@@ -1,0 +1,191 @@
+// run.mjs —— 数据管道主流程编排(需求第四节)。
+//   抓取 → (哈希未变则跳过) → AI 提取 → 程序校验 evidence → 去重 → 信任分级 → 写盘 → 报告
+//
+// 用法:
+//   node run.mjs                      跑全部信源(需 ANTHROPIC_API_KEY)
+//   node run.mjs --only a,b           只跑指定信源 id
+//   node run.mjs --fetch-only         只抓取,把原文存到 state/samples/(不调用 AI)
+//   node run.mjs --health-only        只跑健康检查
+//   环境 ARTPORTAL_OFFLINE_EXTRACT=<json>  用文件里的提取结果代替真实 API 调用(演示/离线用)
+//
+// 合规:抓取合规逻辑在 fetch.mjs / robots.mjs;evidence 硬校验在 verify.mjs。
+
+import { readFile, writeFile, mkdir, appendFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+import { fetchSource } from "./lib/fetch.mjs";
+import { extract, estimateCost, parseJson } from "./lib/extract.mjs";
+import { verifyRecord } from "./lib/verify.mjs";
+import { dedupe } from "./lib/dedupe.mjs";
+import { gradeTrust } from "./lib/trust.mjs";
+import { healthCheck } from "./lib/healthcheck.mjs";
+import { buildReport } from "./lib/report.mjs";
+
+const __dir = dirname(fileURLToPath(import.meta.url));
+const P = (...p) => join(__dir, ...p);
+
+const args = process.argv.slice(2);
+const hasFlag = (f) => args.includes(f);
+const getOpt = (f) => { const i = args.indexOf(f); return i !== -1 ? args[i + 1] : null; };
+const onlyIds = (getOpt("--only") || "").split(",").map(s => s.trim()).filter(Boolean);
+const DATA = getOpt("--out") || P("..", "site", "data", "opportunities.json"); // --out 可指向演示输出,避免覆盖 seed
+
+function todayISO() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+async function readJson(path, fallback) { try { return JSON.parse(await readFile(path, "utf8")); } catch (e) { return fallback; } }
+
+// 离线提取:从文件按 key 取预先算好的提取结果(演示用)。key = source.id + "#" + itemIndex
+let OFFLINE = null;
+async function getExtract(text, ctx, key) {
+  if (process.env.ARTPORTAL_OFFLINE_EXTRACT) {
+    if (!OFFLINE) OFFLINE = await readJson(process.env.ARTPORTAL_OFFLINE_EXTRACT, {});
+    if (OFFLINE[key] == null) throw new Error("离线提取文件缺 key: " + key);
+    return { data: OFFLINE[key], usage: { input_tokens: 0, output_tokens: 0 }, raw: JSON.stringify(OFFLINE[key]) };
+  }
+  return await extract(text, ctx);
+}
+
+async function main() {
+  const sourcesPath = getOpt("--sources") || P("sources.json");
+  const sourcesDoc = await readJson(sourcesPath, { sources: [] });
+  let sources = sourcesDoc.sources.filter(s => s.reachable !== false);
+  if (onlyIds.length) sources = sources.filter(s => onlyIds.includes(s.id));
+
+  if (hasFlag("--health-only")) return runHealth();
+
+  const hashes = await readJson(P("state", "hashes.json"), {});
+  const stats = {
+    at: new Date().toISOString(), sourcesTotal: sources.length, sourcesOk: 0, sourcesFailed: [],
+    unchanged: 0, extracted: 0, added: 0, updated: 0, pending: 0, dropped: 0,
+    hallucinations: 0, cost: 0, tokensIn: 0, tokensOut: 0
+  };
+  const autoRecords = [], pendingRecords = [];
+  await mkdir(P("state", "samples"), { recursive: true });
+
+  for (const src of sources) {
+    process.stderr.write(`\n[抓取] ${src.id}  ${src.url}\n`);
+    const f = await fetchSource(src);
+    if (f.skipped) {
+      stats.sourcesFailed.push({ id: src.id, reason: f.reason + (f.error ? (":" + f.error) : "") });
+      process.stderr.write(`  跳过: ${f.reason}${f.error ? " " + f.error : ""}\n`);
+      continue;
+    }
+    stats.sourcesOk++;
+    process.stderr.write(`  状态 ${f.status} · robots=${f.robots} · 正文 ${f.text.length} 字 · hash ${f.hash.slice(0, 12)}\n`);
+
+    // --fetch-only:存样本,不提取
+    if (hasFlag("--fetch-only")) {
+      await writeFile(P("state", "samples", src.id + ".txt"), f.text, "utf8");
+      continue;
+    }
+
+    // 哈希未变 → 跳过,不调用 AI(省钱)
+    if (hashes[src.id] && hashes[src.id].hash === f.hash) {
+      stats.unchanged++;
+      process.stderr.write("  内容未变,跳过提取\n");
+      continue;
+    }
+    hashes[src.id] = { hash: f.hash, at: todayISO() };
+
+    // 候选文本:RSS 逐条;HTML 整页作一个候选(TODO: 列表页→详情页链接发现,下个迭代)
+    const items = f.isRss ? f.text.split(/\n\n---\n\n/).slice(0, 5) : [f.text];
+
+    for (let i = 0; i < items.length; i++) {
+      const ctx = {
+        org_zh: src.org_zh, domain: src.domain, url: src.url, source_url: src.url,
+        sourceText: items[i]
+      };
+      let ex;
+      try { ex = await getExtract(items[i], ctx, src.id + "#" + i); }
+      catch (e) { process.stderr.write("  提取失败: " + e.message + "\n"); stats.sourcesFailed.push({ id: src.id + "#" + i, reason: "extract:" + e.message }); continue; }
+      stats.extracted++;
+      stats.tokensIn += (ex.usage.input_tokens || 0); stats.tokensOut += (ex.usage.output_tokens || 0);
+      stats.cost += estimateCost(ex.usage);
+
+      const v = verifyRecord(ex.data, ctx);
+      if (v.dropped) { stats.dropped++; process.stderr.write("  丢弃: " + v.dropReason + "\n"); continue; }
+
+      // 记幻觉日志
+      if (v.nulled.length) {
+        stats.hallucinations += v.nulled.length;
+        for (const n of v.nulled) {
+          await appendFile(P("state", "hallucination.log"),
+            JSON.stringify({ at: stats.at, source: src.id, item: i, field: n.field, evidence: n.evidence, dropped_value: n.value, reason: n.reason || "evidence-not-substring" }) + "\n", "utf8");
+        }
+      }
+
+      const g = gradeTrust(v.record, v.flags, src);
+      const rec = finalizeRecord(v.record, src, g.trust);
+      if (g.trust === "auto") { autoRecords.push(rec); }
+      else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
+      process.stderr.write(`  → ${g.trust}${g.reasons.length ? " (" + g.reasons.join("; ") + ")" : ""}  evidence作废 ${v.nulled.length} 处\n`);
+    }
+  }
+
+  if (hasFlag("--fetch-only")) {
+    process.stderr.write("\n[fetch-only] 原文样本已存到 state/samples/\n");
+    return;
+  }
+
+  // 合并:以既有数据为基底(保留 verified 与此前已上线的 auto),用本次新抽取的 auto 记录 upsert。
+  // 关键:哈希未变而跳过的信源,其记录必须原样保留——绝不能因为本次没重抽就把整站数据抹掉。
+  const existing = await readJson(DATA, { opportunities: [] });
+  const byId = new Map(existing.opportunities.map(o => [o.id, o]));
+  for (const r of autoRecords) {
+    const prev = byId.get(r.id);
+    if (prev && prev.trust === "verified") { stats.updated++; continue; } // 人工核实的不被 auto 覆盖
+    if (prev) stats.updated++; else stats.added++;
+    byId.set(r.id, r);
+  }
+  const dd = dedupe(Array.from(byId.values()));
+
+  await writeFile(DATA, JSON.stringify({ _meta: existing._meta || {}, generated_at: todayISO(), count: dd.list.length, opportunities: dd.list }, null, 2), "utf8");
+  await writeFile(P("state", "review-queue.json"), JSON.stringify({ generated_at: todayISO(), count: pendingRecords.length, records: pendingRecords }, null, 2), "utf8");
+  await writeFile(P("state", "hashes.json"), JSON.stringify(hashes, null, 2), "utf8");
+
+  console.log("\n" + buildReport(stats));
+}
+
+// 补全前端 schema 需要但提取不产出的字段。trust 只能是 auto/pending(verified 由人工手改)。
+function finalizeRecord(rec, src, trust) {
+  const today = todayISO();
+  const id = rec.id || (src.id + "-" + slug(rec.title_zh || rec.title_en || "item"));
+  return {
+    id,
+    category: rec.category || null,
+    title_zh: rec.title_zh || null, title_en: rec.title_en || null,
+    org_zh: rec.org_zh || src.org_zh || null,
+    city_zh: rec.city_zh || null, country_zh: rec.country_zh || null,
+    deadline: rec.deadline || null, deadline_note: rec.deadline_note || "",
+    apply_fee: rec.apply_fee || { free: null, amount: null, currency: null },
+    participation_fee: rec.participation_fee || { required: null, amount: null, currency: null },
+    funding: rec.funding || { stipend: null, housing: null, travel: null },
+    eligibility: rec.eligibility || { students_ok: null, age_limit: null, nationality: null },
+    disciplines: rec.disciplines || [],
+    summary_zh: rec.summary_zh || null,
+    url: rec.url, source_url: rec.source_url, domain: rec.domain,
+    org_type: src.org_type || "official",
+    trust,                                   // auto | pending —— 绝不自动写 verified
+    status: computeStatus(rec.deadline),
+    verified_at: null, last_seen: today, updated_at: today
+  };
+}
+function computeStatus(deadline) {
+  if (!deadline) return "open";
+  return deadline < todayISO() ? "expired" : "open";
+}
+function slug(s) {
+  return String(s).toLowerCase().replace(/[^\w一-龥]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "item";
+}
+
+async function runHealth() {
+  const existing = await readJson(DATA, { opportunities: [] });
+  const h = await healthCheck(existing.opportunities);
+  await writeFile(DATA, JSON.stringify(existing, null, 2), "utf8");
+  console.log("[健康检查] 过期隐藏 " + h.hiddenExpired + " · 失联隐藏 " + h.hiddenDead + " · 恢复 " + h.revived);
+}
+
+main().catch(e => { console.error("管道异常:", e); process.exit(1); });

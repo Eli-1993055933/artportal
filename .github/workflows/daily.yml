@@ -1,0 +1,64 @@
+name: 每日数据管道
+
+# 每天北京时间早上 6:00 运行(= UTC 前一天 22:00),同时支持手动触发。
+on:
+  schedule:
+    - cron: "0 22 * * *"
+  workflow_dispatch: {}
+
+# 同一时间只跑一个,避免重叠提交冲突
+concurrency:
+  group: artportal-pipeline
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # 需要把更新后的 JSON commit 回仓库
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 安装 pipeline 依赖
+        working-directory: pipeline
+        run: npm ci --no-audit --no-fund
+
+      - name: 抓取 + 提取 + 校验(更新 opportunities.json)
+        working-directory: pipeline
+        env:
+          # API key 只从 GitHub Secrets 注入,绝不写进代码或页面
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node run.mjs
+
+      - name: 每日健康检查(隐藏已过期/失联条目)
+        working-directory: pipeline
+        run: node run.mjs --health-only
+
+      - name: 提交回仓库(仅当有变化)
+        run: |
+          git config user.name "artportal-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add site/data/opportunities.json \
+                  pipeline/state/hashes.json \
+                  pipeline/state/review-queue.json \
+                  pipeline/state/hallucination.log 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "无变化,跳过提交"
+          else
+            git commit -m "data: 每日更新 $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+# ── 部署说明(必须人工完成一次)──────────────────────────────
+# 1. 在仓库 Settings → Secrets and variables → Actions 添加 Secret:
+#      名称 ANTHROPIC_API_KEY,值为你的 Anthropic API key。
+# 2. Settings → Actions → General → Workflow permissions 选 "Read and write permissions"。
+# 3. 现实提醒:GitHub 的 runner 在境外,部分国内机构官网可能拒绝境外访问或很慢。
+#    这类信源届时会在运行报告里显示为"失败/跳过",需靠"提交机会"入口或换取数方式兜底。
+#    海外站(DAAD/Cité 等)从境外 runner 抓取通常更稳。

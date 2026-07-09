@@ -1,0 +1,742 @@
+{
+  "_meta": {
+    "note": "ArtPortal 前端唯一读取的数据文件。字段定义见需求第五节。任何字段都可能为 null,前端须优雅显示'未注明',绝不出现 undefined/null/空白框。",
+    "note_trust": "trust=verified 表示已人工核实(仅人工可写);trust=auto 表示程序自动收录、未经人工逐条核实。本 seed 中国内官方机构 7 条经核对原文后标 verified,其余标 auto——若你不认可可随时改回。",
+    "note_evidence": "每条的原文逐字 evidence 不进本文件(pipeline 内部校验用),另存于 seed 说明。",
+    "generated_at": "2026-07-09",
+    "count": 16
+  },
+  "opportunities": [
+    {
+      "id": "namoc-innovation-2026",
+      "category": "opencall",
+      "title_zh": "2026全国中青年创新艺术展",
+      "title_en": null,
+      "org_zh": "中国美术馆",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2026-06-21",
+      "deadline_note": "自本通知发布之日起至2026年6月21日(逾期不予受理)",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "出生于1976年7月31日之后",
+        "nationality": "中华人民共和国公民"
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "装置",
+        "影像",
+        "跨媒介"
+      ],
+      "summary_zh": "面向出生于1976年7月31日之后的中华人民共和国公民征集作品,涵盖但不限于架上绘画、雕塑、装置、影像、新媒体艺术、综合材料等,支持跨媒介、跨学科的融合创作,投稿至2026年6月21日截止。",
+      "url": "https://www.namoc.cn/namoc/gonggao/202606/1787136724c542bea53e3e70bbe6efd6.shtml",
+      "source_url": "https://www.namoc.cn/namoc/gonggao/list.shtml",
+      "domain": "namoc.cn",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "expired",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "xafa-naf-mixedmedia-2026",
+      "category": "workshop",
+      "title_zh": "国家艺术基金《“一带一路”主题综合材料绘画创作人才培训》",
+      "title_en": null,
+      "org_zh": "西安美术学院",
+      "city_zh": "西安",
+      "country_zh": "中国",
+      "deadline": "2026-05-31",
+      "deadline_note": "即日起至2026年5月31日24:00前(以收到邮件时间为准)",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "不超过45周岁",
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "跨媒介"
+      ],
+      "summary_zh": "国家艺术基金2026年度资助的综合材料绘画创作人才培训,面向高校艺术类教师、职业艺术家等青年人才,录取学员原则上不超过45周岁,培训期间往返交通费、食宿、学习费用均由项目主体承担,报名至2026年5月31日。",
+      "url": "https://www.xafa.edu.cn/info/1156/130711.htm",
+      "source_url": "https://www.xafa.edu.cn/xmxw/tzgg.htm",
+      "domain": "xafa.edu.cn",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "expired",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "hbmoa-collection-2026",
+      "category": "opencall",
+      "title_zh": "湖北美术馆2026年藏品征集",
+      "title_en": null,
+      "org_zh": "湖北美术馆",
+      "city_zh": "武汉",
+      "country_zh": "中国",
+      "deadline": "2026-12-31",
+      "deadline_note": "自本公告发布之日起至2026年12月31日",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "国内外"
+      },
+      "disciplines": [
+        "版画",
+        "雕塑",
+        "绘画",
+        "跨媒介"
+      ],
+      "summary_zh": "征集近现代国内外美术作品及具美术史价值的文献史料,以湖北省代表性艺术家作品、全国获奖作品及六个收藏方向为重点。本次征集为无偿捐赠,通过评审者颁发收藏证书,征集至2026年12月31日。",
+      "url": "http://wlt.hubei.gov.cn/hbmoa/zxdt/gx/202603/t20260324_5898765.shtml",
+      "source_url": "http://wlt.hubei.gov.cn/hbmoa/zxdt/gx/",
+      "domain": "wlt.hubei.gov.cn",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "open",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "caanet-beijing-biennial-10",
+      "category": "opencall",
+      "title_zh": "第十届中国北京国际美术双年展",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-08-15",
+      "deadline_note": "报名时间:即日起至2025年8月15日,逾期不被接受",
+      "apply_fee": {
+        "free": true,
+        "amount": 0,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": 0,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "世界五大洲艺术家"
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "面向世界五大洲艺术家征集近3年内创作的新作品。原文明确报名参选无需交纳报名及参展费等任何费用;组委会负担境外参展作品(非艺术家本人)往返运费,报名至2025年8月15日。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=9815",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=9815",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "expired",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "cafa-youth-printmaking-2",
+      "category": "opencall",
+      "title_zh": "第二届中国青年版画双年展",
+      "title_en": null,
+      "org_zh": "中央美术学院",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-11-16",
+      "deadline_note": "投稿截止日期:2025年11月16日(含)",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "建议小于45周岁",
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "征集木版、铜版、石版、丝网版、数字版画、独幅版画、综合版画等原创作品,建议参展艺术家年龄小于45周岁,作品须未参加过其它省级以上展览,设金银铜奖,每位参展作者获赠画册一本,投稿至2025年11月16日。",
+      "url": "https://www.cafa.edu.cn/st/2025/90233266.htm",
+      "source_url": "https://www.cafa.edu.cn/sp/nl/?ci=902",
+      "domain": "cafa.edu.cn",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "expired",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "cafa-zhiyi-xiangjian-2025",
+      "category": "workshop",
+      "title_zh": "智艺乡建——面向乡村振兴的数字化文化设计人才培养",
+      "title_en": null,
+      "org_zh": "中央美术学院",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2026-06-08",
+      "deadline_note": "自招生简章发布之日起至2026年6月8日止",
+      "apply_fee": {
+        "free": true,
+        "amount": 0,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": 0,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "北京文化艺术基金2025年资助项目,面向乡村振兴的数字化文化设计人才培养,重点招收文化创意设计、视觉传达、公共艺术等从业人员及高校青年教师。不收取学费、听课费等培训费用,但学员交通、食宿等费用自理,报名至2026年6月8日。",
+      "url": "https://www.cafa.edu.cn/st/2026/90233562.htm",
+      "source_url": "https://www.cafa.edu.cn/sp/nl/?ci=902",
+      "domain": "cafa.edu.cn",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "expired",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "gdmoa-archive-opencall",
+      "category": "opencall",
+      "title_zh": "广东美术馆征集美术文献",
+      "title_en": null,
+      "org_zh": "广东美术馆",
+      "city_zh": "广州",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "此征集函常年有效",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "海内外"
+      },
+      "disciplines": [],
+      "summary_zh": "面向海内外及社会各界广泛征集美术文献,包括古籍、拓片、舆图、手稿、照片及近现当代报刊书籍、文件信函、口述史料等。捐赠资料经登记接收后颁发捐赠证书并予以铭记和奖励,此征集函常年有效。",
+      "url": "https://www.gdmoa.org/Media_Center/Notice/202410/t20241012_17884.html",
+      "source_url": "https://www.gdmoa.org/Media_Center/Notice/",
+      "domain": "gdmoa.org",
+      "org_type": "official",
+      "trust": "verified",
+      "status": "open",
+      "verified_at": "2026-07-09",
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "threeshadows-award-13",
+      "category": "award",
+      "title_zh": "第十三届三影堂摄影奖",
+      "title_en": "The 13th Three Shadows Photography Award",
+      "org_zh": "三影堂摄影艺术中心",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "页面为第13届(2024)信息,展期2024-03-30至2024-04-28,未见当前公开申请截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "三影堂摄影奖设大奖奖金80,000元人民币(税前,获奖作品由三影堂收藏)、Charles Jin收藏奖80,000元人民币(税前),及“骆伯年优秀摄影师奖”奖金10,000元人民币(税前)。",
+      "url": "https://www.threeshadows.cn/young-artists-program/TSPA/",
+      "source_url": "https://www.threeshadows.cn/young-artists-program/TSPA/",
+      "domain": "threeshadows.cn",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "a4-residency-fellowship",
+      "category": "residency",
+      "title_zh": "A4国际驻留 Fellowship(全额资助)",
+      "title_en": "A4 International Residency Fellowship (Fully Funded)",
+      "org_zh": "A4美术馆驻留艺术中心",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": "2026-12-31",
+      "deadline_note": "2028全年招募截止2026-12-31(仍开放);另有2027招募截止2026-06-30已过",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": 0,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "A4国际驻留Fellowship全额资助轨道,面向寻求全面财务与制作支持的创作者。提供独立工作与生活空间、往返经济舱机票或二等座火车票(预算内),以及每个项目10,000元人民币材料/制作费。",
+      "url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
+      "source_url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
+      "domain": "a4artmuseum.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "a4-residency-light",
+      "category": "residency",
+      "title_zh": "A4驻留“轻量版”(自费)",
+      "title_en": "A4 Residency Light Version (Self-Funded)",
+      "org_zh": "A4美术馆驻留艺术中心",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": "2026-12-31",
+      "deadline_note": "2028全年招募截止2026-12-31(仍开放);另有2027招募截止2026-06-30已过",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "A4驻留“轻量版”自费轨道。原文说明差旅(机票/火车)与制作成本由驻留创作者自行承担。原文未单独说明该轨道是否提供住宿及津贴。",
+      "url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
+      "source_url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
+      "domain": "a4artmuseum.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "cite-institutfrancais-2026",
+      "category": "residency",
+      "title_zh": "法国对外文化教育局 × 巴黎国际艺术城 驻留",
+      "title_en": "Institut français x Cité internationale des arts",
+      "org_zh": "巴黎国际艺术城",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
+      "deadline": "2026-10-08",
+      "deadline_note": "申请期 2026-07-02 至 2026-10-08",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "无年龄限制",
+        "nationality": "所有国籍艺术家及文化从业者"
+      },
+      "disciplines": [
+        "绘画",
+        "影像",
+        "跨媒介"
+      ],
+      "summary_zh": "面向所有国籍艺术家及文化从业者,无年龄限制。提供每月至少1100欧元驻留津贴、直接支付给艺术家,法方承担工作室兼住所的月度费用及国际往返旅费。申请期至2026年10月8日。",
+      "url": "https://www.citeinternationaledesarts.fr/appels-a-candidature/institutfrancaisxcite/",
+      "source_url": "https://www.citeinternationaledesarts.fr/en/appels-a-candidature/",
+      "domain": "citeinternationaledesarts.fr",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "cite-francoise-2026",
+      "category": "residency",
+      "title_zh": "Françoise 当代艺术协会 × 巴黎国际艺术城 驻留",
+      "title_en": "Association Françoise pour l'œuvre contemporaine x Cité",
+      "org_zh": "巴黎国际艺术城",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
+      "deadline": "2026-08-16",
+      "deadline_note": "申请期 2026-07-09 至 2026-08-16",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "所有国籍,任何学科的中期或成熟艺术家"
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "面向所有国籍、任何学科的中期或成熟艺术家。提供每月1000欧元(税后)生活津贴、玛莱区工作室兼住所,并承担往返巴黎的国际交通及旅行保险。申请期至2026年8月16日。",
+      "url": "https://www.citeinternationaledesarts.fr/appels-a-candidature/association-francoise-pour-loeuvre-contemporaine-x-cite-internationale-des-arts/",
+      "source_url": "https://www.citeinternationaledesarts.fr/en/appels-a-candidature/",
+      "domain": "citeinternationaledesarts.fr",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "cite-bridges-2026",
+      "category": "residency",
+      "title_zh": "Bridges 艺术评论驻留(AICA 合作)",
+      "title_en": "Bridges",
+      "org_zh": "巴黎国际艺术城",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
+      "deadline": "2026-08-30",
+      "deadline_note": "申请期 2026-07-02 至 2026-08-30",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "须居住在法国本土以外;须为AICA会员且有5年以上艺评实践"
+      },
+      "disciplines": [],
+      "summary_zh": "面向艺术评论家,须居住在法国本土以外、拥有至少五年艺评专业实践、并在申请时为AICA会员。提供每月至少1000欧元(税后)生活补助、玛莱区工作室兼住所,及不超过1000欧元的国际往返交通、旅行与签证保险。申请期至2026年8月30日。",
+      "url": "https://www.citeinternationaledesarts.fr/appels-a-candidature/bridges/",
+      "source_url": "https://www.citeinternationaledesarts.fr/en/appels-a-candidature/",
+      "domain": "citeinternationaledesarts.fr",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "pier2-2027",
+      "category": "residency",
+      "title_zh": "驳二艺术特区 2027 驻村计划",
+      "title_en": "Pier-2 Art Center 2027 Open Call",
+      "org_zh": "驳二艺术特区",
+      "city_zh": "高雄",
+      "country_zh": "中国台湾",
+      "deadline": "2026-07-05",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "TWD"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "TWD"
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "不限国籍;须2年以上创作经验及中级以上英语"
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "面向境内外从事艺术创作的艺术家及团体,不限国籍,须具备至少两年创作经验及中级以上英语沟通能力。提供33平方米工作室(含卫浴)与16.5平方米生活空间、每日NTD800生活津贴、国际艺术家往返经济舱机票及最高NTD35000材料补助。截止2026年7月5日。",
+      "url": "https://www.transartists.org/en/news/pier-2-art-center-2027-open-call",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "kinosaki-air-2027",
+      "category": "residency",
+      "title_zh": "城崎国际艺术中心 AiR 2027/2028",
+      "title_en": "Kinosaki International Arts Center AiR 2027/2028",
+      "org_zh": "城崎国际艺术中心",
+      "city_zh": "丰冈",
+      "country_zh": "日本",
+      "deadline": "2026-06-27",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "JPY"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 350,
+        "currency": "JPY"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "面向个人艺术家或团体,可驻留7天至3个月,原文未提国籍限制。免费使用剧场、工作室及最多7间住宿房间,中心配技术与协调人员支持。艺术家须自付全部交通、生活及制作费用,并每人每日向丰冈市支付350日元水电费。截止2026年6月27日。",
+      "url": "https://www.transartists.org/en/news/kinosaki-international-arts-center-air-20272028",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    },
+    {
+      "id": "artcircle-slovenia-2026",
+      "category": "residency",
+      "title_zh": "ART CIRCLE 斯洛文尼亚 2026",
+      "title_en": "ART CIRCLE Slovenia 2026",
+      "org_zh": "Art Circle",
+      "city_zh": null,
+      "country_zh": "斯洛文尼亚",
+      "deadline": "2026-06-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "跨媒介"
+      ],
+      "summary_zh": "视觉艺术驻留,原文未提参与费或国籍限制。驻留期间提供免费食宿;交通方面主办方协助艺术家通过其在斯洛文尼亚的外交使馆申请资助。截止2026年6月25日。",
+      "url": "https://www.transartists.org/en/news/art-circle-slovenia-2026",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-09",
+      "_fail_streak": 0
+    }
+  ]
+}

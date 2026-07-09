@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>ARTPORTAL · 全球艺术机会</title>
+  <meta name="description" content="聚合全球艺术展览征集、驻留、奖项、工作坊的申请机会,面向中国艺术家与艺术院校学生。" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="#/" aria-label="ARTPORTAL 首页">
+        <span class="brand__mark">ARTPORTAL</span>
+        <span class="brand__sub" data-i18n="brandSub">· 全球艺术机会</span>
+      </a>
+      <div class="topbar__actions">
+        <button class="btn btn--ghost" id="favToggleBtn" type="button" aria-label="我的收藏">
+          <svg class="fav-ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17s-6-4-6-8.2A3.3 3.3 0 0 1 10 6a3.3 3.3 0 0 1 6 2.8C16 13 10 17 10 17Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="fav-text" data-i18n="myFavorites">我的收藏</span>
+          <span class="fav-count" id="favCount" hidden>0</span>
+        </button>
+        <a class="btn btn--dark" id="submitBtn" href="#" target="_blank" rel="noopener"
+           data-i18n="submit">提交机会</a>
+        <button class="btn btn--ghost lang-switch" id="langBtn" type="button" aria-label="切换语言 / Switch language">中 / EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 搜索 + 筛选(桌面同一行,手机吸顶) -->
+  <div class="controls" id="controls">
+    <div class="controls__inner">
+      <div class="searchbar">
+        <svg class="searchbar__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 3a5.5 5.5 0 1 0 3.4 9.8l3.6 3.7 1.4-1.4-3.6-3.6A5.5 5.5 0 0 0 8.5 3Zm0 2a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"/></svg>
+        <input type="search" id="searchInput" class="searchbar__input" autocomplete="off"
+               data-i18n-ph="searchPh" placeholder="搜索标题、机构、城市、学科…" />
+      </div>
+
+      <!-- 主行:分类 tab -->
+      <nav class="tabs" id="catTabs" aria-label="机会分类">
+        <button class="tab is-active" data-cat="all"><span data-i18n="cat_all">全部</span></button>
+        <button class="tab" data-cat="opencall"><span class="tab__dot" data-cat-dot="opencall"></span><span data-i18n="cat_opencall">展览征集</span></button>
+        <button class="tab" data-cat="residency"><span class="tab__dot" data-cat-dot="residency"></span><span data-i18n="cat_residency">驻留项目</span></button>
+        <button class="tab" data-cat="award"><span class="tab__dot" data-cat-dot="award"></span><span data-i18n="cat_award">艺术奖项</span></button>
+        <button class="tab" data-cat="workshop"><span class="tab__dot" data-cat-dot="workshop"></span><span data-i18n="cat_workshop">工作坊</span></button>
+      </nav>
+
+      <div class="controls__row2">
+        <button class="btn btn--ghost more-toggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="moreFilters">
+          <span data-i18n="moreFilters">更多筛选</span>
+          <span class="more-toggle__chev" aria-hidden="true">▾</span>
+          <span class="filter-active-dot" id="filterActiveDot" hidden></span>
+        </button>
+        <div class="sort-wrap">
+          <label class="sort-label" for="sortSelect" data-i18n="sortBy">排序</label>
+          <select id="sortSelect" class="sort-select">
+            <option value="deadline" data-i18n="sort_deadline">截止由近到远</option>
+            <option value="updated" data-i18n="sort_updated">最近更新</option>
+          </select>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="showExpired" />
+          <span data-i18n="showExpired">显示已截止</span>
+        </label>
+        <span class="result-count" id="resultCount" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 更多筛选:桌面为内联展开;手机为底部抽屉 -->
+  <div class="morefilters" id="moreFilters" hidden>
+    <div class="morefilters__panel" role="group" aria-label="更多筛选">
+      <div class="morefilters__header">
+        <span data-i18n="moreFilters">更多筛选</span>
+        <button class="icon-btn morefilters__close" id="moreClose" type="button" aria-label="关闭">✕</button>
+      </div>
+      <div class="morefilters__body">
+        <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_region">地区</h3>
+          <div class="chips" id="regionChips">
+            <button class="chip" data-region="cn"        data-i18n="region_cn">中国大陆</button>
+            <button class="chip" data-region="hktw"      data-i18n="region_hktw">港澳台</button>
+            <button class="chip" data-region="asia"      data-i18n="region_asia">亚洲其他</button>
+            <button class="chip" data-region="europe"    data-i18n="region_europe">欧洲</button>
+            <button class="chip" data-region="namerica"  data-i18n="region_namerica">北美</button>
+            <button class="chip" data-region="other"     data-i18n="region_other">其他</button>
+          </div>
+        </section>
+        <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_fee">费用</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" id="freeOnly" /><span data-i18n="freeOnly">仅看完全免费</span></label>
+          </div>
+        </section>
+        <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_funding">资助</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" data-fund="stipend" /><span data-i18n="fund_stipend">提供津贴</span></label>
+            <label class="chip chip--check"><input type="checkbox" data-fund="housing" /><span data-i18n="fund_housing">提供住宿</span></label>
+            <label class="chip chip--check"><input type="checkbox" data-fund="travel" /><span data-i18n="fund_travel">报销路费</span></label>
+          </div>
+        </section>
+        <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_discipline">学科</h3>
+          <div class="chips" id="discChips">
+            <button class="chip" data-disc="版画">版画</button>
+            <button class="chip" data-disc="绘画">绘画</button>
+            <button class="chip" data-disc="雕塑">雕塑</button>
+            <button class="chip" data-disc="影像">影像</button>
+            <button class="chip" data-disc="装置">装置</button>
+            <button class="chip" data-disc="跨媒介">跨媒介</button>
+          </div>
+        </section>
+        <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_trust">信任</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" id="verifiedOnly" /><span data-i18n="verifiedOnly">仅看已人工核实</span></label>
+          </div>
+        </section>
+      </div>
+      <div class="morefilters__footer">
+        <button class="btn btn--ghost" id="clearFilters" type="button" data-i18n="clearFilters">清除筛选</button>
+        <button class="btn btn--dark morefilters__apply" id="applyFilters" type="button" data-i18n="applyFilters">查看结果</button>
+      </div>
+    </div>
+    <div class="morefilters__scrim" id="moreScrim"></div>
+  </div>
+
+  <!-- 列表 -->
+  <main class="main" id="main">
+    <div class="grid" id="grid" aria-live="polite"></div>
+
+    <!-- 骨架屏 -->
+    <div class="grid" id="skeleton" aria-hidden="true"></div>
+
+    <!-- 空状态 -->
+    <div class="state state--empty" id="emptyState" hidden>
+      <p class="state__title" data-i18n="empty_title">没有符合条件的机会</p>
+      <p class="state__desc" data-i18n="empty_desc">试试减少筛选条件,或打开"显示已截止"。</p>
+      <button class="btn btn--ghost" id="emptyClear" type="button" data-i18n="clearFilters">清除筛选</button>
+    </div>
+
+    <!-- 错误状态 -->
+    <div class="state state--error" id="errorState" hidden>
+      <p class="state__title" data-i18n="error_title">数据加载失败</p>
+      <p class="state__desc" data-i18n="error_desc">可能是网络问题。请检查连接后重试。</p>
+      <button class="btn btn--dark" id="retryBtn" type="button" data-i18n="retry">重试</button>
+    </div>
+
+    <!-- 无限滚动哨兵 -->
+    <div id="sentinel" class="sentinel"></div>
+    <div class="loading-more" id="loadingMore" hidden><span data-i18n="loadingMore">加载更多…</span></div>
+  </main>
+
+  <!-- 页脚常驻声明 -->
+  <footer class="sitefoot">
+    <p class="sitefoot__note" data-i18n="footer_note">
+      标注「自动收录」的条目由程序从机构官网抓取,尚未经人工逐条核实。申请前请以官网信息为准。
+    </p>
+  </footer>
+
+  <!-- 详情:桌面右侧抽屉 / 手机全屏页 -->
+  <div class="detail" id="detail" hidden>
+    <div class="detail__scrim" id="detailScrim"></div>
+    <aside class="detail__panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" tabindex="-1">
+      <div class="detail__bar">
+        <button class="icon-btn detail__back" id="detailBack" type="button" aria-label="返回">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 15 7.5 10l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="detail__back-label" data-i18n="back">返回</span>
+        </button>
+        <button class="icon-btn detail__fav" id="detailFav" type="button" aria-label="收藏"></button>
+      </div>
+      <div class="detail__scroll" id="detailBody"><!-- render.js 填充 --></div>
+    </aside>
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/format.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

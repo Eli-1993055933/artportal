@@ -1,0 +1,18 @@
+# 依赖
+node_modules/
+
+# 密钥 —— 绝不入库(API key 只放 GitHub Secrets)
+.env
+.env.*
+*.key
+
+# pipeline 运行期产物(样本/临时;状态文件按需保留)
+pipeline/state/samples/
+pipeline/state/demo-*.json
+pipeline/state/offline-*.json
+
+# 系统
+.DS_Store
+Thumbs.db
+*.log
+!pipeline/state/hallucination.log

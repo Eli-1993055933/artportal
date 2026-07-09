@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:powerstationofart.com)",
+      "WebFetch(domain:www.gasworks.org.uk)",
+      "WebFetch(domain:www.berliner-kuenstlerprogramm.de)",
+      "WebFetch(domain:www.transartists.org)",
+      "WebFetch(domain:resartis.org)",
+      "WebFetch(domain:iscp-nyc.org)",
+      "WebFetch(domain:www.gsyart.com)",
+      "WebFetch(domain:www.cafa.edu.cn)",
+      "WebFetch(domain:www.threeshadows.cn)",
+      "Bash(node run.mjs --only caanet-beijing-biennial-10,daad-berlin-feed --fetch-only)",
+      "Bash(ls -la state/samples/)",
+      "Bash(node run.mjs --only caanet-bjbiennale,daad-berlin-feed --fetch-only)",
+      "Bash(head -c 600 state/samples/caanet-bjbiennale.txt)",
+      "Bash(npm install *)",
+      "Bash(node -e \"import\\('@anthropic-ai/sdk'\\).then\\(m=>console.log\\('SDK 可加载, 版本:', require\\('./node_modules/@anthropic-ai/sdk/package.json'\\).version\\)\\).catch\\(e=>console.log\\('SDK 加载失败:', e.message\\)\\)\")"
+    ]
+  }
+}
