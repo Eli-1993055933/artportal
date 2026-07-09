@@ -46,5 +46,13 @@ python -m http.server 4321 --directory site
 
 - [x] 第 1–3 步:目录核查、结构与依赖确定、信源清单核验(见 `pipeline/sources.json`)
 - [x] 第 4 步:前端 site/ + 16 条真实数据,自查 11 项全部通过
-- [ ] 第 5 步:pipeline 抓取+提取(待前端验收后开始)
-- [ ] 第 6 步:GitHub Actions 定时
+- [x] 第 5 步:pipeline 抓取+提取跑通(2 信源真实验证;evidence 子串校验、伪造拦截、哈希省钱均实测)
+- [x] 第 6 步:GitHub Actions 每日定时(`.github/workflows/daily.yml`)
+
+## 上线前你需要人工做的 3 件事
+
+1. 建远程仓库并推送:`git remote add origin <你的仓库>` → `git push -u origin master`
+2. 仓库 Settings → Secrets → 新增 `ANTHROPIC_API_KEY`(值为你的 Anthropic API key)
+3. Settings → Actions → General → Workflow permissions 选 "Read and write permissions"
+
+前端部署:把 `site/` 目录托管到任意静态服务(GitHub Pages / Vercel / 自有服务器均可)。
