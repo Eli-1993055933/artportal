@@ -912,8 +912,1235 @@
       "domain": "transartists.org",
       "org_type": "independent",
       "status": "expired"
+    },
+    {
+      "id": "agg-e-sun-art-awards-2026-art",
+      "category": "award",
+      "title_zh": "玉山艺术奖 2026",
+      "title_en": "E.SUN Art Awards 2026",
+      "org_zh": "玉山银行",
+      "city_zh": null,
+      "country_zh": "中国台湾",
+      "deadline": "2026-07-17",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": "台湾公民可报一般组/学生组;海外艺术家及在台外籍人士可报国际艺术家组"
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "以玉山国家公园的地景、生态与文化认同为灵感的国际绘画竞赛,设一般组、学生组与国际艺术家组,分别颁发首奖、特选与优选,本届新增音乐主题。",
+      "url": "https://www.artconnect.com/opportunity/Ry-zNTW77XzzbmJhB30WL",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "commercial",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-radcliffe-fellowship-program-art",
+      "category": "residency",
+      "title_zh": "哈佛拉德克利夫 研究员项目",
+      "title_en": "Radcliffe Fellowship Program",
+      "org_zh": "哈佛拉德克利夫研究院",
+      "city_zh": "剑桥(马萨诸塞州)",
+      "country_zh": "美国",
+      "deadline": "2026-09-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介",
+        "影像"
+      ],
+      "summary_zh": "为期一年的驻院研究员项目,研究员在拉德克利夫的跨学科社群中与科学家、作家、学者及艺术家共处,发展新方法、每周展示研究进展,并可与哈佛本科生合作。",
+      "url": "https://www.artconnect.com/opportunity/daMnUqycDefKtB7-LFHCh",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-int-l-all-media-2026-call-for-entries-art",
+      "category": "opencall",
+      "title_zh": "国际综合媒介 2026 征件展",
+      "title_en": "INT'L All Media 2026 Call For Entries",
+      "org_zh": "西北艺术中心",
+      "city_zh": "迈诺特(北达科他州)",
+      "country_zh": "美国",
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "影像",
+        "版画",
+        "雕塑",
+        "跨媒介",
+        "装置"
+      ],
+      "summary_zh": "第31届年度评审展,展示多元的当代媒介、方法与观念。项目源自Americas 2000系列,强调推广视觉艺术,兼顾在地传统与新的创作视角。",
+      "url": "https://www.artconnect.com/opportunity/6heFHBe0QpVHXZJBs4YmL",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-experimental-visual-art-for-hardcover-book-editi-art",
+      "category": "opencall",
+      "title_zh": "精装书刊及线上实验视觉艺术征集",
+      "title_en": "Experimental Visual Art for Hardcover Book Editions & Online",
+      "org_zh": "Point Pleasant 出版社",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介",
+        "影像",
+        "装置"
+      ],
+      "summary_zh": "出版社为其国际图录征集实验与观念型艺术家,并出版分析入选者创作与过程的评论文章;强调纯人工创作、拒绝AI,青睐具社会相关性、观念创新或机构批判的作品。",
+      "url": "https://www.artconnect.com/opportunity/qOOSNQZGd27KC3b-i0knk",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-nakanojo-biennale-2027-artist-open-call-art",
+      "category": "opencall",
+      "title_zh": "中之条双年展 2027 艺术家征集",
+      "title_en": "Nakanojo Biennale 2027 Artist Open Call",
+      "org_zh": "中之条双年展",
+      "city_zh": "群马县中之条町",
+      "country_zh": "日本",
+      "deadline": "2026-07-12",
+      "deadline_note": "参与者需自理作品制作、布置与维护",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "绘画",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "双年展邀请国际艺术家在中之条的古镇、学校、温泉区与乡野景观中进行在地创作,结合建筑、社会与环境条件;参与者需自行负责作品的制作、布置与维护。",
+      "url": "https://www.artconnect.com/opportunity/tsBBGYqXwC3OJ0Ot4qt7Z",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-the-joan-wakelin-bursary-art",
+      "category": "award",
+      "title_zh": "琼·韦克林奖助金",
+      "title_en": "The Joan Wakelin Bursary",
+      "org_zh": "英国皇家摄影学会(与卫报合作)",
+      "city_zh": null,
+      "country_zh": "英国",
+      "deadline": "2026-07-12",
+      "deadline_note": "仅资助新项目,不支持进行中或前往战区的项目",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "为纪念纪实摄影师琼·韦克林设立,资助针对海外社会纪实议题的全新摄影散文项目,提供2000英镑制作经费;仅资助新项目,不支持进行中项目,也不支持前往战区的项目。",
+      "url": "https://www.artconnect.com/opportunity/uWFoMFWBfx242RIhbSioN",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-ceske-budejovice-ecoc-2028-perma-culture-art",
+      "category": "opencall",
+      "title_zh": "捷克布杰约维采 2028 欧洲文化之都:(永续)文化",
+      "title_en": "Ceske Budejovice ECOC 2028: (Perma)culture",
+      "org_zh": "捷克布杰约维采 2028",
+      "city_zh": "捷克布杰约维采",
+      "country_zh": "捷克",
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "为2028欧洲文化之都征集文化项目,围绕“(永续)文化”框架,呼应关爱地球、人与未来资源的理念;从过程、内容与影响三个维度评审,重视参与式方法与长期社群效益。",
+      "url": "https://www.artconnect.com/opportunity/VslkqpWTdLVU-qpJ9Wf7U",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-core-echo-2027-international-open-call-3-week-re-art",
+      "category": "residency",
+      "title_zh": "CORE ECHO 2027 国际征集与三周艺术家驻留",
+      "title_en": "CORE ECHO 2027 International Open Call & 3-Week Residency",
+      "org_zh": "Grandtek 艺术中心",
+      "city_zh": "广州",
+      "country_zh": "中国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "面向国际招募10位艺术家"
+      },
+      "disciplines": [
+        "跨媒介",
+        "装置",
+        "雕塑",
+        "影像",
+        "绘画"
+      ],
+      "summary_zh": "面向国际招募10位艺术家,与粤港澳大湾区的科技企业协作共创,进入工业设施将技术与材料转化为艺术作品;驻留于2026年8月5-25日进行,2027年3月开幕展出。",
+      "url": "https://www.artconnect.com/opportunity/KtE5q6WeRoetqXXMjAq5a",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-art-moves-2026-billboard-art-competition-art",
+      "category": "opencall",
+      "title_zh": "Art Moves 2026 广告牌艺术竞赛",
+      "title_en": "Art Moves 2026 Billboard Art Competition",
+      "org_zh": "Art Moves 艺术节",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "竞赛围绕主题“恐惧还是勇气?我们如何停止畏惧明天、转而共同创造它?”征集作品,探讨恐惧如何塑造当代社会,并邀请艺术家思考“在恐惧中依然行动的决定”。",
+      "url": "https://www.artconnect.com/opportunity/H3bMNMrM-sLPNexz2Db13",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-extended-possibilities-residency-call-art",
+      "category": "residency",
+      "title_zh": "延展的可能——驻留征集",
+      "title_en": "Extended Possibilities - Residency Call",
+      "org_zh": "RaMDaM 艺术中心",
+      "city_zh": "圣富瓦-莱-里昂",
+      "country_zh": "法国",
+      "deadline": "2026-07-14",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介",
+        "装置"
+      ],
+      "summary_zh": "一家行动主义艺术中心提供为期45天(2027年2月1日-3月15日)的驻留与技术支持,面向从事创作、研究或实验的艺术家或团队,鼓励与社会及解放议题相关的跨学科项目。",
+      "url": "https://www.artconnect.com/opportunity/HpcQwS0TXwyWW5xQ8vxvL",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-icci-art-valley-programme-international-visiting-art",
+      "category": "residency",
+      "title_zh": "ICCI 艺术谷计划——国际访问学者活动",
+      "title_en": "ICCI Art Valley Programme - International Visiting Scholars",
+      "org_zh": "ICCI 文化创意产业学院",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "面向全球艺术家与学者,不限国籍"
+      },
+      "disciplines": [
+        "跨媒介",
+        "装置"
+      ],
+      "summary_zh": "招募5-6位国际访问艺术家或学者,围绕“艺术与科技”“人文对话”“城市参与”三个方向进行跨媒介、跨文化的当代艺术探索,成果将在上海多处场馆及文化地标展出(11月1日-12月15日)。",
+      "url": "https://www.artconnect.com/opportunity/6iupoyGCGJ6xHoPjB0i4E",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-sciences-cinema-risc-very-short-film-competition-art",
+      "category": "opencall",
+      "title_zh": "科学与电影(RISC)超短片竞赛",
+      "title_en": "Sciences & Cinema (RISC) Very Short Film Competition",
+      "org_zh": "Polly Maggoo 协会",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影像",
+        "跨媒介",
+        "绘画"
+      ],
+      "summary_zh": "竞赛旨在推介兼具研究性与创造性的当代影片,并促进电影人、各学科科学家与广大观众(含青少年及学校团体)之间的交流与相遇。",
+      "url": "https://www.artconnect.com/opportunity/YSKlB9VEKIxsPwbZEX8qr",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-nicosia-ludic-lab-shape-new-works-for-toyful-mus-art",
+      "category": "residency",
+      "title_zh": "尼科西亚游戏实验室:为 Toyful 音乐节创作新作",
+      "title_en": "Nicosia Ludic Lab: Shape New Works for Toyful Music Festival",
+      "org_zh": "Atheras Peoples & Cultures",
+      "city_zh": "尼科西亚",
+      "country_zh": "塞浦路斯",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "驻留邀请作曲家与表演-研究者,通过“材料游戏”与“系统游戏”探索以“玩”为创作方法,发展新的合奏作品,直接塑造Toyful音乐节2026的节目单(10月23日-11月22日)。",
+      "url": "https://www.artconnect.com/opportunity/u67G2PbV92jtMYP6nF0cv",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-landscape-2026-international-photography-exhibit-cur",
+      "category": "opencall",
+      "title_zh": "《风景 2026》国际摄影展",
+      "title_en": "Landscape 2026, International Photography Exhibition",
+      "org_zh": "格拉斯哥摄影画廊",
+      "city_zh": "格拉斯哥",
+      "country_zh": "英国",
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 48,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": "面向所有人(Everyone)"
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "以风景为主题的国际摄影展,展期一个月,在格拉斯哥画廊及线上展出。可提交至多8张JPEG。入选者获数字证书、展览照片,并有机会入选“月度摄影师”获社媒推广。",
+      "url": "https://www.curatorspace.com/opportunities/detail/landscape--international-photography-exhibition/10778",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-stories-2026-international-photography-exhibitio-cur",
+      "category": "opencall",
+      "title_zh": "《故事 2026》国际摄影展",
+      "title_en": "Stories 2026, International Photography Exhibition",
+      "org_zh": "格拉斯哥摄影画廊",
+      "city_zh": "格拉斯哥",
+      "country_zh": "英国",
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 48,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": "面向所有人(Everyone)"
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "以“故事”为主题的国际摄影展,2026年11月4-28日在格拉斯哥举办。可提交至多8张作品,可标价出售。入选者获数字证书、展览照片,并有机会入选“月度摄影师”及年终画册。",
+      "url": "https://www.curatorspace.com/opportunities/detail/stories--international-photography-exhibition/10779",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-peninsula-the-south-west-open-2026-cur",
+      "category": "opencall",
+      "title_zh": "《半岛——西南公开展 2026》",
+      "title_en": "Peninsula - The South West Open 2026",
+      "org_zh": "Artizan 画廊",
+      "city_zh": "托尔基",
+      "country_zh": "英国",
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 15,
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "无需身处英国西南地区即可投稿"
+      },
+      "disciplines": [
+        "绘画",
+        "影像",
+        "雕塑"
+      ],
+      "summary_zh": "回应英国西南地区风貌的夏季策划展,2026年7月26日至9月4日在托尔基Artizan画廊举办。单件投稿£15,多件£40。设£150现金奖给总冠军,销售抽成35%。",
+      "url": "https://www.curatorspace.com/opportunities/detail/peninsula--the-south-west-open/10831",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-open-call-for-screening-artist-film-and-moving-i-cur",
+      "category": "opencall",
+      "title_zh": "艺术家影像与动态影像作品放映征集",
+      "title_en": "Open Call for Screening Artist Film and Moving Image Works",
+      "org_zh": "Deep Focus",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-07-10",
+      "deadline_note": "国际投稿欢迎,但优先伦敦本地艺术家",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "欢迎国际投稿,优先伦敦本地艺术家"
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "面向以影像、电影和动态影像创作的艺术家的放映征集,主题为“干预并调节日常与非常经验的吸引力”。放映将于2026年10-12月在伦敦Goldsmiths的RHB影院举办,作品不超过10分钟。",
+      "url": "https://www.curatorspace.com/opportunities/detail/open-call-for-screening-artist-film-and-moving-image-works/10409",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-open-call-transient-states-paris-july-2026-cur",
+      "category": "opencall",
+      "title_zh": "公开征集:《过渡状态》——巴黎,2026年7月",
+      "title_en": "Open Call: Transient States - Paris, July 2026",
+      "org_zh": "臻艺画廊 (Zhen Yi Gallery)",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 200,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "欢迎国际及本地新锐与中生代艺术家"
+      },
+      "disciplines": [
+        "装置",
+        "雕塑",
+        "绘画",
+        "影像"
+      ],
+      "summary_zh": "探讨转化、生成与“介于状态之间”形态的展览,2026年7月20-22日在巴黎玛莱区臻艺画廊展出。可提交2-3件作品,无需到场,运费自理,销售0抽成。入选须付£170/€200参展费。",
+      "url": "https://www.curatorspace.com/opportunities/detail/open-call-transient-states--paris-july---all-media-welcome/10804",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-under-the-skin-of-things-cur",
+      "category": "opencall",
+      "title_zh": "《事物的表皮之下》",
+      "title_en": "Under the Skin of Things",
+      "org_zh": "CISTA ARTS",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 30,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "欢迎所有国家、所有媒介的艺术家"
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "跨媒介"
+      ],
+      "summary_zh": "线上展览,邀请艺术家看向表象之下、探讨当代生活的隐匿维度,涉及记忆、身份、生态、政治、科技、身体等。2026年8月1-30日在CISTA ARTS平台展出,销售0抽成。入选1件£30、2件£50。",
+      "url": "https://www.curatorspace.com/opportunities/detail/under-the-skin-of-things/10802",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-the-ghost-in-the-space-cur",
+      "category": "opencall",
+      "title_zh": "《空间中的幽灵》",
+      "title_en": "The Ghost in the Space",
+      "org_zh": "Celeste 画廊",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 35,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "公开征集,欢迎所有阶段与国籍"
+      },
+      "disciplines": [
+        "影像",
+        "跨媒介",
+        "装置"
+      ],
+      "summary_zh": "线上群展,探讨物理与数字空间中的无形残留,涉及数字痕迹、AI重构之声、空间记忆、缺席与监控等主题。入选作品在3D KUNSTMATRIX平台展出并获媒体推广,5-10位入选者有50/50分成机会。",
+      "url": "https://www.curatorspace.com/opportunities/detail/ghost-in-space/10833",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-flora-fauna-photography-exhibition-cur",
+      "category": "opencall",
+      "title_zh": "《植物 / 动物》摄影展",
+      "title_en": "Flora / Fauna Photography Exhibition",
+      "org_zh": "Solas Shadow",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 16,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18+",
+        "nationality": "面向全球摄影师"
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "线上国际摄影展,围绕“植物/动物”主题,探讨自然中的差异与关联、生长、适应、生存及人类对栖息地的影响。可提交至多5张JPG。入选者作品线上展出、进入数字画册并获参展证书。",
+      "url": "https://www.curatorspace.com/opportunities/detail/flora--fauna-photography-exhibition/10819",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-open-call-museum-of-homeland-cur",
+      "category": "opencall",
+      "title_zh": "公开征集:《家园博物馆》",
+      "title_en": "Open Call: Museum of Homeland",
+      "org_zh": "家园博物馆 (Museum of Homeland)",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "列表显示18/07/2026;FAQ称目前无固定截止日期,滚动审阅",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "任何有移民经历者,不限来源国、目的地、背景、年龄或职业"
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "线上虚拟博物馆,征集有移民经历者的日常物件及个人叙事。投稿含1-5张照片及说明物件对其移民故事意义的文字,入选者作品进入线上收藏。参与不付酬。",
+      "url": "https://www.curatorspace.com/opportunities/detail/open-call-museum-of-homeland/10663",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-post-animal-signal-cur",
+      "category": "opencall",
+      "title_zh": "《后——动物信号》",
+      "title_en": "Post - Animal Signal",
+      "org_zh": "Molend Art",
+      "city_zh": "格拉斯哥",
+      "country_zh": "英国",
+      "deadline": "2026-07-19",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 50,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": "面向所有国家的艺术家、电影人、声音艺术家、学生及独立实践者"
+      },
+      "disciplines": [
+        "影像",
+        "跨媒介"
+      ],
+      "summary_zh": "国际征集,探讨动物性、非人感知、生态想象及新兴人—非人关系。作品于2026年7月28-31日在苏格兰格拉斯哥Molend Space展出。面向所有国家的艺术家、学生及独立实践者,入选参展费£50。",
+      "url": "https://www.curatorspace.com/opportunities/detail/post--animal-signal/10797",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-take-to-the-greenwood-cur",
+      "category": "opencall",
+      "title_zh": "《遁入绿林》",
+      "title_en": "take to the greenwood",
+      "org_zh": "Liverpool Art Space @ CASS Art",
+      "city_zh": "利物浦",
+      "country_zh": "英国",
+      "deadline": "2026-07-24",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "探讨LGBTQIA+群体与自然关系的群展,取意“遁入绿林”。8月3-15日在CASS Art内的社区空间展出,销售0抽成但不保证成交。因商业场地要求,不接受全裸正面作品。",
+      "url": "https://www.curatorspace.com/opportunities/detail/take-to-the-greenwood/10661",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-equinox-virtual-exhibition-with-bobcat-gallery-cur",
+      "category": "opencall",
+      "title_zh": "《春分》——BobCat画廊线上展",
+      "title_en": "Equinox - Virtual Exhibition with BobCat Gallery",
+      "org_zh": "BobCat 画廊",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-26",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 5,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "版画",
+        "跨媒介",
+        "影像"
+      ],
+      "summary_zh": "以春分“昼夜平衡”为主题的线上展,2026年9月1-30日举办。接受2D/3D原创作品,每人至多4件;不接受复制印刷品、数字作品及NFT。免费申请,入选付£5参展费,销售抽成20%。",
+      "url": "https://www.curatorspace.com/opportunities/detail/equinox--virtual-exhibition-with-bobcat-gallery/10777",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-stories-in-motion-call-for-young-artists-ages-7--cur",
+      "category": "opencall",
+      "title_zh": "《动态中的故事》:青年艺术家征集(7-20岁)",
+      "title_en": "Stories in Motion: Call for Young Artists (Ages 7-20)",
+      "org_zh": "Travel Through Art Studio",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-07-17",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "7-20",
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "影像"
+      ],
+      "summary_zh": "面向7-20岁青年艺术家的视觉叙事展,入选作品2026年8月1-29日在伦敦Deptford Lounge展出,并可参与与加拿大多伦多的国际创意交流。每人至多投2件、至多入选1件;未满18岁需监护人代为注册。",
+      "url": "https://www.curatorspace.com/opportunities/detail/stories-in-motion-call-for-young-artists-ages/10825",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
+    },
+    {
+      "id": "agg-suspended-last-few-places-added-cur",
+      "category": "opencall",
+      "title_zh": "《悬置》——追加名额",
+      "title_en": "Suspended - Last Few Places Added",
+      "org_zh": "臻艺画廊 (Zhen Yi Gallery)",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
+      "deadline": "2026-07-24",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 230,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "欢迎国际及本地新锐与中生代艺术家,不限媒介"
+      },
+      "disciplines": [
+        "装置",
+        "雕塑",
+        "绘画",
+        "影像"
+      ],
+      "summary_zh": "探讨感知与“悬置”状态的展览二次征集,涉及等待、过渡、平衡/坍塌、重力、心理不稳定与流离等。2026年8月6-10日在巴黎玛莱区臻艺画廊展出,销售0抽成,入选须付£200/€230。",
+      "url": "https://www.curatorspace.com/opportunities/detail/suspended--last-few-places-added/10875",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10"
     }
   ],
-  "count": 20,
+  "count": 47,
   "generated_at": "2026-07-10"
 }
