@@ -15,6 +15,7 @@ import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
+import { discoverDetailLinks } from "./lib/discover.mjs";
 import { extract, estimateCost, parseJson } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
 import { dedupe } from "./lib/dedupe.mjs";
@@ -90,17 +91,35 @@ async function main() {
     }
     hashes[src.id] = { hash: f.hash, at: todayISO() };
 
-    // 候选文本:RSS 逐条;HTML 整页作一个候选(TODO: 列表页→详情页链接发现,下个迭代)
-    const items = f.isRss ? f.text.split(/\n\n---\n\n/).slice(0, 5) : [f.text];
+    // 候选:HTML 列表页 → 发现详情链接并逐条抓取(每条自己算哈希,变了才提取);
+    //       RSS → 逐条 item;单详情页(crawl:false)→ 整页作一条。
+    let candidates = [];
+    if (f.isRss) {
+      candidates = f.text.split(/\n\n---\n\n/).slice(0, 8).map((t, i) => ({ sourceText: t, url: src.url, key: src.id + "#" + i }));
+    } else if (src.crawl !== false) {
+      const links = discoverDetailLinks(f.rawHtml, src.url, src.domain, { cap: src.cap || 20 });
+      process.stderr.write(`  发现 ${links.length} 条候选详情链接\n`);
+      for (const ln of links) {
+        const detailKey = src.id + "|" + ln.url;
+        const df = await fetchSource({ url: ln.url, domain: src.domain, type: "html" });
+        if (df.skipped) { process.stderr.write(`    详情跳过 ${ln.url}: ${df.reason}\n`); continue; }
+        if (hashes[detailKey] && hashes[detailKey].hash === df.hash) { stats.unchanged++; continue; }
+        hashes[detailKey] = { hash: df.hash, at: todayISO() };
+        candidates.push({ sourceText: df.text, url: ln.url, key: detailKey });
+      }
+      if (!candidates.length) candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0" }];
+    } else {
+      candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0" }];
+    }
 
-    for (let i = 0; i < items.length; i++) {
+    for (const cand of candidates) {
       const ctx = {
-        org_zh: src.org_zh, domain: src.domain, url: src.url, source_url: src.url,
-        sourceText: items[i]
+        org_zh: src.org_zh, domain: src.domain, url: cand.url, source_url: src.url,
+        sourceText: cand.sourceText
       };
       let ex;
-      try { ex = await getExtract(items[i], ctx, src.id + "#" + i); }
-      catch (e) { process.stderr.write("  提取失败: " + e.message + "\n"); stats.sourcesFailed.push({ id: src.id + "#" + i, reason: "extract:" + e.message }); continue; }
+      try { ex = await getExtract(cand.sourceText, ctx, cand.key); }
+      catch (e) { process.stderr.write("  提取失败: " + e.message + "\n"); stats.sourcesFailed.push({ id: cand.key, reason: "extract:" + e.message }); continue; }
       stats.extracted++;
       stats.tokensIn += (ex.usage.input_tokens || 0); stats.tokensOut += (ex.usage.output_tokens || 0);
       stats.cost += estimateCost(ex.usage);
@@ -113,7 +132,7 @@ async function main() {
         stats.hallucinations += v.nulled.length;
         for (const n of v.nulled) {
           await appendFile(P("state", "hallucination.log"),
-            JSON.stringify({ at: stats.at, source: src.id, item: i, field: n.field, evidence: n.evidence, dropped_value: n.value, reason: n.reason || "evidence-not-substring" }) + "\n", "utf8");
+            JSON.stringify({ at: stats.at, source: src.id, item: cand.key, url: cand.url, field: n.field, evidence: n.evidence, dropped_value: n.value, reason: n.reason || "evidence-not-substring" }) + "\n", "utf8");
         }
       }
 

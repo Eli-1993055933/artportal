@@ -86,16 +86,47 @@
     $("filterActiveDot").hidden = !AP.hasActiveMoreFilters();
   }
 
-  // 无限滚动
+  // 无限滚动 + 到底自动刷新(拉取 pipeline 新入库的真实条目,不生成任何内容)
+  function onReachBottom() {
+    if (rendered < filtered.length) { appendPage(); return; }
+    maybeRefresh();  // 现有已全部渲染 → 看看数据文件有没有新机会
+  }
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting && rendered < filtered.length) appendPage();
+      if (entries[0].isIntersecting) onReachBottom();
     }, { rootMargin: "300px" }).observe(sentinel);
   } else {
     window.addEventListener("scroll", function () {
-      if (rendered >= filtered.length) return;
-      if (sentinel.getBoundingClientRect().top < window.innerHeight + 300) appendPage();
+      if (sentinel.getBoundingClientRect().top < window.innerHeight + 300) onReachBottom();
     });
+  }
+
+  // 到底时重新读取 opportunities.json,把新出现的条目(按 id 去重)追加到末尾。
+  // 只读取程序已校验入库的真实数据,前端不做任何内容生成。节流 12 秒一次。
+  var refreshing = false, lastRefreshAt = 0;
+  function maybeRefresh() {
+    var now = Date.now();
+    if (refreshing || now - lastRefreshAt < 12000) return;
+    refreshing = true; lastRefreshAt = now;
+    fetch("data/opportunities.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        refreshing = false;
+        if (!data || !data.opportunities) return;
+        var known = {};
+        for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
+        var fresh = data.opportunities.filter(function (o) { return !known[o.id]; });
+        if (!fresh.length) return;
+        allData = allData.concat(fresh);
+        var add = AP.applyFilters(fresh);          // 只把符合当前筛选的新条目追加到末尾
+        if (add.length) {
+          filtered = filtered.concat(add);
+          appendPage();
+          updateCount();
+          toast(AP.lang === "en" ? ("+" + add.length + " new") : ("新增 " + add.length + " 条机会"));
+        }
+      })
+      .catch(function () { refreshing = false; });
   }
 
   // ---------- 事件 ----------
