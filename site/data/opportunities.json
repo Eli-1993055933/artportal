@@ -737,6 +737,183 @@
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
       "_fail_streak": 0
+    },
+    {
+      "title_en": "TED and POSCA Residency",
+      "city_zh": null,
+      "deadline": "2026-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "面向全球艺术家,不限国籍"
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "trust": "auto",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10",
+      "id": "ted-posca-residency-2026",
+      "category": "residency",
+      "title_zh": "TED × POSCA 驻留计划 2026",
+      "org_zh": "TED 与 POSCA(Fine Acts 策划)",
+      "country_zh": "全球",
+      "summary_zh": "由TED与POSCA发起、Fine Acts策划的全球分布式驻留,2026年遴选四名艺术家在其所在社区创作以“Visible Mending(可见的修补)”为题的公共介入作品。每位入选者获总计1.5万美元,涵盖艺术家费、制作与记录费用。",
+      "url": "https://www.transartists.org/en/news/ted-and-posca-residency",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "independent",
+      "status": "open"
+    },
+    {
+      "title_en": "HKBU International Writers' Workshop 2027",
+      "city_zh": "香港",
+      "deadline": "2026-08-14",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "面向国际作家;须现居香港以外;能使用英语或中文"
+      },
+      "disciplines": [],
+      "trust": "auto",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10",
+      "id": "hkbu-iww-2027",
+      "category": "residency",
+      "title_zh": "香港浸会大学 国际作家工作坊 2027",
+      "org_zh": "香港浸会大学 国际作家工作坊",
+      "country_zh": "中国",
+      "summary_zh": "面向已出版至少一本文学作品、现居香港以外、能使用英语或中文的国际作家。2027年2月26日至3月25日为期一个月驻留,主题“Inheritance”,提供经济舱往返机票、四周校内住宿及每日津贴。",
+      "url": "https://www.transartists.org/en/news/hong-kong-baptist-university-international-writers-workshop-2027",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "official",
+      "status": "open"
+    },
+    {
+      "title_en": "O Castro Art Village — Self-funded Residency",
+      "city_zh": null,
+      "deadline": null,
+      "deadline_note": "自费驻留常年开放 / 滚动招募",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": null,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "自费项目无国籍限制"
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "trust": "auto",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10",
+      "id": "ocastro-selffunded-2026",
+      "category": "residency",
+      "title_zh": "O Castro 艺术村 自费驻留",
+      "org_zh": "O Castro 艺术村",
+      "country_zh": "西班牙",
+      "summary_zh": "位于西班牙加利西亚一座废弃村庄的驻留,含遗址、森林与工作室。自费驻留常年开放、时长灵活(2周至2月),参与者自理食宿费用,含集体用餐与社区交流。",
+      "url": "https://www.transartists.org/en/news/o-castro-art-village-open-calls-2026",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "independent",
+      "status": "open"
+    },
+    {
+      "title_en": "Modes of Access — Digital Residencies 2026",
+      "city_zh": null,
+      "deadline": "2026-06-27",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "未设国籍限制;尤其欢迎慢性病、残障、神经多样或有出行障碍者"
+      },
+      "disciplines": [
+        "影像",
+        "跨媒介"
+      ],
+      "trust": "auto",
+      "verified_at": null,
+      "last_seen": "2026-07-10",
+      "updated_at": "2026-07-10",
+      "id": "modes-of-access-2026",
+      "category": "residency",
+      "title_zh": "Modes of Access 数字驻留 2026",
+      "org_zh": "Modes of Access",
+      "country_zh": "线上",
+      "summary_zh": "面向媒体艺术家的四个线上数字驻留,为期12周(8-10月),以“可及性”为艺术方法,强调残障正义原则与灵活参与。提供2500欧艺术家费、500欧材料预算及额外无障碍支持。",
+      "url": "https://www.transartists.org/en/news/modes-access-digital-residencies-2026",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "independent",
+      "status": "expired"
     }
-  ]
+  ],
+  "count": 20,
+  "generated_at": "2026-07-10"
 }
