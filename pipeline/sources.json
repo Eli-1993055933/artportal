@@ -16,47 +16,565 @@
   ],
   "generated_at": "2026-07-09",
   "sources": [
-    { "id": "cafa-tzgg", "org_zh": "中央美术学院", "name_zh": "通知公告/新闻动态", "url": "https://www.cafa.edu.cn/sp/nl/?ci=902", "domain": "cafa.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award","workshop"], "reachable": true, "robots": "none", "confirmed": false, "notes": "分页公告列表,含挑战杯/招聘等,需过滤出真正可申请机会" },
-    { "id": "caa-tzgg", "org_zh": "中国美术学院", "name_zh": "通知公告", "url": "https://www.caa.edu.cn/tzgg.htm", "domain": "caa.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award","workshop"], "reachable": true, "robots": "none", "confirmed": false, "notes": "搜索给的 /tzgg/index.html 是404,正确为 tzgg.htm" },
-    { "id": "lumei-tzgg", "org_zh": "鲁迅美术学院", "name_zh": "通知公告", "url": "https://www.lumei.edu.cn/xw/tzgg.htm", "domain": "lumei.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "" },
-    { "id": "tjarts-tzgg", "org_zh": "天津美术学院", "name_zh": "通知公告", "url": "https://www.tjarts.edu.cn/index/tzgg/34.htm", "domain": "tjarts.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "另有展览讯息栏 https://www.tjarts.edu.cn/index/zlxx.htm(未单独核验)" },
-    { "id": "gzarts-gsgg", "org_zh": "广州美术学院", "name_zh": "公示公告", "url": "https://www.gzarts.edu.cn/index/xydt/gsgg/61.htm", "domain": "gzarts.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "allow", "confirmed": false, "notes": "唯一有 robots.txt 的院校,User-agent:* 无 Disallow" },
-    { "id": "scfai-xwgg", "org_zh": "四川美术学院", "name_zh": "校务公告", "url": "https://www.scfai.edu.cn/xwgg.htm", "domain": "scfai.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "校级公告,罗中立奖学金另见独立信源" },
-    { "id": "hifa-tzgg", "org_zh": "湖北美术学院", "name_zh": "通知公告", "url": "https://www.hifa.edu.cn/index/tzgg.htm", "domain": "hifa.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "" },
-    { "id": "xafa-tzgg", "org_zh": "西安美术学院", "name_zh": "通知公告", "url": "https://www.xafa.edu.cn/xmxw/tzgg.htm", "domain": "xafa.edu.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award","workshop"], "reachable": true, "robots": "none", "confirmed": false, "notes": "已见国家艺术基金培训招生等真实机会" },
-
-    { "id": "namoc-gonggao", "org_zh": "中国美术馆", "name_zh": "公告", "url": "https://www.namoc.cn/namoc/gonggao/list.shtml", "domain": "namoc.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "已见'2026全国中青年创新艺术展作品征集通知'等" },
-    { "id": "artmuseumonline-xwgg", "org_zh": "中华艺术宫(上海美术馆)", "name_zh": "新闻公告", "url": "https://www.artmuseumonline.org/art/art/visitGuide/xwgg/index.html", "domain": "artmuseumonline.org", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall"], "reachable": true, "robots": "none", "confirmed": false, "notes": "新闻+公告合并栏目" },
-    { "id": "gdmoa-notice", "org_zh": "广东美术馆", "name_zh": "公告", "url": "https://www.gdmoa.org/Media_Center/Notice/", "domain": "gdmoa.org", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall"], "reachable": true, "robots": "none", "confirmed": false, "notes": "同域名下另有广州三年展页" },
-    { "id": "gdmoa-triennial", "org_zh": "广东美术馆", "name_zh": "广州三年展", "url": "https://www.gdmoa.org/Exhibition/triennial_exhibition/", "domain": "gdmoa.org", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall"], "reachable": true, "robots": "none", "confirmed": false, "notes": "第一至第七届主题存档,征集时更新" },
-    { "id": "zjam-notice", "org_zh": "浙江美术馆", "name_zh": "通知公告", "url": "https://www.zjam.org.cn/Site/news/template/noticelist.shtml", "domain": "zjam.org.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall"], "reachable": true, "robots": "none", "confirmed": false, "notes": "条目 JS 异步加载,pipeline 需处理动态渲染或找其数据接口" },
-    { "id": "hbmoa-guanxun", "org_zh": "湖北美术馆", "name_zh": "馆讯", "url": "http://wlt.hubei.gov.cn/hbmoa/zxdt/gx/", "domain": "wlt.hubei.gov.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall","award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "已见'2026年藏品征集公告';挂在省文旅厅域名下(政府站,抓取更需谨慎守 robots)" },
-    { "id": "bjaa-news", "org_zh": "北京画院美术馆", "name_zh": "新闻资讯", "url": "https://www.bjaa.com.cn/news.html?clg=9&hcs=1", "domain": "bjaa.com.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall"], "reachable": true, "robots": "none", "confirmed": false, "notes": "无独立通知栏,公告混在新闻资讯里" },
-
-    { "id": "caanet-bjbiennale", "org_zh": "中国美术家协会", "name_zh": "北京国际美术双年展(征稿)", "url": "https://www.caanet.org.cn/newsdetail.mx?id=9815", "domain": "caanet.org.cn", "type": "html", "rss": null, "org_type": "official", "category_hint": ["opencall"], "reachable": true, "robots": "none", "confirmed": false, "notes": "第十届征稿通知(独立域名 bjbiennale.com.cn 证书错误,故用美协官方页)。此为单条通知,pipeline 应改抓美协公告列表" },
-    { "id": "artron-luozhongli", "org_zh": "四川美术学院/雅昌", "name_zh": "罗中立奖学金", "url": "https://artexpress.artron.net/young/awardsActivitiesDetails/1338", "domain": "artron.net", "type": "html", "rss": null, "org_type": "commercial", "category_hint": ["award"], "reachable": true, "robots": "none", "confirmed": false, "notes": "官方奖项,但申报页托管在商业平台雅昌;org_type 记 commercial 需谨慎" },
-    { "id": "threeshadows-tspa", "org_zh": "三影堂摄影艺术中心", "name_zh": "三影堂摄影奖 TSPA", "url": "https://www.threeshadows.cn/young-artists-program/TSPA/", "domain": "threeshadows.cn", "type": "html", "rss": null, "org_type": "independent", "category_hint": ["award","residency"], "reachable": true, "robots": "allow", "confirmed": false, "notes": "robots 禁 /admin /api /media 等,TSPA 路径未禁" },
-    { "id": "a4-residency", "org_zh": "A4美术馆(成都麓湖)", "name_zh": "驻留公开招募", "url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/", "domain": "a4artmuseum.com", "type": "html", "rss": null, "org_type": "independent", "category_hint": ["residency"], "reachable": true, "robots": "allow", "confirmed": false, "notes": "robots 仅禁 /wp-admin;已见 2027 open call(截止2026-06-30,可能已过期)" },
-
-    { "id": "transartists-calls", "org_zh": "TransArtists", "name_zh": "Open Calls", "url": "https://www.transartists.org/en/transartists-calls", "domain": "transartists.org", "type": "html", "rss": null, "org_type": "independent", "category_hint": ["residency"], "reachable": true, "robots": "disallow", "confirmed": false, "notes": "robots 允许普通爬虫但按名封禁 ClaudeBot;需确认我方 UA 是否被 * 规则允许,否则跳过" },
-    { "id": "gasworks-opportunities", "org_zh": "Gasworks(伦敦)", "name_zh": "Opportunities", "url": "https://www.gasworks.org.uk/opportunities/", "domain": "gasworks.org.uk", "type": "html", "rss": null, "org_type": "independent", "category_hint": ["residency"], "reachable": true, "robots": "unknown", "confirmed": false, "notes": "robots.txt 本次未取到" },
-    { "id": "cite-appels", "org_zh": "Cité internationale des arts(巴黎)", "name_zh": "Appels à candidature", "url": "https://www.citeinternationaledesarts.fr/en/appels-a-candidature/", "domain": "citeinternationaledesarts.fr", "type": "html", "rss": "https://www.citeinternationaledesarts.fr/feed/", "org_type": "independent", "category_hint": ["residency"], "reachable": true, "robots": "allow", "confirmed": false, "notes": "RSS 有效但为综合新闻流需过滤;calls 专属 feed 不存在(404)" },
-    { "id": "rijksakademie-apply", "org_zh": "Rijksakademie(阿姆斯特丹)", "name_zh": "Residency Apply", "url": "https://rijksakademie.nl/en/residency-apply", "domain": "rijksakademie.nl", "type": "html", "rss": null, "org_type": "independent", "category_hint": ["residency"], "reachable": true, "robots": "disallow", "confirmed": false, "notes": "robots 允许普通爬虫但封禁 ClaudeBot 等 AI 爬虫;同上需核对我方 UA" },
-    { "id": "daad-berlin-feed", "org_zh": "DAAD 柏林艺术家项目", "name_zh": "Application (RSS)", "url": "https://www.berliner-kuenstlerprogramm.de/en/application/", "domain": "berliner-kuenstlerprogramm.de", "type": "rss", "rss": "https://www.berliner-kuenstlerprogramm.de/en/feed/", "org_type": "official", "category_hint": ["residency"], "reachable": true, "robots": "none", "confirmed": false, "notes": "★最理想信源:RSS 有效,首条即 2026 驻留招募。DAAD 政府资助" }
+    {
+      "id": "cafa-tzgg",
+      "org_zh": "中央美术学院",
+      "name_zh": "通知公告/新闻动态",
+      "url": "https://www.cafa.edu.cn/sp/nl/?ci=902",
+      "domain": "cafa.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "分页公告列表,含挑战杯/招聘等,需过滤出真正可申请机会"
+    },
+    {
+      "id": "caa-tzgg",
+      "org_zh": "中国美术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.caa.edu.cn/tzgg.htm",
+      "domain": "caa.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "搜索给的 /tzgg/index.html 是404,正确为 tzgg.htm"
+    },
+    {
+      "id": "lumei-tzgg",
+      "org_zh": "鲁迅美术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.lumei.edu.cn/xw/tzgg.htm",
+      "domain": "lumei.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": ""
+    },
+    {
+      "id": "tjarts-tzgg",
+      "org_zh": "天津美术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.tjarts.edu.cn/index/tzgg/34.htm",
+      "domain": "tjarts.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "另有展览讯息栏 https://www.tjarts.edu.cn/index/zlxx.htm(未单独核验)"
+    },
+    {
+      "id": "gzarts-gsgg",
+      "org_zh": "广州美术学院",
+      "name_zh": "公示公告",
+      "url": "https://www.gzarts.edu.cn/index/xydt/gsgg/61.htm",
+      "domain": "gzarts.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "唯一有 robots.txt 的院校,User-agent:* 无 Disallow"
+    },
+    {
+      "id": "scfai-xwgg",
+      "org_zh": "四川美术学院",
+      "name_zh": "校务公告",
+      "url": "https://www.scfai.edu.cn/xwgg.htm",
+      "domain": "scfai.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "校级公告,罗中立奖学金另见独立信源"
+    },
+    {
+      "id": "hifa-tzgg",
+      "org_zh": "湖北美术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.hifa.edu.cn/index/tzgg.htm",
+      "domain": "hifa.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": ""
+    },
+    {
+      "id": "xafa-tzgg",
+      "org_zh": "西安美术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.xafa.edu.cn/xmxw/tzgg.htm",
+      "domain": "xafa.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "已见国家艺术基金培训招生等真实机会"
+    },
+    {
+      "id": "namoc-gonggao",
+      "org_zh": "中国美术馆",
+      "name_zh": "公告",
+      "url": "https://www.namoc.cn/namoc/gonggao/list.shtml",
+      "domain": "namoc.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "已见'2026全国中青年创新艺术展作品征集通知'等"
+    },
+    {
+      "id": "artmuseumonline-xwgg",
+      "org_zh": "中华艺术宫(上海美术馆)",
+      "name_zh": "新闻公告",
+      "url": "https://www.artmuseumonline.org/art/art/visitGuide/xwgg/index.html",
+      "domain": "artmuseumonline.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "新闻+公告合并栏目"
+    },
+    {
+      "id": "gdmoa-notice",
+      "org_zh": "广东美术馆",
+      "name_zh": "公告",
+      "url": "https://www.gdmoa.org/Media_Center/Notice/",
+      "domain": "gdmoa.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "同域名下另有广州三年展页"
+    },
+    {
+      "id": "gdmoa-triennial",
+      "org_zh": "广东美术馆",
+      "name_zh": "广州三年展",
+      "url": "https://www.gdmoa.org/Exhibition/triennial_exhibition/",
+      "domain": "gdmoa.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "第一至第七届主题存档,征集时更新"
+    },
+    {
+      "id": "zjam-notice",
+      "org_zh": "浙江美术馆",
+      "name_zh": "通知公告",
+      "url": "https://www.zjam.org.cn/Site/news/template/noticelist.shtml",
+      "domain": "zjam.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "条目 JS 异步加载,pipeline 需处理动态渲染或找其数据接口"
+    },
+    {
+      "id": "hbmoa-guanxun",
+      "org_zh": "湖北美术馆",
+      "name_zh": "馆讯",
+      "url": "http://wlt.hubei.gov.cn/hbmoa/zxdt/gx/",
+      "domain": "wlt.hubei.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "已见'2026年藏品征集公告';挂在省文旅厅域名下(政府站,抓取更需谨慎守 robots)"
+    },
+    {
+      "id": "bjaa-news",
+      "org_zh": "北京画院美术馆",
+      "name_zh": "新闻资讯",
+      "url": "https://www.bjaa.com.cn/news.html?clg=9&hcs=1",
+      "domain": "bjaa.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "无独立通知栏,公告混在新闻资讯里"
+    },
+    {
+      "id": "caanet-bjbiennale",
+      "org_zh": "中国美术家协会",
+      "name_zh": "北京国际美术双年展(征稿)",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=9815",
+      "domain": "caanet.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "第十届征稿通知(独立域名 bjbiennale.com.cn 证书错误,故用美协官方页)。此为单条通知,pipeline 应改抓美协公告列表"
+    },
+    {
+      "id": "artron-luozhongli",
+      "org_zh": "四川美术学院/雅昌",
+      "name_zh": "罗中立奖学金",
+      "url": "https://artexpress.artron.net/young/awardsActivitiesDetails/1338",
+      "domain": "artron.net",
+      "type": "html",
+      "rss": null,
+      "org_type": "commercial",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "官方奖项,但申报页托管在商业平台雅昌;org_type 记 commercial 需谨慎"
+    },
+    {
+      "id": "threeshadows-tspa",
+      "org_zh": "三影堂摄影艺术中心",
+      "name_zh": "三影堂摄影奖 TSPA",
+      "url": "https://www.threeshadows.cn/young-artists-program/TSPA/",
+      "domain": "threeshadows.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "robots 禁 /admin /api /media 等,TSPA 路径未禁"
+    },
+    {
+      "id": "a4-residency",
+      "org_zh": "A4美术馆(成都麓湖)",
+      "name_zh": "驻留公开招募",
+      "url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
+      "domain": "a4artmuseum.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "robots 仅禁 /wp-admin;已见 2027 open call(截止2026-06-30,可能已过期)"
+    },
+    {
+      "id": "transartists-calls",
+      "org_zh": "TransArtists",
+      "name_zh": "Open Calls",
+      "url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "disallow",
+      "confirmed": false,
+      "notes": "robots 允许普通爬虫但按名封禁 ClaudeBot;需确认我方 UA 是否被 * 规则允许,否则跳过"
+    },
+    {
+      "id": "gasworks-opportunities",
+      "org_zh": "Gasworks(伦敦)",
+      "name_zh": "Opportunities",
+      "url": "https://www.gasworks.org.uk/opportunities/",
+      "domain": "gasworks.org.uk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "robots.txt 本次未取到"
+    },
+    {
+      "id": "cite-appels",
+      "org_zh": "Cité internationale des arts(巴黎)",
+      "name_zh": "Appels à candidature",
+      "url": "https://www.citeinternationaledesarts.fr/en/appels-a-candidature/",
+      "domain": "citeinternationaledesarts.fr",
+      "type": "html",
+      "rss": "https://www.citeinternationaledesarts.fr/feed/",
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "RSS 有效但为综合新闻流需过滤;calls 专属 feed 不存在(404)"
+    },
+    {
+      "id": "rijksakademie-apply",
+      "org_zh": "Rijksakademie(阿姆斯特丹)",
+      "name_zh": "Residency Apply",
+      "url": "https://rijksakademie.nl/en/residency-apply",
+      "domain": "rijksakademie.nl",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "disallow",
+      "confirmed": false,
+      "notes": "robots 允许普通爬虫但封禁 ClaudeBot 等 AI 爬虫;同上需核对我方 UA"
+    },
+    {
+      "id": "daad-berlin-feed",
+      "org_zh": "DAAD 柏林艺术家项目",
+      "name_zh": "Application (RSS)",
+      "url": "https://www.berliner-kuenstlerprogramm.de/en/application/",
+      "domain": "berliner-kuenstlerprogramm.de",
+      "type": "rss",
+      "rss": "https://www.berliner-kuenstlerprogramm.de/en/feed/",
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "★最理想信源:RSS 有效,首条即 2026 驻留招募。DAAD 政府资助"
+    },
+    {
+      "id": "eflux-opencalls",
+      "org_zh": "e-flux(全球)",
+      "name_zh": "Open Calls / Announcements",
+      "url": "https://www.e-flux.com/announcements/",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "全球艺术 open call 聚合;robots 允许 ArtPortalBot(按名禁 ClaudeBot,故子代理抓不了、须靠 pipeline)"
+    },
+    {
+      "id": "artconnect-opportunities",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities",
+      "url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "全球机会聚合,数百条"
+    },
+    {
+      "id": "curatorspace-opportunities",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities",
+      "url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "以英国为主的 open call 聚合"
+    }
   ],
   "blocked_or_unverified": [
-    { "org_zh": "深圳观澜国际版画双年展", "domain": "guanlanprints.com", "reason": "SSL 证书为 *.fkw.com(凡科建站)与域名不匹配,WebFetch 失败;报名疑走微信公众号", "action": "人工用真实浏览器核验;版画类核心信源,值得保留" },
-    { "org_zh": "上海双年展(PSA)", "domain": "powerstationofart.com", "reason": "页面存活(200)但正文 JS 渲染,WebFetch 只拿到标题", "action": "候选 url https://www.powerstationofart.com/whats-on/programs/shanghai-bienniale,pipeline 需动态渲染" },
-    { "org_zh": "武汉双年展", "domain": "wuhanbiennial.com", "reason": "证书过期(2024展期已结束)", "action": "人工复核是否仍在办" },
-    { "org_zh": "青年艺术100", "domain": "artnova100.com", "reason": "服务器对抓取器 Socket closed", "action": "人工浏览器核验" },
-    { "org_zh": "约翰·莫尔绘画奖(中国)", "domain": "johnmooreschina.com", "reason": "Socket closed;搜索显示含200元报名费", "action": "人工核验;正好是'有申请费'样本" },
-    { "org_zh": "假杂志", "domain": "jiazazhi.com", "reason": "Socket closed,且未找到正式驻留 open call 页", "action": "确认其是否设驻留项目" },
-    { "org_zh": "OCAT", "domain": "ocat.org.cn", "reason": "正牌域名证书过期未打开", "action": "★高危:旧域名 ocat.com.cn 已被劫持为成人站,绝不可收录;仅用 ocat.org.cn 且需人工确认证书修复" },
-    { "org_zh": "江苏省美术馆", "domain": "jsmsg.com", "reason": "WAF 按 UA 拦截,连 robots 都打不开", "action": "候选 url /news/news1.aspx;需真实浏览器" },
-    { "org_zh": "深圳关山月美术馆", "domain": "gsyart.com", "reason": "服务器 Socket closed 拒绝连接", "action": "人工核验" },
-    { "org_zh": "山东美术馆", "domain": "sdam.org.cn", "reason": "服务器 Socket closed 拒绝连接", "action": "人工核验" },
-    { "org_zh": "e-flux", "domain": "e-flux.com", "reason": "HTTP 403,robots 封禁 ClaudeBot", "action": "open calls 在 /announcements/;若我方 UA 被 * 允许可抓,否则守 robots 跳过" },
-    { "org_zh": "ISCP(纽约)", "domain": "iscp-nyc.org", "reason": "HTTP 403,robots 封禁 AI 爬虫", "action": "apply 页 /apply;同上" },
-    { "org_zh": "Res Artis", "domain": "resartis.org", "reason": "全域 Socket closed(7+ 次)", "action": "候选 /open-calls/;人工核验" }
+    {
+      "org_zh": "深圳观澜国际版画双年展",
+      "domain": "guanlanprints.com",
+      "reason": "SSL 证书为 *.fkw.com(凡科建站)与域名不匹配,WebFetch 失败;报名疑走微信公众号",
+      "action": "人工用真实浏览器核验;版画类核心信源,值得保留"
+    },
+    {
+      "org_zh": "上海双年展(PSA)",
+      "domain": "powerstationofart.com",
+      "reason": "页面存活(200)但正文 JS 渲染,WebFetch 只拿到标题",
+      "action": "候选 url https://www.powerstationofart.com/whats-on/programs/shanghai-bienniale,pipeline 需动态渲染"
+    },
+    {
+      "org_zh": "武汉双年展",
+      "domain": "wuhanbiennial.com",
+      "reason": "证书过期(2024展期已结束)",
+      "action": "人工复核是否仍在办"
+    },
+    {
+      "org_zh": "青年艺术100",
+      "domain": "artnova100.com",
+      "reason": "服务器对抓取器 Socket closed",
+      "action": "人工浏览器核验"
+    },
+    {
+      "org_zh": "约翰·莫尔绘画奖(中国)",
+      "domain": "johnmooreschina.com",
+      "reason": "Socket closed;搜索显示含200元报名费",
+      "action": "人工核验;正好是'有申请费'样本"
+    },
+    {
+      "org_zh": "假杂志",
+      "domain": "jiazazhi.com",
+      "reason": "Socket closed,且未找到正式驻留 open call 页",
+      "action": "确认其是否设驻留项目"
+    },
+    {
+      "org_zh": "OCAT",
+      "domain": "ocat.org.cn",
+      "reason": "正牌域名证书过期未打开",
+      "action": "★高危:旧域名 ocat.com.cn 已被劫持为成人站,绝不可收录;仅用 ocat.org.cn 且需人工确认证书修复"
+    },
+    {
+      "org_zh": "江苏省美术馆",
+      "domain": "jsmsg.com",
+      "reason": "WAF 按 UA 拦截,连 robots 都打不开",
+      "action": "候选 url /news/news1.aspx;需真实浏览器"
+    },
+    {
+      "org_zh": "深圳关山月美术馆",
+      "domain": "gsyart.com",
+      "reason": "服务器 Socket closed 拒绝连接",
+      "action": "人工核验"
+    },
+    {
+      "org_zh": "山东美术馆",
+      "domain": "sdam.org.cn",
+      "reason": "服务器 Socket closed 拒绝连接",
+      "action": "人工核验"
+    },
+    {
+      "org_zh": "e-flux",
+      "domain": "e-flux.com",
+      "reason": "HTTP 403,robots 封禁 ClaudeBot",
+      "action": "open calls 在 /announcements/;若我方 UA 被 * 允许可抓,否则守 robots 跳过"
+    },
+    {
+      "org_zh": "ISCP(纽约)",
+      "domain": "iscp-nyc.org",
+      "reason": "HTTP 403,robots 封禁 AI 爬虫",
+      "action": "apply 页 /apply;同上"
+    },
+    {
+      "org_zh": "Res Artis",
+      "domain": "resartis.org",
+      "reason": "全域 Socket closed(7+ 次)",
+      "action": "候选 /open-calls/;人工核验"
+    }
   ]
 }
