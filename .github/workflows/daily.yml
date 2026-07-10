@@ -32,7 +32,9 @@ jobs:
       - name: 抓取 + 提取 + 校验(更新 opportunities.json)
         working-directory: pipeline
         env:
-          # API key 只从 GitHub Secrets 注入,绝不写进代码或页面
+          # API key 只从 GitHub Secrets 注入,绝不写进代码或页面。
+          # 二选一:配了哪个就用哪个(DeepSeek 便宜、大陆直连;Anthropic 亦可)。
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node run.mjs
 
