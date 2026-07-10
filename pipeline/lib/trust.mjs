@@ -9,8 +9,10 @@
 export function gradeTrust(rec, flags, src) {
   const reasons = [];
 
-  const isOfficialDomain = src && src.org_type === "official";
-  if (!isOfficialDomain) reasons.push("非官方域名(org_type=" + (src ? src.org_type : "?") + ")");
+  // 可 auto 的来源:官方机构域名,或人工已核实并在 sources.json 标了 trust_auto:true 的信源
+  // (如已核验过的 Open Call 聚合平台)。trust_auto 是人工对信源的信任决定,故符合"auto 需可信来源"的本意。
+  const isTrustedSource = src && (src.org_type === "official" || src.trust_auto === true);
+  if (!isTrustedSource) reasons.push("非可信来源(org_type=" + (src ? src.org_type : "?") + ",且未标 trust_auto)");
 
   // 字段完整:必须有截止(或明确常年)+ 有网址
   if (!flags.hasUrl) reasons.push("缺详情页网址");
@@ -19,7 +21,7 @@ export function gradeTrust(rec, flags, src) {
   // evidence 全部通过(标题 + 各关键字段都没被作废)
   if (flags.anyEvidenceFail) reasons.push("有 evidence 未通过子串校验");
 
-  const auto = isOfficialDomain && flags.hasUrl && flags.hasDeadline && !flags.anyEvidenceFail;
+  const auto = isTrustedSource && flags.hasUrl && flags.hasDeadline && !flags.anyEvidenceFail;
 
   return {
     trust: auto ? "auto" : "pending",

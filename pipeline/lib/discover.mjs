@@ -29,7 +29,12 @@ function looksLikeDetail(u) {
     /[?&]id=\d+/.test(p) ||                 // ?id=9815
     /\/t\d{6,}/.test(p) ||                  // /t20260324_...
     /info\/\d+\/\d+\.htm/i.test(p) ||       // info/1156/130711.htm
-    /\/art\/\d+/.test(p)
+    /\/art\/\d+/.test(p) ||
+    // —— 聚合平台的详情页形态 ——
+    /\/announcements\/\d+/.test(p) ||       // e-flux: /announcements/612345/...
+    /\/opportunity\/[\w-]{6,}/.test(p) ||   // ArtConnect: /opportunity/<id>
+    /\/opportunities\/detail\/[^/]+\/\d+/.test(p) || // CuratorSpace: /opportunities/detail/<slug>/10778
+    /\/(residency|residencies|open-call|call-for|announcement)s?\/[\w%-]{4,}/i.test(p) // 通用
   );
 }
 

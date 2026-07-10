@@ -1,0 +1,160 @@
+{
+  "generated_at": "2026-07-11",
+  "count": 3,
+  "records": [
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "curatorspace-opportunities-开放征集-过渡状态-巴黎-2026年7月",
+      "category": "opencall",
+      "title_zh": "开放征集：过渡状态 — 巴黎，2026年7月",
+      "title_en": "Open Call: Transient States — Paris, July, 2026 | All media welcome",
+      "org_zh": "Zhen Yi Gallery",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 200,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "installation",
+        "sculpture",
+        "painting",
+        "photography",
+        "mixed media"
+      ],
+      "summary_zh": "面向全球新兴及中生代艺术家开放征集，主题为“过渡状态”，探讨转变、涌现与生成过程。展览将于2026年7月20-22日在巴黎Zhen Yi Gallery举行。入选艺术家需支付参与费200欧元，作品运输自理。",
+      "url": "https://www.curatorspace.com/opportunities/detail/open-call-transient-states--paris-july---all-media-welcome/10804",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "curatorspace-opportunities-the-hepworth-wakefield-2026年节日市场",
+      "category": "opencall",
+      "title_zh": "The Hepworth Wakefield 2026年节日市场",
+      "title_en": "The Hepworth Wakefield Festive Market 2026",
+      "org_zh": "The Hepworth Wakefield",
+      "city_zh": "韦克菲尔德",
+      "country_zh": "英国",
+      "deadline": "2026-07-14",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 250,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "UK-based"
+      },
+      "disciplines": [
+        "陶瓷",
+        "化妆品和芳香剂",
+        "食品和饮料",
+        "儿童礼品",
+        "家居用品",
+        "珠宝",
+        "植物和花艺",
+        "版画",
+        "文具",
+        "纺织品"
+      ],
+      "summary_zh": "The Hepworth Wakefield 2026年节日市场开放申请，面向英国本土艺术家、设计师、手工艺者、食品饮料生产商及专业零售商。市场将于2026年11月20-22日和28-29日举办，摊位费每周末250英镑（含增值税），需提前支付。申请截止日期为2026年7月14日中午。",
+      "url": "https://www.curatorspace.com/opportunities/detail/the-hepworth-wakefield-festive-market/10754",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "curatorspace-opportunities-唐卡斯特临时工作室空间",
+      "category": "residency",
+      "title_zh": "唐卡斯特临时工作室空间",
+      "title_en": "Available Temporary Studio Space - Doncaster",
+      "org_zh": "CuratorSpace",
+      "city_zh": "唐卡斯特",
+      "country_zh": "英国",
+      "deadline": null,
+      "deadline_note": "Deadline: n/a",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "30-200",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "CuratorSpace发布英国唐卡斯特临时工作室空间机会，位于市中心前办公空间，步行5分钟到火车站，适合清洁作业的艺术实践、桌面工作者或社区艺术教育者，提供中小型空间，24/7开放，有残疾人通道，月租30-200英镑。",
+      "url": "https://www.curatorspace.com/opportunities/detail/available-temporary-studio-space-doncaster/6025",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    }
+  ]
+}

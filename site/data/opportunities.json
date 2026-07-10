@@ -6,6 +6,8 @@
     "generated_at": "2026-07-09",
     "count": 16
   },
+  "generated_at": "2026-07-11",
+  "count": 61,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -1003,13 +1005,13 @@
       "updated_at": "2026-07-10"
     },
     {
-      "id": "agg-int-l-all-media-2026-call-for-entries-art",
+      "id": "artconnect-opportunities-int-l-all-media-2026-公开征集",
       "category": "opencall",
-      "title_zh": "国际综合媒介 2026 征件展",
+      "title_zh": "INT'L All Media 2026 公开征集",
       "title_en": "INT'L All Media 2026 Call For Entries",
       "org_zh": "西北艺术中心",
-      "city_zh": "迈诺特(北达科他州)",
-      "country_zh": "美国",
+      "city_zh": null,
+      "country_zh": null,
       "deadline": "2026-07-10",
       "deadline_note": "",
       "apply_fee": {
@@ -1033,30 +1035,37 @@
         "nationality": null
       },
       "disciplines": [
-        "绘画",
-        "影像",
-        "版画",
-        "雕塑",
-        "跨媒介",
-        "装置"
+        "Design",
+        "Digital",
+        "Drawing",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Photography",
+        "Printmaking",
+        "Sculpture",
+        "Textiles",
+        "Sound Art",
+        "Visual Arts",
+        "Video"
       ],
-      "summary_zh": "第31届年度评审展,展示多元的当代媒介、方法与观念。项目源自Americas 2000系列,强调推广视觉艺术,兼顾在地传统与新的创作视角。",
+      "summary_zh": "西北艺术中心举办第31届INT'L All Media评审展，面向全球艺术家征集多种媒介作品，包括设计、数字、绘画、雕塑、影像等。截止日期为2026年7月10日22:00 UTC。",
       "url": "https://www.artconnect.com/opportunity/6heFHBe0QpVHXZJBs4YmL",
       "source_url": "https://www.artconnect.com/opportunities",
       "domain": "artconnect.com",
-      "org_type": "official",
+      "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10"
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
     },
     {
-      "id": "agg-experimental-visual-art-for-hardcover-book-editi-art",
+      "id": "artconnect-opportunities-精装书版与在线实验视觉艺术",
       "category": "opencall",
-      "title_zh": "精装书刊及线上实验视觉艺术征集",
+      "title_zh": "精装书版与在线实验视觉艺术",
       "title_en": "Experimental Visual Art for Hardcover Book Editions & Online",
-      "org_zh": "Point Pleasant 出版社",
+      "org_zh": "Point Pleasant Publishing",
       "city_zh": null,
       "country_zh": null,
       "deadline": "2026-07-12",
@@ -1082,11 +1091,17 @@
         "nationality": null
       },
       "disciplines": [
-        "跨媒介",
-        "影像",
-        "装置"
+        "Performance",
+        "Photography",
+        "Video",
+        "Film",
+        "Textiles",
+        "Installation",
+        "Fashion",
+        "Dance",
+        "Interdisciplinary"
       ],
-      "summary_zh": "出版社为其国际图录征集实验与观念型艺术家,并出版分析入选者创作与过程的评论文章;强调纯人工创作、拒绝AI,青睐具社会相关性、观念创新或机构批判的作品。",
+      "summary_zh": "Point Pleasant Publishing 通过国际艺术家专题目录，精选创新和实验性当代艺术家，由策展人撰写深度分析，涵盖表演、摄影、视频、电影、纺织、装置、时尚、舞蹈、跨媒介等领域。无申请费。",
       "url": "https://www.artconnect.com/opportunity/qOOSNQZGd27KC3b-i0knk",
       "source_url": "https://www.artconnect.com/opportunities",
       "domain": "artconnect.com",
@@ -1094,19 +1109,19 @@
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10"
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
     },
     {
-      "id": "agg-nakanojo-biennale-2027-artist-open-call-art",
+      "id": "artconnect-opportunities-nakanojo-biennale-2027",
       "category": "opencall",
-      "title_zh": "中之条双年展 2027 艺术家征集",
-      "title_en": "Nakanojo Biennale 2027 Artist Open Call",
-      "org_zh": "中之条双年展",
-      "city_zh": "群马县中之条町",
+      "title_zh": "Nakanojo Biennale 2027",
+      "title_en": "Nakanojo Biennale 2027",
+      "org_zh": "Nakanojo Biennale",
+      "city_zh": null,
       "country_zh": "日本",
       "deadline": "2026-07-12",
-      "deadline_note": "参与者需自理作品制作、布置与维护",
+      "deadline_note": "",
       "apply_fee": {
         "free": true,
         "amount": null,
@@ -1128,13 +1143,21 @@
         "nationality": null
       },
       "disciplines": [
-        "雕塑",
-        "绘画",
-        "影像",
-        "装置",
-        "跨媒介"
+        "Sculpture",
+        "Painting",
+        "Photography",
+        "Video",
+        "Installation",
+        "Performance",
+        "Visual Arts",
+        "Applied Arts",
+        "Public Art",
+        "Sound Art",
+        "Interdisciplinary",
+        "Design",
+        "Architecture"
       ],
-      "summary_zh": "双年展邀请国际艺术家在中之条的古镇、学校、温泉区与乡野景观中进行在地创作,结合建筑、社会与环境条件;参与者需自行负责作品的制作、布置与维护。",
+      "summary_zh": "Nakanojo Biennale 2027 面向全球艺术家公开征集作品，展览地点包括日本群马县中之条町的历史城镇、学校、温泉区等。入选艺术家将获得制作支持和展览场地。",
       "url": "https://www.artconnect.com/opportunity/tsBBGYqXwC3OJ0Ot4qt7Z",
       "source_url": "https://www.artconnect.com/opportunities",
       "domain": "artconnect.com",
@@ -1142,19 +1165,19 @@
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10"
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
     },
     {
-      "id": "agg-the-joan-wakelin-bursary-art",
+      "id": "artconnect-opportunities-joan-wakelin-助学金",
       "category": "award",
-      "title_zh": "琼·韦克林奖助金",
+      "title_zh": "Joan Wakelin 助学金",
       "title_en": "The Joan Wakelin Bursary",
-      "org_zh": "英国皇家摄影学会(与卫报合作)",
+      "org_zh": "皇家摄影学会",
       "city_zh": null,
-      "country_zh": "英国",
+      "country_zh": null,
       "deadline": "2026-07-12",
-      "deadline_note": "仅资助新项目,不支持进行中或前往战区的项目",
+      "deadline_note": "",
       "apply_fee": {
         "free": true,
         "amount": null,
@@ -1176,9 +1199,9 @@
         "nationality": null
       },
       "disciplines": [
-        "影像"
+        "摄影"
       ],
-      "summary_zh": "为纪念纪实摄影师琼·韦克林设立,资助针对海外社会纪实议题的全新摄影散文项目,提供2000英镑制作经费;仅资助新项目,不支持进行中项目,也不支持前往战区的项目。",
+      "summary_zh": "由皇家摄影学会与《卫报》合作管理，提供2000英镑用于制作关于海外社会纪实议题的摄影专题。仅资助新项目，不支持战争区域旅行。",
       "url": "https://www.artconnect.com/opportunity/uWFoMFWBfx242RIhbSioN",
       "source_url": "https://www.artconnect.com/opportunities",
       "domain": "artconnect.com",
@@ -1186,8 +1209,8 @@
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10"
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
     },
     {
       "id": "agg-ceske-budejovice-ecoc-2028-perma-culture-art",
@@ -1640,15 +1663,15 @@
       "updated_at": "2026-07-10"
     },
     {
-      "id": "agg-open-call-for-screening-artist-film-and-moving-i-cur",
+      "id": "curatorspace-opportunities-艺术家电影与动态影像作品放映公开征集",
       "category": "opencall",
-      "title_zh": "艺术家影像与动态影像作品放映征集",
+      "title_zh": "艺术家电影与动态影像作品放映公开征集",
       "title_en": "Open Call for Screening Artist Film and Moving Image Works",
       "org_zh": "Deep Focus",
       "city_zh": "伦敦",
       "country_zh": "英国",
       "deadline": "2026-07-10",
-      "deadline_note": "国际投稿欢迎,但优先伦敦本地艺术家",
+      "deadline_note": "",
       "apply_fee": {
         "free": true,
         "amount": null,
@@ -1667,21 +1690,22 @@
       "eligibility": {
         "students_ok": null,
         "age_limit": null,
-        "nationality": "欢迎国际投稿,优先伦敦本地艺术家"
+        "nationality": null
       },
       "disciplines": [
-        "影像"
+        "影像",
+        "电影"
       ],
-      "summary_zh": "面向以影像、电影和动态影像创作的艺术家的放映征集,主题为“干预并调节日常与非常经验的吸引力”。放映将于2026年10-12月在伦敦Goldsmiths的RHB影院举办,作品不超过10分钟。",
+      "summary_zh": "Deep Focus 面向全球征集10分钟以内的动态影像作品，主题为“吸引力”。入选作品将于2026年10月至12月在伦敦金史密斯学院RHB影院放映。免费提交，无资金支持，优先考虑能到场参与的艺术家。",
       "url": "https://www.curatorspace.com/opportunities/detail/open-call-for-screening-artist-film-and-moving-image-works/10409",
       "source_url": "https://www.curatorspace.com/opportunities",
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10"
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
     },
     {
       "id": "agg-open-call-transient-states-paris-july-2026-cur",
@@ -2139,8 +2163,702 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10"
+    },
+    {
+      "id": "artconnect-opportunities-寻找工作坊领导者",
+      "category": "opencall",
+      "title_zh": "寻找工作坊领导者",
+      "title_en": "Seeking Workshop Leaders",
+      "org_zh": "大自然保护协会",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-24",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "大自然保护协会纽约安迪·沃霍尔视觉艺术项目征集艺术家，在2026年秋季于安迪·沃霍尔保护区领导户外工作坊。四位艺术家将被选中，需设计适合各年龄段、与保护区自然景观相关的艺术创作工作坊。",
+      "url": "https://www.artconnect.com/opportunity/_DLamO8YbepQDuI8AGS2G",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-圣达菲铁路场公园-广场公共艺术公开征集",
+      "category": "opencall",
+      "title_zh": "圣达菲铁路场公园+广场公共艺术公开征集",
+      "title_en": "Public Art Open Call: Santa Fe’s Railyard Park + Plaza",
+      "org_zh": "圣达菲市",
+      "city_zh": "圣达菲",
+      "country_zh": "美国",
+      "deadline": "2026-08-05",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "公共艺术",
+        "装置",
+        "雕塑"
+      ],
+      "summary_zh": "圣达菲市RAP委员会征集铁路场公园+广场的临时公共艺术装置和创意项目提案，鼓励跨学科合作，作品需适应户外展示并回应场地自然与社会景观。",
+      "url": "https://www.artconnect.com/opportunity/k6PwhJ3GfuYy9H0mkZM6R",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-展览征集",
+      "category": "opencall",
+      "title_zh": "展览征集",
+      "title_en": "Call for Exhibitions",
+      "org_zh": "南内华达学院",
+      "city_zh": null,
+      "country_zh": "美国",
+      "deadline": "2026-09-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "南内华达学院美术系现征集2025-2026展览季的展览提案，涵盖多个画廊空间。接受所有媒介和类型的个展或群展，由教师委员会根据艺术质量、与学院使命的相关性等标准评选。申请免费，截止日期为2026年9月15日。",
+      "url": "https://www.artconnect.com/opportunity/id6cbTEsO9cU88u5BWzPW",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-夏洛特市雕塑公开征集",
+      "category": "opencall",
+      "title_zh": "夏洛特市雕塑公开征集",
+      "title_en": "Open Call for Sculpture in City of Charlotte",
+      "org_zh": "Arts & Science Council",
+      "city_zh": "夏洛特",
+      "country_zh": "美国",
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "U.S. based"
+      },
+      "disciplines": [
+        "雕塑",
+        "视觉艺术",
+        "公共艺术"
+      ],
+      "summary_zh": "Arts & Science Council为夏洛特市动物护理与控制中心征集悬挂雕塑、墙面浮雕或壁画作品，要求艺术家参考该中心愿景，作品需与建筑互补并体现社区历史。",
+      "url": "https://www.artconnect.com/opportunity/jypDoL19PyTV-1rD5P0KP",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-现场项目策展人",
+      "category": "opencall",
+      "title_zh": "现场项目策展人",
+      "title_en": "Live Programmes Curator",
+      "org_zh": "蛇形画廊",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "策展"
+      ],
+      "summary_zh": "蛇形画廊招聘一位经验丰富的跨学科策展人，负责发起、开发并制作动态的现场项目，通过讲座、表演、参与式体验和跨学科现场形式，扩展和激活画廊的展览与策展愿景。",
+      "url": "https://www.artconnect.com/opportunity/eymV84q5X6cygn6u5XgNS",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-欧洲及更远流动性计划",
+      "category": "opencall",
+      "title_zh": "欧洲及更远流动性计划",
+      "title_en": "Europe and Beyond Mobility Programme",
+      "org_zh": "RESEO",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Performance",
+        "Dance",
+        "Education",
+        "Sound Art"
+      ],
+      "summary_zh": "RESEO的欧洲及更远流动性计划为艺术家和专业人士提供财务援助，参与2026年10月在布鲁塞尔举行的RESEO会议，旨在促进国际交流与知识共享。",
+      "url": "https://www.artconnect.com/opportunity/QE6ZKxzSoqNdc3-2YLqrM",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-锡安国家公园驻留艺术家2027",
+      "category": "residency",
+      "title_zh": "锡安国家公园驻留艺术家2027",
+      "title_en": "Zion National Park Artist-in-Residence 2027",
+      "org_zh": "国家公园管理局",
+      "city_zh": "斯普林代尔",
+      "country_zh": "美国",
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "摄影",
+        "电影",
+        "装置",
+        "跨媒介",
+        "版画",
+        "写作",
+        "舞蹈",
+        "音乐",
+        "表演",
+        "纤维艺术",
+        "纸艺",
+        "木雕"
+      ],
+      "summary_zh": "锡安国家公园2027年驻留项目，面向画家、雕塑家、纤维艺术家、纸艺家、木雕家、摄影师、电影制作人、音乐家、表演者、舞者、小说家和诗人。驻留月份为2027年2月、6月、10月中旬至11月中旬。艺术家需自行承担往返交通及材料费用。",
+      "url": "https://www.artconnect.com/opportunity/L5jKGi_e6_65UNFYos7dO",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-解释性面板-公共艺术机会",
+      "category": "opencall",
+      "title_zh": "解释性面板：公共艺术机会",
+      "title_en": "Interpretive Panels: Public Art Opportunity",
+      "org_zh": "Creative Philadelphia",
+      "city_zh": "费城",
+      "country_zh": "美国",
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Public Art"
+      ],
+      "summary_zh": "Creative Philadelphia 发起公开征集，委托艺术家团队设计并制作四块永久性解释性面板，集成增强现实（AR）元素，位于费城市政服务大楼。欢迎所有艺术家申请，费城本地艺术家优先。",
+      "url": "https://www.artconnect.com/opportunity/KI7Mvz7hXnibSG5UIuSgR",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "artconnect-opportunities-up-基金会策展奖学金",
+      "category": "residency",
+      "title_zh": "Upė基金会策展奖学金",
+      "title_en": "Upė Foundation Curatorial Fellowship at Camden Art Centre",
+      "org_zh": "Upė基金会",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-07-13",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "Baltic"
+      },
+      "disciplines": [
+        "策展"
+      ],
+      "summary_zh": "Upė基金会与Camden艺术中心合作，为波罗的海地区早期策展人提供为期12个月的全职策展奖学金，可延长至18个月。入选者将担任助理策展人，参与展览策划、协调与执行，并获得专业发展指导。需迁居伦敦。",
+      "url": "https://www.artconnect.com/opportunity/UzXU2E2mSG104lBlwsePR",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "curatorspace-opportunities-玻璃商cgs毕业生奖与新毕业生回顾2026",
+      "category": "award",
+      "title_zh": "玻璃商CGS毕业生奖与新毕业生回顾2026",
+      "title_en": "Glass Sellers' CGS Graduate Prize and New Graduate Review 2026",
+      "org_zh": "当代玻璃协会",
+      "city_zh": null,
+      "country_zh": "英国",
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "玻璃"
+      ],
+      "summary_zh": "当代玻璃协会为2025/2026年欧洲认证课程毕业生设立的奖项，提交作品需含至少50%玻璃，免费申请但需成为会员，获奖者获现金及代金券奖励，作品将刊登于《玻璃网络》杂志。",
+      "url": "https://www.curatorspace.com/opportunities/detail/glass-sellers-cgs-graduate-prize-and-new-graduate-review/10582",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "curatorspace-opportunities-blandford艺术协会2026年8月公开展览",
+      "category": "opencall",
+      "title_zh": "Blandford艺术协会2026年8月公开展览",
+      "title_en": "Blandford Art Society Open Exhibition August 2026",
+      "org_zh": "Blandford艺术协会",
+      "city_zh": "Blandford Forum",
+      "country_zh": "英国",
+      "deadline": "2026-07-12",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 6,
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "纺织"
+      ],
+      "summary_zh": "Blandford艺术协会举办2026年8月公开展览，面向多塞特、汉普郡、萨默塞特和威尔特郡的艺术家征集原创作品。接受画布、框架作品、雕塑及纺织作品。提交截止2026年7月12日，会员每件6英镑，非会员10英镑。展览于8月15日至21日在Corn Exchange举行。",
+      "url": "https://www.curatorspace.com/opportunities/detail/blandford-art-society-open-exhibition-august--in-the-corn-exchange-blandford-forum-dorset/10457",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "curatorspace-opportunities-梦境与噩梦-艺术家征集",
+      "category": "opencall",
+      "title_zh": "梦境与噩梦 | 艺术家征集",
+      "title_en": "Dreams and Nightmares | Call For Artists",
+      "org_zh": "Boomer Gallery",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-09-02",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 189,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "摄影",
+        "装置",
+        "版画",
+        "纺织品",
+        "插画",
+        "数字艺术",
+        "AI辅助艺术",
+        "诗歌"
+      ],
+      "summary_zh": "Boomer Gallery 发起梦境与噩梦主题展览征集，面向全球艺术家。免费申请，入选艺术家需支付189英镑参展费，涵盖画册、印刷装裱、开幕活动等。展览将于2026年9月在伦敦塔桥区画廊举办。",
+      "url": "https://www.curatorspace.com/advert/click?id=209",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "curatorspace-opportunities-客座撰稿人公开征集-博物馆-摄影与社区",
+      "category": "opencall",
+      "title_zh": "客座撰稿人公开征集（博物馆、摄影与社区）",
+      "title_en": "Open Call for Guest Writers (Museums, Photography & Community)",
+      "org_zh": "The Light Frame Gallery",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "Rolling open call",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "写作",
+        "摄影",
+        "博物馆研究"
+      ],
+      "summary_zh": "The Light Frame Gallery 为在线期刊征集客座撰稿人，要求1500-2000字研究型文章，探讨博物馆与摄影如何促进社区公益。入选者每篇获50英镑稿酬。长期开放申请。",
+      "url": "https://www.curatorspace.com/opportunities/detail/the-light-frame-gallery/9757",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "curatorspace-opportunities-elmswell图书馆展览征稿",
+      "category": "opencall",
+      "title_zh": "Elmswell图书馆展览征稿",
+      "title_en": null,
+      "org_zh": "CuratorSpace",
+      "city_zh": "Elmswell",
+      "country_zh": "英国",
+      "deadline": null,
+      "deadline_note": "滚动截止，作品约每六周更换一次",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Elmswell图书馆为艺术家提供展览空间，约240cm x 220cm，作品展示约六周。无前期费用，售出作品收取15%佣金。滚动截止，欢迎各层次艺术家投稿。",
+      "url": "https://www.curatorspace.com/opportunities/detail/exhibition/8735",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
     }
-  ],
-  "count": 47,
-  "generated_at": "2026-07-10"
+  ]
 }

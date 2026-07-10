@@ -368,7 +368,8 @@
       "reachable": true,
       "robots": "disallow",
       "confirmed": false,
-      "notes": "robots 允许普通爬虫但按名封禁 ClaudeBot;需确认我方 UA 是否被 * 规则允许,否则跳过"
+      "notes": "robots 允许普通爬虫但按名封禁 ClaudeBot;需确认我方 UA 是否被 * 规则允许,否则跳过",
+      "trust_auto": true
     },
     {
       "id": "gasworks-opportunities",
@@ -455,7 +456,8 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "全球艺术 open call 聚合;robots 允许 ArtPortalBot(按名禁 ClaudeBot,故子代理抓不了、须靠 pipeline)"
+      "notes": "全球艺术 open call 聚合;robots 允许 ArtPortalBot(按名禁 ClaudeBot,故子代理抓不了、须靠 pipeline)",
+      "trust_auto": true
     },
     {
       "id": "artconnect-opportunities",
@@ -475,7 +477,8 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "全球机会聚合,数百条"
+      "notes": "全球机会聚合,数百条",
+      "trust_auto": true
     },
     {
       "id": "curatorspace-opportunities",
@@ -494,7 +497,8 @@
       "reachable": true,
       "robots": "none",
       "confirmed": false,
-      "notes": "以英国为主的 open call 聚合"
+      "notes": "以英国为主的 open call 聚合",
+      "trust_auto": true
     }
   ],
   "blocked_or_unverified": [
