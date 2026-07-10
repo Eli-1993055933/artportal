@@ -10,7 +10,9 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const MODEL = "claude-opus-4-8";                  // 提取用模型
+// 提取用模型:结构化提取用 Sonnet 又快又省(可用 EXTRACT_MODEL 环境变量覆盖)。
+// 真正的准确性靠 verify.mjs 的 evidence 子串校验兜底,而非模型档次。
+const MODEL = process.env.EXTRACT_MODEL || "claude-sonnet-5";
 const MAX_INPUT_CHARS = 24000;                    // 原文过长时截断,控制成本
 
 let PROMPT = null;
@@ -20,7 +22,7 @@ async function getPrompt() {
 }
 
 // 价格(美元/百万 token)—— 用于费用报告。若价格调整只改这里。
-const PRICE = { in: 15, out: 75 }; // Opus 4.8 约值,占位;正式以账单为准
+const PRICE = { in: 3, out: 15 }; // Sonnet 约值,占位;正式以账单为准
 
 export function estimateCost(usage) {
   if (!usage) return 0;

@@ -29,6 +29,8 @@ const P = (...p) => join(__dir, ...p);
 const args = process.argv.slice(2);
 const hasFlag = (f) => args.includes(f);
 const getOpt = (f) => { const i = args.indexOf(f); return i !== -1 ? args[i + 1] : null; };
+// 每个信源最多向下钻取的详情页数量。首跑用 --cap 8 控成本;不传则默认 20。
+const CAP = Math.max(1, parseInt(getOpt("--cap") || "20", 10) || 20);
 const onlyIds = (getOpt("--only") || "").split(",").map(s => s.trim()).filter(Boolean);
 const DATA = getOpt("--out") || P("..", "site", "data", "opportunities.json"); // --out 可指向演示输出,避免覆盖 seed
 
@@ -97,7 +99,7 @@ async function main() {
     if (f.isRss) {
       candidates = f.text.split(/\n\n---\n\n/).slice(0, 8).map((t, i) => ({ sourceText: t, url: src.url, key: src.id + "#" + i }));
     } else if (src.crawl !== false) {
-      const links = discoverDetailLinks(f.rawHtml, src.url, src.domain, { cap: src.cap || 20 });
+      const links = discoverDetailLinks(f.rawHtml, src.url, src.domain, { cap: src.cap || CAP });
       process.stderr.write(`  发现 ${links.length} 条候选详情链接\n`);
       for (const ln of links) {
         const detailKey = src.id + "|" + ln.url;
