@@ -12,9 +12,15 @@
   };
 
   function media(o) {
-    // 无图 → 域名首字母 + 分类主色 色块(不留空白框)
-    return '<div class="card__fallback" style="background:' + F.catColor(o.category) + '">' +
-           '<span>' + esc(F.initial(o)) + '</span></div>';
+    // 降级色块(域名首字母 + 分类主色)始终垫底;有封面图则叠加在上,加载失败自动移除退回色块。
+    var fb = '<div class="card__fallback" style="background:' + F.catColor(o.category) + '">' +
+             '<span>' + esc(F.initial(o)) + '</span></div>';
+    if (o.cover) {
+      // 图片加载成功才淡入覆盖色块;加载慢/失败则一直显示色块(不留白)。
+      return fb + '<img class="card__img" src="' + esc(o.cover) + '" alt="" loading="lazy" ' +
+             'referrerpolicy="no-referrer" onload="this.classList.add(\'is-loaded\')" onerror="this.remove()">';
+    }
+    return fb;
   }
 
   function trustBadge(o) {
@@ -112,7 +118,9 @@
                    fundLine(AP.t("travel"), (o.funding || {}).travel);
     var dnote = o.deadline_note ? ' <span class="muted">(' + esc(o.deadline_note) + ')</span>' : '';
 
+    var cover = o.cover ? '<img class="d-cover" src="' + esc(o.cover) + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' : '';
     var html =
+      cover +
       '<div class="d-head">' +
         '<span class="d-cat" style="background:' + F.catColor(o.category) + '">' + esc(AP.tt[AP.lang].cat[o.category] || o.category) + '</span>' +
         '<h1 class="d-title" id="detailTitle">' + esc(o.title_zh || o.title_en || "") + '</h1>' +

@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
 import { discoverDetailLinks } from "./lib/discover.mjs";
+import { extractCover } from "./lib/cover.mjs";
 import { extract, estimateCost, parseJson } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
 import { dedupe } from "./lib/dedupe.mjs";
@@ -107,11 +108,11 @@ async function main() {
         if (df.skipped) { process.stderr.write(`    详情跳过 ${ln.url}: ${df.reason}\n`); continue; }
         if (hashes[detailKey] && hashes[detailKey].hash === df.hash) { stats.unchanged++; continue; }
         hashes[detailKey] = { hash: df.hash, at: todayISO() };
-        candidates.push({ sourceText: df.text, url: ln.url, key: detailKey });
+        candidates.push({ sourceText: df.text, url: ln.url, key: detailKey, rawHtml: df.rawHtml });
       }
-      if (!candidates.length) candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0" }];
+      if (!candidates.length) candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0", rawHtml: f.rawHtml }];
     } else {
-      candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0" }];
+      candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0", rawHtml: f.rawHtml }];
     }
 
     for (const cand of candidates) {
@@ -140,6 +141,8 @@ async function main() {
 
       const g = gradeTrust(v.record, v.flags, src);
       const rec = finalizeRecord(v.record, src, g.trust);
+      // 封面:取该详情页自己的 og:image(热链,前端加载失败退回色块)。旧封面若已有则保留。
+      if (cand.rawHtml) { const cv = extractCover(cand.rawHtml, cand.url); if (cv) { rec.cover = cv; rec.cover_source = src.domain; } }
       if (g.trust === "auto") { autoRecords.push(rec); }
       else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
       process.stderr.write(`  → ${g.trust}${g.reasons.length ? " (" + g.reasons.join("; ") + ")" : ""}  evidence作废 ${v.nulled.length} 处\n`);
@@ -158,6 +161,8 @@ async function main() {
   for (const r of autoRecords) {
     const prev = byId.get(r.id);
     if (prev && prev.trust === "verified") { stats.updated++; continue; } // 人工核实的不被 auto 覆盖
+    // 保留此前已找到的封面(含联网检索来的),避免每日重跑用页面 og 图覆盖更贴切的封面
+    if (prev && prev.cover && !r.cover) { r.cover = prev.cover; r.cover_source = prev.cover_source; }
     if (prev) stats.updated++; else stats.added++;
     byId.set(r.id, r);
   }
