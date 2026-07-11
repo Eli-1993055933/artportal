@@ -499,6 +499,24 @@
       "confirmed": false,
       "notes": "以英国为主的 open call 聚合",
       "trust_auto": true
+    },
+    {
+      "id": "chinaresidencies-directory",
+      "org_zh": "China Residencies",
+      "name_zh": "驻留目录 Residencies",
+      "url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "trust_auto": true,
+      "notes": "非营利中国及全球艺术驻留数据库;/residencies/<slug> 为机构档案,多为常年项目;无 robots"
     }
   ],
   "blocked_or_unverified": [

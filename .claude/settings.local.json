@@ -15,7 +15,27 @@
       "Bash(node run.mjs --only caanet-bjbiennale,daad-berlin-feed --fetch-only)",
       "Bash(head -c 600 state/samples/caanet-bjbiennale.txt)",
       "Bash(npm install *)",
-      "Bash(node -e \"import\\('@anthropic-ai/sdk'\\).then\\(m=>console.log\\('SDK 可加载, 版本:', require\\('./node_modules/@anthropic-ai/sdk/package.json'\\).version\\)\\).catch\\(e=>console.log\\('SDK 加载失败:', e.message\\)\\)\")"
+      "Bash(node -e \"import\\('@anthropic-ai/sdk'\\).then\\(m=>console.log\\('SDK 可加载, 版本:', require\\('./node_modules/@anthropic-ai/sdk/package.json'\\).version\\)\\).catch\\(e=>console.log\\('SDK 加载失败:', e.message\\)\\)\")",
+      "WebFetch(domain:www.gzarts.edu.cn)",
+      "WebFetch(domain:www.scfai.edu.cn)",
+      "WebFetch(domain:www.hifa.edu.cn)",
+      "WebFetch(domain:www.xafa.edu.cn)",
+      "WebFetch(domain:www.namoc.cn)",
+      "WebFetch(domain:www.gdmoa.org)",
+      "WebFetch(domain:wlt.hubei.gov.cn)",
+      "WebFetch(domain:www.artmuseumonline.org)",
+      "WebFetch(domain:www.bjaa.com.cn)",
+      "WebFetch(domain:www.a4artmuseum.com)",
+      "WebFetch(domain:www.citeinternationaledesarts.fr)",
+      "WebFetch(domain:mp.weixin.qq.com)",
+      "WebSearch",
+      "WebFetch(domain:berliner-kuenstlerprogramm.de)",
+      "Bash(node -e \"const d=require\\('./site/data/opportunities.json'\\); console.log\\('JSON 合法, 共', d.opportunities.length, '条, 开放', d.opportunities.filter\\(o=>o.status==='open'\\).length, '条'\\); console.log\\('新增开放机会:', d.opportunities.filter\\(o=>['ted-posca-residency-2026','hkbu-iww-2027','ocastro-selffunded-2026'].includes\\(o.id\\)\\).map\\(o=>o.title_zh\\).join\\(' / '\\)\\)\")",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "WebFetch(domain:www.curatorspace.com)",
+      "WebFetch(domain:www.artconnect.com)",
+      "Bash(node -e \"const d=require\\('./site/data/opportunities.json'\\); console.log\\('JSON 合法:', d.opportunities.length, '条'\\); const s=d.opportunities.find\\(o=>o.id.includes\\('landscape'\\)\\); console.log\\('样例\\(收费展\\):', s.title_zh, '| apply_fee.free=', s.apply_fee.free, '| participation:', JSON.stringify\\(s.participation_fee\\), '| disciplines:', s.disciplines.join\\(','\\)\\);\")"
     ]
   }
 }
