@@ -1,47 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="ht hd">
-  <title id="ht">ArtPortal 主视觉</title>
-  <desc id="hd">暖白底上一道四色拱门,左侧文案:为中国艺术家汇集全球艺术机会,真不真、急不急、给不给钱。</desc>
-  <rect width="1200" height="630" fill="#F7F6F2"/>
+  <title id="ht">ArtPortal 主视觉 · 观测站</title>
+  <desc id="hd">深色太空中,一座空间站俯瞰地球,地球边缘是四类机会主色的大气光带;左侧文案:为中国艺术家汇集全球艺术机会,真不真、急不急、给不给钱。</desc>
 
-  <!-- 右侧:回响的门(纵深) + 主门 -->
-  <g>
-    <path d="M636,512 L636,300 A204,204 0 0 1 1044,300 L1044,512" fill="none" stroke="#1A1A1A" stroke-opacity="0.06" stroke-width="2"/>
-    <path d="M672,512 L672,312 A192,192 0 0 1 1056,312 L1056,512" fill="none" stroke="#1A1A1A" stroke-opacity="0.10" stroke-width="2"/>
+  <rect width="1200" height="630" fill="#14161C"/>
+
+  <!-- 星点 -->
+  <g fill="#FFFFFF">
+    <circle cx="180" cy="70" r="1.4" opacity="0.5"/><circle cx="320" cy="140" r="1" opacity="0.3"/>
+    <circle cx="900" cy="60" r="1.6" opacity="0.55"/><circle cx="1040" cy="120" r="1.1" opacity="0.35"/>
+    <circle cx="1120" cy="240" r="1.4" opacity="0.45"/><circle cx="980" cy="300" r="1" opacity="0.3"/>
+    <circle cx="1150" cy="70" r="1" opacity="0.4"/><circle cx="760" cy="90" r="1.2" opacity="0.4"/>
+    <circle cx="500" cy="60" r="1" opacity="0.3"/><circle cx="1080" cy="360" r="1.2" opacity="0.35"/>
   </g>
-  <defs>
-    <clipPath id="harch"><path d="M708,512 L708,322 A180,180 0 0 1 1068,322 L1068,512 Z"/></clipPath>
-  </defs>
-  <g clip-path="url(#harch)">
-    <rect x="708" y="140" width="90" height="372" fill="#C0392B"/>
-    <rect x="798" y="140" width="90" height="372" fill="#2E6FA7"/>
-    <rect x="888" y="140" width="90" height="372" fill="#C08A1E"/>
-    <rect x="978" y="140" width="90" height="372" fill="#6B5B95"/>
-    <rect x="796" y="140" width="4" height="372" fill="#F7F6F2"/>
-    <rect x="886" y="140" width="4" height="372" fill="#F7F6F2"/>
-    <rect x="976" y="140" width="4" height="372" fill="#F7F6F2"/>
+
+  <!-- 地球 + 四色大气 -->
+  <circle cx="600" cy="1080" r="620" fill="#20242E"/>
+  <circle cx="600" cy="1080" r="620" fill="none" stroke="#3A4150" stroke-width="1.5"/>
+  <g fill="none" stroke-width="10" stroke-linecap="round">
+    <path d="M180,583.9 A650,650 0 0 1 390,464.9" stroke="#E0574A"/>
+    <path d="M390,464.9 A650,650 0 0 1 600,430"   stroke="#4E93CE"/>
+    <path d="M600,430 A650,650 0 0 1 810,464.9"   stroke="#E0AE4B"/>
+    <path d="M810,464.9 A650,650 0 0 1 1020,583.9" stroke="#9385BE"/>
   </g>
-  <path d="M708,512 L708,322 A180,180 0 0 1 1068,322 L1068,512" fill="none" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
-  <line x1="672" y1="512" x2="1104" y2="512" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- 观测站 -->
+  <line x1="600" y1="170" x2="600" y2="320" stroke="#F7F6F2" stroke-opacity="0.5" stroke-width="2" stroke-dasharray="3 6" stroke-linecap="round"/>
+  <g stroke="#F7F6F2" stroke-linejoin="round">
+    <line x1="470" y1="150" x2="730" y2="150" stroke-width="4" stroke-linecap="round"/>
+    <rect x="470" y="134" width="64" height="32" rx="3" fill="#2A2F3A" stroke-width="2.5"/>
+    <line x1="502" y1="134" x2="502" y2="166" stroke-width="1.4"/><line x1="470" y1="150" x2="534" y2="150" stroke-width="1.4"/>
+    <rect x="666" y="134" width="64" height="32" rx="3" fill="#2A2F3A" stroke-width="2.5"/>
+    <line x1="698" y1="134" x2="698" y2="166" stroke-width="1.4"/><line x1="666" y1="150" x2="730" y2="150" stroke-width="1.4"/>
+    <rect x="576" y="130" width="48" height="40" rx="9" fill="#F7F6F2" stroke-width="2.5"/>
+    <circle cx="600" cy="150" r="7" fill="#14161C" stroke="none"/>
+    <line x1="600" y1="130" x2="600" y2="110" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="600" cy="108" r="3" fill="#F7F6F2" stroke="none"/>
+  </g>
 
   <!-- 左侧文案 -->
   <g font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
-    <text x="96" y="118" font-size="22" font-weight="800" letter-spacing="4" fill="#1A1A1A">ARTPORTAL<tspan font-weight="500" fill="#8A8A85"> · 全球艺术机会</tspan></text>
+    <text x="96" y="118" font-size="22" font-weight="800" letter-spacing="4" fill="#F7F6F2">ARTPORTAL<tspan font-weight="500" fill="#8A90A0"> · 全球艺术机会</tspan></text>
 
-    <text x="92" y="268" font-size="72" font-weight="800" fill="#1A1A1A" letter-spacing="1">为中国艺术家</text>
-    <text x="92" y="352" font-size="72" font-weight="800" fill="#1A1A1A" letter-spacing="1">汇集全球艺术机会</text>
+    <text x="92" y="268" font-size="72" font-weight="800" fill="#F7F6F2" letter-spacing="1">为中国艺术家</text>
+    <text x="92" y="352" font-size="72" font-weight="800" fill="#F7F6F2" letter-spacing="1">汇集全球艺术机会</text>
 
-    <text x="96" y="410" font-size="24" fill="#4A4A47" letter-spacing="2">展览征集 · 驻留项目 · 艺术奖项 · 工作坊</text>
+    <text x="96" y="410" font-size="24" fill="#B9BDC7" letter-spacing="2">展览征集 · 驻留项目 · 艺术奖项 · 工作坊</text>
 
-    <!-- 三个承诺 -->
     <g font-size="24" font-weight="700">
-      <rect x="96" y="452" width="132" height="52" rx="26" fill="#1A1A1A"/>
-      <text x="162" y="486" fill="#fff" text-anchor="middle">真不真</text>
-      <rect x="244" y="452" width="132" height="52" rx="26" fill="none" stroke="#B77410" stroke-width="2"/>
-      <text x="310" y="486" fill="#B77410" text-anchor="middle">急不急</text>
-      <rect x="392" y="452" width="150" height="52" rx="26" fill="none" stroke="#2E7D46" stroke-width="2"/>
-      <text x="467" y="486" fill="#2E7D46" text-anchor="middle">给不给钱</text>
+      <rect x="96" y="452" width="132" height="52" rx="26" fill="#F7F6F2"/>
+      <text x="162" y="486" fill="#14161C" text-anchor="middle">真不真</text>
+      <rect x="244" y="452" width="132" height="52" rx="26" fill="none" stroke="#E0AE4B" stroke-width="2"/>
+      <text x="310" y="486" fill="#E0AE4B" text-anchor="middle">急不急</text>
+      <rect x="392" y="452" width="150" height="52" rx="26" fill="none" stroke="#4FB06A" stroke-width="2"/>
+      <text x="467" y="486" fill="#4FB06A" text-anchor="middle">给不给钱</text>
     </g>
 
-    <text x="96" y="560" font-size="16" fill="#8A8A85" letter-spacing="1">每条机会一眼看清 · 只收录机构官网与公开信源</text>
+    <text x="96" y="560" font-size="16" fill="#8A90A0" letter-spacing="1">每条机会一眼看清 · 只收录机构官网与公开信源</text>
   </g>
 </svg>

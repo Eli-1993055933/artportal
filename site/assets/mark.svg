@@ -1,23 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="t d">
-  <title id="t">ArtPortal 标志</title>
-  <desc id="d">一道拱门,门内由展览征集、驻留、奖项、工作坊四类主色的竖条组成。</desc>
-  <defs>
-    <clipPath id="arch">
-      <path d="M22,80 L22,44 A26,26 0 0 1 74,44 L74,80 Z"/>
-    </clipPath>
-  </defs>
-  <!-- 门内四类主色 -->
-  <g clip-path="url(#arch)">
-    <rect x="22" y="16" width="13" height="66" fill="#C0392B"/>
-    <rect x="35" y="16" width="13" height="66" fill="#2E6FA7"/>
-    <rect x="48" y="16" width="13" height="66" fill="#C08A1E"/>
-    <rect x="61" y="16" width="13" height="66" fill="#6B5B95"/>
-    <!-- 竖缝(暖白),让四色读成四扇 -->
-    <rect x="34.2" y="16" width="1.6" height="66" fill="#F7F6F2"/>
-    <rect x="47.2" y="16" width="1.6" height="66" fill="#F7F6F2"/>
-    <rect x="60.2" y="16" width="1.6" height="66" fill="#F7F6F2"/>
+  <title id="t">ArtPortal 标志 · 观测站</title>
+  <desc id="d">一座空间站在轨道上俯瞰地球,地球边缘是由四类机会主色组成的大气光带。</desc>
+
+  <!-- 地球(浅色球冠) -->
+  <circle cx="48" cy="168" r="120" fill="#EAE9E4"/>
+  <circle cx="48" cy="168" r="120" fill="none" stroke="#1A1A1A" stroke-opacity="0.10" stroke-width="1.4"/>
+
+  <!-- 四类主色大气光带 -->
+  <g fill="none" stroke-width="5.2" stroke-linecap="round">
+    <path d="M4,47.8 A128,128 0 0 1 26,41.9" stroke="#C0392B"/>
+    <path d="M26,41.9 A128,128 0 0 1 48,40"  stroke="#2E6FA7"/>
+    <path d="M48,40 A128,128 0 0 1 70,41.9"  stroke="#C08A1E"/>
+    <path d="M70,41.9 A128,128 0 0 1 92,47.8" stroke="#6B5B95"/>
   </g>
-  <!-- 门框 + 门槛 -->
-  <path d="M22,80 L22,44 A26,26 0 0 1 74,44 L74,80" fill="none" stroke="#1A1A1A" stroke-width="3.2" stroke-linejoin="round"/>
-  <line x1="16" y1="80" x2="80" y2="80" stroke="#1A1A1A" stroke-width="3.2" stroke-linecap="round"/>
+
+  <!-- 观测视线 -->
+  <line x1="48" y1="28" x2="48" y2="39" stroke="#1A1A1A" stroke-width="1.6" stroke-dasharray="1.6 2.4" stroke-linecap="round"/>
+
+  <!-- 空间站(墨黑) -->
+  <g stroke="#1A1A1A" stroke-linejoin="round">
+    <line x1="14" y1="20" x2="82" y2="20" stroke-width="2.4" stroke-linecap="round"/>
+    <rect x="12" y="13" width="13" height="14" rx="1.5" fill="#F7F6F2" stroke-width="1.7"/>
+    <line x1="18.5" y1="13" x2="18.5" y2="27" stroke-width="1.1"/>
+    <line x1="12" y1="20" x2="25" y2="20" stroke-width="1.1"/>
+    <rect x="71" y="13" width="13" height="14" rx="1.5" fill="#F7F6F2" stroke-width="1.7"/>
+    <line x1="77.5" y1="13" x2="77.5" y2="27" stroke-width="1.1"/>
+    <line x1="71" y1="20" x2="84" y2="20" stroke-width="1.1"/>
+    <rect x="40" y="12" width="16" height="16" rx="4" fill="#1A1A1A" stroke-width="1.7"/>
+    <circle cx="48" cy="20" r="3" fill="#F7F6F2" stroke="none"/>
+    <line x1="48" y1="12" x2="48" y2="5" stroke-width="1.7" stroke-linecap="round"/>
+    <circle cx="48" cy="4.5" r="1.7" fill="#1A1A1A" stroke="none"/>
+  </g>
 </svg>

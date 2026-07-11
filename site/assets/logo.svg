@@ -1,22 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 96" role="img" aria-label="ARTPORTAL 全球艺术机会">
-  <defs>
-    <clipPath id="la"><path d="M12,78 L12,46 A22,22 0 0 1 56,46 L56,78 Z"/></clipPath>
-  </defs>
-  <!-- 门标 -->
-  <g clip-path="url(#la)">
-    <rect x="12" y="20" width="11" height="58" fill="#C0392B"/>
-    <rect x="23" y="20" width="11" height="58" fill="#2E6FA7"/>
-    <rect x="34" y="20" width="11" height="58" fill="#C08A1E"/>
-    <rect x="45" y="20" width="11" height="58" fill="#6B5B95"/>
-    <rect x="22.4" y="20" width="1.3" height="58" fill="#F7F6F2"/>
-    <rect x="33.4" y="20" width="1.3" height="58" fill="#F7F6F2"/>
-    <rect x="44.4" y="20" width="1.3" height="58" fill="#F7F6F2"/>
+  <!-- 观测站(缩放置左) -->
+  <g transform="translate(6,30) scale(0.72)">
+    <circle cx="48" cy="168" r="120" fill="#EAE9E4"/>
+    <g fill="none" stroke-width="5.2" stroke-linecap="round">
+      <path d="M4,47.8 A128,128 0 0 1 26,41.9" stroke="#C0392B"/>
+      <path d="M26,41.9 A128,128 0 0 1 48,40"  stroke="#2E6FA7"/>
+      <path d="M48,40 A128,128 0 0 1 70,41.9"  stroke="#C08A1E"/>
+      <path d="M70,41.9 A128,128 0 0 1 92,47.8" stroke="#6B5B95"/>
+    </g>
+    <line x1="48" y1="28" x2="48" y2="39" stroke="#1A1A1A" stroke-width="1.6" stroke-dasharray="1.6 2.4" stroke-linecap="round"/>
+    <g stroke="#1A1A1A" stroke-linejoin="round">
+      <line x1="14" y1="20" x2="82" y2="20" stroke-width="2.4" stroke-linecap="round"/>
+      <rect x="12" y="13" width="13" height="14" rx="1.5" fill="#F7F6F2" stroke-width="1.7"/>
+      <rect x="71" y="13" width="13" height="14" rx="1.5" fill="#F7F6F2" stroke-width="1.7"/>
+      <rect x="40" y="12" width="16" height="16" rx="4" fill="#1A1A1A" stroke-width="1.7"/>
+      <circle cx="48" cy="20" r="3" fill="#F7F6F2" stroke="none"/>
+      <line x1="48" y1="12" x2="48" y2="5" stroke-width="1.7" stroke-linecap="round"/>
+      <circle cx="48" cy="4.5" r="1.7" fill="#1A1A1A" stroke="none"/>
+    </g>
   </g>
-  <path d="M12,78 L12,46 A22,22 0 0 1 56,46 L56,78" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round"/>
-  <line x1="7" y1="78" x2="61" y2="78" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
   <!-- 字标 -->
-  <text x="82" y="50" font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="34" letter-spacing="1.5" fill="#1A1A1A">
+  <text x="86" y="50" font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="34" letter-spacing="1.5" fill="#1A1A1A">
     <tspan font-weight="800">ART</tspan><tspan font-weight="500">PORTAL</tspan>
   </text>
-  <text x="84" y="76" font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" letter-spacing="4" fill="#8A8A85">全球艺术机会</text>
+  <text x="88" y="76" font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="15" letter-spacing="4" fill="#8A8A85">全球艺术机会</text>
 </svg>
