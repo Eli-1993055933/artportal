@@ -16,3 +16,7 @@ pipeline/state/offline-*.json
 Thumbs.db
 *.log
 !pipeline/state/hallucination.log
+
+# 部署打包产物
+artportal-site.zip
+*.zip
