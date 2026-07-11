@@ -84,8 +84,10 @@ img { max-width: 100%; display: block; }
   max-width: var(--maxw); margin: 0 auto; padding: 12px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
-.brand { display: flex; align-items: baseline; gap: 8px; }
-.brand__mark { font-weight: 700; letter-spacing: .04em; font-size: 18px; }
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand__logo { height: 28px; width: 28px; display: block; flex: 0 0 auto; }
+.brand__mark { font-weight: 700; letter-spacing: .04em; font-size: 18px; align-self: center; }
+.brand__sub { align-self: center; }
 .brand__sub { color: var(--ink-3); font-size: 14px; }
 .topbar__actions { display: flex; align-items: center; gap: 8px; }
 .fav-ico { display: none; width: 20px; height: 20px; }

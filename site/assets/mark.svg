@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="t d">
+  <title id="t">ArtPortal 标志</title>
+  <desc id="d">一道拱门,门内由展览征集、驻留、奖项、工作坊四类主色的竖条组成。</desc>
+  <defs>
+    <clipPath id="arch">
+      <path d="M22,80 L22,44 A26,26 0 0 1 74,44 L74,80 Z"/>
+    </clipPath>
+  </defs>
+  <!-- 门内四类主色 -->
+  <g clip-path="url(#arch)">
+    <rect x="22" y="16" width="13" height="66" fill="#C0392B"/>
+    <rect x="35" y="16" width="13" height="66" fill="#2E6FA7"/>
+    <rect x="48" y="16" width="13" height="66" fill="#C08A1E"/>
+    <rect x="61" y="16" width="13" height="66" fill="#6B5B95"/>
+    <!-- 竖缝(暖白),让四色读成四扇 -->
+    <rect x="34.2" y="16" width="1.6" height="66" fill="#F7F6F2"/>
+    <rect x="47.2" y="16" width="1.6" height="66" fill="#F7F6F2"/>
+    <rect x="60.2" y="16" width="1.6" height="66" fill="#F7F6F2"/>
+  </g>
+  <!-- 门框 + 门槛 -->
+  <path d="M22,80 L22,44 A26,26 0 0 1 74,44 L74,80" fill="none" stroke="#1A1A1A" stroke-width="3.2" stroke-linejoin="round"/>
+  <line x1="16" y1="80" x2="80" y2="80" stroke="#1A1A1A" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

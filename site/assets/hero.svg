@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="ht hd">
+  <title id="ht">ArtPortal 主视觉</title>
+  <desc id="hd">暖白底上一道四色拱门,左侧文案:为中国艺术家汇集全球艺术机会,真不真、急不急、给不给钱。</desc>
+  <rect width="1200" height="630" fill="#F7F6F2"/>
+
+  <!-- 右侧:回响的门(纵深) + 主门 -->
+  <g>
+    <path d="M636,512 L636,300 A204,204 0 0 1 1044,300 L1044,512" fill="none" stroke="#1A1A1A" stroke-opacity="0.06" stroke-width="2"/>
+    <path d="M672,512 L672,312 A192,192 0 0 1 1056,312 L1056,512" fill="none" stroke="#1A1A1A" stroke-opacity="0.10" stroke-width="2"/>
+  </g>
+  <defs>
+    <clipPath id="harch"><path d="M708,512 L708,322 A180,180 0 0 1 1068,322 L1068,512 Z"/></clipPath>
+  </defs>
+  <g clip-path="url(#harch)">
+    <rect x="708" y="140" width="90" height="372" fill="#C0392B"/>
+    <rect x="798" y="140" width="90" height="372" fill="#2E6FA7"/>
+    <rect x="888" y="140" width="90" height="372" fill="#C08A1E"/>
+    <rect x="978" y="140" width="90" height="372" fill="#6B5B95"/>
+    <rect x="796" y="140" width="4" height="372" fill="#F7F6F2"/>
+    <rect x="886" y="140" width="4" height="372" fill="#F7F6F2"/>
+    <rect x="976" y="140" width="4" height="372" fill="#F7F6F2"/>
+  </g>
+  <path d="M708,512 L708,322 A180,180 0 0 1 1068,322 L1068,512" fill="none" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
+  <line x1="672" y1="512" x2="1104" y2="512" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- 左侧文案 -->
+  <g font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+    <text x="96" y="118" font-size="22" font-weight="800" letter-spacing="4" fill="#1A1A1A">ARTPORTAL<tspan font-weight="500" fill="#8A8A85"> · 全球艺术机会</tspan></text>
+
+    <text x="92" y="268" font-size="72" font-weight="800" fill="#1A1A1A" letter-spacing="1">为中国艺术家</text>
+    <text x="92" y="352" font-size="72" font-weight="800" fill="#1A1A1A" letter-spacing="1">汇集全球艺术机会</text>
+
+    <text x="96" y="410" font-size="24" fill="#4A4A47" letter-spacing="2">展览征集 · 驻留项目 · 艺术奖项 · 工作坊</text>
+
+    <!-- 三个承诺 -->
+    <g font-size="24" font-weight="700">
+      <rect x="96" y="452" width="132" height="52" rx="26" fill="#1A1A1A"/>
+      <text x="162" y="486" fill="#fff" text-anchor="middle">真不真</text>
+      <rect x="244" y="452" width="132" height="52" rx="26" fill="none" stroke="#B77410" stroke-width="2"/>
+      <text x="310" y="486" fill="#B77410" text-anchor="middle">急不急</text>
+      <rect x="392" y="452" width="150" height="52" rx="26" fill="none" stroke="#2E7D46" stroke-width="2"/>
+      <text x="467" y="486" fill="#2E7D46" text-anchor="middle">给不给钱</text>
+    </g>
+
+    <text x="96" y="560" font-size="16" fill="#8A8A85" letter-spacing="1">每条机会一眼看清 · 只收录机构官网与公开信源</text>
+  </g>
+</svg>
