@@ -205,6 +205,18 @@ img { max-width: 100%; display: block; }
 .badge--partfee{ color: var(--warn); border-color: rgba(183,116,16,.35); background: var(--warn-soft); }
 .badge--fund   { color: var(--ok); border-color: rgba(46,125,70,.30); background: var(--ok-soft); }
 
+.card__summary {
+  margin: 2px 0 0; font-size: 13px; line-height: 1.5; color: var(--ink-2);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card__srcrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.src-chip { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 500; white-space: nowrap; }
+.src-chip--official   { color: #2E6FA7; background: #E9F1F8; }
+.src-chip--aggregator { color: var(--ink-2); background: #EFEEE9; }
+.d-provenance { font-size: 12.5px; line-height: 1.55; padding: 9px 12px; border-radius: var(--radius-sm); margin: 12px 0; }
+.d-provenance.src-chip--official   { color: #245b8a; background: #E9F1F8; }
+.d-provenance.src-chip--aggregator { color: var(--ink-2); background: #EFEEE9; }
+
 .trust { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
 .trust svg { width: 14px; height: 14px; }
 .trust--verified { color: var(--ink); font-weight: 600; }

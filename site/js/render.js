@@ -38,6 +38,10 @@
     var titleEn = o.title_en ? '<div class="card__title-en">' + esc(o.title_en) + '</div>' : "";
     var place = [o.city_zh, o.country_zh].filter(Boolean).join(" · ") || AP.t("notStated");
     var orgTag = AP.tt[AP.lang].org[o.org_type] || o.org_type || "";
+    var prov = F.provenance(o);
+    var summary = o.summary_zh ? '<p class="card__summary">' + esc(o.summary_zh) + '</p>' : "";
+    var srcChip = '<span class="src-chip src-chip--' + prov.kind + '">' + esc(prov.label) + '</span>';
+    var visitUrl = F.officialUrl(o) || "#";
 
     var el = document.createElement("article");
     el.className = "card";
@@ -59,10 +63,11 @@
         '</div>' +
         '<div class="card__deadline ' + dl.cls + '">' + esc(dl.text) + '</div>' +
         (fees || funds ? '<div class="badges">' + fees + funds + '</div>' : '') +
-        '<div>' + trustBadge(o) + '</div>' +
+        summary +
+        '<div class="card__srcrow">' + trustBadge(o) + srcChip + '</div>' +
         '<div class="card__foot">' +
           '<button class="btn btn--ghost" data-act="copy" type="button">' + AP.t("copyLink") + '</button>' +
-          '<a class="btn btn--dark" data-act="visit" href="' + esc(o.url || "#") + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>' +
+          '<a class="btn btn--dark" data-act="visit" href="' + esc(visitUrl) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>' +
         '</div>' +
       '</div>';
     return el;
@@ -119,6 +124,11 @@
     var dnote = o.deadline_note ? ' <span class="muted">(' + esc(o.deadline_note) + ')</span>' : '';
 
     var cover = o.cover ? '<img class="d-cover" src="' + esc(o.cover) + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' : '';
+    var prov = F.provenance(o);
+    var official = F.officialUrl(o);
+    var provNote = '<div class="d-provenance src-chip--' + prov.kind + '">' + esc(prov.detail) + '</div>';
+    var srcVal = '<span class="src-chip src-chip--' + prov.kind + '">' + esc(prov.label) + '</span>' +
+      (o.url ? ' <a href="' + esc(o.url) + '" target="_blank" rel="noopener" style="color:var(--c-residency);text-decoration:underline">' + esc(o.domain || AP.t("visit")) + '</a>' : '');
     var html =
       cover +
       '<div class="d-head">' +
@@ -128,6 +138,7 @@
       '</div>' +
       '<div>' + trustBadge(o) + '</div>' +
       alert +
+      provNote +
       '<div class="d-fields">' +
         row(AP.t("dOrg"), esc(o.org_zh) || muted(AP.t("notStated"))) +
         row(AP.t("dPlace"), place ? esc(place) : muted(AP.t("notStated"))) +
@@ -137,13 +148,13 @@
         row(AP.t("dFunding"), fundHtml) +
         row(AP.t("dEligibility"), eligVal(o)) +
         row(AP.t("dDisc"), disc) +
-        row(AP.t("dUrl"), o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener" style="color:var(--c-residency);text-decoration:underline">' + esc(AP.t("visit")) + '</a>' : muted(AP.t("notStated"))) +
-        row(AP.t("dSource"), o.source_url ? '<a href="' + esc(o.source_url) + '" target="_blank" rel="noopener" style="color:var(--c-residency);text-decoration:underline">' + esc(o.domain || AP.t("visit")) + '</a>' : muted(AP.t("notStated"))) +
+        row(AP.t("dUrl"), official ? '<a href="' + esc(official) + '" target="_blank" rel="noopener" style="color:var(--c-residency);text-decoration:underline">' + esc(AP.t("visit")) + '</a>' + (o.official_url ? ' <span class="muted">(' + esc(AP.t("officialLocated")) + ')</span>' : '') : muted(AP.t("notStated"))) +
+        row(AP.t("dSource"), srcVal) +
         row(AP.t("dSeen"), esc(o.last_seen) || muted(AP.t("notStated"))) +
       '</div>' +
       '<div class="d-actions">' +
         '<button class="btn btn--ghost" data-act="copy" data-id="' + esc(o.id) + '" type="button">' + AP.t("copyLink") + '</button>' +
-        '<a class="btn btn--dark" href="' + esc(o.url || "#") + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>' +
+        '<a class="btn btn--dark" href="' + esc(official || "#") + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>' +
       '</div>' +
       '<p class="d-report">' + esc(AP.t("reportErr")) + ' <a href="mailto:atsang799@gmail.com?subject=' + reportSubject + '">' + esc(AP.t("reportLink")) + '</a></p>';
     return html;

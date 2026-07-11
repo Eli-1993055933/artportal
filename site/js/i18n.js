@@ -30,7 +30,7 @@
       dFunding: "资助", dEligibility: "申请资格", dDisc: "适用学科", dUrl: "官网", dSource: "信息来源", dSeen: "最后确认存在",
       notStated: "未注明", provided: "提供", notProvided: "不提供", none: "无", yes: "是", no: "否",
       stipend: "津贴", housing: "住宿", travel: "路费", students: "学生", age: "年龄", nationality: "国籍",
-      reportErr: "信息有误?", reportLink: "反馈给我们", visit: "访问",
+      reportErr: "信息有误?", reportLink: "反馈给我们", visit: "访问", officialLocated: "官网已联网校正",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构" }
     },
@@ -61,7 +61,7 @@
       dFunding: "Funding", dEligibility: "Eligibility", dDisc: "Disciplines", dUrl: "Official site", dSource: "Source", dSeen: "Last confirmed",
       notStated: "Not stated", provided: "Provided", notProvided: "Not provided", none: "None", yes: "Yes", no: "No",
       stipend: "Stipend", housing: "Housing", travel: "Travel", students: "Students", age: "Age", nationality: "Nationality",
-      reportErr: "Found an error?", reportLink: "Let us know", visit: "Visit",
+      reportErr: "Found an error?", reportLink: "Let us know", visit: "Visit", officialLocated: "official site located online",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial" }
     }

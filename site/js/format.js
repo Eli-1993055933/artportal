@@ -123,6 +123,29 @@
     return "?";
   };
 
+  // 来源标注:这条是机构官网直采,还是转自某聚合平台。
+  var AGG = { "artconnect.com": "ArtConnect", "curatorspace.com": "CuratorSpace", "transartists.org": "TransArtists", "chinaresidencies.com": "China Residencies" };
+  F.provenance = function (o) {
+    var name = AGG[o.domain];
+    var en = AP.lang === "en";
+    if (name) {
+      return {
+        kind: "aggregator", platform: name,
+        label: en ? ("via " + name) : ("转自 " + name),
+        detail: en ? ("Collected by ArtPortal's backend AI from the " + name + " platform. The official link below has been located online where possible.")
+                   : ("本条由 ArtPortal 后台 AI 从「" + name + "」平台检索转录;下方「前往官网」已尽量联网定位到主办方官网。")
+      };
+    }
+    return {
+      kind: "official", platform: null,
+      label: en ? "Official site" : "机构官网直采",
+      detail: en ? "Collected by ArtPortal's backend AI directly from the organizer's official website."
+                 : "本条由 ArtPortal 后台 AI 从主办机构官网直接检索整理。"
+    };
+  };
+  // "前往官网"实际要去的地址:优先联网校正后的官网,其次原始链接
+  F.officialUrl = function (o) { return o.official_url || o.url || null; };
+
   // 供搜索用:把一条的可搜文本拼起来
   F.searchText = function (o) {
     var parts = [o.title_zh, o.title_en, o.org_zh, o.city_zh, o.country_zh, o.summary_zh];
