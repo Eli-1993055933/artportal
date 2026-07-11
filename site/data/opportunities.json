@@ -205,7 +205,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.caanet.org.cn/upload/image/20251223/17664542209508192.png",
+      "cover_source": "caanet.org.cn"
     },
     {
       "id": "cafa-youth-printmaking-2",
@@ -436,7 +438,9 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.a4artmuseum.com/wp-content/uploads/2026/04/2027-Opencall%E6%A8%A1%E7%89%88%E6%A8%A1%E7%89%88%E5%BE%AE%E4%BF%A1%E6%8E%A8%E6%96%87%E5%A5%97%E4%BB%B6_%E7%94%BB%E6%9D%BF-1-%E5%89%AF%E6%9C%AC.png",
+      "cover_source": "a4artmuseum.com"
     },
     {
       "id": "a4-residency-light",
@@ -481,7 +485,9 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.a4artmuseum.com/wp-content/uploads/2026/04/2027-Opencall%E6%A8%A1%E7%89%88%E6%A8%A1%E7%89%88%E5%BE%AE%E4%BF%A1%E6%8E%A8%E6%96%87%E5%A5%97%E4%BB%B6_%E7%94%BB%E6%9D%BF-1-%E5%89%AF%E6%9C%AC.png",
+      "cover_source": "a4artmuseum.com"
     },
     {
       "id": "cite-institutfrancais-2026",
@@ -3018,7 +3024,9 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "updated_at": "2026-07-11",
+      "cover": "https://images.squarespace-cdn.com/content/v1/5f0321bfff991535d3d8bd39/d3da2cdb-33f6-4e2f-8ac9-74814a0e5717/gallery_WechatIMG14.jpeg",
+      "cover_source": "images.squarespace-cdn.com"
     },
     {
       "id": "chinaresidencies-directory-fuse-驻留项目",
