@@ -1,19 +1,70 @@
 {
   "generated_at": "2026-07-11",
-  "count": 3,
+  "count": 11,
   "records": [
     {
       "_pending_reasons": [
         "有 evidence 未通过子串校验"
       ],
-      "id": "curatorspace-opportunities-开放征集-过渡状态-巴黎-2026年7月",
-      "category": "opencall",
-      "title_zh": "开放征集：过渡状态 — 巴黎，2026年7月",
-      "title_en": "Open Call: Transient States — Paris, July, 2026 | All media welcome",
-      "org_zh": "Zhen Yi Gallery",
-      "city_zh": "巴黎",
-      "country_zh": "法国",
-      "deadline": "2026-07-12",
+      "id": "chinaresidencies-directory-ny20-国际艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "NY20+ 国际艺术家驻留项目",
+      "title_en": "NY20+ International Artist Residency Program",
+      "org_zh": "NY20+",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "装置",
+        "街头艺术",
+        "涂鸦",
+        "设计"
+      ],
+      "summary_zh": "NY20+位于四川成都，提供免费驻留，包括食宿和创作费用，艺术家仅需自理交通。招募全球艺术家、设计师、学生等，不限艺术范畴，设有雕塑装置、涂鸦、女性艺术等专项项目。",
+      "url": "https://www.chinaresidencies.com/residencies/ny20",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "chinaresidencies-directory-plan8t-open-call-for-2021-summer-artist-",
+      "category": "residency",
+      "title_zh": "PLAN8T Open Call for 2021 Summer Artist-In-Residence",
+      "title_en": "PLAN8T Open Call for 2021 Summer Artist-In-Residence",
+      "org_zh": "P8星球与远大芯建",
+      "city_zh": "长沙",
+      "country_zh": "中国",
+      "deadline": "2021-07-12",
       "deadline_note": "",
       "apply_fee": {
         "free": null,
@@ -21,9 +72,9 @@
         "currency": null
       },
       "participation_fee": {
-        "required": true,
-        "amount": 200,
-        "currency": "EUR"
+        "required": null,
+        "amount": null,
+        "currency": null
       },
       "funding": {
         "stipend": null,
@@ -36,72 +87,73 @@
         "nationality": null
       },
       "disciplines": [
-        "installation",
-        "sculpture",
-        "painting",
-        "photography",
-        "mixed media"
+        "声音艺术"
       ],
-      "summary_zh": "面向全球新兴及中生代艺术家开放征集，主题为“过渡状态”，探讨转变、涌现与生成过程。展览将于2026年7月20-22日在巴黎Zhen Yi Gallery举行。入选艺术家需支付参与费200欧元，作品运输自理。",
-      "url": "https://www.curatorspace.com/opportunities/detail/open-call-transient-states--paris-july---all-media-welcome/10804",
-      "source_url": "https://www.curatorspace.com/opportunities",
-      "domain": "curatorspace.com",
+      "summary_zh": "P8星球与远大芯建联合举办2021夏季艺术驻留，主题为“隐形的声音”，招募使用声音作为艺术实践的艺术家，线上和线下各3-4位，提供差旅补贴、住宿、创作空间及2000元创作经费，驻留作品将在MoW無用博物馆展出。",
+      "url": "https://www.chinaresidencies.com/residencies/plan8t-open-call-for-2021-summer-artist-in-residence",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "pending",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-11",
       "updated_at": "2026-07-11"
     },
     {
       "_pending_reasons": [
-        "有 evidence 未通过子串校验"
+        "缺截止日期且非常年"
       ],
-      "id": "curatorspace-opportunities-the-hepworth-wakefield-2026年节日市场",
-      "category": "opencall",
-      "title_zh": "The Hepworth Wakefield 2026年节日市场",
-      "title_en": "The Hepworth Wakefield Festive Market 2026",
-      "org_zh": "The Hepworth Wakefield",
-      "city_zh": "韦克菲尔德",
-      "country_zh": "英国",
-      "deadline": "2026-07-14",
-      "deadline_note": "",
+      "id": "chinaresidencies-directory-鹿栖驻地计划",
+      "category": "residency",
+      "title_zh": "鹿栖驻地计划",
+      "title_en": "Lucitopia Residency Program",
+      "org_zh": "厦门鹿栖文化有限公司",
+      "city_zh": "抚州市",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "全年开放申请",
       "apply_fee": {
         "free": null,
         "amount": null,
         "currency": null
       },
       "participation_fee": {
-        "required": true,
-        "amount": 250,
-        "currency": "GBP"
+        "required": null,
+        "amount": null,
+        "currency": null
       },
       "funding": {
-        "stipend": null,
+        "stipend": true,
         "housing": null,
         "travel": null
       },
       "eligibility": {
         "students_ok": null,
-        "age_limit": null,
-        "nationality": "UK-based"
+        "age_limit": "25-55",
+        "nationality": null
       },
       "disciplines": [
-        "陶瓷",
-        "化妆品和芳香剂",
-        "食品和饮料",
-        "儿童礼品",
-        "家居用品",
-        "珠宝",
-        "植物和花艺",
-        "版画",
-        "文具",
-        "纺织品"
+        "绘画",
+        "影像",
+        "声音",
+        "行为",
+        "装置",
+        "跨媒体",
+        "建筑",
+        "物件",
+        "时尚",
+        "食物",
+        "自然",
+        "生物",
+        "农业",
+        "科技",
+        "人文"
       ],
-      "summary_zh": "The Hepworth Wakefield 2026年节日市场开放申请，面向英国本土艺术家、设计师、手工艺者、食品饮料生产商及专业零售商。市场将于2026年11月20-22日和28-29日举办，摊位费每周末250英镑（含增值税），需提前支付。申请截止日期为2026年7月14日中午。",
-      "url": "https://www.curatorspace.com/opportunities/detail/the-hepworth-wakefield-festive-market/10754",
-      "source_url": "https://www.curatorspace.com/opportunities",
-      "domain": "curatorspace.com",
+      "summary_zh": "鹿栖驻地计划由厦门鹿栖文化有限公司出品，C-PLATFORM和MEXDIA LAB共同策划，GALA特别合作。欢迎跨学科、跨媒介实践者，年龄建议25-55岁。全年开放申请，2019年共5期，每期2-4人，为期两个月。提供驻地资助2000-20000元。",
+      "url": "https://www.chinaresidencies.com/residencies/lucitopia-residency-program",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "pending",
       "status": "open",
@@ -113,15 +165,15 @@
       "_pending_reasons": [
         "缺截止日期且非常年"
       ],
-      "id": "curatorspace-opportunities-唐卡斯特临时工作室空间",
+      "id": "chinaresidencies-directory-三影堂厦门摄影艺术中心驻留项目",
       "category": "residency",
-      "title_zh": "唐卡斯特临时工作室空间",
-      "title_en": "Available Temporary Studio Space - Doncaster",
-      "org_zh": "CuratorSpace",
-      "city_zh": "唐卡斯特",
-      "country_zh": "英国",
+      "title_zh": "三影堂厦门摄影艺术中心驻留项目",
+      "title_en": "Three Shadows Xiamen Photography Art Centre Artist-in-Residence Program",
+      "org_zh": "三影堂厦门摄影艺术中心",
+      "city_zh": "厦门",
+      "country_zh": "中国",
       "deadline": null,
-      "deadline_note": "Deadline: n/a",
+      "deadline_note": "Residence is available all year except the Spring Festival.",
       "apply_fee": {
         "free": null,
         "amount": null,
@@ -129,8 +181,8 @@
       },
       "participation_fee": {
         "required": true,
-        "amount": "30-200",
-        "currency": "GBP"
+        "amount": 250,
+        "currency": "RMB"
       },
       "funding": {
         "stipend": null,
@@ -143,12 +195,350 @@
         "nationality": null
       },
       "disciplines": [
+        "摄影",
+        "其他媒介"
+      ],
+      "summary_zh": "三影堂厦门摄影艺术中心提供驻留项目，主要面向摄影师，也欢迎其他媒介艺术家、研究者和策展人。设有四个房间，每间每天250元，包含生活空间、工作空间、项目协助和活动支持。全年可申请，春节除外。",
+      "url": "https://www.chinaresidencies.com/residencies/three-shadows-xiamen-photography-art-centre-san-ying-tang-sha-men-she-ying-yi-zhu-zhong-xin",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "chinaresidencies-directory-桃花潭艺术家驻留",
+      "category": "residency",
+      "title_zh": "桃花潭艺术家驻留",
+      "title_en": "Tao Hua Han Artist Retreat",
+      "org_zh": "Novak Graphics Inc.",
+      "city_zh": "宣城市",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及申请截止日期",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画"
+      ],
+      "summary_zh": "Novak Graphics Inc. 在安徽桃花潭运营的国际版画工作室与艺术家驻留项目，强调文化交流。无申请费，入选艺术家仅需承担往返上海浦东机场的交通费，组织方提供食宿、画材及中国境内交通。驻留结束举办展览并出版画册。",
+      "url": "https://www.chinaresidencies.com/residencies/tao-hua-han-artist-retreat",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "chinaresidencies-directory-a4国际驻留项目",
+      "category": "residency",
+      "title_zh": "A4国际驻留项目",
+      "title_en": "A4 International Residency Program",
+      "org_zh": "A4驻留艺术中心",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及申请截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
         "跨媒介"
       ],
-      "summary_zh": "CuratorSpace发布英国唐卡斯特临时工作室空间机会，位于市中心前办公空间，步行5分钟到火车站，适合清洁作业的艺术实践、桌面工作者或社区艺术教育者，提供中小型空间，24/7开放，有残疾人通道，月租30-200英镑。",
-      "url": "https://www.curatorspace.com/opportunities/detail/available-temporary-studio-space-doncaster/6025",
-      "source_url": "https://www.curatorspace.com/opportunities",
-      "domain": "curatorspace.com",
+      "summary_zh": "A4国际驻留项目面向所有领域创作者开放，提供8周驻留，支持往返机票、住宿、工作室、材料费及超级代理系统，鼓励跨学科合作与社区互动。",
+      "url": "https://www.chinaresidencies.com/residencies/a4-residency-art-center",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "chinaresidencies-directory-acentricspace艺术家驻地计划",
+      "category": "residency",
+      "title_zh": "ACENTRICSPACE艺术家驻地计划",
+      "title_en": "ACENTRICSPACE Artist in Residence",
+      "org_zh": "ACENTRICSPACE",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "全年开放申请",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 7700,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "当代艺术"
+      ],
+      "summary_zh": "ACENTRICSPACE艺术家驻地计划全年开放申请，面向所有当代艺术家，提供工作室、住宿和展览空间，驻地费用为每位艺术家每月7700元，艺术家需自行承担交通、餐饮、材料等费用。",
+      "url": "https://www.chinaresidencies.com/residencies/acentricspace",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "chinaresidencies-directory-观澜原创版画基地",
+      "category": "residency",
+      "title_zh": "观澜原创版画基地",
+      "title_en": "Guanlan Original Printmaking Base",
+      "org_zh": "观澜原创版画基地",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "观澜原创版画基地位于深圳，提供版画创作驻留，设施包括工作室、基本材料、24小时工坊和技术支持，驻留期三周至三个月，艺术家需提交申请并获推荐。",
+      "url": "https://www.chinaresidencies.com/residencies/guanlan-original-printmaking-base",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "chinaresidencies-directory-乐天陶社景德镇驻留",
+      "category": "residency",
+      "title_zh": "乐天陶社景德镇驻留",
+      "title_en": "The Pottery Workshop, Jingdezhen",
+      "org_zh": "乐天陶社",
+      "city_zh": "景德镇市",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "全年接受申请，但春节前后关闭一个月",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 2600,
+        "currency": "RMB"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "陶瓷"
+      ],
+      "summary_zh": "乐天陶社景德镇驻留项目位于雕塑瓷厂内，提供工作室、住宿、图书馆等设施。驻留费2600元/周，时长灵活，全年开放（春节前后关闭一个月）。欢迎各水平艺术家使用景德镇材料与工艺进行创作。",
+      "url": "https://www.chinaresidencies.com/residencies/the-pottery-workshop-jingdezhen",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "chinaresidencies-directory-swatch艺术和平酒店艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "Swatch艺术和平酒店艺术家驻留项目",
+      "title_en": "The Swatch Art Peace Hotel Artist Residency Program",
+      "org_zh": "Swatch集团",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": false,
+        "amount": 30,
+        "currency": "CHF"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "音乐",
+        "电影制作",
+        "写作",
+        "舞蹈",
+        "绘画",
+        "观念艺术"
+      ],
+      "summary_zh": "Swatch艺术和平酒店驻留项目位于上海外滩，为艺术家提供3-6个月的住宿和工作空间，涵盖往返机票、住宿、早餐等费用，无津贴，需缴纳30瑞士法郎申请费。",
+      "url": "https://www.chinaresidencies.com/residencies/the-swatch-art-peace-hotel-artist-residency-program",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "chinaresidencies-directory-中间美术馆艺术驻留项目",
+      "category": "residency",
+      "title_zh": "中间美术馆艺术驻留项目",
+      "title_en": "Inside-Out Art Museum Residency",
+      "org_zh": "北京中间美术馆",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "建议在驻留开始日期前3个月提交申请",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介",
+        "研究型"
+      ],
+      "summary_zh": "中间美术馆重启艺术驻留项目，面向国际艺术专业人士和跨学科研究者，提供4周驻留，包含住宿和工作室，不收取住宿及管理费，但艺术家需自行承担差旅、材料和生活费。",
+      "url": "https://www.chinaresidencies.com/residencies/inside-out-art-museum-residency-zhong-jian-mei-zhu-guan",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "pending",
       "status": "open",

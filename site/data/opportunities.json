@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-11",
-  "count": 61,
+  "count": 64,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -2853,6 +2853,145 @@
       "url": "https://www.curatorspace.com/opportunities/detail/exhibition/8735",
       "source_url": "https://www.curatorspace.com/opportunities",
       "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "chinaresidencies-directory-no-name-studio-艺术家驻地",
+      "category": "residency",
+      "title_zh": "No.name Studio 艺术家驻地",
+      "title_en": "No.name Studio Artist Residency",
+      "org_zh": "No.name Studio",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 7000,
+        "currency": "RMB"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "No.name Studio位于上海朱家角古镇，提供工作室、居所和画廊空间。驻地项目周期1周至3个月，欢迎任何形式的艺术创作。提供自费驻地（冬季7000元，春夏秋10000元）及F/ART艺术基金免费驻地。艺术家需承担个人生活费用。",
+      "url": "https://www.chinaresidencies.com/residencies/no-name-studio",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "chinaresidencies-directory-fuse-驻留项目",
+      "category": "residency",
+      "title_zh": "FUSE 驻留项目",
+      "title_en": "FUSE",
+      "org_zh": "錄映太奇",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "媒体艺术",
+        "跨媒介"
+      ],
+      "summary_zh": "錄映太奇是香港非营利新媒体艺术组织，其FUSE驻留项目邀请本地及国际艺术家、策展人、研究者等提交创意项目提案，驻留期1-6个月，提供媒体资源、网络、生产资源、展览空间及项目执行津贴，但国际驻留者需自行承担旅费、住宿和生活费用。",
+      "url": "https://www.chinaresidencies.com/residencies/videotage-lu-ying-tai-qi",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-11",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "id": "chinaresidencies-directory-中国欧洲艺术中心驻留项目",
+      "category": "residency",
+      "title_zh": "中国欧洲艺术中心驻留项目",
+      "title_en": "Chinese European Art Center Residency Program",
+      "org_zh": "中国欧洲艺术中心",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "Applications are accepted on an ongoing basis.",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 10000,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "设计",
+        "建筑",
+        "策展",
+        "时尚设计",
+        "写作",
+        "音乐"
+      ],
+      "summary_zh": "中国欧洲艺术中心驻留项目面向视觉艺术家、设计师、建筑师、策展人、作家、作曲家等，提供工作室和住宿，鼓励跨文化交流，可协助作品制作和运输，每月费用10000元。",
+      "url": "https://www.chinaresidencies.com/residencies/chinese-european-art-center",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
       "status": "open",
