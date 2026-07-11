@@ -296,15 +296,16 @@ img { max-width: 100%; display: block; }
 @media (max-width: 767px) {
   body { font-size: 15px; }
   .grid { grid-template-columns: 1fr; gap: 16px; }
-  .topbar__inner { padding: 10px 14px; gap: 8px; }
+  .topbar__inner { padding: 8px 12px; gap: 6px; }
+  .brand { gap: 6px; }
   .brand__sub { display: none; }
-  .brand__mark { font-size: 16px; }
-  /* 顶栏按钮:紧凑但保持 44px 可点高度 */
-  .topbar__actions { gap: 6px; }
-  .topbar__actions .btn { min-height: 44px; padding: 0 10px; font-size: 13px; }
+  .brand__mark { font-size: 15px; }
+  /* 顶栏按钮:紧凑但保持 44px 可点高度;收紧到 360px 也放得下 */
+  .topbar__actions { gap: 5px; }
+  .topbar__actions .btn { min-height: 44px; padding: 0 9px; font-size: 12.5px; }
   .fav-ico { display: inline-block; }
   #favToggleBtn .fav-text { display: none; }        /* 手机上收藏只留♡+数字 */
-  .lang-switch { padding: 0 8px !important; }
+  .lang-switch { padding: 0 7px !important; }
 
   .controls { top: 55px; }
   .controls__inner { padding: 10px 16px; }
