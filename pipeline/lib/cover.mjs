@@ -27,6 +27,35 @@ export function extractCover(html, baseUrl) {
   return url;
 }
 
+// 从正文里提取候选图片(当页面没有可用 og:image 时的兜底)。
+// 返回按文档顺序去重的绝对 URL 数组,已滤掉 logo/图标/头像/占位等。
+export function extractContentImages(html, baseUrl) {
+  const s = String(html || "");
+  const out = [];
+  const seen = new Set();
+  const bad = /(logo|favicon|sprite|avatar|placeholder|blank|spacer|pixel|1x1|loading|icon|button|social|share[-_]|wechat|weixin|qrcode|erweima|footer|header[-_]bg)/i;
+  const re = /<img\b[^>]*?\b(?:data-src|data-original|src)\s*=\s*["']([^"']+)["'][^>]*>/gi;
+  let m;
+  while ((m = re.exec(s)) !== null) {
+    let raw = m[1].trim();
+    if (!raw || raw.startsWith("data:")) continue;
+    if (bad.test(raw)) continue;
+    // 尺寸提示过滤:width/height 明确很小的跳过
+    const tag = m[0];
+    const wm = /\bwidth\s*=\s*["']?(\d+)/i.exec(tag);
+    const hm = /\bheight\s*=\s*["']?(\d+)/i.exec(tag);
+    if ((wm && +wm[1] < 200) || (hm && +hm[1] < 150)) continue;
+    let abs;
+    try { abs = new URL(raw, baseUrl).href; } catch (e) { continue; }
+    if (!/^https?:\/\//i.test(abs)) continue;
+    if (seen.has(abs)) continue;
+    seen.add(abs);
+    out.push(abs);
+    if (out.length >= 8) break;
+  }
+  return out;
+}
+
 // 判断是否"疑似通用图"(站点 logo / 占位 / 默认分享图)——只认明显特征,避免误杀真封面。
 // 注意:不要用宽泛的 "default"(会误伤 Drupal 的 /sites/default/files/ 上传目录)。
 export function looksGeneric(coverUrl, domain) {

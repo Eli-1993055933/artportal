@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
 import { discoverDetailLinks } from "./lib/discover.mjs";
-import { extractCover } from "./lib/cover.mjs";
+import { extractCover, extractContentImages, looksGeneric } from "./lib/cover.mjs";
 import { extract, estimateCost, parseJson } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
 import { dedupe } from "./lib/dedupe.mjs";
@@ -141,8 +141,15 @@ async function main() {
 
       const g = gradeTrust(v.record, v.flags, src);
       const rec = finalizeRecord(v.record, src, g.trust);
-      // 封面:取该详情页自己的 og:image(热链,前端加载失败退回色块)。旧封面若已有则保留。
-      if (cand.rawHtml) { const cv = extractCover(cand.rawHtml, cand.url); if (cv) { rec.cover = cv; rec.cover_source = src.domain; } }
+      // 封面:优先 og:image;缺失或疑似通用图时退而取正文首图。热链,前端加载失败退回色块。
+      if (cand.rawHtml) {
+        let cv = extractCover(cand.rawHtml, cand.url);
+        if (!cv || looksGeneric(cv, src.domain)) {
+          const imgs = extractContentImages(cand.rawHtml, cand.url);
+          if (imgs.length) cv = imgs[0];
+        }
+        if (cv) { rec.cover = cv; rec.cover_source = src.domain; }
+      }
       if (g.trust === "auto") { autoRecords.push(rec); }
       else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
       process.stderr.write(`  → ${g.trust}${g.reasons.length ? " (" + g.reasons.join("; ") + ")" : ""}  evidence作废 ${v.nulled.length} 处\n`);

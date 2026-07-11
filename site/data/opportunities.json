@@ -56,7 +56,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.namoc.cn/namoc/xhtml/images/f_fwh.jpg",
+      "cover_source": "namoc.cn"
     },
     {
       "id": "xafa-naf-mixedmedia-2026",
@@ -102,7 +104,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.xafa.edu.cn/images/weibo.png",
+      "cover_source": "xafa.edu.cn"
     },
     {
       "id": "hbmoa-collection-2026",
@@ -150,7 +154,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "http://wlt.hubei.gov.cn/material/images/msg_images/vedio_img.jpg",
+      "cover_source": "wlt.hubei.gov.cn"
     },
     {
       "id": "caanet-beijing-biennial-10",
@@ -244,7 +250,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.cafa.edu.cn/library/image/2018xxgk.jpg",
+      "cover_source": "cafa.edu.cn"
     },
     {
       "id": "cafa-zhiyi-xiangjian-2025",
@@ -289,7 +297,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.cafa.edu.cn/library/image/2018xxgk.jpg",
+      "cover_source": "cafa.edu.cn"
     },
     {
       "id": "gdmoa-archive-opencall",
@@ -332,7 +342,9 @@
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.gdmoa.org/Media_Center/Notice/202410/W020241012544865865526.jpg",
+      "cover_source": "gdmoa.org"
     },
     {
       "id": "threeshadows-award-13",
@@ -516,7 +528,9 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.citeinternationaledesarts.fr/app/uploads/2025/10/Visuel-IF-2025-1.jpg",
+      "cover_source": "citeinternationaledesarts.fr"
     },
     {
       "id": "cite-francoise-2026",
@@ -561,7 +575,9 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.citeinternationaledesarts.fr/app/uploads/2025/09/Visuel-Fondation-Frances-2026_.jpg",
+      "cover_source": "citeinternationaledesarts.fr"
     },
     {
       "id": "cite-bridges-2026",
@@ -604,7 +620,9 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-09",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "https://www.citeinternationaledesarts.fr/app/uploads/2026/07/Visuel-AICA-2027-1.jpg",
+      "cover_source": "citeinternationaledesarts.fr"
     },
     {
       "id": "pier2-2027",
@@ -834,7 +852,9 @@
       "source_url": "https://www.transartists.org/en/transartists-calls",
       "domain": "transartists.org",
       "org_type": "official",
-      "status": "open"
+      "status": "open",
+      "cover": "https://www.transartists.org/sites/default/files/styles/teaser/public/2026-06/2027_open_call.png?h=5dcbbc94&amp;itok=eyNnsf3h",
+      "cover_source": "transartists.org"
     },
     {
       "title_en": "O Castro Art Village — Self-funded Residency",
@@ -1611,9 +1631,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-stories-2026-international-photography-exhibitio-cur",
@@ -1658,9 +1677,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-peninsula-the-south-west-open-2026-cur",
@@ -1707,9 +1725,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "curatorspace-opportunities-艺术家电影与动态影像作品放映公开征集",
@@ -1755,9 +1772,8 @@
       "verified_at": null,
       "last_seen": "2026-07-11",
       "updated_at": "2026-07-11",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-open-call-transient-states-paris-july-2026-cur",
@@ -1805,9 +1821,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-under-the-skin-of-things-cur",
@@ -1855,9 +1870,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-the-ghost-in-the-space-cur",
@@ -1904,9 +1918,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-flora-fauna-photography-exhibition-cur",
@@ -1951,9 +1964,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-open-call-museum-of-homeland-cur",
@@ -1998,9 +2010,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-post-animal-signal-cur",
@@ -2046,9 +2057,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-take-to-the-greenwood-cur",
@@ -2093,9 +2103,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-equinox-virtual-exhibition-with-bobcat-gallery-cur",
@@ -2144,9 +2153,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-stories-in-motion-call-for-young-artists-ages-7--cur",
@@ -2192,9 +2200,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-suspended-last-few-places-added-cur",
@@ -2242,9 +2249,8 @@
       "verified_at": null,
       "last_seen": "2026-07-10",
       "updated_at": "2026-07-10",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "artconnect-opportunities-寻找工作坊领导者",
@@ -2772,9 +2778,8 @@
       "verified_at": null,
       "last_seen": "2026-07-11",
       "updated_at": "2026-07-11",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "curatorspace-opportunities-blandford艺术协会2026年8月公开展览",
@@ -2821,9 +2826,8 @@
       "verified_at": null,
       "last_seen": "2026-07-11",
       "updated_at": "2026-07-11",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "curatorspace-opportunities-梦境与噩梦-艺术家征集",
@@ -2925,9 +2929,8 @@
       "verified_at": null,
       "last_seen": "2026-07-11",
       "updated_at": "2026-07-11",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "curatorspace-opportunities-elmswell图书馆展览征稿",
@@ -2970,9 +2973,8 @@
       "verified_at": null,
       "last_seen": "2026-07-11",
       "updated_at": "2026-07-11",
-      "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com",
-      "cover_generic": true
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "chinaresidencies-directory-no-name-studio-艺术家驻地",
@@ -3061,7 +3063,9 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "updated_at": "2026-07-11",
+      "cover": "https://elasticbeanstalk-us-east-1-220573180461.s3.amazonaws.com/uploads/photo/image/2739/gallery_thumb_videotage_small.jpg",
+      "cover_source": "chinaresidencies.com"
     },
     {
       "id": "chinaresidencies-directory-中国欧洲艺术中心驻留项目",
@@ -3111,7 +3115,9 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "updated_at": "2026-07-11",
+      "cover": "https://elasticbeanstalk-us-east-1-220573180461.s3.amazonaws.com/uploads/photo/image/130/gallery_thumb_6998896664_0a7466f78f_b.jpg",
+      "cover_source": "chinaresidencies.com"
     }
   ]
 }
