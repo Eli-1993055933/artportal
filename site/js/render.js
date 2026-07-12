@@ -60,6 +60,7 @@
       : '<button class="btn btn--dark" type="button" disabled aria-disabled="true">' + AP.t("gotoSite") + '</button>';
     var predLabel = F.predictLabel(o);
     var predHtml = predLabel ? '<div class="card__predict"><span class="card__predict-ico" aria-hidden="true">◷</span>' + esc(predLabel) + '</div>' : '';
+    var predictTag = F.cadence(o) ? '<span class="predict-tag" title="' + esc(AP.t("recurringTitle")) + '">◷ ' + esc(AP.t("recurringTag")) + '</span>' : '';
 
     var el = document.createElement("article");
     el.className = "card";
@@ -67,7 +68,10 @@
     el.innerHTML =
       '<div class="card__media">' + media(o, visitUrl) +
         '<div class="card__tags">' +
-          '<span class="cat-tag" data-cat="' + esc(o.category) + '">' + esc(AP.tt[AP.lang].cat[o.category] || o.category) + '</span>' +
+          '<span class="card__tags-l">' +
+            '<span class="cat-tag" data-cat="' + esc(o.category) + '">' + esc(AP.tt[AP.lang].cat[o.category] || o.category) + '</span>' +
+            predictTag +
+          '</span>' +
           (orgTag ? '<span class="org-tag">' + esc(orgTag) + '</span>' : '') +
         '</div>' +
       '</div>' +

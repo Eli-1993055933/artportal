@@ -114,7 +114,7 @@
 
   // 分类主色(用于无图时的降级色块)
   F.catColor = function (cat) {
-    return { opencall: "#C0392B", residency: "#2E6FA7", award: "#C08A1E", workshop: "#6B5B95" }[cat] || "#8A8A85";
+    return { opencall: "#C0392B", residency: "#2E6FA7", award: "#C08A1E", workshop: "#6B5B95", predict: "#B77410" }[cat] || "#8A8A85";
   };
   // 由字符串生成稳定哈希(用于降级色块按条目区分深浅,避免掉图后整排同色)
   function hashOf(s) {

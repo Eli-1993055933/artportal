@@ -35,8 +35,9 @@
       if (state.favOnly && !AP.favorites.has(o.id)) return false;
       // dead 状态永不显示
       if (o.status === "dead") return false;
-      // 分类
-      if (state.cat !== "all" && o.category !== state.cat) return false;
+      // 分类("预测展览"是特殊视图:只看周期明确、可推算下届的双年展/三年展)
+      if (state.cat === "predict") { if (!F.cadence(o)) return false; }
+      else if (state.cat !== "all" && o.category !== state.cat) return false;
       // 已截止:默认隐藏(常年 deadline=null 的不算过期)。
       // 例外:周期明确的复发型展览(双年展/三年展)即便本届已截止仍保留 —— 它带"下届开放推算",有前瞻价值。
       if (!state.showExpired && F.isExpired(o) && !F.cadence(o)) return false;

@@ -177,6 +177,9 @@ img { max-width: 100%; display: block; }
 .card__media-go { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 6px; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
 .card__media-link:hover .card__media-go, .card__media-link:focus-visible .card__media-go { opacity: 1; }
 .card__tags { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
+.card__tags-l { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+/* 周期展标记:一眼看出该卡片可推算下届开放 */
+.predict-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: #fff; background: var(--warn); white-space: nowrap; }
 .cat-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: #fff; }
 .cat-tag[data-cat="opencall"]  { background: var(--c-opencall); }
 .cat-tag[data-cat="residency"] { background: var(--c-residency); }
