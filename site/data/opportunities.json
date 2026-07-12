@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-13",
-  "count": 67,
+  "count": 73,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -2783,7 +2783,7 @@
       "category": "award",
       "title_zh": "玻璃商CGS毕业生奖与新毕业生回顾2026",
       "title_en": "Glass Sellers' CGS Graduate Prize and New Graduate Review 2026",
-      "org_zh": "当代玻璃协会",
+      "org_zh": "当代玻璃协会（CGS）",
       "city_zh": null,
       "country_zh": "英国",
       "deadline": "2026-07-12",
@@ -2811,19 +2811,18 @@
       "disciplines": [
         "玻璃"
       ],
-      "summary_zh": "当代玻璃协会为2025/2026年欧洲认证课程毕业生设立的奖项，提交作品需含至少50%玻璃，免费申请但需成为会员，获奖者获现金及代金券奖励，作品将刊登于《玻璃网络》杂志。",
+      "summary_zh": "当代玻璃协会（CGS）推出2026年玻璃商毕业生奖与新毕业生回顾，面向2025/2026年欧洲认证课程毕业生，作品至少50%玻璃。获奖作品将刊登于《玻璃网络》杂志及数字出版物，奖金及代金券。免费报名，需为CGS会员。",
       "url": "https://www.curatorspace.com/opportunities/detail/glass-sellers-cgs-graduate-prize-and-new-graduate-review/10582",
       "source_url": "https://www.curatorspace.com/opportunities",
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
-      "official_url": "https://cgs.org.uk/news/apply-for-the-2026-glass-sellers-cgs-graduate-prize-and-new-graduate-review/"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/48892/opportunity/9275/image/728bdeaec8e9.jpg",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "curatorspace-opportunities-blandford艺术协会2026年8月公开展览",
@@ -3056,7 +3055,7 @@
       "disciplines": [
         "跨媒介"
       ],
-      "summary_zh": "No.name Studio位于上海朱家角古镇，提供工作室、居所和画廊空间。驻地项目周期1周至3个月，欢迎任何形式的艺术创作。提供自费驻地（冬季7000元，春夏秋10000元）及F/ART艺术基金免费驻地。艺术家需承担个人生活费用。",
+      "summary_zh": "No.name Studio位于上海朱家角古镇，提供1周至3个月的艺术家驻地，欢迎任何形式的艺术创作。驻地费用冬季7000元，春夏秋季10000元，艺术家需自理交通、餐饮、材料等个人费用。提供机场接送。",
       "url": "https://www.chinaresidencies.com/residencies/no-name-studio",
       "source_url": "https://www.chinaresidencies.com/residencies",
       "domain": "chinaresidencies.com",
@@ -3064,11 +3063,10 @@
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
       "cover": "https://images.squarespace-cdn.com/content/v1/5f0321bfff991535d3d8bd39/d3da2cdb-33f6-4e2f-8ac9-74814a0e5717/gallery_WechatIMG14.jpeg",
-      "cover_source": "images.squarespace-cdn.com",
-      "official_url": "https://nonamestudiosh.com/open-call"
+      "cover_source": "images.squarespace-cdn.com"
     },
     {
       "id": "chinaresidencies-directory-fuse-驻留项目",
@@ -3101,10 +3099,10 @@
         "nationality": null
       },
       "disciplines": [
-        "媒体艺术",
+        "影像",
         "跨媒介"
       ],
-      "summary_zh": "錄映太奇是香港非营利新媒体艺术组织，其FUSE驻留项目邀请本地及国际艺术家、策展人、研究者等提交创意项目提案，驻留期1-6个月，提供媒体资源、网络、生产资源、展览空间及项目执行津贴，但国际驻留者需自行承担旅费、住宿和生活费用。",
+      "summary_zh": "錄映太奇是香港非营利新媒体艺术组织，其FUSE驻留项目邀请本地及国际艺术家、策展人等提交新媒体艺术项目提案，驻留期1-6个月，提供创作资源及项目执行津贴，但国际驻留者需自行承担旅费、住宿及生活开销。",
       "url": "https://www.chinaresidencies.com/residencies/videotage-lu-ying-tai-qi",
       "source_url": "https://www.chinaresidencies.com/residencies",
       "domain": "chinaresidencies.com",
@@ -3112,11 +3110,10 @@
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
       "cover": "https://elasticbeanstalk-us-east-1-220573180461.s3.amazonaws.com/uploads/photo/image/2739/gallery_thumb_videotage_small.jpg",
-      "cover_source": "chinaresidencies.com",
-      "official_url": "https://www.videotage.org.hk/programme/fuse-residency-program-fuse-%E9%A7%90%E5%A0%B4%E8%A8%88%E5%8A%83"
+      "cover_source": "chinaresidencies.com"
     },
     {
       "id": "chinaresidencies-directory-中国欧洲艺术中心驻留项目",
@@ -3157,7 +3154,7 @@
         "写作",
         "音乐"
       ],
-      "summary_zh": "中国欧洲艺术中心驻留项目面向视觉艺术家、设计师、建筑师、策展人、作家、作曲家等，提供工作室和住宿，鼓励跨文化交流，可协助作品制作和运输，每月费用10000元。",
+      "summary_zh": "中国欧洲艺术中心驻留项目面向视觉艺术家、设计师、建筑师、策展人、作家、音乐人等，提供设备齐全的工作生活空间，支持跨媒介创作，并组织文化交流活动。申请常年开放，每月费用10000元。",
       "url": "https://www.chinaresidencies.com/residencies/chinese-european-art-center",
       "source_url": "https://www.chinaresidencies.com/residencies",
       "domain": "chinaresidencies.com",
@@ -3165,11 +3162,10 @@
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
       "cover": "https://elasticbeanstalk-us-east-1-220573180461.s3.amazonaws.com/uploads/photo/image/130/gallery_thumb_6998896664_0a7466f78f_b.jpg",
-      "cover_source": "chinaresidencies.com",
-      "official_url": "http://www.ceac99.org/residency/"
+      "cover_source": "chinaresidencies.com"
     },
     {
       "id": "jsmsg-tzgg-江苏省美术馆水印版画材料与技术研究文化和旅游部重点实验室2026年度开放课题申报",
@@ -3306,6 +3302,290 @@
       "updated_at": "2026-07-13",
       "cover": "http://www.johnmooreschina.com/assets/web/cn/images/all/foot.jpg",
       "cover_source": "johnmooreschina.com"
+    },
+    {
+      "id": "transartists-calls-talents-contemporains-la-terre-abbaye-de",
+      "category": "opencall",
+      "title_zh": "Talents Contemporains - La Terre - Abbaye de Pontigny 第一届",
+      "title_en": "Talents Contemporains - La Terre - Abbaye de Pontigny 1st edition",
+      "org_zh": "Fondation François Schneider",
+      "city_zh": "Pontigny",
+      "country_zh": "法国",
+      "deadline": "2026-08-23",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "装置"
+      ],
+      "summary_zh": "Fondation François Schneider 举办第一届“Talents Contemporains – La Terre”竞赛，主题为“大地”，面向雕塑和装置作品，获奖作品将被收购并在Pontigny修道院花园展出，交通和运输费用由基金会全额承担。",
+      "url": "https://www.transartists.org/en/call-artists",
+      "source_url": "https://www.transartists.org/en/transartists-calls",
+      "domain": "transartists.org",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.transartists.org/sites/default/files/2022-02/Fabian%20Knecht%20BAR2019.jpg",
+      "cover_source": "transartists.org"
+    },
+    {
+      "id": "curatorspace-opportunities-under-the-skin-of-things",
+      "category": "opencall",
+      "title_zh": "Under the Skin of Things",
+      "title_en": "Under the Skin of Things",
+      "org_zh": "CISTA ARTS",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 30,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "摄影",
+        "设计",
+        "影像"
+      ],
+      "summary_zh": "CISTA ARTS邀请全球艺术家提交作品，参加探索隐藏层、无形力量与安静痕迹的线上展览。入选作品将在线展出一个月，收录于印刷目录，并获得社交媒体推广。申请免费，入选后每件作品收费30英镑，两件50英镑。",
+      "url": "https://www.curatorspace.com/opportunities/detail/under-the-skin-of-things/10802",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/52406/opportunity/10802/image/db4a67.png",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "curatorspace-opportunities-flora-fauna-摄影展",
+      "category": "opencall",
+      "title_zh": "Flora / Fauna; 摄影展",
+      "title_en": "Flora / Fauna; Photography Exhibition",
+      "org_zh": "Solas / Shadow",
+      "city_zh": null,
+      "country_zh": "英国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 16,
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": 18,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "Solas / Shadow 在线国际摄影画廊举办主题为 Flora / Fauna 的摄影展，探索自然中植物与动物的两极性与相互联系。展览将于2026年9月举行。免费提交，入选后需支付参展费：1张16英镑，2张或以上22英镑。面向全球18岁以上摄影师。",
+      "url": "https://www.curatorspace.com/opportunities/detail/flora--fauna-photography-exhibition/10819",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/82052/opportunity/10819/image/165a2b6856ae9da3e8b2d7ab8e98.jpg",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "curatorspace-opportunities-krate",
+      "category": "residency",
+      "title_zh": "KRATE",
+      "title_en": "KRATE",
+      "org_zh": "CuratorSpace",
+      "city_zh": null,
+      "country_zh": "英国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": false,
+        "age_limit": null,
+        "nationality": "based in England"
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "KRATE是一个可运输的弹出式艺术家工作室，将在英格兰六个城市的空置零售空间进行六次为期两周的驻留，探索气候紧急议题。面向英格兰早期至中期职业艺术家，提供500+英镑费用、媒体报道和群展。",
+      "url": "https://www.curatorspace.com/opportunities/detail/krate/9846",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/44668/opportunity/9810/image/b3299ba25d63a6.jpg",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "curatorspace-opportunities-stories-in-motion-青年艺术家征集-7-20岁",
+      "category": "opencall",
+      "title_zh": "Stories in Motion: 青年艺术家征集（7-20岁）",
+      "title_en": "Stories in Motion: Call for Young Artists (Ages 7–20)",
+      "org_zh": "Travel Through Art Studio and Ultra Education",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-07-17",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "7-20",
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "插画",
+        "摄影",
+        "混合媒介"
+      ],
+      "summary_zh": "Travel Through Art Studio 与 Ultra Education 联合发起面向7-20岁青年艺术家的公开征集，主题为“用艺术讲故事”。入选作品将于2026年8月在伦敦Deptford Lounge展出，并可能参与多伦多国际创意交流。提交免费，每人最多2件作品。",
+      "url": "https://www.curatorspace.com/opportunities/detail/stories-in-motion-call-for-young-artists-ages/10825",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/86780/opportunity_update/865/image/11d8ad69b95e0e872e99e9edd699e0.png",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "curatorspace-opportunities-amanda-moriarty纪念奖-与emma-woffenden的导师指导",
+      "category": "award",
+      "title_zh": "Amanda Moriarty纪念奖——与Emma Woffenden的导师指导",
+      "title_en": "Amanda Moriarty Memorial Prize - Mentoring with Emma Woffenden",
+      "org_zh": "当代玻璃协会",
+      "city_zh": "雷丁",
+      "country_zh": "英国",
+      "deadline": "2026-07-17",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "玻璃"
+      ],
+      "summary_zh": "当代玻璃协会为纪念Amanda Moriarty设立年度奖项，为一名CGS会员提供与知名玻璃艺术家Emma Woffenden的四次导师指导（线上或线下），并有机会在工作室学习一天。获奖者可获得300英镑差旅住宿补贴。申请免费，截止2026年7月17日。",
+      "url": "https://www.curatorspace.com/opportunities/detail/amanda-moriarty-memorial-prize--mentoring-with-emma-woffenden/10583",
+      "source_url": "https://www.curatorspace.com/opportunities",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/48892/opportunity/10583/image/49cade7a7b21a2ddb4dbad38d766add79e3adf5a67.png",
+      "cover_source": "curatorspace.com"
     }
   ]
 }
