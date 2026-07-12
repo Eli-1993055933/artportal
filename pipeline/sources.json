@@ -517,6 +517,667 @@
       "confirmed": false,
       "trust_auto": true,
       "notes": "非营利中国及全球艺术驻留数据库;/residencies/<slug> 为机构档案,多为常年项目;无 robots"
+    },
+    {
+      "id": "nua-tzgg",
+      "org_zh": "南京艺术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.nua.edu.cn/346/list.htm",
+      "domain": "nua.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 0.44s, 33006字节; 命中 公告6/通知7, 机构名『南京艺术学院』20次; 主站346栏目为通知公告列表(文章路径 /2026/MMDD/c346aXXXX/page.htm), 非JS空壳; robots.txt 返回404(196字节)=none。经首页更多链接核实。"
+    },
+    {
+      "id": "safa-synr-tzgg",
+      "org_zh": "上海大学上海美术学院",
+      "name_zh": "通知公告",
+      "url": "https://safa.shu.edu.cn/synr/tzgg.htm",
+      "domain": "safa.shu.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 0.39s, 29664字节; 命中 公告14/通知12/招募1/申请1, 『美术学院』12次; 注意其 list.jsp?wbtreeid=1232 版会302跳转 newsso.shu.edu.cn SSO登录(不可抓), 故采用静态列表 synr/tzgg.htm; robots.txt 404=none。"
+    },
+    {
+      "id": "gxau-tzgg",
+      "org_zh": "广西艺术学院",
+      "name_zh": "通知公告",
+      "url": "https://xxgk.gxau.edu.cn/tzgg",
+      "domain": "gxau.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "入口 https://www.gxau.edu.cn/xxgk/tzgg 302→ https://xxgk.gxau.edu.cn/tzgg(同机构信息公开子站,记录最终有效URL); HTTP200, 33761字节; 命中 公告27/通知28/征集9, 机构名27次; 旧猜测路径 /xxgk/tzgg__tzgg/ 为404; robots.txt 404=none。"
+    },
+    {
+      "id": "ynart-tzgg",
+      "org_zh": "云南艺术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.ynart.edu.cn/index/tzgg/25.htm",
+      "domain": "ynart.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 1.34s, 53264字节; 命中 公告11/通知6/申请4, 机构名15次; 主站通知公告列表, 非JS空壳; robots.txt 返回自定义404页=无规则/none。"
+    },
+    {
+      "id": "jcu-tzgg",
+      "org_zh": "景德镇陶瓷大学",
+      "name_zh": "通知公告",
+      "url": "https://www.jcu.edu.cn/home/tzgg.htm",
+      "domain": "jcu.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 1.80s, 53392字节; 命中 公告19/通知12, 『陶瓷大学』25次; 现行主域 jcu.edu.cn(旧域 jci.edu.cn 仍由校方并存运营,均为官方,已择新域核验); robots.txt 404=none。"
+    },
+    {
+      "id": "jlart-tzgg",
+      "org_zh": "吉林艺术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.jlart.edu.cn/list_wz.jsp?urltype=tree.TreeTempUrl&wbtreeid=1073",
+      "domain": "jlart.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 2.64s, 103933字节; 命中 公告8/征集2/申请20/通知2, 机构名14次; JSP树形列表(wbtreeid=1073), charset=UTF-8, 非JS空壳; robots.txt 404=none。"
+    },
+    {
+      "id": "imac-tzgg",
+      "org_zh": "内蒙古艺术学院",
+      "name_zh": "通知公告",
+      "url": "https://www.imac.edu.cn/html-dzb/tzgg/",
+      "domain": "imac.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 1.75s, 12169字节; 命中 公告17/通知30, 机构名6次; 栏目挂在党政办(html-dzb)目录下的通知公告, 内容为真实公告非空壳; robots.txt 404(13字节 Not Found)=none。"
+    },
+    {
+      "id": "xjart-xxgg",
+      "org_zh": "新疆艺术学院",
+      "name_zh": "信息公告",
+      "url": "https://www.xjart.edu.cn/xxgk1/xxgg.htm",
+      "domain": "xjart.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 0.61s, 35212字节; 命中 公告15/申请1, 机构名『新疆艺术学院』21次; 主站信息公开下的信息公告列; 该站 /robots.txt 返回首页HTML(软404),无Disallow规则=none。"
+    },
+    {
+      "id": "sdca-msxy-tzgg",
+      "org_zh": "山东艺术学院美术学院",
+      "name_zh": "通知公告",
+      "url": "https://msxy.sdca.edu.cn/tzgg.htm",
+      "domain": "msxy.sdca.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 0.75s, 11646字节; 命中 公告3/通知3, 『美术学院』6次; 山东艺术学院美术学院子站通知公告(主站 sdca.edu.cn 未收录, 此为其下属美院); robots.txt 为WAF自定义404页(无robots文件)=none。"
+    },
+    {
+      "id": "artecnu-tzgg",
+      "org_zh": "华东师范大学美术学院",
+      "name_zh": "通知公告",
+      "url": "https://art.ecnu.edu.cn/tzggwzpw/list.htm",
+      "domain": "art.ecnu.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200 0.39s, 35016字节; 命中 公告9/通知5/申请4, 『美术学院』9次; tzggwzpw=通知公告文章频道桌面版列表; robots.txt 404(196字节)=none。"
+    },
+    {
+      "id": "hunnu-msxy-ywgg",
+      "org_zh": "湖南师范大学美术学院",
+      "name_zh": "要闻公告",
+      "url": "https://msxy.hunnu.edu.cn/index/ywgg1.htm",
+      "domain": "msxy.hunnu.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP200, 19195字节; 命中 公告6/申请4/通知2, 『美术学院』20次; 首页导航所标 /tzgg.htm 实为404, 真正有效的通知列为 index/ywgg1.htm(要闻公告); robots.txt 404=none。"
+    },
+    {
+      "id": "jsmsg-tzgg",
+      "org_zh": "江苏省美术馆",
+      "name_zh": "通知公告",
+      "url": "https://www.jsmsg.com/news/news1.aspx",
+      "domain": "jsmsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "curl(ArtPortalBot UA) HTTP 200, 146690 bytes. 命中 公告x245/招募x3/通知x8。身份确认 江苏省美术馆x226。纯服务端HTML列表(ASP.NET aspx),非JS空壳。robots.txt 返回404(云锁防火墙页,无Disallow规则)→none。含征稿/双年展征集/青年策展人扶持等。"
+    },
+    {
+      "id": "gsyart-zx",
+      "org_zh": "深圳市关山月美术馆",
+      "name_zh": "资讯(新闻/公告/招募)",
+      "url": "http://www.gsyart.com/news_list.action",
+      "domain": "gsyart.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 21192 bytes。命中 公告x3/招募x7；28条 news_detail 列表项。身份确认 关山月美术馆x6/关山月x4。HTML列表(struts .action),非JS空壳。robots.txt 返回404(页面找不到)→none。内容混合 展览/公告/活动招募/志愿者。仅http可用。"
+    },
+    {
+      "id": "hxnart-huodong",
+      "org_zh": "何香凝美术馆",
+      "name_zh": "活动(招募/征集)",
+      "url": "http://hxnart.org.cn/cn/category/activity-list",
+      "domain": "hxnart.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 398737 bytes。命中 公告/征集/招募x2/通知。身份确认 何香凝美术馆x30。服务端HTML列表,非JS空壳。robots.txt = 'User-agent: * / Disallow:'(空Disallow=全允许)→allow。含志愿者招募/活动征集/公开招募。https返回000,须用http。"
+    },
+    {
+      "id": "taikang-events",
+      "org_zh": "泰康美术馆(北京)",
+      "name_zh": "公共项目/工作坊(All Events)",
+      "url": "https://tam.taikang.com/page-events/all-events/",
+      "domain": "tam.taikang.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 252089 bytes。命中 Workshop/工作坊(工作坊x3等);双语活动列表。身份确认 泰康x17/TAIKANG ART MUSEUM。服务端HTML列表(WordPress风格),非JS空壳。robots.txt 返回403(openresty,无法读取)→unknown,但目标路径本身200可达。泰康保险集团创办的非营利美术馆。"
+    },
+    {
+      "id": "uabb-news",
+      "org_zh": "深港城市\\建筑双城双年展 (UABB)",
+      "name_zh": "新闻/公告 (News)",
+      "url": "https://www.uabb-sz.com/news",
+      "domain": "uabb-sz.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "HTTP 200,283529字节,服务端渲染(正文含真实关键词,非JS空壳);命中 call for×7、open call×1、公告×20、征集×41、征选×12、策展人×29、双年展×74;机构标识确认(uabb/双城双年展)。<title>为空(Next.js前端注入)但正文完整。robots.txt返回200且内容为空=允许抓取。深圳市规划和自然资源局主办的官方运营站;注册域名szhkbiennale.org.cn本核验网络超时不可达(HTTP000),故采用可达的uabb-sz.com。"
+    },
+    {
+      "id": "guanlan-biennale",
+      "org_zh": "中国·观澜国际版画双年展(观澜版画基地)",
+      "name_zh": "双年展 栏目 (h-col-108)",
+      "url": "http://www.guanlanprints.com/h-col-108.html",
+      "domain": "guanlanprints.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP 200,803138字节,服务端渲染;菜单栏目名'双年展';命中 双年展×377、征稿×6、征集×6、投稿×7、策展人×15;<title>观澜版画 guanlanprints确认。深圳市龙华区观澜版画基地(政府主办,联系邮箱szlhq.gov.cn)。注意:F-WEB/faisys建站,须以Accept-Encoding gzip(--compressed)请求否则返回gzip二进制被误判;首次未解压请求曾误读为空。robots.txt 404=无限制。"
+    },
+    {
+      "id": "gdmoa-bid",
+      "org_zh": "广东美术馆",
+      "name_zh": "展览申办(公开征集/申办)",
+      "url": "https://www.gdmoa.org/Bid/",
+      "domain": "gdmoa.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "HTTP 200,59843字节,服务端渲染;栏目'展览申办'(面向策展人/机构公开征集申办展览);命中 申办×37、展览×44、公告×1、申请×2;<title>展览申办-广东美术馆确认。同域另一征集类列表页。robots.txt 404=无限制。"
+    },
+    {
+      "id": "johnmooreschina-terms",
+      "org_zh": "约翰·莫尔绘画奖(中国)组委会",
+      "name_zh": "参赛须知 / 征集条款(Terms and Conditions)",
+      "url": "http://www.johnmooreschina.com/painting-prize/terms-and-conditions",
+      "domain": "johnmooreschina.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "GET HTTP 200, 11676 字节;命中 参赛×20、征集×3、painting×15、莫尔×5(机构标识);服务端渲染,非JS空壳。robots.txt 返回 404 → 无 robots 限制。该域名整站即约翰·莫尔绘画奖(中国)官网(双年评奖),导航另有 /news 公告栏目与 /painting-prize/awards;此 terms 页为每届征稿的常设条款页。",
+      "crawl": false,
+      "trust_auto": true
+    },
+    {
+      "id": "wangshikuo-award",
+      "org_zh": "王式廓艺术基金会",
+      "name_zh": "我们的项目 · 王式廓奖(征集/提名/驻留)",
+      "url": "http://www.wangshikuofoundation.org.cn/ourproject/award",
+      "domain": "wangshikuofoundation.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "opencall",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "GET HTTP 200, 70680 字节;命中 提名×16、申请×10、驻留×10、征集×2、通知×1;服务端渲染,非JS空壳(约11个script但正文充足)。robots.txt HTTP 200 且 `User-agent:* Disallow:`(空,全站允许)。王式廓艺术基金会官方站,含王式廓奖(30-45岁青年艺术家)专家推荐+社会征集与今日国际驻留项目。",
+      "crawl": false,
+      "trust_auto": true
+    },
+    {
+      "id": "iprojectspace-residency",
+      "org_zh": "I:project space(北京)",
+      "name_zh": "Residency · Apply(驻留申请 / Open Call)",
+      "url": "https://www.yi-projectspace.org/residencyapply/view",
+      "domain": "yi-projectspace.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "GET HTTP 200, 12574 字节;命中 residency×22、apply×8、application×3、open call×1、申请×2、驻留×2;服务端渲染(仅3个script),非JS空壳。http→https 301 正常(Cloudflare,http 版握手偶尔超时,建议直接用 https www 版)。robots.txt:`User-agent:* Allow:/`;AI 爬虫 ClaudeBot/GPTBot/CCBot/Bytespider 等被单列 Disallow:/,但我方 ArtPortalBot 未在名单内,走 * 规则=允许。北京独立艺术空间,驻留常设招募页。",
+      "crawl": false,
+      "trust_auto": true
+    },
+    {
+      "id": "hkadc-cfa",
+      "org_zh": "香港藝術發展局",
+      "name_zh": "Call for Application(資助/計劃公開申請)",
+      "url": "https://www.hkadc.org.hk/en/whats-on/call-for-application",
+      "domain": "www.hkadc.org.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "HTTP 200, 46442 bytes, SSR(14 script标签但正文实测存在). 命中 'Call for Application' x10, 机构名 'Arts Development Council' x11 / 'HKADC' x11. 含真实申请项目链接(如 .../call-for-application/music-and-dance-...-scheme)。非JS空壳。robots: User-agent:* Allow:/(仅对 GPTBot/ClaudeBot/CCBot 等AI训练bot Disallow,本UA匹配 * 未被禁)。法定机构官网,资助/公开申请列表页。"
+    },
+    {
+      "id": "hkac-opencall",
+      "org_zh": "香港藝術中心",
+      "name_zh": "What's On — Open Call(徵集/公開招募)",
+      "url": "https://hkac.org.hk/en/calendar/?type=11",
+      "domain": "hkac.org.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "注意:www.hkac.org.hk 超时(HTTP 000),无 www 的 hkac.org.hk 正常。HTTP 200, 162969 bytes, 命中 'Open Call' x11, 机构名 'Arts Centre' x24。type=11 为官网 Open Call 过滤列表。非JS空壳。robots: User-agent:* 仅 Disallow /cccms/ /lib/ /login/ 等后台路径,/en/calendar/ 未被禁。独立非牟利艺术中心官网。"
+    },
+    {
+      "id": "apo-oi-programmes",
+      "org_zh": "油街實現(藝術推廣辦事處/康文署)",
+      "name_zh": "Oi! Projects and Programmes(駐留/展覽公開招募)",
+      "url": "https://www.apo.hk/en/web/apo/oi_projects_and_programmes.html",
+      "domain": "www.apo.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "HTTP 200, 51777 bytes, SSR(经典政府CMS)。命中 'Call for' x1、'Residency/resid' x6,机构标识 'Oi!' x40、'Oil Street' x1。康文署藝術推廣辦事處(APO/LCSD)官网,油街實現駐留及展覽计划列表页。非JS空壳。robots: User-agent:* Allow:/ 全站允许。"
+    },
+    {
+      "id": "videotage-programmes",
+      "org_zh": "錄映太奇 Videotage",
+      "name_zh": "Programmes(公開徵集/Open Call 節目列表)",
+      "url": "https://www.videotage.org.hk/programmes",
+      "domain": "www.videotage.org.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "workshop",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "注意:/programme(单数)为404,正确列表页为 /programmes(复数)。HTTP 200, 178154 bytes, 仅2个 script 标签=干净SSR。命中 'Open Call' x5、'徵集' x5,机构名 'Videotage' x61 / '錄映太奇' x33,含真实 programme/ 详情链接。非JS空壳。robots.txt 存在但仅含 content-signal 注释、无任何 Disallow/Allow 指令(本UA未被禁)。独立非牟利媒体艺术机构官网。",
+      "trust_auto": true
+    },
+    {
+      "id": "chat-whatson",
+      "org_zh": "CHAT六廠(南豐紗廠)",
+      "name_zh": "What's On(展覽/駐場計劃/公開招募)",
+      "url": "https://www.mill6chat.org/whats-on/",
+      "domain": "www.mill6chat.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency",
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "HTTP 200, 152762 bytes(WordPress SSR)。本次抓取命中 'Residency/resid' x6,机构名 'CHAT' x21 / 'Heritage, Arts' x11 / 'mill6' 多次,正文可读非空壳。为节目/駐場計劃專欄頁(當前主要呈現駐場與展覽)。robots: User-agent:* 僅 Disallow /wp-admin/ 及 /2016-2018/*/ 舊年份歸檔,/whats-on/ 未被禁。獨立非牟利紡織文化藝術館(Mill6 Foundation)官网。"
+    },
+    {
+      "id": "ntmofa-zhanlan-zhengjian",
+      "org_zh": "國立臺灣美術館",
+      "name_zh": "展覽徵件",
+      "url": "https://www.ntmofa.gov.tw/News_Actives_photo.aspx?n=1466&sms=11893",
+      "domain": "www.ntmofa.gov.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 114117 bytes；命中 徵件13/公告6/徵選3；ASP.NET 伺服器渲染,正文有真實徵件清單,非JS空殼；國立臺灣美術館官方域名 (.gov.tw)；/robots.txt 無檔案(回傳站內HTML)→視為 none,目標路徑未被禁；涵蓋 U-108 展演創作計畫、全國美術展等徵件。"
+    },
+    {
+      "id": "clab-news",
+      "org_zh": "臺灣當代文化實驗場 C-LAB",
+      "name_zh": "最新消息",
+      "url": "https://clab.org.tw/news/",
+      "domain": "clab.org.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 67445 bytes；命中 公告21/申請3(含 CREATORS 徵件、年度大展徵件公告標題)；WordPress 伺服器渲染,非空殼；文化部轄下財團法人臺灣生活美學基金會營運,官方；robots.txt 僅 Disallow /wp-admin/,/news/ 允許。"
+    },
+    {
+      "id": "kmfa-zuixin-xunxi",
+      "org_zh": "高雄市立美術館",
+      "name_zh": "最新訊息",
+      "url": "https://www.kmfa.gov.tw/ActivitiesListC005100.aspx?appname=ActivitiesListC005100",
+      "domain": "www.kmfa.gov.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 133917 bytes；命中 公告11/徵件6/徵才1/申請2；伺服器渲染,正文含真實公告清單,非JS空殼；高雄市行政法人官方域名 (.gov.tw)；robots.txt 僅 Disallow /SouthIslandPan,本路徑允許。"
+    },
+    {
+      "id": "ncaf-news",
+      "org_zh": "國家文化藝術基金會",
+      "name_zh": "最新消息",
+      "url": "https://www.ncafroc.org.tw/news.html",
+      "domain": "www.ncafroc.org.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 49282 bytes；命中 補助19/公告13/申請2/徵求1/招募1(常態補助名單、補助申請基準公告);關鍵詞出現在原始HTML(非純空殼);國藝會官方站,財團法人政府基金會→official;robots.txt 為 User-agent:* Allow:/→allow。"
+    },
+    {
+      "id": "artres-calls-list",
+      "org_zh": "文化部 藝術進駐網",
+      "name_zh": "駐村機會(徵件列表)",
+      "url": "https://artres.moc.gov.tw/zh/calls/list",
+      "domain": "artres.moc.gov.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 111047 bytes；命中 駐村120/徵件28/徵選6/招募3/申請7/通知3/open call1；列表頁為伺服器渲染有真實內容,非空殼(站台首頁雖為SPA,但 /zh/calls/list 帶完整徵件清單);中華民國文化部官方平台;涵蓋台北藝術進駐(寶藏巖/台北國際藝術村)、駁二、NTMoFA 國際駐村等;/robots.txt 無檔案(回傳app 404殼)→none。"
+    },
+    {
+      "id": "tfam-news",
+      "org_zh": "臺北市立美術館",
+      "name_zh": "最新消息",
+      "url": "https://www.tfam.museum/News/News.aspx?ddlLang=zh-tw",
+      "domain": "www.tfam.museum",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 94993 bytes；命中 公告2/徵才3/招募1;伺服器渲染,正文含真實消息清單(頁面另有台北雙年展、年度個展/申請展徵件公告,徵件系統在 ea.tfam.museum);臺北市立美術館官方域名;robots.txt 為 User-agent:*(無 Disallow)→allow。"
+    },
+    {
+      "id": "moca-taipei-info",
+      "org_zh": "台北當代藝術館 MOCA Taipei",
+      "name_zh": "訊息公告",
+      "url": "https://www.moca.taipei/tw/ExhibitionAndEvent/Info",
+      "domain": "www.moca.taipei",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 42317 bytes；命中 通知11/申請3;伺服器渲染,正文含真實通知清單,非空殼;moca.taipei 為 MOCA 現行官方新版域名(舊站 mocataipei.org.tw 仍可用);台北市文化基金會營運;robots.txt 為 Disallow:(空)→允許全部→allow;此欄目刊登當代館展覽徵件等公告。"
+    },
+    {
+      "id": "icm-news",
+      "org_zh": "澳門特別行政區政府文化局(ICM)",
+      "name_zh": "新聞消息",
+      "url": "https://www.icm.gov.mo/cn/news",
+      "domain": "icm.gov.mo",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "workshop",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 1.79s, 43812 bytes. 服务器端渲染(非JS空壳):原始HTML命中 徵集x3、申請x4、藝術節x5、藝穗節x2;机构标识确认(文化局x16、Instituto Cultural、icm.gov.mo x24)。这是文化局官方新闻/公告滚动列表,澳门艺术节本地节目徵集、城市藝穗節徵集、大三巴手作坊徵集等 open call 均在此发布。robots.txt: User-agent:* 组仅 Disallow /error/ /fonts/ /maintain/ /offline/ /web2016/ /ws/ /XML/ /comingsoon/ /gate/,未覆盖 /cn/;本方 UA(ArtPortalBot)归入 * 规则,/cn/news 允许抓取(注:ClaudeBot/GPTBot/AhrefsBot 等被单独 Disallow "
+    },
+    {
+      "id": "fdc-activity",
+      "org_zh": "澳門文化發展基金(FDC)",
+      "name_zh": "最新動態 / 接受申請公告",
+      "url": "https://www.fdc.gov.mo/zh-hant/about/activity",
+      "domain": "fdc.gov.mo",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 1.40s, 62655 bytes。服务器端渲染:原始HTML命中 資助x77、補助x20、申請x18、接受申請x6;机构标识确认(文化發展基金x36、Fundo de Desenvolvimento、fdc.gov.mo x13)。此为基金各项資助計劃『接受申請』公告的动态列表(如年度文化活動/項目資助計劃、國家藝術基金配套計劃等),资助范畴含視覺藝術。robots.txt: User-agent:* / Disallow:(空,全站允许)。"
+    },
+    {
+      "id": "fdc-fund-list",
+      "org_zh": "澳門文化發展基金(FDC)",
+      "name_zh": "資助計劃一覽 (Fund List)",
+      "url": "https://www.fdc.gov.mo/zh-hant/fund-list",
+      "domain": "fdc.gov.mo",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "curl HTTP 200, 2.48s, 72902 bytes。服务器端渲染:原始HTML命中 資助x82、補助x19、申請x2;机构标识确认(文化發展基金x14、Fundo de Desenvolvimento x8、fdc.gov.mo x5)。此为全部資助/補助計劃的目录页(含視覺藝術相关的文化活動/項目資助等),每项为一个可申请机会入口。robots.txt: User-agent:* / Disallow:(空,全站允许)。与 fdc-activity 同域但为不同栏目(目录 vs 动态公告)。"
     }
   ],
   "blocked_or_unverified": [
@@ -598,5 +1259,10 @@
       "reason": "全域 Socket closed(7+ 次)",
       "action": "候选 /open-calls/;人工核验"
     }
-  ]
+  ],
+  "_added_batch": {
+    "at": "2026-07-12",
+    "note": "新增中国大陆/港台澳信源(多智能体发现+curl核验)",
+    "count": 36
+  }
 }

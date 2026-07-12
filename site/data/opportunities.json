@@ -6,8 +6,8 @@
     "generated_at": "2026-07-09",
     "count": 16
   },
-  "generated_at": "2026-07-11",
-  "count": 64,
+  "generated_at": "2026-07-13",
+  "count": 67,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -3170,6 +3170,142 @@
       "cover": "https://elasticbeanstalk-us-east-1-220573180461.s3.amazonaws.com/uploads/photo/image/130/gallery_thumb_6998896664_0a7466f78f_b.jpg",
       "cover_source": "chinaresidencies.com",
       "official_url": "http://www.ceac99.org/residency/"
+    },
+    {
+      "id": "jsmsg-tzgg-江苏省美术馆水印版画材料与技术研究文化和旅游部重点实验室2026年度开放课题申报",
+      "category": "opencall",
+      "title_zh": "江苏省美术馆水印版画材料与技术研究文化和旅游部重点实验室2026年度开放课题申报公告",
+      "title_en": null,
+      "org_zh": "江苏省美术馆",
+      "city_zh": "南京",
+      "country_zh": "中国",
+      "deadline": "2026-06-19",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "江苏省美术馆水印版画材料与技术研究文化和旅游部重点实验室面向国内外研究机构、院校等设立2026年度开放课题，围绕水印版画材料、技术、创作应用及装裱保存等方向，资助重点项目、一般项目和自筹项目，研究周期1-2年。",
+      "url": "https://www.jsmsg.com/news/detail.aspx?Id=1447&mtt=3",
+      "source_url": "https://www.jsmsg.com/news/news1.aspx",
+      "domain": "jsmsg.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.jsmsg.com/news/images/cc.png",
+      "cover_source": "jsmsg.com"
+    },
+    {
+      "id": "hkadc-cfa-新兴艺术家发展资助",
+      "category": "opencall",
+      "title_zh": "新兴艺术家发展资助",
+      "title_en": "Emerging Artists Development Grant",
+      "org_zh": "香港艺术发展局",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "香港艺术发展局开放新兴艺术家发展资助申请，截止日期为2026年12月31日，适用于所有艺术形式。",
+      "url": "https://www.hkadc.org.hk/en/whats-on/call-for-application",
+      "source_url": "https://www.hkadc.org.hk/en/whats-on/call-for-application",
+      "domain": "www.hkadc.org.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.hkadc.org.hk/media/images/seo/shareimage-v2.jpg",
+      "cover_source": "www.hkadc.org.hk"
+    },
+    {
+      "id": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
+      "category": "award",
+      "title_zh": "2026 约翰·莫尔绘画奖（中国）",
+      "title_en": "JOHN MOORES PAINTING PRIZE (CHINA)",
+      "org_zh": "约翰·莫尔绘画奖(中国)组委会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-09-22",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 200,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "16周岁以上",
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "面向年满16周岁、生活创作在中国境内的绘画创作者。报名参赛及作品征集时间为2026年5月22日至9月22日。需缴纳报名参赛费200元人民币。作品须为2024年后完成的原创绘画，可悬挂。",
+      "url": "http://www.johnmooreschina.com/painting-prize/terms-and-conditions",
+      "source_url": "http://www.johnmooreschina.com/painting-prize/terms-and-conditions",
+      "domain": "johnmooreschina.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://www.johnmooreschina.com/assets/web/cn/images/all/foot.jpg",
+      "cover_source": "johnmooreschina.com"
     }
   ]
 }

@@ -186,5 +186,1009 @@
   "chinaresidencies-directory|https://www.chinaresidencies.com/residencies/sign_up": {
     "hash": "2fb25a6cc23d5c2cfb2cd83fd0661c62887e6716f5211745ab735e0cea5450fc",
     "at": "2026-07-11"
+  },
+  "nua-tzgg": {
+    "hash": "5efd7deeaf09a9bea5f1ca5c25919ac0b48732d43aa2a49c8a0a319c832d59dc",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://kyc.nua.edu.cn/6006/main.htm": {
+    "hash": "a777ea8075967eb7f63c44488ad07623663db64c3dc6aa37f7eb684feac82ef9",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/6154/list.htm": {
+    "hash": "7e31613cc71cb2b37c8374f4114a101de66af204bc573b67475d5ba591a9872c",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0711/c346a122160/page.htm": {
+    "hash": "29de5eb50902637e3e7eb96d16832b0a6dec566788ed8e50e8b3f75384050058",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0710/c346a122147/page.htm": {
+    "hash": "b3a5e6440c06dd08c4097c343ccd7f8d0d3637fa14e0ba3716d6e3e715fd6f84",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0710/c346a122146/page.htm": {
+    "hash": "b862d204d63a46a5b82dead2509f3916cd0560ed09068b079f32b1a2ed8b76f6",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0707/c346a122091/page.htm": {
+    "hash": "8459563e94115253d48e790469fd932edc41133a7423b50e55ada28589819694",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0706/c346a122081/page.htm": {
+    "hash": "a28e2c5f301d0852a95004c792226b846b82585e386a5f312cc2235c4371b0c5",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0706/c346a122080/page.htm": {
+    "hash": "8ef3e8cafbcb3c32354d2c8a6cd00e1e66f5cfe94bf9a9839ee79880a52547bc",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0701/c346a121978/page.htm": {
+    "hash": "458ac1e000930e16021142da28aacdf8abaaf8812976aa4a9e052019127909a6",
+    "at": "2026-07-13"
+  },
+  "nua-tzgg|https://www.nua.edu.cn/2026/0630/c346a121974/page.htm": {
+    "hash": "f4d02b9afa2588f5be4cb110d0644721ea322d7ee0d40655343f3014e76c148c",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg": {
+    "hash": "299f1c97fdbb67bd6b71ea956e8225f62bf0e4ce88ec5f559d5efc953286becb",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/18940.htm": {
+    "hash": "fa31403e021bdfa600b7e384ede02f7dcc910e66f71b11a6274ccd063d318e44",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/18910.htm": {
+    "hash": "792d3166df73d5d5d2bc47338d97441eed28e0f868a019478bc9a2752870996b",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/18350.htm": {
+    "hash": "8b62d4a7259ea45b2da047717292e6b21d8f289ff495ebd3ddac4dec4c499d8b",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/17680.htm": {
+    "hash": "6aae943fc0dac9e21ea72fcb3295c3a08fb7f68b4d819b97ef2946465d946984",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/17410.htm": {
+    "hash": "9e2dcf801a80cff809c5f8cfc090d60cbf91c0006245c4488b35fe194ce95cc8",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/17110.htm": {
+    "hash": "d103491cd674351c8c658452c7830a59b088d94c84efd9dcfd204d3219f9ebf6",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/16870.htm": {
+    "hash": "6d53833d04d7fe2dcaf2fedb47556fa6c7f3f7cd13a59df6e29b44b626bd3078",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/16510.htm": {
+    "hash": "5bc8ca8412f3cbd406229f29496e0429f86fd9f046094829dca23aeecb22d8d1",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/16490.htm": {
+    "hash": "dfbfe3fa8d2a3f2f9444e4598b600b18cb27f8efbd6b4d84b9dee069ac469b81",
+    "at": "2026-07-13"
+  },
+  "safa-synr-tzgg|https://safa.shu.edu.cn/info/1122/16430.htm": {
+    "hash": "02555aa300a8e64f6b3724d4ea248433e70473df2d6fccc56aa06858065b2bd8",
+    "at": "2026-07-13"
+  },
+  "gxau-tzgg": {
+    "hash": "1afa8a0f3fa9b62da027cc77566bab24cb834402f70dc3814902e5e018107679",
+    "at": "2026-07-13"
+  },
+  "gxau-tzgg|https://xxgk.gxau.edu.cn/tzgg/content_315371": {
+    "hash": "6ce393fe8e79e9dc6db1efe68858feb2d2ec4c54b8ba676eccb12dd5fba7451f",
+    "at": "2026-07-13"
+  },
+  "gxau-tzgg|https://xxgk.gxau.edu.cn/tzgg/content_310142": {
+    "hash": "20e1f1da640d614228ae315d6d9acf672a084ed8eea7868cbde6e4eb3e302136",
+    "at": "2026-07-13"
+  },
+  "gxau-tzgg|https://xxgk.gxau.edu.cn/tzgg/content_310143": {
+    "hash": "fe8c450fc18ec166c06cd52584317d50e770734cce5ea073438fa4aec8473970",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg": {
+    "hash": "61eac2e752007f08a9d145159d17575ed4a5e9aa04b22b9ae9b6d35daf4f4027",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg|https://www.ynart.edu.cn/info/1041/42951.htm": {
+    "hash": "6d227ca0b127c34e3f100338ca04f1af7d516949f528f57a5c7971ba9bf4beb6",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg|https://www.ynart.edu.cn/info/1041/42911.htm": {
+    "hash": "4cdd20db351e7d903a5beffd3dc41536fad96e945a17bcbc53ebabbdd95d2023",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg|https://www.ynart.edu.cn/info/1041/42701.htm": {
+    "hash": "66c2db15e400067675de5d78f334565cf128dbb689e6a68a7cebb227aac30616",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg|https://www.ynart.edu.cn/info/1041/46201.htm": {
+    "hash": "02faa5d6a2a23c02b1620e87129c0ba88695b82a42022a28e4d388229c9211cc",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg|https://www.ynart.edu.cn/info/1041/46191.htm": {
+    "hash": "8fb65ccc7d1d5807596e4d5008bff32d02aa4d2975a83979a0cfe192b34e4d5b",
+    "at": "2026-07-13"
+  },
+  "ynart-tzgg|https://www.ynart.edu.cn/info/1041/42941.htm": {
+    "hash": "d2a198ed1508b777e087bd7e69b0e38ef7ad6e4091aeec7a40c147a9576908ab",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg": {
+    "hash": "b1466d610c25fc4bd224e8b52d126c7f3ebbeb062a714f4699b1d086b5b400df",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://kjc.jcu.edu.cn/info/1028/3631.htm": {
+    "hash": "f0976195c6d3d441456b2a09624bfd56af18594d9467d39be6cb1a80b9bdd3a6",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51256.htm": {
+    "hash": "48bcbe35f8627aff03fbcc7bb20737b0a5e6451acaab7dbe975a3451f5ab04a3",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/50796.htm": {
+    "hash": "ffeded7087ffe1351f4a04b86279bf8f27044209b581638d8e15ca22d7cb9b2d",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51644.htm": {
+    "hash": "9e6a2a2c406af5e5d9a39915843147f011937961347783edd337a7ab921033d7",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51643.htm": {
+    "hash": "19712c4bce36aa5e589020b75d20b6dda7951cc64d3ac9e4e115e958a01910c3",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51615.htm": {
+    "hash": "ea0ac94fa9253b009db902dcc2fe4f69e7958754a8116159625ecf2f423edeb7",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51614.htm": {
+    "hash": "5eb4705c8319d1991f292ea63254c674775b1dd21ab1b92edd06789421c14c3b",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51602.htm": {
+    "hash": "44d5665f9c9b2513f5839182aadcb69597d8d7ad206feca42b8d2081595b2bad",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51592.htm": {
+    "hash": "cd658d68203da3645a7b7aefe28fc17e42a7af3be5c5e5b8cd65a918fc67eb64",
+    "at": "2026-07-13"
+  },
+  "jcu-tzgg|https://www.jcu.edu.cn/info/1055/51591.htm": {
+    "hash": "006523cb2e2b3c127d014a3391100362d18b8fda979a620a7ac74bd7b97f1c64",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg": {
+    "hash": "9dd4c860d3338836bba9e740da356e89e8aa61d6de8fa7012364634ab32a7a08",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1027": {
+    "hash": "678c5c18450b6aae888388898113148c543aa36df427410f4cdf2984f861afee",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1028": {
+    "hash": "51bf3bcef8a2137294f1be1e37f1dc779485696bdedd15f4415b32461cf77129",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/copy_1_xyfg.jsp?urltype=tree.TreeTempUrl&wbtreeid=1029": {
+    "hash": "078c8e72846ce35e474a1457ae57d21a34cc777e3ef5f0f1f2cd358eaca616f1",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1136": {
+    "hash": "c4e1b24204de3978e1e474d7a586970bb42971555e5ae027f79d7700c4a1c137",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1015": {
+    "hash": "80e3133a700c8bd45ca698c0a3b75f410d4d75d8f27a6f8073bf4def61d20166",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1134": {
+    "hash": "73a4cf6f3bc9fdfb981765488c2b151b17ba2e561f8caac28c01a4f9a260544e",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1143": {
+    "hash": "e8b04bafcac2deda2171af992555ea86f4d6549c0a9e91a5935517983c54e040",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1033": {
+    "hash": "5e4b597ab28ddcbddf5f1f931374a34e1012ef76f7673bf9ea27f63f918834f4",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1034": {
+    "hash": "dc222ad645106b30db7a97bc92937c1951eee6f75015f134e7fbb3c1c06f070b",
+    "at": "2026-07-13"
+  },
+  "jlart-tzgg|https://www.jlart.edu.cn/list2.jsp?urltype=tree.TreeTempUrl&wbtreeid=1035": {
+    "hash": "73ecc98bde3c096e22c01e44a953ccc43a9b1386f53ba9f5726d17e20463e6bf",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg": {
+    "hash": "981633e671186abdb9d3e8de805af2139569ff9c876d7708538964b1cefcfb16",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/tzgg/20240605/29347.shtml": {
+    "hash": "b4c5d4285f03c1111846939307eb70d07b64c01e4d5cca88aeee704d79243c26",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240603/29325.shtml": {
+    "hash": "a4541c424f2ae79473f3540563aaf148683e1e9f48f907d145a47cb60f511be4",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240530/29232.shtml": {
+    "hash": "65353c842752322c20448b5c98d5f1e2019ad810c007c4e9de9faa2eb88027d4",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240528/29225.shtml": {
+    "hash": "1bef5388197172aa96c84ffe1c2da6f65e7eeef89f3c9be6d3444510a1818303",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240513/29227.shtml": {
+    "hash": "7131d022915ce3063d600ed4a0f4440a38f9523710f8ec695486c3d06919391f",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240429/29228.shtml": {
+    "hash": "dd0a6841852480b6c9304919b16b90eb86320efcc42466873f355726517c87b8",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240428/29229.shtml": {
+    "hash": "661073a016139e350cbe0ce958990dc05f0a25349a5d9eda0918ad175ae52e89",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240426/29224.shtml": {
+    "hash": "75b3951c47b00c254036536c42932b3f587253b5d3e790c1018d73bc70a4f723",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240329/28208.shtml": {
+    "hash": "40781a617de556608a8eb826ff499e82a7edb2666fe45380ea868043fc2d2ab7",
+    "at": "2026-07-13"
+  },
+  "imac-tzgg|https://www.imac.edu.cn/html-dzb/tzgg/20240328/28213.shtml": {
+    "hash": "d443f5ae549d8822a17d6b9a545ef6a10b3a1a60f21471f42dcc32410bdf9539",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg": {
+    "hash": "328d228d1494b45f31514854dd2f283beecafd82cd99afc5d928a671a6c53f34",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1032/22791.htm": {
+    "hash": "dd85cfa1ab4a553ed4c48a6b811f208eac475eaa532224ef065cc8cc6d6a4b15",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22731.htm": {
+    "hash": "26a40cc8bcfeca664a6336e4c8ac7a8364795d6d7088b1ca211b2c002b1d3f81",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1032/22671.htm": {
+    "hash": "04b9bf6949f152fffbe4565474cdb05d4f680e2ba03a6470f5f9fe81cde3b3c0",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22661.htm": {
+    "hash": "59a96376ec8830706513f49207e86bdf06467f66460c343f5abffe64542d49e5",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22651.htm": {
+    "hash": "a180b4fa58f8adafd98fb3672d6edf156d0ca29860da1086459ae3875aefaad4",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22511.htm": {
+    "hash": "d2d3e0835fafc6497f33ed2cff137573200183a48344d1da001e1fc94ad1540f",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22501.htm": {
+    "hash": "29f202a84071ba22f71fab4dc021b4964a20471d2fd105223f8d30affb73e74c",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22481.htm": {
+    "hash": "0574bea8488fdf30bad751352b50b7a88aac54ccfc83fd6bed2398ef15e23ef5",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22461.htm": {
+    "hash": "d4c70ba24acc2ebd71fd956f3176b43f7ce6338e919c0b8fdddf493d9ce4664f",
+    "at": "2026-07-13"
+  },
+  "xjart-xxgg|https://www.xjart.edu.cn/info/1031/22441.htm": {
+    "hash": "c761ff80eae078f1dc7b104ed24c15a48a1f73205714d255d04c3a78abd33477",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg": {
+    "hash": "1e52b5fc8709d1b0814615642b54eaa10822b294264ecc99b5803ba9cec52150",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/6083.htm": {
+    "hash": "cc96bf6c9e8470ef92cb8d1e618c2449f138f81e8c06909c2c6b23de7bb42a4a",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/6073.htm": {
+    "hash": "1b76f3b9c492a84f1380d4e9ccc80abaa788132f0061c530238757ddc0be018f",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/6063.htm": {
+    "hash": "0ca03624d7425c5717cb5890ce35a90b5d340e0f8a4fba011856540e6df8ad84",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1052/5973.htm": {
+    "hash": "48fb861bd530c29a1608aea1478156e405e19fddfdeb3ea47dd9848a683735a1",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1052/5883.htm": {
+    "hash": "a81aab6968849833789141ef93b59ed966ce1b1714249ee856d61db91dcdfc56",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/4593.htm": {
+    "hash": "11159f8672b10f5cb5e2b4a618c87eac31747963c9b03b4532bd5b9858196aed",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/4553.htm": {
+    "hash": "7767f92db8d9c1694d02033a887df8ab80c0be0772cb083e0a5450791ca108b2",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/4543.htm": {
+    "hash": "b36b027182ee1a061e897738df70a4de17bb24f198b587d1ee32120e27a09513",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1051/4453.htm": {
+    "hash": "6ac6bfa8a19b69012c382ed2e9104afab21af3ad8d4ffc4509d8565e494c73da",
+    "at": "2026-07-13"
+  },
+  "sdca-msxy-tzgg|https://msxy.sdca.edu.cn/info/1052/4443.htm": {
+    "hash": "3dec48b41ad633b5f2a7b266e9cb77637a8daaa5b4f6b7dc2046fd29f397e61c",
+    "at": "2026-07-13"
+  },
+  "artecnu-tzgg": {
+    "hash": "392e1e8a1eb8dd02f352bd06d52934a7ef0b15db3fda01db6fa657dab96d4d2c",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg": {
+    "hash": "ce742b31f91ec7d571d7032618825de476f41234ab3cfd7df08fb29a3706b823",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92211.htm": {
+    "hash": "6a94d7077a0288a62ee670ab2c3ec5e6bce0f73d98e175b24fa2dcfab071fc9e",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92207.htm": {
+    "hash": "c0c9d721f307b013f9132c49f56a5f772bc5a654bd67575434f5dfa4173d6ee3",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92191.htm": {
+    "hash": "a360a4286993ce5218dddc82b24fc987e4d242b73b8bfd8bbeb18f50872d75f7",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92165.htm": {
+    "hash": "9c5e4f82cd7bb8caa50db5b19403ca58ba0cc7b782c313d436cbf77e925960af",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92156.htm": {
+    "hash": "e9206d2e0c7f3b4edee40054ae44c625310c5497f8c3a499d20dda01454c10de",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92152.htm": {
+    "hash": "125b751ad9267752f2df3e2b3db22bb861c93443d474c2240e9e30944ae7f8d1",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92151.htm": {
+    "hash": "73894cc15b59429583b50121b4df7875fa6537aef6768ed4dd0af2240d532cd6",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92146.htm": {
+    "hash": "8093b9b1eda5fbc8a7393e22dfafb0ad78f7cef4c04270b8ba9e6614cc676090",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92145.htm": {
+    "hash": "f1021a8f17074e02bd47aff88dda17cd86e242b642237be8401723a63ca941ac",
+    "at": "2026-07-13"
+  },
+  "hunnu-msxy-ywgg|https://msxy.hunnu.edu.cn/info/10434/92144.htm": {
+    "hash": "350b67af40972503019a590e884ddb80f2933e3ef5e02f8b4a3f37ec723a464e",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg": {
+    "hash": "1717a883d12156d86bf14ded4c9bc5c9bfda0c51527b24ada318b414a0d171f0",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1480&mtt=3": {
+    "hash": "29d7dd1dd4a82134e8111b7ca0a20b0b4a2fed4cd4dca4fe18480062bb764802",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1472&mtt=3": {
+    "hash": "28d7dc387a43624c1c6f447af98d48061b7ad924f94bfb747cb5b3d5225a7a49",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1457&mtt=3": {
+    "hash": "26af7394ce6d41ef6acbc209bc840894429ffd09f07a94ad80f4c5cce9582b9a",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1452&mtt=3": {
+    "hash": "fd255ebeb65a7125a4682af17ac575d5f4a9ccb555dd7701da56e48203f9e221",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1449&mtt=3": {
+    "hash": "01bd9221945ce0f7d125ae21b99d09763f8a9a685bbe2cb4faaf4f04328536c0",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1447&mtt=3": {
+    "hash": "33362ae71ce976831fec355068c4075817670e3af8e7c3da4884a47d65009b59",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1446&mtt=3": {
+    "hash": "5caa222ef1bd33437b220903bbb40661731b25b2e6169a0c0f88bb4cb86a51d3",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1445&mtt=3": {
+    "hash": "b58b39f45ea39d136bd5ff16c8d6013d02c5367b8c2d053c133cbd3294b5942f",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1444&mtt=3": {
+    "hash": "f9fb52d0639179593e18152ba852e8eab87450fb34bf5a2ee1af0dcedaa4e61f",
+    "at": "2026-07-13"
+  },
+  "jsmsg-tzgg|https://www.jsmsg.com/news/detail.aspx?Id=1471&mtt=3": {
+    "hash": "1cc25a9e108a207be652943f9bf655606ea359bf460f9e7621cf23cd04810a3e",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx": {
+    "hash": "b3b8a38d96d6d6fa94ad534fc21f83972691ed585461bde5c06c0e7936a06bd6",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/collect_list.action?cid=4": {
+    "hash": "df2ae528358b4bfd761f35f66ad081d05056adecaf24c14216cc3f90aba3230d",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/collect_list.action?cid=5": {
+    "hash": "c6dc68e12b1bcb11f462d2e67f06d5e3cba31176ba54ebd435d50ad3b01891c8",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/collect_list.action?cid=6": {
+    "hash": "452a1a3ba201a4821c60eb0761427884b1797e1dbd6cdaa90a7e285689f04fd5",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/collect_list.action?cid=7": {
+    "hash": "a556c604f0407bcbaa1d9e10a6c843e76708344e3cb4e7ddf714d947cda72e08",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/collect_list.action?cid=8": {
+    "hash": "f1e78bedb7a7be3f03354daace2a0821a2d4fcbec28388ab915ff33db3929d7b",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/collect_list.action?cid=9": {
+    "hash": "c67d7ef15481c71b091e0f013ce21e56befa57df87d90cae421b2f5c4aecf9b8",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/ggjy_list.action?cid=17": {
+    "hash": "cdaab4541c3138bd07dfbb467cd9b68c725d31bcdca28d81cd625b0cdaa74dc3",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/ggjy_list.action?cid=18": {
+    "hash": "88821928bed3880d7ea04b85810c6d6f4fe8d8c46a36d008168f9b49b2818678",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/ggjy_list.action?cid=16": {
+    "hash": "6cc8bdfe721961051df3630a2eb943174b9131c726e017fbcec0cf3973e588fb",
+    "at": "2026-07-13"
+  },
+  "gsyart-zx|http://www.gsyart.com/ggjy_list.action?cid=19": {
+    "hash": "0c80b341a477ad72767c3bf61043f7d0f15d60f202b7ff55a9166a12acae0b25",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong": {
+    "hash": "ef427c9e4b3d68409a0f383858a3d2aa2f7e7436bb3623aa1e2919d9954de431",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20260516": {
+    "hash": "2bd9be201a32469c32701875c6245e79808166f61bf61fc064bdab893a0c1616",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20260207": {
+    "hash": "0bf40867d300ecd05aac0d690423fa0699e1c2f8988241d8d8f488058ff18636",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!2026020601": {
+    "hash": "72172699e98ecfce529d55a6bf8c6b4bdbad414dc7a8da2ae570cf66bdd8c451",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20260201": {
+    "hash": "9a48dfb7719055b55e2a5eb6ac3188605514ec6c95a1d4c72d846c4c7ce19da0",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20260124": {
+    "hash": "350982e30059c4271c079551741d35d1e4bdeda323f419f2ee6cbff3239abc1e",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20251102": {
+    "hash": "7aaadf13229366fbe7988f186078edcf354f75797d2057a77d82508f0ca5660e",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20251019": {
+    "hash": "941a7fcdc3c3c55d57c5450f91f9bac07d83603bd3cba10c7c19798f3ed283a2",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!2025101801": {
+    "hash": "07e00525076929cae872b2120ba0445e58c11fae776714a67ea21621c779b2cf",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20250927": {
+    "hash": "3768e115ef8c14dc75ad57c4e3668e19a7532c228289f1d989a99da0af4a18eb",
+    "at": "2026-07-13"
+  },
+  "hxnart-huodong|http://hxnart.org.cn/cn/category/activity-list/detail!20250907": {
+    "hash": "6cc890eb342d2d6243f2e1535233a2d0d99c589ad65bd0d0d2db47fc0d08eced",
+    "at": "2026-07-13"
+  },
+  "taikang-events": {
+    "hash": "57ba1519bb309e78953a8719efb341c1867661d5d1b47264cbc515ee746bdf8b",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2026/07/?post_type=events": {
+    "hash": "608dbbaa2b81d9671997fb72d6a11740692193fa29ed72ce4b69e168f86dd277",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2026/06/?post_type=events": {
+    "hash": "a1549664d431b28c50c77aec8f9b1552b6ca1f970cf823339c9b7a5bb6a473c6",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2026/05/?post_type=events": {
+    "hash": "96fab8863846a4e447b2cbfabfc59b1be63adae41105334575a607ff9fdf6817",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2026/03/?post_type=events": {
+    "hash": "1c0effe4cf21050db8a2419c9a149c069b1d2643cdb7412fd358d32cc46ff012",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2026/02/?post_type=events": {
+    "hash": "602fbcf3dc9379ed60d45c4020a108bb1d858e0c556b2fccb2ee80fbb8fb9a4c",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2025/11/?post_type=events": {
+    "hash": "8c83ca38664e4f7398195fb74f6bbfe3d01df888328dc893c798691a0cda370e",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2025/10/?post_type=events": {
+    "hash": "7b72f1370174313f0346670d40a2da127b4127078a2b79eedca89d736e9b730e",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2025/09/?post_type=events": {
+    "hash": "1529ff65e5828907ddee1383b8afe5f32934c717fb16d0e8e0dcf1e3c879ee5d",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2025/05/?post_type=events": {
+    "hash": "e90080055f2f3d6dc6160fade7d463f84084f304154068270bcd21951e29da04",
+    "at": "2026-07-13"
+  },
+  "taikang-events|https://tam.taikang.com/2024/11/?post_type=events": {
+    "hash": "d9138773955214d0283d6abafb8dc4a32f3d5f0cd60c93591c721e701b083f01",
+    "at": "2026-07-13"
+  },
+  "uabb-news": {
+    "hash": "11a9bc925c26092cfdcb882ce6bd93ce3a917d1a72585a5c445da697976dc46b",
+    "at": "2026-07-13"
+  },
+  "uabb-news|https://www.uabb-sz.com/news/article/0b6f0fcc0add4ffc9876c186b2a35fd7": {
+    "hash": "689e30e8c061d567e0c4934881d1bf94fdb199c95974c9667e30db857f576a87",
+    "at": "2026-07-13"
+  },
+  "uabb-news|https://www.uabb-sz.com/news/article/f12822cedba44ec980f7ba09415c8660": {
+    "hash": "385d089c9a50dd38c431137dcd535b98754624e9fd87735580deb91e2e60e9f2",
+    "at": "2026-07-13"
+  },
+  "uabb-news|https://www.uabb-sz.com/news/article/9cef9510c0654b7f92f38f6efffc42d9": {
+    "hash": "bd13caa4e962a714dad93180b8682c1cc2321b2980a961341f7600cb688d9aa4",
+    "at": "2026-07-13"
+  },
+  "uabb-news|https://www.uabb-sz.com/news/article/e26b1017c7024f558ed9e4b71f804ccb": {
+    "hash": "78a39cbd6ff6c3c50762b66694f862c68c8149b9eaa0643a8e03d7464d4bbf90",
+    "at": "2026-07-13"
+  },
+  "uabb-news|https://www.uabb-sz.com/news/article/1fc7d666b7ba462b853771bcee4c8fb8": {
+    "hash": "ef2164c143fa1948fb0359e46dc2d557c5018a325f1a1d38736bb233a6febc1f",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale": {
+    "hash": "4e700e586aacc4dcf56c933b6000f325d14b9579635a1494e23dfa1f5fa5864a",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-27.html": {
+    "hash": "cdb60fd4bd0544a1d31586ea030d0cefed119602c25ffdb5649965a1df3b9dd9",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-25.html": {
+    "hash": "09c60533a613f422a272e31363afe152ed179beeb76a3336afdd52be6a040a42",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-24.html": {
+    "hash": "b5035e8c775363e10f16ea72c5de820cdc679a5efacb2889e5c80e339231057b",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-31.html": {
+    "hash": "cf4fd4fccffd1db57174c20887e32fc23cd5f736d2a0a039856252ad1e3a9d11",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-28.html": {
+    "hash": "c7e6bdb25c47510165c0214ee30377a192256a9f1de5905c3eafdda8df0534c3",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-15.html": {
+    "hash": "9912e94c67e1dc29e7962dd9caae739efddf19ecabffe1147c1228b5d0c4b04f",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-14.html": {
+    "hash": "1d5daab9cf5179b90bf7257d22bcf7d9c9cb6f0927be3ce61d7fff5538be816e",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-13.html": {
+    "hash": "6df8d56323a6ce5f2f19b98eca9ae00264895bbf1af180be773982de6bdde6f9",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-42.html": {
+    "hash": "349d70ae6e62a715d4aa59a269068e769cc424ad89bd46438d5acd2e3c1b4d63",
+    "at": "2026-07-13"
+  },
+  "guanlan-biennale|http://www.guanlanprints.com/h-nd-16.html": {
+    "hash": "6e0333e14de3b450fa1c001a53d567ba2644cd88154bb90b78d873496f1cf48f",
+    "at": "2026-07-13"
+  },
+  "gdmoa-bid": {
+    "hash": "58127a88d25f868a96a02e7f9cb1267ea47067a8a954666ac0149caaa45342c5",
+    "at": "2026-07-13"
+  },
+  "gdmoa-bid|https://www.gdmoa.org/was5/web/search?searchword=&channelid=221448": {
+    "hash": "a01b3f1ded17a82dbedef52873791213cd8a91a687b655df248e5cace5eed341",
+    "at": "2026-07-13"
+  },
+  "gdmoa-bid|https://www.gdmoa.org/Bid/201612/W020170618390502825880.doc": {
+    "hash": "3a88cb91084273313ba7466e2b68b857883d3caa43a2acc7dbc9eafccc97cded",
+    "at": "2026-07-13"
+  },
+  "johnmooreschina-terms": {
+    "hash": "52de3c0e2c6eb274235a2199e3457e841887b6cc559e9a09541373abee55687f",
+    "at": "2026-07-13"
+  },
+  "wangshikuo-award": {
+    "hash": "c9295c00778928cb9062b141c496e48d347839c78eeca2e5433d8feae055c0ef",
+    "at": "2026-07-13"
+  },
+  "iprojectspace-residency": {
+    "hash": "c14f210da7bcf1322fe4640a8440ddee7033454ca012f09cbc6c10f568abbbab",
+    "at": "2026-07-13"
+  },
+  "hkadc-cfa": {
+    "hash": "fd2bd3d0308f3016996ef0ddc28e69dadb26a209610e7c6b0ef75c82af3674b4",
+    "at": "2026-07-13"
+  },
+  "hkac-opencall": {
+    "hash": "fbde0c106703b851060edf72534d6991a437518a40101c4d9208bfb19abb74cc",
+    "at": "2026-07-13"
+  },
+  "apo-oi-programmes": {
+    "hash": "1459e0db0f10a7e3a2163dd386e379f2e6c61246c32de54108e579d5db920757",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes": {
+    "hash": "85487fe4be644d65d5fc069b74b30623160f5c9a7fb04421f8e802629ef09f4f",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/d-normal-v-essay-videotage-edition-time-based-lanes-blips-on-a-dark-sea": {
+    "hash": "25a722e1a139b14d3329147d8d6ecd54c57143cb94ea290878f5f73c2c8b8453",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/ecofutures2026": {
+    "hash": "9260626af00d3dcdd1fb7ee631e2792a2b1fe2818e42cc4f7ae7c2a93d63b615",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/ghost-hardware-phantasmagoria-interfaces-a-hacking-workshop-with-cyanne-van-den-houten-%E9%AD%85%E5%BD%B1%E5%8A%87%E5%A0%B4%E4%B9%8B%E5%B9%BD%E9%9D%88%E7%A1%AC%E4%BB%B6%EF%BC%9Acyanne-van-den-houte": {
+    "hash": "e6ef469aaea83ac159ae6f05542d3770ad5ba81afa1964df70990f3119485bfe",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/only-in-art-march-self-guided-vmac-mini-cinema": {
+    "hash": "2bec6df32a496c44b23e406d255a60842aaf42516ed7496cdbda25cdd0baf8b6",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/videotage-in-new-platform-alternative-asia-mind-the-blank": {
+    "hash": "24f24ac36e56efbb9ee3f1d9121c901d5fa235eae1878d646445fa8e9b27d9f7",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/janne-schimmel-story-machines-case-mods-and-ghost-horses": {
+    "hash": "520a86eb1de55d7d636b4657d87a4935a3e3b268224597798361231e0a6100fa",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/ecofutures-digital-residency": {
+    "hash": "ae1e56ae692454fd7f25eaacc244d71d9c07b3bfe6202a5d0c19bbb701dce2a0",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/cyanne-van-den-houten-phantasmagoria": {
+    "hash": "1d9a70359815d50c513d5644afe29f2f18acaefd16cf4ba4494781872cfde7f6",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/an-evening-with-videotage": {
+    "hash": "bafb2aaf77b86a25192463b3271205d498217d6d6e6f3aa1a6a6b48869c9d86c",
+    "at": "2026-07-13"
+  },
+  "videotage-programmes|https://www.videotage.org.hk/programme/artist-sharing-unhistorical-nonqueer-and-antitechnological-human-bodies": {
+    "hash": "8de0e07947e8c1e894786a34306c01672208daa6ac2e4416a04dbd53104f8e37",
+    "at": "2026-07-13"
+  },
+  "chat-whatson": {
+    "hash": "ac739a18449511c2adc654418798410996378f8876208f143e0949f594bd3707",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian": {
+    "hash": "2c888bda8d2c261885b5983ce73c90d3a03c83c701a7b089069b81250c8b7beb",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/cl.aspx?n=1381": {
+    "hash": "269b3c8d09893a179a9410dc4f4b037a4517300997f19eb10b52842c11c82b52",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/News.aspx?n=1383&sms=11440": {
+    "hash": "c3047b9f063c30f80ee5e6b720c097fe4d6b188e461c1298388959ac8f8705c3",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/News.aspx?n=1384&sms=11441": {
+    "hash": "91f8949fcdd28754274f06c8dc648e96c58dec6c74aec43c3ea9f2d111ee7ed8",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/News_Actives_calendar.aspx?n=1382&sms=11893": {
+    "hash": "f5b58cbf70f6ed728b2f83179e09ec26ce31d25655841c5d1bf7c22983c8becc",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/News.aspx?n=1564&sms=11479": {
+    "hash": "7a92d08c22c8429b30568c58ff4ccf9d7e8ef7feade926eae671990e7217ec87",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/cl.aspx?n=1386": {
+    "hash": "8c6e8c259a7e1a150e31e8789039dc9d973193f3c548d12e405242462a91f6e2",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/cp.aspx?n=1387": {
+    "hash": "0ead5ecd6a297dd602e7a6b4908d32d40db7b864dc6e3b71ffab8c49ff282be4",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/cp.aspx?n=1388": {
+    "hash": "0dc3c875611599a1162ce0cb1be13371652fb8ed97c30efc494720385d52f1b7",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/cp.aspx?n=1390": {
+    "hash": "039a278c228d61550ee6ae079e09807d1a74df01d718f127ec5f66866ea4fd01",
+    "at": "2026-07-13"
+  },
+  "ntmofa-zhanlan-zhengjian|https://www.ntmofa.gov.tw/cp.aspx?n=1391": {
+    "hash": "f0c0b6aa62eb3d3a1bb55daed1b33416f13352019554812c2da845143d29c715",
+    "at": "2026-07-13"
+  },
+  "clab-news": {
+    "hash": "8fd4e041131e6ee24764d182e4142a38d21a478663866ba774a8748062ceac9f",
+    "at": "2026-07-13"
+  },
+  "clab-news|https://clab.org.tw/events/r201_20251101/": {
+    "hash": "4ae35c8a088a2d8250dffd7f75c0441e3fe1f14c95521c7686018a7420c1c089",
+    "at": "2026-07-13"
+  },
+  "clab-news|https://clab.org.tw/events/2025-diversonics-forum/": {
+    "hash": "77272a0eef3c90ffa527461ee1b9b46227cd9d29efa48024e6a29f23ab7b004f",
+    "at": "2026-07-13"
+  },
+  "clab-news|https://clab.org.tw/news/0711-typhoon-notice/": {
+    "hash": "7ac646e58c9477a95ac25449646f90a75918db1deb105b834ada363f651312c7",
+    "at": "2026-07-13"
+  },
+  "clab-news|https://clab.org.tw/news/0710-typhoon-notice/": {
+    "hash": "888af732f32cef9ef74292bda9333d84c5808588e063b179abc5b44d4261329f",
+    "at": "2026-07-13"
+  },
+  "clab-news|https://clab.org.tw/news/2026-animation-new-talent/": {
+    "hash": "5694ccb92cf0b31945cba5d01e0529d28cba5749a06ebfb4c1251e6939df7f0b",
+    "at": "2026-07-13"
+  },
+  "kmfa-zuixin-xunxi": {
+    "hash": "2352e5b9bdea8dd7da90b8d78b023e87a55b920adb8331b60711a62a0687717a",
+    "at": "2026-07-13"
+  },
+  "kmfa-zuixin-xunxi|https://www.kmfa.gov.tw/FileUploadCategoryListC005400.aspx?CategoryID=01ffee04-cdf9-457b-8421-d13a3c19222a": {
+    "hash": "ba9a1cf96a536c05ac4e0b1d4637992c8d4a5a2dd7d6c4e4d4f2d9d9a88e3d6c",
+    "at": "2026-07-13"
+  },
+  "kmfa-zuixin-xunxi|https://www.kmfa.gov.tw/ActivitiesDetailC005100.aspx?Cond=38bcad04-bcfb-4aa5-80d0-7277bd6e4b70": {
+    "hash": "cdfab42b1c17becab91856d22b974f91a7a22a02e00465eafa375adedcf67182",
+    "at": "2026-07-13"
+  },
+  "ncaf-news": {
+    "hash": "e1a059e46b0ca4a6d1a9456fa64d34c006a1071f33c04cc056e0dc21703cb76e",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/art_future.html?sid=1": {
+    "hash": "9dc09a943059cba969e9862f3e8de5453b9f1a3f1da0f1a2b7e14b7515521f9f",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/art_future.html?sid=2": {
+    "hash": "c5cc6174dfdf2e54e050d32ce2fd43b11c596778cb4e7430e1cad7600552bb94",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=858": {
+    "hash": "bcef545e29054091a336342449104940df8affbd230e06e114475c10e53837e3",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=857": {
+    "hash": "4486cde35cc670babeb02a2c6d7c8b20189ffa74bedc632d7069c4a8fa47179e",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=855": {
+    "hash": "ebb7cd674ae678f253e7af1b95647e5e88464496895406d424206cdd1bd799b5",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=853": {
+    "hash": "ee4f9e1451bf455f7d08031e835ea84a77a236f9864e34a871ed8aa13d3d77fe",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=856": {
+    "hash": "3e9a1069af8ab2692ee57acb5d8454aad0a62ab4abd1162e64aaea28e6869b9e",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=854": {
+    "hash": "45b379a7caaaa9ca760a3021631aa6211b83dfdaab91abb4d5c019113e91623f",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=852": {
+    "hash": "861a753b6bea07321a67e270dbab57d6061c1aead2dd0551c166a2046b8a6d80",
+    "at": "2026-07-13"
+  },
+  "ncaf-news|https://www.ncafroc.org.tw/news_detail.html?sid=851": {
+    "hash": "b65beabf31562b4aee56a73c455a00f8f2e6ff03661019c017a639657322842b",
+    "at": "2026-07-13"
+  },
+  "tfam-news": {
+    "hash": "106d8aa1f86c94c2949fe6a0512f4bfdfeddd4d254958be0811d8e347b32d508",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=230": {
+    "hash": "4e10b4e7a60a4a11be0999424efaa91fbabe0f0f0af7676e65e8e5eb5ca33b2c",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=63": {
+    "hash": "9215107933ba30049e99b0f9b851d0c81f2155bd345f5ec03207c818357e9eff",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=64": {
+    "hash": "c3a84979fbdd81c4c7f35de582dcee3b201ea775b49f53d06f235dee8fa04b8d",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=69": {
+    "hash": "f011f5650aeca869fea91bc0100c43065b44e4f372a83716b4755a5636dfa737",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=68": {
+    "hash": "812e9412b751b593d67e0d14a9c13814be06f6c63ef1a6c27052d61bdc4a78aa",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=276": {
+    "hash": "e4ca8e4ffd7fd8e55e3cadcfc0f51f250e854020fa5fa2d391c5d90509b357ca",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Common/editor.aspx?id=303": {
+    "hash": "db77ac97a4b00bb023e04c3e4bef9ac64da5b81b4dc968a02fcf993d3d0e0dc0",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Exhibition/ExhibitionTheme.aspx?id=4": {
+    "hash": "4d96175b743d334bd1d25b74e6f90649b77cc03e51aa1b0b815bd484400cdab2",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Exhibition/ExhibitionTheme.aspx?id=3": {
+    "hash": "e61e9955d8a411aa46b6ebcc025d1499105f2f900e3b598068bbd26ea9df6755",
+    "at": "2026-07-13"
+  },
+  "tfam-news|https://www.tfam.museum/Exhibition/ExhibitionTheme.aspx?id=5": {
+    "hash": "3819763e14033fa040adfacc14e18c331b93f18d952bf598f2a46185a2455fa1",
+    "at": "2026-07-13"
+  },
+  "moca-taipei-info": {
+    "hash": "5f1199bb8108294739550b347c0a47518ae8cd443290f315995784dc1f85f69c",
+    "at": "2026-07-13"
+  },
+  "icm-news": {
+    "hash": "9937d1a2ea8e7533cff59214692b6ed5fa0b6aafa310f2a83a09ca3d07032ec2",
+    "at": "2026-07-13"
+  },
+  "icm-news|https://www.icm.gov.mo/cn/CallForFAM36": {
+    "hash": "83db5b6b4df572af89cbca5fe679a54ef20f6e42e893df1373fe89e0634439f1",
+    "at": "2026-07-13"
+  },
+  "icm-news|https://www.icm.gov.mo/cn/CallForFringe2024": {
+    "hash": "d48319d4e3b6de4de8763f9e6ad960b63d3cc31b083adeac2fe8950320fa16e1",
+    "at": "2026-07-13"
+  },
+  "icm-news|https://www.icm.gov.mo/mcrecipes/": {
+    "hash": "9c97ca0913bc9acc825291e6a1bbb7b8d1c6610c0cfcff8fbd61443bc52af62b",
+    "at": "2026-07-13"
+  },
+  "fdc-activity": {
+    "hash": "7bdc0d986fb796191237c1a14134b23812a1205647109b4b2592158637bb67ad",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special": {
+    "hash": "c226303776c1779d0b823c2a9f7bee06ee40e211638daadb6c91b4c01dcb30f4",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/fund_art": {
+    "hash": "c67c6d5b78182736a3f3e6f31916644be88965035ddfb11099fd8b8a690828c2",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/fund_heritage": {
+    "hash": "15cfcbb505a51d93ffabfcea67178d9679d85deeda65e9c98c026eb9680da7b8",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=430": {
+    "hash": "8422b5209e2846cda5590db27747efc576bd675675d4c756d0b12794440df284",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/267?id=435": {
+    "hash": "25aea5c9d8e5f3afb901fc49e75588a969f9b42bdc1839a273dc71c86cde38c0",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=374": {
+    "hash": "b1e71cf86416e31b2174cf80c8b80398cb17f2c3a9a6f6421d112c381f081ff1",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=321": {
+    "hash": "3ac7bf905ff7d1ee56423d943f012cfa4c8eb1db8824026404117cecc36e36dd",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=319": {
+    "hash": "546a04a4c232dc0f55dcf4e730ac37f76545172cafc3a907b46328ccd8110609",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/267?id=378": {
+    "hash": "27f348c0a403ed31757901a5e5c2e44f5e19ba728ce6bf6ab8287096fa2de064",
+    "at": "2026-07-13"
+  },
+  "fdc-activity|https://www.fdc.gov.mo/zh-hant/funding/special/267?id=326": {
+    "hash": "4b2bcc18aa38416ea1aff055cac18690548d602faa517369ec1b3255cd350a32",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list": {
+    "hash": "8e79bbd125d7a039e96e66cc9b19b5506438804f619afdb1fe009489b20485d9",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special": {
+    "hash": "c226303776c1779d0b823c2a9f7bee06ee40e211638daadb6c91b4c01dcb30f4",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/fund_art": {
+    "hash": "c67c6d5b78182736a3f3e6f31916644be88965035ddfb11099fd8b8a690828c2",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/fund_heritage": {
+    "hash": "15cfcbb505a51d93ffabfcea67178d9679d85deeda65e9c98c026eb9680da7b8",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=430": {
+    "hash": "8422b5209e2846cda5590db27747efc576bd675675d4c756d0b12794440df284",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/267?id=435": {
+    "hash": "25aea5c9d8e5f3afb901fc49e75588a969f9b42bdc1839a273dc71c86cde38c0",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=374": {
+    "hash": "b1e71cf86416e31b2174cf80c8b80398cb17f2c3a9a6f6421d112c381f081ff1",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=321": {
+    "hash": "3ac7bf905ff7d1ee56423d943f012cfa4c8eb1db8824026404117cecc36e36dd",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/271?id=319": {
+    "hash": "546a04a4c232dc0f55dcf4e730ac37f76545172cafc3a907b46328ccd8110609",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/267?id=378": {
+    "hash": "27f348c0a403ed31757901a5e5c2e44f5e19ba728ce6bf6ab8287096fa2de064",
+    "at": "2026-07-13"
+  },
+  "fdc-fund-list|https://www.fdc.gov.mo/zh-hant/funding/special/267?id=326": {
+    "hash": "4b2bcc18aa38416ea1aff055cac18690548d602faa517369ec1b3255cd350a32",
+    "at": "2026-07-13"
   }
 }

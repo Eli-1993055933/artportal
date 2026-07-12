@@ -1,70 +1,77 @@
 {
-  "generated_at": "2026-07-11",
-  "count": 11,
+  "generated_at": "2026-07-13",
+  "count": 23,
   "records": [
     {
       "_pending_reasons": [
         "有 evidence 未通过子串校验"
       ],
-      "id": "chinaresidencies-directory-ny20-国际艺术家驻留项目",
-      "category": "residency",
-      "title_zh": "NY20+ 国际艺术家驻留项目",
-      "title_en": "NY20+ International Artist Residency Program",
-      "org_zh": "NY20+",
-      "city_zh": "成都",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "常年接受申请",
+      "id": "safa-synr-tzgg-2025米兰理工大学设计学院poli-design学院夏令营项目",
+      "category": "workshop",
+      "title_zh": "2025米兰理工大学设计学院POLI.design学院夏令营项目",
+      "title_en": null,
+      "org_zh": "上海大学上海美术学院",
+      "city_zh": "米兰",
+      "country_zh": "意大利",
+      "deadline": "2025-04-25",
+      "deadline_note": "",
       "apply_fee": {
         "free": null,
         "amount": null,
         "currency": null
       },
       "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
+        "required": true,
+        "amount": 2000,
+        "currency": "EUR"
       },
       "funding": {
         "stipend": null,
-        "housing": true,
-        "travel": false
+        "housing": null,
+        "travel": null
       },
       "eligibility": {
-        "students_ok": true,
+        "students_ok": null,
         "age_limit": null,
         "nationality": null
       },
       "disciplines": [
-        "雕塑",
-        "装置",
-        "街头艺术",
-        "涂鸦",
-        "设计"
+        "产品设计",
+        "艺术与科技",
+        "数字媒体艺术",
+        "视觉传达设计",
+        "环境设计",
+        "工艺美术",
+        "艺术设计学",
+        "建筑学",
+        "城乡规划",
+        "城市设计"
       ],
-      "summary_zh": "NY20+位于四川成都，提供免费驻留，包括食宿和创作费用，艺术家仅需自理交通。招募全球艺术家、设计师、学生等，不限艺术范畴，设有雕塑装置、涂鸦、女性艺术等专项项目。",
-      "url": "https://www.chinaresidencies.com/residencies/ny20",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
+      "summary_zh": "上海美术学院与米兰理工大学POLI.design合作举办2025年夏令营，主题为文化遗产与交互设计，为期2周（7月14-25日），面向产品设计等专业本科生及研究生，学费€2000，需于4月25日前提交申请表。",
+      "url": "https://safa.shu.edu.cn/info/1122/16870.htm",
+      "source_url": "https://safa.shu.edu.cn/synr/tzgg.htm",
+      "domain": "safa.shu.edu.cn",
+      "org_type": "official",
       "trust": "pending",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://safa.shu.edu.cn/img/sjContent.png",
+      "cover_source": "safa.shu.edu.cn"
     },
     {
       "_pending_reasons": [
         "有 evidence 未通过子串校验"
       ],
-      "id": "chinaresidencies-directory-plan8t-open-call-for-2021-summer-artist-",
-      "category": "residency",
-      "title_zh": "PLAN8T Open Call for 2021 Summer Artist-In-Residence",
-      "title_en": "PLAN8T Open Call for 2021 Summer Artist-In-Residence",
-      "org_zh": "P8星球与远大芯建",
-      "city_zh": "长沙",
+      "id": "gxau-tzgg-2026第十五届中国-东盟-南宁-音乐周音乐论文征集评选",
+      "category": "award",
+      "title_zh": "2026第十五届中国—东盟（南宁）音乐周音乐论文征集评选",
+      "title_en": null,
+      "org_zh": "广西艺术学院",
+      "city_zh": "南宁",
       "country_zh": "中国",
-      "deadline": "2021-07-12",
+      "deadline": "2026-09-10",
       "deadline_note": "",
       "apply_fee": {
         "free": null,
@@ -87,189 +94,88 @@
         "nationality": null
       },
       "disciplines": [
-        "声音艺术"
+        "音乐评论",
+        "作曲技术理论",
+        "音乐史学",
+        "民族音乐学",
+        "音乐美学",
+        "音乐表演研究"
       ],
-      "summary_zh": "P8星球与远大芯建联合举办2021夏季艺术驻留，主题为“隐形的声音”，招募使用声音作为艺术实践的艺术家，线上和线下各3-4位，提供差旅补贴、住宿、创作空间及2000元创作经费，驻留作品将在MoW無用博物馆展出。",
-      "url": "https://www.chinaresidencies.com/residencies/plan8t-open-call-for-2021-summer-artist-in-residence",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
+      "summary_zh": "广西艺术学院主办2026第十五届中国—东盟（南宁）音乐周音乐论文征集评选，面向全球学者征集音乐评论、作曲技术理论、音乐史学等多学科论文，每人限投一篇，截止2026年9月10日，优秀论文将获证书并推荐至核心期刊发表。",
+      "url": "https://xxgk.gxau.edu.cn/tzgg/content_315371",
+      "source_url": "https://xxgk.gxau.edu.cn/tzgg",
+      "domain": "gxau.edu.cn",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "gxau-tzgg-2025第十四届中国-东盟-南宁-音乐周音乐论文征集评选",
+      "category": "award",
+      "title_zh": "2025第十四届中国—东盟（南宁）音乐周音乐论文征集评选",
+      "title_en": null,
+      "org_zh": "广西艺术学院",
+      "city_zh": "南宁",
+      "country_zh": "中国",
+      "deadline": "2025-09-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "音乐学",
+        "作曲技术理论",
+        "音乐史学",
+        "民族音乐学",
+        "音乐美学"
+      ],
+      "summary_zh": "广西艺术学院主办2025第十四届中国—东盟（南宁）音乐周音乐论文征集评选，面向各学科领域研究成果，要求中文撰写、未发表，每人限投一篇，截止2025年9月10日，优秀论文将颁发证书并推荐至核心期刊发表。",
+      "url": "https://xxgk.gxau.edu.cn/tzgg/content_310142",
+      "source_url": "https://xxgk.gxau.edu.cn/tzgg",
+      "domain": "gxau.edu.cn",
+      "org_type": "official",
       "trust": "pending",
       "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
     },
     {
       "_pending_reasons": [
-        "缺截止日期且非常年"
+        "有 evidence 未通过子串校验"
       ],
-      "id": "chinaresidencies-directory-鹿栖驻地计划",
-      "category": "residency",
-      "title_zh": "鹿栖驻地计划",
-      "title_en": "Lucitopia Residency Program",
-      "org_zh": "厦门鹿栖文化有限公司",
-      "city_zh": "抚州市",
+      "id": "gxau-tzgg-2025第十四届中国-东盟-南宁-音乐周音乐作品征集评选",
+      "category": "opencall",
+      "title_zh": "2025第十四届中国—东盟（南宁）音乐周音乐作品征集评选",
+      "title_en": null,
+      "org_zh": "广西艺术学院",
+      "city_zh": "南宁",
       "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "全年开放申请",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": true,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": "25-55",
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "影像",
-        "声音",
-        "行为",
-        "装置",
-        "跨媒体",
-        "建筑",
-        "物件",
-        "时尚",
-        "食物",
-        "自然",
-        "生物",
-        "农业",
-        "科技",
-        "人文"
-      ],
-      "summary_zh": "鹿栖驻地计划由厦门鹿栖文化有限公司出品，C-PLATFORM和MEXDIA LAB共同策划，GALA特别合作。欢迎跨学科、跨媒介实践者，年龄建议25-55岁。全年开放申请，2019年共5期，每期2-4人，为期两个月。提供驻地资助2000-20000元。",
-      "url": "https://www.chinaresidencies.com/residencies/lucitopia-residency-program",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
-      "trust": "pending",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
-    },
-    {
-      "_pending_reasons": [
-        "缺截止日期且非常年"
-      ],
-      "id": "chinaresidencies-directory-三影堂厦门摄影艺术中心驻留项目",
-      "category": "residency",
-      "title_zh": "三影堂厦门摄影艺术中心驻留项目",
-      "title_en": "Three Shadows Xiamen Photography Art Centre Artist-in-Residence Program",
-      "org_zh": "三影堂厦门摄影艺术中心",
-      "city_zh": "厦门",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "Residence is available all year except the Spring Festival.",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": 250,
-        "currency": "RMB"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "摄影",
-        "其他媒介"
-      ],
-      "summary_zh": "三影堂厦门摄影艺术中心提供驻留项目，主要面向摄影师，也欢迎其他媒介艺术家、研究者和策展人。设有四个房间，每间每天250元，包含生活空间、工作空间、项目协助和活动支持。全年可申请，春节除外。",
-      "url": "https://www.chinaresidencies.com/residencies/three-shadows-xiamen-photography-art-centre-san-ying-tang-sha-men-she-ying-yi-zhu-zhong-xin",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
-      "trust": "pending",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
-    },
-    {
-      "_pending_reasons": [
-        "缺截止日期且非常年"
-      ],
-      "id": "chinaresidencies-directory-桃花潭艺术家驻留",
-      "category": "residency",
-      "title_zh": "桃花潭艺术家驻留",
-      "title_en": "Tao Hua Han Artist Retreat",
-      "org_zh": "Novak Graphics Inc.",
-      "city_zh": "宣城市",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "原文未提及申请截止日期",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": false,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": true,
-        "travel": false
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "版画",
-        "绘画"
-      ],
-      "summary_zh": "Novak Graphics Inc. 在安徽桃花潭运营的国际版画工作室与艺术家驻留项目，强调文化交流。无申请费，入选艺术家仅需承担往返上海浦东机场的交通费，组织方提供食宿、画材及中国境内交通。驻留结束举办展览并出版画册。",
-      "url": "https://www.chinaresidencies.com/residencies/tao-hua-han-artist-retreat",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
-      "trust": "pending",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
-    },
-    {
-      "_pending_reasons": [
-        "缺截止日期且非常年"
-      ],
-      "id": "chinaresidencies-directory-a4国际驻留项目",
-      "category": "residency",
-      "title_zh": "A4国际驻留项目",
-      "title_en": "A4 International Residency Program",
-      "org_zh": "A4驻留艺术中心",
-      "city_zh": "成都",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "原文未提及申请截止日期",
+      "deadline": "2025-07-10",
+      "deadline_note": "",
       "apply_fee": {
         "free": null,
         "amount": null,
@@ -282,55 +188,8 @@
       },
       "funding": {
         "stipend": null,
-        "housing": true,
-        "travel": true
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "跨媒介"
-      ],
-      "summary_zh": "A4国际驻留项目面向所有领域创作者开放，提供8周驻留，支持往返机票、住宿、工作室、材料费及超级代理系统，鼓励跨学科合作与社区互动。",
-      "url": "https://www.chinaresidencies.com/residencies/a4-residency-art-center",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
-      "trust": "pending",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
-    },
-    {
-      "_pending_reasons": [
-        "缺截止日期且非常年"
-      ],
-      "id": "chinaresidencies-directory-acentricspace艺术家驻地计划",
-      "category": "residency",
-      "title_zh": "ACENTRICSPACE艺术家驻地计划",
-      "title_en": "ACENTRICSPACE Artist in Residence",
-      "org_zh": "ACENTRICSPACE",
-      "city_zh": "上海",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "全年开放申请",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": 7700,
-        "currency": "CNY"
-      },
-      "funding": {
-        "stipend": false,
-        "housing": false,
-        "travel": false
+        "housing": null,
+        "travel": null
       },
       "eligibility": {
         "students_ok": true,
@@ -338,32 +197,383 @@
         "nationality": null
       },
       "disciplines": [
-        "当代艺术"
+        "音乐"
       ],
-      "summary_zh": "ACENTRICSPACE艺术家驻地计划全年开放申请，面向所有当代艺术家，提供工作室、住宿和展览空间，驻地费用为每位艺术家每月7700元，艺术家需自行承担交通、餐饮、材料等费用。",
-      "url": "https://www.chinaresidencies.com/residencies/acentricspace",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
+      "summary_zh": "面向广西艺术学院全体教职工征集管弦乐、民族管弦乐、声乐、室内乐等音乐作品，要求近两年创作且未在音乐周展演过，截止2025年7月10日。",
+      "url": "https://xxgk.gxau.edu.cn/tzgg/content_310143",
+      "source_url": "https://xxgk.gxau.edu.cn/tzgg",
+      "domain": "gxau.edu.cn",
+      "org_type": "official",
       "trust": "pending",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "ynart-tzgg-国家艺术基金2024年度艺术人才培训资助项目-西部地区民族题材壁画创作人才培训-",
+      "category": "opencall",
+      "title_zh": "国家艺术基金2024年度艺术人才培训资助项目《西部地区民族题材壁画创作人才培训》招生简章",
+      "title_en": null,
+      "org_zh": "云南艺术学院",
+      "city_zh": "昆明",
+      "country_zh": "中国",
+      "deadline": "2024-05-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": 45,
+        "nationality": null
+      },
+      "disciplines": [
+        "壁画"
+      ],
+      "summary_zh": "国家艺术基金资助，面向全国招收30名45岁以下青年艺术人才，培训周期2024年7月8日至12月31日，集中授课45天，培训期间往返交通、食宿、学习费用由项目主体承担。",
+      "url": "https://www.ynart.edu.cn/info/1041/42951.htm",
+      "source_url": "https://www.ynart.edu.cn/index/tzgg/25.htm",
+      "domain": "ynart.edu.cn",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.ynart.edu.cn/images/haiabo-06.jpg",
+      "cover_source": "ynart.edu.cn"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "jsmsg-tzgg-悲鸿风度-第三届油画双年展",
+      "category": "opencall",
+      "title_zh": "悲鸿风度·第三届油画双年展",
+      "title_en": null,
+      "org_zh": "中国美术家协会、江苏省文化和旅游厅",
+      "city_zh": "南京",
+      "country_zh": "中国",
+      "deadline": "2026-06-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "油画"
+      ],
+      "summary_zh": "悲鸿风度·第三届油画双年展面向全国征集油画作品，要求弘扬社会主义核心价值观，作品装框后尺寸不超过240×200cm，每人限投1件，通过中国美协线上系统投稿，截止2026年6月20日。",
+      "url": "https://www.jsmsg.com/news/detail.aspx?Id=1471&mtt=3",
+      "source_url": "https://www.jsmsg.com/news/news1.aspx",
+      "domain": "jsmsg.com",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.jsmsg.com/news/images/cc.png",
+      "cover_source": "jsmsg.com"
     },
     {
       "_pending_reasons": [
         "缺截止日期且非常年"
       ],
-      "id": "chinaresidencies-directory-观澜原创版画基地",
-      "category": "residency",
-      "title_zh": "观澜原创版画基地",
-      "title_en": "Guanlan Original Printmaking Base",
-      "org_zh": "观澜原创版画基地",
+      "id": "hxnart-huodong-鸟语花香迎新春-国画工作坊第二期",
+      "category": "workshop",
+      "title_zh": "鸟语花香迎新春 | 国画工作坊第二期",
+      "title_en": null,
+      "org_zh": "何香凝美术馆",
       "city_zh": "深圳",
       "country_zh": "中国",
       "deadline": null,
-      "deadline_note": "未提及截止日期",
+      "deadline_note": "招募对象：18岁以上观众（8名），先到先得，未明确截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 100,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": 18,
+        "nationality": null
+      },
+      "disciplines": [
+        "国画"
+      ],
+      "summary_zh": "何香凝美术馆举办国画工作坊，结合花鸟画新春特展，由暨南大学讲师授课，招募18岁以上观众8名，费用100元（现场签到后原路返回），馆方提供物料。",
+      "url": "http://hxnart.org.cn/cn/category/activity-list/detail!20260201",
+      "source_url": "http://hxnart.org.cn/cn/category/activity-list",
+      "domain": "hxnart.org.cn",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://hxnart-org-storage.www.comocloud.net/upload/photo_db/2019/02/18/20190218123135a4a623e6.jpg",
+      "cover_source": "hxnart.org.cn"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "hxnart-huodong-热带水果编织工作坊",
+      "category": "workshop",
+      "title_zh": "热带水果编织工作坊",
+      "title_en": null,
+      "org_zh": "何香凝美术馆",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "招募对象：18岁以上观众（8名），先到先得",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 100,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18岁以上",
+        "nationality": null
+      },
+      "disciplines": [
+        "编织"
+      ],
+      "summary_zh": "何香凝美术馆举办热带水果编织工作坊，结合展览“张荔英：此心安处”，由洪纯、周可儿授课，招募18岁以上观众8名，费用100元（现场签到后原路返回），馆方提供物料，作品由参与者留存。",
+      "url": "http://hxnart.org.cn/cn/category/activity-list/detail!20251102",
+      "source_url": "http://hxnart.org.cn/cn/category/activity-list",
+      "domain": "hxnart.org.cn",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://hxnart-org-storage.www.comocloud.net/upload/photo_db/2019/02/18/20190218123135a4a623e6.jpg",
+      "cover_source": "hxnart.org.cn"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "hxnart-huodong-刻刀下的烽火岁月-木刻版画体验工作坊",
+      "category": "workshop",
+      "title_zh": "刻刀下的烽火岁月 | 木刻版画体验工作坊",
+      "title_en": null,
+      "org_zh": "何香凝美术馆",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "招募8名，额满即止",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 100,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18岁以上",
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "何香凝美术馆举办木刻版画体验工作坊，结合“木刻记忆”展览，由讲师陈怡静指导，招募18岁以上观众8名，费用100元（现场签到后原路返回），馆方提供物料，作品由参与者留存。",
+      "url": "http://hxnart.org.cn/cn/category/activity-list/detail!20250907",
+      "source_url": "http://hxnart.org.cn/cn/category/activity-list",
+      "domain": "hxnart.org.cn",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://hxnart-org-storage.www.comocloud.net/upload/photo_db/2019/02/18/20190218123135a4a623e6.jpg",
+      "cover_source": "hxnart.org.cn"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "uabb-news-第十届深港城市-建筑双城双年展-深圳-华强北分展场全球创意征集",
+      "category": "opencall",
+      "title_zh": "第十届深港城市\\建筑双城双年展（深圳）华强北分展场全球创意征集",
+      "title_en": null,
+      "org_zh": "深港城市\\建筑双城双年展 (UABB)",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "成果提交时间：2025年5月中旬（暂定）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "建筑",
+        "景观",
+        "科技",
+        "艺术",
+        "策划"
+      ],
+      "summary_zh": "第十届深港城市\\建筑双城双年展（深圳）华强北分展场面向全球征集创意提案，主题为“未来城市×科技×艺术”，征集内容包括街道景观提升、活动策划、艺术装置设计等，鼓励跨界合作。",
+      "url": "https://www.uabb-sz.com/news/article/9cef9510c0654b7f92f38f6efffc42d9",
+      "source_url": "https://www.uabb-sz.com/news",
+      "domain": "uabb-sz.com",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://shuangnianzhan.oss-cn-shenzhen.aliyuncs.com/editor/1747366221912_%E5%B0%81%E9%9D%A2%E5%9B%BE.png",
+      "cover_source": "uabb-sz.com"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "uabb-news-第十届深港城市-建筑双城双年展-深圳-策展人征选",
+      "category": "opencall",
+      "title_zh": "第十届深港城市\\建筑双城双年展（深圳）策展人征选",
+      "title_en": null,
+      "org_zh": "深港城市\\建筑双城双年展 (UABB)",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "具体征选信息将于近期发布",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "城市规划",
+        "建筑",
+        "设计",
+        "科技",
+        "艺术"
+      ],
+      "summary_zh": "第十届深港城市\\建筑双城双年展（深圳）面向全球征选主展场策展人，主题关注科技创新与城市转型，展览拟于2024年12月开幕，主展场为河套科创中心。",
+      "url": "https://www.uabb-sz.com/news/article/1fc7d666b7ba462b853771bcee4c8fb8",
+      "source_url": "https://www.uabb-sz.com/news",
+      "domain": "uabb-sz.com",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://shuangnianzhan.oss-cn-shenzhen.aliyuncs.com/editor/1739958785162_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250219175214.png",
+      "cover_source": "uabb-sz.com"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "guanlan-biennale-2009观澜国际版画双年展",
+      "category": "award",
+      "title_zh": "2009观澜国际版画双年展",
+      "title_en": null,
+      "org_zh": "中国·观澜国际版画双年展(观澜版画基地)",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文为后记，未提及申请截止日期",
       "apply_fee": {
         "free": null,
         "amount": null,
@@ -387,39 +597,140 @@
       "disciplines": [
         "版画"
       ],
-      "summary_zh": "观澜原创版画基地位于深圳，提供版画创作驻留，设施包括工作室、基本材料、24小时工坊和技术支持，驻留期三周至三个月，艺术家需提交申请并获推荐。",
-      "url": "https://www.chinaresidencies.com/residencies/guanlan-original-printmaking-base",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
+      "summary_zh": "2009第二届观澜国际版画双年展共有70个国家和地区1604位艺术家的2804件作品参赛，最终253件入选，11件获观澜国际版画奖。展览注重学术性、艺术性和技术性，是国际版画交流平台。",
+      "url": "http://www.guanlanprints.com/h-nd-15.html",
+      "source_url": "http://www.guanlanprints.com/h-col-108.html",
+      "domain": "guanlanprints.com",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://19233756.s21i.faiusr.com/4/6/ABUIABAEGAAg8oO0iAYorOLb8gQwhAM4hAM!100x100.png",
+      "cover_source": "guanlanprints.com"
+    },
+    {
+      "_pending_reasons": [
+        "非可信来源(org_type=independent,且未标 trust_auto)"
+      ],
+      "id": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
+      "category": "award",
+      "title_zh": "2026 约翰·莫尔绘画奖（中国）",
+      "title_en": "JOHN MOORES PAINTING PRIZE (CHINA)",
+      "org_zh": "约翰·莫尔绘画奖(中国)组委会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-09-22",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 200,
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "16周岁以上",
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "面向年满16周岁、生活创作在中国境内的绘画创作者。报名参赛及作品征集时间为2026年5月22日至9月22日。需缴纳报名参赛费200元人民币。作品须为2024年后完成的原创绘画，可悬挂。",
+      "url": "http://www.johnmooreschina.com/painting-prize/terms-and-conditions",
+      "source_url": "http://www.johnmooreschina.com/painting-prize/terms-and-conditions",
+      "domain": "johnmooreschina.com",
       "org_type": "independent",
       "trust": "pending",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://www.johnmooreschina.com/assets/web/cn/images/all/foot.jpg",
+      "cover_source": "johnmooreschina.com"
     },
     {
       "_pending_reasons": [
-        "缺截止日期且非常年"
+        "非可信来源(org_type=independent,且未标 trust_auto)"
       ],
-      "id": "chinaresidencies-directory-乐天陶社景德镇驻留",
+      "id": "wangshikuo-award-2019王式廓-今日中国当代青年艺术家国际驻留项目",
       "category": "residency",
-      "title_zh": "乐天陶社景德镇驻留",
-      "title_en": "The Pottery Workshop, Jingdezhen",
-      "org_zh": "乐天陶社",
-      "city_zh": "景德镇市",
+      "title_zh": "2019王式廓——今日中国当代青年艺术家国际驻留项目",
+      "title_en": null,
+      "org_zh": "今日美术馆、王式廓艺术基金会",
+      "city_zh": "北京",
       "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "全年接受申请，但春节前后关闭一个月",
+      "deadline": "2019-05-21",
+      "deadline_note": "",
       "apply_fee": {
         "free": null,
         "amount": null,
         "currency": null
       },
       "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "30-45",
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "今日美术馆与王式廓艺术基金会联合发起，面向30-45岁、从事艺术创作十年以上的青年艺术家，通过公开征集与专家提名，最终选出两位优胜者获得美国ISCP驻留名额及费用资助（每人约10万元）。",
+      "url": "http://www.wangshikuofoundation.org.cn/ourproject/award",
+      "source_url": "http://www.wangshikuofoundation.org.cn/ourproject/award",
+      "domain": "wangshikuofoundation.org.cn",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://media.wangshikuofoundation.org.cn//site/public/images/closeNav.png",
+      "cover_source": "wangshikuofoundation.org.cn"
+    },
+    {
+      "_pending_reasons": [
+        "非可信来源(org_type=independent,且未标 trust_auto)",
+        "缺截止日期且非常年"
+      ],
+      "id": "iprojectspace-residency-i-project-space-驻留项目",
+      "category": "residency",
+      "title_zh": "I: project space 驻留项目",
+      "title_en": null,
+      "org_zh": "I: project space",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "Applications are accepted through nine to twelve months in advance. However, feel free to inquire about our availability at any time.",
+      "apply_fee": {
+        "free": false,
+        "amount": 25,
+        "currency": "EUR"
+      },
+      "participation_fee": {
         "required": true,
-        "amount": 2600,
-        "currency": "RMB"
+        "amount": null,
+        "currency": null
       },
       "funding": {
         "stipend": null,
@@ -432,36 +743,91 @@
         "nationality": null
       },
       "disciplines": [
-        "陶瓷"
+        "当代艺术"
       ],
-      "summary_zh": "乐天陶社景德镇驻留项目位于雕塑瓷厂内，提供工作室、住宿、图书馆等设施。驻留费2600元/周，时长灵活，全年开放（春节前后关闭一个月）。欢迎各水平艺术家使用景德镇材料与工艺进行创作。",
-      "url": "https://www.chinaresidencies.com/residencies/the-pottery-workshop-jingdezhen",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
+      "summary_zh": "I: project space 是一个非商业性当代艺术空间，为年轻艺术家提供驻留机会。驻留时长2-3个月，需提交简历、作品集和项目提案，并支付25欧元申请费。入选艺术家需支付月费，可申请资助。",
+      "url": "https://www.yi-projectspace.org/residencyapply/view",
+      "source_url": "https://www.yi-projectspace.org/residencyapply/view",
+      "domain": "yi-projectspace.org",
       "org_type": "independent",
       "trust": "pending",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
     },
     {
       "_pending_reasons": [
-        "有 evidence 未通过子串校验"
+        "非可信来源(org_type=independent,且未标 trust_auto)",
+        "缺截止日期且非常年"
       ],
-      "id": "chinaresidencies-directory-swatch艺术和平酒店艺术家驻留项目",
+      "id": "videotage-programmes-ecofutures數碼駐留計劃",
       "category": "residency",
-      "title_zh": "Swatch艺术和平酒店艺术家驻留项目",
-      "title_en": "The Swatch Art Peace Hotel Artist Residency Program",
-      "org_zh": "Swatch集团",
-      "city_zh": "上海",
-      "country_zh": "中国",
+      "title_zh": "EcoFutures數碼駐留計劃",
+      "title_en": "EcoFutures Digital Residency",
+      "org_zh": "錄映太奇",
+      "city_zh": "香港",
+      "country_zh": "香港",
       "deadline": null,
-      "deadline_note": "常年接受申请",
+      "deadline_note": "原文未提及截止日期",
       "apply_fee": {
-        "free": false,
-        "amount": 30,
-        "currency": "CHF"
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计",
+        "美术",
+        "摄影",
+        "电影",
+        "数字艺术",
+        "策展"
+      ],
+      "summary_zh": "錄映太奇與倫敦藝術大學合辦的線上駐留計劃，為期六週，探索數碼媒體、環保意識與情感表達。歡迎10-15位來自設計、美術、攝影、電影、數位藝術與策展領域的UAL學生參與，包括工作坊和數碼刊物創作。",
+      "url": "https://www.videotage.org.hk/programme/ecofutures-digital-residency",
+      "source_url": "https://www.videotage.org.hk/programmes",
+      "domain": "www.videotage.org.hk",
+      "org_type": "independent",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.videotage.org.hk/_next/image?url=https%3A%2F%2Fcdn.videotage.org.hk%2Fwp-content%2Fuploads%2F2025%2F02%2F22013236%2FecoFutures_final-03-1536x865.png&amp;w=3840&amp;q=75",
+      "cover_source": "www.videotage.org.hk"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "clab-news-沒有光的世界巴洛克-微生物影音創作工作坊",
+      "category": "workshop",
+      "title_zh": "✦ 沒有光的世界巴洛克 ✦ 微生物影音創作工作坊",
+      "title_en": null,
+      "org_zh": "臺灣當代文化實驗場 C-LAB",
+      "city_zh": "台北",
+      "country_zh": "台灣",
+      "deadline": null,
+      "deadline_note": "需事先線上報名",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
       },
       "participation_fee": {
         "required": null,
@@ -479,52 +845,96 @@
         "nationality": null
       },
       "disciplines": [
-        "摄影",
-        "音乐",
-        "电影制作",
-        "写作",
-        "舞蹈",
-        "绘画",
-        "观念艺术"
+        "影像",
+        "跨媒介"
       ],
-      "summary_zh": "Swatch艺术和平酒店驻留项目位于上海外滩，为艺术家提供3-6个月的住宿和工作空间，涵盖往返机票、住宿、早餐等费用，无津贴，需缴纳30瑞士法郎申请费。",
-      "url": "https://www.chinaresidencies.com/residencies/the-swatch-art-peace-hotel-artist-residency-program",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
+      "summary_zh": "工作坊以微生物影像聯想為核心，參與者透過顯微鏡觀察並拍攝微生物活動影像，結合自身日常影像素材進行拼貼剪輯，創作約一分鐘短片，可選擇於11/16展演中呈現。",
+      "url": "https://clab.org.tw/events/r201_20251101/",
+      "source_url": "https://clab.org.tw/news/",
+      "domain": "clab.org.tw",
+      "org_type": "official",
       "trust": "pending",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://clab.org.tw/wp-content/uploads/2025/10/R201_1141101_03-scaled.jpg",
+      "cover_source": "clab.org.tw"
     },
     {
       "_pending_reasons": [
-        "缺截止日期且非常年"
+        "有 evidence 未通过子串校验"
       ],
-      "id": "chinaresidencies-directory-中间美术馆艺术驻留项目",
-      "category": "residency",
-      "title_zh": "中间美术馆艺术驻留项目",
-      "title_en": "Inside-Out Art Museum Residency",
-      "org_zh": "北京中间美术馆",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "建议在驻留开始日期前3个月提交申请",
+      "id": "ncaf-news-2026年度第四期國際文化交流項目-出國-補助",
+      "category": "opencall",
+      "title_zh": "2026年度第四期國際文化交流項目（出國）補助",
+      "title_en": null,
+      "org_zh": "國家文化藝術基金會",
+      "city_zh": null,
+      "country_zh": "台湾",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
       "apply_fee": {
-        "free": true,
+        "free": null,
         "amount": null,
         "currency": null
       },
       "participation_fee": {
-        "required": false,
+        "required": null,
         "amount": null,
         "currency": null
       },
       "funding": {
         "stipend": null,
-        "housing": true,
-        "travel": false
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "國藝會2026年度第四期國際文化交流（出國）補助，受理2026/9/1以後出國之交流計畫，線上申請截止日為2026/7/15 23:59，審查結果於2026/8/17前公布。",
+      "url": "https://www.ncafroc.org.tw/news_detail.html?sid=852",
+      "source_url": "https://www.ncafroc.org.tw/news.html",
+      "domain": "www.ncafroc.org.tw",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.ncafroc.org.tw/files/news/20260615/82448f3091e742cda8f41f6f5d08e987/82448f3091e742cda8f41f6f5d08e987.jpg",
+      "cover_source": "www.ncafroc.org.tw"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "icm-news-第三十六屆澳門藝術節-本地節目徵集計劃",
+      "category": "opencall",
+      "title_zh": "第三十六屆澳門藝術節 - 本地節目徵集計劃",
+      "title_en": null,
+      "org_zh": "澳門特別行政區政府文化局",
+      "city_zh": "澳門",
+      "country_zh": "中國",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
       },
       "eligibility": {
         "students_ok": null,
@@ -532,19 +942,221 @@
         "nationality": null
       },
       "disciplines": [
-        "跨媒介",
-        "研究型"
+        "戲劇",
+        "粵劇",
+        "舞蹈",
+        "兒童節目",
+        "多媒體表演藝術"
       ],
-      "summary_zh": "中间美术馆重启艺术驻留项目，面向国际艺术专业人士和跨学科研究者，提供4周驻留，包含住宿和工作室，不收取住宿及管理费，但艺术家需自行承担差旅、材料和生活费。",
-      "url": "https://www.chinaresidencies.com/residencies/inside-out-art-museum-residency-zhong-jian-mei-zhu-guan",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
+      "summary_zh": "第三十六屆澳門藝術節公開徵集本地節目，主題為「海上絲綢之路的文化相遇」，鼓勵以澳門為題材或具澳門特色元素的作品，包括戲劇、粵劇、舞蹈、兒童節目及多媒體表演藝術，並為《百藝看館》招募戶外合家歡演出。",
+      "url": "https://www.icm.gov.mo/cn/CallForFAM36",
+      "source_url": "https://www.icm.gov.mo/cn/news",
+      "domain": "icm.gov.mo",
+      "org_type": "official",
       "trust": "pending",
       "status": "open",
       "verified_at": null,
-      "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11"
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.icm.gov.mo/img/frame2016/TopBanner/callforfam36.jpg",
+      "cover_source": "icm.gov.mo"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "icm-news-第二十三屆澳門城市藝穗節公開徵集",
+      "category": "opencall",
+      "title_zh": "第二十三屆澳門城市藝穗節公開徵集",
+      "title_en": null,
+      "org_zh": "澳門特別行政區政府文化局",
+      "city_zh": "澳門",
+      "country_zh": "中國澳門",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "表演",
+        "策展"
+      ],
+      "summary_zh": "第二十三屆澳門城市藝穗節公開徵集節目及場地，歡迎本地藝術家、製作人、藝術工作者等提交創作方案，鼓勵多元化呈現城市特色與文化底蘊，貫徹「全城舞台，處處觀眾，人人藝術家」精神。",
+      "url": "https://www.icm.gov.mo/cn/CallForFringe2024",
+      "source_url": "https://www.icm.gov.mo/cn/news",
+      "domain": "icm.gov.mo",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.icm.gov.mo/img/frame2016/TopBanner/ICbuilding.jpg",
+      "cover_source": "icm.gov.mo"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "fdc-activity-2026年-澳門元素-影視宣發及內地電影赴葡語系國家宣發資金補助計劃",
+      "category": "opencall",
+      "title_zh": "2026年“澳門元素”影視宣發及內地電影赴葡語系國家宣發資金補助計劃",
+      "title_en": null,
+      "org_zh": "文化發展基金",
+      "city_zh": "澳門",
+      "country_zh": "澳門",
+      "deadline": null,
+      "deadline_note": "申請期共分為四輪，每輪申請期截止後基金將統一安排該段期間提交的項目申請進行評審。如本資助計劃預算使用完畢，則申請期將提早結束",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影視"
+      ],
+      "summary_zh": "文化發展基金推出2026年資助計劃，鼓勵具澳門元素的影視作品宣傳發行，及內地電影赴葡語系國家宣發。申請分四輪，補貼宣傳發行預算的60%至80%，上限50萬或25萬澳門元。",
+      "url": "https://www.fdc.gov.mo/zh-hant/funding/special/271?id=430",
+      "source_url": "https://www.fdc.gov.mo/zh-hant/about/activity",
+      "domain": "fdc.gov.mo",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://www.fdc.gov.mo/uploads/cache/funding355_546/uploads/attachment/2026-05/0b99660847a0e61efe3525fc4cc02778.jpg",
+      "cover_source": "fdc.gov.mo"
+    },
+    {
+      "_pending_reasons": [
+        "缺截止日期且非常年"
+      ],
+      "id": "fdc-activity-澳門取景-影視拍攝資金補助計劃",
+      "category": "opencall",
+      "title_zh": "“澳門取景”影視拍攝資金補助計劃",
+      "title_en": null,
+      "org_zh": "文化發展基金",
+      "city_zh": "澳門",
+      "country_zh": "澳門",
+      "deadline": null,
+      "deadline_note": "申請期共分為四輪，每輪申請期截止後基金將統一安排該段期間提交的項目申請進行評審。如本資助計劃預算使用完畢，則申請期將提早結束。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "文化發展基金推出“澳門取景”影視拍攝資金補助計劃，鼓勵外地拍攝團隊到澳門實地取景，提升本地從業人員經驗，加強宣傳澳門形象。資助範圍包括電視劇、電影、綜藝節目、紀錄片、音樂錄像及廣告片，補貼上限為200萬或50萬澳門元。",
+      "url": "https://www.fdc.gov.mo/zh-hant/funding/special/267?id=378",
+      "source_url": "https://www.fdc.gov.mo/zh-hant/about/activity",
+      "domain": "fdc.gov.mo",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://www.fdc.gov.mo/uploads/cache/funding355_546/uploads/attachment/2025-02/8abb49ebf4a4f053f4eb35cb669ce965.jpg",
+      "cover_source": "fdc.gov.mo"
+    },
+    {
+      "_pending_reasons": [
+        "有 evidence 未通过子串校验"
+      ],
+      "id": "fdc-fund-list-澳門取景-影視拍攝資金補助計劃",
+      "category": "opencall",
+      "title_zh": "“澳門取景”影視拍攝資金補助計劃",
+      "title_en": null,
+      "org_zh": "文化發展基金",
+      "city_zh": "澳門",
+      "country_zh": "澳門",
+      "deadline": "2025-11-28",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影像"
+      ],
+      "summary_zh": "文化發展基金推出“澳門取景”影視拍攝資金補助計劃，鼓勵外地團隊到澳門實地取景拍攝，提升本地從業人員經驗及宣傳澳門形象。申請分四輪，截止至2025年11月28日。資助上限200萬或50萬澳門元，涵蓋製作、交通、住宿等開支。",
+      "url": "https://www.fdc.gov.mo/zh-hant/funding/special/267?id=378",
+      "source_url": "https://www.fdc.gov.mo/zh-hant/fund-list",
+      "domain": "fdc.gov.mo",
+      "org_type": "official",
+      "trust": "pending",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://www.fdc.gov.mo/uploads/cache/funding355_546/uploads/attachment/2025-02/8abb49ebf4a4f053f4eb35cb669ce965.jpg",
+      "cover_source": "fdc.gov.mo"
     }
   ]
 }
