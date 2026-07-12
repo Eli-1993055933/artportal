@@ -170,6 +170,38 @@
   // "前往官网"实际要去的地址:优先联网校正后的官网,其次原始链接
   F.officialUrl = function (o) { return o.official_url || o.url || null; };
 
+  // —— 下届开放时间"推算" ——
+  // 只对周期明确的复发型展览(双年展=2年/三年展=3年)推算,依据真实的往届截止时间。
+  // 结果一律显式标注"推算·以官网为准",绝不当作确定信息(守反误导红线)。
+  F.cadence = function (o) {
+    var t = (o.title_zh || "") + " " + (o.title_en || "");
+    if (/三年展|triennial/i.test(t)) return 3;
+    if (/双年展|雙年展|biennial|biennale/i.test(t)) return 2;
+    return null;
+  };
+  // 返回 { year, month, cad } 或 null。以往届截止月份 + 周期滚动到今天之后的下一届。
+  F.predictNext = function (o) {
+    var cad = F.cadence(o);
+    if (!cad) return null;
+    var d = F.parseDate(o.deadline);
+    if (!d) return null;                       // 无真实参考日期则不推算
+    var today = F.today();
+    var y = d.getFullYear();
+    while (new Date(y, d.getMonth(), d.getDate()) < today) y += cad;   // 滚到今天之后
+    if (F.parseDate(o.deadline) >= today) y += cad;                    // 本届仍开放 → 推算再下一届
+    return { year: y, month: d.getMonth() + 1, cad: cad };
+  };
+  // 组装可直接显示的双语文案(自带"以官网为准"免责)
+  F.predictLabel = function (o) {
+    var p = F.predictNext(o);
+    if (!p) return null;
+    if (AP.lang === "en") {
+      return "Est. next call ~" + p.year + "-" + String(p.month).padStart(2, "0") + " · projected from past editions, verify on official site";
+    }
+    var cadTxt = p.cad === 3 ? "三年展" : "双年展";
+    return "预计下届征集:约 " + p.year + " 年 " + p.month + " 月前后 · " + cadTxt + "据往届推算,以官网为准";
+  };
+
   // 供搜索用:把一条的可搜文本拼起来
   F.searchText = function (o) {
     var parts = [o.title_zh, o.title_en, o.org_zh, o.city_zh, o.country_zh, o.summary_zh];

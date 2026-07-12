@@ -12,17 +12,24 @@
     heartFill: '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17s-6-4-6-8.2A3.3 3.3 0 0 1 10 6a3.3 3.3 0 0 1 6 2.8C16 13 10 17 10 17Z" fill="currentColor"/></svg>'
   };
 
-  function media(o) {
+  function media(o, officialUrl) {
     // 降级色块(机构中文首字 + 按条目区分的分类色)始终垫底;有封面图则叠加在上,加载失败自动移除退回色块。
     var fb = '<div class="card__fallback" style="background:' + F.fallbackColor(o) + '">' +
              '<span>' + esc(F.initial(o)) + '</span></div>';
+    var inner = fb;
     var coverUrl = F.safeUrl(o.cover);
     if (coverUrl) {
       // 图片加载成功才淡入覆盖色块;加载慢/失败则一直显示色块(不留白)。
-      return fb + '<img class="card__img" src="' + esc(coverUrl) + '" alt="" loading="lazy" ' +
+      inner = fb + '<img class="card__img" src="' + esc(coverUrl) + '" alt="" loading="lazy" ' +
              'referrerpolicy="no-referrer" onload="this.classList.add(\'is-loaded\')" onerror="this.remove()">';
     }
-    return fb;
+    // 点击封面直接跳该展览/项目官网(新窗口);无官网时保持普通色块。
+    if (officialUrl) {
+      return '<a class="card__media-link" href="' + esc(officialUrl) + '" target="_blank" rel="noopener" ' +
+             'aria-label="' + esc(AP.t("gotoSite")) + '" title="' + esc(AP.t("gotoSite")) + '">' + inner +
+             '<span class="card__media-go" aria-hidden="true">' + esc(AP.t("gotoSite")) + ' ↗</span></a>';
+    }
+    return inner;
   }
 
   function trustBadge(o) {
@@ -51,12 +58,14 @@
     var visitBtn = visitUrl
       ? '<a class="btn btn--dark" data-act="visit" href="' + esc(visitUrl) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>'
       : '<button class="btn btn--dark" type="button" disabled aria-disabled="true">' + AP.t("gotoSite") + '</button>';
+    var predLabel = F.predictLabel(o);
+    var predHtml = predLabel ? '<div class="card__predict"><span class="card__predict-ico" aria-hidden="true">◷</span>' + esc(predLabel) + '</div>' : '';
 
     var el = document.createElement("article");
     el.className = "card";
     el.setAttribute("data-id", o.id);
     el.innerHTML =
-      '<div class="card__media">' + media(o) +
+      '<div class="card__media">' + media(o, visitUrl) +
         '<div class="card__tags">' +
           '<span class="cat-tag" data-cat="' + esc(o.category) + '">' + esc(AP.tt[AP.lang].cat[o.category] || o.category) + '</span>' +
           (orgTag ? '<span class="org-tag">' + esc(orgTag) + '</span>' : '') +
@@ -71,6 +80,7 @@
           '<span>' + esc(place) + '</span>' +
         '</div>' +
         '<div class="card__deadline ' + dl.cls + '">' + esc(dl.text) + '</div>' +
+        predHtml +
         (fees || funds ? '<div class="badges">' + fees + funds + '</div>' : '') +
         summary +
         '<div class="card__srcrow">' + trustBadge(o) + srcChip + '</div>' +
@@ -155,6 +165,7 @@
         row(AP.t("dOrg"), esc(o.org_zh) || muted(AP.t("notStated"))) +
         row(AP.t("dPlace"), place ? esc(place) : muted(AP.t("notStated"))) +
         row(AP.t("dDeadline"), '<span class="' + dl.cls + '">' + esc(dl.text) + '</span>' + dnote) +
+        (F.predictLabel(o) ? row(AP.t("dPredict"), '<span class="d-predict">' + esc(F.predictLabel(o)) + '</span>') : '') +
         row(AP.t("dApplyFee"), feeVal(o.apply_fee, false)) +
         row(AP.t("dPartFee"), feeVal(o.participation_fee, true)) +
         row(AP.t("dFunding"), fundHtml) +

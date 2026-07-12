@@ -172,6 +172,10 @@ img { max-width: 100%; display: block; }
 .card__img.is-loaded { opacity: 1; }
 .card__fallback { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; }
 .card__fallback span { font-size: 40px; font-weight: 700; opacity: .9; letter-spacing: .02em; }
+/* 封面即官网入口:点封面直接新窗口打开该展览/项目官网 */
+.card__media-link { position: absolute; inset: 0; display: block; cursor: pointer; }
+.card__media-go { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 6px; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
+.card__media-link:hover .card__media-go, .card__media-link:focus-visible .card__media-go { opacity: 1; }
 .card__tags { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
 .cat-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: #fff; }
 .cat-tag[data-cat="opencall"]  { background: var(--c-opencall); }
@@ -211,6 +215,10 @@ img { max-width: 100%; display: block; }
   margin: 2px 0 0; font-size: 13px; line-height: 1.55; color: var(--ink-2);
   display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
 }
+/* 下届开放时间"推算"(仅双年展/三年展;明示据往届推算、以官网为准) */
+.card__predict { display: flex; align-items: flex-start; gap: 5px; font-size: 11.5px; line-height: 1.45; color: var(--warn); background: var(--warn-soft); border-radius: 6px; padding: 5px 8px; }
+.card__predict-ico { flex: 0 0 auto; font-size: 12px; line-height: 1.4; }
+.d-predict { color: var(--warn); font-size: 13px; }
 .card__srcrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .src-chip { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 500; white-space: nowrap; }
 .src-chip--official   { color: #2E6FA7; background: #E9F1F8; }

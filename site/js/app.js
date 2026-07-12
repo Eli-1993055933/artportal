@@ -226,6 +226,8 @@
         if (act === "copy") { e.preventDefault(); copyLink(card.getAttribute("data-id")); return; }
         if (act === "visit") { return; } // 让 <a> 默认新窗口打开
       }
+      // 点封面链接 → 让 <a> 直接新窗口打开官网,不进详情
+      if (e.target.closest(".card__media-link")) return;
       if (card) {
         // 标题是为键盘/读屏可达而设的真链接;点击时拦掉默认跳转,统一走 goDetail 以保留返回行为
         if (e.target.closest(".card__title-link")) e.preventDefault();
