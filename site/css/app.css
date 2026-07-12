@@ -10,7 +10,7 @@
   --card:          #FFFFFF;
   --ink:           #1A1A1A;   /* 正文/主按钮 */
   --ink-2:         #4A4A47;   /* 次要文字 */
-  --ink-3:         #8A8A85;   /* 弱化文字/未注明 */
+  --ink-3:         #6B6B66;   /* 弱化文字/未注明(≈4.95:1,过 WCAG AA;承载「未人工核实」等红线警示需读得清) */
   --line:          rgba(0,0,0,.06);
   --line-2:        rgba(0,0,0,.12);
 
@@ -182,6 +182,8 @@ img { max-width: 100%; display: block; }
 
 .card__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .card__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.35; text-wrap: balance; }
+.card__title-link { color: inherit; text-decoration: none; }
+.card__title-link:hover { text-decoration: underline; text-underline-offset: 2px; }
 .card__title-en { font-size: 13px; color: var(--ink-3); margin-top: 2px; font-weight: 400; }
 .card__meta { display: flex; flex-direction: column; gap: 3px; font-size: 13.5px; color: var(--ink-2); }
 .card__meta .m-org { color: var(--ink); font-weight: 500; }
@@ -206,8 +208,8 @@ img { max-width: 100%; display: block; }
 .badge--fund   { color: var(--ok); border-color: rgba(46,125,70,.30); background: var(--ok-soft); }
 
 .card__summary {
-  margin: 2px 0 0; font-size: 13px; line-height: 1.5; color: var(--ink-2);
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin: 2px 0 0; font-size: 13px; line-height: 1.55; color: var(--ink-2);
+  display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
 }
 .card__srcrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .src-chip { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 500; white-space: nowrap; }
@@ -241,7 +243,12 @@ img { max-width: 100%; display: block; }
 
 /* ---------- 页脚 ---------- */
 .sitefoot { border-top: 1px solid var(--line); background: var(--bg); }
-.sitefoot__note { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px; color: var(--ink-3); font-size: 12.5px; line-height: 1.6; }
+.sitefoot__note { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px 8px; color: var(--ink-3); font-size: 12.5px; line-height: 1.6; }
+.sitefoot__beian { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; }
+/* 备案号未填(两个 <a> 都还 hidden)时整行不占位;填入并去掉 hidden 后自动显示 */
+.sitefoot__beian:not(:has(> a:not([hidden]))) { display: none; }
+.sitefoot__beian-link { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); font-size: 12.5px; }
+.sitefoot__beian-link:hover { color: var(--ink-2); text-decoration: underline; }
 
 /* ---------- 详情:桌面右侧抽屉 ---------- */
 .detail { position: fixed; inset: 0; z-index: 60; }
@@ -263,6 +270,7 @@ img { max-width: 100%; display: block; }
 .d-cat { display: inline-flex; height: 24px; align-items: center; padding: 0 10px; border-radius: 6px; color: #fff; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
 .d-title { font-size: 22px; font-weight: 700; line-height: 1.3; margin: 0 0 4px; text-wrap: balance; }
 .d-title-en { color: var(--ink-3); font-size: 14px; }
+.d-summary { margin: 12px 0 16px; font-size: 15px; line-height: 1.65; color: var(--ink-2); }
 .d-alert { display: flex; gap: 8px; padding: 11px 13px; border-radius: var(--radius-sm); background: var(--warn-soft); color: var(--warn); font-size: 13px; line-height: 1.5; margin: 14px 0; align-items: flex-start; }
 .d-alert svg { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 1px; }
 .d-fields { display: flex; flex-direction: column; gap: 0; margin: 8px 0 20px; }
@@ -272,8 +280,11 @@ img { max-width: 100%; display: block; }
 .d-row__v .muted { color: var(--ink-3); }
 .d-actions { display: flex; gap: 10px; margin: 18px 0; }
 .d-actions .btn { flex: 1; min-height: 44px; }
-.d-report { font-size: 12.5px; color: var(--ink-3); }
+.d-report { font-size: 12.5px; color: var(--ink-3); display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
 .d-report a { color: var(--c-residency); text-decoration: underline; }
+.mail-copy { display: inline-flex; align-items: center; gap: 8px; border: none; background: transparent; padding: 0; font-size: 12.5px; color: var(--c-residency); }
+.mail-copy__addr { text-decoration: underline; text-underline-offset: 2px; }
+.mail-copy__hint { font-size: 11px; color: var(--ink-2); border: 1px solid var(--line-2); border-radius: 5px; padding: 1px 7px; text-decoration: none; }
 
 /* ---------- toast ---------- */
 .toast {

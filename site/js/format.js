@@ -116,11 +116,35 @@
   F.catColor = function (cat) {
     return { opencall: "#C0392B", residency: "#2E6FA7", award: "#C08A1E", workshop: "#6B5B95" }[cat] || "#8A8A85";
   };
-  // 降级色块首字母:优先英文域名首字母,否则机构中文首字
+  // 由字符串生成稳定哈希(用于降级色块按条目区分深浅,避免掉图后整排同色)
+  function hashOf(s) {
+    var h = 0, str = String(s || "x");
+    for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+    return h;
+  }
+  // 降级色块配色:保留分类的色相家族,但按 id 哈希微调明度/饱和度,
+  // 让掉图/无封面的卡片各不相同,而不是塌成一排同色块。
+  var CAT_HUE = { opencall: 6, residency: 207, award: 40, workshop: 260 };
+  F.fallbackColor = function (o) {
+    var hue = CAT_HUE[o && o.category];
+    if (hue == null) hue = 40;
+    var h = hashOf(o && (o.id || o.title_zh));
+    var light = 30 + (h % 15);            // 30%–44%
+    var sat = 40 + ((h >> 4) % 16);       // 40%–55%
+    return "hsl(" + hue + ", " + sat + "%, " + light + "%)";
+  };
+  // 降级色块首字:优先机构中文首字(最能区分同平台条目),其次标题,最后域名首字母
   F.initial = function (o) {
-    if (o.domain) return o.domain.charAt(0).toUpperCase();
     if (o.org_zh) return o.org_zh.charAt(0);
+    if (o.title_zh) return o.title_zh.charAt(0);
+    if (o.domain) return o.domain.charAt(0).toUpperCase();
     return "?";
+  };
+
+  // 只放行 http(s) 链接落入 href/src,挡住 javascript:/data: 等协议注入(全库唯一 XSS 缺口)
+  F.safeUrl = function (u) {
+    if (!u) return "";
+    return /^https?:\/\//i.test(String(u).trim()) ? u : "";
   };
 
   // 来源标注:这条是机构官网直采,还是转自某聚合平台。

@@ -12,6 +12,8 @@
   <meta property="og:title" content="ARTPORTAL · 全球艺术机会" />
   <meta property="og:description" content="为中国艺术家汇集全球展览征集、驻留、奖项、工作坊。真不真 · 急不急 · 给不给钱,一眼看清。" />
   <meta property="og:image" content="assets/hero.svg" />
+  <meta property="og:site_name" content="ARTPORTAL" />
+  <meta property="og:locale" content="zh_CN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#F7F6F2" />
   <link rel="stylesheet" href="css/app.css" />
@@ -31,8 +33,10 @@
           <span class="fav-text" data-i18n="myFavorites">我的收藏</span>
           <span class="fav-count" id="favCount" hidden>0</span>
         </button>
+        <!-- 「提交机会」暂未接投稿渠道:先隐藏,避免向用户暴露占位。
+             接了真实表单后,把 app.js 的 SUBMIT_FORM_URL 填上并去掉下面的 hidden。 -->
         <a class="btn btn--dark" id="submitBtn" href="#" target="_blank" rel="noopener"
-           data-i18n="submit">提交机会</a>
+           data-i18n="submit" hidden>提交机会</a>
         <button class="btn btn--ghost lang-switch" id="langBtn" type="button" aria-label="切换语言 / Switch language">中 / EN</button>
       </div>
     </div>
@@ -44,7 +48,8 @@
       <div class="searchbar">
         <svg class="searchbar__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 3a5.5 5.5 0 1 0 3.4 9.8l3.6 3.7 1.4-1.4-3.6-3.6A5.5 5.5 0 0 0 8.5 3Zm0 2a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"/></svg>
         <input type="search" id="searchInput" class="searchbar__input" autocomplete="off"
-               data-i18n-ph="searchPh" placeholder="搜索标题、机构、城市、学科…" />
+               data-i18n-ph="searchPh" data-i18n-aria="searchAria"
+               placeholder="搜索标题、机构、城市、学科…" aria-label="搜索机会" />
       </div>
 
       <!-- 主行:分类 tab -->
@@ -167,6 +172,19 @@
   <footer class="sitefoot">
     <p class="sitefoot__note" data-i18n="footer_note">
       标注「自动收录」的条目由程序从机构官网抓取,尚未经人工逐条核实。申请前请以官网信息为准。
+    </p>
+    <!-- 备案信息:大陆备案站页脚强制展示。号未下发前保持 hidden,绝不填写编造/示例号。
+         ① ICP 备案通过后:去掉 #icpLink 的 hidden,把工信部下发的号填进 <span>(如 京ICP备2026xxxxxx号-1)。
+         ② 公安联网备案(上线约30日内办)通过后:去掉 #mpsLink 的 hidden,填公安备案号;
+            并把警徽图放到 site/assets/beian-gongan.png、去掉该 <img> 的 hidden。 -->
+    <p class="sitefoot__beian" id="siteBeian">
+      <a class="sitefoot__beian-link" id="icpLink" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" hidden>
+        <span class="sitefoot__icp"><!-- 例:京ICP备2026xxxxxx号 --></span>
+      </a>
+      <a class="sitefoot__beian-link" id="mpsLink" href="https://beian.mps.gov.cn/" target="_blank" rel="noopener" hidden>
+        <img class="sitefoot__gongan" src="assets/beian-gongan.png" alt="" width="14" height="14" hidden />
+        <span class="sitefoot__mps"><!-- 例:京公网安备xxxxxxxxxxxxxx号 --></span>
+      </a>
     </p>
   </footer>
 

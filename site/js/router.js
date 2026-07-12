@@ -12,7 +12,13 @@
     parse: function () {
       var h = location.hash || "";
       var m = /^#\/o\/(.+)$/.exec(h);
-      if (m) return { name: "detail", id: decodeURIComponent(m[1]) };
+      if (m) {
+        // 坏的百分号编码(如粘贴 URL 里混入裸 %)会让 decodeURIComponent 抛 URIError,
+        // 若不拦会一路冒泡到 loadData().catch 把整页误判成「数据加载失败」。降级用原始串。
+        var id;
+        try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
+        return { name: "detail", id: id };
+      }
       return { name: "list", id: null };
     },
 

@@ -226,7 +226,11 @@
         if (act === "copy") { e.preventDefault(); copyLink(card.getAttribute("data-id")); return; }
         if (act === "visit") { return; } // 让 <a> 默认新窗口打开
       }
-      if (card) AP.router.goDetail(card.getAttribute("data-id"));
+      if (card) {
+        // 标题是为键盘/读屏可达而设的真链接;点击时拦掉默认跳转,统一走 goDetail 以保留返回行为
+        if (e.target.closest(".card__title-link")) e.preventDefault();
+        AP.router.goDetail(card.getAttribute("data-id"));
+      }
     });
 
     // 重试
@@ -241,7 +245,10 @@
     // 详情内:复制 / 收藏
     $("detailBody").addEventListener("click", function (e) {
       var actEl = e.target.closest("[data-act]");
-      if (actEl && actEl.getAttribute("data-act") === "copy") { e.preventDefault(); copyLink(actEl.getAttribute("data-id")); }
+      if (!actEl) return;
+      var act = actEl.getAttribute("data-act");
+      if (act === "copy") { e.preventDefault(); copyLink(actEl.getAttribute("data-id")); }
+      else if (act === "copyemail") { e.preventDefault(); copyText(actEl.getAttribute("data-email"), AP.t("mailCopied")); }
     });
     $("detailFav").addEventListener("click", function () {
       var r = AP.router.parse(); if (r.name !== "detail") return;
@@ -305,10 +312,13 @@
   // ---------- 复制链接 ----------
   function copyLink(id) {
     var url = location.origin + location.pathname + location.search + "#/o/" + encodeURIComponent(id);
-    var done = function () { toast(AP.t("copied")); };
+    copyText(url, AP.t("copied"));
+  }
+  function copyText(text, okMsg) {
+    var done = function () { toast(okMsg); };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(done, function () { fallbackCopy(url, done); });
-    } else { fallbackCopy(url, done); }
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+    } else { fallbackCopy(text, done); }
   }
   function fallbackCopy(text, cb) {
     var ta = document.createElement("textarea");

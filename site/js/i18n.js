@@ -25,6 +25,7 @@
       trustVerified: "已核实", trustAuto: "自动收录 · 未人工核实",
       rolling: "常年接受申请", today: "今天截止", left: "仅剩", days: "天", leftDays: "还有", expired: "已截止",
       copyLink: "复制链接", gotoSite: "前往官网", copied: "链接已复制",
+      copyEmail: "复制", mailCopied: "邮箱已复制", searchAria: "搜索机会",
       autoNotice: "本条由程序自动收录,建议点官网核对后再申请。",
       dOrg: "主办方", dPlace: "地点", dDeadline: "截止", dApplyFee: "申请费", dPartFee: "参展/入选费",
       dFunding: "资助", dEligibility: "申请资格", dDisc: "适用学科", dUrl: "官网", dSource: "信息来源", dSeen: "最后确认存在",
@@ -56,6 +57,7 @@
       trustVerified: "Verified", trustAuto: "Auto-collected · unverified",
       rolling: "Rolling / open all year", today: "Closes today", left: "", days: "days left", leftDays: "in", expired: "Closed",
       copyLink: "Copy link", gotoSite: "Official site", copied: "Link copied",
+      copyEmail: "Copy", mailCopied: "Email copied", searchAria: "Search opportunities",
       autoNotice: "This entry was auto-collected. Please verify on the official site before applying.",
       dOrg: "Organizer", dPlace: "Location", dDeadline: "Deadline", dApplyFee: "Application fee", dPartFee: "Participation fee",
       dFunding: "Funding", dEligibility: "Eligibility", dDisc: "Disciplines", dUrl: "Official site", dSource: "Source", dSeen: "Last confirmed",
@@ -84,6 +86,10 @@
     var phs = document.querySelectorAll("[data-i18n-ph]");
     for (var j = 0; j < phs.length; j++) {
       phs[j].setAttribute("placeholder", AP.t(phs[j].getAttribute("data-i18n-ph")));
+    }
+    var arias = document.querySelectorAll("[data-i18n-aria]");
+    for (var k = 0; k < arias.length; k++) {
+      arias[k].setAttribute("aria-label", AP.t(arias[k].getAttribute("data-i18n-aria")));
     }
   };
   AP.setLang = function (lang) {
