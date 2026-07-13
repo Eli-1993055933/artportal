@@ -1178,6 +1178,680 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "curl HTTP 200, 2.48s, 72902 bytes。服务器端渲染:原始HTML命中 資助x82、補助x19、申請x2;机构标识确认(文化發展基金x14、Fundo de Desenvolvimento x8、fdc.gov.mo x5)。此为全部資助/補助計劃的目录页(含視覺藝術相关的文化活動/項目資助等),每项为一个可申请机会入口。robots.txt: User-agent:* / Disallow:(空,全站允许)。与 fdc-activity 同域但为不同栏目(目录 vs 动态公告)。"
+    },
+    {
+      "id": "shcm-riversawards",
+      "org_zh": "上海音乐学院（“百川奖”国际作曲比赛）",
+      "name_zh": "“百川奖”国际作曲比赛（官方站 / 报名章程）",
+      "url": "https://www.riversawards.cn/",
+      "domain": "riversawards.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "音乐",
+      "notes": "curl HTTP 200, 52661字节；命中 报名x4、百川x14、音乐学院x3；上海音乐学院作曲指挥系主办的国际作曲比赛官方站(第15届2026-2027全球征集)。robots.txt(HTTP200): User-agent:* Disallow: 空(允许) + 仅禁/route /extend等系统目录,首页/未禁 => allow。"
+    },
+    {
+      "id": "cma-golden-bell",
+      "org_zh": "中国音乐家协会（中国音乐金钟奖）",
+      "name_zh": "中国音乐金钟奖 专栏（章程/报名通知）",
+      "url": "https://www.chnmusic.org.cn/jzj/",
+      "domain": "chnmusic.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "音乐",
+      "notes": "curl HTTP 200, 343914字节；命中 金钟奖x100、音乐家协会x78、作品x78、委约x8、章程x2、通知x12；服务端渲染的金钟奖官方专栏(中国文联/中国音协主办,声乐器乐比赛+章程报名)。/robots.txt HTTP404 => none(无限制)。"
+    },
+    {
+      "id": "ccom-campus-news",
+      "org_zh": "中央音乐学院",
+      "name_zh": "校园资讯（作品征集/委约/报名 通知列表）",
+      "url": "https://www.ccom.edu.cn/news/xyzx.htm",
+      "domain": "ccom.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "音乐",
+      "notes": "curl HTTP 200, 1638649字节；命中 中央音乐学院x2006、作品征集x13、征集x30、委约x8、招募x11、报名x45、申报x14；列表内容以服务端内嵌JSON数据岛渲染,HTML源码即含真实标题如“中国韵”原创音乐作品征集活动章程、活动报名开启等(非XHR空壳,可抓)。/robots.txt返回自定义404页 => none。"
+    },
+    {
+      "id": "tco-latest-news",
+      "org_zh": "臺北市立國樂團（TCO）",
+      "name_zh": "最新消息（徵曲/報名/藝文補助 公告）",
+      "url": "https://www.tco.gov.taipei/News.aspx?n=1F887F657E358227&sms=46FA76EB55BC2CB8",
+      "domain": "tco.gov.taipei",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "音乐",
+      "notes": "curl HTTP 200, 82997字节；命中 國樂團x21、臺北x32、音樂x13、報名x2、補助x2；臺北市政府文化局所屬公立國樂團(.gov.taipei)的最新消息列表(ASP.NET服务端渲染)。/robots.txt无有效User-agent/Disallow规则(返回站点页) => none(无限制)。"
+    },
+    {
+      "id": "hkcg-signature-events",
+      "org_zh": "香港作曲家聯會（HKCG）",
+      "name_zh": "Signature Events 重點活動（Call for Works 徵集專欄）",
+      "url": "https://www.hkcg.org/signature-events",
+      "domain": "hkcg.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "音乐",
+      "notes": "curl HTTP 200, 528897字节；命中 Call for x8/x2、Apply x14/x14、Deadline x4、Submission x2、Composers x12、Hong Kong x20、作曲家x6；1983年成立的香港作曲家專業協會官网,汇集International Rostrum of Composers/ISCM世界音乐日等徵集(call for works)。robots.txt: User-agent:* Allow:/ 仅禁 *?lightbox=,目标页无该参数 => allow。"
+    },
+    {
+      "id": "first-financing-forum",
+      "org_zh": "FIRST青年电影展",
+      "name_zh": "电影市场 · 创投会 (Financing Forum)",
+      "url": "https://www.firstfilm.org.cn/annual/financing-forum/",
+      "domain": "firstfilm.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "电影",
+      "notes": "curl HTTP200; 50070字节; 命中 创投×13/章程×3/截止×2/competition×2; 机构名 FIRST×23/firstfilm×135; robots.txt HTTP404(无robots,无限制)。属FIRST官网 annual 栏目下创投会专栏页。"
+    },
+    {
+      "id": "siff-project-opencall",
+      "org_zh": "上海国际电影节",
+      "name_zh": "SIFF PROJECT 电影项目创投 · 征集",
+      "url": "https://www.siff.com/content?aid=101260105111357777818727587516421799",
+      "domain": "siff.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "电影",
+      "notes": "curl HTTP200; 100527字节; 命中 创投×17/征集×4/章程×3; 机构名 SIFF×28/上海国际电影节×12; robots.txt HTTP404空(无限制)。官网 siff.com 创投征集启动公告页(第28届),SIFF PROJECT 官方渠道。"
+    },
+    {
+      "id": "bjiff-project-market",
+      "org_zh": "北京国际电影节",
+      "name_zh": "北京市场 · 项目创投",
+      "url": "https://www.bjiff.com/dysc/dysc/",
+      "domain": "bjiff.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "电影",
+      "notes": "curl HTTP200; 31292字节; 命中 创投×11/征集×1; 机构名 北京国际电影节×12/BJIFF; robots.txt HTTP404(无限制)。bjiff.com 电影市场(dysc)项目创投专栏/列表页。"
+    },
+    {
+      "id": "goldenhorse-fpp",
+      "org_zh": "台北金马影展",
+      "name_zh": "金马创投会议 FPP · 报名办法",
+      "url": "https://www.goldenhorse.org.tw/fpp/submission/guidelines/",
+      "domain": "goldenhorse.org.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "电影",
+      "notes": "curl HTTP200; 47770字节; 命中 创投×31/报名×44/徵選×3/申請×4/補助×1/提案×2; 机构名 金马×38/goldenhorse×130; robots.txt HTTP200空(允许)。金马影展官网 FPP 创投会议报名办法专栏页。"
+    },
+    {
+      "id": "cnex-ccdf-callforentry",
+      "org_zh": "CNEX基金会",
+      "name_zh": "CCDF 华人纪录片提案大会 · 征案",
+      "url": "https://ccdf.cnexdoc.com/zh-cn/",
+      "domain": "cnexdoc.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "电影",
+      "notes": "curl HTTP200; 126551字节; 命中 提案×61/征件×15/徵件×1; 机构名 CNEX/CCDF(密集); robots.txt HTTP200仅content-signals注释,无User-agent/Disallow(允许抓取)。纪录片(电影影像)提案征案官网。注:CNEX为跨两岸华人纪录片非营利机构,提案大会主体于台北,region暂定tw。"
+    },
+    {
+      "id": "hkiff-haf-idp",
+      "org_zh": "香港国际电影节协会 (HKIFF Industry)",
+      "name_zh": "香港亚洲电影投资会 HAF · In-Development Projects 征件",
+      "url": "https://industry.hkiff.org.hk/sc/haf/idp",
+      "domain": "hkiff.org.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "电影",
+      "notes": "curl HTTP200; 37625字节; 命中 申请×2/'calls for ...IDP submissions'/'Online Submission'; 机构名 HAF/HKIFF; robots.txt 返回HTML首页(无有效robots规则,无限制)。HAF 官网 In-Development Projects 征件专栏页,附 idp-submission-period-and-fee 子页(申请×14)。页面含部分往届存档文案。"
+    },
+    {
+      "id": "tpac-fringe",
+      "org_zh": "臺北表演藝術中心",
+      "name_zh": "臺北藝穗節",
+      "url": "https://tpac.org.taipei/festival-fringe",
+      "domain": "tpac.org.taipei",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 837KB 服务端渲染;命中必需关键词 報名×65/徵件×5/徵選×7/招募×7/申請×11/委約×1/駐村×1;机构名 臺北藝穗節×351、臺北表演藝術中心×122。robots.txt: User-agent:* Disallow:/member,本路径 /festival-fringe 允许。臺北藝穗節为TPAC每年公开徵件平台(戏剧/舞蹈/跨界)。"
+    },
+    {
+      "id": "weiwuying-news",
+      "org_zh": "衛武營國家藝術文化中心",
+      "name_zh": "最新消息(Open Call/徵選公告)",
+      "url": "https://www.npac-weiwuying.org/news",
+      "domain": "npac-weiwuying.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 344KB 服务端渲染;命中 招募×6/申請×23/報名×1;机构名 衛武營×60。robots.txt 仅含 Sitemap 行、无 Disallow(全站允许)。衛武營为国家表演艺术中心场馆,常年发布 Open Call 甄選計畫(如《眾人的搖擺》)。"
+    },
+    {
+      "id": "ccdc-wudaoqingnian",
+      "org_zh": "城市當代舞蹈團",
+      "name_zh": "舞蹈青年(專才培訓/舞者招募)",
+      "url": "https://www.ccdc.com.hk/dc/talent-development/wudaoqingnian/",
+      "domain": "ccdc.com.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "workshop",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "舞蹈",
+      "notes": "curl HTTP 200, 145KB 服务端渲染;命中 報名×3/apply×3;机构名 城市當代舞蹈團×8、CCDC×36。robots.txt: User-agent:* 仅 Disallow:/wp-admin/(本路径允许)。CCDC为香港首个全职专业当代舞团,舞蹈青年每年面向社区公开招募舞者。"
+    },
+    {
+      "id": "artsbird-news",
+      "org_zh": "中國上海國際藝術節",
+      "name_zh": "通知公告(扶青計劃委約創作/征集)",
+      "url": "https://www.artsbird.com/news",
+      "domain": "artsbird.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 344KB 服务端渲染;命中 委约×14/申报×11/通知×12/征集×1/招募×1;机构名 上海国际艺术节×67、扶持青年×7、扶青×16。robots.txt: User-Agent:* Disallow:(空=全站允许)。artsbird.com为中国上海国际艺术节官网,扶青计划面向全球青年艺术家委约/征集(舞台艺术+视觉)。"
+    },
+    {
+      "id": "dia-china-press",
+      "org_zh": "中国设计智造大奖(DIA)",
+      "name_zh": "新闻资讯 / 赛事公告(全球征集)",
+      "url": "https://www.di-award.org/zh/press.html",
+      "domain": "di-award.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "设计",
+      "notes": "HTTP 200, 33010字节; 命中 参赛x10 征集x4; 机构名 智造大奖x13 DIA x41 工业设计x3; 中国美术学院主办的国际化设计学院奖(综合/工业设计)。robots.txt 内容为空→无规则(none/allow)。/press 302 至 /zh/press.html 同机构页,是持续更新的赛事公告列表页。"
+    },
+    {
+      "id": "goldenpin-design-award",
+      "org_zh": "金点设计奖(台湾设计研究院 TDRI)",
+      "name_zh": "金點設計獎 報名/參賽辦法",
+      "url": "https://goldenpin.org.tw/goldenpin/zh-TW/participate/golden-pin-design-award",
+      "domain": "goldenpin.org.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "设计",
+      "notes": "HTTP 200, 124567字节; 命中 報名x76 參賽x48 申請x22; 机构名 金點x107 Golden Pin x15; 由台湾设计研究院(TDRI)执行的官方设计竞赛,面向量产/上市产品(综合设计)。robots.txt: User-agent:* Allow:/ (仅封 SemrushBot 等,我方UA允许)。"
+    },
+    {
+      "id": "detour-hk-pmq",
+      "org_zh": "PMQ 元創方 deTour 设计节",
+      "name_zh": "deTour design festival — Open Call",
+      "url": "https://detour.hk/main/en/",
+      "domain": "detour.hk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "设计",
+      "notes": "HTTP 200, 45094字节; 命中 Open Call x6 submit; 含 2026x13 2025x16(现届/新一届内容); 机构名 deTour/detour x193 PMQ x6 元創方; PMQ元創方主办的年度设计节,面向创意提案与工作坊公开招募(综合/跨界设计)。robots: User-agent:* Allow:/, 仅 Disallow /wp-admin 等后台,目标路径未被禁。"
+    },
+    {
+      "id": "dfa-awards-hkdc",
+      "org_zh": "香港设计中心(HKDC)DFA 设计奖",
+      "name_zh": "DFA Awards 報名/參賽",
+      "url": "https://dfaawards.com/tc/index/",
+      "domain": "dfaawards.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "设计",
+      "notes": "HTTP 200, 79313字节; 命中 報名 截止; 含 2026x38(现届征件内容); 机构名 DFA/Design for Asia/Hong Kong Design; 香港设计中心旗舰奖项群(DFA设计奖/亚洲设计奖/青年设计才俊奖等,综合设计)。服务器端渲染有实质内容。robots.txt 返回404→无规则(none)。"
+    },
+    {
+      "id": "szgda-kunpeng-sccda",
+      "org_zh": "深圳环球设计大奖(鲲鹏奖)",
+      "name_zh": "深圳环球设计大奖 鲲鹏奖(征集)",
+      "url": "https://www.sccda.org.cn/project/21.html",
+      "domain": "sccda.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "设计",
+      "notes": "HTTP 200, 26076字节; 命中 征集x3; 机构名 环球设计x7 鲲鹏x4; <title>深圳环球设计大奖 鲲鹏奖</title>; 正文注明「深圳创新创意设计发展办公室担任指导单位,深圳广播电影电视集团、深圳市文化创意与设计联合会主办」→官方组织方页(综合设计)。站点归属 深圳市文化创意与设计联合会(SCCDA)。robots.txt 返回 Smarty 错误无有效规则→none。"
+    },
+    {
+      "id": "cpaa-zhenggao-platform",
+      "org_zh": "中国摄影家协会",
+      "name_zh": "征稿平台(全部征稿)",
+      "url": "https://zg.cpanet.cn/",
+      "domain": "zg.cpanet.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "摄影",
+      "notes": "curl HTTP 200,约11888字节;命中 征稿×15、征集×6;服务端渲染,首页含11条 /activity/ 征稿条目(全部征稿/过往征稿/活动征集,均带截稿时间如2029-12-31/2026-11-01);机构名『中国摄影家协会征稿平台』;robots.txt 返回404(none),未禁目标路径。为全国性官方征稿汇总平台,四川/上海/伯奇杯/TOP20/中国航展等展赛均在此投稿。"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong",
+      "org_zh": "《中国摄影》杂志社(中国摄影家协会主办)",
+      "name_zh": "活动·征稿",
+      "url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "摄影",
+      "notes": "curl HTTP 200,35229字节;命中 征稿×27、征集×7、招募×1;列表为真实征稿启事标题(2026尼康杯全国青年摄影大展、苍南『无尽蓝绿』全国摄影大展、明月山全国摄影大展、玉环漩门湾主题大展等);正文含机构名『中国摄影』×19;robots.txt 404(none)未禁;TOP20·中国当代摄影新锐展等亦发布于此栏。"
+    },
+    {
+      "id": "guangdong-photographers-assoc",
+      "org_zh": "广东省摄影家协会",
+      "name_zh": "协会资讯(首页征稿汇总)",
+      "url": "https://www.gdphoto.cn/",
+      "domain": "gdphoto.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "摄影",
+      "notes": "curl HTTP 200(IIS/ASP.NET,GBK,iconv后核验);首页聚合大量征稿启事(第八届深圳摄影作品年度展征稿、第三届乡村振兴摄影大赛征稿启事、白云区古树名木摄影大赛征稿、第七届深圳国际摄影大展征稿等);详情页为 /News/ListsView.aspx?Id=NNNNN;/News/ 索引返回500、/News/Lists.aspx 404,故取首页为列表页;robots.txt 404(none)未禁。"
+    },
+    {
+      "id": "sichuan-photographers-assoc",
+      "org_zh": "四川省摄影家协会",
+      "name_zh": "协会资讯(首页征稿汇总)",
+      "url": "https://www.scssyjxh.cn/",
+      "domain": "scssyjxh.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "摄影",
+      "notes": "curl HTTP 200,142031字节(GBK,iconv后核验);命中 征稿×2、征集×1、启事;首页列出『格·第七届巴蜀青年摄影作品展』征稿启事、『镜观天下』摄影作品征集活动等,详情页 /news_dt/NNN.html;robots.txt 200,Disallow 仅 /m-login /verify* /ce_* /cyproductlist_1/ 等,未禁 / 及 /news_dt(目标路径 allow)。"
+    },
+    {
+      "id": "cac-media-residency",
+      "org_zh": "新时线媒体艺术中心",
+      "name_zh": "驻留 / 研究员计划（Residency & Fellowship Programs）",
+      "url": "https://chronusartcenter.org/research-creation/residency-fellowship-programs/",
+      "domain": "chronusartcenter.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "新媒体",
+      "notes": "curl HTTP 200，53417字节，非空壳；命中 residency(32)+Residency(8)、fellowship(39)+Fellowship(13)；页面含机构名 Chronus/新时线(新时线x10)。robots.txt HTTP 200 仅 Disallow barkrowler，本 UA(ArtPortalBot)未被限制→allow。上海非营利媒体艺术中心官方站，驻留/研究员招募列表页。"
+    },
+    {
+      "id": "dac-taipei-opencall-news",
+      "org_zh": "臺北數位藝術中心",
+      "name_zh": "最新消息（徵件 / 委託製作 / 團隊進駐公告）",
+      "url": "https://dac.taipei/news-zh",
+      "domain": "dac.taipei",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "新媒体",
+      "notes": "curl HTTP 200，57919字节，WordPress 服务端渲染非空壳；命中 進駐x9、委託x3、申請、媒合、計畫；<title>含『最新消息 – DAC.Taipei臺北數位藝術中心』，機構名 數位藝術/DAC present。robots.txt HTTP 200 僅 Disallow /wp-admin/，目标路径 /news-zh 允许→allow。臺北市文化局委辦、視盟(AVAT)營運之數位藝術官方機構，最新消息聚合徵件/委託/進駐公告。"
+    },
+    {
+      "id": "hyundai-blue-prize-opencall",
+      "org_zh": "现代汽车文化中心（北京）",
+      "name_zh": "Hyundai Blue Prize 年度艺术大奖 公开征集（Art+Tech）",
+      "url": "https://hyundaiblueprize.com/",
+      "domain": "hyundaiblueprize.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "commercial",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "新媒体",
+      "notes": "curl HTTP 200，20300字节，非空壳；正文含『Hyundai Blue Prize+ is an open call program, inviting emerging curators』(open call x2)、Prize x31、Hyundai/Blue Prize，含 2025 届信息(2025 x10)。robots.txt HTTP 404→none。北京现代汽车文化中心(798)运营的面向青年策展人/艺术家的 Art+Tech 年度艺术大奖公开征集官方站。"
+    },
+    {
+      "id": "yingge-ceramics-opencall",
+      "org_zh": "新北市立鶯歌陶瓷博物館",
+      "name_zh": "展覽與徵件",
+      "url": "https://www.ceramics.ntpc.gov.tw/xmdoc?xsmsid=0J148497613881029302",
+      "domain": "ceramics.ntpc.gov.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "陶瓷",
+      "notes": "HTTP 200, 50124字节, server-rendered(无app-root/ng/router-outlet等SPA标记); grep命中 徵件×15/展覽×29/陶藝獎×2, 机构名'鶯歌陶瓷博物館'×8; robots.txt: 'User-agent:* Disallow:/sys',本/xmdoc路径允许。栏目含2026臺灣國際陶藝雙年展、全國兒少陶藝獎等徵件公告。"
+    },
+    {
+      "id": "sz-design-center-competition",
+      "org_zh": "深圳市城市设计促进中心(深圳市规划国土发展研究中心)",
+      "name_zh": "设计竞赛",
+      "url": "https://www.szdesigncenter.com/design_competition",
+      "domain": "szdesigncenter.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "建筑",
+      "notes": "HTTP 200, 22686字节, server-rendered(无SPA标记); grep命中 竞赛×14/设计×30/公开×1, 机构名×49(页脚版权'深圳市城市设计促进中心版权所有'); 列表含真实竞赛条目如'东莞潮玩文旅片区发展策划与规划设计竞赛''超级总部基地DU01-02地块建筑设计'; robots.txt存在(HTTP200)且'User-agent:*'无Disallow=全允许。该中心为深圳规划局所属非营利公共机构(邮箱@pnr.sz.gov.cn),设于深圳雕塑院,亦承办公共艺术/建筑竞赛。"
+    },
+    {
+      "id": "hkia-awards",
+      "org_zh": "香港建築師學會(Hong Kong Institute of Architects)",
+      "name_zh": "Awards(獎項與比賽,含Young Architect Award)",
+      "url": "https://www.hkia.net/en/awards-gallery",
+      "domain": "hkia.net",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "建筑",
+      "notes": "HTTP 200, 63965字节, server-rendered(无SPA标记); 专栏列出 Young Architect Award/HKIA Awards/HKIA Special Awards/Cross-Strait Architectural Design Awards 及Competition Advisory Unit, 机构名'Hong Kong Institute of Architects/HKIA'×47; robots.txt仅Allow /,/en/,/zh-HK/,/zh-CN/规则(无Disallow=全允许)。青年建築師獎为年度公开征件(YAA页命中'open')。"
+    },
+    {
+      "id": "chinaasc-notices",
+      "org_zh": "中国建筑学会",
+      "name_zh": "新闻动态·通知公告",
+      "url": "https://www.chinaasc.org.cn/news/tongzhigonggao/",
+      "domain": "chinaasc.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "建筑",
+      "notes": "HTTP 200, 27653字节 GBK编码, server-rendered(DedeCMS,无SPA标记); iconv GBK→UTF8后命中 机构名'中国建筑学会'×16/通知×15/公告×9/征集×2/申报×7/竞赛×4/奖×14/建筑×43, 真实列表条目形如/news/NNNNN.html; robots.txt仅禁DedeCMS内部路径(/plus,/include,/templets),本/news/路径允许。含建筑设计奖、建筑创作奖、学术年会征文等征集通知。"
+    },
+    {
+      "id": "cnaf-guide",
+      "org_zh": "国家艺术基金(国家艺术基金管理中心)",
+      "name_zh": "申报指南",
+      "url": "https://www.cnaf.cn/guide.html",
+      "domain": "cnaf.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 39245字节。命中机构名『国家艺术基金』;服务端渲染列表含真实条目『(一般项目)2027年度舞台艺术创作/美术创作/青年艺术创作人才/艺术人才培训/传播交流推广资助项目申报指南』(申报x17)。全领域补助/申报指南索引页。robots.txt返回HTTP500(无有效规则)→none,目标路径未禁。"
+    },
+    {
+      "id": "shcdf-jjhdt",
+      "org_zh": "上海文化发展基金会",
+      "name_zh": "基金会动态(资助项目申报指南)",
+      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
+      "domain": "shcdf.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 32054字节。命中机构名『上海文化发展基金会』;栏目列表含『申报指南』x5、申报x10、资助x17,为年度资助项目申报公告发布栏目。robots.txt返回HTTP404→none,目标路径未禁。(另公示公告gsgg.html亦可但以结果公示为主,选申报动态栏目更贴征集)"
+    },
+    {
+      "id": "gdarts-news",
+      "org_zh": "广东省艺术研究所",
+      "name_zh": "艺研讯息(新闻列表)",
+      "url": "https://www.gdarts.com/GdArtWeb/Art_Info/news_list",
+      "domain": "gdarts.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 9145字节。命中机构名『广东省艺术研究所』x7;真实条目『华语戏剧盛典征集火热启动』『...2025年度成员招募结果公布』(征集x1、招募x1、公示x1)。公立艺术研究机构官网,发布戏剧/综合类征集招募。robots.txt返回HTTP404→none。"
+    },
+    {
+      "id": "bj-whlj-tzgg",
+      "org_zh": "北京市文化和旅游局(北京文化艺术基金主管)",
+      "name_zh": "通知公告",
+      "url": "https://whlyj.beijing.gov.cn/zwgk/tzgg/",
+      "domain": "whlyj.beijing.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 25741字节。市文旅局官方通知公告栏(通知公告x10),含真实条目『关于征集2026年北京市文...』(征集x2、申报x1);北京文化艺术基金年度资助申报公告在此栏发布(基金无独立官网,申报系统在内网IP)。robots.txt返回HTTP404→none。"
+    },
+    {
+      "id": "claf-news",
+      "org_zh": "中国文学艺术基金会",
+      "name_zh": "新闻资讯(征集/资助)",
+      "url": "http://www.claf.org.cn/news_list.html",
+      "domain": "claf.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "discipline_hint": "综合",
+      "notes": "curl HTTP 200, 85628字节。命中机构名『中国文学艺术基金会』;服务端渲染列表含真实征集条目如『...面向全国征集手机影像作品』(征集x2)。中国文联下属基金会,资助含文学/影像/戏剧/音乐等11类。robots.txt HTTP200:Allow /,仅禁/api/、/user_center/,目标/news_list.html允许→allow。(注:special_funds_list.html?category=literature为JS空壳0关键词,故不选该URL)"
     }
   ],
   "blocked_or_unverified": [
@@ -1263,6 +1937,11 @@
   "_added_batch": {
     "at": "2026-07-12",
     "note": "新增中国大陆/港台澳信源(多智能体发现+curl核验)",
+    "count": 36
+  },
+  "_added_batch2": {
+    "at": "2026-07-13",
+    "note": "各艺术领域信源(音乐/电影/表演/设计/摄影/新媒体/工艺/综合)",
     "count": 36
   }
 }

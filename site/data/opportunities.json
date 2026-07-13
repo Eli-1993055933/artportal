@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-13",
-  "count": 73,
+  "count": 103,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -3586,6 +3586,1456 @@
       "updated_at": "2026-07-13",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/48892/opportunity/10583/image/49cade7a7b21a2ddb4dbad38d766add79e3adf5a67.png",
       "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "bjiff-project-market-京彩台湾-两岸青年短片征集活动",
+      "category": "opencall",
+      "title_zh": "“京彩台湾”两岸青年短片征集活动",
+      "title_en": null,
+      "org_zh": "北京国际电影节",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2026-05-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "短片",
+        "影像"
+      ],
+      "summary_zh": "第十六届北京国际电影节携手“京彩台湾”邀请两岸青年创作团队、高校学子及影像爱好者参与短片征集，设日常光影、未来视界、文化印记、行走画卷四大单元及AI特别单元，截稿2026年5月20日。",
+      "url": "https://www.bjiff.com/xghd/xqdy_19397/",
+      "source_url": "https://www.bjiff.com/dysc/dysc/",
+      "domain": "bjiff.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.bjiff.com/xghd/xqdy_19397/202604/W020260412566016434902.jpg",
+      "cover_source": "bjiff.com"
+    },
+    {
+      "id": "goldenpin-design-award-金點設計獎",
+      "category": "award",
+      "title_zh": "金點設計獎",
+      "title_en": "Golden Pin Design Award",
+      "org_zh": "台灣設計研究院",
+      "city_zh": "台北",
+      "country_zh": "台湾",
+      "deadline": "2026-06-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 9000,
+        "currency": "TWD"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "产品设计",
+        "传达设计",
+        "空间设计",
+        "整合设计"
+      ],
+      "summary_zh": "金點設計獎由台灣設計研究院主辦，涵蓋產品、傳達、空間與整合設計類，評選已商品化或已完成之作品。報名費每件新台幣9,000元（早鳥7,000元），截止日為2026年6月15日17:00。得獎作品可獲金點標章使用權，並有機會參與展覽、媒體曝光及商機媒合。",
+      "url": "https://goldenpin.org.tw/goldenpin/zh-TW/participate/golden-pin-design-award",
+      "source_url": "https://goldenpin.org.tw/goldenpin/zh-TW/participate/golden-pin-design-award",
+      "domain": "goldenpin.org.tw",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://goldenpin.org.tw/goldenpin/images/og.png",
+      "cover_source": "goldenpin.org.tw"
+    },
+    {
+      "id": "dfa-awards-hkdc-dfa-亞洲最具影響力設計獎2026",
+      "category": "award",
+      "title_zh": "DFA 亞洲最具影響力設計獎2026",
+      "title_en": null,
+      "org_zh": "香港設計中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计"
+      ],
+      "summary_zh": "DFA亚洲最具影响力设计奖2026由香港设计中心主办，面向设计领域，报名截止日期为2026年7月15日。",
+      "url": "https://dfaawards.com/tc/index/",
+      "source_url": "https://dfaawards.com/tc/index/",
+      "domain": "dfaawards.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://dfaawards.com/lib/ico/favicon.png",
+      "cover_source": "dfaawards.com"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-无尽蓝绿-山海苍南-全国摄影大展",
+      "category": "opencall",
+      "title_zh": "“无尽蓝绿 山海苍南”全国摄影大展",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "苍南",
+      "country_zh": "中国",
+      "deadline": "2027-04-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "《中国摄影》杂志社等主办，面向全国征集反映浙江省苍南县自然风景、人文景观等摄影作品。征集时间即日起至2027年4月30日。入展作品100幅（组），每幅（组）稿酬800元。不收参加费。",
+      "url": "https://www.cphoto.com.cn/content/article/101304.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-四季风景线-大美明月山-明月山全国摄影大展征稿启事",
+      "category": "opencall",
+      "title_zh": "“四季风景线・大美明月山” 明月山全国摄影大展征稿启事",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "宜春",
+      "country_zh": "中国",
+      "deadline": "2026-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "面向全国征集江西宜春明月山四季的摄影作品和视频作品，入展作品100件，每件稿酬500元，不收参展费，投稿截止2026年12月31日。",
+      "url": "https://www.cphoto.com.cn/content/article/101286.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-旅拍中国-玉环海屿岛-首届漩门湾主题全国摄影大展",
+      "category": "opencall",
+      "title_zh": "“旅拍中国·玉环海屿岛”首届漩门湾主题全国摄影大展",
+      "title_en": null,
+      "org_zh": "中国摄影出版传媒有限责任公司、《中国摄影》杂志社、中共玉环市委宣传部、浙江玉环经济开发区管理委员会",
+      "city_zh": "玉环",
+      "country_zh": "中国",
+      "deadline": "2026-10-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "面向全国摄影人征集反映玉环市漩门湾国家湿地公园的自然风光、野生动植物、人文景观等摄影作品及短视频。入展作品84幅，稿酬各600元；短视频6件，稿酬各600元。不收参加费。",
+      "url": "https://www.cphoto.com.cn/content/article/101233.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-2026-尼康杯-全国青年摄影大展征稿",
+      "category": "opencall",
+      "title_zh": "2026“尼康杯”全国青年摄影大展征稿",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2026-09-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "18-40",
+        "nationality": "中国"
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "《中国摄影》杂志社与尼康联合主办，面向18-40岁中国青年摄影师及高校在校学生征集摄影及视频作品，设社会组和高校组，各入展50件，每件稿酬500元，不收参展费，截止2026年9月30日。",
+      "url": "https://www.cphoto.com.cn/content/article/101287.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-最美航拍目的地-首届中国霞浦航拍摄影大展征稿",
+      "category": "opencall",
+      "title_zh": "最美航拍目的地｜首届中国霞浦航拍摄影大展征稿",
+      "title_en": null,
+      "org_zh": "中国摄影家协会航空（无人机）摄影委员会、《中国摄影》杂志社、霞浦县人民政府",
+      "city_zh": "霞浦",
+      "country_zh": "中国",
+      "deadline": "2025-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "首届中国霞浦航拍摄影大展征集反映霞浦自然景观、人文历史等的航拍短视频及摄影作品。入展作品100件，每件稿酬800元，颁发荣誉证书，可累计中国摄协入会积分。征稿至2025年12月31日，不收参展费。",
+      "url": "https://www.cphoto.com.cn/content/article/101112.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-以镜为翼-启航空天-2025年长春航空展摄影大展",
+      "category": "opencall",
+      "title_zh": "以镜为翼 启航空天——2025年长春航空展摄影大展",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "长春",
+      "country_zh": "中国",
+      "deadline": "2025-10-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "视频"
+      ],
+      "summary_zh": "面向全国征集2025年及历届长春航空展现场精彩瞬间的摄影、视频作品，入展作品90件，短视频10件，每件稿酬500元，颁发荣誉证书，可累计中国摄影家协会入会申请积分。",
+      "url": "https://www.cphoto.com.cn/content/article/101227.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-航拍中国丨-光影之城-厦门-全国航拍摄影大展征稿启事",
+      "category": "opencall",
+      "title_zh": "航拍中国丨“光影之城——厦门”全国航拍摄影大展征稿启事",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": "2025-10-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "《中国摄影》杂志社主办全国航拍摄影大展，征集反映厦门自然生态、人文历史、城市景观的航拍短视频及摄影作品。入展100件，每件稿酬500元，可累计入会积分。征稿至2025年10月31日，不收参展费。",
+      "url": "https://www.cphoto.com.cn/content/article/101181.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-摄影毕业季-2025年度全国高校摄影优秀毕业作品评审",
+      "category": "award",
+      "title_zh": "摄影毕业季｜2025年度全国高校摄影优秀毕业作品评审",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-06-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "影像"
+      ],
+      "summary_zh": "《中国摄影》杂志社主办，面向2025年全国高校摄影及相关专业应届毕业生征集毕业作品，评审出20件优秀作品，颁发荣誉证书，并在杂志及新媒体推广。",
+      "url": "https://www.cphoto.com.cn/content/article/101170.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-2025-尼康杯-全国青年摄影大展征稿",
+      "category": "opencall",
+      "title_zh": "2025“尼康杯”全国青年摄影大展征稿",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-06-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "18-40",
+        "nationality": "中国"
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "《中国摄影》杂志社与尼康联合主办全国青年摄影大展，面向18-40岁中国摄影师及在校学生，征集摄影及视频作品，设社会组和高校组各50件入选，每件稿酬800元，不收参展费，截止2025年6月30日。",
+      "url": "https://www.cphoto.com.cn/content/article/101104.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "guangdong-photographers-assoc-征稿-古韵围楼-大美始兴-全省摄影大赛",
+      "category": "opencall",
+      "title_zh": "征稿｜“古韵围楼·大美始兴”全省摄影大赛",
+      "title_en": null,
+      "org_zh": "广东省摄影家协会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-08-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "广东省摄影家协会主办“古韵围楼·大美始兴”全省摄影大赛，面向全省征稿，截稿日期为2026年8月10日。",
+      "url": "https://www.gdphoto.cn/News/SaiShi.aspx?Tid=20073373707139",
+      "source_url": "https://www.gdphoto.cn/",
+      "domain": "gdphoto.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.gdphoto.cn/images/shipinhao.png",
+      "cover_source": "gdphoto.cn"
+    },
+    {
+      "id": "dac-taipei-opencall-news-臺北數位藝術媒合平臺-媒合計畫受理申請開跑",
+      "category": "opencall",
+      "title_zh": "臺北數位藝術媒合平臺 媒合計畫受理申請開跑！",
+      "title_en": null,
+      "org_zh": "臺北數位藝術中心",
+      "city_zh": "台北",
+      "country_zh": "台湾",
+      "deadline": "2024-08-24",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "數位藝術",
+        "科技藝術",
+        "科技表演藝術",
+        "新媒體藝術"
+      ],
+      "summary_zh": "臺北數位藝術中心媒合計畫受理申請，提供培力進駐、基地進駐、展演空間方案，申請資格需1年以上數位藝術等創作經驗，申請期限至113年8月24日，成功媒合者將獲專業導師陪伴、免費進駐空間及創作材料費用。",
+      "url": "https://dac.taipei/latest-news-zh/231216.html",
+      "source_url": "https://dac.taipei/news-zh",
+      "domain": "dac.taipei",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://dac.taipei/wp-content/uploads/2024/08/%E6%95%B8%E4%BD%8D%E8%97%9D%E8%A1%93%E5%AA%92%E5%90%88%E5%B9%B3%E8%87%BA-%E5%AE%98%E7%B6%B2_03-%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg",
+      "cover_source": "dac.taipei"
+    },
+    {
+      "id": "dac-taipei-opencall-news-立陶宛sodas-2123藝術中心-臺灣數位藝術家駐村徵選",
+      "category": "residency",
+      "title_zh": "立陶宛SODAS 2123藝術中心 臺灣數位藝術家駐村徵選",
+      "title_en": null,
+      "org_zh": "臺北數位藝術中心",
+      "city_zh": "臺北",
+      "country_zh": "臺灣",
+      "deadline": "2024-04-17",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "臺灣"
+      },
+      "disciplines": [
+        "數位藝術"
+      ],
+      "summary_zh": "臺北數位藝術中心與立陶宛SODAS 2123藝術中心合作，徵選2名臺灣數位藝術家駐村2個月，提供來回機票費、創作費、生活津貼及行政支援，即日起至4月17日線上報名。",
+      "url": "https://dac.taipei/latest-news-zh/230952.html",
+      "source_url": "https://dac.taipei/news-zh",
+      "domain": "dac.taipei",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://dac.taipei/wp-content/uploads/2024/03/20240320ed-scaled.jpg",
+      "cover_source": "dac.taipei"
+    },
+    {
+      "id": "cnaf-guide-国家艺术基金-一般项目-2027年度艺术人才培训资助项目",
+      "category": "opencall",
+      "title_zh": "国家艺术基金（一般项目）2027年度艺术人才培训资助项目",
+      "title_en": null,
+      "org_zh": "国家艺术基金管理中心",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-06-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "舞台艺术",
+        "绘画",
+        "雕塑",
+        "书法",
+        "篆刻",
+        "摄影",
+        "工艺美术"
+      ],
+      "summary_zh": "国家艺术基金2027年度艺术人才培训资助项目，资助舞台艺术、绘画、雕塑、书法、篆刻、摄影和工艺美术等领域创作、经营管理及文艺评论人才培训，分为国内短期、中长期培训和国外研修计划。",
+      "url": "https://www.cnaf.cn/guide_detail/5549.html",
+      "source_url": "https://www.cnaf.cn/guide.html",
+      "domain": "cnaf.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
+      "cover_source": "cnaf.cn"
+    },
+    {
+      "id": "shcdf-jjhdt-上海文化发展基金会项目资助",
+      "category": "award",
+      "title_zh": "上海文化发展基金会项目资助",
+      "title_en": null,
+      "org_zh": "上海文化发展基金会",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年受理申报，每年组织两次专家评审",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文学",
+        "电影",
+        "电视剧",
+        "网络剧片",
+        "动画片",
+        "纪录片",
+        "戏剧曲艺",
+        "音乐舞蹈",
+        "美术文博",
+        "连环画",
+        "雕刻",
+        "织绣"
+      ],
+      "summary_zh": "上海文化发展基金会2024年项目资助，重点资助红色文化、新时代现实、中华优秀传统文化及经典IP跨艺术门类转化等题材创作，涵盖文学、影视、戏剧、美术等门类，增设原创文学作品出版专项和连环画创作出版资助，常年受理申报。",
+      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/adb68f0a-ccd8-47ed-b5d3-0fbe58dd3a12.html",
+      "source_url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
+      "domain": "shcdf.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "gdarts-news-第十届华语戏剧盛典",
+      "category": "award",
+      "title_zh": "第十届华语戏剧盛典",
+      "title_en": null,
+      "org_zh": "广东省艺术研究所",
+      "city_zh": "广州",
+      "country_zh": "中国",
+      "deadline": "2026-08-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "戏剧"
+      ],
+      "summary_zh": "第十届华语戏剧盛典征集启动，面向华语戏剧人征集参评作品，报名截止2026年8月15日，评选后将在广州举办盛典。",
+      "url": "https://www.gdarts.com/GdArtWeb/Art_Info/2702",
+      "source_url": "https://www.gdarts.com/GdArtWeb/Art_Info/news_list",
+      "domain": "gdarts.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "gdarts-news-国家艺术基金2026年度艺术人才培训资助项目-粤港澳大湾区当代演艺评论人才培训-",
+      "category": "workshop",
+      "title_zh": "国家艺术基金2026年度艺术人才培训资助项目：《粤港澳大湾区当代演艺评论人才培训》招生简章",
+      "title_en": null,
+      "org_zh": "广东省艺术研究所",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-05-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": 45,
+        "nationality": null
+      },
+      "disciplines": [
+        "评论",
+        "表演艺术"
+      ],
+      "summary_zh": "国家艺术基金资助的演艺评论人才培训项目，面向全国招生30人，培训涵盖广州、香港、澳门等地，提供交通、食宿及学习费用资助，报名截止2026年5月15日。",
+      "url": "https://www.gdarts.com/GdArtWeb/Art_Info/2621",
+      "source_url": "https://www.gdarts.com/GdArtWeb/Art_Info/news_list",
+      "domain": "gdarts.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "ccdc-wudaoqingnian-國家藝術基金2026年度藝術人才培訓資助項目-當代舞創作人才培訓-招生簡章",
+      "category": "opencall",
+      "title_zh": "國家藝術基金2026年度藝術人才培訓資助項目《當代舞創作人才培訓》招生簡章",
+      "title_en": null,
+      "org_zh": "城市當代舞蹈團",
+      "city_zh": "香港",
+      "country_zh": "中國",
+      "deadline": "2026-05-11",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": 45,
+        "nationality": null
+      },
+      "disciplines": [
+        "舞蹈",
+        "編舞",
+        "劇場構作",
+        "舞台美學",
+        "音樂及音效設計",
+        "形體劇場",
+        "製作及傳播"
+      ],
+      "summary_zh": "城市當代舞蹈團主辦國家藝術基金資助的《當代舞創作人才培訓》，面向全國招生50名45歲以下學員，培訓時間2026年7月10日至10月30日，地點包括廣州、澳門、香港，涵蓋編舞創作、劇場構作等課程，學員優秀作品將於香港展演。",
+      "url": "https://www.ccdc.com.hk/cnaf-ccdc/",
+      "source_url": "https://www.ccdc.com.hk/dc/talent-development/wudaoqingnian/",
+      "domain": "ccdc.com.hk",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "detour-hk-pmq-detour-2026-创意方案公开征集",
+      "category": "opencall",
+      "title_zh": "deTour 2026 创意方案公开征集",
+      "title_en": "deTour 2026 — Open Call for Creative Proposal",
+      "org_zh": "PMQ 元創方",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-07-19",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计"
+      ],
+      "summary_zh": "deTour 2026 设计节公开征集创意方案，主题为“Better, Not Perfect: Prototypes for Tomorrow”。入选者可在PMQ展示作品，并获得制作赞助，赞助金额根据类别最高达15万港币。",
+      "url": "https://detour.hk/main/en/news/2040-2-2-2/",
+      "source_url": "https://detour.hk/main/en/",
+      "domain": "detour.hk",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://detour.hk/main/media/2026/06/dT26_MotherWebKV_Web_Opencall-Launch-scaled.jpg",
+      "cover_source": "detour.hk"
+    },
+    {
+      "id": "detour-hk-pmq-detour-2025-创意提案公开征集-装置与展览",
+      "category": "opencall",
+      "title_zh": "deTour 2025 创意提案公开征集（装置与展览）",
+      "title_en": "deTour 2025 — Open Call for Creative Proposal (Installation & Exhibition)",
+      "org_zh": "PMQ 元創方",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2025-07-27",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "装置",
+        "展览"
+      ],
+      "summary_zh": "deTour 2025设计节公开征集创意提案，主题为“The Shape of Yearning”。入选者可在PMQ展示作品，并获得5万至10万港币制作赞助。截止日期为2025年7月27日18:00（HKT）。",
+      "url": "https://detour.hk/main/en/news/2040-2-2/",
+      "source_url": "https://detour.hk/main/en/",
+      "domain": "detour.hk",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://detour.hk/main/media/2025/07/dT25_KV_Web-Post2.jpg",
+      "cover_source": "detour.hk"
+    },
+    {
+      "id": "zhongguo-sheying-mag-huodong-摄影毕业季丨2026年度全国高校摄影优秀毕业作品年展征稿启事",
+      "category": "opencall",
+      "title_zh": "摄影毕业季丨2026年度全国高校摄影优秀毕业作品年展征稿启事",
+      "title_en": null,
+      "org_zh": "《中国摄影》杂志社",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-06-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "面向全国高校2026年摄影及相关专业应届毕业生征集毕业摄影作品，评选20件入选作品，每件稿酬800元，颁发荣誉证书，可累计入会申请积分。不收参评费。",
+      "url": "https://www.cphoto.com.cn/content/article/101309.html",
+      "source_url": "https://www.cphoto.com.cn/category/activity.html",
+      "domain": "cphoto.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
+      "cover_source": "cphoto.com.cn"
+    },
+    {
+      "id": "cnaf-guide-国家艺术基金-一般项目-2027年度舞台艺术创作资助项目",
+      "category": "award",
+      "title_zh": "国家艺术基金（一般项目）2027年度舞台艺术创作资助项目",
+      "title_en": null,
+      "org_zh": "国家艺术基金管理中心",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-06-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "戏曲",
+        "话剧",
+        "歌剧",
+        "舞剧",
+        "音乐剧",
+        "儿童剧",
+        "杂技剧",
+        "木偶剧",
+        "皮影戏",
+        "小剧场戏剧",
+        "交响乐",
+        "民族管弦乐",
+        "曲艺",
+        "具有创新性、跨界融合特点的表演艺术形式"
+      ],
+      "summary_zh": "国家艺术基金2027年度舞台艺术创作资助项目，面向机构或单位，资助大型舞台剧和中小型剧（节）目创作，申报截止2026年6月15日，通过官网系统提交材料。",
+      "url": "https://www.cnaf.cn/guide_detail/5546.html",
+      "source_url": "https://www.cnaf.cn/guide.html",
+      "domain": "cnaf.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
+      "cover_source": "cnaf.cn"
+    },
+    {
+      "id": "cnaf-guide-国家艺术基金-一般项目-2027年度美术创作资助项目",
+      "category": "award",
+      "title_zh": "国家艺术基金（一般项目）2027年度美术创作资助项目",
+      "title_en": null,
+      "org_zh": "国家艺术基金管理中心",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-06-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "雕塑",
+        "水彩（粉）画",
+        "漆画",
+        "书法",
+        "篆刻"
+      ],
+      "summary_zh": "国家艺术基金2027年度美术创作资助项目，面向社会受理申报，资助中国画、油画、版画、雕塑、水彩（粉）画、漆画、书法、篆刻等作品创作，包括组织创作和个人创作两类，资助额度组织创作不超过200万元，个人创作不超过10万元。",
+      "url": "https://www.cnaf.cn/guide_detail/5547.html",
+      "source_url": "https://www.cnaf.cn/guide.html",
+      "domain": "cnaf.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
+      "cover_source": "cnaf.cn"
+    },
+    {
+      "id": "cnaf-guide-国家艺术基金-一般项目-2027年度传播交流推广资助项目",
+      "category": "opencall",
+      "title_zh": "国家艺术基金（一般项目）2027年度传播交流推广资助项目",
+      "title_en": null,
+      "org_zh": "国家艺术基金管理中心",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-06-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "舞台艺术",
+        "绘画",
+        "雕塑",
+        "书法",
+        "篆刻",
+        "摄影",
+        "工艺美术"
+      ],
+      "summary_zh": "国家艺术基金2027年度传播交流推广资助项目，资助优秀舞台艺术、绘画、雕塑、书法、篆刻、摄影和工艺美术作品在国内外的演出、展览。申请额度不超过300万元，国内项目可申请不高于总成本50%，国外项目不高于30%。申报主体为机构或单位，申报时间2026年4月15日至6月15日。",
+      "url": "https://www.cnaf.cn/guide_detail/5548.html",
+      "source_url": "https://www.cnaf.cn/guide.html",
+      "domain": "cnaf.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
+      "cover_source": "cnaf.cn"
+    },
+    {
+      "id": "shcdf-jjhdt-上海文化发展基金会二-二六年度第一期资助项目申报指南",
+      "category": "opencall",
+      "title_zh": "上海文化发展基金会二〇二六年度第一期资助项目申报指南",
+      "title_en": null,
+      "org_zh": "上海文化发展基金会",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": "2026-04-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文学",
+        "电影",
+        "电视剧",
+        "网络剧",
+        "动画片",
+        "纪录片",
+        "舞台艺术",
+        "美术"
+      ],
+      "summary_zh": "上海文化发展基金会2026年度第一期资助项目申报，面向全社会接受本市文化艺术项目资助申报，涵盖文学、电影、电视剧、舞台艺术、美术等门类，重点资助重大题材和上海特色原创作品，网上申报截止2026年4月15日。",
+      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/6b0adc84-064e-4bc0-b62c-356c049abd24.html",
+      "source_url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
+      "domain": "shcdf.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "shcdf-jjhdt-上海文化发展基金会二-二五年度第二期资助项目申报指南",
+      "category": "opencall",
+      "title_zh": "上海文化发展基金会二〇二五年度第二期资助项目申报指南",
+      "title_en": null,
+      "org_zh": "上海文化发展基金会",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": "2025-09-05",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文学",
+        "电影",
+        "电视剧",
+        "网络剧片",
+        "动画片",
+        "纪录片",
+        "舞台艺术",
+        "美术"
+      ],
+      "summary_zh": "上海文化发展基金会面向全社会接受文化艺术项目资助申报，涵盖文学、电影、电视剧、舞台艺术、美术等门类，重点资助重大题材原创作品及上海特色项目。网上申报即日起至2025年9月5日截止。",
+      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/cb765ae3-7bc0-49dd-8bec-02b5b8566d06.html",
+      "source_url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
+      "domain": "shcdf.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "shcdf-jjhdt-上海文化发展基金会二-二五年度第一期资助项目申报指南",
+      "category": "opencall",
+      "title_zh": "上海文化发展基金会二〇二五年度第一期资助项目申报指南",
+      "title_en": null,
+      "org_zh": "上海文化发展基金会",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": "2025-03-24",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文学",
+        "网络文学",
+        "电影",
+        "电视剧",
+        "网络剧片",
+        "动画片",
+        "纪录片",
+        "舞台艺术",
+        "美术",
+        "雕刻",
+        "织绣"
+      ],
+      "summary_zh": "上海文化发展基金会面向全社会接受文化艺术项目资助申报，涵盖文学、电影、电视剧、舞台艺术、美术等门类，重点资助重大题材原创作品、演艺大世界项目、文化综合项目等。网上申报即日起至2025年3月24日截止。",
+      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/03a38ec5-4fa8-426e-ae50-fddad0bc9a2c.html",
+      "source_url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
+      "domain": "shcdf.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13"
+    },
+    {
+      "id": "claf-news-老党员-新风采-荣誉影像全国征稿启事",
+      "category": "opencall",
+      "title_zh": "\"老党员·新风采\"荣誉影像全国征稿启事",
+      "title_en": null,
+      "org_zh": "中国文学艺术基金会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-10-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "中国文学艺术基金会联合中国摄影家协会面向全国征集以党龄50年以上老党员为拍摄对象的摄影作品，评选优秀作品在京举办专题展览，截稿至2026年10月31日。",
+      "url": "http://www.claf.org.cn/news/news_article_51.html",
+      "source_url": "http://www.claf.org.cn/news_list.html",
+      "domain": "claf.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-13",
+      "updated_at": "2026-07-13",
+      "cover": "http://www.claf.org.cn/images/news/ldy/laodangyuan-01.jpg",
+      "cover_source": "claf.org.cn"
     }
   ]
 }

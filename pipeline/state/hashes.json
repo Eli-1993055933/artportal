@@ -1146,5 +1146,753 @@
   "chinaresidencies-directory|https://www.chinaresidencies.com/residencies/the-pottery-workshop-jingdezhen": {
     "hash": "3672e5e7e0470aba29bf59f474bef8c068494c20e740d627480d6523666a91dc",
     "at": "2026-07-13"
+  },
+  "shcm-riversawards": {
+    "hash": "d0c1dda393d248587d08fe3b02ba02f121eb101263bda046abbb8ff52c06af9d",
+    "at": "2026-07-13"
+  },
+  "shcm-riversawards|https://www.riversawards.cn/public/uploads/files/20260415/09db1d4ed9e58a1575cbe32231d8ae83.pdf": {
+    "hash": "c016a614bfc089cf0b2620f85a46acac0e62113d2f6e4be91b27573bb12d2280",
+    "at": "2026-07-13"
+  },
+  "shcm-riversawards|https://www.riversawards.cn/public/uploads/files/20260415/f7926196f7ac6ce5d9978d9430466d8c.doc": {
+    "hash": "26973c14daf1c5a69a637f631a8613d360d30dd81db3ee82a96c4cb8408b1576",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell": {
+    "hash": "379b3086b54a3ed0156523fc8c13fbae6e6a2b03e148a1c1fb5121126d4a0cc0",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/qnzy/202511/t20251111_1353303.html": {
+    "hash": "0f7a0d4c763a29479155d237d126761de9b272b0442347fcd90a50fce355c8aa",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/qnzy/202511/t20251111_1353302.html": {
+    "hash": "327808ff3d238bf0d324e3ca8a8cb981d3e0eaa2cfdb828a96d06bc25d10092c",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/qnzy/202511/t20251111_1353301.html": {
+    "hash": "2125147240eeccd69d2f701de27cfe47f5c55b48fa0fd8b736ddb9eac726f860",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/xwdt/202511/t20251101_1352770.html": {
+    "hash": "ee26e16ae0f19cf144bdf6045cd83922391cc64c388425d35afbcf9c8406fd9f",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/xwdt/202511/t20251101_1352769.html": {
+    "hash": "f13fa8aa2b27442ab88c51a9212c59d0a97c0fe8e252c9b8fe76d10743d5711f",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/xwdt/202510/t20251026_1352470.html": {
+    "hash": "30779037b78436a3a83d1b784a065b5c9977dd8577f2809c14bf0cd12e3eb073",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/xwdt/202510/t20251024_1352398.html": {
+    "hash": "dc99aa07d54817c5f873e2ed0bb24305596c0092d64cc8ab9c424fd0da313b0c",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/xwdt/202510/t20251024_1352395.html": {
+    "hash": "4f42bc6db6e9ca1b95962669a468baf112e5813697d5a067140f8bfe9596c496",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/xwdt/202510/t20251015_1351841.html": {
+    "hash": "43cb87d0a2c966d8b69df62c06e6e84ee65451ba0209d2178a30e7308d11ad51",
+    "at": "2026-07-13"
+  },
+  "cma-golden-bell|https://www.chnmusic.org.cn/jzj/xw/202507/t20250709_1347416.html": {
+    "hash": "b1f57dd5beebdc2c66279db42004828f002abcfe15e7c420a8be95b85d94dad1",
+    "at": "2026-07-13"
+  },
+  "ccom-campus-news": {
+    "hash": "2181ac07e8b3308f094fc1b8991eff607b38da55955e47b12a12965f4b48cfc9",
+    "at": "2026-07-13"
+  },
+  "ccom-campus-news|https://www.ccom.edu.cn/info/17831/246231.htm": {
+    "hash": "63737319bdb8eec49b6f665ca1b6dcc6c92bb8f48d3df570b8353a647330a86d",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news": {
+    "hash": "3298a9cbfa684842c4a2493e4564966b9daf0f7c23777fcf2277101c4e9535b4",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/News.aspx?n=0D9B6F778A90E631&sms=778856C209BCE527": {
+    "hash": "f48a4fc6c5443f7995d4c257ed512af319d3707ce39ceac453632ac2c4025521",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/Content_List.aspx?n=55B3D215093CBB56": {
+    "hash": "aaed9da05cdb1f626b956c216a806a59c1809cc533adb098d8999444172a3cf6",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/News.aspx?n=16B209B8DAC74C23&sms=18793DE0E028C2E2": {
+    "hash": "6d54be3116fade6e3c9a42cb53d228bc0cb24ddab242fb010932ef1982f5270b",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/News.aspx?n=5C98B4EEE860CB18&sms=FC05EB85BD57C709": {
+    "hash": "b96ec3b1dc7866155a878b35b0fea258d03dc040b5b5ead94fa0a60f23fddf4d",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/cp.aspx?n=7BC26E7FEAD9EFC7": {
+    "hash": "0705d04144820c2448a5c6767c8c9fc77f1a0802cb33e9cb295c034673211088",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/Content_List.aspx?n=498604333B00FA71": {
+    "hash": "f9bf6d05d06058f24648326f856d9b4e299dd945419f6b6c557b87fa1071da03",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/cp.aspx?n=595D0E3B5E125017": {
+    "hash": "29fdd3d964cdb354eae5849c476a1ac19d1eaaa72ae672971b394fadf88f9ed1",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/cp.aspx?n=85C116F7D4803003": {
+    "hash": "da19b02940ae6cf055810afb11a27ac5851cfc5467026a5dd5f49d8dfb0fbd1d",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/cp.aspx?n=2A9CE8F331BF0BC5": {
+    "hash": "aa23355e048abe7a202f209b93481355e39dcbb7d5f3f13ba0a09c8aa4fe6cc4",
+    "at": "2026-07-13"
+  },
+  "tco-latest-news|https://www.tco.gov.taipei/cp.aspx?n=390C3E651E8F2BC6": {
+    "hash": "a2f5d3c8895c33147b5748778af265f7da42f2c925e0218c4ef30fd8ae445932",
+    "at": "2026-07-13"
+  },
+  "hkcg-signature-events": {
+    "hash": "e429d1b2cbe30e5db03300a75289fe0179f53d4695fca14f7ce9ad23e727c00b",
+    "at": "2026-07-13"
+  },
+  "first-financing-forum": {
+    "hash": "35448c310ac259445f98f67a91a6e7a30ad6f99d447ca31f70dc420b8130a01e",
+    "at": "2026-07-13"
+  },
+  "first-financing-forum|https://cdn.firstfilm.org.cn/wp-content/uploads/2025/07/FIRST%E5%BD%B1%E5%B1%95%E9%81%93%E5%BE%B7%E5%87%86%E5%88%99%E4%B8%8E%E5%8F%8D%E6%AD%A7%E8%A7%86%E6%94%BF%E7%AD%96.pdf": {
+    "hash": "a76672d7abfd59b87270f448be7b64c0627ee27b49bc1991dbad6b32fb4f403d",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall": {
+    "hash": "e75f13b5842391364c31cfc4bba2492b150b58013140550a54aeb4eef10a808f",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101241126175746631153265362341893169": {
+    "hash": "e5042f69bf9a027b05b4ac9d123595784f665ee3bf06d48ddbb89d4237f6623c",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101241126175938631153732448423941503": {
+    "hash": "b77af5de44b0dac419f0e1625942ab522abfb2fa70389da4dceb895d6ecaee5a",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101230419083740418290632470040581392": {
+    "hash": "8abfb7b06b0ee587c8fa0994235ef1ba4b79ceb4647153f3b20187801043a571",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101230419083755418290695955025925418": {
+    "hash": "5e097e2dba02c1baadd05477ee6ff7f296d248f2feaaf8e483714425ea78061d",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101230419083821418290807313797125219": {
+    "hash": "2bf0f89b98ca1b414abd9a1db595c4d884c139a3a2a706e332f83a44284d6848",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101230419083909418291004974567429496": {
+    "hash": "90159f4154ec340e6981a9ffc59131939180f9fd59d5ea9acc635ef98ecd685a",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101241126180233631154468112568325580": {
+    "hash": "510e76476c80e6d86b8bf0529e91cb6f55fcbd06799eaaddd8504a077647f142",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101241126180301631154586228363269471": {
+    "hash": "b65123476d9ccc9bd065799f111a8adb824f50574de91700d55cf6102625eecc",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101241126180337631154736485109765657": {
+    "hash": "5cab91f255ad3767990f99a2fcd97eae061b13fb8d40023b618bea63cc550217",
+    "at": "2026-07-13"
+  },
+  "siff-project-opencall|https://www.siff.com/list?cid=101241126180543631155265508478981641": {
+    "hash": "a82c7d8a011039c0375952277e04903b106e2254c2a46623ffaac2d123301545",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market": {
+    "hash": "9adff0c88a3384436bc4c40a858cae6fa09f1658e48e56c8730a4d1d72d9b1f7",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/xghd/xqdy_19397/": {
+    "hash": "72d16867576bb1fa30b977eb5923ce638226f73d572d958b2ab433177113691c",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202605/t20260507_195689.html": {
+    "hash": "7d66cd303c8c4c154458c96067b8a9d7d4a2a31796eb45259f9a9c6b1a22fc60",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260424_194831.html": {
+    "hash": "adc75759562ef79abb7e91da8e134cb9ca6304642696bfdb3c270a879748c744",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260422_194371.html": {
+    "hash": "ecb130055b4cbff1a5e929434d055d24b362863d665151600baa4fa83998ed99",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260418_193013.html": {
+    "hash": "b85f6a93a72b1d844408a8211c14bd92c5ff7ce139afacd91ea9e5bd32a78e6a",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260414_192597.html": {
+    "hash": "bf9fd5c31ebd32369ee8526d4d835b200a227c999e68ecfee0868fb464bf3595",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260414_192582.html": {
+    "hash": "462dd1619492975125f8ca7676b19be409cc0c38c5fabcd30b6d399046490c5c",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260413_192523.html": {
+    "hash": "d1580445c720a3b65b86f98a5471e2f48bb228e4182f347ad038eecc1ab337a0",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202604/t20260412_192498.html": {
+    "hash": "e4755b60a4a905a1024243f3024713ce8f9a75513c02010eacaee70ba0c01fa7",
+    "at": "2026-07-13"
+  },
+  "bjiff-project-market|https://www.bjiff.com/dysc/dysc/202603/t20260330_192010.html": {
+    "hash": "0d351ef7c5997bf1456681e3d548679e19c754f354fb258988ba8012334d1842",
+    "at": "2026-07-13"
+  },
+  "goldenhorse-fpp": {
+    "hash": "946533212fec3b737dcf6311fb1404cb06326ab2e50b0a91e658ae784f5b9744",
+    "at": "2026-07-13"
+  },
+  "goldenhorse-fpp|https://www.goldenhorse.org.tw/film/programme/films/": {
+    "hash": "a7449ee51716536ed2a1f6c828c1ae559ba07a195eac13c2193d90aba7d851f3",
+    "at": "2026-07-13"
+  },
+  "goldenhorse-fpp|https://www.goldenhorse.org.tw/film/programme/schedule/": {
+    "hash": "0e1f63960c7d8b0d2ea9b1019810173db6f398cb1949a556510318a2332044bc",
+    "at": "2026-07-13"
+  },
+  "goldenhorse-fpp|https://www.goldenhorse.org.tw/film/programme/download/": {
+    "hash": "8ebdf3d68be7389e1e416347dfa0cde46fa73ccda52201895aa1a490770be251",
+    "at": "2026-07-13"
+  },
+  "goldenhorse-fpp|https://www.goldenhorse.org.tw/film/programme/related/": {
+    "hash": "1047af38c80104197787b2a5145682e26d4cf9c80131804127d214a17eb7571a",
+    "at": "2026-07-13"
+  },
+  "hkiff-haf-idp": {
+    "hash": "a34b2b24bd843ec6ca0f30e0b0ac9365ec700c81692723e4ac70f8a145018f02",
+    "at": "2026-07-13"
+  },
+  "hkiff-haf-idp|https://industry.hkiff.org.hk/sc/advisory?category_id=156": {
+    "hash": "e6381cafffae5f95d0f3f617956dfcab16ecf960bfc0660409ceb31ea881a5b5",
+    "at": "2026-07-13"
+  },
+  "tpac-fringe": {
+    "hash": "f4e1ac0491a2a63f432b3021f266f51f84a97061cd56cb6a6da1b49dfe97b669",
+    "at": "2026-07-13"
+  },
+  "weiwuying-news": {
+    "hash": "bb7491f5b4d234326e207cbc2916bb4470e14452f412d33ed7898e892cba55b2",
+    "at": "2026-07-13"
+  },
+  "ccdc-wudaoqingnian": {
+    "hash": "a08c81a06f68994cf6ab95d987d4c03bbcf47a961943f97acfde17d1c77d98e8",
+    "at": "2026-07-13"
+  },
+  "ccdc-wudaoqingnian|https://www.ccdc.com.hk/cnaf-ccdc/": {
+    "hash": "48a6e7a1fbad2a89f3e63dc198cf2695395436d0746e37010938440c3ce36af1",
+    "at": "2026-07-13"
+  },
+  "artsbird-news": {
+    "hash": "b327bb19b7cfd0bd38cac1fdf19a16c03e53945af18ffcaa2b28b0566e0004b8",
+    "at": "2026-07-13"
+  },
+  "dia-china-press": {
+    "hash": "0a3b18aa0062630a68e93315817245ee78a29346ad65ae3ba5fd202b0e0b6bd9",
+    "at": "2026-07-13"
+  },
+  "dia-china-press|https://www.di-award.org/zh/about.html?hash%3D42": {
+    "hash": "a644404886d4a2382e944262599dfc14c3829d586595be4f70f310791b09812f",
+    "at": "2026-07-13"
+  },
+  "goldenpin-design-award": {
+    "hash": "d3ef9103b059c3a96cafe25d4edcf2069be6ba55216d099b1bc502d67277fdf5",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq": {
+    "hash": "237a017925a2a45fd7a0c01a00e7bacc3c5592f9a2bb4599f6e1a7f263eff640",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/main/en/news/2040-2-2-2/": {
+    "hash": "bb1cecc02985266f495ecd85175fb979415838db3e866107ec28da9eb3a9cbb6",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/main/en/news/2040-2-3/": {
+    "hash": "7fa50bb70d2067eae3c9084d1e760ed822839d0526776b2c1a0686cb309495f8",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/main/en/news/2040-2-2/": {
+    "hash": "dd2471145a6d4b3edd52a2e073bee8851027f294889773986f7f4351dfece5d4",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/main/en/news/2040-2/": {
+    "hash": "2d306de58c6bd83eab528a0cbcba8d97caeed033d56461c219f3c937ad5a6d26",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://www.detour.hk/2024/": {
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://www.detour.hk/2023/": {
+    "hash": "3f3b3c9f94ad8132b62aefbb2a9e62a45bbf567687f25838ed721f777a9783f3",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/main/en/year_event/2022_designasone/": {
+    "hash": "15557051264d96b075f80c3c592ef21ca613dbb5758eaea8c9b6a729644f3a7f",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/archive/2020-matter-of-life/": {
+    "hash": "788c20bc0f8011861723d1a5cd4acf09d4c97dde30f58768530c06ac282f9fd3",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/archive/2019-new-old-old-new/": {
+    "hash": "28e75823c5cf5439546349c3cc8bec34f1790c6ee5e128cccee193749b1e921d",
+    "at": "2026-07-13"
+  },
+  "detour-hk-pmq|https://detour.hk/main/en/year_event/2021_usefuless/": {
+    "hash": "6a3b3944f6f020e13206f52a758240e7e1aaadf3657ae11d3b6068957c7ce972",
+    "at": "2026-07-13"
+  },
+  "dfa-awards-hkdc": {
+    "hash": "1d23f37a3b45478c37c3b7ec6edc1af92eab7fe052d2cd89348c0c0d0caf4365",
+    "at": "2026-07-13"
+  },
+  "szgda-kunpeng-sccda": {
+    "hash": "83dc9fae54630c0c1c060e1f506ef745855d849cc994d882d8ff419b36101415",
+    "at": "2026-07-13"
+  },
+  "cpaa-zhenggao-platform": {
+    "hash": "ce6e68c886a84bc472ea6d24142f5feb74b0439394b4a614d7167c924498b746",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong": {
+    "hash": "9a9facab282315ce0533903f2dd938875a18c654823217deeff5ebe2de523e43",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101304.html": {
+    "hash": "e2ba1e4f9ac1655e5be028928c070fc70e7114c60d6966032e73e45988ad8ed0",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101286.html": {
+    "hash": "e79bf031e907f3ad1ba862cecd9f046f69621e66e2d72fb8899bd0f237aba4cf",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101233.html": {
+    "hash": "72fa644c36c316099168305801f73bf33d715035783d76507ff374cddc45bfe8",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101287.html": {
+    "hash": "d6f832b6956fad879cceca263fc6414b44ae07db6de6cf115aaadb1913d41bed",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101309.html": {
+    "hash": "b19412fbbfb8ad6d2816c10011b9253add96efa3779e9994a1f7f16774637030",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101112.html": {
+    "hash": "618d08d7133c6b98c9565787e12620920757a8c1a4edce2b2cdb0d7082fdebcf",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101227.html": {
+    "hash": "d787aba54936a54f642a1f8e20c210876dde11a8b2a453205dd782f1d7955b8a",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101181.html": {
+    "hash": "0323b4fac23e19cce2b4056991bbae660ecb079a3a3a24f759327ee6290f0031",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101170.html": {
+    "hash": "6e44b35403160446f682f4cfc028e4479c22f50688247b2f91ad5b0c77b5165b",
+    "at": "2026-07-13"
+  },
+  "zhongguo-sheying-mag-huodong|https://www.cphoto.com.cn/content/article/101104.html": {
+    "hash": "27abfc2f58dc316219f29862827311d9d889d28f40a74e4ffe0b446efbae6d3d",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc": {
+    "hash": "34f608b1e328335d7f23d645168b577861b8af489c147fd30d77133f24f954d3",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/About/?Id=4084": {
+    "hash": "4a98852d84ef8c37155fe17869cf484bb49bf44c3e7c69bbcbc38efa31354b3b",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20077272657697": {
+    "hash": "27b2226029cf042de997e8e3d382a8be3e2f5895b92506ac7316d3790b28118c",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/SaiShi.aspx?Tid=20073373707139": {
+    "hash": "22eb41505f84d176c0d0bab8044c2aab5548fec61d10fe8a0f64bad724cc7d5f",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20074862746861": {
+    "hash": "acd065fec5a444902e1966f52efd7fe600b2a52aadcab141d1a66cd612bac5c7",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20123212552470": {
+    "hash": "1f65a5c28d4612a9eb40a89cfbb1ceac39b464fe80485ad555596dd8105ddb81",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20079955758401": {
+    "hash": "28edef1fefec1857030c079f9c10b815e5734685adae5ed2b23b7576adcae734",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20076551482278": {
+    "hash": "2dee0521263f99b5605ecc338a5a79889cef8bf92312327a8490bdc73cb6da41",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20074088213860": {
+    "hash": "bcaa5f976f59d67912df8c985a451bf68c5ff18f2c6ebbee68ac23e58fc58b98",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/YiShuRenSheng.aspx?Tid=20075204804419": {
+    "hash": "a3aec20562bcf1f88d9b25be1091497663b15e4df87689e667928659038d0ce8",
+    "at": "2026-07-13"
+  },
+  "guangdong-photographers-assoc|https://www.gdphoto.cn/News/?Tid=20092237059135": {
+    "hash": "e140abf17f1a7cfdd6a4b40b00b74bbd7593760bf43871182169cea26a59be1d",
+    "at": "2026-07-13"
+  },
+  "sichuan-photographers-assoc": {
+    "hash": "6cc0c52fa3305493dba064696cfd8128552230fd8bfb51c97828fb11a2360636",
+    "at": "2026-07-13"
+  },
+  "cac-media-residency": {
+    "hash": "a62c3fe1ba041fa145354e44816b4869a6e4c29342f97dda72f3f7f5443f62b3",
+    "at": "2026-07-13"
+  },
+  "cac-media-residency|https://chronusartcenter.org/residency/cac-ruishiwenhuajijinhui2024-zhuliuhezuojana-vanecek/": {
+    "hash": "3ae77f00aff489826d19c819bcd9a71b719c1948850467e65ded89c19f7fa329",
+    "at": "2026-07-13"
+  },
+  "cac-media-residency|https://chronusartcenter.org/residency/cac-atelier-feeling-recordings/": {
+    "hash": "b1755589ef5beff5ff6fd8baec0e45c9a1a5453cdf4788ec4385b937312655bb",
+    "at": "2026-07-13"
+  },
+  "cac-media-residency|https://chronusartcenter.org/residency/cac-open-studio-floating-bones/": {
+    "hash": "435bb754fc3b926c551b451e850b84fefd32a775efc447494c349d4e9a09d0fa",
+    "at": "2026-07-13"
+  },
+  "cac-media-residency|https://chronusartcenter.org/residency/cac-artist-talk-harddiskmuseum-meeting-and-artists-community/": {
+    "hash": "bd36a6e0afb18b38be26c1094d08000fd1b4dadf2d6cf0327632f19f83dc1bb3",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news": {
+    "hash": "90b50b5da2b3d4c977ebbe444d6864e47ca8cd7e4e59b75f1aca7255f4ab4a3d",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/231307.html": {
+    "hash": "7ccd701bb86762ff1a847f58fb10632c2e475750658b679063b8956df1521e22",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/231216.html": {
+    "hash": "7eb48d5a85534fb4e2f1d94b35ba19fd91df8781d370f483dd771558c081179f",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/230952.html": {
+    "hash": "2bbe83176158a575271b396d49aa8b54698e41db598cf9009afe8f6fe6b1af1a",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/229910.html": {
+    "hash": "841ea6d4cd4d506e450a4848072602c85a1b7c03684167829da659cfb0daded8",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/229700.html": {
+    "hash": "c04c641a313319a0548edbf6cefb3c234d6c86e3685a28ee31f8656b90901a79",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/229474.html": {
+    "hash": "ec99c67ef83fa4a84d60601e9f5a3e5433ff2709ecd298b169c1da742a8044ac",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/228790.html": {
+    "hash": "ab64fcc5be7b477ca6f37f5425b4a151a077c2304082ec3ef624a7761800dfe7",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/228674.html": {
+    "hash": "27ecc1c68c98c30dca800e9feb93817caf9582b206ad4d7ea7450850c89c290c",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/228344.html": {
+    "hash": "e39420b614daac2dc3d952766e335ef26c5927810c5b822566a81ea3d90d6abd",
+    "at": "2026-07-13"
+  },
+  "dac-taipei-opencall-news|https://dac.taipei/latest-news-zh/227897.html": {
+    "hash": "c3858cbee0407d18c7b92003dbfe9020b54a2e09826d8b39c83f560b04a0f45b",
+    "at": "2026-07-13"
+  },
+  "hyundai-blue-prize-opencall": {
+    "hash": "889b87cc16f6670d324006bff0c3fe32b46f2aca48d140447ac293fbbc10a4d1",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall": {
+    "hash": "fe7dde96cc71f9cdc0ab1c2072a2b703a6783998a812491c6edbc28bb1c5edc1",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc/cont?xsmsid=0G289653379916935418": {
+    "hash": "610e964574407b4173c68238a3ba4a6baffa8f26e485b68b4998793c44f51fba",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc/cont?xsmsid=0G289652950564218832": {
+    "hash": "bf88cb4bb3242a12a10d6bc4be38ef16c01578a33afbbe32488e3ea9ec7e0bc6",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc?xsmsid=0L159363768901208901": {
+    "hash": "8bbacc1a16e11dc2bbe969942c1caf6667155cd6399cffc8a0b8ec28c131a777",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc?xsmsid=0L195632349711077474": {
+    "hash": "c697060a49563127e2a0614e21d51970648e962c60c4726f64aab48ee59a749e",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmlink?xsmsid=0G289658737925840672": {
+    "hash": "c0dccb0c77c6b254b1ce2b006820d1fceee12867df9386cb2745ae6f2af7c4d7",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc?xsmsid=0L196418676818644838": {
+    "hash": "3dc47456d04fad73ba87e917f96ae95a5577671813d85db04a1bc1f5f0d09a62",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc/cont?xsmsid=0G289653561917500445": {
+    "hash": "cbcef7ac52e6ad6bf48f21a7180cd6b96f47c727487a1bc10d985a24b2c34b21",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc/cont?xsmsid=0J149505817291406144": {
+    "hash": "ac0994595fe93ecbd362ae4fb00f25e14be551710904127b291f89dc9eec2aef",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc/cont?xsmsid=0J151645318736764443": {
+    "hash": "5d461f99d779454f4280c264b9b7d1cd3465ea8a8c92bb59621dea9591ed51d6",
+    "at": "2026-07-13"
+  },
+  "yingge-ceramics-opencall|https://www.ceramics.ntpc.gov.tw/xmdoc/cont?xsmsid=0G289653878181469975": {
+    "hash": "9570ccf427ffd6b85869e2a73eff1d8f8e5e6d734acedc1f1f5bf137e69d63f3",
+    "at": "2026-07-13"
+  },
+  "sz-design-center-competition": {
+    "hash": "06118b84d96042b3396dab3789addc9a3a4b9954ccba3f2a1e90625d552a3d73",
+    "at": "2026-07-13"
+  },
+  "hkia-awards": {
+    "hash": "33ed57f7a9109a5fb50ab2767093f714800151cc997cfee1bdc4def454c6ab2c",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices": {
+    "hash": "b31c8010eeb49323f4f635b34cb4525fdb7bafc203e3793d6f314be26d2b69a6",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|https://www.chinaasc.org.cn/news/127270.html": {
+    "hash": "fce51311c26445eead3c471b72ca06606516b8f2e5b7cc13539ffedb6af00b2e",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|https://www.chinaasc.org.cn/news/127334.html": {
+    "hash": "63847c58c9c3b7c9f462414d2d4ecc33a5bfe35a74327c9a5dbf9b32e84d8670",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129632.html": {
+    "hash": "47040b7ac33c008b0300302eb61ca1c4a2c193f56326e5ba4e214a3a584d5346",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129624.html": {
+    "hash": "68eb0889afba515a405a1c68d8a4ba03d4d8bb796a64b1580a53e281a846fc43",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129627.html": {
+    "hash": "34317e38ef7bf0cf65bf06bd4387523d0bbf780691c2d42dc799a568b2880305",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129622.html": {
+    "hash": "b6c3a94aa9072949b3f55f98e0bfe24cc165d2327f330d1881cad295ded7b624",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129621.html": {
+    "hash": "d075caab0c8d6873c83879aab19909b5f9d72f26b04d8ed5d5b91d71a5ba4095",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129619.html": {
+    "hash": "69171e06eb560f5300f67eaa5f7758aef9fa36a414d93dbc41afbde03c7259a0",
+    "at": "2026-07-13"
+  },
+  "chinaasc-notices|http://www.chinaasc.org.cn/news/129615.html": {
+    "hash": "100fb0bbcb3c7e162575feb8a71c7aa760e99f3f4672b93884c3823455dbb2c9",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide": {
+    "hash": "91dd20ca6ca384a82d6fb23bad1deb8044932223b0adc5206a5def759f092f59",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/zzcg_list/list_num/14.html": {
+    "hash": "963924494e2b192635d6f9f02fa6169966cb71b33a84814a60001f78bee582d1",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/zzcg_list/list_num/15.html": {
+    "hash": "b8fde1dc38438ff3448aa133f6dbab6c89b3aa5ef9a4a3db4d1adc381af1f537",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/zzcg_list/list_num/16.html": {
+    "hash": "6d7eb2ba7b12dc8d724176c804f1b5fced46931a8d0cbd876b21795efa7ab26b",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/zzcg_list/list_num/17.html": {
+    "hash": "55ed748aa909fd390a079fca3d4b5b7e0f81683f2278736ddca6783da7c46b3b",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/zzcg_list/list_num/19.html": {
+    "hash": "890ebb71be5137707c76f88d350ba33e5c6efa1c14913203fca41082735fa7e5",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/zzcg_list/list_num/18.html": {
+    "hash": "f8a709b95ab764895b4b75eb6875a06477277d4847e12cf45ee3dbba4bb0001e",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/guide_detail/5546.html": {
+    "hash": "88e679928b6db1ef4b95a092bbefb1397243b233e05bf669aeb2f9a51708b9d9",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/guide_detail/5547.html": {
+    "hash": "b6296dfab49e3c105ce7c6531c834714b164480f3f8246c76cc96a7743179220",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/guide_detail/5548.html": {
+    "hash": "4c928d1e2d1d935d7a588574be274235a7d3b03f17c0c366a40fe5b8a99f050f",
+    "at": "2026-07-13"
+  },
+  "cnaf-guide|https://www.cnaf.cn/guide_detail/5549.html": {
+    "hash": "adbf001a0620a49a987a108d2f5232107585c8ae4f3b1062696d0eff5bebc550",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt": {
+    "hash": "ba91e02030c3e402ad9fa781f9b408a51ddf5a1f0534ba249f5bf4332fdc2e5d",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/6b0adc84-064e-4bc0-b62c-356c049abd24.html": {
+    "hash": "268e63e5c6664b422adeb5d9ffb6840200f27f80668a4bd0948484e7a722a6a1",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/6c885601-5202-425b-80c7-0cca9348d3f7.html": {
+    "hash": "7b03979130c3d9ee2006fa8b59052f02f3088b30457175c0bb569404b15c7d78",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/cb765ae3-7bc0-49dd-8bec-02b5b8566d06.html": {
+    "hash": "b41110b373ae5901e7bc8f2558a0c755c7da56ad3ce2f889326524e1acb352be",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/80084f0f-71cd-4abe-9ff5-cce344e9fbeb.html": {
+    "hash": "eed3a2a1b0e18f43ab64ba472387e39700454fe3e9fe0b07b4caad2d77c2911f",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/03a38ec5-4fa8-426e-ae50-fddad0bc9a2c.html": {
+    "hash": "14196d4d42f549ffc99d501086ad9a767a2c30ceac31a8d7715a7dcda0f0e88b",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/50236c10-fd8c-4eba-b282-eb2cf566dd34.html": {
+    "hash": "1b76de927887fc996bbf29293707f851c026ffd015e2514b4cf2b58c8f1b6fe9",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/54aa979d-99ea-4f17-af08-c819f71b5e89.html": {
+    "hash": "44dadb487c79b779f5e9c14dc537f33ddf2c0631c7ad713792c8e10284ddd06c",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/cd22c90a-3174-41c1-ad8d-09bda2bf53ff.html": {
+    "hash": "bd13ff7ec882b438adc881de4be36acae6bc3362a42cf4513177cf8c30317dba",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/7e02028a-6a2b-4a48-bf40-f51e205e33f5.html": {
+    "hash": "eb9a1366516c8b3113e520c90e7a1955ee013fb85f30c9c446cfa485b63d1240",
+    "at": "2026-07-13"
+  },
+  "shcdf-jjhdt|https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/adb68f0a-ccd8-47ed-b5d3-0fbe58dd3a12.html": {
+    "hash": "65006755bca4021fd4fbeebc74d31a7e643d6d70568206b3d61ed499b1c18293",
+    "at": "2026-07-13"
+  },
+  "gdarts-news": {
+    "hash": "1e15f66954cfbc5c5370c734005c35ff44df83c75258d98ca01fc6b0790e8b0d",
+    "at": "2026-07-13"
+  },
+  "gdarts-news|https://www.gdarts.com/GdArtWeb/Art_Info/2702": {
+    "hash": "0b60bede8c1d4dc6dd406cc200b93be1c9c6e08d28f1990da67b4110ce65d999",
+    "at": "2026-07-13"
+  },
+  "gdarts-news|https://www.gdarts.com/GdArtWeb/Art_Info/2621": {
+    "hash": "7535f0931af77e3386fdf4c9f2e30a12d6350648be7e87a15478a6dcffbbe803",
+    "at": "2026-07-13"
+  },
+  "gdarts-news|https://www.gdarts.com/GdArtWeb/Art_Info/2442": {
+    "hash": "c62d1811fb8299b0c0458273540a3b6ef3ff47bca64d7ef9f91e5f79b934d086",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg": {
+    "hash": "a3d697c9293c58dd86a0eb6b3777a93260f80de42b282074a3e31591d58e0815",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/rsxx/202607/t20260710_4757017.html": {
+    "hash": "6c28858591a0141bb6910f26f9b708558545897a1250235b54b44bdd944dacc3",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/zfcg/202607/t20260709_4754070.html": {
+    "hash": "436279c0eb48862235802dd3fb7cc1ceadb0bf90ddce6427d170e55fbe03cc1e",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/zfcg/202607/t20260708_4751496.html": {
+    "hash": "bef6f715ba72d26c7584c1cd0dfef6de868e8625f1f13fd801d5cecf2e70c22f",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zwgk/tzgg/202607/t20260703_4745946.html": {
+    "hash": "21cc6a0707bd48d9a00a0fa078131c900b531c24c68e6f7492101e10f4727f9e",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zwgk/2024zcwj/202607/t20260703_4745064.html": {
+    "hash": "381d3f76eb6a293f5ec8466404bf8d8ac71e5e760667b429829d765c635a1478",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/rsxx/202607/t20260703_4744966.html": {
+    "hash": "fd9d54b3ae855ac6507c36be15df3d375d48853846b2aea3f276c528a5f5f741",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/rsxx/202607/t20260703_4744955.html": {
+    "hash": "1e6f9146a4edd4c1a198c25bfaccaa269ee1c041f8cc6fdd4bd958ab2765a60f",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/zfcg/202607/t20260701_4741607.html": {
+    "hash": "4dc584027338324eace42ed46b91bfa95c0f98ea619f5ff50cba92000b9a2053",
+    "at": "2026-07-13"
+  },
+  "bj-whlj-tzgg|https://whlyj.beijing.gov.cn/zwgk/2024zcwj/202606/t20260630_4740621.html": {
+    "hash": "f2c3da0ad48900508f9c1383f553b02796d60729e992fde02645784f3b9f3a91",
+    "at": "2026-07-13"
+  },
+  "claf-news": {
+    "hash": "36cf8a81fbfcfb1718e55f6938a25076497f49e6d532f347d23de104392c36ab",
+    "at": "2026-07-13"
+  },
+  "claf-news|http://www.claf.org.cn/news/news_article_51.html": {
+    "hash": "be1c8414ba9090b298ee59814901fd1163b1eb112a57b889045820d497a8ec60",
+    "at": "2026-07-13"
+  },
+  "claf-news|http://www.claf.org.cn/news/news_article_10.html": {
+    "hash": "8c4641e7f24748dcb43276b207d42aac4a38157d86ada99b2bb5c8c205870922",
+    "at": "2026-07-13"
+  },
+  "claf-news|http://www.claf.org.cn/news/news_article_1.html": {
+    "hash": "23f9ff1af29f1fd508221a03411ad7ae5c4409ac2d322da15413dd0fdbf5ab55",
+    "at": "2026-07-13"
+  },
+  "claf-news|http://www.claf.org.cn/news/news_article_5.html": {
+    "hash": "4d0c3ba2d89ba601114473ec7d8bc7e8c6d2b47d302f89dfbf8722a352f7be8b",
+    "at": "2026-07-13"
+  },
+  "claf-news|http://www.claf.org.cn/news/news_article_22.html": {
+    "hash": "f2685ce1febe7bb33593ba8963f82b517a50e6ace204cd38a84241dafccafdab",
+    "at": "2026-07-13"
+  },
+  "claf-news|http://www.claf.org.cn/news/news_article_24.html": {
+    "hash": "9c0156f473aa645be3828c435a84c021b74619ceca3347339a320b77e86d9dee",
+    "at": "2026-07-13"
   }
 }
