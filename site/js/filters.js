@@ -13,18 +13,21 @@
     discs: new Set(),
     verifiedOnly: false,
     sort: "deadline",
-    showExpired: false,
+    showPast: true,        // 默认显示"过往项目"(灰卡)
+    showUpcoming: true,    // 默认显示"即将开启"(周期展下届推算)
     favOnly: false
   };
 
   AP.hasActiveMoreFilters = function () {
     return state.regions.size || state.freeOnly || state.funds.size ||
-           state.discs.size || state.verifiedOnly;
+           state.discs.size || state.verifiedOnly ||
+           state.showPast === false || state.showUpcoming === false;
   };
 
   AP.clearMoreFilters = function () {
     state.regions.clear(); state.freeOnly = false; state.funds.clear();
     state.discs.clear(); state.verifiedOnly = false;
+    state.showPast = true; state.showUpcoming = true;   // 复位为默认全显
   };
 
   // 主流程:返回过滤+排序后的数组
@@ -35,12 +38,12 @@
       if (state.favOnly && !AP.favorites.has(o.id)) return false;
       // dead 状态永不显示
       if (o.status === "dead") return false;
-      // 分类("预测展览"是特殊视图:只看周期明确、可推算下届的双年展/三年展)
-      if (state.cat === "predict") { if (!F.cadence(o)) return false; }
-      else if (state.cat !== "all" && o.category !== state.cat) return false;
-      // 已截止:默认隐藏(常年 deadline=null 的不算过期)。
-      // 例外:周期明确的复发型展览(双年展/三年展)即便本届已截止仍保留 —— 它带"下届开放推算",有前瞻价值。
-      if (!state.showExpired && F.isExpired(o) && !F.cadence(o)) return false;
+      // 分类
+      if (state.cat !== "all" && o.category !== state.cat) return false;
+      // 三态显示范围:open 恒显;past/upcoming 默认显示,用户可在"更多筛选"里关掉
+      var st = F.itemState(o);
+      if (st === "past" && !state.showPast) return false;
+      if (st === "upcoming" && !state.showUpcoming) return false;
       // 关键词
       if (q && F.searchText(o).indexOf(q) === -1) return false;
       // 地区
@@ -76,10 +79,12 @@
     return out;
   };
 
+  // 排序分层:正在开放 → 即将开启 → 过往项目,组内再按日期。
   function deadlineRank(o) {
+    var st = F.itemState(o);
     var n = F.daysUntil(o.deadline);
-    if (o.deadline == null || n == null) return 1e9;      // 常年 → 末尾
-    if (n < 0) return 1e8 + n;                             // 已过期 → 靠后但保留相对序
-    return n;                                              // 未来天数越小越靠前
+    if (st === "open") return (o.deadline == null || n == null) ? 5e8 : n;   // 未来越近越前;常年排开放组末尾
+    if (st === "upcoming") return 1e9 + (n == null ? 0 : n);                 // 即将开启组
+    return 2e9 + (n == null ? 0 : n);                                        // 过往组置底
   }
 })();

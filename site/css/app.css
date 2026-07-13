@@ -142,6 +142,7 @@ img { max-width: 100%; display: block; }
 .morefilters__header, .morefilters__footer { display: none; }
 .morefilters__body { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 28px; padding-top: 8px; }
 .fgroup__title { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-3); text-transform: uppercase; }
+.fgroup__hint { margin: 8px 0 0; font-size: 12px; line-height: 1.5; color: var(--ink-3); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   display: inline-flex; align-items: center; gap: 6px;
@@ -180,6 +181,17 @@ img { max-width: 100%; display: block; }
 .card__tags-l { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 /* 周期展标记:一眼看出该卡片可推算下届开放 */
 .predict-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: #fff; background: var(--warn); white-space: nowrap; }
+.past-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: #fff; background: var(--ink-3); white-space: nowrap; }
+
+/* 过往项目:整卡偏灰,弱化但不删除,保留可读与可点 */
+.card--past { background: #FAFAF9; box-shadow: none; border-color: var(--line-2); }
+.card--past .card__media { filter: grayscale(0.9); }
+.card--past .card__media img, .card--past .card__fallback { opacity: 0.72; }
+.card--past .card__body { opacity: 0.66; }
+.card--past .card__title-link { color: var(--ink-2); }
+.card--past:hover { opacity: 1; box-shadow: var(--shadow); }
+.card--past:hover .card__body { opacity: 0.9; }
+.card--past:hover .card__media { filter: grayscale(0.3); }
 .cat-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: #fff; }
 .cat-tag[data-cat="opencall"]  { background: var(--c-opencall); }
 .cat-tag[data-cat="residency"] { background: var(--c-residency); }

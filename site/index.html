@@ -59,7 +59,6 @@
         <button class="tab" data-cat="residency"><span class="tab__dot" data-cat-dot="residency"></span><span data-i18n="cat_residency">驻留项目</span></button>
         <button class="tab" data-cat="award"><span class="tab__dot" data-cat-dot="award"></span><span data-i18n="cat_award">艺术奖项</span></button>
         <button class="tab" data-cat="workshop"><span class="tab__dot" data-cat-dot="workshop"></span><span data-i18n="cat_workshop">工作坊</span></button>
-        <button class="tab tab--predict" data-cat="predict"><span class="tab__dot" data-cat-dot="predict"></span><span data-i18n="cat_predict">预测展览</span></button>
       </nav>
 
       <div class="controls__row2">
@@ -75,10 +74,6 @@
             <option value="updated" data-i18n="sort_updated">最近更新</option>
           </select>
         </div>
-        <label class="switch">
-          <input type="checkbox" id="showExpired" />
-          <span data-i18n="showExpired">显示已截止</span>
-        </label>
         <span class="result-count" id="resultCount" aria-live="polite"></span>
       </div>
     </div>
@@ -92,6 +87,14 @@
         <button class="icon-btn morefilters__close" id="moreClose" type="button" aria-label="关闭">✕</button>
       </div>
       <div class="morefilters__body">
+        <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_scope">显示范围</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" id="showPast" checked /><span data-i18n="scope_past">过往项目</span></label>
+            <label class="chip chip--check"><input type="checkbox" id="showUpcoming" checked /><span data-i18n="scope_upcoming">即将开启</span></label>
+          </div>
+          <p class="fgroup__hint" data-i18n="scope_hint">默认全部显示。取消勾选即可只看正在开放的机会。</p>
+        </section>
         <section class="fgroup">
           <h3 class="fgroup__title" data-i18n="f_region">地区</h3>
           <div class="chips" id="regionChips">

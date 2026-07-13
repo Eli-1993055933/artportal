@@ -40,6 +40,13 @@
     return n != null && n < 0;
   };
 
+  // 条目三态:open(正在开放,含常年)/ upcoming(本届已过但周期可推算下届 → 即将开启)/ past(过往项目)
+  F.itemState = function (o) {
+    if (!F.isExpired(o)) return "open";
+    if (F.cadence(o)) return "upcoming";
+    return "past";
+  };
+
   // 截止日期渲染 → { text, cls }
   F.deadline = function (o) {
     if (o.deadline == null) return { text: AP.t("rolling"), cls: "due-none" };

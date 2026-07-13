@@ -148,9 +148,11 @@
       rerun();
     });
 
-    // 排序 / 显示已截止
+    // 排序
     $("sortSelect").addEventListener("change", function () { st.sort = this.value; rerun(); });
-    $("showExpired").addEventListener("change", function () { st.showExpired = this.checked; rerun(); });
+    // 显示范围:过往项目 / 即将开启(默认勾选,取消即隐藏对应组)
+    $("showPast").addEventListener("change", function () { st.showPast = this.checked; rerun(); });
+    $("showUpcoming").addEventListener("change", function () { st.showUpcoming = this.checked; rerun(); });
 
     // 更多筛选:开关(桌面内联 / 手机底部抽屉,同一元素)
     var moreFilters = $("moreFilters"), moreToggle = $("moreToggle");
@@ -188,6 +190,7 @@
     // 清除筛选
     function clearAll() {
       AP.clearMoreFilters();
+      $("showPast").checked = true; $("showUpcoming").checked = true;
       $("freeOnly").checked = false; $("verifiedOnly").checked = false;
       var fb = document.querySelectorAll("[data-fund]"); for (var k = 0; k < fb.length; k++) fb[k].checked = false;
       var chips = document.querySelectorAll("#regionChips .chip, #discChips .chip");
