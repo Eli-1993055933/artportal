@@ -1852,6 +1852,767 @@
       "confirmed": false,
       "discipline_hint": "综合",
       "notes": "curl HTTP 200, 85628字节。命中机构名『中国文学艺术基金会』;服务端渲染列表含真实征集条目如『...面向全国征集手机影像作品』(征集x2)。中国文联下属基金会,资助含文学/影像/戏剧/音乐等11类。robots.txt HTTP200:Allow /,仅禁/api/、/user_center/,目标/news_list.html允许→allow。(注:special_funds_list.html?category=literature为JS空壳0关键词,故不选该URL)"
+    },
+    {
+      "id": "gp_golden_pinwheel",
+      "org_zh": "中国上海国际童书展(CCBF)·金风车国际青年插画家大赛",
+      "name_zh": "金风车国际青年插画家大赛 参赛规则/全球征稿",
+      "url": "https://www.ccbfgoldenpinwheel.com.cn/cn/index/introduction",
+      "domain": "ccbfgoldenpinwheel.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "插画/绘本",
+      "notes": "HTTP200,41846字节;命中 插画x52/金风车x19/全球x7/参赛x11/征稿/征集/截止/报名。2025届78国2435位插画师投稿,16-45岁全球征集,明确对中国及国际艺术家开放。robots:User-agent:* Disallow:(全允许)。上海市新闻出版局指导、CCBF主办的官方国际插画赛事。"
+    },
+    {
+      "id": "cacc_jinlong",
+      "org_zh": "中国国际漫画节(CICF)·中国动漫金龙奖 CACC",
+      "name_zh": "中国动漫金龙奖 全球征稿",
+      "url": "http://www.cicfcn.com/cacc",
+      "domain": "cicfcn.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "漫画/动画/动漫",
+      "notes": "HTTP200,152755字节(非JS空壳,服务端渲染);命中 金龙奖x32/CACC x8/中国动漫x25/征稿x8/参赛x5/投稿x2。华语动漫权威官方奖,面向全球公开征集。/robots.txt 返回站点HTML首页即无robots文件→none(未禁本UA)。粤ICP备19026419号,官方节展。"
+    },
+    {
+      "id": "jinhou_cicaf",
+      "org_zh": "中国国际动漫节·金猴奖(中央广播电视总台)",
+      "name_zh": "金猴奖 原创动漫作品全球征集",
+      "url": "https://jhj.cicaf.com/information",
+      "domain": "cicaf.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "动画/漫画/动漫",
+      "notes": "HTTP200,39500字节;命中 金猴奖x21/中国国际动漫节x19/全球征集x1/参赛x83/报名x9。境内外原创动漫作品(动画电影/系列片/短片/漫画)均可参赛,面向全球征集。robots:User-agent:* Disallow:(全允许)。中央广播电视总台主办官方赛事。"
+    },
+    {
+      "id": "indieplay_ciga",
+      "org_zh": "CiGA 中国独立游戏联盟",
+      "name_zh": "indiePlay 中国独立游戏大赛",
+      "url": "https://www.ciga.me/indieplay",
+      "domain": "ciga.me",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "独立游戏/游戏艺术",
+      "notes": "HTTP200,约1.41MB(服务端渲染含正文);命中 indiePlayx138/CiGAx159/submissionx4/征集x2/报名x1/独立游戏x16。2015年起中国最高品质独立游戏大赛,设最佳美术等奖项(游戏艺术)。robots仅Disallow SemrushBot/BlackWidow,本UA ArtPortalBot未被禁→allow。注:官方短域 indieplay.cn 会302/meta跳转至商业站 gmhub.com,故收录主办方CiGA官网栏目页。"
+    },
+    {
+      "id": "cfa-zxzx",
+      "org_zh": "中国服装设计师协会",
+      "name_zh": "会员动态·最新资讯（汉帛奖/中国国际时装设计创新大赛征稿）",
+      "url": "https://www.fashion.org.cn/2023xb/2023hydt/2023zxzx/",
+      "domain": "fashion.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "时尚/服装设计",
+      "notes": "HTTP 200, 16057字节; 命中 征稿/报名/大赛; 中国服装设计师协会官方'最新资讯'列, 第34届汉帛奖国际青年设计师时装作品大赛征稿启事(/…202604/t20260423)与中国国际时装设计创新大赛均发布于此; 汉帛奖国籍/地区不限=对国际(含中国)开放; robots.txt 返回404=none, 允许"
+    },
+    {
+      "id": "thu-ad-xwdt",
+      "org_zh": "清华大学美术学院",
+      "name_zh": "新闻动态（含'从洛桑到北京'国际纤维艺术双年展征集启事）",
+      "url": "https://www.ad.tsinghua.edu.cn/xw/xwdt.htm",
+      "domain": "ad.tsinghua.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "纤维艺术/工艺美术/设计",
+      "notes": "HTTP 200, 39129字节; 命中 招募×2/启事; 清华美院主办'从洛桑到北京'国际纤维艺术双年展, 官网首页现挂'…作品展暨学术研讨会征集启事'(征集×3); 该双年展汇集53国艺术家, 面向全球艺术家/设计师=国际开放; robots.txt 返回404=none, 允许"
+    },
+    {
+      "id": "cnacs-home",
+      "org_zh": "中国工艺美术学会",
+      "name_zh": "首页·通知公告/技艺大赛（纤维·首饰·工艺征集）",
+      "url": "https://www.cnacs.net.cn/",
+      "domain": "cnacs.net.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "工艺美术/纤维艺术/当代首饰",
+      "notes": "HTTP 200, 90785字节; 命中 报名×5/大赛×9/通知公告; 中国科协下属国家一级学会, 设'纤维艺术与设计专业委员会', 主办'中艺杯'工艺美术作品大赛(综合组含首饰)、全国大学生毕业作品大赛(含纤维/首饰); 真实条目如'…大赛参赛报名表'; 多为国内赛事; 列页/12=通知公告、/83=技艺大赛; robots.txt 返回404=none, 允许"
+    },
+    {
+      "id": "cifw-home",
+      "org_zh": "中国服装设计师协会",
+      "name_zh": "中国国际时装周·官方资讯（设计师/品牌征集·大赛·招募）",
+      "url": "https://www.chinafashionweek.org.cn/",
+      "domain": "chinafashionweek.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "时尚/服装设计",
+      "notes": "HTTP 200, 112189字节; 命中 招募×3/报名×3/征集×2/大赛; 中国服装设计师协会主办的中国国际时装周官方站, 含设计师/品牌参加征集与专项大赛; 含'志愿者招募'等噪声需过滤; 与 fashion.org.cn 同属协会但不同域/内容(时装周 vs 赛事征稿); robots.txt 返回404=none, 允许"
+    },
+    {
+      "id": "cafa-diaosuxi-news",
+      "org_zh": "中央美术学院雕塑系(含曾竹韶雕塑艺术奖学金)",
+      "name_zh": "雕塑系 新闻/通知(征稿·征集·奖学金)",
+      "url": "http://dsx.cafa.edu.cn/news.html",
+      "domain": "dsx.cafa.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "雕塑/公共艺术",
+      "notes": "curl(ArtPortalBot UA) HTTP 200 0.85s, 161842 bytes。服务端渲染真实列表(非JS空壳)。命中 征集x21/公告x16/通知x13/征稿x12/报名x4;机构与主题标识 雕塑x588/奖学金x88/曾竹韶x74。这是中央美术学院雕塑系官方子站(dsx=雕塑系);主域 cafa.edu.cn 另有全校通知公告(信源 cafa-tzgg),此子站为雕塑/公共艺术专业专栏,承载全国性『曾竹韶雕塑艺术奖学金』(每年6-8月征集,面向大陆及港澳台高校雕塑专业)与雕塑系征稿。robots.txt 返回 IIS 自定义404页(gb2312)=无规则→none。另 http://dsx.cafa.edu.cn/zzs_index.html 为奖学金专页(HTTP200,8590字"
+    },
+    {
+      "id": "echigo-tsumari-opencall",
+      "org_zh": "越後妻有 大地藝術祭(Echigo-Tsumari Art Field / Triennale)",
+      "name_zh": "News / Open Call(作品公开征集)",
+      "url": "https://www.echigo-tsumari.jp/en/news/",
+      "domain": "echigo-tsumari.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "大地艺术/公共艺术/雕塑",
+      "notes": "curl HTTP 200 0.39s, 69428 bytes。服务端渲染(WordPress)非空壳。列表durable命中开放征集标题『Open call — Call for Entries for the 10th Echigo-Tsumari Art Field [Updated Apr 25 2026]』;Open call/Call for/Triennale x6/Art Field x14。第10届(2027)全球公开征集,制作补助 50万-250万日元,可邮寄/邮件投稿。国际开放性核实:页面及英文导则未硬性限定国籍;系公认的国际大地艺术三年展(历届30+国家艺术家参与、设 CHINA HOUSE华园,多位中国艺术家参展)→对国际/中国艺术家开放;具体资格详见其英文 Guidelines P",
+      "trust_auto": true
+    },
+    {
+      "id": "sbs-bondi-submissions",
+      "org_zh": "Sculpture by the Sea(海边雕塑展,悉尼邦迪)",
+      "name_zh": "Artist Submissions(艺术家作品征集)",
+      "url": "https://sculpturebythesea.com/bondi/artists-and-awards/artist-submissions/",
+      "domain": "sculpturebythesea.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "公共艺术/户外雕塑",
+      "notes": "curl HTTP 200 1.68s, 39030 bytes。服务端渲染(WordPress)非空壳。命中 Sculpture by the Sea x14(机构确认)/submission x15/Call for x2/apply。全球著名户外公共雕塑展(邦迪→塔玛拉玛海岸步道),每年逾100位本地/州际/国际艺术家参展。国际开放性核实:征集页未限定仅澳籍(仅部分奖项按国别设立——Helen Lempriere/Clitheroe 为澳籍、Danish Artist Award 为丹麦籍,反证总体投稿面向各国艺术家)→对国际/中国艺术家开放。robots.txt:User-agent:* Disallow /wp-admin/ /trackback/ /xmlrpc.php /feed/,目标路径未被禁",
+      "trust_auto": true
+    },
+    {
+      "id": "aec-opencalls",
+      "org_zh": "奥地利电子艺术节(Ars Electronica）",
+      "name_zh": "Open Calls 征集专栏",
+      "url": "https://ars.electronica.art/news/en/opencalls/",
+      "domain": "ars.electronica.art",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "数字/新媒体艺术、交互艺术、新动画、声音与媒体艺术",
+      "notes": "HTTP200,47745字节;命中 Open Call×7/Submission×8/deadline×6/residency;org=Ars Electronica×9。robots.txt 仅禁 /wp-admin/,目标路径允许。国际开放已核实:Prix/STARTS 面向全球无国籍限制——在 /prix/en/opencall/(HTTP200,129599字节)核到 international 及 Open Call×7/Submission×6/deadline。此为开放征集专栏列表页,聚合 Prix/STARTS/驻留等多个 open call。"
+    },
+    {
+      "id": "transmediale-feed",
+      "org_zh": "transmediale(柏林媒体艺术节)",
+      "name_zh": "News / Open Call 动态",
+      "url": "https://transmediale.de/en/feed",
+      "domain": "transmediale.de",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "媒体艺术、数字文化、网络艺术、声音",
+      "notes": "HTTP200;/en/news 跳转至 /en/feed(374032字节);命中 Open Call×16/Deadline×19/Call for×4/apply×6/residency×37;国际:international×4/worldwide×1;org=transmediale×9。站点为 SvelteKit,征集内容以内嵌 JSON 随 HTML 一并返回,curl 可取到文本。robots.txt 返回 SPA 页面(无 robots 规则,视为 none)。对全球艺术家/研究者开放。",
+      "trust_auto": true
+    },
+    {
+      "id": "ems-air",
+      "org_zh": "瑞典电子音乐工作室(EMS Elektronmusikstudion）",
+      "name_zh": "Artist in Residence 驻留征集",
+      "url": "https://elektronmusikstudion.se/en/our-studios/ems-artist-in-residence-program/",
+      "domain": "elektronmusikstudion.se",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "电子原声音乐、声音艺术驻留",
+      "notes": "HTTP200,95015字节;命中 apply×2/Submission;国际开放明确:International×2 且写明 'based outside Sweden'(面向瑞典境外的专业作曲家/声音艺术家),对中国等国际艺术家开放;org=Elektronmusikstudion/EMS 多次。robots.txt: User-agent:* Disallow:(空,全站允许)。下一申请期 2026-12-01 开放;滚动动态另见 /en/aktuellt/。"
+    },
+    {
+      "id": "ctm-festival-home",
+      "org_zh": "CTM Festival(柏林前卫音乐与艺术节)",
+      "name_zh": "首页 Open Call 动态",
+      "url": "https://www.ctm-festival.de/",
+      "domain": "ctm-festival.de",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "实验音乐、声音艺术、广播艺术(Radio Lab)",
+      "notes": "HTTP200,154317字节;首页内嵌当前征集 'Resynthesising the Traditional Lab — Open Call … dedicated to sonic arts and experimental music. Apply by 8 August 2026';命中 Open Call×2/Apply×2/worldwide×2;org=CTM×51。Radio Lab 明确 open to artists worldwide(对全球开放)。robots.txt 禁 /typo3/、/fileadmin/application-submission/,首页 '/' 允许。无独立 /open-calls 索引(404),征集在首页及 news 文章呈现。",
+      "trust_auto": true
+    },
+    {
+      "id": "gdc-award",
+      "org_zh": "深圳市平面设计协会(SGDA)",
+      "name_zh": "GDC设计奖",
+      "url": "https://www.gdcaward.com/gdc-award?lang=cn",
+      "domain": "gdcaward.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "平面设计/视觉传达",
+      "notes": "HTTP 200; 49026字节; 命中 参赛×67/征集/报名/apply; 页面含 GDC设计奖/SGDA/深圳市平面设计协会; 全球专业设计师均可参与(全球征集,对中国及国际开放); robots.txt User-agent:* Allow:/ (allow)."
+    },
+    {
+      "id": "ktk-award",
+      "org_zh": "汕头大学·靳埭强设计奖组委会",
+      "name_zh": "KTK靳埭强设计奖·全球华人设计比赛",
+      "url": "https://www.ktkda.cn/",
+      "domain": "ktkda.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "平面设计/视觉传达",
+      "notes": "HTTP 200; 22097字节; 命中 apply×7/参赛×5/报名; 页面含 靳埭强/KTK/汕头大学; 全球华人设计比赛,面向内地及港澳台/海外华人青年开放; robots.txt HTTP 404 无robots(none)."
+    },
+    {
+      "id": "foundertype-award",
+      "org_zh": "北大方正字库(FounderType)",
+      "name_zh": "『方正奖』字体设计大赛",
+      "url": "https://ztds.foundertype.com/",
+      "domain": "foundertype.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "commercial",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "cn",
+      "discipline_hint": "字体/字库设计",
+      "notes": "HTTP 200; 63349字节; 命中 参赛×5/征集×2; 页面含 方正/Founder(第十三届『方正奖』); 设中文/拉丁文/海报等组别,面向国内外设计师; ztds子域 robots.txt HTTP 404 无robots(none)."
+    },
+    {
+      "id": "tokyo-tdc",
+      "org_zh": "Tokyo Type Directors Club(东京字体指导俱乐部)",
+      "name_zh": "东京TDC年度奖(Tokyo TDC Annual Awards)",
+      "url": "https://tokyotypedirectorsclub.org/en/entry/",
+      "domain": "tokyotypedirectorsclub.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "字体/文字视觉表现",
+      "notes": "HTTP 200; 76501字节; 命中 Submission×12/Deadline×4/apply; 页面含 Tokyo TDC/Type Directors; 英文报名页,面向全球(international)开放,历年含大量中国获奖者; robots.txt 仅 Disallow /wp-admin/,目标 /en/entry/ 允许(allow).",
+      "trust_auto": true
+    },
+    {
+      "id": "warsaw-poster-biennale",
+      "org_zh": "华沙国际海报双年展办公室(Academy of Fine Arts Warsaw / Poster Museum)",
+      "name_zh": "华沙国际海报双年展",
+      "url": "https://warsawposterbiennale.com/en/info",
+      "domain": "warsawposterbiennale.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "海报设计",
+      "notes": "HTTP 200; /en/info 18016字节(/en 15402含 Competition×2); 命中 Deadline/International×11/Competition; 页面含 Warsaw Poster Biennale; International Poster Biennale 面向全球投稿(intl开放,participation free of charge); robots.txt User-agent:* 无Disallow(allow)."
+    },
+    {
+      "id": "tigda",
+      "org_zh": "臺灣國際平面設計獎組委會(經濟部/中國生產力中心)",
+      "name_zh": "臺灣國際平面設計獎(TiGDA)",
+      "url": "https://www.tigda.org.tw/",
+      "domain": "tigda.org.tw",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "region_hint": "tw",
+      "discipline_hint": "平面设计/海报/企业识别",
+      "notes": "HTTP 200; 27311字节; 命中 Call for×2/International×6/參賽; 页面含 TiGDA/臺灣國際平面設計獎/Taiwan International Graphic; 國際獎項面向全球徵件(open to intl); robots.txt HTTP 000 无法取得,视为 unknown."
+    },
+    {
+      "id": "jp-tokas-opencall",
+      "org_zh": "东京艺术与空间(TOKAS)",
+      "name_zh": "东京艺术与空间 开放征集/驻留项目",
+      "url": "https://www.tokyoartsandspace.jp/en/application/about_opencall.html",
+      "domain": "tokyoartsandspace.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "contemporary-art / visual-arts / interdisciplinary",
+      "notes": "HTTP 200, 42231 bytes. 命中 open call(12)/application(13)/residency(25);机构名 Tokyo Arts and Space。对国际开放证据充分:页面 Target 明列 'International/Japan-based creators'、'promote international and Japanese creators'、'work internationally',旗下 International Creator Residency Program 面向海外创作者。robots.txt 仅 Disallow /static/tas/、/static/tws/,目标路径 /en/application/ 允许。此页为开放征集项目总览("
+    },
+    {
+      "id": "jp-arcus-opencall",
+      "org_zh": "ARCUS Project(茨城·守谷)",
+      "name_zh": "ARCUS Project 驻留开放征集",
+      "url": "https://www.arcus-project.com/en/open-call/",
+      "domain": "arcus-project.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "contemporary-art",
+      "notes": "HTTP 200, 8831 bytes(开放征集索引页,命中 Open Call(6)/residency(17);机构名 ARCUS)。对国际开放已核实:项目页 /en/residence-program/artist-in-residence-program/(45512 bytes)含 international/overseas/foreign/nationality,面向 residing outside Japan 的国际艺术家。robots.txt 仅 Disallow /wp/wp-admin/,目标路径允许。"
+    },
+    {
+      "id": "jp-acac-opencall",
+      "org_zh": "青森国际艺术中心(ACAC)",
+      "name_zh": "青森国际艺术中心 驻留征集(英文公告列表)",
+      "url": "https://acac-aomori.jp/public/?lang=en",
+      "domain": "acac-aomori.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "contemporary-art",
+      "notes": "HTTP 200, 30860 bytes(英文公告/征集列表页,命中 Open Call/Call for/apply/Application(5)/residency;机构名 Aomori/ACAC)。对国际开放已核实:项目指南页(EAT 2026)含 international(2)、'residing outside Japan',并对海外居住者提供最高 300,000 日元差旅支持。robots.txt 仅 Disallow /prd/wp-admin/,目标路径允许。注:http 版会 302 跳 https,已改用 https 直连核验。"
+    },
+    {
+      "id": "jp-youkobo-application",
+      "org_zh": "游工房艺术空间(Youkobo Art Space,东京)",
+      "name_zh": "Youkobo Art Space 驻留申请",
+      "url": "https://youkobo.co.jp/en/application/",
+      "domain": "youkobo.co.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "contemporary-art / interdisciplinary",
+      "notes": "HTTP 200, 11069 bytes。命中 Apply/application(9)/applications/deadline;域名及品牌属 Youkobo。对国际开放:页面含 nationality,且机构公开说明接收不限国籍(累计 45 国 300+ 位海外艺术家),AIR 指南页含 International/Worldwide。robots.txt 返回 404(无 robots)→ none,无路径限制。艺术家自营独立 AIR(非商业)。",
+      "trust_auto": true
+    },
+    {
+      "id": "kr-mmca-residency",
+      "org_zh": "韩国国立现代美术馆(MMCA)驻留",
+      "name_zh": "MMCA 美术馆驻留(昌洞/高阳)国际驻留",
+      "url": "https://www.mmca.go.kr/eng/artStudio/artStudioMain.do",
+      "domain": "mmca.go.kr",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "contemporary-art",
+      "notes": "HTTP 200, 157795 bytes(驻留专区落地页)。命中 Recruit/Application(8)/Notice/residency(19);机构名 MMCA。对国际开放证据:'creative environment for local and international artists and expand their global network',设 MMCA International Artist/Researcher Residency Program 面向国际艺术家/研究者。robots.txt 仅 Disallow 无关路径(/about/vision.do 等),/eng/artStudio/ 允许。"
+    },
+    {
+      "id": "in-khoj-opportunities",
+      "org_zh": "Khoj 国际艺术家协会(新德里)",
+      "name_zh": "Khoj Studios 机会/开放征集列表",
+      "url": "https://khojstudios.org/opportunities/",
+      "domain": "khojstudios.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "contemporary-art / interdisciplinary",
+      "notes": "HTTP 200, 324251 bytes。命中海量 open call/Call for(130+)/apply/deadline/submission/residency;机构名 Khoj。对国际开放:International(60+),Khoj International Residency 明示 'open for Indian and International artists'(任何媒介/学科)。robots.txt Disallow 为空(全站允许)。非营利独立艺术机构。",
+      "trust_auto": true
+    },
+    {
+      "id": "acc-grant-opportunities",
+      "org_zh": "亚洲文化协会(ACC)",
+      "name_zh": "亚洲文化协会 资助与奖助金机会",
+      "url": "https://www.asianculturalcouncil.org/grant-opportunities",
+      "domain": "asianculturalcouncil.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "multidisciplinary (visual/performing arts, cultural research)",
+      "notes": "HTTP 200, 231198 bytes(首次单次请求偶发 000,重试稳定 200)。命中 grant/Fellowship/Apply(128)/eligibility/deadline;机构名 Asian Cultural Council。对国际/中国开放:页面多处出现 China(15)/Chinese(48)/Asia(23)/asian(37),面向亚洲(含中国)公民及居民的奖助与文化交流。robots.txt 仅注释无 Disallow → 允许。注:此为资助/奖助金(含驻留式交流)基金会,非单一驻留;主要为亚洲<->美国交流,类别宜标 grant/fellowship。"
+    },
+    {
+      "id": "eu-res-bethanien",
+      "org_zh": "柏林 Künstlerhaus Bethanien",
+      "name_zh": "Künstlerhaus Bethanien 申请 / 国际工作室计划",
+      "url": "https://bethanien.de/en/application/",
+      "domain": "bethanien.de",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "视觉艺术",
+      "notes": "HTTP200,~146KB;命中 open call×10/deadline×7/application×38/apply×31/international×15。柏林国际工作室计划(International Studio Programme),既通过全球伙伴机构招募,也接受无机构合作的直接申请(年度截止约10月底),明确面向国际艺术家。robots.txt:User-agent:* Allow:/(仅禁 /admin/ /login/ /private/ 等及 *.pdf),/en/application/ 目标路径允许。同机构 /en/international-studio-program/ 也已 HTTP200 核验(140KB,international×33)。"
+    },
+    {
+      "id": "na-res-vermont-studio-center",
+      "org_zh": "佛蒙特工作室中心(Vermont Studio Center)",
+      "name_zh": "Vermont Studio Center 申请 / Apply",
+      "url": "https://vermontstudiocenter.org/apply",
+      "domain": "vermontstudiocenter.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "视觉艺术/写作",
+      "notes": "HTTP200,131KB;命中 Apply×9/apply×8/Submission×2/deadline/international×2。美国佛蒙特,自述 international residency,明确接受国际申请、可开具签证邀请函(多数国际艺术家持访客签证入境),部分/全额奖学金。robots(Squarespace):AI训练爬虫段封禁 ClaudeBot/anthropic-ai 等,但我方UA(ArtPortalBot)不在其列,落入 User-agent:* 仅禁 /config //search//account//commerce//api,/apply 允许。"
+    },
+    {
+      "id": "na-res-headlands",
+      "org_zh": "Headlands 艺术中心(加州)",
+      "name_zh": "Headlands Center for the Arts 驻留(AIR)项目页",
+      "url": "https://www.headlands.org/program/air/",
+      "domain": "headlands.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "跨学科/视觉艺术/影像/写作/建筑",
+      "notes": "HTTP200,648KB;命中 Apply/international。WebFetch确认页面正文实在(非JS空壳),明确面向 'local, national, and international artists'(需基本英语口语)——对全球艺术家开放。AIR为全额资助驻留,年度open call约每年4/1开放、6/1截止,申请入口经此页/programs跳转(app.entrythingy.com)。robots.txt:User-agent:* Disallow:(空)=全站允许,Crawl-delay:10。同域 /programs/ 亦已HTTP200(609KB,application×12)。"
+    },
+    {
+      "id": "eu-res-fabrica",
+      "org_zh": "Fabrica(贝纳通研究中心,意大利)",
+      "name_zh": "Fabrica 驻留 / Residency",
+      "url": "https://www.fabrica.it/residency/",
+      "domain": "fabrica.it",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "设计/传播/跨界创意(视觉、影像、出版等)",
+      "notes": "HTTP200,47KB;命中 apply×7/application×4/International/international×2/world。意大利Treviso,United Colors of Benetton创立的创意驻留,面向 'from all over the world / around the globe' 的全球创作者,滚动作品集申请(通过筛选后邀请2周试用期)。注意:设25岁以下年龄门槛(属年龄/职业阶段限制,非国籍限制,不触发铁律#4否决)。robots仅禁 /wp-admin/,目标路径允许。"
+    },
+    {
+      "id": "na-res-bemis",
+      "org_zh": "Bemis 当代艺术中心(奥马哈)",
+      "name_zh": "Bemis Center 申请 / Apply",
+      "url": "https://www.bemiscenter.org/apply",
+      "domain": "bemiscenter.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "视觉艺术/媒体/声音/表演/跨学科",
+      "notes": "HTTP200,47KB;命中 Apply×6/Open Call×2/application/international/paused。确为 'international Residency Program',为国际艺术家提供J-1短期学者签证支持(明确对国际开放)。⚠️当前状态:页面明确项目于2027–2028年因场馆改造暂停,下届open call拟2028年初开放、面向2029驻留季——此刻无活跃征集,仅作为规范信源登记以待管道日后自动捕获重开。robots.txt HTTP404→无robots限制(none)。"
+    },
+    {
+      "id": "aesthetica_art_prize",
+      "org_zh": "Aesthetica 杂志(英国)",
+      "name_zh": "Aesthetica 艺术奖 (Aesthetica Art Prize)",
+      "url": "https://aestheticamagazine.com/artprize/",
+      "domain": "aestheticamagazine.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "综合/当代艺术(不限媒介)",
+      "notes": "HTTP 200;81257 bytes;命中 apply(5)、worldwide(5);Aesthetica Art Prize 官方征集页,明确面向全球艺术家、无国籍/年龄限制(对中国开放);robots 允许 /artprize/(仅禁 /wp-admin/、/AAP/ 等);2026届开放中,截止约10月。"
+    },
+    {
+      "id": "future_generation_art_prize",
+      "org_zh": "维克多·平丘克基金会 / PinchukArtCentre",
+      "name_zh": "未来一代艺术奖 (Future Generation Art Prize)",
+      "url": "https://futuregenerationartprize.org/en/home-page-fgap",
+      "domain": "futuregenerationartprize.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "当代艺术(综合媒介,35岁以下)",
+      "notes": "HTTP 200;116669 bytes;命中 Open Call(3)、apply(3)、open to all(4)、International;35岁以下全球艺术家不限国籍网上自行申请(对中国开放);robots 允许该路径(仅禁 /wp-admin/、/feed/ 等);第八届征集进行中。"
+    },
+    {
+      "id": "sharjah_art_foundation_open_calls",
+      "org_zh": "沙迦艺术基金会 (Sharjah Art Foundation)",
+      "name_zh": "公开征集专栏 (Open Calls)",
+      "url": "https://www.sharjahart.org/en/open-calls/list",
+      "domain": "sharjahart.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "当代艺术(综合)",
+      "notes": "HTTP 200;108398 bytes;命中 Open Call(11+)、Apply(8);官方开放征集汇总页(含驻留/工作室/双年展及月度国际机会汇编);/robots.txt 返回站点HTML即无 robots 文件→无限制;SAF 驻留/制作资助等对国际含中国艺术家开放,但各具体征集资格不一,抓取时需按单条核验。"
+    },
+    {
+      "id": "han_nefkens_foundation_grants",
+      "org_zh": "汉·内夫肯斯基金会 (Han Nefkens Foundation)",
+      "name_zh": "资助与联合委任 (Grants & Co-Commissions)",
+      "url": "https://www.hnfoundation.com/awards",
+      "domain": "hnfoundation.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "影像/录像艺术",
+      "notes": "HTTP 200;1349986 bytes;命中 apply(14)、Submission、call for、Deadline、any nationality(3)、international(53)、worldwide(11);录像/影像艺术资助与联合委任官方页,设南亚/东南亚等亚洲资助线,中国/亚洲艺术家相关;robots 允许(仅禁 *?lightbox=)。评选含独立策展人提名环节。"
+    },
+    {
+      "id": "world_press_photo_contest",
+      "org_zh": "世界新闻摄影基金会 (World Press Photo)",
+      "name_zh": "世界新闻摄影比赛 参赛规则 (Contest Entry Rules)",
+      "url": "https://www.worldpressphoto.org/contest/entry-rules",
+      "domain": "worldpressphoto.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "摄影/新闻纪实摄影",
+      "notes": "HTTP 200;38434 bytes(参赛规则页,非 /contest JS空壳);命中 apply、deadline、eligibility、submission、enter、International;面向全球专业新闻/纪实摄影师(中国摄影师可报名,限专业身份证明);robots User-agent:* Allow:/。注:另有外部投稿平台 Picter,此为官方规则页。"
+    },
+    {
+      "id": "sovereign_asian_art_prize",
+      "org_zh": "尚流艺术基金会 (Sovereign Art Foundation, 香港)",
+      "name_zh": "尚流亚洲艺术奖 (Sovereign Asian Art Prize)",
+      "url": "https://www.sovereignartfoundation.com/the-sovereign-asian-art-prize-2/",
+      "domain": "sovereignartfoundation.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "region_hint": "intl",
+      "discipline_hint": "当代艺术(综合)",
+      "notes": "HTTP 200;419059 bytes;命中 apply、Submission、Deadline、eligib、enter(26)、international(25);香港尚流艺术基金会亚洲艺术奖官方页,覆盖亚太含中国大陆/港/台艺术家;robots 允许该路径(仅禁 add-to-cart、wp-admin)。入选为画廊提名制(每画廊最多提名3人)。"
     }
   ],
   "blocked_or_unverified": [
@@ -1943,5 +2704,10 @@
     "at": "2026-07-13",
     "note": "各艺术领域信源(音乐/电影/表演/设计/摄影/新媒体/工艺/综合)",
     "count": 36
+  },
+  "_added_batch3": {
+    "at": "2026-07-14",
+    "note": "未覆盖领域(插画/动画/时尚/公共艺术/字体/声音)+ 面向国际开放的驻留/奖项",
+    "count": 39
   }
 }

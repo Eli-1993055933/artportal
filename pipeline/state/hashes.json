@@ -1894,5 +1894,561 @@
   "claf-news|http://www.claf.org.cn/news/news_article_24.html": {
     "hash": "9c0156f473aa645be3828c435a84c021b74619ceca3347339a320b77e86d9dee",
     "at": "2026-07-13"
+  },
+  "gp_golden_pinwheel": {
+    "hash": "d66d026217e3ad575138f5ae5371ddc8539480b68eb1c01c7b9d2cc40490fe0c",
+    "at": "2026-07-14"
+  },
+  "cacc_jinlong": {
+    "hash": "26ed5dc7e97a422bfc6f4f8271ddbf06c2a456833a5369cd87e80034ca538483",
+    "at": "2026-07-14"
+  },
+  "cacc_jinlong|http://www.cicfcn.com/newsitem/191246": {
+    "hash": "fd3c771b20e6831a4d770a1156b4b90d141149ce46beca1aeb167e6ae62c53df",
+    "at": "2026-07-14"
+  },
+  "cacc_jinlong|http://www.cicfcn.com/newsitem/190608": {
+    "hash": "2ec2228ae6e2e335fd9c11497e1c2e99323fa08640e75f447175991b765d3e6f",
+    "at": "2026-07-14"
+  },
+  "cacc_jinlong|http://www.cicfcn.com/newsitem/188874": {
+    "hash": "aceb8647c1cf06639af4918228cb68c095514d2aac7712c6a30d8a53feaa5ebe",
+    "at": "2026-07-14"
+  },
+  "jinhou_cicaf": {
+    "hash": "8a69a238c3c9eff0f360ab896c92b9be57b3902e0d6fcaee2ab4cd266a306dbd",
+    "at": "2026-07-14"
+  },
+  "jinhou_cicaf|https://jhj.cicaf.com/review/?cid=22&year=2026": {
+    "hash": "1cc6eb0f617fe167d55ca53ff0694b1903d1db2d01186f938f883503cd7917f8",
+    "at": "2026-07-14"
+  },
+  "jinhou_cicaf|https://jhj.cicaf.com/review?cid=21&amp;year=2025": {
+    "hash": "2e781d2c5d7bf2c3d9d2fa6637b10327040045f7615920dc351688109a308bef",
+    "at": "2026-07-14"
+  },
+  "indieplay_ciga": {
+    "hash": "4df3f4c6622ca35902ccdbe82d6c33b4f1438b3218c603628d38d8a1e7195626",
+    "at": "2026-07-14"
+  },
+  "cfa-zxzx": {
+    "hash": "2f8b9915d3b8b1587786b63de028e68d507dc67a6a260b99ca65398bfc0e6aff",
+    "at": "2026-07-14"
+  },
+  "cfa-zxzx|https://www.fashion.org.cn/2023xb/2023hydt/2023zxzx/202509/t20250915_4392671.html": {
+    "hash": "a61b5136f2cebdce5b27f31a801f9e2d6977744a6173311fa6964dc8cc6f54e5",
+    "at": "2026-07-14"
+  },
+  "cfa-zxzx|https://www.fashion.org.cn/2023xb/2023hydt/2023zxzx/202601/t20260116_4401092.html": {
+    "hash": "f48a4dd8cff61d539300398dd6266f2748727a65990db32be317ae608f901806",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt": {
+    "hash": "e608af46e3ed38261ebb96e2ab23556239bd0b1ba2ff8aba8d7b73d028bfefa9",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1374/32643.htm": {
+    "hash": "a694f49939cd41085910d31cbeac619dc32d82a91fca07ea4e39d12d5c4dc58e",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1374/32631.htm": {
+    "hash": "b3326eb78692441575d29da33a2468b1aa2e593a54115cfc29989a04dd83aa75",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1374/32626.htm": {
+    "hash": "5ed4c13218579547f8d140730e44817531c08c96503e887fe9559d8113fce7ae",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1061/32676.htm": {
+    "hash": "7c8bdc6dadff3db7c47e732a618296ebf037adbfb6deac4805dcbbf7e27ce6ff",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1061/32668.htm": {
+    "hash": "fc61c3b93715280917112cda03e873a82de4915033948deb73a657efe0fff9e6",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1061/32666.htm": {
+    "hash": "8486fa7721c9ef1ba6ddba2c03c462cf18a07440bdd80c2261c0ccb8d36d7dc2",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1061/32665.htm": {
+    "hash": "81969b2549ee67865d8aa0b017d45dfef978257d92bcd9d05a86ac92253f0ce3",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1061/32663.htm": {
+    "hash": "0e73344c8fa39acf8fb90f47f169e1fb249b74feeba0148ac1a1142582a984f4",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/info/1061/32660.htm": {
+    "hash": "726c38b5bb23115b2f63ed1ddc5918a0e53a963dda367793dbc055c0e7e279a1",
+    "at": "2026-07-14"
+  },
+  "thu-ad-xwdt|https://www.ad.tsinghua.edu.cn/zs/bkszs/a20222021.htm": {
+    "hash": "867e79e1db868f28c2b7f61a762e5478de90122238fecc8f87a14c9512ec7891",
+    "at": "2026-07-14"
+  },
+  "cnacs-home": {
+    "hash": "2a853ac6512588aeacc2cda857c0d5b778dd7e09db0f4cfd20ad5481d6b2c504",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/2/202403/2265.html": {
+    "hash": "72f5538a240854a04b018b28631feff1df175c19ceaa67c4f441d2e0f3d527ae",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/4/202603/6795.html": {
+    "hash": "7926201582b295c5b3db469352ec171b0710c5109d558115789b88ee08c58108",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/5/202305/4891.html": {
+    "hash": "16a6ff7178c52dddbd8cd6eaa2e06fd49e8ae0922451587008ccf6535f671413",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/131/202307/5099.html": {
+    "hash": "5d25852f72cfd447605dffffceaca18a7d61af2a5e8e2a118c20952a4425b120",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/136/202511/5730.html": {
+    "hash": "1b6f614258565bca2f25195ff34fea7cbe6e38a03003fefd59bc7e8a2b6e4014",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/139/202511/5851.html": {
+    "hash": "abdd754f82524263dd897e3c0db0c39689751715ae1f1b57aea4c4400fc9b47d",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/147/202407/6146.html": {
+    "hash": "d6d57f1a7b73e8daba2a17e6b42eba0e8b7a338c0a9802b7795383b85a75a8bc",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/148/202408/6147.html": {
+    "hash": "ca4601eea40941d9c6a173c1d0eae6c165bc05a1aebf90b5471125e134f1d0ff",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/149/202406/6148.html": {
+    "hash": "434933f224d4d7f2ab9f9c4692ee5bf42a0fa773a716cb7639d502d6a2b1c089",
+    "at": "2026-07-14"
+  },
+  "cnacs-home|https://www.cnacs.net.cn/151/202412/6716.html": {
+    "hash": "6c1cfc4fd2f655a6b1637bbe125a50498f3e53817745c6bc5936b8d33ef1fdb7",
+    "at": "2026-07-14"
+  },
+  "cifw-home": {
+    "hash": "4c2bbbbb7a27d8b15e35279e63d6d68a4f4f1322a82a1066bed86755c06519de",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/2012cx/xczj/201803/t20180321_3691076.html": {
+    "hash": "e5213e7a4b8a5793dd14f2c746d5ad25be7523e40325086d838808af57ee8a8b",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/2012cx/fwxd/201201/t20120105_723329.html": {
+    "hash": "b2f38e2ae04c9cef565aa42895ac7d9ef9056df1af2055561ad403201f20a988",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/2012cx/fwxd/201202/t20120229_903878.html": {
+    "hash": "7f1bbab93b91330c28e9fdd9f21500bd45c22ec095affd08344be52883041327",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/2012cx/fwxd/201201/t20120105_723332.html": {
+    "hash": "89d34df92042c01c1262c953eb8dba7fd004b2f174ae5c1e0057d71a0870faa6",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/gywm/201201/t20120105_723515.html": {
+    "hash": "7cf2a2b1c3dab8e0c81989fbdd0d886578f3f18eb363ec27ebac1878adfd5d03",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/gywm/201201/t20120105_723527.html": {
+    "hash": "404bd90151de470a79d58e43c43c1fa7a212b65fed704381a141e01045d7220d",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/gywm/201202/t20120214_893272.html": {
+    "hash": "e4f7db73ad8736df82f23a5e433a266ae59969e46351906f232dcdd3b6b00c86",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/xwsd/201710/t20171024_4354489.html": {
+    "hash": "340a470de86de09d0caecdbc7daeff033a06ab5a9e07adac92e95f6bbc982b53",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/wjhg/wjtp/2026cjcj/2026cjzcfb/2026cjzcfbtp/202604/t20260408_4408735.html": {
+    "hash": "9c7d6cc451bc8e7377253966370b0a882dadff52769fe63afa50dd783f3145e1",
+    "at": "2026-07-14"
+  },
+  "cifw-home|https://www.chinafashionweek.org.cn/wjhg/wjtp/2026cjcj/2026cjzcfb/2026cjzcfbtp/202604/t20260408_4408733.html": {
+    "hash": "c241c14dba3587d7431c79f46517b0a579bf45cf57bd073eba3f994c629c22e3",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news": {
+    "hash": "58b13fc1890d26f90e6d4861970361acafda29bf3f6d5784319da59d101c444a",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/zzs_index.html": {
+    "hash": "ef33091d56844f0378e2bdf98105b3eceaa566d558ad8d1fdc9905198ea7d926",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/pst_index.html": {
+    "hash": "e35f5c0853c5eeab72b1f54aff9545d717f156660f57ec13ae9198e230d29151",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/zzs_2020selected.html": {
+    "hash": "03b339979bc654b27ab494b9895d0268a8da08007618a15da105914abeece9cb",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/zzs_2020info.html": {
+    "hash": "a060ca42618f75731c3e905f69ad9f4ca5cc10a3ce9d7b13652f822b232c3de9",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/news20200305.html": {
+    "hash": "b39a9e6f5d95ec229ba4b0167a41246a7f228e4efbffff6ff9f650ceaee57e3f",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/zzs_2019info.html": {
+    "hash": "fdc798c9fbe841808c582fd395d33b651f05ca9c657f6ade6e9ea9b80d026179",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/news20180829.html": {
+    "hash": "c425648da904bf7698a4801cb202b3ac58658d02f58e689e54296774f81ee241",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/news20180705.html": {
+    "hash": "26a456fa4d9dfc7070a9487e8ba063fe28689c22eef22886a7954ebd0755fd85",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/news20170904.html": {
+    "hash": "c4cb5a7549f037fdaf1e1348fc5927de60e184e6e60b8dfe7582cafa28c7b793",
+    "at": "2026-07-14"
+  },
+  "cafa-diaosuxi-news|http://dsx.cafa.edu.cn/news20161225.html": {
+    "hash": "c61ad5f48719773bb14ccc60b7d9e058a8d07c886ba3d265766eb105666d9b27",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall": {
+    "hash": "0e0fe13e5956d0a5899231b43af2f778f24cf47d0f33002dad669acfdeb88e37",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/assets/uploads/2026/06/%E4%BD%9C%E5%93%81%E5%85%AC%E9%96%8B%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%EF%BC%88%E8%8B%B1%EF%BC%89_20260619.pdf": {
+    "hash": "65e17218b54c86ef633d2681f3c2f470fccb821fda62795c5dc6fe90b0234452",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/en/news/20260713/": {
+    "hash": "123dc582247a8ac4597541b2e3f1ec97f58128ccb1996cfbab2781ef2eb519e7",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/en/news/20260725/": {
+    "hash": "a588b2cb39edcc0b2939479493d511cc06f47081be18a6cce26e6d2c3cd4b7df",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/en/news/20260622/": {
+    "hash": "db8f62661d9644075a95361747c428c44e0b443f5a16f8d50c1965f22e6803d9",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/en/news/20260530/": {
+    "hash": "74c7604baa5160a8b006aa62aba1f890d7bcbe4c40e16280c5f1246fae3f213f",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/en/news/20250808/": {
+    "hash": "1a562de0174e613e17dc129f09d6bfa24f4328e621df0ae9ff9d3eb15ef1f2dd",
+    "at": "2026-07-14"
+  },
+  "echigo-tsumari-opencall|https://www.echigo-tsumari.jp/news/20220428_02/": {
+    "hash": "ff59450c4aee1aa8dd633dbd7501c21e2c5d6b7de74dabcca331273173885b10",
+    "at": "2026-07-14"
+  },
+  "aec-opencalls": {
+    "hash": "6f63c3a578d6efc92132fd3d63bf29e8c084219a55f9ee3e711ab35bb2119784",
+    "at": "2026-07-14"
+  },
+  "aec-opencalls|https://ars.electronica.art/2026/en/": {
+    "hash": "36399ebd3cd6e1a9fdc172fda5a554d63226e13fc11e024c7fbd52ed75996a3e",
+    "at": "2026-07-14"
+  },
+  "aec-opencalls|https://ars.electronica.art/export/en/ecoc2028-ars-biologica-art-science-residency/": {
+    "hash": "8ab72146eb11d360f0afc95c24986cb1b412476bd04e0a66c0846f17796eb3c3",
+    "at": "2026-07-14"
+  },
+  "ems-air": {
+    "hash": "36e33ff6ba4735269ab6d90e9c83d1fe902ed923dd447e12279b10a1f8790377",
+    "at": "2026-07-14"
+  },
+  "gdc-award": {
+    "hash": "c2b49b28d3ca0111d9addd18a1a27d1ef669fdf994f56c6d9e10c05ce64b6ce0",
+    "at": "2026-07-14"
+  },
+  "ktk-award": {
+    "hash": "466212ede66736fc71430ae7da2ce675d0401a4a4ff702801fb93220a136b8c0",
+    "at": "2026-07-14"
+  },
+  "foundertype-award": {
+    "hash": "44e4ca94ec2be1d40f10fab3e34c6084e18855973190337a69bf6473ac9a95d5",
+    "at": "2026-07-14"
+  },
+  "tokyo-tdc": {
+    "hash": "010fc15b9fc3f906f2a54344fe60d5375255260707a91d51fa579cd36234b052",
+    "at": "2026-07-14"
+  },
+  "tokyo-tdc|https://tokyotypedirectorsclub.org/wp-content/uploads/2026/07/2027_Entryform_CHN_0701.pdf": {
+    "hash": "1aeb5f6657318103fd742b6e70b4492f79f982367b4755f312b0efea8932443a",
+    "at": "2026-07-14"
+  },
+  "tokyo-tdc|https://tokyotypedirectorsclub.org/wp-content/uploads/2026/07/2027_Entryform_KOR.pdf": {
+    "hash": "5f52a52fb37bfa04d0ff42eb722e46e4abfa5faaa3265196945ffdc8b6ed1f16",
+    "at": "2026-07-14"
+  },
+  "tokyo-tdc|https://tokyotypedirectorsclub.org/wp-content/uploads/2026/07/TDC2027_%E6%8F%90%E5%87%BA%E6%96%B9%E6%B3%95_ENG_0701-2.pdf": {
+    "hash": "830b419cda732e1503f793ba3258aecd3894b6fb2e2ce754fa5b461105280371",
+    "at": "2026-07-14"
+  },
+  "warsaw-poster-biennale": {
+    "hash": "963d54f1179f3a04c0731b601365088a1fea68f9198ed10d0e5bc2e86b21fa1b",
+    "at": "2026-07-14"
+  },
+  "tigda": {
+    "hash": "dbc79769788314564abf72323a614b319567d4fb9a09ef63bdf1ab0dd6eb0ea5",
+    "at": "2026-07-14"
+  },
+  "jp-tokas-opencall": {
+    "hash": "a57e50e661b09f51bd6035b175a8124a80812bd6118db4a6b5a3e26511eb24b4",
+    "at": "2026-07-14"
+  },
+  "jp-tokas-opencall|https://www.tokyoartsandspace.jp/application/about_opencall.html": {
+    "hash": "ec9a42b0b253984412ff65c5a0177e98dbe35ad478c763a0c0d3ce4fbb108b89",
+    "at": "2026-07-14"
+  },
+  "jp-tokas-opencall|https://www.tokyoartsandspace.jp/en/application/index.html": {
+    "hash": "63f418b130af64a3b4f00cba15122c556685523da35963f974403047be967c17",
+    "at": "2026-07-14"
+  },
+  "jp-tokas-opencall|https://www.tokyoartsandspace.jp/en/application/schedule.html": {
+    "hash": "3f554d2ce5ed7ce89c65f365f733254a8f3a5ccd120eb079fd54bfa126f6c2ec",
+    "at": "2026-07-14"
+  },
+  "jp-tokas-opencall|https://www.tokyoartsandspace.jp/en/archive/application": {
+    "hash": "ce3335f76ee2a1bc083994a16a7591df7454beb7c93e14db267df12d8b61be37",
+    "at": "2026-07-14"
+  },
+  "jp-arcus-opencall": {
+    "hash": "02f745cfa5a7e8ceddd2eb7ab403bbd30401a7e85c7ba677aadc368217e5b8d4",
+    "at": "2026-07-14"
+  },
+  "jp-acac-opencall": {
+    "hash": "6602d75f0472f6308914eb699d3ddf78e7f4dc8f60e483027f51d613ad8d858c",
+    "at": "2026-07-14"
+  },
+  "jp-acac-opencall|https://acac-aomori.jp/public/call-for-studio-artists/": {
+    "hash": "f2eacee461a06408744c6fb712792270e19f9dbee32ead937f173abfa5e5cf25",
+    "at": "2026-07-14"
+  },
+  "jp-acac-opencall|https://acac-aomori.jp/public/aomori-contemporary-art-centre-artist-in-residence-program-open-call-for-partner-organizations/": {
+    "hash": "ebfb4255dcd2f62d1e29d1b534a2edc37d410a23b46514113f74c40b0a6019dd",
+    "at": "2026-07-14"
+  },
+  "jp-youkobo-application": {
+    "hash": "54d2c56e09799ac05bf8eb36d23d05a42d5bd6b189eaaba99ac89750930952fb",
+    "at": "2026-07-14"
+  },
+  "jp-youkobo-application|http://www.youkobo.co.jp/application/air2019_application_form.doc": {
+    "hash": "fdd99cc7b5025818bbfd8bdc8e196ee4fe7ecdb220afbdeab17f6a49d7a1a2e9",
+    "at": "2026-07-14"
+  },
+  "kr-mmca-residency": {
+    "hash": "813458113023105c4d673046ac2cc1222d94f2e0c60fd03c5c189b12eccea209",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities": {
+    "hash": "e2bbf1a7af387d3c279bc4a518de80fd8b4204d948a9578ead285ae9a483d2a1",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/programme/south-asian-network-for-the-arts-sana/": {
+    "hash": "edb45e24cebd671dc8587c82e3a9da77c9bd55ffdf75e18406b0d9f34fa18a9a",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/the-inlaks-residency-at-nirox-foundation-south-africa/": {
+    "hash": "13baf14fb09349c0c52179aee86d2cef816ab5dac958c2426087140e136ebcf3",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/swali-craft-prize-in-partnership-with-india-art-fair/": {
+    "hash": "1b6a0b44ad2e6bef7d820362763264ae984072d087625449de050c662f99e645",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/programme/khoj-international-residency/edition-august-september-2026/": {
+    "hash": "7ec5da360ce46812fbcb1dff26e8dac9ea9653cbf03b1089a5bf8a224d66eab1",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/un-make-the-art-of-gender-workshop-at-ssaf-kasauli-art-project/": {
+    "hash": "617b888477c2221fd69e2c515d2dbabebacd4817ab85529a2bf958d44442060c",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/open-call-skap-summer-school-landscape-as-performance/": {
+    "hash": "47fd8b3b712cebab0650c59f748ef4b9a1c1980728a24939a6298f6fed227803",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/visureal%e3%83%bbinternational-image-art-festival/": {
+    "hash": "f1ebd3102a6df5c9074db919b105e0329362ca8174ee12f641643f281ddcd28b",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/call-for-applications-live-art-festival-2026/": {
+    "hash": "72ae6b68052a989aecf97e75a60565cec797688e4991f2a63cb595e8dc449ae0",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/programme/peers/edition-2026/": {
+    "hash": "9edd43e121a7acaf459477d372ba25f6c8405fe5713fa60044763bb3651e237f",
+    "at": "2026-07-14"
+  },
+  "in-khoj-opportunities|https://khojstudios.org/opportunity/open-call-for-saas-fee-summer-institute-of-art-2026-berlin/": {
+    "hash": "6887756a7d4d9cf1126b3d0f08431166e699590949a5a4db268b1c070d74fa38",
+    "at": "2026-07-14"
+  },
+  "acc-grant-opportunities": {
+    "hash": "db8d094508009fb1bd07ad418bc335464945476a93a96b71b6ea30a5f3e730c7",
+    "at": "2026-07-14"
+  },
+  "acc-grant-opportunities|https://www.asianculturalcouncil.org/pdf/2026-global-grant-cycle-documents/2026-tf-tch-goapply-registration-instructions.pdf": {
+    "hash": "8d3f7e08f9a4a06851c014247c86df02908fa33ca96e1f93a5fafd4023d29f3e",
+    "at": "2026-07-14"
+  },
+  "acc-grant-opportunities|https://www.asianculturalcouncil.org/pdf/2026-global-grant-cycle-documents/2026-jpn-goapply-registration-instructions.pdf": {
+    "hash": "6b5e1af6cb9a55ca6d27167751702bb7eb91b8beb051174046aa8542df8a4867",
+    "at": "2026-07-14"
+  },
+  "eu-res-bethanien": {
+    "hash": "a20221e5ab5db5fb35ef3dd66eb862e6223575dd4d6f2283e906780f9403e9a9",
+    "at": "2026-07-14"
+  },
+  "na-res-vermont-studio-center": {
+    "hash": "83a0f3feb62e2f640ecb9f7a7f02c8ab874bf64302967554de04dcc55b1d2ea6",
+    "at": "2026-07-14"
+  },
+  "na-res-headlands": {
+    "hash": "e19e04498cef8c3c448dfd7215b5522ef037027f0ad096c3b96d10b6c1c57884",
+    "at": "2026-07-14"
+  },
+  "eu-res-fabrica": {
+    "hash": "084131c11bf55c560a3fc520cfa1a3e52d9c2bcb95479c23f8f4c010732b6e81",
+    "at": "2026-07-14"
+  },
+  "na-res-bemis": {
+    "hash": "5b93982d6f7db90b1dcc83c669067e8bb09fea65d4fcfb93014651071c7c6187",
+    "at": "2026-07-14"
+  },
+  "na-res-bemis|https://www.bemiscenter.org/residency/artists-in-residence": {
+    "hash": "e8a9969c84f66b6fbe29ca3cac34753d49eaf15aa68426541738fb5432c1cf71",
+    "at": "2026-07-14"
+  },
+  "na-res-bemis|https://www.bemiscenter.org/residency/sound-art-experimental-music": {
+    "hash": "33b384903e35fca0ee637317e1765dc65b1a0a7a3a12860c8038eed9cf15668d",
+    "at": "2026-07-14"
+  },
+  "na-res-bemis|https://www.bemiscenter.org/residency/curator-in-residence": {
+    "hash": "f821259f006d773b5328d189c3fe18605916cc13eb0b35e97385a44d81787633",
+    "at": "2026-07-14"
+  },
+  "na-res-bemis|https://www.bemiscenter.org/residency/alumni-artist-in-residence": {
+    "hash": "f0ecaf0ce03e7c70d9d8e7ec0d7008eaae487c0d3eed975594bc914d816645f0",
+    "at": "2026-07-14"
+  },
+  "na-res-bemis|https://www.bemiscenter.org/residency/community-tracks": {
+    "hash": "b46db348b3528a21fbdc3a7d5b177755685e42cd11cf7f34b90181311cd62694",
+    "at": "2026-07-14"
+  },
+  "aesthetica_art_prize": {
+    "hash": "83a805813930d075f6b6cee9619c00150951a4be685cabe583e6dd0e1d31bd68",
+    "at": "2026-07-14"
+  },
+  "aesthetica_art_prize|https://artprize.aestheticamagazine.com/2025-prize/": {
+    "hash": "e3763cd1c919096137b8a868d75334f934df8bf1a356fc45362f2f27e6b0a07b",
+    "at": "2026-07-14"
+  },
+  "aesthetica_art_prize|https://artprize.aestheticamagazine.com/2024-prize/": {
+    "hash": "ff52770eeab658e7e7a5d4062f7f0013537bc7af651ec8a4ea9d29853fe43394",
+    "at": "2026-07-14"
+  },
+  "future_generation_art_prize": {
+    "hash": "2c43268681cb540d8303c4ee8b3a7d14fa37078e160f81e6101b23b4d00b7f90",
+    "at": "2026-07-14"
+  },
+  "future_generation_art_prize|https://futuregenerationartprize.org/en/news-fgap/future-generation-art-prize-2027-open-call-extended-until-19-july": {
+    "hash": "f8c54bfb09a7e23df88cf241e47fd87c640f7ad236d39dd5dc642286330ed903",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls": {
+    "hash": "3e608edfd5392f1cefec04f9c7339416a7b7c48757c140c008c3171edbdb4d2e",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/july-2026-open-calls-and-opportunities-for-artists-and-art-practitioners/": {
+    "hash": "1a7907e3fe398e9596d5945e41fe0198e5a60e61b5bd332d55b39ec50c8386cd",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/open-call-apply-for-studio-space-at-al-hamriyah-studios/": {
+    "hash": "8b01efd205227cdcb2534d3dfaf73acac4cd4cd4911538c559eded03ca43a53e",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/june-2026-open-calls-and-opportunities-for-artists-and-art-practitioners/": {
+    "hash": "a5cd8edca33d776278bb9ea19a69dfc98b9eaa7bce8ef060ac0dee54164aca7f",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/open-call-corniche-8/": {
+    "hash": "92e283687291f0c34a9b25714f7074d5e9007e302b51fc03dc0cdaf0b469ba01",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/hiring-may-2026/": {
+    "hash": "d5becca6c31a8a694b1e5bf20b2241f66db640a5e724966685c3444509b21208",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/kunstenfestivaldesarts-2026/": {
+    "hash": "fe9986fc1a271b38cd9ab64438f7c27fcc8f20e3b6f4a4d7e7cfb8cb63e90d1f",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/may-2026-open-calls-and-opportunities-for-artists-and-art-practitioners/": {
+    "hash": "5607d4073f306fe8ff42e70ed259f040e1109800c02ef5a2e3c193dcec8e0086",
+    "at": "2026-07-14"
+  },
+  "sharjah_art_foundation_open_calls|https://www.sharjahart.org/en/open-calls/details/open-call-sfp9-short-film-production-grant/": {
+    "hash": "3fb987b455ba741330ae1d69e6b775c10b77e87ba628d69e3364fefbb34a2f39",
+    "at": "2026-07-14"
+  },
+  "han_nefkens_foundation_grants": {
+    "hash": "f6b91315ec0d0c0008e1671557af903ad73ca6d830d125c77bc983178b758eee",
+    "at": "2026-07-14"
+  },
+  "han_nefkens_foundation_grants|https://www.hnfoundation.com/grants/2019-montblanc-arts-patronage-award/han-nefkens": {
+    "hash": "e45ca1ffdcc3d8fa5f2e8e219c4182dade2922f5e76fb7cbae876e8d918689f6",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest": {
+    "hash": "cb42fda5d11863ef4842aabf7622d384f0a2aba9b46bc33548615a28bfc9b6b5",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/categories": {
+    "hash": "a18ec2dc7329e570fa7e4bf70e190919e1bd60490642e3f35bce01e23d51ce13",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/code-of-ethics": {
+    "hash": "1210f6ead0fa7454e3edf66a1db5a9c12edfde27550e8a8b8437f2b908fd6306",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/entry-rules/technical-requirements": {
+    "hash": "eab05b34631e0bdaaacc0be578f8d13b1c55765e63fc7cfed8019f013e3b34e6",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/judging-process": {
+    "hash": "1dbb7adb413b928a8610a165ee73b70cf8f3786f49ccb0f41a808170a863b1b7",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/verification-process": {
+    "hash": "615b4a8847d00cb39c76e5fc5683bda6ed55e3d901502c53a5b59a01e980c481",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/verification-process/what-counts-as-manipulation": {
+    "hash": "50ea2fa72324c46596c9e1a5922fa708b7314572725eccaea3b3c4daea111ea8",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2025/what-is-required-in-captions": {
+    "hash": "7c5374412b51218449820f2792697a71e053b80db83f417dc61be56db274f872",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2026/jury": {
+    "hash": "65a992f823eaa9db737aefccbd36dca4ff0112623d06d865b5fed1c78f0bf46f",
+    "at": "2026-07-14"
+  },
+  "world_press_photo_contest|https://www.worldpressphoto.org/contest/2026/jury-perspectives": {
+    "hash": "c656f68dfc59b6d23bc11d7617635ba8f027217faaf05e0e477935f4854bcf0a",
+    "at": "2026-07-14"
   }
 }
