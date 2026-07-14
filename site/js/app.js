@@ -226,6 +226,8 @@
     // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用)
     var aiBtn = $("aiSearchBtn");
     if (aiBtn) aiBtn.addEventListener("click", runAiSearch);
+    var aiCancel = $("aiCancelBtn");
+    if (aiCancel) aiCancel.addEventListener("click", cancelAiSearch);
 
     // 列表点击委托:复制 / 访问 / 打开详情
     grid.addEventListener("click", function (e) {
@@ -322,28 +324,27 @@
   }
 
   // ---------- AI 全网检索(后端 /api/search:搜索→抓官网→逐字校验→真实的才入库)----------
-  var aiSearching = false;
+  var aiSearching = false, aiCtrl = null, aiDone = false, aiTo = null;
   function runAiSearch() {
     if (aiSearching) return;
     var q = ($("searchInput").value || "").trim();
     if (!q) { toast(AP.lang === "en" ? "Type what you're looking for first" : "请先在搜索框输入想找的主题/展览"); $("searchInput").focus(); return; }
-    aiSearching = true;
+    aiSearching = true; aiDone = false;
     var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
     $("aiOverlayQ").textContent = "「" + q + "」";
     $("aiOverlay").hidden = false;
-    // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈)
-    var ctrl = ("AbortController" in window) ? new AbortController() : null;
-    var done = false;
-    var to = setTimeout(function () {
-      if (done) return; done = true;
-      if (ctrl) ctrl.abort();
+    // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈);用户也可随时点"取消"。
+    aiCtrl = ("AbortController" in window) ? new AbortController() : null;
+    aiTo = setTimeout(function () {
+      if (aiDone) return; aiDone = true;
+      if (aiCtrl) aiCtrl.abort();
       finishAi(btn);
       toast(AP.lang === "en" ? "Timed out (search source may be rate-limited). Refresh to see any saved; try again later or set SERPER_API_KEY." : "检索超时(搜索源可能被限流)。刷新后能看到已入库的;稍后再试,或配置 SERPER_API_KEY 稳定检索");
     }, 170000);
-    fetch("/api/search?q=" + encodeURIComponent(q), ctrl ? { signal: ctrl.signal } : {})
+    fetch("/api/search?q=" + encodeURIComponent(q), aiCtrl ? { signal: aiCtrl.signal } : {})
       .then(function (r) { return r.json(); })
       .then(function (res) {
-        if (done) return; done = true; clearTimeout(to); finishAi(btn);
+        if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn);
         if (res && res.error) { toast(res.message || (AP.lang === "en" ? "Search error" : "检索出错,请确认后端服务已启动")); return; }
         var add = (res && res.added) || [];
         var known = {}; for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
@@ -353,7 +354,15 @@
         rerun();
         toast(AP.lang === "en" ? ("Added " + fresh.length + " real opportunities, saved") : ("新增 " + fresh.length + " 条真实机会,已永久入库"));
       })
-      .catch(function () { if (done) return; done = true; clearTimeout(to); finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
+      .catch(function () { if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
+  }
+  // 用户手动取消检索:立即中止请求、收起覆盖层(后端已入库的下次搜索/刷新仍在)
+  function cancelAiSearch() {
+    if (!aiSearching || aiDone) return;
+    aiDone = true; clearTimeout(aiTo);
+    if (aiCtrl) aiCtrl.abort();
+    finishAi($("aiSearchBtn"));
+    toast(AP.lang === "en" ? "Search canceled" : "已取消检索");
   }
   function finishAi(btn) {
     aiSearching = false;

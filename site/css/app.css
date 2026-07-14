@@ -130,6 +130,8 @@ img { max-width: 100%; display: block; }
 .ai-overlay__title { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
 .ai-overlay__q { margin: 0 0 10px; font-size: 15px; color: var(--warn); font-weight: 600; }
 .ai-overlay__note { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-3); }
+.ai-overlay__cancel { margin-top: 16px; min-height: 38px; padding: 0 22px; border-radius: var(--radius-sm); border: 1px solid var(--line-2); background: transparent; color: var(--ink-2); font-size: 13.5px; cursor: pointer; }
+.ai-overlay__cancel:hover { background: rgba(0,0,0,.04); }
 @media (prefers-reduced-motion: reduce) { .ai-search-btn__spin, .ai-overlay__spin { animation: none; } }
 
 .tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
