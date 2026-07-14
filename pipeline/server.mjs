@@ -53,7 +53,7 @@ async function serperSearch(query) {
 async function ddgSearch(query) {
   const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
   try {
-    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(15000) });
+    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(10000) });
     const html = await res.text();
     const out = [];
     for (const m of html.matchAll(/uddg=([^&"']+)/g)) {
@@ -99,8 +99,11 @@ async function searchAndHarvest(query, target = 6) {
   const added = [], log = [];
   let probed = 0;
   const MAX_PROBE = 16;                          // 最多探测这么多候选,控制耗时
+  const t0 = Date.now();
+  const BUDGET = 110000;                         // 总检索时间预算:超 110 秒就返回已收集的,别让请求无限跑
   for (const url of cands) {
     if (added.length >= target || probed >= MAX_PROBE) break;
+    if (Date.now() - t0 > BUDGET) { log.push("time-budget-reached"); break; }
     if (existUrls.has(url)) continue;
     probed++;
     let host; try { host = new URL(url).host; } catch (e) { continue; }

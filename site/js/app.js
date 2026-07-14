@@ -331,10 +331,19 @@
     var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
     $("aiOverlayQ").textContent = "「" + q + "」";
     $("aiOverlay").hidden = false;
-    fetch("/api/search?q=" + encodeURIComponent(q))
+    // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈)
+    var ctrl = ("AbortController" in window) ? new AbortController() : null;
+    var done = false;
+    var to = setTimeout(function () {
+      if (done) return; done = true;
+      if (ctrl) ctrl.abort();
+      finishAi(btn);
+      toast(AP.lang === "en" ? "Timed out (search source may be rate-limited). Refresh to see any saved; try again later or set SERPER_API_KEY." : "检索超时(搜索源可能被限流)。刷新后能看到已入库的;稍后再试,或配置 SERPER_API_KEY 稳定检索");
+    }, 170000);
+    fetch("/api/search?q=" + encodeURIComponent(q), ctrl ? { signal: ctrl.signal } : {})
       .then(function (r) { return r.json(); })
       .then(function (res) {
-        finishAi(btn);
+        if (done) return; done = true; clearTimeout(to); finishAi(btn);
         if (res && res.error) { toast(res.message || (AP.lang === "en" ? "Search error" : "检索出错,请确认后端服务已启动")); return; }
         var add = (res && res.added) || [];
         var known = {}; for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
@@ -344,7 +353,7 @@
         rerun();
         toast(AP.lang === "en" ? ("Added " + fresh.length + " real opportunities, saved") : ("新增 " + fresh.length + " 条真实机会,已永久入库"));
       })
-      .catch(function () { finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
+      .catch(function () { if (done) return; done = true; clearTimeout(to); finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
   }
   function finishAi(btn) {
     aiSearching = false;

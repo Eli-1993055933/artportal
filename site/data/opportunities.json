@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-14",
-  "count": 140,
+  "count": 144,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -6781,6 +6781,197 @@
       "url": "http://snz.ccoif.com/",
       "source_url": "http://snz.ccoif.com/",
       "domain": "snz.ccoif.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-difang-第十届中国北京国际美术双年展",
+      "category": "opencall",
+      "title_zh": "第十届中国北京国际美术双年展",
+      "title_en": null,
+      "org_zh": "中国北京国际美术双年展组委会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "新媒体"
+      ],
+      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球征集作品，拟展出约500件当代美术作品，包括绘画、雕塑、影像、装置、新媒体等，投稿截止2025年7月31日。",
+      "url": "https://difang.gmw.cn/2025-06/19/content_38107002.htm",
+      "source_url": "https://difang.gmw.cn/2025-06/19/content_38107002.htm",
+      "domain": "difang.gmw.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-ipbp-ipbp-南京国际和平海报双年展",
+      "category": "opencall",
+      "title_zh": "IPBP 南京国际和平海报双年展",
+      "title_en": "Nanjing Biennale of Posters for Peace",
+      "org_zh": "江苏省对外文化交流协会、南京市对外文化交流协会",
+      "city_zh": "南京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "海报"
+      ],
+      "summary_zh": "IPBP南京国际和平海报双年展以“历史照亮未来”为主题，面向全球创作者征集海报作品，旨在以视觉语言铭记历史、展望和平。主办单位为江苏省对外文化交流协会等。",
+      "url": "https://www.ipbp.org.cn/",
+      "source_url": "https://www.ipbp.org.cn/",
+      "domain": "ipbp.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-art-第十届北京双年展主题-共生-面向全球征集作品",
+      "category": "opencall",
+      "title_zh": "第十届北京双年展主题“共生” 面向全球征集作品",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "新媒体"
+      ],
+      "summary_zh": "第十届北京双年展以“共生”为主题，面向全球征集作品，拟展出500件左右当代美术作品，包括绘画、雕塑、影像、装置、新媒体等，投稿截止2025年7月31日。",
+      "url": "http://art.china.cn/txt/2025-06/24/content_43153453.htm",
+      "source_url": "http://art.china.cn/txt/2025-06/24/content_43153453.htm",
+      "domain": "art.china.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-apo-va-艺术家驻留计划-征集提案",
+      "category": "residency",
+      "title_zh": "vA! 艺术家驻留计划 – 征集提案",
+      "title_en": "vA! Artist-in-Residence Programme – Call for Proposals",
+      "org_zh": "香港视觉艺术中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-06-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": "Hong Kong"
+      },
+      "disciplines": [
+        "陶瓷",
+        "版画",
+        "雕塑",
+        "实验媒体"
+      ],
+      "summary_zh": "香港视觉艺术中心（vA!）邀请艺术家申请2026-28年驻留计划，提供6个月驻留、8个月展览、最高26万港币资助，面向18岁以上香港身份证持有人，截止2026年6月3日。",
+      "url": "https://www.apo.hk/en/web/apo/va_artist_in_residence_2026.html",
+      "source_url": "https://www.apo.hk/en/web/apo/va_artist_in_residence_2026.html",
+      "domain": "apo.hk",
       "org_type": "official",
       "trust": "auto",
       "status": "expired",
