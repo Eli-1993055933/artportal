@@ -157,8 +157,17 @@
   // 来源标注:这条是机构官网直采,还是转自某聚合平台。
   var AGG = { "artconnect.com": "ArtConnect", "curatorspace.com": "CuratorSpace", "transartists.org": "TransArtists", "chinaresidencies.com": "China Residencies" };
   F.provenance = function (o) {
-    var name = AGG[o.domain];
     var en = AP.lang === "en";
+    // 检索得来、未确认为主办方官网的:如实标"网络来源·未定位官网",绝不谎称官网直采
+    if (o.secondhand) {
+      return {
+        kind: "aggregator", platform: null,
+        label: en ? "web source" : "网络来源·未定位官网",
+        detail: en ? "Found by ArtPortal's AI from a web source; NOT confirmed as the organizer's official site. Please verify on the official site."
+                   : "本条由 ArtPortal 的 AI 从网络来源检索到,尚未确认为主办方官网直采(可能为二手转载)。请务必点开核对,以官网为准。"
+      };
+    }
+    var name = AGG[o.domain];
     if (name) {
       return {
         kind: "aggregator", platform: name,

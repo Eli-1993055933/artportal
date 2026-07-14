@@ -28,6 +28,12 @@ function todayISO() {
 }
 function slug(s) { return String(s).toLowerCase().replace(/[^\w一-龥]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "item"; }
 function computeStatus(deadline) { return deadline && deadline < todayISO() ? "expired" : "open"; }
+function hostOf(u) { try { return new URL(u).host; } catch (e) { return ""; } }
+// 机构官网/官方来源的强信号:美院(edu.cn)、政府美术馆(gov)、机构基金(org.cn)、博物馆(museum)、科研(ac.cn)。
+// 命中 = 大概率第一手官网;不命中 = 无法确认是官网(可能是二手转载),标注上要如实说明。
+function officialHint(host) {
+  return /(\.edu\.cn|\.gov\.cn|\.gov|\.org\.cn|\.ac\.cn|\.museum)$/i.test(String(host)) ? 1 : 0;
+}
 
 // —— 环节①:搜索,拿到候选官网 URL ——
 // 可插拔搜索源:配了 SERPER_API_KEY(serper.dev,Google 结果,有免费额度)就用它(稳定);
@@ -125,6 +131,8 @@ async function searchAndHarvest(query, target = 6) {
     seen.add(key);
     cands.push(key);
   }
+  // 官网优先:机构官网特征的候选排到最前,先抓第一手;二手转载排后(常常凑够 6 条就轮不到它)
+  cands.sort((a, b) => officialHint(hostOf(b)) - officialHint(hostOf(a)));
 
   // 现有库(去重基底)
   const doc = JSON.parse(await readFile(DATA, "utf8"));
@@ -152,7 +160,7 @@ async function searchAndHarvest(query, target = 6) {
     catch (e) { log.push("extract-fail " + host); continue; }
     const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
     if (v.dropped) { log.push("dropped " + host + " " + v.dropReason.slice(0, 40)); continue; }
-    const rec = finalize(v.record, url, host);
+    const rec = finalize(v.record, url, host, !officialHint(host));
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
     added.push(rec);
     log.push("✓ " + rec.title_zh);
@@ -177,11 +185,12 @@ async function searchAndHarvest(query, target = 6) {
   return { added: saved, probed, candidates: cands.length, log };
 }
 
-function finalize(rec, url, host) {
+function finalize(rec, url, host, secondhand) {
   const dom = host.replace(/^www\./, "");
   const id = "search-" + dom.split(".")[0] + "-" + slug(rec.title_zh || rec.title_en || "item");
   const today = todayISO();
   return {
+    secondhand: !!secondhand,          // 未确认为主办方官网(可能二手转载)→ 前端如实标注"网络来源·未定位官网"
     id,
     category: rec.category || "opencall",
     title_zh: rec.title_zh || null, title_en: rec.title_en || null,
@@ -194,7 +203,7 @@ function finalize(rec, url, host) {
     disciplines: rec.disciplines || [],
     summary_zh: rec.summary_zh || null,
     url, source_url: url, domain: dom,
-    org_type: "official",
+    org_type: secondhand ? "aggregator" : "official",
     trust: "auto",                    // evidence 已过;前端仍标"未人工核实·以官网为准"
     status: computeStatus(rec.deadline),
     verified_at: null, last_seen: today, updated_at: today, _via: "search"

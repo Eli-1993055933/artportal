@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-14",
-  "count": 180,
+  "count": 197,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -6156,13 +6156,14 @@
       "url": "https://ogdcn.com/",
       "source_url": "https://ogdcn.com/",
       "domain": "ogdcn.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-a4artmuseum-2027-2028-a4国际驻留项目",
@@ -6207,13 +6208,14 @@
       "url": "https://www.a4artmuseum.com/a4-residencyartcenter/residing/latest-recruitment/",
       "source_url": "https://www.a4artmuseum.com/a4-residencyartcenter/residing/latest-recruitment/",
       "domain": "a4artmuseum.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-scfai-2026-2027年度四川美术学院青年艺术家驻留计划",
@@ -6263,7 +6265,8 @@
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知",
@@ -6308,7 +6311,8 @@
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-aionlabo-ted-posca-global-artist-residency-2027",
@@ -6353,13 +6357,14 @@
       "url": "https://www.aionlabo.com/zh/post/ted-posca-global-artist-residency-2027-1",
       "source_url": "https://www.aionlabo.com/zh/post/ted-posca-global-artist-residency-2027-1",
       "domain": "aionlabo.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-apo-va-艺术家驻留计划-公开征集计划书",
@@ -6401,13 +6406,14 @@
       "url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2026.html",
       "source_url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2026.html",
       "domain": "apo.hk",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-scfai-2025-2026年度四川美术学院青年艺术家驻留计划",
@@ -6457,7 +6463,8 @@
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-caanet-第七届漆画展览征稿通知",
@@ -6502,7 +6509,8 @@
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-hkong-va-艺术家驻留计划",
@@ -6544,13 +6552,14 @@
       "url": "https://www.hkong.cn/2026/0420/61046.shtml",
       "source_url": "https://www.hkong.cn/2026/0420/61046.shtml",
       "domain": "hkong.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-apo-va-艺术家驻留及展览计划",
@@ -6587,13 +6596,14 @@
       "url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2024_sub4_other.html",
       "source_url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2024_sub4_other.html",
       "domain": "apo.hk",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-a4artmuseum-a4国际驻留",
@@ -6637,13 +6647,14 @@
       "url": "https://www.a4artmuseum.com/a4-residencyartcenter/about-residency/",
       "source_url": "https://www.a4artmuseum.com/a4-residencyartcenter/about-residency/",
       "domain": "a4artmuseum.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-longlatifoundation-艺术家驻留计划",
@@ -6682,13 +6693,14 @@
       "url": "http://www.longlatifoundation.org/longlati%E5%86%99%E4%BD%9C%E8%AE%A1%E5%88%92-2/?lang=zh-hans",
       "source_url": "http://www.longlatifoundation.org/longlati%E5%86%99%E4%BD%9C%E8%AE%A1%E5%88%92-2/?lang=zh-hans",
       "domain": "longlatifoundation.org",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-bjbiennale-第十届中国北京国际美术双年展",
@@ -6731,13 +6743,14 @@
       "url": "http://www.bjbiennale.com.cn/cn/zlzn/",
       "source_url": "http://www.bjbiennale.com.cn/cn/zlzn/",
       "domain": "bjbiennale.com.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-snz-第六届当代国际艺术与设计双年展gssp金曦奖大赛暨-当代国际艺术与设计数字典藏馆",
@@ -6781,13 +6794,14 @@
       "url": "http://snz.ccoif.com/",
       "source_url": "http://snz.ccoif.com/",
       "domain": "snz.ccoif.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-difang-第十届中国北京国际美术双年展",
@@ -6830,13 +6844,14 @@
       "url": "https://difang.gmw.cn/2025-06/19/content_38107002.htm",
       "source_url": "https://difang.gmw.cn/2025-06/19/content_38107002.htm",
       "domain": "difang.gmw.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-ipbp-ipbp-南京国际和平海报双年展",
@@ -6881,7 +6896,8 @@
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-art-第十届北京双年展主题-共生-面向全球征集作品",
@@ -6924,13 +6940,14 @@
       "url": "http://art.china.cn/txt/2025-06/24/content_43153453.htm",
       "source_url": "http://art.china.cn/txt/2025-06/24/content_43153453.htm",
       "domain": "art.china.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-apo-va-艺术家驻留计划-征集提案",
@@ -6972,13 +6989,14 @@
       "url": "https://www.apo.hk/en/web/apo/va_artist_in_residence_2026.html",
       "source_url": "https://www.apo.hk/en/web/apo/va_artist_in_residence_2026.html",
       "domain": "apo.hk",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-dunhuangartmuseum-境象丝路-敦煌国际艺术驻地-ssr-air-2026",
@@ -7022,13 +7040,14 @@
       "url": "https://www.dunhuangartmuseum.com/2026",
       "source_url": "https://www.dunhuangartmuseum.com/2026",
       "domain": "dunhuangartmuseum.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-shejijingsai-2025第十届全国插画双年展",
@@ -7067,13 +7086,14 @@
       "url": "https://www.shejijingsai.com/2025/11/1457537.html",
       "source_url": "https://www.shejijingsai.com/2025/11/1457537.html",
       "domain": "shejijingsai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-ziyiaward-紫艺奖-中国国际大学生艺术设计大赛暨高校优秀设计作品展",
@@ -7118,13 +7138,14 @@
       "url": "https://ziyiaward.com/",
       "source_url": "https://ziyiaward.com/",
       "domain": "ziyiaward.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-sj33-北京市大兴区花园城市永定湾-logo-征集活动",
@@ -7163,13 +7184,14 @@
       "url": "https://www.sj33.cn/sjjs",
       "source_url": "https://www.sj33.cn/sjjs",
       "domain": "sj33.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-yczhansai-场域-2026第三届香港青年创新设计奖",
@@ -7213,13 +7235,14 @@
       "url": "https://www.yczhansai.com/",
       "source_url": "https://www.yczhansai.com/",
       "domain": "yczhansai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-a4artmuseum-2026驻留艺术家",
@@ -7277,13 +7300,14 @@
       "url": "https://www.a4artmuseum.com/a4-residencyartcenter/residing/selected-artists/",
       "source_url": "https://www.a4artmuseum.com/a4-residencyartcenter/residing/selected-artists/",
       "domain": "a4artmuseum.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-leogallery-狮語画廊艺术家驻留计划",
@@ -7322,13 +7346,14 @@
       "url": "https://www.leogallery.com.cn/cn/artist-residency/",
       "source_url": "https://www.leogallery.com.cn/cn/artist-residency/",
       "domain": "leogallery.com.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-xingxiancn-2026年-春潮-青岛雕塑双年展-征集公告",
@@ -7368,13 +7393,14 @@
       "url": "https://xingxiancn.com/article/37574",
       "source_url": "https://xingxiancn.com/article/37574",
       "domain": "xingxiancn.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-qdsnqwhg-2025青岛跨年艺术展作品征集",
@@ -7416,13 +7442,14 @@
       "url": "https://www.qdsnqwhg.cn/html/wenhuadongtai/2024/1113/5174.html",
       "source_url": "https://www.qdsnqwhg.cn/html/wenhuadongtai/2024/1113/5174.html",
       "domain": "qdsnqwhg.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-cnaf-国家艺术基金-一般项目-2026年度青年艺术创作人才资助项目",
@@ -7475,13 +7502,14 @@
       "url": "https://www.cnaf.cn/guide_detail/4482.html",
       "source_url": "https://www.cnaf.cn/guide_detail/4482.html",
       "domain": "cnaf.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-xingxiancn-全季-青年艺术计划征集开启",
@@ -7526,13 +7554,14 @@
       "url": "https://xingxiancn.com/article/32017",
       "source_url": "https://xingxiancn.com/article/32017",
       "domain": "xingxiancn.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-news-青韵书画艺术节",
@@ -7578,13 +7607,14 @@
       "url": "https://news.qq.com/rain/a/20230807A03KPY00",
       "source_url": "https://news.qq.com/rain/a/20230807A03KPY00",
       "domain": "news.qq.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-shejijingsai-2026-山情海韵-创见未来-青岛市崂山区第三届文创设计大赛",
@@ -7625,13 +7655,14 @@
       "url": "https://www.shejijingsai.com/2026/01/1482423.html",
       "source_url": "https://www.shejijingsai.com/2026/01/1482423.html",
       "domain": "shejijingsai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-scribd-2025年东京双年展-社会潜水-air公开征集计划",
@@ -7670,13 +7701,14 @@
       "url": "https://www.scribd.com/document/845544784/TB-Opencall-Guideline-en-10march2025-Zh",
       "source_url": "https://www.scribd.com/document/845544784/TB-Opencall-Guideline-en-10march2025-Zh",
       "domain": "scribd.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-cnyisai-2026-第八届-cada-日本概念艺术设计奖",
@@ -7721,13 +7753,14 @@
       "url": "https://www.cnyisai.com/new/2.html",
       "source_url": "https://www.cnyisai.com/new/2.html",
       "domain": "cnyisai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-tada-art-art-venture-ehime-fes-2025-作品公募",
@@ -7764,13 +7797,14 @@
       "url": "https://www.tada-art.com/article/xPW0YaVn07am",
       "source_url": "https://www.tada-art.com/article/xPW0YaVn07am",
       "domain": "tada-art.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-zjmtcn-东京时尚大奖2026",
@@ -7809,13 +7843,14 @@
       "url": "https://www.zjmtcn.com/zjxx/fuzhuang/271560.html",
       "source_url": "https://www.zjmtcn.com/zjxx/fuzhuang/271560.html",
       "domain": "zjmtcn.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-shejijingsai-2027東京tdc-东京字体指导俱乐部-tokyo-tdc賞",
@@ -7855,13 +7890,14 @@
       "url": "https://www.shejijingsai.com/tag/%E4%B8%9C%E4%BA%AC",
       "source_url": "https://www.shejijingsai.com/tag/%E4%B8%9C%E4%BA%AC",
       "domain": "shejijingsai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-tokyoartsandspace-东京艺术空间驻留项目",
@@ -7898,13 +7934,14 @@
       "url": "https://www.tokyoartsandspace.jp/en/residence/index.html",
       "source_url": "https://www.tokyoartsandspace.jp/en/residence/index.html",
       "domain": "tokyoartsandspace.jp",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
       "updated_at": "2026-07-14",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-international-2025-2026学年国际学生招生简章",
@@ -7947,7 +7984,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-eduzs-云南艺术学院2024-2025学年国际学生招生简章",
@@ -7990,7 +8028,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-yn-云南省第七届群众文化-彩云奖-活动美术-书法-摄影展览作品征集",
@@ -8031,13 +8070,14 @@
       "url": "https://yn.zhiliaobiaoxun.com/article/99433703",
       "source_url": "https://yn.zhiliaobiaoxun.com/article/99433703",
       "domain": "yn.zhiliaobiaoxun.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-shejijingsai-大美中国-宝藏云南-和合澜湄-创意云南文化产业博览会-2025-设计大展作品征集",
@@ -8079,13 +8119,14 @@
       "url": "https://www.shejijingsai.com/2025/09/1432282.html",
       "source_url": "https://www.shejijingsai.com/2025/09/1432282.html",
       "domain": "shejijingsai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-10100-德国柏林国际艺术双年展-golden-key-国际艺术大赛",
@@ -8127,13 +8168,14 @@
       "url": "https://www.10100.com/article/23538556",
       "source_url": "https://www.10100.com/article/23538556",
       "domain": "10100.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-zjideas-第十三届西班牙国际具象-绘画雕塑-艺术双年展征稿",
@@ -8173,13 +8215,14 @@
       "url": "http://zjideas.com/zjds/hjys/dssj/23816.html",
       "source_url": "http://zjideas.com/zjds/hjys/dssj/23816.html",
       "domain": "zjideas.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-zwgk-第61届威尼斯国际艺术双年展中国馆征展启事",
@@ -8224,7 +8267,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-caanet-镌印风尚-首届青年版画双年展征稿通知",
@@ -8269,7 +8313,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-shejijingsai-2026-华夏奖-文化艺术设计大赛-秋季",
@@ -8311,13 +8356,14 @@
       "url": "https://www.shejijingsai.com/2026/07/1606467.html",
       "source_url": "https://www.shejijingsai.com/2026/07/1606467.html",
       "domain": "shejijingsai.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-hbwy-镌印风尚-首届青年版画双年展",
@@ -8362,7 +8408,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-caanet-镌刻时代-首届当代版画双年展",
@@ -8407,7 +8454,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": false
     },
     {
       "id": "search-huaxiajiang-2026-华夏奖-文化艺术设计大赛-春季",
@@ -8499,13 +8547,14 @@
       "url": "https://www.huaxiajiang.com/3987.html",
       "source_url": "https://www.huaxiajiang.com/3987.html",
       "domain": "huaxiajiang.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-xingxiancn-2026波普艺术设计奖暨波普艺术国际作品展征集",
@@ -8567,13 +8616,14 @@
       "url": "https://xingxiancn.com/article/40564",
       "source_url": "https://xingxiancn.com/article/40564",
       "domain": "xingxiancn.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-news-第十届北京国际美术双年展",
@@ -8616,13 +8666,14 @@
       "url": "https://news.qq.com/rain/a/20250619A01SZQ00",
       "source_url": "https://news.qq.com/rain/a/20250619A01SZQ00",
       "domain": "news.qq.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-news-第十届中国北京国际美术双年展",
@@ -8665,13 +8716,14 @@
       "url": "https://news.qq.com/rain/a/20250619A0483P00",
       "source_url": "https://news.qq.com/rain/a/20250619A0483P00",
       "domain": "news.qq.com",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-chinanews-第十届中国北京国际美术双年展",
@@ -8714,13 +8766,14 @@
       "url": "https://www.chinanews.com.cn/cul/2025/06-18/10434469.shtml",
       "source_url": "https://www.chinanews.com.cn/cul/2025/06-18/10434469.shtml",
       "domain": "chinanews.com.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "secondhand": true
     },
     {
       "id": "search-news-第十届中国北京国际美术双年展作品征集",
@@ -8763,9 +8816,831 @@
       "url": "https://news.gmw.cn/2025-06/20/content_38102269.htm",
       "source_url": "https://news.gmw.cn/2025-06/20/content_38102269.htm",
       "domain": "news.gmw.cn",
-      "org_type": "official",
+      "org_type": "aggregator",
       "trust": "auto",
       "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-zijing-va-艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "vA! 艺术家驻留计划",
+      "title_en": null,
+      "org_zh": "香港视觉艺术中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-06-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": "香港"
+      },
+      "disciplines": [
+        "陶艺",
+        "版画",
+        "雕塑",
+        "跨媒介"
+      ],
+      "summary_zh": "香港视觉艺术中心征集2026-2028年驻留计划书，邀请年满18岁持有效香港身份证的艺术家或组合驻留六个月，使用陶艺、版画、雕塑等工作室进行跨媒介创作，成果有机会公开展出，并参与工作坊、讲座等活动。",
+      "url": "https://zijing.com.cn/web/article/1495808936448946176/web/content_1495808936448946176.html",
+      "source_url": "https://zijing.com.cn/web/article/1495808936448946176/web/content_1495808936448946176.html",
+      "domain": "zijing.com.cn",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-jiannengwh-镌印风尚-首届青年版画双年展征稿通知",
+      "category": "opencall",
+      "title_zh": "镌印风尚·首届青年版画双年展征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2025-09-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "45",
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "中国美术家协会与江苏省文化和旅游厅共同主办首届青年版画双年展，面向全国45岁以下青年征集版画作品，展出约260件，截稿2025年9月10日。",
+      "url": "https://www.jiannengwh.com/show-2301.html",
+      "source_url": "https://www.jiannengwh.com/show-2301.html",
+      "domain": "jiannengwh.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-archcollege-景镇融合-魔鬼城-西部乌镇2025首届艺术装置设计大赛",
+      "category": "opencall",
+      "title_zh": "“景镇融合”魔鬼城-西部乌镇2025首届艺术装置设计大赛",
+      "title_en": null,
+      "org_zh": "乌尔禾区文体旅游局",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2025-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "装置",
+        "雕塑",
+        "公共艺术"
+      ],
+      "summary_zh": "大赛以艺术装置为纽带，结合魔鬼城自然奇观与西部乌镇人文服务，征集魔鬼文化IP形象、地质奥秘互动装置、非遗融合等方向作品。设入围奖10名，奖金10000元/人，获奖作品可落地制作。",
+      "url": "https://www.archcollege.com/84602.html",
+      "source_url": "https://www.archcollege.com/84602.html",
+      "domain": "archcollege.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-news-景镇融合-魅力乌尔禾-2025首届艺术装置设计大赛",
+      "category": "opencall",
+      "title_zh": "景镇融合·魅力乌尔禾！2025首届艺术装置设计大赛",
+      "title_en": null,
+      "org_zh": "乌尔禾区文体旅游局",
+      "city_zh": "乌尔禾",
+      "country_zh": "中国",
+      "deadline": "2025-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "装置",
+        "公共艺术",
+        "数字艺术"
+      ],
+      "summary_zh": "大赛以艺术装置为纽带，结合世界魔鬼城与乌尔禾区特色，征集魔鬼文化IP、地质互动、非遗融合等方向作品。设10名入围奖，各奖1万元。作品需原创，获奖者承担20%税费。",
+      "url": "https://news.qq.com/rain/a/20251105A05RCZ00",
+      "source_url": "https://news.qq.com/rain/a/20251105A05RCZ00",
+      "domain": "news.qq.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-whaleideas-魔鬼城-乌尔禾区2025首届艺术装置设计大赛",
+      "category": "award",
+      "title_zh": "魔鬼城—乌尔禾区2025首届艺术装置设计大赛",
+      "title_en": null,
+      "org_zh": "乌尔禾区文体旅游局",
+      "city_zh": "乌尔禾区",
+      "country_zh": "中国",
+      "deadline": "2025-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "装置",
+        "雕塑",
+        "公共艺术",
+        "数字艺术",
+        "大地艺术"
+      ],
+      "summary_zh": "乌尔禾区文体旅游局主办的艺术装置设计大赛，面向全球征集以魔鬼城自然奇观与人文服务融合为主题的装置方案，设入围奖10名，奖金10000元/人，作品需原创且可落地。",
+      "url": "http://whaleideas.com/zjds/gycp/wcsj/26191.html",
+      "source_url": "http://whaleideas.com/zjds/gycp/wcsj/26191.html",
+      "domain": "whaleideas.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-shejijingsai-2025第二届上海国际光影节光影艺术装置展-作品公开征集",
+      "category": "opencall",
+      "title_zh": "2025第二届上海国际光影节光影艺术装置展 作品公开征集",
+      "title_en": null,
+      "org_zh": "上海市绿化和市容管理局、上海市文化和旅游局、上海市商务委员会、上海广播电视台",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": "2025-07-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "装置"
+      ],
+      "summary_zh": "第二届上海国际光影节面向全球公开征集7件大型户外光影艺术装置作品，主题为“光绘滨江秀带”，展演于黄浦江两岸核心区域，要求国内首展，注重艺术性、互动性、创新性、公共性、安全性，截止日期2025年7月20日。",
+      "url": "https://www.shejijingsai.com/2025/06/1354705.html",
+      "source_url": "https://www.shejijingsai.com/2025/06/1354705.html",
+      "domain": "shejijingsai.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-guet-第一届-零废弃计划-校园装置艺术设计大赛通知-废旧材料重生计划-艺术赋能绿色校园",
+      "category": "opencall",
+      "title_zh": "第一届 “零废弃计划” 校园装置艺术设计大赛通知 ——废旧材料重生计划·艺术赋能绿色校园",
+      "title_en": null,
+      "org_zh": "桂林电子科技大学教务处、创新创业学院",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2025-07-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "装置"
+      ],
+      "summary_zh": "桂林电子科技大学举办首届校园装置艺术设计大赛，面向全校在校生，要求作品主体使用≥70%校园废弃物，初赛提交设计方案，决赛制作实体装置，设特等奖、金、银、铜奖及最佳人气奖。",
+      "url": "https://www.guet.edu.cn/utsc/2025/0626/c4291a139936/page.htm",
+      "source_url": "https://www.guet.edu.cn/utsc/2025/0626/c4291a139936/page.htm",
+      "domain": "guet.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": false
+    },
+    {
+      "id": "search-artenda-ucross基金会驻留项目",
+      "category": "residency",
+      "title_zh": "Ucross基金会驻留项目",
+      "title_en": "Ucross Foundation Residency",
+      "org_zh": "Ucross基金会",
+      "city_zh": "克莱蒙特",
+      "country_zh": "美国",
+      "deadline": "2026-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 40,
+        "currency": "USD"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": false,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "版画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "Ucross基金会为视觉艺术家、作家、作曲家等提供2至6周驻留，提供生活住宿、工作空间和1500美元津贴，申请费40美元，截止2026年7月15日。",
+      "url": "https://artenda.net/",
+      "source_url": "https://artenda.net/",
+      "domain": "artenda.net",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-bj-第十届中国北京国际美术双年展",
+      "category": "opencall",
+      "title_zh": "第十届中国北京国际美术双年展",
+      "title_en": null,
+      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及具体截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "数字",
+        "影像",
+        "新媒体"
+      ],
+      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球征集作品，拟展出500件左右，涵盖绘画、雕塑、数字、影像、新媒体等，将于2025年12月31日至2026年2月1日在北京展览馆举办。",
+      "url": "http://www.bj.xinhuanet.com/20250619/eb28079fb82a4ab089356673fed0ef64/c.html",
+      "source_url": "http://www.bj.xinhuanet.com/20250619/eb28079fb82a4ab089356673fed0ef64/c.html",
+      "domain": "bj.xinhuanet.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-cn5v-第十届中国北京国际美术双年展",
+      "category": "opencall",
+      "title_zh": "第十届中国北京国际美术双年展",
+      "title_en": null,
+      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "新媒体"
+      ],
+      "summary_zh": "第十届北京双年展以“共生”为主题，面向全球征集绘画、雕塑、影像、装置、新媒体等作品，投稿截止2025年7月31日，拟展出约500件作品。",
+      "url": "http://www.cn5v.com/2025/06/105870.html",
+      "source_url": "http://www.cn5v.com/2025/06/105870.html",
+      "domain": "cn5v.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-resartis-中国驻留",
+      "category": "residency",
+      "title_zh": "中国驻留",
+      "title_en": "China Residencies",
+      "org_zh": "中国驻留",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年开放申请",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Visual Art",
+        "Sculpture",
+        "Ceramics",
+        "Dance",
+        "Theatre",
+        "Printmaking",
+        "Performing Arts",
+        "Textile Art",
+        "Music",
+        "Literature",
+        "New Media",
+        "Animations",
+        "Film-making",
+        "Architecture",
+        "Curatorial",
+        "Education Programmes"
+      ],
+      "summary_zh": "中国驻留是一个在线目录，收录中国大陆及香港50多个艺术家驻留项目。提供免费申请，部分项目提供全额资助，包括旅费、制作费、食宿等。",
+      "url": "https://resartis.org/listings/china-residencies/",
+      "source_url": "https://resartis.org/listings/china-residencies/",
+      "domain": "resartis.org",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-artenda-throwing-shapes-clay-city",
+      "category": "residency",
+      "title_zh": "Throwing Shapes - Clay City",
+      "title_en": "Throwing Shapes - Clay City",
+      "org_zh": "other",
+      "city_zh": "Dublin",
+      "country_zh": "Ireland",
+      "deadline": "2026-07-14",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Ceramics"
+      ],
+      "summary_zh": "Throwing Shapes - Clay City 是位于爱尔兰都柏林的艺术家驻留项目，为期一年，主题为粘土。提供工作室和私人住宿，免租金。面向过去三年内毕业于视觉艺术、设计或陶瓷专业并有权在爱尔兰居住和工作的艺术家。",
+      "url": "https://artenda.net/art-open-call-opportunity/residency",
+      "source_url": "https://artenda.net/art-open-call-opportunity/residency",
+      "domain": "artenda.net",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "id": "search-open-calls-open-call-for-internship-positions-2025",
+      "category": "opencall",
+      "title_zh": "Open Call for Internship Positions 2025",
+      "title_en": "Open Call for Internship Positions 2025",
+      "org_zh": "Klimt02",
+      "city_zh": null,
+      "country_zh": "Europe",
+      "deadline": "2024-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Klimt02 发布2025年实习职位公开征集，面向艺术家，截止日期为2024年12月31日，地点在欧洲。",
+      "url": "https://open-calls.art/opportunities/?category=residency",
+      "source_url": "https://open-calls.art/opportunities/?category=residency",
+      "domain": "open-calls.art",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search",
+      "secondhand": true
+    },
+    {
+      "secondhand": true,
+      "id": "search-pointsarts-几点国际驻留项目",
+      "category": "residency",
+      "title_zh": "几点国际驻留项目",
+      "title_en": null,
+      "org_zh": "几点当代艺术中心",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "公开征集",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "几点当代艺术中心国际艺术家驻留项目，面向所有类型艺术家及策展人、作家等跨领域专家，通过机构交换、公开征集及邀请三种方式进行，不定期举办展览和活动。",
+      "url": "https://www.pointsarts.org/cn/about-residency-programme",
+      "source_url": "https://www.pointsarts.org/cn/about-residency-programme",
+      "domain": "pointsarts.org",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "secondhand": true,
+      "id": "search-aionlabo-tokas-international-creator-residency-pr",
+      "category": "residency",
+      "title_zh": "TOKAS International Creator Residency Program 2027",
+      "title_en": "TOKAS International Creator Residency Program 2027",
+      "org_zh": "Tokyo Arts and Space",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-06-16",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": false,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "设计",
+        "建筑"
+      ],
+      "summary_zh": "Tokyo Arts and Space 面向视觉艺术、设计、建筑领域的国际创作者，开放2027年国际创作者驻留项目申请。驻留期3个月，提供机票、生活费、创作/项目费用、单人居住空间及共享工作室。截止日期2026年6月16日。",
+      "url": "https://www.aionlabo.com/zh/post/tokas-international-creator-residency-program-2027-1",
+      "source_url": "https://www.aionlabo.com/zh/post/tokas-international-creator-residency-program-2027-1",
+      "domain": "aionlabo.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "secondhand": true,
+      "id": "search-gaoyy-2025年8月机会-面向艺术家的公开招募-驻留项目和资助",
+      "category": "opencall",
+      "title_zh": "2025年8月机会：面向艺术家的公开招募、驻留项目和资助",
+      "title_en": null,
+      "org_zh": "搞英语 → 看世界",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "原文为多个月度机会汇总，无统一截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "每月为艺术家和设计师分享公开招募、资助、奖学金和驻留项目等机会，包括多个截止日期在2025年8月至10月的项目。",
+      "url": "https://www.gaoyy.com/2025%E5%B9%B48%E6%9C%88%E6%9C%BA%E4%BC%9A%EF%BC%9A%E9%9D%A2%E5%90%91%E8%89%BA%E6%9C%AF%E5%AE%B6%E7%9A%84%E5%85%AC%E5%BC%80%E6%8B%9B%E5%8B%9F%E3%80%81%E9%A9%BB%E7%95%99%E9%A1%B9%E7%9B%AE%E5%92%8C/",
+      "source_url": "https://www.gaoyy.com/2025%E5%B9%B48%E6%9C%88%E6%9C%BA%E4%BC%9A%EF%BC%9A%E9%9D%A2%E5%90%91%E8%89%BA%E6%9C%AF%E5%AE%B6%E7%9A%84%E5%85%AC%E5%BC%80%E6%8B%9B%E5%8B%9F%E3%80%81%E9%A9%BB%E7%95%99%E9%A1%B9%E7%9B%AE%E5%92%8C/",
+      "domain": "gaoyy.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "secondhand": true,
+      "id": "search-shejijingsai-第十届中国北京国际美术双年展",
+      "category": "opencall",
+      "title_zh": "第十届中国北京国际美术双年展",
+      "title_en": null,
+      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "数字艺术"
+      ],
+      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球艺术家征集绘画、雕塑、影像、装置、数字艺术等作品。报名截止2025年7月31日，无需报名及参展费。国内入选作者具备加入中国美协条件之一。",
+      "url": "https://www.shejijingsai.com/2025/06/1378950.html",
+      "source_url": "https://www.shejijingsai.com/2025/06/1378950.html",
+      "domain": "shejijingsai.com",
+      "org_type": "aggregator",
+      "trust": "auto",
+      "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
