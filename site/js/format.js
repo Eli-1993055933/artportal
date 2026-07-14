@@ -158,13 +158,14 @@
   var AGG = { "artconnect.com": "ArtConnect", "curatorspace.com": "CuratorSpace", "transartists.org": "TransArtists", "chinaresidencies.com": "China Residencies" };
   F.provenance = function (o) {
     var en = AP.lang === "en";
-    // 检索得来、未确认为主办方官网的:如实标"网络来源·未定位官网",绝不谎称官网直采
-    if (o.secondhand) {
+    // 检索(AI 全网搜)来的一律如实标"AI 检索·请核对官网",绝不谎称官网直采
+    // (程序无法可靠区分官网/二手,故不硬猜,交由用户点官网核对)
+    if (o._via === "search") {
       return {
         kind: "aggregator", platform: null,
-        label: en ? "web source" : "网络来源·未定位官网",
-        detail: en ? "Found by ArtPortal's AI from a web source; NOT confirmed as the organizer's official site. Please verify on the official site."
-                   : "本条由 ArtPortal 的 AI 从网络来源检索到,尚未确认为主办方官网直采(可能为二手转载)。请务必点开核对,以官网为准。"
+        label: en ? "AI web search · verify" : "AI 检索 · 请核对官网",
+        detail: en ? "Found by ArtPortal's AI via web search; NOT yet human-confirmed as the organizer's official site. Please verify there before applying."
+                   : "本条由 ArtPortal 的 AI 从全网检索到,尚未人工确认为主办方官网(可能来自转载)。请务必点开核对,以官网为准。"
       };
     }
     var name = AGG[o.domain];

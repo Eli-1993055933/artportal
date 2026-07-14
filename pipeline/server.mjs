@@ -111,10 +111,13 @@ function rateLimited(ip) {
 
 async function searchAndHarvest(query, target = 6) {
   // 多组检索词提升召回。加"艺术"强限定去歧义(否则"征集"会命中征兵/问卷等)。
+  // 官网限定组:用 site: 把结果锁死在机构官网域(serper/Google 上极有效),直取第一手;
+  // 相关性交给后续 DeepSeek 提取 + evidence 校验兜底(无关官网会被判 not-applicable 丢弃)。
+  const OFFICIAL_SITES = "(site:edu.cn OR site:org.cn OR site:gov.cn OR site:ac.cn OR site:museum OR site:org.hk OR site:gov.tw OR site:org.tw)";
   const queries = [
-    query + " 艺术 驻留 申请 截止 官网",
-    query + " 艺术 征集 报名 大赛 双年展 奖",
-    query + " art residency open call apply",
+    query + " 驻留 征集 报名 " + OFFICIAL_SITES,   // ① 官网限定(第一手)
+    query + " 艺术 驻留 征集 报名 大赛 奖 官网",     // ② 普通艺术相关
+    query + " art residency open call apply",       // ③ 国际
   ];
   const rawUrls = [];
   for (const q of queries) {
@@ -160,7 +163,7 @@ async function searchAndHarvest(query, target = 6) {
     catch (e) { log.push("extract-fail " + host); continue; }
     const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
     if (v.dropped) { log.push("dropped " + host + " " + v.dropReason.slice(0, 40)); continue; }
-    const rec = finalize(v.record, url, host, !officialHint(host));
+    const rec = finalize(v.record, url, host);
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
     added.push(rec);
     log.push("✓ " + rec.title_zh);
@@ -185,12 +188,11 @@ async function searchAndHarvest(query, target = 6) {
   return { added: saved, probed, candidates: cands.length, log };
 }
 
-function finalize(rec, url, host, secondhand) {
+function finalize(rec, url, host) {
   const dom = host.replace(/^www\./, "");
   const id = "search-" + dom.split(".")[0] + "-" + slug(rec.title_zh || rec.title_en || "item");
   const today = todayISO();
   return {
-    secondhand: !!secondhand,          // 未确认为主办方官网(可能二手转载)→ 前端如实标注"网络来源·未定位官网"
     id,
     category: rec.category || "opencall",
     title_zh: rec.title_zh || null, title_en: rec.title_en || null,
@@ -203,8 +205,8 @@ function finalize(rec, url, host, secondhand) {
     disciplines: rec.disciplines || [],
     summary_zh: rec.summary_zh || null,
     url, source_url: url, domain: dom,
-    org_type: secondhand ? "aggregator" : "official",
-    trust: "auto",                    // evidence 已过;前端仍标"未人工核实·以官网为准"
+    org_type: "official",
+    trust: "auto",                    // evidence 已过;前端标"AI 检索·请核对官网"(见 provenance)
     status: computeStatus(rec.deadline),
     verified_at: null, last_seen: today, updated_at: today, _via: "search"
   };
