@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-14",
-  "count": 126,
+  "count": 140,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -6120,6 +6120,674 @@
       "updated_at": "2026-07-14",
       "cover": "https://www.sharjahart.org/images/Thumbnail/al_mureijah_square_thumb_%289%29.jpg",
       "cover_source": "sharjahart.org"
+    },
+    {
+      "id": "search-ogdcn-2026东方创意之星大湾区旅游文创主题赛暨第七届国际大学生旅游文创设计大赛",
+      "category": "opencall",
+      "title_zh": "2026东方创意之星大湾区旅游文创主题赛暨第七届国际大学生旅游文创设计大赛",
+      "title_en": null,
+      "org_zh": "东方好创意大赛网",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-10-18",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "2026东方创意之星大湾区旅游文创主题赛暨第七届国际大学生旅游文创设计大赛，主题赛，起止时间2026年06月11日至2026年10月18日。",
+      "url": "https://ogdcn.com/",
+      "source_url": "https://ogdcn.com/",
+      "domain": "ogdcn.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-a4artmuseum-2027-2028-a4国际驻留项目",
+      "category": "residency",
+      "title_zh": "2027-2028 A4国际驻留项目",
+      "title_en": null,
+      "org_zh": "A4美术馆",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": "2026-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "表演艺术",
+        "音乐",
+        "电影",
+        "声音",
+        "建筑",
+        "设计"
+      ],
+      "summary_zh": "A4国际驻留项目面向多学科艺术家、策展人、设计师等开放，提供工作空间、住处、交通支持及材料费，鼓励在地创作与社区互动，分为A类国际驻留和B类轻量版驻留。",
+      "url": "https://www.a4artmuseum.com/a4-residencyartcenter/residing/latest-recruitment/",
+      "source_url": "https://www.a4artmuseum.com/a4-residencyartcenter/residing/latest-recruitment/",
+      "domain": "a4artmuseum.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-scfai-2026-2027年度四川美术学院青年艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "2026-2027年度四川美术学院青年艺术家驻留计划",
+      "title_en": null,
+      "org_zh": "四川美术学院美术馆",
+      "city_zh": "重庆",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "实验艺术",
+        "手工艺术",
+        "设计艺术",
+        "艺术管理"
+      ],
+      "summary_zh": "四川美术学院青年艺术家驻留计划招募2026-2027年度驻留艺术家25名，提供工作室、每月1000元创作补贴及学术平台，面向30周岁以下中国籍艺术类毕业生及青年策展人，驻留期2026.9.10-2027.6.30。",
+      "url": "https://www.scfai.edu.cn/museum/info/1111/3424.htm",
+      "source_url": "https://www.scfai.edu.cn/museum/info/1111/3424.htm",
+      "domain": "scfai.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知",
+      "category": "opencall",
+      "title_zh": "中国美协艺委会青年展系列：第五届青年漆画展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "宁波",
+      "country_zh": "中国",
+      "deadline": "2026-08-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "45周岁以下",
+        "nationality": null
+      },
+      "disciplines": [
+        "漆画"
+      ],
+      "summary_zh": "中国美术家协会主办第五届青年漆画展览，面向45周岁以下作者征集漆画作品，投稿需通过线上系统提交图片，截止2026年8月30日，展览将于2026年12月在宁波美术馆举行。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10206",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10206",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-aionlabo-ted-posca-global-artist-residency-2027",
+      "category": "residency",
+      "title_zh": "TED & POSCA Global Artist Residency 2027",
+      "title_en": "TED & POSCA Global Artist Residency 2027",
+      "org_zh": "TED, POSCA, Fine Acts",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "壁画",
+        "跨学科艺术",
+        "设计",
+        "社区实践",
+        "建筑或空间实践",
+        "跨领域创作"
+      ],
+      "summary_zh": "TED与POSCA发起、Fine Acts策展的全球分布式艺术家驻留项目，2026年主题为“Visible Mending”，面向社区公共介入项目。2027年实施，每位入选艺术家获15,000美元用于费用、制作或社区行动。",
+      "url": "https://www.aionlabo.com/zh/post/ted-posca-global-artist-residency-2027-1",
+      "source_url": "https://www.aionlabo.com/zh/post/ted-posca-global-artist-residency-2027-1",
+      "domain": "aionlabo.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-apo-va-艺术家驻留计划-公开征集计划书",
+      "category": "residency",
+      "title_zh": "vA! 艺术家驻留计划 — 公开征集计划书",
+      "title_en": null,
+      "org_zh": "香港视觉艺术中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-06-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "陶艺",
+        "版画",
+        "雕塑",
+        "实验媒体"
+      ],
+      "summary_zh": "香港视觉艺术中心公开征集2026-28驻留计划书，提供6个月驻留期、工作室空间、8个月公开展览及高达26万港元资助，邀请年满18岁持有效香港身份证的艺术家以个人或最多三人组合申请。",
+      "url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2026.html",
+      "source_url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2026.html",
+      "domain": "apo.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-scfai-2025-2026年度四川美术学院青年艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "2025-2026年度四川美术学院青年艺术家驻留计划",
+      "title_en": null,
+      "org_zh": "四川美术学院美术馆",
+      "city_zh": "重庆",
+      "country_zh": "中国",
+      "deadline": "2025-04-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": false,
+        "age_limit": "30周岁以下",
+        "nationality": "中国国籍"
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "实验艺术",
+        "手工艺术",
+        "设计艺术",
+        "艺术管理"
+      ],
+      "summary_zh": "四川美术学院面向国内外高校艺术类毕业生、艺术创作者、青年策展人招募30名驻留艺术家，提供工作室、每月1000元创作补贴及学术平台，驻留期2025年9月至2026年6月，需提交申请表和PPT，截止2025年4月30日。",
+      "url": "https://www.scfai.edu.cn/museum/info/1111/3114.htm",
+      "source_url": "https://www.scfai.edu.cn/museum/info/1111/3114.htm",
+      "domain": "scfai.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-第七届漆画展览征稿通知",
+      "category": "opencall",
+      "title_zh": "第七届漆画展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2025-08-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "漆画"
+      ],
+      "summary_zh": "中国美术家协会等主办第七届漆画展览，面向国内征集原创漆画作品，每位作者限投1件，初评需提交10寸照片，截稿2025年8月25日，展览2025年10月在鲁迅美术学院艺术博物馆举行。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=9761",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=9761",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-hkong-va-艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "vA! 艺术家驻留计划",
+      "title_en": null,
+      "org_zh": "香港视觉艺术中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-06-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": "香港"
+      },
+      "disciplines": [
+        "陶艺",
+        "版画",
+        "雕塑",
+        "跨媒介"
+      ],
+      "summary_zh": "香港视觉艺术中心公开征集2026年至2028年驻留周期的计划书，邀请年满18岁、持有效香港身份证的艺术家或最多三人组合，在中心驻留六个月，使用陶艺、版画及雕塑等设施进行跨媒介创作，成果有机会公开展出。",
+      "url": "https://www.hkong.cn/2026/0420/61046.shtml",
+      "source_url": "https://www.hkong.cn/2026/0420/61046.shtml",
+      "domain": "hkong.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-apo-va-艺术家驻留及展览计划",
+      "category": "residency",
+      "title_zh": "vA!艺术家驻留及展览计划",
+      "title_en": null,
+      "org_zh": "香港视觉艺术中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "香港视觉艺术中心推出vA!艺术家驻留及展览计划，面向艺术家征集驻留及展览申请。申请者需提交原创计划书，入选后将签订委约合约，并遵守相关规则。计划最终解释权归vA!所有。",
+      "url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2024_sub4_other.html",
+      "source_url": "https://www.apo.hk/sc/web/apo/va_artist_in_residence_2024_sub4_other.html",
+      "domain": "apo.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-a4artmuseum-a4国际驻留",
+      "category": "residency",
+      "title_zh": "A4国际驻留",
+      "title_en": null,
+      "org_zh": "A4美术馆",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介",
+        "影像",
+        "装置",
+        "绘画",
+        "雕塑",
+        "版画"
+      ],
+      "summary_zh": "A4国际驻留艺术中心面向各领域创作者，提供跨学科、社区参与的驻留平台，支持在地创作与国际交流，驻留时间集中在春秋两季。",
+      "url": "https://www.a4artmuseum.com/a4-residencyartcenter/about-residency/",
+      "source_url": "https://www.a4artmuseum.com/a4-residencyartcenter/about-residency/",
+      "domain": "a4artmuseum.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-longlatifoundation-艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "艺术家驻留计划",
+      "title_en": null,
+      "org_zh": "Longlati基金会",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及申请截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "Longlati基金会关注90后中国艺术家实践，通过驻留计划支持年轻新锐，驻留期间作品归艺术家所有，期满后可能举办个展。",
+      "url": "http://www.longlatifoundation.org/longlati%E5%86%99%E4%BD%9C%E8%AE%A1%E5%88%92-2/?lang=zh-hans",
+      "source_url": "http://www.longlatifoundation.org/longlati%E5%86%99%E4%BD%9C%E8%AE%A1%E5%88%92-2/?lang=zh-hans",
+      "domain": "longlatifoundation.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-bjbiennale-第十届中国北京国际美术双年展",
+      "category": "opencall",
+      "title_zh": "第十届中国北京国际美术双年展",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-08-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "第十届北京双年展以“共生”为主题，面向全球征集绘画、雕塑、影像、装置、数字艺术等作品。截稿日期2025年8月15日，无需报名及参展费。组委会负担境外作品往返运费，国内作品仅负担退件费。",
+      "url": "http://www.bjbiennale.com.cn/cn/zlzn/",
+      "source_url": "http://www.bjbiennale.com.cn/cn/zlzn/",
+      "domain": "bjbiennale.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
+    },
+    {
+      "id": "search-snz-第六届当代国际艺术与设计双年展gssp金曦奖大赛暨-当代国际艺术与设计数字典藏馆",
+      "category": "opencall",
+      "title_zh": "第六届当代国际艺术与设计双年展GSSP金曦奖大赛暨【当代国际艺术与设计数字典藏馆】作品征集",
+      "title_en": null,
+      "org_zh": "GSSP • 当代国际艺术与设计双年展组委会",
+      "city_zh": "上海",
+      "country_zh": "中国",
+      "deadline": "2024-12-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "装置",
+        "影像",
+        "版画",
+        "跨媒介"
+      ],
+      "summary_zh": "第六届当代国际艺术与设计双年展GSSP金曦奖大赛面向全球征集艺术与设计作品，类别包括艺术类（传统美术、当代艺术等）和设计类（空间、平面等），截止2024年12月10日，在线投稿。",
+      "url": "http://snz.ccoif.com/",
+      "source_url": "http://snz.ccoif.com/",
+      "domain": "snz.ccoif.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-14",
+      "updated_at": "2026-07-14",
+      "_via": "search"
     }
   ]
 }

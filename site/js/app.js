@@ -223,6 +223,10 @@
       else { this.href = SUBMIT_FORM_URL; }
     });
 
+    // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用)
+    var aiBtn = $("aiSearchBtn");
+    if (aiBtn) aiBtn.addEventListener("click", runAiSearch);
+
     // 列表点击委托:复制 / 访问 / 打开详情
     grid.addEventListener("click", function (e) {
       var actEl = e.target.closest("[data-act]");
@@ -315,6 +319,37 @@
     var btn = $("detailFav"), on = AP.favorites.has(id);
     btn.innerHTML = on ? AP.ICON.heartFill : AP.ICON.heart;
     btn.style.color = on ? "var(--c-opencall)" : "";
+  }
+
+  // ---------- AI 全网检索(后端 /api/search:搜索→抓官网→逐字校验→真实的才入库)----------
+  var aiSearching = false;
+  function runAiSearch() {
+    if (aiSearching) return;
+    var q = ($("searchInput").value || "").trim();
+    if (!q) { toast(AP.lang === "en" ? "Type what you're looking for first" : "请先在搜索框输入想找的主题/展览"); $("searchInput").focus(); return; }
+    aiSearching = true;
+    var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
+    $("aiOverlayQ").textContent = "「" + q + "」";
+    $("aiOverlay").hidden = false;
+    fetch("/api/search?q=" + encodeURIComponent(q))
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        finishAi(btn);
+        if (res && res.error) { toast(res.message || (AP.lang === "en" ? "Search error" : "检索出错,请确认后端服务已启动")); return; }
+        var add = (res && res.added) || [];
+        var known = {}; for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
+        var fresh = add.filter(function (o) { return !known[o.id]; });
+        if (!fresh.length) { toast(AP.lang === "en" ? "No new real ones found (never fabricated). Try another term." : "本次没找到新的真实机会(绝不编造)。换个词再试"); return; }
+        allData = allData.concat(fresh);
+        rerun();
+        toast(AP.lang === "en" ? ("Added " + fresh.length + " real opportunities, saved") : ("新增 " + fresh.length + " 条真实机会,已永久入库"));
+      })
+      .catch(function () { finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
+  }
+  function finishAi(btn) {
+    aiSearching = false;
+    if (btn) { btn.disabled = false; btn.classList.remove("is-loading"); }
+    var ov = $("aiOverlay"); if (ov) ov.hidden = true;
   }
 
   // ---------- 复制链接 ----------

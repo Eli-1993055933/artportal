@@ -40,3 +40,23 @@
   (腾讯问卷 / 金数据 / Google Form),把链接填进 `site/js/app.js` 的 `SUBMIT_FORM_URL`。
 - **信息有误** mailto 用的是站长邮箱,公开后有收到垃圾邮件的可能。
 - 想要微信分享卡有大图,`og:image` 需换成**绝对地址的 PNG/JPG**(现为 SVG,部分平台不认)。
+
+---
+
+## 「搜索即检索」功能:需要后端(重要)
+
+网站新增了"用 AI 全网检索"功能:用户搜索时,后端去搜相关官网→抓原文→DeepSeek 提取+逐字 evidence→程序校验→**真实的才永久入库**。这一步需要一个**能跑 Node 的后端**,纯静态托管(Cloudflare Pages/OSS)跑不了它。
+
+**本地/服务器启动**(它同时托管网站 + 提供 `/api/search`):
+```bash
+cd pipeline
+# Windows: set DEEPSEEK_API_KEY=... ;  或用 .env
+node server.mjs         # 默认 8080 端口,浏览器开 http://localhost:8080
+```
+- 需要 `pipeline/.env` 里的 `DEEPSEEK_API_KEY`(与每日管道同一把)。
+- **搜索源**:默认用 DuckDuckGo(免密钥,但会被限流,仅够原型/自用)。要稳定,去 serper.dev 注册拿免费 key(每月约 2500 次),在 `.env` 加 `SERPER_API_KEY=...` 即可自动切换。
+- 严守红线:与每日管道同一套 evidence 校验,只收录真实存在的,**绝不编造凑数**;某词真实只有 3 条就是 3 条。
+
+**部署两种形态**:
+- **要搜索功能** → 部署到能跑 Node 的服务器(阿里云轻量即可),用 `pm2`/`systemd` 守护 `node server.mjs`,反代到域名。
+- **纯静态托管**(Cloudflare Pages 等)→ 网站照常,但"AI 全网检索"按钮不可用(没有后端)。可先静态上线、后端稍后补。

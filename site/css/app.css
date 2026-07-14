@@ -110,6 +110,28 @@ img { max-width: 100%; display: block; }
 }
 .searchbar__input::placeholder { color: var(--ink-3); }
 
+/* AI 全网检索按钮 + 检索中覆盖层 */
+.ai-search-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 42px; padding: 0 16px;
+  border-radius: var(--radius-sm); border: 1px solid var(--ink);
+  background: var(--ink); color: #fff; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: background .12s ease;
+}
+.ai-search-btn:hover { background: #000; }
+.ai-search-btn:disabled { opacity: .7; cursor: default; }
+.ai-search-btn__spin { display: none; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: aispin .7s linear infinite; }
+.ai-search-btn.is-loading .ai-search-btn__spin { display: inline-block; }
+@keyframes aispin { to { transform: rotate(360deg); } }
+
+.ai-overlay { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.42); padding: 20px; }
+.ai-overlay__card { background: var(--card); border-radius: var(--radius); padding: 28px 26px; max-width: 360px; text-align: center; box-shadow: var(--shadow-pop); }
+.ai-overlay__spin { width: 34px; height: 34px; margin: 0 auto 14px; border: 3px solid var(--line-2); border-top-color: var(--ink); border-radius: 50%; animation: aispin .8s linear infinite; }
+.ai-overlay__title { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+.ai-overlay__q { margin: 0 0 10px; font-size: 15px; color: var(--warn); font-weight: 600; }
+.ai-overlay__note { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-3); }
+@media (prefers-reduced-motion: reduce) { .ai-search-btn__spin, .ai-overlay__spin { animation: none; } }
+
 .tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {

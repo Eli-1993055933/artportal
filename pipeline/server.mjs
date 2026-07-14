@@ -1,0 +1,192 @@
+// server.mjs —— 本地一体化服务:①托管静态站(site/) ②提供"按需 AI 检索"接口 /api/search
+//
+// 「搜索即检索」闭环(严守反幻觉红线,与每日管道同一套校验):
+//   用户搜关键词 → DuckDuckGo 找相关官网页 → 抓官网原文 → DeepSeek 提取+逐字 evidence
+//   → verify.mjs 程序校验 evidence 是原文子串 → 只有真实、校验通过的才写入 opportunities.json
+// 数量尽力(默认目标 6),真实优先:某词真实只找到 3 条就是 3 条,绝不编造凑数。
+//
+// 启动:  set -a && . ./.env && set +a && node server.mjs   (需 DEEPSEEK_API_KEY)
+// 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
+
+import { createServer } from "node:http";
+import { readFile, writeFile, stat } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { dirname, join, extname, normalize } from "node:path";
+import { fetchSource } from "./lib/fetch.mjs";
+import { extract } from "./lib/extract.mjs";
+import { verifyRecord } from "./lib/verify.mjs";
+
+const __dir = dirname(fileURLToPath(import.meta.url));
+const SITE = join(__dir, "..", "site");
+const DATA = join(SITE, "data", "opportunities.json");
+const PORT = process.env.PORT || 8080;
+const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36";
+
+function todayISO() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+function slug(s) { return String(s).toLowerCase().replace(/[^\w一-龥]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "item"; }
+function computeStatus(deadline) { return deadline && deadline < todayISO() ? "expired" : "open"; }
+
+// —— 环节①:搜索,拿到候选官网 URL ——
+// 可插拔搜索源:配了 SERPER_API_KEY(serper.dev,Google 结果,有免费额度)就用它(稳定);
+// 否则退回 DuckDuckGo lite(免密钥但会被限流,仅适合原型)。上线稳定跑建议配 key。
+async function searchWeb(query) {
+  if (process.env.SERPER_API_KEY) {
+    try { return await serperSearch(query); }
+    catch (e) { return await ddgSearch(query); }   // API 失败也降级 DDG
+  }
+  return await ddgSearch(query);
+}
+async function serperSearch(query) {
+  const res = await fetch("https://google.serper.dev/search", {
+    method: "POST",
+    headers: { "X-API-KEY": process.env.SERPER_API_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify({ q: query, num: 15, gl: "cn", hl: "zh-cn" }),
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!res.ok) throw new Error("serper " + res.status);
+  const j = await res.json();
+  return (j.organic || []).map(o => o.link).filter(Boolean);
+}
+async function ddgSearch(query) {
+  const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
+  try {
+    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(15000) });
+    const html = await res.text();
+    const out = [];
+    for (const m of html.matchAll(/uddg=([^&"']+)/g)) {
+      try { out.push(decodeURIComponent(m[1])); } catch (e) {}
+    }
+    return out;
+  } catch (e) { return []; }
+}
+
+// 明显不是机构官网征集页的噪声域名(社交/聚合/问卷/竞赛导流/无关政务)
+const BLOCK = /(weixin\.qq|mp\.weixin|zhihu\.com|xiaohongshu|xhslink|weibo\.|douban\.com|bilibili|baike\.baidu|baidu\.com|bing\.com|duckduckgo|zhipin|liepin|58\.com|facebook\.|instagram\.|youtube\.|twitter\.|t\.me|tiktok|douyin|1688\.|taobao|jd\.com|csdn|jianshu|sohu\.com|163\.com\/|qq\.com\/a\/|sina\.com|1zj\.com|wjx\.cn|zhengjifuwu|opencallradar|saikr\.com|gfbzb|征兵|cpta\.com\.cn|activity\.tencent|meishujia\.cn|zcool\.com\.cn\/work|nipic|huitu\.com|quanjing)/i;
+
+// —— 主流程:检索并入库 ——
+let busy = false;
+async function searchAndHarvest(query, target = 6) {
+  // 多组检索词提升召回。加"艺术"强限定去歧义(否则"征集"会命中征兵/问卷等)。
+  const queries = [
+    query + " 艺术 驻留 申请 截止 官网",
+    query + " 艺术 征集 报名 大赛 双年展 奖",
+    query + " art residency open call apply",
+  ];
+  const rawUrls = [];
+  for (const q of queries) {
+    rawUrls.push(...await searchWeb(q));
+    await new Promise(r => setTimeout(r, 800)); // 对搜索端点客气一点
+  }
+  // 候选去重 + 过滤噪声
+  const seen = new Set(), cands = [];
+  for (const u of rawUrls) {
+    let host; try { host = new URL(u).host; } catch (e) { continue; }
+    if (BLOCK.test(u)) continue;
+    const key = u.split("#")[0];
+    if (seen.has(key)) continue;
+    seen.add(key);
+    cands.push(key);
+  }
+
+  // 现有库(去重基底)
+  const doc = JSON.parse(await readFile(DATA, "utf8"));
+  const existIds = new Set(doc.opportunities.map(o => o.id));
+  const existUrls = new Set(doc.opportunities.map(o => o.url));
+
+  const added = [], log = [];
+  let probed = 0;
+  const MAX_PROBE = 16;                          // 最多探测这么多候选,控制耗时
+  for (const url of cands) {
+    if (added.length >= target || probed >= MAX_PROBE) break;
+    if (existUrls.has(url)) continue;
+    probed++;
+    let host; try { host = new URL(url).host; } catch (e) { continue; }
+    const domain = host.replace(/^www\./, "");
+    let f;
+    try { f = await fetchSource({ url, domain: host, type: "html" }); }
+    catch (e) { log.push("fetch-error " + host); continue; }
+    if (f.skipped || !f.text || f.text.length < 200) { log.push("skip " + host + " " + (f.reason || "thin")); continue; }
+    let ex;
+    try { ex = await extract(f.text, { org_zh: "", domain: host, url, source_url: url, sourceText: f.text }); }
+    catch (e) { log.push("extract-fail " + host); continue; }
+    const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
+    if (v.dropped) { log.push("dropped " + host + " " + v.dropReason.slice(0, 40)); continue; }
+    const rec = finalize(v.record, url, host);
+    if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
+    added.push(rec);
+    log.push("✓ " + rec.title_zh);
+  }
+
+  // 写入库(新机会永久留存)
+  if (added.length) {
+    doc.opportunities.push(...added);
+    doc.count = doc.opportunities.length;
+    await writeFile(DATA, JSON.stringify(doc, null, 2), "utf8");
+  }
+  return { added, probed, candidates: cands.length, log };
+}
+
+function finalize(rec, url, host) {
+  const dom = host.replace(/^www\./, "");
+  const id = "search-" + dom.split(".")[0] + "-" + slug(rec.title_zh || rec.title_en || "item");
+  const today = todayISO();
+  return {
+    id,
+    category: rec.category || "opencall",
+    title_zh: rec.title_zh || null, title_en: rec.title_en || null,
+    org_zh: rec.org_zh || null, city_zh: rec.city_zh || null, country_zh: rec.country_zh || null,
+    deadline: rec.deadline || null, deadline_note: rec.deadline_note || "",
+    apply_fee: rec.apply_fee || { free: null, amount: null, currency: null },
+    participation_fee: rec.participation_fee || { required: null, amount: null, currency: null },
+    funding: rec.funding || { stipend: null, housing: null, travel: null },
+    eligibility: rec.eligibility || { students_ok: null, age_limit: null, nationality: null },
+    disciplines: rec.disciplines || [],
+    summary_zh: rec.summary_zh || null,
+    url, source_url: url, domain: dom,
+    org_type: "official",
+    trust: "auto",                    // evidence 已过;前端仍标"未人工核实·以官网为准"
+    status: computeStatus(rec.deadline),
+    verified_at: null, last_seen: today, updated_at: today, _via: "search"
+  };
+}
+
+// —— 静态文件服务 ——
+const MIME = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "application/javascript; charset=utf-8", ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".ico": "image/x-icon", ".webp": "image/webp" };
+async function serveStatic(req, res) {
+  let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
+  if (p === "/") p = "/index.html";
+  const full = normalize(join(SITE, p));
+  if (!full.startsWith(SITE)) { res.writeHead(403); return res.end("forbidden"); }
+  try {
+    const s = await stat(full);
+    if (s.isDirectory()) { res.writeHead(403); return res.end(); }
+    const body = await readFile(full);
+    res.writeHead(200, { "Content-Type": MIME[extname(full)] || "application/octet-stream", "Cache-Control": "no-cache" });
+    res.end(body);
+  } catch (e) { res.writeHead(404); res.end("not found"); }
+}
+
+createServer(async (req, res) => {
+  const u = new URL(req.url, "http://x");
+  if (u.pathname === "/api/search") {
+    const q = (u.searchParams.get("q") || "").trim();
+    if (!q) { res.writeHead(400, { "Content-Type": "application/json" }); return res.end(JSON.stringify({ error: "empty query" })); }
+    if (busy) { res.writeHead(429, { "Content-Type": "application/json" }); return res.end(JSON.stringify({ error: "busy", message: "上一次检索还在进行,请稍候" })); }
+    busy = true;
+    const t0 = Date.now();
+    try {
+      const r = await searchAndHarvest(q, 6);
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ query: q, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 }));
+      process.stderr.write(`[检索] "${q}" → 探测${r.probed}/${r.candidates} 入库${r.added.length} (${Date.now() - t0}ms)\n` + r.log.map(x => "   " + x).join("\n") + "\n");
+    } catch (e) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: String(e.message || e) }));
+    } finally { busy = false; }
+    return;
+  }
+  return serveStatic(req, res);
+}).listen(PORT, () => process.stderr.write(`ArtPortal 服务启动:http://localhost:${PORT}  (静态站 + /api/search)\n`));
