@@ -15,7 +15,8 @@
     sort: "deadline",
     showPast: true,        // 默认显示"过往项目"(灰卡)
     showUpcoming: true,    // 默认显示"即将开启"(周期展下届推算)
-    favOnly: false
+    favOnly: false,
+    pinnedIds: null        // 本次 AI 检索新增的 id 集合:免搜索/筛选过滤,并置顶显示
   };
 
   AP.hasActiveMoreFilters = function () {
@@ -38,6 +39,8 @@
       if (state.favOnly && !AP.favorites.has(o.id)) return false;
       // dead 状态永不显示
       if (o.status === "dead") return false;
+      // 本次 AI 检索新增:免搜索/分类/筛选过滤,保证一定看得到(排序里再置顶)
+      if (state.pinnedIds && state.pinnedIds.has(o.id)) return true;
       // 分类
       if (state.cat !== "all" && o.category !== state.cat) return false;
       // 三态显示范围:open 恒显;past/upcoming 默认显示,用户可在"更多筛选"里关掉
@@ -70,6 +73,10 @@
     });
 
     out.sort(function (a, b) {
+      if (state.pinnedIds) {                       // 本次检索新增置顶
+        var pa = state.pinnedIds.has(a.id) ? 0 : 1, pb = state.pinnedIds.has(b.id) ? 0 : 1;
+        if (pa !== pb) return pa - pb;
+      }
       if (state.sort === "updated") {
         return String(b.updated_at || "").localeCompare(String(a.updated_at || ""));
       }

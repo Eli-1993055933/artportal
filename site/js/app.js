@@ -135,7 +135,11 @@
 
     // 搜索(实时)
     var searchInput = $("searchInput");
-    searchInput.addEventListener("input", function () { st.q = searchInput.value; rerun(); });
+    searchInput.addEventListener("input", function () { st.q = searchInput.value; st.pinnedIds = null; rerun(); });
+
+    // AI 检索结果横幅关闭
+    var sbClose = $("sbClose");
+    if (sbClose) sbClose.addEventListener("click", function () { var b = $("searchBanner"); if (b) b.hidden = true; });
 
     // 分类 tab
     $("catTabs").addEventListener("click", function (e) {
@@ -333,6 +337,7 @@
     var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
     $("aiBarQ").textContent = "「" + q + "」";
     $("aiBar").hidden = false;
+    setSearchBanner(q, null);            // 横幅:正在检索…
     // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈);用户也可随时点"取消"。
     aiCtrl = ("AbortController" in window) ? new AbortController() : null;
     aiTo = setTimeout(function () {
@@ -346,26 +351,17 @@
       .then(function (res) {
         if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn);
         if (res && res.error) { toast(res.message || (AP.lang === "en" ? "Search error" : "检索出错,请确认后端服务已启动")); return; }
-        if (res && res.cached) { toast(res.message || (AP.lang === "en" ? "Just searched — results already in the list" : "该词刚检索过,结果已在库")); return; }
+        if (res && res.cached) { setSearchBanner(q, -1); return; }
         var add = (res && res.added) || [];
         var known = {}; for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
         var fresh = add.filter(function (o) { return !known[o.id]; });
-        if (!fresh.length) { toast(AP.lang === "en" ? "No new real ones found (never fabricated). Try another term." : "本次没找到新的真实机会(绝不编造)。换个词再试"); return; }
+        if (!fresh.length) { setSearchBanner(q, 0); return; }
         allData = allData.concat(fresh);
-        // 关键:新入库机会的文本未必含用户刚输入的关键词,会被当前搜索/筛选/排序挡住看不到。
-        // 检索本就是"扩库看成果",故清掉搜索词与分类、切"最近更新"让新增置顶、并滚到顶,确保一定看到。
-        var st2 = AP.filterState;
-        st2.q = ""; if ($("searchInput")) $("searchInput").value = "";
-        st2.cat = "all";
-        var tabs = $("catTabs") ? $("catTabs").querySelectorAll(".tab") : [];
-        for (var ti = 0; ti < tabs.length; ti++) tabs[ti].classList.toggle("is-active", tabs[ti].getAttribute("data-cat") === "all");
-        st2.sort = "updated"; if ($("sortSelect")) $("sortSelect").value = "updated";
-        st2.showPast = true; st2.showUpcoming = true;
-        if ($("showPast")) $("showPast").checked = true;
-        if ($("showUpcoming")) $("showUpcoming").checked = true;
+        // 保持在当前搜索状态(不跳回全部);把本次新增置顶+免过滤显示,横幅常驻"新增X条"直到下次检索。
+        AP.filterState.pinnedIds = new Set(fresh.map(function (o) { return o.id; }));
         rerun();
+        setSearchBanner(q, fresh.length);
         try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { window.scrollTo(0, 0); }
-        toast(AP.lang === "en" ? ("Added " + fresh.length + " — shown at top") : ("新增 " + fresh.length + " 条真实机会,已置顶显示"));
       })
       .catch(function () { if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
   }
@@ -381,6 +377,17 @@
     aiSearching = false;
     if (btn) { btn.disabled = false; btn.classList.remove("is-loading"); }
     var ov = $("aiBar"); if (ov) ov.hidden = true;
+  }
+  // 检索结果横幅(常驻,直到下次检索):n=null 检索中 / n<0 缓存命中 / n=0 未找到 / n>0 新增数
+  function setSearchBanner(q, n) {
+    var t = $("sbText"), el = $("searchBanner");
+    if (!t || !el) return;
+    var en = AP.lang === "en", qq = "「" + q + "」";
+    if (n === null) t.textContent = en ? ("Searching " + qq + " …") : ("正在检索 " + qq + " …");
+    else if (n < 0) t.textContent = en ? (qq + " just searched — results already in the list below") : (qq + " 刚检索过,结果已在下方列表里");
+    else if (n === 0) t.textContent = en ? (qq + ": no new real ones found (never fabricated) — try another term") : ("本次检索 " + qq + " 未找到新的真实机会(绝不编造),换个词试试");
+    else t.textContent = en ? (qq + " · added " + n + " new, pinned on top") : ("本次检索 " + qq + " · 新增 " + n + " 条真实机会,已置顶在最上方");
+    el.hidden = false;
   }
 
   // ---------- 复制链接 ----------
