@@ -110,15 +110,15 @@ function rateLimited(ip) {
 }
 
 async function searchAndHarvest(query, target = 6) {
-  // 多组检索词提升召回。加"艺术"强限定去歧义(否则"征集"会命中征兵/问卷等)。
-  // 官网限定组:用 site: 把结果锁死在机构官网域(serper/Google 上极有效),直取第一手;
-  // 相关性交给后续 DeepSeek 提取 + evidence 校验兜底(无关官网会被判 not-applicable 丢弃)。
+  // AI 理解需求 → 结构化意图(地点/领域 + 精准查询);理解失败退回关键词模板。
+  const intent = await understandQuery(query);
+  const loc = intent && intent.location ? String(intent.location).trim() : null;
+  process.stderr.write("  [意图] 地点=" + (loc || "—") + " 领域=" + ((intent && intent.subject) || "—") + "\n");
   const OFFICIAL_SITES = "(site:edu.cn OR site:org.cn OR site:gov.cn OR site:ac.cn OR site:museum OR site:org.hk OR site:gov.tw OR site:org.tw)";
-  const queries = [
-    query + " 驻留 征集 报名 " + OFFICIAL_SITES,   // ① 官网限定(第一手)
-    query + " 艺术 驻留 征集 报名 大赛 奖 官网",     // ② 普通艺术相关
-    query + " art residency open call apply",       // ③ 国际
-  ];
+  const baseQ = (intent && Array.isArray(intent.search_queries) && intent.search_queries.length)
+    ? intent.search_queries.slice(0, 3).map(String)
+    : [query + " 艺术 驻留 征集 报名", query + " 展览 征集 大赛 奖 官网", query + " art residency open call apply"];
+  const queries = [(baseQ[0] || query) + " " + OFFICIAL_SITES].concat(baseQ);   // ① 官网限定 + ②③④ 意图查询
   const rawUrls = [];
   for (const q of queries) {
     rawUrls.push(...await searchWeb(q));
@@ -164,6 +164,7 @@ async function searchAndHarvest(query, target = 6) {
     const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
     if (v.dropped) { log.push("dropped " + host + " " + v.dropReason.slice(0, 40)); continue; }
     const rec = finalize(v.record, url, host);
+    if (loc && !matchLocation(rec, loc)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
     added.push(rec);
     log.push("✓ " + rec.title_zh);
@@ -210,6 +211,44 @@ function finalize(rec, url, host) {
     status: computeStatus(rec.deadline),
     verified_at: null, last_seen: today, updated_at: today, _via: "search"
   };
+}
+
+// AI 查询理解:把用户的自由需求拆成结构化检索意图(地点/领域 + 精准查询词)。用 DeepSeek。
+async function understandQuery(userQuery) {
+  const key = process.env.DEEPSEEK_API_KEY;
+  if (!key) return null;
+  const sys =
+    "你是艺术机会检索的意图理解器。用户在找可申请的艺术展览/驻留/奖项/工作坊/征集等机会。" +
+    "把用户这句需求拆成结构化检索意图,只输出一个 JSON,不要任何解释。\n" +
+    "字段:\n" +
+    "  location: 用户明确提到的地点/城市/地区(如 大理、上海、香港),没提就 null。\n" +
+    "  subject: 核心领域或形式(如 摄影、版画、驻留、雕塑),没提就 null。\n" +
+    "  search_queries: 2-3 条适合直接丢给搜索引擎的精准查询,每条都把地点/领域和机会类型词(征集/驻留/报名/申请/open call)组合好;以中文为主,可含 1 条英文覆盖国际。\n" +
+    '例 "大理" -> {"location":"大理","subject":null,"search_queries":["大理 艺术 驻留 征集 报名","大理 展览 征集 美术馆 艺术中心 官网","Dali Yunnan art residency open call"]}\n' +
+    '例 "面向青年的免费版画奖" -> {"location":null,"subject":"版画","search_queries":["版画 奖 青年 征集 报名","青年 版画 大赛 征稿 申请","printmaking award young artists open call"]}';
+  try {
+    const res = await fetch("https://api.deepseek.com/chat/completions", {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: process.env.EXTRACT_MODEL || "deepseek-chat",
+        temperature: 0.2, max_tokens: 400, response_format: { type: "json_object" },
+        messages: [{ role: "system", content: sys }, { role: "user", content: "用户需求:" + userQuery }]
+      }),
+      signal: AbortSignal.timeout(20000)
+    });
+    if (!res.ok) return null;
+    const j = await res.json();
+    const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+    const m = /\{[\s\S]*\}/.exec(raw);
+    return m ? JSON.parse(m[0]) : null;
+  } catch (e) { return null; }
+}
+// 相关性把关:机会文本是否包含用户明确指定的地点(硬约束);不含则判为跑题、丢弃。
+function matchLocation(rec, loc) {
+  if (!loc) return true;
+  const hay = (rec.title_zh || "") + (rec.title_en || "") + (rec.city_zh || "") + (rec.country_zh || "") + (rec.org_zh || "") + (rec.summary_zh || "");
+  return hay.indexOf(loc) !== -1;
 }
 
 // —— 静态文件服务 ——

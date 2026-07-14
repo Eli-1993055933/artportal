@@ -5,7 +5,7 @@
     zh: {
       brandSub: "· 全球艺术机会",
       myFavorites: "我的收藏", submit: "提交机会",
-      searchPh: "搜索标题、机构、城市、学科…",
+      searchPh: "搜索,或直接描述需求让 AI 全网检索:如 大理的摄影驻留",
       cat_all: "全部", cat_opencall: "展览征集", cat_residency: "驻留项目", cat_award: "艺术奖项", cat_workshop: "工作坊", cat_predict: "预测展览",
       recurringTag: "周期展", recurringTitle: "双年展/三年展 · 可推算下届开放时间",
       moreFilters: "更多筛选", sortBy: "排序", sort_deadline: "截止由近到远", sort_updated: "最近更新",
@@ -45,7 +45,7 @@
     en: {
       brandSub: "· Global Art Opportunities",
       myFavorites: "Saved", submit: "Submit an opportunity",
-      searchPh: "Search title, organizer, city, discipline…",
+      searchPh: "Search, or describe a need for AI web search: e.g. photography residency in Dali",
       cat_all: "All", cat_opencall: "Open Calls", cat_residency: "Residencies", cat_award: "Awards", cat_workshop: "Workshops", cat_predict: "Recurring",
       recurringTag: "Recurring", recurringTitle: "Biennial/Triennial · next edition can be estimated",
       moreFilters: "More filters", sortBy: "Sort", sort_deadline: "Deadline (soonest)", sort_updated: "Recently updated",
