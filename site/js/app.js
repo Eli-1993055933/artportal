@@ -352,8 +352,20 @@
         var fresh = add.filter(function (o) { return !known[o.id]; });
         if (!fresh.length) { toast(AP.lang === "en" ? "No new real ones found (never fabricated). Try another term." : "本次没找到新的真实机会(绝不编造)。换个词再试"); return; }
         allData = allData.concat(fresh);
+        // 关键:新入库机会的文本未必含用户刚输入的关键词,会被当前搜索/筛选/排序挡住看不到。
+        // 检索本就是"扩库看成果",故清掉搜索词与分类、切"最近更新"让新增置顶、并滚到顶,确保一定看到。
+        var st2 = AP.filterState;
+        st2.q = ""; if ($("searchInput")) $("searchInput").value = "";
+        st2.cat = "all";
+        var tabs = $("catTabs") ? $("catTabs").querySelectorAll(".tab") : [];
+        for (var ti = 0; ti < tabs.length; ti++) tabs[ti].classList.toggle("is-active", tabs[ti].getAttribute("data-cat") === "all");
+        st2.sort = "updated"; if ($("sortSelect")) $("sortSelect").value = "updated";
+        st2.showPast = true; st2.showUpcoming = true;
+        if ($("showPast")) $("showPast").checked = true;
+        if ($("showUpcoming")) $("showUpcoming").checked = true;
         rerun();
-        toast(AP.lang === "en" ? ("Added " + fresh.length + " real opportunities, saved") : ("新增 " + fresh.length + " 条真实机会,已永久入库"));
+        try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { window.scrollTo(0, 0); }
+        toast(AP.lang === "en" ? ("Added " + fresh.length + " — shown at top") : ("新增 " + fresh.length + " 条真实机会,已置顶显示"));
       })
       .catch(function () { if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
   }
