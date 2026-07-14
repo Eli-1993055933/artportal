@@ -331,8 +331,8 @@
     if (!q) { toast(AP.lang === "en" ? "Type what you're looking for first" : "请先在搜索框输入想找的主题/展览"); $("searchInput").focus(); return; }
     aiSearching = true; aiDone = false;
     var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
-    $("aiOverlayQ").textContent = "「" + q + "」";
-    $("aiOverlay").hidden = false;
+    $("aiBarQ").textContent = "「" + q + "」";
+    $("aiBar").hidden = false;
     // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈);用户也可随时点"取消"。
     aiCtrl = ("AbortController" in window) ? new AbortController() : null;
     aiTo = setTimeout(function () {
@@ -367,7 +367,7 @@
   function finishAi(btn) {
     aiSearching = false;
     if (btn) { btn.disabled = false; btn.classList.remove("is-loading"); }
-    var ov = $("aiOverlay"); if (ov) ov.hidden = true;
+    var ov = $("aiBar"); if (ov) ov.hidden = true;
   }
 
   // ---------- 复制链接 ----------

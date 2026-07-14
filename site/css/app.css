@@ -124,15 +124,15 @@ img { max-width: 100%; display: block; }
 .ai-search-btn.is-loading .ai-search-btn__spin { display: inline-block; }
 @keyframes aispin { to { transform: rotate(360deg); } }
 
-.ai-overlay { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.42); padding: 20px; }
-.ai-overlay__card { background: var(--card); border-radius: var(--radius); padding: 28px 26px; max-width: 360px; text-align: center; box-shadow: var(--shadow-pop); }
-.ai-overlay__spin { width: 34px; height: 34px; margin: 0 auto 14px; border: 3px solid var(--line-2); border-top-color: var(--ink); border-radius: 50%; animation: aispin .8s linear infinite; }
-.ai-overlay__title { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
-.ai-overlay__q { margin: 0 0 10px; font-size: 15px; color: var(--warn); font-weight: 600; }
-.ai-overlay__note { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-3); }
-.ai-overlay__cancel { margin-top: 16px; min-height: 38px; padding: 0 22px; border-radius: var(--radius-sm); border: 1px solid var(--line-2); background: transparent; color: var(--ink-2); font-size: 13.5px; cursor: pointer; }
-.ai-overlay__cancel:hover { background: rgba(0,0,0,.04); }
-@media (prefers-reduced-motion: reduce) { .ai-search-btn__spin, .ai-overlay__spin { animation: none; } }
+/* 检索中:底部悬浮提示条,不遮挡内容;进网站默认隐藏 */
+.ai-bar { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 80; display: flex; align-items: center; gap: 12px; max-width: 92vw; padding: 10px 12px 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; box-shadow: var(--shadow-pop); }
+.ai-bar[hidden] { display: none; }                     /* 关键:压过 display:flex,hidden 才真正隐藏 */
+.ai-bar__spin { flex: 0 0 auto; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: aispin .7s linear infinite; }
+.ai-bar__text { font-size: 13px; line-height: 1.4; }
+.ai-bar__q { color: #ffd8a8; font-weight: 600; }
+.ai-bar__cancel { flex: 0 0 auto; border: none; background: rgba(255,255,255,.18); color: #fff; border-radius: 999px; padding: 4px 14px; font-size: 12.5px; cursor: pointer; }
+.ai-bar__cancel:hover { background: rgba(255,255,255,.3); }
+@media (prefers-reduced-motion: reduce) { .ai-search-btn__spin, .ai-bar__spin { animation: none; } }
 
 .tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .tabs::-webkit-scrollbar { display: none; }

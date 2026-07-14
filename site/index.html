@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#F7F6F2" />
   <!-- 资源版本号:每次改前端 JS/CSS 就把 v 递增一位,强制浏览器加载新版本(避免缓存错配) -->
-  <link rel="stylesheet" href="css/app.css?v=10" />
+  <link rel="stylesheet" href="css/app.css?v=11" />
 </head>
 <body>
   <!-- 顶部栏 -->
@@ -213,26 +213,22 @@
     </aside>
   </div>
 
-  <!-- AI 检索中覆盖层 -->
-  <div class="ai-overlay" id="aiOverlay" hidden>
-    <div class="ai-overlay__card">
-      <div class="ai-overlay__spin" aria-hidden="true"></div>
-      <p class="ai-overlay__title" data-i18n="aiSearching">AI 正在全网检索真实机会…</p>
-      <p class="ai-overlay__q" id="aiOverlayQ"></p>
-      <p class="ai-overlay__note" data-i18n="aiSearchNote">正在抓取机构官网原文并逐字校验,约需 1–2 分钟。只收录真实存在的,绝不编造。</p>
-      <button class="ai-overlay__cancel" id="aiCancelBtn" type="button" data-i18n="aiCancel">取消</button>
-    </div>
+  <!-- AI 检索中:底部轻量提示条(不遮挡页面,可继续浏览) -->
+  <div class="ai-bar" id="aiBar" hidden>
+    <span class="ai-bar__spin" aria-hidden="true"></span>
+    <span class="ai-bar__text"><span data-i18n="aiSearching">AI 正在全网检索真实机会…</span> <span class="ai-bar__q" id="aiBarQ"></span></span>
+    <button class="ai-bar__cancel" id="aiCancelBtn" type="button" data-i18n="aiCancel">取消</button>
   </div>
 
   <!-- toast -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="js/i18n.js?v=10"></script>
-  <script src="js/format.js?v=10"></script>
-  <script src="js/favorites.js?v=10"></script>
-  <script src="js/filters.js?v=10"></script>
-  <script src="js/render.js?v=10"></script>
-  <script src="js/router.js?v=10"></script>
-  <script src="js/app.js?v=10"></script>
+  <script src="js/i18n.js?v=11"></script>
+  <script src="js/format.js?v=11"></script>
+  <script src="js/favorites.js?v=11"></script>
+  <script src="js/filters.js?v=11"></script>
+  <script src="js/render.js?v=11"></script>
+  <script src="js/router.js?v=11"></script>
+  <script src="js/app.js?v=11"></script>
 </body>
 </html>
