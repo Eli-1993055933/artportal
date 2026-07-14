@@ -346,6 +346,7 @@
       .then(function (res) {
         if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn);
         if (res && res.error) { toast(res.message || (AP.lang === "en" ? "Search error" : "检索出错,请确认后端服务已启动")); return; }
+        if (res && res.cached) { toast(res.message || (AP.lang === "en" ? "Just searched — results already in the list" : "该词刚检索过,结果已在库")); return; }
         var add = (res && res.added) || [];
         var known = {}; for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
         var fresh = add.filter(function (o) { return !known[o.id]; });

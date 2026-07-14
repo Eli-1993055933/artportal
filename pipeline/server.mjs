@@ -67,7 +67,42 @@ async function ddgSearch(query) {
 const BLOCK = /(weixin\.qq|mp\.weixin|zhihu\.com|xiaohongshu|xhslink|weibo\.|douban\.com|bilibili|baike\.baidu|baidu\.com|bing\.com|duckduckgo|zhipin|liepin|58\.com|facebook\.|instagram\.|youtube\.|twitter\.|t\.me|tiktok|douyin|1688\.|taobao|jd\.com|csdn|jianshu|sohu\.com|163\.com\/|qq\.com\/a\/|sina\.com|1zj\.com|wjx\.cn|zhengjifuwu|opencallradar|saikr\.com|gfbzb|征兵|cpta\.com\.cn|activity\.tencent|meishujia\.cn|zcool\.com\.cn\/work|nipic|huitu\.com|quanjing)/i;
 
 // —— 主流程:检索并入库 ——
-let busy = false;
+// —— 并发控制基础设施(拆掉原来的全局独占锁,支持多人同时各跑各的)——
+// 1) 写库串行锁:抓取/校验全程并发,只有"读文件→再去重→追加→写文件"这一小步串行,避免并发写互相覆盖丢数据。
+let writeChain = Promise.resolve();
+function withWriteLock(fn) {
+  const p = writeChain.then(fn, fn);
+  writeChain = p.then(() => {}, () => {});
+  return p;
+}
+// 2) 并发信号量:同时进行的检索上限;超出的"排队等待"(不是拒绝)。检索大多在等网络IO,故上限可较高。
+const MAX_CONCURRENT = 12;
+let running = 0;
+const waiters = [];
+function acquireSlot() {
+  if (running < MAX_CONCURRENT) { running++; return Promise.resolve(); }
+  return new Promise(res => waiters.push(res));
+}
+function releaseSlot() {
+  if (waiters.length) waiters.shift()();     // 名额直接交给下一个排队者(running 不变)
+  else running--;
+}
+// 3) 相同关键词短时去重:同词 8 分钟内不重复全网检索(结果已在库),省 API 费、防重复;进行中的也挡住。
+const recentQ = new Map();                   // q(小写) -> 完成时间戳
+const inFlight = new Set();                  // 正在检索中的词(小写)
+const QUERY_TTL = 8 * 60 * 1000;
+function recentlyDone(q) { const t = recentQ.get(q); return t && (Date.now() - t < QUERY_TTL); }
+// 4) 简易 IP 限频:同一来源每分钟检索上限,防单人狂刷烧钱。
+const ipHits = new Map();                    // ip -> [时间戳...]
+const IP_WINDOW = 60 * 1000, IP_MAX = 4;
+function rateLimited(ip) {
+  const now = Date.now();
+  const arr = (ipHits.get(ip) || []).filter(t => now - t < IP_WINDOW);
+  if (arr.length >= IP_MAX) { ipHits.set(ip, arr); return true; }
+  arr.push(now); ipHits.set(ip, arr);
+  return false;
+}
+
 async function searchAndHarvest(query, target = 6) {
   // 多组检索词提升召回。加"艺术"强限定去歧义(否则"征集"会命中征兵/问卷等)。
   const queries = [
@@ -123,13 +158,23 @@ async function searchAndHarvest(query, target = 6) {
     log.push("✓ " + rec.title_zh);
   }
 
-  // 写入库(新机会永久留存)
+  // 写入库(串行临界区:读最新→再去重→追加→写)。抓取/校验已在锁外并发完成,故不阻塞别人。
+  let saved = added;
   if (added.length) {
-    doc.opportunities.push(...added);
-    doc.count = doc.opportunities.length;
-    await writeFile(DATA, JSON.stringify(doc, null, 2), "utf8");
+    saved = await withWriteLock(async () => {
+      const cur = JSON.parse(await readFile(DATA, "utf8"));
+      const ids = new Set(cur.opportunities.map(o => o.id));
+      const urls = new Set(cur.opportunities.map(o => o.url));
+      const fresh = added.filter(o => !ids.has(o.id) && !urls.has(o.url));  // 并发下再去一次重
+      if (fresh.length) {
+        cur.opportunities.push(...fresh);
+        cur.count = cur.opportunities.length;
+        await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+      }
+      return fresh;
+    });
   }
-  return { added, probed, candidates: cands.length, log };
+  return { added: saved, probed, candidates: cands.length, log };
 }
 
 function finalize(rec, url, host) {
@@ -167,7 +212,9 @@ async function serveStatic(req, res) {
     const s = await stat(full);
     if (s.isDirectory()) { res.writeHead(403); return res.end(); }
     const body = await readFile(full);
-    res.writeHead(200, { "Content-Type": MIME[extname(full)] || "application/octet-stream", "Cache-Control": "no-cache" });
+    // HTML 绝不缓存(每次拿最新,带上最新的 ?v= 资源引用);其余交给 ?v= 版本号控缓存
+    const isHtml = extname(full) === ".html" || p === "/index.html";
+    res.writeHead(200, { "Content-Type": MIME[extname(full)] || "application/octet-stream", "Cache-Control": isHtml ? "no-store, no-cache, must-revalidate" : "no-cache" });
     res.end(body);
   } catch (e) { res.writeHead(404); res.end("not found"); }
 }
@@ -176,19 +223,24 @@ createServer(async (req, res) => {
   const u = new URL(req.url, "http://x");
   if (u.pathname === "/api/search") {
     const q = (u.searchParams.get("q") || "").trim();
-    if (!q) { res.writeHead(400, { "Content-Type": "application/json" }); return res.end(JSON.stringify({ error: "empty query" })); }
-    if (busy) { res.writeHead(429, { "Content-Type": "application/json" }); return res.end(JSON.stringify({ error: "busy", message: "上一次检索还在进行,请稍候" })); }
-    busy = true;
+    const json = (code, obj) => { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
+    if (!q) return json(400, { error: "empty query" });
+    const ql = q.toLowerCase();
+    const ip = String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "?").split(",")[0].trim();
+    if (rateLimited(ip)) return json(429, { error: "rate", message: "检索太频繁了,请过一会儿再试" });
+    // 同词 8 分钟内已检索过、或正在检索中 → 直接返回,不重复全网跑(结果已/即将在库)
+    if (recentlyDone(ql) || inFlight.has(ql)) return json(200, { query: q, added: [], addedCount: 0, cached: true, message: "「" + q + "」刚刚检索过,结果已在库,下拉列表即可看到" });
+    inFlight.add(ql);
     const t0 = Date.now();
+    await acquireSlot();                       // 超并发上限则在此排队等待(不拒绝)
     try {
       const r = await searchAndHarvest(q, 6);
-      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ query: q, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 }));
-      process.stderr.write(`[检索] "${q}" → 探测${r.probed}/${r.candidates} 入库${r.added.length} (${Date.now() - t0}ms)\n` + r.log.map(x => "   " + x).join("\n") + "\n");
+      recentQ.set(ql, Date.now());             // 成功才进短时缓存
+      json(200, { query: q, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 });
+      process.stderr.write(`[检索] "${q}" ← ${ip} · 并发${running} → 探测${r.probed}/${r.candidates} 入库${r.added.length} (${Date.now() - t0}ms)\n`);
     } catch (e) {
-      res.writeHead(500, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: String(e.message || e) }));
-    } finally { busy = false; }
+      json(500, { error: String(e.message || e) });
+    } finally { releaseSlot(); inFlight.delete(ql); }
     return;
   }
   return serveStatic(req, res);
