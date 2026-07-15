@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-14",
-  "count": 225,
+  "count": 276,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -10869,6 +10869,2449 @@
       "org_type": "official",
       "trust": "auto",
       "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-luxembourgartprize-卢森堡艺术奖",
+      "category": "award",
+      "title_zh": "卢森堡艺术奖",
+      "title_en": "Luxembourg Art Prize",
+      "org_zh": "卢森堡大公国博物馆",
+      "city_zh": null,
+      "country_zh": "卢森堡",
+      "deadline": "2026-09-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕刻",
+        "装置",
+        "油画",
+        "摄影",
+        "雕塑",
+        "混合技术",
+        "装饰艺术"
+      ],
+      "summary_zh": "卢森堡艺术奖面向全球在世业余或专业艺术家，不限年龄、国籍、居住地及艺术领域。参赛作品形式包括绘画、雕刻、装置、油画、摄影、雕塑、混合技术、装饰艺术等。每年9月30日截止报名，需在线支付注册费。前三名奖金分别为20,000€、10,000€、5,000€。",
+      "url": "https://www.luxembourgartprize.com/zh/rules-zh/",
+      "source_url": "https://www.luxembourgartprize.com/zh/rules-zh/",
+      "domain": "luxembourgartprize.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-bocec-全球吉庆生肖设计大赛-丁未羊年",
+      "category": "opencall",
+      "title_zh": "全球吉庆生肖设计大赛（丁未羊年）",
+      "title_en": null,
+      "org_zh": "北京市文化和旅游局",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计"
+      ],
+      "summary_zh": "由北京市文化和旅游局主办的全球吉庆生肖设计大赛（丁未羊年）面向全球征集设计作品与文创产品，获奖佳作将登陆国际文化交流舞台。",
+      "url": "https://www.bocec.cn/Index/tree/id/3",
+      "source_url": "https://www.bocec.cn/Index/tree/id/3",
+      "domain": "bocec.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-bcaf-地球大2022高等学校设计征集",
+      "category": "award",
+      "title_zh": "地球大2022高等学校设计征集",
+      "title_en": null,
+      "org_zh": "北京当代艺术基金会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2022-05-16",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": "中国大陆"
+      },
+      "disciplines": [
+        "设计"
+      ],
+      "summary_zh": "MUJI無印良品中国联合北京当代艺术基金会发起面向中国大陆高校在校生的设计征集，主题为“地球大”，征集与生活相关的设计作品，提供总计12万元奖金及多项荣誉。",
+      "url": "https://bcaf.org.cn/2022",
+      "source_url": "https://bcaf.org.cn/2022",
+      "domain": "bcaf.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-e-flux-艺术家驻留项目公开征集",
+      "category": "residency",
+      "title_zh": "艺术家驻留项目公开征集",
+      "title_en": "Open call for artist residency program",
+      "org_zh": "布伦瑞克工业大学",
+      "city_zh": "布伦瑞克",
+      "country_zh": "德国",
+      "deadline": "2026-05-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介"
+      ],
+      "summary_zh": "布伦瑞克工业大学科学与艺术实验室与BrightBrain研究联盟合作，邀请国际艺术家申请为期三个月的驻留项目，聚焦微光子学、生物医学、技术与神经退行性疾病，提供艺术家费、差旅住宿及制作预算。",
+      "url": "https://www.e-flux.com/announcements/6786984/open-call-for-artist-residency-program",
+      "source_url": "https://www.e-flux.com/announcements/6786984/open-call-for-artist-residency-program",
+      "domain": "e-flux.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-resartis-中欧艺术中心驻留公开征集",
+      "category": "residency",
+      "title_zh": "中欧艺术中心驻留公开征集",
+      "title_en": "Residency open call – Chinese European Art Center",
+      "org_zh": "中欧艺术中心",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": "2026-05-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 12000,
+        "currency": "RMB"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "中欧艺术中心（CEAC）位于厦门思明区，提供2026年10月8日至2027年1月7日的驻留机会。驻留费用为每月12000元人民币，包含工作室和生活空间。欢迎各领域艺术家申请，截止日期2026年5月31日。",
+      "url": "https://resartis.org/open-call/residency-open-call-chinese-european-art-center/",
+      "source_url": "https://resartis.org/open-call/residency-open-call-chinese-european-art-center/",
+      "domain": "resartis.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-artelaguna-第18届拉古纳国际艺术奖",
+      "category": "opencall",
+      "title_zh": "第18届拉古纳国际艺术奖",
+      "title_en": "Arte Laguna Prize 18",
+      "org_zh": "意大利国家现当代艺术协会（MoCA）",
+      "city_zh": "威尼斯",
+      "country_zh": "意大利",
+      "deadline": "2023-10-26",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 80,
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑及装置艺术",
+        "摄影",
+        "视频及短片",
+        "虚拟艺术",
+        "数字图形和卡通图像",
+        "环境/地景艺术",
+        "城市艺术",
+        "表演与行为艺术",
+        "艺术设计"
+      ],
+      "summary_zh": "第18届拉古纳国际艺术奖向全球艺术家和设计师开放，不限年龄、性别、国籍。作品类别包括绘画、雕塑、摄影、视频、虚拟艺术等。截止2023年10月26日。报名费80欧元（35岁以下）或100欧元（35岁以上）。入围者将于2024年3月至4月在威尼斯北军械库参展。",
+      "url": "https://artelaguna.world/18th-edition-applications-cn/",
+      "source_url": "https://artelaguna.world/18th-edition-applications-cn/",
+      "domain": "artelaguna.world",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-dianying-第十九届中国-山东-青年微电影大赛",
+      "category": "award",
+      "title_zh": "第十九届中国（山东）青年微电影大赛",
+      "title_en": null,
+      "org_zh": "中国电影家协会、山东省文联、山东省教育厅",
+      "city_zh": "济南",
+      "country_zh": "中国",
+      "deadline": "2026-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "35岁以下",
+        "nationality": null
+      },
+      "disciplines": [
+        "微电影"
+      ],
+      "summary_zh": "第十九届中国（山东）青年微电影大赛面向社会征集作品，分为学生单元和社会单元，涵盖故事片、纪录片、动画片、公益广告片。报名参赛不收取任何费用，作品须为2025年1月1日后创作，截止日期为2026年7月31日。",
+      "url": "https://dianying.sflac.org.cn/article/63_31984.html",
+      "source_url": "https://dianying.sflac.org.cn/article/63_31984.html",
+      "domain": "dianying.sflac.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-chinafilm-2026全国青年剧作计划征集启事",
+      "category": "opencall",
+      "title_zh": "2026全国青年剧作计划征集启事",
+      "title_en": null,
+      "org_zh": "中央宣传部电影局、中央宣传部电影剧本规划策划中心",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-07-29",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "45周岁以下",
+        "nationality": null
+      },
+      "disciplines": [
+        "剧本"
+      ],
+      "summary_zh": "2026全国青年剧作计划由中央宣传部电影局等主办，面向全国高校在读学生及毕业两年内的本科生、硕士生与博士生，年龄45周岁以下，征集未公映电影剧本，入选作品给予扶持资金。",
+      "url": "https://www.chinafilm.gov.cn/xxgk/gztz/202604/t20260421_985810.html",
+      "source_url": "https://www.chinafilm.gov.cn/xxgk/gztz/202604/t20260421_985810.html",
+      "domain": "chinafilm.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-wglj-第二十届中国长春电影节-金鹿创投-新摇篮计划项目征集公告",
+      "category": "opencall",
+      "title_zh": "第二十届中国长春电影节“金鹿创投”新摇篮计划项目征集公告",
+      "title_en": null,
+      "org_zh": "中国长春电影节",
+      "city_zh": "长春",
+      "country_zh": "中国",
+      "deadline": "2025-08-22",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "电影"
+      ],
+      "summary_zh": "第二十届中国长春电影节“金鹿创投”新摇篮计划面向华语电影项目征集，分为常规单元和大学生单元，要求已完成剧本的故事片，未拍摄未完成融资。报名截止2025年8月22日，入围路演项目有机会获得奖金资助。",
+      "url": "http://wglj.changchun.gov.cn/jdhy_44809/zjdc/202507/t20250725_3417145.html",
+      "source_url": "http://wglj.changchun.gov.cn/jdhy_44809/zjdc/202507/t20250725_3417145.html",
+      "domain": "wglj.changchun.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-xingping-第八届-玉琮杯-清廉微电影微视频大赛",
+      "category": "award",
+      "title_zh": "第八届\"玉琮杯\"清廉微电影微视频大赛",
+      "title_en": null,
+      "org_zh": "中国纪检监察杂志社、浙江省纪委监委、浙江省教育厅、浙江省文联、中央广播电视总台浙江总站、浙江日报报业集团、杭州市纪委监委、中共杭州市余杭区委",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-09-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "微电影",
+        "微视频"
+      ],
+      "summary_zh": "第八届\"玉琮杯\"清廉微电影微视频大赛面向全国征集作品，主题为\"光影@使命如炬\"，设微电影和微视频两类，含综合奖、单项奖等，2026年9月15日截止。",
+      "url": "https://xingping.qinfeng.gov.cn/info/1017/5876.htm",
+      "source_url": "https://xingping.qinfeng.gov.cn/info/1017/5876.htm",
+      "domain": "xingping.qinfeng.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-gmqn-艺术与海洋-主题绘画作品大赛",
+      "category": "award",
+      "title_zh": "\"艺术与海洋\"主题绘画作品大赛",
+      "title_en": null,
+      "org_zh": "中国科学院深海科学与工程研究所",
+      "city_zh": "三亚",
+      "country_zh": "中国",
+      "deadline": "2019-04-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "油画",
+        "版画",
+        "水粉",
+        "水彩"
+      ],
+      "summary_zh": "中国科学院深海科学与工程研究所主办，面向中国美术学院在校师生及优秀毕业生征集海洋主题绘画作品，设一二三等奖，奖金5000/3000/1000元，截止2019年4月15日。",
+      "url": "https://gmqn.caa.edu.cn/info/1026/1632.htm",
+      "source_url": "https://gmqn.caa.edu.cn/info/1026/1632.htm",
+      "domain": "gmqn.caa.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-film-2024青年编剧大会剧本大赛",
+      "category": "award",
+      "title_zh": "2024青年编剧大会剧本大赛",
+      "title_en": null,
+      "org_zh": "厦门大学电影学院、厦门影视剧本中心",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "剧本",
+        "影视",
+        "戏剧"
+      ],
+      "summary_zh": "2024青年编剧大会剧本大赛征集原创华语剧本，设影视、短片短剧、戏剧三类及厦金蛋特别单元。获奖者可获住宿接待、奖金扶持等。投稿截止2024年8月31日。",
+      "url": "https://film.xmu.edu.cn/info/1179/13465.htm",
+      "source_url": "https://film.xmu.edu.cn/info/1179/13465.htm",
+      "domain": "film.xmu.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-m-第十六届中国摄影艺术节报名展",
+      "category": "opencall",
+      "title_zh": "第十六届中国摄影艺术节报名展",
+      "title_en": null,
+      "org_zh": "第十六届中国摄影艺术节执委会",
+      "city_zh": "三门峡市",
+      "country_zh": "中国",
+      "deadline": "2026-08-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 800,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "第十六届中国摄影艺术节报名展面向广大摄影人征集主题展览作品，弘扬中华优秀传统文化、展示自然生态之美。展览于2026年10月至2027年2月在河南三门峡中国摄影艺术馆举办。报名截止2026年8月25日。展线计价800元/延米，入围作者需自行承担制作、布展及往返邮寄费用。",
+      "url": "https://m.cpanet.org.cn/detail_news_143189.html",
+      "source_url": "https://m.cpanet.org.cn/detail_news_143189.html",
+      "domain": "m.cpanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-silkroad-第五届-丝路-国际青少年摄影-短视频大赛",
+      "category": "award",
+      "title_zh": "第五届“丝路”国际青少年摄影、短视频大赛",
+      "title_en": null,
+      "org_zh": "福建可比信息科技有限公司",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "赛程安排：2026年4月-12月",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "12-20",
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "短视频"
+      ],
+      "summary_zh": "第五届“丝路”国际青少年摄影、短视频大赛面向12-20岁青少年征稿，赛程为2026年4月至12月，设12-15岁和16-20岁两个赛区。",
+      "url": "https://silkroad.52hrtt.com/",
+      "source_url": "https://silkroad.52hrtt.com/",
+      "domain": "silkroad.52hrtt.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-esraro-r-a-r-o-布宜诺斯艾利斯驻留项目公开征集",
+      "category": "residency",
+      "title_zh": "R.A.R.O. 布宜诺斯艾利斯驻留项目公开征集",
+      "title_en": "Open Call | R.A.R.O.",
+      "org_zh": "R.A.R.O.",
+      "city_zh": "布宜诺斯艾利斯",
+      "country_zh": "阿根廷",
+      "deadline": "2026-09-04",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "R.A.R.O. 布宜诺斯艾利斯驻留项目开放2026年第二届Macro-Residency和Micro-Residency申请。Macro-Residency提供1个全额资助名额，申请截止至2026年9月4日。Micro-Residency全年开放。面向各类艺术家、研究者、策展人等。",
+      "url": "https://www.esraro.com/en/postular",
+      "source_url": "https://www.esraro.com/en/postular",
+      "domain": "esraro.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-ny20plus-国际艺术驻留征集令",
+      "category": "residency",
+      "title_zh": "国际艺术驻留征集令",
+      "title_en": null,
+      "org_zh": "成都浓园文化艺术传播有限公司",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "影像",
+        "雕塑",
+        "装置",
+        "综合材料",
+        "陶瓷",
+        "舞蹈",
+        "其他"
+      ],
+      "summary_zh": "NY20+ 国际艺术驻留项目面向艺术家开放申请，提供驻留机会，涵盖绘画、影像、雕塑、装置、综合材料、陶瓷、舞蹈等多种艺术门类。",
+      "url": "http://www.ny20plus.com/h-col-158.html",
+      "source_url": "http://www.ny20plus.com/h-col-158.html",
+      "domain": "ny20plus.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-lawayakacurrent-la-wayaka-current-驻留项目",
+      "category": "residency",
+      "title_zh": "La Wayaka Current 驻留项目",
+      "title_en": "La Wayaka Current Residency",
+      "org_zh": "La Wayaka Current",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "We are currently accepting applications.",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "La Wayaka Current 正在接受申请，提供沙漠、热带、巴塔哥尼亚等地的驻留项目。申请需使用英语或西班牙语。",
+      "url": "https://www.lawayakacurrent.com/apply",
+      "source_url": "https://www.lawayakacurrent.com/apply",
+      "domain": "lawayakacurrent.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-resartis-母亲艺术驻留",
+      "category": "residency",
+      "title_zh": "母亲艺术驻留",
+      "title_en": "MOTHERS IN ART RESIDENCY",
+      "org_zh": "Ruutin Kartano",
+      "city_zh": null,
+      "country_zh": "芬兰",
+      "deadline": "2025-05-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 1400,
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "摄影",
+        "设计",
+        "音乐",
+        "写作",
+        "研究"
+      ],
+      "summary_zh": "芬兰乡村的艺术家驻留项目，面向艺术家母亲，可携带家人（最多6人）。提供舒适住房、工作室、桑拿等设施。2025年10月为期4周，费用1400欧元。申请截止2025年5月15日。",
+      "url": "https://resartis.org/open-call/motehrs-in-art-residency-open-call/",
+      "source_url": "https://resartis.org/open-call/motehrs-in-art-residency-open-call/",
+      "domain": "resartis.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-transartists-随时申请",
+      "category": "residency",
+      "title_zh": "随时申请",
+      "title_en": "Apply any time",
+      "org_zh": "TransArtists",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "Apply any time",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "TransArtists网站提供全年可申请的驻留项目列表，涵盖多个国家，艺术家可随时提交申请。",
+      "url": "https://www.transartists.org/en/apply-any-time",
+      "source_url": "https://www.transartists.org/en/apply-any-time",
+      "domain": "transartists.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-redcorner-mongolia-蒙古及蒙古驻地艺术家公开征集",
+      "category": "residency",
+      "title_zh": "蒙古及蒙古驻地艺术家公开征集",
+      "title_en": "OPEN CALL FOR MONGOLIAN AND MONGOLIA BASED ARTISTS - Nomadic Red Corner",
+      "org_zh": "蒙古当代艺术支持协会",
+      "city_zh": null,
+      "country_zh": "蒙古",
+      "deadline": "2023-09-08",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "Mongolian and Mongolia-based"
+      },
+      "disciplines": [
+        "visual arts",
+        "photography",
+        "film",
+        "dance",
+        "music",
+        "literature"
+      ],
+      "summary_zh": "蒙古当代艺术支持协会邀请蒙古及蒙古驻地艺术家申请为期1个月的驻留项目，时间为2023年9月15日至10月15日，提供生活和工作空间，支持创意实现，并与当地社区合作。",
+      "url": "https://redcorner-mongolia.com/open-call-for-mongolian-and-mongolia-based-artists/",
+      "source_url": "https://redcorner-mongolia.com/open-call-for-mongolian-and-mongolia-based-artists/",
+      "domain": "redcorner-mongolia.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-cafa-千里之行-全国美术学院毕业作品展征稿通知",
+      "category": "opencall",
+      "title_zh": "“千里之行”全国美术学院毕业作品展征稿通知",
+      "title_en": null,
+      "org_zh": "北京市通州区宋庄镇人民政府、中央美术学院等",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-06-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "装置",
+        "设计",
+        "多媒体艺术"
+      ],
+      "summary_zh": "面向全国美术类2025届应届毕业生征集毕业作品，类别包括绘画、雕塑、装置、设计、多媒体等。社会征集截止2025年6月20日。入选者有机会参与驻留计划，获免费工作室和创作补助。",
+      "url": "https://www.cafa.edu.cn/st/2025/90133087.htm",
+      "source_url": "https://www.cafa.edu.cn/st/2025/90133087.htm",
+      "domain": "cafa.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-sites-2026年河南省第八届大学生艺术展演活动-专业组-作品征集",
+      "category": "opencall",
+      "title_zh": "2026年河南省第八届大学生艺术展演活动（专业组）作品征集",
+      "title_en": null,
+      "org_zh": "洛阳师范学院教务处",
+      "city_zh": "洛阳",
+      "country_zh": "中国",
+      "deadline": "2025-12-26",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "声乐",
+        "器乐",
+        "舞蹈",
+        "戏剧",
+        "朗诵",
+        "绘画",
+        "书法和篆刻",
+        "摄影",
+        "设计",
+        "微电影"
+      ],
+      "summary_zh": "面向本校在读本科生、专升本及全日制研究生征集艺术表演类、艺术作品类、艺术实践工作坊和高校美育改革创新优秀案例作品，要求原创，2025年12月26日前以学院为单位报送。",
+      "url": "https://sites.lynu.edu.cn/jwc/info/1014/2956.htm",
+      "source_url": "https://sites.lynu.edu.cn/jwc/info/1014/2956.htm",
+      "domain": "sites.lynu.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-moe-全国第八届大学生艺术展演活动",
+      "category": "opencall",
+      "title_zh": "全国第八届大学生艺术展演活动",
+      "title_en": null,
+      "org_zh": "中华人民共和国教育部",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "校级展演阶段为2026年4—7月，省级展演阶段为2026年8—12月，全国汇演阶段为2027年1—6月",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "声乐",
+        "器乐",
+        "舞蹈",
+        "戏剧",
+        "朗诵",
+        "绘画",
+        "书法",
+        "篆刻",
+        "摄影",
+        "设计",
+        "影视"
+      ],
+      "summary_zh": "教育部举办全国第八届大学生艺术展演活动，面向全国普通高校全日制在籍学生，设艺术表演类、艺术作品类、艺术实践工作坊和高校美育改革创新优秀成果四大类，分校级、省级、全国汇演三个阶段。",
+      "url": "https://www.moe.gov.cn/srcsite/A17/moe_794/moe_628/202604/t20260421_1434298.html",
+      "source_url": "https://www.moe.gov.cn/srcsite/A17/moe_794/moe_628/202604/t20260421_1434298.html",
+      "domain": "moe.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-www2-关于征集全国第八届大学生艺术展演活动校级作品的通知",
+      "category": "opencall",
+      "title_zh": "关于征集全国第八届大学生艺术展演活动校级作品的通知",
+      "title_en": null,
+      "org_zh": "华南理工大学",
+      "city_zh": "广州",
+      "country_zh": "中国",
+      "deadline": "2026-06-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "声乐",
+        "器乐",
+        "舞蹈",
+        "戏剧（戏曲）",
+        "朗诵",
+        "绘画",
+        "书法",
+        "篆刻",
+        "摄影",
+        "设计",
+        "影视"
+      ],
+      "summary_zh": "华南理工大学面向全校师生征集全国第八届大学生艺术展演活动校级作品，包括艺术表演类、艺术作品类、艺术实践工作坊和高校美育改革创新优秀成果四大类，截止日期为2026年6月30日中午12:00。",
+      "url": "https://www2.scut.edu.cn/youth/2026/0624/c11096a630773/page.htm",
+      "source_url": "https://www2.scut.edu.cn/youth/2026/0624/c11096a630773/page.htm",
+      "domain": "www2.scut.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-cxcyxy-2026年-春期-国青杯-高校艺术设计作品征集活动",
+      "category": "opencall",
+      "title_zh": "2026年（春期）“国青杯”高校艺术设计作品征集活动",
+      "title_en": null,
+      "org_zh": "中国人生科学学会艺术教育专业委员会、国青杯高校艺术设计作品展评组委会",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-06-05",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "智能产品设计",
+        "数字媒体艺术",
+        "环境空间设计",
+        "视觉传达设计",
+        "时尚与纺织品设计",
+        "美术作品",
+        "理论研究与概念设计",
+        "综合设计"
+      ],
+      "summary_zh": "面向全国高校艺术设计类专业在校学生征集作品，涵盖智能产品设计、数字媒体艺术、环境空间设计、视觉传达设计、时尚与纺织品设计、美术作品、理论研究与概念设计、综合设计等类别。截止2026年6月5日，每人投稿不超过2件。",
+      "url": "https://cxcyxy.ntu.edu.cn/2026/0409/c10412a288843/page.htm",
+      "source_url": "https://cxcyxy.ntu.edu.cn/2026/0409/c10412a288843/page.htm",
+      "domain": "cxcyxy.ntu.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-ad-第七届艺术与科学国际作品展暨学术研讨会征集启事",
+      "category": "opencall",
+      "title_zh": "第七届艺术与科学国际作品展暨学术研讨会征集启事",
+      "title_en": null,
+      "org_zh": "清华大学",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2026-06-18",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "第七届艺术与科学国际作品展暨学术研讨会将于2026年11月1日至2027年2月28日在北京举行，主题为“世界之弦：艺术与科学的变奏”。现面向全球征集作品和论文，作品投稿截止2026年6月18日，论文提交截止2026年7月31日。",
+      "url": "https://www.ad.tsinghua.edu.cn/info/1061/32565.htm",
+      "source_url": "https://www.ad.tsinghua.edu.cn/info/1061/32565.htm",
+      "domain": "ad.tsinghua.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-cpanet-第十五届中国摄影艺术节报名展",
+      "category": "opencall",
+      "title_zh": "第十五届中国摄影艺术节报名展",
+      "title_en": null,
+      "org_zh": "中国摄影艺术节执委会",
+      "city_zh": "三门峡",
+      "country_zh": "中国",
+      "deadline": "2024-09-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 600,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "第十五届中国摄影艺术节报名展面向国内外摄影家、摄影机构征集主题展览作品，主题为弘扬中国优秀文化、展示自然生态之美。展览于2024年11月至2025年3月在三门峡中国摄影艺术馆举办。报名截止2024年9月25日。展线计价600元/延米，入选后需自行承担制作布展及往返运费。优秀展览及策展人各10名，稿酬各5000元。",
+      "url": "https://www.cpanet.org.cn/detail_news_139255.html",
+      "source_url": "https://www.cpanet.org.cn/detail_news_139255.html",
+      "domain": "cpanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-hbwy-第十五届中国摄影艺术节报名展征集启事",
+      "category": "opencall",
+      "title_zh": "第十五届中国摄影艺术节报名展征集启事",
+      "title_en": null,
+      "org_zh": "第十五届中国摄影艺术节执委会",
+      "city_zh": "三门峡",
+      "country_zh": "中国",
+      "deadline": "2024-09-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 600,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "第十五届中国摄影艺术节报名展面向国内外摄影家、摄影爱好者、策展人、机构征集主题展览作品，展览主题为弘扬中国优秀文化展示自然生态之美，报名截止2024年9月25日，展线计价600元/延米。",
+      "url": "https://www.hbwy.org.cn/c/2024/08/23/58190.shtml",
+      "source_url": "https://www.hbwy.org.cn/c/2024/08/23/58190.shtml",
+      "domain": "hbwy.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-icspa-辉煌的瞬间-2024-第三届中国老年摄影展征稿启事",
+      "category": "opencall",
+      "title_zh": "辉煌的瞬间 ——2024•第三届中国老年摄影展征稿启事",
+      "title_en": null,
+      "org_zh": "中国老摄影家协会",
+      "city_zh": "张家界",
+      "country_zh": "中国",
+      "deadline": "2024-09-08",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "中国老摄影家协会主办的第三届老年摄影展，面向全国摄影工作者和爱好者征稿，身份年龄不限。设时代锦绣、岁月如歌、诗意山河三个专题，计划入选400件作品。截稿2024年9月8日，展览于10月在张家界举办。",
+      "url": "https://www.icspa.org.cn/?m=home&c=View&a=index&aid=36",
+      "source_url": "https://www.icspa.org.cn/?m=home&c=View&a=index&aid=36",
+      "domain": "icspa.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-zhjqw-2024非遗影像展作品征集",
+      "category": "opencall",
+      "title_zh": "2024非遗影像展作品征集",
+      "title_en": null,
+      "org_zh": "文化和旅游部民族民间文艺发展中心",
+      "city_zh": "开化县",
+      "country_zh": "中国",
+      "deadline": "2024-08-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "影像",
+        "摄影"
+      ],
+      "summary_zh": "2024非遗影像展面向机构及个人征集非遗纪录影像和纪实摄影图片，截止2024年8月25日，入选作品将获颁证书并在浙江开化展映。",
+      "url": "https://www.zhjqw.org.cn/?s=news-read-id-292.html",
+      "source_url": "https://www.zhjqw.org.cn/?s=news-read-id-292.html",
+      "domain": "zhjqw.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-jwc-2024年安徽省大学生摄影作品大赛校内作品征集通知",
+      "category": "opencall",
+      "title_zh": "2024年安徽省大学生摄影作品大赛校内作品征集通知",
+      "title_en": null,
+      "org_zh": "合肥师范学院教务处",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2024-11-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "2024年安徽省大学生摄影作品大赛面向全省高校在籍学生征集摄影作品，分为纪录类和艺术类，要求作品在2022年后创作，每人每类限投3件，总不超过6件，免费报名，截止2024年11月15日。",
+      "url": "https://jwc.hfnu.edu.cn/info/1009/55710.htm",
+      "source_url": "https://jwc.hfnu.edu.cn/info/1009/55710.htm",
+      "domain": "jwc.hfnu.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-muhn-中国梦-劳动美-永远跟党走-奋进新征程-第十一届全国职工摄影展",
+      "category": "award",
+      "title_zh": "中国梦·劳动美——永远跟党走 奋进新征程 第十一届全国职工摄影展",
+      "title_en": null,
+      "org_zh": "中华全国总工会宣传教育部、重庆市总工会",
+      "city_zh": "重庆",
+      "country_zh": "中国",
+      "deadline": "2024-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "中华全国总工会举办第十一届全国职工摄影展，主题为“中国梦·劳动美——永远跟党走 奋进新征程”。面向在职及退休职工征集摄影作品，设金、银、铜奖及优秀作品奖，奖金最高10000元。不收取任何费用。",
+      "url": "https://www.muhn.edu.cn/gh/info/1031/4104.htm",
+      "source_url": "https://www.muhn.edu.cn/gh/info/1031/4104.htm",
+      "domain": "muhn.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-gxnu-关于征集参加广西第八届大学生艺术展演活动作品的通知",
+      "category": "opencall",
+      "title_zh": "关于征集参加广西第八届大学生艺术展演活动作品的通知",
+      "title_en": null,
+      "org_zh": "广西师范大学",
+      "city_zh": "桂林",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "书法",
+        "篆刻",
+        "摄影",
+        "设计",
+        "影视",
+        "声乐",
+        "器乐",
+        "舞蹈",
+        "戏剧",
+        "朗诵"
+      ],
+      "summary_zh": "广西师范大学面向全校师生征集作品参加广西第八届大学生艺术展演活动，涵盖艺术表演、艺术作品、艺术实践工作坊和高校美育改革创新优秀成果四大类，要求全日制在籍学生参加，截止日期为2026年8月31日。",
+      "url": "https://www.gxnu.edu.cn/2026/0606/c1441a343591/page.htm",
+      "source_url": "https://www.gxnu.edu.cn/2026/0606/c1441a343591/page.htm",
+      "domain": "gxnu.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-第三届全国大学生美术作品展览征稿通知",
+      "category": "opencall",
+      "title_zh": "第三届全国大学生美术作品展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-05-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "综合材料绘画",
+        "版画",
+        "雕塑",
+        "水彩",
+        "粉画",
+        "连环画",
+        "插图",
+        "漆画",
+        "实验艺术",
+        "数字艺术",
+        "动画",
+        "艺术设计",
+        "工艺美术",
+        "陶瓷艺术"
+      ],
+      "summary_zh": "第三届全国大学生美术作品展览由中国美术家协会主办，面向全国艺术院校应届毕业生及硕博在校生征稿，涵盖16个门类，设8个展区，总计展出约2050件作品，投稿需通过院校初审后统一报送，截止日期为2026年5月20日。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10137",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10137",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-第八届全国青年美术作品展览征稿通知",
+      "category": "opencall",
+      "title_zh": "第八届全国青年美术作品展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2025-08-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "45",
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "雕塑",
+        "水彩画",
+        "漆画",
+        "插图",
+        "连环画",
+        "综合材料绘画"
+      ],
+      "summary_zh": "第八届全国青年美术作品展览面向45岁以下青年美术家征稿，作品形式包括中国画、油画、版画、雕塑等9类，需提交10寸照片初评，截稿2025年8月10日。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=9746",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=9746",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-lnwyw-中国文联2025年度青年文艺创作扶持计划项目",
+      "category": "award",
+      "title_zh": "中国文联2025年度青年文艺创作扶持计划项目",
+      "title_en": null,
+      "org_zh": "中国文联",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "截止时间以各推荐单位规定为准",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "戏剧",
+        "音乐",
+        "曲艺",
+        "舞蹈",
+        "杂技"
+      ],
+      "summary_zh": "中国文联面向45周岁以下青年文艺工作者征集2025年度舞台艺术原创项目，聚焦现实题材，经推荐单位遴选后报送，资助项目给予资金支持，支持项目无资金资助，项目须于2025年内完成。",
+      "url": "http://www.lnwyw.org.cn/gnwx/202506/t20250605_1345435.html",
+      "source_url": "http://www.lnwyw.org.cn/gnwx/202506/t20250605_1345435.html",
+      "domain": "lnwyw.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-iamasf-申请展览",
+      "category": "opencall",
+      "title_zh": "申请展览",
+      "title_en": null,
+      "org_zh": "International Art Museum of America",
+      "city_zh": "旧金山",
+      "country_zh": "美国",
+      "deadline": null,
+      "deadline_note": "未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 800,
+        "currency": "USD"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "摄影",
+        "混合媒介",
+        "雕塑",
+        "装置艺术"
+      ],
+      "summary_zh": "IAMA为本地和国际中高级艺术家提供在Lightspace画廊和大展览厅举办个展的机会，展览为期两个月，需支付每月800美元或3000美元的费用，艺术家负责作品运输和安装。",
+      "url": "https://iamasf.org/zh/art/rotating-exhibitions/apply-for-an-exhibition/",
+      "source_url": "https://iamasf.org/zh/art/rotating-exhibitions/apply-for-an-exhibition/",
+      "domain": "iamasf.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-ioac-2026英国维多利亚国际青少年绘画大赛",
+      "category": "opencall",
+      "title_zh": "2026英国维多利亚国际青少年绘画大赛",
+      "title_en": null,
+      "org_zh": "IOAC联盟",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "全年全球征稿",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "2026英国维多利亚国际青少年绘画大赛由IOAC联盟主办，全年全球征稿，面向青少年，旨在展现艺术才华。",
+      "url": "https://www.ioac.info/finearts.html",
+      "source_url": "https://www.ioac.info/finearts.html",
+      "domain": "ioac.info",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-hkas-香港藝術學院藝廊-展覽計劃書徵集",
+      "category": "opencall",
+      "title_zh": "香港藝術學院藝廊 ｜展覽計劃書徵集",
+      "title_en": null,
+      "org_zh": "香港藝術學院",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2025-08-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "香港藝術學院藝廊公開徵集展覽提案，歡迎個人及團體申請舉辦個展或聯展。申請資格為香港藝術學院學歷頒授課程之校友及學生。截止日期為2025年8月31日。",
+      "url": "https://www.hkas.edu.hk/events-zh-hant/call-for-exhibition-proposals-at-the-gallery/?lang=zh-hant",
+      "source_url": "https://www.hkas.edu.hk/events-zh-hant/call-for-exhibition-proposals-at-the-gallery/?lang=zh-hant",
+      "domain": "hkas.edu.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-hkas-香港藝術學院為典亞藝博2025展位公開徵集藝術作品",
+      "category": "opencall",
+      "title_zh": "香港藝術學院為典亞藝博2025展位公開徵集藝術作品",
+      "title_en": null,
+      "org_zh": "香港藝術學院",
+      "city_zh": "香港",
+      "country_zh": "香港",
+      "deadline": "2025-08-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "陶藝",
+        "繪畫",
+        "雕塑",
+        "攝影"
+      ],
+      "summary_zh": "香港藝術學院為慶祝成立25週年，首度公開徵集作品參與典亞藝博2025。誠邀校友與在校學生提交陶藝、繪畫、雕塑或攝影作品。截止日期為2025年8月3日，不收取展示費，入選者需自行負擔物流等費用。",
+      "url": "https://www.hkas.edu.hk/events-zh-hant/open_call_hkas_fine_art_asia_2025/?lang=zh-hant",
+      "source_url": "https://www.hkas.edu.hk/events-zh-hant/open_call_hkas_fine_art_asia_2025/?lang=zh-hant",
+      "domain": "hkas.edu.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-apo-va-藝術家駐留及展覽計劃",
+      "category": "residency",
+      "title_zh": "vA!藝術家駐留及展覽計劃",
+      "title_en": null,
+      "org_zh": "香港視覺藝術中心",
+      "city_zh": "香港",
+      "country_zh": "中國",
+      "deadline": "2024-04-05",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": false,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": "香港居民"
+      },
+      "disciplines": [
+        "繪畫",
+        "版畫",
+        "雕塑",
+        "陶藝",
+        "跨媒介"
+      ],
+      "summary_zh": "香港視覺藝術中心公開徵集藝術家駐留及展覽計劃書，獲選者將獲不多於港幣260,000元委約金額進行創作及展覽，駐留期及展覽期可選2024或2025年。",
+      "url": "https://www.apo.hk/tc/web/apo/va_artist_in_residence_2024.html",
+      "source_url": "https://www.apo.hk/tc/web/apo/va_artist_in_residence_2024.html",
+      "domain": "apo.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-hkac-珍藏香港藝術博覽2026作品召集",
+      "category": "opencall",
+      "title_zh": "珍藏香港藝術博覽2026作品召集",
+      "title_en": null,
+      "org_zh": "香港藝術中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2025-11-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 300,
+        "currency": "HKD"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "摄影",
+        "版画",
+        "插画",
+        "数字艺术",
+        "录像艺术",
+        "装置",
+        "雕塑",
+        "混合媒材"
+      ],
+      "summary_zh": "香港藝術中心舉辦「珍藏香港2026」藝術展，公開徵集作品。申請者須為香港藝術學院學生、校友、教職員或香港藝術中心之友，提交最多3件作品，截止2025年11月30日。入選者需繳付港幣300元行政費。",
+      "url": "https://hkac.org.hk/tc/calendar_detail/?u=collecthongkong26_opencall",
+      "source_url": "https://hkac.org.hk/tc/calendar_detail/?u=collecthongkong26_opencall",
+      "domain": "hkac.org.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-info-va-藝術家駐留計劃",
+      "category": "residency",
+      "title_zh": "vA! 藝術家駐留計劃",
+      "title_en": null,
+      "org_zh": "香港視覺藝術中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-06-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": "香港"
+      },
+      "disciplines": [
+        "陶藝",
+        "版畫",
+        "雕塑",
+        "跨媒介"
+      ],
+      "summary_zh": "香港視覺藝術中心公開徵集2026-2028年駐留計劃書，邀請年滿18歲持有效香港身份證的藝術家或組合（最多3人）進駐六個月，使用陶藝、版畫、雕塑等設施進行跨媒介創作，成果有機會展出，並參與公眾活動。",
+      "url": "https://www.info.gov.hk/gia/general/202604/20/P2026042000428.htm",
+      "source_url": "https://www.info.gov.hk/gia/general/202604/20/P2026042000428.htm",
+      "domain": "info.gov.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-kfbg-2026-2027艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "2026-2027艺术家驻留计划",
+      "title_en": "ARTIST-IN-RESIDENCE PROGRAMME 2026-2027",
+      "org_zh": "嘉道理农场暨植物园",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2025-11-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介当代艺术",
+        "视觉艺术",
+        "装置艺术"
+      ],
+      "summary_zh": "嘉道理农场暨植物园邀请艺术家、表演者和作家申请2026-2027驻留计划。驻留期2-6周，需创作新作品并举办至少两次工作坊。提供创作资金、住宿、旅行及生活津贴。截止日期：2025年11月30日。",
+      "url": "https://www.kfbg.org/en/events/artist-in-residence-programme-2026-2027open-calls",
+      "source_url": "https://www.kfbg.org/en/events/artist-in-residence-programme-2026-2027open-calls",
+      "domain": "kfbg.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-swt-2026南博-大理-国际影会征稿暨招展启事",
+      "category": "opencall",
+      "title_zh": "2026南博（大理）国际影会征稿暨招展启事",
+      "title_en": null,
+      "org_zh": "中共大理州委宣传部",
+      "city_zh": "大理",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "征稿细则详见附件，未明确截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 2000,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "2026南博（大理）国际影会面向社会公开征稿暨招展，设精华展区、大理影像艺术走廊、影像艺术品典藏线路、摄影器材展销四大板块。入选参展者需缴纳2000元保证金，撤展后返还。",
+      "url": "https://swt.yn.gov.cn/articles/51215",
+      "source_url": "https://swt.yn.gov.cn/articles/51215",
+      "domain": "swt.yn.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-sjysxy-马到功成-丙午华章-2026全国设计名家马年生肖视觉形象作品邀请展",
+      "category": "award",
+      "title_zh": "马到功成·丙午华章——2026全国设计名家马年生肖视觉形象作品邀请展",
+      "title_en": null,
+      "org_zh": "天津美术学院设计艺术学院",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2025-11-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉传达设计",
+        "数字媒体"
+      ],
+      "summary_zh": "面向天津美术学院设计艺术学院师生征集以“马”为主题的原创视觉形象作品，鼓励数字媒体形式，设学生一、二、三等奖，截止2025年11月30日。",
+      "url": "https://sjysxy.tjarts.edu.cn/info/1011/3410.htm",
+      "source_url": "https://sjysxy.tjarts.edu.cn/info/1011/3410.htm",
+      "domain": "sjysxy.tjarts.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-zxys-雕塑系展览月-优秀作品征集-天津美术学院雕塑系第十五届年度展",
+      "category": "opencall",
+      "title_zh": "雕塑系展览月·优秀作品征集｜天津美术学院雕塑系第十五届年度展",
+      "title_en": null,
+      "org_zh": "天津美术学院造型艺术学院雕塑系",
+      "city_zh": "天津",
+      "country_zh": "中国",
+      "deadline": "2023-12-14",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "绘画"
+      ],
+      "summary_zh": "天津美术学院雕塑系第十五届年度展面向雕塑系在校本科生征集雕塑或绘画作品（1-3件），提交作品信息及高清图片至指定邮箱，截止日期12月14日。",
+      "url": "https://zxys.tjarts.edu.cn/info/1002/1578.htm",
+      "source_url": "https://zxys.tjarts.edu.cn/info/1002/1578.htm",
+      "domain": "zxys.tjarts.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-为中国而设计-第十一届全国环境艺术设计展览征稿通知",
+      "category": "opencall",
+      "title_zh": "为中国而设计——第十一届全国环境艺术设计展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "天津",
+      "country_zh": "中国",
+      "deadline": "2024-08-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "室外环境设计",
+        "室内设计",
+        "家具设计",
+        "公共艺术设计",
+        "大地艺术设计"
+      ],
+      "summary_zh": "中国美术家协会主办，2024年10月在天津举办，以“环境艺术的‘水’营造”为主题，面向国内公开征集室外环境设计、室内设计、家具设计、公共艺术设计、大地艺术设计作品，每位作者限投1件，截稿2024年8月20日。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=9369",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=9369",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-physics-第一届天津市大中小学国防教育主题绘画作品征集活动",
+      "category": "opencall",
+      "title_zh": "第一届天津市大中小学国防教育主题绘画作品征集活动",
+      "title_en": null,
+      "org_zh": "天津市教育两委、市委宣传部和天津警备区",
+      "city_zh": "天津",
+      "country_zh": "中国",
+      "deadline": "2026-05-13",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "面向南开大学全体在校学生征集国防教育主题绘画作品，可个人或团队参赛（不超过3人），需于2026年5月13日前提交作品至学院，经校内选拔后参加市级评比。",
+      "url": "https://physics.nankai.edu.cn/2026/0507/c572a594338/page.htm",
+      "source_url": "https://physics.nankai.edu.cn/2026/0507/c572a594338/page.htm",
+      "domain": "physics.nankai.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-ai-第一届天津市大中小学国防教育主题绘画作品征集活动",
+      "category": "opencall",
+      "title_zh": "第一届天津市大中小学国防教育主题绘画作品征集活动",
+      "title_en": null,
+      "org_zh": "南开大学人民武装部、人工智能学院",
+      "city_zh": "天津",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "南开大学组织学生参加第一届天津市大中小学国防教育主题绘画作品征集活动，面向全校在校学生，个人或团队（不超过3人）参赛，需于2026年5月14日前通过学院提交作品电子版及说明。",
+      "url": "https://ai.nankai.edu.cn/info/1020/6527.htm",
+      "source_url": "https://ai.nankai.edu.cn/info/1020/6527.htm",
+      "domain": "ai.nankai.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-15",
+      "updated_at": "2026-07-15",
+      "_via": "search"
+    },
+    {
+      "id": "search-syxy-首届-天地新视界-地铁艺术展览-作品征集通知",
+      "category": "opencall",
+      "title_zh": "首届“天地新视界”地铁艺术展览 作品征集通知",
+      "title_en": null,
+      "org_zh": "天津美术学院实验艺术学院团委、天津轨道交通运营集团有限公司",
+      "city_zh": "天津",
+      "country_zh": "中国",
+      "deadline": "2019-06-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "油画",
+        "版画",
+        "综合材料",
+        "插画",
+        "水彩",
+        "水墨"
+      ],
+      "summary_zh": "天津美术学院实验艺术学院团委与天津轨道交通运营集团合作，面向天津美术学院在校生征集地铁艺术展览作品，类别包括油画、版画、综合材料等，作品需原创，尺寸15-50cm，重量0.1-1.5kg，截止2019年6月15日。",
+      "url": "https://syxy.tjarts.edu.cn/info/1017/1077.htm",
+      "source_url": "https://syxy.tjarts.edu.cn/info/1017/1077.htm",
+      "domain": "syxy.tjarts.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
