@@ -6,40 +6,78 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>ArtPortal 管理后台</title>
 <style>
+  /* 布局学 Ant Design Pro / Stripe 后台:左侧导航分页面(一次只看一个模块),
+     每模块自带 搜索/过滤/分页,绝不一次渲染几百行;待办数直接标在导航角标上。 */
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   body { margin: 0; background: #14161a; color: #e8e8e6; font: 14px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 20px 60px; }
   h1 { font-size: 18px; margin: 0 0 20px; letter-spacing: .04em; }
-  h1 small { color: #8b8f98; font-weight: 400; font-size: 12px; margin-left: 10px; }
-  h2 { font-size: 14px; color: #aab; margin: 28px 0 10px; }
   /* 登录 */
-  .login { max-width: 320px; margin: 18vh auto 0; }
+  .login { max-width: 320px; margin: 18vh auto 0; padding: 0 20px; }
   .login input { width: 100%; height: 44px; border-radius: 8px; border: 1px solid #333; background: #1d2026; color: #fff; padding: 0 12px; font-size: 14px; margin-bottom: 10px; }
   .login button { width: 100%; height: 44px; border-radius: 8px; border: none; background: #e8e8e6; color: #14161a; font-size: 14px; font-weight: 600; cursor: pointer; }
   .login .err { color: #ff7a6e; font-size: 12px; min-height: 18px; margin: 4px 0; }
+  /* 框架:侧栏 + 主区 */
+  .layout { display: flex; min-height: 100vh; }
+  .side { width: 190px; flex: none; border-right: 1px solid #2a2e36; padding: 18px 10px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; }
+  .side__brand { font-size: 15px; font-weight: 700; letter-spacing: .04em; padding: 0 10px 14px; }
+  .side__brand small { display: block; color: #8b8f98; font-weight: 400; font-size: 11px; margin-top: 2px; }
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav button {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    border: none; background: transparent; color: #aab; font-size: 13.5px; cursor: pointer;
+    padding: 9px 12px; border-radius: 8px; text-align: left;
+  }
+  .nav button:hover { background: #1d2026; color: #e8e8e6; }
+  .nav button.is-active { background: #23272e; color: #fff; font-weight: 600; }
+  .side__foot { margin-top: auto; padding: 10px 12px; font-size: 11px; color: #666b75; }
+  .main { flex: 1; min-width: 0; padding: 20px 22px 60px; }
+  .sec__title { font-size: 16px; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
   /* 概览卡 */
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-bottom: 22px; }
   .card { background: #1d2026; border: 1px solid #2a2e36; border-radius: 10px; padding: 12px 14px; }
   .card .k { font-size: 12px; color: #8b8f98; }
   .card .v { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 2px; }
   .card .v.hot { color: #7ee08a; }
+  h2 { font-size: 14px; color: #aab; margin: 24px 0 10px; }
+  /* 工具条:搜索 + 过滤 chips + 计数 */
+  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .searchbox { width: 250px; max-width: 100%; height: 34px; border-radius: 8px; border: 1px solid #333; background: #1d2026; color: #fff; padding: 0 10px; font-size: 13px; }
+  .fchip { border: 1px solid #2a2e36; background: #1d2026; color: #aab; font-size: 12px; padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+  .fchip.is-active { background: #e8e8e6; color: #14161a; border-color: #e8e8e6; font-weight: 600; }
+  .count { font-size: 12px; color: #8b8f98; margin-left: auto; }
   /* 表格 */
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #2a2e36; white-space: nowrap; }
-  th { color: #8b8f98; font-weight: 500; font-size: 12px; }
+  th { color: #8b8f98; font-weight: 500; font-size: 12px; position: sticky; top: 0; background: #1d2026; }
   td.mono { font-variant-numeric: tabular-nums; color: #aab; }
   .scroll { overflow-x: auto; border: 1px solid #2a2e36; border-radius: 10px; background: #1d2026; }
-  .searchbox { width: 260px; height: 34px; border-radius: 8px; border: 1px solid #333; background: #1d2026; color: #fff; padding: 0 10px; font-size: 13px; margin-bottom: 10px; }
   .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; background: #2a2e36; color: #aab; }
   .pill.on { background: #1d3a24; color: #7ee08a; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 18px; padding: 0 6px; border-radius: 999px; font-size: 11px; background: #2a2e36; color: #aab; }
+  .badge.hot { background: #4a2418; color: #ffb08a; font-weight: 700; }
   .muted { color: #666b75; }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-  .refresh { font-size: 12px; color: #8b8f98; }
+  /* 分页器 */
+  .pager { display: flex; align-items: center; gap: 10px; justify-content: flex-end; padding: 10px 2px 0; font-size: 12.5px; color: #8b8f98; }
+  .pager button { border: 1px solid #2a2e36; background: #1d2026; color: #aab; border-radius: 7px; padding: 5px 12px; font-size: 12.5px; cursor: pointer; }
+  .pager button:disabled { opacity: .35; cursor: default; }
+  /* 手机:侧栏变顶部横滑 tab */
+  @media (max-width: 899px) {
+    .layout { flex-direction: column; }
+    .side { width: auto; height: auto; position: sticky; top: 0; z-index: 5; background: #14161a; border-right: none; border-bottom: 1px solid #2a2e36; padding: 10px 12px 0; }
+    .side__brand { padding: 0 2px 8px; }
+    .side__brand small { display: inline; margin-left: 8px; }
+    .nav { flex-direction: row; overflow-x: auto; scrollbar-width: none; padding-bottom: 8px; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav button { flex: none; padding: 7px 12px; }
+    .side__foot { display: none; }
+    .main { padding: 14px 12px 50px; }
+    .searchbox { width: 100%; }
+    .count { margin-left: 0; width: 100%; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
   <!-- 登录 -->
   <div class="login" id="loginView">
     <h1>ArtPortal 管理后台</h1>
@@ -48,43 +86,100 @@
     <button id="loginBtn" type="button">进入</button>
   </div>
 
-  <!-- 仪表盘 -->
-  <div id="dash" hidden>
-    <div class="bar">
-      <h1>ArtPortal 管理后台 <small id="now"></small></h1>
-      <span class="refresh">每 10 秒自动刷新</span>
-    </div>
+  <!-- 框架:左侧导航 + 单模块主区 -->
+  <div id="dash" class="layout" hidden>
+    <aside class="side">
+      <div class="side__brand">ArtPortal 后台<small id="now"></small></div>
+      <nav class="nav" id="nav">
+        <button data-view="overview" class="is-active">概览</button>
+        <button data-view="subs">投稿审核 <span class="badge" id="navSubN">0</span></button>
+        <button data-view="content">内容管理 <span class="badge" id="navContentN">0</span></button>
+        <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
+        <button data-view="ingest">检索溯源</button>
+        <button data-view="users">用户 <span class="badge" id="navUserN">0</span></button>
+      </nav>
+      <div class="side__foot">每 10 秒自动刷新</div>
+    </aside>
 
-    <div class="cards" id="cards"></div>
+    <main class="main">
+      <!-- 概览 -->
+      <section data-sec="overview">
+        <h1 class="sec__title">概览</h1>
+        <div class="cards" id="cards"></div>
+        <h2>当前在线(近 5 分钟有心跳)</h2>
+        <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
+        <h2>近期事件(最新 30 条)</h2>
+        <div class="scroll"><table id="evtTbl"><thead><tr><th>时间</th><th>类型</th><th>谁</th><th>详情</th></tr></thead><tbody></tbody></table></div>
+      </section>
 
-    <h2>内容管理(展览项目信息;删除进回收站)</h2>
-    <input class="searchbox" id="contentSearch" placeholder="按标题/机构/ID 筛选…" />
-    <div class="scroll"><table id="contentTbl"><thead><tr><th>标题</th><th>类别</th><th>机构</th><th>来源</th><th>检索者</th><th>更新</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+      <!-- 投稿审核 -->
+      <section data-sec="subs" hidden>
+        <h1 class="sec__title">投稿审核 <span class="pill" id="subPending">0 待审</span></h1>
+        <div class="toolbar" id="subFilter">
+          <button class="fchip is-active" data-st="">全部</button>
+          <button class="fchip" data-st="pending">待审</button>
+          <button class="fchip" data-st="approved">已通过</button>
+          <button class="fchip" data-st="rejected">已拒绝</button>
+          <span class="count" id="subCount"></span>
+        </div>
+        <div class="scroll"><table id="subTbl"><thead><tr><th>时间</th><th>标题</th><th>类别</th><th>主办方</th><th>链接</th><th>机审</th><th>投稿人</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="subPager"></div>
+      </section>
 
-    <h2>回收站 <span class="pill" id="recycleN">0</span></h2>
-    <div class="scroll"><table id="recycleTbl"><thead><tr><th>删除时间</th><th>标题</th><th>机构</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+      <!-- 内容管理 -->
+      <section data-sec="content" hidden>
+        <h1 class="sec__title">内容管理 <span class="muted" style="font-size:12px">(展览项目信息;删除进回收站)</span></h1>
+        <div class="toolbar" id="contentFilter">
+          <input class="searchbox" id="contentSearch" placeholder="按标题/机构/ID 搜索…" />
+          <button class="fchip is-active" data-via="">全部来源</button>
+          <button class="fchip" data-via="daily">每日抓取</button>
+          <button class="fchip" data-via="search">AI检索</button>
+          <button class="fchip" data-via="submit">用户投稿</button>
+          <span class="count" id="contentCount"></span>
+        </div>
+        <div class="scroll"><table id="contentTbl"><thead><tr><th>标题</th><th>类别</th><th>机构</th><th>来源</th><th>检索者</th><th>更新</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="contentPager"></div>
+      </section>
 
-    <h2>检索入库溯源(谁的检索把信息带进了库)</h2>
-    <div class="scroll"><table id="ingestTbl"><thead><tr><th>时间</th><th>频道</th><th>检索词</th><th>入库条目</th><th>用户</th></tr></thead><tbody></tbody></table></div>
+      <!-- 回收站 -->
+      <section data-sec="recycle" hidden>
+        <h1 class="sec__title">回收站 <span class="pill" id="recycleN">0</span></h1>
+        <div class="scroll"><table id="recycleTbl"><thead><tr><th>删除时间</th><th>标题</th><th>机构</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="recyclePager"></div>
+      </section>
 
-    <h2>投稿审核 <span class="pill" id="subPending">0 待审</span></h2>
-    <div class="scroll"><table id="subTbl"><thead><tr><th>时间</th><th>标题</th><th>类别</th><th>主办方</th><th>链接</th><th>机审</th><th>投稿人</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+      <!-- 检索溯源 -->
+      <section data-sec="ingest" hidden>
+        <h1 class="sec__title">检索入库溯源 <span class="muted" style="font-size:12px">(谁的检索把信息带进了库)</span></h1>
+        <div class="scroll"><table id="ingestTbl"><thead><tr><th>时间</th><th>频道</th><th>检索词</th><th>入库条目</th><th>用户</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="ingestPager"></div>
+      </section>
 
-    <h2>当前在线(近 5 分钟有心跳)</h2>
-    <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
-
-    <h2>注册用户名册</h2>
-    <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称筛选…" />
-    <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
-
-    <h2>近期事件(最新 30 条)</h2>
-    <div class="scroll"><table id="evtTbl"><thead><tr><th>时间</th><th>类型</th><th>谁</th><th>详情</th></tr></thead><tbody></tbody></table></div>
+      <!-- 用户 -->
+      <section data-sec="users" hidden>
+        <h1 class="sec__title">注册用户名册</h1>
+        <div class="toolbar">
+          <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称搜索…" />
+          <span class="count" id="userCount"></span>
+        </div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="userPager"></div>
+      </section>
+    </main>
   </div>
-</div>
 <script>
 (function () {
   "use strict";
-  var allUsers = [];
+  var allUsers = [], allContent = [], allSubs = [], allRecycle = [], allIngests = [];
+  var view = "overview";
+  // 各模块分页/过滤状态(刷新数据时保留页码,不打断管理员操作)
+  var st = {
+    subs:    { page: 1, per: 30, status: "" },
+    content: { page: 1, per: 50, q: "", via: "" },
+    recycle: { page: 1, per: 50 },
+    ingest:  { page: 1, per: 50 },
+    users:   { page: 1, per: 50, q: "" }
+  };
 
   function $(id) { return document.getElementById(id); }
   function post(url, data) {
@@ -115,6 +210,27 @@
     return withDate ? s.slice(0, 16).replace("T", " ") : s.slice(5, 19).replace("T", " ");
   }
   function bjClock() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(11, 19); }
+  function emptyRow(tb, text, colSpan) {
+    var tr = document.createElement("tr");
+    var c = td(text, "muted"); c.colSpan = colSpan;
+    tr.appendChild(c); tb.appendChild(tr);
+  }
+  // 分页器:list 取当页切片渲染,页脚给 共N条 · 页码 + 上/下页
+  function paginate(list, s, pagerEl, renderRow, tb, colSpan, emptyText) {
+    tb.textContent = "";
+    var total = list.length, pages = Math.max(1, Math.ceil(total / s.per));
+    if (s.page > pages) s.page = pages;
+    if (!total) { emptyRow(tb, emptyText, colSpan); pagerEl.textContent = ""; return; }
+    list.slice((s.page - 1) * s.per, s.page * s.per).forEach(renderRow);
+    pagerEl.textContent = "";
+    var info = document.createElement("span");
+    info.textContent = "共 " + total + " 条 · 第 " + s.page + " / " + pages + " 页";
+    var prev = document.createElement("button"); prev.textContent = "‹ 上一页"; prev.disabled = s.page <= 1;
+    var next = document.createElement("button"); next.textContent = "下一页 ›"; next.disabled = s.page >= pages;
+    prev.addEventListener("click", function () { s.page--; renderActive(); });
+    next.addEventListener("click", function () { s.page++; renderActive(); });
+    pagerEl.appendChild(info); pagerEl.appendChild(prev); pagerEl.appendChild(next);
+  }
 
   // —— 登录 ——
   function tryLogin() {
@@ -127,7 +243,28 @@
   $("loginBtn").addEventListener("click", tryLogin);
   $("pw").addEventListener("keydown", function (e) { if (e.key === "Enter") tryLogin(); });
 
-  // —— 仪表盘 ——
+  // —— 导航:一次只显示一个模块 ——
+  $("nav").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-view]");
+    if (!b) return;
+    view = b.getAttribute("data-view");
+    var btns = document.querySelectorAll("#nav [data-view]");
+    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i] === b);
+    var secs = document.querySelectorAll("[data-sec]");
+    for (var j = 0; j < secs.length; j++) secs[j].hidden = secs[j].getAttribute("data-sec") !== view;
+    renderActive();
+    window.scrollTo(0, 0);
+  });
+  function renderActive() {
+    if (view === "overview") { /* overview 由 refresh 渲染 */ }
+    else if (view === "subs") renderSubs();
+    else if (view === "content") renderContent();
+    else if (view === "recycle") renderRecycle();
+    else if (view === "ingest") renderIngests();
+    else if (view === "users") renderUsers();
+  }
+
+  // —— 概览 ——
   var CARD_DEFS = [
     ["registered_total", "注册用户总数"], ["registered_today", "今日新注册"],
     ["online_users_n", "在线·已登录"], ["online_anon", "在线·访客"],
@@ -150,11 +287,7 @@
   }
   function renderOnline(list) {
     var tb = $("onlineTbl").tBodies[0]; tb.textContent = "";
-    if (!list.length) {
-      var tr = document.createElement("tr");
-      var c = td("(当前没有已登录用户在线;访客数见上方卡片)", "muted"); c.colSpan = 2;
-      tr.appendChild(c); tb.appendChild(tr); return;
-    }
+    if (!list.length) { emptyRow(tb, "(当前没有已登录用户在线;访客数见上方卡片)", 2); return; }
     list.sort(function (a, b) { return b.last - a.last; }).forEach(function (u) {
       var tr = document.createElement("tr");
       tr.appendChild(td(u.email));
@@ -162,10 +295,27 @@
       tb.appendChild(tr);
     });
   }
+  var EVT_NAME = { visit: "访问", outbound: "去官网", search: "检索", register: "注册", login: "登录", submit: "投稿", profile: "改资料" };
+  function renderEvents(list) {
+    var tb = $("evtTbl").tBodies[0]; tb.textContent = "";
+    list.forEach(function (e) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(e.t, false), "mono"));
+      var typeCell = document.createElement("td");
+      var pill = document.createElement("span"); pill.className = "pill" + (e.type === "register" ? " on" : "");
+      pill.textContent = EVT_NAME[e.type] || e.type; typeCell.appendChild(pill); tr.appendChild(typeCell);
+      tr.appendChild(td(e.email || (e.anon ? "访客 " + e.anon : "—")));
+      tr.appendChild(td(e.q || e.id || "", "muted"));
+      tb.appendChild(tr);
+    });
+  }
+
+  // —— 用户 ——
   function renderUsers() {
-    var q = $("userSearch").value.trim().toLowerCase();
-    var tb = $("usersTbl").tBodies[0]; tb.textContent = "";
-    allUsers.filter(function (u) { return !q || (u.email || "").indexOf(q) !== -1 || (u.nickname || "").toLowerCase().indexOf(q) !== -1; }).slice(0, 500).forEach(function (u) {
+    var q = st.users.q.trim().toLowerCase();
+    var list = allUsers.filter(function (u) { return !q || (u.email || "").indexOf(q) !== -1 || (u.nickname || "").toLowerCase().indexOf(q) !== -1; });
+    $("userCount").textContent = q ? "命中 " + list.length + " / " + allUsers.length : "";
+    paginate(list, st.users, $("userPager"), function (u) {
       var tr = document.createElement("tr");
       var av = document.createElement("td");
       if (u.avatar) { var im = document.createElement("img"); im.src = "/" + u.avatar; im.style.cssText = "width:26px;height:26px;border-radius:50%;object-fit:cover;display:block"; av.appendChild(im); }
@@ -176,19 +326,21 @@
       tr.appendChild(td(bj(u.created_at, true), "mono"));
       tr.appendChild(td(rel(u.last_seen), "mono"));
       tr.appendChild(td(u.favorites, "mono"));
-      tb.appendChild(tr);
-    });
+      $("usersTbl").tBodies[0].appendChild(tr);
+    }, $("usersTbl").tBodies[0], 6, "(还没有注册用户)");
   }
+  $("userSearch").addEventListener("input", function () { st.users.q = this.value; st.users.page = 1; renderUsers(); });
 
-  // —— 内容管理 + 回收站 + 检索溯源 ——
-  var allContent = [];
+  // —— 内容管理 ——
+  var VIA = { search: "AI检索", submit: "用户投稿", daily: "每日抓取" };
   function renderContent() {
-    var q = $("contentSearch").value.trim().toLowerCase();
-    var tb = $("contentTbl").tBodies[0]; tb.textContent = "";
-    var VIA = { search: "AI检索", submit: "用户投稿", daily: "每日抓取" };
-    allContent.filter(function (o) {
+    var q = st.content.q.trim().toLowerCase(), via = st.content.via;
+    var list = allContent.filter(function (o) {
+      if (via && (o.via || "daily") !== via) return false;
       return !q || (o.title || "").toLowerCase().indexOf(q) !== -1 || (o.org || "").toLowerCase().indexOf(q) !== -1 || o.id.indexOf(q) !== -1;
-    }).slice(0, 120).forEach(function (o) {
+    });
+    $("contentCount").textContent = "命中 " + list.length + " / 共 " + allContent.length + " 条";
+    paginate(list, st.content, $("contentPager"), function (o) {
       var tr = document.createElement("tr");
       var t = td(o.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "260px"; tr.appendChild(t);
       tr.appendChild(td(o.category));
@@ -208,17 +360,23 @@
         });
       });
       ops.appendChild(del); tr.appendChild(ops);
-      tb.appendChild(tr);
-    });
+      $("contentTbl").tBodies[0].appendChild(tr);
+    }, $("contentTbl").tBodies[0], 7, "(没有匹配的内容)");
   }
-  function renderRecycle(list) {
-    $("recycleN").textContent = String(list.length);
-    var tb = $("recycleTbl").tBodies[0]; tb.textContent = "";
-    if (!list.length) {
-      var tr0 = document.createElement("tr");
-      var c = td("(回收站为空)", "muted"); c.colSpan = 4; tr0.appendChild(c); tb.appendChild(tr0); return;
-    }
-    list.slice(0, 100).forEach(function (r) {
+  $("contentSearch").addEventListener("input", function () { st.content.q = this.value; st.content.page = 1; renderContent(); });
+  $("contentFilter").addEventListener("click", function (e) {
+    var c = e.target.closest(".fchip"); if (!c) return;
+    st.content.via = c.getAttribute("data-via"); st.content.page = 1;
+    var chips = this.querySelectorAll(".fchip");
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("is-active", chips[i] === c);
+    renderContent();
+  });
+
+  // —— 回收站 ——
+  function renderRecycle() {
+    $("recycleN").textContent = String(allRecycle.length);
+    $("navRecycleN").textContent = String(allRecycle.length);
+    paginate(allRecycle, st.recycle, $("recyclePager"), function (r) {
       var p = r.payload || {};
       var tr = document.createElement("tr");
       tr.appendChild(td(bj(r.deleted_at, true), "mono"));
@@ -239,42 +397,33 @@
         ops.appendChild(b);
       });
       tr.appendChild(ops);
-      tb.appendChild(tr);
-    });
+      $("recycleTbl").tBodies[0].appendChild(tr);
+    }, $("recycleTbl").tBodies[0], 4, "(回收站为空)");
   }
-  function renderIngests(list) {
-    var tb = $("ingestTbl").tBodies[0]; tb.textContent = "";
-    if (!list.length) {
-      var tr0 = document.createElement("tr");
-      var c = td("(暂无检索入库记录;此功能上线后的新检索会在这里留痕)", "muted"); c.colSpan = 5; tr0.appendChild(c); tb.appendChild(tr0); return;
-    }
-    list.slice(0, 100).forEach(function (g) {
+
+  // —— 检索溯源 ——
+  function renderIngests() {
+    paginate(allIngests, st.ingest, $("ingestPager"), function (g) {
       var tr = document.createElement("tr");
       tr.appendChild(td(bj(g.at, false), "mono"));
       tr.appendChild(td({ opportunities: "机会", news: "资讯", jobs: "招聘" }[g.channel] || g.channel));
       tr.appendChild(td(g.q || "—"));
       var t = td(g.title || g.record_id); t.style.whiteSpace = "normal"; t.style.maxWidth = "260px"; tr.appendChild(t);
       tr.appendChild(td(g.email || ("访客 " + (g.ip || "?"))));
-      tb.appendChild(tr);
-    });
+      $("ingestTbl").tBodies[0].appendChild(tr);
+    }, $("ingestTbl").tBodies[0], 5, "(暂无检索入库记录)");
   }
-  function refreshContent() {
-    get("/api/admin/content").then(function (r) { allContent = r.list || []; renderContent(); }).catch(function () {});
-    get("/api/admin/recycle").then(function (r) { renderRecycle(r.list || []); }).catch(function () {});
-    get("/api/admin/ingests").then(function (r) { renderIngests(r.list || []); }).catch(function () {});
-  }
-  $("contentSearch") && $("contentSearch").addEventListener("input", renderContent);
+
   // —— 投稿审核 ——
-  function renderSubs(list) {
-    var pending = list.filter(function (s) { return s.status === "pending"; }).length;
+  function renderSubs() {
+    var pending = allSubs.filter(function (s) { return s.status === "pending"; }).length;
     $("subPending").textContent = pending + " 待审";
     $("subPending").className = "pill" + (pending > 0 ? " on" : "");
-    var tb = $("subTbl").tBodies[0]; tb.textContent = "";
-    if (!list.length) {
-      var tr0 = document.createElement("tr");
-      var c = td("(暂无投稿)", "muted"); c.colSpan = 9; tr0.appendChild(c); tb.appendChild(tr0); return;
-    }
-    list.slice(0, 100).forEach(function (s) {
+    $("navSubN").textContent = String(pending);
+    $("navSubN").className = "badge" + (pending > 0 ? " hot" : "");
+    var list = st.subs.status ? allSubs.filter(function (s) { return s.status === st.subs.status; }) : allSubs;
+    $("subCount").textContent = "共 " + list.length + " 条";
+    paginate(list, st.subs, $("subPager"), function (s) {
       var p = s.payload || {};
       var tr = document.createElement("tr");
       tr.appendChild(td(bj(s.created_at, true), "mono"));
@@ -300,11 +449,11 @@
                    (mod.hits && mod.hits.soft && mod.hits.soft.length ? " · 词:" + mod.hits.soft.join(",").slice(0, 30) : "");
       var mc = td(modTxt, mod.verdict === "pass" ? "" : "muted"); mc.title = (mod.ai && mod.ai.reason) || ""; tr.appendChild(mc);
       tr.appendChild(td(s.email));
-      var st = document.createElement("td");
+      var stc = document.createElement("td");
       var pill = document.createElement("span");
       pill.className = "pill" + (s.status === "approved" ? " on" : "");
       pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[s.status] || s.status;
-      st.appendChild(pill); tr.appendChild(st);
+      stc.appendChild(pill); tr.appendChild(stc);
       var ops = document.createElement("td");
       if (s.status === "pending") {
         ["approve", "reject"].forEach(function (act) {
@@ -321,39 +470,58 @@
           });
           ops.appendChild(b);
         });
-      } else ops.appendChild(td("—", "muted").firstChild || document.createTextNode("—"));
+      } else ops.textContent = "—";
       tr.appendChild(ops);
-      tb.appendChild(tr);
-    });
+      $("subTbl").tBodies[0].appendChild(tr);
+    }, $("subTbl").tBodies[0], 9, "(暂无投稿)");
   }
-  function refreshSubs() {
-    get("/api/admin/submissions").then(function (r) { renderSubs(r.list || []); }).catch(function () {});
-  }
+  $("subFilter").addEventListener("click", function (e) {
+    var c = e.target.closest(".fchip"); if (!c) return;
+    st.subs.status = c.getAttribute("data-st"); st.subs.page = 1;
+    var chips = this.querySelectorAll(".fchip");
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("is-active", chips[i] === c);
+    renderSubs();
+  });
 
-  var EVT_NAME = { visit: "访问", outbound: "去官网", search: "检索", register: "注册", login: "登录", submit: "投稿" };
-  function renderEvents(list) {
-    var tb = $("evtTbl").tBodies[0]; tb.textContent = "";
-    list.forEach(function (e) {
-      var tr = document.createElement("tr");
-      tr.appendChild(td(bj(e.t, false), "mono"));
-      var typeCell = document.createElement("td");
-      var pill = document.createElement("span"); pill.className = "pill" + (e.type === "register" ? " on" : "");
-      pill.textContent = EVT_NAME[e.type] || e.type; typeCell.appendChild(pill); tr.appendChild(typeCell);
-      tr.appendChild(td(e.email || (e.anon ? "访客 " + e.anon : "—")));
-      tr.appendChild(td(e.q || e.id || "", "muted"));
-      tb.appendChild(tr);
-    });
+  // —— 数据刷新:导航角标每次都更新;表格只重渲当前模块(保留页码,不打断操作) ——
+  function refreshSubs() {
+    get("/api/admin/submissions").then(function (r) {
+      allSubs = r.list || [];
+      var pending = allSubs.filter(function (s) { return s.status === "pending"; }).length;
+      $("navSubN").textContent = String(pending);
+      $("navSubN").className = "badge" + (pending > 0 ? " hot" : "");
+      if (view === "subs") renderSubs();
+    }).catch(function () {});
+  }
+  function refreshContent() {
+    get("/api/admin/content").then(function (r) {
+      allContent = r.list || [];
+      $("navContentN").textContent = String(allContent.length);
+      if (view === "content") renderContent();
+    }).catch(function () {});
+    get("/api/admin/recycle").then(function (r) {
+      allRecycle = r.list || [];
+      $("navRecycleN").textContent = String(allRecycle.length);
+      if (view === "recycle") renderRecycle();
+    }).catch(function () {});
+    get("/api/admin/ingests").then(function (r) {
+      allIngests = r.list || [];
+      if (view === "ingest") renderIngests();
+    }).catch(function () {});
   }
   function refresh() {
     $("now").textContent = bjClock() + " 北京时间";
     get("/api/admin/overview").then(function (o) {
       renderCards(o); renderOnline(o.online_users); renderEvents(o.recent || []);
     }).catch(function () { location.reload(); });
-    get("/api/admin/users").then(function (r) { allUsers = r.users || []; renderUsers(); }).catch(function () {});
+    get("/api/admin/users").then(function (r) {
+      allUsers = r.users || [];
+      $("navUserN").textContent = String(allUsers.length);
+      if (view === "users") renderUsers();
+    }).catch(function () {});
     refreshSubs();
     refreshContent();
   }
-  $("userSearch").addEventListener("input", renderUsers);
 })();
 </script>
 </body>
