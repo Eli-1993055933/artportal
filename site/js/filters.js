@@ -11,6 +11,7 @@
     freeOnly: false,
     funds: new Set(),          // stipend / housing / travel
     discs: new Set(),
+    orgTypes: new Set(),       // official / independent / commercial
     verifiedOnly: false,
     sort: "deadline",
     showPast: true,        // 默认显示"过往项目"(灰卡)
@@ -21,13 +22,13 @@
 
   AP.hasActiveMoreFilters = function () {
     return state.regions.size || state.freeOnly || state.funds.size ||
-           state.discs.size || state.verifiedOnly ||
+           state.discs.size || state.orgTypes.size || state.verifiedOnly ||
            state.showPast === false || state.showUpcoming === false;
   };
 
   AP.clearMoreFilters = function () {
     state.regions.clear(); state.freeOnly = false; state.funds.clear();
-    state.discs.clear(); state.verifiedOnly = false;
+    state.discs.clear(); state.orgTypes.clear(); state.verifiedOnly = false;
     state.showPast = true; state.showUpcoming = true;   // 复位为默认全显
   };
 
@@ -39,6 +40,9 @@
       if (state.favOnly && !AP.favorites.has(o.id)) return false;
       // dead 状态永不显示
       if (o.status === "dead") return false;
+      // 硬性保证:只展示能一点击直达主办方官网的条目。定位不到官网的先不显示,
+      // 管道每晚持续重试,定位到官网后自动出现(绝不让用户点到聚合平台/新闻页)。
+      if (!F.officialUrl(o)) return false;
       // 本次 AI 检索新增:免搜索/分类/筛选过滤,保证一定看得到(排序里再置顶)
       if (state.pinnedIds && state.pinnedIds.has(o.id)) return true;
       // 分类
@@ -67,6 +71,8 @@
         state.discs.forEach(function (d) { if (ds.indexOf(d) !== -1) hit = true; });
         if (!hit) return false;
       }
+      // 机构类型(任一命中即可)
+      if (state.orgTypes.size && !state.orgTypes.has(o.org_type)) return false;
       // 仅看已人工核实
       if (state.verifiedOnly && o.trust !== "verified") return false;
       return true;

@@ -11,6 +11,14 @@ pipeline/state/samples/
 pipeline/state/demo-*.json
 pipeline/state/offline-*.json
 
+# 账号系统数据 —— 含用户邮箱 / 口令哈希 / 会话令牌 / IP,绝不入库(PII)
+pipeline/state/users.json
+pipeline/state/sessions.json
+pipeline/state/events.jsonl*
+
+# 翻译回滚备份
+site/data/opportunities.json.bak-*
+
 # 系统
 .DS_Store
 Thumbs.db
@@ -20,3 +28,4 @@ Thumbs.db
 # 部署打包产物
 artportal-site.zip
 *.zip
+site/assets/covers/

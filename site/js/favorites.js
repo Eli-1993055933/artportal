@@ -1,4 +1,4 @@
-/* 收藏:纯 localStorage,无账号。 */
+/* 收藏:localStorage 为主;登录后由 auth.js 通过 replaceAll/onChange 与账号云同步。 */
 (function () {
   "use strict";
   var AP = window.AP || (window.AP = {});
@@ -23,7 +23,14 @@
     toggle: function (id) {
       if (set.has(id)) set.delete(id); else set.add(id);
       save();
+      if (typeof AP.favorites.onChange === "function") AP.favorites.onChange();
       return set.has(id);
-    }
+    },
+    // 登录后云同步用:整体替换本地收藏(不触发 onChange,避免回环)
+    replaceAll: function (ids) {
+      set = new Set(Array.isArray(ids) ? ids : []);
+      save();
+    },
+    onChange: null
   };
 })();

@@ -17,6 +17,13 @@
     });
   };
 
+  // 双语字段选择:EN 界面优先 *_en(机器翻译或原文),缺则回退 *_zh;中文界面反之。
+  // 绝不因缺翻译而显示空白。
+  F.loc = function (o, base) {
+    var zh = o[base + "_zh"], en = o[base + "_en"];
+    return AP.lang === "en" ? (en || zh || "") : (zh || en || "");
+  };
+
   // 今天(本地),用于相对天数与过期判断
   F.today = function () {
     var d = new Date();
@@ -121,7 +128,7 @@
 
   // 分类主色(用于无图时的降级色块)
   F.catColor = function (cat) {
-    return { opencall: "#C0392B", residency: "#2E6FA7", award: "#C08A1E", workshop: "#6B5B95", predict: "#B77410" }[cat] || "#8A8A85";
+    return { opencall: "#C0392B", residency: "#2E6FA7", award: "#C08A1E", workshop: "#6B5B95", predict: "#B77410", news: "#1E8A8A", jobs: "#2E8B57" }[cat] || "#8A8A85";
   };
   // 由字符串生成稳定哈希(用于降级色块按条目区分深浅,避免掉图后整排同色)
   function hashOf(s) {
@@ -131,7 +138,7 @@
   }
   // 降级色块配色:保留分类的色相家族,但按 id 哈希微调明度/饱和度,
   // 让掉图/无封面的卡片各不相同,而不是塌成一排同色块。
-  var CAT_HUE = { opencall: 6, residency: 207, award: 40, workshop: 260 };
+  var CAT_HUE = { opencall: 6, residency: 207, award: 40, workshop: 260, news: 182, jobs: 150 };
   F.fallbackColor = function (o) {
     var hue = CAT_HUE[o && o.category];
     if (hue == null) hue = 40;
@@ -140,18 +147,94 @@
     var sat = 40 + ((h >> 4) % 16);       // 40%–55%
     return "hsl(" + hue + ", " + sat + "%, " + light + "%)";
   };
-  // 降级色块首字:优先机构中文首字(最能区分同平台条目),其次标题,最后域名首字母
+  // 降级色块首字:优先机构首字(随界面语言取中/英),其次标题,最后域名首字母
   F.initial = function (o) {
-    if (o.org_zh) return o.org_zh.charAt(0);
-    if (o.title_zh) return o.title_zh.charAt(0);
+    var org = F.loc(o, "org"), title = F.loc(o, "title");
+    if (org) return org.charAt(0).toUpperCase();
+    if (title) return title.charAt(0).toUpperCase();
     if (o.domain) return o.domain.charAt(0).toUpperCase();
     return "?";
   };
+
+  // 视觉宽度:中日韩全角字算 2,其余算 1(用于标题折行)
+  function visWidth(str) { var w = 0; for (var i = 0; i < str.length; i++) w += str.charCodeAt(i) > 255 ? 2 : 1; return w; }
+  // 标题折行:中文按字、英文按词,最多 maxLines 行,超出末行加省略号
+  function wrapTitle(title, maxLines, maxW) {
+    title = String(title || "").trim();
+    var lines = [], cur = "";
+    var latin = /\s/.test(title) && !/[一-鿿぀-ヿ]/.test(title);
+    if (latin) {
+      var ws = title.split(/\s+/);
+      for (var i = 0; i < ws.length && lines.length < maxLines; i++) {
+        var test = cur ? cur + " " + ws[i] : ws[i];
+        if (visWidth(test) > maxW && cur) { lines.push(cur); cur = ws[i]; } else cur = test;
+      }
+    } else {
+      for (var j = 0; j < title.length; j++) {
+        cur += title.charAt(j);
+        if (visWidth(cur) >= maxW) { lines.push(cur); cur = ""; if (lines.length >= maxLines) break; }
+      }
+    }
+    if (cur && lines.length < maxLines) lines.push(cur);
+    var consumed = lines.join(latin ? " " : "").length;
+    if (lines.length >= maxLines && consumed < title.length) {
+      var last = lines[maxLines - 1];
+      lines[maxLines - 1] = last.slice(0, Math.max(1, last.length - 1)) + "…";
+    }
+    return lines.slice(0, maxLines);
+  }
+
+  // 无真实封面时:用条目自身信息(标题+类别+主办方)生成一张"设计海报卡"。
+  // 任何条目都好看、离线可用、不受境外站访问限制。返回一段可直接内联的 SVG 字符串。
+  F.coverArt = function (o) {
+    var cat = o && o.category;
+    var hue = CAT_HUE[cat]; if (hue == null) hue = 40;
+    var h = hashOf(o && (o.id || o.title_zh || "x"));
+    var c1 = "hsl(" + hue + "," + (48 + h % 12) + "%," + (33 + h % 9) + "%)";
+    var c2 = "hsl(" + ((hue + 22) % 360) + "," + (56 + (h >> 3) % 12) + "%," + (20 + (h >> 2) % 7) + "%)";
+    var gid = "g" + (h % 100000);
+    var title = F.loc(o, "title") || "";
+    var org = F.loc(o, "org") || "";
+    var catLabel = (AP.tt[AP.lang] && AP.tt[AP.lang].cat[cat]) || cat || "";
+    var initial = F.initial(o);
+    var lines = wrapTitle(title, 3, 22);
+    // 标题整块垂直居中;字号随行数微调
+    var fs = lines.length >= 3 ? 30 : (lines.length === 2 ? 33 : 36);
+    var lh = fs + 8;
+    var startY = 168 - (lines.length - 1) * lh / 2;
+    var titleSvg = "";
+    for (var i = 0; i < lines.length; i++) {
+      titleSvg += '<text x="34" y="' + (startY + i * lh) + '" fill="#fff" font-size="' + fs +
+        '" font-weight="700" font-family="' + SVG_FONT + '">' + F.esc(lines[i]) + '</text>';
+    }
+    return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + F.esc(title) + '">' +
+      '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="' + c1 + '"/><stop offset="1" stop-color="' + c2 + '"/></linearGradient></defs>' +
+      '<rect width="400" height="300" fill="url(#' + gid + ')"/>' +
+      // 巨大的半透明首字作为纹理点缀
+      '<text x="330" y="250" fill="rgba(255,255,255,0.10)" font-size="240" font-weight="800" text-anchor="middle" font-family="' + SVG_FONT + '">' + F.esc(initial) + '</text>' +
+      // 顶部类别标签
+      '<text x="34" y="52" fill="rgba(255,255,255,0.9)" font-size="15" font-weight="600" letter-spacing="1" font-family="' + SVG_FONT + '">' + F.esc(catLabel) + '</text>' +
+      '<rect x="34" y="62" width="34" height="3" rx="1.5" fill="rgba(255,255,255,0.7)"/>' +
+      titleSvg +
+      // 底部主办方
+      (org ? '<text x="34" y="272" fill="rgba(255,255,255,0.78)" font-size="15" font-family="' + SVG_FONT + '">' + F.esc(org.length > 18 ? org.slice(0, 17) + "…" : org) + '</text>' : "") +
+      '</svg>';
+  };
+  var SVG_FONT = "-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif";
 
   // 只放行 http(s) 链接落入 href/src,挡住 javascript:/data: 等协议注入(全库唯一 XSS 缺口)
   F.safeUrl = function (u) {
     if (!u) return "";
     return /^https?:\/\//i.test(String(u).trim()) ? u : "";
+  };
+  // 封面地址:放行 http(s) 外链(og图),也放行我们自己生成的截图相对路径(同源 assets/covers/xxx.jpg)
+  F.coverSrc = function (o) {
+    var c = o && o.cover; if (!c) return "";
+    c = String(c).trim();
+    if (/^https?:\/\//i.test(c)) return c;
+    if (/^assets\/covers\/[a-z0-9]+\.jpg$/i.test(c)) return c;
+    return "";
   };
 
   // 来源标注:这条是机构官网直采,还是转自某聚合平台。
@@ -184,8 +267,34 @@
                  : "本条由 ArtPortal 后台 AI 从主办机构官网直接检索整理。"
     };
   };
-  // "前往官网"实际要去的地址:优先联网校正后的官网,其次原始链接
-  F.officialUrl = function (o) { return o.official_url || o.url || null; };
+  // 第三方域名(聚合/新闻/门户/社媒)——「前往官网」绝不能落到这里,必须是主办方本站。
+  // 与后端 pipeline/lib/aggregators.mjs 保持一致。
+  var THIRD_PARTY = [
+    "curatorspace.com","artconnect.com","chinaresidencies.com","resartis.org","transartists.org",
+    "artenda.net","open-calls.art","artresidencyguide.com","artistcommunities.org","e-flux.com","art-hub.co.uk","artrabbit.com",
+    "artforum.com.cn","artealdia.com","leapleapleap.com","artforum.com","artsy.net",
+    "news.qq.com","qq.com","chinanews.com.cn","gmw.cn","xinhuanet.com","zijing.com.cn","china.cn","52hrtt.com",
+    "people.com.cn","sina.com.cn","sohu.com","163.com","thepaper.cn","artron.net",
+    "scribd.com","docin.com","doc88.com",
+    "shejijingsai.com","xingxiancn.com","sj33.cn","archcollege.com","cn5v.com","gaoyy.com","chinaawards.net",
+    "huaxiajiang.com","zjideas.com","whaleideas.com","yczhansai.com","cnyisai.com","eduzs.org.cn","10100.com",
+    "jsmsg.com","zhiliaobiaoxun.com","ogdcn.com","zcool.com.cn","gtn9.com","logohhh.com","arting365.com","68design.net","shijue.me","missku.com",
+    "mp.weixin.qq.com","weixin.qq.com","xiaohongshu.com","douyin.com","weibo.com","zhihu.com"
+  ];
+  F.isThirdParty = function (u) {
+    var h; try { h = new URL(u).host.replace(/^www\./, "").toLowerCase(); } catch (e) { return false; }
+    for (var i = 0; i < THIRD_PARTY.length; i++) {
+      var t = THIRD_PARTY[i];
+      if (h === t || h.slice(-(t.length + 1)) === "." + t) return true;
+    }
+    return false;
+  };
+  // "前往官网"实际要去的地址:只允许主办方本站。优先 official_url;若原始 url 是第三方则不作为官网返回。
+  F.officialUrl = function (o) {
+    if (o.official_url && !F.isThirdParty(o.official_url)) return o.official_url;
+    if (o.url && !F.isThirdParty(o.url)) return o.url;
+    return null;
+  };
 
   // —— 下届开放时间"推算" ——
   // 只对周期明确的复发型展览(双年展=2年/三年展=3年)推算,依据真实的往届截止时间。
@@ -219,10 +328,12 @@
     return "预计下届征集:约 " + p.year + " 年 " + p.month + " 月前后 · " + cadTxt + "据往届推算,以官网为准";
   };
 
-  // 供搜索用:把一条的可搜文本拼起来
+  // 供搜索用:把一条的可搜文本拼起来(中英都收进索引,两种语言都能搜到)
   F.searchText = function (o) {
-    var parts = [o.title_zh, o.title_en, o.org_zh, o.city_zh, o.country_zh, o.summary_zh];
+    var parts = [o.title_zh, o.title_en, o.org_zh, o.org_en, o.city_zh, o.city_en,
+                 o.country_zh, o.country_en, o.summary_zh, o.summary_en];
     if (o.disciplines) parts = parts.concat(o.disciplines);
+    if (o.disciplines_en) parts = parts.concat(o.disciplines_en);
     return parts.filter(Boolean).join(" ").toLowerCase();
   };
 })();

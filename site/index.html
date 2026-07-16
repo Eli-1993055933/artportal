@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#F7F6F2" />
   <!-- 资源版本号:每次改前端 JS/CSS 就把 v 递增一位,强制浏览器加载新版本(避免缓存错配) -->
-  <link rel="stylesheet" href="css/app.css?v=17" />
+  <link rel="stylesheet" href="css/app.css?v=36" />
 </head>
 <body>
   <!-- 顶部栏 -->
@@ -42,6 +42,15 @@
       </div>
     </div>
   </header>
+
+  <!-- 一级频道:机会 / 资讯 / 招聘(三个平级大分区,比"展览征集/驻留/奖项/工作坊"更高一级) -->
+  <nav class="channels" id="channelNav" aria-label="内容频道">
+    <div class="channels__inner">
+      <button class="channel is-active" type="button" data-channel="opportunities" data-i18n="ch_opportunities">机会</button>
+      <button class="channel" type="button" data-channel="news" data-i18n="ch_news">资讯</button>
+      <button class="channel" type="button" data-channel="jobs" data-i18n="ch_jobs">招聘</button>
+    </div>
+  </nav>
 
   <!-- 搜索 + 筛选(桌面同一行,手机吸顶) -->
   <div class="controls" id="controls">
@@ -138,6 +147,14 @@
           </div>
         </section>
         <section class="fgroup">
+          <h3 class="fgroup__title" data-i18n="f_orgtype">机构类型</h3>
+          <div class="chips" id="orgTypeChips">
+            <button class="chip" data-orgtype="official"    data-i18n="orgt_official">官方体制</button>
+            <button class="chip" data-orgtype="independent" data-i18n="orgt_independent">独立学术</button>
+            <button class="chip" data-orgtype="commercial"  data-i18n="orgt_commercial">商业机构</button>
+          </div>
+        </section>
+        <section class="fgroup">
           <h3 class="fgroup__title" data-i18n="f_trust">信任</h3>
           <div class="chips">
             <label class="chip chip--check"><input type="checkbox" id="verifiedOnly" /><span data-i18n="verifiedOnly">仅看已人工核实</span></label>
@@ -229,12 +246,13 @@
   <!-- toast -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="js/i18n.js?v=17"></script>
-  <script src="js/format.js?v=17"></script>
-  <script src="js/favorites.js?v=17"></script>
-  <script src="js/filters.js?v=17"></script>
-  <script src="js/render.js?v=17"></script>
-  <script src="js/router.js?v=17"></script>
-  <script src="js/app.js?v=17"></script>
+  <script src="js/i18n.js?v=36"></script>
+  <script src="js/format.js?v=36"></script>
+  <script src="js/favorites.js?v=36"></script>
+  <script src="js/filters.js?v=36"></script>
+  <script src="js/render.js?v=36"></script>
+  <script src="js/router.js?v=36"></script>
+  <script src="js/app.js?v=36"></script>
+  <script src="js/auth.js?v=36"></script>
 </body>
 </html>

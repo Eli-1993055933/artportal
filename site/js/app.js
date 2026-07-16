@@ -9,6 +9,18 @@
   var $ = function (id) { return document.getElementById(id); };
   var allData = [], filtered = [], rendered = 0;
 
+  // 一级频道:机会(展览与项目)/ 资讯 / 招聘。各有独立数据文件与卡片。
+  var channel = "opportunities";
+  var cache = {};
+  var CH = {
+    opportunities: { file: "data/opportunities.json", key: "opportunities", card: function (o) { return AP.renderCard(o); } },
+    news:          { file: "data/news.json",          key: "items",         card: function (o) { return AP.renderNewsCard(o); } },
+    jobs:          { file: "data/jobs.json",           key: "jobs",          card: function (o) { return AP.renderJobCard(o); } }
+  };
+  function channelSearchText(o) {
+    return [o.title, o.title_zh, o.title_en, o.source, o.org, o.summary, o.summary_zh, o.summary_en, o.city, o.country, o.employment_type].filter(Boolean).join(" ").toLowerCase();
+  }
+
   var grid = $("grid"), skeleton = $("skeleton"), sentinel = $("sentinel"),
       loadingMore = $("loadingMore"), emptyState = $("emptyState"), errorState = $("errorState"),
       resultCount = $("resultCount");
@@ -37,18 +49,25 @@
   }
 
   function loadData() {
+    var c = CH[channel];
+    if (cache[channel]) { allData = cache[channel]; showState("ready"); rerun(); syncRoute(); return; }
     showState("loading");
-    fetch("data/opportunities.json", { cache: "no-cache" })
-      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    fetch(c.file, { cache: "no-cache" })
+      .then(function (r) {
+        if (r.ok) return r.json();
+        if (channel === "opportunities") throw new Error("HTTP " + r.status);
+        return null;   // 资讯/招聘文件缺失 → 当空处理,显示"筹备中"
+      })
       .then(function (data) {
-        allData = (data && data.opportunities) || [];
+        allData = (data && data[c.key]) || [];
+        cache[channel] = allData;
         showState("ready");
         rerun();
         syncRoute();
       })
       .catch(function (err) {
-        console.error("[ArtPortal] 数据加载失败:", err);
-        showState("error");
+        if (channel === "opportunities") { console.error("[ArtPortal] 数据加载失败:", err); showState("error"); }
+        else { allData = []; cache[channel] = []; showState("ready"); rerun(); }
       });
   }
 
@@ -61,22 +80,67 @@
 
   // ---------- 渲染主流程 ----------
   function rerun() {
-    filtered = AP.applyFilters(allData);
+    if (channel === "opportunities") {
+      filtered = AP.applyFilters(allData);
+    } else {
+      // 资讯/招聘:仅关键词过滤 + 按日期倒序(无展览那套筛选)
+      var q = AP.filterState.q.trim().toLowerCase();
+      filtered = allData.filter(function (o) { return !q || channelSearchText(o).indexOf(q) !== -1; });
+      filtered.sort(function (a, b) {
+        return String(b.published_at || b.posted_at || b.deadline || "").localeCompare(String(a.published_at || a.posted_at || a.deadline || ""));
+      });
+    }
     rendered = 0;
     grid.innerHTML = "";
     updateCount();
     appendPage();
-    emptyState.hidden = filtered.length !== 0;
+    updateEmpty();
     updateFilterDot();
+  }
+  function updateEmpty() {
+    var isEmpty = filtered.length === 0;
+    emptyState.hidden = !isEmpty;
+    if (!isEmpty) return;
+    var t = channel === "news" ? "empty_news" : channel === "jobs" ? "empty_jobs" : null;
+    if (t) {
+      emptyState.querySelector(".state__title").textContent = AP.t(t + "_title");
+      emptyState.querySelector(".state__desc").textContent = AP.t(t + "_desc");
+      $("emptyClear").hidden = true;
+    } else {
+      emptyState.querySelector(".state__title").textContent = AP.t("empty_title");
+      emptyState.querySelector(".state__desc").textContent = AP.t("empty_desc");
+      $("emptyClear").hidden = false;
+    }
   }
 
   function appendPage() {
+    var renderer = CH[channel].card;
     var end = Math.min(rendered + PAGE, filtered.length);
     var frag = document.createDocumentFragment();
-    for (var i = rendered; i < end; i++) frag.appendChild(AP.renderCard(filtered[i]));
+    for (var i = rendered; i < end; i++) frag.appendChild(renderer(filtered[i]));
     grid.appendChild(frag);
     rendered = end;
     loadingMore.hidden = rendered >= filtered.length;
+  }
+
+  // 频道切换
+  function toggleEl(el, show) { if (el) el.style.display = show ? "" : "none"; }
+  function switchChannel(ch) {
+    if (ch === channel || !CH[ch]) return;
+    channel = ch;
+    var btns = document.querySelectorAll("#channelNav .channel");
+    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i].getAttribute("data-channel") === ch);
+    var opp = ch === "opportunities";
+    toggleEl($("aiSearchBtn"), opp);           // AI 检索、分类 tab、更多筛选行 仅机会频道
+    toggleEl($("catTabs"), opp);
+    toggleEl(document.querySelector(".controls__row2"), opp);
+    $("moreFilters").hidden = true;
+    AP.filterState.q = ""; if ($("searchInput")) $("searchInput").value = "";
+    AP.filterState.cat = "all";
+    $("searchInput").setAttribute("placeholder", AP.t(ch === "news" ? "searchNewsPh" : ch === "jobs" ? "searchJobsPh" : "searchPh"));
+    if (AP.router.parse().name === "detail") AP.router.goList();
+    window.scrollTo(0, 0);
+    loadData();
   }
 
   function updateCount() {
@@ -105,6 +169,7 @@
   // 只读取程序已校验入库的真实数据,前端不做任何内容生成。节流 12 秒一次。
   var refreshing = false, lastRefreshAt = 0;
   function maybeRefresh() {
+    if (channel !== "opportunities") return;   // 到底自动刷新只对机会频道
     var now = Date.now();
     if (refreshing || now - lastRefreshAt < 12000) return;
     refreshing = true; lastRefreshAt = now;
@@ -179,6 +244,11 @@
       var c = e.target.closest(".chip"); if (!c) return;
       toggleSetChip(c, st.discs, c.getAttribute("data-disc")); rerun();
     });
+    // 机构类型 chips(多选)
+    $("orgTypeChips").addEventListener("click", function (e) {
+      var c = e.target.closest(".chip"); if (!c) return;
+      toggleSetChip(c, st.orgTypes, c.getAttribute("data-orgtype")); rerun();
+    });
     // 完全免费 / 资助 / 已核实
     $("freeOnly").addEventListener("change", function () { st.freeOnly = this.checked; rerun(); });
     $("verifiedOnly").addEventListener("change", function () { st.verifiedOnly = this.checked; rerun(); });
@@ -200,7 +270,7 @@
       if ($("showUpcoming")) $("showUpcoming").checked = true;
       $("freeOnly").checked = false; $("verifiedOnly").checked = false;
       var fb = document.querySelectorAll("[data-fund]"); for (var k = 0; k < fb.length; k++) fb[k].checked = false;
-      var chips = document.querySelectorAll("#regionChips .chip, #discChips .chip");
+      var chips = document.querySelectorAll("#regionChips .chip, #discChips .chip, #orgTypeChips .chip");
       for (var j = 0; j < chips.length; j++) chips[j].classList.remove("is-active");
       rerun();
     }
@@ -233,8 +303,20 @@
     var aiCancel = $("aiCancelBtn");
     if (aiCancel) aiCancel.addEventListener("click", cancelAiSearch);
 
+    // 频道导航切换
+    $("channelNav").addEventListener("click", function (e) {
+      var b = e.target.closest(".channel"); if (b) switchChannel(b.getAttribute("data-channel"));
+    });
+
     // 列表点击委托:复制 / 访问 / 打开详情
     grid.addEventListener("click", function (e) {
+      // 资讯/招聘:整卡点击 → 新窗口打开原文/申请页(不进详情)
+      if (channel !== "opportunities") {
+        if (e.target.closest("[data-act='visit']")) return;   // 卡内 <a> 走默认
+        var lk = e.target.closest(".card--link");
+        if (lk && lk.getAttribute("data-url")) window.open(lk.getAttribute("data-url"), "_blank", "noopener");
+        return;
+      }
       var actEl = e.target.closest("[data-act]");
       var card = e.target.closest(".card");
       if (actEl) {
@@ -292,6 +374,9 @@
     var n = AP.favorites.count(), el = $("favCount");
     el.textContent = n; el.hidden = n === 0;
   }
+  // 供 auth.js 在登录/退出云同步收藏后刷新角标与(若在收藏视图)列表
+  AP.syncFavCount = syncFavCount;
+  AP.rerun = rerun;
 
   function byId(id) {
     for (var i = 0; i < allData.length; i++) if (allData[i].id === id) return allData[i];
@@ -410,11 +495,10 @@
   }
 
   // ---------- toast ----------
-  var toastTimer;
   function toast(msg) {
     var el = $("toast");
     el.textContent = msg; el.hidden = false;
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { el.hidden = true; }, 1800);
+    clearTimeout(el._apTimer);                 // 与 auth.js 共用 #toast:统一用元素上的定时器,互不打断
+    el._apTimer = setTimeout(function () { el.hidden = true; }, 1800);
   }
 })();

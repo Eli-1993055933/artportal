@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>ArtPortal 管理后台</title>
+<style>
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: #14161a; color: #e8e8e6; font: 14px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 20px 60px; }
+  h1 { font-size: 18px; margin: 0 0 20px; letter-spacing: .04em; }
+  h1 small { color: #8b8f98; font-weight: 400; font-size: 12px; margin-left: 10px; }
+  h2 { font-size: 14px; color: #aab; margin: 28px 0 10px; }
+  /* 登录 */
+  .login { max-width: 320px; margin: 18vh auto 0; }
+  .login input { width: 100%; height: 44px; border-radius: 8px; border: 1px solid #333; background: #1d2026; color: #fff; padding: 0 12px; font-size: 14px; margin-bottom: 10px; }
+  .login button { width: 100%; height: 44px; border-radius: 8px; border: none; background: #e8e8e6; color: #14161a; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .login .err { color: #ff7a6e; font-size: 12px; min-height: 18px; margin: 4px 0; }
+  /* 概览卡 */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .card { background: #1d2026; border: 1px solid #2a2e36; border-radius: 10px; padding: 12px 14px; }
+  .card .k { font-size: 12px; color: #8b8f98; }
+  .card .v { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .card .v.hot { color: #7ee08a; }
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #2a2e36; white-space: nowrap; }
+  th { color: #8b8f98; font-weight: 500; font-size: 12px; }
+  td.mono { font-variant-numeric: tabular-nums; color: #aab; }
+  .scroll { overflow-x: auto; border: 1px solid #2a2e36; border-radius: 10px; background: #1d2026; }
+  .searchbox { width: 260px; height: 34px; border-radius: 8px; border: 1px solid #333; background: #1d2026; color: #fff; padding: 0 10px; font-size: 13px; margin-bottom: 10px; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; background: #2a2e36; color: #aab; }
+  .pill.on { background: #1d3a24; color: #7ee08a; }
+  .muted { color: #666b75; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .refresh { font-size: 12px; color: #8b8f98; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- 登录 -->
+  <div class="login" id="loginView">
+    <h1>ArtPortal 管理后台</h1>
+    <input type="password" id="pw" placeholder="管理密码" autocomplete="current-password" />
+    <div class="err" id="loginErr"></div>
+    <button id="loginBtn" type="button">进入</button>
+  </div>
+
+  <!-- 仪表盘 -->
+  <div id="dash" hidden>
+    <div class="bar">
+      <h1>ArtPortal 管理后台 <small id="now"></small></h1>
+      <span class="refresh">每 10 秒自动刷新</span>
+    </div>
+
+    <div class="cards" id="cards"></div>
+
+    <h2>当前在线(近 5 分钟有心跳)</h2>
+    <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>注册用户名册</h2>
+    <input class="searchbox" id="userSearch" placeholder="按邮箱筛选…" />
+    <div class="scroll"><table id="usersTbl"><thead><tr><th>邮箱</th><th>昵称</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>近期事件(最新 30 条)</h2>
+    <div class="scroll"><table id="evtTbl"><thead><tr><th>时间</th><th>类型</th><th>谁</th><th>详情</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var allUsers = [];
+
+  function $(id) { return document.getElementById(id); }
+  function post(url, data) {
+    return fetch(url, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data || {}) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); });
+  }
+  function get(url) {
+    return fetch(url, { credentials: "same-origin" }).then(function (r) {
+      if (r.status === 401) throw new Error("unauth");
+      return r.json();
+    });
+  }
+  function rel(ts) {
+    var t = typeof ts === "number" ? ts : Date.parse(ts);
+    if (!t) return "—";
+    var s = Math.round((Date.now() - t) / 1000);
+    if (s < 60) return s + " 秒前";
+    if (s < 3600) return Math.round(s / 60) + " 分钟前";
+    if (s < 86400) return Math.round(s / 3600) + " 小时前";
+    return Math.round(s / 86400) + " 天前";
+  }
+  function td(text, cls) { var el = document.createElement("td"); el.textContent = text == null ? "—" : String(text); if (cls) el.className = cls; return el; }
+  // 事件/注册时间存的是 UTC ISO;后台按【北京时间】显示(+8 小时)
+  function bj(iso, withDate) {
+    if (!iso) return "—";
+    var t = Date.parse(iso); if (isNaN(t)) return iso;
+    var s = new Date(t + 8 * 3600 * 1000).toISOString();
+    return withDate ? s.slice(0, 16).replace("T", " ") : s.slice(5, 19).replace("T", " ");
+  }
+  function bjClock() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(11, 19); }
+
+  // —— 登录 ——
+  function tryLogin() {
+    post("/api/admin/login", { password: $("pw").value }).then(function (r) {
+      if (!r.ok) { $("loginErr").textContent = r.data && r.data.error || "登录失败"; return; }
+      $("loginView").hidden = true; $("dash").hidden = false;
+      refresh(); setInterval(refresh, 10000);
+    });
+  }
+  $("loginBtn").addEventListener("click", tryLogin);
+  $("pw").addEventListener("keydown", function (e) { if (e.key === "Enter") tryLogin(); });
+
+  // —— 仪表盘 ——
+  var CARD_DEFS = [
+    ["registered_total", "注册用户总数"], ["registered_today", "今日新注册"],
+    ["online_users_n", "在线·已登录"], ["online_anon", "在线·访客"],
+    ["t_visit", "今日访问"], ["t_search", "今日检索"], ["t_outbound", "今日去官网"], ["t_login", "今日登录"]
+  ];
+  function renderCards(o) {
+    var vals = {
+      registered_total: o.registered_total, registered_today: o.registered_today,
+      online_users_n: o.online_users.length, online_anon: o.online_anon,
+      t_visit: o.today.visit, t_search: o.today.search, t_outbound: o.today.outbound, t_login: o.today.login
+    };
+    var box = $("cards"); box.textContent = "";
+    CARD_DEFS.forEach(function (d) {
+      var c = document.createElement("div"); c.className = "card";
+      var k = document.createElement("div"); k.className = "k"; k.textContent = d[1];
+      var v = document.createElement("div"); v.className = "v" + ((d[0] === "online_users_n" || d[0] === "online_anon") && vals[d[0]] > 0 ? " hot" : "");
+      v.textContent = String(vals[d[0]] == null ? 0 : vals[d[0]]);
+      c.appendChild(k); c.appendChild(v); box.appendChild(c);
+    });
+  }
+  function renderOnline(list) {
+    var tb = $("onlineTbl").tBodies[0]; tb.textContent = "";
+    if (!list.length) {
+      var tr = document.createElement("tr");
+      var c = td("(当前没有已登录用户在线;访客数见上方卡片)", "muted"); c.colSpan = 2;
+      tr.appendChild(c); tb.appendChild(tr); return;
+    }
+    list.sort(function (a, b) { return b.last - a.last; }).forEach(function (u) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(u.email));
+      tr.appendChild(td(rel(u.last), "mono"));
+      tb.appendChild(tr);
+    });
+  }
+  function renderUsers() {
+    var q = $("userSearch").value.trim().toLowerCase();
+    var tb = $("usersTbl").tBodies[0]; tb.textContent = "";
+    allUsers.filter(function (u) { return !q || (u.email || "").indexOf(q) !== -1; }).slice(0, 500).forEach(function (u) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(u.email));
+      tr.appendChild(td(u.nickname || "—"));
+      tr.appendChild(td(bj(u.created_at, true), "mono"));
+      tr.appendChild(td(rel(u.last_seen), "mono"));
+      tr.appendChild(td(u.favorites, "mono"));
+      tb.appendChild(tr);
+    });
+  }
+  var EVT_NAME = { visit: "访问", outbound: "去官网", search: "检索", register: "注册", login: "登录" };
+  function renderEvents(list) {
+    var tb = $("evtTbl").tBodies[0]; tb.textContent = "";
+    list.forEach(function (e) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(e.t, false), "mono"));
+      var typeCell = document.createElement("td");
+      var pill = document.createElement("span"); pill.className = "pill" + (e.type === "register" ? " on" : "");
+      pill.textContent = EVT_NAME[e.type] || e.type; typeCell.appendChild(pill); tr.appendChild(typeCell);
+      tr.appendChild(td(e.email || (e.anon ? "访客 " + e.anon : "—")));
+      tr.appendChild(td(e.q || e.id || "", "muted"));
+      tb.appendChild(tr);
+    });
+  }
+  function refresh() {
+    $("now").textContent = bjClock() + " 北京时间";
+    get("/api/admin/overview").then(function (o) {
+      renderCards(o); renderOnline(o.online_users); renderEvents(o.recent || []);
+    }).catch(function () { location.reload(); });
+    get("/api/admin/users").then(function (r) { allUsers = r.users || []; renderUsers(); }).catch(function () {});
+  }
+  $("userSearch").addEventListener("input", renderUsers);
+})();
+</script>
+</body>
+</html>

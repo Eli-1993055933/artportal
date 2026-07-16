@@ -23,6 +23,8 @@ import { dedupe } from "./lib/dedupe.mjs";
 import { gradeTrust } from "./lib/trust.mjs";
 import { healthCheck } from "./lib/healthcheck.mjs";
 import { buildReport } from "./lib/report.mjs";
+import { locateOfficial } from "./lib/locate-official.mjs";
+import { isThirdParty } from "./lib/aggregators.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const P = (...p) => join(__dir, ...p);
@@ -150,6 +152,18 @@ async function main() {
         }
         if (cv) { rec.cover = cv; rec.cover_source = src.domain; }
       }
+      // 「前往官网必达主办方本站」:抓到聚合/新闻来源的条目,立刻用其页面HTML + AI/搜索定位主办方真官网。
+      // 源链接(rec.url)照留作"信息来源";找到官网写 official_url,前端优先用它。找不到就留空(夜间 backfill 重试)。
+      if (isThirdParty(rec.url)) {
+        try {
+          const loc = await locateOfficial(
+            { title: rec.title_zh || rec.title_en, org: rec.org_zh || rec.org_en, city: rec.city_zh, country: rec.country_zh },
+            { sourceHtml: cand.rawHtml, sourceUrl: rec.url }
+          );
+          if (loc && loc.url && !isThirdParty(loc.url)) { rec.official_url = loc.url; rec.official_located = loc.level; process.stderr.write(`    → 官网定位: ${loc.url} (${loc.level})\n`); }
+          else process.stderr.write("    → 官网暂未定位(留待夜间重试)\n");
+        } catch (e) { process.stderr.write("    → 官网定位失败: " + e.message + "\n"); }
+      }
       if (g.trust === "auto") { autoRecords.push(rec); }
       else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
       process.stderr.write(`  → ${g.trust}${g.reasons.length ? " (" + g.reasons.join("; ") + ")" : ""}  evidence作废 ${v.nulled.length} 处\n`);
@@ -170,6 +184,7 @@ async function main() {
     if (prev && prev.trust === "verified") { stats.updated++; continue; } // 人工核实的不被 auto 覆盖
     // 保留此前已找到的封面(含联网检索来的),避免每日重跑用页面 og 图覆盖更贴切的封面
     if (prev && prev.cover && !r.cover) { r.cover = prev.cover; r.cover_source = prev.cover_source; }
+    carryTranslations(prev, r);   // 源文未变的英文翻译按字段继承,防每晚重抽抹掉翻译
     if (prev) stats.updated++; else stats.added++;
     byId.set(r.id, r);
   }
@@ -180,6 +195,42 @@ async function main() {
   await writeFile(P("state", "hashes.json"), JSON.stringify(hashes, null, 2), "utf8");
 
   console.log("\n" + buildReport(stats));
+}
+
+// 重抽整条重建时,把上一版里【源文未变】的英文翻译字段(backfill-en.mjs 补的)按字段继承过来,
+// 避免 EN 界面每晚静默退化 + 重复付费翻译;源文变了的字段不继承(过期翻译宁缺,由夜间 backfill 重译)。
+function carryTranslations(prev, r) {
+  if (!prev) return;
+  const mt = new Set(prev.en_mt_fields || []);
+  const src = prev.en_src || {};
+  const kept = [], keptSrc = {};
+  const same = (a, b) => (a || "") === (b || "");
+  const pairs = [["title", "title_zh", "title_en"], ["summary", "summary_zh", "summary_en"],
+                 ["org", "org_zh", "org_en"], ["city", "city_zh", "city_en"],
+                 ["country", "country_zh", "country_en"], ["deadline_note", "deadline_note", "deadline_note_en"]];
+  for (const [f, zh, en] of pairs) {
+    if (!r[en] && prev[en] && same(prev[zh], r[zh])) {
+      r[en] = prev[en];
+      if (mt.has(f)) kept.push(f);
+      if (src[f] != null) keptSrc[f] = src[f];
+    }
+  }
+  const pe = prev.eligibility || {}, re = r.eligibility || (r.eligibility = {});
+  for (const f of ["age_limit", "nationality"]) {
+    if (!re[f + "_en"] && pe[f + "_en"] && same(pe[f], re[f])) {
+      re[f + "_en"] = pe[f + "_en"];
+      if (mt.has(f)) kept.push(f);
+      if (src[f] != null) keptSrc[f] = src[f];
+    }
+  }
+  if (!r.disciplines_en && prev.disciplines_en &&
+      JSON.stringify(prev.disciplines || []) === JSON.stringify(r.disciplines || [])) {
+    r.disciplines_en = prev.disciplines_en;
+    if (mt.has("disciplines")) kept.push("disciplines");
+    if (src.disciplines != null) keptSrc.disciplines = src.disciplines;
+  }
+  if (kept.length) r.en_mt_fields = kept;
+  if (Object.keys(keptSrc).length) r.en_src = keptSrc;
 }
 
 // 补全前端 schema 需要但提取不产出的字段。trust 只能是 auto/pending(verified 由人工手改)。

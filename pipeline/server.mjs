@@ -11,15 +11,18 @@
 import { createServer } from "node:http";
 import { readFile, writeFile, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { dirname, join, extname, normalize } from "node:path";
+import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
 import { extract } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
+import * as auth from "./lib/auth.mjs";
+import { isThirdParty } from "./lib/aggregators.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
 const DATA = join(SITE, "data", "opportunities.json");
 const PORT = process.env.PORT || 8080;
+await auth.initAuth();   // 先加载用户/会话,再开始接请求
 const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36";
 
 function todayISO() {
@@ -128,7 +131,7 @@ async function searchAndHarvest(query, target = 6) {
   const seen = new Set(), cands = [];
   for (const u of rawUrls) {
     let host; try { host = new URL(u).host; } catch (e) { continue; }
-    if (BLOCK.test(u)) continue;
+    if (BLOCK.test(u) || isThirdParty(u)) continue;   // 第三方聚合/新闻/门户一律不采,只收主办方本站
     const key = u.split("#")[0];
     if (seen.has(key)) continue;
     seen.add(key);
@@ -254,10 +257,13 @@ function matchLocation(rec, loc) {
 // —— 静态文件服务 ——
 const MIME = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "application/javascript; charset=utf-8", ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".ico": "image/x-icon", ".webp": "image/webp" };
 async function serveStatic(req, res) {
-  let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
+  let p;
+  try { p = decodeURIComponent(new URL(req.url, "http://x").pathname); }
+  catch (e) { res.writeHead(400); return res.end("bad request"); }   // 畸形百分号(如 /%)会抛 URIError,兜住防崩
   if (p === "/") p = "/index.html";
   const full = normalize(join(SITE, p));
-  if (!full.startsWith(SITE)) { res.writeHead(403); return res.end("forbidden"); }
+  // 结尾补分隔符防"同前缀兄弟目录"越界(SITE 与 SITE + "extra" 的前缀陷阱)
+  if (full !== SITE && !full.startsWith(SITE + sep)) { res.writeHead(403); return res.end("forbidden"); }
   try {
     const s = await stat(full);
     if (s.isDirectory()) { res.writeHead(403); return res.end(); }
@@ -269,14 +275,63 @@ async function serveStatic(req, res) {
   } catch (e) { res.writeHead(404); res.end("not found"); }
 }
 
+// 请求体读取(JSON,限 256KB,防大包;收藏最多 2000 条约 100–120KB,留足余量)
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    let size = 0; const chunks = [];
+    req.on("data", c => { size += c.length; if (size > 262144) { reject(new Error("too large")); req.destroy(); } else chunks.push(c); });
+    req.on("end", () => { try { resolve(chunks.length ? JSON.parse(Buffer.concat(chunks).toString("utf8")) : {}); } catch (e) { reject(new Error("bad json")); } });
+    req.on("error", reject);
+  });
+}
+// 客户端 IP:默认只信 socket 真实地址(当前 IP 直连、无反代,X-Forwarded-For 可被任意伪造,
+// 若信它则所有限频形同虚设)。以后套 nginx 反代时设 TRUST_PROXY=1 才改用 XFF 首值。
+const TRUST_PROXY = process.env.TRUST_PROXY === "1";
+const ipOf = req => {
+  if (TRUST_PROXY && req.headers["x-forwarded-for"]) return String(req.headers["x-forwarded-for"]).split(",")[0].trim();
+  return String(req.socket.remoteAddress || "?");
+};
+
+// —— 账号 / 统计 / 管理后台 API(实现见 lib/auth.mjs)——
+async function handleAuthApi(req, res, u) {
+  const json = r => { res.writeHead(r.code, { "Content-Type": "application/json; charset=utf-8", ...(r.headers || {}) }); res.end(JSON.stringify(r.body)); };
+  const ip = ipOf(req);
+  const p = u.pathname, m = req.method;
+  try {
+    if (p === "/api/auth/me" && m === "GET") return json(auth.me(req));
+    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(auth.register(b.email, b.password, ip)); }
+    if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.email, b.password, ip)); }
+    if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
+    if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
+    if (p === "/api/track" && m === "POST") { const b = await readBody(req); return json(auth.track(req, b, ip)); }
+    if (p === "/api/admin/login" && m === "POST") { const b = await readBody(req); return json(auth.adminLogin(b.password, ip)); }
+    if (p === "/api/admin/overview" && m === "GET") return json(auth.isAdmin(req, ip) ? await auth.adminOverview() : { code: 401, body: { error: "unauthorized" } });
+    if (p === "/api/admin/users" && m === "GET") return json(auth.isAdmin(req, ip) ? auth.adminUsers() : { code: 401, body: { error: "unauthorized" } });
+  } catch (e) {
+    return json({ code: 400, body: { error: "请求格式不正确" } });
+  }
+  return json({ code: 404, body: { error: "not found" } });
+}
+
 createServer(async (req, res) => {
   const u = new URL(req.url, "http://x");
+  // 管理后台页面(不在 site/ 公开目录里,由这里单独路由;页面数据全靠带管理 cookie 的 API)
+  if (u.pathname === "/admin" && req.method === "GET") {
+    try {
+      const body = await readFile(join(__dir, "admin.html"));
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
+      return res.end(body);
+    } catch (e) { res.writeHead(404); return res.end("not found"); }
+  }
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname.startsWith("/api/admin/")) {
+    return handleAuthApi(req, res, u);
+  }
   if (u.pathname === "/api/search") {
     const q = (u.searchParams.get("q") || "").trim();
     const json = (code, obj) => { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
     if (!q) return json(400, { error: "empty query" });
     const ql = q.toLowerCase();
-    const ip = String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "?").split(",")[0].trim();
+    const ip = ipOf(req);
     if (rateLimited(ip)) return json(429, { error: "rate", message: "检索太频繁了,请过一会儿再试" });
     // 同词 8 分钟内已检索过、或正在检索中 → 直接返回,不重复全网跑(结果已/即将在库)
     if (recentlyDone(ql) || inFlight.has(ql)) return json(200, { query: q, added: [], addedCount: 0, cached: true, message: "「" + q + "」刚刚检索过,结果已在库,下拉列表即可看到" });
@@ -284,6 +339,8 @@ createServer(async (req, res) => {
     const t0 = Date.now();
     await acquireSlot();                       // 超并发上限则在此排队等待(不拒绝)
     try {
+      const user = auth.userOf(req);
+      auth.logEvent("search", { q: q.slice(0, 80), ip, ...(user ? { uid: user.id, email: user.email } : {}) });
       const r = await searchAndHarvest(q, 6);
       recentQ.set(ql, Date.now());             // 成功才进短时缓存
       json(200, { query: q, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 });
@@ -294,4 +351,4 @@ createServer(async (req, res) => {
     return;
   }
   return serveStatic(req, res);
-}).listen(PORT, () => process.stderr.write(`ArtPortal 服务启动:http://localhost:${PORT}  (静态站 + /api/search)\n`));
+}).listen(PORT, () => process.stderr.write(`ArtPortal 服务启动:http://localhost:${PORT}  (静态站 + /api/search + 账号/后台)\n`));

@@ -41,6 +41,8 @@
 }
 
 * { box-sizing: border-box; }
+/* hidden 属性必须赢过任何 display 规则(修复:骨架屏/占位按钮/收藏角标 hidden 后仍显示) */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -98,8 +100,23 @@ img { max-width: 100%; display: block; }
 }
 .lang-switch { font-variant-numeric: tabular-nums; }
 
+/* ---------- 一级频道导航(机会/资讯/招聘) ---------- */
+.channels { position: sticky; top: 61px; z-index: 31; background: var(--bg); border-bottom: 1px solid var(--line); }
+.channels__inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; gap: 8px; }
+.channel {
+  position: relative; border: none; background: transparent; cursor: pointer;
+  padding: 13px 6px 12px; font-size: 15px; font-weight: 600; color: var(--ink-3);
+  letter-spacing: .02em; transition: color .12s ease;
+}
+.channel:hover { color: var(--ink-2); }
+.channel.is-active { color: var(--ink); }
+.channel.is-active::after {
+  content: ""; position: absolute; left: 6px; right: 6px; bottom: -1px; height: 2.5px;
+  background: var(--ink); border-radius: 2px;
+}
+
 /* ---------- 控制区(搜索+筛选) ---------- */
-.controls { position: sticky; top: 63px; z-index: 30; background: var(--bg); border-bottom: 1px solid var(--line); }
+.controls { position: sticky; top: 98px; z-index: 30; background: var(--bg); border-bottom: 1px solid var(--line); }
 .controls__inner { max-width: var(--maxw); margin: 0 auto; padding: 12px 24px; display: flex; flex-direction: column; gap: 10px; }
 .searchbar { position: relative; }
 .searchbar__icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; fill: var(--ink-3); pointer-events: none; }
@@ -210,6 +227,11 @@ img { max-width: 100%; display: block; }
 .card__img.is-loaded { opacity: 1; }
 .card__fallback { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; }
 .card__fallback span { font-size: 40px; font-weight: 700; opacity: .9; letter-spacing: .02em; }
+/* 设计海报卡:SVG 铺满媒体区 */
+.card__fallback--art { display: block; }
+.card__fallback--art svg { width: 100%; height: 100%; display: block; }
+.d-cover--art { padding: 0; overflow: hidden; }
+.d-cover--art svg { width: 100%; height: 100%; display: block; }
 /* 封面即官网入口:点封面直接新窗口打开该展览/项目官网 */
 .card__media-link { position: absolute; inset: 0; display: block; cursor: pointer; }
 .card__media-go { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 6px; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
@@ -234,6 +256,10 @@ img { max-width: 100%; display: block; }
 .cat-tag[data-cat="residency"] { background: var(--c-residency); }
 .cat-tag[data-cat="award"]     { background: var(--c-award); }
 .cat-tag[data-cat="workshop"]  { background: var(--c-workshop); }
+.cat-tag[data-cat="news"]      { background: #1E8A8A; }
+.cat-tag[data-cat="jobs"]      { background: #2E8B57; }
+/* 资讯/招聘卡片:整卡可点(跳原文/申请) */
+.card--link { cursor: pointer; }
 .org-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 11px; font-weight: 500; background: rgba(255,255,255,.92); color: var(--ink-2); }
 
 .card__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
@@ -275,9 +301,12 @@ img { max-width: 100%; display: block; }
 .src-chip { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 500; white-space: nowrap; }
 .src-chip--official   { color: #2E6FA7; background: #E9F1F8; }
 .src-chip--aggregator { color: var(--ink-2); background: #EFEEE9; }
+.src-chip--mt         { color: var(--ink-3); background: #EFEEE9; letter-spacing: .04em; }
 .d-provenance { font-size: 12.5px; line-height: 1.55; padding: 9px 12px; border-radius: var(--radius-sm); margin: 12px 0; }
 .d-provenance.src-chip--official   { color: #245b8a; background: #E9F1F8; }
 .d-provenance.src-chip--aggregator { color: var(--ink-2); background: #EFEEE9; }
+/* EN 模式下机器翻译条目的如实标注 */
+.d-mt-note { font-size: 12px; line-height: 1.5; color: var(--ink-3); margin: -4px 0 12px; }
 
 .trust { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
 .trust svg { width: 14px; height: 14px; }
@@ -346,6 +375,33 @@ img { max-width: 100%; display: block; }
 .mail-copy__addr { text-decoration: underline; text-underline-offset: 2px; }
 .mail-copy__hint { font-size: 11px; color: var(--ink-2); border: 1px solid var(--line-2); border-radius: 5px; padding: 1px 7px; text-decoration: none; }
 
+/* ---------- 账号弹窗 / 顶栏入口 ---------- */
+.auth { position: fixed; inset: 0; z-index: 90; }
+.auth__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.4); animation: fade .12s ease; }
+.auth__panel {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: min(360px, calc(100vw - 40px)); background: var(--bg);
+  border-radius: 16px; padding: 22px 20px 16px; box-shadow: var(--shadow-pop);
+  max-height: 90vh; overflow-y: auto;      /* 小屏/软键盘弹出时可滚动,按钮不被裁掉 */
+}
+.auth__close { position: absolute; top: 8px; right: 8px; border: none; background: transparent; font-size: 15px; color: var(--ink-3); cursor: pointer; padding: 8px; border-radius: 8px; }
+.auth__close:hover { background: rgba(0,0,0,.05); color: var(--ink); }
+.auth__title { margin: 0 0 6px; font-size: 18px; }
+.auth__note { margin: 0 0 14px; font-size: 12.5px; color: var(--ink-2); line-height: 1.6; }
+.auth__tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+.auth__tabs button { flex: 1; min-height: 34px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--card); color: var(--ink-2); font-size: 13px; cursor: pointer; }
+.auth__tabs button.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.auth__form input { width: 100%; height: 44px; border: 1px solid var(--line-2); border-radius: 8px; padding: 0 12px; font-size: 14px; background: var(--card); color: var(--ink); margin-bottom: 10px; }
+.auth__form input::placeholder { color: var(--ink-3); }
+.auth__err { min-height: 18px; font-size: 12px; color: var(--danger); margin: -4px 0 6px; }
+.auth__submit { width: 100%; min-height: 44px; }
+.auth__privacy { margin: 12px 0 0; font-size: 11px; color: var(--ink-3); line-height: 1.5; }
+.auth-btn { display: inline-block; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 36px; }
+.auth-menu { position: fixed; z-index: 95; background: var(--card); border: 1px solid var(--line-2); border-radius: 10px; box-shadow: var(--shadow-pop); padding: 6px; }
+.auth-menu__email { padding: 6px 14px 8px; font-size: 12px; color: var(--ink-3); border-bottom: 1px solid var(--line); margin-bottom: 4px; max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
+.auth-menu button { display: block; width: 100%; border: none; background: transparent; padding: 9px 14px; font-size: 13px; text-align: left; border-radius: 6px; cursor: pointer; color: var(--ink); }
+.auth-menu button:hover { background: rgba(0,0,0,.05); }
+
 /* ---------- toast ---------- */
 .toast {
   position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
@@ -363,10 +419,10 @@ img { max-width: 100%; display: block; }
   .topbar__inner, .controls__inner, .main, .sitefoot__note, .morefilters__panel { padding-left: 20px; padding-right: 20px; }
 }
 
-/* 手机 <768:单列;tab 胶囊横滑;更多筛选=底部抽屉;搜索吸顶;按钮堆叠 */
+/* 手机 <768:双列紧凑瀑布流(小红书式);tab 胶囊横滑;更多筛选=底部抽屉;搜索吸顶 */
 @media (max-width: 767px) {
   body { font-size: 15px; }
-  .grid { grid-template-columns: 1fr; gap: 16px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .topbar__inner { padding: 8px 12px; gap: 6px; }
   .brand { gap: 6px; }
   .brand__sub { display: none; }
@@ -378,9 +434,26 @@ img { max-width: 100%; display: block; }
   #favToggleBtn .fav-text { display: none; }        /* 手机上收藏只留♡+数字 */
   .lang-switch { padding: 0 7px !important; }
 
-  .controls { top: 55px; }
-  .controls__inner { padding: 10px 16px; }
-  .main { padding: 16px 16px 40px; }
+  /* 手机:频道导航吸顶在 topbar 下,控制区再往下(数值对齐实测 topbar≈60、频道≈37) */
+  .channels { top: 60px; }
+  .channels__inner { padding: 0 16px; gap: 4px; }
+  .channel { padding: 9px 6px 8px; font-size: 14px; }
+  .controls { top: 97px; }
+  .controls__inner { padding: 8px 16px; gap: 8px; }
+
+  /* 分类 tab:缩小胶囊、色点缩到 5px,360px 宽也能一屏放下五个不用横滑 */
+  .tabs { gap: 3px; }
+  .tab { min-height: 30px; padding: 0 7px; font-size: 12px; gap: 3px; }
+  .tab__dot { width: 5px; height: 5px; }
+
+  /* 第二行(更多筛选/结果数/排序)整体缩小,压进一行 */
+  .controls__row2 { gap: 8px; }
+  .controls__row2 .btn { min-height: 30px; padding: 0 10px; font-size: 12px; }
+  .sort-label { display: none; }
+  .sort-select { height: 28px; font-size: 12px; padding: 0 6px; }
+  .result-count { font-size: 11px; white-space: nowrap; }
+  .main { padding: 12px 10px 40px; }
+  .search-banner { margin-bottom: 12px; }
   .sitefoot__note { padding: 16px; }
 
   .controls__row2 .sort-wrap { order: 3; }
@@ -389,11 +462,12 @@ img { max-width: 100%; display: block; }
   /* 更多筛选变底部弹出抽屉 */
   .morefilters { position: fixed; inset: 0; z-index: 70; hidden: none; }
   .morefilters[hidden] { display: none; }
-  .morefilters__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.28); }
+  /* 遮罩 z-index 必须低于面板:否则遮罩(DOM 在面板之后)会盖在面板上,面板变灰且点不动 */
+  .morefilters__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.28); z-index: 1; }
   .morefilters__panel {
     position: absolute; left: 0; right: 0; bottom: 0; max-height: 82vh; overflow-y: auto;
     background: var(--bg); border-radius: 16px 16px 0 0; padding: 0 16px 16px;
-    animation: sheetup .18s ease;
+    animation: sheetup .18s ease; z-index: 2;
   }
   @keyframes sheetup { from { transform: translateY(30px); } }
   .morefilters__header {
@@ -405,9 +479,39 @@ img { max-width: 100%; display: block; }
   .morefilters__footer { display: flex; gap: 10px; position: sticky; bottom: 0; background: var(--bg); padding: 12px 0 4px; }
   .morefilters__footer .btn { flex: 1; min-height: 46px; }
 
-  /* 卡片按钮上下堆叠、各占满宽 */
-  .card__foot { flex-direction: column; }
-  .card__foot .btn { width: 100%; min-height: var(--tap); }
+  /* ── 紧凑卡片(小红书式):图上文下,信息只留关键项 ──
+     隐去:英文副题/简介/推算框/底部按钮(详情页里都有);
+     保留:分类角标、标题(两行截断)、机构/地点、截止、费用徽章、来源诚实标注。 */
+  .card { border-radius: 10px; }
+  .card:hover { transform: none; }
+  .card__media { aspect-ratio: 4 / 3; }
+  /* 手机上点封面不再直接跳外站(小卡片易误触):事件穿透到卡片,统一进详情 */
+  .card__media-link { pointer-events: none; }
+  .card__fallback span { font-size: 26px; }
+  .card__tags { top: 6px; left: 6px; right: 6px; gap: 4px; }
+  .card__tags-l { gap: 4px; }
+  .cat-tag, .predict-tag, .past-tag { height: 19px; padding: 0 7px; font-size: 10px; border-radius: 5px; }
+  .org-tag { height: 18px; padding: 0 6px; font-size: 10px; border-radius: 5px; }
+  .card__body { padding: 8px 10px 10px; gap: 5px; }
+  .card__title { font-size: 13.5px; line-height: 1.4; text-wrap: wrap;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card__title-en { display: none; }
+  .card__meta { gap: 1px; font-size: 11px; }
+  .card__meta > span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card__deadline { font-size: 11.5px; }
+  .badges { gap: 4px; margin-top: 0; }
+  .badge { height: 18px; padding: 0 6px; font-size: 10px; border-radius: 5px; gap: 3px; }
+  .card__predict { display: none; }
+  .card__summary { display: none; }
+  .card__srcrow { gap: 4px; }
+  .trust { font-size: 10px; gap: 3px; }
+  .trust svg { width: 11px; height: 11px; }
+  .src-chip { height: 17px; padding: 0 6px; font-size: 9.5px; }
+  .card__foot { display: none; }
+
+  /* 骨架屏同步紧凑 */
+  .skel-media { aspect-ratio: 4 / 3; }
+  .skel-line { margin: 8px 10px; height: 10px; }
 
   /* 详情全屏页 */
   .detail__panel { width: 100%; animation: slideup .18s ease; }

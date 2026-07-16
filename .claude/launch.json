@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "artportal",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--env-file=pipeline/.env", "pipeline/server.mjs"],
+      "port": 8080
+    },
+    {
       "name": "artportal-site",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "serve", "site", "-l", "4321"],
