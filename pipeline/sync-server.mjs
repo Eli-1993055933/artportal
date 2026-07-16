@@ -139,7 +139,7 @@ async function syncDir(relDir, ext, label) {
   console.log(`[${label}] 已补传 ${missing.length} 个`);
 }
 const syncCovers = () => syncDir("site/assets/covers", ".jpg", "covers");
-const syncFulltext = () => syncDir("site/data/fulltext", ".txt", "fulltext");
+const syncFulltext = () => syncDir("site/data/fulltext", ".json", "fulltext");
 
 async function main() {
   await mkdir(TMP, { recursive: true });

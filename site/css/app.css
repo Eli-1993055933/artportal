@@ -499,6 +499,10 @@ img { max-width: 100%; display: block; }
 .d-actions--top { margin: 2px 0 14px; }
 .d-morewrap { margin: -6px 0 16px; }
 .d-more-btn { min-height: 32px; padding: 0 14px; font-size: 13px; }
+/* 详情原地展开区(入库时存好的双语官网原文) */
+.ft-body { margin: 4px 0 14px; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 13.5px; line-height: 1.7; max-height: 360px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.ft-body p { margin: 0 0 9px; }
+.ft-body .ft-note { color: var(--warn); font-size: 11.5px; margin-bottom: 10px; }
 
 /* ---------- toast ---------- */
 .toast {
