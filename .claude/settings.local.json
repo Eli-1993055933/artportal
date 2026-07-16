@@ -641,7 +641,18 @@
       "Bash(curl -s -o /dev/null -w \"首页 %{http_code}\\\\n\" http://localhost:8080/)",
       "Bash(time curl -s --max-time 20 \"http://localhost:8080/api/pagetrans?url=https%3A%2F%2Fexample.com%2Fdefinitely-not-a-real-page-404&to=zh\")",
       "Bash(curl -s --max-time 30 \"http://localhost:8080/api/pagetrans?url=https%3A%2F%2Fstudiovoltaire.org%2Fprogrammes%2Fresidencies%2F&to=zh\")",
-      "Bash(node -e \"let s='';process.stdin.on\\('data',c=>s+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(s\\);console.log\\('cached:',j.cached,'| title:',j.title,'| text长度:',String\\(j.text||''\\).length\\)}\\)\")"
+      "Bash(node -e \"let s='';process.stdin.on\\('data',c=>s+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(s\\);console.log\\('cached:',j.cached,'| title:',j.title,'| text长度:',String\\(j.text||''\\).length\\)}\\)\")",
+      "Bash(scp -o ConnectTimeout=20 /tmp/artportal-trans.tar.gz admin@60.205.212.195:/tmp/)",
+      "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'cd /home/admin/artportal && node -e \"const d=require\\(\\\\\"/home/admin/artportal/site/data/news.json\\\\\"\\);console.log\\(\\\\\"部署前线上 news:\\\\\",d.items.length\\)\" && tar xzf /tmp/artportal-trans.tar.gz && rm /tmp/artportal-trans.tar.gz && sudo systemctl restart artportal && sleep 2 && systemctl is-active artportal && grep -o \"?v=[0-9]*\" site/index.html | head -1')",
+      "Bash(rm /tmp/artportal-trans.tar.gz)",
+      "Bash(curl -s --max-time 20 \"http://60.205.212.195/api/pagetrans?url=https%3A%2F%2Fexample.com%2F&to=zh\")",
+      "Bash(curl -s --max-time 20 \"http://60.205.212.195/js/translate.js?v=40\")",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "Bash(node --check sync-server.mjs)",
+      "Bash(node sync-server.mjs --dry)",
+      "Bash(node sync-server.mjs)",
+      "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'for f in opportunities news jobs; do node -e \"const d=require\\(\\\\\"/home/admin/artportal/site/data/$f.json\\\\\"\\); const k=d.opportunities||d.items||d.jobs; console.log\\(\\\\\"服务器: $f\\\\\", k.length\\)\"; done; ls /home/admin/artportal/site/data/*.bak | wc -l')"
     ]
   }
 }

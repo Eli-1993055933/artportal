@@ -3,7 +3,7 @@
     "note": "艺术招聘。真实抓取核实,非编造。"
   },
   "generated_at": "2026-07-16",
-  "count": 38,
+  "count": 39,
   "jobs": [
     {
       "id": "job-1irbwe-sales-assistant-to-director-总监销售助理",
@@ -772,6 +772,26 @@
       "title_en": "Today Art Museum Multiple Internship Positions Open!",
       "summary_zh": "今日美术馆开放多个实习岗位，包括展览策划执行、新媒体运营、平面设计、视频编导、学术研究、会员发展、公共教育、创新拓展及执行、出版编辑、出版设计。实习期至少2个月，每周出勤至少3天。要求热爱艺术，相关专业优先。提供实习补贴、免费观展等福利。",
       "summary_en": "Today Art Museum offers multiple internship positions including exhibition planning and execution, new media operations, graphic design, video directing, academic research, membership development, public education, innovation and execution, publishing editing, and publishing design. Internship period at least 2 months, at least 3 days per week. Passion for art required, related majors preferred. Internship subsidy, free exhibition access, and other benefits provided.",
+      "added_at": "2026-07-16"
+    },
+    {
+      "id": "job-b59rue-gallery-intern-at-xie-li-space",
+      "title": "協力空间招画廊实习生",
+      "org": "協力空间",
+      "city": "北京",
+      "country": null,
+      "employment_type": "实习",
+      "salary": null,
+      "deadline": null,
+      "summary": "协助画廊日常展览、接待与维护，设计制作展览清单，排版发送公众号，协助布撤展，沟通艺术家及策展人，协调日常活动与拍摄。要求有责任心、细心，每周到岗3天以上，实习期不少于4个月，艺术专业或设计、翻译背景优先。提供实习补贴、免费观展机会及行业推荐机会。",
+      "apply_url": "https://www.sina.cn/news/detail/5305859304330414.html",
+      "domain": "sina.cn",
+      "posted_at": null,
+      "_via": "search",
+      "title_zh": "協力空间招画廊实习生",
+      "title_en": "Gallery Intern at Xie Li Space",
+      "summary_zh": "协助画廊日常展览、接待与维护，设计制作展览清单，排版发送公众号，协助布撤展，沟通艺术家及策展人，协调日常活动与拍摄。要求有责任心、细心，每周到岗3天以上，实习期不少于4个月，艺术专业或设计、翻译背景优先。提供实习补贴、免费观展机会及行业推荐机会。",
+      "summary_en": "Assist with daily gallery exhibitions, reception and maintenance, design and produce exhibition checklists, layout and send WeChat official account posts, assist with installation and deinstallation, communicate with artists and curators, coordinate daily activities and filming. Requires responsibility, carefulness, at least 3 days per week, internship period no less than 4 months, art major or design/translation background preferred. Provides internship allowance, free exhibition opportunities, and industry recommendations.",
       "added_at": "2026-07-16"
     }
   ]

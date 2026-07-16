@@ -6,8 +6,8 @@
     "generated_at": "2026-07-09",
     "count": 16
   },
-  "generated_at": "2026-07-14",
-  "count": 289,
+  "generated_at": "2026-07-16",
+  "count": 306,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -693,77 +693,6 @@
       ],
       "en_src": {
         "summary": "1jk1x37",
-        "org": "sjo5ce",
-        "city": "3n5ig",
-        "country": "3tz79",
-        "deadline_note": "20h57l",
-        "disciplines": "926vrm"
-      }
-    },
-    {
-      "id": "a4-residency-light",
-      "category": "residency",
-      "title_zh": "A4驻留“轻量版”(自费)",
-      "title_en": "A4 Residency Light Version (Self-Funded)",
-      "org_zh": "A4美术馆驻留艺术中心",
-      "city_zh": "成都",
-      "country_zh": "中国",
-      "deadline": "2026-12-31",
-      "deadline_note": "2028全年招募截止2026-12-31(仍开放);另有2027招募截止2026-06-30已过",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": "CNY"
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": null,
-        "currency": "CNY"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": false
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "跨媒介"
-      ],
-      "summary_zh": "A4驻留“轻量版”自费轨道。原文说明差旅(机票/火车)与制作成本由驻留创作者自行承担。原文未单独说明该轨道是否提供住宿及津贴。",
-      "url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
-      "source_url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
-      "domain": "a4artmuseum.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-10",
-      "updated_at": "2026-07-09",
-      "_fail_streak": 0,
-      "cover": "https://www.a4artmuseum.com/wp-content/uploads/2026/04/2027-Opencall%E6%A8%A1%E7%89%88%E6%A8%A1%E7%89%88%E5%BE%AE%E4%BF%A1%E6%8E%A8%E6%96%87%E5%A5%97%E4%BB%B6_%E7%94%BB%E6%9D%BF-1-%E5%89%AF%E6%9C%AC.png",
-      "cover_source": "a4artmuseum.com",
-      "summary_en": "A4 Residency 'Light Version' self-funded track. The original text states that travel (air/train) and production costs are borne by the resident creator. The original text does not separately explain whether this track provides accommodation and stipend.",
-      "org_en": "A4 Art Museum Residency Center",
-      "city_en": "Chengdu",
-      "country_en": "China",
-      "deadline_note_en": "2028 full-year recruitment deadline 2026-12-31 (still open); 2027 recruitment deadline 2026-06-30 has passed",
-      "disciplines_en": [
-        "Cross-media"
-      ],
-      "en_mt_fields": [
-        "summary",
-        "org",
-        "city",
-        "country",
-        "deadline_note",
-        "disciplines"
-      ],
-      "en_src": {
-        "summary": "x5dl5a",
         "org": "sjo5ce",
         "city": "3n5ig",
         "country": "3tz79",
@@ -5017,152 +4946,6 @@
       "official_located": "specific"
     },
     {
-      "id": "curatorspace-opportunities-under-the-skin-of-things",
-      "category": "opencall",
-      "title_zh": "Under the Skin of Things",
-      "title_en": "Under the Skin of Things",
-      "org_zh": "CISTA ARTS",
-      "city_zh": "伦敦",
-      "country_zh": "英国",
-      "deadline": "2026-07-15",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": 30,
-        "currency": "GBP"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "摄影",
-        "设计",
-        "影像"
-      ],
-      "summary_zh": "CISTA ARTS邀请全球艺术家提交作品，参加探索隐藏层、无形力量与安静痕迹的线上展览。入选作品将在线展出一个月，收录于印刷目录，并获得社交媒体推广。申请免费，入选后每件作品收费30英镑，两件50英镑。",
-      "url": "https://www.curatorspace.com/opportunities/detail/under-the-skin-of-things/10802",
-      "source_url": "https://www.curatorspace.com/opportunities",
-      "domain": "curatorspace.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/52406/opportunity/10802/image/db4a67.png",
-      "cover_source": "curatorspace.com",
-      "summary_en": "CISTA ARTS invites global artists to submit works for an online exhibition exploring hidden layers, invisible forces, and quiet traces. Selected works will be exhibited online for one month, included in a printed catalogue, and promoted on social media. Free to apply, fee of £30 per work or £50 for two works after selection.",
-      "org_en": "CISTA ARTS",
-      "city_en": "London",
-      "country_en": "United Kingdom",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Photography",
-        "Design",
-        "Video"
-      ],
-      "en_mt_fields": [
-        "summary",
-        "org",
-        "city",
-        "country",
-        "disciplines"
-      ],
-      "en_src": {
-        "summary": "1jjl6m0",
-        "org": "2eg98d",
-        "city": "3tx1h",
-        "country": "2v6zt",
-        "disciplines": "1y37dio"
-      },
-      "official_url": "https://www.cistaarts.com/opportunities",
-      "official_located": "homepage"
-    },
-    {
-      "id": "curatorspace-opportunities-flora-fauna-摄影展",
-      "category": "opencall",
-      "title_zh": "Flora / Fauna; 摄影展",
-      "title_en": "Flora / Fauna; Photography Exhibition",
-      "org_zh": "Solas / Shadow",
-      "city_zh": null,
-      "country_zh": "英国",
-      "deadline": "2026-07-15",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": 16,
-        "currency": "GBP"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": 18,
-        "nationality": null,
-        "age_limit_en": "18"
-      },
-      "disciplines": [
-        "摄影"
-      ],
-      "summary_zh": "Solas / Shadow 在线国际摄影画廊举办主题为 Flora / Fauna 的摄影展，探索自然中植物与动物的两极性与相互联系。展览将于2026年9月举行。免费提交，入选后需支付参展费：1张16英镑，2张或以上22英镑。面向全球18岁以上摄影师。",
-      "url": "https://www.curatorspace.com/opportunities/detail/flora--fauna-photography-exhibition/10819",
-      "source_url": "https://www.curatorspace.com/opportunities",
-      "domain": "curatorspace.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/82052/opportunity/10819/image/165a2b6856ae9da3e8b2d7ab8e98.jpg",
-      "cover_source": "curatorspace.com",
-      "summary_en": "Solas / Shadow, an online international photography gallery, presents a photography exhibition themed Flora / Fauna, exploring the polarity and interconnectedness of plants and animals in nature. The exhibition will take place in September 2026. Free to submit, entry fee after selection: £16 for 1 image, £22 for 2 or more. Open to photographers aged 18+ worldwide.",
-      "org_en": "Solas / Shadow",
-      "country_en": "United Kingdom",
-      "disciplines_en": [
-        "Photography"
-      ],
-      "en_mt_fields": [
-        "summary",
-        "org",
-        "country",
-        "age_limit",
-        "disciplines"
-      ],
-      "en_src": {
-        "summary": "u0dgot",
-        "org": "8n8ff2",
-        "country": "2v6zt",
-        "age_limit": "3hl4c",
-        "disciplines": "1s9bus6"
-      },
-      "official_url": "https://solas-shadowgallery.com/open-calls",
-      "official_located": "specific"
-    },
-    {
       "id": "curatorspace-opportunities-krate",
       "category": "residency",
       "title_zh": "KRATE",
@@ -5228,84 +5011,6 @@
         "nationality": "w0thx4",
         "disciplines": "926vrm"
       }
-    },
-    {
-      "id": "curatorspace-opportunities-stories-in-motion-青年艺术家征集-7-20岁",
-      "category": "opencall",
-      "title_zh": "Stories in Motion: 青年艺术家征集（7-20岁）",
-      "title_en": "Stories in Motion: Call for Young Artists (Ages 7–20)",
-      "org_zh": "Travel Through Art Studio and Ultra Education",
-      "city_zh": "伦敦",
-      "country_zh": "英国",
-      "deadline": "2026-07-17",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": false,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": true,
-        "age_limit": "7-20",
-        "nationality": null,
-        "age_limit_en": "7-20"
-      },
-      "disciplines": [
-        "绘画",
-        "插画",
-        "摄影",
-        "混合媒介"
-      ],
-      "summary_zh": "Travel Through Art Studio 与 Ultra Education 联合发起面向7-20岁青年艺术家的公开征集，主题为“用艺术讲故事”。入选作品将于2026年8月在伦敦Deptford Lounge展出，并可能参与多伦多国际创意交流。提交免费，每人最多2件作品。",
-      "url": "https://www.curatorspace.com/opportunities/detail/stories-in-motion-call-for-young-artists-ages/10825",
-      "source_url": "https://www.curatorspace.com/opportunities",
-      "domain": "curatorspace.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/86780/opportunity_update/865/image/11d8ad69b95e0e872e99e9edd699e0.png",
-      "cover_source": "curatorspace.com",
-      "summary_en": "Travel Through Art Studio and Ultra Education jointly launch an open call for young artists aged 7-20, themed 'Tell a Story with Art.' Selected works will be exhibited at Deptford Lounge in London in August 2026, with potential participation in the Toronto International Creative Exchange. Free to submit, max 2 works per person.",
-      "org_en": "Travel Through Art Studio and Ultra Education",
-      "city_en": "London",
-      "country_en": "United Kingdom",
-      "disciplines_en": [
-        "Painting",
-        "Illustration",
-        "Photography",
-        "Mixed Media"
-      ],
-      "en_mt_fields": [
-        "summary",
-        "org",
-        "city",
-        "country",
-        "age_limit",
-        "disciplines"
-      ],
-      "en_src": {
-        "summary": "12plqaz",
-        "org": "dx499q",
-        "city": "3tx1h",
-        "country": "2v6zt",
-        "age_limit": "yhusot",
-        "disciplines": "k9h5iu"
-      },
-      "official_url": "https://travelthroughart.co.uk/pages/stories-in-motion",
-      "official_located": "specific"
     },
     {
       "id": "curatorspace-opportunities-amanda-moriarty纪念奖-与emma-woffenden的导师指导",
@@ -21292,6 +20997,1007 @@
       "url": "http://chongqingdac.org/?page_id=11919",
       "source_url": "http://chongqingdac.org/?page_id=11919",
       "domain": "chongqingdac.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-zjam-浙江美术馆展览申请",
+      "category": "opencall",
+      "title_zh": "浙江美术馆展览申请",
+      "title_en": null,
+      "org_zh": "浙江美术馆",
+      "city_zh": "杭州",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "装置",
+        "影像"
+      ],
+      "summary_zh": "浙江美术馆面向社会提供展览场地，接受艺术家或策展人申请。申请需提交展览方案、作品清单及作品资料，经专家委员会评审通过后签订协议。展期不少于14天，费用按协议执行。",
+      "url": "https://www.zjam.org.cn/site/exbition/guide.shtml",
+      "source_url": "https://www.zjam.org.cn/site/exbition/guide.shtml",
+      "domain": "zjam.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-britishcouncil-2x2艺术驻留-中国大陆地区残障艺术家招募",
+      "category": "residency",
+      "title_zh": "2x2艺术驻留：中国大陆地区残障艺术家招募",
+      "title_en": null,
+      "org_zh": "British Council",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2025-06-10",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "英国文化教育协会招募中国大陆地区残障艺术家参与2x2艺术驻留项目，与苏格兰艺术家共同在苏格兰和杭州进行线下驻留及线上交流，探索新想法，深化实践，促进跨文化合作。",
+      "url": "https://www.britishcouncil.cn/events/2x2%E8%89%BA%E6%9C%AF%E9%A9%BB%E7%95%99%EF%BC%9A%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E5%9C%B0%E5%8C%BA%E6%AE%8B%E9%9A%9C%E8%89%BA%E6%9C%AF%E5%AE%B6%E6%8B%9B%E5%8B%9F",
+      "source_url": "https://www.britishcouncil.cn/events/2x2%E8%89%BA%E6%9C%AF%E9%A9%BB%E7%95%99%EF%BC%9A%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E5%9C%B0%E5%8C%BA%E6%AE%8B%E9%9A%9C%E8%89%BA%E6%9C%AF%E5%AE%B6%E6%8B%9B%E5%8B%9F",
+      "domain": "britishcouncil.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-innart-inna-studio-visit-2026",
+      "category": "residency",
+      "title_zh": "INNA Studio Visit 2026",
+      "title_en": "INNA Studio Visit 2026",
+      "org_zh": "清影艺术空间",
+      "city_zh": "杭州",
+      "country_zh": "中国",
+      "deadline": "2026-08-20",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "清影艺术空间正在进行的INNA Studio Visit 2026项目，时间跨度为2026年7月4日至8月20日。",
+      "url": "http://www.innart.org/cn/",
+      "source_url": "http://www.innart.org/cn/",
+      "domain": "innart.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-hzqjam-杭州钱江美术馆展览申请",
+      "category": "opencall",
+      "title_zh": "杭州钱江美术馆展览申请",
+      "title_en": null,
+      "org_zh": "杭州钱江美术馆",
+      "city_zh": "杭州",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "常年接受申请，节假日除外",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "装置",
+        "影像"
+      ],
+      "summary_zh": "杭州钱江美术馆常年接受展览申请，面向具备较高艺术水准和影响力的艺术家或策展人。申请需提交展品清单、个人简介、展品照片或影像资料等。经评审委员会审核后签订协议实施展览。",
+      "url": "http://hzqjam.com/Site/Exhibition/guide.shtml",
+      "source_url": "http://hzqjam.com/Site/Exhibition/guide.shtml",
+      "domain": "hzqjam.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-byicaa-byicaa国际艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "BYICAA国际艺术家驻留项目",
+      "title_en": "BYICAA International Artist Residency Program",
+      "org_zh": "北京青年国际文化与艺术协会",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "每年3月1日-30日，9月1日-30日",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "雕塑",
+        "陶瓷",
+        "表演艺术",
+        "音乐",
+        "文学",
+        "新媒体",
+        "动画",
+        "策展",
+        "电影制作",
+        "建筑"
+      ],
+      "summary_zh": "北京青年国际文化与艺术协会提供驻留项目，为期1-3个月，提供工作室和住宿，每月200美元生活补助及每日餐饮。艺术家需参与工作坊、展览、捐赠作品等。申请每年3月1-30日和9月1-30日。",
+      "url": "http://www.byicaa.com/hdxmX.asp?id=7&aid=8&bid=14",
+      "source_url": "http://www.byicaa.com/hdxmX.asp?id=7&aid=8&bid=14",
+      "domain": "byicaa.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-reviewedbyartists-北京艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "北京艺术家驻留项目",
+      "title_en": "Artist Residencies in Beijing",
+      "org_zh": "Reviewed by Artists",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提供统一截止日期，各驻留项目申请方式不同",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "跨媒介",
+        "影像",
+        "摄影",
+        "写作",
+        "策展",
+        "装置",
+        "绘画",
+        "雕塑",
+        "新媒介"
+      ],
+      "summary_zh": "北京拥有多个艺术家驻留项目，如Platform China、Inside-Out Art Museum、Galerie Urs Meile等，提供工作室、住宿及展览机会，适合不同创作方向的艺术家。",
+      "url": "https://www.reviewedbyartists.com/cities/beijing",
+      "source_url": "https://www.reviewedbyartists.com/cities/beijing",
+      "domain": "reviewedbyartists.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-hk-威尼斯视艺双年展实习计划2026",
+      "category": "residency",
+      "title_zh": "威尼斯视艺双年展实习计划2026",
+      "title_en": null,
+      "org_zh": "香港艺术馆",
+      "city_zh": "威尼斯",
+      "country_zh": "意大利",
+      "deadline": "2026-01-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "美术",
+        "艺术史",
+        "美术教育",
+        "博物馆学"
+      ],
+      "summary_zh": "香港艺术馆推出威尼斯视艺双年展实习计划2026，获选实习生将前往意大利威尼斯驻留六星期，协助双年展香港展的日常运作，并获发津贴资助交通、住宿及生活开支。",
+      "url": "https://hk.art.museum/sc/web/ma/VB-Internship.html",
+      "source_url": "https://hk.art.museum/sc/web/ma/VB-Internship.html",
+      "domain": "hk.art.museum",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-hkac-公開徵集-hkac-creators-for-tomorrow-2024",
+      "category": "opencall",
+      "title_zh": "公開徵集: HKAC CREATORS FOR TOMORROW 2024",
+      "title_en": null,
+      "org_zh": "香港藝術中心",
+      "city_zh": "香港",
+      "country_zh": "香港",
+      "deadline": "2024-04-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "香港藝術中心主辦的公開徵集計劃，支持香港新晉藝術家、策展人、創作者和研究者的專業發展，提供最高港幣60,000元資助及場地資源。展覽類別於張靜蘭實驗畫廊展出，專題研究類別時程另議。截止日期為2024年4月15日。",
+      "url": "https://hkac.org.hk/tc/calendar_detail/?u=XWBrQl0-3UM",
+      "source_url": "https://hkac.org.hk/tc/calendar_detail/?u=XWBrQl0-3UM",
+      "domain": "hkac.org.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-hongkongartscollective-第二届香港西源里绘画展",
+      "category": "opencall",
+      "title_zh": "第二届香港西源里绘画展",
+      "title_en": "The 2nd Hong Kong Paintings in Sai Yuen Lane Exhibition",
+      "org_zh": "Sun Museum",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画"
+      ],
+      "summary_zh": "Sun Museum 举办第二届香港西源里绘画展，现正公开征集作品。该博物馆为非营利独立博物馆，致力于推广中国艺术文化并支持香港艺术家发展。",
+      "url": "https://www.hongkongartscollective.com/blog/categories/artist-opportunities",
+      "source_url": "https://www.hongkongartscollective.com/blog/categories/artist-opportunities",
+      "domain": "hongkongartscollective.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-rivet-2025年春季香港艺术家驻留",
+      "category": "residency",
+      "title_zh": "2025年春季香港艺术家驻留",
+      "title_en": "2025 Spring Hong Kong Artist Residency",
+      "org_zh": "TongLau Space",
+      "city_zh": "九龙",
+      "country_zh": "香港",
+      "deadline": "2024-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 1400,
+        "currency": "USD"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "陶瓷",
+        "设计",
+        "纪录片",
+        "绘画",
+        "插画",
+        "装置",
+        "珠宝",
+        "大地艺术",
+        "多媒体",
+        "绘画",
+        "摄影",
+        "公共艺术",
+        "研究",
+        "雕塑",
+        "纺织",
+        "视频艺术"
+      ],
+      "summary_zh": "TongLau Space 2025年春季香港艺术家驻留项目，为期3个月，提供共享工作室和住宿，需缴纳1400美元项目费，欢迎不同身份的艺术家和学生申请，截止2024年7月31日。",
+      "url": "https://rivet.es/calls/view/2025-spring-hong-kong-artist-residency",
+      "source_url": "https://rivet.es/calls/view/2025-spring-hong-kong-artist-residency",
+      "domain": "rivet.es",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-info-香港视觉艺术中心-va-艺术家驻留计划-公开征集提案",
+      "category": "residency",
+      "title_zh": "香港视觉艺术中心「vA! 艺术家驻留计划」公开征集提案",
+      "title_en": "Open call for proposals for Hong Kong Visual Arts Centre's \"vA! Artist-in-Residence Programme\"",
+      "org_zh": "香港视觉艺术中心",
+      "city_zh": "香港",
+      "country_zh": "中国",
+      "deadline": "2026-06-03",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18",
+        "nationality": "Hong Kong"
+      },
+      "disciplines": [
+        "陶瓷",
+        "版画",
+        "雕塑"
+      ],
+      "summary_zh": "香港视觉艺术中心启动2026-2028年度驻留计划公开征集，邀请18岁以上香港艺术家或艺术团体提交提案，进行为期六个月的驻留创作，可使用陶瓷、版画、雕塑专业工作室，作品有机会公开展出，并参与工作坊、讲座等公众活动。",
+      "url": "https://www.info.gov.hk/gia/general/202604/20/P2026042000429.htm",
+      "source_url": "https://www.info.gov.hk/gia/general/202604/20/P2026042000429.htm",
+      "domain": "info.gov.hk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-lib-深耕地域文化-彰显时代精神-美术作品征集活动",
+      "category": "opencall",
+      "title_zh": "“深耕地域文化，彰显时代精神”美术作品征集活动",
+      "title_en": null,
+      "org_zh": "天津商业大学图书馆",
+      "city_zh": "天津",
+      "country_zh": "中国",
+      "deadline": "2024-12-08",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "版画",
+        "数字媒体"
+      ],
+      "summary_zh": "天津商业大学图书馆面向全校师生征集美术作品，主题围绕天津地域文化，形式包括手绘、数字媒体等，截止2024年12月8日，优秀作品将在图书馆展出。",
+      "url": "https://lib.tjcu.edu.cn/info/1059/6104.htm",
+      "source_url": "https://lib.tjcu.edu.cn/info/1059/6104.htm",
+      "domain": "lib.tjcu.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-ky-三农-题材新大众文艺作品征集展示活动",
+      "category": "opencall",
+      "title_zh": "“三农”题材新大众文艺作品征集展示活动",
+      "title_en": null,
+      "org_zh": "中国农业电影电视中心",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2026-07-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文学",
+        "美术",
+        "书法",
+        "摄影",
+        "音乐",
+        "影视",
+        "手工"
+      ],
+      "summary_zh": "征集反映乡村振兴的“三农”题材新大众文艺作品，包括文学、美术、书法、摄影、音乐、影视、手工等类别。面向全国农民、艺术爱好者及团体，公益征集，不收费。截止2026年7月30日。",
+      "url": "https://ky.sdada.edu.cn/info/1111/1618.htm",
+      "source_url": "https://ky.sdada.edu.cn/info/1111/1618.htm",
+      "domain": "ky.sdada.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-artspoon-第二届-meri-art-征集展",
+      "category": "opencall",
+      "title_zh": "第二届 MERI ART 征集展",
+      "title_en": null,
+      "org_zh": "Meta Rich",
+      "city_zh": "Seoul",
+      "country_zh": "Korea",
+      "deadline": "2026-04-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "版画",
+        "摄影",
+        "雕塑",
+        "装置",
+        "多媒体影像"
+      ],
+      "summary_zh": "第二届 MERI ART 征集展寻找通过艺术扩展可持续生活价值的当代艺术家。征集时间2026年3月23日至4月30日，国籍不限，20岁以上个人及团队可申请。大奖奖金5000万韩元（含作品收购费）及2027年个展支持。",
+      "url": "https://artspoon.io/zh/contest/detail/meri-art-2nd-2026",
+      "source_url": "https://artspoon.io/zh/contest/detail/meri-art-2nd-2026",
+      "domain": "artspoon.io",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-miniprint-阿波和纸国际微型版画展作品征集",
+      "category": "opencall",
+      "title_zh": "阿波和纸国际微型版画展作品征集",
+      "title_en": null,
+      "org_zh": "一般財団法人 阿波和紙伝統産業会館",
+      "city_zh": "吉野川市",
+      "country_zh": "日本",
+      "deadline": "2025-07-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": false,
+        "amount": 2500,
+        "currency": "JPY"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "阿波和纸国际微型版画展征集作品，不限国籍专业，每人最多2幅，作品需使用和纸，A4尺寸，图像180×270mm以内。参展费1幅2500日元，2幅5000日元。截止2025年7月31日。",
+      "url": "http://miniprint.awagami.jp/CHINESE/entry/index.html",
+      "source_url": "http://miniprint.awagami.jp/CHINESE/entry/index.html",
+      "domain": "miniprint.awagami.jp",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-m-第二十五届全国版画作品展征稿",
+      "category": "opencall",
+      "title_zh": "第二十五届全国版画作品展征稿",
+      "title_en": null,
+      "org_zh": "中国美术家协会、江西省文化广电新闻出版旅游局",
+      "city_zh": "南昌",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "第二十五届全国版画作品展面向全国征稿，每位作者限投1件原创版画作品，需提交10寸作品照片1张，截止2023年9月12日。展览将于2023年12月在江西省美术馆举办，展出约260件作品。",
+      "url": "http://m.52jingsai.com/article-19513.html",
+      "source_url": "http://m.52jingsai.com/article-19513.html",
+      "domain": "m.52jingsai.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-accr-europe-文化交流中心驻留项目",
+      "category": "residency",
+      "title_zh": "文化交流中心驻留项目",
+      "title_en": null,
+      "org_zh": "文化交流中心",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "文化交流中心提供驻留项目，面向艺术家，具体信息需查看官网。",
+      "url": "https://www.accr-europe.org/en/cn/residencies-cn",
+      "source_url": "https://www.accr-europe.org/en/cn/residencies-cn",
+      "domain": "accr-europe.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-wlt-第四届山西省文化创意设计大赛",
+      "category": "award",
+      "title_zh": "第四届山西省文化创意设计大赛",
+      "title_en": null,
+      "org_zh": "山西省文化和旅游厅",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2022-07-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计",
+        "工艺美术",
+        "视觉传达"
+      ],
+      "summary_zh": "第四届山西省文化创意设计大赛面向省内外征集创意设计作品，设太忻一体化经济区文创主题竞赛单元、文化创意专题单元（含文化文博、旅游商品、传统工艺、产品包装、视觉传达五类）及定向征集单元，2022年7月15日截止。",
+      "url": "https://wlt.shanxi.gov.cn/xwzx/tzgg/202203/t20220331_5662073.shtml",
+      "source_url": "https://wlt.shanxi.gov.cn/xwzx/tzgg/202203/t20220331_5662073.shtml",
+      "domain": "wlt.shanxi.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-yishujs-第六届山西省文化创意设计大赛",
+      "category": "award",
+      "title_zh": "第六届山西省文化创意设计大赛",
+      "title_en": null,
+      "org_zh": "山西省文化和旅游厅、山西省教育厅、山西省文物局、共青团山西省委",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-08-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文创设计"
+      ],
+      "summary_zh": "第六届山西省文化创意设计大赛面向国内外征集文创作品，设五大单元，优秀奖5000元/名，入围奖500元/名，8月31日截止。",
+      "url": "http://www.yishujs.com/sys-nd/5636.html",
+      "source_url": "http://www.yishujs.com/sys-nd/5636.html",
+      "domain": "yishujs.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-m-首届山西省文化创意设计大赛",
+      "category": "award",
+      "title_zh": "首届山西省文化创意设计大赛",
+      "title_en": null,
+      "org_zh": "山西省文化和旅游厅",
+      "city_zh": "太原",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文化文物衍生品设计",
+        "旅游商品创意设计",
+        "时尚生活创意设计",
+        "传统工艺+非遗创意设计",
+        "品牌及包装创意设计",
+        "企业定向征集创意设计"
+      ],
+      "summary_zh": "首届山西省文化创意设计大赛，面向专业组和学生组征集文化文物衍生品、旅游商品、时尚生活、传统工艺+非遗、品牌包装及企业定向等类别创意设计作品，设金、银、铜奖及优秀奖，获奖作品将进行成果转化和市场推广。",
+      "url": "http://m.52jingsai.com/article-7642.html",
+      "source_url": "http://m.52jingsai.com/article-7642.html",
+      "domain": "m.52jingsai.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "search"
+    },
+    {
+      "id": "search-peopleapp-第六届山西省文化创意设计大赛",
+      "category": "award",
+      "title_zh": "第六届山西省文化创意设计大赛",
+      "title_en": null,
+      "org_zh": "山西省文化和旅游厅、山西省教育厅、山西省文物局、共青团山西省委",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2026-08-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文创设计"
+      ],
+      "summary_zh": "第六届山西省文化创意设计大赛面向国内外征集作品，设五大参赛单元，优秀奖5000元/名，入围奖500元/名，8月31日前上传作品。",
+      "url": "https://www.peopleapp.com/rmharticle/30052252033",
+      "source_url": "https://www.peopleapp.com/rmharticle/30052252033",
+      "domain": "peopleapp.com",
       "org_type": "official",
       "trust": "auto",
       "status": "open",
