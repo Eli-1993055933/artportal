@@ -166,12 +166,6 @@ img { max-width: 100%; display: block; }
 .brand__sub { align-self: center; }
 .brand__sub { color: var(--ink-3); font-size: 14px; }
 .topbar__actions { display: flex; align-items: center; gap: 8px; }
-.fav-ico { display: none; width: 20px; height: 20px; }
-.fav-count {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 18px; height: 18px; padding: 0 5px; margin-left: 2px;
-  background: var(--ink); color: var(--on-ink); font-size: 11px; border-radius: 9px;
-}
 .lang-switch { font-variant-numeric: tabular-nums; }
 
 /* ---------- 频道 + 搜索行(合并为一行;手机换行为两行) ---------- */
@@ -504,10 +498,6 @@ img { max-width: 100%; display: block; }
 .auth__submit { width: 100%; min-height: 44px; }
 .auth__privacy { margin: 12px 0 0; font-size: 11px; color: var(--ink-3); line-height: 1.5; }
 .auth-btn { display: inline-block; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 36px; }
-.auth-menu { position: fixed; z-index: 95; background: var(--card); border: 1px solid var(--line-2); border-radius: 10px; box-shadow: var(--shadow-pop); padding: 6px; }
-.auth-menu__email { padding: 6px 14px 8px; font-size: 12px; color: var(--ink-3); border-bottom: 1px solid var(--line); margin-bottom: 4px; max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
-.auth-menu button { display: block; width: 100%; border: none; background: transparent; padding: 9px 14px; font-size: 13px; text-align: left; border-radius: 6px; cursor: pointer; color: var(--ink); }
-.auth-menu button:hover { background: var(--hover); }
 
 /* ---------- 用户主页(8.1) ---------- */
 .ppage { position: fixed; inset: 0; z-index: 60; background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -518,6 +508,7 @@ img { max-width: 100%; display: block; }
 .ppage__info { min-width: 0; }
 .ppage__name { margin: 2px 0 6px; font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .ppage__editbtn { min-height: 32px; font-size: 12.5px; }
+.ppage__logout { color: var(--ink-3); }   /* 退出登录:弱化呈现,避免误点 */
 .ppage__meta { margin: 2px 0; color: var(--ink-3); font-size: 13px; }
 .ppage__bio { margin: 10px 0 2px; font-size: 14px; line-height: 1.7; color: var(--ink-2); white-space: pre-wrap; overflow-wrap: break-word; }
 .ppage__link { margin: 6px 0 0; }
@@ -584,8 +575,6 @@ img { max-width: 100%; display: block; }
   /* 顶栏按钮:紧凑但保持 44px 可点高度;收紧到 360px 也放得下 */
   .topbar__actions { gap: 5px; }
   .topbar__actions .btn { min-height: 44px; padding: 0 9px; font-size: 12.5px; }
-  .fav-ico { display: inline-block; }
-  #favToggleBtn .fav-text { display: none; }        /* 手机上收藏只留♡+数字 */
   .lang-switch { padding: 0 7px !important; }
   .theme-toggle { min-width: 38px; }                /* 日/夜按钮手机上收窄,360px 顶栏也放得下 */
   /* 顶栏溢出治本:提交机会移出顶栏,改右下角悬浮 ➕(小红书式);其余按钮全面收紧,

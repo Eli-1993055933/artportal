@@ -253,7 +253,7 @@
   }
   AP.favorites.onChange = pushFavorites;
 
-  // ---------- 顶栏入口 ----------
+  // ---------- 顶栏入口(放在中/EN 右侧;点头像直达"我的主页",收藏/编辑资料/退出都在主页里) ----------
   function updateTopbar() {
     var actions = document.querySelector(".topbar__actions");
     if (!actions) return;
@@ -261,12 +261,13 @@
     if (!btn) {
       btn = document.createElement("button");
       btn.type = "button"; btn.id = "authBtn"; btn.className = "btn btn--ghost auth-btn";
-      actions.insertBefore(btn, document.getElementById("langBtn"));
+      actions.appendChild(btn);               // 最右(中/EN 之后)
       btn.addEventListener("click", function () {
         if (!user) { openModal("login", null); return; }
-        toggleMenu(btn);
+        AP.router.goUser(user.id);            // 直达我的主页,不再弹菜单
       });
     }
+    btn.setAttribute("aria-label", AP.t(user ? "menuMyPage" : "authLoginBtn"));
     if (user) {
       var name = user.nickname || user.email.split("@")[0];
       var label = name.length > 10 ? name.slice(0, 9) + "…" : name;
@@ -286,48 +287,18 @@
       btn.setAttribute("data-i18n", "authLoginBtn");   // 语言切换时由 applyI18n 更新
     }
   }
-  function toggleMenu(anchor) {
-    var m = document.getElementById("authMenu");
-    if (m) { m.remove(); return; }
-    m = document.createElement("div");
-    m.className = "auth-menu"; m.id = "authMenu";
-    var emailDiv = document.createElement("div");
-    emailDiv.className = "auth-menu__email"; emailDiv.textContent = user.email;
-    // 我的主页 / 编辑资料(8.1 用户主页)
-    var mine = document.createElement("button");
-    mine.type = "button"; mine.textContent = AP.t("menuMyPage");
-    mine.addEventListener("click", function () { m.remove(); if (user) AP.router.goUser(user.id); });
-    var edit = document.createElement("button");
-    edit.type = "button"; edit.textContent = AP.t("menuEditProfile");
-    edit.addEventListener("click", function () { m.remove(); if (AP.profilePage) AP.profilePage.editOpen(); });
-    var out = document.createElement("button");
-    out.type = "button"; out.textContent = AP.t("authLogout");
-    out.addEventListener("click", function () {
-      post("/api/auth/logout", {}).then(function () {
-        user = null; updateTopbar();
-        try { localStorage.removeItem("ap_email"); } catch (e) {}   // 主动退出=不再替这台设备记邮箱(共用电脑不泄露)
-        // 清空本地收藏,防同一浏览器换账号登录时把上个账号的收藏并进来(跨账号串号)
-        AP.favorites.replaceAll([]);
-        var fc = document.getElementById("favCount"); if (fc) { fc.textContent = "0"; fc.hidden = true; }
-        if (AP.filterState && AP.filterState.favOnly && typeof AP.rerun === "function") AP.rerun();
-        var mm = document.getElementById("authMenu"); if (mm) mm.remove();
-        if (AP.profilePage) AP.profilePage.refresh();   // 正停在用户主页 → 按访客视角重渲(收起编辑按钮等)
-        toast(AP.t("authLoggedOut"));
-      });
+  // 退出登录(由用户主页的"退出登录"按钮调用,顶栏不再有菜单)
+  function doLogout() {
+    post("/api/auth/logout", {}).then(function () {
+      user = null; updateTopbar();
+      try { localStorage.removeItem("ap_email"); } catch (e) {}   // 主动退出=不再替这台设备记邮箱(共用电脑不泄露)
+      // 清空本地收藏,防同一浏览器换账号登录时把上个账号的收藏并进来(跨账号串号)
+      AP.favorites.replaceAll([]);
+      if (typeof AP.syncFavCount === "function") AP.syncFavCount();
+      if (AP.filterState && AP.filterState.favOnly && typeof AP.rerun === "function") AP.rerun();
+      if (AP.profilePage) AP.profilePage.refresh();   // 正停在用户主页 → 按访客视角重渲(收起编辑/退出按钮)
+      toast(AP.t("authLoggedOut"));
     });
-    m.appendChild(emailDiv); m.appendChild(mine); m.appendChild(edit); m.appendChild(out);
-    document.body.appendChild(m);
-    var r = anchor.getBoundingClientRect();
-    m.style.top = (r.bottom + 6) + "px";
-    m.style.right = Math.max(8, window.innerWidth - r.right) + "px";
-    setTimeout(function () {
-      // 只有真正点到菜单外才移除并解绑;点在菜单内(如邮箱行)不消耗监听,否则会关不掉
-      document.addEventListener("click", function outside(ev) {
-        if (m.contains(ev.target) || ev.target === anchor) return;
-        m.remove();
-        document.removeEventListener("click", outside);
-      });
-    }, 0);
   }
 
   // ---------- 资料补全(昵称+头像,全站必填;老用户下次进站强制补) ----------
@@ -528,6 +499,7 @@
     current: function () { return user; },                      // 当前登录用户(含自己的公开资料字段)
     apply: function (u) { user = u; updateTopbar(); },          // 编辑资料保存后同步登录态与顶栏
     openLogin: function (note) { openModal("login", note || null); },
+    logout: doLogout,                                           // 退出登录(用户主页调用)
     squareFromImg: drawSquare,                                  // 图片 → 居中裁方 256px JPEG dataURL(兜底)
     openCropper: openCropper,                                   // 头像裁剪器(拖动+缩放选范围)
     makeAvatar: makeAvatar                                      // 昵称 → 默认头像 dataURL

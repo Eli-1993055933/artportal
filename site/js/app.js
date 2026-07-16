@@ -250,7 +250,6 @@
       for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("is-active");
       btn.classList.add("is-active");
       st.cat = btn.getAttribute("data-cat");
-      st.favOnly = false; syncFavBtn();
       rerun();
     });
 
@@ -319,10 +318,7 @@
     $("clearFilters").addEventListener("click", clearAll);
     $("emptyClear").addEventListener("click", clearAll);
 
-    // 收藏视图
-    $("favToggleBtn").addEventListener("click", function () {
-      st.favOnly = !st.favOnly; syncFavBtn(); rerun();
-    });
+    // (顶栏收藏按钮已移除:我的收藏在用户主页"收藏"tab 里,点头像直达)
 
     // 日间/夜间切换:改 <html> 的 data-theme(CSS 变量随之整体换肤),选择存本机。
     // 首屏的初始主题与 meta theme-color 由 index.html <head> 里的预置脚本决定(没选过则跟随系统)。
@@ -444,13 +440,9 @@
     if (set.has(val)) { set.delete(val); chipEl.classList.remove("is-active"); }
     else { set.add(val); chipEl.classList.add("is-active"); }
   }
-  function syncFavBtn() {
-    $("favToggleBtn").classList.toggle("btn--dark", AP.filterState.favOnly);
-    $("favToggleBtn").classList.toggle("btn--ghost", !AP.filterState.favOnly);
-  }
   function syncFavCount() {
     var n = AP.favorites.count(), el = $("favCount");
-    el.textContent = n; el.hidden = n === 0;
+    if (el) { el.textContent = n; el.hidden = n === 0; }   // 顶栏角标已移除,留守卫防旧引用
   }
   // 供 auth.js 在登录/退出云同步收藏后刷新角标与(若在收藏视图)列表
   AP.syncFavCount = syncFavCount;

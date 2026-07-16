@@ -25,6 +25,7 @@
     root.addEventListener("click", function (e) {
       if (e.target.closest("#ppBack")) { e.preventDefault(); AP.router.goList(); return; }
       if (e.target.closest("#ppEdit")) { editOpen(); return; }
+      if (e.target.closest("#ppLogout")) { AP.auth.logout(); return; }   // 退出后 refresh 自动转访客视角
       var tab = e.target.closest("[data-pptab]");
       if (tab) { curTab = tab.getAttribute("data-pptab"); render(); return; }
       // 卡片点击 → 详情(标题真链接拦默认统一走 goDetail 保留返回;官网外链/封面链接放行,注册墙照常拦)
@@ -84,7 +85,8 @@
         '<img class="ppage__ava" alt="" src="' + esc(u.avatar || "") + '" />' +
         '<div class="ppage__info">' +
           '<h1 class="ppage__name">' + esc(u.nickname) +
-            (isMe ? ' <button class="btn btn--ghost ppage__editbtn" id="ppEdit" type="button">' + esc(AP.t("menuEditProfile")) + '</button>' : "") +
+            (isMe ? ' <button class="btn btn--ghost ppage__editbtn" id="ppEdit" type="button">' + esc(AP.t("menuEditProfile")) + '</button>' +
+                    '<button class="btn btn--ghost ppage__editbtn ppage__logout" id="ppLogout" type="button">' + esc(AP.t("authLogout")) + '</button>' : "") +
           '</h1>' +
           (metaBits.length ? '<p class="ppage__meta">' + metaBits.join(" · ") + '</p>' : "") +
           (u.fields ? '<p class="ppage__meta">' + esc(AP.t("ppFields")) + ':' + esc(u.fields) + '</p>' : "") +
