@@ -409,6 +409,7 @@ img { max-width: 100%; display: block; }
 .sitefoot__beian:not(:has(> a:not([hidden]))) { display: none; }
 .sitefoot__beian-link { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); font-size: 12.5px; }
 .sitefoot__beian-link:hover { color: var(--ink-2); text-decoration: underline; }
+.sitefoot__ver { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 18px; color: var(--ink-3); font-size: 11.5px; letter-spacing: 0.04em; opacity: 0.75; }
 
 /* ---------- 详情:桌面右侧抽屉 ---------- */
 .detail { position: fixed; inset: 0; z-index: 60; }

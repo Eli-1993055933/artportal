@@ -16,6 +16,8 @@
   <meta property="og:locale" content="zh_CN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#F7F6F2" />
+  <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
+  <meta name="app-version" content="0.49.0" />
   <!-- 主题预置:在 CSS 应用前把 data-theme 打到 <html> 上,并同步 meta theme-color,
        避免夜间用户首屏页面/浏览器外壳闪白。手动选择存 localStorage(ap_theme);
        没选过则跟随系统深浅色偏好(存储被禁时也走系统偏好)。 -->
@@ -32,8 +34,8 @@
       if (m) m.setAttribute("content", t === "dark" ? "#1B1A18" : "#F7F6F2");
     })();
   </script>
-  <!-- 资源版本号:每次改前端 JS/CSS 就把 v 递增一位,强制浏览器加载新版本(避免缓存错配) -->
-  <link rel="stylesheet" href="css/app.css?v=48" />
+  <!-- 资源版本号(SemVer):由 pipeline/bump-version.mjs 统一改写,强制浏览器加载新版本(避免缓存错配),勿手改 -->
+  <link rel="stylesheet" href="css/app.css?v=0.49.0" />
 </head>
 <body>
   <!-- 顶部栏 -->
@@ -241,6 +243,7 @@
         <span class="sitefoot__mps"><!-- 例:京公网安备xxxxxxxxxxxxxx号 --></span>
       </a>
     </p>
+    <p class="sitefoot__ver">ARTPORTAL <span id="appVer">v0.49.0</span></p>
   </footer>
 
   <!-- 详情:桌面右侧抽屉 / 手机全屏页 -->
@@ -268,14 +271,14 @@
   <!-- toast -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="js/i18n.js?v=48"></script>
-  <script src="js/format.js?v=48"></script>
-  <script src="js/favorites.js?v=48"></script>
-  <script src="js/filters.js?v=48"></script>
-  <script src="js/render.js?v=48"></script>
-  <script src="js/router.js?v=48"></script>
-  <script src="js/app.js?v=48"></script>
-  <script src="js/auth.js?v=48"></script>
-  <script src="js/submit.js?v=48"></script>
+  <script src="js/i18n.js?v=0.49.0"></script>
+  <script src="js/format.js?v=0.49.0"></script>
+  <script src="js/favorites.js?v=0.49.0"></script>
+  <script src="js/filters.js?v=0.49.0"></script>
+  <script src="js/render.js?v=0.49.0"></script>
+  <script src="js/router.js?v=0.49.0"></script>
+  <script src="js/app.js?v=0.49.0"></script>
+  <script src="js/auth.js?v=0.49.0"></script>
+  <script src="js/submit.js?v=0.49.0"></script>
 </body>
 </html>
