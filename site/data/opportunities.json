@@ -94,7 +94,8 @@
         "age_limit": "1ohhr9q",
         "nationality": "1wbtlps",
         "disciplines": "1rjoo74"
-      }
+      },
+      "fulltext": "data/fulltext/namoc-innovation-2026.json"
     },
     {
       "id": "xafa-naf-mixedmedia-2026",
@@ -172,7 +173,8 @@
         "deadline_note": "172e3ey",
         "age_limit": "1ku22n6",
         "disciplines": "1k5it7h"
-      }
+      },
+      "fulltext": "data/fulltext/xafa-naf-mixedmedia-2026.json"
     },
     {
       "id": "hbmoa-collection-2026",
@@ -254,7 +256,8 @@
         "deadline_note": "68giv7",
         "nationality": "3ehlrf",
         "disciplines": "1d91c7e"
-      }
+      },
+      "fulltext": "data/fulltext/hbmoa-collection-2026.json"
     },
     {
       "id": "caanet-beijing-biennial-10",
@@ -338,7 +341,8 @@
         "deadline_note": "2rs56m",
         "nationality": "m0y63h",
         "disciplines": "1i3o7fk"
-      }
+      },
+      "fulltext": "data/fulltext/caanet-beijing-biennial-10.json"
     },
     {
       "id": "cafa-youth-printmaking-2",
@@ -414,7 +418,8 @@
         "deadline_note": "ti2xo6",
         "age_limit": "1f8rn2w",
         "disciplines": "1unxm1c"
-      }
+      },
+      "fulltext": "data/fulltext/cafa-youth-printmaking-2.json"
     },
     {
       "id": "cafa-zhiyi-xiangjian-2025",
@@ -487,7 +492,8 @@
         "country": "3tz79",
         "deadline_note": "uvoxc0",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/cafa-zhiyi-xiangjian-2025.json"
     },
     {
       "id": "gdmoa-archive-opencall",
@@ -556,7 +562,8 @@
         "country": "3tz79",
         "deadline_note": "rre5rq",
         "nationality": "3cjyap"
-      }
+      },
+      "fulltext": "data/fulltext/gdmoa-archive-opencall.json"
     },
     {
       "id": "threeshadows-award-13",
@@ -627,7 +634,8 @@
         "country": "3tz79",
         "deadline_note": "fj0bgf",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "fulltext": "data/fulltext/threeshadows-award-13.json"
     },
     {
       "id": "a4-residency-fellowship",
@@ -698,7 +706,8 @@
         "country": "3tz79",
         "deadline_note": "20h57l",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/a4-residency-fellowship.json"
     },
     {
       "id": "cite-institutfrancais-2026",
@@ -779,7 +788,8 @@
         "age_limit": "1gu5csz",
         "nationality": "1f1ijf9",
         "disciplines": "1prlpjj"
-      }
+      },
+      "fulltext": "data/fulltext/cite-institutfrancais-2026.json"
     },
     {
       "id": "cite-francoise-2026",
@@ -853,7 +863,8 @@
         "deadline_note": "uk5oks",
         "nationality": "5gi9ad",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/cite-francoise-2026.json"
     },
     {
       "id": "cite-bridges-2026",
@@ -920,7 +931,8 @@
         "country": "3ohhp",
         "deadline_note": "10ydvib",
         "nationality": "d6s05c"
-      }
+      },
+      "fulltext": "data/fulltext/cite-bridges-2026.json"
     },
     {
       "id": "pier2-2027",
@@ -992,7 +1004,8 @@
         "country": "18x4sfv",
         "nationality": "1hs519y",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/pier2-2027.json"
     },
     {
       "id": "kinosaki-air-2027",
@@ -1061,7 +1074,8 @@
         "city": "3u08t",
         "country": "3ma24",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/kinosaki-air-2027.json"
     },
     {
       "id": "artcircle-slovenia-2026",
@@ -1129,7 +1143,8 @@
         "org": "1a8d174",
         "country": "1odi3ww",
         "disciplines": "1k5it7h"
-      }
+      },
+      "fulltext": "data/fulltext/artcircle-slovenia-2026.json"
     },
     {
       "title_en": "TED and POSCA Residency",
@@ -1197,7 +1212,8 @@
         "country": "3pi0e",
         "nationality": "eondfj",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/ted-posca-residency-2026.json"
     },
     {
       "title_en": "HKBU International Writers' Workshop 2027",
@@ -1261,7 +1277,8 @@
         "city": "2sy37",
         "country": "3tz79",
         "nationality": "16ym8lh"
-      }
+      },
+      "fulltext": "data/fulltext/hkbu-iww-2027.json"
     },
     {
       "title_en": "O Castro Art Village — Self-funded Residency",
@@ -1332,7 +1349,8 @@
         "deadline_note": "ir1k8v",
         "nationality": "66tx93",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/ocastro-selffunded-2026.json"
     },
     {
       "title_en": "Modes of Access — Digital Residencies 2026",
@@ -1402,7 +1420,8 @@
         "country": "3lr9s",
         "nationality": "1f43m5w",
         "disciplines": "1dyig80"
-      }
+      },
+      "fulltext": "data/fulltext/modes-of-access-2026.json"
     },
     {
       "id": "agg-e-sun-art-awards-2026-art",
@@ -1470,7 +1489,8 @@
         "country": "18x4sfv",
         "nationality": "1lhrusy",
         "disciplines": "1u0sfgg"
-      }
+      },
+      "fulltext": "data/fulltext/agg-e-sun-art-awards-2026-art.json"
     },
     {
       "id": "agg-radcliffe-fellowship-program-art",
@@ -1540,7 +1560,8 @@
         "city": "vl28c",
         "country": "3lpx2",
         "disciplines": "19nz8lc"
-      }
+      },
+      "fulltext": "data/fulltext/agg-radcliffe-fellowship-program-art.json"
     },
     {
       "id": "artconnect-opportunities-int-l-all-media-2026-公开征集",
@@ -1626,7 +1647,8 @@
         "summary": "q0ssiw",
         "org": "12qd7km",
         "disciplines": "d79itr"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-int-l-all-media-2026-公开征集.json"
     },
     {
       "id": "artconnect-opportunities-精装书版与在线实验视觉艺术",
@@ -1704,7 +1726,8 @@
         "summary": "w1ertx",
         "org": "gwbn1c",
         "disciplines": "134rahj"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-精装书版与在线实验视觉艺术.json"
     },
     {
       "id": "artconnect-opportunities-nakanojo-biennale-2027",
@@ -1793,7 +1816,8 @@
         "org": "p6hqsi",
         "country": "3ma24",
         "disciplines": "19cjyhj"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-nakanojo-biennale-2027.json"
     },
     {
       "id": "artconnect-opportunities-joan-wakelin-助学金",
@@ -1855,7 +1879,8 @@
         "summary": "1ll4gyy",
         "org": "1fj8zq5",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-joan-wakelin-助学金.json"
     },
     {
       "id": "agg-ceske-budejovice-ecoc-2028-perma-culture-art",
@@ -1923,7 +1948,8 @@
         "city": "3p1b1b",
         "country": "3nv4p",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/agg-ceske-budejovice-ecoc-2028-perma-culture-art.json"
     },
     {
       "id": "agg-core-echo-2027-international-open-call-3-week-re-art",
@@ -2001,7 +2027,8 @@
         "country": "3tz79",
         "nationality": "1s8uhqd",
         "disciplines": "6bq0v4"
-      }
+      },
+      "fulltext": "data/fulltext/agg-core-echo-2027-international-open-call-3-week-re-art.json"
     },
     {
       "id": "agg-art-moves-2026-billboard-art-competition-art",
@@ -2063,7 +2090,8 @@
         "summary": "tre4tx",
         "org": "h9g7dj",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/agg-art-moves-2026-billboard-art-competition-art.json"
     },
     {
       "id": "agg-extended-possibilities-residency-call-art",
@@ -2133,7 +2161,8 @@
         "city": "164wkdv",
         "country": "3ohhp",
         "disciplines": "ewydsl"
-      }
+      },
+      "fulltext": "data/fulltext/agg-extended-possibilities-residency-call-art.json"
     },
     {
       "id": "agg-icci-art-valley-programme-international-visiting-art",
@@ -2206,7 +2235,8 @@
         "country": "3tz79",
         "nationality": "1dismya",
         "disciplines": "ewydsl"
-      }
+      },
+      "fulltext": "data/fulltext/agg-icci-art-valley-programme-international-visiting-art.json"
     },
     {
       "id": "agg-sciences-cinema-risc-very-short-film-competition-art",
@@ -2272,7 +2302,8 @@
         "summary": "ryljkt",
         "org": "anht4q",
         "disciplines": "fhr7pr"
-      }
+      },
+      "fulltext": "data/fulltext/agg-sciences-cinema-risc-very-short-film-competition-art.json"
     },
     {
       "id": "agg-nicosia-ludic-lab-shape-new-works-for-toyful-mus-art",
@@ -2341,7 +2372,8 @@
         "disciplines": "926vrm"
       },
       "official_url": "https://atheras.eu/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/agg-nicosia-ludic-lab-shape-new-works-for-toyful-mus-art.json"
     },
     {
       "id": "agg-landscape-2026-international-photography-exhibit-cur",
@@ -2412,7 +2444,8 @@
         "country": "2v6zt",
         "nationality": "1fg55zx",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "fulltext": "data/fulltext/agg-landscape-2026-international-photography-exhibit-cur.json"
     },
     {
       "id": "agg-stories-2026-international-photography-exhibitio-cur",
@@ -2483,7 +2516,8 @@
         "country": "2v6zt",
         "nationality": "1fg55zx",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "fulltext": "data/fulltext/agg-stories-2026-international-photography-exhibitio-cur.json"
     },
     {
       "id": "agg-peninsula-the-south-west-open-2026-cur",
@@ -2559,7 +2593,8 @@
         "nationality": "kpriuq",
         "disciplines": "j99dx6"
       },
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/agg-peninsula-the-south-west-open-2026-cur.json"
     },
     {
       "id": "curatorspace-opportunities-艺术家电影与动态影像作品放映公开征集",
@@ -2628,7 +2663,8 @@
         "city": "3tx1h",
         "country": "2v6zt",
         "disciplines": "138mxdh"
-      }
+      },
+      "fulltext": "data/fulltext/curatorspace-opportunities-艺术家电影与动态影像作品放映公开征集.json"
     },
     {
       "id": "agg-open-call-transient-states-paris-july-2026-cur",
@@ -2705,7 +2741,8 @@
         "country": "3ohhp",
         "nationality": "16edjdn",
         "disciplines": "1b76jfh"
-      }
+      },
+      "fulltext": "data/fulltext/agg-open-call-transient-states-paris-july-2026-cur.json"
     },
     {
       "id": "agg-under-the-skin-of-things-cur",
@@ -2776,7 +2813,8 @@
         "org": "2eg98d",
         "nationality": "16u2ni5",
         "disciplines": "1wpdhlz"
-      }
+      },
+      "fulltext": "data/fulltext/agg-under-the-skin-of-things-cur.json"
     },
     {
       "id": "agg-the-ghost-in-the-space-cur",
@@ -2851,7 +2889,8 @@
         "country": "2v6zt",
         "nationality": "zrvl96",
         "disciplines": "16qxqhz"
-      }
+      },
+      "fulltext": "data/fulltext/agg-the-ghost-in-the-space-cur.json"
     },
     {
       "id": "agg-flora-fauna-photography-exhibition-cur",
@@ -2919,7 +2958,8 @@
         "age_limit": "374cxz",
         "nationality": "153128",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "fulltext": "data/fulltext/agg-flora-fauna-photography-exhibition-cur.json"
     },
     {
       "id": "agg-open-call-museum-of-homeland-cur",
@@ -2987,7 +3027,8 @@
         "deadline_note": "3uknds",
         "nationality": "p3385x",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/agg-open-call-museum-of-homeland-cur.json"
     },
     {
       "id": "agg-post-animal-signal-cur",
@@ -3128,7 +3169,8 @@
         "city": "3f761v",
         "country": "2v6zt",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/agg-take-to-the-greenwood-cur.json"
     },
     {
       "id": "agg-equinox-virtual-exhibition-with-bobcat-gallery-cur",
@@ -3198,7 +3240,8 @@
         "summary": "mznxc1",
         "org": "9x1mrx",
         "disciplines": "14h7e3c"
-      }
+      },
+      "fulltext": "data/fulltext/agg-equinox-virtual-exhibition-with-bobcat-gallery-cur.json"
     },
     {
       "id": "agg-stories-in-motion-call-for-young-artists-ages-7--cur",
@@ -3271,7 +3314,8 @@
         "country": "2v6zt",
         "age_limit": "yhusot",
         "disciplines": "i4wbde"
-      }
+      },
+      "fulltext": "data/fulltext/agg-stories-in-motion-call-for-young-artists-ages-7--cur.json"
     },
     {
       "id": "agg-suspended-last-few-places-added-cur",
@@ -3349,7 +3393,8 @@
         "disciplines": "1b76jfh"
       },
       "official_url": "https://zhenyigallery.com/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/agg-suspended-last-few-places-added-cur.json"
     },
     {
       "id": "artconnect-opportunities-寻找工作坊领导者",
@@ -3460,7 +3505,8 @@
         "disciplines": "17y7ntk"
       },
       "official_url": "https://www.nature.org/en-us/get-involved/how-to-help/events/call-for-artist-montauk/",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/artconnect-opportunities-寻找工作坊领导者.json"
     },
     {
       "id": "artconnect-opportunities-圣达菲铁路场公园-广场公共艺术公开征集",
@@ -3532,7 +3578,8 @@
         "city": "3faioa",
         "country": "3lpx2",
         "disciplines": "1plx31g"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-圣达菲铁路场公园-广场公共艺术公开征集.json"
     },
     {
       "id": "artconnect-opportunities-展览征集",
@@ -3645,7 +3692,8 @@
         "org": "1i7pq83",
         "country": "3lpx2",
         "disciplines": "17y7ntk"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-展览征集.json"
     },
     {
       "id": "artconnect-opportunities-夏洛特市雕塑公开征集",
@@ -3721,7 +3769,8 @@
         "disciplines": "8f9r85"
       },
       "official_url": "https://artsandscience.org/wp-content/uploads/2026/06/Animal-Control-Adoption-Center-RFQ-1.pdf",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/artconnect-opportunities-夏洛特市雕塑公开征集.json"
     },
     {
       "id": "artconnect-opportunities-现场项目策展人",
@@ -3783,7 +3832,8 @@
         "summary": "cfw82w",
         "org": "eu0ihd",
         "disciplines": "1tl8y1s"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-现场项目策展人.json"
     },
     {
       "id": "artconnect-opportunities-欧洲及更远流动性计划",
@@ -3851,7 +3901,8 @@
         "summary": "w3r02e",
         "org": "3s8nxn",
         "disciplines": "1ttu9x0"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-欧洲及更远流动性计划.json"
     },
     {
       "id": "artconnect-opportunities-锡安国家公园驻留艺术家2027",
@@ -3945,7 +3996,8 @@
         "city": "1o6t8is",
         "country": "3lpx2",
         "disciplines": "1qb0r46"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-锡安国家公园驻留艺术家2027.json"
     },
     {
       "id": "artconnect-opportunities-解释性面板-公共艺术机会",
@@ -4015,7 +4067,8 @@
         "city": "2uoya",
         "country": "3lpx2",
         "disciplines": "1p2x4nn"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-解释性面板-公共艺术机会.json"
     },
     {
       "id": "artconnect-opportunities-up-基金会策展奖学金",
@@ -4086,7 +4139,8 @@
         "country": "2v6zt",
         "nationality": "1875ogk",
         "disciplines": "1tl8y1s"
-      }
+      },
+      "fulltext": "data/fulltext/artconnect-opportunities-up-基金会策展奖学金.json"
     },
     {
       "id": "curatorspace-opportunities-玻璃商cgs毕业生奖与新毕业生回顾2026",
@@ -4152,7 +4206,8 @@
         "disciplines": "1uux2d7"
       },
       "official_url": "https://cgs.org.uk/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/curatorspace-opportunities-玻璃商cgs毕业生奖与新毕业生回顾2026.json"
     },
     {
       "id": "curatorspace-opportunities-blandford艺术协会2026年8月公开展览",
@@ -4224,7 +4279,8 @@
         "city": "18kp3x8",
         "country": "2v6zt",
         "disciplines": "ozdwih"
-      }
+      },
+      "fulltext": "data/fulltext/curatorspace-opportunities-blandford艺术协会2026年8月公开展览.json"
     },
     {
       "id": "curatorspace-opportunities-梦境与噩梦-艺术家征集",
@@ -4310,7 +4366,8 @@
         "city": "3tx1h",
         "country": "2v6zt",
         "disciplines": "1qsnq3s"
-      }
+      },
+      "fulltext": "data/fulltext/curatorspace-opportunities-梦境与噩梦-艺术家征集.json"
     },
     {
       "id": "curatorspace-opportunities-客座撰稿人公开征集-博物馆-摄影与社区",
@@ -4379,7 +4436,8 @@
         "org": "1ebong7",
         "deadline_note": "j7n0fi",
         "disciplines": "71of38"
-      }
+      },
+      "fulltext": "data/fulltext/curatorspace-opportunities-客座撰稿人公开征集-博物馆-摄影与社区.json"
     },
     {
       "id": "curatorspace-opportunities-elmswell图书馆展览征稿",
@@ -4446,7 +4504,8 @@
         "deadline_note": "2vgu0l"
       },
       "official_url": "https://www.suffolklibraries.co.uk/visit/locations-and-times/elmswell-library",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/curatorspace-opportunities-elmswell图书馆展览征稿.json"
     },
     {
       "id": "chinaresidencies-directory-no-name-studio-艺术家驻地",
@@ -4518,7 +4577,8 @@
         "disciplines": "926vrm"
       },
       "official_url": "https://nonamestudiosh.com/open-call",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/chinaresidencies-directory-no-name-studio-艺术家驻地.json"
     },
     {
       "id": "chinaresidencies-directory-fuse-驻留项目",
@@ -4592,7 +4652,8 @@
         "disciplines": "1dyig80"
       },
       "official_url": "https://www.videotage.org.hk/programme/fuse-residency-program-fuse-%E9%A7%90%E5%A0%B4%E8%A8%88%E5%8A%83",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/chinaresidencies-directory-fuse-驻留项目.json"
     },
     {
       "id": "chinaresidencies-directory-中国欧洲艺术中心驻留项目",
@@ -4676,7 +4737,8 @@
         "disciplines": "c1z3gb"
       },
       "official_url": "https://www.ceac99.org/residency/",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/chinaresidencies-directory-中国欧洲艺术中心驻留项目.json"
     },
     {
       "id": "jsmsg-tzgg-江苏省美术馆水印版画材料与技术研究文化和旅游部重点实验室2026年度开放课题申报",
@@ -4745,7 +4807,8 @@
         "city": "3q7j2",
         "country": "3tz79",
         "disciplines": "1unxm1c"
-      }
+      },
+      "fulltext": "data/fulltext/jsmsg-tzgg-江苏省美术馆水印版画材料与技术研究文化和旅游部重点实验室2026年度开放课题申报.json"
     },
     {
       "id": "hkadc-cfa-新兴艺术家发展资助",
@@ -4805,7 +4868,8 @@
         "org": "1wqx6aq",
         "city": "2sy37",
         "country": "3tz79"
-      }
+      },
+      "fulltext": "data/fulltext/hkadc-cfa-新兴艺术家发展资助.json"
     },
     {
       "id": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
@@ -4872,7 +4936,8 @@
         "country": "3tz79",
         "age_limit": "1iqgm10",
         "disciplines": "1u0sfgg"
-      }
+      },
+      "fulltext": "data/fulltext/johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国.json"
     },
     {
       "id": "transartists-calls-talents-contemporains-la-terre-abbaye-de",
@@ -4943,7 +5008,8 @@
         "disciplines": "1uhqgtc"
       },
       "official_url": "https://www.fondationfrancoisschneider.org/en/contemporary-talents-competition/contemporary-talents-competition-the-earth",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/transartists-calls-talents-contemporains-la-terre-abbaye-de.json"
     },
     {
       "id": "curatorspace-opportunities-krate",
@@ -5010,7 +5076,8 @@
         "country": "2v6zt",
         "nationality": "w0thx4",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/curatorspace-opportunities-krate.json"
     },
     {
       "id": "curatorspace-opportunities-amanda-moriarty纪念奖-与emma-woffenden的导师指导",
@@ -5079,7 +5146,8 @@
         "disciplines": "1uux2d7"
       },
       "official_url": "https://cgs.org.uk/news/meet-emma-woffenden/",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/curatorspace-opportunities-amanda-moriarty纪念奖-与emma-woffenden的导师指导.json"
     },
     {
       "id": "bjiff-project-market-京彩台湾-两岸青年短片征集活动",
@@ -5150,7 +5218,8 @@
         "city": "3qrtq",
         "country": "3tz79",
         "disciplines": "1c53jmj"
-      }
+      },
+      "fulltext": "data/fulltext/bjiff-project-market-京彩台湾-两岸青年短片征集活动.json"
     },
     {
       "id": "goldenpin-design-award-金點設計獎",
@@ -5223,7 +5292,8 @@
         "city": "3qoyq",
         "country": "3qnwr",
         "disciplines": "10y0oit"
-      }
+      },
+      "fulltext": "data/fulltext/goldenpin-design-award-金點設計獎.json"
     },
     {
       "id": "dfa-awards-hkdc-dfa-亞洲最具影響力設計獎2026",
@@ -5292,7 +5362,8 @@
         "city": "2sy37",
         "country": "3tz79",
         "disciplines": "60nv98"
-      }
+      },
+      "fulltext": "data/fulltext/dfa-awards-hkdc-dfa-亞洲最具影響力設計獎2026.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-无尽蓝绿-山海苍南-全国摄影大展",
@@ -5361,7 +5432,8 @@
         "city": "2v70f",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-无尽蓝绿-山海苍南-全国摄影大展.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-四季风景线-大美明月山-明月山全国摄影大展征稿启事",
@@ -5430,7 +5502,8 @@
         "city": "3s0ak",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-四季风景线-大美明月山-明月山全国摄影大展征稿启事.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-旅拍中国-玉环海屿岛-首届漩门湾主题全国摄影大展",
@@ -5499,7 +5572,8 @@
         "city": "3l6o3",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-旅拍中国-玉环海屿岛-首届漩门湾主题全国摄影大展.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-2026-尼康杯-全国青年摄影大展征稿",
@@ -5574,7 +5648,8 @@
         "age_limit": "1wcphh",
         "nationality": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-2026-尼康杯-全国青年摄影大展征稿.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-最美航拍目的地-首届中国霞浦航拍摄影大展征稿",
@@ -5643,7 +5718,8 @@
         "city": "2qge5",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-最美航拍目的地-首届中国霞浦航拍摄影大展征稿.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-以镜为翼-启航空天-2025年长春航空展摄影大展",
@@ -5714,7 +5790,8 @@
         "city": "2qtkv",
         "country": "3tz79",
         "disciplines": "94x72l"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-以镜为翼-启航空天-2025年长春航空展摄影大展.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-航拍中国丨-光影之城-厦门-全国航拍摄影大展征稿启事",
@@ -5783,7 +5860,8 @@
         "city": "3pq4r",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-航拍中国丨-光影之城-厦门-全国航拍摄影大展征稿启事.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-摄影毕业季-2025年度全国高校摄影优秀毕业作品评审",
@@ -5854,7 +5932,8 @@
         "city": "3qrtq",
         "country": "3tz79",
         "disciplines": "1w2r9c4"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-摄影毕业季-2025年度全国高校摄影优秀毕业作品评审.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-2025-尼康杯-全国青年摄影大展征稿",
@@ -5929,7 +6008,8 @@
         "age_limit": "1wcphh",
         "nationality": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-2025-尼康杯-全国青年摄影大展征稿.json"
     },
     {
       "id": "guangdong-photographers-assoc-征稿-古韵围楼-大美始兴-全省摄影大赛",
@@ -5995,7 +6075,8 @@
         "org": "sa0035",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/guangdong-photographers-assoc-征稿-古韵围楼-大美始兴-全省摄影大赛.json"
     },
     {
       "id": "dac-taipei-opencall-news-臺北數位藝術媒合平臺-媒合計畫受理申請開跑",
@@ -6070,7 +6151,8 @@
         "city": "3qoyq",
         "country": "3qnwr",
         "disciplines": "uyer0w"
-      }
+      },
+      "fulltext": "data/fulltext/dac-taipei-opencall-news-臺北數位藝術媒合平臺-媒合計畫受理申請開跑.json"
     },
     {
       "id": "dac-taipei-opencall-news-立陶宛sodas-2123藝術中心-臺灣數位藝術家駐村徵選",
@@ -6142,7 +6224,8 @@
         "country": "2u3q4",
         "nationality": "2u3q4",
         "disciplines": "1li2l4o"
-      }
+      },
+      "fulltext": "data/fulltext/dac-taipei-opencall-news-立陶宛sodas-2123藝術中心-臺灣數位藝術家駐村徵選.json"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度艺术人才培训资助项目",
@@ -6220,7 +6303,8 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "1thkije"
-      }
+      },
+      "fulltext": "data/fulltext/cnaf-guide-国家艺术基金-一般项目-2027年度艺术人才培训资助项目.json"
     },
     {
       "id": "shcdf-jjhdt-上海文化发展基金会项目资助",
@@ -6314,7 +6398,8 @@
         "disciplines": "uegxbq"
       },
       "cover": "assets/covers/1143b3d829f7faf6.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/shcdf-jjhdt-上海文化发展基金会项目资助.json"
     },
     {
       "id": "gdarts-news-第十届华语戏剧盛典",
@@ -6383,7 +6468,8 @@
         "disciplines": "1snx6wb"
       },
       "cover": "assets/covers/1166a4e59da2301f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/gdarts-news-第十届华语戏剧盛典.json"
     },
     {
       "id": "gdarts-news-国家艺术基金2026年度艺术人才培训资助项目-粤港澳大湾区当代演艺评论人才培训-",
@@ -6451,7 +6537,8 @@
         "disciplines": "17yy9qw"
       },
       "cover": "assets/covers/fd6b21eedc39b39e.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/gdarts-news-国家艺术基金2026年度艺术人才培训资助项目-粤港澳大湾区当代演艺评论人才培训-.json"
     },
     {
       "id": "ccdc-wudaoqingnian-國家藝術基金2026年度藝術人才培訓資助項目-當代舞創作人才培訓-招生簡章",
@@ -6535,7 +6622,8 @@
         "disciplines": "12kjxu2"
       },
       "cover": "assets/covers/ed3822d312b11cdf.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/ccdc-wudaoqingnian-國家藝術基金2026年度藝術人才培訓資助項目-當代舞創作人才培訓-招生簡章.json"
     },
     {
       "id": "detour-hk-pmq-detour-2026-创意方案公开征集",
@@ -6602,7 +6690,8 @@
         "city": "2sy37",
         "country": "3tz79",
         "disciplines": "60nv98"
-      }
+      },
+      "fulltext": "data/fulltext/detour-hk-pmq-detour-2026-创意方案公开征集.json"
     },
     {
       "id": "detour-hk-pmq-detour-2025-创意提案公开征集-装置与展览",
@@ -6671,7 +6760,8 @@
         "city": "2sy37",
         "country": "3tz79",
         "disciplines": "mqwwgp"
-      }
+      },
+      "fulltext": "data/fulltext/detour-hk-pmq-detour-2025-创意提案公开征集-装置与展览.json"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-摄影毕业季丨2026年度全国高校摄影优秀毕业作品年展征稿启事",
@@ -6737,7 +6827,8 @@
         "org": "g1aufe",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/zhongguo-sheying-mag-huodong-摄影毕业季丨2026年度全国高校摄影优秀毕业作品年展征稿启事.json"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度舞台艺术创作资助项目",
@@ -6829,7 +6920,8 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "4mncdb"
-      }
+      },
+      "fulltext": "data/fulltext/cnaf-guide-国家艺术基金-一般项目-2027年度舞台艺术创作资助项目.json"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度美术创作资助项目",
@@ -6909,7 +7001,8 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "1kh2jos"
-      }
+      },
+      "fulltext": "data/fulltext/cnaf-guide-国家艺术基金-一般项目-2027年度美术创作资助项目.json"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度传播交流推广资助项目",
@@ -6987,7 +7080,8 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "1thkije"
-      }
+      },
+      "fulltext": "data/fulltext/cnaf-guide-国家艺术基金-一般项目-2027年度传播交流推广资助项目.json"
     },
     {
       "id": "shcdf-jjhdt-上海文化发展基金会二-二六年度第一期资助项目申报指南",
@@ -7068,7 +7162,8 @@
         "city": "3ttdk",
         "country": "3tz79",
         "disciplines": "1d64wgy"
-      }
+      },
+      "fulltext": "data/fulltext/shcdf-jjhdt-上海文化发展基金会二-二六年度第一期资助项目申报指南.json"
     },
     {
       "id": "shcdf-jjhdt-上海文化发展基金会二-二五年度第二期资助项目申报指南",
@@ -7151,7 +7246,8 @@
         "disciplines": "6voy85"
       },
       "cover": "assets/covers/f1dfdef770047925.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/shcdf-jjhdt-上海文化发展基金会二-二五年度第二期资助项目申报指南.json"
     },
     {
       "id": "shcdf-jjhdt-上海文化发展基金会二-二五年度第一期资助项目申报指南",
@@ -7240,7 +7336,8 @@
         "disciplines": "1r9hx2n"
       },
       "cover": "assets/covers/7720776bdea7d1e9.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/shcdf-jjhdt-上海文化发展基金会二-二五年度第一期资助项目申报指南.json"
     },
     {
       "id": "claf-news-老党员-新风采-荣誉影像全国征稿启事",
@@ -7306,7 +7403,8 @@
         "org": "3lo9ow",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/claf-news-老党员-新风采-荣誉影像全国征稿启事.json"
     },
     {
       "id": "gp_golden_pinwheel-金风车国际青年插画家大赛",
@@ -7376,7 +7474,8 @@
         "country": "3tz79",
         "age_limit": "1w5k5q",
         "disciplines": "1sge32i"
-      }
+      },
+      "fulltext": "data/fulltext/gp_golden_pinwheel-金风车国际青年插画家大赛.json"
     },
     {
       "id": "warsaw-poster-biennale-第29届华沙国际海报双年展",
@@ -7566,7 +7665,8 @@
         "org": "1j52tff",
         "city": "2jbcd7",
         "country": "3ma24"
-      }
+      },
+      "fulltext": "data/fulltext/jp-acac-opencall-青森国际艺术中心驻留项目-合作机构公开征集.json"
     },
     {
       "id": "eu-res-bethanien-柏林k-nstlerhaus-bethanien驻留项目",
@@ -7636,7 +7736,8 @@
         "country": "3rir3",
         "deadline_note": "1groodb",
         "disciplines": "1vq83jt"
-      }
+      },
+      "fulltext": "data/fulltext/eu-res-bethanien-柏林k-nstlerhaus-bethanien驻留项目.json"
     },
     {
       "id": "sharjah_art_foundation_open_calls-corniche-8-公开征集",
@@ -7705,7 +7806,8 @@
         "city": "3otp6",
         "country": "d0tnah",
         "disciplines": "1egrbw6"
-      }
+      },
+      "fulltext": "data/fulltext/sharjah_art_foundation_open_calls-corniche-8-公开征集.json"
     },
     {
       "id": "aec-opencalls-ars-biologica-artxscience-驻留公开征集",
@@ -7779,7 +7881,8 @@
         "country": "3nv4p",
         "nationality": "d44wj1",
         "disciplines": "18oeav"
-      }
+      },
+      "fulltext": "data/fulltext/aec-opencalls-ars-biologica-artxscience-驻留公开征集.json"
     },
     {
       "id": "gdc-award-gdc-设计奖-2025",
@@ -7870,7 +7973,8 @@
         "city": "3nmqv",
         "country": "3tz79",
         "disciplines": "n3r8di"
-      }
+      },
+      "fulltext": "data/fulltext/gdc-award-gdc-设计奖-2025.json"
     },
     {
       "id": "foundertype-award-第十三届-方正奖-设计大赛",
@@ -7941,7 +8045,8 @@
         "summary": "12d1inp",
         "org": "taf7pn",
         "disciplines": "10f79ho"
-      }
+      },
+      "fulltext": "data/fulltext/foundertype-award-第十三届-方正奖-设计大赛.json"
     },
     {
       "id": "jp-acac-opencall-工作室艺术家公开招募",
@@ -8001,7 +8106,8 @@
         "org": "108fuii",
         "city": "2jbcd7",
         "country": "3ma24"
-      }
+      },
+      "fulltext": "data/fulltext/jp-acac-opencall-工作室艺术家公开招募.json"
     },
     {
       "id": "in-khoj-opportunities-inlaks-nirox基金会驻留项目",
@@ -8065,7 +8171,8 @@
         "org": "s6k9xu",
         "country": "3pw8c",
         "disciplines": "1lnvsbt"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-inlaks-nirox基金会驻留项目.json"
     },
     {
       "id": "in-khoj-opportunities-swali工艺奖",
@@ -8132,7 +8239,8 @@
         "country": "3qbir",
         "nationality": "3jpoum",
         "disciplines": "q80vup"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-swali工艺奖.json"
     },
     {
       "id": "in-khoj-opportunities-khoj-国际驻留项目-2026年8月-9月",
@@ -8199,7 +8307,8 @@
         "city": "3b6vm6",
         "country": "3qbir",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-khoj-国际驻留项目-2026年8月-9月.json"
     },
     {
       "id": "in-khoj-opportunities-un-make-性别的艺术-ssaf-kasauli艺术项目工作坊",
@@ -8269,7 +8378,8 @@
         "age_limit": "3hl52",
         "nationality": "1a1fq1s",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-un-make-性别的艺术-ssaf-kasauli艺术项目工作坊.json"
     },
     {
       "id": "in-khoj-opportunities-skap暑期学校-作为表演的风景",
@@ -8341,7 +8451,8 @@
         "country": "3qbir",
         "nationality": "3qbir",
         "disciplines": "1qduz5n"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-skap暑期学校-作为表演的风景.json"
     },
     {
       "id": "in-khoj-opportunities-visureal-国际影像艺术节",
@@ -8412,7 +8523,8 @@
         "city": "3n5ig",
         "country": "3tz79",
         "disciplines": "xvho77"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-visureal-国际影像艺术节.json"
     },
     {
       "id": "in-khoj-opportunities-2026年现场艺术节征稿",
@@ -8485,7 +8597,8 @@
         "city": "3g1kvh",
         "country": "3pw8c",
         "disciplines": "f3nk1n"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-2026年现场艺术节征稿.json"
     },
     {
       "id": "in-khoj-opportunities-peers-2026-驻留项目",
@@ -8555,7 +8668,8 @@
         "country": "3qbir",
         "nationality": "1a1fq1s",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-peers-2026-驻留项目.json"
     },
     {
       "id": "in-khoj-opportunities-saas-fee-夏季艺术研究所-2026-柏林公开征集",
@@ -8644,7 +8758,8 @@
         "city": "3nakd",
         "country": "3rir3",
         "disciplines": "osn117"
-      }
+      },
+      "fulltext": "data/fulltext/in-khoj-opportunities-saas-fee-夏季艺术研究所-2026-柏林公开征集.json"
     },
     {
       "id": "future_generation_art_prize-未来世代艺术奖",
@@ -8701,7 +8816,8 @@
         "summary": "1h5s99f",
         "org": "3vo7ev",
         "age_limit": "3hl5v"
-      }
+      },
+      "fulltext": "data/fulltext/future_generation_art_prize-未来世代艺术奖.json"
     },
     {
       "id": "sharjah_art_foundation_open_calls-al-hamriyah工作室空间申请开放",
@@ -8761,7 +8877,8 @@
         "org": "ut481q",
         "city": "3otp6",
         "country": "d0tnah"
-      }
+      },
+      "fulltext": "data/fulltext/sharjah_art_foundation_open_calls-al-hamriyah工作室空间申请开放.json"
     },
     {
       "id": "sharjah_art_foundation_open_calls-corniche-8-公开征稿",
@@ -8836,7 +8953,8 @@
         "age_limit": "3hl4c",
         "nationality": "3767k2",
         "disciplines": "1egrbw6"
-      }
+      },
+      "fulltext": "data/fulltext/sharjah_art_foundation_open_calls-corniche-8-公开征稿.json"
     },
     {
       "id": "sharjah_art_foundation_open_calls-sfp9短片制作资助",
@@ -8903,7 +9021,8 @@
         "city": "3otp6",
         "country": "d0tnah",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "fulltext": "data/fulltext/sharjah_art_foundation_open_calls-sfp9短片制作资助.json"
     },
     {
       "id": "search-ogdcn-2026东方创意之星大湾区旅游文创主题赛暨第七届国际大学生旅游文创设计大赛",
@@ -8962,7 +9081,8 @@
       "official_url": "http://www.gzasc.edu.cn/yscm/info/1027/7761.htm",
       "official_located": "specific",
       "cover": "assets/covers/7b5241adda5aa510.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-ogdcn-2026东方创意之星大湾区旅游文创主题赛暨第七届国际大学生旅游文创设计大赛.json"
     },
     {
       "id": "search-a4artmuseum-2027-2028-a4国际驻留项目",
@@ -9044,7 +9164,8 @@
         "disciplines": "1tjf75s"
       },
       "cover": "assets/covers/fff908e31bba8a7f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-a4artmuseum-2027-2028-a4国际驻留项目.json"
     },
     {
       "id": "search-scfai-2026-2027年度四川美术学院青年艺术家驻留计划",
@@ -9124,7 +9245,8 @@
         "disciplines": "qobwzw"
       },
       "cover": "assets/covers/80e6ce5b202853db.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-scfai-2026-2027年度四川美术学院青年艺术家驻留计划.json"
     },
     {
       "id": "search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知",
@@ -9197,7 +9319,8 @@
         "disciplines": "1s28866"
       },
       "cover": "assets/covers/a31e520a86e3e3ac.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知.json"
     },
     {
       "id": "search-aionlabo-ted-posca-global-artist-residency-2027",
@@ -9345,7 +9468,8 @@
         "city": "2sy37",
         "country": "3tz79",
         "disciplines": "16e2ljb"
-      }
+      },
+      "fulltext": "data/fulltext/search-apo-va-艺术家驻留计划-公开征集计划书.json"
     },
     {
       "id": "search-scfai-2025-2026年度四川美术学院青年艺术家驻留计划",
@@ -9429,7 +9553,8 @@
         "age_limit": "1eu275t",
         "nationality": "18x56ed",
         "disciplines": "qobwzw"
-      }
+      },
+      "fulltext": "data/fulltext/search-scfai-2025-2026年度四川美术学院青年艺术家驻留计划.json"
     },
     {
       "id": "search-caanet-第七届漆画展览征稿通知",
@@ -9494,7 +9619,8 @@
         "org": "16qmhp3",
         "country": "3tz79",
         "disciplines": "1s28866"
-      }
+      },
+      "fulltext": "data/fulltext/search-caanet-第七届漆画展览征稿通知.json"
     },
     {
       "id": "search-hkong-va-艺术家驻留计划",
@@ -9576,7 +9702,8 @@
         "disciplines": "1bczqo5"
       },
       "cover": "assets/covers/ec1c4ed8d2d6b0ed.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-hkong-va-艺术家驻留计划.json"
     },
     {
       "id": "search-apo-va-艺术家驻留及展览计划",
@@ -9725,7 +9852,8 @@
         "disciplines": "2imycf"
       },
       "cover": "assets/covers/0a81edf0f6de23a1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-a4artmuseum-a4国际驻留.json"
     },
     {
       "id": "search-longlatifoundation-艺术家驻留计划",
@@ -9798,7 +9926,8 @@
         "disciplines": "1u0sfgg"
       },
       "cover": "assets/covers/0c28536e7d597e78.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-longlatifoundation-艺术家驻留计划.json"
     },
     {
       "id": "search-bjbiennale-第十届中国北京国际美术双年展",
@@ -9874,7 +10003,8 @@
         "city": "3qrtq",
         "country": "3tz79",
         "disciplines": "1i3o7fk"
-      }
+      },
+      "fulltext": "data/fulltext/search-bjbiennale-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-snz-第六届当代国际艺术与设计双年展gssp金曦奖大赛暨-当代国际艺术与设计数字典藏馆",
@@ -9954,7 +10084,8 @@
         "disciplines": "jfjrdr"
       },
       "cover": "assets/covers/120e36c3bd77cbf1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-snz-第六届当代国际艺术与设计双年展gssp金曦奖大赛暨-当代国际艺术与设计数字典藏馆.json"
     },
     {
       "id": "search-difang-第十届中国北京国际美术双年展",
@@ -10034,7 +10165,8 @@
       "official_url": "http://www.bjbiennale.com.cn/cn/zldt/202506/t20250619_1346227.html",
       "official_located": "specific",
       "cover": "assets/covers/15c55e2532997aff.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-difang-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-ipbp-ipbp-南京国际和平海报双年展",
@@ -10103,7 +10235,8 @@
         "country": "3tz79",
         "deadline_note": "w8x94v",
         "disciplines": "1r4vg0h"
-      }
+      },
+      "fulltext": "data/fulltext/search-ipbp-ipbp-南京国际和平海报双年展.json"
     },
     {
       "id": "search-art-第十届北京双年展主题-共生-面向全球征集作品",
@@ -10183,7 +10316,8 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/241ea0df90ed066d.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-art-第十届北京双年展主题-共生-面向全球征集作品.json"
     },
     {
       "id": "search-apo-va-艺术家驻留计划-征集提案",
@@ -10347,7 +10481,8 @@
         "disciplines": "esst9p"
       },
       "cover": "assets/covers/1b3198882ac61110.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-dunhuangartmuseum-境象丝路-敦煌国际艺术驻地-ssr-air-2026.json"
     },
     {
       "id": "search-shejijingsai-2025第十届全国插画双年展",
@@ -10416,7 +10551,8 @@
       "official_url": "https://www.illusplus.com/",
       "official_located": "homepage",
       "cover": "assets/covers/54ac494bfd1395d5.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-shejijingsai-2025第十届全国插画双年展.json"
     },
     {
       "id": "search-ziyiaward-紫艺奖-中国国际大学生艺术设计大赛暨高校优秀设计作品展",
@@ -10495,7 +10631,8 @@
         "disciplines": "c74k8g"
       },
       "cover": "assets/covers/5ee47445ac15ade7.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-ziyiaward-紫艺奖-中国国际大学生艺术设计大赛暨高校优秀设计作品展.json"
     },
     {
       "id": "search-sj33-北京市大兴区花园城市永定湾-logo-征集活动",
@@ -10570,7 +10707,8 @@
       "official_url": "https://www.bjdx.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/c7df06e4e00c73df.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-sj33-北京市大兴区花园城市永定湾-logo-征集活动.json"
     },
     {
       "id": "search-yczhansai-场域-2026第三届香港青年创新设计奖",
@@ -10644,7 +10782,8 @@
         "disciplines": "186rgsc"
       },
       "official_url": "http://www.cacr.hk/h-nd-294.html",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/search-yczhansai-场域-2026第三届香港青年创新设计奖.json"
     },
     {
       "id": "search-a4artmuseum-2026驻留艺术家",
@@ -10755,7 +10894,8 @@
         "disciplines": "17k3va1"
       },
       "cover": "assets/covers/12440847a30c9a64.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-a4artmuseum-2026驻留艺术家.json"
     },
     {
       "id": "search-leogallery-狮語画廊艺术家驻留计划",
@@ -10826,7 +10966,8 @@
         "disciplines": "926vrm"
       },
       "cover": "assets/covers/894efb7aee8c0e35.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-leogallery-狮語画廊艺术家驻留计划.json"
     },
     {
       "id": "search-xingxiancn-2026年-春潮-青岛雕塑双年展-征集公告",
@@ -10896,7 +11037,8 @@
         "city": "2rjgs",
         "country": "3tz79",
         "disciplines": "1uhqgtc"
-      }
+      },
+      "fulltext": "data/fulltext/search-xingxiancn-2026年-春潮-青岛雕塑双年展-征集公告.json"
     },
     {
       "id": "search-qdsnqwhg-2025青岛跨年艺术展作品征集",
@@ -10970,7 +11112,8 @@
         "city": "2rjgs",
         "country": "3tz79",
         "disciplines": "150mfyc"
-      }
+      },
+      "fulltext": "data/fulltext/search-qdsnqwhg-2025青岛跨年艺术展作品征集.json"
     },
     {
       "id": "search-cnaf-国家艺术基金-一般项目-2026年度青年艺术创作人才资助项目",
@@ -11069,7 +11212,8 @@
         "age_limit": "3hkzl",
         "nationality": "3tz79",
         "disciplines": "17t4duj"
-      }
+      },
+      "fulltext": "data/fulltext/search-cnaf-国家艺术基金-一般项目-2026年度青年艺术创作人才资助项目.json"
     },
     {
       "id": "search-xingxiancn-全季-青年艺术计划征集开启",
@@ -11149,7 +11293,8 @@
         "city": "3ttdk",
         "country": "3tz79",
         "disciplines": "q5jbk"
-      }
+      },
+      "fulltext": "data/fulltext/search-xingxiancn-全季-青年艺术计划征集开启.json"
     },
     {
       "id": "search-news-青韵书画艺术节",
@@ -11231,7 +11376,8 @@
         "city": "2rjgs",
         "country": "3tz79",
         "disciplines": "z5ifmt"
-      }
+      },
+      "fulltext": "data/fulltext/search-news-青韵书画艺术节.json"
     },
     {
       "id": "search-shejijingsai-2026-山情海韵-创见未来-青岛市崂山区第三届文创设计大赛",
@@ -11303,7 +11449,8 @@
         "city": "2j9aku",
         "country": "3tz79",
         "disciplines": "1uxzho5"
-      }
+      },
+      "fulltext": "data/fulltext/search-shejijingsai-2026-山情海韵-创见未来-青岛市崂山区第三届文创设计大赛.json"
     },
     {
       "id": "search-scribd-2025年东京双年展-社会潜水-air公开征集计划",
@@ -11379,7 +11526,8 @@
         "disciplines": "926vrm"
       },
       "official_url": "https://tokyobiennale.jp/en/archives/news/6152",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/search-scribd-2025年东京双年展-社会潜水-air公开征集计划.json"
     },
     {
       "id": "search-cnyisai-2026-第八届-cada-日本概念艺术设计奖",
@@ -11454,7 +11602,8 @@
         "org": "1678qyj",
         "country": "3ma24",
         "disciplines": "12sp54f"
-      }
+      },
+      "fulltext": "data/fulltext/search-cnyisai-2026-第八届-cada-日本概念艺术设计奖.json"
     },
     {
       "id": "search-tada-art-art-venture-ehime-fes-2025-作品公募",
@@ -11514,7 +11663,8 @@
         "country": "3ma24"
       },
       "cover": "assets/covers/63eb1886620be096.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-tada-art-art-venture-ehime-fes-2025-作品公募.json"
     },
     {
       "id": "search-zjmtcn-东京时尚大奖2026",
@@ -11584,7 +11734,8 @@
         "disciplines": "116hg"
       },
       "cover": "assets/covers/d9979579e0463d44.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-zjmtcn-东京时尚大奖2026.json"
     },
     {
       "id": "search-shejijingsai-2027東京tdc-东京字体指导俱乐部-tokyo-tdc賞",
@@ -11658,7 +11809,8 @@
       "official_url": "https://tokyotypedirectorsclub.org/entry/",
       "official_located": "specific",
       "cover": "assets/covers/337c27018fdbafb0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-shejijingsai-2027東京tdc-东京字体指导俱乐部-tokyo-tdc賞.json"
     },
     {
       "id": "search-tokyoartsandspace-东京艺术空间驻留项目",
@@ -11720,7 +11872,8 @@
         "city": "3tzlh",
         "country": "3ma24",
         "deadline_note": "2iphxw"
-      }
+      },
+      "fulltext": "data/fulltext/search-tokyoartsandspace-东京艺术空间驻留项目.json"
     },
     {
       "id": "search-international-2025-2026学年国际学生招生简章",
@@ -11785,7 +11938,8 @@
         "country": "3tz79",
         "age_limit": "1wcpi9",
         "nationality": "1m2xet2"
-      }
+      },
+      "fulltext": "data/fulltext/search-international-2025-2026学年国际学生招生简章.json"
     },
     {
       "id": "search-eduzs-云南艺术学院2024-2025学年国际学生招生简章",
@@ -11854,7 +12008,8 @@
       "official_url": "https://international.ynart.edu.cn/info/1158/5750.htm",
       "official_located": "specific",
       "cover": "assets/covers/c88e57423e018e1c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-eduzs-云南艺术学院2024-2025学年国际学生招生简章.json"
     },
     {
       "id": "search-yn-云南省第七届群众文化-彩云奖-活动美术-书法-摄影展览作品征集",
@@ -11930,7 +12085,8 @@
       "official_url": "https://dct.yn.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/c3a7e0540e595aee.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-yn-云南省第七届群众文化-彩云奖-活动美术-书法-摄影展览作品征集.json"
     },
     {
       "id": "search-shejijingsai-大美中国-宝藏云南-和合澜湄-创意云南文化产业博览会-2025-设计大展作品征集",
@@ -12005,7 +12161,8 @@
       "official_url": "https://www.ynxc.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/48a9cdc067e32c3e.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-shejijingsai-大美中国-宝藏云南-和合澜湄-创意云南文化产业博览会-2025-设计大展作品征集.json"
     },
     {
       "id": "search-10100-德国柏林国际艺术双年展-golden-key-国际艺术大赛",
@@ -12077,7 +12234,8 @@
         "city": "3nakd",
         "country": "3rir3",
         "disciplines": "5jtym6"
-      }
+      },
+      "fulltext": "data/fulltext/search-10100-德国柏林国际艺术双年展-golden-key-国际艺术大赛.json"
     },
     {
       "id": "search-zjideas-第十三届西班牙国际具象-绘画雕塑-艺术双年展征稿",
@@ -12149,7 +12307,8 @@
         "disciplines": "1or4yw8"
       },
       "official_url": "https://www.fundaciondelasartes.org/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/search-zjideas-第十三届西班牙国际具象-绘画雕塑-艺术双年展征稿.json"
     },
     {
       "id": "search-zwgk-第61届威尼斯国际艺术双年展中国馆征展启事",
@@ -12214,7 +12373,8 @@
         "org": "1vnnynt",
         "nationality": "18x56ed",
         "disciplines": "1evhrvq"
-      }
+      },
+      "fulltext": "data/fulltext/search-zwgk-第61届威尼斯国际艺术双年展中国馆征展启事.json"
     },
     {
       "id": "search-caanet-镌印风尚-首届青年版画双年展征稿通知",
@@ -12284,7 +12444,8 @@
         "disciplines": "1unxm1c"
       },
       "cover": "assets/covers/dbe05c3e0ff0f855.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-caanet-镌印风尚-首届青年版画双年展征稿通知.json"
     },
     {
       "id": "search-shejijingsai-2026-华夏奖-文化艺术设计大赛-秋季",
@@ -12354,7 +12515,8 @@
         "disciplines": "1wpdhlz"
       },
       "official_url": "http://www.chqsn.com/delta/1054",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/search-shejijingsai-2026-华夏奖-文化艺术设计大赛-秋季.json"
     },
     {
       "id": "search-hbwy-镌印风尚-首届青年版画双年展",
@@ -12427,7 +12589,8 @@
         "disciplines": "1unxm1c"
       },
       "cover": "assets/covers/aaee826406ce18d1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-hbwy-镌印风尚-首届青年版画双年展.json"
     },
     {
       "id": "search-caanet-镌刻时代-首届当代版画双年展",
@@ -12495,7 +12658,8 @@
         "city": "3equvl",
         "country": "3tz79",
         "disciplines": "1unxm1c"
-      }
+      },
+      "fulltext": "data/fulltext/search-caanet-镌刻时代-首届当代版画双年展.json"
     },
     {
       "id": "search-huaxiajiang-2026-华夏奖-文化艺术设计大赛-春季",
@@ -12667,7 +12831,8 @@
       "official_url": "http://www.chqsn.com/delta/1054",
       "official_located": "specific",
       "cover": "assets/covers/00642983bd6cd457.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-huaxiajiang-2026-华夏奖-文化艺术设计大赛-春季.json"
     },
     {
       "id": "search-xingxiancn-2026波普艺术设计奖暨波普艺术国际作品展征集",
@@ -12775,7 +12940,8 @@
         "summary": "112329",
         "org": "15v3i9k",
         "disciplines": "1d81rr2"
-      }
+      },
+      "fulltext": "data/fulltext/search-xingxiancn-2026波普艺术设计奖暨波普艺术国际作品展征集.json"
     },
     {
       "id": "search-news-第十届北京国际美术双年展",
@@ -12855,7 +13021,8 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/ac0974bd887ae5fd.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-news-第十届北京国际美术双年展.json"
     },
     {
       "id": "search-news-第十届中国北京国际美术双年展",
@@ -12935,7 +13102,8 @@
       "official_url": "http://www.bjbiennale.com.cn/cn/zlzn/",
       "official_located": "specific",
       "cover": "assets/covers/d4c36c0841f723fa.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-news-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-chinanews-第十届中国北京国际美术双年展",
@@ -13015,7 +13183,8 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/ef2f74811bae2bd6.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-chinanews-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-news-第十届中国北京国际美术双年展作品征集",
@@ -13098,7 +13267,8 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/805398930b70be04.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-news-第十届中国北京国际美术双年展作品征集.json"
     },
     {
       "id": "search-zijing-va-艺术家驻留计划",
@@ -13182,7 +13352,8 @@
       "official_url": "https://www.apo.hk/en/web/apo/va_artist_in_residence_2026.html",
       "official_located": "specific",
       "cover": "assets/covers/b5c21409838c2766.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-zijing-va-艺术家驻留计划.json"
     },
     {
       "id": "search-jiannengwh-镌印风尚-首届青年版画双年展征稿通知",
@@ -13252,7 +13423,8 @@
         "disciplines": "1unxm1c"
       },
       "cover": "assets/covers/85ac36ad3edfb45b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-jiannengwh-镌印风尚-首届青年版画双年展征稿通知.json"
     },
     {
       "id": "search-archcollege-景镇融合-魔鬼城-西部乌镇2025首届艺术装置设计大赛",
@@ -13323,7 +13495,8 @@
         "disciplines": "nc7xdw"
       },
       "official_url": "https://www.weh.gov.cn/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/search-archcollege-景镇融合-魔鬼城-西部乌镇2025首届艺术装置设计大赛.json"
     },
     {
       "id": "search-news-景镇融合-魅力乌尔禾-2025首届艺术装置设计大赛",
@@ -13397,7 +13570,8 @@
         "disciplines": "hytvgy"
       },
       "official_url": "https://www.weh.gov.cn/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "fulltext": "data/fulltext/search-news-景镇融合-魅力乌尔禾-2025首届艺术装置设计大赛.json"
     },
     {
       "id": "search-whaleideas-魔鬼城-乌尔禾区2025首届艺术装置设计大赛",
@@ -13477,7 +13651,8 @@
       "official_url": "https://www.weh.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/21536d33b2405cb2.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-whaleideas-魔鬼城-乌尔禾区2025首届艺术装置设计大赛.json"
     },
     {
       "id": "search-shejijingsai-2025第二届上海国际光影节光影艺术装置展-作品公开征集",
@@ -13549,7 +13724,8 @@
       "official_url": "https://lhsr.sh.gov.cn/gyj25/20251011/0f71f3e9aea148a4839d5727320fc4e8.html",
       "official_located": "specific",
       "cover": "assets/covers/a48cb2330ac4a915.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-shejijingsai-2025第二届上海国际光影节光影艺术装置展-作品公开征集.json"
     },
     {
       "id": "search-guet-第一届-零废弃计划-校园装置艺术设计大赛通知-废旧材料重生计划-艺术赋能绿色校园",
@@ -13693,7 +13869,8 @@
       "official_url": "https://www.ucrossfoundation.org/residency-program.html",
       "official_located": "specific",
       "cover": "assets/covers/f97b3d67097b0a93.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-artenda-ucross基金会驻留项目.json"
     },
     {
       "id": "search-bj-第十届中国北京国际美术双年展",
@@ -13776,7 +13953,8 @@
       "official_url": "http://www.bjbiennale.com.cn/cn/zldt/202506/t20250619_1346227.html",
       "official_located": "specific",
       "cover": "assets/covers/8bc6adc649604151.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-bj-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-cn5v-第十届中国北京国际美术双年展",
@@ -13856,7 +14034,8 @@
       "official_url": "http://www.bjbiennale.com.cn/cn/zlzn/",
       "official_located": "specific",
       "cover": "assets/covers/d3615e1b256a0909.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-cn5v-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-artenda-throwing-shapes-clay-city",
@@ -13926,7 +14105,8 @@
       "official_url": "https://throwingshapes.ie/pages/claycity",
       "official_located": "specific",
       "cover": "assets/covers/b2c90f98024b098f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-artenda-throwing-shapes-clay-city.json"
     },
     {
       "id": "search-open-calls-open-call-for-internship-positions-2025",
@@ -13986,7 +14166,8 @@
       "official_url": "https://klimt02.net/events/open-calls/open-call-internship-positions-klimt02",
       "official_located": "specific",
       "cover": "assets/covers/568e356547fc2b77.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-open-calls-open-call-for-internship-positions-2025.json"
     },
     {
       "id": "search-pointsarts-几点国际驻留项目",
@@ -14044,7 +14225,8 @@
         "summary": "18l4i4m",
         "org": "19wfsyf",
         "deadline_note": "159skzy"
-      }
+      },
+      "fulltext": "data/fulltext/search-pointsarts-几点国际驻留项目.json"
     },
     {
       "id": "search-aionlabo-tokas-international-creator-residency-pr",
@@ -14110,7 +14292,8 @@
         "disciplines": "1wdatm5"
       },
       "cover": "assets/covers/50c215e604151ee5.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-aionlabo-tokas-international-creator-residency-pr.json"
     },
     {
       "id": "search-shejijingsai-第十届中国北京国际美术双年展",
@@ -14190,7 +14373,8 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/9c9b7e1af6a98329.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-shejijingsai-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-caanet-第五届深圳大芬国际油画双年展征稿通知",
@@ -14258,7 +14442,8 @@
         "city": "3nmqv",
         "country": "3tz79",
         "disciplines": "1qywpfl"
-      }
+      },
+      "fulltext": "data/fulltext/search-caanet-第五届深圳大芬国际油画双年展征稿通知.json"
     },
     {
       "id": "search-caanet-精神-图式-第四届中国写意油画双年展征稿通知",
@@ -14326,7 +14511,8 @@
         "city": "2qtkv",
         "country": "3tz79",
         "disciplines": "1qywpfl"
-      }
+      },
+      "fulltext": "data/fulltext/search-caanet-精神-图式-第四届中国写意油画双年展征稿通知.json"
     },
     {
       "id": "search-chinaawards-人民美术油画双年展",
@@ -14394,7 +14580,8 @@
         "city": "3qrtq",
         "country": "3tz79",
         "disciplines": "1qywpfl"
-      }
+      },
+      "fulltext": "data/fulltext/search-chinaawards-人民美术油画双年展.json"
     },
     {
       "id": "search-dfbiennale-第五届深圳大芬国际油画双年展征稿通知",
@@ -14467,7 +14654,8 @@
         "disciplines": "1qywpfl"
       },
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=10123",
-      "official_located": "specific"
+      "official_located": "specific",
+      "fulltext": "data/fulltext/search-dfbiennale-第五届深圳大芬国际油画双年展征稿通知.json"
     },
     {
       "id": "search-zjmtcn-第五届深圳大芬国际油画双年展",
@@ -14537,7 +14725,8 @@
         "disciplines": "1qywpfl"
       },
       "cover": "assets/covers/b62db0b24619583b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-zjmtcn-第五届深圳大芬国际油画双年展.json"
     },
     {
       "id": "search-news-悲鸿风度-第三届油画双年展征稿通知",
@@ -14609,7 +14798,8 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=10161",
       "official_located": "specific",
       "cover": "assets/covers/a94b5cb899c1245c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-news-悲鸿风度-第三届油画双年展征稿通知.json"
     },
     {
       "id": "search-nonamestudiosh-意大利驻留-tuscany-residency-new",
@@ -14700,7 +14890,8 @@
         "disciplines": "hon957"
       },
       "cover": "assets/covers/ba2f26e64bc68998.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-nonamestudiosh-意大利驻留-tuscany-residency-new.json"
     },
     {
       "id": "search-artresidencyguide-farindola国际艺术节",
@@ -14763,7 +14954,8 @@
       "official_url": "https://www.farindola.art/",
       "official_located": "specific",
       "cover": "assets/covers/9b5f0512ed600750.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-artresidencyguide-farindola国际艺术节.json"
     },
     {
       "id": "search-chinafilm-第二十一届夏衍杯优秀电影剧本征集活动",
@@ -14830,7 +15022,8 @@
         "disciplines": "cezqr0"
       },
       "cover": "assets/covers/0b7ea0955f625256.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-chinafilm-第二十一届夏衍杯优秀电影剧本征集活动.json"
     },
     {
       "id": "search-bjiff-第十六届北京国际电影节征片公告",
@@ -14908,7 +15101,8 @@
         "disciplines": "iq81nr"
       },
       "cover": "assets/covers/6bee8b7125910f9b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-bjiff-第十六届北京国际电影节征片公告.json"
     },
     {
       "id": "search-bcsff-北京国际电影节-第33届大学生电影节影片推选-剧本推选-影评推选-青石创投",
@@ -14976,7 +15170,8 @@
         "city": "3qrtq",
         "country": "3tz79",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "fulltext": "data/fulltext/search-bcsff-北京国际电影节-第33届大学生电影节影片推选-剧本推选-影评推选-青石创投.json"
     },
     {
       "id": "search-bjbiennale-共生-第十届北京双年展开启全球征稿",
@@ -15054,7 +15249,8 @@
         "disciplines": "1dyio9s"
       },
       "cover": "assets/covers/bcf61635b1993622.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-bjbiennale-共生-第十届北京双年展开启全球征稿.json"
     },
     {
       "id": "search-artforum-eyebeam-驻留计划征集方案大奖产生",
@@ -15129,7 +15325,8 @@
       "official_url": "https://eyebeam.org/",
       "official_located": "homepage",
       "cover": "assets/covers/52e8444e15e5eafb.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-artforum-eyebeam-驻留计划征集方案大奖产生.json"
     },
     {
       "id": "search-luxembourgartprize-luxembourg-art-prize",
@@ -15211,7 +15408,8 @@
         "disciplines": "n19oro"
       },
       "cover": "assets/covers/972ffdee48c25534.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-luxembourgartprize-luxembourg-art-prize.json"
     },
     {
       "id": "search-tictacartcentre-艺术驻地",
@@ -15284,7 +15482,8 @@
         "disciplines": "66ko67"
       },
       "cover": "assets/covers/57e4d40185177cde.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-tictacartcentre-艺术驻地.json"
     },
     {
       "id": "search-drc12-外交公寓12号艺术家驻留项目",
@@ -15350,7 +15549,8 @@
         "country": "3tz79",
         "deadline_note": "1i9o92y",
         "disciplines": "926vrm"
-      }
+      },
+      "fulltext": "data/fulltext/search-drc12-外交公寓12号艺术家驻留项目.json"
     },
     {
       "id": "search-artscoral-jpa艺术大赛",
@@ -15419,7 +15619,8 @@
         "org": "jb1l0i",
         "nationality": "18ozdlz",
         "disciplines": "uvup5j"
-      }
+      },
+      "fulltext": "data/fulltext/search-artscoral-jpa艺术大赛.json"
     },
     {
       "id": "search-pointsarts-2021-几点春季国际驻留项目-公开征集",
@@ -15489,7 +15690,8 @@
         "disciplines": "1evhrvq"
       },
       "cover": "assets/covers/7d9da9915647fa15.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-pointsarts-2021-几点春季国际驻留项目-公开征集.json"
     },
     {
       "secondhand": true,
@@ -15553,7 +15755,8 @@
       "official_url": "https://www.ioam.org.cn/zhu-liu/",
       "official_located": "homepage",
       "cover": "assets/covers/9a02e7c18f96bc6b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-chinaresidencies-locality-reality-本土性-现实性冬季驻留项目.json"
     },
     {
       "secondhand": true,
@@ -15620,7 +15823,8 @@
       "official_url": "https://studiovoltaire.org/programmes/residencies/",
       "official_located": "specific",
       "cover": "assets/covers/71dff5d62dc76c09.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-artealdia-studio-voltaire-驻留项目.json"
     },
     {
       "id": "search-faguowenhua-艺同-法国艺术家在华驻留计划",
@@ -15699,7 +15903,8 @@
         "disciplines": "1qxs4hp"
       },
       "cover": "assets/covers/93bf526c4e761562.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-faguowenhua-艺同-法国艺术家在华驻留计划.json"
     },
     {
       "id": "search-swatch-art-peace-hotel-斯沃琪和平饭店艺术中心艺术家驻留计划",
@@ -15782,7 +15987,8 @@
         "disciplines": "111efyv"
       },
       "cover": "assets/covers/c3b2ffd39b3aa06c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-swatch-art-peace-hotel-斯沃琪和平饭店艺术中心艺术家驻留计划.json"
     },
     {
       "id": "search-colour4lifecompetition-色彩人生绘画比赛",
@@ -15993,7 +16199,8 @@
         "disciplines": "hko9o7"
       },
       "cover": "assets/covers/b506259d3e971423.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-call-欧洲媒体艺术平台驻留.json"
     },
     {
       "id": "search-luxembourgartprize-卢森堡艺术奖",
@@ -16072,7 +16279,8 @@
         "disciplines": "1v7om6i"
       },
       "cover": "assets/covers/be1ad5a42062aa48.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-luxembourgartprize-卢森堡艺术奖.json"
     },
     {
       "id": "search-bocec-全球吉庆生肖设计大赛-丁未羊年",
@@ -16143,7 +16351,8 @@
         "country": "3tz79",
         "deadline_note": "w8x94v",
         "disciplines": "60nv98"
-      }
+      },
+      "fulltext": "data/fulltext/search-bocec-全球吉庆生肖设计大赛-丁未羊年.json"
     },
     {
       "id": "search-bcaf-地球大2022高等学校设计征集",
@@ -16213,7 +16422,8 @@
         "disciplines": "60nv98"
       },
       "cover": "assets/covers/7f5e9cfe074e96d4.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-bcaf-地球大2022高等学校设计征集.json"
     },
     {
       "id": "search-e-flux-艺术家驻留项目公开征集",
@@ -16283,7 +16493,8 @@
       "official_url": "https://www.tu-braunschweig.de/projekthaus/labs/science-art-lab/artist-residency",
       "official_located": "specific",
       "cover": "assets/covers/a90c2cc1fdd1a9a9.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-e-flux-艺术家驻留项目公开征集.json"
     },
     {
       "id": "search-resartis-中欧艺术中心驻留公开征集",
@@ -16449,7 +16660,8 @@
         "disciplines": "9kg0m0"
       },
       "cover": "assets/covers/75e06fdbf1cd4b62.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-artelaguna-第18届拉古纳国际艺术奖.json"
     },
     {
       "id": "search-dianying-第十九届中国-山东-青年微电影大赛",
@@ -16522,7 +16734,8 @@
         "disciplines": "1saxaw9"
       },
       "cover": "assets/covers/d60af9e5c2027ffe.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-dianying-第十九届中国-山东-青年微电影大赛.json"
     },
     {
       "id": "search-chinafilm-2026全国青年剧作计划征集启事",
@@ -16590,7 +16803,8 @@
         "country": "3tz79",
         "age_limit": "1c2uh9f",
         "disciplines": "6zbns"
-      }
+      },
+      "fulltext": "data/fulltext/search-chinafilm-2026全国青年剧作计划征集启事.json"
     },
     {
       "id": "search-wglj-第二十届中国长春电影节-金鹿创投-新摇篮计划项目征集公告",
@@ -16658,7 +16872,8 @@
         "city": "2qtkv",
         "country": "3tz79",
         "disciplines": "1uq4y6f"
-      }
+      },
+      "fulltext": "data/fulltext/search-wglj-第二十届中国长春电影节-金鹿创投-新摇篮计划项目征集公告.json"
     },
     {
       "id": "search-xingping-第八届-玉琮杯-清廉微电影微视频大赛",
@@ -16727,7 +16942,8 @@
         "disciplines": "i0iz98"
       },
       "cover": "assets/covers/7a3c8bcea82cafba.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-xingping-第八届-玉琮杯-清廉微电影微视频大赛.json"
     },
     {
       "id": "search-gmqn-艺术与海洋-主题绘画作品大赛",
@@ -16803,7 +17019,8 @@
         "disciplines": "j4p8f2"
       },
       "cover": "assets/covers/f1a2eb1110865e00.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-gmqn-艺术与海洋-主题绘画作品大赛.json"
     },
     {
       "id": "search-film-2024青年编剧大会剧本大赛",
@@ -16877,7 +17094,8 @@
         "disciplines": "ib3oon"
       },
       "cover": "assets/covers/54b8838a691172a9.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-film-2024青年编剧大会剧本大赛.json"
     },
     {
       "id": "search-m-第十六届中国摄影艺术节报名展",
@@ -16945,7 +17163,8 @@
         "city": "19oieyv",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/search-m-第十六届中国摄影艺术节报名展.json"
     },
     {
       "id": "search-silkroad-第五届-丝路-国际青少年摄影-短视频大赛",
@@ -17015,7 +17234,8 @@
         "deadline_note": "15iwm1o",
         "age_limit": "1w8geh",
         "disciplines": "o4jf0g"
-      }
+      },
+      "fulltext": "data/fulltext/search-silkroad-第五届-丝路-国际青少年摄影-短视频大赛.json"
     },
     {
       "id": "search-esraro-r-a-r-o-布宜诺斯艾利斯驻留项目公开征集",
@@ -17074,7 +17294,8 @@
         "org": "1wl69xn",
         "city": "k818lz",
         "country": "2jegfo"
-      }
+      },
+      "fulltext": "data/fulltext/search-esraro-r-a-r-o-布宜诺斯艾利斯驻留项目公开征集.json"
     },
     {
       "id": "search-ny20plus-国际艺术驻留征集令",
@@ -17161,7 +17382,8 @@
         "disciplines": "ljj5jr"
       },
       "cover": "assets/covers/58e1c58bd6af80ec.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-ny20plus-国际艺术驻留征集令.json"
     },
     {
       "id": "search-lawayakacurrent-la-wayaka-current-驻留项目",
@@ -17219,7 +17441,8 @@
         "deadline_note": "amlmqi"
       },
       "cover": "assets/covers/1a41d60ea8913733.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-lawayakacurrent-la-wayaka-current-驻留项目.json"
     },
     {
       "id": "search-resartis-母亲艺术驻留",
@@ -17372,7 +17595,8 @@
         "disciplines": "7xacpx"
       },
       "cover": "assets/covers/c97cb101f52ff5f1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-redcorner-mongolia-蒙古及蒙古驻地艺术家公开征集.json"
     },
     {
       "id": "search-cafa-千里之行-全国美术学院毕业作品展征稿通知",
@@ -17450,7 +17674,8 @@
         "disciplines": "b6jldq"
       },
       "cover": "assets/covers/7b51611ecbfc581c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-cafa-千里之行-全国美术学院毕业作品展征稿通知.json"
     },
     {
       "id": "search-sites-2026年河南省第八届大学生艺术展演活动-专业组-作品征集",
@@ -17538,7 +17763,8 @@
         "disciplines": "blpcy2"
       },
       "cover": "assets/covers/03ae142d7c3560af.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-sites-2026年河南省第八届大学生艺术展演活动-专业组-作品征集.json"
     },
     {
       "id": "search-moe-全国第八届大学生艺术展演活动",
@@ -17628,7 +17854,8 @@
         "disciplines": "8bt0yf"
       },
       "cover": "assets/covers/d22d896bdef05c6b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-moe-全国第八届大学生艺术展演活动.json"
     },
     {
       "id": "search-www2-关于征集全国第八届大学生艺术展演活动校级作品的通知",
@@ -17716,7 +17943,8 @@
         "city": "3r64k",
         "country": "3tz79",
         "disciplines": "7ijxij"
-      }
+      },
+      "fulltext": "data/fulltext/search-www2-关于征集全国第八届大学生艺术展演活动校级作品的通知.json"
     },
     {
       "id": "search-cxcyxy-2026年-春期-国青杯-高校艺术设计作品征集活动",
@@ -17794,7 +18022,8 @@
         "disciplines": "1efyoyn"
       },
       "cover": "assets/covers/98f5bba15732e382.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-cxcyxy-2026年-春期-国青杯-高校艺术设计作品征集活动.json"
     },
     {
       "id": "search-ad-第七届艺术与科学国际作品展暨学术研讨会征集启事",
@@ -17857,7 +18086,8 @@
         "country": "3tz79"
       },
       "cover": "assets/covers/4a1a9140eec682e0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-ad-第七届艺术与科学国际作品展暨学术研讨会征集启事.json"
     },
     {
       "id": "search-cpanet-第十五届中国摄影艺术节报名展",
@@ -17927,7 +18157,8 @@
         "disciplines": "1s9bus6"
       },
       "cover": "assets/covers/a51d0dc63df301e5.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-cpanet-第十五届中国摄影艺术节报名展.json"
     },
     {
       "id": "search-hbwy-第十五届中国摄影艺术节报名展征集启事",
@@ -17997,7 +18228,8 @@
         "disciplines": "1s9bus6"
       },
       "cover": "assets/covers/36b32b4ff81d74b6.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-hbwy-第十五届中国摄影艺术节报名展征集启事.json"
     },
     {
       "id": "search-icspa-辉煌的瞬间-2024-第三届中国老年摄影展征稿启事",
@@ -18065,7 +18297,8 @@
         "city": "3g2vgf",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/search-icspa-辉煌的瞬间-2024-第三届中国老年摄影展征稿启事.json"
     },
     {
       "id": "search-zhjqw-2024非遗影像展作品征集",
@@ -18202,7 +18435,8 @@
         "org": "1t3hvrv",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "fulltext": "data/fulltext/search-jwc-2024年安徽省大学生摄影作品大赛校内作品征集通知.json"
     },
     {
       "id": "search-muhn-中国梦-劳动美-永远跟党走-奋进新征程-第十一届全国职工摄影展",
@@ -18272,7 +18506,8 @@
         "disciplines": "1s9bus6"
       },
       "cover": "assets/covers/ba1c86046b8eb4e1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-muhn-中国梦-劳动美-永远跟党走-奋进新征程-第十一届全国职工摄影展.json"
     },
     {
       "id": "search-gxnu-关于征集参加广西第八届大学生艺术展演活动作品的通知",
@@ -18360,7 +18595,8 @@
         "city": "3pff4",
         "country": "3tz79",
         "disciplines": "1b70kk7"
-      }
+      },
+      "fulltext": "data/fulltext/search-gxnu-关于征集参加广西第八届大学生艺术展演活动作品的通知.json"
     },
     {
       "id": "search-caanet-第三届全国大学生美术作品展览征稿通知",
@@ -18457,7 +18693,8 @@
         "disciplines": "mnq5a5"
       },
       "cover": "assets/covers/21d5f48e5067d168.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-caanet-第三届全国大学生美术作品展览征稿通知.json"
     },
     {
       "id": "search-caanet-第八届全国青年美术作品展览征稿通知",
@@ -18543,7 +18780,8 @@
         "disciplines": "1umh7su"
       },
       "cover": "assets/covers/a54d502901f8438f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-caanet-第八届全国青年美术作品展览征稿通知.json"
     },
     {
       "id": "search-lnwyw-中国文联2025年度青年文艺创作扶持计划项目",
@@ -18621,7 +18859,8 @@
         "disciplines": "c86t78"
       },
       "cover": "assets/covers/3bdcdbc23e8a2dba.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-lnwyw-中国文联2025年度青年文艺创作扶持计划项目.json"
     },
     {
       "id": "search-iamasf-申请展览",
@@ -18702,7 +18941,8 @@
         "disciplines": "1lrvwo9"
       },
       "cover": "assets/covers/b3c76667e128cd34.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-iamasf-申请展览.json"
     },
     {
       "id": "search-ioac-2026英国维多利亚国际青少年绘画大赛",
@@ -18767,7 +19007,8 @@
         "org": "1aq4op6",
         "deadline_note": "11sstrg",
         "disciplines": "1u0sfgg"
-      }
+      },
+      "fulltext": "data/fulltext/search-ioac-2026英国维多利亚国际青少年绘画大赛.json"
     },
     {
       "id": "search-hkas-香港藝術學院藝廊-展覽計劃書徵集",
@@ -18830,7 +19071,8 @@
         "country": "3tz79"
       },
       "cover": "assets/covers/d2cebef50a57e4f8.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-hkas-香港藝術學院藝廊-展覽計劃書徵集.json"
     },
     {
       "id": "search-hkas-香港藝術學院為典亞藝博2025展位公開徵集藝術作品",
@@ -18904,7 +19146,8 @@
         "city": "2sy37",
         "country": "2sy37",
         "disciplines": "1cczcvh"
-      }
+      },
+      "fulltext": "data/fulltext/search-hkas-香港藝術學院為典亞藝博2025展位公開徵集藝術作品.json"
     },
     {
       "id": "search-apo-va-藝術家駐留及展覽計劃",
@@ -18986,7 +19229,8 @@
         "age_limit": "3hl4c",
         "nationality": "dsv78n",
         "disciplines": "vpvvbz"
-      }
+      },
+      "fulltext": "data/fulltext/search-apo-va-藝術家駐留及展覽計劃.json"
     },
     {
       "id": "search-hkac-珍藏香港藝術博覽2026作品召集",
@@ -19070,7 +19314,8 @@
         "city": "2sy37",
         "country": "3tz79",
         "disciplines": "yz1qu8"
-      }
+      },
+      "fulltext": "data/fulltext/search-hkac-珍藏香港藝術博覽2026作品召集.json"
     },
     {
       "id": "search-info-va-藝術家駐留計劃",
@@ -19150,7 +19395,8 @@
         "age_limit": "3hl4c",
         "nationality": "2sy37",
         "disciplines": "o381f6"
-      }
+      },
+      "fulltext": "data/fulltext/search-info-va-藝術家駐留計劃.json"
     },
     {
       "id": "search-kfbg-2026-2027艺术家驻留计划",
@@ -19223,7 +19469,8 @@
         "country": "3tz79",
         "age_limit": "3hl4c",
         "disciplines": "1smoryr"
-      }
+      },
+      "fulltext": "data/fulltext/search-kfbg-2026-2027艺术家驻留计划.json"
     },
     {
       "id": "search-swt-2026南博-大理-国际影会征稿暨招展启事",
@@ -19296,7 +19543,8 @@
         "disciplines": "1s9bus6"
       },
       "cover": "assets/covers/a29cf84ebc8d7002.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-swt-2026南博-大理-国际影会征稿暨招展启事.json"
     },
     {
       "id": "search-sjysxy-马到功成-丙午华章-2026全国设计名家马年生肖视觉形象作品邀请展",
@@ -19362,7 +19610,8 @@
         "disciplines": "16ulu07"
       },
       "cover": "assets/covers/148921a630ba7b6d.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-sjysxy-马到功成-丙午华章-2026全国设计名家马年生肖视觉形象作品邀请展.json"
     },
     {
       "id": "search-zxys-雕塑系展览月-优秀作品征集-天津美术学院雕塑系第十五届年度展",
@@ -19434,7 +19683,8 @@
         "disciplines": "szagy0"
       },
       "cover": "assets/covers/41a7eb4e5fcb1854.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-zxys-雕塑系展览月-优秀作品征集-天津美术学院雕塑系第十五届年度展.json"
     },
     {
       "id": "search-caanet-为中国而设计-第十一届全国环境艺术设计展览征稿通知",
@@ -19510,7 +19760,8 @@
         "city": "3qyax",
         "country": "3tz79",
         "disciplines": "1gffdew"
-      }
+      },
+      "fulltext": "data/fulltext/search-caanet-为中国而设计-第十一届全国环境艺术设计展览征稿通知.json"
     },
     {
       "id": "search-physics-第一届天津市大中小学国防教育主题绘画作品征集活动",
@@ -19580,7 +19831,8 @@
         "disciplines": "1u0sfgg"
       },
       "cover": "assets/covers/b8c6f783c834df72.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-physics-第一届天津市大中小学国防教育主题绘画作品征集活动.json"
     },
     {
       "id": "search-ai-第一届天津市大中小学国防教育主题绘画作品征集活动",
@@ -19650,7 +19902,8 @@
         "disciplines": "1u0sfgg"
       },
       "cover": "assets/covers/346b3d8ea021cc67.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-ai-第一届天津市大中小学国防教育主题绘画作品征集活动.json"
     },
     {
       "id": "search-syxy-首届-天地新视界-地铁艺术展览-作品征集通知",
@@ -19730,7 +19983,8 @@
         "disciplines": "ybizgr"
       },
       "cover": "assets/covers/a90a0d6bd28a99e1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-syxy-首届-天地新视界-地铁艺术展览-作品征集通知.json"
     },
     {
       "id": "search-hbshy-关于举办-翰墨童心-放飞梦想-第六届河北省少儿书画作品展征集活动的通知",
@@ -19827,7 +20081,8 @@
         "country": "3tz79",
         "age_limit": "1nv2xoz",
         "disciplines": "12hpodh"
-      }
+      },
+      "fulltext": "data/fulltext/search-hbshy-关于举办-翰墨童心-放飞梦想-第六届河北省少儿书画作品展征集活动的通知.json"
     },
     {
       "id": "search-whly-大美河北全省美术摄影非遗主题展作品征集",
@@ -19901,7 +20156,8 @@
         "disciplines": "117mkny"
       },
       "cover": "assets/covers/2183293178d09ed0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-whly-大美河北全省美术摄影非遗主题展作品征集.json"
     },
     {
       "id": "search-whly-第十四届全国美展河北省选送作品暨庆祝中华人民共和国成立七十五周年河北省优秀美术作",
@@ -20000,7 +20256,8 @@
         "org": "1m1i8k9",
         "country": "3tz79",
         "disciplines": "1n19xk6"
-      }
+      },
+      "fulltext": "data/fulltext/search-whly-第十四届全国美展河北省选送作品暨庆祝中华人民共和国成立七十五周年河北省优秀美术作.json"
     },
     {
       "id": "search-hebtu-关于征集河北省第八届大学生艺术展演作品的通知",
@@ -20088,7 +20345,8 @@
         "city": "39malg",
         "country": "3tz79",
         "disciplines": "8bt0yf"
-      }
+      },
+      "fulltext": "data/fulltext/search-hebtu-关于征集河北省第八届大学生艺术展演作品的通知.json"
     },
     {
       "id": "search-jgxy-关于组织参与河北省第八届大学生艺术展演活动的通知",
@@ -20178,7 +20436,8 @@
         "disciplines": "1b70kk7"
       },
       "cover": "assets/covers/f29f8f077f67f72f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-jgxy-关于组织参与河北省第八届大学生艺术展演活动的通知.json"
     },
     {
       "id": "search-yjsy-第七届河北省研究生艺术创意大赛初赛",
@@ -20248,7 +20507,8 @@
         "disciplines": "yavfb6"
       },
       "cover": "assets/covers/9de49de82e5ef031.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-yjsy-第七届河北省研究生艺术创意大赛初赛.json"
     },
     {
       "id": "search-bjiad-东方精神-2026-当代漆艺术作品展",
@@ -20318,7 +20578,8 @@
         "disciplines": "1s4oahr"
       },
       "cover": "assets/covers/6d85dcc0791a0e5b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-bjiad-东方精神-2026-当代漆艺术作品展.json"
     },
     {
       "id": "search-caanet-第十届中国北京国际美术双年展",
@@ -20396,7 +20657,8 @@
         "disciplines": "1dyio9s"
       },
       "cover": "assets/covers/3c1eb41de42977c4.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-caanet-第十届中国北京国际美术双年展.json"
     },
     {
       "id": "search-whlyj-2024年全国美术馆青年策展人扶持计划",
@@ -20466,7 +20728,8 @@
         "disciplines": "1tl8y1s"
       },
       "cover": "assets/covers/fea2ab31fdd0b097.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-whlyj-2024年全国美术馆青年策展人扶持计划.json"
     },
     {
       "id": "search-en-研究与艺术驻留申请",
@@ -20538,7 +20801,8 @@
         "disciplines": "mddfn2"
       },
       "cover": "assets/covers/1c4470e4ec83e2a5.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-en-研究与艺术驻留申请.json"
     },
     {
       "id": "search-beijingdangdaiartfair-2026年北京当代-艺术博览会参展申请",
@@ -20604,7 +20868,8 @@
         "deadline_note": "12uslc5"
       },
       "cover": "assets/covers/a4455d9e15942442.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "fulltext": "data/fulltext/search-beijingdangdaiartfair-2026年北京当代-艺术博览会参展申请.json"
     },
     {
       "id": "search-eguangzhou-第五届粤港澳大湾区文化艺术节公开征集",
@@ -20670,7 +20935,8 @@
         "summary": "1yrnuht",
         "org": "c8a82",
         "disciplines": "16sq1ht"
-      }
+      },
+      "fulltext": "data/fulltext/search-eguangzhou-第五届粤港澳大湾区文化艺术节公开征集.json"
     },
     {
       "id": "search-whlyj-北京文化艺术基金2024年度艺术人才培养项目申报公告",
@@ -20721,7 +20987,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-whlyj-北京文化艺术基金2024年度艺术人才培养项目申报公告.json"
     },
     {
       "id": "search-goethe-驻留项目",
@@ -20764,7 +21031,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-goethe-驻留项目.json"
     },
     {
       "id": "search-syartmuseum-上苑艺术馆国际创作计划驻馆艺术家申请",
@@ -20820,7 +21088,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-syartmuseum-上苑艺术馆国际创作计划驻馆艺术家申请.json"
     },
     {
       "id": "search-yi-projectspace-北京艺术家驻留项目",
@@ -20865,7 +21134,8 @@
       "verified_at": null,
       "last_seen": "2026-07-15",
       "updated_at": "2026-07-15",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-yi-projectspace-北京艺术家驻留项目.json"
     },
     {
       "id": "search-arthing-艺术驻留-征集-open-call-2025-03",
@@ -20908,7 +21178,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-arthing-艺术驻留-征集-open-call-2025-03.json"
     },
     {
       "id": "search-chongqingdac-十方青年策展人計劃",
@@ -20953,7 +21224,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-chongqingdac-十方青年策展人計劃.json"
     },
     {
       "id": "search-chongqingdac-2026-open-call-十方藝術中心",
@@ -21003,7 +21275,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-chongqingdac-2026-open-call-十方藝術中心.json"
     },
     {
       "id": "search-zjam-浙江美术馆展览申请",
@@ -21051,7 +21324,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-zjam-浙江美术馆展览申请.json"
     },
     {
       "id": "search-britishcouncil-2x2艺术驻留-中国大陆地区残障艺术家招募",
@@ -21137,7 +21411,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-innart-inna-studio-visit-2026.json"
     },
     {
       "id": "search-hzqjam-杭州钱江美术馆展览申请",
@@ -21185,7 +21460,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-hzqjam-杭州钱江美术馆展览申请.json"
     },
     {
       "id": "search-byicaa-byicaa国际艺术家驻留项目",
@@ -21240,7 +21516,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-byicaa-byicaa国际艺术家驻留项目.json"
     },
     {
       "id": "search-reviewedbyartists-北京艺术家驻留项目",
@@ -21293,7 +21570,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-reviewedbyartists-北京艺术家驻留项目.json"
     },
     {
       "id": "search-hk-威尼斯视艺双年展实习计划2026",
@@ -21341,7 +21619,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-hk-威尼斯视艺双年展实习计划2026.json"
     },
     {
       "id": "search-hkac-公開徵集-hkac-creators-for-tomorrow-2024",
@@ -21384,7 +21663,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-hkac-公開徵集-hkac-creators-for-tomorrow-2024.json"
     },
     {
       "id": "search-hongkongartscollective-第二届香港西源里绘画展",
@@ -21489,7 +21769,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-rivet-2025年春季香港艺术家驻留.json"
     },
     {
       "id": "search-info-香港视觉艺术中心-va-艺术家驻留计划-公开征集提案",
@@ -21536,7 +21817,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-info-香港视觉艺术中心-va-艺术家驻留计划-公开征集提案.json"
     },
     {
       "id": "search-lib-深耕地域文化-彰显时代精神-美术作品征集活动",
@@ -21583,7 +21865,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-lib-深耕地域文化-彰显时代精神-美术作品征集活动.json"
     },
     {
       "id": "search-ky-三农-题材新大众文艺作品征集展示活动",
@@ -21634,7 +21917,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-ky-三农-题材新大众文艺作品征集展示活动.json"
     },
     {
       "id": "search-artspoon-第二届-meri-art-征集展",
@@ -21684,7 +21968,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-artspoon-第二届-meri-art-征集展.json"
     },
     {
       "id": "search-miniprint-阿波和纸国际微型版画展作品征集",
@@ -21729,7 +22014,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-miniprint-阿波和纸国际微型版画展作品征集.json"
     },
     {
       "id": "search-m-第二十五届全国版画作品展征稿",
@@ -21774,7 +22060,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-m-第二十五届全国版画作品展征稿.json"
     },
     {
       "id": "search-accr-europe-文化交流中心驻留项目",
@@ -21817,7 +22104,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-accr-europe-文化交流中心驻留项目.json"
     },
     {
       "id": "search-wlt-第四届山西省文化创意设计大赛",
@@ -21909,7 +22197,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-yishujs-第六届山西省文化创意设计大赛.json"
     },
     {
       "id": "search-m-首届山西省文化创意设计大赛",
@@ -21959,7 +22248,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-m-首届山西省文化创意设计大赛.json"
     },
     {
       "id": "search-peopleapp-第六届山西省文化创意设计大赛",
@@ -22004,7 +22294,8 @@
       "verified_at": null,
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
-      "_via": "search"
+      "_via": "search",
+      "fulltext": "data/fulltext/search-peopleapp-第六届山西省文化创意设计大赛.json"
     }
   ]
 }
