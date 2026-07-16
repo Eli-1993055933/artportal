@@ -57,7 +57,7 @@
   --radius-sm:     8px;
   --shadow:        0 1px 2px rgba(0,0,0,.03), 0 1px 3px rgba(0,0,0,.02);
   --shadow-pop:    0 8px 30px rgba(0,0,0,.12);
-  --maxw:          1240px;
+  --maxw:          1480px;   /* 参考 Behance/ArtStation:大屏更宽的内容容器,配 auto-fill 网格提升信息密度 */
   --gap:           20px;
   --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
           "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
@@ -281,7 +281,9 @@ img { max-width: 100%; display: block; }
 
 /* ---------- 列表网格 ---------- */
 .main { max-width: var(--maxw); margin: 0 auto; padding: 20px 24px 40px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+/* 流式网格(学 Behance/ArtStation):每列最小 250px,窗口多宽铺多少列,任何宽度都铺满不留白。
+   1480 容器 ≈ 5 列、1240 ≈ 4 列、笔记本 ≈ 4 列;手机端在 @767 覆盖为固定两列。 */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
 
 /* ---------- 卡片 ---------- */
 .card {
@@ -520,6 +522,26 @@ img { max-width: 100%; display: block; }
 .ppage__empty { color: var(--ink-3); padding: 34px 0; font-size: 13.5px; text-align: center; }
 .pe-hint { margin: -6px 0 8px; font-size: 11.5px; color: var(--ink-3); }
 .pe-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+
+/* ---------- 头像裁剪器(拖动选位置 + 滑杆缩放) ---------- */
+.cropper { z-index: 96; }                            /* 压在资料弹窗(z=90)之上 */
+.cropper__panel { width: min(344px, calc(100vw - 32px)); }
+.cropper__canvas { display: block; width: 280px; max-width: 100%; margin: 0 auto 12px; border-radius: 12px; background: var(--line); cursor: move; touch-action: none; }
+.cropper__zoom { width: 100%; margin: 0 0 14px; accent-color: var(--ink); }
+.cropper__btns { display: flex; gap: 8px; }
+.cropper__btns .btn { flex: 1; min-height: 40px; }
+
+/* 手机端投稿悬浮按钮(顶栏放不下,改右下角 ➕;桌面仍用顶栏按钮) */
+.submit-fab { display: none; }
+@media (max-width: 767px) {
+  .submit-fab {
+    display: flex; align-items: center; justify-content: center;
+    position: fixed; right: 16px; bottom: calc(22px + env(safe-area-inset-bottom));
+    width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--ink); color: var(--on-ink); font-size: 26px; line-height: 1;
+    box-shadow: var(--shadow-pop); z-index: 35;      /* 低于顶栏(40)与详情/主页覆盖层 */
+  }
+}
 @media (max-width: 767px) {
   .ppage__inner { padding: 14px 16px 48px; }
   .ppage__ava { width: 64px; height: 64px; }
@@ -540,9 +562,8 @@ img { max-width: 100%; display: block; }
    响应式:三端适配(需求第七节,非缩放)
    ============================================================ */
 
-/* 平板 768–1199:两列,更多筛选默认折叠(JS 控制 hidden) */
+/* 平板 768–1199:列数交给 auto-fill 网格自适应,这里只收紧左右留白 */
 @media (max-width: 1199px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
   .topbar__inner, .controls__inner, .main, .sitefoot__note, .morefilters__panel { padding-left: 20px; padding-right: 20px; }
 }
 
@@ -561,6 +582,17 @@ img { max-width: 100%; display: block; }
   #favToggleBtn .fav-text { display: none; }        /* 手机上收藏只留♡+数字 */
   .lang-switch { padding: 0 7px !important; }
   .theme-toggle { min-width: 38px; }                /* 日/夜按钮手机上收窄,360px 顶栏也放得下 */
+  /* 顶栏溢出治本:提交机会移出顶栏,改右下角悬浮 ➕(小红书式);其余按钮全面收紧,
+     登录态(头像+昵称最宽)在 360px 宽也放得下 */
+  #submitBtn { display: none; }
+  .topbar__actions { gap: 4px; }
+  .topbar__actions .btn { padding: 0 6px; }
+  .lang-switch { padding: 0 5px !important; font-size: 12px; }
+  .theme-toggle { min-width: 34px; }
+  /* 登录后只显示头像(小红书式):有头像时藏昵称文字,按钮缩成圆头像 */
+  .auth-btn { max-width: 80px; }
+  .auth-btn .auth-avatar { margin-right: 0; width: 24px; height: 24px; }
+  .auth-btn .auth-avatar + .auth-btn__name { display: none; }
 
   /* 手机:频道导航吸顶在 topbar 下,控制区再往下(数值对齐实测 topbar≈60、频道≈37) */
   .channels { top: 60px; }

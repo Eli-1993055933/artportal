@@ -105,6 +105,8 @@
       peWebsitePh: "个人网站(选填,https:// 开头)",
       peFavPub: "公开我的收藏(他人可在我的主页看到)",
       peErrWebsite: "个人网站需以 http(s):// 开头", peDone: "资料已保存",
+      crTitle: "调整头像", crHint: "拖动图片调整位置,滑杆放大缩小;圈内为最终头像。",
+      crZoom: "缩放", crOk: "确定",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -210,6 +212,8 @@
       peWebsitePh: "Website (optional, starts with https://)",
       peFavPub: "Make my saved items public on my page",
       peErrWebsite: "Website must start with http(s)://", peDone: "Saved",
+      crTitle: "Adjust avatar", crHint: "Drag to reposition, slide to zoom. The circle is your final avatar.",
+      crZoom: "Zoom", crOk: "Done",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

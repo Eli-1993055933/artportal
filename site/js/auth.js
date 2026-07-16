@@ -276,7 +276,10 @@
         im.className = "auth-avatar"; im.alt = ""; im.src = user.avatar;
         btn.appendChild(im);
       }
-      btn.appendChild(document.createTextNode(label));
+      var nm = document.createElement("span");   // 名字包进 span:手机端有头像时 CSS 隐藏文字只留头像
+      nm.className = "auth-btn__name";
+      nm.textContent = label;
+      btn.appendChild(nm);
       btn.removeAttribute("data-i18n");
     } else {
       btn.textContent = AP.t("authLoginBtn");
@@ -359,7 +362,7 @@
     document.getElementById("pfForm").addEventListener("submit", onProfileSubmit);
     return el;
   }
-  // 头像统一 256×256 JPEG:上传图居中裁方再压缩
+  // 头像统一 256×256 JPEG:上传图居中裁方再压缩(裁剪器的兜底,也供旧调用)
   function drawSquare(img) {
     var c = document.createElement("canvas"); c.width = 256; c.height = 256;
     var g = c.getContext("2d");
@@ -367,18 +370,104 @@
     g.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 256, 256);
     return c.toDataURL("image/jpeg", 0.82);
   }
+
+  // ---------- 头像裁剪器:拖动选取位置 + 滑杆缩放,圆形取景参考线,输出 256px JPEG ----------
+  // 资料补全弹窗与"编辑资料"(profile.js)共用;鼠标/触屏都可拖。
+  var CROP_V = 280;                                   // 取景框边长(canvas 分辨率;显示宽随屏收缩)
+  function openCropper(img, done) {
+    var old = document.getElementById("cropModal");
+    if (old) old.remove();
+    var el = document.createElement("div");
+    el.className = "auth cropper"; el.id = "cropModal";
+    el.innerHTML =
+      '<div class="auth__scrim"></div>' +
+      '<div class="auth__panel cropper__panel" role="dialog" aria-modal="true">' +
+        '<h2 class="auth__title">' + esc(AP.t("crTitle")) + '</h2>' +
+        '<p class="auth__note">' + esc(AP.t("crHint")) + '</p>' +
+        '<canvas class="cropper__canvas" id="cropCanvas" width="' + CROP_V + '" height="' + CROP_V + '"></canvas>' +
+        '<input type="range" class="cropper__zoom" id="cropZoom" min="100" max="300" value="100" aria-label="' + esc(AP.t("crZoom")) + '" />' +
+        '<div class="cropper__btns">' +
+          '<button type="button" class="btn btn--ghost" id="cropCancel">' + esc(AP.t("aiCancel")) + '</button>' +
+          '<button type="button" class="btn btn--dark" id="cropOk">' + esc(AP.t("crOk")) + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(el);
+    var cv = document.getElementById("cropCanvas"), g = cv.getContext("2d");
+    var cover = Math.max(CROP_V / img.width, CROP_V / img.height);   // 最小缩放=铺满取景框
+    var scale = cover;
+    var ox = (CROP_V - img.width * scale) / 2, oy = (CROP_V - img.height * scale) / 2;
+    function clamp() {   // 图片任何时候都盖满取景框,不留白边
+      ox = Math.min(0, Math.max(CROP_V - img.width * scale, ox));
+      oy = Math.min(0, Math.max(CROP_V - img.height * scale, oy));
+    }
+    function draw() {
+      g.clearRect(0, 0, CROP_V, CROP_V);
+      g.drawImage(img, ox, oy, img.width * scale, img.height * scale);
+      // 圆形取景参考:头像最终是圆的,圈外压暗提示会被裁掉(只画在预览,不影响输出)
+      g.fillStyle = "rgba(0,0,0,.38)";
+      g.beginPath();
+      g.rect(0, 0, CROP_V, CROP_V);
+      g.arc(CROP_V / 2, CROP_V / 2, CROP_V / 2 - 1, 0, Math.PI * 2, true);
+      g.fill("evenodd");
+    }
+    clamp(); draw();
+    document.getElementById("cropZoom").addEventListener("input", function () {
+      var ns = cover * (Number(this.value) / 100);
+      // 围绕取景框中心缩放:中心处的原图像素保持不动
+      ox = CROP_V / 2 - (CROP_V / 2 - ox) * (ns / scale);
+      oy = CROP_V / 2 - (CROP_V / 2 - oy) * (ns / scale);
+      scale = ns;
+      clamp(); draw();
+    });
+    // 拖动(鼠标 + 触屏)。canvas 显示宽可能被压缩,位移按分辨率/显示宽换算。
+    var drag = null, pxRatio = 1;
+    function start(x, y) { pxRatio = CROP_V / cv.getBoundingClientRect().width; drag = { x: x, y: y }; }
+    function move(x, y) {
+      if (!drag) return;
+      ox += (x - drag.x) * pxRatio; oy += (y - drag.y) * pxRatio;
+      drag = { x: x, y: y };
+      clamp(); draw();
+    }
+    function onMouseMove(e) { move(e.clientX, e.clientY); }
+    function onMouseUp() { drag = null; }
+    cv.addEventListener("mousedown", function (e) { e.preventDefault(); start(e.clientX, e.clientY); });
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    cv.addEventListener("touchstart", function (e) { if (e.touches.length === 1) { e.preventDefault(); start(e.touches[0].clientX, e.touches[0].clientY); } }, { passive: false });
+    cv.addEventListener("touchmove", function (e) { if (e.touches.length === 1) { e.preventDefault(); move(e.touches[0].clientX, e.touches[0].clientY); } }, { passive: false });
+    cv.addEventListener("touchend", function () { drag = null; });
+    function cleanup() {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      el.remove();
+    }
+    document.getElementById("cropCancel").addEventListener("click", cleanup);
+    el.querySelector(".auth__scrim").addEventListener("click", cleanup);
+    document.getElementById("cropOk").addEventListener("click", function () {
+      var out = document.createElement("canvas"); out.width = 256; out.height = 256;
+      var k = 256 / CROP_V;
+      out.getContext("2d").drawImage(img, ox * k, oy * k, img.width * scale * k, img.height * scale * k);
+      cleanup();
+      done(out.toDataURL("image/jpeg", 0.84));
+    });
+  }
+
   function onAvatarPick() {
-    var f = document.getElementById("pfFile").files[0];
+    var input = document.getElementById("pfFile");
+    var f = input.files[0];
     var err = document.getElementById("pfErr");
     if (!f) return;
+    input.value = "";                                  // 允许下次重选同一文件
     if (!/^image\//.test(f.type)) { err.textContent = AP.t("pfErrImg"); return; }
     var url = URL.createObjectURL(f);
     var img = new Image();
     img.onload = function () {
       URL.revokeObjectURL(url);
-      avatarData = drawSquare(img);
-      var p = document.getElementById("pfPrev"); p.src = avatarData; p.classList.add("has");
-      err.textContent = "";
+      openCropper(img, function (dataURL) {            // 用户自己调位置与大小
+        avatarData = dataURL;
+        var p = document.getElementById("pfPrev"); p.src = avatarData; p.classList.add("has");
+        err.textContent = "";
+      });
     };
     img.onerror = function () { URL.revokeObjectURL(url); err.textContent = AP.t("pfErrImg"); };
     img.src = url;
@@ -439,7 +528,8 @@
     current: function () { return user; },                      // 当前登录用户(含自己的公开资料字段)
     apply: function (u) { user = u; updateTopbar(); },          // 编辑资料保存后同步登录态与顶栏
     openLogin: function (note) { openModal("login", note || null); },
-    squareFromImg: drawSquare,                                  // 图片 → 居中裁方 256px JPEG dataURL
+    squareFromImg: drawSquare,                                  // 图片 → 居中裁方 256px JPEG dataURL(兜底)
+    openCropper: openCropper,                                   // 头像裁剪器(拖动+缩放选范围)
     makeAvatar: makeAvatar                                      // 昵称 → 默认头像 dataURL
   };
 

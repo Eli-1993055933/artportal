@@ -187,13 +187,16 @@
     document.getElementById("peFile").addEventListener("change", function () {
       var f = this.files[0], err = document.getElementById("peErr");
       if (!f) return;
+      this.value = "";                                 // 允许下次重选同一文件
       if (!/^image\//.test(f.type)) { err.textContent = AP.t("pfErrImg"); return; }
       var url = URL.createObjectURL(f), img = new Image();
       img.onload = function () {
         URL.revokeObjectURL(url);
-        newAvatar = AP.auth.squareFromImg(img);
-        document.getElementById("pePrev").src = newAvatar;
-        err.textContent = "";
+        AP.auth.openCropper(img, function (dataURL) {  // 拖动+缩放自选裁剪范围
+          newAvatar = dataURL;
+          document.getElementById("pePrev").src = newAvatar;
+          err.textContent = "";
+        });
       };
       img.onerror = function () { URL.revokeObjectURL(url); err.textContent = AP.t("pfErrImg"); };
       img.src = url;

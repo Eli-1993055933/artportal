@@ -3,7 +3,7 @@
   "use strict";
   var AP = window.AP;
   var F = AP.format;
-  var PAGE = 24;
+  var PAGE = 30;   // 流式网格桌面可达 5 列,首屏批次相应加大
 
   var $ = function (id) { return document.getElementById(id); };
   var allData = [], filtered = [], rendered = 0;
@@ -34,7 +34,7 @@
 
   function buildSkeleton() {
     var html = "";
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 10; i++) {
       html += '<div class="skel-card"><div class="skel-media"></div><div class="skel-line"></div><div class="skel-line sh"></div></div>';
     }
     skeleton.innerHTML = html;
@@ -363,11 +363,13 @@
       if (AP.profilePage) AP.profilePage.refresh();   // 用户主页开着 → 按新语言重渲
     });
 
-    // 提交机会:站内投稿表单(登录 → 填写 → 审核通过后发布)
+    // 提交机会:站内投稿表单(登录 → 填写 → 审核通过后发布);手机端为右下角悬浮 ➕
     $("submitBtn").addEventListener("click", function (e) {
       e.preventDefault();
       if (AP.submitForm) AP.submitForm.open();
     });
+    var fab = $("submitFab");
+    if (fab) fab.addEventListener("click", function () { if (AP.submitForm) AP.submitForm.open(); });
 
     // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用)
     var aiBtn = $("aiSearchBtn");
