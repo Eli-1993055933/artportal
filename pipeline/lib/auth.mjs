@@ -174,12 +174,23 @@ export function logout(req) {
 
 export function me(req) {
   const u = userOf(req);
+  let headers = null;
   if (u) {
     markOnline("user:" + u.id, "user", u.email);
     // last_seen 落盘限流:5 分钟一次,避免每次心跳都写文件
     if (Date.now() - Date.parse(u.last_seen || 0) > 5 * 60 * 1000) { u.last_seen = new Date().toISOString(); saveUsers(); }
+    // 会话滑动续期:原来 180 天从"首次登录"起算且 cookie 不刷新,活跃老用户会莫名掉线
+    // → 被注册墙拦(bug 报告:已登录还被要求注册)。现在每天首次访问就把会话与 cookie
+    // 一起顺延 180 天,常来的用户永不过期;半年不来的才需要重新登录。
+    const token = cookieOf(req, "ap_sess");
+    const s = token ? sessions.get(token) : null;
+    if (s && Date.now() - s.created_at > 24 * 3600 * 1000) {
+      s.created_at = Date.now();
+      saveSessions();
+      headers = { "Set-Cookie": sessionCookie(token) };
+    }
   }
-  return { code: 200, body: { user: u ? publicUser(u) : null } };
+  return { code: 200, body: { user: u ? publicUser(u) : null }, ...(headers ? { headers } : {}) };
 }
 
 export function setFavorites(req, ids) {

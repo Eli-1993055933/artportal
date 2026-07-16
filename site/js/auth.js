@@ -24,7 +24,7 @@
       method: "POST", credentials: "same-origin",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data || {})
-    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); });
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, status: r.status, data: j }; }); });
   }
   function toast(msg) {
     var t = document.getElementById("toast");
@@ -36,6 +36,15 @@
   }
   function clicksUsed() { try { return parseInt(localStorage.getItem("ap_ow") || "0", 10) || 0; } catch (e) { return 0; } }
   function useClick() { try { localStorage.setItem("ap_ow", String(clicksUsed() + 1)); } catch (e) {} }
+  // 会话确认成立时调用:记住"这台设备登录过谁"(下次掉线弹墙直接给登录页+预填邮箱),
+  // 并清零免费点击计数(将来若 cookie 丢失,至少还有 3 次缓冲,不会一点就撞墙)。
+  function rememberAuthed(u) {
+    try {
+      if (u && u.email) localStorage.setItem("ap_email", u.email);
+      localStorage.setItem("ap_ow", "0");
+    } catch (e) {}
+  }
+  function knownEmail() { try { return localStorage.getItem("ap_email") || ""; } catch (e) { return ""; } }
 
   // ---------- 注册墙:捕获阶段拦「前往官网」 ----------
   document.addEventListener("click", function (e) {
@@ -54,8 +63,36 @@
     }
     e.preventDefault(); e.stopPropagation();
     pendingUrl = href;
-    openModal("register", AP.t("gateWallMsg"));
+    openGateWall();
   }, true);
+
+  // 弹墙(修 bug:已登录用户被误拦):
+  // ① 这台设备登录过 → 直接给登录页并预填邮箱(输密码就走),不再让人"再注册一遍";
+  // ② 弹墙同时向后端复核一次会话——首屏 /me 请求在弱网下失败/超时会把已登录用户误判成
+  //    匿名,复核确认在登录就立刻撤墙,换成"前往官网"按钮(保留真实手势,弹窗不被拦)。
+  function openGateWall() {
+    var em = knownEmail();
+    if (em) {
+      openModal("login", AP.t("gateWelcomeBack"));
+      var input = document.getElementById("authEmail");
+      if (input) { input.value = em; }
+      setTimeout(function () { var pw = document.getElementById("authPw"); if (pw) pw.focus(); }, 60);
+    } else {
+      openModal("register", AP.t("gateWallMsg"));
+    }
+    fetch("/api/auth/me", { credentials: "same-origin" })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!(j && j.user)) return;
+        user = j.user; sessionReady = true;
+        rememberAuthed(user);
+        updateTopbar();
+        var go = pendingUrl; pendingUrl = null;
+        var modal = document.getElementById("authModal");
+        if (go && modal && !modal.hidden) showGoStep(go, AP.t("authWelcomeBack"));
+      })
+      .catch(function () {});
+  }
 
   // ---------- 弹窗 ----------
   var PANEL_HTML =
@@ -141,7 +178,18 @@
     post(mode === "register" ? "/api/auth/register" : "/api/auth/login", { email: email, password: pw })
       .then(function (r) {
         btn.disabled = false;
-        if (!r.ok) { err.textContent = r.data && r.data.error ? r.data.error : AP.t("authNetErr"); return; }
+        if (!r.ok) {
+          // 已有账号的用户在注册页提交(409)→ 自动切到登录页,邮箱保留、光标进密码框,
+          // 不让人卡在"该邮箱已注册"干瞪眼(bug 报告的另一half:被要求"再注册一遍")
+          if (mode === "register" && r.status === 409) {
+            setMode("login");
+            document.getElementById("authErr").textContent = (r.data && r.data.error) || "";
+            var pwEl = document.getElementById("authPw"); if (pwEl) pwEl.focus();
+            return;
+          }
+          err.textContent = r.data && r.data.error ? r.data.error : AP.t("authNetErr");
+          return;
+        }
         onAuthed(r.data.user, mode === "register");
       })
       .catch(function () { btn.disabled = false; err.textContent = AP.t("authNetErr"); });
@@ -149,22 +197,23 @@
 
   function onAuthed(u, isNew) {
     user = u;
+    rememberAuthed(u);             // 记住设备登录过 + 清零免费点击计数
     mergeFavoritesOnLogin(u);      // 显式登录/注册:把匿名期攒的本地收藏并入账号(迁移时机)
     updateTopbar();
     var go = pendingUrl; pendingUrl = null;
     toast(isNew ? AP.t("authWelcomeNew") : AP.t("authWelcomeBack"));
     // 注册墙场景:不能在 fetch 回调里 window.open(微信/iOS 会拦弹窗)。
     // 改成弹窗内放一个真链接按钮,由用户亲手点击(真实手势)打开官网。
-    if (go) { showGoStep(go); return; }
+    if (go) { showGoStep(go, isNew ? AP.t("authWelcomeNew") : AP.t("authWelcomeBack")); return; }
     var el = document.getElementById("authModal");
     if (el) el.hidden = true;
   }
-  function showGoStep(url) {
+  function showGoStep(url, title) {
     var panel = document.querySelector("#authModal .auth__panel");
     if (!panel) { window.open(url, "_blank", "noopener"); return; }
     panel.innerHTML =
       '<button class="auth__close" id="authClose2" type="button" aria-label="关闭">✕</button>' +
-      '<h2 class="auth__title">' + esc(AP.t("authWelcomeNew")) + '</h2>' +
+      '<h2 class="auth__title">' + esc(title || AP.t("authWelcomeBack")) + '</h2>' +
       '<p class="auth__note">' + esc(AP.t("gateGoNote")) + '</p>' +
       '<a class="btn btn--dark auth__submit" id="authGo" href="' + esc(url) + '" target="_blank" rel="noopener" style="display:flex;text-decoration:none">' + esc(AP.t("gateGoBtn")) + '</a>';
     document.getElementById("authClose2").addEventListener("click", closeModal);
@@ -238,6 +287,7 @@
     out.addEventListener("click", function () {
       post("/api/auth/logout", {}).then(function () {
         user = null; updateTopbar();
+        try { localStorage.removeItem("ap_email"); } catch (e) {}   // 主动退出=不再替这台设备记邮箱(共用电脑不泄露)
         // 清空本地收藏,防同一浏览器换账号登录时把上个账号的收藏并进来(跨账号串号)
         AP.favorites.replaceAll([]);
         var fc = document.getElementById("favCount"); if (fc) { fc.textContent = "0"; fc.hidden = true; }
@@ -268,7 +318,7 @@
       .then(function (j) {
         user = j && j.user ? j.user : null;
         sessionReady = true;
-        if (user) adoptFavorites(user);
+        if (user) { rememberAuthed(user); adoptFavorites(user); }   // 会话有效:记住设备+清零计数
         updateTopbar();
       })
       .catch(function () { sessionReady = true; updateTopbar(); });
