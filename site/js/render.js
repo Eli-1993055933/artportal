@@ -152,7 +152,7 @@
         '<div class="card__meta"><span class="m-org">' + esc(n.source || "") + '</span>' + date + '</div>' +
         viaChip(n) +
         '<div class="card__foot">' +
-          '<button class="btn btn--ghost" type="button" data-act="pagetrans" data-url="' + esc(F.safeUrl(n.url)) + '">' + AP.t("transQuick") + '</button>' +
+          '<button class="btn btn--ghost" type="button" data-act="pagetrans" data-url="' + esc(F.safeUrl(n.url)) + '" data-fulltext="' + esc(n.fulltext || "") + '">' + AP.t("transQuick") + '</button>' +
           '<a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a>' +
         '</div>' +
       '</div>';
@@ -184,7 +184,7 @@
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         viaChip(j) +
         '<div class="card__foot">' +
-          '<button class="btn btn--ghost" type="button" data-act="pagetrans" data-url="' + esc(apply) + '">' + AP.t("transQuick") + '</button>' +
+          '<button class="btn btn--ghost" type="button" data-act="pagetrans" data-url="' + esc(apply) + '" data-fulltext="' + esc(j.fulltext || "") + '">' + AP.t("transQuick") + '</button>' +
           '<a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a>' +
         '</div>' +
       '</div>';
@@ -283,9 +283,9 @@
       provNote +
       mtNote +
       summaryHtml +
-      // 简介下的「详情」小按钮:弹出官网完整介绍(实时抓官网正文,跟随界面语言翻译)
+      // 简介下的「详情」小按钮:弹出官网未精简的原文(入库存档秒开;老数据实时抓兜底)
       (official
-        ? '<div class="d-morewrap"><button class="btn btn--ghost d-more-btn" data-act="pagetrans" data-url="' + esc(official) + '" type="button">' + esc(AP.t("detailMore")) + ' ▸</button></div>'
+        ? '<div class="d-morewrap"><button class="btn btn--ghost d-more-btn" data-act="pagetrans" data-url="' + esc(official) + '" data-fulltext="' + esc(o.fulltext || "") + '" type="button">' + esc(AP.t("detailMore")) + ' ▸</button></div>'
         : '') +
       '<div class="d-fields">' +
         row(AP.t("dOrg"), esc(F.loc(o, "org")) || muted(AP.t("notStated"))) +

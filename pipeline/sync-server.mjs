@@ -69,11 +69,19 @@ export function mergeLists(localList, remoteList, urlOf) {
   return { list: out, stats: { fromRemote, addedFromLocal: fromLocal, localWonOnConflict: replaced, urlDropped } };
 }
 function pickWinner(l, r) {
+  let win, lose;
   // 人工核实的记录绝不被自动记录顶掉
-  if (r.trust === "verified" && l.trust !== "verified") return r;
-  if (l.trust === "verified" && r.trust !== "verified") return l;
-  const key = o => String(o.updated_at || o.added_at || o.last_seen || "");
-  return key(r) > key(l) ? r : l;   // 新者胜;平手偏本地(本地有夜间增强)
+  if (r.trust === "verified" && l.trust !== "verified") { win = r; lose = l; }
+  else if (l.trust === "verified" && r.trust !== "verified") { win = l; lose = r; }
+  else {
+    const key = o => String(o.updated_at || o.added_at || o.last_seen || "");
+    win = key(r) > key(l) ? r : l;   // 新者胜;平手偏本地(本地有夜间增强)
+    lose = win === r ? l : r;
+  }
+  // 单侧独有的增强字段(封面/原文存档)嫁接给胜者,不因合并丢失
+  if (!win.cover && lose.cover) { win.cover = lose.cover; win.cover_source = lose.cover_source; }
+  if (!win.fulltext && lose.fulltext) win.fulltext = lose.fulltext;
+  return win;
 }
 
 async function readJsonStrict(path) {
@@ -111,23 +119,27 @@ async function syncChannel(ch) {
   ssh(`cp ${RBASE}/site/data/${ch.file} ${RBASE}/site/data/${ch.file}.bak && mv /tmp/merged-${ch.file} ${RBASE}/site/data/${ch.file}`);
 }
 
-// 封面增量上传:只传服务器没有的截图
-async function syncCovers() {
-  const dir = join(SITE, "assets", "covers");
+// 目录增量上传:只传服务器没有的文件(封面截图、原文存档共用)
+async function syncDir(relDir, ext, label) {
+  const dir = join(SITE, "..", relDir);
   let localFiles;
-  try { localFiles = (await readdir(dir)).filter(f => f.endsWith(".jpg")); } catch (e) { return console.log("[covers] 本地无封面目录,跳过"); }
-  const remoteSet = new Set(ssh(`ls ${RBASE}/site/assets/covers 2>/dev/null || true`).split("\n").map(s => s.trim()).filter(Boolean));
+  try { localFiles = (await readdir(dir)).filter(f => f.endsWith(ext)); } catch (e) { return console.log(`[${label}] 本地无目录,跳过`); }
+  const remoteSet = new Set(ssh(`ls ${RBASE}/${relDir} 2>/dev/null || true`).split("\n").map(s => s.trim()).filter(Boolean));
   const missing = localFiles.filter(f => !remoteSet.has(f));
-  console.log(`[covers] 本地 ${localFiles.length} 张,服务器缺 ${missing.length} 张`);
+  console.log(`[${label}] 本地 ${localFiles.length} 个,服务器缺 ${missing.length} 个`);
   if (!missing.length || DRY) return;
-  const listFile = join(TMP, "covers-list.txt");
-  await writeFile(listFile, missing.map(f => "site/assets/covers/" + f).join("\n"), "utf8");
-  const tarFile = join(TMP, "covers.tar.gz");
-  execFileSync("tar", ["czf", tarFile, "-C", join(SITE, ".."), "-T", listFile], { timeout: 300000 });
-  scpUp(tarFile, "/tmp/covers-sync.tar.gz");
-  ssh(`cd ${RBASE} && tar xzf /tmp/covers-sync.tar.gz && rm /tmp/covers-sync.tar.gz && mkdir -p site/assets/covers`);
-  console.log(`[covers] 已补传 ${missing.length} 张`);
+  const listFile = join(TMP, label + "-list.txt");
+  await writeFile(listFile, missing.map(f => relDir + "/" + f).join("\n"), "utf8");
+  const tarFile = join(TMP, label + ".tar.gz");
+  // tar 一律用 cwd+相对路径:GNU tar 会把 Windows 盘符 "D:" 当远程主机(Cannot connect to D:)
+  execFileSync("tar", ["czf", "pipeline/state/sync-tmp/" + label + ".tar.gz", "-T", "pipeline/state/sync-tmp/" + label + "-list.txt"],
+    { cwd: join(SITE, ".."), timeout: 300000 });
+  scpUp(tarFile, `/tmp/${label}-sync.tar.gz`);
+  ssh(`cd ${RBASE} && tar xzf /tmp/${label}-sync.tar.gz && rm /tmp/${label}-sync.tar.gz`);
+  console.log(`[${label}] 已补传 ${missing.length} 个`);
 }
+const syncCovers = () => syncDir("site/assets/covers", ".jpg", "covers");
+const syncFulltext = () => syncDir("site/data/fulltext", ".txt", "fulltext");
 
 async function main() {
   await mkdir(TMP, { recursive: true });
@@ -138,6 +150,8 @@ async function main() {
   }
   try { await syncCovers(); }
   catch (e) { failed.push("covers: " + (e.message || e)); console.error("[covers] 同步失败:", e.message || e); }
+  try { await syncFulltext(); }
+  catch (e) { failed.push("fulltext: " + (e.message || e)); console.error("[fulltext] 同步失败:", e.message || e); }
   await rm(TMP, { recursive: true, force: true });
   if (failed.length) { console.error(`\n[sync] 有 ${failed.length} 项失败(其余已完成):`, failed.join(" | ")); process.exit(1); }
   console.log(DRY ? "\n[sync] dry-run 完成,未写任何文件" : "\n[sync] 双向同步完成:本地与服务器已收敛到同一份数据");

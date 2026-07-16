@@ -379,7 +379,7 @@
     grid.addEventListener("click", function (e) {
       // 官网速览按钮:任何频道都优先拦截(否则会冒泡触发整卡跳外链)
       var tBtn = e.target.closest('[data-act="pagetrans"]');
-      if (tBtn) { e.preventDefault(); e.stopPropagation(); AP.pageTrans.open(tBtn.getAttribute("data-url")); return; }
+      if (tBtn) { e.preventDefault(); e.stopPropagation(); AP.pageTrans.open(tBtn.getAttribute("data-url"), tBtn.getAttribute("data-fulltext")); return; }
       // 资讯/招聘:整卡点击 → 新窗口打开原文/申请页(不进详情)
       if (channel !== "opportunities") {
         if (e.target.closest("[data-act='visit']")) return;   // 卡内 <a> 走默认
@@ -419,7 +419,7 @@
       var act = actEl.getAttribute("data-act");
       if (act === "copy") { e.preventDefault(); copyLink(actEl.getAttribute("data-id")); }
       else if (act === "copyemail") { e.preventDefault(); copyText(actEl.getAttribute("data-email"), AP.t("mailCopied")); }
-      else if (act === "pagetrans") { e.preventDefault(); AP.pageTrans.open(actEl.getAttribute("data-url")); }
+      else if (act === "pagetrans") { e.preventDefault(); AP.pageTrans.open(actEl.getAttribute("data-url"), actEl.getAttribute("data-fulltext")); }
     });
     $("detailFav").addEventListener("click", function () {
       var r = AP.router.parse(); if (r.name !== "detail") return;

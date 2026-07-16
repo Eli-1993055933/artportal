@@ -25,6 +25,7 @@ import { healthCheck } from "./lib/healthcheck.mjs";
 import { buildReport } from "./lib/report.mjs";
 import { locateOfficial } from "./lib/locate-official.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
+import { saveFulltext } from "./lib/fulltext.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const P = (...p) => join(__dir, ...p);
@@ -143,6 +144,9 @@ async function main() {
 
       const g = gradeTrust(v.record, v.flags, src);
       const rec = finalizeRecord(v.record, src, g.trust);
+      // 官网原文存档:精简前的正文存静态文件,前端"详情"秒开
+      const ft = await saveFulltext(rec.id, cand.sourceText);
+      if (ft) rec.fulltext = ft;
       // 封面:优先 og:image;缺失或疑似通用图时退而取正文首图。热链,前端加载失败退回色块。
       if (cand.rawHtml) {
         let cv = extractCover(cand.rawHtml, cand.url);
@@ -184,6 +188,7 @@ async function main() {
     if (prev && prev.trust === "verified") { stats.updated++; continue; } // 人工核实的不被 auto 覆盖
     // 保留此前已找到的封面(含联网检索来的),避免每日重跑用页面 og 图覆盖更贴切的封面
     if (prev && prev.cover && !r.cover) { r.cover = prev.cover; r.cover_source = prev.cover_source; }
+    if (prev && prev.fulltext && !r.fulltext) r.fulltext = prev.fulltext;   // 原文存档路径同理保留
     carryTranslations(prev, r);   // 源文未变的英文翻译按字段继承,防每晚重抽抹掉翻译
     if (prev) stats.updated++; else stats.added++;
     byId.set(r.id, r);

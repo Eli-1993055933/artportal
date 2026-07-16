@@ -54,6 +54,8 @@
       // 官网速览(站内机翻辅助阅读)
       transQuick: "详情", detailMore: "详情",
       transTitle: "完整介绍",
+      transTabRaw: "原文",
+      transNoteRaw: "以下为官网页面正文(未精简原样呈现,入库时存档或实时抓取);最新内容以官网为准。",
       transNote: "以下为该官网页面主要内容的机器翻译,仅供辅助阅读,以官网原文为准。打开官网后,也可使用浏览器自带的网页翻译。",
       transLoading: "正在抓取官网页面并翻译…(约 10–30 秒)",
       transFail: "速览失败:官网暂时抓取不到,请直接打开官网查看",
@@ -129,6 +131,8 @@
       // Page quick view (in-site MT reading aid)
       transQuick: "Details", detailMore: "Details",
       transTitle: "Full description",
+      transTabRaw: "Original",
+      transNoteRaw: "The page's text as-is (archived at ingestion or fetched live), not summarized. See the official site for the latest.",
       transNote: "Machine translation of the page's main content, as a reading aid only — the official site is authoritative. Your browser's built-in page translation also works after opening the site.",
       transLoading: "Fetching and translating the page… (~10–30s)",
       transFail: "Quick view failed — the page couldn't be fetched. Please open the official site directly.",

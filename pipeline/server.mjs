@@ -19,6 +19,7 @@ import * as auth from "./lib/auth.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
 import { searchWeb, BLOCK, unsafeHost } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
+import { saveFulltext } from "./lib/fulltext.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -136,6 +137,9 @@ async function searchAndHarvest(query, target = 6) {
     const rec = finalize(v.record, url, host);
     if (loc && !matchLocation(rec, loc)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
+    // 官网原文存档:精简成 summary 之前的正文存成静态文件,前端"详情"秒开
+    const ft = await saveFulltext(rec.id, f.text);
+    if (ft) rec.fulltext = ft;
     added.push(rec);
     log.push("✓ " + rec.title_zh);
   }
@@ -299,6 +303,13 @@ async function translatePage(url, to) {
       if (!fh || unsafeHost(fh)) throw new Error("该页面不支持速览");
     }
     if (f.skipped || !f.text || f.text.length < 100) throw new Error("官网页面暂时抓取不到(" + (f.reason || "内容过少") + "),请直接打开官网");
+    // raw 模式:原文直出,不调 LLM(老数据没有 fulltext 存档时的"详情"兜底,秒级、零 API 费)
+    if (to === "raw") {
+      const entry = { title: "", text: f.text.slice(0, 12000), truncated: f.text.length > 12000, at: Date.now() };
+      cache[key] = entry;
+      persistTransCache(cache);
+      return { ...entry, cached: false };
+    }
     const raw = f.text.slice(0, 7000);
     const truncated = f.text.length > 7000;
     const sys = "你是忠实的网页翻译器。把用户给的【网页正文】翻译成" + (to === "en" ? "英文" : "简体中文") +
@@ -401,7 +412,8 @@ createServer(async (req, res) => {
   }
   if (u.pathname === "/api/pagetrans") {
     const url = (u.searchParams.get("url") || "").trim();
-    const to = (u.searchParams.get("to") || "zh") === "en" ? "en" : "zh";
+    const toRaw = (u.searchParams.get("to") || "zh");
+    const to = ["zh", "en", "raw"].includes(toRaw) ? toRaw : "zh";
     const json = (code, obj) => { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
     if (!/^https?:\/\//i.test(url)) return json(400, { error: "bad url" });
     const ip = ipOf(req);
