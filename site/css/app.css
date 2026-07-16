@@ -501,6 +501,31 @@ img { max-width: 100%; display: block; }
 .auth-menu button { display: block; width: 100%; border: none; background: transparent; padding: 9px 14px; font-size: 13px; text-align: left; border-radius: 6px; cursor: pointer; color: var(--ink); }
 .auth-menu button:hover { background: var(--hover); }
 
+/* ---------- 用户主页(8.1) ---------- */
+.ppage { position: fixed; inset: 0; z-index: 60; background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.ppage__inner { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px 60px; }
+.ppage__back { margin-bottom: 16px; }
+.ppage__head { display: flex; gap: 18px; align-items: flex-start; }
+.ppage__ava { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line-2); background: var(--line); flex: none; }
+.ppage__info { min-width: 0; }
+.ppage__name { margin: 2px 0 6px; font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ppage__editbtn { min-height: 32px; font-size: 12.5px; }
+.ppage__meta { margin: 2px 0; color: var(--ink-3); font-size: 13px; }
+.ppage__bio { margin: 10px 0 2px; font-size: 14px; line-height: 1.7; color: var(--ink-2); white-space: pre-wrap; overflow-wrap: break-word; }
+.ppage__link { margin: 6px 0 0; }
+.ppage__link a { color: var(--c-residency); text-decoration: underline; font-size: 13px; word-break: break-all; }
+.ppage__tabs { display: flex; gap: 4px; margin: 24px 0 16px; border-bottom: 1px solid var(--line); }
+.ppage__tabs button { border: none; background: transparent; padding: 10px 14px; font-size: 14px; cursor: pointer; color: var(--ink-3); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.ppage__tabs button.is-active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+.ppage__empty { color: var(--ink-3); padding: 34px 0; font-size: 13.5px; text-align: center; }
+.pe-hint { margin: -6px 0 8px; font-size: 11.5px; color: var(--ink-3); }
+.pe-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+@media (max-width: 767px) {
+  .ppage__inner { padding: 14px 16px 48px; }
+  .ppage__ava { width: 64px; height: 64px; }
+  .ppage__name { font-size: 20px; }
+}
+
 .d-actions--top { margin: 2px 0 14px; }
 
 /* ---------- toast ---------- */

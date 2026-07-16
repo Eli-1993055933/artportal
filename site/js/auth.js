@@ -290,6 +290,13 @@
     m.className = "auth-menu"; m.id = "authMenu";
     var emailDiv = document.createElement("div");
     emailDiv.className = "auth-menu__email"; emailDiv.textContent = user.email;
+    // 我的主页 / 编辑资料(8.1 用户主页)
+    var mine = document.createElement("button");
+    mine.type = "button"; mine.textContent = AP.t("menuMyPage");
+    mine.addEventListener("click", function () { m.remove(); if (user) AP.router.goUser(user.id); });
+    var edit = document.createElement("button");
+    edit.type = "button"; edit.textContent = AP.t("menuEditProfile");
+    edit.addEventListener("click", function () { m.remove(); if (AP.profilePage) AP.profilePage.editOpen(); });
     var out = document.createElement("button");
     out.type = "button"; out.textContent = AP.t("authLogout");
     out.addEventListener("click", function () {
@@ -301,10 +308,11 @@
         var fc = document.getElementById("favCount"); if (fc) { fc.textContent = "0"; fc.hidden = true; }
         if (AP.filterState && AP.filterState.favOnly && typeof AP.rerun === "function") AP.rerun();
         var mm = document.getElementById("authMenu"); if (mm) mm.remove();
+        if (AP.profilePage) AP.profilePage.refresh();   // 正停在用户主页 → 按访客视角重渲(收起编辑按钮等)
         toast(AP.t("authLoggedOut"));
       });
     });
-    m.appendChild(emailDiv); m.appendChild(out);
+    m.appendChild(emailDiv); m.appendChild(mine); m.appendChild(edit); m.appendChild(out);
     document.body.appendChild(m);
     var r = anchor.getBoundingClientRect();
     m.style.top = (r.bottom + 6) + "px";
@@ -375,9 +383,9 @@
     img.onerror = function () { URL.revokeObjectURL(url); err.textContent = AP.t("pfErrImg"); };
     img.src = url;
   }
-  // 默认头像:昵称首字 + 按昵称哈希取色(没图也能 2 秒完成)
-  function genDefaultAvatar() {
-    var nick = document.getElementById("pfNick").value.trim() || (user && user.email ? user.email[0] : "A");
+  // 默认头像:昵称首字 + 按昵称哈希取色(没图也能 2 秒完成)。makeAvatar 是纯函数,编辑资料弹窗(profile.js)也用它。
+  function makeAvatar(nick) {
+    nick = (nick || "").trim() || (user && user.email ? user.email[0] : "A");
     var h = 0; for (var i = 0; i < nick.length; i++) h = (h * 31 + nick.charCodeAt(i)) >>> 0;
     var c = document.createElement("canvas"); c.width = 256; c.height = 256;
     var g = c.getContext("2d");
@@ -385,7 +393,10 @@
     g.fillStyle = "#fff"; g.font = "700 128px -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif";
     g.textAlign = "center"; g.textBaseline = "middle";
     g.fillText(nick.charAt(0).toUpperCase(), 128, 140);
-    avatarData = c.toDataURL("image/jpeg", 0.85);
+    return c.toDataURL("image/jpeg", 0.85);
+  }
+  function genDefaultAvatar() {
+    avatarData = makeAvatar(document.getElementById("pfNick").value);
     var p = document.getElementById("pfPrev"); p.src = avatarData; p.classList.add("has");
     document.getElementById("pfErr").textContent = "";
   }
@@ -422,10 +433,14 @@
     setTimeout(function () { document.getElementById("pfNick").focus(); }, 60);
   }
 
-  // 供其他模块(投稿等)使用的最小接口:查登录态 / 拉起登录弹窗
+  // 供其他模块(投稿/用户主页等)使用的最小接口
   AP.auth = {
     isIn: function () { return !!user; },
-    openLogin: function (note) { openModal("login", note || null); }
+    current: function () { return user; },                      // 当前登录用户(含自己的公开资料字段)
+    apply: function (u) { user = u; updateTopbar(); },          // 编辑资料保存后同步登录态与顶栏
+    openLogin: function (note) { openModal("login", note || null); },
+    squareFromImg: drawSquare,                                  // 图片 → 居中裁方 256px JPEG dataURL
+    makeAvatar: makeAvatar                                      // 昵称 → 默认头像 dataURL
   };
 
   // ---------- 启动:恢复会话 + 访问上报 + 心跳 ----------

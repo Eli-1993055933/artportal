@@ -8,16 +8,21 @@
   AP.router = {
     _appNav: false, // 是否由站内点击进入过详情(用于决定返回用 history.back 还是清 hash)
 
-    // 解析当前 hash → { name, id }
+    // 解析当前 hash → { name, id }。#/o/<id>=详情,#/u/<uid>=用户主页(均可分享深链)
     parse: function () {
       var h = location.hash || "";
       var m = /^#\/o\/(.+)$/.exec(h);
+      var id;
       if (m) {
         // 坏的百分号编码(如粘贴 URL 里混入裸 %)会让 decodeURIComponent 抛 URIError,
         // 若不拦会一路冒泡到 loadData().catch 把整页误判成「数据加载失败」。降级用原始串。
-        var id;
         try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
         return { name: "detail", id: id };
+      }
+      m = /^#\/u\/(.+)$/.exec(h);
+      if (m) {
+        try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
+        return { name: "user", id: id };
       }
       return { name: "list", id: null };
     },
@@ -27,8 +32,13 @@
       location.hash = "#/o/" + encodeURIComponent(id); // 触发 hashchange → 打开详情
     },
 
+    goUser: function (uid) {
+      this._appNav = true;
+      location.hash = "#/u/" + encodeURIComponent(uid); // 触发 hashchange → 打开用户主页
+    },
+
     goList: function () {
-      if (this.parse().name !== "detail") return;
+      if (this.parse().name === "list") return;
       if (this._appNav && history.length > 1) {
         // 站内进入的:用浏览器后退,URL 干净、与前进后退一致
         this._appNav = false;

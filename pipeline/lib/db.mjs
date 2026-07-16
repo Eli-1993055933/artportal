@@ -128,6 +128,17 @@ export async function ingestMap() {
   } catch (e) { return {}; }
 }
 
+// 某用户已通过审核的投稿(用户主页"投稿"tab;对应机会 id = "submit-" + 投稿id)
+export async function userApprovedSubmissions(uid) {
+  const d = await getDb();
+  return d.prepare("SELECT id, payload, decided_at FROM submissions WHERE uid=? AND status='approved' ORDER BY id DESC LIMIT 100")
+    .all(uid)
+    .map(r => {
+      let title = null; try { title = JSON.parse(r.payload).title || null; } catch (e) {}
+      return { oid: "submit-" + r.id, title, decided_at: r.decided_at };
+    });
+}
+
 // 单用户 24 小时内最多 5 条(防灌水)
 export async function submissionRateOk(uid) {
   const d = await getDb();

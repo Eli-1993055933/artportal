@@ -10,7 +10,8 @@ import { readFile, writeFile, rename, mkdir, appendFile } from "node:fs/promises
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { wordHits } from "./moderation.mjs";
+import { wordHits, moderateText } from "./moderation.mjs";
+import { logModeration } from "./db.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE = join(__dir, "..", "state");
@@ -132,11 +133,34 @@ function authLimited(ip, max = 10, windowMs = 10 * 60 * 1000) {
 
 // ---------- 公开 API 处理器(返回 {code, body, headers?}) ----------
 function publicUser(u) {
+  const p = u.profile || {};
   return {
+    id: u.id,                                  // 自己的 uid(用于打开"我的主页" #/u/<id>;uid 本就出现在主页链接里,非敏感)
     email: u.email, nickname: u.nickname || null, avatar: u.avatar || null,
     favorites: u.favorites || [], created_at: u.created_at,
+    bio: p.bio || "", identity: p.identity || "", location: p.location || "",
+    website: p.website || "", fields: p.fields || "",
+    fav_public: p.fav_public !== false,        // 收藏默认公开,可在编辑资料里关闭
+    nickname_changed_at: u.nickname_changed_at || null,
     needs_profile: !(u.nickname && u.avatar)   // 昵称+头像必填;缺任一,前端强制补全
   };
+}
+
+// 用户公开主页(8.1):任何人可看。只出公开字段——绝不含邮箱/收藏之外的任何隐私(红线)。
+export function publicProfile(uid, ip) {
+  if (authLimited("pub:" + ip, 60, 60 * 1000)) return { code: 429, body: { error: "请求太频繁,请稍后再试" } };
+  const u = users.find(x => x.id === uid);
+  if (!u || !u.nickname) return { code: 404, body: { error: "用户不存在" } };   // 资料未完成的暂不展示
+  const p = u.profile || {};
+  const pub = p.fav_public !== false;
+  return { code: 200, body: { user: {
+    id: u.id, nickname: u.nickname, avatar: u.avatar || null,
+    bio: p.bio || "", identity: p.identity || "", location: p.location || "",
+    website: p.website || "", fields: p.fields || "",
+    joined: String(u.created_at || "").slice(0, 10),
+    fav_public: pub, fav_count: (u.favorites || []).length,
+    favorites: pub ? (u.favorites || []) : []
+  } } };
 }
 
 // ---------- 用户资料:昵称(全站唯一) + 头像(必填) ----------
@@ -149,6 +173,7 @@ let byNick = new Map();   // nickKey -> uid(initAuth 时建,更新时维护)
 function rebuildNickIndex() {
   byNick = new Map(users.filter(u => u.nickname).map(u => [nickKey(u.nickname), u.id]));
 }
+const NICK_COOLDOWN = 7 * 24 * 3600 * 1000;   // 改名冷静期 7 天(防冒充/骚扰式换名;首次设置不算)
 export async function setProfile(req, body, ip) {
   const u = userOf(req);
   if (!u) return { code: 401, body: { error: "未登录" } };
@@ -156,6 +181,11 @@ export async function setProfile(req, body, ip) {
   const nickname = String((body || {}).nickname || "").trim().replace(/\s+/g, " ");
   if (!NICK_RE.test(nickname.replace(/ /g, ""))) return { code: 400, body: { error: "昵称需 2–20 字,可用中英文、数字、_-·" } };
   if (NICK_RESERVED.test(nickname)) return { code: 400, body: { error: "该昵称包含保留词,请换一个" } };
+  const changingNick = !!(u.nickname && nickname !== u.nickname);
+  if (changingNick) {
+    const wait = NICK_COOLDOWN - (Date.now() - (Date.parse(u.nickname_changed_at || 0) || 0));
+    if (wait > 0) return { code: 429, body: { error: "昵称每 7 天可修改一次,还需等 " + Math.ceil(wait / 86400000) + " 天" } };
+  }
   const hits = await wordHits(nickname);
   if (hits.hard.length || hits.soft.length) return { code: 400, body: { error: "昵称包含不允许的词,请换一个" } };
   const key = nickKey(nickname);
@@ -163,6 +193,24 @@ export async function setProfile(req, body, ip) {
   if (holder && holder !== u.id) {
     const suggest = nickname + String(100 + Math.floor(Math.random() * 900));
     return { code: 409, body: { error: "该昵称已被使用,试试「" + suggest + "」", suggest } };
+  }
+  // —— 扩展资料(8.1 用户主页,均选填):简介/身份/创作领域/所在地/个人网站/收藏公开 ——
+  const str = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
+  const b = body || {};
+  const bio = str(b.bio, 300), location = str(b.location, 40), fields = str(b.fields, 60);
+  const website = str(b.website, 200);
+  if (website) {
+    if (!/^https?:\/\/.{4,}$/i.test(website)) return { code: 400, body: { error: "个人网站需以 http(s):// 开头" } };
+    try { new URL(website); } catch (e) { return { code: 400, body: { error: "个人网站链接格式不正确" } }; }
+  }
+  const identity = ["artist", "curator", "student", "org", "fan"].includes(b.identity) ? b.identity : "";
+  // 简介等自由文本是 UGC:变更时过敏感词 + AI 机审(明显违规拒;可疑放行但留审计日志,后台可查)
+  const p = u.profile || (u.profile = {});
+  const freeText = [bio, fields, location].filter(Boolean).join("\n");
+  if (freeText && freeText !== [p.bio, p.fields, p.location].filter(Boolean).join("\n")) {
+    const mod = await moderateText(freeText);
+    if (mod.verdict === "reject") return { code: 400, body: { error: "资料内容包含不允许的词句,请修改后再试" } };
+    if (mod.verdict === "review") logModeration("profile", u.id, "review", { bio, fields, location, hits: mod.hits, ai: mod.ai }).catch(() => {});
   }
   // 头像:必须有(新传的 base64,或此前已设置过)
   const avatar = typeof (body || {}).avatar === "string" ? body.avatar : "";
@@ -179,8 +227,11 @@ export async function setProfile(req, body, ip) {
     u.avatar = "assets/avatars/" + u.id + ".jpg";
   }
   if (u.nickname) byNick.delete(nickKey(u.nickname));
+  if (changingNick) u.nickname_changed_at = new Date().toISOString();
   u.nickname = nickname;
   byNick.set(key, u.id);
+  p.bio = bio; p.identity = identity; p.fields = fields; p.location = location; p.website = website;
+  if (typeof b.fav_public === "boolean") p.fav_public = b.fav_public;
   saveUsers();
   logEvent("profile", { uid: u.id, email: u.email, ip, nickname });
   return { code: 200, body: { user: publicUser(u) } };

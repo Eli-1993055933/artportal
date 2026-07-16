@@ -360,6 +360,7 @@
       // 横幅是拼好的整句纯文本,applyI18n 刷不到:可见时按新语言重渲一次
       var sb = $("searchBanner");
       if (sb && !sb.hidden && lastBanner) setSearchBanner(lastBanner.q, lastBanner.n, lastBanner.ch);
+      if (AP.profilePage) AP.profilePage.refresh();   // 用户主页开着 → 按新语言重渲
     });
 
     // 提交机会:站内投稿表单(登录 → 填写 → 审核通过后发布)
@@ -449,6 +450,8 @@
   // 供 auth.js 在登录/退出云同步收藏后刷新角标与(若在收藏视图)列表
   AP.syncFavCount = syncFavCount;
   AP.rerun = rerun;
+  // 供 profile.js 取已加载的频道数据(启动即加载机会频道,主页收藏/投稿卡片由此查找)
+  AP.channelData = function (ch) { return cache[ch] || null; };
 
   function byId(id) {
     for (var i = 0; i < allData.length; i++) if (allData[i].id === id) return allData[i];
@@ -459,10 +462,15 @@
   function syncRoute() {
     var r = AP.router.parse();
     if (r.name === "detail") {
+      if (AP.profilePage) AP.profilePage.close();   // 先关主页再开详情(overflow 锁定顺序)
       var o = byId(r.id);
       if (o) openDetail(o); else AP.router.goList();
+    } else if (r.name === "user") {
+      closeDetail();
+      if (AP.profilePage) AP.profilePage.open(r.id);
     } else {
       closeDetail();
+      if (AP.profilePage) AP.profilePage.close();
     }
   }
   function openDetail(o) {

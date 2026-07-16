@@ -347,6 +347,14 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
+    // —— 用户公开主页(路线图 8.1):只出公开字段,绝不暴露邮箱;附该用户已通过的投稿 ——
+    if (p.startsWith("/api/users/") && m === "GET") {
+      let uid; try { uid = decodeURIComponent(p.slice("/api/users/".length)); } catch (e) { uid = p.slice("/api/users/".length); }
+      const r = auth.publicProfile(uid, ip);
+      if (r.code !== 200) return json(r);
+      try { r.body.submissions = await db.userApprovedSubmissions(uid); } catch (e) { r.body.submissions = []; }
+      return json(r);
+    }
     if (p === "/api/track" && m === "POST") { const b = await readBody(req); return json(auth.track(req, b, ip)); }
     if (p === "/api/admin/login" && m === "POST") { const b = await readBody(req); return json(auth.adminLogin(b.password, ip)); }
     if (p === "/api/admin/overview" && m === "GET") return json(auth.isAdmin(req, ip) ? await auth.adminOverview() : { code: 401, body: { error: "unauthorized" } });
@@ -497,7 +505,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname.startsWith("/api/admin/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {
