@@ -16,8 +16,24 @@
   <meta property="og:locale" content="zh_CN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#F7F6F2" />
+  <!-- 主题预置:在 CSS 应用前把 data-theme 打到 <html> 上,并同步 meta theme-color,
+       避免夜间用户首屏页面/浏览器外壳闪白。手动选择存 localStorage(ap_theme);
+       没选过则跟随系统深浅色偏好(存储被禁时也走系统偏好)。 -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("ap_theme"); } catch (e) {}
+      if (t !== "dark" && t !== "light") {
+        try { t = (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light"; }
+        catch (e) { t = "light"; }
+      }
+      document.documentElement.setAttribute("data-theme", t);
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute("content", t === "dark" ? "#1B1A18" : "#F7F6F2");
+    })();
+  </script>
   <!-- 资源版本号:每次改前端 JS/CSS 就把 v 递增一位,强制浏览器加载新版本(避免缓存错配) -->
-  <link rel="stylesheet" href="css/app.css?v=37" />
+  <link rel="stylesheet" href="css/app.css?v=38" />
 </head>
 <body>
   <!-- 顶部栏 -->
@@ -38,6 +54,12 @@
              接了真实表单后,把 app.js 的 SUBMIT_FORM_URL 填上并去掉下面的 hidden。 -->
         <a class="btn btn--dark" id="submitBtn" href="#" target="_blank" rel="noopener"
            data-i18n="submit" hidden>提交机会</a>
+        <!-- 日间/夜间手动切换:日间显示月亮(点了变夜间),夜间显示太阳;选择记忆在本机。
+             aria-pressed 由 app.js 按当前主题同步(读屏可感知开关状态) -->
+        <button class="icon-btn theme-toggle" id="themeBtn" type="button" aria-label="夜间模式" aria-pressed="false">
+          <svg class="theme-ico theme-ico--moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.6 12.2A6.6 6.6 0 0 1 7.8 4.4a.55.55 0 0 0-.74-.63 7.2 7.2 0 1 0 9.17 9.17.55.55 0 0 0-.63-.74Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <svg class="theme-ico theme-ico--sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M15.8 4.2l-1.5 1.5M5.7 14.3l-1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
         <button class="btn btn--ghost lang-switch" id="langBtn" type="button" aria-label="切换语言 / Switch language">中 / EN</button>
       </div>
     </div>
@@ -246,13 +268,13 @@
   <!-- toast -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="js/i18n.js?v=37"></script>
-  <script src="js/format.js?v=37"></script>
-  <script src="js/favorites.js?v=37"></script>
-  <script src="js/filters.js?v=37"></script>
-  <script src="js/render.js?v=37"></script>
-  <script src="js/router.js?v=37"></script>
-  <script src="js/app.js?v=37"></script>
-  <script src="js/auth.js?v=37"></script>
+  <script src="js/i18n.js?v=38"></script>
+  <script src="js/format.js?v=38"></script>
+  <script src="js/favorites.js?v=38"></script>
+  <script src="js/filters.js?v=38"></script>
+  <script src="js/render.js?v=38"></script>
+  <script src="js/router.js?v=38"></script>
+  <script src="js/app.js?v=38"></script>
+  <script src="js/auth.js?v=38"></script>
 </body>
 </html>

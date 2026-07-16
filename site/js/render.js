@@ -259,7 +259,8 @@
     var html =
       cover +
       '<div class="d-head">' +
-        '<span class="d-cat" style="background:' + F.catColor(o.category) + '">' + esc(AP.tt[AP.lang].cat[o.category] || o.category) + '</span>' +
+        // 分类章底色走 CSS 的 data-cat 规则(--tag-*),随主题正确换肤;不再内联硬编码色
+        '<span class="d-cat" data-cat="' + esc(o.category) + '">' + esc(AP.tt[AP.lang].cat[o.category] || o.category) + '</span>' +
         '<h1 class="d-title" id="detailTitle">' + esc(F.loc(o, "title")) + '</h1>' +
         (function () { var alt = en ? o.title_zh : (mtHas(o, "title") ? null : o.title_en);
           return (alt && alt !== F.loc(o, "title")) ? '<div class="d-title-en">' + esc(alt) + '</div>' : ''; })() +

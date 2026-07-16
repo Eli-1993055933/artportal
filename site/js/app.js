@@ -30,7 +30,6 @@
     AP.applyI18n();
     buildSkeleton();
     wireEvents();
-    wireCatDots();
     loadData();
   });
 
@@ -41,12 +40,8 @@
     }
     skeleton.innerHTML = html;
   }
-  function wireCatDots() {
-    var dots = document.querySelectorAll("[data-cat-dot]");
-    for (var i = 0; i < dots.length; i++) {
-      dots[i].style.background = F.catColor(dots[i].getAttribute("data-cat-dot"));
-    }
-  }
+  // 分类 tab 色点的底色由 app.css 的 .tab__dot[data-cat-dot=*] 规则提供(随主题换肤),
+  // 不再用 JS 内联写死(内联样式会压过 CSS 变量,夜间提亮色永远不生效)。
 
   function loadData() {
     var c = CH[channel];
@@ -331,6 +326,25 @@
     $("favToggleBtn").addEventListener("click", function () {
       st.favOnly = !st.favOnly; syncFavBtn(); rerun();
     });
+
+    // 日间/夜间切换:改 <html> 的 data-theme(CSS 变量随之整体换肤),选择存本机。
+    // 首屏的初始主题与 meta theme-color 由 index.html <head> 里的预置脚本决定(没选过则跟随系统)。
+    var themeBtn = $("themeBtn");
+    function syncThemeUi() {
+      var dark = document.documentElement.getAttribute("data-theme") === "dark";
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", dark ? "#1B1A18" : "#F7F6F2");
+      if (themeBtn) themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");   // 读屏可感知开关状态
+      var logo = document.querySelector(".brand__logo");                              // logo 是 <img>,CSS 变量管不到,换深浅两版文件
+      if (logo) logo.src = dark ? "assets/mark-dark.svg" : "assets/mark.svg";
+    }
+    if (themeBtn) themeBtn.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("ap_theme", next); } catch (e) {}
+      syncThemeUi();
+    });
+    syncThemeUi();
 
     // 语言切换
     $("langBtn").addEventListener("click", function () {
