@@ -52,8 +52,8 @@
       reportErr: "信息有误?", reportLink: "反馈给我们", visit: "访问", officialLocated: "官网已联网校正",
       mtNote: "英文内容由机器翻译,请以官网原文措辞为准。",
       // 官网速览(站内机翻辅助阅读)
-      transQuick: "速览", transBtnDetail: "官网内容速览(机器翻译)",
-      transTitle: "官网内容速览",
+      transQuick: "详情", detailMore: "详情",
+      transTitle: "完整介绍",
       transNote: "以下为该官网页面主要内容的机器翻译,仅供辅助阅读,以官网原文为准。打开官网后,也可使用浏览器自带的网页翻译。",
       transLoading: "正在抓取官网页面并翻译…(约 10–30 秒)",
       transFail: "速览失败:官网暂时抓取不到,请直接打开官网查看",
@@ -127,8 +127,8 @@
       reportErr: "Found an error?", reportLink: "Let us know", visit: "Visit", officialLocated: "official site located online",
       mtNote: "English text is machine-translated — see the official site for the original wording.",
       // Page quick view (in-site MT reading aid)
-      transQuick: "Translate", transBtnDetail: "Official page quick view (MT)",
-      transTitle: "Official page quick view",
+      transQuick: "Details", detailMore: "Details",
+      transTitle: "Full description",
       transNote: "Machine translation of the page's main content, as a reading aid only — the official site is authoritative. Your browser's built-in page translation also works after opening the site.",
       transLoading: "Fetching and translating the page… (~10–30s)",
       transFail: "Quick view failed — the page couldn't be fetched. Please open the official site directly.",

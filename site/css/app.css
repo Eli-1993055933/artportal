@@ -496,7 +496,9 @@ img { max-width: 100%; display: block; }
 .trans__body p { margin: 0 0 10px; }
 .trans__loading { color: var(--ink-3); }
 .trans__foot { margin: 14px 0 0; }
-.btn--transview { width: 100%; margin: -8px 0 16px; }
+.d-actions--top { margin: 2px 0 14px; }
+.d-morewrap { margin: -6px 0 16px; }
+.d-more-btn { min-height: 32px; padding: 0 14px; font-size: 13px; }
 
 /* ---------- toast ---------- */
 .toast {

@@ -271,11 +271,22 @@
         (function () { var alt = en ? o.title_zh : (mtHas(o, "title") ? null : o.title_en);
           return (alt && alt !== F.loc(o, "title")) ? '<div class="d-title-en">' + esc(alt) + '</div>' : ''; })() +
       '</div>' +
+      // 主操作(复制链接/前往官网)上提到标题正下方:一进详情就够得着,不用滚到底
+      '<div class="d-actions d-actions--top">' +
+        '<button class="btn btn--ghost" data-act="copy" data-id="' + esc(o.id) + '" type="button">' + AP.t("copyLink") + '</button>' +
+        (official
+          ? '<a class="btn btn--dark" data-gate="official" href="' + esc(official) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>'
+          : '<button class="btn btn--ghost" type="button" disabled aria-disabled="true">' + AP.t("noOfficial") + '</button>') +
+      '</div>' +
       '<div>' + trustBadge(o) + '</div>' +
       alert +
       provNote +
       mtNote +
       summaryHtml +
+      // 简介下的「详情」小按钮:弹出官网完整介绍(实时抓官网正文,跟随界面语言翻译)
+      (official
+        ? '<div class="d-morewrap"><button class="btn btn--ghost d-more-btn" data-act="pagetrans" data-url="' + esc(official) + '" type="button">' + esc(AP.t("detailMore")) + ' ▸</button></div>'
+        : '') +
       '<div class="d-fields">' +
         row(AP.t("dOrg"), esc(F.loc(o, "org")) || muted(AP.t("notStated"))) +
         row(AP.t("dPlace"), place ? esc(place) : muted(AP.t("notStated"))) +
@@ -290,14 +301,6 @@
         row(AP.t("dSource"), srcVal) +
         row(AP.t("dSeen"), esc(o.last_seen) || muted(AP.t("notStated"))) +
       '</div>' +
-      '<div class="d-actions">' +
-        '<button class="btn btn--ghost" data-act="copy" data-id="' + esc(o.id) + '" type="button">' + AP.t("copyLink") + '</button>' +
-        (official
-          ? '<a class="btn btn--dark" data-gate="official" href="' + esc(official) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>'
-          : '<button class="btn btn--ghost" type="button" disabled aria-disabled="true">' + AP.t("noOfficial") + '</button>') +
-      '</div>' +
-      // 官网内容速览:站内机翻辅助阅读(无法在别人官网上注入翻译,故做站内速览面板)
-      (official ? '<button class="btn btn--ghost btn--transview" data-act="pagetrans" data-url="' + esc(official) + '" type="button">🌐 ' + esc(AP.t("transBtnDetail")) + '</button>' : '') +
       // 反馈用「点击复制邮箱」而非 mailto:微信内置浏览器/无邮件客户端的手机点 mailto 常无反应。
       '<p class="d-report">' + esc(AP.t("reportErr")) +
         ' <button class="mail-copy" type="button" data-act="copyemail" data-email="' + esc(REPORT_EMAIL) + '">' +
