@@ -1,0 +1,11 @@
+{
+  "_meta": {
+    "note": "招聘频道每日信源(run-channels.mjs 用)。全部经实测可抓(2026-07-16)。org 为机构名(提取缺失时兜底);link_prefix 限定该源只收此路径前缀下的职位链接(greenhouse 多机构共用域名)。清单刻意从小做起:只收真实可抓、服务端渲染的机构招聘板;后续逐步扩充,AI 检索可随时按需补量。",
+    "红线": "职位名逐字 evidence 校验;薪资/截止 evidence 不过则作废置 null;已截止职位不收。"
+  },
+  "sources": [
+    { "id": "zwirner", "org": "David Zwirner(卓纳画廊)", "type": "html", "url": "https://job-boards.greenhouse.io/davidzwirnergallery", "domain": "job-boards.greenhouse.io", "link_prefix": "/davidzwirnergallery/", "lang": "en" },
+    { "id": "sothebys", "org": "Sotheby's(苏富比)", "type": "html", "url": "https://job-boards.greenhouse.io/sothebys", "domain": "job-boards.greenhouse.io", "link_prefix": "/sothebys/", "lang": "en", "cap": 8 },
+    { "id": "whitney", "org": "Whitney Museum of American Art(惠特尼美国艺术博物馆)", "type": "html", "url": "https://whitney.org/about/job-postings", "domain": "whitney.org", "lang": "en" }
+  ]
+}

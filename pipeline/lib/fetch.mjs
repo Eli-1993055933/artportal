@@ -22,12 +22,20 @@ const robotsCache = new Map();
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-async function throttle(host) {
-  const now = Date.now();
-  const last = lastHitByHost.get(host) || 0;
-  const wait = MIN_INTERVAL_MS - (now - last);
-  if (wait > 0) await sleep(wait);
-  lastHitByHost.set(host, Date.now());
+// 同域限速。按 host 串行排队(promise 链):并发协程各自 check-then-sleep 会同时醒来连发,
+// 破坏"同域 >= 3 秒"的承诺;串行链保证进程内任意并发下间隔都成立(跨进程仍各自计时)。
+const hostChains = new Map();
+function throttle(host) {
+  const prev = hostChains.get(host) || Promise.resolve();
+  const p = prev.then(async () => {
+    const now = Date.now();
+    const last = lastHitByHost.get(host) || 0;
+    const wait = MIN_INTERVAL_MS - (now - last);
+    if (wait > 0) await sleep(wait);
+    lastHitByHost.set(host, Date.now());
+  });
+  hostChains.set(host, p.then(() => {}, () => {}));
+  return p;
 }
 
 async function rawFetch(url, accept) {

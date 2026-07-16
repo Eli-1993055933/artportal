@@ -58,6 +58,7 @@ for (const F of FILES) {
   const batches = [];
   for (let i = 0; i < todo.length; i += BATCH) batches.push(todo.slice(i, i + BATCH));
   let ok = 0;
+  const translated = new Map();   // id -> 译文;翻译期间不动原文件
   const queue = batches.slice();
   async function worker() {
     while (queue.length) {
@@ -69,18 +70,33 @@ for (const F of FILES) {
       for (let i = 0; i < batch.length; i++) {
         const o = batch[i], r = byId.get(o.id) || (byIdx ? byIdx[i] : null);
         if (!r) continue;
-        if (s(r.title_zh)) o.title_zh = s(r.title_zh);
-        if (s(r.title_en)) o.title_en = s(r.title_en);
-        if (o.summary) { if (s(r.summary_zh)) o.summary_zh = s(r.summary_zh); if (s(r.summary_en)) o.summary_en = s(r.summary_en); }
-        if (o.title_zh && o.title_en) ok++;
+        translated.set(o.id, r);
+        ok++;
       }
       process.stderr.write(`\r  ${F.key} 进度 ${ok}/${todo.length}`);
     }
   }
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
   process.stderr.write("\n");
-  await writeFile(F.path + ".tmp", JSON.stringify(data, null, 2), "utf8");
-  await rename(F.path + ".tmp", F.path);
-  console.log(`  ${F.key}: 补齐 ${ok} 条`);
+
+  // 翻译要跑好几分钟,期间 server.mjs 的检索可能已往文件里追加了新记录——
+  // 绝不能拿旧快照整体写回(会把窗口期的新增全部抹掉)。重读最新文件,按 id 合并、只补缺字段。
+  const fresh = JSON.parse(await readFile(F.path, "utf8"));
+  let applied = 0;
+  for (const o of (fresh[F.key] || [])) {
+    const r = translated.get(o.id);
+    if (!r) continue;
+    if (!o.title_zh && s(r.title_zh)) o.title_zh = s(r.title_zh);
+    if (!o.title_en && s(r.title_en)) o.title_en = s(r.title_en);
+    if (o.summary) {
+      if (!o.summary_zh && s(r.summary_zh)) o.summary_zh = s(r.summary_zh);
+      if (!o.summary_en && s(r.summary_en)) o.summary_en = s(r.summary_en);
+    }
+    applied++;
+  }
+  const tmp = F.path + ".tmp-" + process.pid + "-" + Date.now();
+  await writeFile(tmp, JSON.stringify(fresh, null, 2), "utf8");
+  await rename(tmp, F.path);
+  console.log(`  ${F.key}: 译得 ${ok} 条,合并写回 ${applied} 条`);
 }
 console.log("完成");

@@ -83,11 +83,27 @@
     if (channel === "opportunities") {
       filtered = AP.applyFilters(allData);
     } else {
-      // 资讯/招聘:仅关键词过滤 + 按日期倒序(无展览那套筛选)
+      // 资讯/招聘:仅关键词过滤(无展览那套筛选);本次 AI 检索新增免过滤+置顶。
       var q = AP.filterState.q.trim().toLowerCase();
-      filtered = allData.filter(function (o) { return !q || channelSearchText(o).indexOf(q) !== -1; });
+      var pinned = AP.filterState.pinnedIds;
+      filtered = allData.filter(function (o) {
+        if (pinned && pinned.has(o.id)) return true;
+        return !q || channelSearchText(o).indexOf(q) !== -1;
+      });
       filtered.sort(function (a, b) {
-        return String(b.published_at || b.posted_at || b.deadline || "").localeCompare(String(a.published_at || a.posted_at || a.deadline || ""));
+        if (pinned) {                              // 本次检索新增置顶
+          var pa = pinned.has(a.id) ? 0 : 1, pb = pinned.has(b.id) ? 0 : 1;
+          if (pa !== pb) return pa - pb;
+        }
+        if (channel === "jobs") {
+          // 招聘:截止由近到远(在招优先),无截止的居中按新旧,已截止置底
+          var ga = jobGroup(a), gb = jobGroup(b);
+          if (ga !== gb) return ga - gb;
+          if (ga === 0) return String(a.deadline).localeCompare(String(b.deadline));
+          return String(b.posted_at || b.published_at || b.added_at || "").localeCompare(String(a.posted_at || a.published_at || a.added_at || ""));
+        }
+        // 资讯:按发布日期倒序(提不到发布日期的用入库日兜底,别让新条目沉底)
+        return String(b.published_at || b.added_at || b.posted_at || "").localeCompare(String(a.published_at || a.added_at || a.posted_at || ""));
       });
     }
     rendered = 0;
@@ -97,10 +113,26 @@
     updateEmpty();
     updateFilterDot();
   }
+  // 招聘排序分组:0=有截止且未过(最急最前) 1=无固定截止 2=已截止(置底)
+  // "招满为止/滚动招聘"这类非 ISO 截止串解析不出日期,属"无固定截止",绝不能当已截止置底。
+  function jobGroup(j) {
+    if (!j.deadline) return 1;
+    var n = F.daysUntil(j.deadline);
+    if (n == null) return 1;
+    return n >= 0 ? 0 : 2;
+  }
+
   function updateEmpty() {
     var isEmpty = filtered.length === 0;
     emptyState.hidden = !isEmpty;
     if (!isEmpty) return;
+    if (channel !== "opportunities" && allData.length > 0) {
+      // 库里有数据、只是关键词无命中:如实说"没匹配",别谎称"筹备中"
+      emptyState.querySelector(".state__title").textContent = AP.t("empty_q_title");
+      emptyState.querySelector(".state__desc").textContent = AP.t("empty_q_desc");
+      $("emptyClear").hidden = true;
+      return;
+    }
     var t = channel === "news" ? "empty_news" : channel === "jobs" ? "empty_jobs" : null;
     if (t) {
       emptyState.querySelector(".state__title").textContent = AP.t(t + "_title");
@@ -131,13 +163,31 @@
     var btns = document.querySelectorAll("#channelNav .channel");
     for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i].getAttribute("data-channel") === ch);
     var opp = ch === "opportunities";
-    toggleEl($("aiSearchBtn"), opp);           // AI 检索、分类 tab、更多筛选行 仅机会频道
-    toggleEl($("catTabs"), opp);
+    toggleEl($("catTabs"), opp);               // 分类 tab、更多筛选行 仅机会频道
     toggleEl(document.querySelector(".controls__row2"), opp);
+    // AI 检索三频道都有(同规格),按钮文案随频道切换(改 data-i18n,语言切换时 applyI18n 也能刷对)
+    var aiLbl = document.querySelector("#aiSearchBtn .ai-search-btn__label");
+    if (aiLbl) {
+      var aiKey = ch === "news" ? "aiSearchNews" : ch === "jobs" ? "aiSearchJobs" : "aiSearch";
+      aiLbl.setAttribute("data-i18n", aiKey);
+      aiLbl.textContent = AP.t(aiKey);
+    }
+    // 检索中底条文案同理随频道("正在检索真实资讯/招聘…")
+    var aiBarLbl = document.querySelector("#aiBar span[data-i18n]");
+    if (aiBarLbl) {
+      var abKey = ch === "news" ? "aiSearchingNews" : ch === "jobs" ? "aiSearchingJobs" : "aiSearching";
+      aiBarLbl.setAttribute("data-i18n", abKey);
+      aiBarLbl.textContent = AP.t(abKey);
+    }
     $("moreFilters").hidden = true;
     AP.filterState.q = ""; if ($("searchInput")) $("searchInput").value = "";
     AP.filterState.cat = "all";
-    $("searchInput").setAttribute("placeholder", AP.t(ch === "news" ? "searchNewsPh" : ch === "jobs" ? "searchJobsPh" : "searchPh"));
+    AP.filterState.pinnedIds = null;           // 置顶集是"上一次检索"的,不跨频道带
+    var sb = $("searchBanner"); if (sb) sb.hidden = true;   // 横幅说的是上个频道的检索,收起
+    // placeholder 连同 data-i18n-ph 一起换:否则语言切换触发 applyI18n 时会被刷回机会频道文案
+    var phKey = ch === "news" ? "searchNewsPh" : ch === "jobs" ? "searchJobsPh" : "searchPh";
+    $("searchInput").setAttribute("data-i18n-ph", phKey);
+    $("searchInput").setAttribute("placeholder", AP.t(phKey));
     if (AP.router.parse().name === "detail") AP.router.goList();
     window.scrollTo(0, 0);
     loadData();
@@ -182,7 +232,7 @@
         for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
         var fresh = data.opportunities.filter(function (o) { return !known[o.id]; });
         if (!fresh.length) return;
-        allData = allData.concat(fresh);
+        Array.prototype.push.apply(allData, fresh);   // 原地追加:保持与 cache 同一数组引用,别让两处快照分叉
         var add = AP.applyFilters(fresh);          // 只把符合当前筛选的新条目追加到末尾
         if (add.length) {
           filtered = filtered.concat(add);
@@ -289,6 +339,9 @@
       var r = AP.router.parse();
       if (r.name === "detail") { var o = byId(r.id); if (o) $("detailBody").innerHTML = AP.renderDetail(o); }
       syncFavCount();
+      // 横幅是拼好的整句纯文本,applyI18n 刷不到:可见时按新语言重渲一次
+      var sb = $("searchBanner");
+      if (sb && !sb.hidden && lastBanner) setSearchBanner(lastBanner.q, lastBanner.n, lastBanner.ch);
     });
 
     // 提交机会(占位)
@@ -412,17 +465,19 @@
     btn.style.color = on ? "var(--c-opencall)" : "";
   }
 
-  // ---------- AI 全网检索(后端 /api/search:搜索→抓官网→逐字校验→真实的才入库)----------
+  // ---------- AI 全网检索(后端 /api/search:搜索→抓原文→逐字校验→真实的才入库)----------
+  // 三频道同规格:机会/资讯/招聘各自检索各自的库,请求带 channel 参数。
   var aiSearching = false, aiCtrl = null, aiDone = false, aiTo = null;
   function runAiSearch() {
     if (aiSearching) return;
     var q = ($("searchInput").value || "").trim();
     if (!q) { toast(AP.lang === "en" ? "Type what you're looking for first" : "请先在搜索框输入想找的主题/展览"); $("searchInput").focus(); return; }
+    var ch = channel;                    // 捕获发起时的频道:响应回来时用户可能已切走
     aiSearching = true; aiDone = false;
     var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
     $("aiBarQ").textContent = "「" + q + "」";
     $("aiBar").hidden = false;
-    setSearchBanner(q, null);            // 横幅:正在检索…
+    setSearchBanner(q, null, ch);        // 横幅:正在检索…
     // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈);用户也可随时点"取消"。
     aiCtrl = ("AbortController" in window) ? new AbortController() : null;
     aiTo = setTimeout(function () {
@@ -431,21 +486,28 @@
       finishAi(btn);
       toast(AP.lang === "en" ? "Timed out (search source may be rate-limited). Refresh to see any saved; try again later or set SERPER_API_KEY." : "检索超时(搜索源可能被限流)。刷新后能看到已入库的;稍后再试,或配置 SERPER_API_KEY 稳定检索");
     }, 170000);
-    fetch("/api/search?q=" + encodeURIComponent(q), aiCtrl ? { signal: aiCtrl.signal } : {})
+    fetch("/api/search?q=" + encodeURIComponent(q) + "&channel=" + encodeURIComponent(ch), aiCtrl ? { signal: aiCtrl.signal } : {})
       .then(function (r) { return r.json(); })
       .then(function (res) {
         if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn);
         if (res && res.error) { toast(res.message || (AP.lang === "en" ? "Search error" : "检索出错,请确认后端服务已启动")); return; }
-        if (res && res.cached) { setSearchBanner(q, -1); return; }
+        if (res && res.cached) { if (channel === ch) setSearchBanner(q, -1, ch); return; }
         var add = (res && res.added) || [];
-        var known = {}; for (var i = 0; i < allData.length; i++) known[allData[i].id] = 1;
+        // 并入发起频道的缓存数组(原地 push,保持 cache 与 allData 同一引用,切频道来回不丢)
+        var base = cache[ch] || (cache[ch] = []);
+        var known = {}; for (var i = 0; i < base.length; i++) known[base[i].id] = 1;
         var fresh = add.filter(function (o) { return !known[o.id]; });
-        if (!fresh.length) { setSearchBanner(q, 0); return; }
-        allData = allData.concat(fresh);
+        if (!fresh.length) { if (channel === ch) setSearchBanner(q, 0, ch); return; }
+        Array.prototype.push.apply(base, fresh);
+        if (channel !== ch) {            // 用户已切走:数据已并入该频道,回去即见
+          toast(AP.lang === "en" ? ("+" + fresh.length + " new in " + AP.t("ch_" + ch)) : ("「" + AP.t("ch_" + ch) + "」新增 " + fresh.length + " 条,切回即见"));
+          return;
+        }
+        if (allData !== base) allData = base;
         // 保持在当前搜索状态(不跳回全部);把本次新增置顶+免过滤显示,横幅常驻"新增X条"直到下次检索。
         AP.filterState.pinnedIds = new Set(fresh.map(function (o) { return o.id; }));
         rerun();
-        setSearchBanner(q, fresh.length);
+        setSearchBanner(q, fresh.length, ch);
         try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { window.scrollTo(0, 0); }
       })
       .catch(function () { if (aiDone) return; aiDone = true; clearTimeout(aiTo); finishAi(btn); toast(AP.lang === "en" ? "Search failed — is the server running?" : "检索失败,请确认已用 node server.mjs 启动服务"); });
@@ -462,16 +524,23 @@
     aiSearching = false;
     if (btn) { btn.disabled = false; btn.classList.remove("is-loading"); }
     var ov = $("aiBar"); if (ov) ov.hidden = true;
+    // 先收起"正在检索…"横幅:取消/超时/出错路径不再更新它,不收会永久停在检索中;
+    // 成功/缓存命中路径随后会重新 setSearchBanner 展示结果。
+    var sb = $("searchBanner"); if (sb) sb.hidden = true;
   }
   // 检索结果横幅(常驻,直到下次检索):n=null 检索中 / n<0 缓存命中 / n=0 未找到 / n>0 新增数
-  function setSearchBanner(q, n) {
+  // noun 随频道:机会/资讯/招聘(三频道同规格检索)。记住最近一次参数,切语言时可重渲。
+  var lastBanner = null;
+  function setSearchBanner(q, n, ch) {
     var t = $("sbText"), el = $("searchBanner");
     if (!t || !el) return;
+    lastBanner = { q: q, n: n, ch: ch || channel };
     var en = AP.lang === "en", qq = "「" + q + "」";
+    var noun = AP.t("noun_" + (ch || channel));
     if (n === null) t.textContent = en ? ("Searching " + qq + " …") : ("正在检索 " + qq + " …");
     else if (n < 0) t.textContent = en ? (qq + " just searched — results already in the list below") : (qq + " 刚检索过,结果已在下方列表里");
-    else if (n === 0) t.textContent = en ? (qq + ": no new real ones found (never fabricated) — try another term") : ("本次检索 " + qq + " 未找到新的真实机会(绝不编造),换个词试试");
-    else t.textContent = en ? (qq + " · added " + n + " new, pinned on top") : ("本次检索 " + qq + " · 新增 " + n + " 条真实机会,已置顶在最上方");
+    else if (n === 0) t.textContent = en ? (qq + ": no new real " + noun + " found (never fabricated) — try another term") : ("本次检索 " + qq + " 未找到新的真实" + noun + "(绝不编造),换个词试试");
+    else t.textContent = en ? (qq + " · added " + n + " new " + noun + ", pinned on top") : ("本次检索 " + qq + " · 新增 " + n + " 条真实" + noun + ",已置顶在最上方");
     el.hidden = false;
   }
 

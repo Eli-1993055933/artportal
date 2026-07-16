@@ -118,6 +118,21 @@
     if (!url) return fb;
     return fb + '<img class="card__img" src="' + esc(url) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onload="this.classList.add(\'is-loaded\')" onerror="this.remove()">';
   }
+  // AI 检索收录的条目如实标注(与机会频道"AI 检索·请核对官网"同一条诚实红线);
+  // 且资讯/招聘的双语标题有一侧是机器翻译:界面语言显示的不是原文语言时,加 MT 小标
+  // (机会频道"机翻不冒充原文"红线延伸到新频道)。
+  function isZhText(s) { return /[一-鿿]/.test(String(s || "")); }
+  function viaChip(o) {
+    var chips = "";
+    if (o._via === "search") chips += '<span class="src-chip src-chip--aggregator">' + esc(AP.t("chipAiSearched")) + '</span>';
+    if (o.title) {
+      var showingEn = AP.lang === "en", srcIsZh = isZhText(o.title);
+      if ((showingEn && srcIsZh) || (!showingEn && !srcIsZh)) {
+        chips += '<span class="src-chip src-chip--mt" title="' + esc(AP.t("mtNote")) + '">MT</span>';
+      }
+    }
+    return chips ? '<div class="card__srcrow">' + chips + '</div>' : "";
+  }
   AP.renderNewsCard = function (n) {
     var title = F.loc(n, "title") || n.title || "";
     var summary = F.loc(n, "summary") || n.summary || "";
@@ -135,6 +150,7 @@
         '<h2 class="card__title">' + esc(title) + '</h2>' +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         '<div class="card__meta"><span class="m-org">' + esc(n.source || "") + '</span>' + date + '</div>' +
+        viaChip(n) +
         '<div class="card__foot"><a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a></div>' +
       '</div>';
     return el;
@@ -163,6 +179,7 @@
         (badges ? '<div class="badges">' + badges + '</div>' : "") +
         (j.deadline ? '<div class="card__deadline due-normal">' + esc(AP.t("job_deadline")) + " " + esc(j.deadline) + '</div>' : "") +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
+        viaChip(j) +
         '<div class="card__foot"><a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a></div>' +
       '</div>';
     return el;

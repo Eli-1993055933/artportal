@@ -17,13 +17,14 @@ import { extract } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
+import { searchWeb, BLOCK, unsafeHost } from "./lib/websearch.mjs";
+import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
 const DATA = join(SITE, "data", "opportunities.json");
 const PORT = process.env.PORT || 8080;
 await auth.initAuth();   // 先加载用户/会话,再开始接请求
-const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36";
 
 function todayISO() {
   const d = new Date();
@@ -39,41 +40,7 @@ function officialHint(host) {
 }
 
 // —— 环节①:搜索,拿到候选官网 URL ——
-// 可插拔搜索源:配了 SERPER_API_KEY(serper.dev,Google 结果,有免费额度)就用它(稳定);
-// 否则退回 DuckDuckGo lite(免密钥但会被限流,仅适合原型)。上线稳定跑建议配 key。
-async function searchWeb(query) {
-  if (process.env.SERPER_API_KEY) {
-    try { return await serperSearch(query); }
-    catch (e) { return await ddgSearch(query); }   // API 失败也降级 DDG
-  }
-  return await ddgSearch(query);
-}
-async function serperSearch(query) {
-  const res = await fetch("https://google.serper.dev/search", {
-    method: "POST",
-    headers: { "X-API-KEY": process.env.SERPER_API_KEY, "Content-Type": "application/json" },
-    body: JSON.stringify({ q: query, num: 15, gl: "cn", hl: "zh-cn" }),
-    signal: AbortSignal.timeout(15000)
-  });
-  if (!res.ok) throw new Error("serper " + res.status);
-  const j = await res.json();
-  return (j.organic || []).map(o => o.link).filter(Boolean);
-}
-async function ddgSearch(query) {
-  const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
-  try {
-    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(10000) });
-    const html = await res.text();
-    const out = [];
-    for (const m of html.matchAll(/uddg=([^&"']+)/g)) {
-      try { out.push(decodeURIComponent(m[1])); } catch (e) {}
-    }
-    return out;
-  } catch (e) { return []; }
-}
-
-// 明显不是机构官网征集页的噪声域名(社交/聚合/问卷/竞赛导流/无关政务)
-const BLOCK = /(weixin\.qq|mp\.weixin|zhihu\.com|xiaohongshu|xhslink|weibo\.|douban\.com|bilibili|baike\.baidu|baidu\.com|bing\.com|duckduckgo|zhipin|liepin|58\.com|facebook\.|instagram\.|youtube\.|twitter\.|t\.me|tiktok|douyin|1688\.|taobao|jd\.com|csdn|jianshu|sohu\.com|163\.com\/|qq\.com\/a\/|sina\.com|1zj\.com|wjx\.cn|zhengjifuwu|opencallradar|saikr\.com|gfbzb|征兵|cpta\.com\.cn|activity\.tencent|meishujia\.cn|zcool\.com\.cn\/work|nipic|huitu\.com|quanjing)/i;
+// searchWeb / 噪声域名 BLOCK 已抽到 lib/websearch.mjs(三频道共用,serper 优先、DDG 兜底)。
 
 // —— 主流程:检索并入库 ——
 // —— 并发控制基础设施(拆掉原来的全局独占锁,支持多人同时各跑各的)——
@@ -131,7 +98,7 @@ async function searchAndHarvest(query, target = 6) {
   const seen = new Set(), cands = [];
   for (const u of rawUrls) {
     let host; try { host = new URL(u).host; } catch (e) { continue; }
-    if (BLOCK.test(u) || isThirdParty(u)) continue;   // 第三方聚合/新闻/门户一律不采,只收主办方本站
+    if (BLOCK.test(u) || isThirdParty(u) || unsafeHost(host)) continue;   // 第三方聚合/门户不采;裸IP/内网host不抓(SSRF闸)
     const key = u.split("#")[0];
     if (seen.has(key)) continue;
     seen.add(key);
@@ -328,23 +295,26 @@ createServer(async (req, res) => {
   }
   if (u.pathname === "/api/search") {
     const q = (u.searchParams.get("q") || "").trim();
+    // 频道参数:opportunities(默认)| news | jobs —— 三频道完全同规格的检索闭环
+    const channel = (u.searchParams.get("channel") || "opportunities").trim();
     const json = (code, obj) => { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
     if (!q) return json(400, { error: "empty query" });
-    const ql = q.toLowerCase();
+    if (channel !== "opportunities" && !CHANNELS[channel]) return json(400, { error: "bad channel" });
+    const ql = channel + ":" + q.toLowerCase();   // 同词去重按"频道+词",资讯和机会各查各的
     const ip = ipOf(req);
     if (rateLimited(ip)) return json(429, { error: "rate", message: "检索太频繁了,请过一会儿再试" });
     // 同词 8 分钟内已检索过、或正在检索中 → 直接返回,不重复全网跑(结果已/即将在库)
-    if (recentlyDone(ql) || inFlight.has(ql)) return json(200, { query: q, added: [], addedCount: 0, cached: true, message: "「" + q + "」刚刚检索过,结果已在库,下拉列表即可看到" });
+    if (recentlyDone(ql) || inFlight.has(ql)) return json(200, { query: q, channel, added: [], addedCount: 0, cached: true, message: "「" + q + "」刚刚检索过,结果已在库,下拉列表即可看到" });
     inFlight.add(ql);
     const t0 = Date.now();
     await acquireSlot();                       // 超并发上限则在此排队等待(不拒绝)
     try {
       const user = auth.userOf(req);
-      auth.logEvent("search", { q: q.slice(0, 80), ip, ...(user ? { uid: user.id, email: user.email } : {}) });
-      const r = await searchAndHarvest(q, 6);
+      auth.logEvent("search", { q: q.slice(0, 80), channel, ip, ...(user ? { uid: user.id, email: user.email } : {}) });
+      const r = channel === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(channel, q, 6);
       recentQ.set(ql, Date.now());             // 成功才进短时缓存
-      json(200, { query: q, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 });
-      process.stderr.write(`[检索] "${q}" ← ${ip} · 并发${running} → 探测${r.probed}/${r.candidates} 入库${r.added.length} (${Date.now() - t0}ms)\n`);
+      json(200, { query: q, channel, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 });
+      process.stderr.write(`[检索·${channel}] "${q}" ← ${ip} · 并发${running} → 探测${r.probed}/${r.candidates} 入库${r.added.length} (${Date.now() - t0}ms)\n`);
     } catch (e) {
       json(500, { error: String(e.message || e) });
     } finally { releaseSlot(); inFlight.delete(ql); }

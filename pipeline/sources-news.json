@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "note": "资讯频道每日信源(run-channels.mjs 用)。全部经实测可抓(2026-07-16)。type=rss 抓 feed,type=html 抓列表页再发现文章链接。source_name 为媒体名,提取缺失时兜底;cap 为该源单次最多处理的新文章数。",
+    "红线": "只抓公开 RSS 与媒体官网;绝不抓微信公众号/小红书/抖音。每条文章逐字 evidence 校验后才入库。"
+  },
+  "sources": [
+    { "id": "hyperallergic", "source_name": "Hyperallergic", "type": "rss", "rss": "https://hyperallergic.com/feed/", "url": "https://hyperallergic.com/feed/", "domain": "hyperallergic.com", "lang": "en" },
+    { "id": "theartnewspaper", "source_name": "The Art Newspaper", "type": "rss", "rss": "https://www.theartnewspaper.com/rss.xml", "url": "https://www.theartnewspaper.com/rss.xml", "domain": "theartnewspaper.com", "lang": "en", "cap": 6 },
+    { "id": "artnet-news", "source_name": "Artnet News", "type": "rss", "rss": "https://news.artnet.com/feed", "url": "https://news.artnet.com/feed", "domain": "news.artnet.com", "lang": "en" },
+    { "id": "artnews", "source_name": "ARTnews", "type": "rss", "rss": "https://www.artnews.com/feed/", "url": "https://www.artnews.com/feed/", "domain": "artnews.com", "lang": "en" },
+    { "id": "artforum", "source_name": "Artforum", "type": "rss", "rss": "https://www.artforum.com/feed/", "url": "https://www.artforum.com/feed/", "domain": "artforum.com", "lang": "en" },
+    { "id": "ocula", "source_name": "Ocula Magazine", "type": "rss", "rss": "https://ocula.com/magazine/feed/", "url": "https://ocula.com/magazine/feed/", "domain": "ocula.com", "lang": "en" },
+    { "id": "colossal", "source_name": "Colossal", "type": "rss", "rss": "https://www.thisiscolossal.com/feed/", "url": "https://www.thisiscolossal.com/feed/", "domain": "thisiscolossal.com", "lang": "en" },
+    { "id": "juxtapoz", "source_name": "Juxtapoz", "type": "rss", "rss": "https://www.juxtapoz.com/news/?format=feed&type=rss", "url": "https://www.juxtapoz.com/news/?format=feed&type=rss", "domain": "juxtapoz.com", "lang": "en" },
+    { "id": "hifructose", "source_name": "Hi-Fructose", "type": "rss", "rss": "https://hifructose.com/feed/", "url": "https://hifructose.com/feed/", "domain": "hifructose.com", "lang": "en", "cap": 5 },
+    { "id": "artron-news", "source_name": "雅昌艺术网", "type": "html", "url": "https://news.artron.net/", "domain": "artron.net", "lang": "zh" },
+    { "id": "art-china", "source_name": "艺术中国", "type": "html", "url": "http://art.china.cn/", "domain": "art.china.cn", "lang": "zh" },
+    { "id": "99ys", "source_name": "99艺术网", "type": "html", "url": "https://www.99ys.com/", "domain": "99ys.com", "lang": "zh" }
+  ]
+}
