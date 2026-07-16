@@ -16,6 +16,8 @@
     sort: "deadline",
     showPast: true,        // 默认显示"过往项目"(灰卡)
     showUpcoming: true,    // 默认显示"即将开启"(周期展下届推算)
+    showUserSub: true,     // 默认显示"用户上传"(trust:user 投稿)
+    showAiSearch: true,    // 默认显示"AI 检索"入库的条目
     favOnly: false,
     pinnedIds: null        // 本次 AI 检索新增的 id 集合:免搜索/筛选过滤,并置顶显示
   };
@@ -23,13 +25,15 @@
   AP.hasActiveMoreFilters = function () {
     return state.regions.size || state.freeOnly || state.funds.size ||
            state.discs.size || state.orgTypes.size || state.verifiedOnly ||
-           state.showPast === false || state.showUpcoming === false;
+           state.showPast === false || state.showUpcoming === false ||
+           state.showUserSub === false || state.showAiSearch === false;
   };
 
   AP.clearMoreFilters = function () {
     state.regions.clear(); state.freeOnly = false; state.funds.clear();
     state.discs.clear(); state.orgTypes.clear(); state.verifiedOnly = false;
     state.showPast = true; state.showUpcoming = true;   // 复位为默认全显
+    state.showUserSub = true; state.showAiSearch = true;
   };
 
   // 主流程:返回过滤+排序后的数组
@@ -53,6 +57,9 @@
       var st = F.itemState(o);
       if (st === "past" && !state.showPast) return false;
       if (st === "upcoming" && !state.showUpcoming) return false;
+      // 来源范围:用户上传 / AI 检索,默认显示,可关
+      if (!state.showUserSub && (o.trust === "user" || o._via === "submit")) return false;
+      if (!state.showAiSearch && o._via === "search") return false;
       // 关键词
       if (q && F.searchText(o).indexOf(q) === -1) return false;
       // 地区

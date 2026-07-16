@@ -268,6 +268,9 @@
     var _sp = $("showPast"), _su = $("showUpcoming");
     if (_sp) _sp.addEventListener("change", function () { st.showPast = this.checked; rerun(); });
     if (_su) _su.addEventListener("change", function () { st.showUpcoming = this.checked; rerun(); });
+    var _sus = $("showUserSub"), _sas = $("showAiSearch");
+    if (_sus) _sus.addEventListener("change", function () { st.showUserSub = this.checked; rerun(); });
+    if (_sas) _sas.addEventListener("change", function () { st.showAiSearch = this.checked; rerun(); });
 
     // 更多筛选:开关(桌面内联 / 手机底部抽屉,同一元素)
     var moreFilters = $("moreFilters"), moreToggle = $("moreToggle");
@@ -312,6 +315,8 @@
       AP.clearMoreFilters();
       if ($("showPast")) $("showPast").checked = true;
       if ($("showUpcoming")) $("showUpcoming").checked = true;
+      if ($("showUserSub")) $("showUserSub").checked = true;
+      if ($("showAiSearch")) $("showAiSearch").checked = true;
       $("freeOnly").checked = false; $("verifiedOnly").checked = false;
       var fb = document.querySelectorAll("[data-fund]"); for (var k = 0; k < fb.length; k++) fb[k].checked = false;
       var chips = document.querySelectorAll("#regionChips .chip, #discChips .chip, #orgTypeChips .chip");
