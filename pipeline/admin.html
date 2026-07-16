@@ -57,6 +57,9 @@
 
     <div class="cards" id="cards"></div>
 
+    <h2>投稿审核 <span class="pill" id="subPending">0 待审</span></h2>
+    <div class="scroll"><table id="subTbl"><thead><tr><th>时间</th><th>标题</th><th>类别</th><th>主办方</th><th>链接</th><th>机审</th><th>投稿人</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+
     <h2>当前在线(近 5 分钟有心跳)</h2>
     <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
 
@@ -162,7 +165,62 @@
       tb.appendChild(tr);
     });
   }
-  var EVT_NAME = { visit: "访问", outbound: "去官网", search: "检索", register: "注册", login: "登录" };
+  // —— 投稿审核 ——
+  function renderSubs(list) {
+    var pending = list.filter(function (s) { return s.status === "pending"; }).length;
+    $("subPending").textContent = pending + " 待审";
+    $("subPending").className = "pill" + (pending > 0 ? " on" : "");
+    var tb = $("subTbl").tBodies[0]; tb.textContent = "";
+    if (!list.length) {
+      var tr0 = document.createElement("tr");
+      var c = td("(暂无投稿)", "muted"); c.colSpan = 9; tr0.appendChild(c); tb.appendChild(tr0); return;
+    }
+    list.slice(0, 100).forEach(function (s) {
+      var p = s.payload || {};
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(s.created_at, true), "mono"));
+      var t = td(p.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "220px"; t.title = p.summary || ""; tr.appendChild(t);
+      tr.appendChild(td(p.category));
+      tr.appendChild(td(p.org));
+      var lk = document.createElement("td");
+      var a = document.createElement("a"); a.href = p.url; a.target = "_blank"; a.rel = "noopener";
+      a.textContent = "打开"; a.style.color = "#7aa7ff"; lk.appendChild(a); tr.appendChild(lk);
+      var mod = s.mod || {};
+      var modTxt = (mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : "") +
+                   (mod.hits && mod.hits.soft && mod.hits.soft.length ? " · 词:" + mod.hits.soft.join(",").slice(0, 30) : "");
+      var mc = td(modTxt, mod.verdict === "pass" ? "" : "muted"); mc.title = (mod.ai && mod.ai.reason) || ""; tr.appendChild(mc);
+      tr.appendChild(td(s.email));
+      var st = document.createElement("td");
+      var pill = document.createElement("span");
+      pill.className = "pill" + (s.status === "approved" ? " on" : "");
+      pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[s.status] || s.status;
+      st.appendChild(pill); tr.appendChild(st);
+      var ops = document.createElement("td");
+      if (s.status === "pending") {
+        ["approve", "reject"].forEach(function (act) {
+          var b = document.createElement("button");
+          b.textContent = act === "approve" ? "通过" : "拒绝";
+          b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" +
+            (act === "approve" ? "#1d3a24;color:#7ee08a" : "#3a1d1d;color:#ff9a8a");
+          b.addEventListener("click", function () {
+            if (!confirm((act === "approve" ? "通过并发布" : "拒绝") + ":" + p.title + "?")) return;
+            post("/api/admin/submissions/decide", { id: s.id, action: act }).then(function (r) {
+              if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+              refreshSubs();
+            });
+          });
+          ops.appendChild(b);
+        });
+      } else ops.appendChild(td("—", "muted").firstChild || document.createTextNode("—"));
+      tr.appendChild(ops);
+      tb.appendChild(tr);
+    });
+  }
+  function refreshSubs() {
+    get("/api/admin/submissions").then(function (r) { renderSubs(r.list || []); }).catch(function () {});
+  }
+
+  var EVT_NAME = { visit: "访问", outbound: "去官网", search: "检索", register: "注册", login: "登录", submit: "投稿" };
   function renderEvents(list) {
     var tb = $("evtTbl").tBodies[0]; tb.textContent = "";
     list.forEach(function (e) {
@@ -182,6 +240,7 @@
       renderCards(o); renderOnline(o.online_users); renderEvents(o.recent || []);
     }).catch(function () { location.reload(); });
     get("/api/admin/users").then(function (r) { allUsers = r.users || []; renderUsers(); }).catch(function () {});
+    refreshSubs();
   }
   $("userSearch").addEventListener("input", renderUsers);
 })();

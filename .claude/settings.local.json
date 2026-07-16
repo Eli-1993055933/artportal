@@ -698,7 +698,14 @@
       "Bash(scp -o ConnectTimeout=20 /tmp/ap-remove.tar.gz admin@60.205.212.195:/tmp/)",
       "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'cd /home/admin/artportal && tar xzf /tmp/ap-remove.tar.gz && rm /tmp/ap-remove.tar.gz && rm -rf site/data/fulltext pipeline/state/pagetrans.json pipeline/lib/fulltext.mjs pipeline/backfill-fulltext.mjs site/js/translate.js && node -e \" *)",
       "Bash(rm /tmp/ap-remove.tar.gz)",
-      "Bash(curl -s -o /dev/null -w \"线上首页: %{http_code}\\\\n\" --max-time 15 http://60.205.212.195/)"
+      "Bash(curl -s -o /dev/null -w \"线上首页: %{http_code}\\\\n\" --max-time 15 http://60.205.212.195/)",
+      "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'node -v; ls /home/admin/artportal/pipeline/package.json 2>/dev/null || echo \"服务器无 package.json\"')",
+      "Bash(sed -i 's|<script src=\"js/auth.js?v=44\"></script>|<script src=\"js/auth.js?v=44\"></script>\\\\n  <script src=\"js/submit.js?v=44\"></script>|' site/index.html)",
+      "Bash(sed -i 's/?v=44/?v=45/g' site/index.html)",
+      "Bash(rm -f pipeline/state/artportal.db pipeline/state/artportal.db-*)",
+      "Bash(scp -o ConnectTimeout=20 /tmp/ap-submit.tar.gz admin@60.205.212.195:/tmp/)",
+      "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'cd /home/admin/artportal && tar xzf /tmp/ap-submit.tar.gz && rm /tmp/ap-submit.tar.gz && cd pipeline && npm install better-sqlite3 --registry=https://registry.npmmirror.com --no-audit --no-fund 2>&1 | tail -1 && node -e \"import\\(\\\\\"better-sqlite3\\\\\"\\).then\\(\\(\\)=>console.log\\(\\\\\"better-sqlite3 OK\\\\\"\\)\\).catch\\(e=>{console.log\\(\\\\\"FAIL:\\\\\",e.message\\);process.exit\\(1\\)}\\)\" && sudo systemctl restart artportal && sleep 2 && systemctl is-active artportal && curl -s -o /dev/null -w \"本机自测: %{http_code}\\\\n\" http://localhost/ && curl -s -X POST http://localhost/api/submit -H \"Content-Type: application/json\" -d \"{}\"')",
+      "Bash(rm /tmp/ap-submit.tar.gz)"
     ],
     "defaultMode": "acceptEdits"
   }

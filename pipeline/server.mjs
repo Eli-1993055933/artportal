@@ -19,6 +19,8 @@ import * as auth from "./lib/auth.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
 import { searchWeb, BLOCK, unsafeHost } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
+import { moderateText } from "./lib/moderation.mjs";
+import * as db from "./lib/db.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -259,6 +261,43 @@ const ipOf = req => {
   return String(req.socket.remoteAddress || "?");
 };
 
+// —— 用户投稿(路线图第3项):登录用户按卡片模板投稿 → 敏感词+机审 → SQLite 待审 → 人工通过才发布 ——
+const CATS = ["opencall", "residency", "award", "workshop"];
+function validateSubmission(b) {
+  const s = v => String(v == null ? "" : v).trim();
+  const title = s(b.title), org = s(b.org), url = s(b.url), category = s(b.category);
+  const city = s(b.city).slice(0, 40), country = s(b.country).slice(0, 40);
+  const deadline = s(b.deadline), summary = s(b.summary).slice(0, 500);
+  if (title.length < 2 || title.length > 120) return { error: "标题需 2–120 字" };
+  if (org.length < 2 || org.length > 80) return { error: "主办方需 2–80 字" };
+  if (!CATS.includes(category)) return { error: "请选择类别" };
+  if (!/^https?:\/\/.{4,300}$/i.test(url)) return { error: "请填写有效的官网链接(http(s):// 开头)" };
+  let host; try { host = new URL(url).host; } catch (e) { return { error: "官网链接格式不正确" }; }
+  if (unsafeHost(host) || BLOCK.test(url)) return { error: "该链接不可用作官网(请填主办方自己的网站)" };
+  if (deadline && !/^\d{4}-\d{2}-\d{2}$/.test(deadline)) return { error: "截止日期格式应为 YYYY-MM-DD" };
+  return { data: { title, org, category, url, city: city || null, country: country || null, deadline: deadline || null, summary: summary || null } };
+}
+// 通过的投稿 → 机会记录(trust:"user" 打"用户投稿·未经核实"标;绝不冒充官网直采)
+function submissionToOpportunity(p, subId) {
+  const today = todayISO();
+  let dom = ""; try { dom = new URL(p.url).host.replace(/^www\./, ""); } catch (e) {}
+  return {
+    id: "submit-" + subId,
+    category: p.category, title_zh: p.title, title_en: null,
+    org_zh: p.org, city_zh: p.city, country_zh: p.country,
+    deadline: p.deadline, deadline_note: "",
+    apply_fee: { free: null, amount: null, currency: null },
+    participation_fee: { required: null, amount: null, currency: null },
+    funding: { stipend: null, housing: null, travel: null },
+    eligibility: { students_ok: null, age_limit: null, nationality: null },
+    disciplines: [], summary_zh: p.summary,
+    url: p.url, source_url: p.url, domain: dom,
+    org_type: null, trust: "user",
+    status: computeStatus(p.deadline), verified_at: null,
+    last_seen: today, updated_at: today, _via: "submit"
+  };
+}
+
 // —— 账号 / 统计 / 管理后台 API(实现见 lib/auth.mjs)——
 async function handleAuthApi(req, res, u) {
   const json = r => { res.writeHead(r.code, { "Content-Type": "application/json; charset=utf-8", ...(r.headers || {}) }); res.end(JSON.stringify(r.body)); };
@@ -274,6 +313,57 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/admin/login" && m === "POST") { const b = await readBody(req); return json(auth.adminLogin(b.password, ip)); }
     if (p === "/api/admin/overview" && m === "GET") return json(auth.isAdmin(req, ip) ? await auth.adminOverview() : { code: 401, body: { error: "unauthorized" } });
     if (p === "/api/admin/users" && m === "GET") return json(auth.isAdmin(req, ip) ? auth.adminUsers() : { code: 401, body: { error: "unauthorized" } });
+    // —— 投稿:提交 / 后台队列 / 人工裁决 ——
+    if (p === "/api/submit" && m === "POST") {
+      const user = auth.userOf(req);
+      if (!user) return json({ code: 401, body: { error: "请先登录后再投稿" } });
+      const b = await readBody(req);
+      const v = validateSubmission(b);
+      if (v.error) return json({ code: 400, body: { error: v.error } });
+      try {
+        if (!(await db.submissionRateOk(user.id))) return json({ code: 429, body: { error: "今天投稿已达上限(5 条),明天再来" } });
+        const modText = [v.data.title, v.data.org, v.data.city, v.data.country, v.data.summary, v.data.url].filter(Boolean).join("\n");
+        const mod = await moderateText(modText);
+        const id = await db.insertSubmission({ uid: user.id, email: user.email, payload: v.data, mod, ip });
+        await db.logModeration("submission", id, "created:" + mod.verdict, { hits: mod.hits, ai: mod.ai });
+        auth.logEvent("submit", { uid: user.id, email: user.email, ip, id: String(id) });
+        if (mod.verdict === "reject") {   // 明显违规:自动拒,留档可查
+          await db.decideSubmission(id, "rejected", "机审自动拒绝");
+          return json({ code: 200, body: { ok: true, status: "rejected" } });
+        }
+        return json({ code: 200, body: { ok: true, status: "pending" } });
+      } catch (e) {
+        process.stderr.write("[submit] " + (e.message || e) + "\n");
+        return json({ code: 503, body: { error: "投稿服务暂不可用,请稍后再试" } });
+      }
+    }
+    if (p === "/api/admin/submissions" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try { return json({ code: 200, body: { list: await db.listSubmissions(200) } }); }
+      catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    if (p === "/api/admin/submissions/decide" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const action = b.action === "approve" ? "approved" : "rejected";
+      try {
+        const row = await db.decideSubmission(Number(b.id), action, b.note);
+        if (!row) return json({ code: 404, body: { error: "not found" } });
+        if (action === "approved") {
+          const rec = submissionToOpportunity(row.payload, row.id);
+          await withWriteLock(async () => {
+            const cur = JSON.parse(await readFile(DATA, "utf8"));
+            if (!cur.opportunities.find(o => o.id === rec.id || o.url === rec.url)) {
+              cur.opportunities.push(rec);
+              cur.count = cur.opportunities.length;
+              await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+            }
+          });
+        }
+        await db.logModeration("submission", b.id, "decided:" + action, null);
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
   } catch (e) {
     return json({ code: 400, body: { error: "请求格式不正确" } });
   }
@@ -290,7 +380,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname.startsWith("/api/admin/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname.startsWith("/api/admin/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {

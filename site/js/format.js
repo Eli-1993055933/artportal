@@ -241,6 +241,15 @@
   var AGG = { "artconnect.com": "ArtConnect", "curatorspace.com": "CuratorSpace", "transartists.org": "TransArtists", "chinaresidencies.com": "China Residencies" };
   F.provenance = function (o) {
     var en = AP.lang === "en";
+    // 用户投稿:人工通过后发布,但平台未逐字核实 → 如实标注(诚实红线)
+    if (o._via === "submit" || o.trust === "user") {
+      return {
+        kind: "aggregator", platform: null,
+        label: en ? "User submission · unverified" : "用户投稿 · 未经核实",
+        detail: en ? "Submitted by a user and approved by a moderator. NOT verified word-by-word by ArtPortal — please confirm on the official site before applying."
+                   : "本条由用户投稿、管理员人工通过后发布;平台未逐字核实内容,申请前请务必以官网为准。"
+      };
+    }
     // 检索(AI 全网搜)来的一律如实标"AI 检索·请核对官网",绝不谎称官网直采
     // (程序无法可靠区分官网/二手,故不硬猜,交由用户点官网核对)
     if (o._via === "search") {

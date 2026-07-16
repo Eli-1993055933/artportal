@@ -10,6 +10,7 @@
     "health": "node run.mjs --health-only"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.1"
+    "@anthropic-ai/sdk": "^0.32.1",
+    "better-sqlite3": "^12.11.1"
   }
 }

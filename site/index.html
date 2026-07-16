@@ -33,7 +33,7 @@
     })();
   </script>
   <!-- 资源版本号:每次改前端 JS/CSS 就把 v 递增一位,强制浏览器加载新版本(避免缓存错配) -->
-  <link rel="stylesheet" href="css/app.css?v=44" />
+  <link rel="stylesheet" href="css/app.css?v=45" />
 </head>
 <body>
   <!-- 顶部栏 -->
@@ -50,10 +50,8 @@
           <span class="fav-text" data-i18n="myFavorites">我的收藏</span>
           <span class="fav-count" id="favCount" hidden>0</span>
         </button>
-        <!-- 「提交机会」暂未接投稿渠道:先隐藏,避免向用户暴露占位。
-             接了真实表单后,把 app.js 的 SUBMIT_FORM_URL 填上并去掉下面的 hidden。 -->
-        <a class="btn btn--dark" id="submitBtn" href="#" target="_blank" rel="noopener"
-           data-i18n="submit" hidden>提交机会</a>
+        <!-- 提交机会:站内投稿(submit.js),登录后填表 → 审核通过才发布 -->
+        <a class="btn btn--dark" id="submitBtn" href="#" data-i18n="submit">提交机会</a>
         <!-- 日间/夜间手动切换:日间显示月亮(点了变夜间),夜间显示太阳;选择记忆在本机。
              aria-pressed 由 app.js 按当前主题同步(读屏可感知开关状态) -->
         <button class="icon-btn theme-toggle" id="themeBtn" type="button" aria-label="夜间模式" aria-pressed="false">
@@ -268,13 +266,14 @@
   <!-- toast -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="js/i18n.js?v=44"></script>
-  <script src="js/format.js?v=44"></script>
-  <script src="js/favorites.js?v=44"></script>
-  <script src="js/filters.js?v=44"></script>
-  <script src="js/render.js?v=44"></script>
-  <script src="js/router.js?v=44"></script>
-  <script src="js/app.js?v=44"></script>
-  <script src="js/auth.js?v=44"></script>
+  <script src="js/i18n.js?v=45"></script>
+  <script src="js/format.js?v=45"></script>
+  <script src="js/favorites.js?v=45"></script>
+  <script src="js/filters.js?v=45"></script>
+  <script src="js/render.js?v=45"></script>
+  <script src="js/router.js?v=45"></script>
+  <script src="js/app.js?v=45"></script>
+  <script src="js/auth.js?v=45"></script>
+  <script src="js/submit.js?v=45"></script>
 </body>
 </html>

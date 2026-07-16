@@ -4,7 +4,6 @@
   var AP = window.AP;
   var F = AP.format;
   var PAGE = 24;
-  var SUBMIT_FORM_URL = ""; // 占位:外部投稿表单链接,后续填入
 
   var $ = function (id) { return document.getElementById(id); };
   var allData = [], filtered = [], rendered = 0;
@@ -358,10 +357,10 @@
       if (sb && !sb.hidden && lastBanner) setSearchBanner(lastBanner.q, lastBanner.n, lastBanner.ch);
     });
 
-    // 提交机会(占位)
+    // 提交机会:站内投稿表单(登录 → 填写 → 审核通过后发布)
     $("submitBtn").addEventListener("click", function (e) {
-      if (!SUBMIT_FORM_URL) { e.preventDefault(); toast(AP.lang === "en" ? "Submission form coming soon" : "投稿表单链接待配置"); }
-      else { this.href = SUBMIT_FORM_URL; }
+      e.preventDefault();
+      if (AP.submitForm) AP.submitForm.open();
     });
 
     // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用)

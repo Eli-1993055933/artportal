@@ -42,6 +42,9 @@
       var when = o.verified_at ? " · " + o.verified_at.slice(5) : "";
       return '<span class="trust trust--verified">' + ICON.check + AP.t("trustVerified") + when + '</span>';
     }
+    if (o.trust === "user") {
+      return '<span class="trust trust--auto">' + ICON.circle + AP.t("trustUser") + '</span>';
+    }
     return '<span class="trust trust--auto">' + ICON.circle + AP.t("trustAuto") + '</span>';
   }
 

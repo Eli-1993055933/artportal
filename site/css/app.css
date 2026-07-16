@@ -468,6 +468,16 @@ img { max-width: 100%; display: block; }
 .auth__tabs button.is-active { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .auth__form input { width: 100%; height: 44px; border: 1px solid var(--line-2); border-radius: 8px; padding: 0 12px; font-size: 14px; background: var(--card); color: var(--ink); margin-bottom: 10px; }
 .auth__form input::placeholder { color: var(--ink-3); }
+/* 投稿表单复用 auth 弹窗样式;补 select/textarea/双列 */
+.auth__form select, .auth__form textarea {
+  width: 100%; border: 1px solid var(--line-2); border-radius: 8px; padding: 9px 12px;
+  font-size: 14px; background: var(--card); color: var(--ink); font-family: inherit; margin-bottom: 10px;
+}
+.auth__form select { height: 44px; padding: 0 12px; }
+.auth__form textarea { min-height: 88px; resize: vertical; }
+.auth__form textarea::placeholder { color: var(--ink-3); }
+.sf-row { display: flex; gap: 8px; }
+.sf-row input { flex: 1; min-width: 0; }
 .auth__err { min-height: 18px; font-size: 12px; color: var(--danger); margin: -4px 0 6px; }
 .auth__submit { width: 100%; min-height: 44px; }
 .auth__privacy { margin: 12px 0 0; font-size: 11px; color: var(--ink-3); line-height: 1.5; }

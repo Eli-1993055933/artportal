@@ -311,6 +311,12 @@
     }, 0);
   }
 
+  // 供其他模块(投稿等)使用的最小接口:查登录态 / 拉起登录弹窗
+  AP.auth = {
+    isIn: function () { return !!user; },
+    openLogin: function (note) { openModal("login", note || null); }
+  };
+
   // ---------- 启动:恢复会话 + 访问上报 + 心跳 ----------
   function init() {
     fetch("/api/auth/me", { credentials: "same-origin" })
