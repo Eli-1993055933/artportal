@@ -78,9 +78,8 @@ function pickWinner(l, r) {
     win = key(r) > key(l) ? r : l;   // 新者胜;平手偏本地(本地有夜间增强)
     lose = win === r ? l : r;
   }
-  // 单侧独有的增强字段(封面/原文存档)嫁接给胜者,不因合并丢失
+  // 单侧独有的增强字段(封面)嫁接给胜者,不因合并丢失
   if (!win.cover && lose.cover) { win.cover = lose.cover; win.cover_source = lose.cover_source; }
-  if (!win.fulltext && lose.fulltext) win.fulltext = lose.fulltext;
   return win;
 }
 
@@ -139,7 +138,6 @@ async function syncDir(relDir, ext, label) {
   console.log(`[${label}] 已补传 ${missing.length} 个`);
 }
 const syncCovers = () => syncDir("site/assets/covers", ".jpg", "covers");
-const syncFulltext = () => syncDir("site/data/fulltext", ".json", "fulltext");
 
 async function main() {
   await mkdir(TMP, { recursive: true });
@@ -150,8 +148,6 @@ async function main() {
   }
   try { await syncCovers(); }
   catch (e) { failed.push("covers: " + (e.message || e)); console.error("[covers] 同步失败:", e.message || e); }
-  try { await syncFulltext(); }
-  catch (e) { failed.push("fulltext: " + (e.message || e)); console.error("[fulltext] 同步失败:", e.message || e); }
   await rm(TMP, { recursive: true, force: true });
   if (failed.length) { console.error(`\n[sync] 有 ${failed.length} 项失败(其余已完成):`, failed.join(" | ")); process.exit(1); }
   console.log(DRY ? "\n[sync] dry-run 完成,未写任何文件" : "\n[sync] 双向同步完成:本地与服务器已收敛到同一份数据");

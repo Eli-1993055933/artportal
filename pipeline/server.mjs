@@ -13,13 +13,12 @@ import { readFile, writeFile, stat, rename } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
-import { extract, llmExtract } from "./lib/extract.mjs";
+import { extract } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
 import { searchWeb, BLOCK, unsafeHost } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
-import { saveFulltext } from "./lib/fulltext.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -137,9 +136,6 @@ async function searchAndHarvest(query, target = 6) {
     const rec = finalize(v.record, url, host);
     if (loc && !matchLocation(rec, loc)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
-    // 官网原文存档:精简成 summary 之前的正文存成静态文件,前端"详情"秒开
-    const ft = await saveFulltext(rec.id, f.text);
-    if (ft) rec.fulltext = ft;
     added.push(rec);
     log.push("✓ " + rec.title_zh);
   }
@@ -225,119 +221,6 @@ function matchLocation(rec, loc) {
   return hay.indexOf(loc) !== -1;
 }
 
-// —— 官网内容速览(机器翻译辅助阅读):按需抓收录的官网页面 → DeepSeek 忠实翻译 → 站内面板展示 ——
-// 诚实与版权边界:只做"辅助阅读",正文限长截取,面板固定标注"机器翻译·以官网原文为准",
-// 主按钮仍是"前往官网";绝不替代官网、不索引、不当作本站内容二次分发。
-// 安全边界:URL 必须是本站数据里收录的链接(官网/资讯原文/招聘申请页)——不做开放代理。
-const TRANS_CACHE_FILE = join(__dir, "state", "pagetrans.json");
-const TRANS_TTL = 7 * 24 * 3600 * 1000;      // 同页译文缓存 7 天(控 API 费)
-const TRANS_NEG_TTL = 10 * 60 * 1000;        // 失败负缓存 10 分钟(防对稳定失败页反复烧钱)
-const TRANS_MAX = 2000;                       // 缓存条数上限(须大于 收录URL数×2语种,否则扫一遍即击穿)
-let transCache = null;
-async function loadTransCache() {
-  if (!transCache) { try { transCache = JSON.parse(await readFile(TRANS_CACHE_FILE, "utf8")); } catch (e) { transCache = {}; } }
-  return transCache;
-}
-// 白名单:三个数据文件里出现过的外链(60 秒缓存,避免每请求重读三份 JSON)
-let knownUrls = { at: 0, set: new Set() };
-async function isKnownUrl(u) {
-  if (Date.now() - knownUrls.at > 60000) {
-    const set = new Set();
-    try { const d = JSON.parse(await readFile(DATA, "utf8")); for (const o of d.opportunities || []) { if (o.url) set.add(o.url); if (o.official_url) set.add(o.official_url); } } catch (e) {}
-    try { const d = JSON.parse(await readFile(join(SITE, "data", "news.json"), "utf8")); for (const o of d.items || []) if (o.url) set.add(o.url); } catch (e) {}
-    try { const d = JSON.parse(await readFile(join(SITE, "data", "jobs.json"), "utf8")); for (const o of d.jobs || []) if (o.apply_url) set.add(o.apply_url); } catch (e) {}
-    knownUrls = { at: Date.now(), set };
-  }
-  return knownUrls.set.has(u);
-}
-// 翻译接口独立限频(6 次/分),与检索限频分开计
-const transHits = new Map();
-function transLimited(ip) {
-  const now = Date.now();
-  const arr = (transHits.get(ip) || []).filter(t => now - t < 60000);
-  if (arr.length >= 6) { transHits.set(ip, arr); return true; }
-  arr.push(now); transHits.set(ip, arr);
-  return false;
-}
-const transInFlight = new Map();              // url+to -> Promise(同页并发请求只翻一次)
-// 翻译独立小信号量(3 并发,排队上限 50):绝不与检索抢 12 个大并发槽,
-// 否则廉价的翻译 GET 能把正在等 170 秒的检索用户饿死(评审 MEDIUM)。
-const TRANS_CONC = 3, TRANS_QUEUE_MAX = 50;
-let transRunning = 0;
-const transWaiters = [];
-function acquireTransSlot() {
-  if (transRunning < TRANS_CONC) { transRunning++; return Promise.resolve(); }
-  if (transWaiters.length >= TRANS_QUEUE_MAX) return null;   // 队伍太长直接请客稍候
-  return new Promise(r => transWaiters.push(r));
-}
-function releaseTransSlot() {
-  if (transWaiters.length) transWaiters.shift()();
-  else transRunning--;
-}
-function persistTransCache(cache) {
-  const keys = Object.keys(cache);
-  if (keys.length > TRANS_MAX) {
-    keys.sort((a, b) => cache[a].at - cache[b].at);
-    for (const k of keys.slice(0, keys.length - TRANS_MAX)) delete cache[k];
-  }
-  // 原子写(tmp+rename):直接覆盖写在进程中断时会把缓存文件截成非法 JSON,下次全量丢失
-  const tmp = TRANS_CACHE_FILE + ".tmp-" + process.pid + "-" + Date.now();
-  withWriteLock(async () => {
-    await writeFile(tmp, JSON.stringify(cache), "utf8");
-    await rename(tmp, TRANS_CACHE_FILE);
-  }).catch(() => {});
-}
-async function translatePage(url, to) {
-  const cache = await loadTransCache();
-  const key = to + "\n" + url;
-  const hit = cache[key];
-  if (hit && hit.neg && Date.now() - hit.at < TRANS_NEG_TTL) throw new Error(hit.fail || "速览失败,请稍后再试");
-  if (hit && !hit.neg && Date.now() - hit.at < TRANS_TTL) { hit.at = Date.now(); return { ...hit, cached: true }; }
-  try {
-    let host; try { host = new URL(url).host; } catch (e) { throw new Error("bad url"); }
-    if (unsafeHost(host)) throw new Error("该页面不支持速览");
-    const f = await fetchSource({ url, domain: host, type: "html" });
-    // SSRF 防线:fetchSource 跟随重定向,落点若是内网/裸 IP,内容绝不能进面板(评审 MEDIUM)
-    if (f.finalUrl) {
-      let fh; try { fh = new URL(f.finalUrl).host; } catch (e) { fh = ""; }
-      if (!fh || unsafeHost(fh)) throw new Error("该页面不支持速览");
-    }
-    if (f.skipped || !f.text || f.text.length < 100) throw new Error("官网页面暂时抓取不到(" + (f.reason || "内容过少") + "),请直接打开官网");
-    // raw 模式:原文直出,不调 LLM(老数据没有 fulltext 存档时的"详情"兜底,秒级、零 API 费)
-    if (to === "raw") {
-      const entry = { title: "", text: f.text.slice(0, 12000), truncated: f.text.length > 12000, at: Date.now() };
-      cache[key] = entry;
-      persistTransCache(cache);
-      return { ...entry, cached: false };
-    }
-    const raw = f.text.slice(0, 7000);
-    const truncated = f.text.length > 7000;
-    const sys = "你是忠实的网页翻译器。把用户给的【网页正文】翻译成" + (to === "en" ? "英文" : "简体中文") +
-      "。只翻译,绝不增删信息、不解释、不评论、不补全;保留段落结构(段落间用 \\n 分隔);" +
-      "数字、日期、金额、邮箱、URL、专有名词原文照抄。若正文本身已是目标语言,原样整理返回。" +
-      '只输出一个 JSON:{"title":"页面标题的译文","text":"正文译文"}';
-    let r;
-    try { r = await llmExtract(sys, "【网页正文】\n\n" + raw, 4000); }
-    catch (e) {
-      // 不把 DeepSeek 原始报错(可能含响应体)透传给访客
-      process.stderr.write("[pagetrans] LLM 失败: " + (e.message || e) + "\n");
-      throw new Error("翻译服务暂时不可用,请稍后再试");
-    }
-    const title = typeof r.data.title === "string" ? r.data.title.slice(0, 200) : "";
-    const text = typeof r.data.text === "string" ? r.data.text.slice(0, 12000) : "";
-    if (!text.trim()) throw new Error("翻译失败,请稍后再试");
-    const entry = { title, text, truncated, at: Date.now() };
-    cache[key] = entry;
-    persistTransCache(cache);
-    return { ...entry, cached: false };
-  } catch (e) {
-    // 失败负缓存:同页 10 分钟内不再反复 fetch+LLM(评审 LOW)
-    cache[key] = { neg: true, fail: String(e.message || e).slice(0, 200), at: Date.now() };
-    persistTransCache(cache);
-    throw e;
-  }
-}
-
 // —— 静态文件服务 ——
 const MIME = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "application/javascript; charset=utf-8", ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".ico": "image/x-icon", ".webp": "image/webp" };
 async function serveStatic(req, res) {
@@ -409,36 +292,6 @@ createServer(async (req, res) => {
   }
   if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname.startsWith("/api/admin/")) {
     return handleAuthApi(req, res, u);
-  }
-  if (u.pathname === "/api/pagetrans") {
-    const url = (u.searchParams.get("url") || "").trim();
-    const toRaw = (u.searchParams.get("to") || "zh");
-    const to = ["zh", "en", "raw"].includes(toRaw) ? toRaw : "zh";
-    const json = (code, obj) => { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
-    if (!/^https?:\/\//i.test(url)) return json(400, { error: "bad url" });
-    const ip = ipOf(req);
-    if (transLimited(ip)) return json(429, { error: "rate", message: "操作太频繁,请稍候再试" });
-    if (!(await isKnownUrl(url))) return json(403, { error: "not allowed", message: "仅支持速览本站收录的官网页面" });
-    const key = to + "\n" + url;
-    const slot = acquireTransSlot();           // 翻译独立小并发池(3),不与检索抢槽
-    if (!slot) return json(429, { error: "busy", message: "速览请求排队太多,请稍候再试" });
-    await slot;
-    try {
-      let p = transInFlight.get(key);
-      if (!p) {
-        p = translatePage(url, to);
-        transInFlight.set(key, p);
-        // 关键:catch(()=>{}) 先把派生链接住,再 finally 清表。
-        // 直接 p.finally(...) 会产生一条无人接住的派生 Promise,任何一次翻译失败
-        // 都会以 unhandledRejection 击杀整个进程(评审 HIGH,已复现)。
-        p.catch(() => {}).finally(() => transInFlight.delete(key));
-      }
-      const r = await p;
-      json(200, { url, to, title: r.title, text: r.text, truncated: !!r.truncated, cached: !!r.cached });
-    } catch (e) {
-      json(500, { error: "trans", message: String(e.message || e).slice(0, 200) });
-    } finally { releaseTransSlot(); }
-    return;
   }
   if (u.pathname === "/api/search") {
     const q = (u.searchParams.get("q") || "").trim();

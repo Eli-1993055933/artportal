@@ -18,7 +18,6 @@ import { llmExtract, MAX_INPUT_CHARS } from "./extract.mjs";
 import { extractCover, looksGeneric } from "./cover.mjs";
 import { fetchSource } from "./fetch.mjs";
 import { searchWeb, BLOCK, unsafeHost } from "./websearch.mjs";
-import { saveFulltext } from "./fulltext.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE_DATA = join(__dir, "..", "..", "site", "data");
@@ -345,9 +344,6 @@ export async function processChannelPage(chKey, page, via) {
     if (cv && !looksGeneric(cv, page.host)) cover = cv;
   }
   const rec = ch.finalize(v.record, page.url, page.host, cover, via || "search");
-  // 官网原文存档:精简前的正文存静态文件,前端"详情"秒开(检索与每日管道都经过这里)
-  const ft = await saveFulltext(rec.id, page.text);
-  if (ft) rec.fulltext = ft;
   return { record: rec, nulled: v.nulled, usage: ex.usage };
 }
 

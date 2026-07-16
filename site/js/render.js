@@ -151,10 +151,7 @@
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         '<div class="card__meta"><span class="m-org">' + esc(n.source || "") + '</span>' + date + '</div>' +
         viaChip(n) +
-        '<div class="card__foot">' +
-          (n.fulltext && n.fulltext.slice(-5) === ".json" ? '<button class="btn btn--ghost" type="button" data-act="ft" data-fulltext="' + esc(n.fulltext) + '">' + AP.t("transQuick") + ' ▸</button>' : '') +
-          '<a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a>' +
-        '</div>' +
+        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a></div>' +
       '</div>';
     return el;
   };
@@ -183,10 +180,7 @@
         (j.deadline ? '<div class="card__deadline due-normal">' + esc(AP.t("job_deadline")) + " " + esc(j.deadline) + '</div>' : "") +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         viaChip(j) +
-        '<div class="card__foot">' +
-          (j.fulltext && j.fulltext.slice(-5) === ".json" ? '<button class="btn btn--ghost" type="button" data-act="ft" data-fulltext="' + esc(j.fulltext) + '">' + AP.t("transQuick") + ' ▸</button>' : '') +
-          '<a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a>' +
-        '</div>' +
+        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a></div>' +
       '</div>';
     return el;
   };
@@ -283,10 +277,6 @@
       provNote +
       mtNote +
       summaryHtml +
-      // 简介下的「详情」小按钮:原地展开入库时已存好的双语官网原文(仅当存档存在;绝不现场翻译)
-      (o.fulltext && o.fulltext.slice(-5) === ".json"
-        ? '<div class="d-morewrap"><button class="btn btn--ghost d-more-btn" data-act="ft" data-fulltext="' + esc(o.fulltext) + '" type="button">' + esc(AP.t("detailMore")) + ' ▸</button></div>'
-        : '') +
       '<div class="d-fields">' +
         row(AP.t("dOrg"), esc(F.loc(o, "org")) || muted(AP.t("notStated"))) +
         row(AP.t("dPlace"), place ? esc(place) : muted(AP.t("notStated"))) +

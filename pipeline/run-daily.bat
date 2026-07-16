@@ -16,8 +16,6 @@ rem 资讯/招聘补中英双语(每日新增大多已自带双语,这里兜底�
 "D:\Node.js\node.exe" --env-file=.env backfill-channel-i18n.mjs >> "D:\Claude Code\pipeline\state\cron.log" 2>&1
 rem 资讯/招聘无封面条目截图(mShots,本机跑,存本站 assets/covers)
 "D:\Node.js\node.exe" --env-file=.env backfill-channel-covers.mjs >> "D:\Claude Code\pipeline\state\cron.log" 2>&1
-rem 给缺双语原文存档的存量条目补档(详情原地展开用;详见 backfill-fulltext.mjs)
-"D:\Node.js\node.exe" --env-file=.env backfill-fulltext.mjs >> "D:\Claude Code\pipeline\state\cron.log" 2>&1
-rem 与服务器按条合并双向同步(数据+封面+原文存档):当晚新抓的自动上线,线上检索/UGC 数据绝不丢(sync-server.mjs)
+rem 与服务器按条合并双向同步(数据+封面):当晚新抓的自动上线,线上检索/UGC 数据绝不丢(sync-server.mjs)
 "D:\Node.js\node.exe" sync-server.mjs >> "D:\Claude Code\pipeline\state\cron.log" 2>&1
 echo ==== done at %date% %time% ==== >> "D:\Claude Code\pipeline\state\cron.log"

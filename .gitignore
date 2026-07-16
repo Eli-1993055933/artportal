@@ -30,4 +30,3 @@ artportal-site.zip
 *.zip
 site/assets/covers/
 pipeline/state/pagetrans.json*
-site/data/fulltext/

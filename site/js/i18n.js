@@ -51,15 +51,6 @@
       stipend: "津贴", housing: "住宿", travel: "路费", students: "学生", age: "年龄", nationality: "国籍",
       reportErr: "信息有误?", reportLink: "反馈给我们", visit: "访问", officialLocated: "官网已联网校正",
       mtNote: "英文内容由机器翻译,请以官网原文措辞为准。",
-      // 官网速览(站内机翻辅助阅读)
-      transQuick: "详情", detailMore: "详情", detailCollapse: "收起",
-      ftSrcNote: "以下为官网页面原文(入库时存档),最新内容以官网为准。",
-      ftMtNote: "以下由官网原文机器翻译(入库时生成),请以官网为准。",
-      ftMissing: "该条目的原文存档暂缺,请直接访问官网查看。",
-      transNote: "以下为该官网页面主要内容的机器翻译,仅供辅助阅读,以官网原文为准。打开官网后,也可使用浏览器自带的网页翻译。",
-      transLoading: "正在抓取官网页面并翻译…(约 10–30 秒)",
-      transFail: "速览失败:官网暂时抓取不到,请直接打开官网查看",
-      transTruncated: "—— 页面较长,以上为开头部分,完整内容请看官网 ——",
       // 账号
       authLoginBtn: "登录", authRegister: "注册", authLogin: "登录",
       authTitleReg: "创建账号", authTitleLog: "欢迎回来",
@@ -128,15 +119,6 @@
       stipend: "Stipend", housing: "Housing", travel: "Travel", students: "Students", age: "Age", nationality: "Nationality",
       reportErr: "Found an error?", reportLink: "Let us know", visit: "Visit", officialLocated: "official site located online",
       mtNote: "English text is machine-translated — see the official site for the original wording.",
-      // Page quick view (in-site MT reading aid)
-      transQuick: "Details", detailMore: "Details", detailCollapse: "Collapse",
-      ftSrcNote: "Original text of the official page (archived at ingestion). See the official site for the latest.",
-      ftMtNote: "Machine-translated from the official page (generated at ingestion). The official site is authoritative.",
-      ftMissing: "No archive for this entry yet — please visit the official site.",
-      transNote: "Machine translation of the page's main content, as a reading aid only — the official site is authoritative. Your browser's built-in page translation also works after opening the site.",
-      transLoading: "Fetching and translating the page… (~10–30s)",
-      transFail: "Quick view failed — the page couldn't be fetched. Please open the official site directly.",
-      transTruncated: "— Long page: this is the beginning. See the official site for the full content —",
       // Account
       authLoginBtn: "Sign in", authRegister: "Sign up", authLogin: "Sign in",
       authTitleReg: "Create account", authTitleLog: "Welcome back",

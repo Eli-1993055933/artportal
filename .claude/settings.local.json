@@ -689,7 +689,16 @@
       "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'ls /home/admin/artportal/site/data/fulltext | wc -l; curl -s -o /dev/null -w \"线上原文文件: HTTP %{http_code}\\\\n\" \"http://localhost/data/fulltext/$\\(ls /home/admin/artportal/site/data/fulltext | head -1\\)\"')",
       "Bash(node --env-file=.env backfill-fulltext.mjs)",
       "Bash(echo \"backfill exit=$?\")",
-      "Bash(curl -s --max-time 175 \"http://localhost:8080/api/search?q=%E9%99%B6%E8%89%BA%E5%B1%95%E8%A7%88&channel=news\")"
+      "Bash(curl -s --max-time 175 \"http://localhost:8080/api/search?q=%E9%99%B6%E8%89%BA%E5%B1%95%E8%A7%88&channel=news\")",
+      "Bash(rm -f site/js/translate.js pipeline/backfill-fulltext.mjs pipeline/lib/fulltext.mjs pipeline/state/pagetrans.json)",
+      "Bash(rm -rf site/data/fulltext)",
+      "Bash(sed -i '/site\\\\/data\\\\/fulltext/d' .gitignore)",
+      "Bash(sed -i '/translate.js/d' site/index.html)",
+      "Bash(sed -i 's/?v=43/?v=44/g' site/index.html)",
+      "Bash(scp -o ConnectTimeout=20 /tmp/ap-remove.tar.gz admin@60.205.212.195:/tmp/)",
+      "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'cd /home/admin/artportal && tar xzf /tmp/ap-remove.tar.gz && rm /tmp/ap-remove.tar.gz && rm -rf site/data/fulltext pipeline/state/pagetrans.json pipeline/lib/fulltext.mjs pipeline/backfill-fulltext.mjs site/js/translate.js && node -e \" *)",
+      "Bash(rm /tmp/ap-remove.tar.gz)",
+      "Bash(curl -s -o /dev/null -w \"线上首页: %{http_code}\\\\n\" --max-time 15 http://60.205.212.195/)"
     ],
     "defaultMode": "acceptEdits"
   }
