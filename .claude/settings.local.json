@@ -706,7 +706,12 @@
       "Bash(scp -o ConnectTimeout=20 /tmp/ap-submit.tar.gz admin@60.205.212.195:/tmp/)",
       "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'cd /home/admin/artportal && tar xzf /tmp/ap-submit.tar.gz && rm /tmp/ap-submit.tar.gz && cd pipeline && npm install better-sqlite3 --registry=https://registry.npmmirror.com --no-audit --no-fund 2>&1 | tail -1 && node -e \"import\\(\\\\\"better-sqlite3\\\\\"\\).then\\(\\(\\)=>console.log\\(\\\\\"better-sqlite3 OK\\\\\"\\)\\).catch\\(e=>{console.log\\(\\\\\"FAIL:\\\\\",e.message\\);process.exit\\(1\\)}\\)\" && sudo systemctl restart artportal && sleep 2 && systemctl is-active artportal && curl -s -o /dev/null -w \"本机自测: %{http_code}\\\\n\" http://localhost/ && curl -s -X POST http://localhost/api/submit -H \"Content-Type: application/json\" -d \"{}\"')",
       "Bash(rm /tmp/ap-submit.tar.gz)",
-      "Bash(grep -n \"assets\\\\\\\\\\\\\\\\/covers\" site/js/format.js)"
+      "Bash(grep -n \"assets\\\\\\\\\\\\\\\\/covers\" site/js/format.js)",
+      "Bash(curl -s -b /tmp/adm3.txt http://localhost:8080/api/admin/ingests)",
+      "Bash(node -e \"let s='';process.stdin.on\\('data',c=>s+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(s\\);console.log\\('溯源记录:',j.list.length,'条'\\);j.list.slice\\(0,3\\).forEach\\(g=>console.log\\('-',g.channel,'|',\\(g.title||''\\).slice\\(0,25\\),'| 检索词:',g.q,'| 用户:',g.email||\\('访客 '+g.ip\\)\\)\\)}\\)\")",
+      "Bash(curl -s \"http://localhost:8080/api/search?q=x&channel=jobs\" -o /dev/null -w \"服务存活: %{http_code}\\\\n\" --max-time 5)",
+      "Bash(curl -s -b /tmp/adm3.txt --max-time 20 http://localhost:8080/api/admin/ingests)",
+      "Bash(node -e \"let s='';process.stdin.on\\('data',c=>s+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(s\\);console.log\\('溯源记录:',j.list.length,'条'\\);j.list.slice\\(0,4\\).forEach\\(g=>console.log\\('-',g.channel,'|',\\(g.title||''\\).slice\\(0,28\\),'| 词:',g.q,'| 用户:',g.email||\\('访客 '+g.ip\\)\\)\\)}\\)\")"
     ],
     "defaultMode": "acceptEdits"
   }

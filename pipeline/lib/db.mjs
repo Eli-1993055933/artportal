@@ -35,6 +35,18 @@ export async function getDb() {
         kind TEXT NOT NULL, ref_id TEXT, action TEXT NOT NULL,
         detail TEXT, at TEXT NOT NULL
       );
+      CREATE TABLE IF NOT EXISTS recycle (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        channel TEXT NOT NULL, record_id TEXT NOT NULL,
+        payload TEXT NOT NULL,
+        deleted_at TEXT NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS search_ingest (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        channel TEXT NOT NULL, record_id TEXT NOT NULL, title TEXT,
+        q TEXT, uid TEXT, email TEXT, ip TEXT, at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_ingest_rec ON search_ingest(record_id);
     `);
     return db;
   } catch (e) {
@@ -74,6 +86,48 @@ export async function countPending() {
   try { const d = await getDb(); return d.prepare("SELECT COUNT(*) n FROM submissions WHERE status='pending'").get().n; }
   catch (e) { return 0; }
 }
+// ---------- 回收站(后台删除的展览项目信息,可恢复/可彻底删除) ----------
+export async function recycleInsert(channel, record) {
+  const d = await getDb();
+  d.prepare("INSERT INTO recycle(channel,record_id,payload,deleted_at) VALUES(?,?,?,?)")
+    .run(channel, record.id, JSON.stringify(record), new Date().toISOString());
+}
+export async function recycleList(limit = 300) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM recycle ORDER BY id DESC LIMIT ?").all(limit)
+    .map(r => ({ ...r, payload: JSON.parse(r.payload) }));
+}
+export async function recycleTake(id) {
+  const d = await getDb();
+  const row = d.prepare("SELECT * FROM recycle WHERE id=?").get(id);
+  if (!row) return null;
+  d.prepare("DELETE FROM recycle WHERE id=?").run(id);
+  return { ...row, payload: JSON.parse(row.payload) };
+}
+
+// ---------- 检索入库溯源(哪个用户的哪次检索把这条信息带进了库) ----------
+export async function ingestInsert({ channel, record_id, title, q, uid, email, ip }) {
+  try {
+    const d = await getDb();
+    d.prepare("INSERT INTO search_ingest(channel,record_id,title,q,uid,email,ip,at) VALUES(?,?,?,?,?,?,?,?)")
+      .run(channel, record_id, title || null, q || null, uid || null, email || null, ip || null, new Date().toISOString());
+  } catch (e) {}
+}
+export async function ingestList(limit = 300) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM search_ingest ORDER BY id DESC LIMIT ?").all(limit);
+}
+// record_id -> 最近一次检索者(email 或 访客ip),供内容管理列表标注
+export async function ingestMap() {
+  try {
+    const d = await getDb();
+    const rows = d.prepare("SELECT record_id, email, ip FROM search_ingest ORDER BY id ASC").all();
+    const m = {};
+    for (const r of rows) m[r.record_id] = r.email || ("访客 " + String(r.ip || "").slice(0, 18));
+    return m;
+  } catch (e) { return {}; }
+}
+
 // 单用户 24 小时内最多 5 条(防灌水)
 export async function submissionRateOk(uid) {
   const d = await getDb();

@@ -10,9 +10,11 @@ import { readFile, writeFile, rename, mkdir, appendFile } from "node:fs/promises
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { wordHits } from "./moderation.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE = join(__dir, "..", "state");
+const AVATARS = join(__dir, "..", "..", "site", "assets", "avatars");
 const USERS_FILE = join(STATE, "users.json");
 const SESS_FILE = join(STATE, "sessions.json");
 const EVENTS_FILE = join(STATE, "events.jsonl");
@@ -39,6 +41,7 @@ export async function initAuth() {
     users = Array.isArray(d.users) ? d.users : [];
   } catch (e) { users = []; }
   byEmail = new Map(users.map(u => [u.email, u]));
+  rebuildNickIndex();
   try {
     const d = JSON.parse(await readFile(SESS_FILE, "utf8"));
     const now = Date.now();
@@ -129,7 +132,58 @@ function authLimited(ip, max = 10, windowMs = 10 * 60 * 1000) {
 
 // ---------- 公开 API 处理器(返回 {code, body, headers?}) ----------
 function publicUser(u) {
-  return { email: u.email, nickname: u.nickname || null, favorites: u.favorites || [], created_at: u.created_at };
+  return {
+    email: u.email, nickname: u.nickname || null, avatar: u.avatar || null,
+    favorites: u.favorites || [], created_at: u.created_at,
+    needs_profile: !(u.nickname && u.avatar)   // 昵称+头像必填;缺任一,前端强制补全
+  };
+}
+
+// ---------- 用户资料:昵称(全站唯一) + 头像(必填) ----------
+// 昵称规范(学习成熟社区经验):2–20 字符,中英文/数字/_-·;
+// 唯一性按"小写+去空白"归一比对(防 "张 三"/"张三" 混淆);保留词与敏感词拒绝。
+const NICK_RE = /^[一-鿿A-Za-z0-9_\-·]{2,20}$/;
+const NICK_RESERVED = /(官方|管理员|管理|客服|站长|admin|artportal|official|moderator|system)/i;
+function nickKey(n) { return String(n).toLowerCase().replace(/\s+/g, ""); }
+let byNick = new Map();   // nickKey -> uid(initAuth 时建,更新时维护)
+function rebuildNickIndex() {
+  byNick = new Map(users.filter(u => u.nickname).map(u => [nickKey(u.nickname), u.id]));
+}
+export async function setProfile(req, body, ip) {
+  const u = userOf(req);
+  if (!u) return { code: 401, body: { error: "未登录" } };
+  if (authLimited("profile:" + u.id, 12, 10 * 60 * 1000)) return { code: 429, body: { error: "操作太频繁,请稍后再试" } };
+  const nickname = String((body || {}).nickname || "").trim().replace(/\s+/g, " ");
+  if (!NICK_RE.test(nickname.replace(/ /g, ""))) return { code: 400, body: { error: "昵称需 2–20 字,可用中英文、数字、_-·" } };
+  if (NICK_RESERVED.test(nickname)) return { code: 400, body: { error: "该昵称包含保留词,请换一个" } };
+  const hits = await wordHits(nickname);
+  if (hits.hard.length || hits.soft.length) return { code: 400, body: { error: "昵称包含不允许的词,请换一个" } };
+  const key = nickKey(nickname);
+  const holder = byNick.get(key);
+  if (holder && holder !== u.id) {
+    const suggest = nickname + String(100 + Math.floor(Math.random() * 900));
+    return { code: 409, body: { error: "该昵称已被使用,试试「" + suggest + "」", suggest } };
+  }
+  // 头像:必须有(新传的 base64,或此前已设置过)
+  const avatar = typeof (body || {}).avatar === "string" ? body.avatar : "";
+  if (!avatar && !u.avatar) return { code: 400, body: { error: "请设置头像(上传图片或使用默认头像)" } };
+  if (avatar) {
+    if (!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(avatar) || avatar.length > 300000) {
+      return { code: 400, body: { error: "头像图片无效或过大" } };
+    }
+    let buf;
+    try { buf = Buffer.from(avatar.slice(23), "base64"); } catch (e) { return { code: 400, body: { error: "头像图片无效" } }; }
+    if (buf.length < 100 || buf.length > 220000) return { code: 400, body: { error: "头像图片无效或过大" } };
+    await mkdir(AVATARS, { recursive: true });
+    await writeFile(join(AVATARS, u.id + ".jpg"), buf);
+    u.avatar = "assets/avatars/" + u.id + ".jpg";
+  }
+  if (u.nickname) byNick.delete(nickKey(u.nickname));
+  u.nickname = nickname;
+  byNick.set(key, u.id);
+  saveUsers();
+  logEvent("profile", { uid: u.id, email: u.email, ip, nickname });
+  return { code: 200, body: { user: publicUser(u) } };
 }
 
 export function register(email, password, ip) {
@@ -307,7 +361,7 @@ export async function adminOverview() {
 }
 export function adminUsers() {
   const list = users.slice().reverse().map(u => ({
-    email: u.email, nickname: u.nickname, created_at: u.created_at,
+    email: u.email, nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
     last_seen: u.last_seen, favorites: (u.favorites || []).length
   }));
   return { code: 200, body: { total: list.length, users: list } };

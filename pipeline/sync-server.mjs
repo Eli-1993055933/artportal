@@ -89,6 +89,33 @@ async function readJsonStrict(path) {
   return d;
 }
 
+// 墓碑:后台删除的记录 id(两侧合并前先剔除,防"一侧删了另一侧又合并复活")。
+// 服务器与本机的墓碑取并集,应用后把并集写回两侧。
+async function loadTombs() {
+  const localPath = join(__dir, "state", "tombstones.json");
+  const remoteTmp = join(TMP, "remote-tombstones.json");
+  let local = {}, remote = {};
+  try { local = JSON.parse(await readFile(localPath, "utf8")); } catch (e) {}
+  try { scpDown(`${RBASE}/pipeline/state/tombstones.json`, remoteTmp); remote = JSON.parse(await readFile(remoteTmp, "utf8")); } catch (e) {}
+  const union = {};
+  for (const src of [local, remote]) {
+    for (const chKey of Object.keys(src)) {
+      union[chKey] = union[chKey] || {};
+      Object.assign(union[chKey], src[chKey]);
+    }
+  }
+  if (!DRY) {
+    const body = JSON.stringify(union, null, 2);
+    await writeFile(localPath, body, "utf8");
+    const up = join(TMP, "tombstones-up.json");
+    await writeFile(up, body, "utf8");
+    scpUp(up, "/tmp/tombstones.json");
+    ssh(`mv /tmp/tombstones.json ${RBASE}/pipeline/state/tombstones.json`);
+  }
+  return union;
+}
+let TOMBS = {};
+
 async function syncChannel(ch) {
   const localPath = join(SITE, "data", ch.file);
   const remoteTmp = join(TMP, "remote-" + ch.file);
@@ -96,8 +123,10 @@ async function syncChannel(ch) {
   scpDown(`${RBASE}/site/data/${ch.file}`, remoteTmp);
   const localDoc = await readJsonStrict(localPath);
   const remoteDoc = await readJsonStrict(remoteTmp);
-  const localList = localDoc[ch.key] || [];
-  const remoteList = remoteDoc[ch.key] || [];
+  const chName = ch.file.replace(".json", "");
+  const dead = TOMBS[chName] || {};
+  const localList = (localDoc[ch.key] || []).filter(o => !dead[o.id]);
+  const remoteList = (remoteDoc[ch.key] || []).filter(o => !dead[o.id]);
   // 2) 合并
   const { list, stats } = mergeLists(localList, remoteList, ch.urlOf);
   const floor = Math.max(localList.length, remoteList.length) - stats.urlDropped;
@@ -142,6 +171,8 @@ const syncCovers = () => syncDir("site/assets/covers", ".jpg", "covers");
 async function main() {
   await mkdir(TMP, { recursive: true });
   const failed = [];
+  try { TOMBS = await loadTombs(); }
+  catch (e) { console.error("[tombs] 墓碑同步失败(继续,但删除可能复活):", e.message || e); }
   for (const ch of CHANNELS) {
     try { await syncChannel(ch); }
     catch (e) { failed.push(ch.file + ": " + (e.message || e)); console.error(`[${ch.file}] 同步失败:`, e.message || e); }

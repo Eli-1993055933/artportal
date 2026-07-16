@@ -57,6 +57,16 @@
 
     <div class="cards" id="cards"></div>
 
+    <h2>内容管理(展览项目信息;删除进回收站)</h2>
+    <input class="searchbox" id="contentSearch" placeholder="按标题/机构/ID 筛选…" />
+    <div class="scroll"><table id="contentTbl"><thead><tr><th>标题</th><th>类别</th><th>机构</th><th>来源</th><th>检索者</th><th>更新</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>回收站 <span class="pill" id="recycleN">0</span></h2>
+    <div class="scroll"><table id="recycleTbl"><thead><tr><th>删除时间</th><th>标题</th><th>机构</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+
+    <h2>检索入库溯源(谁的检索把信息带进了库)</h2>
+    <div class="scroll"><table id="ingestTbl"><thead><tr><th>时间</th><th>频道</th><th>检索词</th><th>入库条目</th><th>用户</th></tr></thead><tbody></tbody></table></div>
+
     <h2>投稿审核 <span class="pill" id="subPending">0 待审</span></h2>
     <div class="scroll"><table id="subTbl"><thead><tr><th>时间</th><th>标题</th><th>类别</th><th>主办方</th><th>链接</th><th>机审</th><th>投稿人</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
 
@@ -64,8 +74,8 @@
     <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
 
     <h2>注册用户名册</h2>
-    <input class="searchbox" id="userSearch" placeholder="按邮箱筛选…" />
-    <div class="scroll"><table id="usersTbl"><thead><tr><th>邮箱</th><th>昵称</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
+    <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称筛选…" />
+    <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
 
     <h2>近期事件(最新 30 条)</h2>
     <div class="scroll"><table id="evtTbl"><thead><tr><th>时间</th><th>类型</th><th>谁</th><th>详情</th></tr></thead><tbody></tbody></table></div>
@@ -155,16 +165,105 @@
   function renderUsers() {
     var q = $("userSearch").value.trim().toLowerCase();
     var tb = $("usersTbl").tBodies[0]; tb.textContent = "";
-    allUsers.filter(function (u) { return !q || (u.email || "").indexOf(q) !== -1; }).slice(0, 500).forEach(function (u) {
+    allUsers.filter(function (u) { return !q || (u.email || "").indexOf(q) !== -1 || (u.nickname || "").toLowerCase().indexOf(q) !== -1; }).slice(0, 500).forEach(function (u) {
       var tr = document.createElement("tr");
+      var av = document.createElement("td");
+      if (u.avatar) { var im = document.createElement("img"); im.src = "/" + u.avatar; im.style.cssText = "width:26px;height:26px;border-radius:50%;object-fit:cover;display:block"; av.appendChild(im); }
+      else av.textContent = "—";
+      tr.appendChild(av);
+      tr.appendChild(td(u.nickname || "(未设置)", u.nickname ? "" : "muted"));
       tr.appendChild(td(u.email));
-      tr.appendChild(td(u.nickname || "—"));
       tr.appendChild(td(bj(u.created_at, true), "mono"));
       tr.appendChild(td(rel(u.last_seen), "mono"));
       tr.appendChild(td(u.favorites, "mono"));
       tb.appendChild(tr);
     });
   }
+
+  // —— 内容管理 + 回收站 + 检索溯源 ——
+  var allContent = [];
+  function renderContent() {
+    var q = $("contentSearch").value.trim().toLowerCase();
+    var tb = $("contentTbl").tBodies[0]; tb.textContent = "";
+    var VIA = { search: "AI检索", submit: "用户投稿", daily: "每日抓取" };
+    allContent.filter(function (o) {
+      return !q || (o.title || "").toLowerCase().indexOf(q) !== -1 || (o.org || "").toLowerCase().indexOf(q) !== -1 || o.id.indexOf(q) !== -1;
+    }).slice(0, 120).forEach(function (o) {
+      var tr = document.createElement("tr");
+      var t = td(o.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "260px"; tr.appendChild(t);
+      tr.appendChild(td(o.category));
+      tr.appendChild(td(o.org));
+      tr.appendChild(td(VIA[o.via] || o.via || "每日抓取"));
+      tr.appendChild(td(o.searched_by || "—", o.searched_by ? "" : "muted"));
+      tr.appendChild(td((o.updated_at || "").slice(0, 10), "mono"));
+      var ops = document.createElement("td");
+      var del = document.createElement("button");
+      del.textContent = "删除";
+      del.style.cssText = "padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:#3a1d1d;color:#ff9a8a";
+      del.addEventListener("click", function () {
+        if (!confirm("删除「" + o.title + "」?(会进回收站,可恢复)")) return;
+        post("/api/admin/content/delete", { id: o.id }).then(function (r) {
+          if (!r.ok) { alert(r.data && r.data.error || "删除失败"); return; }
+          refreshContent();
+        });
+      });
+      ops.appendChild(del); tr.appendChild(ops);
+      tb.appendChild(tr);
+    });
+  }
+  function renderRecycle(list) {
+    $("recycleN").textContent = String(list.length);
+    var tb = $("recycleTbl").tBodies[0]; tb.textContent = "";
+    if (!list.length) {
+      var tr0 = document.createElement("tr");
+      var c = td("(回收站为空)", "muted"); c.colSpan = 4; tr0.appendChild(c); tb.appendChild(tr0); return;
+    }
+    list.slice(0, 100).forEach(function (r) {
+      var p = r.payload || {};
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(r.deleted_at, true), "mono"));
+      var t = td(p.title_zh || p.title_en || r.record_id); t.style.whiteSpace = "normal"; t.style.maxWidth = "280px"; tr.appendChild(t);
+      tr.appendChild(td(p.org_zh || "—"));
+      var ops = document.createElement("td");
+      [["restore", "恢复", "#1d3a24", "#7ee08a"], ["purge", "彻底删除", "#3a1d1d", "#ff9a8a"]].forEach(function (d) {
+        var b = document.createElement("button");
+        b.textContent = d[1];
+        b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + d[2] + ";color:" + d[3];
+        b.addEventListener("click", function () {
+          if (d[0] === "purge" && !confirm("彻底删除「" + (p.title_zh || r.record_id) + "」?不可恢复!")) return;
+          post("/api/admin/recycle/" + d[0], { id: r.id }).then(function (x) {
+            if (!x.ok) { alert(x.data && x.data.error || "操作失败"); return; }
+            refreshContent();
+          });
+        });
+        ops.appendChild(b);
+      });
+      tr.appendChild(ops);
+      tb.appendChild(tr);
+    });
+  }
+  function renderIngests(list) {
+    var tb = $("ingestTbl").tBodies[0]; tb.textContent = "";
+    if (!list.length) {
+      var tr0 = document.createElement("tr");
+      var c = td("(暂无检索入库记录;此功能上线后的新检索会在这里留痕)", "muted"); c.colSpan = 5; tr0.appendChild(c); tb.appendChild(tr0); return;
+    }
+    list.slice(0, 100).forEach(function (g) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(g.at, false), "mono"));
+      tr.appendChild(td({ opportunities: "机会", news: "资讯", jobs: "招聘" }[g.channel] || g.channel));
+      tr.appendChild(td(g.q || "—"));
+      var t = td(g.title || g.record_id); t.style.whiteSpace = "normal"; t.style.maxWidth = "260px"; tr.appendChild(t);
+      tr.appendChild(td(g.email || ("访客 " + (g.ip || "?"))));
+      tb.appendChild(tr);
+    });
+  }
+  function refreshContent() {
+    get("/api/admin/content").then(function (r) { allContent = r.list || []; renderContent(); }).catch(function () {});
+    get("/api/admin/recycle").then(function (r) { renderRecycle(r.list || []); }).catch(function () {});
+    get("/api/admin/ingests").then(function (r) { renderIngests(r.list || []); }).catch(function () {});
+  }
+  $("contentSearch") && $("contentSearch").addEventListener("input", renderContent);
   // —— 投稿审核 ——
   function renderSubs(list) {
     var pending = list.filter(function (s) { return s.status === "pending"; }).length;
@@ -252,6 +351,7 @@
     }).catch(function () { location.reload(); });
     get("/api/admin/users").then(function (r) { allUsers = r.users || []; renderUsers(); }).catch(function () {});
     refreshSubs();
+    refreshContent();
   }
   $("userSearch").addEventListener("input", renderUsers);
 })();

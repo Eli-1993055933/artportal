@@ -86,6 +86,12 @@
       gateGoBtn: "前往官网 ↗",
       authLogout: "退出登录", authLoggedOut: "已退出登录",
       authPrivacy: "邮箱仅用于登录与找回账号,不公开、不对第三方提供。",
+      pfTitle: "完善你的资料",
+      pfNote: "昵称和头像是必填项(社区功能需要),1 分钟完成。昵称全站唯一。",
+      pfPhNick: "昵称(2–20 字,中英文/数字/_-·)",
+      pfUpload: "上传头像", pfDefault: "使用默认头像", pfSave: "保存",
+      pfErrNick: "昵称至少 2 个字", pfErrAva: "请上传头像或点“使用默认头像”",
+      pfErrImg: "图片无效,请换一张", pfDone: "资料已保存!",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -172,6 +178,12 @@
       gateGoBtn: "Go to official site ↗",
       authLogout: "Sign out", authLoggedOut: "Signed out",
       authPrivacy: "Your email is used only for sign-in and account recovery. Never public, never shared.",
+      pfTitle: "Complete your profile",
+      pfNote: "Nickname and avatar are required (for community features) — takes a minute. Nicknames are unique site-wide.",
+      pfPhNick: "Nickname (2–20 chars)",
+      pfUpload: "Upload avatar", pfDefault: "Use default avatar", pfSave: "Save",
+      pfErrNick: "Nickname needs 2+ chars", pfErrAva: "Upload an avatar or tap “Use default avatar”",
+      pfErrImg: "Invalid image — try another", pfDone: "Profile saved!",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

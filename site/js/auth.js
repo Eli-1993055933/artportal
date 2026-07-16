@@ -204,9 +204,10 @@
     toast(isNew ? AP.t("authWelcomeNew") : AP.t("authWelcomeBack"));
     // 注册墙场景:不能在 fetch 回调里 window.open(微信/iOS 会拦弹窗)。
     // 改成弹窗内放一个真链接按钮,由用户亲手点击(真实手势)打开官网。
-    if (go) { showGoStep(go, isNew ? AP.t("authWelcomeNew") : AP.t("authWelcomeBack")); return; }
+    if (go) { showGoStep(go, isNew ? AP.t("authWelcomeNew") : AP.t("authWelcomeBack")); requireProfile(); return; }
     var el = document.getElementById("authModal");
     if (el) el.hidden = true;
+    requireProfile();   // 昵称/头像缺失 → 立即补全(新注册与老用户登录同样强制)
   }
   function showGoStep(url, title) {
     var panel = document.querySelector("#authModal .auth__panel");
@@ -268,7 +269,14 @@
     }
     if (user) {
       var name = user.nickname || user.email.split("@")[0];
-      btn.textContent = name.length > 10 ? name.slice(0, 9) + "…" : name;
+      var label = name.length > 10 ? name.slice(0, 9) + "…" : name;
+      btn.textContent = "";
+      if (user.avatar) {
+        var im = document.createElement("img");
+        im.className = "auth-avatar"; im.alt = ""; im.src = user.avatar;
+        btn.appendChild(im);
+      }
+      btn.appendChild(document.createTextNode(label));
       btn.removeAttribute("data-i18n");
     } else {
       btn.textContent = AP.t("authLoginBtn");
@@ -311,6 +319,109 @@
     }, 0);
   }
 
+  // ---------- 资料补全(昵称+头像,全站必填;老用户下次进站强制补) ----------
+  var avatarData = null;
+  function profileModal() {
+    var el = document.getElementById("profileModal");
+    if (el) return el;
+    el = document.createElement("div");
+    el.className = "auth"; el.id = "profileModal"; el.hidden = true;
+    // 刻意不给关闭按钮/遮罩关闭:昵称头像是必填项,填完才能继续(用户要求"必须立刻补上")
+    el.innerHTML =
+      '<div class="auth__scrim"></div>' +
+      '<div class="auth__panel" role="dialog" aria-modal="true">' +
+        '<h2 class="auth__title">' + esc(AP.t("pfTitle")) + '</h2>' +
+        '<p class="auth__note">' + esc(AP.t("pfNote")) + '</p>' +
+        '<form class="auth__form" id="pfForm" novalidate>' +
+          '<input type="text" id="pfNick" maxlength="20" placeholder="' + esc(AP.t("pfPhNick")) + '" autocomplete="nickname" />' +
+          '<div class="pf-ava">' +
+            '<img id="pfPrev" alt="" />' +
+            '<div class="pf-ava__btns">' +
+              '<label class="btn btn--ghost pf-file">' + esc(AP.t("pfUpload")) + '<input type="file" id="pfFile" accept="image/*" hidden /></label>' +
+              '<button type="button" class="btn btn--ghost" id="pfGen">' + esc(AP.t("pfDefault")) + '</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="auth__err" id="pfErr"></div>' +
+          '<button type="submit" class="btn btn--dark auth__submit" id="pfGo">' + esc(AP.t("pfSave")) + '</button>' +
+        '</form>' +
+      '</div>';
+    document.body.appendChild(el);
+    document.getElementById("pfFile").addEventListener("change", onAvatarPick);
+    document.getElementById("pfGen").addEventListener("click", genDefaultAvatar);
+    document.getElementById("pfForm").addEventListener("submit", onProfileSubmit);
+    return el;
+  }
+  // 头像统一 256×256 JPEG:上传图居中裁方再压缩
+  function drawSquare(img) {
+    var c = document.createElement("canvas"); c.width = 256; c.height = 256;
+    var g = c.getContext("2d");
+    var s = Math.min(img.width, img.height);
+    g.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 256, 256);
+    return c.toDataURL("image/jpeg", 0.82);
+  }
+  function onAvatarPick() {
+    var f = document.getElementById("pfFile").files[0];
+    var err = document.getElementById("pfErr");
+    if (!f) return;
+    if (!/^image\//.test(f.type)) { err.textContent = AP.t("pfErrImg"); return; }
+    var url = URL.createObjectURL(f);
+    var img = new Image();
+    img.onload = function () {
+      URL.revokeObjectURL(url);
+      avatarData = drawSquare(img);
+      var p = document.getElementById("pfPrev"); p.src = avatarData; p.classList.add("has");
+      err.textContent = "";
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); err.textContent = AP.t("pfErrImg"); };
+    img.src = url;
+  }
+  // 默认头像:昵称首字 + 按昵称哈希取色(没图也能 2 秒完成)
+  function genDefaultAvatar() {
+    var nick = document.getElementById("pfNick").value.trim() || (user && user.email ? user.email[0] : "A");
+    var h = 0; for (var i = 0; i < nick.length; i++) h = (h * 31 + nick.charCodeAt(i)) >>> 0;
+    var c = document.createElement("canvas"); c.width = 256; c.height = 256;
+    var g = c.getContext("2d");
+    g.fillStyle = "hsl(" + (h % 360) + ", 48%, 46%)"; g.fillRect(0, 0, 256, 256);
+    g.fillStyle = "#fff"; g.font = "700 128px -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif";
+    g.textAlign = "center"; g.textBaseline = "middle";
+    g.fillText(nick.charAt(0).toUpperCase(), 128, 140);
+    avatarData = c.toDataURL("image/jpeg", 0.85);
+    var p = document.getElementById("pfPrev"); p.src = avatarData; p.classList.add("has");
+    document.getElementById("pfErr").textContent = "";
+  }
+  function onProfileSubmit(e) {
+    e.preventDefault();
+    var err = document.getElementById("pfErr");
+    var nick = document.getElementById("pfNick").value.trim();
+    if (nick.length < 2) { err.textContent = AP.t("pfErrNick"); return; }
+    if (!avatarData && !(user && user.avatar)) { err.textContent = AP.t("pfErrAva"); return; }
+    var btn = document.getElementById("pfGo");
+    btn.disabled = true;
+    post("/api/auth/profile", { nickname: nick, avatar: avatarData || "" })
+      .then(function (r) {
+        btn.disabled = false;
+        if (!r.ok) {
+          err.textContent = (r.data && r.data.error) || AP.t("authNetErr");
+          if (r.data && r.data.suggest) document.getElementById("pfNick").value = r.data.suggest;
+          return;
+        }
+        user = r.data.user;
+        avatarData = null;
+        updateTopbar();
+        document.getElementById("profileModal").hidden = true;
+        toast(AP.t("pfDone"));
+      })
+      .catch(function () { btn.disabled = false; err.textContent = AP.t("authNetErr"); });
+  }
+  function requireProfile() {
+    if (!user || !user.needs_profile) return;
+    profileModal();
+    document.getElementById("pfNick").value = user.nickname || "";
+    if (user.avatar) { var p = document.getElementById("pfPrev"); p.src = user.avatar; p.classList.add("has"); }
+    document.getElementById("profileModal").hidden = false;
+    setTimeout(function () { document.getElementById("pfNick").focus(); }, 60);
+  }
+
   // 供其他模块(投稿等)使用的最小接口:查登录态 / 拉起登录弹窗
   AP.auth = {
     isIn: function () { return !!user; },
@@ -326,6 +437,7 @@
         sessionReady = true;
         if (user) { rememberAuthed(user); adoptFavorites(user); }   // 会话有效:记住设备+清零计数
         updateTopbar();
+        requireProfile();   // 老用户没补昵称/头像 → 进站即提示必须补上
       })
       .catch(function () { sessionReady = true; updateTopbar(); });
     post("/api/track", { type: "visit", anon: anonId() });

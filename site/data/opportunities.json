@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-16",
-  "count": 306,
+  "count": 307,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -22005,6 +22005,52 @@
       "last_seen": "2026-07-16",
       "updated_at": "2026-07-16",
       "_via": "search"
+    },
+    {
+      "id": "submit-1",
+      "category": "opencall",
+      "title_zh": "这是一个测试",
+      "title_en": null,
+      "org_zh": "Eli",
+      "city_zh": "B市",
+      "country_zh": "C国",
+      "deadline": "2026-12-01",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "我不知道",
+      "url": null,
+      "source_url": null,
+      "domain": "",
+      "source_note": "我随便写的",
+      "org_type": null,
+      "trust": "user",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-16",
+      "updated_at": "2026-07-16",
+      "_via": "submit",
+      "cover": "assets/covers/submit-1.jpg",
+      "cover_source": "user"
     }
   ]
 }

@@ -312,6 +312,29 @@ function submissionToOpportunity(p, subId) {
   };
 }
 
+// —— 墓碑(tombstones):后台删除的记录 id 落此文件,夜间 sync 据此在两侧同删,
+//    防止"服务器删了、本机还有 → 合并又复活"。恢复时从墓碑移除。 ——
+const TOMB_PATH = join(__dir, "state", "tombstones.json");
+async function readTombs() {
+  try { return JSON.parse(await readFile(TOMB_PATH, "utf8")); } catch (e) { return {}; }
+}
+function writeTombs(t) {
+  return withWriteLock(async () => {
+    const tmp = TOMB_PATH + ".tmp-" + process.pid;
+    await writeFile(tmp, JSON.stringify(t, null, 2), "utf8");
+    await rename(tmp, TOMB_PATH);
+  });
+}
+async function tombAdd(channel, id) {
+  const t = await readTombs();
+  (t[channel] || (t[channel] = {}))[id] = new Date().toISOString();
+  await writeTombs(t);
+}
+async function tombRemove(channel, id) {
+  const t = await readTombs();
+  if (t[channel] && t[channel][id]) { delete t[channel][id]; await writeTombs(t); }
+}
+
 // —— 账号 / 统计 / 管理后台 API(实现见 lib/auth.mjs)——
 async function handleAuthApi(req, res, u) {
   const json = r => { res.writeHead(r.code, { "Content-Type": "application/json; charset=utf-8", ...(r.headers || {}) }); res.end(JSON.stringify(r.body)); };
@@ -322,6 +345,7 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(auth.register(b.email, b.password, ip)); }
     if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.email, b.password, ip)); }
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
+    if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
     if (p === "/api/track" && m === "POST") { const b = await readBody(req); return json(auth.track(req, b, ip)); }
     if (p === "/api/admin/login" && m === "POST") { const b = await readBody(req); return json(auth.adminLogin(b.password, ip)); }
@@ -354,6 +378,72 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/admin/submissions" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
       try { return json({ code: 200, body: { list: await db.listSubmissions(200) } }); }
+      catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    // —— 内容管理:列表(带检索溯源)/删除进回收站/回收站列表/恢复/彻底删除 ——
+    if (p === "/api/admin/content" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const cur = JSON.parse(await readFile(DATA, "utf8"));
+      const who = await db.ingestMap();
+      const list = cur.opportunities.map(o => ({
+        id: o.id, title: o.title_zh || o.title_en, category: o.category, org: o.org_zh,
+        via: o._via || "daily", trust: o.trust, updated_at: o.updated_at,
+        searched_by: o._via === "search" ? (who[o.id] || null) : null
+      }));
+      return json({ code: 200, body: { list } });
+    }
+    if (p === "/api/admin/content/delete" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const id = String(b.id || "");
+      let removed = null;
+      await withWriteLock(async () => {
+        const cur = JSON.parse(await readFile(DATA, "utf8"));
+        const i = cur.opportunities.findIndex(o => o.id === id);
+        if (i === -1) return;
+        removed = cur.opportunities.splice(i, 1)[0];
+        cur.count = cur.opportunities.length;
+        await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+      });
+      if (!removed) return json({ code: 404, body: { error: "not found" } });
+      try { await db.recycleInsert("opportunities", removed); } catch (e) {}
+      await tombAdd("opportunities", id);
+      await db.logModeration("content", id, "deleted", { title: removed.title_zh });
+      return json({ code: 200, body: { ok: true } });
+    }
+    if (p === "/api/admin/recycle" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try { return json({ code: 200, body: { list: await db.recycleList() } }); }
+      catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    if (p === "/api/admin/recycle/restore" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const row = await db.recycleTake(Number(b.id));
+      if (!row) return json({ code: 404, body: { error: "not found" } });
+      await withWriteLock(async () => {
+        const cur = JSON.parse(await readFile(DATA, "utf8"));
+        if (!cur.opportunities.find(o => o.id === row.record_id)) {
+          cur.opportunities.push(row.payload);
+          cur.count = cur.opportunities.length;
+          await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+        }
+      });
+      await tombRemove(row.channel, row.record_id);
+      await db.logModeration("content", row.record_id, "restored", null);
+      return json({ code: 200, body: { ok: true } });
+    }
+    if (p === "/api/admin/recycle/purge" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const row = await db.recycleTake(Number(b.id));   // 取出即删;墓碑保留,两侧不再复活
+      if (!row) return json({ code: 404, body: { error: "not found" } });
+      await db.logModeration("content", row.record_id, "purged", null);
+      return json({ code: 200, body: { ok: true } });
+    }
+    if (p === "/api/admin/ingests" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try { return json({ code: 200, body: { list: await db.ingestList() } }); }
       catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
     if (p === "/api/admin/submissions/decide" && m === "POST") {
@@ -429,6 +519,10 @@ createServer(async (req, res) => {
       const user = auth.userOf(req);
       auth.logEvent("search", { q: q.slice(0, 80), channel, ip, ...(user ? { uid: user.id, email: user.email } : {}) });
       const r = channel === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(channel, q, 6);
+      // 检索入库溯源:每条新入库记录记下"谁的哪次检索带进来的"(后台可查)
+      for (const rec of r.added) {
+        db.ingestInsert({ channel, record_id: rec.id, title: rec.title_zh || rec.title, q: q.slice(0, 80), uid: user ? user.id : null, email: user ? user.email : null, ip });
+      }
       recentQ.set(ql, Date.now());             // 成功才进短时缓存
       json(200, { query: q, channel, added: r.added, addedCount: r.added.length, probed: r.probed, candidates: r.candidates, ms: Date.now() - t0 });
       process.stderr.write(`[检索·${channel}] "${q}" ← ${ip} · 并发${running} → 探测${r.probed}/${r.candidates} 入库${r.added.length} (${Date.now() - t0}ms)\n`);
