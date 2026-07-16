@@ -149,8 +149,13 @@ img { max-width: 100%; display: block; }
 :root[data-theme="dark"] .theme-toggle .theme-ico--sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .theme-ico--moon { display: none; }
 
+/* ---------- 吸顶头部:单一 sticky 容器(顶栏+频道+搜索+分类一体,无缝隙) ----------
+   下滑收起整体(内容满屏沉浸,学 YouTube/小红书),上滑立即召回;由 app.js 切 is-hidden */
+.stickyhead { position: sticky; top: 0; z-index: 40; background: var(--bg); transition: transform .18s ease; }
+.stickyhead.is-hidden { transform: translateY(-100%); }
+
 /* ---------- 顶部栏 ---------- */
-.topbar { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1px solid var(--line); }
+.topbar { background: var(--bg); border-bottom: 1px solid var(--line); }
 .topbar__inner {
   max-width: var(--maxw); margin: 0 auto; padding: 12px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -169,40 +174,38 @@ img { max-width: 100%; display: block; }
 }
 .lang-switch { font-variant-numeric: tabular-nums; }
 
-/* ---------- 一级频道导航(机会/资讯/招聘) ---------- */
-.channels { position: sticky; top: 61px; z-index: 31; background: var(--bg); border-bottom: 1px solid var(--line); }
-.channels__inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; gap: 8px; }
+/* ---------- 频道 + 搜索行(合并为一行;手机换行为两行) ---------- */
+.headrow { border-bottom: 1px solid var(--line); }
+.headrow__inner { max-width: var(--maxw); margin: 0 auto; padding: 8px 24px; display: flex; align-items: center; gap: 16px; }
+.channels { display: flex; align-items: center; gap: 4px; flex: none; }
 .channel {
-  position: relative; border: none; background: transparent; cursor: pointer;
-  padding: 13px 6px 12px; font-size: 15px; font-weight: 600; color: var(--ink-3);
-  letter-spacing: .02em; transition: color .12s ease;
+  border: none; background: transparent; cursor: pointer;
+  height: 34px; padding: 0 14px; border-radius: 999px;
+  font-size: 14.5px; font-weight: 600; color: var(--ink-3);
+  letter-spacing: .02em; transition: color .12s ease, background .12s ease;
 }
-.channel:hover { color: var(--ink-2); }
-.channel.is-active { color: var(--ink); }
-.channel.is-active::after {
-  content: ""; position: absolute; left: 6px; right: 6px; bottom: -1px; height: 2.5px;
-  background: var(--ink); border-radius: 2px;
-}
+.channel:hover { color: var(--ink); background: var(--hover); }
+.channel.is-active { color: var(--on-ink); background: var(--ink); }
 
-/* ---------- 控制区(搜索+筛选) ---------- */
-.controls { position: sticky; top: 98px; z-index: 30; background: var(--bg); border-bottom: 1px solid var(--line); }
-.controls__inner { max-width: var(--maxw); margin: 0 auto; padding: 12px 24px; display: flex; flex-direction: column; gap: 10px; }
-.searchbar { position: relative; }
-.searchbar__icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; fill: var(--ink-3); pointer-events: none; }
+/* ---------- 搜索框(胶囊,AI 检索按钮内嵌右端) ---------- */
+.searchbar { position: relative; flex: 1; min-width: 0; }
+.searchbar__icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; fill: var(--ink-3); pointer-events: none; }
 .searchbar__input {
-  width: 100%; height: 42px; padding: 0 14px 0 38px;
-  background: var(--card); border: 1px solid var(--line-2); border-radius: var(--radius-sm);
+  width: 100%; height: 38px; padding: 0 108px 0 38px;
+  background: var(--card); border: 1px solid var(--line-2); border-radius: 999px;
   font-size: 15px; color: var(--ink);
 }
 .searchbar__input::placeholder { color: var(--ink-3); }
+.searchbar__input:focus { outline: none; border-color: var(--ink-3); }
 
-/* AI 全网检索按钮 + 检索中覆盖层 */
+/* AI 全网检索:搜索框内嵌胶囊按钮(不再独占一行) */
 .ai-search-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; min-height: 42px; padding: 0 16px;
-  border-radius: var(--radius-sm); border: 1px solid var(--ink);
-  background: var(--ink); color: var(--on-ink); font-size: 14px; font-weight: 600;
-  cursor: pointer; transition: background .12s ease;
+  position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 30px; padding: 0 13px;
+  border-radius: 999px; border: none;
+  background: var(--ink); color: var(--on-ink); font-size: 12.5px; font-weight: 600;
+  cursor: pointer; transition: background .12s ease; white-space: nowrap;
 }
 .ai-search-btn:hover { background: var(--ink-hover); }
 .ai-search-btn:disabled { opacity: .7; cursor: default; }
@@ -236,14 +239,17 @@ img { max-width: 100%; display: block; }
 .tab__dot[data-cat-dot="award"]     { background: var(--c-award); }
 .tab__dot[data-cat-dot="workshop"]  { background: var(--c-workshop); }
 
-.controls__row2 { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.more-toggle { position: relative; }
+/* ---------- 分类行(分类 tab + 结果数 + 筛选 + 排序,一行放齐) ---------- */
+.catrow { border-bottom: 1px solid var(--line); }
+.catrow__inner { max-width: var(--maxw); margin: 0 auto; padding: 7px 24px; display: flex; align-items: center; gap: 12px; }
+.catrow .tabs { flex: 1; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.catrow .tabs::-webkit-scrollbar { display: none; }
+.catrow .result-count { flex: none; white-space: nowrap; }
+.more-toggle { position: relative; flex: none; min-height: 32px; }
 .more-toggle__chev { transition: transform .12s ease; }
 .more-toggle[aria-expanded="true"] .more-toggle__chev { transform: rotate(180deg); }
 .filter-active-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-opencall); }
-.sort-wrap { display: flex; align-items: center; gap: 6px; }
-.sort-label { font-size: 13px; color: var(--ink-3); }
-.sort-select { height: 34px; border: 1px solid var(--line-2); border-radius: var(--radius-sm); background: var(--card); color: var(--ink); font-size: 13px; padding: 0 8px; }
+.sort-select { flex: none; height: 32px; border: 1px solid var(--line-2); border-radius: var(--radius-sm); background: var(--card); color: var(--ink); font-size: 13px; padding: 0 8px; }
 .switch { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); cursor: pointer; }
 .switch input { width: 16px; height: 16px; accent-color: var(--ink); }
 .result-count { margin-left: auto; font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
@@ -564,7 +570,7 @@ img { max-width: 100%; display: block; }
 
 /* 平板 768–1199:列数交给 auto-fill 网格自适应,这里只收紧左右留白 */
 @media (max-width: 1199px) {
-  .topbar__inner, .controls__inner, .main, .sitefoot__note, .morefilters__panel { padding-left: 20px; padding-right: 20px; }
+  .topbar__inner, .headrow__inner, .catrow__inner, .main, .sitefoot__note, .morefilters__panel { padding-left: 20px; padding-right: 20px; }
 }
 
 /* 手机 <768:双列紧凑瀑布流(小红书式);tab 胶囊横滑;更多筛选=底部抽屉;搜索吸顶 */
@@ -594,30 +600,25 @@ img { max-width: 100%; display: block; }
   .auth-btn .auth-avatar { margin-right: 0; width: 24px; height: 24px; }
   .auth-btn .auth-avatar + .auth-btn__name { display: none; }
 
-  /* 手机:频道导航吸顶在 topbar 下,控制区再往下(数值对齐实测 topbar≈60、频道≈37) */
-  .channels { top: 60px; }
-  .channels__inner { padding: 0 16px; gap: 4px; }
-  .channel { padding: 9px 6px 8px; font-size: 14px; }
-  .controls { top: 97px; }
-  .controls__inner { padding: 8px 16px; gap: 8px; }
+  /* 手机:频道+搜索换行成两行(都在同一个 stickyhead 里,无缝隙);下滑整体收起 */
+  .headrow__inner { flex-wrap: wrap; padding: 4px 12px 8px; gap: 6px; row-gap: 4px; }
+  .channels { width: 100%; gap: 2px; }
+  .channel { height: 36px; padding: 0 13px; font-size: 14px; }
+  .searchbar { flex: 1 1 100%; }
+  .searchbar__input { height: 36px; padding-right: 96px; }
+  .ai-search-btn { height: 28px; padding: 0 11px; font-size: 12px; }
 
-  /* 分类 tab:缩小胶囊、色点缩到 5px,360px 宽也能一屏放下五个不用横滑 */
+  /* 分类行:tab 横滑,筛选/排序钉在右端;结果数手机上不占位 */
+  .catrow__inner { padding: 6px 12px; gap: 8px; }
+  .catrow .result-count { display: none; }
   .tabs { gap: 3px; }
   .tab { min-height: 30px; padding: 0 7px; font-size: 12px; gap: 3px; }
   .tab__dot { width: 5px; height: 5px; }
-
-  /* 第二行(更多筛选/结果数/排序)整体缩小,压进一行 */
-  .controls__row2 { gap: 8px; }
-  .controls__row2 .btn { min-height: 30px; padding: 0 10px; font-size: 12px; }
-  .sort-label { display: none; }
-  .sort-select { height: 28px; font-size: 12px; padding: 0 6px; }
-  .result-count { font-size: 11px; white-space: nowrap; }
+  .more-toggle { min-height: 30px; padding: 0 10px; font-size: 12px; }
+  .sort-select { height: 30px; font-size: 12px; padding: 0 6px; }
   .main { padding: 12px 10px 40px; }
   .search-banner { margin-bottom: 12px; }
   .sitefoot__note { padding: 16px; }
-
-  .controls__row2 .sort-wrap { order: 3; }
-  .result-count { order: 2; }
 
   /* 更多筛选变底部弹出抽屉 */
   .morefilters { position: fixed; inset: 0; z-index: 70; hidden: none; }

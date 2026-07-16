@@ -157,16 +157,9 @@
     var btns = document.querySelectorAll("#channelNav .channel");
     for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i].getAttribute("data-channel") === ch);
     var opp = ch === "opportunities";
-    toggleEl($("catTabs"), opp);               // 分类 tab、更多筛选行 仅机会频道
-    toggleEl(document.querySelector(".controls__row2"), opp);
-    // AI 检索三频道都有(同规格),按钮文案随频道切换(改 data-i18n,语言切换时 applyI18n 也能刷对)
-    var aiLbl = document.querySelector("#aiSearchBtn .ai-search-btn__label");
-    if (aiLbl) {
-      var aiKey = ch === "news" ? "aiSearchNews" : ch === "jobs" ? "aiSearchJobs" : "aiSearch";
-      aiLbl.setAttribute("data-i18n", aiKey);
-      aiLbl.textContent = AP.t(aiKey);
-    }
-    // 检索中底条文案同理随频道("正在检索真实资讯/招聘…")
+    toggleEl($("catRow"), opp);                // 分类+筛选+排序整行 仅机会频道
+    // AI 检索三频道都有(同规格),按钮为内嵌短文案"✦ AI 检索"(不随频道换,placeholder 负责说明)
+    // 检索中底条文案随频道("正在检索真实资讯/招聘…")
     var aiBarLbl = document.querySelector("#aiBar span[data-i18n]");
     if (aiBarLbl) {
       var abKey = ch === "news" ? "aiSearchingNews" : ch === "jobs" ? "aiSearchingJobs" : "aiSearching";
@@ -430,6 +423,16 @@
       AP.favorites.toggle(r.id); syncFavCount(); syncDetailFav(r.id);
       if (AP.filterState.favOnly) rerun();
     });
+
+    // 沉浸式浏览:下滑收起整个吸顶头(内容满屏),上滑或接近顶部立即召回;
+    // 搜索框聚焦(输入法弹出会触发 scroll)期间不收,避免输入时头部消失。
+    var headEl = $("stickyHead"), lastY = window.scrollY || 0;
+    if (headEl) window.addEventListener("scroll", function () {
+      var y = window.scrollY;
+      if (y < 90 || document.activeElement === searchInput || y < lastY - 2) headEl.classList.remove("is-hidden");
+      else if (y > lastY + 6) headEl.classList.add("is-hidden");
+      lastY = y;
+    }, { passive: true });
 
     // 路由变化
     AP.router.onChange(syncRoute);
