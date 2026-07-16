@@ -258,7 +258,9 @@
     var summaryTxt = F.loc(o, "summary");
     var summaryHtml = summaryTxt ? '<p class="d-summary">' + esc(summaryTxt) + '</p>' : '';
     var srcVal = '<span class="src-chip src-chip--' + prov.kind + '">' + esc(prov.label) + '</span>' +
-      (srcUrl ? ' <a href="' + esc(srcUrl) + '" target="_blank" rel="noopener" style="color:var(--c-residency);text-decoration:underline">' + esc(o.domain || AP.t("visit")) + '</a>' : '');
+      (srcUrl ? ' <a href="' + esc(srcUrl) + '" target="_blank" rel="noopener" style="color:var(--c-residency);text-decoration:underline">' + esc(o.domain || AP.t("visit")) + '</a>' : '') +
+      // 用户投稿注明的来源(自由文本,如实展示;无官网链接时这是唯一溯源信息)
+      (o.source_note ? '<div class="muted" style="margin-top:3px;font-size:12.5px">' + esc(AP.t("dSourceNote")) + ": " + esc(o.source_note) + '</div>' : '');
     var html =
       cover +
       '<div class="d-head">' +

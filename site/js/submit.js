@@ -23,13 +23,18 @@
           '<input type="text" id="sfT" maxlength="120" placeholder="' + esc(AP.t("sfPhTitle")) + '" />' +
           '<select id="sfC">' + catOpts + '</select>' +
           '<input type="text" id="sfO" maxlength="80" placeholder="' + esc(AP.t("sfPhOrg")) + '" />' +
+          '<input type="text" id="sfSrc" maxlength="150" placeholder="' + esc(AP.t("sfPhSrc")) + '" />' +
           '<div class="sf-row">' +
             '<input type="text" id="sfCity" maxlength="40" placeholder="' + esc(AP.t("sfPhCity")) + '" />' +
             '<input type="text" id="sfCountry" maxlength="40" placeholder="' + esc(AP.t("sfPhCountry")) + '" />' +
           '</div>' +
-          '<input type="text" id="sfD" placeholder="' + esc(AP.t("sfPhDeadline")) + '" />' +
+          '<label class="sf-label">' + esc(AP.t("sfPhDeadline")) + '<input type="date" id="sfD" /></label>' +
           '<input type="url" id="sfU" maxlength="300" placeholder="' + esc(AP.t("sfPhUrl")) + '" />' +
           '<textarea id="sfS" maxlength="500" placeholder="' + esc(AP.t("sfPhSummary")) + '"></textarea>' +
+          '<label class="sf-label sf-cover">' + esc(AP.t("sfPhCover")) +
+            '<input type="file" id="sfCov" accept="image/*" />' +
+            '<img id="sfCovPrev" alt="" hidden />' +
+          '</label>' +
           '<div class="auth__err" id="sfErr"></div>' +
           '<button type="submit" class="btn btn--dark auth__submit" id="sfGo">' + esc(AP.t("sfSubmit")) + '</button>' +
         '</form>' +
@@ -39,6 +44,7 @@
     document.getElementById("sfClose").addEventListener("click", close);
     document.getElementById("sfScrim").addEventListener("click", close);
     document.getElementById("sfForm").addEventListener("submit", onSubmit);
+    document.getElementById("sfCov").addEventListener("change", onCoverPick);
     document.addEventListener("keydown", function (e) {
       var m = document.getElementById("submitModal");
       var am = document.getElementById("authModal");
@@ -56,15 +62,43 @@
     t._apTimer = setTimeout(function () { t.hidden = true; }, 3200);
   }
 
+  // 封面选择:客户端压缩(最长边 1280、JPEG)后作为 data URL 随表单提交;审核通过才落地成文件
+  var coverData = null;
+  function onCoverPick() {
+    var input = document.getElementById("sfCov");
+    var err = document.getElementById("sfErr");
+    var prev = document.getElementById("sfCovPrev");
+    coverData = null; prev.hidden = true; err.textContent = "";
+    var file = input.files && input.files[0];
+    if (!file) return;
+    if (!/^image\//.test(file.type)) { err.textContent = AP.t("sfErrCover"); input.value = ""; return; }
+    var obj = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      URL.revokeObjectURL(obj);
+      var max = 1280, scale = Math.min(1, max / Math.max(img.width, img.height));
+      var c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      var d = c.toDataURL("image/jpeg", 0.78);
+      if (d.length > 700000) d = c.toDataURL("image/jpeg", 0.55);
+      if (d.length > 800000) { err.textContent = AP.t("sfErrCover"); input.value = ""; return; }
+      coverData = d;
+      prev.src = d; prev.hidden = false;
+    };
+    img.onerror = function () { URL.revokeObjectURL(obj); err.textContent = AP.t("sfErrCover"); input.value = ""; };
+    img.src = obj;
+  }
+
   function onSubmit(e) {
     e.preventDefault();
     var err = document.getElementById("sfErr");
     var $ = function (id) { return document.getElementById(id).value.trim(); };
-    var data = { title: $("sfT"), category: $("sfC"), org: $("sfO"), city: $("sfCity"), country: $("sfCountry"), deadline: $("sfD"), url: $("sfU"), summary: $("sfS") };
+    var data = { title: $("sfT"), category: $("sfC"), org: $("sfO"), source_note: $("sfSrc"), city: $("sfCity"), country: $("sfCountry"), deadline: $("sfD"), url: $("sfU"), summary: $("sfS"), cover: coverData };
     if (data.title.length < 2) { err.textContent = AP.t("sfErrTitle"); return; }
     if (data.org.length < 2) { err.textContent = AP.t("sfErrOrg"); return; }
-    if (!/^https?:\/\//i.test(data.url)) { err.textContent = AP.t("sfErrUrl"); return; }
-    if (data.deadline && !/^\d{4}-\d{2}-\d{2}$/.test(data.deadline)) { err.textContent = AP.t("sfErrDate"); return; }
+    if (data.source_note.length < 2) { err.textContent = AP.t("sfErrSrc"); return; }
+    if (data.url && !/^https?:\/\//i.test(data.url)) { err.textContent = AP.t("sfErrUrl"); return; }
     var btn = document.getElementById("sfGo");
     btn.disabled = true; err.textContent = "";
     fetch("/api/submit", {
@@ -78,6 +112,7 @@
         close();
         toast(r.data.status === "rejected" ? AP.t("sfRejected") : AP.t("sfOk"));
         document.getElementById("sfForm").reset();
+        coverData = null;
       })
       .catch(function () { btn.disabled = false; err.textContent = AP.t("authNetErr"); });
   }

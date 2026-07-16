@@ -9,7 +9,7 @@
 // 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
 
 import { createServer } from "node:http";
-import { readFile, writeFile, stat, rename } from "node:fs/promises";
+import { readFile, writeFile, stat, rename, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
@@ -244,11 +244,11 @@ async function serveStatic(req, res) {
   } catch (e) { res.writeHead(404); res.end("not found"); }
 }
 
-// 请求体读取(JSON,限 256KB,防大包;收藏最多 2000 条约 100–120KB,留足余量)
-function readBody(req) {
+// 请求体读取(JSON,默认限 256KB;投稿带压缩封面 base64 时调用方放宽到 ~900KB)
+function readBody(req, max = 262144) {
   return new Promise((resolve, reject) => {
     let size = 0; const chunks = [];
-    req.on("data", c => { size += c.length; if (size > 262144) { reject(new Error("too large")); req.destroy(); } else chunks.push(c); });
+    req.on("data", c => { size += c.length; if (size > max) { reject(new Error("too large")); req.destroy(); } else chunks.push(c); });
     req.on("end", () => { try { resolve(chunks.length ? JSON.parse(Buffer.concat(chunks).toString("utf8")) : {}); } catch (e) { reject(new Error("bad json")); } });
     req.on("error", reject);
   });
@@ -266,21 +266,34 @@ const CATS = ["opencall", "residency", "award", "workshop"];
 function validateSubmission(b) {
   const s = v => String(v == null ? "" : v).trim();
   const title = s(b.title), org = s(b.org), url = s(b.url), category = s(b.category);
+  const source_note = s(b.source_note).slice(0, 150);
   const city = s(b.city).slice(0, 40), country = s(b.country).slice(0, 40);
   const deadline = s(b.deadline), summary = s(b.summary).slice(0, 500);
+  const cover = typeof b.cover === "string" ? b.cover : "";
   if (title.length < 2 || title.length > 120) return { error: "标题需 2–120 字" };
   if (org.length < 2 || org.length > 80) return { error: "主办方需 2–80 字" };
   if (!CATS.includes(category)) return { error: "请选择类别" };
-  if (!/^https?:\/\/.{4,300}$/i.test(url)) return { error: "请填写有效的官网链接(http(s):// 开头)" };
-  let host; try { host = new URL(url).host; } catch (e) { return { error: "官网链接格式不正确" }; }
-  if (unsafeHost(host) || BLOCK.test(url)) return { error: "该链接不可用作官网(请填主办方自己的网站)" };
+  if (source_note.length < 2) return { error: "请注明信息来源(如:机构公众号/官网/海报等)" };
+  // 官网链接选填;填了就必须合法且不是黑名单/内网
+  if (url) {
+    if (!/^https?:\/\/.{4,300}$/i.test(url)) return { error: "官网链接需以 http(s):// 开头" };
+    let host; try { host = new URL(url).host; } catch (e) { return { error: "官网链接格式不正确" }; }
+    if (unsafeHost(host) || BLOCK.test(url)) return { error: "该链接不可用作官网(请填主办方自己的网站)" };
+  }
   if (deadline && !/^\d{4}-\d{2}-\d{2}$/.test(deadline)) return { error: "截止日期格式应为 YYYY-MM-DD" };
-  return { data: { title, org, category, url, city: city || null, country: country || null, deadline: deadline || null, summary: summary || null } };
+  // 封面选填:仅接受前端压缩后的 JPEG data URL,解码后 ≤600KB
+  if (cover) {
+    if (!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(cover) || cover.length > 850000) return { error: "封面图无效或过大" };
+    try { if (Buffer.from(cover.slice(23), "base64").length > 600000) return { error: "封面图过大" }; }
+    catch (e) { return { error: "封面图无效" }; }
+  }
+  return { data: { title, org, category, url: url || null, source_note, city: city || null, country: country || null, deadline: deadline || null, summary: summary || null, cover: cover || null } };
 }
 // 通过的投稿 → 机会记录(trust:"user" 打"用户投稿·未经核实"标;绝不冒充官网直采)
+// 官网链接选填:无链接时"前往官网"呈禁用态,来源说明(source_note)在详情页如实展示。
 function submissionToOpportunity(p, subId) {
   const today = todayISO();
-  let dom = ""; try { dom = new URL(p.url).host.replace(/^www\./, ""); } catch (e) {}
+  let dom = ""; try { if (p.url) dom = new URL(p.url).host.replace(/^www\./, ""); } catch (e) {}
   return {
     id: "submit-" + subId,
     category: p.category, title_zh: p.title, title_en: null,
@@ -291,7 +304,8 @@ function submissionToOpportunity(p, subId) {
     funding: { stipend: null, housing: null, travel: null },
     eligibility: { students_ok: null, age_limit: null, nationality: null },
     disciplines: [], summary_zh: p.summary,
-    url: p.url, source_url: p.url, domain: dom,
+    url: p.url || null, source_url: p.url || null, domain: dom,
+    source_note: p.source_note || null,
     org_type: null, trust: "user",
     status: computeStatus(p.deadline), verified_at: null,
     last_seen: today, updated_at: today, _via: "submit"
@@ -317,12 +331,12 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/submit" && m === "POST") {
       const user = auth.userOf(req);
       if (!user) return json({ code: 401, body: { error: "请先登录后再投稿" } });
-      const b = await readBody(req);
+      const b = await readBody(req, 900 * 1024);   // 放宽:压缩封面 base64
       const v = validateSubmission(b);
       if (v.error) return json({ code: 400, body: { error: v.error } });
       try {
         if (!(await db.submissionRateOk(user.id))) return json({ code: 429, body: { error: "今天投稿已达上限(5 条),明天再来" } });
-        const modText = [v.data.title, v.data.org, v.data.city, v.data.country, v.data.summary, v.data.url].filter(Boolean).join("\n");
+        const modText = [v.data.title, v.data.org, v.data.city, v.data.country, v.data.summary, v.data.url, v.data.source_note].filter(Boolean).join("\n");
         const mod = await moderateText(modText);
         const id = await db.insertSubmission({ uid: user.id, email: user.email, payload: v.data, mod, ip });
         await db.logModeration("submission", id, "created:" + mod.verdict, { hits: mod.hits, ai: mod.ai });
@@ -351,6 +365,19 @@ async function handleAuthApi(req, res, u) {
         if (!row) return json({ code: 404, body: { error: "not found" } });
         if (action === "approved") {
           const rec = submissionToOpportunity(row.payload, row.id);
+          // 投稿封面:通过时才落地成文件(待审期间只存 DB,拒绝的不产生文件)
+          if (row.payload.cover) {
+            try {
+              const buf = Buffer.from(String(row.payload.cover).slice(23), "base64");
+              if (buf.length > 100 && buf.length <= 600000) {
+                await mkdir(join(SITE, "assets", "covers"), { recursive: true });
+                const file = "submit-" + row.id + ".jpg";
+                await writeFile(join(SITE, "assets", "covers", file), buf);
+                rec.cover = "assets/covers/" + file;
+                rec.cover_source = "user";
+              }
+            } catch (e) {}
+          }
           await withWriteLock(async () => {
             const cur = JSON.parse(await readFile(DATA, "utf8"));
             if (!cur.opportunities.find(o => o.id === rec.id || o.url === rec.url)) {

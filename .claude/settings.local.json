@@ -705,7 +705,8 @@
       "Bash(rm -f pipeline/state/artportal.db pipeline/state/artportal.db-*)",
       "Bash(scp -o ConnectTimeout=20 /tmp/ap-submit.tar.gz admin@60.205.212.195:/tmp/)",
       "Bash(ssh -o BatchMode=yes admin@60.205.212.195 'cd /home/admin/artportal && tar xzf /tmp/ap-submit.tar.gz && rm /tmp/ap-submit.tar.gz && cd pipeline && npm install better-sqlite3 --registry=https://registry.npmmirror.com --no-audit --no-fund 2>&1 | tail -1 && node -e \"import\\(\\\\\"better-sqlite3\\\\\"\\).then\\(\\(\\)=>console.log\\(\\\\\"better-sqlite3 OK\\\\\"\\)\\).catch\\(e=>{console.log\\(\\\\\"FAIL:\\\\\",e.message\\);process.exit\\(1\\)}\\)\" && sudo systemctl restart artportal && sleep 2 && systemctl is-active artportal && curl -s -o /dev/null -w \"本机自测: %{http_code}\\\\n\" http://localhost/ && curl -s -X POST http://localhost/api/submit -H \"Content-Type: application/json\" -d \"{}\"')",
-      "Bash(rm /tmp/ap-submit.tar.gz)"
+      "Bash(rm /tmp/ap-submit.tar.gz)",
+      "Bash(grep -n \"assets\\\\\\\\\\\\\\\\/covers\" site/js/format.js)"
     ],
     "defaultMode": "acceptEdits"
   }

@@ -183,8 +183,19 @@
       tr.appendChild(td(p.category));
       tr.appendChild(td(p.org));
       var lk = document.createElement("td");
-      var a = document.createElement("a"); a.href = p.url; a.target = "_blank"; a.rel = "noopener";
-      a.textContent = "打开"; a.style.color = "#7aa7ff"; lk.appendChild(a); tr.appendChild(lk);
+      if (p.url) {
+        var a = document.createElement("a"); a.href = p.url; a.target = "_blank"; a.rel = "noopener";
+        a.textContent = "打开"; a.style.color = "#7aa7ff"; lk.appendChild(a);
+      } else {
+        lk.textContent = "来源:" + (p.source_note || "—"); lk.className = "muted";
+        lk.style.whiteSpace = "normal"; lk.style.maxWidth = "160px";
+      }
+      if (p.cover) {   // 封面缩略图(待审时直接看)
+        var im = document.createElement("img"); im.src = p.cover;
+        im.style.cssText = "display:block;max-height:36px;border-radius:4px;margin-top:4px";
+        lk.appendChild(im);
+      }
+      tr.appendChild(lk);
       var mod = s.mod || {};
       var modTxt = (mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : "") +
                    (mod.hits && mod.hits.soft && mod.hits.soft.length ? " · 词:" + mod.hits.soft.join(",").slice(0, 30) : "");

@@ -42,7 +42,9 @@
       if (o.status === "dead") return false;
       // 硬性保证:只展示能一点击直达主办方官网的条目。定位不到官网的先不显示,
       // 管道每晚持续重试,定位到官网后自动出现(绝不让用户点到聚合平台/新闻页)。
-      if (!F.officialUrl(o)) return false;
+      // 例外:用户投稿(trust:"user")官网链接为选填——无链接也展示(卡片"前往官网"呈禁用态,
+      // 且有"用户投稿·未经核实"标注),来源在详情页如实展示。
+      if (!F.officialUrl(o) && o.trust !== "user") return false;
       // 本次 AI 检索新增:免搜索/分类/筛选过滤,保证一定看得到(排序里再置顶)
       if (state.pinnedIds && state.pinnedIds.has(o.id)) return true;
       // 分类

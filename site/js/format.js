@@ -233,7 +233,7 @@
     var c = o && o.cover; if (!c) return "";
     c = String(c).trim();
     if (/^https?:\/\//i.test(c)) return c;
-    if (/^assets\/covers\/[a-z0-9]+\.jpg$/i.test(c)) return c;
+    if (/^assets\/covers\/[\w-]+\.jpg$/i.test(c)) return c;
     return "";
   };
 
