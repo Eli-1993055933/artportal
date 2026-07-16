@@ -477,6 +477,27 @@ img { max-width: 100%; display: block; }
 .auth-menu button { display: block; width: 100%; border: none; background: transparent; padding: 9px 14px; font-size: 13px; text-align: left; border-radius: 6px; cursor: pointer; color: var(--ink); }
 .auth-menu button:hover { background: var(--hover); }
 
+/* ---------- 官网速览(站内机翻辅助阅读)面板 ---------- */
+.trans { position: fixed; inset: 0; z-index: 85; }
+.trans[hidden] { display: none; }
+.trans__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.4); animation: fade .12s ease; }
+.trans__panel {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: min(640px, calc(100vw - 28px)); max-height: 88vh; overflow-y: auto;
+  background: var(--bg); border-radius: 16px; padding: 20px 20px 16px;
+  box-shadow: var(--shadow-pop); -webkit-overflow-scrolling: touch;
+}
+.trans__tabs { display: flex; gap: 6px; margin: 10px 0; }
+.trans__tabs button { min-height: 32px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--card); color: var(--ink-2); font-size: 13px; cursor: pointer; }
+.trans__tabs button.is-active { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.trans__note { font-size: 12px; line-height: 1.6; color: var(--warn); background: var(--warn-soft); border-radius: var(--radius-sm); padding: 8px 11px; margin: 0 0 12px; }
+.trans__pagetitle { font-size: 16px; line-height: 1.4; margin: 0 0 10px; }
+.trans__body { font-size: 14px; line-height: 1.7; color: var(--ink); }
+.trans__body p { margin: 0 0 10px; }
+.trans__loading { color: var(--ink-3); }
+.trans__foot { margin: 14px 0 0; }
+.btn--transview { width: 100%; margin: -8px 0 16px; }
+
 /* ---------- toast ---------- */
 .toast {
   position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
@@ -580,6 +601,9 @@ img { max-width: 100%; display: block; }
   .badge { height: 18px; padding: 0 6px; font-size: 10px; border-radius: 5px; gap: 3px; }
   .card__predict { display: none; }
   .card__summary { display: none; }
+  /* 资讯/招聘没有详情页,手机上保留底栏,否则"速览"入口整体不可达(机会卡仍隐藏底栏,详情页里有) */
+  .card--link .card__foot { display: flex; }
+  .card--link .card__foot .btn { min-height: 34px; padding: 0 8px; font-size: 12px; }
   .card__srcrow { gap: 4px; }
   .trust { font-size: 10px; gap: 3px; }
   .trust svg { width: 11px; height: 11px; }

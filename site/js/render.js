@@ -151,7 +151,10 @@
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         '<div class="card__meta"><span class="m-org">' + esc(n.source || "") + '</span>' + date + '</div>' +
         viaChip(n) +
-        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a></div>' +
+        '<div class="card__foot">' +
+          '<button class="btn btn--ghost" type="button" data-act="pagetrans" data-url="' + esc(F.safeUrl(n.url)) + '">' + AP.t("transQuick") + '</button>' +
+          '<a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a>' +
+        '</div>' +
       '</div>';
     return el;
   };
@@ -180,7 +183,10 @@
         (j.deadline ? '<div class="card__deadline due-normal">' + esc(AP.t("job_deadline")) + " " + esc(j.deadline) + '</div>' : "") +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         viaChip(j) +
-        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a></div>' +
+        '<div class="card__foot">' +
+          '<button class="btn btn--ghost" type="button" data-act="pagetrans" data-url="' + esc(apply) + '">' + AP.t("transQuick") + '</button>' +
+          '<a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a>' +
+        '</div>' +
       '</div>';
     return el;
   };
@@ -290,6 +296,8 @@
           ? '<a class="btn btn--dark" data-gate="official" href="' + esc(official) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>'
           : '<button class="btn btn--ghost" type="button" disabled aria-disabled="true">' + AP.t("noOfficial") + '</button>') +
       '</div>' +
+      // 官网内容速览:站内机翻辅助阅读(无法在别人官网上注入翻译,故做站内速览面板)
+      (official ? '<button class="btn btn--ghost btn--transview" data-act="pagetrans" data-url="' + esc(official) + '" type="button">🌐 ' + esc(AP.t("transBtnDetail")) + '</button>' : '') +
       // 反馈用「点击复制邮箱」而非 mailto:微信内置浏览器/无邮件客户端的手机点 mailto 常无反应。
       '<p class="d-report">' + esc(AP.t("reportErr")) +
         ' <button class="mail-copy" type="button" data-act="copyemail" data-email="' + esc(REPORT_EMAIL) + '">' +

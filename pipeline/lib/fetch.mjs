@@ -48,7 +48,7 @@ async function rawFetch(url, accept) {
       headers: { "User-Agent": USER_AGENT, "Accept": accept || "text/html,application/xhtml+xml" }
     });
     const body = await res.text();
-    return { ok: res.ok, status: res.status, body };
+    return { ok: res.ok, status: res.status, body, url: res.url || url };   // res.url = 重定向后的最终地址
   } finally { clearTimeout(t); }
 }
 
@@ -127,6 +127,7 @@ export async function fetchSource(src) {
     skipped: false, status: r.status, isRss,
     rawHtml: r.body, text,
     hash: sha256(text),
+    finalUrl: r.url,      // 跟随重定向后的最终地址(调用方可据此做落点安全校验)
     robots: rb.none ? "none" : (rb.error ? "unknown" : "allow")
   };
 }
