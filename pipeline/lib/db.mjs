@@ -53,6 +53,17 @@ export async function getDb() {
         PRIMARY KEY (follower, followee)
       );
       CREATE INDEX IF NOT EXISTS idx_follows_followee ON follows(followee);
+      CREATE TABLE IF NOT EXISTS notifications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT NOT NULL,
+        type TEXT NOT NULL,
+        actor TEXT,
+        refkey TEXT,
+        ref TEXT,
+        read INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_notif_uid ON notifications(uid, read);
       CREATE TABLE IF NOT EXISTS comments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         kind TEXT NOT NULL, target TEXT NOT NULL,
@@ -170,6 +181,31 @@ export async function userApprovedSubmissions(uid) {
       let title = null; try { title = JSON.parse(r.payload).title || null; } catch (e) {}
       return { oid: "submit-" + r.id, title, decided_at: r.decided_at };
     });
+}
+
+// ---------- 站内通知(8.4 一期):被关注/被回复/被点赞/内容审核结果 ----------
+// refkey 用于去重(如反复点赞只留最新一条):同 uid+type+actor+refkey 先删旧再插新。
+export async function notify({ uid, type, actor, refkey, ref }) {
+  if (!uid || uid === actor) return;                  // 不给自己发通知
+  const d = await getDb();
+  if (refkey) d.prepare("DELETE FROM notifications WHERE uid=? AND type=? AND actor IS ? AND refkey=?").run(uid, type, actor || null, refkey);
+  d.prepare("INSERT INTO notifications(uid,type,actor,refkey,ref,created_at) VALUES(?,?,?,?,?,?)")
+    .run(uid, type, actor || null, refkey || null, ref ? JSON.stringify(ref) : null, new Date().toISOString());
+  // 每人最多留 300 条,老的裁掉
+  d.prepare("DELETE FROM notifications WHERE uid=? AND id NOT IN (SELECT id FROM notifications WHERE uid=? ORDER BY id DESC LIMIT 300)").run(uid, uid);
+}
+export async function notifList(uid, limit = 50) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM notifications WHERE uid=? ORDER BY id DESC LIMIT ?").all(uid, limit)
+    .map(r => ({ ...r, ref: r.ref ? JSON.parse(r.ref) : null }));
+}
+export async function notifUnread(uid) {
+  const d = await getDb();
+  return d.prepare("SELECT COUNT(*) n FROM notifications WHERE uid=? AND read=0").get(uid).n;
+}
+export async function notifMarkAllRead(uid) {
+  const d = await getDb();
+  d.prepare("UPDATE notifications SET read=1 WHERE uid=? AND read=0").run(uid);
 }
 
 // ---------- 评论(路线图第 2 项):四类内容通用(opportunity/news/job/work),扁平+一层回复 ----------

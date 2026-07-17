@@ -560,20 +560,25 @@ img { max-width: 100%; display: block; }
 .wk-thumb { position: relative; }
 .wk-thumb img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; display: block; }
 .wk-thumb button { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; border: none; background: var(--ink); color: var(--on-ink); font-size: 10px; cursor: pointer; line-height: 1; }
+/* 查看器布局(2026-07-17 修"显示不全"):整个面板改为【可滚动列】——
+   图片限高 60vh,标题/说明/评论在下方完整展开,内容再多也能滚到,不再被视口裁掉。 */
 .wkview { position: fixed; inset: 0; z-index: 95; }
-.wkview__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.78); }
-.wkview__box { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; pointer-events: none; }
-.wkview__box > * { pointer-events: auto; }
-.wkview__img { max-width: min(92vw, 1100px); max-height: 72vh; object-fit: contain; border-radius: 8px; background: #111; }
-.wkview__close { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; border: none; background: rgba(0,0,0,.55); color: #fff; font-size: 16px; cursor: pointer; }
-.wkview__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(0,0,0,.55); color: #fff; font-size: 24px; cursor: pointer; line-height: 1; }
+.wkview__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.82); }
+.wkview__box {
+  position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 54px 16px 40px;
+}
+.wkview__img { max-width: min(92vw, 1100px); max-height: 60vh; object-fit: contain; border-radius: 8px; background: #111; flex: none; }
+.wkview__close { position: fixed; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; border: none; background: rgba(0,0,0,.55); color: #fff; font-size: 16px; cursor: pointer; z-index: 2; }
+.wkview__nav { position: fixed; top: 33vh; width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(0,0,0,.55); color: #fff; font-size: 24px; cursor: pointer; line-height: 1; z-index: 2; }
 .wkview__prev { left: 14px; }
 .wkview__next { right: 14px; }
-.wkview__ct { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 12.5px; background: rgba(0,0,0,.5); padding: 2px 10px; border-radius: 999px; }
-.wkview__meta { max-width: min(92vw, 1100px); width: 100%; color: #fff; margin-top: 12px; }
-.wkview__title { font-size: 15px; font-weight: 700; }
-.wkview__desc { font-size: 13px; color: rgba(255,255,255,.78); margin-top: 4px; white-space: pre-wrap; max-height: 20vh; overflow-y: auto; }
-.wkview__ops { margin-top: 8px; }
+.wkview__ct { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 12.5px; background: rgba(0,0,0,.5); padding: 2px 10px; border-radius: 999px; z-index: 2; }
+.wkview__meta { max-width: min(92vw, 760px); width: 100%; color: #fff; margin-top: 14px; flex: none; }
+.wkview__title { font-size: 16px; font-weight: 700; }
+.wkview__desc { font-size: 13.5px; color: rgba(255,255,255,.8); margin-top: 6px; white-space: pre-wrap; line-height: 1.7; overflow-wrap: break-word; }
+.wkview__ops { margin-top: 10px; }
 .wkview__op { border: 1px solid rgba(255,255,255,.4); background: transparent; color: rgba(255,255,255,.85); font-size: 12px; padding: 4px 12px; border-radius: 999px; cursor: pointer; }
 .wkview__op--del:hover { border-color: #ff9a8a; color: #ff9a8a; }
 
@@ -623,8 +628,8 @@ img { max-width: 100%; display: block; }
 }
 /* 资讯/招聘卡片上的 💬 按钮 */
 .cmt-btn { min-height: 34px; font-size: 12.5px; margin-left: 8px; flex: none; }
-/* 作品查看器内评论区(深底,覆盖浅色变量) */
-.wkview__cmts { max-height: 30vh; overflow-y: auto; margin-top: 10px; }
+/* 作品查看器内评论区(深底,覆盖浅色变量;随整体面板滚动,不再自限高度截断) */
+.wkview__cmts { margin-top: 12px; }
 .wkview__cmts .cmts { border-top-color: rgba(255,255,255,.18); }
 .wkview__cmts .cmts__head, .wkview__cmts .cmt__body { color: #fff; }
 .wkview__cmts .cmt__nick { color: rgba(255,255,255,.85); }
@@ -647,6 +652,26 @@ img { max-width: 100%; display: block; }
 .cropper__zoom { width: 100%; margin: 0 0 14px; accent-color: var(--ink); }
 .cropper__btns { display: flex; gap: 8px; }
 .cropper__btns .btn { flex: 1; min-height: 40px; }
+
+/* ---------- 站内通知:顶栏铃铛 + 未读角标 + 面板项 ---------- */
+.notif-btn { position: relative; }
+.notif-badge {
+  position: absolute; top: 2px; right: 0;
+  min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px;
+  background: var(--c-opencall); color: #fff; font-size: 10px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+}
+.notifs { padding-top: 6px; }
+.notif { display: flex; align-items: flex-start; gap: 10px; width: 100%; border: none; background: transparent; text-align: left; padding: 10px 8px; border-radius: 10px; cursor: pointer; }
+.notif:hover { background: var(--hover); }
+.notif.is-unread { background: var(--warn-soft); }
+.notif.is-unread:hover { background: var(--warn-soft); filter: brightness(.97); }
+.notif__ava { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex: none; background: var(--line); }
+.notif__ico { width: 32px; height: 32px; border-radius: 50%; background: var(--line); color: var(--ink-2); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.notif__main { flex: 1; min-width: 0; }
+.notif__line { display: block; font-size: 13px; line-height: 1.55; color: var(--ink); overflow-wrap: break-word; }
+.notif__line b { font-weight: 600; }
+.notif__time { display: block; font-size: 11px; color: var(--ink-3); margin-top: 2px; }
 
 /* 手机端投稿悬浮按钮(顶栏放不下,改右下角 ➕;桌面仍用顶栏按钮) */
 .submit-fab { display: none; }

@@ -142,6 +142,11 @@
       cmtPending: "审核中,仅自己可见",
       cmtSentLive: "已发布", cmtSentPending: "已提交,人工复核通过后显示",
       cmtJustNow: "刚刚", cmtMinAgo: "分钟前", cmtHourAgo: "小时前", cmtDayAgo: "天前",
+      // 站内通知(8.4)
+      ntTitle: "通知", ntEmpty: "还没有通知。被关注、被回复、被点赞、审核结果都会出现在这里。",
+      ntFollow: "关注了你", ntReply: "回复了你", ntLike: "赞了你的评论", ntComment: "评论了你的作品",
+      ntDecide: "审核结果:你的", ntWhatWork: "作品", ntWhatSub: "投稿", ntWhatCmt: "评论",
+      ntResOk: "已通过 ✓", ntResNo: "未通过/已下架",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -284,6 +289,11 @@
       cmtPending: "In review — visible only to you",
       cmtSentLive: "Posted", cmtSentPending: "Submitted — visible after human review",
       cmtJustNow: "just now", cmtMinAgo: "min ago", cmtHourAgo: "h ago", cmtDayAgo: "d ago",
+      // Notifications
+      ntTitle: "Notifications", ntEmpty: "Nothing yet. Follows, replies, likes and review results show up here.",
+      ntFollow: "followed you", ntReply: "replied to you", ntLike: "liked your comment", ntComment: "commented on your work",
+      ntDecide: "Review result — your", ntWhatWork: "work", ntWhatSub: "submission", ntWhatCmt: "comment",
+      ntResOk: "approved ✓", ntResNo: "not approved / taken down",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

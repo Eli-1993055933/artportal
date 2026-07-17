@@ -364,6 +364,17 @@ function validateWork(b) {
 }
 // 评论可挂的四类内容(机会/资讯/招聘/作品)
 const CMT_KINDS = new Set(["opportunity", "news", "job", "work"]);
+// 评论可见时给相关人发通知:有 parent → 通知被回复者;顶层挂在作品上 → 通知作品作者
+async function notifyForComment(c) {
+  const preview = String(c.content).slice(0, 60);
+  if (c.parent) {
+    const pc = await db.getComment(c.parent);
+    if (pc) await db.notify({ uid: pc.uid, type: "reply", actor: c.uid, ref: { kind: c.kind, target: c.target, cid: c.id, preview } });
+  } else if (c.kind === "work") {
+    const w = await db.getWork(Number(c.target));
+    if (w) await db.notify({ uid: w.uid, type: "comment", actor: c.uid, ref: { kind: "work", target: c.target, cid: c.id, preview, title: w.title } });
+  }
+}
 // 作品举报限频(防刷):单 IP 每天 20 次
 const reportHits = new Map();
 function reportLimited(ip) {
@@ -410,6 +421,29 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
+    // —— 站内通知(8.4 一期):列表(附未读数与发起人公开摘要)/ 全部已读 ——
+    if (p === "/api/notifications" && m === "GET") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "未登录" } });
+      try {
+        if (u.searchParams.get("count") === "1") {
+          return json({ code: 200, body: { unread: await db.notifUnread(me.id) } });   // 轻量轮询只要数字
+        }
+        const rows = await db.notifList(me.id);
+        const mini = auth.usersMini([...new Set(rows.map(n => n.actor).filter(Boolean))]);
+        const byId = new Map(mini.map(x => [x.id, x]));
+        return json({ code: 200, body: {
+          unread: await db.notifUnread(me.id),
+          list: rows.map(n => ({ id: n.id, type: n.type, read: !!n.read, created_at: n.created_at, ref: n.ref, actor: n.actor ? (byId.get(n.actor) || null) : null }))
+        } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/notifications/read" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "未登录" } });
+      try { await db.notifMarkAllRead(me.id); return json({ code: 200, body: { ok: true } }); }
+      catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
     // —— 评论(路线图第 2 项):四类内容通用;AI 先审(pass 即显示,可疑进人工) ——
     if (p === "/api/comments" && m === "GET") {
       const kind = String(u.searchParams.get("kind") || "");
@@ -450,6 +484,7 @@ async function handleAuthApi(req, res, u) {
         const id = await db.insertComment({ kind, target, uid: me.id, email: me.email, parent, content, mod, status });
         await db.logModeration("comment", id, (status === "approved" ? "auto-approved:" : "created:") + mod.verdict, { kind, target, uid: me.id });
         auth.logEvent("comment", { uid: me.id, email: me.email, ip, id: String(id) });
+        if (status === "approved") await notifyForComment({ id, kind, target, uid: me.id, parent, content }).catch(() => {});
         return json({ code: 200, body: { ok: true, id, status } });
       } catch (e) { return json({ code: 503, body: { error: "评论服务暂不可用" } }); }
     }
@@ -460,7 +495,9 @@ async function handleAuthApi(req, res, u) {
       try {
         const c = await db.getComment(Number(b.id));
         if (!c || c.status !== "approved") return json({ code: 404, body: { error: "评论不存在" } });
-        return json({ code: 200, body: await db.commentLikeToggle(me.id, c.id) });
+        const lr = await db.commentLikeToggle(me.id, c.id);
+        if (lr.liked) await db.notify({ uid: c.uid, type: "like", actor: me.id, refkey: "like:" + c.id, ref: { kind: c.kind, target: c.target, cid: c.id, preview: String(c.content).slice(0, 60) } }).catch(() => {});
+        return json({ code: 200, body: lr });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     if (p === "/api/comments/delete" && m === "POST") {
@@ -506,6 +543,8 @@ async function handleAuthApi(req, res, u) {
         }
         await db.decideComment(c.id, action, b.note);
         await db.logModeration("comment", c.id, "decided:" + action, null);
+        if (action === "approved") await notifyForComment(c).catch(() => {});   // 人工放行的评论此刻才可见 → 通知被回复者/作品作者
+        await db.notify({ uid: c.uid, type: "decide", ref: { what: "comment", preview: String(c.content).slice(0, 60), result: action } }).catch(() => {});
         return json({ code: 200, body: { ok: true } });
       } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
@@ -649,6 +688,7 @@ async function handleAuthApi(req, res, u) {
         }
         await db.decideWork(w.id, action, b.note);
         await db.logModeration("work", w.id, "decided:" + action, null);
+        await db.notify({ uid: w.uid, type: "decide", ref: { what: "work", title: w.title, result: action } }).catch(() => {});
         return json({ code: 200, body: { ok: true } });
       } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
@@ -677,6 +717,7 @@ async function handleAuthApi(req, res, u) {
         if (on && !(await db.followRateOk(me.id))) return json({ code: 429, body: { error: "今日关注操作太多,明天再来" } });
         await db.followSet(me.id, target, on);
         const info = await db.followInfo(target, me.id);
+        if (on) await db.notify({ uid: target, type: "follow", actor: me.id, refkey: "follow" }).catch(() => {});
         auth.logEvent("follow", { uid: me.id, target, on: on ? 1 : 0, ip });
         return json({ code: 200, body: { ok: true, followers: info.followers, is_following: info.is_following } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
@@ -805,6 +846,7 @@ async function handleAuthApi(req, res, u) {
         if (!row) return json({ code: 404, body: { error: "not found" } });
         if (action === "approved") await publishSubmission(row);
         await db.logModeration("submission", b.id, "decided:" + action, null);
+        await db.notify({ uid: row.uid, type: "decide", ref: { what: "submission", title: row.payload.title, result: action } }).catch(() => {});
         return json({ code: 200, body: { ok: true } });
       } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
@@ -824,7 +866,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {

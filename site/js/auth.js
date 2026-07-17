@@ -310,6 +310,7 @@
       });
     }
     btn.setAttribute("aria-label", AP.t(user ? "menuMyPage" : "authLoginBtn"));
+    if (AP.notify) AP.notify.sync();   // 登录态变化 → 铃铛显隐与未读轮询同步
     if (user) {
       var name = user.nickname || user.email.split("@")[0];
       var label = name.length > 10 ? name.slice(0, 9) + "…" : name;

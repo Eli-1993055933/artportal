@@ -187,6 +187,8 @@
         '</div>';
       document.getElementById("wvScrim").addEventListener("click", close);
       document.getElementById("wvClose").addEventListener("click", close);
+      // 容器改为满屏可滚后遮罩在其下层:点内容之外的空白区(即容器本身)也应关闭
+      el.querySelector(".wkview__box").addEventListener("click", function (e) { if (e.target === e.currentTarget) close(); });
       var pv = document.getElementById("wvPrev"), nx = document.getElementById("wvNext");
       if (pv) pv.addEventListener("click", function () { i = (i - 1 + w.images.length) % w.images.length; render(); });
       if (nx) nx.addEventListener("click", function () { i = (i + 1) % w.images.length; render(); });
