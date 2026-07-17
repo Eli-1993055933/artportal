@@ -146,6 +146,30 @@ function publicUser(u) {
   };
 }
 
+// 用户搜索(8.2):按昵称归一化子串匹配;只出已完成资料的用户、公开最小字段(绝不含邮箱)
+export function searchUsers(q, ip) {
+  if (authLimited("usearch:" + ip, 30, 60 * 1000)) return { code: 429, body: { error: "搜索太频繁,歇一下" } };
+  q = String(q || "").trim().toLowerCase().replace(/\s+/g, "");
+  if (!q || q.length > 30) return { code: 400, body: { error: "关键词 1–30 字" } };
+  const out = [];
+  for (const u of users) {
+    if (!u.nickname || !u.avatar) continue;                    // 资料未完成的不进搜索
+    if (nickKey(u.nickname).indexOf(q) === -1) continue;
+    out.push({ id: u.id, nickname: u.nickname, avatar: u.avatar, identity: (u.profile || {}).identity || "" });
+    if (out.length >= 12) break;
+  }
+  return { code: 200, body: { users: out } };
+}
+// 批量取用户公开摘要(关注/粉丝列表用);查不到/资料未完成的剔除
+export function usersMini(uids) {
+  const byId = new Map(users.map(u => [u.id, u]));
+  return uids.map(id => {
+    const u = byId.get(id);
+    return u && u.nickname ? { id: u.id, nickname: u.nickname, avatar: u.avatar || null, identity: (u.profile || {}).identity || "" } : null;
+  }).filter(Boolean);
+}
+export function userExists(uid) { return users.some(u => u.id === uid && u.nickname); }
+
 // 用户公开主页(8.1):任何人可看。只出公开字段——绝不含邮箱/收藏之外的任何隐私(红线)。
 export function publicProfile(uid, ip) {
   if (authLimited("pub:" + ip, 60, 60 * 1000)) return { code: 429, body: { error: "请求太频繁,请稍后再试" } };

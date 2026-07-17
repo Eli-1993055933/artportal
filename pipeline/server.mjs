@@ -347,12 +347,44 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
-    // —— 用户公开主页(路线图 8.1):只出公开字段,绝不暴露邮箱;附该用户已通过的投稿 ——
+    // —— 用户搜索(8.2;注意要先于下面的 /api/users/<uid> 通配) ——
+    if (p === "/api/users/search" && m === "GET") {
+      return json(auth.searchUsers(u.searchParams.get("q") || "", ip));
+    }
+    // —— 粉丝/关注列表(8.2):GET /api/users/<uid>/follows?kind=followers|following ——
+    if (p.startsWith("/api/users/") && p.endsWith("/follows") && m === "GET") {
+      let uid; try { uid = decodeURIComponent(p.slice("/api/users/".length, -"/follows".length)); } catch (e) { uid = ""; }
+      const kind = u.searchParams.get("kind") === "followers" ? "followers" : "following";
+      try {
+        const rows = await db.followList(uid, kind);
+        return json({ code: 200, body: { kind, users: auth.usersMini(rows.map(r => r.uid)) } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 关注/取关(8.2):登录用户;不能关注自己;新增关注限 100 次/天 ——
+    if (p === "/api/follow" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "请先登录" } });
+      const b = await readBody(req);
+      const target = String(b.uid || ""), on = !!b.on;
+      if (target === me.id) return json({ code: 400, body: { error: "不能关注自己" } });
+      if (!auth.userExists(target)) return json({ code: 404, body: { error: "用户不存在" } });
+      try {
+        if (on && !(await db.followRateOk(me.id))) return json({ code: 429, body: { error: "今日关注操作太多,明天再来" } });
+        await db.followSet(me.id, target, on);
+        const info = await db.followInfo(target, me.id);
+        auth.logEvent("follow", { uid: me.id, target, on: on ? 1 : 0, ip });
+        return json({ code: 200, body: { ok: true, followers: info.followers, is_following: info.is_following } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 用户公开主页(路线图 8.1):只出公开字段,绝不暴露邮箱;附已通过投稿 + 关注数据(8.2) ——
     if (p.startsWith("/api/users/") && m === "GET") {
       let uid; try { uid = decodeURIComponent(p.slice("/api/users/".length)); } catch (e) { uid = p.slice("/api/users/".length); }
       const r = auth.publicProfile(uid, ip);
       if (r.code !== 200) return json(r);
       try { r.body.submissions = await db.userApprovedSubmissions(uid); } catch (e) { r.body.submissions = []; }
+      const viewer = auth.userOf(req);
+      try { Object.assign(r.body.user, await db.followInfo(uid, viewer ? viewer.id : null)); }
+      catch (e) { Object.assign(r.body.user, { followers: 0, following: 0, is_following: false }); }
       return json(r);
     }
     if (p === "/api/track" && m === "POST") { const b = await readBody(req); return json(auth.track(req, b, ip)); }
@@ -505,7 +537,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {

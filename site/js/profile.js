@@ -26,6 +26,7 @@
       if (e.target.closest("#ppBack")) { e.preventDefault(); AP.router.goList(); return; }
       if (e.target.closest("#ppEdit")) { editOpen(); return; }
       if (e.target.closest("#ppLogout")) { AP.auth.logout(); return; }   // 退出后 refresh 自动转访客视角
+      if (e.target.closest("#ppFollow")) { toggleFollow(); return; }
       var tab = e.target.closest("[data-pptab]");
       if (tab) { curTab = tab.getAttribute("data-pptab"); render(); return; }
       // 卡片点击 → 详情(标题真链接拦默认统一走 goDetail 保留返回;官网外链/封面链接放行,注册墙照常拦)
@@ -86,7 +87,8 @@
         '<div class="ppage__info">' +
           '<h1 class="ppage__name">' + esc(u.nickname) +
             (isMe ? ' <button class="btn btn--ghost ppage__editbtn" id="ppEdit" type="button">' + esc(AP.t("menuEditProfile")) + '</button>' +
-                    '<button class="btn btn--ghost ppage__editbtn ppage__logout" id="ppLogout" type="button">' + esc(AP.t("authLogout")) + '</button>' : "") +
+                    '<button class="btn btn--ghost ppage__editbtn ppage__logout" id="ppLogout" type="button">' + esc(AP.t("authLogout")) + '</button>'
+                  : ' <button class="btn ' + (u.is_following ? "btn--ghost" : "btn--dark") + ' ppage__followbtn" id="ppFollow" type="button">' + esc(AP.t(u.is_following ? "followingBtn" : "followBtn")) + '</button>') +
           '</h1>' +
           (metaBits.length ? '<p class="ppage__meta">' + metaBits.join(" · ") + '</p>' : "") +
           (u.fields ? '<p class="ppage__meta">' + esc(AP.t("ppFields")) + ':' + esc(u.fields) + '</p>' : "") +
@@ -97,6 +99,8 @@
       '<div class="ppage__tabs">' +
         '<button type="button" data-pptab="favs" class="' + (curTab === "favs" ? "is-active" : "") + '">' + esc(AP.t("ppTabFavs")) + favN + '</button>' +
         '<button type="button" data-pptab="subs" class="' + (curTab === "subs" ? "is-active" : "") + '">' + esc(AP.t("ppTabSubs")) + " " + subs.length + '</button>' +
+        '<button type="button" data-pptab="following" class="' + (curTab === "following" ? "is-active" : "") + '">' + esc(AP.t("ppFollowingTab")) + " " + (u.following || 0) + '</button>' +
+        '<button type="button" data-pptab="followers" class="' + (curTab === "followers" ? "is-active" : "") + '">' + esc(AP.t("ppFollowersTab")) + " " + (u.followers || 0) + '</button>' +
       '</div>' +
       '<div id="ppBody"></div>' +
       '</div>';
@@ -123,11 +127,65 @@
     if (curTab === "favs") {
       if (!isMe && !u.fav_public) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavPrivate")) + '</p>'; return; }
       grid(favIds, "ppFavEmpty");
+    } else if (curTab === "following" || curTab === "followers") {
+      // 关注/粉丝列表:按需拉取,同一次打开内缓存
+      var tab = curTab;
+      var cacheF = current._follows || (current._follows = {});
+      if (cacheF[tab]) { renderUserList(cacheF[tab]); return; }
+      body.innerHTML = '<p class="ppage__empty">…</p>';
+      fetch("/api/users/" + encodeURIComponent(u.id) + "/follows?kind=" + tab, { credentials: "same-origin" })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          cacheF[tab] = (j && j.users) || [];
+          if (root && !root.hidden && curTab === tab) renderUserList(cacheF[tab]);
+        })
+        .catch(function () { if (curTab === tab) body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("authNetErr")) + '</p>'; });
     } else {
       var oids = [];
       for (var i = 0; i < subs.length; i++) oids.push(subs[i].oid);
       grid(oids, "ppSubEmpty");
     }
+  }
+
+  // 关注/粉丝的用户列表(头像+昵称+身份,点击进对方主页)
+  function renderUserList(list) {
+    var body = document.getElementById("ppBody");
+    if (!body) return;
+    if (!list.length) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t(curTab === "following" ? "ppFollowEmpty" : "ppFansEmpty")) + '</p>'; return; }
+    var box = document.createElement("div");
+    box.className = "plist";
+    for (var i = 0; i < list.length; i++) {
+      var m = list[i];
+      var a = document.createElement("a");
+      a.className = "plist__row"; a.href = "#/u/" + encodeURIComponent(m.id);
+      a.innerHTML = '<img class="plist__ava" alt="" src="' + esc(m.avatar || "") + '" />' +
+        '<span class="plist__nick">' + esc(m.nickname) + '</span>' +
+        (m.identity ? '<span class="plist__idn">' + esc(AP.t("idn_" + m.identity)) + '</span>' : "");
+      box.appendChild(a);
+    }
+    body.innerHTML = ""; body.appendChild(box);
+  }
+
+  // 关注/取关(未登录先登录;成功后原地刷新按钮与粉丝数)
+  function toggleFollow() {
+    var me = AP.auth && AP.auth.current();
+    if (!me) { AP.auth.openLogin(); return; }
+    var u = current.user;
+    var on = !u.is_following;
+    fetch("/api/follow", {
+      method: "POST", credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid: u.id, on: on })
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); })
+      .then(function (r) {
+        if (!r.ok) { toast((r.data && r.data.error) || AP.t("authNetErr")); return; }
+        u.is_following = r.data.is_following;
+        u.followers = r.data.followers;
+        if (current._follows) delete current._follows.followers;   // 粉丝列表已变,下次进 tab 重取
+        render();
+        toast(AP.t(u.is_following ? "followDone" : "unfollowDone"));
+      })
+      .catch(function () { toast(AP.t("authNetErr")); });
   }
 
   // ---------- 编辑资料弹窗(顶栏菜单与主页"编辑资料"共用) ----------
@@ -246,6 +304,8 @@
 
   AP.profilePage = {
     open: open, close: close, editOpen: editOpen,
-    refresh: function () { if (root && !root.hidden && current) render(); }   // 语言切换时重渲
+    refresh: function () { if (root && !root.hidden && current) render(); },   // 语言切换时重渲(用缓存)
+    // 登录态变化时调用:主页开着就按新身份整页重取(is_following/isMe 视角都会变)
+    reload: function () { if (root && !root.hidden && curUid) { current = null; open(curUid); } }
   };
 })();

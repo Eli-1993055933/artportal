@@ -47,6 +47,12 @@ export async function getDb() {
         q TEXT, uid TEXT, email TEXT, ip TEXT, at TEXT NOT NULL
       );
       CREATE INDEX IF NOT EXISTS idx_ingest_rec ON search_ingest(record_id);
+      CREATE TABLE IF NOT EXISTS follows (
+        follower TEXT NOT NULL, followee TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        PRIMARY KEY (follower, followee)
+      );
+      CREATE INDEX IF NOT EXISTS idx_follows_followee ON follows(followee);
     `);
     return db;
   } catch (e) {
@@ -137,6 +143,35 @@ export async function userApprovedSubmissions(uid) {
       let title = null; try { title = JSON.parse(r.payload).title || null; } catch (e) {}
       return { oid: "submit-" + r.id, title, decided_at: r.decided_at };
     });
+}
+
+// ---------- 关注关系(路线图 8.2) ----------
+export async function followSet(follower, followee, on) {
+  const d = await getDb();
+  if (on) d.prepare("INSERT OR IGNORE INTO follows(follower,followee,created_at) VALUES(?,?,?)")
+    .run(follower, followee, new Date().toISOString());
+  else d.prepare("DELETE FROM follows WHERE follower=? AND followee=?").run(follower, followee);
+}
+// 某用户的 粉丝数/关注数 + 当前查看者是否已关注 TA
+export async function followInfo(uid, viewer) {
+  const d = await getDb();
+  return {
+    followers: d.prepare("SELECT COUNT(*) n FROM follows WHERE followee=?").get(uid).n,
+    following: d.prepare("SELECT COUNT(*) n FROM follows WHERE follower=?").get(uid).n,
+    is_following: viewer ? !!d.prepare("SELECT 1 FROM follows WHERE follower=? AND followee=?").get(viewer, uid) : false
+  };
+}
+export async function followList(uid, kind, limit = 200) {
+  const d = await getDb();
+  return kind === "followers"
+    ? d.prepare("SELECT follower AS uid FROM follows WHERE followee=? ORDER BY created_at DESC LIMIT ?").all(uid, limit)
+    : d.prepare("SELECT followee AS uid FROM follows WHERE follower=? ORDER BY created_at DESC LIMIT ?").all(uid, limit);
+}
+// 防滥用:单用户 24 小时内新增关注上限(现存关注的 created_at 即计数依据)
+export async function followRateOk(uid, max = 100) {
+  const d = await getDb();
+  const since = new Date(Date.now() - 24 * 3600e3).toISOString();
+  return d.prepare("SELECT COUNT(*) n FROM follows WHERE follower=? AND created_at>?").get(uid, since).n < max;
 }
 
 // 单用户 24 小时内最多 5 条(防灌水)

@@ -200,6 +200,7 @@
     rememberAuthed(u);             // 记住设备登录过 + 清零免费点击计数
     mergeFavoritesOnLogin(u);      // 显式登录/注册:把匿名期攒的本地收藏并入账号(迁移时机)
     updateTopbar();
+    if (AP.profilePage) AP.profilePage.reload();   // 正停在别人主页登录 → 按新身份重取(关注按钮状态)
     var go = pendingUrl; pendingUrl = null;
     toast(isNew ? AP.t("authWelcomeNew") : AP.t("authWelcomeBack"));
     // 注册墙场景:不能在 fetch 回调里 window.open(微信/iOS 会拦弹窗)。
@@ -296,7 +297,7 @@
       AP.favorites.replaceAll([]);
       if (typeof AP.syncFavCount === "function") AP.syncFavCount();
       if (AP.filterState && AP.filterState.favOnly && typeof AP.rerun === "function") AP.rerun();
-      if (AP.profilePage) AP.profilePage.refresh();   // 正停在用户主页 → 按访客视角重渲(收起编辑/退出按钮)
+      if (AP.profilePage) AP.profilePage.reload();   // 正停在用户主页 → 按访客身份整页重取
       toast(AP.t("authLoggedOut"));
     });
   }

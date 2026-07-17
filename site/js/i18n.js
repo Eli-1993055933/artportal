@@ -108,6 +108,12 @@
       peErrWebsite: "个人网站需以 http(s):// 开头", peDone: "资料已保存",
       crTitle: "调整头像", crHint: "拖动图片调整位置,滑杆放大缩小;圈内为最终头像。",
       crZoom: "缩放", crOk: "确定",
+      // 搜索面板 + 关注(8.2)
+      spRecent: "最近搜索", spClear: "清空", spUsers: "用户", spItems: "内容", spAi: "用 AI 全网检索",
+      followBtn: "+ 关注", followingBtn: "已关注",
+      followDone: "已关注", unfollowDone: "已取消关注",
+      ppFollowingTab: "关注", ppFollowersTab: "粉丝",
+      ppFollowEmpty: "还没有关注任何人。用搜索框找找同行吧。", ppFansEmpty: "还没有粉丝",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -216,6 +222,12 @@
       peErrWebsite: "Website must start with http(s)://", peDone: "Saved",
       crTitle: "Adjust avatar", crHint: "Drag to reposition, slide to zoom. The circle is your final avatar.",
       crZoom: "Zoom", crOk: "Done",
+      // Search panel + follow (8.2)
+      spRecent: "Recent searches", spClear: "Clear", spUsers: "Users", spItems: "Items", spAi: "AI web search",
+      followBtn: "+ Follow", followingBtn: "Following",
+      followDone: "Followed", unfollowDone: "Unfollowed",
+      ppFollowingTab: "Following", ppFollowersTab: "Followers",
+      ppFollowEmpty: "Not following anyone yet — try the search box.", ppFansEmpty: "No followers yet",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

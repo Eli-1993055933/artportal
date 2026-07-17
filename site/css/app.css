@@ -520,6 +520,34 @@ img { max-width: 100%; display: block; }
 .pe-hint { margin: -6px 0 8px; font-size: 11.5px; color: var(--ink-3); }
 .pe-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
 
+/* ---------- 搜索面板(8.2:最近搜索/用户联想/内容建议/AI 检索操作) ---------- */
+.spanel {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 60;
+  background: var(--card); border: 1px solid var(--line-2); border-radius: 14px;
+  box-shadow: var(--shadow-pop); padding: 8px; max-height: min(420px, 60vh); overflow-y: auto;
+}
+.spanel__sec { display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: var(--ink-3); padding: 6px 8px 4px; letter-spacing: .03em; }
+.spanel__clear { border: none; background: transparent; color: var(--ink-3); font-size: 11.5px; cursor: pointer; padding: 0; }
+.spanel__clear:hover { color: var(--ink); }
+.spanel__chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 8px 8px; }
+.spanel__chip { border: 1px solid var(--line-2); background: var(--bg); color: var(--ink-2); font-size: 12.5px; padding: 5px 12px; border-radius: 999px; cursor: pointer; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.spanel__chip:hover { background: var(--hover); }
+.spanel__row { display: flex; align-items: center; gap: 10px; width: 100%; border: none; background: transparent; text-align: left; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 13.5px; color: var(--ink); }
+.spanel__row:hover { background: var(--hover); }
+.spanel__ava { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex: none; }
+.spanel__rt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.spanel__idn { flex: none; font-size: 11px; color: var(--ink-3); border: 1px solid var(--line-2); padding: 1px 7px; border-radius: 999px; }
+.spanel__ai { color: var(--c-residency); font-weight: 600; }
+
+/* ---------- 主页:关注按钮 + 关注/粉丝用户列表 ---------- */
+.ppage__followbtn { min-height: 32px; font-size: 12.5px; }
+.plist { display: flex; flex-direction: column; gap: 2px; max-width: 560px; }
+.plist__row { display: flex; align-items: center; gap: 12px; padding: 9px 10px; border-radius: 10px; color: var(--ink); text-decoration: none; }
+.plist__row:hover { background: var(--hover); }
+.plist__ava { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; background: var(--line); }
+.plist__nick { font-weight: 600; font-size: 14px; }
+.plist__idn { font-size: 11.5px; color: var(--ink-3); border: 1px solid var(--line-2); padding: 1px 8px; border-radius: 999px; }
+
 /* ---------- 头像裁剪器(拖动选位置 + 滑杆缩放) ---------- */
 .cropper { z-index: 96; }                            /* 压在资料弹窗(z=90)之上 */
 .cropper__panel { width: min(344px, calc(100vw - 32px)); }

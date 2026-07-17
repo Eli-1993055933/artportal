@@ -447,8 +447,9 @@
   // 供 auth.js 在登录/退出云同步收藏后刷新角标与(若在收藏视图)列表
   AP.syncFavCount = syncFavCount;
   AP.rerun = rerun;
-  // 供 profile.js 取已加载的频道数据(启动即加载机会频道,主页收藏/投稿卡片由此查找)
+  // 供 profile.js/search.js 取已加载的频道数据与当前频道
   AP.channelData = function (ch) { return cache[ch] || null; };
+  AP.currentChannel = function () { return channel; };
 
   function byId(id) {
     for (var i = 0; i < allData.length; i++) if (allData[i].id === id) return allData[i];
