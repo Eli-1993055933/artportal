@@ -895,6 +895,57 @@ async function handleAuthApi(req, res, u) {
   return json({ code: 404, body: { error: "not found" } });
 }
 
+// —— 每小时自动检索(用户 2026-07-17 要求:近期让站内 AI 定时全网检索,充实资讯/招聘)——
+// 开关在服务器 .env:AUTO_HARVEST=1 开启;AUTO_HARVEST_MINUTES 间隔(默认 60);AUTO_HARVEST_BOOT 首轮延迟秒(默认 180)。
+// 词池按小时轮换(约两天不重词);结果走与用户检索完全同一条反幻觉管线(harvestChannel:
+// 搜索→抓原文→evidence 逐字校验→真实才入库),入库标"AI 检索收录",溯源记 auto-hourly。
+const AUTO_QUERIES = {
+  news: [
+    "美术馆 新展 开幕", "双年展 艺术 新闻", "当代艺术 展览 报道", "艺术家 获奖 消息",
+    "画廊 个展 开幕", "艺术市场 拍卖 新闻", "公共艺术 项目 落成", "艺术节 开幕 现场",
+    "摄影 展览 资讯", "设计 展览 开幕", "雕塑 装置 展览 新闻", "水墨 书法 展览 消息",
+    "contemporary art exhibition news", "museum new exhibition opening", "art biennale news",
+    "artist award announcement", "gallery show opening review", "art fair news",
+    "青年艺术家 展览 报道", "艺术院校 毕业展 新闻", "驻留项目 成果 展览", "行为艺术 现场 报道",
+    "新媒体艺术 展览 消息", "艺术书 出版 消息"
+  ],
+  jobs: [
+    "美术馆 招聘 策展", "画廊 招聘 助理", "艺术机构 招聘", "博物馆 招聘 公共教育",
+    "艺术中心 招聘 运营", "拍卖行 招聘", "艺术媒体 招聘 编辑", "艺术教育 机构 招聘",
+    "museum curator job opening", "gallery assistant job", "art institution hiring",
+    "artist studio assistant job", "art fair jobs", "auction house job opening",
+    "文化机构 招聘 展览", "美术学院 招聘 教师", "艺术基金会 招聘", "设计工作室 招聘",
+    "art residency coordinator job", "museum registrar job"
+  ]
+};
+async function autoHarvestTick() {
+  const hourIdx = Math.floor(Date.now() / 3600e3);
+  for (const ch of ["news", "jobs"]) {
+    const pool = AUTO_QUERIES[ch];
+    const q = pool[hourIdx % pool.length];
+    try {
+      await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
+      try {
+        const t0 = Date.now();
+        const r = await harvestChannel(ch, q, 6);
+        for (const rec of r.added) {
+          db.ingestInsert({ channel: ch, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "auto-hourly", ip: "server" });
+        }
+        process.stderr.write(`[自动检索·${ch}] "${q}" → 探测${r.probed} 入库${r.added.length} (${Math.round((Date.now() - t0) / 1000)}s)\n`);
+      } finally { releaseSlot(); }
+    } catch (e) {
+      process.stderr.write(`[自动检索·${ch}] "${q}" 失败: ${String(e.message || e).slice(0, 120)}\n`);
+    }
+  }
+}
+if (process.env.AUTO_HARVEST === "1") {
+  const mins = Math.max(10, Number(process.env.AUTO_HARVEST_MINUTES || 60));   // 下限 10 分钟,防手滑刷爆搜索配额
+  const boot = Math.max(5, Number(process.env.AUTO_HARVEST_BOOT || 180));
+  setTimeout(autoHarvestTick, boot * 1000);
+  setInterval(autoHarvestTick, mins * 60 * 1000);
+  process.stderr.write(`[自动检索] 已开启:每 ${mins} 分钟为 资讯+招聘 各检索一词(首轮 ${boot} 秒后)\n`);
+}
+
 createServer(async (req, res) => {
   const u = new URL(req.url, "http://x");
   // 管理后台页面(不在 site/ 公开目录里,由这里单独路由;页面数据全靠带管理 cookie 的 API)
