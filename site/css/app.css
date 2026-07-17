@@ -494,6 +494,9 @@ img { max-width: 100%; display: block; }
 .sf-label input[type="date"] { color-scheme: light dark; }
 .sf-cover input[type="file"] { border: 1px dashed var(--line-2); background: transparent; padding: 9px 12px; width: 100%; border-radius: 8px; color: var(--ink-2); font-size: 13px; }
 .sf-cover img { margin-top: 8px; max-height: 90px; border-radius: 8px; display: block; }
+.auth__coderow { display: flex; gap: 8px; }
+.auth__coderow input { flex: 1; min-width: 0; }
+.auth__sendcode { flex: none; min-height: 44px; font-size: 13px; white-space: nowrap; margin-bottom: 10px; }
 .auth__err { min-height: 18px; font-size: 12px; color: var(--danger); margin: -4px 0 6px; }
 .auth__submit { width: 100%; min-height: 44px; }
 .auth__privacy { margin: 12px 0 0; font-size: 11px; color: var(--ink-3); line-height: 1.5; }

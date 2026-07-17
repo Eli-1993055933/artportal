@@ -10,6 +10,7 @@
   var pendingUrl = null;
   var mode = "register";
   var toastTimer = null;
+  var codeRequired = false;      // 服务端发信已配置 → 注册必须邮箱验证码(/me 下发)
 
   // ---------- 基础 ----------
   function anonId() {
@@ -83,6 +84,7 @@
     fetch("/api/auth/me", { credentials: "same-origin" })
       .then(function (r) { return r.json(); })
       .then(function (j) {
+        if (j) codeRequired = !!j.email_code_required;
         if (!(j && j.user)) return;
         user = j.user; sessionReady = true;
         rememberAuthed(user);
@@ -107,6 +109,10 @@
         '</div>' +
         '<form class="auth__form" id="authForm" novalidate>' +
           '<input type="email" id="authEmail" autocomplete="email" />' +
+          '<div class="auth__coderow" id="authCodeRow" hidden>' +
+            '<input type="text" id="authCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" />' +
+            '<button type="button" class="btn btn--ghost auth__sendcode" id="authSendCode"></button>' +
+          '</div>' +
           '<input type="password" id="authPw" autocomplete="current-password" minlength="6" />' +
           '<div class="auth__err" id="authErr"></div>' +
           '<button type="submit" class="btn btn--dark auth__submit" id="authSubmit"></button>' +
@@ -119,6 +125,34 @@
     document.getElementById("authTabReg").addEventListener("click", function () { setMode("register"); });
     document.getElementById("authTabLog").addEventListener("click", function () { setMode("login"); });
     document.getElementById("authForm").addEventListener("submit", onSubmit);
+    document.getElementById("authSendCode").addEventListener("click", sendCode);
+  }
+  // 发送邮箱验证码(60 秒倒计时防连点;错误直接显示在表单错误位)
+  var codeTimer = null;
+  function sendCode() {
+    var email = document.getElementById("authEmail").value.trim();
+    var err = document.getElementById("authErr");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.textContent = AP.t("authBadEmail"); return; }
+    var btn = document.getElementById("authSendCode");
+    btn.disabled = true;
+    post("/api/auth/sendcode", { email: email }).then(function (r) {
+      if (!r.ok) {
+        btn.disabled = false;
+        err.textContent = (r.data && r.data.error) || AP.t("authNetErr");
+        if (r.status === 409) setMode("login");   // 已注册 → 直接切登录页
+        return;
+      }
+      err.textContent = "";
+      toast(AP.t("authCodeSent"));
+      var left = 60;
+      btn.textContent = AP.t("authCodeResend") + " " + left + "s";
+      clearInterval(codeTimer);
+      codeTimer = setInterval(function () {
+        left--;
+        if (left <= 0) { clearInterval(codeTimer); btn.disabled = false; btn.textContent = AP.t("authSendCode"); }
+        else btn.textContent = AP.t("authCodeResend") + " " + left + "s";
+      }, 1000);
+    }).catch(function () { btn.disabled = false; err.textContent = AP.t("authNetErr"); });
   }
   function buildModal() {
     var wrap = document.getElementById("authModal");
@@ -145,6 +179,11 @@
     document.getElementById("authNote").textContent = note || AP.t("authNoteDefault");
     document.getElementById("authEmail").placeholder = AP.t("authEmailPh");
     document.getElementById("authPw").placeholder = AP.t("authPwPh");
+    // 验证码行:仅注册页且服务端开了发信才显示
+    document.getElementById("authCodeRow").hidden = !(mode === "register" && codeRequired);
+    document.getElementById("authCode").placeholder = AP.t("authCodePh");
+    var sc = document.getElementById("authSendCode");
+    if (!sc.disabled) sc.textContent = AP.t("authSendCode");
     document.getElementById("authSubmit").textContent = mode === "register" ? AP.t("authSubmitReg") : AP.t("authSubmitLog");
     document.getElementById("authPrivacy").textContent = AP.t("authPrivacy");
     var tr = document.getElementById("authTabReg"), tl = document.getElementById("authTabLog");
@@ -173,9 +212,11 @@
     var err = document.getElementById("authErr");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.textContent = AP.t("authBadEmail"); return; }
     if (pw.length < 6) { err.textContent = AP.t("authBadPw"); return; }
+    var code = document.getElementById("authCode").value.trim();
+    if (mode === "register" && codeRequired && code.length !== 6) { err.textContent = AP.t("authCodeNeed"); return; }
     var btn = document.getElementById("authSubmit");
     btn.disabled = true;
-    post(mode === "register" ? "/api/auth/register" : "/api/auth/login", { email: email, password: pw })
+    post(mode === "register" ? "/api/auth/register" : "/api/auth/login", { email: email, password: pw, code: code })
       .then(function (r) {
         btn.disabled = false;
         if (!r.ok) {
@@ -512,6 +553,7 @@
       .then(function (r) { return r.json(); })
       .then(function (j) {
         user = j && j.user ? j.user : null;
+        codeRequired = !!(j && j.email_code_required);   // 服务端发信配好 → 注册需验证码
         sessionReady = true;
         if (user) { rememberAuthed(user); adoptFavorites(user); }   // 会话有效:记住设备+清零计数
         updateTopbar();

@@ -162,7 +162,7 @@
           <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称搜索…" />
           <span class="count" id="userCount"></span>
         </div>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>验证</th><th>注册时间</th><th>最近活跃</th><th>收藏</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -323,11 +323,18 @@
       tr.appendChild(av);
       tr.appendChild(td(u.nickname || "(未设置)", u.nickname ? "" : "muted"));
       tr.appendChild(td(u.email));
+      // 邮箱验证:验证码注册的 ✓;发信启用前注册的老账号显示 —(仅弱校验)
+      var vc = document.createElement("td");
+      var vp = document.createElement("span");
+      vp.className = "pill" + (u.verified ? " on" : "");
+      vp.textContent = u.verified ? "✓ 已验证" : "未验证";
+      vp.title = u.verified ? "验证码注册,邮箱真实" : "注册于发信启用前(仅域名弱校验)";
+      vc.appendChild(vp); tr.appendChild(vc);
       tr.appendChild(td(bj(u.created_at, true), "mono"));
       tr.appendChild(td(rel(u.last_seen), "mono"));
       tr.appendChild(td(u.favorites, "mono"));
       $("usersTbl").tBodies[0].appendChild(tr);
-    }, $("usersTbl").tBodies[0], 6, "(还没有注册用户)");
+    }, $("usersTbl").tBodies[0], 7, "(还没有注册用户)");
   }
   $("userSearch").addEventListener("input", function () { st.users.q = this.value; st.users.page = 1; renderUsers(); });
 

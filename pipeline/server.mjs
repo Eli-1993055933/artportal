@@ -342,7 +342,8 @@ async function handleAuthApi(req, res, u) {
   const p = u.pathname, m = req.method;
   try {
     if (p === "/api/auth/me" && m === "GET") return json(auth.me(req));
-    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(auth.register(b.email, b.password, ip)); }
+    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b.email, b.password, b.code, ip)); }
+    if (p === "/api/auth/sendcode" && m === "POST") { const b = await readBody(req); return json(await auth.sendEmailCode(b, ip)); }
     if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.email, b.password, ip)); }
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }

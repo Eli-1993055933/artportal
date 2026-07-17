@@ -10,8 +10,10 @@ import { readFile, writeFile, rename, mkdir, appendFile } from "node:fs/promises
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { Resolver } from "node:dns/promises";
 import { wordHits, moderateText } from "./moderation.mjs";
 import { logModeration } from "./db.mjs";
+import { mailerOn, sendVerifyCode } from "./mailer.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE = join(__dir, "..", "state");
@@ -94,6 +96,82 @@ const DUMMY_SALT = randomBytes(16).toString("hex");
 function burnPassword(pw) { try { scryptSync(String(pw), DUMMY_SALT, 64); } catch (e) {} }
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+// ---------- 邮箱真实性(注册闸门):一次性邮箱黑名单 + 域名 MX/A 记录校验 ----------
+// 常见临时邮箱域名。挡"随手编一个"的假注册;真实域名的假邮箱由验证码机制(mailer 配好后)负责。
+const DISPOSABLE = new Set([
+  "mailinator.com", "guerrillamail.com", "10minutemail.com", "tempmail.com", "temp-mail.org",
+  "yopmail.com", "sharklasers.com", "getnada.com", "maildrop.cc", "dispostable.com",
+  "fakeinbox.com", "trashmail.com", "mytemp.email", "tempinbox.com", "mohmal.com",
+  "linshiyouxiang.net", "mail.tm", "emailondeck.com", "33mail.com", "spambog.com",
+  "mintemail.com", "tempmailo.com", "mailnesia.com", "tmpmail.org", "10mail.org",
+  "luxusmail.org", "snapmail.cc", "moakt.com", "tempr.email", "throwawaymail.com"
+]);
+const mxCache = new Map();   // domain -> { ok, exp }(结果缓存,别每次注册都查 DNS)
+// 显式走公共 DNS(阿里 223.5.5.5 / 腾讯 119.29.29.29):实测系统/运营商 DNS 会对 MX 查询
+// 超时或劫持 NXDOMAIN(不存在的域名也回 A 记录),导致假域名被放行。公共 DNS 行为干净。
+const dnsr = new Resolver();
+try { dnsr.setServers(["223.5.5.5", "119.29.29.29"]); } catch (e) {}
+function dnsTimed(fn, domain) {
+  return Promise.race([dnsr[fn](domain), new Promise((_, rj) => setTimeout(() => rj(Object.assign(new Error("dns timeout"), { code: "ETIMEOUT" })), 3500))]);
+}
+async function domainAcceptsMail(domain) {
+  const hit = mxCache.get(domain);
+  if (hit && Date.now() < hit.exp) return hit.ok;
+  async function q(fn) {
+    try { const r = await dnsTimed(fn, domain); return { ok: Array.isArray(r) && r.length > 0 }; }
+    catch (e) {
+      // ENOTFOUND/ENODATA = 域名/记录确实不存在 → 定论;超时/解析器故障 → 不定论(放行,别误杀真实用户)
+      if (e && (e.code === "ENOTFOUND" || e.code === "ENODATA")) return { ok: false };
+      return { indeterminate: true };
+    }
+  }
+  const mx = await q("resolveMx");
+  let ok;
+  if (mx.ok) ok = true;
+  else if (mx.indeterminate) return true;
+  else {
+    const a = await q("resolve4");                // RFC 5321:没有 MX 记录时退 A 记录
+    if (a.indeterminate) return true;
+    ok = a.ok;
+  }
+  mxCache.set(domain, { ok, exp: Date.now() + (ok ? 24 : 2) * 3600e3 });
+  return ok;
+}
+// 黑名单 + 域名校验,返回错误文案或 null
+async function emailRealErr(email) {
+  const domain = email.split("@")[1] || "";
+  if (DISPOSABLE.has(domain)) return "不支持一次性邮箱,请用常用邮箱注册";
+  if (!(await domainAcceptsMail(domain))) return "该邮箱域名不存在或无法收信,请检查拼写";
+  return null;
+}
+
+// ---------- 邮箱验证码(mailer 配置好后启用;未配置时注册走上面的弱校验) ----------
+const emailCodes = new Map();   // email -> { code, exp, tries }
+export async function sendEmailCode(body, ip) {
+  if (!mailerOn()) return { code: 400, body: { error: "当前无需验证码,直接注册即可" } };
+  const email = String((body || {}).email || "").trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
+  if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已注册,请直接登录" } };
+  const realErr = await emailRealErr(email);
+  if (realErr) return { code: 400, body: { error: realErr } };
+  if (authLimited("code:" + email, 3, 10 * 60 * 1000)) return { code: 429, body: { error: "该邮箱请求验证码太频繁,请稍后再试" } };
+  if (authLimited("codeip:" + ip, 8, 10 * 60 * 1000)) return { code: 429, body: { error: "发送太频繁,请稍后再试" } };
+  const code = String(100000 + (randomBytes(4).readUInt32BE(0) % 900000));
+  emailCodes.set(email, { code, exp: Date.now() + 10 * 60 * 1000, tries: 0 });
+  if (emailCodes.size > 10000) {                  // 容量兜底:清过期
+    const now = Date.now();
+    for (const [k, v] of emailCodes) if (now > v.exp) emailCodes.delete(k);
+  }
+  try { await sendVerifyCode(email, code); }
+  catch (e) {
+    emailCodes.delete(email);
+    process.stderr.write("[mailer] 发送失败 " + email + ": " + (e.message || e) + "\n");
+    return { code: 503, body: { error: "验证码发送失败,请稍后再试" } };
+  }
+  logEvent("sendcode", { email, ip });
+  return { code: 200, body: { ok: true } };
+}
+
 // ---------- 会话 ----------
 function newSession(uid) {
   const token = randomBytes(32).toString("hex");
@@ -142,6 +220,7 @@ function publicUser(u) {
     website: p.website || "", fields: p.fields || "",
     fav_public: p.fav_public !== false,        // 收藏默认公开,可在编辑资料里关闭
     nickname_changed_at: u.nickname_changed_at || null,
+    email_verified: !!u.email_verified,
     needs_profile: !(u.nickname && u.avatar)   // 昵称+头像必填;缺任一,前端强制补全
   };
 }
@@ -261,7 +340,7 @@ export async function setProfile(req, body, ip) {
   return { code: 200, body: { user: publicUser(u) } };
 }
 
-export function register(email, password, ip) {
+export async function register(email, password, code, ip) {
   if (authLimited(ip)) return { code: 429, body: { error: "尝试太频繁,请稍后再试" } };
   email = String(email || "").trim().toLowerCase();
   password = String(password || "");
@@ -269,10 +348,26 @@ export function register(email, password, ip) {
   if (password.length < 6 || password.length > 72) return { code: 400, body: { error: "密码需 6–72 位" } };
   if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已注册,请直接登录" } };
   if (users.length >= MAX_USERS) return { code: 503, body: { error: "注册暂时关闭,请稍后再试" } };
+  let verified = false;
+  if (mailerOn()) {
+    // 发信已配置:必须携带发到邮箱的 6 位验证码(能收到 = 邮箱真实且是本人)
+    const rec = emailCodes.get(email);
+    if (!rec || Date.now() > rec.exp) return { code: 400, body: { error: "请先获取邮箱验证码" } };
+    rec.tries++;
+    if (rec.tries > 5) { emailCodes.delete(email); return { code: 429, body: { error: "尝试次数过多,请重新获取验证码" } }; }
+    if (String(code || "").trim() !== rec.code) return { code: 400, body: { error: "验证码不正确" } };
+    emailCodes.delete(email);
+    verified = true;
+  } else {
+    // 发信未配置:退化为真实性弱校验(一次性邮箱黑名单 + 域名 MX/A 记录),挡住乱编的域名
+    const realErr = await emailRealErr(email);
+    if (realErr) return { code: 400, body: { error: realErr } };
+  }
   const salt = randomBytes(16).toString("hex");
   const u = {
     id: "u" + randomBytes(6).toString("hex"),
     email, salt, hash: hashPassword(password, salt),
+    email_verified: verified,
     nickname: null, profile: {}, favorites: [],
     created_at: new Date().toISOString(), last_seen: new Date().toISOString()
   };
@@ -319,7 +414,8 @@ export function me(req) {
       headers = { "Set-Cookie": sessionCookie(token) };
     }
   }
-  return { code: 200, body: { user: u ? publicUser(u) : null }, ...(headers ? { headers } : {}) };
+  // email_code_required:告诉前端注册是否需要验证码(mailer 配置好即 true)
+  return { code: 200, body: { user: u ? publicUser(u) : null, email_code_required: mailerOn() }, ...(headers ? { headers } : {}) };
 }
 
 export function setFavorites(req, ids) {
@@ -437,7 +533,8 @@ export async function adminOverview() {
 export function adminUsers() {
   const list = users.slice().reverse().map(u => ({
     email: u.email, nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
-    last_seen: u.last_seen, favorites: (u.favorites || []).length
+    last_seen: u.last_seen, favorites: (u.favorites || []).length,
+    verified: !!u.email_verified
   }));
   return { code: 200, body: { total: list.length, users: list } };
 }
