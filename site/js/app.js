@@ -14,10 +14,12 @@
   var CH = {
     opportunities: { file: "data/opportunities.json", key: "opportunities", card: function (o) { return AP.renderCard(o); } },
     news:          { file: "data/news.json",          key: "items",         card: function (o) { return AP.renderNewsCard(o); } },
-    jobs:          { file: "data/jobs.json",           key: "jobs",          card: function (o) { return AP.renderJobCard(o); } }
+    jobs:          { file: "data/jobs.json",           key: "jobs",          card: function (o) { return AP.renderJobCard(o); } },
+    // 第四频道"作品":平台艺术家的已过审作品瀑布流(API 动态数据,不走静态文件、不缓存)
+    works:         { api: "/api/works/feed",          key: "works",         card: function (o) { return AP.works.renderFeedCard(o); } }
   };
   function channelSearchText(o) {
-    return [o.title, o.title_zh, o.title_en, o.source, o.org, o.summary, o.summary_zh, o.summary_en, o.city, o.country, o.employment_type].filter(Boolean).join(" ").toLowerCase();
+    return [o.title, o.title_zh, o.title_en, o.source, o.org, o.summary, o.summary_zh, o.summary_en, o.city, o.country, o.employment_type, o.description, o.author && o.author.nickname].filter(Boolean).join(" ").toLowerCase();
   }
 
   var grid = $("grid"), skeleton = $("skeleton"), sentinel = $("sentinel"),
@@ -44,9 +46,9 @@
 
   function loadData() {
     var c = CH[channel];
-    if (cache[channel]) { allData = cache[channel]; showState("ready"); rerun(); syncRoute(); return; }
+    if (cache[channel] && !c.api) { allData = cache[channel]; showState("ready"); rerun(); syncRoute(); return; }   // API 频道(作品)每次都取最新
     showState("loading");
-    fetch(c.file, { cache: "no-cache" })
+    fetch(c.api || c.file, { cache: "no-cache", credentials: c.api ? "same-origin" : "omit" })
       .then(function (r) {
         if (r.ok) return r.json();
         if (channel === "opportunities") throw new Error("HTTP " + r.status);
@@ -74,6 +76,7 @@
 
   // ---------- 渲染主流程 ----------
   function rerun() {
+    grid.className = channel === "works" ? "wk-flow" : "grid";   // 作品频道用瀑布流容器
     if (channel === "opportunities") {
       filtered = AP.applyFilters(allData);
     } else {
@@ -85,6 +88,7 @@
         return !q || channelSearchText(o).indexOf(q) !== -1;
       });
       filtered.sort(function (a, b) {
+        if (channel === "works") return 0;         // 作品流:接口已按最新在前,保持原序
         if (pinned) {                              // 本次检索新增置顶
           var pa = pinned.has(a.id) ? 0 : 1, pb = pinned.has(b.id) ? 0 : 1;
           if (pa !== pb) return pa - pb;
@@ -127,7 +131,7 @@
       $("emptyClear").hidden = true;
       return;
     }
-    var t = channel === "news" ? "empty_news" : channel === "jobs" ? "empty_jobs" : null;
+    var t = channel === "news" ? "empty_news" : channel === "jobs" ? "empty_jobs" : channel === "works" ? "empty_works" : null;
     if (t) {
       emptyState.querySelector(".state__title").textContent = AP.t(t + "_title");
       emptyState.querySelector(".state__desc").textContent = AP.t(t + "_desc");
@@ -158,7 +162,8 @@
     for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i].getAttribute("data-channel") === ch);
     var opp = ch === "opportunities";
     toggleEl($("catRow"), opp);                // 分类+筛选+排序整行 仅机会频道
-    // AI 检索三频道都有(同规格),按钮为内嵌短文案"✦ AI 检索"(不随频道换,placeholder 负责说明)
+    toggleEl($("aiSearchBtn"), ch !== "works");   // 作品频道没有"AI 全网检索"(站内内容)
+    // AI 检索其余三频道同规格,按钮为内嵌短文案"✦ AI 检索"(不随频道换,placeholder 负责说明)
     // 检索中底条文案随频道("正在检索真实资讯/招聘…")
     var aiBarLbl = document.querySelector("#aiBar span[data-i18n]");
     if (aiBarLbl) {
@@ -172,7 +177,7 @@
     AP.filterState.pinnedIds = null;           // 置顶集是"上一次检索"的,不跨频道带
     var sb = $("searchBanner"); if (sb) sb.hidden = true;   // 横幅说的是上个频道的检索,收起
     // placeholder 连同 data-i18n-ph 一起换:否则语言切换触发 applyI18n 时会被刷回机会频道文案
-    var phKey = ch === "news" ? "searchNewsPh" : ch === "jobs" ? "searchJobsPh" : "searchPh";
+    var phKey = ch === "news" ? "searchNewsPh" : ch === "jobs" ? "searchJobsPh" : ch === "works" ? "searchWorksPh" : "searchPh";
     $("searchInput").setAttribute("data-i18n-ph", phKey);
     $("searchInput").setAttribute("placeholder", AP.t(phKey));
     if (AP.router.parse().name === "detail") AP.router.goList();
@@ -375,6 +380,22 @@
     grid.addEventListener("click", function (e) {
       // 官网速览按钮:任何频道都优先拦截(否则会冒泡触发整卡跳外链)
       // 资讯/招聘:整卡点击 → 新窗口打开原文/申请页(不进详情)
+      if (channel === "works") {
+        // 作品流:点作者 → TA 的主页;点卡片 → 大图查看器(删除自己的作品后从流里移除)
+        var au = e.target.closest("[data-author]");
+        if (au) { AP.router.goUser(au.getAttribute("data-author")); return; }
+        var wc = e.target.closest("[data-wid]");
+        if (wc && AP.works) {
+          var wid = Number(wc.getAttribute("data-wid"));
+          for (var wi = 0; wi < filtered.length; wi++) {
+            if (filtered[wi].id === wid) {
+              AP.works.view(filtered[wi], function () { cache.works = null; loadData(); });
+              break;
+            }
+          }
+        }
+        return;
+      }
       if (channel !== "opportunities") {
         if (e.target.closest("[data-act='visit']")) return;   // 卡内 <a> 走默认
         var lk = e.target.closest(".card--link");

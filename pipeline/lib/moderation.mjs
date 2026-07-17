@@ -3,8 +3,9 @@
 //   ① 敏感词库:硬类(涉政/色情)命中 → 直接拒;软类(导流/广告)命中 → 标记人工优先看。
 //      内置基础词库,可在 pipeline/state/badwords.txt 扩充(一行一词;行首 ! 表硬类)。
 //   ② DeepSeek 机审:分类 正常/广告导流/无关灌水/涉政敏感/色情低俗/人身攻击/虚假可疑。
-// 结论 verdict:reject(明显违规,自动拒)/ review(可疑,人工优先)/ pass(机审干净)。
-// 注意:投稿无论 pass 与否都必须人工通过才发布;机审只做预筛与标注,人说了才算。
+// 结论 verdict:reject(明显违规)/ review(可疑)/ pass(机审干净)。
+// 审核策略(2026-07-17 起,用户拍板):pass → 自动通过并发布;review/reject → 留在
+// 待审队列交人工。后台对全部内容(含自动通过的)可见、可拒/可下架,审计日志全程留痕。
 
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";

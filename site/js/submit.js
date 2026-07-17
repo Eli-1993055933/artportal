@@ -110,7 +110,7 @@
         if (r.status === 401) { close(); if (AP.auth) AP.auth.openLogin(AP.t("sfNeedLogin")); return; }
         if (r.status !== 200) { err.textContent = (r.data && r.data.error) || AP.t("authNetErr"); return; }
         close();
-        toast(r.data.status === "rejected" ? AP.t("sfRejected") : AP.t("sfOk"));
+        toast(r.data.status === "approved" ? AP.t("sfLive") : r.data.status === "rejected" ? AP.t("sfRejected") : AP.t("sfOk"));
         document.getElementById("sfForm").reset();
         coverData = null;
       })

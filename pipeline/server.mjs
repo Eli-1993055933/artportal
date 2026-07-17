@@ -312,6 +312,33 @@ function submissionToOpportunity(p, subId) {
   };
 }
 
+// 通过的投稿发布成机会条目(AI 自动通过与 admin 人工通过共用这一段)
+async function publishSubmission(row) {
+  const rec = submissionToOpportunity(row.payload, row.id);
+  // 投稿封面:通过时才落地成文件(待审期间只存 DB,拒绝的不产生文件)
+  if (row.payload.cover) {
+    try {
+      const buf = Buffer.from(String(row.payload.cover).slice(23), "base64");
+      if (buf.length > 100 && buf.length <= 600000) {
+        await mkdir(join(SITE, "assets", "covers"), { recursive: true });
+        const file = "submit-" + row.id + ".jpg";
+        await writeFile(join(SITE, "assets", "covers", file), buf);
+        rec.cover = "assets/covers/" + file;
+        rec.cover_source = "user";
+      }
+    } catch (e) {}
+  }
+  await withWriteLock(async () => {
+    const cur = JSON.parse(await readFile(DATA, "utf8"));
+    if (rec.url && cur.opportunities.find(o => o.url === rec.url)) return;   // 同 URL 已收录 → 真重复,跳过
+    // id 撞车(如 DB 重建后自增号从头来,撞上历史 submit-N):换随机后缀继续发布,绝不静默丢投稿
+    if (cur.opportunities.find(o => o.id === rec.id)) rec.id += "-" + Math.random().toString(36).slice(2, 7);
+    cur.opportunities.push(rec);
+    cur.count = cur.opportunities.length;
+    await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+  });
+}
+
 // —— 作品集(路线图 8.3)——
 // 合规关键:待审图片存【非公开目录】pipeline/state/works_pending(直链访问不到),
 // 人工审核通过才搬进 site/assets/works/ 公开;拒绝即删文件。文字部分照常机审。
@@ -390,27 +417,43 @@ async function handleAuthApi(req, res, u) {
       if (v.error) return json({ code: 400, body: { error: v.error } });
       try {
         if (!(await db.workRateOk(me.id))) return json({ code: 429, body: { error: "今天上传已达上限(3 组),明天再来" } });
+        // 审核策略(2026-07-17 起):文字机审 pass → 自动通过、图片直接进公开目录即时发布;
+        // review/reject → 图片留在非公开待审目录,交人工。后台全量可见,已发布的可"下架"。
+        // (注:DeepSeek 只能审文字;图片内容靠 后台可见+举报+下架 兜底)
         const mod = await moderateText(v.data.title + "\n" + v.data.description);
-        if (mod.verdict === "reject") {
-          await db.logModeration("work", "-", "text-rejected", { uid: me.id, title: v.data.title });
-          return json({ code: 400, body: { error: "文字内容未通过审核,请修改后重试" } });
-        }
+        const autoPass = mod.verdict === "pass";
         const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, mod });
-        await mkdir(WORKS_PENDING, { recursive: true });
+        const dir = autoPass ? WORKS_PUB : WORKS_PENDING;
+        await mkdir(dir, { recursive: true });
         const names = [];
         for (let i = 0; i < v.data.bufs.length; i++) {
           const name = "w" + id + "-" + i + ".jpg";
-          await writeFile(join(WORKS_PENDING, name), v.data.bufs[i]);
+          await writeFile(join(dir, name), v.data.bufs[i]);
           names.push(name);
         }
         await db.setWorkImages(id, names);
-        await db.logModeration("work", id, "created:" + mod.verdict, { uid: me.id, n: names.length });
+        if (autoPass) await db.decideWork(id, "approved", "AI 机审通过,自动发布");
+        await db.logModeration("work", id, (autoPass ? "auto-approved:" : "created:") + mod.verdict, { uid: me.id, n: names.length });
         auth.logEvent("work", { uid: me.id, email: me.email, ip, id: String(id) });
-        return json({ code: 200, body: { ok: true, id, status: "pending" } });
+        return json({ code: 200, body: { ok: true, id, status: autoPass ? "approved" : "pending" } });
       } catch (e) {
         process.stderr.write("[works] " + (e.message || e) + "\n");
         return json({ code: 503, body: { error: "作品服务暂不可用,请稍后再试" } });
       }
+    }
+    // 作品广场(第四频道"作品"):全站已过审作品的最新流,附作者公开摘要
+    if (p === "/api/works/feed" && m === "GET") {
+      try {
+        const rows = await db.worksFeed(200);
+        const mini = auth.usersMini([...new Set(rows.map(w => w.uid))]);
+        const byId = new Map(mini.map(x => [x.id, x]));
+        return json({ code: 200, body: { works: rows.map(w => ({
+          id: w.id, uid: w.uid, title: w.title, description: w.description || "",
+          created_at: w.created_at, n: w.images.length,
+          images: w.images.map(n => "assets/works/" + n),
+          author: byId.get(w.uid) || null
+        })) } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     if (p === "/api/works" && m === "GET") {
       const uid = String(u.searchParams.get("uid") || "");
@@ -479,6 +522,17 @@ async function handleAuthApi(req, res, u) {
       try {
         const w = await db.getWork(Number(b.id));
         if (!w) return json({ code: 404, body: { error: "not found" } });
+        // 下架:已发布(含 AI 自动通过)的作品,人工复核发现问题 → 图片撤回非公开目录留证,状态改拒绝
+        if (w.status === "approved" && action === "rejected") {
+          await mkdir(WORKS_PENDING, { recursive: true });
+          for (const n of w.images) {
+            if (!workFileRe.test(n)) continue;
+            await rename(join(WORKS_PUB, n), join(WORKS_PENDING, n)).catch(() => {});
+          }
+          await db.decideWork(w.id, "rejected", b.note || "人工复核下架");
+          await db.logModeration("work", w.id, "takedown", null);
+          return json({ code: 200, body: { ok: true } });
+        }
         if (w.status !== "pending") return json({ code: 400, body: { error: "该作品已裁决过" } });
         if (action === "approved") {
           await mkdir(WORKS_PUB, { recursive: true });
@@ -556,9 +610,13 @@ async function handleAuthApi(req, res, u) {
         const id = await db.insertSubmission({ uid: user.id, email: user.email, payload: v.data, mod, ip });
         await db.logModeration("submission", id, "created:" + mod.verdict, { hits: mod.hits, ai: mod.ai });
         auth.logEvent("submit", { uid: user.id, email: user.email, ip, id: String(id) });
-        if (mod.verdict === "reject") {   // 明显违规:自动拒,留档可查
-          await db.decideSubmission(id, "rejected", "机审自动拒绝");
-          return json({ code: 200, body: { ok: true, status: "rejected" } });
+        // 审核策略(2026-07-17 起):AI 机审干净(pass)→ 自动通过并发布;
+        // 可疑/违规(review/reject)→ 不通过,留在待审队列交人工。后台全量可见、可撤。
+        if (mod.verdict === "pass") {
+          const row = await db.decideSubmission(id, "approved", "AI 机审通过,自动发布");
+          await publishSubmission(row);
+          await db.logModeration("submission", id, "auto-approved", null);
+          return json({ code: 200, body: { ok: true, status: "approved" } });
         }
         return json({ code: 200, body: { ok: true, status: "pending" } });
       } catch (e) {
@@ -644,30 +702,7 @@ async function handleAuthApi(req, res, u) {
       try {
         const row = await db.decideSubmission(Number(b.id), action, b.note);
         if (!row) return json({ code: 404, body: { error: "not found" } });
-        if (action === "approved") {
-          const rec = submissionToOpportunity(row.payload, row.id);
-          // 投稿封面:通过时才落地成文件(待审期间只存 DB,拒绝的不产生文件)
-          if (row.payload.cover) {
-            try {
-              const buf = Buffer.from(String(row.payload.cover).slice(23), "base64");
-              if (buf.length > 100 && buf.length <= 600000) {
-                await mkdir(join(SITE, "assets", "covers"), { recursive: true });
-                const file = "submit-" + row.id + ".jpg";
-                await writeFile(join(SITE, "assets", "covers", file), buf);
-                rec.cover = "assets/covers/" + file;
-                rec.cover_source = "user";
-              }
-            } catch (e) {}
-          }
-          await withWriteLock(async () => {
-            const cur = JSON.parse(await readFile(DATA, "utf8"));
-            if (!cur.opportunities.find(o => o.id === rec.id || o.url === rec.url)) {
-              cur.opportunities.push(rec);
-              cur.count = cur.opportunities.length;
-              await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
-            }
-          });
-        }
+        if (action === "approved") await publishSubmission(row);
         await db.logModeration("submission", b.id, "decided:" + action, null);
         return json({ code: 200, body: { ok: true } });
       } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }

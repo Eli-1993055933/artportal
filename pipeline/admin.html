@@ -542,21 +542,25 @@
       pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[w.status] || w.status;
       stc.appendChild(pill); tr.appendChild(stc);
       var ops = document.createElement("td");
-      if (w.status === "pending") {
-        ["approve", "reject"].forEach(function (act) {
-          var b = document.createElement("button");
-          b.textContent = act === "approve" ? "通过" : "拒绝";
-          b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" +
-            (act === "approve" ? "#1d3a24;color:#7ee08a" : "#3a1d1d;color:#ff9a8a");
-          b.addEventListener("click", function () {
-            if (!confirm((act === "approve" ? "通过并公开" : "拒绝(图片将删除)") + ":" + w.title + "?")) return;
-            post("/api/admin/works/decide", { id: w.id, action: act }).then(function (r) {
-              if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
-              refreshWorks();
-            });
+      function opBtn(label, act, confirmText, bg, fg) {
+        var b = document.createElement("button");
+        b.textContent = label;
+        b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + bg + ";color:" + fg;
+        b.addEventListener("click", function () {
+          if (!confirm(confirmText + ":" + w.title + "?")) return;
+          post("/api/admin/works/decide", { id: w.id, action: act }).then(function (r) {
+            if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+            refreshWorks();
           });
-          ops.appendChild(b);
         });
+        ops.appendChild(b);
+      }
+      if (w.status === "pending") {
+        opBtn("通过", "approve", "通过并公开", "#1d3a24", "#7ee08a");
+        opBtn("拒绝", "reject", "拒绝(图片将删除)", "#3a1d1d", "#ff9a8a");
+      } else if (w.status === "approved") {
+        // AI 自动通过的也在这里:人工复核发现问题可随时下架(图片撤回非公开目录留证)
+        opBtn("下架", "reject", "下架(从作品频道撤下,图片留证)", "#3a2a1d", "#ffc38a");
       } else ops.textContent = "—";
       tr.appendChild(ops);
       $("workTbl").tBodies[0].appendChild(tr);

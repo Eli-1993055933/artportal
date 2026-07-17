@@ -210,6 +210,11 @@ export async function worksByUser(uid, includeAll) {
     : d.prepare("SELECT * FROM works WHERE uid=? AND status='approved' ORDER BY id DESC LIMIT 200").all(uid);
   return rows.map(parseWork);
 }
+// 作品广场:全站已过审作品,最新在前(第四频道)
+export async function worksFeed(limit = 200) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM works WHERE status='approved' ORDER BY id DESC LIMIT ?").all(limit).map(parseWork);
+}
 export async function worksCountApproved(uid) {
   const d = await getDb();
   return d.prepare("SELECT COUNT(*) n FROM works WHERE uid=? AND status='approved'").get(uid).n;

@@ -102,7 +102,7 @@
           btn.disabled = false; btn.textContent = AP.t("wkSubmit");
           if (!r.ok) { err.textContent = (r.data && r.data.error) || AP.t("authNetErr"); return; }
           close();
-          toast(AP.t("wkDone"));
+          toast(AP.t(r.data.status === "approved" ? "wkDoneLive" : "wkDone"));   // AI 机审通过=即时发布
           if (onDone) onDone();
         })
         .catch(function () { btn.disabled = false; btn.textContent = AP.t("wkSubmit"); err.textContent = AP.t("authNetErr"); });
@@ -218,5 +218,26 @@
     document.addEventListener("keydown", onKey, true);
   }
 
-  AP.works = { renderTab: renderTab, uploadOpen: uploadOpen };
+  // ---------- 作品频道(第四频道)的瀑布流卡片:封面 + 标题 + 作者行 ----------
+  function renderFeedCard(w) {
+    var el = document.createElement("div");
+    el.className = "wk-card";
+    el.setAttribute("data-wid", w.id);
+    el.innerHTML =
+      '<img class="wk-card__img" loading="lazy" src="' + esc(w.images[0] || "") + '" alt="" />' +
+      '<div class="wk-card__t">' + esc(w.title) + (w.n > 1 ? ' <span class="wk-card__n">' + w.n + '</span>' : "") + '</div>' +
+      (w.author
+        ? '<button type="button" class="wk-card__by" data-author="' + esc(w.author.id) + '">' +
+            '<img src="' + esc(w.author.avatar || "") + '" alt="" /><span>' + esc(w.author.nickname) + '</span>' +
+          '</button>'
+        : "");
+    return el;
+  }
+  // 从作品频道打开查看器:是否本人由当前登录态判断(本人可删,他人可举报)
+  function view(w, onChanged) {
+    var me = AP.auth && AP.auth.current();
+    openViewer(w, !!(me && w.uid && me.id === w.uid), onChanged || null);
+  }
+
+  AP.works = { renderTab: renderTab, uploadOpen: uploadOpen, renderFeedCard: renderFeedCard, view: view };
 })();
