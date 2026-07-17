@@ -15,7 +15,7 @@
     t._apTimer = setTimeout(function () { t.hidden = true; }, 2500);
   }
 
-  var root = null, current = null, curTab = "favs", curUid = null;
+  var root = null, current = null, curTab = "works", curUid = null;
 
   function build() {
     if (root) return;
@@ -46,7 +46,7 @@
     // 同一主页有缓存(如从详情返回)→ 先即时渲染;但无论如何都后台重取一次,
     // 保证隐私开关/资料变更不会因缓存而显示旧数据(stale-while-revalidate)。
     if (current && curUid === uid) { render(); }
-    else { curUid = uid; current = null; curTab = "favs"; root.innerHTML = '<div class="ppage__inner">' + backBtn() + '<p class="ppage__empty">…</p></div>'; }
+    else { curUid = uid; current = null; curTab = "works"; root.innerHTML = '<div class="ppage__inner">' + backBtn() + '<p class="ppage__empty">…</p></div>'; }
     curUid = uid;
     fetch("/api/users/" + encodeURIComponent(uid), { credentials: "same-origin" })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); })
@@ -97,6 +97,7 @@
         '</div>' +
       '</div>' +
       '<div class="ppage__tabs">' +
+        '<button type="button" data-pptab="works" class="' + (curTab === "works" ? "is-active" : "") + '">' + esc(AP.t("ppTabWorks")) + " " + (u.works || 0) + '</button>' +
         '<button type="button" data-pptab="favs" class="' + (curTab === "favs" ? "is-active" : "") + '">' + esc(AP.t("ppTabFavs")) + favN + '</button>' +
         '<button type="button" data-pptab="subs" class="' + (curTab === "subs" ? "is-active" : "") + '">' + esc(AP.t("ppTabSubs")) + " " + subs.length + '</button>' +
         '<button type="button" data-pptab="following" class="' + (curTab === "following" ? "is-active" : "") + '">' + esc(AP.t("ppFollowingTab")) + " " + (u.following || 0) + '</button>' +
@@ -124,7 +125,11 @@
       body.innerHTML = "";
       body.appendChild(g);
     }
-    if (curTab === "favs") {
+    if (curTab === "works") {
+      // 作品集(8.3):渲染交给 works.js;变更(上传/删除)后整页重取刷新计数
+      if (AP.works) AP.works.renderTab(body, u, isMe, function () { current = null; open(curUid); });
+      return;
+    } else if (curTab === "favs") {
       if (!isMe && !u.fav_public) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavPrivate")) + '</p>'; return; }
       grid(favIds, "ppFavEmpty");
     } else if (curTab === "following" || curTab === "followers") {

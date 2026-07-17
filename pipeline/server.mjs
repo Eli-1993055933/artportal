@@ -9,7 +9,7 @@
 // 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
 
 import { createServer } from "node:http";
-import { readFile, writeFile, stat, rename, mkdir } from "node:fs/promises";
+import { readFile, writeFile, stat, rename, mkdir, unlink } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
@@ -312,6 +312,39 @@ function submissionToOpportunity(p, subId) {
   };
 }
 
+// —— 作品集(路线图 8.3)——
+// 合规关键:待审图片存【非公开目录】pipeline/state/works_pending(直链访问不到),
+// 人工审核通过才搬进 site/assets/works/ 公开;拒绝即删文件。文字部分照常机审。
+const WORKS_PENDING = join(__dir, "state", "works_pending");
+const WORKS_PUB = join(SITE, "assets", "works");
+const WORK_IMG_RE = /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/;
+const workFileRe = /^w\d+-\d+\.jpg$/;          // 文件名只认我们自己生成的格式(防路径注入)
+function validateWork(b) {
+  const s = v => String(v == null ? "" : v).trim();
+  const title = s(b.title), description = s(b.description).slice(0, 500);
+  if (title.length < 2 || title.length > 60) return { error: "作品标题需 2–60 字" };
+  const imgs = Array.isArray(b.images) ? b.images : [];
+  if (!imgs.length || imgs.length > 9) return { error: "请上传 1–9 张图片" };
+  const bufs = [];
+  for (const im of imgs) {
+    if (typeof im !== "string" || !WORK_IMG_RE.test(im) || im.length > 1000000) return { error: "图片无效或过大(单张压缩后需 ≤700KB)" };
+    let buf;
+    try { buf = Buffer.from(im.slice(23), "base64"); } catch (e) { return { error: "图片无效" }; }
+    if (buf.length < 100 || buf.length > 700000) return { error: "图片无效或过大(单张压缩后需 ≤700KB)" };
+    bufs.push(buf);
+  }
+  return { data: { title, description, bufs } };
+}
+// 作品举报限频(防刷):单 IP 每天 20 次
+const reportHits = new Map();
+function reportLimited(ip) {
+  const now = Date.now();
+  const arr = (reportHits.get(ip) || []).filter(t => now - t < 24 * 3600e3);
+  if (arr.length >= 20) { reportHits.set(ip, arr); return true; }
+  arr.push(now); reportHits.set(ip, arr);
+  return false;
+}
+
 // —— 墓碑(tombstones):后台删除的记录 id 落此文件,夜间 sync 据此在两侧同删,
 //    防止"服务器删了、本机还有 → 合并又复活"。恢复时从墓碑移除。 ——
 const TOMB_PATH = join(__dir, "state", "tombstones.json");
@@ -348,6 +381,122 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
+    // —— 作品集(8.3):上传(登录,进人工审核) / 查看 / 删除 / 举报 ——
+    if (p === "/api/works" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "请先登录再上传作品" } });
+      const b = await readBody(req, 9 * 1024 * 1024);   // ≤9 张压缩图
+      const v = validateWork(b);
+      if (v.error) return json({ code: 400, body: { error: v.error } });
+      try {
+        if (!(await db.workRateOk(me.id))) return json({ code: 429, body: { error: "今天上传已达上限(3 组),明天再来" } });
+        const mod = await moderateText(v.data.title + "\n" + v.data.description);
+        if (mod.verdict === "reject") {
+          await db.logModeration("work", "-", "text-rejected", { uid: me.id, title: v.data.title });
+          return json({ code: 400, body: { error: "文字内容未通过审核,请修改后重试" } });
+        }
+        const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, mod });
+        await mkdir(WORKS_PENDING, { recursive: true });
+        const names = [];
+        for (let i = 0; i < v.data.bufs.length; i++) {
+          const name = "w" + id + "-" + i + ".jpg";
+          await writeFile(join(WORKS_PENDING, name), v.data.bufs[i]);
+          names.push(name);
+        }
+        await db.setWorkImages(id, names);
+        await db.logModeration("work", id, "created:" + mod.verdict, { uid: me.id, n: names.length });
+        auth.logEvent("work", { uid: me.id, email: me.email, ip, id: String(id) });
+        return json({ code: 200, body: { ok: true, id, status: "pending" } });
+      } catch (e) {
+        process.stderr.write("[works] " + (e.message || e) + "\n");
+        return json({ code: 503, body: { error: "作品服务暂不可用,请稍后再试" } });
+      }
+    }
+    if (p === "/api/works" && m === "GET") {
+      const uid = String(u.searchParams.get("uid") || "");
+      const viewer = auth.userOf(req);
+      const own = !!(viewer && viewer.id === uid);
+      try {
+        const rows = await db.worksByUser(uid, own);
+        return json({ code: 200, body: { works: rows.map(w => ({
+          id: w.id, title: w.title, description: w.description || "",
+          created_at: w.created_at, n: w.images.length,
+          status: own ? w.status : "approved",
+          images: w.status === "approved" ? w.images.map(n => "assets/works/" + n) : []
+        })) } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/works/delete" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "未登录" } });
+      const b = await readBody(req);
+      try {
+        const w = await db.getWork(Number(b.id));
+        if (!w) return json({ code: 404, body: { error: "作品不存在" } });
+        if (w.uid !== me.id) return json({ code: 403, body: { error: "只能删除自己的作品" } });
+        await db.deleteWork(w.id);
+        for (const n of w.images) {
+          if (!workFileRe.test(n)) continue;
+          await unlink(join(w.status === "approved" ? WORKS_PUB : WORKS_PENDING, n)).catch(() => {});
+        }
+        await db.logModeration("work", w.id, "deleted-by-owner", { uid: me.id });
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/works/report" && m === "POST") {
+      if (reportLimited(ip)) return json({ code: 429, body: { error: "举报太频繁" } });
+      const b = await readBody(req);
+      try {
+        const w = await db.getWork(Number(b.id));
+        if (!w) return json({ code: 404, body: { error: "作品不存在" } });
+        await db.workReport(w.id);
+        const viewer = auth.userOf(req);
+        await db.logModeration("work", w.id, "reported", { by: viewer ? viewer.id : "anon", ip, reason: String(b.reason || "").slice(0, 200) });
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 作品审核(admin):列表 / 待审图预览(图在非公开目录,只有管理员能看) / 裁决 ——
+    if (p === "/api/admin/works" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try { return json({ code: 200, body: { list: await db.worksAdminList() } }); }
+      catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    if (p === "/api/admin/works/img" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) { res.writeHead(401); return res.end(); }
+      try {
+        const w = await db.getWork(Number(u.searchParams.get("id")));
+        const name = w && w.images[Number(u.searchParams.get("i") || 0)];
+        if (!w || !name || !workFileRe.test(name)) { res.writeHead(404); return res.end(); }
+        const body = await readFile(join(w.status === "approved" ? WORKS_PUB : WORKS_PENDING, name));
+        res.writeHead(200, { "Content-Type": "image/jpeg", "Cache-Control": "no-store" });
+        return res.end(body);
+      } catch (e) { res.writeHead(404); return res.end(); }
+    }
+    if (p === "/api/admin/works/decide" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const action = b.action === "approve" ? "approved" : "rejected";
+      try {
+        const w = await db.getWork(Number(b.id));
+        if (!w) return json({ code: 404, body: { error: "not found" } });
+        if (w.status !== "pending") return json({ code: 400, body: { error: "该作品已裁决过" } });
+        if (action === "approved") {
+          await mkdir(WORKS_PUB, { recursive: true });
+          for (const n of w.images) {
+            if (!workFileRe.test(n)) continue;
+            await rename(join(WORKS_PENDING, n), join(WORKS_PUB, n));   // 过审才进公开目录
+          }
+        } else {
+          for (const n of w.images) {
+            if (!workFileRe.test(n)) continue;
+            await unlink(join(WORKS_PENDING, n)).catch(() => {});       // 拒绝即删文件
+          }
+        }
+        await db.decideWork(w.id, action, b.note);
+        await db.logModeration("work", w.id, "decided:" + action, null);
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
     // —— 用户搜索(8.2;注意要先于下面的 /api/users/<uid> 通配) ——
     if (p === "/api/users/search" && m === "GET") {
       return json(auth.searchUsers(u.searchParams.get("q") || "", ip));
@@ -386,6 +535,7 @@ async function handleAuthApi(req, res, u) {
       const viewer = auth.userOf(req);
       try { Object.assign(r.body.user, await db.followInfo(uid, viewer ? viewer.id : null)); }
       catch (e) { Object.assign(r.body.user, { followers: 0, following: 0, is_following: false }); }
+      try { r.body.user.works = await db.worksCountApproved(uid); } catch (e) { r.body.user.works = 0; }
       return json(r);
     }
     if (p === "/api/track" && m === "POST") { const b = await readBody(req); return json(auth.track(req, b, ip)); }
@@ -538,7 +688,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {

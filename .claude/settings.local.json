@@ -736,7 +736,16 @@
       "Bash(curl -s --max-time 15 \"http://60.205.212.195/api/users/search?q=a\")",
       "Bash(node --check pipeline/lib/mailer.mjs)",
       "Bash(cp .env .env.bak-mailtest)",
-      "Bash(echo \"MAIL_DEBUG=1\")"
+      "Bash(echo \"MAIL_DEBUG=1\")",
+      "Bash(curl -s --max-time 20 -X POST http://60.205.212.195/api/auth/register -H \"Content-Type: application/json\" -d '{\"email\":\"user@zhege-domain-bucunzai-7788.com\",\"password\":\"test123456\"}')",
+      "Bash(curl -s --max-time 20 -X POST http://60.205.212.195/api/auth/register -H \"Content-Type: application/json\" -d '{\"email\":\"abc@mailinator.com\",\"password\":\"test123456\"}')",
+      "Bash(ssh -o ConnectTimeout=15 admin@60.205.212.195 \"cd /home/admin/artportal/pipeline && cp .env .env.bak-smtp && grep -c '^SMTP_' .env; true\")",
+      "Bash(ssh -o ConnectTimeout=15 admin@60.205.212.195 \"cd /home/admin/artportal/pipeline && printf '\\\\nSMTP_HOST=smtp.qq.com\\\\nSMTP_USER=3471483657@qq.com\\\\nSMTP_PASS=wwpwjocnbsptched\\\\n' >> .env && grep -c '^SMTP_' .env && sudo systemctl restart artportal && sleep 2 && systemctl is-active artportal\")",
+      "Bash(curl -s --max-time 15 http://60.205.212.195/api/auth/me)",
+      "Bash(curl -s --max-time 30 -X POST http://60.205.212.195/api/auth/sendcode -H \"Content-Type: application/json\" -d '{\"email\":\"3471483657@qq.com\"}')",
+      "Bash(curl -s --max-time 30 -X POST http://60.205.212.195/api/auth/sendcode -H \"Content-Type: application/json\" -d '{\"email\":\"atsang799@gmail.com\"}')",
+      "Bash(ssh -o ConnectTimeout=15 admin@60.205.212.195 \"journalctl -u artportal --since '2 minutes ago' --no-pager | grep -i 'mailer\\\\|sendcode' | tail -5; true\")",
+      "Bash(curl -s --max-time 15 \"http://60.205.212.195/js/auth.js?v=0.56.0\")"
     ],
     "defaultMode": "acceptEdits"
   }

@@ -542,6 +542,38 @@ img { max-width: 100%; display: block; }
 .spanel__idn { flex: none; font-size: 11px; color: var(--ink-3); border: 1px solid var(--line-2); padding: 1px 7px; border-radius: 999px; }
 .spanel__ai { color: var(--c-residency); font-weight: 600; }
 
+/* ---------- 作品集(8.3):瀑布流 + 上传缩略图 + 大图查看器 ---------- */
+.wk-add { min-height: 38px; margin-bottom: 14px; }
+.wk-flow { columns: 4 220px; column-gap: 14px; }   /* CSS 瀑布流:自适应列数(小红书式) */
+.wk-card { break-inside: avoid; margin-bottom: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; cursor: pointer; }
+.wk-card:hover { box-shadow: var(--shadow-pop); }
+.wk-card__img { display: block; width: 100%; height: auto; }
+.wk-card__hold { display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; color: var(--ink-3); font-size: 12.5px; background: var(--line); }
+.wk-card__t { padding: 8px 11px 9px; font-size: 13px; font-weight: 600; line-height: 1.4; }
+.wk-card__n { color: var(--ink-3); font-weight: 400; font-size: 11.5px; }
+.wk-card__st { color: var(--warn); font-weight: 400; font-size: 11.5px; }
+.wk-pick { justify-content: center; margin-bottom: 10px; display: flex; }
+.wk-thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.wk-thumb { position: relative; }
+.wk-thumb img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; display: block; }
+.wk-thumb button { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; border: none; background: var(--ink); color: var(--on-ink); font-size: 10px; cursor: pointer; line-height: 1; }
+.wkview { position: fixed; inset: 0; z-index: 95; }
+.wkview__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.78); }
+.wkview__box { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; pointer-events: none; }
+.wkview__box > * { pointer-events: auto; }
+.wkview__img { max-width: min(92vw, 1100px); max-height: 72vh; object-fit: contain; border-radius: 8px; background: #111; }
+.wkview__close { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; border: none; background: rgba(0,0,0,.55); color: #fff; font-size: 16px; cursor: pointer; }
+.wkview__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(0,0,0,.55); color: #fff; font-size: 24px; cursor: pointer; line-height: 1; }
+.wkview__prev { left: 14px; }
+.wkview__next { right: 14px; }
+.wkview__ct { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 12.5px; background: rgba(0,0,0,.5); padding: 2px 10px; border-radius: 999px; }
+.wkview__meta { max-width: min(92vw, 1100px); width: 100%; color: #fff; margin-top: 12px; }
+.wkview__title { font-size: 15px; font-weight: 700; }
+.wkview__desc { font-size: 13px; color: rgba(255,255,255,.78); margin-top: 4px; white-space: pre-wrap; max-height: 20vh; overflow-y: auto; }
+.wkview__ops { margin-top: 8px; }
+.wkview__op { border: 1px solid rgba(255,255,255,.4); background: transparent; color: rgba(255,255,255,.85); font-size: 12px; padding: 4px 12px; border-radius: 999px; cursor: pointer; }
+.wkview__op--del:hover { border-color: #ff9a8a; color: #ff9a8a; }
+
 /* ---------- 主页:关注按钮 + 关注/粉丝用户列表 ---------- */
 .ppage__followbtn { min-height: 32px; font-size: 12.5px; }
 .plist { display: flex; flex-direction: column; gap: 2px; max-width: 560px; }

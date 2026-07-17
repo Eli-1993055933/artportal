@@ -93,6 +93,7 @@
       <nav class="nav" id="nav">
         <button data-view="overview" class="is-active">概览</button>
         <button data-view="subs">投稿审核 <span class="badge" id="navSubN">0</span></button>
+        <button data-view="works">作品审核 <span class="badge" id="navWorkN">0</span></button>
         <button data-view="content">内容管理 <span class="badge" id="navContentN">0</span></button>
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
@@ -124,6 +125,20 @@
         </div>
         <div class="scroll"><table id="subTbl"><thead><tr><th>时间</th><th>标题</th><th>类别</th><th>主办方</th><th>链接</th><th>机审</th><th>投稿人</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="subPager"></div>
+      </section>
+
+      <!-- 作品审核(8.3):待审图片在非公开目录,预览走 /api/admin/works/img -->
+      <section data-sec="works" hidden>
+        <h1 class="sec__title">作品审核 <span class="pill" id="workPending">0 待审</span></h1>
+        <div class="toolbar" id="workFilter">
+          <button class="fchip is-active" data-st="">全部</button>
+          <button class="fchip" data-st="pending">待审</button>
+          <button class="fchip" data-st="approved">已通过</button>
+          <button class="fchip" data-st="rejected">已拒绝</button>
+          <span class="count" id="workCount"></span>
+        </div>
+        <div class="scroll"><table id="workTbl"><thead><tr><th>时间</th><th>预览</th><th>标题/说明</th><th>张数</th><th>作者</th><th>机审</th><th>举报</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="workPager"></div>
       </section>
 
       <!-- 内容管理 -->
@@ -175,6 +190,7 @@
   // 各模块分页/过滤状态(刷新数据时保留页码,不打断管理员操作)
   var st = {
     subs:    { page: 1, per: 30, status: "" },
+    works:   { page: 1, per: 30, status: "" },
     content: { page: 1, per: 50, q: "", via: "" },
     recycle: { page: 1, per: 50 },
     ingest:  { page: 1, per: 50 },
@@ -258,6 +274,7 @@
   function renderActive() {
     if (view === "overview") { /* overview 由 refresh 渲染 */ }
     else if (view === "subs") renderSubs();
+    else if (view === "works") renderWorks();
     else if (view === "content") renderContent();
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
@@ -490,6 +507,78 @@
     renderSubs();
   });
 
+  // —— 作品审核(8.3) ——
+  var allWorks = [];
+  function renderWorks() {
+    var pending = allWorks.filter(function (w) { return w.status === "pending"; }).length;
+    $("workPending").textContent = pending + " 待审";
+    $("workPending").className = "pill" + (pending > 0 ? " on" : "");
+    var list = st.works.status ? allWorks.filter(function (w) { return w.status === st.works.status; }) : allWorks;
+    $("workCount").textContent = "共 " + list.length + " 条";
+    paginate(list, st.works, $("workPager"), function (w) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(w.created_at, true), "mono"));
+      // 预览:前 3 张缩略图,点开新窗看大图(走管理员图片通道,待审图也能看)
+      var pv = document.createElement("td");
+      w.images.slice(0, 3).forEach(function (_, i) {
+        var a = document.createElement("a");
+        a.href = "/api/admin/works/img?id=" + w.id + "&i=" + i; a.target = "_blank"; a.rel = "noopener";
+        var im = document.createElement("img"); im.src = a.href;
+        im.style.cssText = "height:44px;border-radius:4px;margin-right:4px;vertical-align:middle";
+        a.appendChild(im); pv.appendChild(a);
+      });
+      if (!w.images.length) pv.textContent = "—";
+      tr.appendChild(pv);
+      var t = td(w.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "220px"; t.title = w.description || ""; tr.appendChild(t);
+      tr.appendChild(td(w.images.length, "mono"));
+      tr.appendChild(td(w.email || w.uid));
+      var mod = w.mod || {};
+      var mc = td((mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : ""), mod.verdict === "pass" ? "" : "muted");
+      mc.title = (mod.ai && mod.ai.reason) || ""; tr.appendChild(mc);
+      tr.appendChild(td(w.reports || 0, w.reports > 0 ? "" : "muted"));
+      var stc = document.createElement("td");
+      var pill = document.createElement("span");
+      pill.className = "pill" + (w.status === "approved" ? " on" : "");
+      pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[w.status] || w.status;
+      stc.appendChild(pill); tr.appendChild(stc);
+      var ops = document.createElement("td");
+      if (w.status === "pending") {
+        ["approve", "reject"].forEach(function (act) {
+          var b = document.createElement("button");
+          b.textContent = act === "approve" ? "通过" : "拒绝";
+          b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" +
+            (act === "approve" ? "#1d3a24;color:#7ee08a" : "#3a1d1d;color:#ff9a8a");
+          b.addEventListener("click", function () {
+            if (!confirm((act === "approve" ? "通过并公开" : "拒绝(图片将删除)") + ":" + w.title + "?")) return;
+            post("/api/admin/works/decide", { id: w.id, action: act }).then(function (r) {
+              if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+              refreshWorks();
+            });
+          });
+          ops.appendChild(b);
+        });
+      } else ops.textContent = "—";
+      tr.appendChild(ops);
+      $("workTbl").tBodies[0].appendChild(tr);
+    }, $("workTbl").tBodies[0], 9, "(暂无作品)");
+  }
+  $("workFilter").addEventListener("click", function (e) {
+    var c = e.target.closest(".fchip"); if (!c) return;
+    st.works.status = c.getAttribute("data-st"); st.works.page = 1;
+    var chips = this.querySelectorAll(".fchip");
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("is-active", chips[i] === c);
+    renderWorks();
+  });
+  function refreshWorks() {
+    get("/api/admin/works").then(function (r) {
+      allWorks = r.list || [];
+      var pending = allWorks.filter(function (w) { return w.status === "pending"; }).length;
+      $("navWorkN").textContent = String(pending);
+      $("navWorkN").className = "badge" + (pending > 0 ? " hot" : "");
+      if (view === "works") renderWorks();
+    }).catch(function () {});
+  }
+
   // —— 数据刷新:导航角标每次都更新;表格只重渲当前模块(保留页码,不打断操作) ——
   function refreshSubs() {
     get("/api/admin/submissions").then(function (r) {
@@ -527,6 +616,7 @@
       if (view === "users") renderUsers();
     }).catch(function () {});
     refreshSubs();
+    refreshWorks();
     refreshContent();
   }
 })();

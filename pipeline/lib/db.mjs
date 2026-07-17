@@ -53,6 +53,17 @@ export async function getDb() {
         PRIMARY KEY (follower, followee)
       );
       CREATE INDEX IF NOT EXISTS idx_follows_followee ON follows(followee);
+      CREATE TABLE IF NOT EXISTS works (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT NOT NULL, email TEXT,
+        title TEXT NOT NULL, description TEXT,
+        images TEXT NOT NULL DEFAULT '[]',
+        status TEXT NOT NULL DEFAULT 'pending',
+        mod TEXT, reports INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL, decided_at TEXT, decide_note TEXT
+      );
+      CREATE INDEX IF NOT EXISTS idx_works_uid ON works(uid);
+      CREATE INDEX IF NOT EXISTS idx_works_status ON works(status);
     `);
     return db;
   } catch (e) {
@@ -172,6 +183,68 @@ export async function followRateOk(uid, max = 100) {
   const d = await getDb();
   const since = new Date(Date.now() - 24 * 3600e3).toISOString();
   return d.prepare("SELECT COUNT(*) n FROM follows WHERE follower=? AND created_at>?").get(uid, since).n < max;
+}
+
+// ---------- 作品集(路线图 8.3):图片人工审核通过才公开 ----------
+const parseWork = r => ({ ...r, images: JSON.parse(r.images || "[]"), mod: r.mod ? JSON.parse(r.mod) : null });
+export async function insertWork({ uid, email, title, description, mod }) {
+  const d = await getDb();
+  const r = d.prepare("INSERT INTO works(uid,email,title,description,mod,created_at) VALUES(?,?,?,?,?,?)")
+    .run(uid, email || null, title, description || null, mod ? JSON.stringify(mod) : null, new Date().toISOString());
+  return Number(r.lastInsertRowid);
+}
+export async function setWorkImages(id, paths) {
+  const d = await getDb();
+  d.prepare("UPDATE works SET images=? WHERE id=?").run(JSON.stringify(paths), id);
+}
+export async function getWork(id) {
+  const d = await getDb();
+  const r = d.prepare("SELECT * FROM works WHERE id=?").get(id);
+  return r ? parseWork(r) : null;
+}
+// 某用户的作品:公开视角只出 approved;本人视角全出(前端标"审核中/未通过")
+export async function worksByUser(uid, includeAll) {
+  const d = await getDb();
+  const rows = includeAll
+    ? d.prepare("SELECT * FROM works WHERE uid=? ORDER BY id DESC LIMIT 200").all(uid)
+    : d.prepare("SELECT * FROM works WHERE uid=? AND status='approved' ORDER BY id DESC LIMIT 200").all(uid);
+  return rows.map(parseWork);
+}
+export async function worksCountApproved(uid) {
+  const d = await getDb();
+  return d.prepare("SELECT COUNT(*) n FROM works WHERE uid=? AND status='approved'").get(uid).n;
+}
+export async function worksAdminList(limit = 300) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM works ORDER BY (status='pending') DESC, id DESC LIMIT ?").all(limit).map(parseWork);
+}
+export async function decideWork(id, status, note) {
+  const d = await getDb();
+  const row = d.prepare("SELECT * FROM works WHERE id=?").get(id);
+  if (!row) return null;
+  d.prepare("UPDATE works SET status=?,decided_at=?,decide_note=? WHERE id=?")
+    .run(status, new Date().toISOString(), note || null, id);
+  return parseWork(row);
+}
+export async function deleteWork(id) {
+  const d = await getDb();
+  const row = d.prepare("SELECT * FROM works WHERE id=?").get(id);
+  if (!row) return null;
+  d.prepare("DELETE FROM works WHERE id=?").run(id);
+  return parseWork(row);
+}
+export async function workReport(id) {
+  const d = await getDb();
+  d.prepare("UPDATE works SET reports=reports+1 WHERE id=?").run(id);
+}
+export async function workRateOk(uid, max = 3) {   // 单用户 24 小时最多 3 组作品
+  const d = await getDb();
+  const since = new Date(Date.now() - 24 * 3600e3).toISOString();
+  return d.prepare("SELECT COUNT(*) n FROM works WHERE uid=? AND created_at>?").get(uid, since).n < max;
+}
+export async function countPendingWorks() {
+  try { const d = await getDb(); return d.prepare("SELECT COUNT(*) n FROM works WHERE status='pending'").get().n; }
+  catch (e) { return 0; }
 }
 
 // 单用户 24 小时内最多 5 条(防灌水)
