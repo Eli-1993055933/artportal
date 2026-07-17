@@ -17,7 +17,7 @@ import { extract } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
-import { searchWeb, BLOCK, unsafeHost } from "./lib/websearch.mjs";
+import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
@@ -932,32 +932,38 @@ const AUTO_QUERIES = {
     "art residency coordinator job", "museum registrar job"
   ]
 };
+// 省额策略(2026-07-18,余额撑半年):每轮只跑【一个】频道,按 机会→资讯→机会→招聘 轮转
+// (机会双倍权重);当天 serper 预算余量不足时整轮让路,把余量留给用户手动检索。
+const AUTO_ROTATION = ["opportunities", "news", "opportunities", "jobs"];
+let autoTickN = 0;
 async function autoHarvestTick() {
-  const hourIdx = Math.floor(Date.now() / 3600e3);
-  for (const ch of ["opportunities", "news", "jobs"]) {
-    const pool = AUTO_QUERIES[ch];
-    const q = pool[hourIdx % pool.length];
+  if (process.env.SERPER_API_KEY && serperBudgetLeft() < 6) {
+    process.stderr.write("[自动检索] 今日搜索预算余量不足,本轮让路(优先保用户手动检索)\n");
+    return;
+  }
+  const ch = AUTO_ROTATION[autoTickN++ % AUTO_ROTATION.length];
+  const pool = AUTO_QUERIES[ch];
+  const q = pool[Math.floor(Math.random() * pool.length)];   // 随机取词:长期均匀覆盖词池,无需持久化游标
+  try {
+    await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
     try {
-      await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
-      try {
-        const t0 = Date.now();
-        const r = ch === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(ch, q, 6);
-        for (const rec of r.added) {
-          db.ingestInsert({ channel: ch, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "auto-hourly", ip: "server" });
-        }
-        process.stderr.write(`[自动检索·${ch}] "${q}" → 探测${r.probed} 入库${r.added.length} (${Math.round((Date.now() - t0) / 1000)}s)\n`);
-      } finally { releaseSlot(); }
-    } catch (e) {
-      process.stderr.write(`[自动检索·${ch}] "${q}" 失败: ${String(e.message || e).slice(0, 120)}\n`);
-    }
+      const t0 = Date.now();
+      const r = ch === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(ch, q, 6);
+      for (const rec of r.added) {
+        db.ingestInsert({ channel: ch, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "auto-hourly", ip: "server" });
+      }
+      process.stderr.write(`[自动检索·${ch}] "${q}" → 探测${r.probed} 入库${r.added.length} (${Math.round((Date.now() - t0) / 1000)}s,今日搜索余量${serperBudgetLeft()})\n`);
+    } finally { releaseSlot(); }
+  } catch (e) {
+    process.stderr.write(`[自动检索·${ch}] "${q}" 失败: ${String(e.message || e).slice(0, 120)}\n`);
   }
 }
 if (process.env.AUTO_HARVEST === "1") {
-  const mins = Math.max(10, Number(process.env.AUTO_HARVEST_MINUTES || 60));   // 下限 10 分钟,防手滑刷爆搜索配额
+  const mins = Math.max(10, Number(process.env.AUTO_HARVEST_MINUTES || 480));   // 默认 8 小时一轮(省额);下限 10 分钟防手滑
   const boot = Math.max(5, Number(process.env.AUTO_HARVEST_BOOT || 180));
   setTimeout(autoHarvestTick, boot * 1000);
   setInterval(autoHarvestTick, mins * 60 * 1000);
-  process.stderr.write(`[自动检索] 已开启:每 ${mins} 分钟为 资讯+招聘 各检索一词(首轮 ${boot} 秒后)\n`);
+  process.stderr.write(`[自动检索] 已开启:每 ${mins} 分钟检索一个频道(机会→资讯→机会→招聘 轮转;首轮 ${boot} 秒后)\n`);
 }
 
 createServer(async (req, res) => {
