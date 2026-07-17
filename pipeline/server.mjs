@@ -451,7 +451,11 @@ async function handleAuthApi(req, res, u) {
       if (!CMT_KINDS.has(kind) || !target) return json({ code: 400, body: { error: "参数不正确" } });
       const viewer = auth.userOf(req);
       try {
-        const rows = await db.commentsFor(kind, target, viewer ? viewer.id : null);
+        let rows = await db.commentsFor(kind, target, viewer ? viewer.id : null);
+        if (viewer) {   // 我拉黑的人,评论对我不可见
+          const blocked = await db.blockedSetOf(viewer.id);
+          if (blocked.size) rows = rows.filter(c => !blocked.has(c.uid));
+        }
         const liked = viewer ? await db.likedSet(viewer.id, kind, target) : new Set();
         const mini = auth.usersMini([...new Set(rows.map(c => c.uid))]);
         const byId = new Map(mini.map(x => [x.id, x]));
@@ -477,7 +481,12 @@ async function handleAuthApi(req, res, u) {
         if (parent) {
           const pc = await db.getComment(parent);
           if (!pc || pc.kind !== kind || pc.target !== target) return json({ code: 400, body: { error: "回复的评论不存在" } });
+          if (await db.isBlocked(pc.uid, me.id)) return json({ code: 403, body: { error: "无法回复该用户" } });   // 对方拉黑了我
           if (pc.parent) parent = pc.parent;               // 回复的回复 → 扁平挂到主评论下(小红书式一层)
+        }
+        if (kind === "work") {   // 作品作者拉黑了我 → 不能在其作品下评论
+          const wk = await db.getWork(Number(target));
+          if (wk && await db.isBlocked(wk.uid, me.id)) return json({ code: 403, body: { error: "无法评论该作品" } });
         }
         const mod = await moderateText(content, "comment");
         const status = mod.verdict === "pass" ? "approved" : "pending";   // AI 干净即显示,可疑压下待人工
@@ -495,6 +504,7 @@ async function handleAuthApi(req, res, u) {
       try {
         const c = await db.getComment(Number(b.id));
         if (!c || c.status !== "approved") return json({ code: 404, body: { error: "评论不存在" } });
+        if (await db.isBlocked(c.uid, me.id)) return json({ code: 403, body: { error: "无法操作" } });   // 对方拉黑了我
         const lr = await db.commentLikeToggle(me.id, c.id);
         if (lr.liked) await db.notify({ uid: c.uid, type: "like", actor: me.id, refkey: "like:" + c.id, ref: { kind: c.kind, target: c.target, cid: c.id, preview: String(c.content).slice(0, 60) } }).catch(() => {});
         return json({ code: 200, body: lr });
@@ -581,10 +591,15 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 503, body: { error: "作品服务暂不可用,请稍后再试" } });
       }
     }
-    // 作品广场(第四频道"作品"):全站已过审作品的最新流,附作者公开摘要
+    // 作品广场(第四频道"作品"):全站已过审作品的最新流,附作者公开摘要;?following=1 只看关注的人
     if (p === "/api/works/feed" && m === "GET") {
       try {
-        const rows = await db.worksFeed(200);
+        let rows;
+        if (u.searchParams.get("following") === "1") {
+          const viewer = auth.userOf(req);
+          if (!viewer) return json({ code: 401, body: { error: "登录后可看关注的人的作品" } });
+          rows = await db.worksFeedFollowing(viewer.id);
+        } else rows = await db.worksFeed(200);
         const mini = auth.usersMini([...new Set(rows.map(w => w.uid))]);
         const byId = new Map(mini.map(x => [x.id, x]));
         return json({ code: 200, body: { works: rows.map(w => ({
@@ -705,7 +720,21 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 200, body: { kind, users: auth.usersMini(rows.map(r => r.uid)) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
-    // —— 关注/取关(8.2):登录用户;不能关注自己;新增关注限 100 次/天 ——
+    // —— 拉黑/解除(8.4 二期):拉黑后对方无法关注/评论你,双向关注解除 ——
+    if (p === "/api/block" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "请先登录" } });
+      const b = await readBody(req);
+      const target = String(b.uid || ""), on = !!b.on;
+      if (target === me.id) return json({ code: 400, body: { error: "不能拉黑自己" } });
+      if (!auth.userExists(target)) return json({ code: 404, body: { error: "用户不存在" } });
+      try {
+        await db.blockSet(me.id, target, on);
+        await db.logModeration("block", target, on ? "blocked" : "unblocked", { by: me.id });
+        return json({ code: 200, body: { ok: true, blocked: on } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 关注/取关(8.2):登录用户;不能关注自己;新增关注限 100 次/天;拉黑关系下禁止 ——
     if (p === "/api/follow" && m === "POST") {
       const me = auth.userOf(req);
       if (!me) return json({ code: 401, body: { error: "请先登录" } });
@@ -714,6 +743,8 @@ async function handleAuthApi(req, res, u) {
       if (target === me.id) return json({ code: 400, body: { error: "不能关注自己" } });
       if (!auth.userExists(target)) return json({ code: 404, body: { error: "用户不存在" } });
       try {
+        if (on && await db.isBlocked(target, me.id)) return json({ code: 403, body: { error: "无法关注该用户" } });
+        if (on && await db.isBlocked(me.id, target)) return json({ code: 403, body: { error: "你已拉黑对方,先解除拉黑" } });
         if (on && !(await db.followRateOk(me.id))) return json({ code: 429, body: { error: "今日关注操作太多,明天再来" } });
         await db.followSet(me.id, target, on);
         const info = await db.followInfo(target, me.id);
@@ -732,12 +763,20 @@ async function handleAuthApi(req, res, u) {
       try { Object.assign(r.body.user, await db.followInfo(uid, viewer ? viewer.id : null)); }
       catch (e) { Object.assign(r.body.user, { followers: 0, following: 0, is_following: false }); }
       try { r.body.user.works = await db.worksCountApproved(uid); } catch (e) { r.body.user.works = 0; }
+      try { r.body.user.is_blocked = viewer ? await db.isBlocked(viewer.id, uid) : false; } catch (e) { r.body.user.is_blocked = false; }
       return json(r);
     }
     if (p === "/api/track" && m === "POST") { const b = await readBody(req); return json(auth.track(req, b, ip)); }
     if (p === "/api/admin/login" && m === "POST") { const b = await readBody(req); return json(auth.adminLogin(b.password, ip)); }
     if (p === "/api/admin/overview" && m === "GET") return json(auth.isAdmin(req, ip) ? await auth.adminOverview() : { code: 401, body: { error: "unauthorized" } });
     if (p === "/api/admin/users" && m === "GET") return json(auth.isAdmin(req, ip) ? auth.adminUsers() : { code: 401, body: { error: "unauthorized" } });
+    if (p === "/api/admin/users/ban" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const r = auth.adminSetBan(b.email, !!b.on);
+      if (r.code === 200) await db.logModeration("user", String(b.email), b.on ? "banned" : "unbanned", null).catch(() => {});
+      return json(r);
+    }
     // —— 投稿:提交 / 后台队列 / 人工裁决 ——
     if (p === "/api/submit" && m === "POST") {
       const user = auth.userOf(req);
@@ -866,7 +905,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {

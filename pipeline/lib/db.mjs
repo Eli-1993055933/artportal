@@ -53,6 +53,11 @@ export async function getDb() {
         PRIMARY KEY (follower, followee)
       );
       CREATE INDEX IF NOT EXISTS idx_follows_followee ON follows(followee);
+      CREATE TABLE IF NOT EXISTS blocks (
+        blocker TEXT NOT NULL, blocked TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        PRIMARY KEY (blocker, blocked)
+      );
       CREATE TABLE IF NOT EXISTS notifications (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         uid TEXT NOT NULL,
@@ -181,6 +186,26 @@ export async function userApprovedSubmissions(uid) {
       let title = null; try { title = JSON.parse(r.payload).title || null; } catch (e) {}
       return { oid: "submit-" + r.id, title, decided_at: r.decided_at };
     });
+}
+
+// ---------- 拉黑(8.4 二期):拉黑后对方无法关注你/评论你的内容,已有互相关注解除 ----------
+export async function blockSet(blocker, blocked, on) {
+  const d = await getDb();
+  if (on) {
+    d.prepare("INSERT OR IGNORE INTO blocks(blocker,blocked,created_at) VALUES(?,?,?)").run(blocker, blocked, new Date().toISOString());
+    d.prepare("DELETE FROM follows WHERE (follower=? AND followee=?) OR (follower=? AND followee=?)").run(blocker, blocked, blocked, blocker);
+  } else {
+    d.prepare("DELETE FROM blocks WHERE blocker=? AND blocked=?").run(blocker, blocked);
+  }
+}
+// blocker 是否拉黑了 blocked
+export async function isBlocked(blocker, blocked) {
+  const d = await getDb();
+  return !!d.prepare("SELECT 1 FROM blocks WHERE blocker=? AND blocked=?").get(blocker, blocked);
+}
+export async function blockedSetOf(uid) {
+  const d = await getDb();
+  return new Set(d.prepare("SELECT blocked FROM blocks WHERE blocker=?").all(uid).map(r => r.blocked));
 }
 
 // ---------- 站内通知(8.4 一期):被关注/被回复/被点赞/内容审核结果 ----------
@@ -340,6 +365,12 @@ export async function worksByUser(uid, includeAll) {
 export async function worksFeed(limit = 200) {
   const d = await getDb();
   return d.prepare("SELECT * FROM works WHERE status='approved' ORDER BY id DESC LIMIT ?").all(limit).map(parseWork);
+}
+// 关注动态:只看我关注的人的已过审作品(作品频道"关注"过滤)
+export async function worksFeedFollowing(uid, limit = 200) {
+  const d = await getDb();
+  return d.prepare("SELECT w.* FROM works w JOIN follows f ON f.followee=w.uid WHERE f.follower=? AND w.status='approved' ORDER BY w.id DESC LIMIT ?")
+    .all(uid, limit).map(parseWork);
 }
 export async function worksCountApproved(uid) {
   const d = await getDb();

@@ -147,6 +147,13 @@
       ntFollow: "关注了你", ntReply: "回复了你", ntLike: "赞了你的评论", ntComment: "评论了你的作品",
       ntDecide: "审核结果:你的", ntWhatWork: "作品", ntWhatSub: "投稿", ntWhatCmt: "评论",
       ntResOk: "已通过 ✓", ntResNo: "未通过/已下架",
+      // 拉黑 + 关注动态(8.4 二期)
+      blockBtn: "拉黑", unblockBtn: "已拉黑 · 点击解除",
+      blockAsk: "拉黑 TA?对方将无法关注你、无法评论你的内容和回复你;已有的相互关注会解除。",
+      blockDone: "已拉黑", unblockDone: "已解除拉黑",
+      wsAll: "全部作品", wsFollowing: "关注的人",
+      wsNeedLogin: "登录后可以只看你关注的艺术家的作品",
+      empty_wsf_title: "关注的人还没有发布作品", empty_wsf_desc: "去「全部作品」逛逛,或在搜索里找同行来关注。",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -294,6 +301,13 @@
       ntFollow: "followed you", ntReply: "replied to you", ntLike: "liked your comment", ntComment: "commented on your work",
       ntDecide: "Review result — your", ntWhatWork: "work", ntWhatSub: "submission", ntWhatCmt: "comment",
       ntResOk: "approved ✓", ntResNo: "not approved / taken down",
+      // Block + following feed
+      blockBtn: "Block", unblockBtn: "Blocked · tap to undo",
+      blockAsk: "Block this user? They won't be able to follow you, comment on your content or reply to you; mutual follows will be removed.",
+      blockDone: "Blocked", unblockDone: "Unblocked",
+      wsAll: "All works", wsFollowing: "Following",
+      wsNeedLogin: "Sign in to see works from artists you follow",
+      empty_wsf_title: "No works from people you follow yet", empty_wsf_desc: "Browse all works, or find artists via search.",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

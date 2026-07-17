@@ -18,6 +18,7 @@
     // 第四频道"作品":平台艺术家的已过审作品瀑布流(API 动态数据,不走静态文件、不缓存)
     works:         { api: "/api/works/feed",          key: "works",         card: function (o) { return AP.works.renderFeedCard(o); } }
   };
+  var worksScope = "all";   // 作品频道范围:all=全部 / following=关注的人(8.4 动态)
   function channelSearchText(o) {
     return [o.title, o.title_zh, o.title_en, o.source, o.org, o.summary, o.summary_zh, o.summary_en, o.city, o.country, o.employment_type, o.description, o.author && o.author.nickname].filter(Boolean).join(" ").toLowerCase();
   }
@@ -48,7 +49,8 @@
     var c = CH[channel];
     if (cache[channel] && !c.api) { allData = cache[channel]; showState("ready"); rerun(); syncRoute(); return; }   // API 频道(作品)每次都取最新
     showState("loading");
-    fetch(c.api || c.file, { cache: "no-cache", credentials: c.api ? "same-origin" : "omit" })
+    var src = c.api ? (c.api + (channel === "works" && worksScope === "following" ? "?following=1" : "")) : c.file;
+    fetch(src, { cache: "no-cache", credentials: c.api ? "same-origin" : "omit" })
       .then(function (r) {
         if (r.ok) return r.json();
         if (channel === "opportunities") throw new Error("HTTP " + r.status);
@@ -131,7 +133,7 @@
       $("emptyClear").hidden = true;
       return;
     }
-    var t = channel === "news" ? "empty_news" : channel === "jobs" ? "empty_jobs" : channel === "works" ? "empty_works" : null;
+    var t = channel === "news" ? "empty_news" : channel === "jobs" ? "empty_jobs" : channel === "works" ? (worksScope === "following" ? "empty_wsf" : "empty_works") : null;
     if (t) {
       emptyState.querySelector(".state__title").textContent = AP.t(t + "_title");
       emptyState.querySelector(".state__desc").textContent = AP.t(t + "_desc");
@@ -162,6 +164,7 @@
     for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i].getAttribute("data-channel") === ch);
     var opp = ch === "opportunities";
     toggleEl($("catRow"), opp);                // 分类+筛选+排序整行 仅机会频道
+    toggleEl($("worksBar"), ch === "works");   // 作品范围行(全部/关注)仅作品频道
     toggleEl($("aiSearchBtn"), ch !== "works");   // 作品频道没有"AI 全网检索"(站内内容)
     // AI 检索其余三频道同规格,按钮为内嵌短文案"✦ AI 检索"(不随频道换,placeholder 负责说明)
     // 检索中底条文案随频道("正在检索真实资讯/招聘…")
@@ -374,6 +377,20 @@
     // 频道导航切换
     $("channelNav").addEventListener("click", function (e) {
       var b = e.target.closest(".channel"); if (b) switchChannel(b.getAttribute("data-channel"));
+    });
+
+    // 作品范围:全部 / 关注的人(需登录;切换即重取 feed)
+    var wb = $("worksBar");
+    if (wb) wb.addEventListener("click", function (e) {
+      var t = e.target.closest("[data-wscope]"); if (!t) return;
+      var scope = t.getAttribute("data-wscope");
+      if (scope === "following" && !(AP.auth && AP.auth.isIn())) { AP.auth.openLogin(AP.t("wsNeedLogin")); return; }
+      if (scope === worksScope) return;
+      worksScope = scope;
+      var tabs2 = wb.querySelectorAll("[data-wscope]");
+      for (var i2 = 0; i2 < tabs2.length; i2++) tabs2[i2].classList.toggle("is-active", tabs2[i2] === t);
+      cache.works = null;
+      loadData();
     });
 
     // 列表点击委托:复制 / 访问 / 打开详情

@@ -27,6 +27,7 @@
       if (e.target.closest("#ppEdit")) { editOpen(); return; }
       if (e.target.closest("#ppLogout")) { AP.auth.logout(); return; }   // 退出后 refresh 自动转访客视角
       if (e.target.closest("#ppFollow")) { toggleFollow(); return; }
+      if (e.target.closest("#ppBlock")) { toggleBlock(); return; }
       var tab = e.target.closest("[data-pptab]");
       if (tab) { curTab = tab.getAttribute("data-pptab"); render(); return; }
       // 卡片点击 → 详情(标题真链接拦默认统一走 goDetail 保留返回;官网外链/封面链接放行,注册墙照常拦)
@@ -88,7 +89,10 @@
           '<h1 class="ppage__name">' + esc(u.nickname) +
             (isMe ? ' <button class="btn btn--ghost ppage__editbtn" id="ppEdit" type="button">' + esc(AP.t("menuEditProfile")) + '</button>' +
                     '<button class="btn btn--ghost ppage__editbtn ppage__logout" id="ppLogout" type="button">' + esc(AP.t("authLogout")) + '</button>'
-                  : ' <button class="btn ' + (u.is_following ? "btn--ghost" : "btn--dark") + ' ppage__followbtn" id="ppFollow" type="button">' + esc(AP.t(u.is_following ? "followingBtn" : "followBtn")) + '</button>') +
+                  : (u.is_blocked
+                      ? ' <button class="btn btn--ghost ppage__editbtn ppage__logout" id="ppBlock" type="button">' + esc(AP.t("unblockBtn")) + '</button>'
+                      : ' <button class="btn ' + (u.is_following ? "btn--ghost" : "btn--dark") + ' ppage__followbtn" id="ppFollow" type="button">' + esc(AP.t(u.is_following ? "followingBtn" : "followBtn")) + '</button>' +
+                        '<button class="btn btn--ghost ppage__editbtn ppage__logout" id="ppBlock" type="button">' + esc(AP.t("blockBtn")) + '</button>')) +
           '</h1>' +
           (metaBits.length ? '<p class="ppage__meta">' + metaBits.join(" · ") + '</p>' : "") +
           (u.fields ? '<p class="ppage__meta">' + esc(AP.t("ppFields")) + ':' + esc(u.fields) + '</p>' : "") +
@@ -169,6 +173,26 @@
       box.appendChild(a);
     }
     body.innerHTML = ""; body.appendChild(box);
+  }
+
+  // 拉黑/解除(未登录先登录;拉黑需确认——会解除双向关注,对方不能再关注/评论你)
+  function toggleBlock() {
+    var me = AP.auth && AP.auth.current();
+    if (!me) { AP.auth.openLogin(); return; }
+    var u = current.user;
+    var on = !u.is_blocked;
+    if (on && !confirm(AP.t("blockAsk"))) return;
+    fetch("/api/block", {
+      method: "POST", credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid: u.id, on: on })
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); })
+      .then(function (r) {
+        if (!r.ok) { toast((r.data && r.data.error) || AP.t("authNetErr")); return; }
+        toast(AP.t(on ? "blockDone" : "unblockDone"));
+        current = null; open(curUid);        // 拉黑会解除关注关系 → 整页重取
+      })
+      .catch(function () { toast(AP.t("authNetErr")); });
   }
 
   // 关注/取关(未登录先登录;成功后原地刷新按钮与粉丝数)

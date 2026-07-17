@@ -185,6 +185,7 @@ export function userOf(req) {
   const s = sessions.get(token);
   if (!s || Date.now() - s.created_at > SESS_TTL) { if (s) { sessions.delete(token); saveSessions(); } return null; }
   const u = users.find(x => x.id === s.uid);
+  if (u && u.banned) return null;               // 封禁账号:会话视同失效(所有登录态接口即刻失能)
   return u || null;
 }
 function cookieOf(req, name) {
@@ -384,6 +385,7 @@ export function login(email, password, ip) {
   // 统一报错文案 + 恒定耗时(邮箱不存在也跑一次假哈希),不泄露"邮箱是否注册过"
   if (!u) { burnPassword(password); return { code: 401, body: { error: "邮箱或密码不正确" } }; }
   if (!checkPassword(password, u)) return { code: 401, body: { error: "邮箱或密码不正确" } };
+  if (u.banned) return { code: 403, body: { error: "该账号已被停用。如有疑问请通过页脚反馈联系平台。" } };
   u.last_seen = new Date().toISOString(); saveUsers();
   logEvent("login", { uid: u.id, email, ip });
   const token = newSession(u.id);
@@ -534,7 +536,20 @@ export function adminUsers() {
   const list = users.slice().reverse().map(u => ({
     email: u.email, nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
     last_seen: u.last_seen, favorites: (u.favorites || []).length,
-    verified: !!u.email_verified
+    verified: !!u.email_verified, banned: !!u.banned
   }));
   return { code: 200, body: { total: list.length, users: list } };
+}
+// 封禁/解封(admin):封禁即杀掉该用户所有会话,登录也被拒
+export function adminSetBan(email, on) {
+  const u = byEmail.get(String(email || "").trim().toLowerCase());
+  if (!u) return { code: 404, body: { error: "用户不存在" } };
+  u.banned = !!on;
+  if (on) {
+    for (const [t, s] of sessions) if (s.uid === u.id) sessions.delete(t);
+    saveSessions();
+  }
+  saveUsers();
+  logEvent("ban", { uid: u.id, email: u.email, on: on ? 1 : 0 });
+  return { code: 200, body: { ok: true, banned: u.banned } };
 }
