@@ -94,6 +94,7 @@
         <button data-view="overview" class="is-active">概览</button>
         <button data-view="subs">投稿审核 <span class="badge" id="navSubN">0</span></button>
         <button data-view="works">作品审核 <span class="badge" id="navWorkN">0</span></button>
+        <button data-view="comments">评论审核 <span class="badge" id="navCmtN">0</span></button>
         <button data-view="content">内容管理 <span class="badge" id="navContentN">0</span></button>
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
@@ -139,6 +140,20 @@
         </div>
         <div class="scroll"><table id="workTbl"><thead><tr><th>时间</th><th>预览</th><th>标题/说明</th><th>张数</th><th>作者</th><th>机审</th><th>举报</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="workPager"></div>
+      </section>
+
+      <!-- 评论审核:AI 干净即显示;可疑在此人工裁决;已显示的可下架 -->
+      <section data-sec="comments" hidden>
+        <h1 class="sec__title">评论审核 <span class="pill" id="cmtPending">0 待审</span></h1>
+        <div class="toolbar" id="cmtFilter">
+          <button class="fchip is-active" data-st="">全部</button>
+          <button class="fchip" data-st="pending">待审</button>
+          <button class="fchip" data-st="approved">已显示</button>
+          <button class="fchip" data-st="rejected">已拒绝</button>
+          <span class="count" id="cmtCount"></span>
+        </div>
+        <div class="scroll"><table id="cmtTbl"><thead><tr><th>时间</th><th>内容</th><th>挂在</th><th>作者</th><th>机审</th><th>赞</th><th>举报</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="cmtPager"></div>
       </section>
 
       <!-- 内容管理 -->
@@ -191,6 +206,7 @@
   var st = {
     subs:    { page: 1, per: 30, status: "" },
     works:   { page: 1, per: 30, status: "" },
+    cmts:    { page: 1, per: 50, status: "" },
     content: { page: 1, per: 50, q: "", via: "" },
     recycle: { page: 1, per: 50 },
     ingest:  { page: 1, per: 50 },
@@ -275,6 +291,7 @@
     if (view === "overview") { /* overview 由 refresh 渲染 */ }
     else if (view === "subs") renderSubs();
     else if (view === "works") renderWorks();
+    else if (view === "comments") renderCmts();
     else if (view === "content") renderContent();
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
@@ -583,6 +600,69 @@
     }).catch(function () {});
   }
 
+  // —— 评论审核 ——
+  var allCmts = [];
+  var CMT_KIND = { opportunity: "机会", news: "资讯", job: "招聘", work: "作品" };
+  function renderCmts() {
+    var pending = allCmts.filter(function (c) { return c.status === "pending"; }).length;
+    $("cmtPending").textContent = pending + " 待审";
+    $("cmtPending").className = "pill" + (pending > 0 ? " on" : "");
+    var list = st.cmts.status ? allCmts.filter(function (c) { return c.status === st.cmts.status; }) : allCmts;
+    $("cmtCount").textContent = "共 " + list.length + " 条";
+    paginate(list, st.cmts, $("cmtPager"), function (c) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(c.created_at, true), "mono"));
+      var ct = td(c.content); ct.style.whiteSpace = "normal"; ct.style.maxWidth = "300px"; tr.appendChild(ct);
+      var tg = td((CMT_KIND[c.kind] || c.kind) + " · " + c.target, "muted"); tg.style.maxWidth = "180px"; tg.style.overflow = "hidden"; tg.style.textOverflow = "ellipsis"; tg.title = c.target; tr.appendChild(tg);
+      tr.appendChild(td(c.email || c.uid));
+      var mod = c.mod || {};
+      var mc = td((mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : ""), mod.verdict === "pass" ? "" : "muted");
+      mc.title = (mod.ai && mod.ai.reason) || ""; tr.appendChild(mc);
+      tr.appendChild(td(c.likes || 0, "mono"));
+      tr.appendChild(td(c.reports || 0, c.reports > 0 ? "" : "muted"));
+      var stc = document.createElement("td");
+      var pill = document.createElement("span");
+      pill.className = "pill" + (c.status === "approved" ? " on" : "");
+      pill.textContent = { pending: "待审", approved: "已显示", rejected: "已拒绝" }[c.status] || c.status;
+      stc.appendChild(pill); tr.appendChild(stc);
+      var ops = document.createElement("td");
+      function cop(label, act, bg, fg) {
+        var b = document.createElement("button");
+        b.textContent = label;
+        b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + bg + ";color:" + fg;
+        b.addEventListener("click", function () {
+          if (!confirm(label + "这条评论?")) return;
+          post("/api/admin/comments/decide", { id: c.id, action: act }).then(function (r) {
+            if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+            refreshCmts();
+          });
+        });
+        ops.appendChild(b);
+      }
+      if (c.status === "pending") { cop("通过", "approve", "#1d3a24", "#7ee08a"); cop("拒绝", "reject", "#3a1d1d", "#ff9a8a"); }
+      else if (c.status === "approved") cop("下架", "reject", "#3a2a1d", "#ffc38a");
+      else ops.textContent = "—";
+      tr.appendChild(ops);
+      $("cmtTbl").tBodies[0].appendChild(tr);
+    }, $("cmtTbl").tBodies[0], 9, "(暂无评论)");
+  }
+  $("cmtFilter").addEventListener("click", function (e) {
+    var c = e.target.closest(".fchip"); if (!c) return;
+    st.cmts.status = c.getAttribute("data-st"); st.cmts.page = 1;
+    var chips = this.querySelectorAll(".fchip");
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("is-active", chips[i] === c);
+    renderCmts();
+  });
+  function refreshCmts() {
+    get("/api/admin/comments").then(function (r) {
+      allCmts = r.list || [];
+      var pending = allCmts.filter(function (c) { return c.status === "pending"; }).length;
+      $("navCmtN").textContent = String(pending);
+      $("navCmtN").className = "badge" + (pending > 0 ? " hot" : "");
+      if (view === "comments") renderCmts();
+    }).catch(function () {});
+  }
+
   // —— 数据刷新:导航角标每次都更新;表格只重渲当前模块(保留页码,不打断操作) ——
   function refreshSubs() {
     get("/api/admin/submissions").then(function (r) {
@@ -621,6 +701,7 @@
     }).catch(function () {});
     refreshSubs();
     refreshWorks();
+    refreshCmts();
     refreshContent();
   }
 })();

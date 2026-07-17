@@ -311,7 +311,7 @@ export async function setProfile(req, body, ip) {
   const p = u.profile || (u.profile = {});
   const freeText = [bio, fields, location].filter(Boolean).join("\n");
   if (freeText && freeText !== [p.bio, p.fields, p.location].filter(Boolean).join("\n")) {
-    const mod = await moderateText(freeText);
+    const mod = await moderateText(freeText, "profile");
     if (mod.verdict === "reject") return { code: 400, body: { error: "资料内容包含不允许的词句,请修改后再试" } };
     if (mod.verdict === "review") logModeration("profile", u.id, "review", { bio, fields, location, hits: mod.hits, ai: mod.ai }).catch(() => {});
   }

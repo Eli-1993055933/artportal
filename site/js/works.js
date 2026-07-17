@@ -182,6 +182,7 @@
                 ? '<button class="wkview__op wkview__op--del" id="wvDel" type="button">' + esc(AP.t("wkDelete")) + '</button>'
                 : '<button class="wkview__op" id="wvReport" type="button">' + esc(AP.t("reportErr")) + '</button>') +
             '</div>' +
+            '<div class="wkview__cmts" id="wvCmts"></div>' +
           '</div>' +
         '</div>';
       document.getElementById("wvScrim").addEventListener("click", close);
@@ -205,6 +206,7 @@
           toast(r.ok ? AP.t("wkReported") : ((r.data && r.data.error) || AP.t("authNetErr")));
         });
       });
+      if (AP.comments) AP.comments.mount(document.getElementById("wvCmts"), "work", String(w.id));   // 作品评论
     }
     function close() { el.hidden = true; document.removeEventListener("keydown", onKey, true); }
     function onKey(e) {

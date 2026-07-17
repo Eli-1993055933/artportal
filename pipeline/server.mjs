@@ -362,6 +362,8 @@ function validateWork(b) {
   }
   return { data: { title, description, bufs } };
 }
+// 评论可挂的四类内容(机会/资讯/招聘/作品)
+const CMT_KINDS = new Set(["opportunity", "news", "job", "work"]);
 // 作品举报限频(防刷):单 IP 每天 20 次
 const reportHits = new Map();
 function reportLimited(ip) {
@@ -408,6 +410,105 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
+    // —— 评论(路线图第 2 项):四类内容通用;AI 先审(pass 即显示,可疑进人工) ——
+    if (p === "/api/comments" && m === "GET") {
+      const kind = String(u.searchParams.get("kind") || "");
+      const target = String(u.searchParams.get("id") || "").slice(0, 200);
+      if (!CMT_KINDS.has(kind) || !target) return json({ code: 400, body: { error: "参数不正确" } });
+      const viewer = auth.userOf(req);
+      try {
+        const rows = await db.commentsFor(kind, target, viewer ? viewer.id : null);
+        const liked = viewer ? await db.likedSet(viewer.id, kind, target) : new Set();
+        const mini = auth.usersMini([...new Set(rows.map(c => c.uid))]);
+        const byId = new Map(mini.map(x => [x.id, x]));
+        return json({ code: 200, body: { comments: rows.map(c => ({
+          id: c.id, parent: c.parent || null, content: c.content, created_at: c.created_at,
+          likes: c.likes, liked: liked.has(c.id),
+          status: viewer && c.uid === viewer.id ? c.status : "approved",
+          uid: c.uid, author: byId.get(c.uid) || null
+        })) } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/comments" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "请先登录再评论" } });
+      const b = await readBody(req);
+      const kind = String(b.kind || ""), target = String(b.target || "").slice(0, 200);
+      const content = String(b.content || "").trim().slice(0, 500);
+      if (!CMT_KINDS.has(kind) || !target) return json({ code: 400, body: { error: "参数不正确" } });
+      if (content.length < 1) return json({ code: 400, body: { error: "评论不能为空" } });
+      try {
+        if (!(await db.commentRateOk(me.id))) return json({ code: 429, body: { error: "今天评论太多了,明天再来" } });
+        let parent = Number(b.parent) || null;
+        if (parent) {
+          const pc = await db.getComment(parent);
+          if (!pc || pc.kind !== kind || pc.target !== target) return json({ code: 400, body: { error: "回复的评论不存在" } });
+          if (pc.parent) parent = pc.parent;               // 回复的回复 → 扁平挂到主评论下(小红书式一层)
+        }
+        const mod = await moderateText(content, "comment");
+        const status = mod.verdict === "pass" ? "approved" : "pending";   // AI 干净即显示,可疑压下待人工
+        const id = await db.insertComment({ kind, target, uid: me.id, email: me.email, parent, content, mod, status });
+        await db.logModeration("comment", id, (status === "approved" ? "auto-approved:" : "created:") + mod.verdict, { kind, target, uid: me.id });
+        auth.logEvent("comment", { uid: me.id, email: me.email, ip, id: String(id) });
+        return json({ code: 200, body: { ok: true, id, status } });
+      } catch (e) { return json({ code: 503, body: { error: "评论服务暂不可用" } }); }
+    }
+    if (p === "/api/comments/like" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "请先登录" } });
+      const b = await readBody(req);
+      try {
+        const c = await db.getComment(Number(b.id));
+        if (!c || c.status !== "approved") return json({ code: 404, body: { error: "评论不存在" } });
+        return json({ code: 200, body: await db.commentLikeToggle(me.id, c.id) });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/comments/delete" && m === "POST") {
+      const me = auth.userOf(req);
+      const b = await readBody(req);
+      try {
+        const c = await db.getComment(Number(b.id));
+        if (!c) return json({ code: 404, body: { error: "评论不存在" } });
+        const isAdminReq = auth.isAdmin(req, ip);
+        if (!isAdminReq && (!me || c.uid !== me.id)) return json({ code: 403, body: { error: "只能删除自己的评论" } });
+        await db.deleteComment(c.id);
+        await db.logModeration("comment", c.id, isAdminReq ? "deleted-by-admin" : "deleted-by-owner", null);
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/comments/report" && m === "POST") {
+      if (reportLimited(ip)) return json({ code: 429, body: { error: "举报太频繁" } });
+      const b = await readBody(req);
+      try {
+        const c = await db.getComment(Number(b.id));
+        if (!c) return json({ code: 404, body: { error: "评论不存在" } });
+        await db.commentReport(c.id);
+        const viewer = auth.userOf(req);
+        await db.logModeration("comment", c.id, "reported", { by: viewer ? viewer.id : "anon", ip });
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 评论审核(admin):列表 / 裁决(pending→通过|拒绝;approved→下架) ——
+    if (p === "/api/admin/comments" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try { return json({ code: 200, body: { list: await db.commentsAdminList() } }); }
+      catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    if (p === "/api/admin/comments/decide" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const action = b.action === "approve" ? "approved" : "rejected";
+      try {
+        const c = await db.getComment(Number(b.id));
+        if (!c) return json({ code: 404, body: { error: "not found" } });
+        if (!(c.status === "pending" || (c.status === "approved" && action === "rejected"))) {
+          return json({ code: 400, body: { error: "该评论已裁决过" } });
+        }
+        await db.decideComment(c.id, action, b.note);
+        await db.logModeration("comment", c.id, "decided:" + action, null);
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
     // —— 作品集(8.3):上传(登录,进人工审核) / 查看 / 删除 / 举报 ——
     if (p === "/api/works" && m === "POST") {
       const me = auth.userOf(req);
@@ -420,7 +521,7 @@ async function handleAuthApi(req, res, u) {
         // 审核策略(2026-07-17 起):文字机审 pass → 自动通过、图片直接进公开目录即时发布;
         // review/reject → 图片留在非公开待审目录,交人工。后台全量可见,已发布的可"下架"。
         // (注:DeepSeek 只能审文字;图片内容靠 后台可见+举报+下架 兜底)
-        const mod = await moderateText(v.data.title + "\n" + v.data.description);
+        const mod = await moderateText(v.data.title + "\n" + v.data.description, "work");
         const autoPass = mod.verdict === "pass";
         const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, mod });
         const dir = autoPass ? WORKS_PUB : WORKS_PENDING;
@@ -723,7 +824,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   if (u.pathname === "/api/search") {

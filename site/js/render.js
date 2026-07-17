@@ -154,7 +154,8 @@
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         '<div class="card__meta"><span class="m-org">' + esc(n.source || "") + '</span>' + date + '</div>' +
         viaChip(n) +
-        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a></div>' +
+        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a>' +
+          '<button class="btn btn--ghost cmt-btn" type="button" data-cmt="' + esc(n.id) + '" data-cmt-title="' + esc(title) + '">💬 ' + AP.t("cmt") + '</button></div>' +
       '</div>';
     return el;
   };
@@ -183,7 +184,8 @@
         (j.deadline ? '<div class="card__deadline due-normal">' + esc(AP.t("job_deadline")) + " " + esc(j.deadline) + '</div>' : "") +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         viaChip(j) +
-        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a></div>' +
+        '<div class="card__foot"><a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a>' +
+          '<button class="btn btn--ghost cmt-btn" type="button" data-cmt="' + esc(j.id) + '" data-cmt-title="' + esc(title) + '">💬 ' + AP.t("cmt") + '</button></div>' +
       '</div>';
     return el;
   };

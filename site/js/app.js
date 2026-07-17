@@ -397,6 +397,13 @@
         return;
       }
       if (channel !== "opportunities") {
+        // 💬 评论按钮:资讯/招聘卡片没有详情页,评论走弹层(先于整卡跳外链拦截)
+        var cbtn = e.target.closest("[data-cmt]");
+        if (cbtn) {
+          e.preventDefault(); e.stopPropagation();
+          if (AP.comments) AP.comments.sheet(channel === "news" ? "news" : "job", cbtn.getAttribute("data-cmt"), cbtn.getAttribute("data-cmt-title") || "");
+          return;
+        }
         if (e.target.closest("[data-act='visit']")) return;   // 卡内 <a> 走默认
         var lk = e.target.closest(".card--link");
         if (lk && lk.getAttribute("data-url")) window.open(lk.getAttribute("data-url"), "_blank", "noopener");
@@ -494,6 +501,12 @@
   }
   function openDetail(o) {
     $("detailBody").innerHTML = AP.renderDetail(o);
+    // 评论区:挂在详情最底部(四类内容全可评论,机会走详情页形态)
+    if (AP.comments) {
+      var cb = document.createElement("div");
+      $("detailBody").appendChild(cb);
+      AP.comments.mount(cb, "opportunity", o.id);
+    }
     $("detail").hidden = false;
     document.body.style.overflow = "hidden";
     syncDetailFav(o.id);

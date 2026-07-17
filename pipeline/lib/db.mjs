@@ -53,6 +53,22 @@ export async function getDb() {
         PRIMARY KEY (follower, followee)
       );
       CREATE INDEX IF NOT EXISTS idx_follows_followee ON follows(followee);
+      CREATE TABLE IF NOT EXISTS comments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        kind TEXT NOT NULL, target TEXT NOT NULL,
+        uid TEXT NOT NULL, email TEXT,
+        parent INTEGER,
+        content TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'pending',
+        mod TEXT, likes INTEGER NOT NULL DEFAULT 0, reports INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL, decided_at TEXT, decide_note TEXT
+      );
+      CREATE INDEX IF NOT EXISTS idx_comments_target ON comments(kind, target);
+      CREATE INDEX IF NOT EXISTS idx_comments_status ON comments(status);
+      CREATE TABLE IF NOT EXISTS comment_likes (
+        uid TEXT NOT NULL, cid INTEGER NOT NULL,
+        PRIMARY KEY (uid, cid)
+      );
       CREATE TABLE IF NOT EXISTS works (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         uid TEXT NOT NULL, email TEXT,
@@ -154,6 +170,80 @@ export async function userApprovedSubmissions(uid) {
       let title = null; try { title = JSON.parse(r.payload).title || null; } catch (e) {}
       return { oid: "submit-" + r.id, title, decided_at: r.decided_at };
     });
+}
+
+// ---------- 评论(路线图第 2 项):四类内容通用(opportunity/news/job/work),扁平+一层回复 ----------
+const parseCmt = r => ({ ...r, mod: r.mod ? JSON.parse(r.mod) : null });
+export async function insertComment({ kind, target, uid, email, parent, content, mod, status }) {
+  const d = await getDb();
+  const r = d.prepare("INSERT INTO comments(kind,target,uid,email,parent,content,mod,status,created_at) VALUES(?,?,?,?,?,?,?,?,?)")
+    .run(kind, target, uid, email || null, parent || null, content, mod ? JSON.stringify(mod) : null, status, new Date().toISOString());
+  return Number(r.lastInsertRowid);
+}
+// 某条内容下的评论:公开的(approved)+ 查看者自己的待审(让作者看到"审核中")
+export async function commentsFor(kind, target, viewer) {
+  const d = await getDb();
+  const rows = viewer
+    ? d.prepare("SELECT * FROM comments WHERE kind=? AND target=? AND (status='approved' OR (status='pending' AND uid=?)) ORDER BY id ASC LIMIT 500").all(kind, target, viewer)
+    : d.prepare("SELECT * FROM comments WHERE kind=? AND target=? AND status='approved' ORDER BY id ASC LIMIT 500").all(kind, target);
+  return rows.map(parseCmt);
+}
+export async function getComment(id) {
+  const d = await getDb();
+  const r = d.prepare("SELECT * FROM comments WHERE id=?").get(id);
+  return r ? parseCmt(r) : null;
+}
+// 点赞开关:comment_likes 保证一人一赞;返回最新状态与计数
+export async function commentLikeToggle(uid, cid) {
+  const d = await getDb();
+  const had = d.prepare("SELECT 1 FROM comment_likes WHERE uid=? AND cid=?").get(uid, cid);
+  if (had) {
+    d.prepare("DELETE FROM comment_likes WHERE uid=? AND cid=?").run(uid, cid);
+    d.prepare("UPDATE comments SET likes=MAX(0,likes-1) WHERE id=?").run(cid);
+  } else {
+    d.prepare("INSERT INTO comment_likes(uid,cid) VALUES(?,?)").run(uid, cid);
+    d.prepare("UPDATE comments SET likes=likes+1 WHERE id=?").run(cid);
+  }
+  return { liked: !had, likes: d.prepare("SELECT likes FROM comments WHERE id=?").get(cid).likes };
+}
+export async function likedSet(uid, kind, target) {
+  const d = await getDb();
+  return new Set(d.prepare("SELECT cid FROM comment_likes WHERE uid=? AND cid IN (SELECT id FROM comments WHERE kind=? AND target=?)")
+    .all(uid, kind, target).map(r => r.cid));
+}
+export async function deleteComment(id) {
+  const d = await getDb();
+  const r = d.prepare("SELECT * FROM comments WHERE id=?").get(id);
+  if (!r) return null;
+  // 删主评论连带删其回复(界面上回复挂在主评论下,主评论没了回复无处安放)
+  d.prepare("DELETE FROM comments WHERE id=? OR parent=?").run(id, id);
+  d.prepare("DELETE FROM comment_likes WHERE cid=?").run(id);
+  return parseCmt(r);
+}
+export async function commentReport(id) {
+  const d = await getDb();
+  d.prepare("UPDATE comments SET reports=reports+1 WHERE id=?").run(id);
+}
+export async function commentsAdminList(limit = 300) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM comments ORDER BY (status='pending') DESC, id DESC LIMIT ?").all(limit).map(parseCmt);
+}
+export async function decideComment(id, status, note) {
+  const d = await getDb();
+  const row = d.prepare("SELECT * FROM comments WHERE id=?").get(id);
+  if (!row) return null;
+  d.prepare("UPDATE comments SET status=?,decided_at=?,decide_note=? WHERE id=?")
+    .run(status, new Date().toISOString(), note || null, id);
+  return parseCmt(row);
+}
+export async function countPendingComments() {
+  try { const d = await getDb(); return d.prepare("SELECT COUNT(*) n FROM comments WHERE status='pending'").get().n; }
+  catch (e) { return 0; }
+}
+export async function commentRateOk(uid, max = 30) {   // 单用户 24 小时 30 条
+  const d = await getDb();
+  const since = new Date(Date.now() - 24 * 3600e3).toISOString();
+  return d.prepare("SELECT COUNT(*) n FROM comments WHERE uid=? AND created_at>?").get(uid, since).n < max;
 }
 
 // ---------- 关注关系(路线图 8.2) ----------

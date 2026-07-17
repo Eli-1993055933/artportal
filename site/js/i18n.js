@@ -133,6 +133,15 @@
       wkPendingTip: "作品审核中,通过后即可查看大图",
       wkDelete: "删除作品", wkDelAsk: "删除这组作品?不可恢复。", wkDeleted: "已删除",
       wkReported: "已收到举报,我们会尽快核查",
+      // 评论(四类内容通用)
+      cmt: "评论", cmtTitle: "评论",
+      cmtPh: "说点什么…(友善交流,AI 审核通过即显示)",
+      cmtSend: "发布", cmtReply: "回复", cmtReplyTo: "回复", cmtCancel: "取消",
+      cmtDelete: "删除", cmtDelAsk: "删除这条评论?(回复会一并删除)", cmtDeleted: "已删除",
+      cmtEmpty: "还没有评论,来说第一句。",
+      cmtPending: "审核中,仅自己可见",
+      cmtSentLive: "已发布", cmtSentPending: "已提交,人工复核通过后显示",
+      cmtJustNow: "刚刚", cmtMinAgo: "分钟前", cmtHourAgo: "小时前", cmtDayAgo: "天前",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -266,6 +275,15 @@
       wkPendingTip: "In review — images visible once approved",
       wkDelete: "Delete work", wkDelAsk: "Delete this work? This cannot be undone.", wkDeleted: "Deleted",
       wkReported: "Report received — we'll review it soon",
+      // Comments
+      cmt: "Comments", cmtTitle: "Comments",
+      cmtPh: "Say something… (visible instantly after AI review)",
+      cmtSend: "Post", cmtReply: "Reply", cmtReplyTo: "Replying to", cmtCancel: "Cancel",
+      cmtDelete: "Delete", cmtDelAsk: "Delete this comment? Replies will be removed too.", cmtDeleted: "Deleted",
+      cmtEmpty: "No comments yet — be the first.",
+      cmtPending: "In review — visible only to you",
+      cmtSentLive: "Posted", cmtSentPending: "Submitted — visible after human review",
+      cmtJustNow: "just now", cmtMinAgo: "min ago", cmtHourAgo: "h ago", cmtDayAgo: "d ago",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

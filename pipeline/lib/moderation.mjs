@@ -44,25 +44,47 @@ export async function wordHits(text) {
   return { hard, soft };
 }
 
-async function aiModerate(text) {
-  const sys = "你是内容审核员。用户在艺术平台投稿了一条『艺术机会』信息(展览征集/驻留/奖项/工作坊)。" +
+// 机审提示词按【场景】区分——用错场景会大量误判(如拿"投稿"标准审短评论,
+// 正常感想会被判"无关灌水"全进人工队列,AI 先审形同虚设)。
+const AI_SYS = {
+  submission:
+    "你是内容审核员。用户在艺术平台投稿了一条『艺术机会』信息(展览征集/驻留/奖项/工作坊)。" +
     "判断这段内容属于哪一类,只输出一个 JSON,不要解释:\n" +
     '{"category":"正常|广告导流|无关灌水|涉政敏感|色情低俗|人身攻击|虚假可疑","reason":"一句话理由"}\n' +
     "判定要点:含联系方式导流/推销课程产品=广告导流;与艺术机会无关=无关灌水;" +
-    "宣称高额回报、信息自相矛盾、机构不可考=虚假可疑;正常的艺术机会信息=正常。";
-  const r = await llmExtract(sys, "【投稿内容】\n" + String(text).slice(0, 3000), 300);
+    "宣称高额回报、信息自相矛盾、机构不可考=虚假可疑;正常的艺术机会信息=正常。",
+  comment:
+    "你是内容审核员。用户在艺术平台的某条内容(展览/资讯/招聘/艺术作品)下发了一条评论。" +
+    "判断这条评论属于哪一类,只输出一个 JSON,不要解释:\n" +
+    '{"category":"正常|广告导流|涉政敏感|色情低俗|人身攻击|垃圾刷屏","reason":"一句话理由"}\n' +
+    "判定要点:日常感想/提问/夸赞/吐槽/闲聊都算【正常】(评论本来就是随口聊,宽松对待);" +
+    "含联系方式或买卖招揽=广告导流;辱骂攻击具体的人=人身攻击;纯乱码或复读机式刷屏=垃圾刷屏。",
+  work:
+    "你是内容审核员。艺术家在平台上传作品,这是作品的标题与介绍文字。" +
+    "判断属于哪一类,只输出一个 JSON,不要解释:\n" +
+    '{"category":"正常|广告导流|涉政敏感|色情低俗|人身攻击","reason":"一句话理由"}\n' +
+    "判定要点:正常的作品名/媒介/尺寸/创作自述都算【正常】;含联系方式或卖课卖货招揽=广告导流。",
+  profile:
+    "你是内容审核员。用户在艺术平台填写了个人资料(简介/创作领域/所在地)。" +
+    "判断属于哪一类,只输出一个 JSON,不要解释:\n" +
+    '{"category":"正常|广告导流|涉政敏感|色情低俗|人身攻击","reason":"一句话理由"}\n' +
+    "判定要点:正常的自我介绍都算【正常】;含联系方式导流或推销=广告导流。"
+};
+async function aiModerate(text, kind) {
+  const sys = AI_SYS[kind] || AI_SYS.submission;
+  const r = await llmExtract(sys, "【待审内容】\n" + String(text).slice(0, 3000), 300);
   return {
     category: typeof r.data.category === "string" ? r.data.category.slice(0, 20) : "机审异常",
     reason: typeof r.data.reason === "string" ? r.data.reason.slice(0, 200) : ""
   };
 }
 
-// 主入口。返回 { verdict, hits, ai }
-export async function moderateText(text) {
+// 主入口。kind = submission(默认) | comment | work | profile。返回 { verdict, hits, ai }
+export async function moderateText(text, kind) {
   const hits = await wordHits(text);
   if (hits.hard.length) return { verdict: "reject", hits, ai: null };
   let ai = null;
-  try { ai = await aiModerate(text); }
+  try { ai = await aiModerate(text, kind); }
   catch (e) { ai = { category: "机审失败", reason: String(e.message || e).slice(0, 100) }; }
   let verdict = "pass";
   if (hits.soft.length) verdict = "review";
