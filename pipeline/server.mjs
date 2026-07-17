@@ -900,6 +900,20 @@ async function handleAuthApi(req, res, u) {
 // 词池按小时轮换(约两天不重词);结果走与用户检索完全同一条反幻觉管线(harvestChannel:
 // 搜索→抓原文→evidence 逐字校验→真实才入库),入库标"AI 检索收录",溯源记 auto-hourly。
 const AUTO_QUERIES = {
+  // 机会(用户 2026-07-18 要求:尤其多注意中国各省市的项目展览):省市 × 征集/驻留/展览 定向词池,
+  // 走 searchAndHarvest(自带意图理解+地点硬过滤,搜"北京"不含北京的丢弃);官网直采,入库即可见。
+  opportunities: [
+    "北京 展览 征集 报名", "北京 艺术驻留 申请", "上海 展览 征集 投稿", "上海 艺术家 驻留 项目",
+    "广州 艺术 征集 展览", "深圳 公共艺术 征集", "深圳 设计 双年展 征集", "杭州 艺术项目 征集",
+    "成都 艺术展 征集 驻留", "重庆 展览 征集 投稿", "云南 大理 昆明 艺术驻留", "山东 济南 青岛 艺术 征集",
+    "内蒙古 呼和浩特 艺术项目 展览", "新疆 乌鲁木齐 艺术展 征集", "西安 陕西 美术 征集",
+    "武汉 湖北 艺术展 征集", "南京 江苏 艺术项目 征集", "苏州 美术馆 展览 征集",
+    "长沙 湖南 青年艺术家 征集", "天津 艺术 展览 征集", "厦门 福建 艺术驻留 征集",
+    "贵州 艺术乡建 驻留 项目", "兰州 甘肃 青海 艺术 征集", "哈尔滨 沈阳 大连 展览 征集",
+    "郑州 河南 艺术 征集", "南昌 江西 景德镇 陶瓷 驻留", "桂林 广西 艺术驻留",
+    "海南 三亚 艺术项目 征集", "山西 太原 艺术展 征集", "河北 石家庄 艺术 征集",
+    "香港 艺术资助 计划 申请", "澳门 艺术节 征集", "青年艺术家 扶持 计划 征集", "全国 美术作品 展览 征稿"
+  ],
   news: [
     "美术馆 新展 开幕", "双年展 艺术 新闻", "当代艺术 展览 报道", "艺术家 获奖 消息",
     "画廊 个展 开幕", "艺术市场 拍卖 新闻", "公共艺术 项目 落成", "艺术节 开幕 现场",
@@ -920,14 +934,14 @@ const AUTO_QUERIES = {
 };
 async function autoHarvestTick() {
   const hourIdx = Math.floor(Date.now() / 3600e3);
-  for (const ch of ["news", "jobs"]) {
+  for (const ch of ["opportunities", "news", "jobs"]) {
     const pool = AUTO_QUERIES[ch];
     const q = pool[hourIdx % pool.length];
     try {
       await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
       try {
         const t0 = Date.now();
-        const r = await harvestChannel(ch, q, 6);
+        const r = ch === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(ch, q, 6);
         for (const rec of r.added) {
           db.ingestInsert({ channel: ch, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "auto-hourly", ip: "server" });
         }
