@@ -381,6 +381,15 @@ export async function worksByUser(uid, includeAll) {
     : d.prepare("SELECT * FROM works WHERE uid=? AND status='approved' ORDER BY id DESC LIMIT 200").all(uid);
   return rows.map(parseWork);
 }
+// 按 id 批量取已过审作品(收藏解析用:把 work:<id> 收藏还原成可渲染对象)
+export async function worksByIds(ids) {
+  const list = (ids || []).map(Number).filter(n => Number.isFinite(n));
+  if (!list.length) return [];
+  const d = await getDb();
+  if (!d) return [];
+  const qs = list.map(() => "?").join(",");
+  return d.prepare("SELECT * FROM works WHERE status='approved' AND id IN (" + qs + ")").all(...list).map(parseWork);
+}
 // 作品广场:全站已过审作品,最新在前(第四频道)
 export async function worksFeed(limit = 200) {
   const d = await getDb();

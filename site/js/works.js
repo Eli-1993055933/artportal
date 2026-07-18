@@ -245,6 +245,7 @@
     el.setAttribute("data-wid", w.id);
     el.innerHTML =
       '<img class="wk-card__img" loading="lazy" src="' + esc(w.images[0] || "") + '" alt="" />' +
+      (AP.favBtnHtml ? AP.favBtnHtml(w.id, "works") : "") +
       '<div class="wk-card__t">' + esc(w.title) + (w.n > 1 ? ' <span class="wk-card__n">' + w.n + '</span>' : "") +
         (w.tags && w.tags.length ? ' <button type="button" class="card-tag" style="--th:' + AP.tagHue(w.tags[0]) + '" data-cardtag="' + esc(w.tags[0]) + '">#' + esc(AP.tagLabel(w.tags[0])) + '</button>' : "") +
       '</div>' +

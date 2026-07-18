@@ -290,8 +290,15 @@ img { max-width: 100%; display: block; }
 .d-cover--art svg { width: 100%; height: 100%; display: block; }
 /* 封面即官网入口:点封面直接新窗口打开该展览/项目官网 */
 .card__media-link { position: absolute; inset: 0; display: block; cursor: pointer; }
-.card__media-go { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 6px; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
+.card__media-go { position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 6px; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
 .card__media-link:hover .card__media-go, .card__media-link:focus-visible .card__media-go { opacity: 1; }
+/* 收藏 ♥ 按钮:浮在封面右下角(四频道通用);默认半透明黑底白心,选中=白底红心 */
+.card-fav { position: absolute; right: 8px; bottom: 8px; z-index: 3; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: none; border-radius: 50%; background: rgba(0,0,0,.45); color: #fff; cursor: pointer; transition: background .12s ease, transform .1s ease; }
+.card-fav:hover { background: rgba(0,0,0,.66); }
+.card-fav:active { transform: scale(.9); }
+.card-fav.is-on { background: rgba(255,255,255,.94); color: var(--c-opencall); }
+.card-fav svg { width: 18px; height: 18px; }
+@media (max-width: 767px) { .card-fav { width: 30px; height: 30px; right: 6px; bottom: 6px; } }
 .card__tags { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
 .card__tags-l { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0; }
 /* 周期展标记:一眼看出该卡片可推算下届开放(角标白字配 --tag-* 饱和底,两主题同对比) */
@@ -532,7 +539,7 @@ img { max-width: 100%; display: block; }
 /* ---------- 作品集(8.3):瀑布流 + 上传缩略图 + 大图查看器 ---------- */
 .wk-add { min-height: 38px; margin-bottom: 14px; }
 .wk-flow { columns: 4 220px; column-gap: 14px; }   /* CSS 瀑布流:自适应列数(小红书式) */
-.wk-card { break-inside: avoid; margin-bottom: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; cursor: pointer; }
+.wk-card { position: relative; break-inside: avoid; margin-bottom: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; cursor: pointer; }
 .wk-card:hover { box-shadow: var(--shadow-pop); }
 .wk-card__img { display: block; width: 100%; height: auto; }
 .wk-card__hold { display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; color: var(--ink-3); font-size: 12.5px; background: var(--line); }

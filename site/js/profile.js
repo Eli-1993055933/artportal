@@ -16,6 +16,7 @@
   }
 
   var root = null, current = null, curTab = "works", curUid = null;
+  var favWorks = {};   // 收藏 tab 已解析的作品对象(wid -> work),供点开查看器
 
   function build() {
     if (root) return;
@@ -30,6 +31,24 @@
       if (e.target.closest("#ppBlock")) { toggleBlock(); return; }
       var tab = e.target.closest("[data-pptab]");
       if (tab) { curTab = tab.getAttribute("data-pptab"); render(); return; }
+      // 收藏 ♥:就地切换(收藏 tab 混排四频道卡片都可能有);本人 tab 里取消即从列表移除
+      var favEl = e.target.closest("[data-fav]");
+      if (favEl) {
+        e.preventDefault(); e.stopPropagation();
+        var on = AP.favorites.toggle(favEl.getAttribute("data-fav"), favEl.getAttribute("data-favch") || "opportunities");
+        favEl.classList.toggle("is-on", on);
+        favEl.setAttribute("aria-pressed", on ? "true" : "false");
+        favEl.innerHTML = on ? AP.ICON.heartFill : AP.ICON.heart;
+        if (AP.syncFavCount) AP.syncFavCount();
+        if (!on && curTab === "favs") { var cc = favEl.closest(".card, .wk-card"); if (cc) cc.remove(); }
+        return;
+      }
+      // 收藏 tab 里的作品卡:点开大图查看器(需已解析的作品对象)
+      var wc = e.target.closest("[data-wid]");
+      if (wc && AP.works && favWorks[wc.getAttribute("data-wid")]) { AP.works.view(favWorks[wc.getAttribute("data-wid")]); return; }
+      // 收藏 tab 里资讯/招聘卡片整卡跳原文(它们没有站内详情)
+      var lk = e.target.closest(".card--link");
+      if (lk && lk.getAttribute("data-url")) { window.open(lk.getAttribute("data-url"), "_blank", "noopener"); return; }
       // 卡片门类彩标:主页场景无列表可筛,拦截以免落入整卡兜底误进详情(主列表里才是"点标签=筛选")
       if (e.target.closest("[data-cardtag]")) return;
       // 卡片点击 → 详情(标题真链接拦默认统一走 goDetail 保留返回;官网外链/封面链接放行,注册墙照常拦)
@@ -70,6 +89,35 @@
   }
   function renderMissing() {
     root.innerHTML = '<div class="ppage__inner">' + backBtn() + '<p class="ppage__empty">' + esc(AP.t("ppNotFound")) + '</p></div>';
+  }
+
+  // 收藏 tab:四频道混排。收藏键交后端解析成对象,按频道选渲染器。
+  function renderByChannel(ch, o) {
+    if (ch === "opportunities") return AP.renderCard(o);
+    if (ch === "news") return AP.renderNewsCard(o);
+    if (ch === "jobs") return AP.renderJobCard(o);
+    if (ch === "works" && AP.works) { favWorks[String(o.id)] = o; return AP.works.renderFeedCard(o); }
+    return null;
+  }
+  function renderFavs(body, keys) {
+    favWorks = {};
+    if (!keys || !keys.length) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
+    body.innerHTML = '<p class="ppage__empty">…</p>';
+    var reqUid = curUid;
+    fetch("/api/favorites/resolve", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ keys: keys }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (curUid !== reqUid || curTab !== "favs") return;   // 期间已切走
+        var items = (j && j.items) || [];
+        if (!items.length) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
+        var g = document.createElement("div");
+        g.className = "grid ppage__grid";
+        var n = 0;
+        items.forEach(function (x) { var el = renderByChannel(x.channel, x.item); if (el) { g.appendChild(el); n++; } });
+        if (!n) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
+        body.innerHTML = ""; body.appendChild(g);
+      })
+      .catch(function () { if (curUid === reqUid) body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; });
   }
 
   function render() {
@@ -137,7 +185,7 @@
       return;
     } else if (curTab === "favs") {
       if (!isMe && !u.fav_public) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavPrivate")) + '</p>'; return; }
-      grid(favIds, "ppFavEmpty");
+      renderFavs(body, favIds);
     } else if (curTab === "following" || curTab === "followers") {
       // 关注/粉丝列表:按需拉取,同一次打开内缓存
       var tab = curTab;

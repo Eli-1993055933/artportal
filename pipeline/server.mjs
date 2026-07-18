@@ -44,6 +44,56 @@ function officialHint(host) {
   return /(\.edu\.cn|\.gov\.cn|\.gov|\.org\.cn|\.ac\.cn|\.museum)$/i.test(String(host)) ? 1 : 0;
 }
 
+// —— 收藏解析(v0.73.0 四频道收藏):把命名空间键(机会=裸 id;news:/job:/work: 前缀)
+//    还原成可渲染/可撰稿的对象。opp/news/jobs 读静态 JSON(30s 轻缓存),works 读 SQLite。
+const FAV_FILES = { opportunities: ["opportunities.json", "opportunities"], news: ["news.json", "items"], jobs: ["jobs.json", "jobs"] };
+let _favMaps = { at: 0, m: {} };
+async function favChannelMap(ch) {
+  if (Date.now() - _favMaps.at > 30000) _favMaps = { at: Date.now(), m: {} };
+  if (_favMaps.m[ch]) return _favMaps.m[ch];
+  const map = new Map();
+  try {
+    const [file, key] = FAV_FILES[ch];
+    const doc = JSON.parse(await readFile(join(SITE, "data", file), "utf8"));
+    for (const o of (doc[key] || [])) map.set(String(o.id), o);
+  } catch (e) {}
+  _favMaps.m[ch] = map;
+  return map;
+}
+function parseFavKey(k) {
+  k = String(k);
+  if (k.startsWith("news:")) return { key: k, ch: "news", id: k.slice(5) };
+  if (k.startsWith("job:")) return { key: k, ch: "jobs", id: k.slice(4) };
+  if (k.startsWith("work:")) return { key: k, ch: "works", id: k.slice(5) };
+  return { key: k, ch: "opportunities", id: k };
+}
+// 返回 [{ key, channel, item }]（保持输入顺序,解析不到的跳过）
+async function resolveFavorites(keys) {
+  const parsed = (keys || []).slice(0, 2000).map(parseFavKey);
+  const worksById = new Map();
+  const workIds = parsed.filter(x => x.ch === "works").map(x => x.id);
+  if (workIds.length) {
+    try {
+      const rows = await db.worksByIds(workIds);
+      const mini = auth.usersMini([...new Set(rows.map(w => w.uid))]);
+      const byU = new Map(mini.map(x => [x.id, x]));
+      for (const w of rows) worksById.set(String(w.id), {
+        id: w.id, uid: w.uid, title: w.title, description: w.description || "",
+        n: w.images.length, tags: w.tags || [], images: w.images.map(n => "assets/works/" + n),
+        author: byU.get(w.uid) || null
+      });
+    } catch (e) {}
+  }
+  const out = [];
+  for (const x of parsed) {
+    if (x.ch === "works") { const o = worksById.get(x.id); if (o) out.push({ key: x.key, channel: "works", item: o }); continue; }
+    const map = await favChannelMap(x.ch);
+    const o = map.get(String(x.id));
+    if (o) out.push({ key: x.key, channel: x.ch, item: o });
+  }
+  return out;
+}
+
 // —— 环节①:搜索,拿到候选官网 URL ——
 // searchWeb / 噪声域名 BLOCK 已抽到 lib/websearch.mjs(三频道共用,serper 优先、DDG 兜底)。
 
@@ -513,6 +563,12 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
+    // 收藏解析:把收藏键还原成可渲染对象(四频道混合;收藏 tab 展示用)。内容本身公开,无隐私泄露。
+    if (p === "/api/favorites/resolve" && m === "POST") {
+      const b = await readBody(req);
+      const items = await resolveFavorites(Array.isArray(b.keys) ? b.keys : []);
+      return json({ code: 200, body: { items } });
+    }
     // —— 站内通知(8.4 一期):列表(附未读数与发起人公开摘要)/ 全部已读 ——
     if (p === "/api/notifications" && m === "GET") {
       const me = auth.userOf(req);
@@ -1254,7 +1310,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   // Agent 打卡(v0.72.0 巡视台):本机管道脚本干完活上报;AGENT_KEY 鉴权(sha256 恒时比较)

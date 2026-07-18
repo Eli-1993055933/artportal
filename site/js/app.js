@@ -512,6 +512,18 @@
 
     // 列表点击委托:复制 / 访问 / 打开详情
     grid.addEventListener("click", function (e) {
+      // 收藏 ♥(四频道通用,最先拦):就地切换收藏并更新按钮态;登录后经 favorites.onChange 云同步
+      var favEl = e.target.closest("[data-fav]");
+      if (favEl) {
+        e.preventDefault(); e.stopPropagation();
+        var nowOn = AP.favorites.toggle(favEl.getAttribute("data-fav"), favEl.getAttribute("data-favch") || "opportunities");
+        favEl.classList.toggle("is-on", nowOn);
+        favEl.setAttribute("aria-pressed", nowOn ? "true" : "false");
+        favEl.innerHTML = nowOn ? AP.ICON.heartFill : AP.ICON.heart;
+        syncFavCount();
+        if (AP.filterState.favOnly && channel === "opportunities") rerun();
+        return;
+      }
       // 卡片上的门类小彩标(任何频道都最先拦):点标签 = 按该门类筛选(学参考图"点 tag 看同类")
       var dtag = e.target.closest("[data-cardtag]");
       if (dtag) {

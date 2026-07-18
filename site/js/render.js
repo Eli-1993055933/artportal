@@ -48,6 +48,16 @@
     }).join("") + '</div>';
   }
 
+  // 收藏 ♥ 按钮(四频道通用):浮在封面右下角,点击由 app.js grid 委托统一处理(data-fav + data-favch)。
+  // ch: opportunities|news|jobs|works —— 决定收藏键的命名空间(favorites.js)。
+  function favBtn(id, ch) {
+    var on = AP.favorites && AP.favorites.has(id, ch);
+    return '<button class="card-fav' + (on ? " is-on" : "") + '" type="button" data-fav="' + esc(id) + '" data-favch="' + esc(ch) + '"' +
+      ' aria-pressed="' + (on ? "true" : "false") + '" aria-label="' + esc(AP.t("favSave")) + '" title="' + esc(AP.t(on ? "favSaved" : "favSave")) + '">' +
+      (on ? ICON.heartFill : ICON.heart) + '</button>';
+  }
+  AP.favBtnHtml = favBtn;
+
   function trustBadge(o) {
     if (o.trust === "verified") {
       var when = o.verified_at ? " · " + o.verified_at.slice(5) : "";
@@ -102,6 +112,7 @@
           '</span>' +
           (orgTag ? '<span class="org-tag">' + esc(orgTag) + '</span>' : '') +
         '</div>' +
+        favBtn(o.id, "opportunities") +
       '</div>' +
       '<div class="card__body">' +
         '<div>' +
@@ -161,6 +172,7 @@
     el.innerHTML =
       '<div class="card__media">' + channelMedia(n, shim) +
         '<div class="card__tags"><span class="card__tags-l">' + cat + '</span></div>' +
+        favBtn(n.id, "news") +
       '</div>' +
       '<div class="card__body">' +
         '<h2 class="card__title">' + esc(title) + '</h2>' +
@@ -190,6 +202,7 @@
     el.innerHTML =
       '<div class="card__media">' + channelMedia(j, shim) +
         '<div class="card__tags"><span class="card__tags-l"><span class="cat-tag" data-cat="jobs">' + esc(AP.t("ch_jobs")) + '</span></span></div>' +
+        favBtn(j.id, "jobs") +
       '</div>' +
       '<div class="card__body">' +
         '<h2 class="card__title">' + esc(title) + '</h2>' +
