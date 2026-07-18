@@ -37,6 +37,17 @@
   }
   function hasMt(o) { return !!(o.en_mt_fields && o.en_mt_fields.length); }
 
+  // 门类小彩标(v0.68.0,学资讯类产品:标签长在内容上,点标签看同类)。
+  // 最多 2 个;--th 为门类色相(tags.js),点击由 app.js 的 grid 委托统一处理(data-cardtag)。
+  function discTags(o, channel) {
+    if (!AP.tagsOf) return "";
+    var ts = AP.tagsOf(o, channel).slice(0, 2);
+    if (!ts.length) return "";
+    return '<div class="card__dtags">' + ts.map(function (id) {
+      return '<button type="button" class="card-tag" style="--th:' + AP.tagHue(id) + '" data-cardtag="' + esc(id) + '">#' + esc(AP.tagLabel(id)) + '</button>';
+    }).join("") + '</div>';
+  }
+
   function trustBadge(o) {
     if (o.trust === "verified") {
       var when = o.verified_at ? " · " + o.verified_at.slice(5) : "";
@@ -104,6 +115,7 @@
         predHtml +
         (fees || funds ? '<div class="badges">' + fees + funds + '</div>' : '') +
         summary +
+        discTags(o, "opportunities") +
         '<div class="card__srcrow">' + trustBadge(o) + srcChip + '</div>' +
         '<div class="card__foot">' +
           '<button class="btn btn--ghost" data-act="copy" type="button">' + AP.t("copyLink") + '</button>' +
@@ -153,6 +165,7 @@
         '<h2 class="card__title">' + esc(title) + '</h2>' +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
         '<div class="card__meta"><span class="m-org">' + esc(n.source || "") + '</span>' + date + '</div>' +
+        discTags(n, "news") +
         viaChip(n) +
         '<div class="card__foot"><a class="btn btn--dark" href="' + esc(F.safeUrl(n.url)) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("news_readmore") + ' ↗</a>' +
           '<button class="btn btn--ghost cmt-btn" type="button" data-cmt="' + esc(n.id) + '" data-cmt-title="' + esc(title) + '">💬 ' + AP.t("cmt") + '</button></div>' +
@@ -183,6 +196,7 @@
         (badges ? '<div class="badges">' + badges + '</div>' : "") +
         (j.deadline ? '<div class="card__deadline due-normal">' + esc(AP.t("job_deadline")) + " " + esc(j.deadline) + '</div>' : "") +
         (summary ? '<p class="card__summary">' + esc(summary) + '</p>' : "") +
+        discTags(j, "jobs") +
         viaChip(j) +
         '<div class="card__foot"><a class="btn btn--dark" href="' + esc(apply) + '" target="_blank" rel="noopener" data-act="visit">' + AP.t("job_apply") + ' ↗</a>' +
           '<button class="btn btn--ghost cmt-btn" type="button" data-cmt="' + esc(j.id) + '" data-cmt-title="' + esc(title) + '">💬 ' + AP.t("cmt") + '</button></div>' +

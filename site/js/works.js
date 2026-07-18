@@ -62,7 +62,7 @@
           '<textarea id="wkDesc" maxlength="500" placeholder="' + esc(AP.t("wkDescPh")) + '"></textarea>' +
           '<p class="wk-tags__hint">' + esc(AP.t("wkTagsHint")) + '</p>' +
           '<div class="wk-tags" id="wkTags">' + (AP.TAGS || []).map(function (t) {
-            return '<button type="button" class="tag-chip" data-wtag="' + t.id + '">' + esc(AP.lang === "en" ? t.en : t.zh) + '</button>';
+            return '<button type="button" class="tag-chip" style="--th:' + t.h + '" data-wtag="' + t.id + '">' + esc(AP.lang === "en" ? t.en : t.zh) + '</button>';
           }).join("") + '</div>' +
           '<label class="btn btn--ghost pf-file wk-pick">' + esc(AP.t("wkPick")) + '<input type="file" id="wkFiles" accept="image/*" multiple hidden /></label>' +
           '<div class="wk-thumbs" id="wkThumbs"></div>' +
@@ -191,7 +191,7 @@
             '<span class="wkview__ct">' + (i + 1) + " / " + w.images.length + '</span>' : "") +
           '<div class="wkview__meta">' +
             '<div class="wkview__title">' + esc(w.title) + '</div>' +
-            (w.tags && w.tags.length ? '<div>' + w.tags.map(function (t) { return '<span class="wk-tagchip">' + esc(AP.tagLabel(t)) + '</span>'; }).join("") + '</div>' : "") +
+            (w.tags && w.tags.length ? '<div class="card__dtags" style="margin:6px 0 2px">' + w.tags.map(function (t) { return '<span class="card-tag" style="--th:' + AP.tagHue(t) + '">#' + esc(AP.tagLabel(t)) + '</span>'; }).join("") + '</div>' : "") +
             (w.description ? '<div class="wkview__desc">' + esc(w.description) + '</div>' : "") +
             '<div class="wkview__ops">' +
               (isMe
@@ -246,7 +246,7 @@
     el.innerHTML =
       '<img class="wk-card__img" loading="lazy" src="' + esc(w.images[0] || "") + '" alt="" />' +
       '<div class="wk-card__t">' + esc(w.title) + (w.n > 1 ? ' <span class="wk-card__n">' + w.n + '</span>' : "") +
-        (w.tags && w.tags.length ? ' <span class="wk-tagchip">' + esc(AP.tagLabel(w.tags[0])) + '</span>' : "") +
+        (w.tags && w.tags.length ? ' <button type="button" class="card-tag" style="--th:' + AP.tagHue(w.tags[0]) + '" data-cardtag="' + esc(w.tags[0]) + '">#' + esc(AP.tagLabel(w.tags[0])) + '</button>' : "") +
       '</div>' +
       (w.author
         ? '<button type="button" class="wk-card__by" data-author="' + esc(w.author.id) + '">' +

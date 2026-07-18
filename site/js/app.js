@@ -41,6 +41,7 @@
     AP.applyI18n();
     buildSkeleton();
     wireEvents();
+    renderTagRow();   // 首屏先渲染无计数的彩色门类行(数据到达后 rerun 自动补计数),不留空白横带
     loadData();
   });
 
@@ -143,13 +144,24 @@
     for (var i = 0; i < AP.TAGS.length; i++) {
       (counts[AP.TAGS[i].id] ? have : zero).push(AP.TAGS[i]);
     }
-    var html = '<button class="tag-chip' + (cur ? "" : " is-active") + '" data-tag="" aria-pressed="' + (cur ? "false" : "true") + '">' + AP.t("tagAll") + '</button>';
+    // 参考图样式:每个门类一个色系(--th 色相),常态浅底同色字(Subtle),选中实底白字+✓(Bold)
+    var html = '<button class="tag-chip tag-chip--all' + (cur ? "" : " is-active") + '" data-tag="" aria-pressed="' + (cur ? "false" : "true") + '">' + AP.t("tagAll") + '</button>';
     have.concat(zero).forEach(function (t) {
       var n = counts[t.id] || 0, on = cur === t.id;
-      html += '<button class="tag-chip' + (on ? " is-active" : "") + (n ? "" : " tag-chip--zero") + '" data-tag="' + t.id + '" aria-pressed="' + (on ? "true" : "false") + '">' +
+      html += '<button class="tag-chip' + (on ? " is-active" : "") + (n ? "" : " tag-chip--zero") + '" style="--th:' + t.h + '" data-tag="' + t.id + '" aria-pressed="' + (on ? "true" : "false") + '">' +
+        (on ? '<span class="tag-chip__ck" aria-hidden="true">✓</span>' : "") +
         (AP.lang === "en" ? t.en : t.zh) + (n ? '<span class="tag-chip__n">' + n + '</span>' : "") + '</button>';
     });
     box.innerHTML = html;
+    // 横滑行较长:选中的 chip 滚进可视区。手动只改容器 scrollLeft——
+    // 旧 WebKit/老微信内核不认 scrollIntoView 的 options 字典,会坍缩成顶端对齐,
+    // 吸顶头下每次 rerun 都把整页往下滚(它不抛错,try/catch 包不住)。
+    var act = box.querySelector(".tag-chip.is-active");
+    if (act && cur) {
+      var br = box.getBoundingClientRect(), ar = act.getBoundingClientRect();
+      if (ar.left < br.left) box.scrollLeft += ar.left - br.left - 12;
+      else if (ar.right > br.right) box.scrollLeft += ar.right - br.right + 12;
+    }
   }
 
   // 筛选面板分组按频道显隐(data-fch="all"|"opportunities"|"works");
@@ -185,7 +197,7 @@
     if (!box) return;
     var html = "";
     if (channel === "opportunities" && AP.filterState.cat !== "all") html += achipHtml("cat", AP.t("cat_" + AP.filterState.cat));
-    if (AP.filterState.tag) html += achipHtml("tag", AP.tagLabel(AP.filterState.tag));
+    // 门类不在摘要里回显:上方彩色标签行的选中态(实底+✓)已经是可见可取消的状态本身
     if (channel === "works" && worksScope === "following") html += achipHtml("scope", AP.t("wsFollowing"));
     if (html === lastChipsHtml) return;
     lastChipsHtml = html;
@@ -246,8 +258,11 @@
     var btns = document.querySelectorAll("#channelNav .channel");
     for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("is-active", btns[i].getAttribute("data-channel") === ch);
     var opp = ch === "opportunities";
-    // 控制行四频道通用(v0.67.0 布局整合);排序只对机会有意义,其余频道隐藏
+    // 控制行四频道通用(v0.67.0 布局整合);排序只对机会有意义,其余频道隐藏。
+    // 门类移回台面标签行后(v0.68.0),筛选面板对资讯/招聘已无内容 → 按钮一并隐藏。
     toggleEl($("sortSelect"), opp);
+    toggleEl($("moreToggle"), opp || ch === "works");
+    $("catRow").setAttribute("data-ch", ch);      // 手机端资讯/招聘整行隐藏(CSS 按 data-ch),别留空白细带
     toggleEl($("aiSearchBtn"), ch !== "works");   // 作品频道没有"AI 全网检索"(站内内容)
     syncFilterPanel(ch);                       // 筛选面板各分组按频道显隐
     // AI 检索其余三频道同规格,按钮为内嵌短文案"✦ AI 检索"(不随频道换,placeholder 负责说明)
@@ -284,8 +299,8 @@
     // 类型/门类/作品范围收进了筛选面板 → 它们激活时,筛选按钮上的小红点也要亮。
     // hasActiveMoreFilters 统计的全是机会专属条件(地区/免费/资助…),只在机会频道计入:
     // 否则在资讯/招聘/作品频道红点会指向"面板里看不到、对当前列表也不生效"的条件(评审确认项)。
+    // 门类已回到台面上的彩色标签行,选中态自见,不再计入面板红点
     var extra = (channel === "opportunities" && AP.filterState.cat !== "all") ||
-                !!AP.filterState.tag ||
                 (channel === "works" && worksScope === "following");
     $("filterActiveDot").hidden = !((channel === "opportunities" && AP.hasActiveMoreFilters()) || extra);
   }
@@ -506,6 +521,16 @@
 
     // 列表点击委托:复制 / 访问 / 打开详情
     grid.addEventListener("click", function (e) {
+      // 卡片上的门类小彩标(任何频道都最先拦):点标签 = 按该门类筛选(学参考图"点 tag 看同类")
+      var dtag = e.target.closest("[data-cardtag]");
+      if (dtag) {
+        e.preventDefault(); e.stopPropagation();
+        st.tag = dtag.getAttribute("data-cardtag");
+        rerun();
+        window.scrollTo(0, 0);
+        var hd = $("stickyHead"); if (hd) hd.classList.remove("is-hidden");   // 召回头部,让标签行的选中态可见
+        return;
+      }
       // 官网速览按钮:任何频道都优先拦截(否则会冒泡触发整卡跳外链)
       // 资讯/招聘:整卡点击 → 新窗口打开原文/申请页(不进详情)
       if (channel === "works") {

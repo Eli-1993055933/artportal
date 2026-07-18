@@ -30,6 +30,8 @@
       if (e.target.closest("#ppBlock")) { toggleBlock(); return; }
       var tab = e.target.closest("[data-pptab]");
       if (tab) { curTab = tab.getAttribute("data-pptab"); render(); return; }
+      // 卡片门类彩标:主页场景无列表可筛,拦截以免落入整卡兜底误进详情(主列表里才是"点标签=筛选")
+      if (e.target.closest("[data-cardtag]")) return;
       // 卡片点击 → 详情(标题真链接拦默认统一走 goDetail 保留返回;官网外链/封面链接放行,注册墙照常拦)
       if (e.target.closest('[data-gate="official"]') || e.target.closest(".card__media-link")) return;
       var card = e.target.closest(".card");

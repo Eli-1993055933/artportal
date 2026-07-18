@@ -133,9 +133,10 @@
       if (e.key === "Enter") { pushHist(input.value); closePanel(); input.blur(); }
       else if (e.key === "Escape") closePanel();
     });
+    // 点外部关闭:挂捕获阶段——下游(如卡片门类彩标)stopPropagation 也拦不住它,面板必能关上
     document.addEventListener("click", function (e) {
       if (!panel.hidden && !wrap.contains(e.target)) closePanel();
-    });
+    }, true);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

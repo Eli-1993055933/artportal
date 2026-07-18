@@ -732,9 +732,11 @@ img { max-width: 100%; display: block; }
   .searchbar__input { height: 36px; padding-right: 96px; }
   .ai-search-btn { height: 28px; padding: 0 11px; font-size: 12px; }
 
-  /* 控制行:已选摘要占满中段(把筛选/排序钉在右端);结果数手机上不占位 */
+  /* 控制行:已选摘要占满中段(把筛选/排序钉在右端);结果数手机上不占位。
+     资讯/招聘频道此行只剩隐藏的按钮 → 整行藏掉,别留一条空白细带 */
   .catrow__inner { padding: 6px 12px; gap: 8px; }
   .catrow .result-count { display: none; }
+  .catrow[data-ch="news"], .catrow[data-ch="jobs"] { display: none; }
   .more-toggle { min-height: 30px; padding: 0 10px; font-size: 12px; }
   .sort-select { height: 30px; font-size: 12px; padding: 0 6px; }
   .main { padding: 12px 10px 40px; }
@@ -848,19 +850,66 @@ img { max-width: 100%; display: block; }
 .auth__nl { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; cursor: pointer; }
 .auth__nl input { margin-top: 2px; }
 
-/* ---------- 艺术门类 chips(v0.66.0;v0.67.0 起收进筛选面板,随 .chips 容器换行排布) ---------- */
-.tag-chip {
-  flex: none; border: 1px solid var(--line-2); background: var(--card); color: var(--ink-2);
-  font-size: 12.5px; line-height: 1; padding: 7px 12px; border-radius: 999px; cursor: pointer;
-  transition: background .15s, color .15s;
+/* ---------- 艺术门类彩色 chip 体系(v0.68.0,参考成熟 tag 设计:Subtle 常态 / Bold 选中) ----------
+   每个门类一个色相(--th,tags.js 注入):常态=浅色底+同色系深字;选中=该色实底+白字+✓;
+   夜间=同色系暗底+亮字。标签行 / 作品上传表单共用。 */
+.tagbar { border-bottom: 1px solid var(--line); background: var(--bg); }
+.tagbar__inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 8px 24px;
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
-.tag-chip:hover { background: var(--hover); color: var(--ink); }
-.tag-chip.is-active { background: var(--ink); color: var(--on-ink); border-color: var(--ink); font-weight: 600; }
-.tag-chip__n { font-size: 11px; margin-left: 5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-.tag-chip.is-active .tag-chip__n { color: inherit; opacity: .72; }
-.tag-chip--zero { opacity: .45; }
-/* 面板内的门类 chips 与相邻分组的 .chip 同高同字号(作品上传表单里保持小号,不受影响) */
-.morefilters__body .tag-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; font-size: 13px; }
+.tagbar__inner::-webkit-scrollbar { display: none; }
+.tag-chip {
+  flex: none; display: inline-flex; align-items: center; gap: 4px;
+  border: 1px solid hsl(var(--th, 220), 45%, 86%);
+  background: hsl(var(--th, 220), 70%, 95%);
+  color: hsl(var(--th, 220), 60%, 30%);
+  font-size: 12.5px; line-height: 1; padding: 7px 12px; border-radius: 999px; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.tag-chip:hover { background: hsl(var(--th, 220), 65%, 91%); }
+.tag-chip.is-active {
+  background: hsl(var(--th, 220), 55%, 40%); border-color: hsl(var(--th, 220), 55%, 40%);
+  color: #fff; font-weight: 600;
+}
+html[data-theme="dark"] .tag-chip {
+  background: hsl(var(--th, 220), 32%, 17%); border-color: hsl(var(--th, 220), 30%, 28%);
+  color: hsl(var(--th, 220), 55%, 76%);
+}
+html[data-theme="dark"] .tag-chip:hover { background: hsl(var(--th, 220), 32%, 22%); }
+html[data-theme="dark"] .tag-chip.is-active { background: hsl(var(--th, 220), 50%, 46%); border-color: hsl(var(--th, 220), 50%, 46%); color: #fff; }
+/* "全部"chip:中性色(不参与彩色体系) */
+.tag-chip--all { background: var(--card); border-color: var(--line-2); color: var(--ink-2); }
+.tag-chip--all:hover { background: var(--hover); }
+.tag-chip--all.is-active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+html[data-theme="dark"] .tag-chip--all { background: var(--card); border-color: var(--line-2); color: var(--ink-2); }
+html[data-theme="dark"] .tag-chip--all.is-active { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.tag-chip__ck { font-size: 11px; }
+.tag-chip__n { font-size: 11px; margin-left: 2px; color: inherit; opacity: .62; font-variant-numeric: tabular-nums; }
+/* 零计数门类:降底色/边框饱和度示"暂无内容",文字单独保 ≥4.5:1 对比(整体 opacity 会把文字冲到 2.3:1 不可读);
+   选中时 .tag-chip.is-active 特异性更高,自动恢复满 Bold 实底,无需补规则 */
+.tag-chip--zero {
+  background: hsl(var(--th, 220), 25%, 96%);
+  border-color: hsl(var(--th, 220), 20%, 88%);
+  color: hsl(var(--th, 220), 25%, 42%);
+}
+html[data-theme="dark"] .tag-chip--zero {
+  background: hsl(var(--th, 220), 12%, 15%);
+  border-color: hsl(var(--th, 220), 12%, 24%);
+  color: hsl(var(--th, 220), 25%, 62%);
+}
+@media (max-width: 767px) { .tagbar__inner { padding: 7px 12px; } }
+
+/* 卡片上的门类小彩标(点标签=按该门类筛选) */
+.card__dtags { display: flex; flex-wrap: wrap; gap: 5px; }
+.card-tag {
+  display: inline-flex; align-items: center; border: none; cursor: pointer;
+  background: hsl(var(--th, 220), 65%, 94%); color: hsl(var(--th, 220), 55%, 33%);
+  font-size: 10.5px; line-height: 1; padding: 4px 8px; border-radius: 999px;
+}
+.card-tag:hover { background: hsl(var(--th, 220), 60%, 89%); }
+html[data-theme="dark"] .card-tag { background: hsl(var(--th, 220), 30%, 19%); color: hsl(var(--th, 220), 55%, 74%); }
+html[data-theme="dark"] .card-tag:hover { background: hsl(var(--th, 220), 30%, 24%); }
 
 /* 控制行「已选条件」摘要 chips(类型/门类/作品范围收进面板后在此回显,点 ✕ 移除)。
    flex:1 是布局关键:吸收中段剩余空间,把 筛选/排序 钉在行右端(原 tabs 的职责),
