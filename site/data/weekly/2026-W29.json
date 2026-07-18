@@ -1,281 +1,256 @@
 {
   "id": "2026-W29",
-  "title": "周报 | 2026-W29：全球征集密集截止，美术馆夜场与双年展资讯齐发",
   "date": "2026-07-18",
-  "intro": "本周机会涵盖动物信号、未来世代艺术奖、TED×POSCA驻留等国际征集，以及全国青年剧作计划、三农题材作品征集等国内项目。资讯聚焦开普敦画廊争议、台南美术馆共展、亚洲双年展主题公布。招聘方面，David Zwirner、苏富比、惠特尼美术馆等机构开放多个岗位。",
-  "outro": "以上为本期精选，把握截止日期，早投递早准备。下周见！",
   "ai_composed": true,
+  "counts": [
+    5,
+    4,
+    0
+  ],
+  "format": 2,
+  "title": "修补的可见性与悬置的生态：在等待与行动之间",
+  "subtitle": "从社区介入到感官档案，本周的艺术生产正试图在关系断裂处重建连接",
+  "closing": "本周的候选清单揭示了一个共同关切：艺术如何在断裂处重新建立连接——无论是通过修补、悬置还是档案化。对于创作者而言，一个具体的建议是：在提交申请或策划项目时，优先考虑那些允许你停留于不确定状态的机制（如原型工作坊、社区介入项目或主题明确的驻留），而非急于追求完成度。因为正是在悬置与修补的间隙，艺术最有可能触及它真正要处理的问题——不是创造完美对象，而是在不完美的世界中找到一种可行的共存方式。",
   "sections": [
     {
-      "key": "opps",
-      "heading": "本周机会精选",
-      "note": "精选12个即将截止或高含金量的机会，涵盖国际驻留、大奖赛及主题展览。",
-      "items": [
-        {
-          "oid": "agg-post-animal-signal-cur",
-          "kind": "opp",
-          "title": "《后——动物信号》",
-          "org": "Molend Art",
-          "city": "格拉斯哥",
-          "country": "英国",
-          "category": "opencall",
-          "deadline": "2026-07-19",
-          "summary": "国际征集,探讨动物性、非人感知、生态想象及新兴人—非人关系。作品于2026年7月28-31日在苏格兰格拉斯哥Molend Space展出。面向所有国家的艺术家、学生及独立实践者,入选参展费£50。"
-        },
-        {
-          "oid": "detour-hk-pmq-detour-2026-创意方案公开征集",
-          "kind": "opp",
-          "title": "deTour 2026 创意方案公开征集",
-          "org": "PMQ 元創方",
-          "city": "香港",
-          "country": "中国",
-          "category": "opencall",
-          "deadline": "2026-07-19",
-          "summary": "deTour 2026 设计节公开征集创意方案，主题为“Better, Not Perfect: Prototypes for Tomorrow”。入选者可在PMQ展示作品，并获得制作赞助，赞助金额根据类别最高达15万港币。"
-        },
-        {
-          "oid": "future_generation_art_prize-未来世代艺术奖",
-          "kind": "opp",
-          "title": "未来世代艺术奖",
-          "org": "维克多·平丘克基金会 / PinchukArtCentre",
-          "city": "",
-          "country": "",
-          "category": "award",
-          "deadline": "2026-07-19",
-          "summary": "未来世代艺术奖2027年公开征集延长至2026年7月19日，面向全球35岁及以下新兴艺术家，提供10万美元主奖及5个特别奖，旨在发现和支持新一代艺术家。"
-        },
-        {
-          "oid": "artconnect-opportunities-寻找工作坊领导者",
-          "kind": "opp",
-          "title": "寻找工作坊领导者",
-          "org": "大自然保护协会",
-          "city": "",
-          "country": "",
-          "category": "opencall",
-          "deadline": "2026-07-24",
-          "summary": "大自然保护协会纽约安迪·沃霍尔视觉艺术项目征集艺术家，在2026年秋季于安迪·沃霍尔保护区领导户外工作坊。四位艺术家将被选中，需设计适合各年龄段、与保护区自然景观相关的艺术创作工作坊。"
-        },
-        {
-          "oid": "search-chinafilm-2026全国青年剧作计划征集启事",
-          "kind": "opp",
-          "title": "2026全国青年剧作计划征集启事",
-          "org": "中央宣传部电影局、中央宣传部电影剧本规划策划中心",
-          "city": "",
-          "country": "中国",
-          "category": "opencall",
-          "deadline": "2026-07-29",
-          "summary": "2026全国青年剧作计划由中央宣传部电影局等主办，面向全国高校在读学生及毕业两年内的本科生、硕士生与博士生，年龄45周岁以下，征集未公映电影剧本，入选作品给予扶持资金。"
-        },
-        {
-          "oid": "search-ky-三农-题材新大众文艺作品征集展示活动",
-          "kind": "opp",
-          "title": "“三农”题材新大众文艺作品征集展示活动",
-          "org": "中国农业电影电视中心",
-          "city": "北京",
-          "country": "中国",
-          "category": "opencall",
-          "deadline": "2026-07-30",
-          "summary": "征集反映乡村振兴的“三农”题材新大众文艺作品，包括文学、美术、书法、摄影、音乐、影视、手工等类别。面向全国农民、艺术爱好者及团体，公益征集，不收费。截止2026年7月30日。"
-        },
-        {
-          "oid": "ted-posca-residency-2026",
-          "kind": "opp",
-          "title": "TED × POSCA 驻留计划 2026",
-          "org": "TED 与 POSCA(Fine Acts 策划)",
-          "city": "",
-          "country": "全球",
-          "category": "residency",
-          "deadline": "2026-07-31",
-          "summary": "由TED与POSCA发起、Fine Acts策划的全球分布式驻留,2026年遴选四名艺术家在其所在社区创作以“Visible Mending(可见的修补)”为题的公共介入作品。每位入选者获总计1.5万美元,涵盖艺术家费、制作与记录费用。"
-        },
-        {
-          "oid": "search-dianying-第十九届中国-山东-青年微电影大赛",
-          "kind": "opp",
-          "title": "第十九届中国（山东）青年微电影大赛",
-          "org": "中国电影家协会、山东省文联、山东省教育厅",
-          "city": "济南",
-          "country": "中国",
-          "category": "award",
-          "deadline": "2026-07-31",
-          "summary": "第十九届中国（山东）青年微电影大赛面向社会征集作品，分为学生单元和社会单元，涵盖故事片、纪录片、动画片、公益广告片。报名参赛不收取任何费用，作品须为2025年1月1日后创作，截止日期为2026年7月31日。"
-        },
-        {
-          "oid": "artconnect-opportunities-圣达菲铁路场公园-广场公共艺术公开征集",
-          "kind": "opp",
-          "title": "圣达菲铁路场公园+广场公共艺术公开征集",
-          "org": "圣达菲市",
-          "city": "圣达菲",
-          "country": "美国",
-          "category": "opencall",
-          "deadline": "2026-08-05",
-          "summary": "圣达菲市RAP委员会征集铁路场公园+广场的临时公共艺术装置和创意项目提案，鼓励跨学科合作，作品需适应户外展示并回应场地自然与社会景观。"
-        },
-        {
-          "oid": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
-          "kind": "opp",
-          "title": "2026 约翰·莫尔绘画奖（中国）",
-          "org": "约翰·莫尔绘画奖(中国)组委会",
-          "city": "",
-          "country": "中国",
-          "category": "award",
-          "deadline": "2026-09-22",
-          "summary": "面向年满16周岁、生活创作在中国境内的绘画创作者。报名参赛及作品征集时间为2026年5月22日至9月22日。需缴纳报名参赛费200元人民币。作品须为2024年后完成的原创绘画，可悬挂。"
-        },
-        {
-          "oid": "aec-opencalls-ars-biologica-artxscience-驻留公开征集",
-          "kind": "opp",
-          "title": "Ars Biologica ArtXScience 驻留公开征集",
-          "org": "奥地利电子艺术节（Ars Electronica）与捷克布杰约维采2028欧洲文化之都",
-          "city": "捷克布杰约维采",
-          "country": "捷克",
-          "category": "residency",
-          "deadline": "2026-09-28",
-          "summary": "Ars Biologica ArtXScience 驻留项目邀请艺术家与当地科学家合作，创作空间性艺术与科学作品及公众参与活动。项目提供24000欧元总资助，包括艺术家费、制作预算及差旅住宿。驻留期2027年1月至2028年4月，最终成果在"
-        },
-        {
-          "oid": "search-call-欧洲媒体艺术平台驻留",
-          "kind": "opp",
-          "title": "欧洲媒体艺术平台驻留",
-          "org": "欧洲媒体艺术平台",
-          "city": "",
-          "country": "",
-          "category": "residency",
-          "deadline": "2026-11-06",
-          "summary": "EMAP 2027年驻留项目面向数字、媒体、机器人和生物艺术领域的艺术家、双人组或集体，提供两个月驻留，包括4000欧元津贴、住宿、旅费及4000欧元项目预算。申请截止2026年11月6日。"
-        }
+      "heading": "修补：从身体到社区的可见实践",
+      "image": {
+        "src": "https://www.transartists.org/sites/default/files/2026-06/screenshot_17.png",
+        "caption": "TED × POSCA 驻留计划 2026 · TED 与 POSCA(Fine Acts 策划)"
+      },
+      "paragraphs": [
+        [
+          {
+            "t": "本周最引人注目的主题线索是“修补”——一种既指向物理修复也隐喻社会缝合的实践。TED与POSCA联合发起的全球驻留计划以“可见的修补”为主题，遴选四位艺术家在各自社区创作公共介入作品，每位获得1.5万美元支持 "
+          },
+          {
+            "ref": {
+              "n": 1,
+              "oid": "ted-posca-residency-2026",
+              "kind": "opp",
+              "url": null,
+              "text": "TED × POSCA 驻留计划 2026"
+            }
+          },
+          {
+            "t": "。该计划强调修补的“可见性”，意在使修复行为本身成为公共对话的媒介。与此呼应，大自然保护协会在安迪·沃霍尔保护区征集艺术家领导户外工作坊，要求设计适合各年龄段、与自然景观相关的艺术创作活动 "
+          },
+          {
+            "ref": {
+              "n": 2,
+              "oid": "artconnect-opportunities-寻找工作坊领导者",
+              "kind": "opp",
+              "url": null,
+              "text": "寻找工作坊领导者"
+            }
+          },
+          {
+            "t": "。两者都隐含着一种关系美学的预设：艺术的效力不在于对象，而在于它促成的相遇与协作。法国哲学家布里奥曾将这种实践归纳为“关系美学”，认为当代艺术的核心任务是在社会缝隙中创造临时性的社群。然而，克莱尔·毕晓普对参与式艺术的批评也值得警惕——她指出，许多参与式项目过于强调伦理共识，反而回避了真正的政治分歧。本周的两个项目似乎有意避免这种陷阱：“可见的修补”要求艺术家的介入是“可见的”，即修补行为本身必须成为一种公开的声明，而非仅止于内部和谐。"
+          }
+        ],
+        [
+          {
+            "t": "另一端的“修补”则发生在个体身体层面。画家凯尔蒂·费里斯在伍德斯托克的工作室中展示其抽象绘画与身体印痕作品，探讨绘画中的二元对立 "
+          },
+          {
+            "ref": {
+              "n": 3,
+              "oid": "news-3tcvfx-beer-with-a-painter-keltie-ferris",
+              "kind": "news",
+              "url": "https://hyperallergic.com/beer-with-a-painter-keltie-ferris/",
+              "text": "与画家共饮啤酒：凯尔蒂·费里斯"
+            }
+          },
+          {
+            "t": "。费里斯的身体印痕可被视为一种“自我修补”——通过肉身在画布上的直接印记，缝合抽象与具象、意识与物质之间的裂隙。这种个人化的修补实践与社区层面的公共介入形成对照，共同指向本周艺术生产的一个内在张力：修补究竟应指向外部关系还是内部完整？或许答案在于，两者都是对断裂处境的回应——无论是社会纽带的分崩还是主体经验的离散。"
+          }
+        ]
       ]
     },
     {
-      "key": "news",
-      "heading": "艺术资讯",
-      "note": "精选5条行业动态，包括争议事件、展览开幕及双年展信息。",
-      "items": [
-        {
-          "oid": "news-ctxwlq-hong-kong-house-2026-opening-and-exchang",
-          "kind": "news",
-          "title": "【香港部屋2026】開幕及交流活動",
-          "source": "大地藝術祭",
-          "published_at": "2026-07-18",
-          "url": "https://www.echigo-tsumari.jp/zh-tw/event/hongkonghouse_opening/",
-          "summary": "为配合香港部屋2026年特别展览《艹 田 人》开幕，于7月周末举办开幕活动及多场交流活动与工作坊，包括漬物体验、香品工作坊、鱼旗展示等，所有活动免费参加。"
-        },
-        {
-          "oid": "news-6w0tl3-cape-town-gallery-accused-of-withholding",
-          "kind": "news",
-          "title": "开普敦画廊被指控拖欠薪酬和扣留艺术品",
-          "source": "Hyperallergic",
-          "published_at": "2026-07-15",
-          "url": "https://hyperallergic.com/cape-town-gallery-accused-of-withholding-pay-and-artworks/",
-          "summary": "南非艺术家Kate Gottgens指控开普敦SMAC画廊扣留其画作并延迟付款，包括一幅作品在米兰艺博会后四年未归还。画廊否认指控，称延迟因进出口问题。Gottgens表示离开画廊后仍在争取归还作品，并已收到部分付款。"
-        },
-        {
-          "oid": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
-          "kind": "news",
-          "title": "臺南市美術館TAM⁺藝術之森「魔法藍圖生成中」，以共創展覽與工作坊串連跨世代參與，延展城市空間的感知經驗",
-          "source": "臺南市美術館",
-          "published_at": "2026-07-15",
-          "url": "https://www.tnam.museum/news/990",
-          "summary": "臺南市美術館在TAM⁺藝術之森推出展覽「魔法藍圖生成中」，結合法國藝術家Laure Catugier駐村與版印創作，並舉辦工作坊，引導市民參與共創，探索城市空間與地方記憶。展期為2026年7月3日至8月30日。"
-        },
-        {
-          "oid": "news-cqn836-2026-asian-art-biennial-announces-theme-",
-          "kind": "news",
-          "title": "2026亞洲藝術雙年展公布主題與首批參展名單",
-          "source": "藝術家雜誌社",
-          "published_at": null,
-          "url": "https://www.artist-magazine.com/edcontent_d.php?lang=tw&tb=4&id=31564&srsltid=AfmBOorbAq9nxnpxBxmGJYy9bwb30TANZ2rykQDJXDnWpGYyPx6dRJk7",
-          "summary": "國立臺灣美術館公布2026亞洲藝術雙年展主題為「MrahulTminun．共織．Co-Weaving」，由呂佩怡策展，首波參展藝術家包括林介文等，展期自11月7日至2027年2月28日。"
-        },
-        {
-          "oid": "news-84f0hz-2026-kyla-artist-prize-4th-edition-offic",
-          "kind": "news",
-          "title": "2026 Kyla Artist Prize — 第四屆：得獎者官方名單",
-          "source": "ALEA DE Global Art Agency",
-          "published_at": null,
-          "url": "https://www.deglobalart-alea.com/zh/post/2026-kyla-artist-prize-%E7%AC%AC%E5%9B%9B%E5%B1%86%EF%BC%9A%E5%BE%97%E7%8D%8E%E8%80%85%E5%AE%98%E6%96%B9%E5%90%8D%E5%96%AE",
-          "summary": "巴黎藝術之光協會與蝶映藝術文化公布2026年第四屆Kyla Artist Prize得獎名單，共17位藝術家獲獎，國籍橫跨台灣、日本、古巴、美國及英國，涵蓋繪畫、舞蹈、室內設計、數位多媒體及平面設計等類別。"
-        }
+      "heading": "悬置：等待、过渡与不稳定状态",
+      "image": {
+        "src": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
+        "caption": "《悬置》——追加名额 · 臻艺画廊 (Zhen Yi Gallery)"
+      },
+      "paragraphs": [
+        [
+          {
+            "t": "与修补的积极行动相对应，本周另一组条目聚焦于“悬置”——一种消极但具有生产性的状态。巴黎臻艺画廊的展览《悬置》二次征集，主题涵盖等待、过渡、平衡与坍塌、重力、心理不稳定与流离 "
+          },
+          {
+            "ref": {
+              "n": 4,
+              "oid": "agg-suspended-last-few-places-added-cur",
+              "kind": "opp",
+              "url": null,
+              "text": "《悬置》——追加名额"
+            }
+          },
+          {
+            "t": "。该展览明确将“悬置”视为一种感知条件，而非单纯的情感基调。这与格罗伊斯关于策展与档案的论述形成对话：格罗伊斯认为，当代艺术中档案化的冲动源于对时间断裂的焦虑，而“悬置”正是这种焦虑的表征——作品被置于一种既非完成也非未完成的中间地带。臻艺画廊的征集要求入选者支付200英镑参展费，这一经济门槛暗示了“悬置”状态在艺术体制中的物质基础：艺术家在等待展览机会时，实际上也在承受经济上的“悬置”。"
+          }
+        ],
+        [
+          {
+            "t": "同样探讨过渡状态的还有香港deTour 2026设计节，其主题“Better, Not Perfect: Prototypes for Tomorrow”明确拥抱不完美与临时性 "
+          },
+          {
+            "ref": {
+              "n": 5,
+              "oid": "detour-hk-pmq-detour-2026-创意方案公开征集",
+              "kind": "opp",
+              "url": null,
+              "text": "deTour 2026 创意方案公开征集"
+            }
+          },
+          {
+            "t": "。原型（prototype）本身就是一种悬置——它既不是最终产品，也不是纯粹概念，而是处于测试和迭代中的中间物。deTour提供最高15万港币的制作赞助，这种资金支持使艺术家得以在悬置状态下持续工作。而BobCat画廊的线上展览《春分》则以昼夜平衡为题，将悬置自然化——春分是季节过渡的节点，平衡本身便是短暂的 "
+          },
+          {
+            "ref": {
+              "n": 6,
+              "oid": "agg-equinox-virtual-exhibition-with-bobcat-gallery-cur",
+              "kind": "opp",
+              "url": null,
+              "text": "《春分》——BobCat画廊线上展"
+            }
+          },
+          {
+            "t": "。这些项目共同揭示：悬置不仅是困境，也可能是艺术创新的条件。当艺术家被允许停留在不确定中，他们反而可能比在稳定体制内更能触碰感知的边界。"
+          }
+        ]
       ]
     },
     {
-      "key": "jobs",
-      "heading": "招聘速递",
-      "note": "精选8个优质岗位，涵盖画廊、拍卖行、美术馆及设计机构。",
-      "items": [
-        {
-          "oid": "job-8ci8v5-gallery-assistant",
-          "kind": "job",
-          "title": "画廊助理",
-          "org": "David Zwirner",
-          "location": "",
-          "deadline": null,
-          "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5184574007"
-        },
-        {
-          "oid": "job-b0he8v-communications-associate",
-          "kind": "job",
-          "title": "传播专员",
-          "org": "David Zwirner",
-          "location": "",
-          "deadline": null,
-          "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5175044007"
-        },
-        {
-          "oid": "job-bu8puz-seller-operations-manager",
-          "kind": "job",
-          "title": "卖家运营经理",
-          "org": "Sotheby's",
-          "location": "",
-          "deadline": null,
-          "url": "https://job-boards.greenhouse.io/sothebys/jobs/6103681004"
-        },
-        {
-          "oid": "job-99z5ee-internships",
-          "kind": "job",
-          "title": "实习",
-          "org": "Whitney Museum of American Art",
-          "location": "",
-          "deadline": null,
-          "url": "https://whitney.org/about/careers/internships"
-        },
-        {
-          "oid": "job-1ja7lj-curator",
-          "kind": "job",
-          "title": "策展人",
-          "org": "轻井泽新美术馆",
-          "location": "",
-          "deadline": null,
-          "url": "https://knam.jp/zh-CN/news/2026/7902/"
-        },
-        {
-          "oid": "job-499up0-exhibition-specialist",
-          "kind": "job",
-          "title": "展览专员",
-          "org": "苏州当代美术馆管理有限公司",
-          "location": "",
-          "deadline": null,
-          "url": "https://www.gaoxiaojob.com/job/detail/2050758.html"
-        },
-        {
-          "oid": "job-5asg1f-public-art-curatorial-manager",
-          "kind": "job",
-          "title": "公共艺术策划经理",
-          "org": "设计互联",
-          "location": "",
-          "deadline": null,
-          "url": "https://m.bendibao.com/show999818.html"
-        },
-        {
-          "oid": "job-587f2w-today-art-museum-multiple-internship-pos",
-          "kind": "job",
-          "title": "今日美术馆多个实习岗位招聘！",
-          "org": "今日美术馆",
-          "location": "",
-          "deadline": null,
-          "url": "http://www.todayartmuseum.com/cnnewsdetails.aspx?year=2026&id=405&type=news"
-        }
+      "heading": "档案与参与：在地实践中的记忆政治",
+      "image": {
+        "src": "https://www.tnam.museum/images/filesys/images/ch/news/319/10_%E5%8E%9F%E8%87%BA%E5%8D%97%E5%85%AC%E5%9C%92%E7%AE%A1%E7%90%86%E6%89%80%E5%BB%BA%E7%AF%89%E5%A4%96%E8%A7%80.jpg",
+        "caption": "臺南市美術館TAM⁺藝術之森「魔法藍圖生成中」，以共創展覽與工作坊串連跨世代參與，延展城市空間的感知經驗 · 臺南市美術館"
+      },
+      "paragraphs": [
+        [
+          {
+            "t": "本周多个项目涉及档案的共建与感知资料的收集，暗示一种从被动观察到主动参与的认识论转向。台南市美术馆在TAM⁺艺术之森的展览“魔法蓝图生成中”，结合法国艺术家驻村与版印创作，引导市民参与共创，探索城市空间与地方记忆 "
+          },
+          {
+            "ref": {
+              "n": 7,
+              "oid": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
+              "kind": "news",
+              "url": "https://www.tnam.museum/news/990",
+              "text": "臺南市美術館TAM⁺藝術之森「魔法藍圖生成中」"
+            }
+          },
+          {
+            "t": "。该展览明确将参与式工作坊视为知识生产的手段，而非仅仅教育延伸。类似地，新竹县文化局转介的“城市探索行动｜青埔感知资料库”活动，邀请三位原住民族青年艺术家驻村，通过系列工作坊建立地方感知档案 "
+          },
+          {
+            "ref": {
+              "n": 8,
+              "oid": "news-2vs1hy-notice-2026-open-and-next-art-imaginatio",
+              "kind": "news",
+              "url": "https://www.hchcc.gov.tw/Tw/News/NewsDetail?filter=093437eb-1b2b-4130-9f8e-bf4218dfd22f&id=6355b198-4de6-40be-8fac-5a12cb326fd7",
+              "text": "轉知：「2026 Open, and next 藝想實驗場：城市探索行動|青埔感知資料庫及系列參與式工作坊」"
+            }
+          },
+          {
+            "t": "。这两个项目都试图将居民的身体经验转化为可共享的档案，其方法论接近布尔迪厄的场域理论——艺术家的介入并非从外部赋予意义，而是在特定社会空间中与既有权力结构协商。"
+          }
+        ],
+        [
+          {
+            "t": "更宏观的档案化尝试出现在2026亚洲艺术双年展，其主题“MrahulTminun·共织·Co-Weaving”直接指向编织与协作 "
+          },
+          {
+            "ref": {
+              "n": 9,
+              "oid": "news-cqn836-2026-asian-art-biennial-announces-theme-",
+              "kind": "news",
+              "url": "https://www.artist-magazine.com/edcontent_d.php?lang=tw&tb=4&id=31564&srsltid=AfmBOorbAq9nxnpxBxmGJYy9bwb30TANZ2rykQDJXDnWpGYyPx6dRJk7",
+              "text": "2026亞洲藝術雙年展公布主題與首批參展名單"
+            }
+          },
+          {
+            "t": "。策展人吕佩怡选择“共织”作为隐喻，暗示展览本身即是一个不断生成的档案网络，而非静态的成果展示。这种将展览视为活档案的做法，与格罗伊斯关于当代艺术中档案与策展关系的论述不谋而合：策展不再只是选择与陈列，而是成为一种档案实践，在时间中持续演化。然而，档案化也面临风险——正如毕晓普对参与式艺术的批评所暗示的，当社区参与被过度仪式化，它可能沦为一种道德表演。本周的项目能否避免这种陷阱，取决于它们是否允许冲突与不和谐进入档案。"
+          }
+        ]
       ]
     }
   ],
-  "generated_at": "2026-07-17T16:31:47.747Z"
+  "references": [
+    {
+      "n": 1,
+      "oid": "ted-posca-residency-2026",
+      "kind": "opp",
+      "title": "TED × POSCA 驻留计划 2026",
+      "meta": "TED 与 POSCA(Fine Acts 策划) · 全球 · 截止 2026-07-31",
+      "url": null
+    },
+    {
+      "n": 2,
+      "oid": "artconnect-opportunities-寻找工作坊领导者",
+      "kind": "opp",
+      "title": "寻找工作坊领导者",
+      "meta": "大自然保护协会 · 截止 2026-07-24",
+      "url": null
+    },
+    {
+      "n": 3,
+      "oid": "news-3tcvfx-beer-with-a-painter-keltie-ferris",
+      "kind": "news",
+      "title": "与画家共饮啤酒：凯尔蒂·费里斯",
+      "meta": "Hyperallergic · 2026-07-15",
+      "url": "https://hyperallergic.com/beer-with-a-painter-keltie-ferris/"
+    },
+    {
+      "n": 4,
+      "oid": "agg-suspended-last-few-places-added-cur",
+      "kind": "opp",
+      "title": "《悬置》——追加名额",
+      "meta": "臻艺画廊 (Zhen Yi Gallery) · 巴黎 法国 · 截止 2026-07-24",
+      "url": null
+    },
+    {
+      "n": 5,
+      "oid": "detour-hk-pmq-detour-2026-创意方案公开征集",
+      "kind": "opp",
+      "title": "deTour 2026 创意方案公开征集",
+      "meta": "PMQ 元創方 · 香港 中国 · 截止 2026-07-19",
+      "url": null
+    },
+    {
+      "n": 6,
+      "oid": "agg-equinox-virtual-exhibition-with-bobcat-gallery-cur",
+      "kind": "opp",
+      "title": "《春分》——BobCat画廊线上展",
+      "meta": "BobCat 画廊 · 截止 2026-07-26",
+      "url": null
+    },
+    {
+      "n": 7,
+      "oid": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
+      "kind": "news",
+      "title": "臺南市美術館TAM⁺藝術之森「魔法藍圖生成中」，以共創展覽與工作坊串連跨世代參與，延展城市空間的感知經驗",
+      "meta": "臺南市美術館 · 2026-07-15",
+      "url": "https://www.tnam.museum/news/990"
+    },
+    {
+      "n": 8,
+      "oid": "news-2vs1hy-notice-2026-open-and-next-art-imaginatio",
+      "kind": "news",
+      "title": "轉知：「2026 Open, and next 藝想實驗場：城市探索行動|青埔感知資料庫及系列參與式工作坊」",
+      "meta": "新竹縣政府文化局 · 2026-07-14",
+      "url": "https://www.hchcc.gov.tw/Tw/News/NewsDetail?filter=093437eb-1b2b-4130-9f8e-bf4218dfd22f&id=6355b198-4de6-40be-8fac-5a12cb326fd7"
+    },
+    {
+      "n": 9,
+      "oid": "news-cqn836-2026-asian-art-biennial-announces-theme-",
+      "kind": "news",
+      "title": "2026亞洲藝術雙年展公布主題與首批參展名單",
+      "meta": "藝術家雜誌社",
+      "url": "https://www.artist-magazine.com/edcontent_d.php?lang=tw&tb=4&id=31564&srsltid=AfmBOorbAq9nxnpxBxmGJYy9bwb30TANZ2rykQDJXDnWpGYyPx6dRJk7"
+    }
+  ],
+  "generated_at": "2026-07-18T05:30:15.393Z"
 }

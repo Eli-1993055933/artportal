@@ -89,7 +89,61 @@
     if (s.key === "jobs") return AP.t("wrSecJobs");
     return s.heading || "";
   }
+  // 往期目录(两种渲染格式共用)
+  function archiveHtml(curId) {
+    if (!(index && index.list && index.list.length > 1)) return "";
+    var html = '<div class="wr-arch"><h2 class="wr-sec__h">' + esc(AP.t("wrArchive")) + '</h2>';
+    for (var k = 0; k < Math.min(index.list.length, 12); k++) {
+      var it = index.list[k];
+      if (it.id === curId) continue;
+      html += '<a class="wr-arch__row" href="#/w/' + encodeURIComponent(it.id) + '">' + esc(it.title) + ' <span class="wr-item__meta">' + esc(it.date || it.id) + '</span></a>';
+    }
+    return html + '</div>';
+  }
+  // ---------- 文章型周刊(format 2,v0.70.0):撰稿 agent 成文,NYT 式排版 ----------
+  // 文内引用(程序回填的真实链接):机会→站内详情深链,资讯/招聘→原文新窗口;带上标编号对应文末「本期提及」。
+  function refLinkHtml(ref) {
+    var href = ref.kind === "opp" ? "#/o/" + encodeURIComponent(ref.oid) : (ref.url || "#");
+    var ext = ref.kind !== "opp";
+    return '<a class="wra-ref" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener nofollow"' : "") + '>' + esc(ref.text) + '</a><sup class="wra-sup">[' + ref.n + ']</sup>';
+  }
+  function renderArticle(r) {
+    var html =
+      '<div class="ppage__inner wrpage wra">' + backBtn() +
+      '<header class="wra-head">' +
+        '<div class="wra-brand">ARTPORTAL · ' + esc(AP.t("wrBrand")) + '</div>' +
+        '<h1 class="wra-title">' + esc(r.title) + '</h1>' +
+        (r.subtitle ? '<p class="wra-sub">' + esc(r.subtitle) + '</p>' : "") +
+        '<p class="wra-meta">' + esc(r.id + " · " + (r.date || "")) + ' · ' + esc(AP.t("wrAiNote")) + '</p>' +
+      '</header>';
+    (r.sections || []).forEach(function (sc) {
+      html += '<section class="wra-sec"><h2 class="wra-h2">' + esc(sc.heading) + '</h2>';
+      if (sc.image) {
+        html += '<figure class="wra-fig"><img loading="lazy" src="' + esc(sc.image.src) + '" alt="" onerror="this.parentNode.remove()" />' +
+          '<figcaption>' + esc(sc.image.caption) + '</figcaption></figure>';
+      }
+      (sc.paragraphs || []).forEach(function (p) {
+        html += '<p class="wra-p">' + p.map(function (sg) { return sg.t != null ? esc(sg.t) : refLinkHtml(sg.ref); }).join("") + '</p>';
+      });
+      html += '</section>';
+    });
+    if (r.closing) html += '<p class="wra-closing">' + esc(r.closing) + '</p>';
+    if (r.references && r.references.length) {
+      html += '<div class="wra-refs"><h2 class="wra-h2">' + esc(AP.t("wraRefs")) + '</h2>';
+      r.references.forEach(function (ref) {
+        var href = ref.kind === "opp" ? "#/o/" + encodeURIComponent(ref.oid) : (ref.url || "#");
+        var ext = ref.kind !== "opp";
+        html += '<p class="wra-refrow">[' + ref.n + '] <a href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener nofollow"' : "") + '>' + esc(ref.title) + '</a>' +
+          (ref.meta ? ' <span class="wra-refmeta">— ' + esc(ref.meta) + '</span>' : "") + '</p>';
+      });
+      html += '</div>';
+    }
+    html += archiveHtml(r.id) + '</div>';
+    page.innerHTML = html;
+    page.scrollTop = 0;
+  }
   function renderReport(r) {
+    if (r.format === 2) { renderArticle(r); return; }
     var html =
       '<div class="ppage__inner wrpage">' + backBtn() +
       '<div class="wr-head">' +
@@ -107,17 +161,7 @@
       html += '</section>';
     }
     if (r.outro) html += '<p class="wr-outro">' + esc(r.outro) + '</p>';
-    // 往期
-    if (index && index.list && index.list.length > 1) {
-      html += '<div class="wr-arch"><h2 class="wr-sec__h">' + esc(AP.t("wrArchive")) + '</h2>';
-      for (var k = 0; k < Math.min(index.list.length, 12); k++) {
-        var it = index.list[k];
-        if (it.id === r.id) continue;
-        html += '<a class="wr-arch__row" href="#/w/' + encodeURIComponent(it.id) + '">' + esc(it.title) + ' <span class="wr-item__meta">' + esc(it.date || it.id) + '</span></a>';
-      }
-      html += '</div>';
-    }
-    html += '</div>';
+    html += archiveHtml(r.id) + '</div>';
     page.innerHTML = html;
     page.scrollTop = 0;
   }

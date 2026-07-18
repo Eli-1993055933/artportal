@@ -936,3 +936,45 @@ html[data-theme="dark"] .card-tag:hover { background: hsl(var(--th, 220), 30%, 2
 .wk-tags__hint { font-size: 11.5px; color: var(--ink-3); margin: 0 0 2px; }
 /* 作品卡片/查看器上的门类小标 */
 .wk-tagchip { display: inline-block; font-size: 10.5px; color: var(--ink-3); border: 1px solid var(--line-2); border-radius: 999px; padding: 1px 7px; margin-right: 4px; }
+
+/* ---------- 文章型周刊排版(v0.70.0,对标 NYT 艺术版:衬线正文、窄栏、图注体系) ---------- */
+.wra { max-width: 720px; }
+.wra-brand { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 11.5px; letter-spacing: .18em; color: var(--ink-3); text-align: center; }
+.wra-head { text-align: center; margin-bottom: 8px; }
+.wra-title {
+  font-family: Georgia, "Times New Roman", "Songti SC", STSong, SimSun, serif;
+  font-size: 30px; line-height: 1.35; font-weight: 700; margin: 14px 0 8px; color: var(--ink);
+}
+.wra-sub {
+  font-family: Georgia, "Times New Roman", "Songti SC", STSong, SimSun, serif;
+  font-size: 15.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 8px;
+}
+.wra-meta { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 11.5px; color: var(--ink-3); margin: 0; }
+.wra-sec { margin-top: 30px; }
+.wra-h2 {
+  font-family: Georgia, "Times New Roman", "Songti SC", STSong, SimSun, serif;
+  font-size: 20px; font-weight: 700; margin: 0 0 12px; padding-top: 22px; color: var(--ink);
+  border-top: 1px solid var(--line-2);
+}
+.wra-p {
+  font-family: Georgia, "Times New Roman", "Songti SC", STSong, SimSun, serif;
+  font-size: 16.5px; line-height: 1.95; color: var(--ink); margin: 0 0 16px; text-align: justify;
+}
+.wra-ref { color: var(--c-residency); text-decoration: underline; text-underline-offset: 3px; }
+.wra-ref:hover { opacity: .82; }
+.wra-sup { font-family: -apple-system, sans-serif; font-size: 10.5px; color: var(--ink-3); margin-left: 1px; }
+.wra-fig { margin: 4px 0 18px; }
+.wra-fig img { width: 100%; border-radius: 6px; display: block; background: var(--line); }
+.wra-fig figcaption { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 11.5px; color: var(--ink-3); margin-top: 6px; line-height: 1.5; }
+.wra-closing {
+  font-family: Georgia, "Times New Roman", "Songti SC", STSong, SimSun, serif;
+  font-size: 16px; line-height: 1.9; color: var(--ink-2); font-style: italic; margin: 26px 0 0;
+}
+.wra-refs { margin-top: 34px; }
+.wra-refrow { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px; line-height: 1.75; color: var(--ink-2); margin: 0 0 7px; }
+.wra-refrow a { color: var(--c-residency); text-decoration: underline; text-underline-offset: 2px; }
+.wra-refmeta { color: var(--ink-3); }
+@media (max-width: 767px) {
+  .wra-title { font-size: 24px; }
+  .wra-p { font-size: 16px; line-height: 1.9; text-align: left; }
+}

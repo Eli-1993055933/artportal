@@ -57,7 +57,8 @@ function collectOpps(doc) {
       title: o.title_zh || o.title_en || "",
       org: o.org_zh || "", city: o.city_zh || "", country: o.country_zh || "",
       category: o.category || "", deadline: o.deadline || null,
-      summary: String(o.summary_zh || "").slice(0, 120)
+      summary: String(o.summary_zh || "").slice(0, 160),
+      cover: o.cover || null
     });
   }
   // 截止近的在前(无截止按更新日新在前),候选给 AI 最多 40 条
@@ -82,7 +83,8 @@ function collectNews(doc) {
       source: n.source || n.domain || "",
       published_at: n.published_at || null,
       url: n.url,
-      summary: String(n.summary_zh || n.summary || "").slice(0, 120)
+      summary: String(n.summary_zh || n.summary || "").slice(0, 160),
+      cover: n.cover || null
     });
   }
   ok.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
@@ -98,11 +100,177 @@ function collectJobs(doc) {
       oid: j.id, kind: "job",
       title: j.title_zh || j.title || "",
       org: j.org_zh || j.org || "", location: j.location_zh || j.location || "",
-      deadline: j.deadline || null, url: j.apply_url || j.url
+      deadline: j.deadline || null, url: j.apply_url || j.url,
+      summary: String(j.summary_zh || j.summary || "").slice(0, 100),
+      cover: j.cover || null
     };
     if ((j.posted_at || j.added_at || "") >= since) fresh.push(item); else open.push(item);
   }
   return fresh.concat(open).slice(0, 30);
+}
+
+// ---------- 撰稿 agent(v0.70.0):文章型周刊 ----------
+// 定位:专业撰稿人水准的编辑部文章(对标 NYT 艺术版 / e-flux criticism 的行文),
+// 不是链接清单。反幻觉的落法:
+//   - AI 只能引用【编号候选清单】里的条目;正文提及项目必须用 [[编号:显示文字]] 标记,
+//     程序逐个校验编号合法性并回填真实链接(机会→站内详情深链,资讯/招聘→原文),
+//     非法标记剥壳保文字——AI 写不出一个假链接;
+//   - 配图只能选候选自带封面(image: 编号),图与图注由程序回填;
+//   - 允许【转述】当代艺术理论观点组织论述,但铁律禁止编造直接引语/页码/出版细节;
+//   - 全文如实标注"AI 撰写·条目事实以原文为准";生成后程序校验(结构/引用数),不达标重试一次,
+//     再不行退回清单式保底出刊(绝不因为追求文采而停刊或编造)。
+const REF_RE = /\[\[(\d+)[::]([^\]]{1,60})\]\]/g;
+function candLine(c, i) {
+  const bits = [c.title];
+  if (c.kind === "opp") {
+    if (c.org) bits.push(c.org);
+    const place = [c.city, c.country].filter(Boolean).join(" ");
+    if (place) bits.push(place);
+    if (c.deadline) bits.push("截止" + c.deadline);
+  } else if (c.kind === "news") {
+    if (c.source) bits.push("来源:" + c.source);
+    if (c.published_at) bits.push(c.published_at);
+  } else {
+    if (c.org) bits.push(c.org);
+    if (c.location) bits.push(c.location);
+    if (c.deadline) bits.push("截止" + c.deadline);
+  }
+  if (c.summary) bits.push(c.summary);
+  if (c.cover) bits.push("[有配图]");
+  return "[" + i + "] " + bits.join(" | ");
+}
+async function composeArticleAI(cand, weekId) {
+  const key = process.env.DEEPSEEK_API_KEY;
+  if (!key) return null;
+  // 全局连续编号的候选表(三段展示,编号不分段,防 AI 混淆)
+  const C = [].concat(cand.opps.slice(0, 30), cand.news.slice(0, 15), cand.jobs.slice(0, 12));
+  if (!C.length) return null;
+  let listText = "【机会(可申请的展览征集/驻留/奖项)】\n";
+  C.forEach((c, i) => {
+    if (i === cand.opps.slice(0, 30).length) listText += "\n【资讯(本周艺术新闻)】\n";
+    if (i === cand.opps.slice(0, 30).length + cand.news.slice(0, 15).length) listText += "\n【招聘(在招艺术岗位)】\n";
+    listText += candLine(c, i) + "\n";
+  });
+  const sys =
+    "你是艺术平台 ArtPortal 的特约主笔,写作水准对标《纽约时报》艺术版与 e-flux criticism:严谨、克制、具体、有洞察。\n" +
+    "任务:基于给定的【编号候选清单】(全部为平台已核实的真实条目),写一篇 1200–1800 字的中文艺术周报文章——是真正的文章,不是条目罗列。\n\n" +
+    "结构要求(像论文一样严谨):\n" +
+    "1. 标题:有观点的刊题(不要『第X周周报』这种流水账题);副题一句,点出本周的观察线索。\n" +
+    "2. 正文 3–4 个章节:把候选条目组织进【有内在逻辑的叙事】(如按地理、媒介、机制、时间性分组),每章节 2–4 段;段落之间要有承转,不是并列的条目说明。\n" +
+    "3. 理论视野:在合适的章节【转述】1–3 处当代艺术理论帮助读者理解材料(如布里奥的关系美学、克莱尔·毕晓普对参与式艺术的批评、格罗伊斯论策展与档案、布尔迪厄的场域理论等)——理论必须服务于本周材料的解读,不堆砌名词。\n" +
+    "4. 结语:一段,收束本周观察,给创作者一个具体的行动建议。\n\n" +
+    "铁律(违反任何一条即废稿):\n" +
+    "A. 一切事实(项目/机构/人名/日期/地点/数字)只能来自候选清单;绝不引入清单之外的展览、机构或事件。\n" +
+    "B. 正文每次提到候选条目,必须用 [[编号:显示文字]] 标记,如 [[3:未来世代艺术奖]];显示文字须是该条目的实际名称或自然简称;至少提及 8 个不同条目,机会/资讯/招聘三类都要覆盖。\n" +
+    "C. 理论只能【转述观点】,绝不使用带引号的直接引语,绝不编造书名页码、年份、出版细节;理论家人名与理论名称须是公认常识。\n" +
+    "D. 语言:中文书面语;不用『震撼』『必看』『重磅』等营销腔;不吹捧任何机构。\n" +
+    "E. 每个章节可选一张配图:字段 image 填某个标注[有配图]的候选编号(该章节确实谈到它时才配),否则填 null。\n\n" +
+    '只输出一个 JSON:{"title":"…","subtitle":"…","sections":[{"heading":"…","image":编号或null,"paragraphs":["…","…"]}],"closing":"…"}';
+  async function callOnce(extraNote) {
+    try {
+      const res = await fetch("https://api.deepseek.com/chat/completions", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: process.env.EXTRACT_MODEL || "deepseek-chat",
+          temperature: 0.75, max_tokens: 5000, response_format: { type: "json_object" },
+          messages: [
+            { role: "system", content: sys },
+            { role: "user", content: "本期:" + weekId + (extraNote ? "\n(上一稿问题:" + extraNote + ",请重写并严格遵守铁律)" : "") + "\n\n候选清单:\n" + listText }
+          ]
+        }),
+        signal: AbortSignal.timeout(150000)
+      });
+      if (!res.ok) return null;
+      const j = await res.json();
+      const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+      const m = /\{[\s\S]*\}/.exec(raw);
+      return m ? JSON.parse(m[0]) : null;
+    } catch (e) { return null; }
+  }
+  // 稿件校验:结构完整 + 引用充分。不达标给一次重写机会(带上问题说明)。
+  function inspect(out) {
+    if (!out || !String(out.title || "").trim()) return "缺标题";
+    const secs = Array.isArray(out.sections) ? out.sections : [];
+    if (secs.length < 2) return "章节少于 2 个";
+    let refs = new Set(), badRef = 0, totalLen = 0;
+    for (const s of secs) {
+      const paras = Array.isArray(s.paragraphs) ? s.paragraphs : [];
+      if (!paras.length) return "存在空章节";
+      for (const p of paras) {
+        totalLen += String(p).length;
+        for (const mm of String(p).matchAll(REF_RE)) {
+          const n = Number(mm[1]);
+          if (Number.isInteger(n) && n >= 0 && n < C.length) refs.add(n); else badRef++;
+        }
+      }
+    }
+    if (refs.size < 6) return "文内 [[编号:文字]] 引用不足(仅 " + refs.size + " 个,需≥8)";
+    if (badRef > refs.size) return "存在大量非法编号引用";
+    if (totalLen < 600) return "正文太短";
+    return null;
+  }
+  let out = await callOnce(null);
+  let problem = inspect(out);
+  if (problem) {
+    process.stderr.write("[周报] 初稿未过校验(" + problem + "),重写一次\n");
+    out = await callOnce(problem);
+    problem = inspect(out);
+    if (problem) { process.stderr.write("[周报] 重写仍未过(" + problem + "),退回清单式\n"); return null; }
+  }
+  return assembleArticle(out, C, weekId);
+}
+// 程序组装:解析引用标记→回填真实链接与文末汇总;配图编号→回填封面与图注。
+// 存档格式 format:2 —— paragraphs 为 segment 数组 [{t:"文字"}|{ref:{n,oid,kind,url,text}}]
+function assembleArticle(out, C, weekId) {
+  const s = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
+  const refOrder = [];                       // 首次出现顺序 → 文末编号 1..n
+  const refNum = new Map();                  // 候选下标 → 文末编号
+  function segsOf(text) {
+    const segs = [];
+    let last = 0;
+    for (const m of String(text).matchAll(REF_RE)) {
+      const n = Number(m[1]);
+      const label = m[2].trim();
+      if (m.index > last) segs.push({ t: String(text).slice(last, m.index) });
+      if (Number.isInteger(n) && n >= 0 && n < C.length) {
+        if (!refNum.has(n)) { refNum.set(n, refOrder.length + 1); refOrder.push(n); }
+        const c = C[n];
+        segs.push({ ref: { n: refNum.get(n), oid: c.oid, kind: c.kind, url: c.kind === "opp" ? null : (c.url || null), text: label || c.title } });
+      } else {
+        segs.push({ t: label });             // 非法编号:剥掉标记只留文字,绝不生成假链接
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < String(text).length) segs.push({ t: String(text).slice(last) });
+    return segs;
+  }
+  const sections = (out.sections || []).map(sec => {
+    const paras = (Array.isArray(sec.paragraphs) ? sec.paragraphs : []).map(p => segsOf(s(p, 2000)));
+    let image = null;
+    const iv = Number(sec.image);
+    if (Number.isInteger(iv) && iv >= 0 && iv < C.length && C[iv].cover) {
+      const c = C[iv];
+      image = { src: c.cover, caption: c.title + (c.org || c.source ? " · " + (c.org || c.source) : "") };
+    }
+    return { heading: s(sec.heading, 60), image, paragraphs: paras };
+  }).filter(sec => sec.paragraphs.length);
+  const references = refOrder.map((n, i) => {
+    const c = C[n];
+    const meta = c.kind === "opp"
+      ? [c.org, [c.city, c.country].filter(Boolean).join(" "), c.deadline ? "截止 " + c.deadline : ""].filter(Boolean).join(" · ")
+      : c.kind === "news"
+        ? [c.source, c.published_at].filter(Boolean).join(" · ")
+        : [c.org, c.location, c.deadline ? "截止 " + c.deadline : ""].filter(Boolean).join(" · ");
+    return { n: i + 1, oid: c.oid, kind: c.kind, title: c.title, meta, url: c.kind === "opp" ? null : (c.url || null) };
+  });
+  return {
+    format: 2,
+    title: s(out.title, 60) || ("ArtPortal 艺术周刊 " + weekId),
+    subtitle: s(out.subtitle, 120),
+    closing: s(out.closing, 600),
+    sections, references
+  };
 }
 
 // ---------- DeepSeek:选条 + 导语(只准引用候选,绝不产出事实字段) ----------
@@ -197,33 +365,47 @@ export async function generateWeekly({ force = false } = {}) {
     readJson(join(SITE, "data", "jobs.json"), { jobs: [] })
   ]);
   const cand = { opps: collectOpps(oppDoc), news: collectNews(newsDoc), jobs: collectJobs(jobsDoc) };
-  let c = await composeWithAI(cand, weekId);
-  const ai = !!c;
-  if (!c) c = composeFallback(cand, weekId);
-  // 空刊保护:三节全空(数据长期没更新)就不出刊
-  if (!c.opps.length && !c.news.length && !c.jobs.length) {
-    return { report: null, empty: true };
+  if (!cand.opps.length && !cand.news.length && !cand.jobs.length) {
+    return { report: null, empty: true };    // 空刊保护:数据长期没更新就不出刊
   }
-  const report = {
-    id: weekId,
-    title: c.title || ("ArtPortal 艺术周报 " + weekId),
-    date: todayISO(),
-    intro: c.intro,
-    outro: c.outro,
-    ai_composed: ai,          // true=AI 撰写导语与编排;false=程序模板
-    sections: [
-      { key: "opps", heading: "本周机会精选", note: c.opps_note, items: c.opps },
-      { key: "news", heading: "艺术资讯", note: c.news_note, items: c.news },
-      { key: "jobs", heading: "招聘速递", note: c.jobs_note, items: c.jobs }
-    ].filter(s => s.items.length),
-    generated_at: new Date().toISOString()
-  };
+  let report = null;
+  // 首选:撰稿 agent 的文章型周刊(format 2);两稿都不过校验才退回清单式,保证必出刊
+  const article = await composeArticleAI(cand, weekId);
+  if (article) {
+    report = {
+      id: weekId,
+      date: todayISO(),
+      ai_composed: true,
+      counts: ["opp", "news", "job"].map(k => article.references.filter(r => r.kind === k).length),
+      ...article,
+      generated_at: new Date().toISOString()
+    };
+  } else {
+    let c = await composeWithAI(cand, weekId);
+    const ai = !!c;
+    if (!c) c = composeFallback(cand, weekId);
+    report = {
+      id: weekId,
+      title: c.title || ("ArtPortal 艺术周报 " + weekId),
+      date: todayISO(),
+      intro: c.intro,
+      outro: c.outro,
+      ai_composed: ai,          // true=AI 撰写导语与编排;false=程序模板
+      sections: [
+        { key: "opps", heading: "本周机会精选", note: c.opps_note, items: c.opps },
+        { key: "news", heading: "艺术资讯", note: c.news_note, items: c.news },
+        { key: "jobs", heading: "招聘速递", note: c.jobs_note, items: c.jobs }
+      ].filter(s => s.items.length),
+      generated_at: new Date().toISOString()
+    };
+    report.counts = report.sections.map(s => s.items.length);
+  }
   await mkdir(WEEKLY_DIR, { recursive: true });
   await atomicWrite(file, report);
-  // 目录:一行一期(新在前),供前端资讯频道横条与归档列表用
+  // 目录:一行一期(新在前),供前端横条与归档列表用
   const idx = await readWeeklyIndex();
   const list = (idx.list || []).filter(x => x.id !== weekId);
-  list.unshift({ id: weekId, title: report.title, date: report.date, counts: report.sections.map(s => s.items.length) });
+  list.unshift({ id: weekId, title: report.title, date: report.date, counts: report.counts });
   list.sort((a, b) => b.id.localeCompare(a.id));
   await atomicWrite(join(WEEKLY_DIR, "index.json"), { list: list.slice(0, 120) });
   return { report, existed: false };
@@ -252,7 +434,44 @@ function itemMeta(it) {
   }
   return bits.join(" · ");
 }
+// 文章型(format 2)引用 → 链接:机会走站内详情深链,资讯/招聘走原文
+function refHref(ref, siteUrl) {
+  return ref.kind === "opp" ? siteUrl + "/#/o/" + encodeURIComponent(ref.oid) : (ref.url || siteUrl);
+}
+function articleEmailHtml(report, { siteUrl, unsubUrl }) {
+  const serif = "Georgia,'Times New Roman','Songti SC',STSong,SimSun,serif";
+  const sans = "-apple-system,'PingFang SC','Microsoft YaHei',sans-serif";
+  const para = (segs) => '<p style="font-family:' + serif + ';font-size:16px;line-height:1.9;color:#1b1a18;margin:0 0 16px">' +
+    segs.map(sg => sg.t != null
+      ? esc(sg.t)
+      : '<a href="' + esc(refHref(sg.ref, siteUrl)) + '" style="color:#2e6fa7;text-decoration:underline">' + esc(sg.ref.text) + '</a><sup style="font-size:11px;color:#8a847c">[' + sg.ref.n + ']</sup>'
+    ).join("") + "</p>";
+  const sec = (sc) =>
+    '<h2 style="font-family:' + serif + ';font-size:20px;margin:30px 0 4px;color:#1b1a18;border-top:1px solid #e8e4dc;padding-top:22px">' + esc(sc.heading) + "</h2>" +
+    (sc.image ? '<img src="' + esc(/^https?:/i.test(sc.image.src) ? sc.image.src : siteUrl + "/" + sc.image.src) + '" alt="" style="width:100%;border-radius:6px;margin:10px 0 4px" />' +
+      '<div style="font-family:' + sans + ';font-size:11.5px;color:#8a847c;margin:0 0 14px">' + esc(sc.image.caption) + "</div>" : "") +
+    sc.paragraphs.map(para).join("");
+  return (
+    '<div style="max-width:620px;margin:0 auto;padding:28px 18px;background:#f7f6f2">' +
+      '<div style="font-family:' + sans + ';font-size:12px;letter-spacing:.16em;color:#8a847c;text-align:center">ARTPORTAL · 艺术周刊</div>' +
+      '<h1 style="font-family:' + serif + ';font-size:27px;line-height:1.35;margin:14px 0 6px;color:#1b1a18;text-align:center">' + esc(report.title) + "</h1>" +
+      (report.subtitle ? '<p style="font-family:' + serif + ';font-size:15px;color:#4a4a47;text-align:center;margin:0 0 6px">' + esc(report.subtitle) + "</p>" : "") +
+      '<div style="font-family:' + sans + ';font-size:11.5px;color:#8a847c;text-align:center;margin-bottom:6px">' + esc(report.id + " · " + report.date) + " · AI 撰写,条目事实以原文为准</div>" +
+      report.sections.map(sec).join("") +
+      (report.closing ? '<p style="font-family:' + serif + ';font-size:16px;line-height:1.9;color:#1b1a18;margin:24px 0 0;font-style:italic">' + esc(report.closing) + "</p>" : "") +
+      '<h2 style="font-family:' + serif + ';font-size:17px;margin:32px 0 10px;border-top:1px solid #e8e4dc;padding-top:22px">本期提及</h2>' +
+      report.references.map(r =>
+        '<div style="font-family:' + sans + ';font-size:12.5px;line-height:1.7;color:#4a4a47;margin:0 0 7px">[' + r.n + '] ' +
+        '<a href="' + esc(refHref(r, siteUrl)) + '" style="color:#2e6fa7">' + esc(r.title) + "</a>" + (r.meta ? " — " + esc(r.meta) : "") + "</div>"
+      ).join("") +
+      '<hr style="border:none;border-top:1px solid #e8e4dc;margin:26px 0 12px" />' +
+      '<p style="font-family:' + sans + ';font-size:11px;color:#8a847c;line-height:1.7">你收到本邮件是因为在 ArtPortal 注册时勾选了订阅周报。' +
+        '<a href="' + esc(unsubUrl) + '" style="color:#8a847c">退订</a> · <a href="' + esc(siteUrl) + '" style="color:#8a847c">访问 ArtPortal</a></p>' +
+    "</div>"
+  );
+}
 export function renderEmailHtml(report, { siteUrl, unsubUrl }) {
+  if (report.format === 2) return articleEmailHtml(report, { siteUrl, unsubUrl });
   const sec = (s) =>
     '<h2 style="font-size:16px;margin:26px 0 4px;color:#1b1a18">' + esc(s.heading) + "</h2>" +
     (s.note ? '<p style="font-size:13px;color:#6b6660;margin:0 0 10px">' + esc(s.note) + "</p>" : "") +
@@ -278,6 +497,18 @@ export function renderEmailHtml(report, { siteUrl, unsubUrl }) {
   );
 }
 export function renderEmailText(report, { siteUrl, unsubUrl }) {
+  if (report.format === 2) {
+    const lines = [report.title, report.subtitle || "", report.id + " · " + report.date + " · AI 撰写,条目事实以原文为准", ""];
+    for (const sc of report.sections) {
+      lines.push("== " + sc.heading + " ==");
+      for (const p of sc.paragraphs) lines.push(p.map(sg => sg.t != null ? sg.t : sg.ref.text + "[" + sg.ref.n + "]").join(""), "");
+    }
+    if (report.closing) lines.push(report.closing, "");
+    lines.push("—— 本期提及 ——");
+    for (const r of report.references) lines.push("[" + r.n + "] " + r.title + (r.meta ? " — " + r.meta : "") + "\n    " + refHref(r, siteUrl));
+    lines.push("", "退订:" + unsubUrl);
+    return lines.join("\n");
+  }
   const lines = [report.title, report.date + (report.ai_composed ? " · AI 撰写导语与编排,条目事实以原文为准" : ""), ""];
   if (report.intro) lines.push(report.intro, "");
   for (const s of report.sections) {
