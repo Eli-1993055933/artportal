@@ -27,7 +27,8 @@
       '<a class="wr-bar__main" href="#/w/' + encodeURIComponent(latest.id) + '">' +
         '<span class="wr-bar__ico" aria-hidden="true">✦</span>' +
         '<span class="wr-bar__title">' + esc(latest.title) + '</span>' +
-        '<span class="wr-bar__meta">' + esc(latest.date || latest.id) + ' · ' + esc(AP.t("wrRead")) + ' →</span>' +
+        '<span class="wr-bar__date">' + esc(latest.date || latest.id) + '</span>' +
+        '<span class="wr-bar__meta">' + esc(AP.t("wrRead")) + ' →</span>' +
       '</a>';
     el.hidden = false;
   }
@@ -39,13 +40,9 @@
       .then(function (j) { loadingIdx = false; indexLoaded = true; index = j || { list: [] }; renderBar(); })
       .catch(function () { loadingIdx = false; indexLoaded = true; index = { list: [] }; renderBar(); });
   }
-  // app.js 频道切换时调用:资讯频道才显示横条
-  function sync(channel) {
-    var el = ensureBar();
-    if (!el) return;
-    if (channel === "news") loadIndex();
-    else el.hidden = true;
-  }
+  // 周报横条全局常显(用户 2026-07-18 要求:切任何频道都固定在栏目条+标签条下方)。
+  // app.js 频道切换仍会调用 sync(兼容旧签名)——现在只负责语言切换等场景的重渲。
+  function sync() { renderBar(); }
 
   // ---------- 阅读页(#/w/<id>) ----------
   function build() {
@@ -155,8 +152,9 @@
     else close();
   }
   AP.router.onChange(onRoute);
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onRoute);
-  else onRoute();
+  function boot() { onRoute(); loadIndex(); }   // 启动即取周报目录:横条第一屏就位(任何频道)
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 
   AP.weekly = { sync: sync, refresh: function () { if (page && !page.hidden && curId && reports[curId]) renderReport(reports[curId]); renderBar(); } };
 })();

@@ -810,17 +810,23 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- AI 艺术周报(第 5 项,v0.65.0) ---------- */
-/* 资讯频道顶部入口横条 */
-.wr-bar { margin: 0 0 14px; }
+/* 周报入口横条:全局常显(v0.69.0 起移入吸顶头,任何频道都在标签条下方一行) */
+.wr-bar { border-bottom: 1px solid var(--line); background: var(--bg); }
 .wr-bar__main {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  padding: 12px 16px; border: 1px solid var(--line-2); border-radius: var(--radius);
-  background: var(--card); color: var(--ink); text-decoration: none;
+  max-width: var(--maxw); margin: 0 auto;
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 24px; color: var(--ink); text-decoration: none;
 }
-.wr-bar__main:hover { background: var(--hover); }
+.wr-bar__main:hover .wr-bar__title { text-decoration: underline; }
 .wr-bar__ico { color: var(--warn); font-weight: 700; flex: none; }
-.wr-bar__title { font-weight: 700; font-size: 14.5px; min-width: 0; }
-.wr-bar__meta { color: var(--ink-3); font-size: 12.5px; margin-left: auto; flex: none; }
+.wr-bar__title { font-weight: 600; font-size: 13px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wr-bar__date { color: var(--ink-3); font-size: 12px; flex: none; margin-left: auto; }
+.wr-bar__meta { color: var(--ink-3); font-size: 12px; flex: none; }
+@media (max-width: 767px) {
+  .wr-bar__main { padding: 6px 12px; gap: 6px; }
+  .wr-bar__date { display: none; }   /* 手机寸土寸金:日期让位,保标题+"阅读本期" */
+  .wr-bar__meta { margin-left: auto; }
+}
 
 /* 阅读页(外壳复用 .ppage 全屏覆盖层) */
 .wrpage { max-width: 720px; }
