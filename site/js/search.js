@@ -123,7 +123,10 @@
     panel.hidden = true;
     wrap.appendChild(panel);
     panel.addEventListener("click", onPanelClick);
-    input.addEventListener("focus", function () { renderPanel(input.value.trim()); openPanel(); });
+    // 聚焦或再次点击搜索框都弹出联想(Esc 关掉后原地再点也能召回——已聚焦时不会再触发 focus 事件)
+    function reopen() { renderPanel(input.value.trim()); openPanel(); }
+    input.addEventListener("focus", reopen);
+    input.addEventListener("click", reopen);
     input.addEventListener("input", function () {
       var q = input.value.trim();
       clearTimeout(timer);
@@ -133,10 +136,14 @@
       if (e.key === "Enter") { pushHist(input.value); closePanel(); input.blur(); }
       else if (e.key === "Escape") closePanel();
     });
-    // 点外部关闭:挂捕获阶段——下游(如卡片门类彩标)stopPropagation 也拦不住它,面板必能关上
-    document.addEventListener("click", function (e) {
-      if (!panel.hidden && !wrap.contains(e.target)) closePanel();
-    }, true);
+    // 点/触面板外即收起联想:捕获阶段——下游(如卡片门类彩标)stopPropagation 也拦不住它,面板必能关上。
+    // pointerdown 覆盖鼠标+触摸,手机/微信里比 click 更即时可靠(click 有时因焦点转移/300ms 延迟不触发)。
+    function outsideClose(e) { if (panel && !panel.hidden && !wrap.contains(e.target)) closePanel(); }
+    document.addEventListener("pointerdown", outsideClose, true);
+    document.addEventListener("click", outsideClose, true);
+    // 点「AI 检索」按钮开始检索时,联想面板让位收起(按钮在 searchbar 内,外部关闭逻辑不覆盖它)
+    var aiBtn = document.getElementById("aiSearchBtn");
+    if (aiBtn) aiBtn.addEventListener("click", closePanel);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

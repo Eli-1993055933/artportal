@@ -266,13 +266,6 @@
     toggleEl($("aiSearchBtn"), ch !== "works");   // 作品频道没有"AI 全网检索"(站内内容)
     syncFilterPanel(ch);                       // 筛选面板各分组按频道显隐
     // AI 检索其余三频道同规格,按钮为内嵌短文案"✦ AI 检索"(不随频道换,placeholder 负责说明)
-    // 检索中底条文案随频道("正在检索真实资讯/招聘…")
-    var aiBarLbl = document.querySelector("#aiBar span[data-i18n]");
-    if (aiBarLbl) {
-      var abKey = ch === "news" ? "aiSearchingNews" : ch === "jobs" ? "aiSearchingJobs" : "aiSearching";
-      aiBarLbl.setAttribute("data-i18n", abKey);
-      aiBarLbl.textContent = AP.t(abKey);
-    }
     $("moreFilters").hidden = true;
     $("moreToggle").setAttribute("aria-expanded", "false");   // 面板开着切频道:按钮箭头/读屏状态同步复位
     AP.filterState.q = ""; if ($("searchInput")) $("searchInput").value = "";
@@ -502,11 +495,9 @@
     var fab = $("submitFab");
     if (fab) fab.addEventListener("click", function () { if (AP.publish) AP.publish.open(); });
 
-    // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用)
+    // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用);检索中再点同一按钮即取消
     var aiBtn = $("aiSearchBtn");
     if (aiBtn) aiBtn.addEventListener("click", runAiSearch);
-    var aiCancel = $("aiCancelBtn");
-    if (aiCancel) aiCancel.addEventListener("click", cancelAiSearch);
 
     // 频道导航切换
     $("channelNav").addEventListener("click", function (e) {
@@ -690,15 +681,13 @@
   // 三频道同规格:机会/资讯/招聘各自检索各自的库,请求带 channel 参数。
   var aiSearching = false, aiCtrl = null, aiDone = false, aiTo = null;
   function runAiSearch() {
-    if (aiSearching) return;
+    if (aiSearching) { cancelAiSearch(); return; }   // 检索中再点即取消(按钮此刻是转圈的「取消」)
     var q = ($("searchInput").value || "").trim();
     if (!q) { toast(AP.lang === "en" ? "Type what you're looking for first" : "请先在搜索框输入想找的主题/展览"); $("searchInput").focus(); return; }
     var ch = channel;                    // 捕获发起时的频道:响应回来时用户可能已切走
     aiSearching = true; aiDone = false;
-    var btn = $("aiSearchBtn"); if (btn) { btn.disabled = true; btn.classList.add("is-loading"); }
-    $("aiBarQ").textContent = "「" + q + "」";
-    $("aiBar").hidden = false;
-    setSearchBanner(q, null, ch);        // 横幅:正在检索…
+    // 检索中唯一提示:搜索框内「AI 检索」按钮转圈并切成「取消」;不再另弹底部条/顶部横幅(用户要求:只留一个)
+    var btn = $("aiSearchBtn"); if (btn) { btn.classList.add("is-loading"); setAiBtnLabel(btn, true); }
     // 超时保护:检索最长等 170 秒,超时自动收起覆盖层并提示(避免永远转圈);用户也可随时点"取消"。
     aiCtrl = ("AbortController" in window) ? new AbortController() : null;
     aiTo = setTimeout(function () {
@@ -741,12 +730,15 @@
     finishAi($("aiSearchBtn"));
     toast(AP.lang === "en" ? "Search canceled" : "已取消检索");
   }
+  // 按钮文案:检索中显示「取消」(点击即中止),平时显示「✦ AI 检索」
+  function setAiBtnLabel(btn, loading) {
+    var lbl = btn.querySelector(".ai-search-btn__label");
+    if (lbl) lbl.textContent = loading ? AP.t("aiCancel") : AP.t("aiSearchBtnS");
+  }
   function finishAi(btn) {
     aiSearching = false;
-    if (btn) { btn.disabled = false; btn.classList.remove("is-loading"); }
-    var ov = $("aiBar"); if (ov) ov.hidden = true;
-    // 先收起"正在检索…"横幅:取消/超时/出错路径不再更新它,不收会永久停在检索中;
-    // 成功/缓存命中路径随后会重新 setSearchBanner 展示结果。
+    if (btn) { btn.classList.remove("is-loading"); setAiBtnLabel(btn, false); }
+    // 取消/超时/出错路径先收起结果条(无结果不留残条);成功/缓存路径随后会 setSearchBanner 展示结果。
     var sb = $("searchBanner"); if (sb) sb.hidden = true;
   }
   // 检索结果横幅(常驻,直到下次检索):n=null 检索中 / n<0 缓存命中 / n=0 未找到 / n>0 新增数
