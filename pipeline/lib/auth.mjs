@@ -119,6 +119,8 @@ export function newsletterAudience() {
     .map(u => ({ email: u.email, id: u.id }));
 }
 export function newsletterCount() { return users.filter(u => u.newsletter && !u.banned).length; }
+// 站内周刊通知的收件人:所有未封禁用户(站内通知是低打扰的铃铛提示,邮件才受订阅开关约束)
+export function allUserIds() { return users.filter(u => !u.banned).map(u => u.id); }
 
 // ---------- 密码 ----------
 function hashPassword(pw, salt) { return scryptSync(String(pw), salt, 64).toString("hex"); }

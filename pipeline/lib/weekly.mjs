@@ -94,7 +94,15 @@ function collectNews(doc) {
     });
   }
   ok.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
-  return ok.slice(0, 30);
+  // 交替取,保证国际顶级媒体(Hyperallergic/Artforum/Artnet/The Art Newspaper/ARTnews 等)资讯
+  // 始终有代表——用户要求周刊纳入"顶级艺术周刊的最新资讯",且撰稿铁律需要中外对照材料。
+  const intl = ok.filter(x => x.region === "国际"), dom = ok.filter(x => x.region === "国内");
+  const merged = []; let i = 0, j = 0;
+  while (merged.length < 30 && (i < intl.length || j < dom.length)) {
+    if (i < intl.length) merged.push(intl[i++]);              // 每轮先放一条国际,防国内近期新闻扎堆挤掉国际
+    if (j < dom.length && merged.length < 30) merged.push(dom[j++]);
+  }
+  return merged;
 }
 // 招聘:在招(无截止或未过期),近 14 天新增优先,候选最多 30
 function collectJobs(doc) {

@@ -17,6 +17,7 @@ pipeline/state/sessions.json
 pipeline/state/mail-secret
 pipeline/state/search-budget.json
 pipeline/state/events.jsonl*
+pipeline/state/summaries/       # 用户专属总结(私密,服务器 only,同 users.json)
 
 # 翻译回滚备份
 site/data/opportunities.json.bak-*

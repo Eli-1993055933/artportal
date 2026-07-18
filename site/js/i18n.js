@@ -168,7 +168,7 @@
       cmtJustNow: "刚刚", cmtMinAgo: "分钟前", cmtHourAgo: "小时前", cmtDayAgo: "天前",
       // 站内通知(8.4)
       ntTitle: "通知", ntEmpty: "还没有通知。被关注、被回复、被点赞、审核结果都会出现在这里。",
-      ntFollow: "关注了你", ntReply: "回复了你", ntLike: "赞了你的评论", ntComment: "评论了你的作品",
+      ntWeekly: "本周《艺术周刊》已更新 · ", ntFollow: "关注了你", ntReply: "回复了你", ntLike: "赞了你的评论", ntComment: "评论了你的作品",
       ntDecide: "审核结果:你的", ntWhatWork: "作品", ntWhatSub: "投稿", ntWhatCmt: "评论",
       ntResOk: "已通过 ✓", ntResNo: "未通过/已下架",
       // 拉黑 + 关注动态(8.4 二期)
@@ -361,7 +361,7 @@
       cmtJustNow: "just now", cmtMinAgo: "min ago", cmtHourAgo: "h ago", cmtDayAgo: "d ago",
       // Notifications
       ntTitle: "Notifications", ntEmpty: "Nothing yet. Follows, replies, likes and review results show up here.",
-      ntFollow: "followed you", ntReply: "replied to you", ntLike: "liked your comment", ntComment: "commented on your work",
+      ntWeekly: "This week's Art Weekly is out · ", ntFollow: "followed you", ntReply: "replied to you", ntLike: "liked your comment", ntComment: "commented on your work",
       ntDecide: "Review result — your", ntWhatWork: "work", ntWhatSub: "submission", ntWhatCmt: "comment",
       ntResOk: "approved ✓", ntResNo: "not approved / taken down",
       // Block + following feed

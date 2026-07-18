@@ -111,6 +111,15 @@ async function writeSummary(uid, data) {
   await writeFile(tmp, JSON.stringify(data, null, 2), "utf8");
   await rename(tmp, f);
 }
+// 新周刊出刊 → 给所有用户各发一条站内通知(铃铛提示),点开进 #/w/<期号>。
+// 站内通知面向全体用户(低打扰);邮件才受"订阅"开关约束。
+async function notifyWeeklyPublished(report) {
+  if (!report || !report.id) return;
+  try {
+    const uids = auth.allUserIds();
+    if (uids.length) await db.notifyBroadcast(uids, { type: "weekly", refkey: "weekly:" + report.id, ref: { id: report.id, title: report.title } });
+  } catch (e) {}
+}
 async function listSummaries() {
   try {
     const files = await readdir(SUMMARY_DIR);
@@ -1070,7 +1079,7 @@ async function handleAuthApi(req, res, u) {
       try {
         const r = await generateWeekly({ force: !!b.force });
         if (r.empty) return json({ code: 200, body: { ok: false, empty: true, error: "近一周没有可入刊的内容" } });
-        if (!r.existed) db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${r.report.id}「${r.report.title}」(admin 手动触发)`, metrics: { id: r.report.id, format: r.report.format || 1, en: !!r.report.en } }).catch(() => {});
+        if (!r.existed) { db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${r.report.id}「${r.report.title}」(admin 手动触发)`, metrics: { id: r.report.id, format: r.report.format || 1, en: !!r.report.en } }).catch(() => {}); notifyWeeklyPublished(r.report); }
         return json({ code: 200, body: { ok: true, existed: !!r.existed, report: { id: r.report.id, title: r.report.title, ai_composed: r.report.ai_composed, counts: r.report.counts || [] } } });
       } catch (e) { return json({ code: 500, body: { error: String(e.message || e).slice(0, 200) } }); }
     }
@@ -1270,6 +1279,7 @@ if (process.env.WEEKLY_REPORT === "1") {
       if (!r.report) return;
       process.stderr.write(`[周报] 已生成 ${r.report.id}「${r.report.title}」(AI=${r.report.ai_composed})\n`);
       db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${r.report.id}「${r.report.title}」`, metrics: { id: r.report.id, format: r.report.format || 1, refs: (r.report.references || []).length, en: !!r.report.en } }).catch(() => {});
+      if (!r.existed) notifyWeeklyPublished(r.report);   // 站内通知全体用户:新周刊出刊
       if (process.env.NEWSLETTER_AUTO === "1" && process.env.NEWSLETTER_BULK === "1" && mailerOn() && !nlState.running) {
         sendWeeklyBulk(r.report);
       }

@@ -64,6 +64,7 @@
   function lineOf(n) {
     var who = n.actor ? '<b>' + esc(n.actor.nickname) + '</b> ' : "";
     var pv = n.ref && n.ref.preview ? ':' + esc(n.ref.preview) : "";
+    if (n.type === "weekly") return esc(AP.t("ntWeekly")) + (n.ref && n.ref.title ? '《' + esc(n.ref.title) + '》' : "");
     if (n.type === "follow") return who + esc(AP.t("ntFollow"));
     if (n.type === "reply") return who + esc(AP.t("ntReply")) + pv;
     if (n.type === "like") return who + esc(AP.t("ntLike")) + pv;
@@ -120,6 +121,7 @@
 
   // 点通知跳转:关注→TA主页;评论/点赞/回复→目标内容;审核→我的主页(看状态)
   function go(n) {
+    if (n.type === "weekly") { if (n.ref && n.ref.id) location.hash = "#/w/" + encodeURIComponent(n.ref.id); return; }
     if (n.type === "follow" && n.actor) { AP.router.goUser(n.actor.id); return; }
     if (n.type === "decide") {
       var me = AP.auth && AP.auth.current();

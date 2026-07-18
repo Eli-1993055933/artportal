@@ -239,6 +239,25 @@ export async function notify({ uid, type, actor, refkey, ref }) {
   // 每人最多留 300 条,老的裁掉
   d.prepare("DELETE FROM notifications WHERE uid=? AND id NOT IN (SELECT id FROM notifications WHERE uid=? ORDER BY id DESC LIMIT 300)").run(uid, uid);
 }
+// 广播通知(如新周刊出刊):给一批 uid 各发一条系统通知(actor 空),同 refkey 去重,事务批量。
+export async function notifyBroadcast(uids, { type, refkey, ref }) {
+  const d = await getDb();
+  if (!d || !uids || !uids.length) return 0;
+  const refStr = ref ? JSON.stringify(ref) : null;
+  const now = new Date().toISOString();
+  const del = d.prepare("DELETE FROM notifications WHERE uid=? AND type=? AND actor IS NULL AND refkey=?");
+  const ins = d.prepare("INSERT INTO notifications(uid,type,actor,refkey,ref,created_at) VALUES(?,?,NULL,?,?,?)");
+  const trim = d.prepare("DELETE FROM notifications WHERE uid=? AND id NOT IN (SELECT id FROM notifications WHERE uid=? ORDER BY id DESC LIMIT 300)");
+  const tx = d.transaction((list) => {
+    for (const uid of list) {
+      if (refkey) del.run(uid, type, refkey);
+      ins.run(uid, type, refkey || null, refStr, now);
+      trim.run(uid, uid);
+    }
+  });
+  tx(uids);
+  return uids.length;
+}
 export async function notifList(uid, limit = 50) {
   const d = await getDb();
   return d.prepare("SELECT * FROM notifications WHERE uid=? ORDER BY id DESC LIMIT ?").all(uid, limit)
