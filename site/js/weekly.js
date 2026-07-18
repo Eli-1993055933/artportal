@@ -201,6 +201,8 @@
   function open(id) {
     build();
     ensureFont();
+    // 详情叠层返回场景:本期已在展示中(详情只是叠在上面开合)→ 什么都不动,滚动位置天然保留
+    if (curId === id && !page.hidden && reports[id]) { document.body.style.overflow = "hidden"; return; }
     if (!page.hidden && curId && curId !== id) savedScroll[curId] = page.scrollTop;   // 页内切往期:记住当前期位置
     page.hidden = false;
     document.body.style.overflow = "hidden";
@@ -236,10 +238,12 @@
     }
   }
 
-  // 路由:#/w/<id> 打开,其余关闭(router.parse 已识别 weekly)
+  // 路由:#/w/<id> 打开;从周刊点开详情时【保持周刊在底层】(详情 z-index 更高,叠层弹出,
+  // 返回时周刊原样还在);其余路由才真正关闭。
   function onRoute() {
     var r = AP.router.parse();
     if (r.name === "weekly") open(r.id);
+    else if (r.name === "detail" && page && !page.hidden) { /* 详情叠在周刊上,底层保持 */ }
     else close();
   }
   AP.router.onChange(onRoute);

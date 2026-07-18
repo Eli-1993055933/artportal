@@ -145,7 +145,9 @@ async function syncChannel(ch) {
   const upTmp = join(TMP, "merged-" + ch.file);
   await writeFile(upTmp, body, "utf8");
   scpUp(upTmp, `/tmp/merged-${ch.file}`);
-  ssh(`cp ${RBASE}/site/data/${ch.file} ${RBASE}/site/data/${ch.file}.bak && mv /tmp/merged-${ch.file} ${RBASE}/site/data/${ch.file}`);
+  // 服务器侧用 remote-swap 替换:把"下载快照→合并→上传"窗口内服务器新增的条目
+  // (用户在线投稿/线上检索入库)回填进合并稿再原子替换,绝不静默覆盖丢数据。
+  ssh(`cp ${RBASE}/site/data/${ch.file} ${RBASE}/site/data/${ch.file}.bak && node ${RBASE}/pipeline/remote-swap.mjs ${RBASE}/site/data/${ch.file} /tmp/merged-${ch.file} ${ch.key} ${RBASE}/pipeline/state/tombstones.json && rm -f /tmp/merged-${ch.file}`);
 }
 
 // 目录增量上传:只传服务器没有的文件(封面截图、原文存档共用)

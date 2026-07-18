@@ -264,33 +264,77 @@ const ipOf = req => {
   return String(req.socket.remoteAddress || "?");
 };
 
-// —— 用户投稿(路线图第3项):登录用户按卡片模板投稿 → 敏感词+机审 → SQLite 待审 → 人工通过才发布 ——
+// —— 用户投稿(路线图第3项;v0.72.0 扩展为统一发布:机会/招聘/资讯,作品走 /api/works):
+//    登录用户投稿 → 敏感词+机审 → SQLite 待审/AI 干净即发 → 发布到对应频道数据 ——
 const CATS = ["opencall", "residency", "award", "workshop"];
+const EMP_TYPES = ["全职", "兼职", "实习", "合约", "志愿者", "其他"];
+// URL 规范化比对:防加 query/fragment/尾斜杠变体绕过"同链接已收录"查重。
+// 只做安全规范化(去 #、去尾斜杠、域名小写、剔跟踪参数并排序)——不同 query 可能是不同职位页,不整段丢弃。
+function normUrl(u) {
+  try {
+    const x = new URL(String(u || "").trim());
+    x.hash = "";
+    for (const k of [...x.searchParams.keys()]) if (/^(utm_\w+|fbclid|gclid|spm|ref)$/i.test(k)) x.searchParams.delete(k);
+    x.searchParams.sort();
+    const q = x.searchParams.toString();
+    return x.protocol.toLowerCase() + "//" + x.host.toLowerCase() + x.pathname.replace(/\/+$/, "") + (q ? "?" + q : "");
+  } catch (e) { return String(u || "").trim(); }
+}
+function checkUrl(url, label) {
+  if (!/^https?:\/\/.{4,300}$/i.test(url)) return label + "需以 http(s):// 开头";
+  let host; try { host = new URL(url).host; } catch (e) { return label + "格式不正确"; }
+  if (unsafeHost(host) || BLOCK.test(url)) return "该链接不可用(请填原始/官方网址)";
+  return null;
+}
 function validateSubmission(b) {
   const s = v => String(v == null ? "" : v).trim();
-  const title = s(b.title), org = s(b.org), url = s(b.url), category = s(b.category);
+  const kind = ["job", "news"].includes(b.kind) ? b.kind : "opp";
+  const title = s(b.title), url = s(b.url);
+  const summary = s(b.summary).slice(0, 500);
+  const deadline = s(b.deadline);
+  if (deadline) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(deadline)) return { error: "日期格式应为 YYYY-MM-DD" };
+    const dt = new Date(deadline + "T00:00:00Z");   // 真实日历校验:挡 2026-99-99 这类合法格式的假日期
+    if (isNaN(dt.getTime()) || dt.toISOString().slice(0, 10) !== deadline) return { error: "日期无效,请检查年月日" };
+  }
+  // —— 招聘投稿:职位/机构/申请链接必填 ——
+  if (kind === "job") {
+    const org = s(b.org), city = s(b.city).slice(0, 40), country = s(b.country).slice(0, 40);
+    const salary = s(b.salary).slice(0, 40);
+    const employment_type = EMP_TYPES.includes(s(b.employment_type)) ? s(b.employment_type) : null;
+    if (title.length < 2 || title.length > 80) return { error: "职位名称需 2–80 字" };
+    if (org.length < 2 || org.length > 80) return { error: "机构名称需 2–80 字" };
+    if (!url) return { error: "请填写申请链接(官网招聘页/招聘启事原文)" };
+    const ue = checkUrl(url, "申请链接"); if (ue) return { error: ue };
+    return { data: { kind, title, org, city: city || null, country: country || null, employment_type, salary: salary || null, deadline: deadline || null, summary: summary || null, url } };
+  }
+  // —— 资讯投稿:标题/来源/原文链接必填 ——
+  if (kind === "news") {
+    const source = s(b.source).slice(0, 40);
+    if (title.length < 4 || title.length > 120) return { error: "资讯标题需 4–120 字" };
+    if (source.length < 2) return { error: "请填写来源名称(媒体/机构)" };
+    if (!url) return { error: "请填写原文链接" };
+    const ue = checkUrl(url, "原文链接"); if (ue) return { error: ue };
+    // 发布日期钳制到今天:防伪造未来日期在资讯频道(按日期倒序)永久置顶
+    const today = todayISO();
+    return { data: { kind, title, source, published_at: deadline ? (deadline > today ? today : deadline) : null, summary: summary || null, url } };
+  }
+  // —— 机会投稿(原有逻辑) ——
+  const org = s(b.org), category = s(b.category);
   const source_note = s(b.source_note).slice(0, 150);
   const city = s(b.city).slice(0, 40), country = s(b.country).slice(0, 40);
-  const deadline = s(b.deadline), summary = s(b.summary).slice(0, 500);
   const cover = typeof b.cover === "string" ? b.cover : "";
   if (title.length < 2 || title.length > 120) return { error: "标题需 2–120 字" };
   if (org.length < 2 || org.length > 80) return { error: "主办方需 2–80 字" };
   if (!CATS.includes(category)) return { error: "请选择类别" };
   if (source_note.length < 2) return { error: "请注明信息来源(如:机构公众号/官网/海报等)" };
-  // 官网链接选填;填了就必须合法且不是黑名单/内网
-  if (url) {
-    if (!/^https?:\/\/.{4,300}$/i.test(url)) return { error: "官网链接需以 http(s):// 开头" };
-    let host; try { host = new URL(url).host; } catch (e) { return { error: "官网链接格式不正确" }; }
-    if (unsafeHost(host) || BLOCK.test(url)) return { error: "该链接不可用作官网(请填主办方自己的网站)" };
-  }
-  if (deadline && !/^\d{4}-\d{2}-\d{2}$/.test(deadline)) return { error: "截止日期格式应为 YYYY-MM-DD" };
-  // 封面选填:仅接受前端压缩后的 JPEG data URL,解码后 ≤600KB
+  if (url) { const ue = checkUrl(url, "官网链接"); if (ue) return { error: ue }; }
   if (cover) {
     if (!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(cover) || cover.length > 850000) return { error: "封面图无效或过大" };
     try { if (Buffer.from(cover.slice(23), "base64").length > 600000) return { error: "封面图过大" }; }
     catch (e) { return { error: "封面图无效" }; }
   }
-  return { data: { title, org, category, url: url || null, source_note, city: city || null, country: country || null, deadline: deadline || null, summary: summary || null, cover: cover || null } };
+  return { data: { kind: "opp", title, org, category, url: url || null, source_note, city: city || null, country: country || null, deadline: deadline || null, summary: summary || null, cover: cover || null } };
 }
 // 通过的投稿 → 机会记录(trust:"user" 打"用户投稿·未经核实"标;绝不冒充官网直采)
 // 官网链接选填:无链接时"前往官网"呈禁用态,来源说明(source_note)在详情页如实展示。
@@ -315,8 +359,37 @@ function submissionToOpportunity(p, subId) {
   };
 }
 
-// 通过的投稿发布成机会条目(AI 自动通过与 admin 人工通过共用这一段)
+// 通过的投稿发布(AI 自动通过与 admin 人工通过共用):按 kind 发到对应频道数据文件。
+// 招聘/资讯与机会同一条红线:标 _via:"submit",前端显示"用户投稿·未经核实",绝不冒充官方直采。
 async function publishSubmission(row) {
+  const p = row.payload;
+  const today = todayISO();
+  if (p.kind === "job" || p.kind === "news") {
+    const file = join(SITE, "data", p.kind === "job" ? "jobs.json" : "news.json");
+    const key = p.kind === "job" ? "jobs" : "items";
+    let dom = ""; try { dom = new URL(p.url).host.replace(/^www\./, ""); } catch (e) {}
+    const rec = p.kind === "job"
+      ? { id: "submit-j" + row.id, title: p.title, title_zh: p.title, org: p.org, org_zh: p.org,
+          city: p.city, country: p.country, employment_type: p.employment_type, salary: p.salary,
+          deadline: p.deadline, summary: p.summary, summary_zh: p.summary,
+          apply_url: p.url, url: p.url, domain: dom, posted_at: today, _via: "submit" }
+      : { id: "submit-n" + row.id, title: p.title, title_zh: p.title, source: p.source,
+          url: p.url, domain: dom, published_at: p.published_at || today,
+          summary: p.summary, summary_zh: p.summary, added_at: today, _via: "submit" };
+    let dup = false;
+    await withWriteLock(async () => {
+      const cur = JSON.parse(await readFile(file, "utf8"));
+      const list = cur[key] || [];
+      const urlKey = p.kind === "job" ? "apply_url" : "url";
+      if (list.find(x => normUrl(x[urlKey] || x.url) === normUrl(p.url))) { dup = true; return; }   // 同链接已收录(规范化比对)
+      if (list.find(x => x.id === rec.id)) rec.id += "-" + Math.random().toString(36).slice(2, 7);
+      list.push(rec);
+      cur[key] = list;
+      if (cur.count != null) cur.count = list.length;
+      await writeFile(file, JSON.stringify(cur, null, 2), "utf8");
+    });
+    return dup ? "duplicate" : "published";
+  }
   const rec = submissionToOpportunity(row.payload, row.id);
   // 投稿封面:通过时才落地成文件(待审期间只存 DB,拒绝的不产生文件)
   if (row.payload.cover) {
@@ -331,15 +404,17 @@ async function publishSubmission(row) {
       }
     } catch (e) {}
   }
+  let dup = false;
   await withWriteLock(async () => {
     const cur = JSON.parse(await readFile(DATA, "utf8"));
-    if (rec.url && cur.opportunities.find(o => o.url === rec.url)) return;   // 同 URL 已收录 → 真重复,跳过
+    if (rec.url && cur.opportunities.find(o => normUrl(o.url) === normUrl(rec.url))) { dup = true; return; }   // 同 URL 已收录(规范化比对)
     // id 撞车(如 DB 重建后自增号从头来,撞上历史 submit-N):换随机后缀继续发布,绝不静默丢投稿
     if (cur.opportunities.find(o => o.id === rec.id)) rec.id += "-" + Math.random().toString(36).slice(2, 7);
     cur.opportunities.push(rec);
     cur.count = cur.opportunities.length;
     await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
   });
+  return dup ? "duplicate" : "published";
 }
 
 // —— 作品集(路线图 8.3)——
@@ -399,6 +474,12 @@ function reportLimited(ip) {
 // —— 墓碑(tombstones):后台删除的记录 id 落此文件,夜间 sync 据此在两侧同删,
 //    防止"服务器删了、本机还有 → 合并又复活"。恢复时从墓碑移除。 ——
 const TOMB_PATH = join(__dir, "state", "tombstones.json");
+// 三频道数据文件映射(admin 内容管理/回收站/下架通用;键名与 sync 墓碑频道名一致)
+const CH_FILES = {
+  opportunities: [DATA, "opportunities"],
+  jobs: [join(SITE, "data", "jobs.json"), "jobs"],
+  news: [join(SITE, "data", "news.json"), "items"]
+};
 async function readTombs() {
   try { return JSON.parse(await readFile(TOMB_PATH, "utf8")); } catch (e) { return {}; }
 }
@@ -797,7 +878,7 @@ async function handleAuthApi(req, res, u) {
       if (v.error) return json({ code: 400, body: { error: v.error } });
       try {
         if (!(await db.submissionRateOk(user.id))) return json({ code: 429, body: { error: "今天投稿已达上限(5 条),明天再来" } });
-        const modText = [v.data.title, v.data.org, v.data.city, v.data.country, v.data.summary, v.data.url, v.data.source_note].filter(Boolean).join("\n");
+        const modText = [v.data.title, v.data.org, v.data.source, v.data.city, v.data.country, v.data.salary, v.data.summary, v.data.url, v.data.source_note].filter(Boolean).join("\n");
         const mod = await moderateText(modText);
         const id = await db.insertSubmission({ uid: user.id, email: user.email, payload: v.data, mod, ip });
         await db.logModeration("submission", id, "created:" + mod.verdict, { hits: mod.hits, ai: mod.ai });
@@ -806,9 +887,9 @@ async function handleAuthApi(req, res, u) {
         // 可疑/违规(review/reject)→ 不通过,留在待审队列交人工。后台全量可见、可撤。
         if (mod.verdict === "pass") {
           const row = await db.decideSubmission(id, "approved", "AI 机审通过,自动发布");
-          await publishSubmission(row);
-          await db.logModeration("submission", id, "auto-approved", null);
-          return json({ code: 200, body: { ok: true, status: "approved" } });
+          const pub = await publishSubmission(row);
+          await db.logModeration("submission", id, pub === "duplicate" ? "auto-approved-duplicate" : "auto-approved", null);
+          return json({ code: 200, body: { ok: true, status: pub === "duplicate" ? "duplicate" : "approved" } });
         }
         return json({ code: 200, body: { ok: true, status: "pending" } });
       } catch (e) {
@@ -897,35 +978,41 @@ async function handleAuthApi(req, res, u) {
       try { return json({ code: 200, body: { list: await db.listSubmissions(200) } }); }
       catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
-    // —— 内容管理:列表(带检索溯源)/删除进回收站/回收站列表/恢复/彻底删除 ——
+    // —— 内容管理(v0.72.1 起三频道通用):列表/删除进回收站/回收站列表/恢复/彻底删除 ——
     if (p === "/api/admin/content" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
-      const cur = JSON.parse(await readFile(DATA, "utf8"));
+      const channel = CH_FILES[u.searchParams.get("channel")] ? u.searchParams.get("channel") : "opportunities";
+      const [file, key] = CH_FILES[channel];
+      const cur = JSON.parse(await readFile(file, "utf8"));
       const who = await db.ingestMap();
-      const list = cur.opportunities.map(o => ({
-        id: o.id, title: o.title_zh || o.title_en, category: o.category, org: o.org_zh,
-        via: o._via || "daily", trust: o.trust, updated_at: o.updated_at,
+      const list = (cur[key] || []).map(o => ({
+        id: o.id, title: o.title_zh || o.title || o.title_en, category: o.category || channel,
+        org: o.org_zh || o.org || o.source || "",
+        via: o._via || "daily", trust: o.trust,
+        updated_at: o.updated_at || o.posted_at || o.published_at || o.added_at,
         searched_by: o._via === "search" ? (who[o.id] || null) : null
       }));
-      return json({ code: 200, body: { list } });
+      return json({ code: 200, body: { list, channel } });
     }
     if (p === "/api/admin/content/delete" && m === "POST") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
       const b = await readBody(req);
       const id = String(b.id || "");
+      const channel = CH_FILES[b.channel] ? b.channel : "opportunities";
+      const [file, key] = CH_FILES[channel];
       let removed = null;
       await withWriteLock(async () => {
-        const cur = JSON.parse(await readFile(DATA, "utf8"));
-        const i = cur.opportunities.findIndex(o => o.id === id);
+        const cur = JSON.parse(await readFile(file, "utf8"));
+        const i = (cur[key] || []).findIndex(o => o.id === id);
         if (i === -1) return;
-        removed = cur.opportunities.splice(i, 1)[0];
-        cur.count = cur.opportunities.length;
-        await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+        removed = cur[key].splice(i, 1)[0];
+        if (cur.count != null) cur.count = cur[key].length;
+        await writeFile(file, JSON.stringify(cur, null, 2), "utf8");
       });
       if (!removed) return json({ code: 404, body: { error: "not found" } });
-      try { await db.recycleInsert("opportunities", removed); } catch (e) {}
-      await tombAdd("opportunities", id);
-      await db.logModeration("content", id, "deleted", { title: removed.title_zh });
+      try { await db.recycleInsert(channel, removed); } catch (e) {}
+      await tombAdd(channel, id);
+      await db.logModeration("content", id, "deleted", { title: removed.title_zh || removed.title, channel });
       return json({ code: 200, body: { ok: true } });
     }
     if (p === "/api/admin/recycle" && m === "GET") {
@@ -938,12 +1025,13 @@ async function handleAuthApi(req, res, u) {
       const b = await readBody(req);
       const row = await db.recycleTake(Number(b.id));
       if (!row) return json({ code: 404, body: { error: "not found" } });
+      const [rFile, rKey] = CH_FILES[row.channel] || CH_FILES.opportunities;   // 按频道恢复,别把招聘/资讯灌进机会库
       await withWriteLock(async () => {
-        const cur = JSON.parse(await readFile(DATA, "utf8"));
-        if (!cur.opportunities.find(o => o.id === row.record_id)) {
-          cur.opportunities.push(row.payload);
-          cur.count = cur.opportunities.length;
-          await writeFile(DATA, JSON.stringify(cur, null, 2), "utf8");
+        const cur = JSON.parse(await readFile(rFile, "utf8"));
+        if (!(cur[rKey] || []).find(o => o.id === row.record_id)) {
+          cur[rKey].push(row.payload);
+          if (cur.count != null) cur.count = cur[rKey].length;
+          await writeFile(rFile, JSON.stringify(cur, null, 2), "utf8");
         }
       });
       await tombRemove(row.channel, row.record_id);
@@ -971,6 +1059,29 @@ async function handleAuthApi(req, res, u) {
         const row = await db.decideSubmission(Number(b.id), action, b.note);
         if (!row) return json({ code: 404, body: { error: "not found" } });
         if (action === "approved") await publishSubmission(row);
+        // 改判撤下:已发布(含 AI 自动发布)的投稿被人工改判拒绝 → 从对应频道移除并立墓碑(防夜间同步复活)
+        if (action === "rejected" && row.status === "approved") {
+          const kd = row.payload.kind;
+          const channel = kd === "job" ? "jobs" : kd === "news" ? "news" : "opportunities";
+          const prefix = (kd === "job" ? "submit-j" : kd === "news" ? "submit-n" : "submit-") + row.id;
+          const [file, key] = CH_FILES[channel];
+          const removedIds = [];
+          await withWriteLock(async () => {
+            const cur = JSON.parse(await readFile(file, "utf8"));
+            const keep = [];
+            for (const o of (cur[key] || [])) {
+              if (String(o.id) === prefix || String(o.id).startsWith(prefix + "-")) removedIds.push(o.id);
+              else keep.push(o);
+            }
+            if (removedIds.length) {
+              cur[key] = keep;
+              if (cur.count != null) cur.count = keep.length;
+              await writeFile(file, JSON.stringify(cur, null, 2), "utf8");
+            }
+          });
+          for (const rid of removedIds) await tombAdd(channel, rid);
+          if (removedIds.length) await db.logModeration("submission", b.id, "takedown", { ids: removedIds, channel });
+        }
         await db.logModeration("submission", b.id, "decided:" + action, null);
         await db.notify({ uid: row.uid, type: "decide", ref: { what: "submission", title: row.payload.title, result: action } }).catch(() => {});
         return json({ code: 200, body: { ok: true } });

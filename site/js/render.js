@@ -140,7 +140,8 @@
   function viaChip(o) {
     var chips = "";
     if (o._via === "search") chips += '<span class="src-chip src-chip--aggregator">' + esc(AP.t("chipAiSearched")) + '</span>';
-    if (o.title) {
+    if (o._via === "submit") chips += '<span class="src-chip src-chip--aggregator">' + esc(AP.t("trustUser")) + '</span>';
+    if (o.title && o._via !== "submit") {   // 用户投稿展示的就是原文,不存在机翻侧,勿标 MT
       var showingEn = AP.lang === "en", srcIsZh = isZhText(o.title);
       if ((showingEn && srcIsZh) || (!showingEn && !srcIsZh)) {
         chips += '<span class="src-chip src-chip--mt" title="' + esc(AP.t("mtNote")) + '">MT</span>';

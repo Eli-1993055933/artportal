@@ -161,6 +161,11 @@
       <!-- 内容管理 -->
       <section data-sec="content" hidden>
         <h1 class="sec__title">内容管理 <span class="muted" style="font-size:12px">(展览项目信息;删除进回收站)</span></h1>
+        <div class="toolbar" id="contentChannel">
+          <button class="fchip is-active" data-chn="opportunities">机会</button>
+          <button class="fchip" data-chn="jobs">招聘</button>
+          <button class="fchip" data-chn="news">资讯</button>
+        </div>
         <div class="toolbar" id="contentFilter">
           <input class="searchbox" id="contentSearch" placeholder="按标题/机构/ID 搜索…" />
           <button class="fchip is-active" data-via="">全部来源</button>
@@ -238,7 +243,7 @@
     subs:    { page: 1, per: 30, status: "" },
     works:   { page: 1, per: 30, status: "" },
     cmts:    { page: 1, per: 50, status: "" },
-    content: { page: 1, per: 50, q: "", via: "" },
+    content: { page: 1, per: 50, q: "", via: "", channel: "opportunities" },
     recycle: { page: 1, per: 50 },
     ingest:  { page: 1, per: 50 },
     users:   { page: 1, per: 50, q: "" }
@@ -615,7 +620,7 @@
       del.style.cssText = "padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:#3a1d1d;color:#ff9a8a";
       del.addEventListener("click", function () {
         if (!confirm("删除「" + o.title + "」?(会进回收站,可恢复)")) return;
-        post("/api/admin/content/delete", { id: o.id }).then(function (r) {
+        post("/api/admin/content/delete", { id: o.id, channel: st.content.channel }).then(function (r) {
           if (!r.ok) { alert(r.data && r.data.error || "删除失败"); return; }
           refreshContent();
         });
@@ -624,6 +629,13 @@
       $("contentTbl").tBodies[0].appendChild(tr);
     }, $("contentTbl").tBodies[0], 7, "(没有匹配的内容)");
   }
+  $("contentChannel").addEventListener("click", function (e) {
+    var c = e.target.closest(".fchip"); if (!c) return;
+    st.content.channel = c.getAttribute("data-chn"); st.content.page = 1;
+    var chips = this.querySelectorAll(".fchip");
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("is-active", chips[i] === c);
+    refreshContent();
+  });
   $("contentSearch").addEventListener("input", function () { st.content.q = this.value; st.content.page = 1; renderContent(); });
   $("contentFilter").addEventListener("click", function (e) {
     var c = e.target.closest(".fchip"); if (!c) return;
@@ -689,8 +701,9 @@
       var tr = document.createElement("tr");
       tr.appendChild(td(bj(s.created_at, true), "mono"));
       var t = td(p.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "220px"; t.title = p.summary || ""; tr.appendChild(t);
-      tr.appendChild(td(p.category));
-      tr.appendChild(td(p.org));
+      // v0.72.0 统一发布:kind=job/news 的投稿在类别列直呼其名;机会照旧显示 category
+      tr.appendChild(td(p.kind === "job" ? "招聘" : p.kind === "news" ? "资讯" : p.category));
+      tr.appendChild(td(p.org || p.source || "—"));
       var lk = document.createElement("td");
       if (p.url) {
         var a = document.createElement("a"); a.href = p.url; a.target = "_blank"; a.rel = "noopener";
@@ -894,7 +907,7 @@
     }).catch(function () {});
   }
   function refreshContent() {
-    get("/api/admin/content").then(function (r) {
+    get("/api/admin/content?channel=" + st.content.channel).then(function (r) {
       allContent = r.list || [];
       $("navContentN").textContent = String(allContent.length);
       if (view === "content") renderContent();

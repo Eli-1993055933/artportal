@@ -406,7 +406,7 @@ img { max-width: 100%; display: block; }
 .sitefoot__ver { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 18px; color: var(--ink-3); font-size: 11.5px; letter-spacing: 0.04em; opacity: 0.75; }
 
 /* ---------- 详情:桌面右侧抽屉 ---------- */
-.detail { position: fixed; inset: 0; z-index: 60; }
+.detail { position: fixed; inset: 0; z-index: 65; }   /* 高于 .ppage(60):周刊/主页内点开详情直接叠在其上 */
 .detail__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.28); animation: fade .12s ease; }
 .detail__panel {
   position: absolute; top: 0; right: 0; height: 100%; width: min(480px, 92vw);
@@ -995,4 +995,27 @@ html[data-theme="dark"] .card-tag:hover { background: hsl(var(--th, 220), 30%, 2
   .wra-fig { margin: 2px -4px 16px; }
   .wra-fig figcaption { font-size: 11px; }
   .wra-refrow { font-size: 12.5px; line-height: 1.8; }
+}
+
+/* ---------- 统一发布面板(v0.72.0,学小红书):四类内容选择 ---------- */
+.pub__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+.pub__item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 14px; border: 1px solid var(--line-2); border-radius: var(--radius);
+  background: var(--card); cursor: pointer; text-align: left; transition: background .12s, border-color .12s;
+}
+.pub__item:hover { background: var(--hover); border-color: var(--ink-3); }
+.pub__ico { font-size: 22px; }
+.pub__t { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+.pub__d { font-size: 11.5px; color: var(--ink-3); line-height: 1.4; }
+.pub__row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pub__row select { height: 44px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--card); color: var(--ink); padding: 0 10px; font-size: 14px; }
+/* 手机端:发布选择面板从底部弹出(小红书式) */
+@media (max-width: 767px) {
+  .pubsheet .auth__panel {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; transform: none;
+    width: auto; max-width: none; border-radius: 16px 16px 0 0;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
+    animation: sheetup .18s ease;
+  }
 }

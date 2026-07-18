@@ -494,13 +494,13 @@
       if (AP.weekly) AP.weekly.refresh();             // 周报页/横条同理
     });
 
-    // 提交机会:站内投稿表单(登录 → 填写 → 审核通过后发布);手机端为右下角悬浮 ➕
+    // ➕ 发布(v0.72.0 统一入口,学小红书):选择面板 → 机会/招聘/资讯/作品;手机为右下角悬浮 ➕
     $("submitBtn").addEventListener("click", function (e) {
       e.preventDefault();
-      if (AP.submitForm) AP.submitForm.open();
+      if (AP.publish) AP.publish.open();
     });
     var fab = $("submitFab");
-    if (fab) fab.addEventListener("click", function () { if (AP.submitForm) AP.submitForm.open(); });
+    if (fab) fab.addEventListener("click", function () { if (AP.publish) AP.publish.open(); });
 
     // AI 全网检索(调后端 /api/search,仅在 node server.mjs 下可用)
     var aiBtn = $("aiSearchBtn");
@@ -676,7 +676,9 @@
   }
   function closeDetail() {
     $("detail").hidden = true;
-    document.body.style.overflow = "";
+    // 详情可能是叠在周刊页/用户主页上打开的(z-index 更高):底层还开着就保持背景滚动锁
+    var wp = document.getElementById("weeklyPage"), pp = document.getElementById("profilePage");
+    document.body.style.overflow = ((wp && !wp.hidden) || (pp && !pp.hidden)) ? "hidden" : "";
   }
   function syncDetailFav(id) {
     var btn = $("detailFav"), on = AP.favorites.has(id);
