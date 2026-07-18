@@ -3,26 +3,27 @@
   "date": "2026-07-18",
   "ai_composed": true,
   "counts": [
-    7,
-    5,
-    3
+    6,
+    4,
+    0
   ],
   "format": 2,
   "author": "Eli",
-  "title": "全球艺术生态的温度差：从格拉斯哥到香港的征集季观察",
-  "subtitle": "本周机会清单揭示中外艺术系统的不同关切——生态、身份、市场与公共性",
-  "closing": "本周的征集清单与新闻显示，艺术生态正同时朝着两个方向延伸：一是全球化的奖项与驻留网络，二是地方性的参与式实践。对于创作者而言，行动建议是：在申请时仔细审视每个项目的“场域逻辑”——是追求国际市场的象征资本（如未来世代艺术奖），还是嵌入社区关系的在地实验（如大自然保护协会工作坊），抑或积累体制内认可（如全国青年剧作计划）。最佳策略不是盲目投递，而是根据自身创作脉络选择与之对话的场域，将每次申请转化为对自身实践的一次理论化反思。",
+  "title": "在悬置与修补之间：艺术世界的生态转向与劳动伦理",
+  "subtitle": "本周，从格拉斯哥的动物信号到台南的共感探索，艺术实践正重新定义创作、展示与分配的边界",
+  "closing": "本周的艺术机会与事件表明，创作者正面临一个既要回应生态与伦理议题、又需应对市场与机构权力的复杂局面。一个具体的行动建议是：在申请任何项目前，仔细阅读其条款中关于参展费、销售抽成、作品归还周期的规定——正如开普敦画廊事件所警示的，合同细节往往决定了你能否真正“修补”自己的艺术生涯。",
   "sections": [
     {
-      "heading": "生态与身份：跨文化议题的在地转化",
+      "heading": "一、从感官悬置到生态修补：国际机会中的理论转向",
       "image": {
         "src": "assets/covers/a1f3384a8d8ed641.jpg",
-        "caption": "《后——动物信号》 · Molend Art"
+        "caption": "《后——动物信号》 · Molend Art",
+        "caption_en": "Post - Animal Signal · Molend Art"
       },
       "paragraphs": [
         [
           {
-            "t": "本周的征集机会中，生态与身份议题呈现出鲜明的跨文化对话。格拉斯哥Molend Art的《后——动物信号》征集"
+            "t": "本周截止的征集项目中，一个值得注意的趋势是艺术对非人感知与生态关系的持续关注。"
           },
           {
             "ref": {
@@ -34,196 +35,68 @@
             }
           },
           {
-            "t": "，明确要求探讨“动物性、非人感知、生态想象及新兴人—非人关系”，这延续了西方当代艺术中“后人类”与“新物质主义”的理论脉络——如罗西·布拉伊多蒂所论的“后人类主体性”，强调人类与非人行动者的共生关系。该展览在苏格兰举办，参展费50英镑，门槛较低，旨在吸引全球独立实践者。"
-          }
-        ],
-        [
-          {
-            "t": "与之形成对照的是香港deTour 2026设计节的主题“Better, Not Perfect: Prototypes for Tomorrow”"
+            "t": " 邀请艺术家探讨动物性、非人感知与生态想象，这延续了近年来艺术理论中“多物种民族志”的讨论——人类学家安娜·青等人曾指出，艺术可以成为超越人类中心主义的认知工具。与此同时，"
           },
           {
             "ref": {
               "n": 2,
-              "oid": "detour-hk-pmq-detour-2026-创意方案公开征集",
+              "oid": "ted-posca-residency-2026",
               "kind": "opp",
               "url": null,
-              "text": "deTour 2026 创意方案公开征集"
+              "text": "TED × POSCA 驻留计划 2026"
             }
           },
           {
-            "t": "，其关注点落在“原型”与“明天”上，更偏向设计思维中的迭代优化与社会创新。这种差异反映了欧洲艺术界对生态危机的哲学化回应与亚洲设计界对实用主义未来的探索之间的张力。"
+            "t": " 以“Visible Mending（可见的修补）”为题，要求艺术家在社区中创作公共介入作品，这一主题呼应了克莱尔·毕晓普对参与式艺术的批评：真正的参与不应止于象征性互动，而应指向社会关系的实质性修复。"
           }
         ],
         [
           {
-            "t": "利物浦的《遁入绿林》展览"
+            "t": "值得注意的是，这两个项目分别位于英国和全球分布式空间，但它们共享一种“过程性”的创作伦理："
           },
           {
             "ref": {
               "n": 3,
-              "oid": "agg-take-to-the-greenwood-cur",
+              "oid": "agg-suspended-last-few-places-added-cur",
               "kind": "opp",
               "url": null,
-              "text": "遁入绿林"
+              "text": "悬置"
             }
           },
           {
-            "t": "则聚焦LGBTQIA+群体与自然的关系，将身份政治与生态议题结合，这让人联想到克莱尔·毕晓普对参与式艺术的批评——她曾指出，身份认同驱动的艺术有时会陷入“社群主义”的封闭循环，而忽视更广阔的社会结构。该展览要求作品不得包含全裸正面，这一商业场地的限制也暗示了公共空间中艺术表达的边界协商。"
+            "t": " 的追加征集则更直接地以“悬置”状态为命题，涉及等待、过渡、平衡/坍塌等感知状态。这些项目共同暗示，当代艺术的机会正在从“作品”转向“情境”——艺术家被期待成为特定感知或社会关系的触发者，而非单纯的形式生产者。这种转向在格罗伊斯关于策展的论述中已有预示：他认为当代艺术的功能之一就是呈现“档案”与“现场”之间的张力，而这些征集恰恰要求艺术家在特定时空内激活档案式的主题。"
           }
         ]
       ]
     },
     {
-      "heading": "市场与制度：中外艺术系统的不同水温",
-      "image": {
-        "src": "https://futuregenerationartprize.org/wp-content/uploads/2026/06/1920x862.png",
-        "caption": "未来世代艺术奖 · 维克多·平丘克基金会 / PinchukArtCentre"
-      },
+      "heading": "二、机构批判与市场权力：国内外艺术体制的温差",
+      "image": null,
       "paragraphs": [
         [
           {
-            "t": "本周的奖项与驻留机会清晰勾勒出中外艺术市场的温差。维克多·平丘克基金会的未来世代艺术奖"
+            "t": "本周的新闻揭示了艺术机构在两种不同语境下的运作逻辑。在国际方面，"
           },
           {
             "ref": {
               "n": 4,
-              "oid": "future_generation_art_prize-未来世代艺术奖",
-              "kind": "opp",
-              "url": null,
-              "text": "未来世代艺术奖"
+              "oid": "news-6w0tl3-cape-town-gallery-accused-of-withholding",
+              "kind": "news",
+              "url": "https://hyperallergic.com/cape-town-gallery-accused-of-withholding-pay-and-artworks/",
+              "text": "开普敦画廊被指控拖欠薪酬和扣留艺术品"
             }
           },
           {
-            "t": "提供10万美元主奖，面向全球35岁以下艺术家，其雄厚的资金背后是乌克兰寡头艺术赞助的全球野心，类似于达明安·赫斯特与弗朗索瓦·皮诺的收藏逻辑——通过奖项建立文化资本与市场话语权。而台湾的Kyla Artist Prize"
+            "t": " 的报道再次将艺术市场的权力不对等问题推向台前。南非艺术家Kate Gottgens指控SMAC画廊扣留其作品并延迟付款，这一案例并非孤例——布尔迪厄的场域理论早已指出，艺术市场是一个充满象征资本争夺的场域，艺术家往往处于结构性弱势。画廊方面以“进出口问题”为托词，恰恰暴露了全球艺术贸易中物流与金融环节的灰色地带。"
+          }
+        ],
+        [
+          {
+            "t": "与之形成对照的是国内机构的实践："
           },
           {
             "ref": {
               "n": 5,
-              "oid": "news-84f0hz-2026-kyla-artist-prize-4th-edition-offic",
-              "kind": "news",
-              "url": "https://www.deglobalart-alea.com/zh/post/2026-kyla-artist-prize-%E7%AC%AC%E5%9B%9B%E5%B1%86%EF%BC%9A%E5%BE%97%E7%8D%8E%E8%80%85%E5%AE%98%E6%96%B9%E5%90%8D%E5%96%AE",
-              "text": "2026 Kyla Artist Prize — 第四届：得奖者官方名单"
-            }
-          },
-          {
-            "t": "与2026国际艺术家大奖赛"
-          },
-          {
-            "ref": {
-              "n": 6,
-              "oid": "news-4iqwjp-2026-international-artist-grand-prize-co",
-              "kind": "news",
-              "url": "https://graphiccompetitions.com/multiple-disciplines/2026-international-artists-grand-prize-competition/zh/",
-              "text": "2026国际艺术家大奖赛参赛指南"
-            }
-          },
-          {
-            "t": "则显示出亚洲奖项的多元性，前者获奖者横跨多国，后者与台北新艺术博览会联动，直接对接市场销售。"
-          }
-        ],
-        [
-          {
-            "t": "中国国内的征集项目则呈现出强烈的体制内导向。全国青年剧作计划"
-          },
-          {
-            "ref": {
-              "n": 7,
-              "oid": "search-chinafilm-2026全国青年剧作计划征集启事",
-              "kind": "opp",
-              "url": null,
-              "text": "2026全国青年剧作计划征集启事"
-            }
-          },
-          {
-            "t": "由中央宣传部电影局主办，“三农”题材新大众文艺作品征集"
-          },
-          {
-            "ref": {
-              "n": 8,
-              "oid": "search-ky-三农-题材新大众文艺作品征集展示活动",
-              "kind": "opp",
-              "url": null,
-              "text": "“三农”题材新大众文艺作品征集展示活动"
-            }
-          },
-          {
-            "t": "由农业电影电视中心组织，这类项目直接服务于国家政策叙事，与西方独立策展模式形成鲜明对比。布尔迪厄的场域理论在此适用：中国艺术征集场域中，官方机构掌握着象征资本与资源分配权，艺术家参与此类项目往往是在体制内积累认可度的策略。"
-          }
-        ],
-        [
-          {
-            "t": "与此同时，苏富比与大卫·兹沃纳等国际画廊正在大规模招聘——从伦敦的画廊助理"
-          },
-          {
-            "ref": {
-              "n": 9,
-              "oid": "job-8ci8v5-gallery-assistant",
-              "kind": "job",
-              "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5184574007",
-              "text": "画廊助理"
-            }
-          },
-          {
-            "t": "到纽约的传播专员"
-          },
-          {
-            "ref": {
-              "n": 10,
-              "oid": "job-b0he8v-communications-associate",
-              "kind": "job",
-              "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5175044007",
-              "text": "传播专员"
-            }
-          },
-          {
-            "t": "，再到苏富比的中国区董事总经理"
-          },
-          {
-            "ref": {
-              "n": 11,
-              "oid": "job-5lwx48-managing-director-china",
-              "kind": "job",
-              "url": "https://job-boards.greenhouse.io/sothebys/jobs/5995329004",
-              "text": "中国区董事总经理"
-            }
-          },
-          {
-            "t": "，显示出全球艺术市场对中国业务的重视。这种“人才虹吸”与国内征集项目对本土创作者的支持形成对照，提示中国艺术家在参与国际竞争时需同时面对体制内外的双重逻辑。"
-          }
-        ]
-      ]
-    },
-    {
-      "heading": "公共参与与空间生产：从美术馆到社区",
-      "image": {
-        "src": "https://r2.ac-img.com/2022/7209bb9e-970e-464f-a2a3-233e2b05f726.jpg",
-        "caption": "寻找工作坊领导者 · 大自然保护协会"
-      },
-      "paragraphs": [
-        [
-          {
-            "t": "本周的资讯与机会条目中，公共参与和空间生产成为一条重要线索。大自然保护协会的纽约安迪·沃霍尔保护区工作坊征集"
-          },
-          {
-            "ref": {
-              "n": 12,
-              "oid": "artconnect-opportunities-寻找工作坊领导者",
-              "kind": "opp",
-              "url": null,
-              "text": "寻找工作坊领导者"
-            }
-          },
-          {
-            "t": "，要求艺术家在自然景观中设计面向全年龄段的创作工作坊，这呼应了关系美学中“参与式艺术”的理念——如尼古拉斯·布里奥所定义的，通过艺术创造临时社群与交往空间。该项目的特殊性在于，它将艺术实践嵌入生态保护区的日常，使艺术成为环境教育的中介。"
-          }
-        ],
-        [
-          {
-            "t": "台南市美术馆的“魔法蓝图生成中”展览"
-          },
-          {
-            "ref": {
-              "n": 13,
               "oid": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
               "kind": "news",
               "url": "https://www.tnam.museum/news/990",
@@ -231,36 +104,87 @@
             }
           },
           {
-            "t": "同样强调共参与，邀请法国艺术家驻村并与市民合作版印创作，探索城市空间记忆。这种“在地性”实践与格罗伊斯关于策展的论述相关：他认为策展人通过档案化与展示，将日常经验转化为艺术话语。台南的项目正是将城市空间作为“活档案”，通过工作坊让居民成为意义的共同生产者。"
+            "t": " 以共创展览和工作坊串联跨世代参与，试图延展城市空间的感知经验；"
+          },
+          {
+            "ref": {
+              "n": 6,
+              "oid": "news-2vs1hy-notice-2026-open-and-next-art-imaginatio",
+              "kind": "news",
+              "url": "https://www.hchcc.gov.tw/Tw/News/NewsDetail?filter=093437eb-1b2b-4130-9f8e-bf4218dfd22f&id=6355b198-4de6-40be-8fac-5a12cb326fd7",
+              "text": "2026 Open, and next 藝想實驗場：城市探索行動"
+            }
+          },
+          {
+            "t": " 则邀请原住民族青年艺术家驻村创作，探索地方样貌。这些项目更接近于布里奥所说的“关系美学”——它们不以物质作品为中心，而是创造人际相遇的场域。然而，这种差异也折射出两种艺术体制的根本不同：国际艺术市场更依赖商业画廊的信用体系，而国内公立机构则更多承担社会美育与地方文化建设的职能。前者频发劳资纠纷，后者则面临如何避免形式主义参与的问题——正如毕晓普所警告的，参与式艺术若缺乏真正的政治效力，可能沦为“被管理的参与”。"
+          }
+        ]
+      ]
+    },
+    {
+      "heading": "三、奖项、展览与职业路径：新兴艺术家的机遇与陷阱",
+      "image": {
+        "src": "https://futuregenerationartprize.org/wp-content/uploads/2026/06/1920x862.png",
+        "caption": "未来世代艺术奖 · 维克多·平丘克基金会 / PinchukArtCentre",
+        "caption_en": "Future Generation Art Prize · 维克多·平丘克基金会 / PinchukArtCentre"
+      },
+      "paragraphs": [
+        [
+          {
+            "t": "在奖项与展览征集方面，本周有多项值得关注的机会。"
+          },
+          {
+            "ref": {
+              "n": 7,
+              "oid": "future_generation_art_prize-未来世代艺术奖",
+              "kind": "opp",
+              "url": null,
+              "text": "未来世代艺术奖"
+            }
+          },
+          {
+            "t": " 为35岁以下艺术家提供10万美元主奖，其背后是维克多·平丘克基金会的全球网络；"
+          },
+          {
+            "ref": {
+              "n": 8,
+              "oid": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
+              "kind": "opp",
+              "url": null,
+              "text": "2026 约翰·莫尔绘画奖（中国）"
+            }
+          },
+          {
+            "t": " 则延续了英国历史悠久的绘画奖项传统，在中国设立赛区。这两个奖项代表了两条不同的国际化路径：前者强调“新兴”与“全球”，后者则深耕绘画这一经典媒介。对于青年艺术家而言，这类奖项既是机会也是陷阱——它们往往要求支付报名费（如约翰·莫尔绘画奖200元人民币），且获奖后可能面临机构对作品的长期控制。"
           }
         ],
         [
           {
-            "t": "新竹县的“青埔感知资料库”系列工作坊"
+            "t": "国内方面，"
           },
           {
             "ref": {
-              "n": 14,
-              "oid": "news-2vs1hy-notice-2026-open-and-next-art-imaginatio",
-              "kind": "news",
-              "url": "https://www.hchcc.gov.tw/Tw/News/NewsDetail?filter=093437eb-1b2b-4130-9f8e-bf4218dfd22f&id=6355b198-4de6-40be-8fac-5a12cb326fd7",
-              "text": "轉知：「2026 Open, and next 藝想實驗場：城市探索行動|青埔感知資料庫及系列參與式工作坊」"
+              "n": 9,
+              "oid": "search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知",
+              "kind": "opp",
+              "url": null,
+              "text": "第五届青年漆画展览"
             }
           },
           {
-            "t": "则引入原住民族青年艺术家驻村，将地方知识与当代艺术结合。这类项目在台湾的活跃，与大陆中国美术馆暑期夜场开放"
+            "t": " 由中国美术家协会主办，面向45周岁以下作者，体现了官方协会对传统工艺当代化的推动。而"
           },
           {
             "ref": {
-              "n": 15,
-              "oid": "news-h5kpmn-中国美术馆2026暑期夜场开放-每日新增预约名额2000个",
+              "n": 10,
+              "oid": "news-84f0hz-2026-kyla-artist-prize-4th-edition-offic",
               "kind": "news",
-              "url": "http://bj.bendibao.com/news/2026714/384493.shtm",
-              "text": "中国美术馆2026暑期夜场开放"
+              "url": "https://www.deglobalart-alea.com/zh/post/2026-kyla-artist-prize-%E7%AC%AC%E5%9B%9B%E5%B1%86%EF%BC%9A%E5%BE%97%E7%8D%8E%E8%80%85%E5%AE%98%E6%96%B9%E5%90%8D%E5%96%AE",
+              "text": "2026 Kyla Artist Prize"
             }
           },
           {
-            "t": "形成对比：前者是去中心化的参与式实践，后者是大型机构通过延时开放吸引公众的策略，共同反映了艺术机构在公共性上的不同探索路径。"
+            "t": " 的得奖者名单则显示，台湾地区的艺术奖项正试图构建跨区域的评选网络，涵盖绘画、舞蹈、数位多媒体等多个类别。这些项目共同指向一个事实：在全球化与地方性之间，新兴艺术家需要同时具备创作能力与制度辨识能力——理解不同奖项的评审逻辑与资源分配方式，往往比作品本身更决定职业路径。"
           }
         ]
       ]
@@ -272,133 +196,113 @@
       "oid": "agg-post-animal-signal-cur",
       "kind": "opp",
       "title": "《后——动物信号》",
+      "title_en": "Post-Animal Signals",
       "meta": "Molend Art · 格拉斯哥 英国 · 截止 2026-07-19",
+      "meta_en": "Molend Art · 格拉斯哥 英国 · Deadline 2026-07-19",
       "url": null
     },
     {
       "n": 2,
-      "oid": "detour-hk-pmq-detour-2026-创意方案公开征集",
+      "oid": "ted-posca-residency-2026",
       "kind": "opp",
-      "title": "deTour 2026 创意方案公开征集",
-      "meta": "PMQ 元創方 · 香港 中国 · 截止 2026-07-19",
+      "title": "TED × POSCA 驻留计划 2026",
+      "title_en": "TED × POSCA Residency 2026",
+      "meta": "TED 与 POSCA(Fine Acts 策划) · 全球 · 截止 2026-07-31",
+      "meta_en": "TED 与 POSCA(Fine Acts 策划) · 全球 · Deadline 2026-07-31",
       "url": null
     },
     {
       "n": 3,
-      "oid": "agg-take-to-the-greenwood-cur",
+      "oid": "agg-suspended-last-few-places-added-cur",
       "kind": "opp",
-      "title": "《遁入绿林》",
-      "meta": "Liverpool Art Space @ CASS Art · 利物浦 英国 · 截止 2026-07-24",
+      "title": "《悬置》——追加名额",
+      "title_en": "Suspension",
+      "meta": "臻艺画廊 (Zhen Yi Gallery) · 巴黎 法国 · 截止 2026-07-24",
+      "meta_en": "臻艺画廊 (Zhen Yi Gallery) · 巴黎 法国 · Deadline 2026-07-24",
       "url": null
     },
     {
       "n": 4,
-      "oid": "future_generation_art_prize-未来世代艺术奖",
-      "kind": "opp",
-      "title": "未来世代艺术奖",
-      "meta": "维克多·平丘克基金会 / PinchukArtCentre · 截止 2026-07-19",
-      "url": null
+      "oid": "news-6w0tl3-cape-town-gallery-accused-of-withholding",
+      "kind": "news",
+      "title": "开普敦画廊被指控拖欠薪酬和扣留艺术品",
+      "title_en": "Cape Town Gallery Accused of Withholding Pay and Artworks",
+      "meta": "Hyperallergic · 2026-07-15",
+      "meta_en": "Hyperallergic · 2026-07-15",
+      "url": "https://hyperallergic.com/cape-town-gallery-accused-of-withholding-pay-and-artworks/"
     },
     {
       "n": 5,
-      "oid": "news-84f0hz-2026-kyla-artist-prize-4th-edition-offic",
+      "oid": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
       "kind": "news",
-      "title": "2026 Kyla Artist Prize — 第四屆：得獎者官方名單",
-      "meta": "ALEA DE Global Art Agency",
-      "url": "https://www.deglobalart-alea.com/zh/post/2026-kyla-artist-prize-%E7%AC%AC%E5%9B%9B%E5%B1%86%EF%BC%9A%E5%BE%97%E7%8D%8E%E8%80%85%E5%AE%98%E6%96%B9%E5%90%8D%E5%96%AE"
+      "title": "臺南市美術館TAM⁺藝術之森「魔法藍圖生成中」，以共創展覽與工作坊串連跨世代參與，延展城市空間的感知經驗",
+      "title_en": "Tainan Art Museum TAM⁺ Art Forest \"Magic Blueprint in Progress\": Connecting Generations through Co-creation Exhibitions and Workshops, Extending Perception of Urban Space",
+      "meta": "臺南市美術館 · 2026-07-15",
+      "meta_en": "臺南市美術館 · 2026-07-15",
+      "url": "https://www.tnam.museum/news/990"
     },
     {
       "n": 6,
-      "oid": "news-4iqwjp-2026-international-artist-grand-prize-co",
+      "oid": "news-2vs1hy-notice-2026-open-and-next-art-imaginatio",
       "kind": "news",
-      "title": "2026国际艺术家大奖赛参赛指南",
-      "meta": "Graphic Competitions",
-      "url": "https://graphiccompetitions.com/multiple-disciplines/2026-international-artists-grand-prize-competition/zh/"
+      "title": "轉知：「2026 Open, and next 藝想實驗場：城市探索行動|青埔感知資料庫及系列參與式工作坊」",
+      "title_en": "Notice: \"2026 Open, and next Art Imagination Lab: City Exploration Action | Qingpu Perception Database and Series Participatory Workshops\"",
+      "meta": "新竹縣政府文化局 · 2026-07-14",
+      "meta_en": "新竹縣政府文化局 · 2026-07-14",
+      "url": "https://www.hchcc.gov.tw/Tw/News/NewsDetail?filter=093437eb-1b2b-4130-9f8e-bf4218dfd22f&id=6355b198-4de6-40be-8fac-5a12cb326fd7"
     },
     {
       "n": 7,
-      "oid": "search-chinafilm-2026全国青年剧作计划征集启事",
+      "oid": "future_generation_art_prize-未来世代艺术奖",
       "kind": "opp",
-      "title": "2026全国青年剧作计划征集启事",
-      "meta": "中央宣传部电影局、中央宣传部电影剧本规划策划中心 · 中国 · 截止 2026-07-29",
+      "title": "未来世代艺术奖",
+      "title_en": "Future Generation Art Prize",
+      "meta": "维克多·平丘克基金会 / PinchukArtCentre · 截止 2026-07-19",
+      "meta_en": "维克多·平丘克基金会 / PinchukArtCentre · Deadline 2026-07-19",
       "url": null
     },
     {
       "n": 8,
-      "oid": "search-ky-三农-题材新大众文艺作品征集展示活动",
+      "oid": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
       "kind": "opp",
-      "title": "“三农”题材新大众文艺作品征集展示活动",
-      "meta": "中国农业电影电视中心 · 北京 中国 · 截止 2026-07-30",
+      "title": "2026 约翰·莫尔绘画奖（中国）",
+      "title_en": "2026 John Moores Painting Prize (China)",
+      "meta": "约翰·莫尔绘画奖(中国)组委会 · 中国 · 截止 2026-09-22",
+      "meta_en": "约翰·莫尔绘画奖(中国)组委会 · 中国 · Deadline 2026-09-22",
       "url": null
     },
     {
       "n": 9,
-      "oid": "job-8ci8v5-gallery-assistant",
-      "kind": "job",
-      "title": "画廊助理",
-      "meta": "David Zwirner",
-      "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5184574007"
-    },
-    {
-      "n": 10,
-      "oid": "job-b0he8v-communications-associate",
-      "kind": "job",
-      "title": "传播专员",
-      "meta": "David Zwirner",
-      "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5175044007"
-    },
-    {
-      "n": 11,
-      "oid": "job-5lwx48-managing-director-china",
-      "kind": "job",
-      "title": "中国区董事总经理",
-      "meta": "Sotheby's",
-      "url": "https://job-boards.greenhouse.io/sothebys/jobs/5995329004"
-    },
-    {
-      "n": 12,
-      "oid": "artconnect-opportunities-寻找工作坊领导者",
+      "oid": "search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知",
       "kind": "opp",
-      "title": "寻找工作坊领导者",
-      "meta": "大自然保护协会 · 截止 2026-07-24",
+      "title": "中国美协艺委会青年展系列：第五届青年漆画展览征稿通知",
+      "title_en": "5th Youth Lacquer Painting Exhibition",
+      "meta": "中国美术家协会 · 宁波 中国 · 截止 2026-08-30",
+      "meta_en": "中国美术家协会 · 宁波 中国 · Deadline 2026-08-30",
       "url": null
     },
     {
-      "n": 13,
-      "oid": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
+      "n": 10,
+      "oid": "news-84f0hz-2026-kyla-artist-prize-4th-edition-offic",
       "kind": "news",
-      "title": "臺南市美術館TAM⁺藝術之森「魔法藍圖生成中」，以共創展覽與工作坊串連跨世代參與，延展城市空間的感知經驗",
-      "meta": "臺南市美術館 · 2026-07-15",
-      "url": "https://www.tnam.museum/news/990"
-    },
-    {
-      "n": 14,
-      "oid": "news-2vs1hy-notice-2026-open-and-next-art-imaginatio",
-      "kind": "news",
-      "title": "轉知：「2026 Open, and next 藝想實驗場：城市探索行動|青埔感知資料庫及系列參與式工作坊」",
-      "meta": "新竹縣政府文化局 · 2026-07-14",
-      "url": "https://www.hchcc.gov.tw/Tw/News/NewsDetail?filter=093437eb-1b2b-4130-9f8e-bf4218dfd22f&id=6355b198-4de6-40be-8fac-5a12cb326fd7"
-    },
-    {
-      "n": 15,
-      "oid": "news-h5kpmn-中国美术馆2026暑期夜场开放-每日新增预约名额2000个",
-      "kind": "news",
-      "title": "中国美术馆2026暑期夜场开放 每日新增预约名额2000个",
-      "meta": "中国美术馆 · 2026-07-13",
-      "url": "http://bj.bendibao.com/news/2026714/384493.shtm"
+      "title": "2026 Kyla Artist Prize — 第四屆：得獎者官方名單",
+      "title_en": "2026 Kyla Artist Prize",
+      "meta": "ALEA DE Global Art Agency",
+      "meta_en": "ALEA DE Global Art Agency",
+      "url": "https://www.deglobalart-alea.com/zh/post/2026-kyla-artist-prize-%E7%AC%AC%E5%9B%9B%E5%B1%86%EF%BC%9A%E5%BE%97%E7%8D%8E%E8%80%85%E5%AE%98%E6%96%B9%E5%90%8D%E5%96%AE"
     }
   ],
   "en": {
-    "title": "Temperature Differentials in the Global Art Ecosystem: A Season of Open Calls from Glasgow",
-    "subtitle": "This week’s opportunity list reveals the divergent concerns of Chinese and international art systems: ecology, identity, market, and publicness",
-    "closing": "This week’s open call list and news show that the art ecosystem is simultaneously extending in two directions: one toward globalized award and residency networks, the other toward localized participatory practices. For creators, the actionable advice is to carefully examine each project’s “field logic” when applying—whether pursuing symbolic capital in the international market (e.g., Future Generation Art Prize), embedding in community-based local experiments (e.g., Nature Conservancy workshop), or accumulating recognition within the system (e.g., National Youth Screenwriting Plan). The best strategy is not blind submission but selecting fields that dialogue with one’s own creative trajectory, turning each application into a theoretical reflection on one’s practice.",
+    "title": "Between Suspension and Repair: The Ecological Turn and Labor Ethics in the Art World",
+    "subtitle": "This week, from animal signals in Glasgow to synesthetic explorations in Tainan, artistic practices are redefining the boundaries of creation, display, and distribution.",
+    "closing": "This week's art opportunities and events show that creators face a complex situation where they must respond to ecological and ethical issues while navigating market and institutional power. A concrete suggestion: before applying for any project, carefully read its terms regarding participation fees, sales commissions, and artwork return periods—as the Cape Town gallery incident warns, contract details often determine whether you can truly 'mend' your artistic career.",
     "sections": [
       {
-        "heading": "Ecology and Identity: Local Translations of Cross-Cultural Themes",
+        "heading": "I. From Sensory Suspension to Ecological Repair: A Theoretical Shift in International Oppo",
         "paragraphs": [
           [
             {
-              "t": "Among this week’s open calls, ecology and identity emerge as sites of vivid cross-cultural dialogue. Glasgow’s Molend Art call for “Post—Animal Signals” "
+              "t": "Among the open calls closing this week, a notable trend is the sustained focus on non-human perception and ecological relationships. "
             },
             {
               "ref": {
@@ -406,59 +310,69 @@
                 "oid": "agg-post-animal-signal-cur",
                 "kind": "opp",
                 "url": null,
-                "text": "Post—Animal Signals"
+                "text": "Post-Animal Signals"
               }
             },
             {
-              "t": " explicitly asks for works exploring “animality, non-human perception, ecological imagination, and emerging human–non-human relations,” continuing the theoretical lineage of “posthumanism” and “new materialism” in Western contemporary art—as in Rosi Braidotti’s notion of “posthuman subjectivity,” which emphasizes symbiotic relationships between human and non-human actors. The exhibition takes place in Scotland with a participation fee of £50, a low threshold aimed at attracting independent practitioners worldwide."
-            }
-          ],
-          [
-            {
-              "t": "In contrast, Hong Kong’s deTour 2026 Design Festival adopts the theme “Better, Not Perfect: Prototypes for Tomorrow” "
+              "t": " invites artists to explore animality, non-human perception, and ecological imaginaries, continuing the recent art-theoretical discussion of 'multispecies ethnography'—anthropologist Anna Tsing and others have argued that art can serve as a cognitive tool to transcend anthropocentrism. Meanwhile, "
             },
             {
               "ref": {
                 "n": 2,
-                "oid": "detour-hk-pmq-detour-2026-创意方案公开征集",
+                "oid": "ted-posca-residency-2026",
                 "kind": "opp",
                 "url": null,
-                "text": "deTour 2026 Open Call for Creative Proposals"
+                "text": "TED × POSCA Residency 2026"
               }
             },
             {
-              "t": ", focusing on “prototypes” and “tomorrow,” leaning more toward iterative optimization and social innovation in design thinking. This divergence reflects the tension between European art’s philosophical response to ecological crisis and Asian design’s pragmatic exploration of the future."
+              "t": " takes 'Visible Mending' as its theme, requiring artists to create public interventions in communities. This theme echoes Claire Bishop's critique of participatory art: genuine participation should not stop at symbolic interaction but should aim for substantive repair of social relations."
             }
           ],
           [
             {
-              "t": "Liverpool’s “Into the Greenwood” exhibition "
+              "t": "Notably, these two projects are based in the UK and globally distributed spaces respectively, yet they share a 'processual' creative ethic: the additional call for "
             },
             {
               "ref": {
                 "n": 3,
-                "oid": "agg-take-to-the-greenwood-cur",
+                "oid": "agg-suspended-last-few-places-added-cur",
                 "kind": "opp",
                 "url": null,
-                "text": "Into the Greenwood"
+                "text": "Suspension"
               }
             },
             {
-              "t": " centers on the relationship between LGBTQIA+ communities and nature, merging identity politics with ecological themes. This recalls Claire Bishop’s critique of participatory art, where she argues that identity-driven art can sometimes fall into a closed cycle of “communitarianism,” neglecting broader social structures. The exhibition’s restriction against full-frontal nudity, imposed by the commercial venue, also hints at the negotiation of artistic expression in public space."
+              "t": " more directly takes the state of 'suspension' as its proposition, involving perceptual states such as waiting, transition, balance/collapse. Together, these projects suggest that contemporary art opportunities are shifting from 'works' to 'situations'—artists are expected to become triggers of specific perceptions or social relations, rather than mere producers of form. This shift was foreshadowed in Boris Groys's writings on curating: he argues that one function of contemporary art is to present the tension between 'archive' and 'live,' and these calls precisely require artists to activate archival themes within specific times and spaces."
             }
           ]
         ]
       },
       {
-        "heading": "Market and Institutions: Different Temperatures in Chinese and International Art Systems",
+        "heading": "II. Institutional Critique and Market Power: Temperature Differences in Domestic and Inter",
         "paragraphs": [
           [
             {
-              "t": "This week’s awards and residencies clearly delineate the temperature gap between Chinese and international art markets. The Victor Pinchuk Foundation’s Future Generation Art Prize "
+              "t": "This week's news reveals the operational logic of art institutions in two different contexts. Internationally, the report that [[32:Cape Town Gallery Accused of Withholding Salaries and Artworks]] once again brings the power imbalance in the art market to the fore. South African artist Kate Gottgens accuses SMAC Gallery of withholding her works and delaying payment—this case is not isolated. Pierre Bourdieu's field theory long ago pointed out that the art market is a field of symbolic capital struggle, where artists are often structurally disadvantaged. The gallery's excuse of 'import-export issues' precisely exposes the gray areas of logistics and finance in global art trade."
+            }
+          ],
+          [
+            {
+              "t": "In contrast, domestic institutions offer a different picture: [[34:Tainan Art Museum TAM⁺ Art Forest 'Magic Blueprint in Progress']] uses co-creative exhibitions and workshops to connect intergenerational participation, attempting to extend the sensory experience of urban space; [[35:2026 Open, and next Art Experiment Field: Urban Exploration Action]] invites indigenous youth artists for residencies to explore local landscapes. These projects are closer to Nicolas Bourriaud's 'relational aesthetics'—they do not center on material works but create spaces for human encounter. However, this difference also reflects fundamentally different art systems: the international art market relies more on the credit system of commercial galleries, while domestic public institutions bear more responsibility for social aesthetic education and local cultural construction. The former frequently sees labor disputes, while the latter faces the question of how to avoid formalistic participation—as Bishop warns, participatory art without genuine political efficacy may degenerate into 'managed participation.'"
+            }
+          ]
+        ]
+      },
+      {
+        "heading": "III. Awards, Exhibitions, and Career Paths: Opportunities and Pitfalls for Emerging Artist",
+        "paragraphs": [
+          [
+            {
+              "t": "In terms of awards and exhibition calls, several noteworthy opportunities are available this week. "
             },
             {
               "ref": {
-                "n": 4,
+                "n": 7,
                 "oid": "future_generation_art_prize-未来世代艺术奖",
                 "kind": "opp",
                 "url": null,
@@ -466,126 +380,53 @@
               }
             },
             {
-              "t": " offers a $100,000 main prize for artists under 35 worldwide, backed by the global ambitions of Ukrainian oligarch art patronage—similar to the collecting logic of Damien Hirst and François Pinault, where awards build cultural capital and market influence. Meanwhile, Taiwan’s Kyla Artist Prize [[41:2026 Kyla Artist Prize — 4th Edition: Official List of Winners]] and the 2026 International Artist Grand Prize Competition "
+              "t": " offers a $100,000 main prize for artists under 35, backed by the Victor Pinchuk Foundation's global network; "
             },
             {
               "ref": {
-                "n": 6,
-                "oid": "news-4iqwjp-2026-international-artist-grand-prize-co",
-                "kind": "news",
-                "url": "https://graphiccompetitions.com/multiple-disciplines/2026-international-artists-grand-prize-competition/zh/",
-                "text": "2026 International Artist Grand Prize Competition Guidelines"
-              }
-            },
-            {
-              "t": " showcase the diversity of Asian awards: the former spans winners from multiple countries, while the latter links directly to the Art Revolution Taipei fair, connecting to market sales."
-            }
-          ],
-          [
-            {
-              "t": "Open calls within mainland China, by contrast, show a strong institutional orientation. The National Youth Screenwriting Plan "
-            },
-            {
-              "ref": {
-                "n": 7,
-                "oid": "search-chinafilm-2026全国青年剧作计划征集启事",
+                "n": 8,
+                "oid": "johnmooreschina-terms-2026-约翰-莫尔绘画奖-中国",
                 "kind": "opp",
                 "url": null,
-                "text": "2026 National Youth Screenwriting Plan Open Call"
+                "text": "2026 John Moores Painting Prize (China)"
               }
             },
             {
-              "t": ", organized by the Film Bureau of the Central Propaganda Department, and the “Agriculture, Rural Areas, and Farmers” New Popular Literature and Art Works Collection [[8:“Agriculture, Rural Areas, and Farmers” New Popular Literature and Art Works Collection and Exhibition Activity]], run by the Agricultural Film and Television Center, directly serve national policy narratives, starkly contrasting with Western independent curatorial models. Bourdieu’s field theory applies here: in the Chinese art open-call field, official institutions hold symbolic capital and resource allocation power, and artists’ participation in such projects is often a strategy to accumulate recognition within the system."
+              "t": " continues the tradition of the long-standing British painting award with a China competition. These two awards represent different internationalization paths: the former emphasizes 'emerging' and 'global,' while the latter delves into the classic medium of painting. For young artists, such awards are both opportunities and traps—they often require an entry fee (e.g., 200 RMB for the John Moores Painting Prize), and winners may face long-term control over their works by the institution."
             }
           ],
           [
             {
-              "t": "At the same time, international galleries like Sotheby’s and David Zwirner are hiring on a large scale—from gallery assistants in London "
+              "t": "Domestically, "
             },
             {
               "ref": {
                 "n": 9,
-                "oid": "job-8ci8v5-gallery-assistant",
-                "kind": "job",
-                "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5184574007",
-                "text": "Gallery Assistant"
+                "oid": "search-caanet-中国美协艺委会青年展系列-第五届青年漆画展览征稿通知",
+                "kind": "opp",
+                "url": null,
+                "text": "5th Youth Lacquer Painting Exhibition"
               }
             },
             {
-              "t": " to communications specialists in New York "
+              "t": " is organized by the China Artists Association, open to authors under 45, reflecting the official association's push for the contemporary transformation of traditional crafts. Meanwhile, the list of winners for "
             },
             {
               "ref": {
                 "n": 10,
-                "oid": "job-b0he8v-communications-associate",
-                "kind": "job",
-                "url": "https://job-boards.greenhouse.io/davidzwirnergallery/jobs/5175044007",
-                "text": "Communications Specialist"
-              }
-            },
-            {
-              "t": ", and Sotheby’s Managing Director for China "
-            },
-            {
-              "ref": {
-                "n": 11,
-                "oid": "job-5lwx48-managing-director-china",
-                "kind": "job",
-                "url": "https://job-boards.greenhouse.io/sothebys/jobs/5995329004",
-                "text": "Managing Director, China"
-              }
-            },
-            {
-              "t": "—indicating the global art market’s emphasis on Chinese business. This “brain drain” contrasts with domestic open calls supporting local creators, suggesting that Chinese artists must navigate dual logics—inside and outside the system—when competing internationally."
-            }
-          ]
-        ]
-      },
-      {
-        "heading": "Public Participation and Spatial Production: From Museums to Communities",
-        "paragraphs": [
-          [
-            {
-              "t": "Among this week’s news and opportunities, public participation and spatial production form a key thread. The Nature Conservancy’s call for workshop leaders at the Andy Warhol Preserve in New York "
-            },
-            {
-              "ref": {
-                "n": 12,
-                "oid": "artconnect-opportunities-寻找工作坊领导者",
-                "kind": "opp",
-                "url": null,
-                "text": "Seeking Workshop Facilitators"
-              }
-            },
-            {
-              "t": " asks artists to design creative workshops for all ages within natural landscapes, echoing the concept of “relational art” in relational aesthetics—as defined by Nicolas Bourriaud, art that creates temporary communities and spaces of encounter. The project’s uniqueness lies in embedding artistic practice into the daily life of an ecological preserve, making art a medium for environmental education."
-            }
-          ],
-          [
-            {
-              "t": "Tainan Art Museum’s “Magic Blueprint in Progress” exhibition [[34:Tainan Art Museum TAM⁺ Art Forest “Magic Blueprint in Progress”]] similarly emphasizes co-participation, inviting a French artist for a residency and collaborating with citizens on printmaking to explore urban spatial memory. This “locality” practice relates to Boris Groys’s discussion of curating: he argues that curators transform everyday experience into artistic discourse through archiving and display. Tainan’s project treats urban space as a “living archive,” using workshops to make residents co-producers of meaning."
-            }
-          ],
-          [
-            {
-              "t": "Hsinchu County’s “Qingpu Perception Database” series of workshops [[35:Forward: “2026 Open, and Next Art Experiment Field: City Exploration Action | Qingpu Perception Database and Series of Participatory Workshops”]] incorporates indigenous youth artist residencies, combining local knowledge with contemporary art. The vibrancy of such projects in Taiwan contrasts with the China Art Museum’s summer evening openings "
-            },
-            {
-              "ref": {
-                "n": 15,
-                "oid": "news-h5kpmn-中国美术馆2026暑期夜场开放-每日新增预约名额2000个",
+                "oid": "news-84f0hz-2026-kyla-artist-prize-4th-edition-offic",
                 "kind": "news",
-                "url": "http://bj.bendibao.com/news/2026714/384493.shtm",
-                "text": "China Art Museum 2026 Summer Evening Opening"
+                "url": "https://www.deglobalart-alea.com/zh/post/2026-kyla-artist-prize-%E7%AC%AC%E5%9B%9B%E5%B1%86%EF%BC%9A%E5%BE%97%E7%8D%8E%E8%80%85%E5%AE%98%E6%96%B9%E5%90%8D%E5%96%AE",
+                "text": "2026 Kyla Artist Prize"
               }
             },
             {
-              "t": ": the former are decentralized participatory practices, while the latter is a large institution’s strategy to attract audiences through extended hours, together reflecting different paths in exploring publicness."
+              "t": " shows that art awards in the Taiwan region are attempting to build cross-regional selection networks, covering categories such as painting, dance, and digital multimedia. Together, these projects point to a fact: between globalization and locality, emerging artists need both creative ability and institutional literacy—understanding the judging logic and resource allocation of different awards often determines career paths more than the work itself."
             }
           ]
         ]
       }
     ]
   },
-  "generated_at": "2026-07-18T06:19:53.078Z"
+  "generated_at": "2026-07-18T07:01:23.208Z"
 }

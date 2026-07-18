@@ -23,10 +23,11 @@
     if (!el) return;
     var latest = index && index.list && index.list[0];
     if (!latest) { el.hidden = true; return; }
+    var barTitle = (AP.lang === "en" && latest.title_en) ? latest.title_en : latest.title;
     el.innerHTML =
       '<a class="wr-bar__main" href="#/w/' + encodeURIComponent(latest.id) + '">' +
         '<span class="wr-bar__ico" aria-hidden="true">✦</span>' +
-        '<span class="wr-bar__title">' + esc(latest.title) + '</span>' +
+        '<span class="wr-bar__title">' + esc(barTitle) + '</span>' +
         '<span class="wr-bar__date">' + esc(latest.date || latest.id) + '</span>' +
         '<span class="wr-bar__meta">' + esc(AP.t("wrRead")) + ' →</span>' +
       '</a>';
@@ -96,7 +97,8 @@
     for (var k = 0; k < Math.min(index.list.length, 12); k++) {
       var it = index.list[k];
       if (it.id === curId) continue;
-      html += '<a class="wr-arch__row" href="#/w/' + encodeURIComponent(it.id) + '">' + esc(it.title) + ' <span class="wr-item__meta">' + esc(it.date || it.id) + '</span></a>';
+      var tt = (AP.lang === "en" && it.title_en) ? it.title_en : it.title;
+      html += '<a class="wr-arch__row" href="#/w/' + encodeURIComponent(it.id) + '">' + esc(tt) + ' <span class="wr-item__meta">' + esc(it.date || it.id) + '</span></a>';
     }
     return html + '</div>';
   }
@@ -113,21 +115,21 @@
     var en = AP.lang === "en" && r.en;
     var T = en ? r.en : r;
     var byline = (AP.lang === "en" ? "By " : "文 / ") + (r.author || "Eli");
-    var mtTag = en ? " · machine-translated" : "";
     var html =
       '<div class="ppage__inner wrpage wra">' + backBtn() +
       '<header class="wra-head">' +
         '<div class="wra-brand">ARTPORTAL · ' + esc(AP.t("wrBrand")) + '</div>' +
         '<h1 class="wra-title">' + esc(T.title) + '</h1>' +
         (T.subtitle ? '<p class="wra-sub">' + esc(T.subtitle) + '</p>' : "") +
-        '<p class="wra-meta">' + esc(byline) + ' · ' + esc(r.id + " · " + (r.date || "")) + ' · ' + esc(AP.t("wrAiNote")) + esc(mtTag) + '</p>' +
+        '<p class="wra-meta">' + esc(byline) + ' · ' + esc(r.id + " · " + (r.date || "")) + '</p>' +
       '</header>';
     (T.sections || []).forEach(function (sc, i) {
       var zhSec = (r.sections || [])[i] || {};          // 配图跟中文版结构走(en 只译文本层)
       html += '<section class="wra-sec"><h2 class="wra-h2">' + esc(sc.heading) + '</h2>';
       if (zhSec.image) {
+        var cap = (en && zhSec.image.caption_en) ? zhSec.image.caption_en : zhSec.image.caption;
         html += '<figure class="wra-fig"><img loading="lazy" src="' + esc(zhSec.image.src) + '" alt="" onerror="this.parentNode.remove()" />' +
-          '<figcaption>' + esc(zhSec.image.caption) + '</figcaption></figure>';
+          '<figcaption>' + esc(cap) + '</figcaption></figure>';
       }
       (sc.paragraphs || []).forEach(function (p) {
         html += '<p class="wra-p">' + p.map(function (sg) { return sg.t != null ? esc(sg.t) : refLinkHtml(sg.ref); }).join("") + '</p>';
@@ -140,11 +142,15 @@
       r.references.forEach(function (ref) {
         var href = ref.kind === "opp" ? "#/o/" + encodeURIComponent(ref.oid) : (ref.url || "#");
         var ext = ref.kind !== "opp";
-        html += '<p class="wra-refrow">[' + ref.n + '] <a href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener nofollow"' : "") + '>' + esc(ref.title) + '</a>' +
-          (ref.meta ? ' <span class="wra-refmeta">— ' + esc(ref.meta) + '</span>' : "") + '</p>';
+        var rTitle = (en && ref.title_en) ? ref.title_en : ref.title;
+        var rMeta = (en && ref.meta_en) ? ref.meta_en : ref.meta;
+        html += '<p class="wra-refrow">[' + ref.n + '] <a href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener nofollow"' : "") + '>' + esc(rTitle) + '</a>' +
+          (rMeta ? ' <span class="wra-refmeta">— ' + esc(rMeta) + '</span>' : "") + '</p>';
       });
       html += '</div>';
     }
+    // AI 生成提示:按用户要求从标题下移到文章最末尾的小字(诚实标注不变,位置更克制)
+    html += '<p class="wra-ainote">' + esc(AP.t("wraAiFoot")) + (en ? esc(" · Machine-translated from the Chinese original.") : "") + '</p>';
     html += archiveHtml(r.id) + '</div>';
     page.innerHTML = html;
     page.scrollTop = 0;
@@ -156,7 +162,7 @@
       '<div class="wr-head">' +
         '<div class="wr-head__brand">ARTPORTAL · ' + esc(AP.t("wrBrand")) + '</div>' +
         '<h1 class="wr-head__title">' + esc(r.title) + '</h1>' +
-        '<p class="wr-head__meta">' + esc(r.date || r.id) + (r.ai_composed ? ' · ' + esc(AP.t("wrAiNote")) : "") + '</p>' +
+        '<p class="wr-head__meta">' + esc(r.date || r.id) + '</p>' +
       '</div>' +
       (r.intro ? '<p class="wr-intro">' + esc(r.intro) + '</p>' : "");
     for (var i = 0; i < (r.sections || []).length; i++) {
@@ -168,6 +174,7 @@
       html += '</section>';
     }
     if (r.outro) html += '<p class="wr-outro">' + esc(r.outro) + '</p>';
+    if (r.ai_composed) html += '<p class="wra-ainote">' + esc(AP.t("wraAiFoot")) + '</p>';
     html += archiveHtml(r.id) + '</div>';
     page.innerHTML = html;
     page.scrollTop = 0;

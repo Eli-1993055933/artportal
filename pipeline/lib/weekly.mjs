@@ -55,6 +55,7 @@ function collectOpps(doc) {
     ok.push({
       oid: o.id, kind: "opp",
       title: o.title_zh || o.title_en || "",
+      title_en: o.title_en || null,
       org: o.org_zh || "", city: o.city_zh || "", country: o.country_zh || "",
       category: o.category || "", deadline: o.deadline || null,
       summary: String(o.summary_zh || "").slice(0, 160),
@@ -83,6 +84,7 @@ function collectNews(doc) {
     ok.push({
       oid: n.id, kind: "news",
       title: n.title_zh || n.title || "",
+      title_en: n.title_en || (!/[一-鿿]/.test(String(n.title||"")) ? n.title : null),
       source: src, region: cn ? "国内" : "国际",
       published_at: n.published_at || null,
       url: n.url,
@@ -102,6 +104,7 @@ function collectJobs(doc) {
     const item = {
       oid: j.id, kind: "job",
       title: j.title_zh || j.title || "",
+      title_en: j.title_en || (!/[一-鿿]/.test(String(j.title||"")) ? j.title : null),
       org: j.org_zh || j.org || "", location: j.location_zh || j.location || "",
       deadline: j.deadline || null, url: j.apply_url || j.url,
       summary: String(j.summary_zh || j.summary || "").slice(0, 100),
@@ -238,6 +241,12 @@ async function composeArticleAI(cand, weekId) {
       if (enSecs.length === article.sections.length) {
         const s = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
         article.en = { title: s(enOut.title, 90), subtitle: s(enOut.subtitle, 200), closing: s(enOut.closing, 900), sections: enSecs };
+        // 英文正文里 AI 给出的项目英文名,回填到 References 的 title_en(比机翻库存名更贴切)
+        const enName = new Map();
+        for (const sec of enSecs) for (const p of sec.paragraphs) for (const sg of p) {
+          if (sg.ref && sg.ref.text && !enName.has(sg.ref.n)) enName.set(sg.ref.n, sg.ref.text);
+        }
+        for (const r of article.references) if (enName.has(r.n)) r.title_en = enName.get(r.n);
       } else process.stderr.write("[周报] 英文版章节数与中文不一致,弃用(前端回退中文)\n");
     }
   } catch (e) {}
@@ -314,7 +323,11 @@ function assembleArticle(out, C, weekId) {
     const iv = Number(sec.image);
     if (Number.isInteger(iv) && iv >= 0 && iv < C.length && C[iv].cover) {
       const c = C[iv];
-      image = { src: c.cover, caption: c.title + (c.org || c.source ? " · " + (c.org || c.source) : "") };
+      image = {
+        src: c.cover,
+        caption: c.title + (c.org || c.source ? " · " + (c.org || c.source) : ""),
+        caption_en: c.title_en ? c.title_en + (c.org || c.source ? " · " + (c.org || c.source) : "") : null
+      };
     }
     return { heading: s(sec.heading, 60), image, paragraphs: paras };
   }).filter(sec => sec.paragraphs.length);
@@ -325,7 +338,13 @@ function assembleArticle(out, C, weekId) {
       : c.kind === "news"
         ? [c.source, c.published_at].filter(Boolean).join(" · ")
         : [c.org, c.location, c.deadline ? "截止 " + c.deadline : ""].filter(Boolean).join(" · ");
-    return { n: i + 1, oid: c.oid, kind: c.kind, title: c.title, meta, url: c.kind === "opp" ? null : (c.url || null) };
+    // 英文 meta:同一批事实字段换英文措辞(截止→Deadline);机构/地名保持原文(专有名词不硬译)
+    const meta_en = c.kind === "opp"
+      ? [c.org, [c.city, c.country].filter(Boolean).join(" "), c.deadline ? "Deadline " + c.deadline : ""].filter(Boolean).join(" · ")
+      : c.kind === "news"
+        ? [c.source, c.published_at].filter(Boolean).join(" · ")
+        : [c.org, c.location, c.deadline ? "Deadline " + c.deadline : ""].filter(Boolean).join(" · ");
+    return { n: i + 1, oid: c.oid, kind: c.kind, title: c.title, title_en: c.title_en || null, meta, meta_en, url: c.kind === "opp" ? null : (c.url || null) };
   });
   return {
     article: {
@@ -472,7 +491,7 @@ export async function generateWeekly({ force = false } = {}) {
   // 目录:一行一期(新在前),供前端横条与归档列表用
   const idx = await readWeeklyIndex();
   const list = (idx.list || []).filter(x => x.id !== weekId);
-  list.unshift({ id: weekId, title: report.title, date: report.date, counts: report.counts });
+  list.unshift({ id: weekId, title: report.title, title_en: report.en ? report.en.title : null, date: report.date, counts: report.counts });
   list.sort((a, b) => b.id.localeCompare(a.id));
   await atomicWrite(join(WEEKLY_DIR, "index.json"), { list: list.slice(0, 120) });
   return { report, existed: false };
@@ -523,7 +542,7 @@ function articleEmailHtml(report, { siteUrl, unsubUrl }) {
       '<div style="font-family:' + sans + ';font-size:12px;letter-spacing:.16em;color:#8a847c;text-align:center">ARTPORTAL · 艺术周刊</div>' +
       '<h1 style="font-family:' + serif + ';font-size:27px;line-height:1.35;margin:14px 0 6px;color:#1b1a18;text-align:center">' + esc(report.title) + "</h1>" +
       (report.subtitle ? '<p style="font-family:' + serif + ';font-size:15px;color:#4a4a47;text-align:center;margin:0 0 6px">' + esc(report.subtitle) + "</p>" : "") +
-      '<div style="font-family:' + sans + ';font-size:11.5px;color:#8a847c;text-align:center;margin-bottom:6px">' + esc("文 / " + (report.author || "Eli") + " · " + report.id + " · " + report.date) + " · AI 撰写,条目事实以原文为准</div>" +
+      '<div style="font-family:' + sans + ';font-size:11.5px;color:#8a847c;text-align:center;margin-bottom:6px">' + esc("文 / " + (report.author || "Eli") + " · " + report.id + " · " + report.date) + "</div>" +
       report.sections.map(sec).join("") +
       (report.closing ? '<p style="font-family:' + serif + ';font-size:16px;line-height:1.9;color:#1b1a18;margin:24px 0 0;font-style:italic">' + esc(report.closing) + "</p>" : "") +
       '<h2 style="font-family:' + serif + ';font-size:17px;margin:32px 0 10px;border-top:1px solid #e8e4dc;padding-top:22px">本期提及</h2>' +
@@ -532,6 +551,7 @@ function articleEmailHtml(report, { siteUrl, unsubUrl }) {
         '<a href="' + esc(refHref(r, siteUrl)) + '" style="color:#2e6fa7">' + esc(r.title) + "</a>" + (r.meta ? " — " + esc(r.meta) : "") + "</div>"
       ).join("") +
       '<hr style="border:none;border-top:1px solid #e8e4dc;margin:26px 0 12px" />' +
+      '<p style="font-family:' + sans + ';font-size:11px;color:#8a847c;line-height:1.7">本文由 AI(主笔 agent)撰写生成,条目事实以各项目原文为准。</p>' +
       '<p style="font-family:' + sans + ';font-size:11px;color:#8a847c;line-height:1.7">你收到本邮件是因为在 ArtPortal 注册时勾选了订阅周报。' +
         '<a href="' + esc(unsubUrl) + '" style="color:#8a847c">退订</a> · <a href="' + esc(siteUrl) + '" style="color:#8a847c">访问 ArtPortal</a></p>' +
     "</div>"
