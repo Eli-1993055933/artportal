@@ -31,6 +31,7 @@ Thumbs.db
 artportal-site.zip
 *.zip
 site/assets/covers/
+site/assets/fonts/noto-serif-sc/files/
 pipeline/state/pagetrans.json*
 site/assets/avatars/
 site/assets/works/

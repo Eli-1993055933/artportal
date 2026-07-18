@@ -179,8 +179,20 @@
     page.innerHTML = html;
     page.scrollTop = 0;
   }
+  // 衬线 webfont(思源宋体分片)只在进入周刊阅读页时加载:主站不背这份体积,
+  // 手机(安卓/微信无内置衬线中文字体)也能得到与电脑一致的宋体排版。
+  var fontLoaded = false;
+  function ensureFont() {
+    if (fontLoaded) return;
+    fontLoaded = true;
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "assets/fonts/noto-serif-sc/serif.css";
+    document.head.appendChild(l);
+  }
   function open(id) {
     build();
+    ensureFont();
     page.hidden = false;
     document.body.style.overflow = "hidden";
     curId = id;
