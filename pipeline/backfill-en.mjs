@@ -11,6 +11,7 @@
 // 幂等:重复运行只处理仍缺英文字段的条目(每日管道/检索新增数据后重跑即可)。
 
 import { readFile, writeFile, copyFile, rename } from "node:fs/promises";
+import { reportAgent } from "./lib/agent-report.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -208,3 +209,4 @@ await writeFile(DATA + ".tmp", JSON.stringify(fresh, null, 2), "utf8");
 await rename(DATA + ".tmp", DATA);
 console.log(`完成:补齐 ${ok} 条(合并回库 ${merged} 条);失败 ${failedIds.length} 条${failedIds.length ? "(重跑本脚本即可续补):" + failedIds.slice(0, 10).join(",") : ""}`);
 console.log(`备份在 ${BAK}`);
+await reportAgent("translator", true, `双语回填:补齐 ${ok} 条,失败 ${failedIds.length} 条`, { ok, failed: failedIds.length });

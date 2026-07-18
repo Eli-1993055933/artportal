@@ -103,6 +103,16 @@ export async function getDb() {
         at TEXT NOT NULL
       );
       CREATE INDEX IF NOT EXISTS idx_nl_wid ON newsletter_sends(wid);
+      CREATE TABLE IF NOT EXISTS agent_log (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        agent TEXT NOT NULL,
+        ok INTEGER NOT NULL,
+        summary TEXT,
+        metrics TEXT,
+        took_ms INTEGER,
+        at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_agent_log ON agent_log(agent, id);
     `);
     // v0.66.0:作品加艺术门类标签(作者自选 ≤3,tags.js 的 23 门类 slug)。
     // 旧库无此列 → ALTER 补上;已有则报"duplicate column"忽略即可。
@@ -444,6 +454,47 @@ export async function nlStats(wid) {
     const r = d.prepare("SELECT SUM(ok) ok, COUNT(*) total FROM newsletter_sends WHERE wid=?").get(wid);
     return { ok: r.ok || 0, total: r.total || 0 };
   } catch (e) { return { ok: 0, total: 0 }; }
+}
+
+// ---------- Agent 打卡簿(v0.72.0 巡视台):每个 agent 干完活上报一条,后台按岗巡视 ----------
+export async function agentLog({ agent, ok, summary, metrics, took_ms }) {
+  try {
+    const d = await getDb();
+    d.prepare("INSERT INTO agent_log(agent,ok,summary,metrics,took_ms,at) VALUES(?,?,?,?,?,?)")
+      .run(String(agent).slice(0, 40), ok ? 1 : 0, summary ? String(summary).slice(0, 400) : null,
+           metrics ? JSON.stringify(metrics).slice(0, 1000) : null, Number(took_ms) || null, new Date().toISOString());
+    // 每个 agent 留最近 200 条,老的裁掉
+    d.prepare("DELETE FROM agent_log WHERE agent=? AND id NOT IN (SELECT id FROM agent_log WHERE agent=? ORDER BY id DESC LIMIT 200)")
+      .run(agent, agent);
+  } catch (e) {}
+}
+// 各 agent 的最近一次打卡(巡视台卡片用)
+export async function agentLastAll() {
+  const d = await getDb();
+  return d.prepare("SELECT a.* FROM agent_log a JOIN (SELECT agent, MAX(id) mid FROM agent_log GROUP BY agent) m ON a.id=m.mid")
+    .all().map(r => ({ ...r, metrics: r.metrics ? JSON.parse(r.metrics) : null }));
+}
+export async function agentRecent(agent, limit = 20) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM agent_log WHERE agent=? ORDER BY id DESC LIMIT ?").all(agent, limit)
+    .map(r => ({ ...r, metrics: r.metrics ? JSON.parse(r.metrics) : null }));
+}
+// 今日审核工作量(北京日,一线审核员卡片用):moderation_log 按动作聚合
+export async function moderationToday() {
+  try {
+    const d = await getDb();
+    const since = new Date(Date.now() - 24 * 3600e3).toISOString();
+    const rows = d.prepare("SELECT action, COUNT(*) n FROM moderation_log WHERE at>? GROUP BY action").all(since);
+    const sum = { auto: 0, pending: 0, decided: 0, reported: 0, total: 0 };
+    for (const r of rows) {
+      sum.total += r.n;
+      if (r.action.startsWith("auto-approved")) sum.auto += r.n;
+      else if (r.action.startsWith("created:review") || r.action.startsWith("created:reject")) sum.pending += r.n;
+      else if (r.action.startsWith("decided:")) sum.decided += r.n;
+      else if (r.action === "reported") sum.reported += r.n;
+    }
+    return sum;
+  } catch (e) { return null; }
 }
 
 // 单用户 24 小时内最多 5 条(防灌水)

@@ -20,6 +20,7 @@
 // 已接入 run-daily.bat 末尾:每晚抓完自动同步上线,无需人工部署数据。
 
 import { readFile, writeFile, rename, mkdir, readdir, rm } from "node:fs/promises";
+import { reportAgent } from "./lib/agent-report.mjs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";

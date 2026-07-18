@@ -11,6 +11,7 @@
 // 合规:抓取合规逻辑在 fetch.mjs / robots.mjs;evidence 硬校验在 verify.mjs。
 
 import { readFile, writeFile, mkdir, appendFile } from "node:fs/promises";
+import { reportAgent } from "./lib/agent-report.mjs";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -272,4 +273,6 @@ async function runHealth() {
   console.log("[健康检查] 过期隐藏 " + h.hiddenExpired + " · 失联隐藏 " + h.hiddenDead + " · 恢复 " + h.revived);
 }
 
-main().catch(e => { console.error("管道异常:", e); process.exit(1); });
+const _t0 = Date.now();
+main().then(() => reportAgent("harvester", true, "每日机会抓取管线完成(含健康检查)", null, Date.now() - _t0))
+  .catch(async e => { console.error("管道异常:", e); await reportAgent("harvester", false, String(e.message || e).slice(0, 150), null, Date.now() - _t0); process.exit(1); });

@@ -7,6 +7,7 @@
 // 幂等:只处理还没有任何封面的条目;截到就写 o.cover,下次跳过。截不到就留空,前端退回"设计海报卡"、夜间重试。
 
 import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
+import { reportAgent } from "./lib/agent-report.mjs";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -68,3 +69,4 @@ for (const [id, cover] of results) {
 await writeFile(DATA + ".tmp", JSON.stringify(fresh, null, 2), "utf8");
 await rename(DATA + ".tmp", DATA);
 console.log(`完成:截到 ${got} 张,写回 ${merged} 条。其余留待下次重试(前端先用设计海报卡兜底)。`);
+await reportAgent("photographer", true, `官网截图封面:截到 ${got} 张,写回 ${merged} 条`, { got, merged });

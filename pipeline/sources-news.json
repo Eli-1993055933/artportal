@@ -13,6 +13,7 @@
     { "id": "colossal", "source_name": "Colossal", "type": "rss", "rss": "https://www.thisiscolossal.com/feed/", "url": "https://www.thisiscolossal.com/feed/", "domain": "thisiscolossal.com", "lang": "en" },
     { "id": "juxtapoz", "source_name": "Juxtapoz", "type": "rss", "rss": "https://www.juxtapoz.com/news/?format=feed&type=rss", "url": "https://www.juxtapoz.com/news/?format=feed&type=rss", "domain": "juxtapoz.com", "lang": "en" },
     { "id": "hifructose", "source_name": "Hi-Fructose", "type": "rss", "rss": "https://hifructose.com/feed/", "url": "https://hifructose.com/feed/", "domain": "hifructose.com", "lang": "en", "cap": 5 },
+    { "id": "artreview", "source_name": "ArtReview", "type": "rss", "rss": "https://artreview.com/feed/", "url": "https://artreview.com/feed/", "domain": "artreview.com", "lang": "en", "cap": 5 },
     { "id": "artron-news", "source_name": "雅昌艺术网", "type": "html", "url": "https://news.artron.net/", "domain": "artron.net", "lang": "zh" },
     { "id": "art-china", "source_name": "艺术中国", "type": "html", "url": "http://art.china.cn/", "domain": "art.china.cn", "lang": "zh" },
     { "id": "99ys", "source_name": "99艺术网", "type": "html", "url": "https://www.99ys.com/", "domain": "99ys.com", "lang": "zh" }

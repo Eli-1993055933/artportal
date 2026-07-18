@@ -98,6 +98,7 @@
         <button data-view="content">内容管理 <span class="badge" id="navContentN">0</span></button>
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
+        <button data-view="agents">Agent 编队 <span class="badge" id="navAgentN">0</span></button>
         <button data-view="weekly">AI 周报</button>
         <button data-view="users">用户 <span class="badge" id="navUserN">0</span></button>
       </nav>
@@ -184,6 +185,17 @@
         <h1 class="sec__title">检索入库溯源 <span class="muted" style="font-size:12px">(谁的检索把信息带进了库)</span></h1>
         <div class="scroll"><table id="ingestTbl"><thead><tr><th>时间</th><th>频道</th><th>检索词</th><th>入库条目</th><th>用户</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="ingestPager"></div>
+      </section>
+
+      <!-- Agent 编队巡视台(v0.72.0):像巡视工位一样看每个 agent 的状态/上次打卡/产出 -->
+      <section data-sec="agents" hidden>
+        <h1 class="sec__title">Agent 编队 <span class="muted" style="font-size:12px">(每个岗位一张工牌:🟢在岗正常 🟡迟到 🔴上次失败 ⚪未打卡)</span></h1>
+        <h2 style="margin-top:0">今日简报</h2>
+        <div class="cards" id="agBrief"></div>
+        <h2>编队工位</h2>
+        <div class="cards" id="agCards" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))"></div>
+        <h2 id="agLogTitle" hidden>工作记录</h2>
+        <div class="scroll" id="agLogWrap" hidden><table id="agLogTbl"><thead><tr><th>时间</th><th>结果</th><th>摘要</th><th>耗时</th></tr></thead><tbody></tbody></table></div>
       </section>
 
       <!-- AI 周报(第 5 项):生成/试发/群发。群发受 NEWSLETTER_BULK 闸(备案后在 .env 开启) -->
@@ -314,8 +326,107 @@
     else if (view === "content") renderContent();
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
+    else if (view === "agents") renderAgents();
     else if (view === "weekly") renderWeekly();
     else if (view === "users") renderUsers();
+  }
+
+  // —— Agent 编队巡视台(v0.72.0):工牌注册表(岗位/周期/驻地),状态由打卡记录推断 ——
+  var AGENTS = [
+    { id: "scout",         name: "小采",  role: "采编记者 · 全网自动检索",     period: 8.5 * 3600e3,  where: "服务器 · 每8小时" },
+    { id: "eli",           name: "Eli",   role: "主笔 · AI 艺术周刊",          period: 7.5 * 86400e3, where: "服务器 · 每周一" },
+    { id: "postman",       name: "邮差",  role: "周报群发投递",                period: 0,             where: "服务器 · 事件触发" },
+    { id: "moderator",     name: "审读",  role: "一线内容审核(敏感词+AI)",   period: 0,             where: "服务器 · 实时", special: "moderation" },
+    { id: "harvester",     name: "铁犁",  role: "每日机会抓取管线",            period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "channels",      name: "双线",  role: "资讯/招聘每日抓取",           period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "translator",    name: "译者",  role: "中英双语回填",                period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "locator",       name: "寻址",  role: "主办方官网定位",              period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "photographer",  name: "快门",  role: "官网截图封面",                period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "cover-auditor", name: "鉴图",  role: "美术编辑 · 封面查重审核",     period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间" }
+  ];
+  var agLastMap = {}, agSelected = null;
+  function agLight(def, last) {
+    if (def.special === "moderation") return "🟢";
+    if (!last) return "⚪";
+    if (!last.ok) return "🔴";
+    if (def.period && Date.now() - Date.parse(last.at) > def.period) return "🟡";
+    return "🟢";
+  }
+  function renderAgents() {
+    get("/api/admin/agents" + (agSelected ? "?agent=" + encodeURIComponent(agSelected) : "")).then(function (r) {
+      agLastMap = {};
+      (r.last || []).forEach(function (x) { agLastMap[x.agent] = x; });
+      // 今日简报卡
+      var bb = $("agBrief"); bb.textContent = "";
+      var brief = r.brief || {};
+      var t = brief.today || {};
+      [["搜索余量(serper)", brief.serper_left != null ? brief.serper_left + " 次" : "—"],
+       ["磁盘剩余", brief.disk_free_gb != null ? brief.disk_free_gb + " GB" : "—"],
+       ["今日内容更新", (t.opp || 0) + " 机会 · " + (t.news || 0) + " 资讯 · " + (t.jobs || 0) + " 招聘"],
+       ["待人工处理", (brief.pending || 0) + " 项"]
+      ].forEach(function (d) {
+        var c = document.createElement("div"); c.className = "card";
+        c.innerHTML = '<div class="k"></div><div class="v" style="font-size:15px"></div>';
+        c.querySelector(".k").textContent = d[0]; c.querySelector(".v").textContent = d[1];
+        bb.appendChild(c);
+      });
+      // 工牌
+      var box = $("agCards"); box.textContent = "";
+      var alerts = 0;
+      AGENTS.forEach(function (def) {
+        var last = agLastMap[def.id];
+        var light = agLight(def, last);
+        if (light === "🔴" || light === "🟡") alerts++;
+        var c = document.createElement("div");
+        c.className = "card"; c.style.cursor = "pointer";
+        if (agSelected === def.id) c.style.borderColor = "#7eb8e0";
+        var line1 = document.createElement("div");
+        line1.className = "k"; line1.textContent = light + " " + def.name + " · " + def.role;
+        var line2 = document.createElement("div");
+        line2.style.cssText = "font-size:12px;color:#aab;margin-top:6px;line-height:1.6";
+        if (def.special === "moderation") {
+          var mo = r.moderation || {};
+          line2.textContent = "24h:审 " + (mo.total || 0) + " 件(自动放行 " + (mo.auto || 0) + " · 转人工 " + (mo.pending || 0) + " · 人工裁决 " + (mo.decided || 0) + " · 举报 " + (mo.reported || 0) + ")";
+        } else if (last) {
+          line2.textContent = rel(last.at) + (last.took_ms ? " · 用时 " + Math.round(last.took_ms / 1000) + "s" : "") + "\n" + (last.summary || "");
+          line2.style.whiteSpace = "pre-wrap";
+        } else {
+          line2.textContent = "还没有打卡记录";
+        }
+        var line3 = document.createElement("div");
+        line3.style.cssText = "font-size:11px;color:#666b75;margin-top:6px";
+        line3.textContent = def.where;
+        c.appendChild(line1); c.appendChild(line2); c.appendChild(line3);
+        c.addEventListener("click", function () { agSelected = agSelected === def.id ? null : def.id; renderAgents(); });
+        box.appendChild(c);
+      });
+      $("navAgentN").textContent = String(alerts);
+      $("navAgentN").className = "badge" + (alerts > 0 ? " hot" : "");
+      // 选中 agent 的工作记录
+      var showLog = agSelected && r.recent;
+      $("agLogTitle").hidden = !showLog;
+      $("agLogWrap").hidden = !showLog;
+      if (showLog) {
+        var def = null;
+        AGENTS.forEach(function (a) { if (a.id === agSelected) def = a; });
+        $("agLogTitle").textContent = "工作记录 — " + (def ? def.name + " · " + def.role : agSelected);
+        var tb = $("agLogTbl").tBodies[0]; tb.textContent = "";
+        if (!r.recent.length) emptyRow(tb, "(还没有记录)", 4);
+        r.recent.forEach(function (x) {
+          var tr = document.createElement("tr");
+          tr.appendChild(td(bj(x.at, true), "mono"));
+          var st = document.createElement("td");
+          var pill = document.createElement("span");
+          pill.className = "pill" + (x.ok ? " on" : "");
+          pill.textContent = x.ok ? "完成" : "失败";
+          st.appendChild(pill); tr.appendChild(st);
+          tr.appendChild(td(x.summary || "—"));
+          tr.appendChild(td(x.took_ms ? Math.round(x.took_ms / 1000) + "s" : "—", "mono"));
+          tb.appendChild(tr);
+        });
+      }
+    }).catch(function () {});
   }
 
   // —— AI 周报:状态卡 + 生成/试发/群发 ——
@@ -813,6 +924,7 @@
     refreshCmts();
     refreshContent();
     if (view === "weekly") renderWeekly();   // 群发进行中时进度条 10 秒一跳
+    if (view === "agents") renderAgents();   // 巡视台跟随 10 秒自动刷新
   }
 })();
 </script>

@@ -9,7 +9,8 @@
 // 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
 
 import { createServer } from "node:http";
-import { readFile, writeFile, stat, rename, mkdir, unlink } from "node:fs/promises";
+import { createHash, timingSafeEqual } from "node:crypto";
+import { readFile, writeFile, stat, rename, mkdir, unlink, statfs } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
@@ -815,6 +816,28 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 503, body: { error: "投稿服务暂不可用,请稍后再试" } });
       }
     }
+    // —— Agent 巡视台(v0.72.0):各 agent 最近打卡 + 今日简报;?agent=xx 附该员最近记录 ——
+    if (p === "/api/admin/agents" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try {
+        const body = { last: await db.agentLastAll(), moderation: await db.moderationToday() };
+        const who = u.searchParams.get("agent");
+        if (who) body.recent = await db.agentRecent(String(who).slice(0, 40), 30);
+        // 今日简报:搜索余量 / 磁盘 / 三频道今日更新 / 待人工事项
+        const brief = { serper_left: serperBudgetLeft(), disk_free_gb: null, today: {}, pending: 0 };
+        try { const fsx = await statfs(SITE); brief.disk_free_gb = Math.round(fsx.bsize * fsx.bavail / 1e9 * 10) / 10; } catch (e) {}
+        try {
+          const today = todayISO();
+          for (const [name, file, key] of [["opp", "opportunities.json", "opportunities"], ["news", "news.json", "items"], ["jobs", "jobs.json", "jobs"]]) {
+            const doc = JSON.parse(await readFile(join(SITE, "data", file), "utf8"));
+            brief.today[name] = (doc[key] || []).filter(o => o.updated_at === today || o.added_at === today).length;
+          }
+        } catch (e) {}
+        try { brief.pending = (await db.countPending()) + (await db.countPendingWorks()) + (await db.countPendingComments()); } catch (e) {}
+        body.brief = brief;
+        return json({ code: 200, body });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
     // —— AI 周报(第 5 项):状态 / 生成 / 试发 / 群发(群发有备案闸,见 NEWSLETTER_BULK) ——
     if (p === "/api/admin/weekly/status" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
@@ -841,7 +864,8 @@ async function handleAuthApi(req, res, u) {
       try {
         const r = await generateWeekly({ force: !!b.force });
         if (r.empty) return json({ code: 200, body: { ok: false, empty: true, error: "近一周没有可入刊的内容" } });
-        return json({ code: 200, body: { ok: true, existed: !!r.existed, report: { id: r.report.id, title: r.report.title, ai_composed: r.report.ai_composed, counts: r.report.sections.map(s => ({ key: s.key, n: s.items.length })) } } });
+        if (!r.existed) db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${r.report.id}「${r.report.title}」(admin 手动触发)`, metrics: { id: r.report.id, format: r.report.format || 1, en: !!r.report.en } }).catch(() => {});
+        return json({ code: 200, body: { ok: true, existed: !!r.existed, report: { id: r.report.id, title: r.report.title, ai_composed: r.report.ai_composed, counts: r.report.counts || [] } } });
       } catch (e) { return json({ code: 500, body: { error: String(e.message || e).slice(0, 200) } }); }
     }
     if (p === "/api/admin/weekly/send" && m === "POST") {
@@ -995,6 +1019,7 @@ async function sendWeeklyBulk(report) {
     await new Promise(r => setTimeout(r, 3000));   // 逐封限速:对 SMTP 服务商客气,防触发风控
   }
   process.stderr.write(`[周报] 群发结束 ${report.id}:成功 ${nlState.ok}/${nlState.total}\n`);
+  db.agentLog({ agent: "postman", ok: nlState.ok === nlState.total, summary: `群发 ${report.id}:成功 ${nlState.ok}/${nlState.total}`, metrics: { wid: report.id, ok: nlState.ok, total: nlState.total } }).catch(() => {});
   nlState.running = false;
 }
 // 每周自动出刊:.env 设 WEEKLY_REPORT=1 开启 —— 每小时看一眼,北京时间周一 9 点后本周还没出就生成;
@@ -1008,6 +1033,7 @@ if (process.env.WEEKLY_REPORT === "1") {
       const r = await generateWeekly({});
       if (!r.report) return;
       process.stderr.write(`[周报] 已生成 ${r.report.id}「${r.report.title}」(AI=${r.report.ai_composed})\n`);
+      db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${r.report.id}「${r.report.title}」`, metrics: { id: r.report.id, format: r.report.format || 1, refs: (r.report.references || []).length, en: !!r.report.en } }).catch(() => {});
       if (process.env.NEWSLETTER_AUTO === "1" && process.env.NEWSLETTER_BULK === "1" && mailerOn() && !nlState.running) {
         sendWeeklyBulk(r.report);
       }
@@ -1077,6 +1103,7 @@ let autoTickN = 0;
 async function autoHarvestTick() {
   if (process.env.SERPER_API_KEY && serperBudgetLeft() < 6) {
     process.stderr.write("[自动检索] 今日搜索预算余量不足,本轮让路(优先保用户手动检索)\n");
+    db.agentLog({ agent: "scout", ok: true, summary: "预算余量不足,本轮让路(保用户手动检索)", metrics: { skipped: true } }).catch(() => {});
     return;
   }
   const ch = AUTO_ROTATION[autoTickN++ % AUTO_ROTATION.length];
@@ -1091,9 +1118,11 @@ async function autoHarvestTick() {
         db.ingestInsert({ channel: ch, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "auto-hourly", ip: "server" });
       }
       process.stderr.write(`[自动检索·${ch}] "${q}" → 探测${r.probed} 入库${r.added.length} (${Math.round((Date.now() - t0) / 1000)}s,今日搜索余量${serperBudgetLeft()})\n`);
+      db.agentLog({ agent: "scout", ok: true, summary: `${ch}「${q}」探测${r.probed} 入库${r.added.length}`, metrics: { channel: ch, q, probed: r.probed, added: r.added.length }, took_ms: Date.now() - t0 }).catch(() => {});
     } finally { releaseSlot(); }
   } catch (e) {
     process.stderr.write(`[自动检索·${ch}] "${q}" 失败: ${String(e.message || e).slice(0, 120)}\n`);
+    db.agentLog({ agent: "scout", ok: false, summary: `${ch}「${q}」失败:` + String(e.message || e).slice(0, 120) }).catch(() => {});
   }
 }
 if (process.env.AUTO_HARVEST === "1") {
@@ -1116,6 +1145,19 @@ createServer(async (req, res) => {
   }
   if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
+  }
+  // Agent 打卡(v0.72.0 巡视台):本机管道脚本干完活上报;AGENT_KEY 鉴权(sha256 恒时比较)
+  if (u.pathname === "/api/agent/report" && req.method === "POST") {
+    const json = (code, obj) => { res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
+    try {
+      const b = await readBody(req);
+      const expect = process.env.AGENT_KEY;
+      const ha = createHash("sha256").update(String(b.key || "")).digest();
+      const hb = createHash("sha256").update(String(expect || "")).digest();
+      if (!expect || !timingSafeEqual(ha, hb)) return json(401, { error: "unauthorized" });
+      await db.agentLog({ agent: String(b.agent || "unknown"), ok: b.ok !== false, summary: b.summary, metrics: b.metrics, took_ms: b.took_ms });
+      return json(200, { ok: true });
+    } catch (e) { return json(400, { error: "bad request" }); }
   }
   // 周报退订:邮件里的链接,点开即退订(无需登录;token=HMAC 防伪造)
   if (u.pathname === "/api/newsletter/unsub" && req.method === "GET") {

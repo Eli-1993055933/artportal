@@ -6,7 +6,7 @@
     "generated_at": "2026-07-09",
     "count": 16
   },
-  "generated_at": "2026-07-16",
+  "generated_at": "2026-07-18",
   "count": 307,
   "opportunities": [
     {
@@ -383,10 +383,9 @@
       "status": "expired",
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-09",
+      "updated_at": "2026-07-18",
       "_fail_streak": 0,
-      "cover": "https://www.cafa.edu.cn/library/image/2018xxgk.jpg",
-      "cover_source": "cafa.edu.cn",
+      "cover": "assets/covers/0b230b6e486eed10.jpg",
       "summary_en": "Seeking original works such as woodcut, etching, lithograph, screenprint, digital print, monotype, and mixed media print. Suggested artist age under 45. Works must not have been exhibited in other provincial-level or above exhibitions. Prizes include gold, silver, and bronze. Each exhibiting artist will receive one catalogue. Submission deadline: November 16, 2025.",
       "org_en": "Central Academy of Fine Arts",
       "city_en": "Beijing",
@@ -414,7 +413,9 @@
         "deadline_note": "ti2xo6",
         "age_limit": "1f8rn2w",
         "disciplines": "1unxm1c"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "cafa-zhiyi-xiangjian-2025",
@@ -458,10 +459,9 @@
       "status": "expired",
       "verified_at": "2026-07-09",
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-09",
+      "updated_at": "2026-07-18",
       "_fail_streak": 0,
-      "cover": "https://www.cafa.edu.cn/library/image/2018xxgk.jpg",
-      "cover_source": "cafa.edu.cn",
+      "cover": "assets/covers/23137c62073b51e2.jpg",
       "summary_en": "A 2025 Beijing Cultural Arts Fund project focusing on digital cultural design talent training for rural revitalization. Priority given to professionals in cultural creative design, visual communication, public art, and university instructors. No tuition or course fees charged, but participants cover their own transportation and accommodation. Registration deadline: June 8, 2026.",
       "org_en": "Central Academy of Fine Arts",
       "city_en": "Beijing",
@@ -487,7 +487,9 @@
         "country": "3tz79",
         "deadline_note": "uvoxc0",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "gdmoa-archive-opencall",
@@ -965,10 +967,9 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-09",
+      "updated_at": "2026-07-18",
       "_fail_streak": 0,
-      "cover": "https://www.transartists.org/sites/default/files/2026-06/ede8aa33-eb87-4d42-bc53-5363137b39b9.jpg",
-      "cover_source": "transartists.org",
+      "cover": "assets/covers/35d82fbcb4fb03df.jpg",
       "official_url": "https://www.pier2air.tw/en/member-apply/",
       "summary_en": "Open to artists and groups engaged in artistic creation, both domestic and international, with no nationality restrictions, requiring at least two years of creative experience and intermediate English communication skills. Provides a 33-square-meter studio (with bathroom) and 16.5-square-meter living space, daily NTD800 living allowance, international economy-class round-trip airfare for the artist, and up to NTD35,000 material subsidy. Deadline July 5, 2026.",
       "org_en": "Pier-2 Art Center",
@@ -992,7 +993,9 @@
         "country": "18x4sfv",
         "nationality": "1hs519y",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "screenshot"
     },
     {
       "id": "kinosaki-air-2027",
@@ -1036,10 +1039,9 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-09",
+      "updated_at": "2026-07-18",
       "_fail_streak": 0,
-      "cover": "https://www.transartists.org/sites/default/files/2026-06/260427-3_kiacofunkoru27-28_gaozhihuaxiang_zhangfangxing_1.jpg",
-      "cover_source": "transartists.org",
+      "cover": "http://kiac.jp/shared/img/common/og-image.png",
       "official_url": "https://kiac.jp/en/article/3918/",
       "summary_en": "Open to individual artists or groups, residency from 7 days to 3 months, no nationality restrictions mentioned. Free use of theater, studios, and up to 7 accommodation rooms; center provides technical and coordination support. Artists must cover all transportation, living, and production costs, and pay ¥350 per person per day for utilities to Toyooka City. Deadline June 27, 2026.",
       "org_en": "Kinosaki International Arts Center",
@@ -1061,7 +1063,9 @@
         "city": "3u08t",
         "country": "3ma24",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "kiac.jp"
     },
     {
       "id": "artcircle-slovenia-2026",
@@ -1106,10 +1110,9 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-09",
+      "updated_at": "2026-07-18",
       "_fail_streak": 0,
-      "cover": "https://www.transartists.org/sites/default/files/2026-06/slo_2026.jpg",
-      "cover_source": "transartists.org",
+      "cover": "https://artcircle.si/wp-content/uploads/2026/04/SLO_2026.jpg",
       "official_url": "https://artcircle.si/en/open-call/",
       "summary_en": "Visual arts residency, no participation fee or nationality restrictions mentioned. Provides free accommodation and meals during residency; the organizer assists artists in applying for transportation funding through their diplomatic embassy in Slovenia. Deadline June 25, 2026.",
       "org_en": "Art Circle",
@@ -1129,7 +1132,9 @@
         "org": "1a8d174",
         "country": "1odi3ww",
         "disciplines": "1k5it7h"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artcircle.si"
     },
     {
       "title_en": "TED and POSCA Residency",
@@ -1163,7 +1168,7 @@
       "trust": "auto",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
+      "updated_at": "2026-07-18",
       "id": "ted-posca-residency-2026",
       "category": "residency",
       "title_zh": "TED × POSCA 驻留计划 2026",
@@ -1175,8 +1180,7 @@
       "domain": "transartists.org",
       "org_type": "independent",
       "status": "open",
-      "cover": "https://www.transartists.org/sites/default/files/2026-06/screenshot_17.png",
-      "cover_source": "transartists.org",
+      "cover": "http://static1.squarespace.com/static/53fe1308e4b0af9b1b65d318/t/6a1ade31905a751a090613ab/1780145713445/uni+SELECTION.png?format=1500w",
       "official_url": "https://fineacts.co/ted-posca-residency",
       "summary_en": "A global distributed residency initiated by TED and POSCA, curated by Fine Acts. In 2026, four artists will be selected to create public intervention works in their communities themed 'Visible Mending'. Each selected artist receives a total of $15,000, covering artist fees, production, and documentation costs.",
       "org_en": "TED and POSCA (Curated by Fine Acts)",
@@ -1197,7 +1201,9 @@
         "country": "3pi0e",
         "nationality": "eondfj",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "fineacts.co"
     },
     {
       "title_en": "HKBU International Writers' Workshop 2027",
@@ -1229,7 +1235,7 @@
       "trust": "auto",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
+      "updated_at": "2026-07-18",
       "id": "hkbu-iww-2027",
       "category": "residency",
       "title_zh": "香港浸会大学 国际作家工作坊 2027",
@@ -1241,8 +1247,7 @@
       "domain": "transartists.org",
       "org_type": "official",
       "status": "open",
-      "cover": "https://www.transartists.org/sites/default/files/styles/teaser/public/2026-06/2027_open_call.png?h=5dcbbc94&amp;itok=eyNnsf3h",
-      "cover_source": "transartists.org",
+      "cover": "assets/covers/e9c8bf1245a7d002.jpg",
       "official_url": "https://iww.hkbu.edu.hk/wp-content/uploads/2026/05/2027-IWW-WR-Call-for-Application.pdf",
       "summary_en": "Open to international writers who have published at least one literary work, currently reside outside Hong Kong, and can communicate in English or Chinese. One-month residency from February 26 to March 25, 2027, on the theme 'Inheritance', providing economy-class round-trip airfare, four weeks of on-campus accommodation, and daily allowance.",
       "org_en": "International Writers Workshop, Hong Kong Baptist University",
@@ -1261,7 +1266,9 @@
         "city": "2sy37",
         "country": "3tz79",
         "nationality": "16ym8lh"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "screenshot"
     },
     {
       "title_en": "O Castro Art Village — Self-funded Residency",
@@ -1295,7 +1302,7 @@
       "trust": "auto",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
+      "updated_at": "2026-07-18",
       "id": "ocastro-selffunded-2026",
       "category": "residency",
       "title_zh": "O Castro 艺术村 自费驻留",
@@ -1307,8 +1314,7 @@
       "domain": "transartists.org",
       "org_type": "independent",
       "status": "open",
-      "cover": "https://www.transartists.org/sites/default/files/2026-06/opencall_all_artists_self_funded_2026_1_.jpg",
-      "cover_source": "transartists.org",
+      "cover": "https://ocastroartvillage.com/wp-content/uploads/28.jpg",
       "official_url": "https://ocastroartvillage.com/creative-residency-at-o-castro-art-village/",
       "summary_en": "Residency in an abandoned village in Galicia, Spain, featuring ruins, forests, and a studio. Self-funded residency open year-round with flexible duration (2 weeks to 2 months); participants cover their own room and board, including group meals and community exchange.",
       "org_en": "O Castro Art Village",
@@ -1332,7 +1338,9 @@
         "deadline_note": "ir1k8v",
         "nationality": "66tx93",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "ocastroartvillage.com"
     },
     {
       "title_en": "Modes of Access — Digital Residencies 2026",
@@ -1367,7 +1375,7 @@
       "trust": "auto",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
+      "updated_at": "2026-07-18",
       "id": "modes-of-access-2026",
       "category": "residency",
       "title_zh": "Modes of Access 数字驻留 2026",
@@ -1379,8 +1387,7 @@
       "domain": "transartists.org",
       "org_type": "independent",
       "status": "expired",
-      "cover": "https://www.transartists.org/sites/default/files/2026-06/screenshot_15.png",
-      "cover_source": "transartists.org",
+      "cover": "assets/covers/87321cd52ba052bd.jpg",
       "official_url": "https://stiftung-kuenstlerdorf.de/en/program/modes-of-access-digital-residencies-2026",
       "summary_en": "Four online digital residencies for media artists, each lasting 12 weeks (Aug–Oct), using 'accessibility' as an artistic methodology, emphasizing disability justice principles and flexible participation. Offers €2,500 artist fee, €500 materials budget, and additional accessibility support.",
       "org_en": "Modes of Access",
@@ -1402,7 +1409,9 @@
         "country": "3lr9s",
         "nationality": "1f43m5w",
         "disciplines": "1dyig80"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "screenshot"
     },
     {
       "id": "agg-e-sun-art-awards-2026-art",
@@ -2386,9 +2395,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://static.wixstatic.com/media/dbe4ed_e725ed2133c44b83ab4a275a8a8a187d~mv2.jpg/v1/fill/w_1200,h_1200,al_c,q_85/LandscapeNovember2026OpenCallPoster.jpg",
       "official_url": "https://www.glasgowgalleryofphotography.com/exhibition/landscape-2026",
       "summary_en": "An international photography exhibition themed 'Landscape', shown for one month at Glasgow Gallery and online. Submit up to 8 JPEGs. Selected artists receive a digital certificate, exhibition photos, and a chance to be 'Photographer of the Month' with social media promotion.",
       "org_en": "Glasgow Photography Gallery",
@@ -2412,7 +2420,9 @@
         "country": "2v6zt",
         "nationality": "1fg55zx",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "glasgowgalleryofphotography.com"
     },
     {
       "id": "agg-stories-2026-international-photography-exhibitio-cur",
@@ -2457,9 +2467,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://static.wixstatic.com/media/dbe4ed_9047a6342cf74aedb74effd758465295~mv2.jpg/v1/fill/w_1200,h_1200,al_c,q_85/StoriesNovember2026OpenCallPoster.jpg",
       "official_url": "https://www.glasgowgalleryofphotography.com/exhibition/stories-2026",
       "summary_en": "An international photography exhibition themed 'Stories', held in Glasgow from November 4-28, 2026. Submit up to 8 works, which may be priced for sale. Selected artists receive a digital certificate, exhibition photos, and a chance to be 'Photographer of the Month' and featured in the annual catalogue.",
       "org_en": "Glasgow Photography Gallery",
@@ -2483,7 +2492,9 @@
         "country": "2v6zt",
         "nationality": "1fg55zx",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "glasgowgalleryofphotography.com"
     },
     {
       "id": "agg-peninsula-the-south-west-open-2026-cur",
@@ -2530,9 +2541,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://static.wixstatic.com/media/0b9020_1699bcd51d5c4064956beb411716876a~mv2_d_5616_3744_s_4_2.jpg/v1/fill/w_2500,h_1666,al_c/0b9020_1699bcd51d5c4064956beb411716876a~mv2_d_5616_3744_s_4_2.jpg",
       "official_url": "https://www.artizangallery.co.uk/",
       "summary_en": "A summer curated exhibition responding to the landscape of the South West of England, held at Artizan Gallery, Torquay from July 26 to September 4, 2026. £15 for single entry, £40 for multiple. £150 cash prize for the overall winner, 35% sales commission.",
       "org_en": "Artizan Gallery",
@@ -2559,7 +2569,9 @@
         "nationality": "kpriuq",
         "disciplines": "j99dx6"
       },
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "artizangallery.co.uk"
     },
     {
       "id": "curatorspace-opportunities-艺术家电影与动态影像作品放映公开征集",
@@ -2604,9 +2616,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
+      "updated_at": "2026-07-18",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
       "summary_en": "Deep Focus seeks dynamic image works under 10 mins on the theme 'Attraction'. Selected works will be screened at RHB Cinema, Goldsmiths, London from Oct to Dec 2026. Free submission, no funding, priority to artists who can attend.",
       "org_en": "Deep Focus",
       "city_en": "London",
@@ -2628,7 +2639,9 @@
         "city": "3tx1h",
         "country": "2v6zt",
         "disciplines": "138mxdh"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-open-call-transient-states-paris-july-2026-cur",
@@ -2676,9 +2689,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/1cf2fa98fae624e5.jpg",
       "official_url": "https://zhenyigallery.com/upcoming-exhibitions",
       "summary_en": "Exhibition exploring transformation, generation, and 'in-between states', held July 20-22, 2026 at Zhen Yi Gallery, Marais, Paris. Submit 2-3 works, no attendance required, shipping at own cost, 0% commission on sales. Selected must pay £170/€200 participation fee.",
       "org_en": "Zhen Yi Gallery",
@@ -2705,7 +2717,9 @@
         "country": "3ohhp",
         "nationality": "16edjdn",
         "disciplines": "1b76jfh"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "screenshot"
     },
     {
       "id": "agg-under-the-skin-of-things-cur",
@@ -2753,9 +2767,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://static.wixstatic.com/media/f7b54b_1365c13bf7174382850ca07324ae1972~mv2.jpeg/v1/fill/w_1280,h_1280,al_c/f7b54b_1365c13bf7174382850ca07324ae1972~mv2.jpeg",
       "official_url": "https://www.cistaarts.com/opportunities",
       "summary_en": "Online exhibition inviting artists to look beneath the surface and explore hidden dimensions of contemporary life, including memory, identity, ecology, politics, technology, body, etc. Held Aug 1-30, 2026 on CISTA ARTS platform, 0% commission. £30 for 1 work, £50 for 2 works selected.",
       "org_en": "CISTA ARTS",
@@ -2776,7 +2789,9 @@
         "org": "2eg98d",
         "nationality": "16u2ni5",
         "disciplines": "1wpdhlz"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "cistaarts.com"
     },
     {
       "id": "agg-the-ghost-in-the-space-cur",
@@ -2823,9 +2838,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/4cf3c3845adc4d49.jpg",
       "official_url": "https://www.celestegallery.uk/exhibition/The-Ghost-in-the-Space",
       "summary_en": "Online group exhibition exploring intangible residues in physical and digital spaces, involving digital traces, AI-reconstructed voices, spatial memory, absence, surveillance, etc. Selected works displayed on 3D KUNSTMATRIX platform with media promotion; 5-10 artists have 50/50 split opportunity.",
       "org_en": "Celeste Gallery",
@@ -2851,7 +2865,9 @@
         "country": "2v6zt",
         "nationality": "zrvl96",
         "disciplines": "16qxqhz"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "screenshot"
     },
     {
       "id": "agg-flora-fauna-photography-exhibition-cur",
@@ -2897,9 +2913,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
+      "updated_at": "2026-07-18",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
       "official_url": "https://solas-shadowgallery.com/open-calls",
       "summary_en": "Online international photography exhibition themed 'Flora/Fauna', exploring differences and connections in nature, growth, adaptation, survival, and human impact on habitats. Submit up to 5 JPGs. Selected works displayed online, included in digital catalog, and receive exhibition certificate.",
       "org_en": "Solas Shadow",
@@ -2919,7 +2934,9 @@
         "age_limit": "374cxz",
         "nationality": "153128",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "agg-open-call-museum-of-homeland-cur",
@@ -2964,9 +2981,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://museumderheimat.de/og-image.jpg",
       "official_url": "https://www.museumderheimat.de/en/open-call",
       "summary_en": "Online virtual museum seeking everyday objects and personal narratives from those with migration experience. Submit 1-5 photos and text explaining the object's significance to your migration story. Selected works enter online collection. No compensation for participation.",
       "org_en": "Museum of Homeland",
@@ -2987,7 +3003,9 @@
         "deadline_note": "3uknds",
         "nationality": "p3385x",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "museumderheimat.de"
     },
     {
       "id": "agg-post-animal-signal-cur",
@@ -3033,9 +3051,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/a1f3384a8d8ed641.jpg",
       "official_url": "https://www.molendart.com/opencallpost-animalsignal",
       "summary_en": "International open call exploring animality, non-human perception, ecological imagination, and emerging human-nonhuman relationships. The works will be exhibited at Molend Space in Glasgow, Scotland from July 28-31, 2026. Open to artists, students, and independent practitioners of all nationalities. Selected participants pay a fee of £50.",
       "org_en": "Molend Art",
@@ -3060,7 +3077,9 @@
         "country": "2v6zt",
         "nationality": "vzauu",
         "disciplines": "1dyig80"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "screenshot"
     },
     {
       "id": "agg-take-to-the-greenwood-cur",
@@ -3104,9 +3123,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://www.cassart.co.uk/images/stencil/original/image-manager/28-01-2026-crafted-for-artists-hp-banner.jpg",
       "official_url": "https://www.cassart.co.uk/the-cass-art-spaces/",
       "summary_en": "A group exhibition exploring the relationship between the LGBTQIA+ community and nature, taking its meaning from 'going to the greenwood'. Held from August 3-15 at a community space within CASS Art, with no commission on sales but no guarantee of sale. Due to commercial venue restrictions, full frontal nudity is not accepted.",
       "org_en": "Liverpool Art Space @ CASS Art",
@@ -3128,7 +3146,9 @@
         "city": "3f761v",
         "country": "2v6zt",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "cassart.co.uk"
     },
     {
       "id": "agg-equinox-virtual-exhibition-with-bobcat-gallery-cur",
@@ -3176,9 +3196,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://img1.wsimg.com/isteam/ip/f1fe8182-b42b-44c1-be64-19adf14b7488/Equinox%20Square%20Graphic.png",
       "official_url": "https://bobcatgallery.co.uk/blog/f/call-for-art-equinox-virtual-exhibition",
       "summary_en": "An online exhibition themed 'Day and Night in Balance' for the spring equinox, held from September 1-30, 2026. Accepts original 2D/3D works, up to 4 pieces per person; no reproductions, digital works or NFTs. Free to apply, selected participants pay a fee of £5, with a 20% commission on sales.",
       "org_en": "BobCat Gallery",
@@ -3198,7 +3217,9 @@
         "summary": "mznxc1",
         "org": "9x1mrx",
         "disciplines": "14h7e3c"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "bobcatgallery.co.uk"
     },
     {
       "id": "agg-stories-in-motion-call-for-young-artists-ages-7--cur",
@@ -3244,9 +3265,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://travelthroughart.co.uk/cdn/shop/files/TTAS_logo.png?height=628&pad_color=ffffff&v=1783040154&width=1200",
       "official_url": "https://travelthroughart.co.uk/pages/stories-in-motion",
       "summary_en": "A visual narrative exhibition for young artists aged 7-20. Selected works will be exhibited at Deptford Lounge in London from August 1-29, 2026, with an opportunity for international creative exchange with Toronto, Canada. Each artist can submit up to 2 works and be selected for at most 1; those under 18 must be registered by a guardian.",
       "org_en": "Travel Through Art Studio",
@@ -3271,7 +3291,9 @@
         "country": "2v6zt",
         "age_limit": "yhusot",
         "disciplines": "i4wbde"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "travelthroughart.co.uk"
     },
     {
       "id": "agg-suspended-last-few-places-added-cur",
@@ -3319,9 +3341,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-10",
-      "updated_at": "2026-07-10",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/c08e6ae59ef42e2c.jpg",
       "summary_en": "A second call for an exhibition exploring perception and the state of 'suspension', involving waiting, transition, balance/collapse, gravity, psychological instability, and displacement. Held from August 6-10, 2026 at Zhen Yi Gallery in the Marais district of Paris. No commission on sales, selected participants pay £200/€230.",
       "org_en": "Zhen Yi Gallery",
       "city_en": "Paris",
@@ -3349,7 +3370,9 @@
         "disciplines": "1b76jfh"
       },
       "official_url": "https://zhenyigallery.com/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "screenshot"
     },
     {
       "id": "artconnect-opportunities-寻找工作坊领导者",
@@ -4130,9 +4153,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/48892/opportunity/9275/image/728bdeaec8e9.jpg",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://cgs.org.uk/wp-content/uploads/2023/03/CGS-logo.jpg",
       "summary_en": "The Contemporary Glass Society (CGS) launches the Glass Sellers CGS Graduate Award and New Graduate Review 2026, open to graduates from European accredited courses in 2025/2026 with works at least 50% glass. Winning works will be published in Glass Network magazine and digital publications, with cash prizes and vouchers. Free entry, must be CGS member.",
       "org_en": "Contemporary Glass Society (CGS)",
       "country_en": "United Kingdom",
@@ -4152,7 +4174,9 @@
         "disciplines": "1uux2d7"
       },
       "official_url": "https://cgs.org.uk/",
-      "official_located": "homepage"
+      "official_located": "homepage",
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "cgs.org.uk"
     },
     {
       "id": "curatorspace-opportunities-blandford艺术协会2026年8月公开展览",
@@ -4198,9 +4222,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://blandfordartsociety.weebly.com/uploads/1/6/9/3/16934844/exhibition-poster-a4-august-2026_orig.jpg",
       "official_url": "https://blandfordartsociety.weebly.com/society-exhibitions.html",
       "summary_en": "Blandford Art Society presents the August 2026 Open Exhibition, inviting artists from Dorset, Hampshire, Somerset, and Wiltshire to submit original works. Accepts canvas, framed works, sculpture, and textiles. Submission deadline July 12, 2026. Members £6 per piece, non-members £10. Exhibition runs August 15-21 at the Corn Exchange.",
       "org_en": "Blandford Art Society",
@@ -4224,7 +4247,9 @@
         "city": "18kp3x8",
         "country": "2v6zt",
         "disciplines": "ozdwih"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "blandfordartsociety.weebly.com"
     },
     {
       "id": "curatorspace-opportunities-梦境与噩梦-艺术家征集",
@@ -4356,9 +4381,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/d393f9484c72363e.jpg",
       "official_url": "https://thelightframegallery.com/",
       "summary_en": "The Light Frame Gallery invites guest writers for its online journal, seeking 1500-2000 word research articles exploring how museums and photography can promote community well-being. Selected writers receive £50 per article. Open call ongoing.",
       "org_en": "The Light Frame Gallery",
@@ -4379,7 +4403,9 @@
         "org": "1ebong7",
         "deadline_note": "j7n0fi",
         "disciplines": "71of38"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "screenshot"
     },
     {
       "id": "curatorspace-opportunities-elmswell图书馆展览征稿",
@@ -4421,9 +4447,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-11",
-      "updated_at": "2026-07-11",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/20693/uploads/54901/images/SWANFALL_ROAR_Asset_W+800+px+%C3%97+H+800+px.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/b9ef6afd6bea29ff.jpg",
       "summary_en": "Elmswell Library offers artists an exhibition space, approximately 240cm x 220cm, for about six weeks. No upfront fees. 15% commission on sales. Rolling deadline, open to artists at all levels.",
       "org_en": "CuratorSpace",
       "city_en": "Elmswell",
@@ -4446,7 +4471,9 @@
         "deadline_note": "2vgu0l"
       },
       "official_url": "https://www.suffolklibraries.co.uk/visit/locations-and-times/elmswell-library",
-      "official_located": "specific"
+      "official_located": "specific",
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
+      "cover_source": "screenshot"
     },
     {
       "id": "chinaresidencies-directory-no-name-studio-艺术家驻地",
@@ -4720,9 +4747,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "cover": "https://www.jsmsg.com/news/images/cc.png",
-      "cover_source": "jsmsg.com",
       "summary_en": "The Key Laboratory of Watermark Printmaking Materials and Technology Research, Ministry of Culture and Tourism, Jiangsu Provincial Art Museum, establishes 2026 open research projects for domestic and international research institutions and universities. The focus is on watermark printmaking materials, techniques, creative applications, mounting and preservation, etc. Funded projects include key projects, general projects, and self-funded projects, with a research period of 1-2 years.",
       "org_en": "Jiangsu Provincial Art Museum",
       "city_en": "Nanjing",
@@ -4745,7 +4771,9 @@
         "city": "3q7j2",
         "country": "3tz79",
         "disciplines": "1unxm1c"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "jsmsg.com"
     },
     {
       "id": "hkadc-cfa-新兴艺术家发展资助",
@@ -4917,9 +4945,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.transartists.org/sites/default/files/2022-02/Fabian%20Knecht%20BAR2019.jpg",
-      "cover_source": "transartists.org",
+      "updated_at": "2026-07-18",
+      "cover": "https://www.fondationfrancoisschneider.org/wp-content/uploads/2026/06/PON_04_029_02092024_bd-Grande.jpeg",
       "summary_en": "The Fondation François Schneider launches the first edition of the \"Talents Contemporains – La Terre\" competition, themed \"Earth\" (La Terre), for sculpture and installation works. Winning works will be acquired and exhibited in the gardens of the Pontigny Abbey, with all transportation costs fully covered by the foundation.",
       "org_en": "Fondation François Schneider",
       "city_en": "Pontigny",
@@ -4943,7 +4970,9 @@
         "disciplines": "1uhqgtc"
       },
       "official_url": "https://www.fondationfrancoisschneider.org/en/contemporary-talents-competition/contemporary-talents-competition-the-earth",
-      "official_located": "specific"
+      "official_located": "specific",
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "fondationfrancoisschneider.org"
     },
     {
       "id": "curatorspace-opportunities-krate",
@@ -4988,9 +5017,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/44668/opportunity/9810/image/b3299ba25d63a6.jpg",
-      "cover_source": "curatorspace.com",
       "summary_en": "KRATE is a transportable pop-up artist studio that will conduct six two-week residencies in vacant retail spaces across six English cities, exploring the climate emergency. Open to early to mid-career artists based in England, offering £500+ fee, media coverage, and group exhibition.",
       "org_en": "CuratorSpace",
       "country_en": "United Kingdom",
@@ -5010,7 +5038,9 @@
         "country": "2v6zt",
         "nationality": "w0thx4",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "curatorspace.com"
     },
     {
       "id": "curatorspace-opportunities-amanda-moriarty纪念奖-与emma-woffenden的导师指导",
@@ -5054,9 +5084,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/48892/opportunity/10583/image/49cade7a7b21a2ddb4dbad38d766add79e3adf5a67.png",
-      "cover_source": "curatorspace.com",
+      "updated_at": "2026-07-18",
+      "cover": "https://cgs.org.uk/wp-content/uploads/2026/04/6EWoffendenMidwifephoto_700.jpg",
       "summary_en": "The Contemporary Glass Society establishes an annual award in memory of Amanda Moriarty, providing one CGS member with four mentoring sessions (online or in-person) with renowned glass artist Emma Woffenden, plus a day in the studio. The winner receives £300 travel and accommodation subsidy. Free to apply, deadline 17 July 2026.",
       "org_en": "Contemporary Glass Society",
       "city_en": "Reading",
@@ -5079,7 +5108,9 @@
         "disciplines": "1uux2d7"
       },
       "official_url": "https://cgs.org.uk/news/meet-emma-woffenden/",
-      "official_located": "specific"
+      "official_located": "specific",
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "cgs.org.uk"
     },
     {
       "id": "bjiff-project-market-京彩台湾-两岸青年短片征集活动",
@@ -5336,9 +5367,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/a00dcd6e5589262b.jpg",
       "summary_en": "Organized by Chinese Photography Magazine and others, it calls for photographic works from across the country reflecting the natural scenery and cultural landscapes of Cangnan County, Zhejiang Province. Submission period is from now until April 30, 2027. 100 entries (individual or series) will be selected, with each receiving a fee of 800 yuan. No participation fee is charged.",
       "org_en": "Chinese Photography Magazine",
       "city_en": "Cangnan",
@@ -5361,7 +5391,9 @@
         "city": "2v70f",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-四季风景线-大美明月山-明月山全国摄影大展征稿启事",
@@ -5405,9 +5437,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
       "summary_en": "It calls for photographic and video works from across the country capturing the four seasons of Mingyue Mountain in Yichun, Jiangxi. 100 works will be selected, each with a fee of 500 yuan. No participation fee is required. Submission deadline is December 31, 2026.",
       "org_en": "Chinese Photography Magazine",
       "city_en": "Yichun",
@@ -5430,7 +5461,9 @@
         "city": "3s0ak",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "cphoto.com.cn"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-旅拍中国-玉环海屿岛-首届漩门湾主题全国摄影大展",
@@ -5474,9 +5507,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/1b32f357a4225cab.jpg",
       "summary_en": "It calls for photographic works and short videos from photographers nationwide reflecting the natural scenery, wildlife, and cultural landscapes of Xuanmen Bay National Wetland Park in Yuhuan City. 84 photographic works will be selected, each with a fee of 600 yuan; 6 short videos, each with a fee of 600 yuan. No participation fee is charged.",
       "org_en": "China Photography Publishing & Media Co., Ltd., Chinese Photography Magazine, Publicity Department of Yuhuan Municipal Committee of the CPC, Zhejiang Yuhuan Economic Development Zone Management Committee",
       "city_en": "Yuhuan",
@@ -5499,7 +5531,9 @@
         "city": "3l6o3",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-2026-尼康杯-全国青年摄影大展征稿",
@@ -5545,9 +5579,8 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/85729eb3636be72b.jpg",
       "summary_en": "Co-organized by Chinese Photography Magazine and Nikon, it invites Chinese youth photographers aged 18-40 and college students to submit photographic and video works. There are two groups: social group and university group, each selecting 50 works, with each receiving a fee of 500 yuan. No participation fee is required. Deadline: September 30, 2026.",
       "org_en": "Chinese Photography Magazine",
       "city_en": "Beijing",
@@ -5574,7 +5607,9 @@
         "age_limit": "1wcphh",
         "nationality": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-最美航拍目的地-首届中国霞浦航拍摄影大展征稿",
@@ -5618,9 +5653,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/a8a88c9dcfb5fe2d.jpg",
       "summary_en": "The first China Xiapu Aerial Photography Exhibition calls for aerial short videos and photographic works reflecting Xiapu's natural landscape, cultural history, etc. 100 works will be exhibited, each with a fee of 800 RMB, honorary certificate, and can accumulate points for China Photographers Association membership. Submission deadline: December 31, 2025. No participation fee.",
       "org_en": "Aviation (UAV) Photography Committee of China Photographers Association, China Photography Magazine, Xiapu County People's Government",
       "city_en": "Xiapu",
@@ -5643,7 +5677,9 @@
         "city": "2qge5",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-以镜为翼-启航空天-2025年长春航空展摄影大展",
@@ -5688,9 +5724,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/2d09dc13b07e7f24.jpg",
       "summary_en": "National call for photographic and video works capturing the highlights of the 2025 and previous Changchun Airshows. 90 photographic works and 10 short videos will be exhibited, each with a fee of 500 RMB, honorary certificate, and can accumulate points for China Photographers Association membership application.",
       "org_en": "China Photography Magazine",
       "city_en": "Changchun",
@@ -5714,7 +5749,9 @@
         "city": "2qtkv",
         "country": "3tz79",
         "disciplines": "94x72l"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-航拍中国丨-光影之城-厦门-全国航拍摄影大展征稿启事",
@@ -5758,9 +5795,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/2ff9f2dff80834d4.jpg",
       "summary_en": "China Photography Magazine hosts a national aerial photography exhibition, calling for aerial short videos and photographic works reflecting Xiamen's natural ecology, cultural history, and urban landscape. 100 works will be exhibited, each with a fee of 500 RMB, and can accumulate membership points. Submission deadline: October 31, 2025. No participation fee.",
       "org_en": "China Photography Magazine",
       "city_en": "Xiamen",
@@ -5783,7 +5819,9 @@
         "city": "3pq4r",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-摄影毕业季-2025年度全国高校摄影优秀毕业作品评审",
@@ -5828,9 +5866,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/d3e2774d8e995633.jpg",
       "summary_en": "Hosted by China Photography Magazine, it calls for graduation works from 2025 photography and related majors graduates nationwide. 20 outstanding works will be selected, honorary certificates issued, and promoted in the magazine and new media.",
       "org_en": "China Photography Magazine",
       "city_en": "Beijing",
@@ -5854,7 +5891,9 @@
         "city": "3qrtq",
         "country": "3tz79",
         "disciplines": "1w2r9c4"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-2025-尼康杯-全国青年摄影大展征稿",
@@ -5900,9 +5939,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/40f397dcea9350bc.jpg",
       "summary_en": "Co-hosted by China Photography Magazine and Nikon, the National Youth Photography Exhibition is open to Chinese photographers aged 18-40 and current students, calling for photographic and video works. 50 works each from social and university groups will be selected, each with a fee of 800 RMB, no participation fee. Deadline: June 30, 2025.",
       "org_en": "China Photography Magazine",
       "city_en": "Beijing",
@@ -5929,7 +5967,9 @@
         "age_limit": "1wcphh",
         "nationality": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "guangdong-photographers-assoc-征稿-古韵围楼-大美始兴-全省摄影大赛",
@@ -6192,9 +6232,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
-      "cover_source": "cnaf.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/b754739b20c20177.jpg",
       "summary_en": "The China National Arts Fund 2027 Art Talent Training Funding Project supports talent training in creation, management, and art criticism in the fields of stage arts, painting, sculpture, calligraphy, seal carving, photography, and craft arts. It includes short-term domestic, medium-to-long-term domestic, and overseas study programs.",
       "org_en": "China National Arts Fund Management Center",
       "country_en": "China",
@@ -6220,7 +6259,9 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "1thkije"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "shcdf-jjhdt-上海文化发展基金会项目资助",
@@ -6275,7 +6316,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "summary_en": "Shanghai Cultural Development Foundation 2024 Project Funding, focusing on red culture, contemporary realities, fine traditional Chinese culture, and cross-art-form transformation of classic IPs. Covers literature, film, television, drama, fine arts, etc. Newly adds special funding for original literary works publication and comic strip creation and publication. Applications accepted year-round.",
       "org_en": "Shanghai Cultural Development Foundation",
       "city_en": "Shanghai",
@@ -6314,6 +6355,7 @@
         "disciplines": "uegxbq"
       },
       "cover": "assets/covers/1143b3d829f7faf6.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -6358,7 +6400,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "summary_en": "The 10th Huayu Drama Awards call for submissions is open to Chinese-language theatre professionals. Submission deadline: August 15, 2026. The awards ceremony will be held in Guangzhou after evaluation.",
       "org_en": "Guangdong Arts Research Institute",
       "city_en": "Guangzhou",
@@ -6383,6 +6425,7 @@
         "disciplines": "1snx6wb"
       },
       "cover": "assets/covers/1166a4e59da2301f.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -6429,7 +6472,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "summary_en": "A performing arts criticism training program funded by the China National Arts Fund. Recruits 30 trainees nationwide. Training covers Guangzhou, Hong Kong, Macao, etc. Provides transportation, accommodation, and study expense subsidies. Application deadline: May 15, 2026.",
       "org_en": "Guangdong Arts Research Institute",
       "disciplines_en": [
@@ -6451,6 +6494,7 @@
         "disciplines": "17yy9qw"
       },
       "cover": "assets/covers/fd6b21eedc39b39e.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -6715,9 +6759,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cphoto.com.cn/public/assets/default/images/code.png",
-      "cover_source": "cphoto.com.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/6ef5575cc5ab36cf.jpg",
       "summary_en": "A call for graduation photography works from 2026 photography and related majors nationwide. 20 works will be selected, each with a fee of 800 RMB and a certificate. Eligible for membership points. No entry fee.",
       "org_en": "Chinese Photography Magazine",
       "country_en": "China",
@@ -6737,7 +6780,9 @@
         "org": "g1aufe",
         "country": "3tz79",
         "disciplines": "1s9bus6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×10)",
+      "cover_source": "screenshot"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度舞台艺术创作资助项目",
@@ -6794,9 +6839,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
-      "cover_source": "cnaf.cn",
       "summary_en": "The China National Arts Fund 2027 Stage Art Creation Grant is open to institutions or units, supporting the creation of large-scale stage plays and small-to-medium-scale plays (programs). Application deadline is June 15, 2026. Materials must be submitted through the official website system.",
       "org_en": "China National Arts Fund Management Center",
       "country_en": "China",
@@ -6829,7 +6873,9 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "4mncdb"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "cnaf.cn"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度美术创作资助项目",
@@ -6880,9 +6926,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
-      "cover_source": "cnaf.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/5672faf570066688.jpg",
       "summary_en": "The China National Arts Fund 2027 Fine Art Creation Grant accepts applications from the public, supporting the creation of Chinese painting, oil painting, printmaking, sculpture, watercolor (gouache) painting, lacquer painting, calligraphy, and seal cutting. Categories include organized creation and individual creation. Funding amounts: organized creation up to 2 million yuan, individual creation up to 100,000 yuan.",
       "org_en": "China National Arts Fund Management Center",
       "country_en": "China",
@@ -6909,7 +6954,9 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "1kh2jos"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "cnaf-guide-国家艺术基金-一般项目-2027年度传播交流推广资助项目",
@@ -6959,9 +7006,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
-      "cover": "https://www.cnaf.cn/Uploads/Gjysjj/Picture/2022/03/22s623949b693812.png",
-      "cover_source": "cnaf.cn",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/ffdfea0090da63a7.jpg",
       "summary_en": "The China National Arts Fund 2027 Communication, Exchange and Promotion Funding Project supports outstanding stage arts, painting, sculpture, calligraphy, seal carving, photography and craft art works in performances and exhibitions at home and abroad. The application amount shall not exceed 3 million RMB; for domestic projects, no more than 50% of total cost; for foreign projects, no more than 30%. Applicants must be institutions or organizations. Application period: April 15 to June 15, 2026.",
       "org_en": "China National Arts Fund Management Center",
       "country_en": "China",
@@ -6987,7 +7033,9 @@
         "org": "carjbt",
         "country": "3tz79",
         "disciplines": "1thkije"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "shcdf-jjhdt-上海文化发展基金会二-二六年度第一期资助项目申报指南",
@@ -7119,7 +7167,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "summary_en": "The Shanghai Cultural Development Foundation is open to the whole society for funding applications for cultural and artistic projects, covering categories such as literature, film, TV series, stage arts, fine arts, etc., with priority on original works on major themes and projects with Shanghai characteristics. Online application from now until September 5, 2025.",
       "org_en": "Shanghai Cultural Development Foundation",
       "city_en": "Shanghai",
@@ -7151,6 +7199,7 @@
         "disciplines": "6voy85"
       },
       "cover": "assets/covers/f1dfdef770047925.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -7205,7 +7254,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-13",
-      "updated_at": "2026-07-13",
+      "updated_at": "2026-07-18",
       "summary_en": "The Shanghai Cultural Development Foundation is open to the whole society for funding applications for cultural and artistic projects, covering categories such as literature, film, TV series, stage arts, fine arts, etc., with priority on original works on major themes, Performing Arts World projects, and comprehensive cultural projects. Online application from now until March 24, 2025.",
       "org_en": "Shanghai Cultural Development Foundation",
       "city_en": "Shanghai",
@@ -7240,6 +7289,7 @@
         "disciplines": "1r9hx2n"
       },
       "cover": "assets/covers/7720776bdea7d1e9.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -7681,9 +7731,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "cover": "https://www.sharjahart.org/images/Thumbnail/al_mureijah_square_thumb_%289%29.jpg",
-      "cover_source": "sharjahart.org",
       "summary_en": "The Sharjah Art Foundation invites illustrators and comic artists from GCC countries to submit proposals for six-page comics for the eighth issue of the Corniche Comic Annual. Deadline: June 30, 2026.",
       "org_en": "Sharjah Art Foundation",
       "city_en": "Sharjah",
@@ -7705,7 +7754,9 @@
         "city": "3otp6",
         "country": "d0tnah",
         "disciplines": "1egrbw6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "sharjahart.org"
     },
     {
       "id": "aec-opencalls-ars-biologica-artxscience-驻留公开征集",
@@ -8045,9 +8096,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "cover": "https://khoj-website.storage.googleapis.com/wp-content/uploads/2021/12/19135433/Khoj_Sharing_08Dec2021.png",
-      "cover_source": "khojstudios.org",
       "summary_en": "The Inlaks Shivdasani Foundation, in collaboration with the NIROX Foundation and the Centre for Indian Studies in Africa at the University of the Witwatersrand, offers a residency opportunity for Indian artists in South Africa. The residency runs from October 1 to November 12, 2026. Applicants must be Indian citizens, born after January 1, 1991, and proficient in English.",
       "org_en": "Inlaks Shivdasani Foundation",
       "country_en": "South Africa",
@@ -8065,7 +8115,9 @@
         "org": "s6k9xu",
         "country": "3pw8c",
         "disciplines": "1lnvsbt"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×2)",
+      "cover_source": "khojstudios.org"
     },
     {
       "id": "in-khoj-opportunities-swali工艺奖",
@@ -8245,9 +8297,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
-      "cover": "https://khoj-website.storage.googleapis.com/wp-content/uploads/2021/12/19135433/Khoj_Sharing_08Dec2021.png",
-      "cover_source": "khojstudios.org",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/7ae343e443cf763f.jpg",
       "summary_en": "UN.MAKE. The Art of Gender is a 5-day residential workshop for emerging artists addressing gender and its intersections with caste, class, race, religion, region, disability, etc., open to all gender identities. Applications due May 30, 2026.",
       "org_en": "Sher-Gil Sundaram Arts Foundation",
       "country_en": "India",
@@ -8269,7 +8320,9 @@
         "age_limit": "3hl52",
         "nationality": "1a1fq1s",
         "disciplines": "926vrm"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "in-khoj-opportunities-skap暑期学校-作为表演的风景",
@@ -8743,9 +8796,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
-      "cover": "https://www.sharjahart.org/images/Thumbnail/al_mureijah_square_thumb_%289%29.jpg",
-      "cover_source": "sharjahart.org",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/3c35475ce40064c2.jpg",
       "summary_en": "Sharjah Art Foundation opens applications for Al Hamriyah Studio Spaces, providing long-term or short-term studios for artists and creative practitioners at different stages for artistic research, experimentation, and production. Deadline: July 11, 2026.",
       "org_en": "Sharjah Art Foundation",
       "city_en": "Sharjah",
@@ -8761,7 +8813,9 @@
         "org": "ut481q",
         "city": "3otp6",
         "country": "d0tnah"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "sharjah_art_foundation_open_calls-corniche-8-公开征稿",
@@ -8808,9 +8862,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "cover": "https://www.sharjahart.org/images/Thumbnail/al_mureijah_square_thumb_%289%29.jpg",
-      "cover_source": "sharjahart.org",
       "summary_en": "Sharjah Art Foundation announces an open call for Corniche 8, the annual comics anthology. Open to illustrators and comic artists from Gulf Cooperation Council countries. Submit a proposal for a six-page comic. Selected artists will be invited to a three-day creative exchange in Sharjah, and works will be published.",
       "org_en": "Sharjah Art Foundation",
       "city_en": "Sharjah",
@@ -8836,7 +8889,9 @@
         "age_limit": "3hl4c",
         "nationality": "3767k2",
         "disciplines": "1egrbw6"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "sharjahart.org"
     },
     {
       "id": "sharjah_art_foundation_open_calls-sfp9短片制作资助",
@@ -8880,9 +8935,8 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
-      "cover": "https://www.sharjahart.org/images/Thumbnail/al_mureijah_square_thumb_%289%29.jpg",
-      "cover_source": "sharjahart.org",
+      "updated_at": "2026-07-18",
+      "cover": "assets/covers/0ef9ba247667490f.jpg",
       "summary_en": "Sharjah Art Foundation opens applications for the Short Film Production Grant of the 9th Sharjah Film Platform (SFP). Supports the completion of short films exploring contemporary cinematic possibilities. Total grant amount: 120,000 UAE Dirhams (approx. $30,000). Deadline: May 28, 2026.",
       "org_en": "Sharjah Art Foundation",
       "city_en": "Sharjah",
@@ -8903,7 +8957,9 @@
         "city": "3otp6",
         "country": "d0tnah",
         "disciplines": "1ynz4ot"
-      }
+      },
+      "cover_audit": "2026-07-18 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "search-ogdcn-2026东方创意之星大湾区旅游文创主题赛暨第七届国际大学生旅游文创设计大赛",
@@ -8945,7 +9001,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "2026 Oriental Creative Star Greater Bay Area Tourism Cultural and Creative Themed Competition & 7th International University Student Tourism Cultural and Creative Design Competition. Themed competition. Duration: June 11, 2026 to October 18, 2026.",
       "org_en": "Oriental Good Creative Competition Network",
@@ -8962,6 +9018,7 @@
       "official_url": "http://www.gzasc.edu.cn/yscm/info/1027/7761.htm",
       "official_located": "specific",
       "cover": "assets/covers/7b5241adda5aa510.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -10002,7 +10059,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 10th China Beijing International Art Biennale, themed \"Symbiosis,\" is calling for works from around the world. It plans to exhibit about 500 contemporary artworks, including paintings, sculptures, videos, installations, and new media. Submission deadline: July 31, 2025.",
       "org_en": "Organizing Committee of China Beijing International Art Biennale",
@@ -10034,6 +10091,7 @@
       "official_url": "http://www.bjbiennale.com.cn/cn/zldt/202506/t20250619_1346227.html",
       "official_located": "specific",
       "cover": "assets/covers/15c55e2532997aff.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×3)",
       "cover_source": "screenshot"
     },
     {
@@ -10151,7 +10209,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 10th Beijing Biennale, themed \"Symbiosis,\" is calling for works from around the world. It plans to exhibit about 500 contemporary artworks, including paintings, sculptures, videos, installations, and new media. Submission deadline: July 31, 2025.",
       "org_en": "China Artists Association",
@@ -10183,6 +10241,7 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/241ea0df90ed066d.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×6)",
       "cover_source": "screenshot"
     },
     {
@@ -10232,7 +10291,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "Hong Kong Visual Arts Centre (vA!) invites artists to apply for the 2026-28 residency programme, offering a 6-month residency, 8-month exhibition, and up to HKD 260,000 funding. Open to Hong Kong ID holders aged 18 or above. Deadline: June 3, 2026.",
       "org_en": "Hong Kong Visual Arts Centre",
@@ -10263,6 +10322,7 @@
         "disciplines": "n75dii"
       },
       "cover": "assets/covers/2183aa595f274970.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×2)",
       "cover_source": "screenshot"
     },
     {
@@ -10466,7 +10526,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "Purple Art Award invites university students to submit design works, with free track (no theme), industry-education integration track, and thematic track, covering visual communication, product design, environmental space, fashion design, digital media, traditional art, AIGC, etc. Free submission, deadline: June 30, 2026.",
       "org_en": "Purple Art Award Organizing Committee",
@@ -10495,6 +10555,7 @@
         "disciplines": "c74k8g"
       },
       "cover": "assets/covers/5ee47445ac15ade7.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -10539,7 +10600,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-14",
-      "updated_at": "2026-07-14",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The Daxing District Garden City Yongding Bay Development and Construction Task Force is openly soliciting brand LOGO design proposals from the public, aiming to highlight the ecological and cultural heritage of the Yongding River and the connotation of garden city construction, creating a new urban landmark along the Yongding River.",
       "org_en": "Beijing Daxing District Garden City Yongding Bay Development and Construction Task Force",
@@ -10570,6 +10631,7 @@
       "official_url": "https://www.bjdx.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/c7df06e4e00c73df.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -11900,7 +11962,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 7th Yunnan Provincial Mass Culture 'Caiyun Award' invites mass culture workers and enthusiasts to submit works of art, calligraphy, and photography. Online registration for the preliminary round closes on May 31, 2026, and final submission deadline is June 20, 2026. 18 award-winning works and several exhibition works will be selected.",
       "org_en": "Yunnan Provincial Department of Culture and Tourism, Qujing Municipal People's Government",
@@ -11930,6 +11992,7 @@
       "official_url": "https://dct.yn.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/c3a7e0540e595aee.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -11977,7 +12040,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The Creative Yunnan Cultural Industry Expo (2025) Design Exhibition, themed 'Beautiful China·Treasure Yunnan·Harmonious Lancang-Mekong', features six tracks and invites submissions from the public. Outstanding works will be pre-selected for the 2026 Yunnan Spring Festival Gala. Registration deadline: November 15, 2025.",
       "org_en": "Publicity Department of Yunnan Provincial Committee of the CPC",
@@ -12005,6 +12068,7 @@
       "official_url": "https://www.ynxc.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/48a9cdc067e32c3e.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -12399,7 +12463,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "Co-organized by the China Artists Association and the Jiangsu Provincial Department of Culture and Tourism, the First Youth Print Biennale is open to printmakers under 45. The exhibition will be held at the Jiangsu Art Museum in December 2025, featuring about 260 works.",
       "org_en": "China Artists Association, Jiangsu Provincial Department of Culture and Tourism",
@@ -12427,6 +12491,7 @@
         "disciplines": "1unxm1c"
       },
       "cover": "assets/covers/aaee826406ce18d1.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -12823,7 +12888,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 10th Beijing International Art Biennale, themed \"Symbiosis,\" is open for global submissions of paintings, sculptures, videos, installations, new media works, etc. Submission deadline: July 31, 2025. Approximately 500 works will be exhibited.",
       "org_en": "China Federation of Literary and Art Circles, Publicity Department of the CPC Beijing Municipal Committee, China Artists Association",
@@ -12855,249 +12920,7 @@
       "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
       "official_located": "specific",
       "cover": "assets/covers/ac0974bd887ae5fd.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-news-第十届中国北京国际美术双年展",
-      "category": "opencall",
-      "title_zh": "第十届中国北京国际美术双年展",
-      "title_en": "10th China Beijing International Art Biennale",
-      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": "2025-07-31",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "新媒体"
-      ],
-      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球征集作品，拟展出500件左右当代美术作品，包括绘画、雕塑、影像、装置、新媒体等，投稿截止2025年7月31日。",
-      "url": "https://news.qq.com/rain/a/20250619A0483P00",
-      "source_url": "https://news.qq.com/rain/a/20250619A0483P00",
-      "domain": "news.qq.com",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 10th China Beijing International Art Biennale, themed \"Symbiosis,\" is open for global submissions, planning to exhibit about 500 contemporary artworks, including paintings, sculptures, videos, installations, new media works, etc. Submission deadline: July 31, 2025.",
-      "org_en": "China Federation of Literary and Art Circles, Publicity Department of the CPC Beijing Municipal Committee, China Artists Association",
-      "city_en": "Beijing",
-      "country_en": "China",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Video",
-        "Installation",
-        "New Media"
-      ],
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "1gjnrkt",
-        "summary": "1rqc0bw",
-        "org": "14vrswz",
-        "city": "3qrtq",
-        "country": "3tz79",
-        "disciplines": "1dyio9s"
-      },
-      "official_url": "http://www.bjbiennale.com.cn/cn/zlzn/",
-      "official_located": "specific",
-      "cover": "assets/covers/d4c36c0841f723fa.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-chinanews-第十届中国北京国际美术双年展",
-      "category": "opencall",
-      "title_zh": "第十届中国北京国际美术双年展",
-      "title_en": "10th China Beijing International Art Biennale",
-      "org_zh": "中国北京国际美术双年展组委会",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": "2025-07-31",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "新媒体"
-      ],
-      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球征集作品，投稿截止2025年7月31日，拟展出约500件当代美术作品，涵盖绘画、雕塑、影像、装置、新媒体等。",
-      "url": "https://www.chinanews.com.cn/cul/2025/06-18/10434469.shtml",
-      "source_url": "https://www.chinanews.com.cn/cul/2025/06-18/10434469.shtml",
-      "domain": "chinanews.com.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 10th China Beijing International Art Biennale, themed \"Symbiosis,\" is open for global submissions. Submission deadline: July 31, 2025. Approximately 500 contemporary artworks will be exhibited, covering paintings, sculptures, videos, installations, new media, etc.",
-      "org_en": "Organizing Committee of the China Beijing International Art Biennale",
-      "city_en": "Beijing",
-      "country_en": "China",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Video",
-        "Installation",
-        "New Media"
-      ],
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "1gjnrkt",
-        "summary": "rth60l",
-        "org": "1r6elao",
-        "city": "3qrtq",
-        "country": "3tz79",
-        "disciplines": "1dyio9s"
-      },
-      "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
-      "official_located": "specific",
-      "cover": "assets/covers/ef2f74811bae2bd6.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-news-第十届中国北京国际美术双年展作品征集",
-      "category": "opencall",
-      "title_zh": "第十届中国北京国际美术双年展作品征集",
-      "title_en": "Call for Works for the 10th China Beijing International Art Biennale",
-      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "原文未提及截止日期",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "新媒体"
-      ],
-      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球征集美术作品约500件，涵盖绘画、雕塑、影像、装置、新媒体等，拟于2025年12月31日至2026年2月1日在北京展览馆举办。",
-      "url": "https://news.gmw.cn/2025-06/20/content_38102269.htm",
-      "source_url": "https://news.gmw.cn/2025-06/20/content_38102269.htm",
-      "domain": "news.gmw.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 10th China Beijing International Art Biennale, themed \"Symbiosis,\" is open for global submissions of about 500 artworks, covering paintings, sculptures, videos, installations, new media, etc. It is planned to be held at the Beijing Exhibition Center from December 31, 2025 to February 1, 2026.",
-      "org_en": "China Federation of Literary and Art Circles, Publicity Department of the CPC Beijing Municipal Committee, China Artists Association",
-      "city_en": "Beijing",
-      "country_en": "China",
-      "deadline_note_en": "Deadline not mentioned in the original text",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Video",
-        "Installation",
-        "New Media"
-      ],
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "deadline_note",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "1az9q3r",
-        "summary": "apdvj8",
-        "org": "14vrswz",
-        "city": "3qrtq",
-        "country": "3tz79",
-        "deadline_note": "w8x94v",
-        "disciplines": "1dyio9s"
-      },
-      "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
-      "official_located": "specific",
-      "cover": "assets/covers/805398930b70be04.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×6)",
       "cover_source": "screenshot"
     },
     {
@@ -13147,7 +12970,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The Hong Kong Visual Arts Centre invites proposals for the 2026-2028 residency programme. Artists or collectives aged 18 or above holding a valid Hong Kong Identity Card may apply for a six-month residency, using ceramics, printmaking, sculpture, and other studios for cross-media creation. Works may be publicly exhibited, and participants may engage in workshops, talks, etc.",
       "org_en": "Hong Kong Visual Arts Centre",
@@ -13182,6 +13005,7 @@
       "official_url": "https://www.apo.hk/en/web/apo/va_artist_in_residence_2026.html",
       "official_located": "specific",
       "cover": "assets/covers/b5c21409838c2766.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×2)",
       "cover_source": "screenshot"
     },
     {
@@ -13445,7 +13269,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The Art Installation Design Competition hosted by the Wuerhe District Bureau of Culture, Sports and Tourism calls for installation proposals themed around integrating the natural wonder of Demon City with humanistic services, open to the world. 10 finalists will be selected with a prize of 10,000 RMB per person. Works must be original and feasible for installation.",
       "org_en": "Wuerhe District Bureau of Culture, Sports and Tourism",
@@ -13477,6 +13301,7 @@
       "official_url": "https://www.weh.gov.cn/",
       "official_located": "homepage",
       "cover": "assets/covers/21536d33b2405cb2.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -13696,169 +13521,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "search-bj-第十届中国北京国际美术双年展",
-      "category": "opencall",
-      "title_zh": "第十届中国北京国际美术双年展",
-      "title_en": "10th China Beijing International Art Biennale",
-      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "原文未提及具体截止日期",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "数字",
-        "影像",
-        "新媒体"
-      ],
-      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球征集作品，拟展出500件左右，涵盖绘画、雕塑、数字、影像、新媒体等，将于2025年12月31日至2026年2月1日在北京展览馆举办。",
-      "url": "http://www.bj.xinhuanet.com/20250619/eb28079fb82a4ab089356673fed0ef64/c.html",
-      "source_url": "http://www.bj.xinhuanet.com/20250619/eb28079fb82a4ab089356673fed0ef64/c.html",
-      "domain": "bj.xinhuanet.com",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 10th Beijing Biennale, themed 'Symbiosis', calls for works globally, expecting to exhibit around 500 pieces including painting, sculpture, digital, video, and new media. It will be held at Beijing Exhibition Center from December 31, 2025 to February 1, 2026.",
-      "org_en": "China Federation of Literary and Art Circles, Publicity Department of CPC Beijing Municipal Committee, China Artists Association",
-      "city_en": "Beijing",
-      "country_en": "China",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Digital",
-        "Video",
-        "New Media"
-      ],
-      "deadline_note_en": "No specific deadline mentioned in the original text",
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "deadline_note",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "1gjnrkt",
-        "summary": "14n46db",
-        "org": "14vrswz",
-        "city": "3qrtq",
-        "country": "3tz79",
-        "deadline_note": "3ntwjf",
-        "disciplines": "ia4mjw"
-      },
-      "official_url": "http://www.bjbiennale.com.cn/cn/zldt/202506/t20250619_1346227.html",
-      "official_located": "specific",
-      "cover": "assets/covers/8bc6adc649604151.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-cn5v-第十届中国北京国际美术双年展",
-      "category": "opencall",
-      "title_zh": "第十届中国北京国际美术双年展",
-      "title_en": "10th China Beijing International Art Biennale",
-      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": "2025-07-31",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "新媒体"
-      ],
-      "summary_zh": "第十届北京双年展以“共生”为主题，面向全球征集绘画、雕塑、影像、装置、新媒体等作品，投稿截止2025年7月31日，拟展出约500件作品。",
-      "url": "http://www.cn5v.com/2025/06/105870.html",
-      "source_url": "http://www.cn5v.com/2025/06/105870.html",
-      "domain": "cn5v.com",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 10th Beijing Biennale, themed 'Symbiosis', calls for works in painting, sculpture, video, installation, and new media. Submission deadline: July 31, 2025. Approximately 500 works will be exhibited.",
-      "org_en": "China Federation of Literary and Art Circles, Publicity Department of CPC Beijing Municipal Committee, China Artists Association",
-      "city_en": "Beijing",
-      "country_en": "China",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Video",
-        "Installation",
-        "New Media"
-      ],
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "1gjnrkt",
-        "summary": "16cdeua",
-        "org": "14vrswz",
-        "city": "3qrtq",
-        "country": "3tz79",
-        "disciplines": "1dyio9s"
-      },
-      "official_url": "http://www.bjbiennale.com.cn/cn/zlzn/",
-      "official_located": "specific",
-      "cover": "assets/covers/d3615e1b256a0909.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "search-artenda-throwing-shapes-clay-city",
       "category": "residency",
       "title_zh": "Throwing Shapes - Clay City",
@@ -13968,7 +13630,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "Klimt02 announces open call for internship positions 2025, targeting artists, deadline December 31, 2024, location in Europe.",
       "org_en": "Klimt02",
@@ -13985,8 +13647,9 @@
       },
       "official_url": "https://klimt02.net/events/open-calls/open-call-internship-positions-klimt02",
       "official_located": "specific",
-      "cover": "assets/covers/568e356547fc2b77.jpg",
-      "cover_source": "screenshot"
+      "cover": "https://klimt02.net/common/media.php?Id=108181&Hash=e81bad0b2b2dc03614ead1918afe50fe",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
+      "cover_source": "klimt02.net"
     },
     {
       "id": "search-pointsarts-几点国际驻留项目",
@@ -14110,86 +13773,6 @@
         "disciplines": "1wdatm5"
       },
       "cover": "assets/covers/50c215e604151ee5.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-shejijingsai-第十届中国北京国际美术双年展",
-      "category": "opencall",
-      "title_zh": "第十届中国北京国际美术双年展",
-      "title_en": "The 10th Beijing International Art Biennale, China",
-      "org_zh": "中国文学艺术界联合会、中共北京市委宣传部、中国美术家协会",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": "2025-07-31",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": false,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "数字艺术"
-      ],
-      "summary_zh": "第十届中国北京国际美术双年展以“共生”为主题，面向全球艺术家征集绘画、雕塑、影像、装置、数字艺术等作品。报名截止2025年7月31日，无需报名及参展费。国内入选作者具备加入中国美协条件之一。",
-      "url": "https://www.shejijingsai.com/2025/06/1378950.html",
-      "source_url": "https://www.shejijingsai.com/2025/06/1378950.html",
-      "domain": "shejijingsai.com",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 10th Beijing International Art Biennale, with the theme 'Symbiosis', calls for works from global artists in painting, sculpture, video, installation, digital art, etc. Registration deadline July 31, 2025, no registration or participation fee. Domestic selected authors meet one of the conditions for joining the China Artists Association.",
-      "org_en": "China Federation of Literary and Art Circles, Publicity Department of the CPC Beijing Municipal Committee, China Artists Association",
-      "city_en": "Beijing",
-      "country_en": "China",
-      "disciplines_en": [
-        "Painting",
-        "Sculpture",
-        "Video",
-        "Installation",
-        "Digital Art"
-      ],
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "1gjnrkt",
-        "summary": "9wonp0",
-        "org": "14vrswz",
-        "city": "3qrtq",
-        "country": "3tz79",
-        "disciplines": "hocoir"
-      },
-      "official_url": "https://www.caanet.org.cn/newsdetail.mx?id=9816",
-      "official_located": "specific",
-      "cover": "assets/covers/9c9b7e1af6a98329.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -15024,7 +14607,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 10th Beijing International Art Biennale, themed “Symbiosis,” calls for artworks created within the past three years, including painting, sculpture, video, installation, new media, etc. Submission deadline: July 31, 2025.",
       "org_en": "China Federation of Literary and Art Circles, Publicity Department of CPC Beijing Municipal Committee, China Artists Association",
@@ -15054,6 +14637,7 @@
         "disciplines": "1dyio9s"
       },
       "cover": "assets/covers/bcf61635b1993622.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×3)",
       "cover_source": "screenshot"
     },
     {
@@ -15749,7 +15333,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The Swatch Art Peace Hotel residency program welcomes established and emerging artists worldwide to live and work in apartments and studios for three to six months, covering dancers, musicians, photographers, filmmakers, writers, painters, conceptual artists, and other creatives.",
       "org_en": "Swatch Art Peace Hotel",
@@ -15781,8 +15365,9 @@
         "deadline_note": "w8x94v",
         "disciplines": "111efyv"
       },
-      "cover": "assets/covers/c3b2ffd39b3aa06c.jpg",
-      "cover_source": "screenshot"
+      "cover": "https://www.swatch-art-peace-hotel.com/sites/default/files/images/upload/upload/global_home.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
+      "cover_source": "swatch-art-peace-hotel.com"
     },
     {
       "id": "search-colour4lifecompetition-色彩人生绘画比赛",
@@ -16494,7 +16079,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 19th China (Shandong) Youth Micro Film Competition calls for submissions from the public, divided into a Student Section and a General Section, covering feature films, documentaries, animation, and public service advertisements. Registration is free. Works must be created after January 1, 2025. Deadline: July 31, 2026.",
       "org_en": "China Film Association, Shandong Federation of Literary and Art Circles, Shandong Provincial Department of Education",
@@ -16522,6 +16107,7 @@
         "disciplines": "1saxaw9"
       },
       "cover": "assets/covers/d60af9e5c2027ffe.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -17836,7 +17422,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 7th International Exhibition and Symposium on Art and Science will be held in Beijing from November 1, 2026 to February 28, 2027, with the theme 'Strings of the World: Variations of Art and Science'. It calls for works and papers globally. Submission deadline for works: June 18, 2026; Submission deadline for papers: July 31, 2026.",
       "org_en": "Tsinghua University",
@@ -17857,6 +17443,7 @@
         "country": "3tz79"
       },
       "cover": "assets/covers/4a1a9140eec682e0.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -17971,7 +17558,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 15th China Photography Art Festival's registration exhibition invites photographers, enthusiasts, curators, and institutions from home and abroad to submit themed exhibitions showcasing Chinese culture and natural beauty. Deadline: September 25, 2024. Booth fee: RMB 600 per linear meter.",
       "org_en": "Organizing Committee of the 15th China Photography Art Festival",
@@ -17997,6 +17584,7 @@
         "disciplines": "1s9bus6"
       },
       "cover": "assets/covers/36b32b4ff81d74b6.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -19267,7 +18855,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 2026 Nanbo (Dali) International Photography Exhibition issues an open call for submissions and exhibitors. It features four sections: Highlight Exhibition, Dali Image Art Corridor, Image Art Collection Route, and Photography Equipment Expo. Selected exhibitors pay a deposit of 2,000 RMB, refunded after the exhibition.",
       "org_en": "Propaganda Department of Dali Prefectural Committee of the CPC",
@@ -19296,6 +18884,7 @@
         "disciplines": "1s9bus6"
       },
       "cover": "assets/covers/a29cf84ebc8d7002.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -19873,7 +19462,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "Hebei Provincial Mass Art Center launches the 'Great Beauty Hebei' provincial fine art, photography, and intangible cultural heritage themed exhibition call for submissions. Artwork types: fine art, photography, and intangible cultural heritage. Contact the local mass art center (cultural center) before the end of September to submit works. Selected works will be exhibited and receive exhibition certificates.",
       "org_en": "Hebei Provincial Mass Art Center (Provincial Intangible Cultural Heritage Center)",
@@ -19901,6 +19490,7 @@
         "disciplines": "117mkny"
       },
       "cover": "assets/covers/2183293178d09ed0.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -20366,7 +19956,7 @@
       "status": "expired",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The 10th Beijing Biennale is themed 'Symbiosis' and is open to global submissions. It plans to exhibit about 500 works, including painting, sculpture, video, installation, and new media. Submission deadline: July 31, 2025. Participation can be through nomination by the curatorial committee, institutional recommendation, or independent submission.",
       "org_en": "China Artists Association",
@@ -20396,6 +19986,7 @@
         "disciplines": "1dyio9s"
       },
       "cover": "assets/covers/3c1eb41de42977c4.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×6)",
       "cover_source": "screenshot"
     },
     {
@@ -20440,7 +20031,7 @@
       "status": "open",
       "verified_at": null,
       "last_seen": "2026-07-15",
-      "updated_at": "2026-07-15",
+      "updated_at": "2026-07-18",
       "_via": "search",
       "summary_en": "The Ministry of Culture and Tourism implements the 2024 National Art Museum Young Curator Support Program. Provincial culture and tourism administrative departments organize eligible art museums in their regions to participate in the application. Application materials must be sent to the Art Division of the Beijing Municipal Bureau of Culture and Tourism for review before May 8, 2024.",
       "org_en": "Ministry of Culture and Tourism",
@@ -20466,6 +20057,7 @@
         "disciplines": "1tl8y1s"
       },
       "cover": "assets/covers/fea2ab31fdd0b097.jpg",
+      "cover_audit": "2026-07-18 审核撤换(截图内容相同×22)",
       "cover_source": "screenshot"
     },
     {
@@ -22051,6 +21643,295 @@
       "_via": "submit",
       "cover": "assets/covers/submit-1.jpg",
       "cover_source": "user"
+    },
+    {
+      "id": "search-fj-首届中国-厦门-马约翰艺术大展征集",
+      "category": "opencall",
+      "title_zh": "首届中国（厦门）马约翰艺术大展征集",
+      "title_en": null,
+      "org_zh": "中国工艺美术学会、清华大学美术学院、清华大学奥林匹克艺术研究中心、厦门市体育局、厦门市文联、厦门市鼓浪屿—万石山风景名胜区管理委员会",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": "2023-10-29",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "油画",
+        "版画",
+        "综合绘画",
+        "水墨",
+        "水彩",
+        "雕塑",
+        "装置影像",
+        "新媒体艺术"
+      ],
+      "summary_zh": "首届中国（厦门）马约翰艺术大展面向全球公开征稿，作品形式包括油画、版画、综合绘画、水墨、水彩、雕塑、装置影像、新媒体艺术等，展览将于2023年11月在厦门鼓浪屿举办。",
+      "url": "http://fj.chinadaily.com.cn/a/202309/27/WS6513c731a310936092f23f45.html",
+      "source_url": "http://fj.chinadaily.com.cn/a/202309/27/WS6513c731a310936092f23f45.html",
+      "domain": "fj.chinadaily.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-17",
+      "updated_at": "2026-07-17",
+      "_via": "search"
+    },
+    {
+      "id": "search-trueart-2022无界艺术展",
+      "category": "opencall",
+      "title_zh": "2022无界艺术展",
+      "title_en": null,
+      "org_zh": "三影堂摄影艺术中心",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": "2022-02-07",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "装置",
+        "视频",
+        "绘画",
+        "雕塑",
+        "艺术设计",
+        "综合材料"
+      ],
+      "summary_zh": "第三届三影堂无界艺术展面向艺术家公开征集作品，不限主题，作品形式包括摄影、装置、视频、绘画、雕塑、艺术设计、综合材料等。入选作品将在厦门三影堂参与为期一个月的群展，开幕周有嘉宾分享会、Critique、放映、艺术书展等活动。",
+      "url": "https://www.trueart.com/news/499770.html",
+      "source_url": "https://www.trueart.com/news/499770.html",
+      "domain": "trueart.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-17",
+      "updated_at": "2026-07-17",
+      "_via": "search"
+    },
+    {
+      "id": "search-szmc-深圳地铁美术馆征集公共艺术作品",
+      "category": "opencall",
+      "title_zh": "深圳地铁美术馆征集公共艺术作品",
+      "title_en": null,
+      "org_zh": "深圳地铁建设集团有限公司",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": "2019-05-04",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "壁画",
+        "装置",
+        "新媒体"
+      ],
+      "summary_zh": "深圳地铁美术馆面向社会征集公共艺术作品，主题为“对话”，涵盖5号线南延线7个站点和9号线西延线9个站点共17个墙体空间。最终实施方案奖励8万元，入围方案奖励5千元。投稿截止2019年5月4日。",
+      "url": "https://www.szmc.net/szmc_m/home/xinweenzhongxin/gongsigonggao/201904/1747.html",
+      "source_url": "https://www.szmc.net/szmc_m/home/xinweenzhongxin/gongsigonggao/201904/1747.html",
+      "domain": "szmc.net",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-17",
+      "updated_at": "2026-07-17",
+      "_via": "search"
+    },
+    {
+      "id": "search-nspai-2021第五届深圳-琵鹭杯-公共艺术精英赛暨-深圳市城市轨道交通12-13号线文",
+      "category": "opencall",
+      "title_zh": "2021第五届深圳“琵鹭杯”公共艺术精英赛暨 深圳市城市轨道交通12、13号线文化艺术方案征集公告",
+      "title_en": "Announcement of 5th Shenzhen Spoonbill Cup Public Art Competition 2021 and the Shenzhen Urban Rail Transit line 12 and 13 Arts and Culture Proposal Entries",
+      "org_zh": "深圳市新空间·公共艺术研究院",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": "2021-12-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "公共艺术"
+      ],
+      "summary_zh": "2021第五届深圳“琵鹭杯”公共艺术精英赛面向国内外艺术家、设计师征集深圳地铁12、13号线公共艺术方案，分为公共艺术方案类和公共艺术计划类，设实施奖和优胜奖，获奖作品推荐给深圳地铁集团。",
+      "url": "http://nspai.cn/index.php/news/detail/231/nspai_new_competition",
+      "source_url": "http://nspai.cn/index.php/news/detail/231/nspai_new_competition",
+      "domain": "nspai.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-17",
+      "updated_at": "2026-07-17",
+      "_via": "search"
+    },
+    {
+      "id": "search-jiaju-对话-深圳地铁美术馆艺术展作品征集",
+      "category": "opencall",
+      "title_zh": "“对话”——深圳地铁美术馆艺术展作品征集",
+      "title_en": null,
+      "org_zh": "深圳市地铁集团有限公司",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": "2019-05-04",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "壁画",
+        "装置",
+        "新媒体"
+      ],
+      "summary_zh": "深圳地铁美术馆面向公众征集公共艺术作品，主题为“对话”，涵盖5/9号线16个车站17个墙体空间。作品形式包括雕塑、壁画、装置、新媒体等。最终实施方案奖励80,000元，入围方案奖励5,000元。投稿截止2019年5月4日。",
+      "url": "https://jiaju.sina.cn/zixun/20190424/6526636646048530743.shtml",
+      "source_url": "https://jiaju.sina.cn/zixun/20190424/6526636646048530743.shtml",
+      "domain": "jiaju.sina.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-17",
+      "updated_at": "2026-07-17",
+      "_via": "search"
+    },
+    {
+      "id": "search-yshk-art-2022第六届深圳-琵鹭杯-公共艺术精英赛",
+      "category": "opencall",
+      "title_zh": "2022第六届深圳“琵鹭杯”公共艺术精英赛",
+      "title_en": "The 6th Shenzhen Spoonbill Cup Public Art Competition",
+      "org_zh": "梅溪湖投资（长沙）有限公司",
+      "city_zh": "长沙",
+      "country_zh": "中国",
+      "deadline": "2022-12-16",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "公共艺术"
+      ],
+      "summary_zh": "2022第六届深圳“琵鹭杯”公共艺术精英赛面向全球征集长沙梅溪湖国际新城城市公共艺术作品设计方案，主题为“艺术·生态·共享”，征集时间2022年11月1日至12月16日。",
+      "url": "https://www.yshk-art.com/contend-detail-2711.html",
+      "source_url": "https://www.yshk-art.com/contend-detail-2711.html",
+      "domain": "yshk-art.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-17",
+      "updated_at": "2026-07-17",
+      "_via": "search"
     }
   ]
 }

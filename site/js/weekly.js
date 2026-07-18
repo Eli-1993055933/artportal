@@ -108,26 +108,33 @@
     return '<a class="wra-ref" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener nofollow"' : "") + '>' + esc(ref.text) + '</a><sup class="wra-sup">[' + ref.n + ']</sup>';
   }
   function renderArticle(r) {
+    // 中英切换:英文界面且该期带 en 平行版 → 用英文文本层(image/references 共用中文版;
+    // 英文由机器翻译,meta 行如实标注);老刊/翻译失败 → 英文界面回退中文。
+    var en = AP.lang === "en" && r.en;
+    var T = en ? r.en : r;
+    var byline = (AP.lang === "en" ? "By " : "文 / ") + (r.author || "Eli");
+    var mtTag = en ? " · machine-translated" : "";
     var html =
       '<div class="ppage__inner wrpage wra">' + backBtn() +
       '<header class="wra-head">' +
         '<div class="wra-brand">ARTPORTAL · ' + esc(AP.t("wrBrand")) + '</div>' +
-        '<h1 class="wra-title">' + esc(r.title) + '</h1>' +
-        (r.subtitle ? '<p class="wra-sub">' + esc(r.subtitle) + '</p>' : "") +
-        '<p class="wra-meta">' + esc(r.id + " · " + (r.date || "")) + ' · ' + esc(AP.t("wrAiNote")) + '</p>' +
+        '<h1 class="wra-title">' + esc(T.title) + '</h1>' +
+        (T.subtitle ? '<p class="wra-sub">' + esc(T.subtitle) + '</p>' : "") +
+        '<p class="wra-meta">' + esc(byline) + ' · ' + esc(r.id + " · " + (r.date || "")) + ' · ' + esc(AP.t("wrAiNote")) + esc(mtTag) + '</p>' +
       '</header>';
-    (r.sections || []).forEach(function (sc) {
+    (T.sections || []).forEach(function (sc, i) {
+      var zhSec = (r.sections || [])[i] || {};          // 配图跟中文版结构走(en 只译文本层)
       html += '<section class="wra-sec"><h2 class="wra-h2">' + esc(sc.heading) + '</h2>';
-      if (sc.image) {
-        html += '<figure class="wra-fig"><img loading="lazy" src="' + esc(sc.image.src) + '" alt="" onerror="this.parentNode.remove()" />' +
-          '<figcaption>' + esc(sc.image.caption) + '</figcaption></figure>';
+      if (zhSec.image) {
+        html += '<figure class="wra-fig"><img loading="lazy" src="' + esc(zhSec.image.src) + '" alt="" onerror="this.parentNode.remove()" />' +
+          '<figcaption>' + esc(zhSec.image.caption) + '</figcaption></figure>';
       }
       (sc.paragraphs || []).forEach(function (p) {
         html += '<p class="wra-p">' + p.map(function (sg) { return sg.t != null ? esc(sg.t) : refLinkHtml(sg.ref); }).join("") + '</p>';
       });
       html += '</section>';
     });
-    if (r.closing) html += '<p class="wra-closing">' + esc(r.closing) + '</p>';
+    if (T.closing) html += '<p class="wra-closing">' + esc(T.closing) + '</p>';
     if (r.references && r.references.length) {
       html += '<div class="wra-refs"><h2 class="wra-h2">' + esc(AP.t("wraRefs")) + '</h2>';
       r.references.forEach(function (ref) {

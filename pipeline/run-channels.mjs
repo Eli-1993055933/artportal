@@ -11,6 +11,7 @@
 // 信源清单:sources-news.json / sources-jobs.json;状态:state/hashes-channels.json。
 
 import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
+import { reportAgent } from "./lib/agent-report.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
@@ -200,4 +201,6 @@ async function main() {
   console.log(`\n[频道管道] 提取 ${stats.extracted} · 入库 ${stats.added} · 丢弃 ${stats.dropped} · 未变跳过 ${stats.unchanged} · 失败 ${stats.failed.length}${stats.failed.length ? " " + JSON.stringify(stats.failed.slice(0, 5)) : ""}`);
 }
 
-main().catch(e => { console.error("频道管道异常:", e); process.exit(1); });
+const _t0 = Date.now();
+main().then(() => reportAgent("channels", true, "资讯/招聘每日抓取完成", null, Date.now() - _t0))
+  .catch(async e => { console.error("频道管道异常:", e); await reportAgent("channels", false, String(e.message || e).slice(0, 150), null, Date.now() - _t0); process.exit(1); });

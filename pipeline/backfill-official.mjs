@@ -7,6 +7,7 @@
 // 一次性大批量回填由多智能体工作流完成,这里主要覆盖日常增量。
 
 import { readFile, writeFile, rename } from "node:fs/promises";
+import { reportAgent } from "./lib/agent-report.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { locateOfficial } from "./lib/locate-official.mjs";
@@ -60,3 +61,4 @@ for (const [id, r] of results) {
 await writeFile(DATA + ".tmp", JSON.stringify(fresh, null, 2), "utf8");
 await rename(DATA + ".tmp", DATA);
 console.log(`完成:定位到 ${found} 条,写回 ${merged} 条。其余留待下次重试。`);
+await reportAgent("locator", true, `官网定位:定位到 ${found} 条,写回 ${merged} 条`, { found, merged });
