@@ -184,6 +184,7 @@
     $("searchInput").setAttribute("data-i18n-ph", phKey);
     $("searchInput").setAttribute("placeholder", AP.t(phKey));
     if (AP.router.parse().name === "detail") AP.router.goList();
+    if (AP.weekly) AP.weekly.sync(ch);        // 周报横条:仅资讯频道显示
     window.scrollTo(0, 0);
     loadData();
   }
@@ -358,6 +359,7 @@
       var sb = $("searchBanner");
       if (sb && !sb.hidden && lastBanner) setSearchBanner(lastBanner.q, lastBanner.n, lastBanner.ch);
       if (AP.profilePage) AP.profilePage.refresh();   // 用户主页开着 → 按新语言重渲
+      if (AP.weekly) AP.weekly.refresh();             // 周报页/横条同理
     });
 
     // 提交机会:站内投稿表单(登录 → 填写 → 审核通过后发布);手机端为右下角悬浮 ➕
@@ -498,6 +500,12 @@
 
   function byId(id) {
     for (var i = 0; i < allData.length; i++) if (allData[i].id === id) return allData[i];
+    // 详情页只属于机会频道:当前停在别的频道时(如从周报/主页点开机会深链),
+    // 回退到已缓存的机会数据里找,免得被误判"不存在"而清掉路由。
+    var opp = cache.opportunities;
+    if (opp && opp !== allData) {
+      for (var j = 0; j < opp.length; j++) if (opp[j].id === id) return opp[j];
+    }
     return null;
   }
 

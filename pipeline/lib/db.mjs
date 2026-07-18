@@ -96,6 +96,13 @@ export async function getDb() {
       );
       CREATE INDEX IF NOT EXISTS idx_works_uid ON works(uid);
       CREATE INDEX IF NOT EXISTS idx_works_status ON works(status);
+      CREATE TABLE IF NOT EXISTS newsletter_sends (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        wid TEXT NOT NULL, email TEXT NOT NULL,
+        ok INTEGER NOT NULL, err TEXT,
+        at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_nl_wid ON newsletter_sends(wid);
     `);
     return db;
   } catch (e) {
@@ -407,6 +414,33 @@ export async function workRateOk(uid, max = 3) {   // 单用户 24 小时最多 
 export async function countPendingWorks() {
   try { const d = await getDb(); return d.prepare("SELECT COUNT(*) n FROM works WHERE status='pending'").get().n; }
   catch (e) { return 0; }
+}
+
+// ---------- 周报发送记录(第 5 项):群发留痕 + 断点续发(同期已成功的不重发) ----------
+export async function nlLogSend(wid, email, ok, err) {
+  try {
+    const d = await getDb();
+    d.prepare("INSERT INTO newsletter_sends(wid,email,ok,err,at) VALUES(?,?,?,?,?)")
+      .run(wid, email, ok ? 1 : 0, err ? String(err).slice(0, 200) : null, new Date().toISOString());
+  } catch (e) {}
+}
+// 某期已发送成功的邮箱集合(重跑群发时跳过,防重复打扰)
+export async function nlSentSet(wid) {
+  try {
+    const d = await getDb();
+    return new Set(d.prepare("SELECT DISTINCT email FROM newsletter_sends WHERE wid=? AND ok=1").all(wid).map(r => r.email));
+  } catch (e) { return new Set(); }
+}
+export async function nlRecent(limit = 100) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM newsletter_sends ORDER BY id DESC LIMIT ?").all(limit);
+}
+export async function nlStats(wid) {
+  try {
+    const d = await getDb();
+    const r = d.prepare("SELECT SUM(ok) ok, COUNT(*) total FROM newsletter_sends WHERE wid=?").get(wid);
+    return { ok: r.ok || 0, total: r.total || 0 };
+  } catch (e) { return { ok: 0, total: 0 }; }
 }
 
 // 单用户 24 小时内最多 5 条(防灌水)

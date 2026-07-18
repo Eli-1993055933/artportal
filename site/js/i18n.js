@@ -154,6 +154,13 @@
       wsAll: "全部作品", wsFollowing: "关注的人",
       wsNeedLogin: "登录后可以只看你关注的艺术家的作品",
       empty_wsf_title: "关注的人还没有发布作品", empty_wsf_desc: "去「全部作品」逛逛,或在搜索里找同行来关注。",
+      // AI 艺术周报(第 5 项)
+      wrBrand: "艺术周报", wrRead: "阅读本期",
+      wrAiNote: "AI 撰写导语与编排 · 条目事实以原文为准",
+      wrSecOpps: "本周机会精选", wrSecNews: "艺术资讯", wrSecJobs: "招聘速递",
+      wrArchive: "往期周报", wrNotFound: "这期周报不存在或还没生成",
+      authNlOpt: "订阅每周《艺术周报》邮件(可随时退订)",
+      peNl: "订阅每周艺术周报邮件",
       cat: { opencall: "展览征集", residency: "驻留项目", award: "艺术奖项", workshop: "工作坊" },
       org: { official: "官方体制", independent: "独立学术", commercial: "商业机构", aggregator: "第三方来源" }
     },
@@ -308,6 +315,13 @@
       wsAll: "All works", wsFollowing: "Following",
       wsNeedLogin: "Sign in to see works from artists you follow",
       empty_wsf_title: "No works from people you follow yet", empty_wsf_desc: "Browse all works, or find artists via search.",
+      // Weekly digest
+      wrBrand: "Weekly Digest", wrRead: "Read this issue",
+      wrAiNote: "Intro & curation by AI · facts per original sources",
+      wrSecOpps: "Opportunities of the week", wrSecNews: "Art news", wrSecJobs: "Jobs",
+      wrArchive: "Past issues", wrNotFound: "This issue doesn't exist or isn't out yet",
+      authNlOpt: "Email me the weekly art digest (unsubscribe anytime)",
+      peNl: "Subscribe to the weekly art digest email",
       cat: { opencall: "Open Call", residency: "Residency", award: "Award", workshop: "Workshop" },
       org: { official: "Official", independent: "Independent", commercial: "Commercial", aggregator: "Third-party" }
     }

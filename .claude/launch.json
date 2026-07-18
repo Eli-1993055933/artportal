@@ -8,6 +8,12 @@
       "port": 8080
     },
     {
+      "name": "artportal-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--env-file=pipeline/.env", "--env-file=pipeline/.env.dev", "pipeline/server.mjs"],
+      "port": 8090
+    },
+    {
       "name": "artportal-site",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "serve", "site", "-l", "4321"],

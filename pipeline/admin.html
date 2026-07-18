@@ -98,6 +98,7 @@
         <button data-view="content">内容管理 <span class="badge" id="navContentN">0</span></button>
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
+        <button data-view="weekly">AI 周报</button>
         <button data-view="users">用户 <span class="badge" id="navUserN">0</span></button>
       </nav>
       <div class="side__foot">每 10 秒自动刷新</div>
@@ -183,6 +184,24 @@
         <h1 class="sec__title">检索入库溯源 <span class="muted" style="font-size:12px">(谁的检索把信息带进了库)</span></h1>
         <div class="scroll"><table id="ingestTbl"><thead><tr><th>时间</th><th>频道</th><th>检索词</th><th>入库条目</th><th>用户</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="ingestPager"></div>
+      </section>
+
+      <!-- AI 周报(第 5 项):生成/试发/群发。群发受 NEWSLETTER_BULK 闸(备案后在 .env 开启) -->
+      <section data-sec="weekly" hidden>
+        <h1 class="sec__title">AI 艺术周报</h1>
+        <div class="cards" id="wrCards"></div>
+        <div class="toolbar">
+          <button class="fchip" id="wrGen">生成本周</button>
+          <button class="fchip" id="wrRegen">重新生成(覆盖本周)</button>
+          <input class="searchbox" id="wrTestTo" placeholder="试发邮箱(先发给自己看效果)" style="width:280px" />
+          <button class="fchip" id="wrTest">试发一封</button>
+          <button class="fchip" id="wrBulk">群发给订阅用户</button>
+          <span class="count" id="wrMsg"></span>
+        </div>
+        <h2>本期与往期(期号可点开预览)</h2>
+        <div class="scroll"><table id="wrHistTbl"><thead><tr><th>期号</th><th>标题</th><th>日期</th><th>机会/资讯/招聘</th></tr></thead><tbody></tbody></table></div>
+        <h2>发送记录(最近 60 条)</h2>
+        <div class="scroll"><table id="wrSendTbl"><thead><tr><th>时间</th><th>期号</th><th>邮箱</th><th>结果</th></tr></thead><tbody></tbody></table></div>
       </section>
 
       <!-- 用户 -->
@@ -295,8 +314,79 @@
     else if (view === "content") renderContent();
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
+    else if (view === "weekly") renderWeekly();
     else if (view === "users") renderUsers();
   }
+
+  // —— AI 周报:状态卡 + 生成/试发/群发 ——
+  function wrCard(k, v, hot) {
+    var c = document.createElement("div"); c.className = "card";
+    var ke = document.createElement("div"); ke.className = "k"; ke.textContent = k;
+    var ve = document.createElement("div"); ve.className = "v" + (hot ? " hot" : ""); ve.textContent = String(v);
+    ve.style.fontSize = "16px";
+    c.appendChild(ke); c.appendChild(ve); return c;
+  }
+  function renderWeekly() {
+    get("/api/admin/weekly/status").then(function (s) {
+      var box = $("wrCards"); box.textContent = "";
+      box.appendChild(wrCard("本周期号", s.week));
+      box.appendChild(wrCard("本周状态", s.generated ? "已生成 ✓" : "未生成", s.generated));
+      box.appendChild(wrCard("订阅人数", s.subscribers, s.subscribers > 0));
+      box.appendChild(wrCard("发信配置", s.mailer_on ? "已配置 ✓" : "未配置(.env SMTP_*)", s.mailer_on));
+      box.appendChild(wrCard("群发闸", s.bulk_enabled ? "已开启" : "关闭(备案后开)", s.bulk_enabled));
+      box.appendChild(wrCard("群发进度", s.sending ? ("发送中 " + s.sending.done + "/" + s.sending.total) : (s.sent_stats && s.sent_stats.total ? ("本期成功 " + s.sent_stats.ok + "/" + s.sent_stats.total) : "—"), !!s.sending));
+      var tb = $("wrHistTbl").tBodies[0]; tb.textContent = "";
+      if (!(s.history || []).length) emptyRow(tb, "(还没有周报;点「生成本周」试试)", 4);
+      (s.history || []).forEach(function (h) {
+        var tr = document.createElement("tr");
+        var idc = document.createElement("td");
+        var a = document.createElement("a");
+        a.href = "/#/w/" + encodeURIComponent(h.id); a.target = "_blank";
+        a.textContent = h.id; a.style.color = "#7eb8e0";
+        idc.appendChild(a); tr.appendChild(idc);
+        tr.appendChild(td(h.title));
+        tr.appendChild(td(h.date, "mono"));
+        tr.appendChild(td((h.counts || []).join(" / "), "mono"));
+        tb.appendChild(tr);
+      });
+      var tb2 = $("wrSendTbl").tBodies[0]; tb2.textContent = "";
+      if (!(s.recent_sends || []).length) emptyRow(tb2, "(还没有发送记录)", 4);
+      (s.recent_sends || []).forEach(function (r) {
+        var tr = document.createElement("tr");
+        tr.appendChild(td(bj(r.at, true), "mono"));
+        tr.appendChild(td(r.wid, "mono"));
+        tr.appendChild(td(r.email));
+        var rc = document.createElement("td");
+        var pill = document.createElement("span");
+        pill.className = "pill" + (r.ok ? " on" : "");
+        pill.textContent = r.ok ? "成功" : ("失败 " + (r.err || ""));
+        rc.appendChild(pill); tr.appendChild(rc);
+        tb2.appendChild(tr);
+      });
+    }).catch(function () {});
+  }
+  function wrPost(url, data, busyText) {
+    $("wrMsg").textContent = busyText || "处理中…";
+    return post(url, data).then(function (r) {
+      $("wrMsg").textContent = r.ok ? "完成 ✓" : ((r.data && r.data.error) || "失败");
+      renderWeekly();
+      return r;
+    }).catch(function () { $("wrMsg").textContent = "网络异常"; });
+  }
+  $("wrGen").addEventListener("click", function () { wrPost("/api/admin/weekly/generate", {}, "生成中(AI 撰写导语,约 30 秒)…"); });
+  $("wrRegen").addEventListener("click", function () {
+    if (!confirm("重新生成会覆盖本周已有的周报,确定?")) return;
+    wrPost("/api/admin/weekly/generate", { force: true }, "重新生成中…");
+  });
+  $("wrTest").addEventListener("click", function () {
+    var to = $("wrTestTo").value.trim();
+    if (!to) { $("wrMsg").textContent = "先填试发邮箱"; return; }
+    wrPost("/api/admin/weekly/send", { test: to }, "试发中…");
+  });
+  $("wrBulk").addEventListener("click", function () {
+    if (!confirm("群发给全部订阅用户?(逐封限速发送;同一期已发过的自动跳过)")) return;
+    wrPost("/api/admin/weekly/send", {}, "群发启动中…");
+  });
 
   // —— 概览 ——
   var CARD_DEFS = [
@@ -722,6 +812,7 @@
     refreshWorks();
     refreshCmts();
     refreshContent();
+    if (view === "weekly") renderWeekly();   // 群发进行中时进度条 10 秒一跳
   }
 })();
 </script>

@@ -7,7 +7,7 @@
 // - 事件:events.jsonl 追加(visit/outbound/search/register/login),心跳只进内存不落盘。
 
 import { readFile, writeFile, rename, mkdir, appendFile } from "node:fs/promises";
-import { randomBytes, scryptSync, timingSafeEqual, createHash } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual, createHash, createHmac } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { Resolver } from "node:dns/promises";
@@ -39,6 +39,7 @@ const adminTokens = new Map();                 // token -> expiry
 
 export async function initAuth() {
   await mkdir(STATE, { recursive: true });
+  await initMailSecret();
   try {
     const d = JSON.parse(await readFile(USERS_FILE, "utf8"));
     users = Array.isArray(d.users) ? d.users : [];
@@ -82,6 +83,42 @@ export function logEvent(type, extra) {
 }
 const MAX_USERS = 100000;                  // 批量注册安全阀(早期远够;到量再迁库)
 const MAX_ONLINE = 5000;                   // 在线表条目上限,防伪造 anon 灌爆内存
+
+// ---------- 周报订阅(路线图第 5 项):退订 token + 订阅名单 ----------
+// 退订链接要做到"点开即退订、无需登录"(邮件里点的可能不是登录设备),
+// 又不能让人拿别人邮箱伪造退订 → 用服务器本地随机密钥做 HMAC(state/mail-secret,首启生成)。
+const MAIL_SECRET_FILE = join(STATE, "mail-secret");
+let mailSecret = "";
+async function initMailSecret() {
+  try { mailSecret = (await readFile(MAIL_SECRET_FILE, "utf8")).trim(); } catch (e) {}
+  if (!mailSecret) {
+    mailSecret = randomBytes(32).toString("hex");
+    try { await writeFile(MAIL_SECRET_FILE, mailSecret, "utf8"); } catch (e) {}
+  }
+}
+export function unsubToken(email) {
+  return createHmac("sha256", mailSecret).update(String(email).toLowerCase()).digest("hex").slice(0, 32);
+}
+// 邮件里的退订链接点开:校验 token → 关闭订阅。返回 true=已退订 / false=链接无效
+export function newsletterUnsub(email, token) {
+  email = String(email || "").trim().toLowerCase();
+  const u = byEmail.get(email);
+  if (!u || !token) return false;
+  try {
+    if (!timingSafeEqual(Buffer.from(unsubToken(email)), Buffer.from(String(token).slice(0, 32).padEnd(32, "0")))) return false;
+  } catch (e) { return false; }
+  u.newsletter = false;
+  saveUsers();
+  logEvent("unsub", { uid: u.id, email });
+  return true;
+}
+// 群发名单:勾选了订阅、未被封禁的用户(邮箱验证过的优先在前,退信少)
+export function newsletterAudience() {
+  return users.filter(u => u.newsletter && !u.banned)
+    .sort((a, b) => (b.email_verified ? 1 : 0) - (a.email_verified ? 1 : 0))
+    .map(u => ({ email: u.email, id: u.id }));
+}
+export function newsletterCount() { return users.filter(u => u.newsletter && !u.banned).length; }
 
 // ---------- 密码 ----------
 function hashPassword(pw, salt) { return scryptSync(String(pw), salt, 64).toString("hex"); }
@@ -220,6 +257,7 @@ function publicUser(u) {
     bio: p.bio || "", identity: p.identity || "", location: p.location || "",
     website: p.website || "", fields: p.fields || "",
     fav_public: p.fav_public !== false,        // 收藏默认公开,可在编辑资料里关闭
+    newsletter: !!u.newsletter,                // 周报订阅(注册勾选/资料页可改/邮件可退订)
     nickname_changed_at: u.nickname_changed_at || null,
     email_verified: !!u.email_verified,
     needs_profile: !(u.nickname && u.avatar)   // 昵称+头像必填;缺任一,前端强制补全
@@ -336,12 +374,13 @@ export async function setProfile(req, body, ip) {
   byNick.set(key, u.id);
   p.bio = bio; p.identity = identity; p.fields = fields; p.location = location; p.website = website;
   if (typeof b.fav_public === "boolean") p.fav_public = b.fav_public;
+  if (typeof b.newsletter === "boolean") u.newsletter = b.newsletter;   // 周报订阅开关(资料页)
   saveUsers();
   logEvent("profile", { uid: u.id, email: u.email, ip, nickname });
   return { code: 200, body: { user: publicUser(u) } };
 }
 
-export async function register(email, password, code, ip) {
+export async function register(email, password, code, ip, newsletter) {
   if (authLimited(ip)) return { code: 429, body: { error: "尝试太频繁,请稍后再试" } };
   email = String(email || "").trim().toLowerCase();
   password = String(password || "");
@@ -369,6 +408,7 @@ export async function register(email, password, code, ip) {
     id: "u" + randomBytes(6).toString("hex"),
     email, salt, hash: hashPassword(password, salt),
     email_verified: verified,
+    newsletter: !!newsletter,     // 注册页勾选"订阅周报"才 true(《个保法》明示同意,绝不默认勾)
     nickname: null, profile: {}, favorites: [],
     created_at: new Date().toISOString(), last_seen: new Date().toISOString()
   };

@@ -24,6 +24,11 @@
         try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
         return { name: "user", id: id };
       }
+      m = /^#\/w\/(.+)$/.exec(h);          // 周报阅读页(weekly.js 承接)
+      if (m) {
+        try { id = decodeURIComponent(m[1]); } catch (e) { id = m[1]; }
+        return { name: "weekly", id: id };
+      }
       return { name: "list", id: null };
     },
 

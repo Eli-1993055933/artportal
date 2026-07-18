@@ -14,6 +14,8 @@ pipeline/state/offline-*.json
 # 账号系统数据 —— 含用户邮箱 / 口令哈希 / 会话令牌 / IP,绝不入库(PII)
 pipeline/state/users.json
 pipeline/state/sessions.json
+pipeline/state/mail-secret
+pipeline/state/search-budget.json
 pipeline/state/events.jsonl*
 
 # 翻译回滚备份

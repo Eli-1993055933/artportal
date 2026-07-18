@@ -262,6 +262,7 @@
           '<input type="text" id="peLocation" maxlength="40" value="' + esc(me.location || "") + '" placeholder="' + esc(AP.t("peLocationPh")) + '" />' +
           '<input type="url" id="peWebsite" maxlength="200" value="' + esc(me.website || "") + '" placeholder="' + esc(AP.t("peWebsitePh")) + '" />' +
           '<label class="sf-label pe-check"><input type="checkbox" id="peFavPub"' + (me.fav_public !== false ? " checked" : "") + ' /> ' + esc(AP.t("peFavPub")) + '</label>' +
+          '<label class="sf-label pe-check"><input type="checkbox" id="peNl"' + (me.newsletter ? " checked" : "") + ' /> ' + esc(AP.t("peNl")) + '</label>' +
           '<div class="auth__err" id="peErr"></div>' +
           '<button type="submit" class="btn btn--dark auth__submit" id="peGo">' + esc(AP.t("pfSave")) + '</button>' +
         '</form>' +
@@ -312,7 +313,8 @@
         fields: document.getElementById("peFields").value.trim(),
         location: document.getElementById("peLocation").value.trim(),
         website: website,
-        fav_public: document.getElementById("peFavPub").checked
+        fav_public: document.getElementById("peFavPub").checked,
+        newsletter: document.getElementById("peNl").checked
       })
     }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); })
       .then(function (r) {

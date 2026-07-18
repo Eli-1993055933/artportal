@@ -114,6 +114,8 @@
             '<button type="button" class="btn btn--ghost auth__sendcode" id="authSendCode"></button>' +
           '</div>' +
           '<input type="password" id="authPw" autocomplete="current-password" minlength="6" />' +
+          // 周报订阅:注册页可选勾选(《个保法》明示同意——默认不勾,勾了才订)
+          '<label class="auth__nl" id="authNlRow" hidden><input type="checkbox" id="authNl" /> <span id="authNlTxt"></span></label>' +
           '<div class="auth__err" id="authErr"></div>' +
           '<button type="submit" class="btn btn--dark auth__submit" id="authSubmit"></button>' +
         '</form>' +
@@ -181,6 +183,8 @@
     document.getElementById("authPw").placeholder = AP.t("authPwPh");
     // 验证码行:仅注册页且服务端开了发信才显示
     document.getElementById("authCodeRow").hidden = !(mode === "register" && codeRequired);
+    var nlRow = document.getElementById("authNlRow");
+    if (nlRow) { nlRow.hidden = mode !== "register"; document.getElementById("authNlTxt").textContent = AP.t("authNlOpt"); }
     document.getElementById("authCode").placeholder = AP.t("authCodePh");
     var sc = document.getElementById("authSendCode");
     if (!sc.disabled) sc.textContent = AP.t("authSendCode");
@@ -216,7 +220,9 @@
     if (mode === "register" && codeRequired && code.length !== 6) { err.textContent = AP.t("authCodeNeed"); return; }
     var btn = document.getElementById("authSubmit");
     btn.disabled = true;
-    post(mode === "register" ? "/api/auth/register" : "/api/auth/login", { email: email, password: pw, code: code })
+    var nlBox = document.getElementById("authNl");
+    post(mode === "register" ? "/api/auth/register" : "/api/auth/login",
+         { email: email, password: pw, code: code, newsletter: mode === "register" && !!(nlBox && nlBox.checked) })
       .then(function (r) {
         btn.disabled = false;
         if (!r.ok) {

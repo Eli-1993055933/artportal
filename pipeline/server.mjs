@@ -21,6 +21,8 @@ import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
+import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText } from "./lib/weekly.mjs";
+import { mailerOn, sendMail } from "./lib/mailer.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -415,7 +417,7 @@ async function handleAuthApi(req, res, u) {
   const p = u.pathname, m = req.method;
   try {
     if (p === "/api/auth/me" && m === "GET") return json(auth.me(req));
-    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b.email, b.password, b.code, ip)); }
+    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b.email, b.password, b.code, ip, b.newsletter === true)); }
     if (p === "/api/auth/sendcode" && m === "POST") { const b = await readBody(req); return json(await auth.sendEmailCode(b, ip)); }
     if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.email, b.password, ip)); }
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
@@ -805,6 +807,59 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 503, body: { error: "投稿服务暂不可用,请稍后再试" } });
       }
     }
+    // —— AI 周报(第 5 项):状态 / 生成 / 试发 / 群发(群发有备案闸,见 NEWSLETTER_BULK) ——
+    if (p === "/api/admin/weekly/status" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const wid = weekIdOf();
+      const cur = await readWeekly(wid);
+      const idx = await readWeeklyIndex();
+      let recent = []; try { recent = await db.nlRecent(60); } catch (e) {}
+      return json({ code: 200, body: {
+        week: wid,
+        generated: !!cur,
+        report: cur ? { id: cur.id, title: cur.title, date: cur.date, ai_composed: cur.ai_composed, counts: cur.sections.map(s => ({ key: s.key, n: s.items.length })) } : null,
+        history: (idx.list || []).slice(0, 12),
+        subscribers: auth.newsletterCount(),
+        mailer_on: mailerOn(),
+        bulk_enabled: process.env.NEWSLETTER_BULK === "1",
+        sending: nlState.running ? nlState : null,
+        sent_stats: cur ? await db.nlStats(wid).catch(() => null) : null,
+        recent_sends: recent
+      } });
+    }
+    if (p === "/api/admin/weekly/generate" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      try {
+        const r = await generateWeekly({ force: !!b.force });
+        if (r.empty) return json({ code: 200, body: { ok: false, empty: true, error: "近一周没有可入刊的内容" } });
+        return json({ code: 200, body: { ok: true, existed: !!r.existed, report: { id: r.report.id, title: r.report.title, ai_composed: r.report.ai_composed, counts: r.report.sections.map(s => ({ key: s.key, n: s.items.length })) } } });
+      } catch (e) { return json({ code: 500, body: { error: String(e.message || e).slice(0, 200) } }); }
+    }
+    if (p === "/api/admin/weekly/send" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      if (!mailerOn()) return json({ code: 400, body: { error: "发信未配置(服务器 .env 需 SMTP_HOST/USER/PASS)" } });
+      const b = await readBody(req);
+      const report = await readWeekly(String(b.wid || weekIdOf()));
+      if (!report) return json({ code: 404, body: { error: "该期周报还没生成" } });
+      if (b.test) {   // 试发一封到指定邮箱(不进订阅名单逻辑,不受群发闸限制)
+        const to = String(b.test).trim().toLowerCase();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(to)) return json({ code: 400, body: { error: "试发邮箱格式不正确" } });
+        try {
+          await sendWeeklyTo(report, to);
+          await db.nlLogSend(report.id, to + " (试发)", true, null);
+          return json({ code: 200, body: { ok: true, test: to } });
+        } catch (e) {
+          await db.nlLogSend(report.id, to + " (试发)", false, e.message);
+          return json({ code: 500, body: { error: "发送失败:" + String(e.message || e).slice(0, 160) } });
+        }
+      }
+      // 群发:备案前默认关闭(NEWSLETTER_BULK=1 才开),防误发;开启后也是断点续发、逐封限速
+      if (process.env.NEWSLETTER_BULK !== "1") return json({ code: 403, body: { error: "群发未开启。备案通过后在服务器 .env 设 NEWSLETTER_BULK=1 再群发。" } });
+      if (nlState.running) return json({ code: 409, body: { error: "本期群发正在进行中", state: nlState } });
+      sendWeeklyBulk(report);   // 后台异步跑,进度看 status
+      return json({ code: 200, body: { ok: true, started: true } });
+    }
     if (p === "/api/admin/submissions" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
       try { return json({ code: 200, body: { list: await db.listSubmissions(200) } }); }
@@ -895,6 +950,66 @@ async function handleAuthApi(req, res, u) {
   return json({ code: 404, body: { error: "not found" } });
 }
 
+// —— AI 周报发送引擎(第 5 项)——
+// 站点地址(邮件里的深链/退订链接用):备案绑域名后在 .env 设 SITE_URL=https://artportal123.com
+const SITE_URL = (process.env.SITE_URL || "http://60.205.212.195").replace(/\/+$/, "");
+function unsubUrlOf(email) {
+  return SITE_URL + "/api/newsletter/unsub?e=" + Buffer.from(String(email).toLowerCase()).toString("base64url") + "&t=" + auth.unsubToken(email);
+}
+function sendWeeklyTo(report, email) {
+  const ctx = { siteUrl: SITE_URL, unsubUrl: unsubUrlOf(email) };
+  return sendMail({
+    to: email,
+    subject: report.title,
+    html: renderEmailHtml(report, ctx),
+    text: renderEmailText(report, ctx),
+    headers: { "List-Unsubscribe": "<" + ctx.unsubUrl + ">" }   // 合规:一键退订头(Gmail/QQ 都认)
+  });
+}
+// 群发状态(单例:同一时间只跑一场;断点续发靠 newsletter_sends 里的成功记录)
+const nlState = { running: false, wid: null, done: 0, ok: 0, total: 0 };
+async function sendWeeklyBulk(report) {
+  const audience = auth.newsletterAudience();
+  const sent = await db.nlSentSet(report.id);
+  const targets = audience.filter(a => !sent.has(a.email));
+  nlState.running = true; nlState.wid = report.id; nlState.done = 0; nlState.ok = 0; nlState.total = targets.length;
+  process.stderr.write(`[周报] 群发开始 ${report.id}:订阅 ${audience.length},本轮待发 ${targets.length}\n`);
+  for (const t of targets) {
+    try {
+      await sendWeeklyTo(report, t.email);
+      await db.nlLogSend(report.id, t.email, true, null);
+      nlState.ok++;
+    } catch (e) {
+      await db.nlLogSend(report.id, t.email, false, e.message);
+      process.stderr.write(`[周报] 发送失败 ${t.email}: ${String(e.message || e).slice(0, 100)}\n`);
+    }
+    nlState.done++;
+    await new Promise(r => setTimeout(r, 3000));   // 逐封限速:对 SMTP 服务商客气,防触发风控
+  }
+  process.stderr.write(`[周报] 群发结束 ${report.id}:成功 ${nlState.ok}/${nlState.total}\n`);
+  nlState.running = false;
+}
+// 每周自动出刊:.env 设 WEEKLY_REPORT=1 开启 —— 每小时看一眼,北京时间周一 9 点后本周还没出就生成;
+// 生成后若 NEWSLETTER_AUTO=1 且群发闸(NEWSLETTER_BULK=1)已开、发信已配置,则自动群发(备案后的全自动形态)。
+if (process.env.WEEKLY_REPORT === "1") {
+  async function weeklyTick() {
+    try {
+      const bj = new Date(Date.now() + 8 * 3600e3);
+      if (bj.getUTCDay() !== 1 || bj.getUTCHours() < 9) return;    // 北京时间周一 9 点后
+      if (await readWeekly(weekIdOf())) return;                    // 本周已出刊
+      const r = await generateWeekly({});
+      if (!r.report) return;
+      process.stderr.write(`[周报] 已生成 ${r.report.id}「${r.report.title}」(AI=${r.report.ai_composed})\n`);
+      if (process.env.NEWSLETTER_AUTO === "1" && process.env.NEWSLETTER_BULK === "1" && mailerOn() && !nlState.running) {
+        sendWeeklyBulk(r.report);
+      }
+    } catch (e) { process.stderr.write("[周报] 定时生成失败: " + String(e.message || e).slice(0, 160) + "\n"); }
+  }
+  setTimeout(weeklyTick, 90 * 1000);
+  setInterval(weeklyTick, 3600 * 1000);
+  process.stderr.write("[周报] 每周自动出刊已开启(北京时间周一 9 点后生成" + (process.env.NEWSLETTER_AUTO === "1" ? ",并自动群发" : "") + ")\n");
+}
+
 // —— 每小时自动检索(用户 2026-07-17 要求:近期让站内 AI 定时全网检索,充实资讯/招聘)——
 // 开关在服务器 .env:AUTO_HARVEST=1 开启;AUTO_HARVEST_MINUTES 间隔(默认 60);AUTO_HARVEST_BOOT 首轮延迟秒(默认 180)。
 // 词池按小时轮换(约两天不重词);结果走与用户检索完全同一条反幻觉管线(harvestChannel:
@@ -978,6 +1093,21 @@ createServer(async (req, res) => {
   }
   if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname === "/api/favorites" || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
+  }
+  // 周报退订:邮件里的链接,点开即退订(无需登录;token=HMAC 防伪造)
+  if (u.pathname === "/api/newsletter/unsub" && req.method === "GET") {
+    let email = "";
+    try { email = Buffer.from(String(u.searchParams.get("e") || ""), "base64url").toString("utf8"); } catch (e) {}
+    const ok = auth.newsletterUnsub(email, u.searchParams.get("t") || "");
+    res.writeHead(ok ? 200 : 400, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
+    return res.end(
+      '<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>ArtPortal</title>' +
+      '<body style="font-family:-apple-system,\'PingFang SC\',sans-serif;background:#f7f6f2;color:#1b1a18;display:flex;min-height:90vh;align-items:center;justify-content:center">' +
+      '<div style="text-align:center;padding:24px"><div style="letter-spacing:.14em;font-size:12px;color:#8a847c">ARTPORTAL</div>' +
+      (ok ? "<h1 style='font-size:20px'>已退订艺术周报</h1><p style='color:#6b6660;font-size:14px'>不会再给这个邮箱发周报了。想恢复,登录后在「编辑资料」里重新勾选即可。</p>"
+          : "<h1 style='font-size:20px'>链接无效</h1><p style='color:#6b6660;font-size:14px'>退订链接不完整或已失效。可登录 ArtPortal,在「编辑资料」里关闭订阅。</p>") +
+      '<p><a href="' + SITE_URL + '" style="color:#1b1a18">返回 ArtPortal</a></p></div>'
+    );
   }
   if (u.pathname === "/api/search") {
     const q = (u.searchParams.get("q") || "").trim();
