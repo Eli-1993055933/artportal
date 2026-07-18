@@ -118,19 +118,21 @@
     var ext = ref.kind !== "opp";
     return '<a class="wra-ref" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener nofollow"' : "") + '>' + esc(ref.text) + '</a><sup class="wra-sup">[' + ref.n + ']</sup>';
   }
-  function renderArticle(r) {
+  // 文章正文 HTML(不含返回按钮/往期目录):周刊阅读页与"个人专属总结"内嵌复用同一排版。
+  function articleInner(r) {
     // 中英切换:英文界面且该期带 en 平行版 → 用英文文本层(image/references 共用中文版;
-    // 英文由机器翻译,meta 行如实标注);老刊/翻译失败 → 英文界面回退中文。
+    // 英文由机器翻译,meta 行如实标注);老刊/翻译失败/个人总结(中文单语) → 回退中文。
     var en = AP.lang === "en" && r.en;
     var T = en ? r.en : r;
-    var byline = (AP.lang === "en" ? "By " : "文 / ") + (r.author || "Eli");
+    var meta = esc((AP.lang === "en" ? "By " : "文 / ") + (r.author || "Eli"));
+    if (r.id) meta += ' · ' + esc(r.id);        // 周刊有期号;个人总结无 id,仅显示署名+日期
+    if (r.date) meta += ' · ' + esc(r.date);
     var html =
-      '<div class="ppage__inner wrpage wra">' + backBtn() +
       '<header class="wra-head">' +
-        '<div class="wra-brand">ARTPORTAL · ' + esc(AP.t("wrBrand")) + '</div>' +
+        '<div class="wra-brand">ARTPORTAL · ' + esc(AP.t(r.kind === "personal" ? "sumBrand" : "wrBrand")) + '</div>' +
         '<h1 class="wra-title">' + esc(T.title) + '</h1>' +
         (T.subtitle ? '<p class="wra-sub">' + esc(T.subtitle) + '</p>' : "") +
-        '<p class="wra-meta">' + esc(byline) + ' · ' + esc(r.id + " · " + (r.date || "")) + '</p>' +
+        '<p class="wra-meta">' + meta + '</p>' +
       '</header>';
     (T.sections || []).forEach(function (sc, i) {
       var zhSec = (r.sections || [])[i] || {};          // 配图跟中文版结构走(en 只译文本层)
@@ -158,10 +160,12 @@
       });
       html += '</div>';
     }
-    // AI 生成提示:按用户要求从标题下移到文章最末尾的小字(诚实标注不变,位置更克制)
+    // AI 生成提示:诚实标注(个人总结同样是 AI 撰写),位置在文章最末尾小字
     html += '<p class="wra-ainote">' + esc(AP.t("wraAiFoot")) + (en ? esc(" · Machine-translated from the Chinese original.") : "") + '</p>';
-    html += archiveHtml(r.id) + '</div>';
-    page.innerHTML = html;
+    return html;
+  }
+  function renderArticle(r) {
+    page.innerHTML = '<div class="ppage__inner wrpage wra">' + backBtn() + articleInner(r) + archiveHtml(r.id) + '</div>';
   }
   function renderReport(r) {
     if (r.format === 2) { renderArticle(r); return; }
@@ -258,5 +262,8 @@
       page.scrollTop = keep;
     }
     renderBar();
-  } };
+  },
+  // 供 profile.js 内嵌"个人专属总结":复用周刊 NYT 排版(format 2 文章),按需加载衬线字体
+  summaryHtml: function (r) { return articleInner(r); },
+  ensureFont: function () { ensureFont(); } };
 })();

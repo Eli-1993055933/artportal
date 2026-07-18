@@ -99,25 +99,75 @@
     if (ch === "works" && AP.works) { favWorks[String(o.id)] = o; return AP.works.renderFeedCard(o); }
     return null;
   }
-  function renderFavs(body, keys) {
+  function renderFavs(body, keys, isMe) {
     favWorks = {};
-    if (!keys || !keys.length) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
-    body.innerHTML = '<p class="ppage__empty">…</p>';
+    // 本人收藏 tab 顶部:专属总结面板(生成/展示);下方:收藏卡片网格。
+    body.innerHTML = (isMe ? '<div id="ppSummary" class="pp-sum"></div>' : "") + '<div id="ppFavGrid"><p class="ppage__empty">…</p></div>';
+    if (isMe) loadSummary();
+    var gridHost = document.getElementById("ppFavGrid");
+    if (!keys || !keys.length) { gridHost.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
     var reqUid = curUid;
     fetch("/api/favorites/resolve", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ keys: keys }) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (curUid !== reqUid || curTab !== "favs") return;   // 期间已切走
+        var host = document.getElementById("ppFavGrid"); if (!host) return;
         var items = (j && j.items) || [];
-        if (!items.length) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
+        if (!items.length) { host.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
         var g = document.createElement("div");
         g.className = "grid ppage__grid";
         var n = 0;
         items.forEach(function (x) { var el = renderByChannel(x.channel, x.item); if (el) { g.appendChild(el); n++; } });
-        if (!n) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
-        body.innerHTML = ""; body.appendChild(g);
+        if (!n) { host.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; return; }
+        host.innerHTML = ""; host.appendChild(g);
       })
-      .catch(function () { if (curUid === reqUid) body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; });
+      .catch(function () { var h = document.getElementById("ppFavGrid"); if (curUid === reqUid && h) h.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavEmpty")) + '</p>'; });
+  }
+
+  // ---------- 专属总结面板(本人收藏 tab)----------
+  function loadSummary() {
+    var host = document.getElementById("ppSummary");
+    if (!host) return;
+    host.innerHTML = '<div class="pp-sum__bar"><span class="pp-sum__t">✦ ' + esc(AP.t("sumTitle")) + '</span></div><p class="ppage__empty">…</p>';
+    var reqUid = curUid;
+    fetch("/api/summary", { credentials: "same-origin" })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (curUid === reqUid) renderSummaryPanel(host, j.summary, j.fav_count || 0, j.min_favs || 3); })
+      .catch(function () { if (curUid === reqUid) renderSummaryPanel(host, null, 0, 3); });
+  }
+  function renderSummaryPanel(host, summary, favN, minN) {
+    if (!host) return;
+    var canGen = favN >= minN;
+    var bar = '<div class="pp-sum__bar"><span class="pp-sum__t">✦ ' + esc(AP.t("sumTitle")) + '</span>' +
+      '<button class="btn btn--dark pp-sum__gen" id="ppSumGen" type="button"' + (canGen ? "" : " disabled") + '>' +
+        esc(AP.t(summary ? "sumRegen" : "sumGen")) + '</button></div>';
+    var inner;
+    if (summary) {
+      if (AP.weekly && AP.weekly.ensureFont) AP.weekly.ensureFont();
+      inner = '<div class="pp-sum__art wra">' + (AP.weekly && AP.weekly.summaryHtml ? AP.weekly.summaryHtml(summary) : "") + '</div>';
+    } else {
+      inner = '<p class="pp-sum__intro">' + esc(canGen ? AP.t("sumIntro") : AP.t("sumNeedMore").replace("{n}", minN)) + '</p>';
+    }
+    host.innerHTML = bar + inner;
+    var gen = document.getElementById("ppSumGen");
+    if (gen) gen.addEventListener("click", function () { doGenerateSummary(host); });
+  }
+  function doGenerateSummary(host) {
+    var gen = document.getElementById("ppSumGen");
+    if (gen) { gen.disabled = true; gen.textContent = AP.t("sumGenning"); }
+    var note = host.querySelector(".pp-sum__intro");
+    if (note) note.textContent = AP.t("sumGenningNote");
+    else { var p = document.createElement("p"); p.className = "pp-sum__intro"; p.textContent = AP.t("sumGenningNote"); host.appendChild(p); }
+    var reqUid = curUid;
+    fetch("/api/summary/generate", { method: "POST", credentials: "same-origin" })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, data: j }; }); })
+      .then(function (res) {
+        if (curUid !== reqUid) return;
+        if (!res.ok) { toast((res.data && res.data.error) || AP.t("authNetErr")); loadSummary(); return; }
+        renderSummaryPanel(host, res.data.summary, (res.data.summary && res.data.summary.fav_count) || 0, 3);
+        toast(AP.t("sumDone"));
+      })
+      .catch(function () { if (curUid === reqUid) { toast(AP.t("authNetErr")); loadSummary(); } });
   }
 
   function render() {
@@ -185,7 +235,7 @@
       return;
     } else if (curTab === "favs") {
       if (!isMe && !u.fav_public) { body.innerHTML = '<p class="ppage__empty">' + esc(AP.t("ppFavPrivate")) + '</p>'; return; }
-      renderFavs(body, favIds);
+      renderFavs(body, favIds, isMe);
     } else if (curTab === "following" || curTab === "followers") {
       // 关注/粉丝列表:按需拉取,同一次打开内缓存
       var tab = curTab;

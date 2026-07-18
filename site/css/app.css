@@ -943,6 +943,15 @@ html[data-theme="dark"] .card-tag:hover { background: hsl(var(--th, 220), 30%, 2
 
 /* ---------- 文章型周刊排版(v0.70.0,对标 NYT 艺术版:衬线正文、窄栏、图注体系) ---------- */
 .wra { max-width: 720px; }
+/* 收藏 tab 顶部:个人专属总结面板(生成按钮 + 内嵌周刊式文章) */
+.pp-sum { border: 1px solid var(--line-2); border-radius: 14px; padding: 14px 16px; margin-bottom: 18px; background: var(--card); }
+.pp-sum__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pp-sum__t { font-weight: 600; font-size: 15px; color: var(--ink); }
+.pp-sum__gen { flex: none; }
+.pp-sum__intro { color: var(--ink-2); font-size: 13.5px; line-height: 1.6; margin: 10px 0 0; }
+.pp-sum__art { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.pp-sum__art.wra { max-width: 100%; }        /* 内嵌于面板:铺满,不再限 720 居中 */
+.pp-sum__art .wra-sec { margin-top: 22px; }
 .wra-brand { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 11.5px; letter-spacing: .18em; color: var(--ink-3); text-align: center; }
 .wra-head { text-align: center; margin-bottom: 8px; }
 .wra-title {

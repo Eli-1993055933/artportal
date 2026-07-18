@@ -10,7 +10,7 @@
 
 import { createServer } from "node:http";
 import { createHash, timingSafeEqual } from "node:crypto";
-import { readFile, writeFile, stat, rename, mkdir, unlink, statfs } from "node:fs/promises";
+import { readFile, writeFile, stat, rename, mkdir, unlink, statfs, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
@@ -22,7 +22,7 @@ import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
-import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText } from "./lib/weekly.mjs";
+import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
 import { mailerOn, sendMail } from "./lib/mailer.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
@@ -92,6 +92,40 @@ async function resolveFavorites(keys) {
     if (o) out.push({ key: x.key, channel: x.ch, item: o });
   }
   return out;
+}
+
+// —— 个人专属总结存储(v0.73.0):私密,存服务器 state 目录,绝不进公开 site/data。
+//    走登录鉴权 API 读写(GET /api/summary 只回本人的);后台可查全部。
+const SUMMARY_DIR = join(__dir, "state", "summaries");
+const SUMMARY_COOLDOWN_MS = 20 * 60 * 1000;    // 再生成冷却 20 分钟(防刷 AI 成本)
+function validUid(uid) { return /^u[0-9a-f]{8,20}$/.test(String(uid || "")); }
+async function readSummary(uid) {
+  if (!validUid(uid)) return null;
+  try { return JSON.parse(await readFile(join(SUMMARY_DIR, uid + ".json"), "utf8")); } catch (e) { return null; }
+}
+async function writeSummary(uid, data) {
+  if (!validUid(uid)) return;
+  await mkdir(SUMMARY_DIR, { recursive: true });
+  const f = join(SUMMARY_DIR, uid + ".json");
+  const tmp = f + ".tmp-" + process.pid;
+  await writeFile(tmp, JSON.stringify(data, null, 2), "utf8");
+  await rename(tmp, f);
+}
+async function listSummaries() {
+  try {
+    const files = await readdir(SUMMARY_DIR);
+    const out = [];
+    for (const fn of files) {
+      if (!fn.endsWith(".json")) continue;
+      try {
+        const s = JSON.parse(await readFile(join(SUMMARY_DIR, fn), "utf8"));
+        out.push({ uid: s.uid || fn.replace(/\.json$/, ""), nickname: s.nickname || "", title: s.title || "",
+          generated_at: s.generated_at || "", fav_count: s.fav_count || 0, refs: (s.references || []).length });
+      } catch (e) {}
+    }
+    out.sort((a, b) => String(b.generated_at).localeCompare(String(a.generated_at)));
+    return out;
+  } catch (e) { return []; }
 }
 
 // —— 环节①:搜索,拿到候选官网 URL ——
@@ -569,6 +603,34 @@ async function handleAuthApi(req, res, u) {
       const items = await resolveFavorites(Array.isArray(b.keys) ? b.keys : []);
       return json({ code: 200, body: { items } });
     }
+    // —— 个人专属总结(v0.73.0):基于本人收藏,复用周刊撰稿管线成文,署名 ArtPortal ——
+    if (p === "/api/summary" && m === "GET") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "未登录" } });
+      const s = await readSummary(me.id);
+      const favN = (me.favorites || []).length;
+      return json({ code: 200, body: { summary: s, fav_count: favN, min_favs: 3 } });
+    }
+    if (p === "/api/summary/generate" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "登录后可生成专属总结" } });
+      const prev = await readSummary(me.id);
+      if (prev && prev.generated_at && (Date.now() - Date.parse(prev.generated_at)) < SUMMARY_COOLDOWN_MS) {
+        const mins = Math.ceil((SUMMARY_COOLDOWN_MS - (Date.now() - Date.parse(prev.generated_at))) / 60000);
+        return json({ code: 429, body: { error: "刚生成过,请约 " + mins + " 分钟后再重新生成", summary: prev } });
+      }
+      const items = await resolveFavorites(me.favorites || []);
+      const cand = items.filter(x => x.channel !== "works");   // 文字综述取 机会/资讯/招聘(作品是图片)
+      if (cand.length < 3) return json({ code: 400, body: { error: "收藏满 3 条(机会/资讯/招聘)才能生成专属总结,当前 " + cand.length + " 条" } });
+      let summary;
+      try { summary = await generatePersonalSummary(cand, { nickname: me.nickname || "" }); }
+      catch (e) { summary = null; }
+      if (!summary || summary.error) return json({ code: 502, body: { error: "生成失败,请稍后再试(需后端配置 DEEPSEEK_API_KEY)" } });
+      summary.uid = me.id; summary.nickname = me.nickname || ""; summary.fav_count = cand.length;
+      await writeSummary(me.id, summary);
+      try { db.agentLog({ agent: "artportal-summary", ok: true, summary: "为用户生成专属总结", metrics: { uid: me.id, refs: (summary.references || []).length } }); } catch (e) {}
+      return json({ code: 200, body: { summary } });
+    }
     // —— 站内通知(8.4 一期):列表(附未读数与发起人公开摘要)/ 全部已读 ——
     if (p === "/api/notifications" && m === "GET") {
       const me = auth.userOf(req);
@@ -918,6 +980,13 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/admin/login" && m === "POST") { const b = await readBody(req); return json(auth.adminLogin(b.password, ip)); }
     if (p === "/api/admin/overview" && m === "GET") return json(auth.isAdmin(req, ip) ? await auth.adminOverview() : { code: 401, body: { error: "unauthorized" } });
     if (p === "/api/admin/users" && m === "GET") return json(auth.isAdmin(req, ip) ? auth.adminUsers() : { code: 401, body: { error: "unauthorized" } });
+    // 后台查用户专属总结:无 uid=列表;带 uid=返回该用户完整总结文章
+    if (p === "/api/admin/summaries" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const uid = u.searchParams.get("uid");
+      if (uid) return json({ code: 200, body: { summary: await readSummary(uid) } });
+      return json({ code: 200, body: { summaries: await listSummaries() } });
+    }
     if (p === "/api/admin/users/ban" && m === "POST") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
       const b = await readBody(req);
@@ -1310,7 +1379,7 @@ createServer(async (req, res) => {
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname.startsWith("/api/summary") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   // Agent 打卡(v0.72.0 巡视台):本机管道脚本干完活上报;AGENT_KEY 鉴权(sha256 恒时比较)

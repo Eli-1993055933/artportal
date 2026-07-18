@@ -530,6 +530,113 @@ export async function generateWeekly({ force = false } = {}) {
   return { report, existed: false };
 }
 
+// ---------- 个人专属总结(v0.73.0)----------
+// 复用文章型撰稿管线(候选编号→[[编号:文字]]标记→程序回填真实链接→文末汇总),
+// 与周刊的区别:①素材=该用户的收藏(不做时间过滤,收藏即入选);②署名 ArtPortal(非 Eli);
+// ③中文单语(用户选择,省一半 AI 成本,不译英);④口吻"为你综述"。反幻觉红线完全一致。
+// 入参 favItems: [{channel:"opportunities"|"news"|"jobs", item:原始对象}](works 不进文字综述)。
+export async function generatePersonalSummary(favItems, opts = {}) {
+  const key = process.env.DEEPSEEK_API_KEY;
+  if (!key) return null;
+  const opps = [], news = [], jobs = [];
+  for (const f of (favItems || [])) {
+    const o = f.item || {};
+    if (f.channel === "opportunities") opps.push({
+      oid: o.id, kind: "opp", title: o.title_zh || o.title_en || "", title_en: o.title_en || null,
+      org: o.org_zh || "", city: o.city_zh || "", country: o.country_zh || "",
+      org_en: o.org_en || null, city_en: o.city_en || null, country_en: o.country_en || null,
+      category: o.category || "", deadline: o.deadline || null,
+      summary: String(o.summary_zh || "").slice(0, 160), cover: o.cover || null
+    });
+    else if (f.channel === "news") news.push({
+      oid: o.id, kind: "news", title: o.title_zh || o.title || "", title_en: o.title_en || null,
+      source: o.source || o.domain || "",
+      region: (/雅昌|艺术中国|99艺术|中国美术|凤凰艺术/.test(o.source || "") || /[一-鿿]/.test(String(o.title || ""))) ? "国内" : "国际",
+      published_at: o.published_at || null, url: o.url,
+      summary: String(o.summary_zh || o.summary || "").slice(0, 160), cover: o.cover || null
+    });
+    else if (f.channel === "jobs") jobs.push({
+      oid: o.id, kind: "job", title: o.title_zh || o.title || "", title_en: o.title_en || null,
+      org: o.org_zh || o.org || "", location: [o.city, o.country].filter(Boolean).join(" "),
+      deadline: o.deadline || null, url: o.apply_url || o.url,
+      summary: String(o.summary_zh || o.summary || "").slice(0, 100), cover: o.cover || null
+    });
+  }
+  const C = [].concat(opps.slice(0, 30), news.slice(0, 25), jobs.slice(0, 12));
+  if (C.length < 2) return { error: "too_few" };   // 素材太少不足以成文
+  let listText = "【机会(用户收藏的展览征集/驻留/奖项)】\n";
+  const nOpp = opps.slice(0, 30).length, nNews = news.slice(0, 25).length;
+  C.forEach((c, i) => {
+    if (i === nOpp) listText += "\n【资讯(用户收藏的艺术新闻)】\n";
+    if (i === nOpp + nNews) listText += "\n【招聘(用户收藏的岗位)】\n";
+    listText += candLine(c, i) + "\n";
+  });
+  const nick = String(opts.nickname || "").slice(0, 40);
+  const sys =
+    "你是艺术平台 ArtPortal 的编辑,为单个用户撰写一份【专属收藏综述】,署名 ArtPortal。写作水准对标《纽约时报》艺术版:严谨、克制、具体、有洞察。\n" +
+    "任务:基于该用户【收藏的编号候选清单】(全部为平台已核实的真实条目),写一篇 900–1500 字的中文综述——不是条目罗列,而是为这位用户量身写的文章:读出 TA 收藏里的兴趣脉络与共性(媒介/地域/机制/主题),把这些收藏组织成有内在逻辑的叙事,并给出面向 TA 的具体建议(临近截止的提醒、值得深挖的方向)。\n\n" +
+    "结构:1)有观点的标题 + 一句副题(点出这位用户的收藏主线);2)正文 2–3 个章节,每章 2–3 段,段落之间有承转;3)结语一段,给 TA 一个具体的行动建议。\n\n" +
+    "铁律(违反任何一条即废稿):\n" +
+    "A. 一切事实(项目/机构/人名/日期/地点/数字)只能来自候选清单,绝不引入清单之外的任何内容。\n" +
+    "B. 正文每次提到候选条目必须用 [[编号:显示文字]] 标记(如 [[2:未来世代艺术奖]]);显示文字须是该条目实际名称或自然简称;至少提及 6 个不同条目。\n" +
+    "C. 不用营销腔(『必看』『重磅』『震撼』);不吹捧机构;可克制地转述当代艺术理论帮助解读,但绝不使用带引号的直接引语、绝不编造书名页码年份等出版细节。\n" +
+    "D. 语言:中文书面语。E. 每个章节可选一张配图:字段 image 填某个标注[有配图]的候选编号(该章确实谈到它时才配),否则填 null。\n\n" +
+    '只输出一个 JSON:{"title":"…","subtitle":"…","sections":[{"heading":"…","image":编号或null,"paragraphs":["…","…"]}],"closing":"…"}';
+  async function callOnce(extra) {
+    try {
+      const res = await fetch("https://api.deepseek.com/chat/completions", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: process.env.EXTRACT_MODEL || "deepseek-chat",
+          temperature: 0.7, max_tokens: 4000, response_format: { type: "json_object" },
+          messages: [
+            { role: "system", content: sys },
+            { role: "user", content: (nick ? "用户昵称:" + nick + "\n" : "") + "收藏清单:\n" + listText + (extra ? "\n(上一稿问题:" + extra + ",请重写并严格遵守铁律)" : "") }
+          ]
+        }),
+        signal: AbortSignal.timeout(150000)
+      });
+      if (!res.ok) return null;
+      const j = await res.json();
+      const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+      const m = /\{[\s\S]*\}/.exec(raw);
+      return m ? JSON.parse(m[0]) : null;
+    } catch (e) { return null; }
+  }
+  function inspect(out) {
+    if (!out || !String(out.title || "").trim()) return "缺标题";
+    const secs = Array.isArray(out.sections) ? out.sections : [];
+    if (secs.length < 2) return "章节少于 2 个";
+    let refs = new Set(), totalLen = 0;
+    for (const s of secs) {
+      const paras = Array.isArray(s.paragraphs) ? s.paragraphs : [];
+      if (!paras.length) return "存在空章节";
+      for (const p of paras) {
+        totalLen += String(p).length;
+        for (const mm of String(p).matchAll(REF_RE)) { const n = Number(mm[1]); if (Number.isInteger(n) && n >= 0 && n < C.length) refs.add(n); }
+      }
+    }
+    if (refs.size < 4) return "文内引用不足(仅 " + refs.size + " 个,需≥6)";
+    if (totalLen < 400) return "正文太短";
+    return null;
+  }
+  let out = await callOnce(null);
+  let problem = inspect(out);
+  if (problem) { out = await callOnce(problem); problem = inspect(out); if (problem) return null; }
+  const { article } = assembleArticle(out, C, "");
+  article.author = "ArtPortal";
+  delete article.en;                              // 个人总结中文单语,不挂英文版
+  return {
+    kind: "personal",
+    date: todayISO(),
+    ai_composed: true,
+    counts: ["opp", "news", "job"].map(k => article.references.filter(r => r.kind === k).length),
+    ...article,
+    generated_at: new Date().toISOString()
+  };
+}
+
 // ---------- 邮件渲染(HTML 内联样式,兼容主流客户端;附纯文本版) ----------
 function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 function itemLink(it, siteUrl) {

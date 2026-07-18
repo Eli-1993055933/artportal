@@ -75,6 +75,15 @@
     .searchbox { width: 100%; }
     .count { margin-left: 0; width: 100%; }
   }
+  .sumprev:empty { display: none; }
+  .sumprev { margin-top: 18px; padding: 18px 20px; border: 1px solid #2a2e36; border-radius: 12px; background: #14161b; max-width: 760px; line-height: 1.7; }
+  .sumprev__brand { font-size: 11px; letter-spacing: .12em; color: #7f8796; margin-bottom: 8px; }
+  .sumprev h2 { margin: 4px 0 6px; font-size: 20px; color: #e8eaee; }
+  .sumprev__sub { color: #aab; margin: 0 0 14px; }
+  .sumprev h3 { margin: 18px 0 6px; font-size: 15px; color: #cdd2da; }
+  .sumprev p { margin: 0 0 10px; color: #c2c7d0; }
+  .sumprev b { color: #7eb8e0; font-weight: 600; }
+  .sumprev p.mono { font-size: 12.5px; color: #8b93a1; }
 </style>
 </head>
 <body>
@@ -100,6 +109,7 @@
         <button data-view="ingest">检索溯源</button>
         <button data-view="agents">Agent 编队 <span class="badge" id="navAgentN">0</span></button>
         <button data-view="weekly">AI 周报</button>
+        <button data-view="summaries">用户总结 <span class="badge" id="navSumN">0</span></button>
         <button data-view="users">用户 <span class="badge" id="navUserN">0</span></button>
       </nav>
       <div class="side__foot">每 10 秒自动刷新</div>
@@ -221,6 +231,14 @@
         <div class="scroll"><table id="wrSendTbl"><thead><tr><th>时间</th><th>期号</th><th>邮箱</th><th>结果</th></tr></thead><tbody></tbody></table></div>
       </section>
 
+      <!-- 用户专属总结(v0.73.0):用户在收藏夹一键生成的 ArtPortal 署名综述,后台可查 -->
+      <section data-sec="summaries" hidden>
+        <h1 class="sec__title">用户专属总结</h1>
+        <div class="toolbar"><span class="count" id="sumCount"></span></div>
+        <div class="scroll"><table id="sumTbl"><thead><tr><th>用户</th><th>标题</th><th>收藏</th><th>引用</th><th>生成时间</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div id="sumPreview" class="sumprev"></div>
+      </section>
+
       <!-- 用户 -->
       <section data-sec="users" hidden>
         <h1 class="sec__title">注册用户名册</h1>
@@ -333,6 +351,7 @@
     else if (view === "ingest") renderIngests();
     else if (view === "agents") renderAgents();
     else if (view === "weekly") renderWeekly();
+    else if (view === "summaries") renderSummaries();
     else if (view === "users") renderUsers();
   }
 
@@ -503,6 +522,59 @@
     if (!confirm("群发给全部订阅用户?(逐封限速发送;同一期已发过的自动跳过)")) return;
     wrPost("/api/admin/weekly/send", {}, "群发启动中…");
   });
+
+  // —— 用户专属总结(v0.73.0):列表 + 点「查看」预览全文 ——
+  function renderSummaries() {
+    get("/api/admin/summaries").then(function (s) {
+      var list = (s && s.summaries) || [];
+      $("navSumN").textContent = list.length;
+      $("sumCount").textContent = list.length + " 位用户已生成专属总结";
+      var tb = $("sumTbl").tBodies[0]; tb.textContent = "";
+      if (!list.length) { emptyRow(tb, "(还没有用户在收藏夹生成专属总结)", 6); return; }
+      list.forEach(function (x) {
+        var tr = document.createElement("tr");
+        tr.appendChild(td(x.nickname || x.uid));
+        tr.appendChild(td(x.title));
+        tr.appendChild(td(x.fav_count, "mono"));
+        tr.appendChild(td(x.refs, "mono"));
+        tr.appendChild(td(bj(x.generated_at, true), "mono"));
+        var vc = document.createElement("td");
+        var btn = document.createElement("button"); btn.className = "fchip"; btn.textContent = "查看";
+        btn.addEventListener("click", function () { previewSummary(x.uid); });
+        vc.appendChild(btn); tr.appendChild(vc);
+        tb.appendChild(tr);
+      });
+    }).catch(function () {});
+  }
+  function previewSummary(uid) {
+    get("/api/admin/summaries?uid=" + encodeURIComponent(uid)).then(function (s) {
+      var r = s && s.summary, box = $("sumPreview");
+      box.textContent = "";
+      if (!r) { box.textContent = "(读取失败)"; return; }
+      var brand = document.createElement("div"); brand.className = "sumprev__brand";
+      brand.textContent = "ARTPORTAL · 专属总结 · 文 / " + (r.author || "ArtPortal") + " · " + (r.date || "") + " · @" + (r.nickname || uid);
+      box.appendChild(brand);
+      var h = document.createElement("h2"); h.textContent = r.title || ""; box.appendChild(h);
+      if (r.subtitle) { var sub = document.createElement("p"); sub.className = "sumprev__sub"; sub.textContent = r.subtitle; box.appendChild(sub); }
+      (r.sections || []).forEach(function (sc) {
+        var h3 = document.createElement("h3"); h3.textContent = sc.heading || ""; box.appendChild(h3);
+        (sc.paragraphs || []).forEach(function (p) {
+          var para = document.createElement("p");
+          (p || []).forEach(function (sg) {
+            if (sg.t != null) para.appendChild(document.createTextNode(sg.t));
+            else if (sg.ref) { var b = document.createElement("b"); b.textContent = sg.ref.text + "[" + sg.ref.n + "]"; para.appendChild(b); }
+          });
+          box.appendChild(para);
+        });
+      });
+      if (r.closing) { var cl = document.createElement("p"); var ci = document.createElement("i"); ci.textContent = r.closing; cl.appendChild(ci); box.appendChild(cl); }
+      if ((r.references || []).length) {
+        var rh = document.createElement("h3"); rh.textContent = "本期提及"; box.appendChild(rh);
+        r.references.forEach(function (rf) { var p = document.createElement("p"); p.className = "mono"; p.textContent = "[" + rf.n + "] " + rf.title + " — " + (rf.meta || ""); box.appendChild(p); });
+      }
+      box.scrollIntoView({ behavior: "smooth", block: "start" });
+    }).catch(function () {});
+  }
 
   // —— 概览 ——
   var CARD_DEFS = [
