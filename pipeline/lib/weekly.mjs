@@ -57,6 +57,7 @@ function collectOpps(doc) {
       title: o.title_zh || o.title_en || "",
       title_en: o.title_en || null,
       org: o.org_zh || "", city: o.city_zh || "", country: o.country_zh || "",
+      org_en: o.org_en || null, city_en: o.city_en || null, country_en: o.country_en || null,
       category: o.category || "", deadline: o.deadline || null,
       summary: String(o.summary_zh || "").slice(0, 160),
       cover: o.cover || null
@@ -105,7 +106,8 @@ function collectJobs(doc) {
       oid: j.id, kind: "job",
       title: j.title_zh || j.title || "",
       title_en: j.title_en || (!/[一-鿿]/.test(String(j.title||"")) ? j.title : null),
-      org: j.org_zh || j.org || "", location: j.location_zh || j.location || "",
+      // 修:招聘数据的地点在 city/country 字段(原先取不存在的 location,招聘 meta 一直缺地点)
+      org: j.org_zh || j.org || "", location: [j.city, j.country].filter(Boolean).join(" "),
       deadline: j.deadline || null, url: j.apply_url || j.url,
       summary: String(j.summary_zh || j.summary || "").slice(0, 100),
       cover: j.cover || null
@@ -126,6 +128,36 @@ function collectJobs(doc) {
 //   - 全文如实标注"AI 撰写·条目事实以原文为准";生成后程序校验(结构/引用数),不达标重试一次,
 //     再不行退回清单式保底出刊(绝不因为追求文采而停刊或编造)。
 const REF_RE = /\[\[(\d+)[::]([^\]]{1,60})\]\]/g;
+// 中文媒体/机构名 → 通行英文名(仅收录确知的权威对应,绝不臆造;表外用启发式:
+// 名称含拉丁品牌词时取拉丁部分,如 "Tate 泰特英国美术馆"→"Tate";纯中文且无对应则保留原文——专有名词不硬译)
+const SOURCE_EN = {
+  "雅昌新闻": "Artron News", "雅昌艺术网": "Artron News", "艺术中国": "Art China", "99艺术网": "99ys.com",
+  "中国美术馆": "National Art Museum of China", "中央美术学院": "Central Academy of Fine Arts (CAFA)",
+  "清华大学美术学院": "Tsinghua University Academy of Arts & Design",
+  "UCCA尤伦斯当代艺术中心": "UCCA Center for Contemporary Art",
+  "澎湃新闻·艺术评论": "The Paper · Art Review", "新华网": "Xinhua", "中国新闻网": "China News Service",
+  "新京报": "The Beijing News", "香港01": "HK01", "联合早报网": "Lianhe Zaobao",
+  "艺术论坛 Artforum(中文版)": "Artforum China", "Artforum(艺术论坛)": "Artforum",
+  "中国日报网": "China Daily", "BBC News 中文": "BBC News Chinese", "上观新闻": "Shanghai Observer",
+  "江西日报": "Jiangxi Daily", "中国国家博物馆": "National Museum of China",
+  "香港故宮文化博物館": "Hong Kong Palace Museum", "國立臺灣美術館": "National Taiwan Museum of Fine Arts",
+  "臺南市美術館": "Tainan Art Museum", "大地藝術祭": "Echigo-Tsumari Art Triennale",
+  "世界新闻网": "World Journal", "欧洲时报网": "Nouvelles d'Europe", "報導者 The Reporter": "The Reporter",
+  "艺术新闻/The Art Journal": "The Art Journal", "The Art Newspaper(艺术新闻报)": "The Art Newspaper",
+  "纽约市博物馆": "Museum of the City of New York", "北京市文物局": "Beijing Municipal Cultural Heritage Bureau",
+  "国际艺术新闻网": "International Art News", "景德镇陶瓷大学官方网站": "Jingdezhen Ceramic University",
+  "当代唐人艺术中心": "Tang Contemporary Art", "空白空间 WHITE SPACE": "WHITE SPACE", "藝術家雜誌社": "Artist Magazine"
+};
+function enName(s) {
+  s = String(s || "").trim();
+  if (!s || !/[一-鿿]/.test(s)) return s;                    // 本就是英文
+  if (SOURCE_EN[s]) return SOURCE_EN[s];
+  const noParen = s.replace(/[((][^))]*[))]/g, "").trim();  // 去中文括号注释:The Art Newspaper(艺术新闻报)
+  if (noParen && !/[一-鿿]/.test(noParen)) return noParen;
+  const latin = s.split(/\s+/).filter(t => /^[\x20-\x7E’&.·-]+$/.test(t) && /[A-Za-z]/.test(t)).join(" ");
+  if (latin.length >= 3) return latin;                        // "Tate 泰特英国美术馆" → "Tate"
+  return s;                                                   // 纯中文专有名词:保留原文,不硬译
+}
 function candLine(c, i) {
   const bits = [c.title];
   if (c.kind === "opp") {
@@ -323,10 +355,11 @@ function assembleArticle(out, C, weekId) {
     const iv = Number(sec.image);
     if (Number.isInteger(iv) && iv >= 0 && iv < C.length && C[iv].cover) {
       const c = C[iv];
+      const enBy = c.org_en || enName(c.org || c.source || "");
       image = {
         src: c.cover,
         caption: c.title + (c.org || c.source ? " · " + (c.org || c.source) : ""),
-        caption_en: c.title_en ? c.title_en + (c.org || c.source ? " · " + (c.org || c.source) : "") : null
+        caption_en: c.title_en ? c.title_en + (enBy ? " · " + enBy : "") : null
       };
     }
     return { heading: s(sec.heading, 60), image, paragraphs: paras };
@@ -338,12 +371,12 @@ function assembleArticle(out, C, weekId) {
       : c.kind === "news"
         ? [c.source, c.published_at].filter(Boolean).join(" · ")
         : [c.org, c.location, c.deadline ? "截止 " + c.deadline : ""].filter(Boolean).join(" · ");
-    // 英文 meta:同一批事实字段换英文措辞(截止→Deadline);机构/地名保持原文(专有名词不硬译)
+    // 英文 meta:机构/城市/国家用数据里的英文字段(机会已 100% 双语),媒体名走权威映射,截止→Deadline
     const meta_en = c.kind === "opp"
-      ? [c.org, [c.city, c.country].filter(Boolean).join(" "), c.deadline ? "Deadline " + c.deadline : ""].filter(Boolean).join(" · ")
+      ? [c.org_en || enName(c.org), [c.city_en || c.city, c.country_en || c.country].filter(Boolean).join(" "), c.deadline ? "Deadline " + c.deadline : ""].filter(Boolean).join(" · ")
       : c.kind === "news"
-        ? [c.source, c.published_at].filter(Boolean).join(" · ")
-        : [c.org, c.location, c.deadline ? "Deadline " + c.deadline : ""].filter(Boolean).join(" · ");
+        ? [enName(c.source), c.published_at].filter(Boolean).join(" · ")
+        : [enName(c.org), c.location, c.deadline ? "Deadline " + c.deadline : ""].filter(Boolean).join(" · ");
     return { n: i + 1, oid: c.oid, kind: c.kind, title: c.title, title_en: c.title_en || null, meta, meta_en, url: c.kind === "opp" ? null : (c.url || null) };
   });
   return {
