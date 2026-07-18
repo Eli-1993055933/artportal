@@ -218,27 +218,17 @@ img { max-width: 100%; display: block; }
 .ai-bar__cancel:hover { background: rgba(255,255,255,.3); }
 @media (prefers-reduced-motion: reduce) { .ai-search-btn__spin, .ai-bar__spin { animation: none; } }
 
-.tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.tabs::-webkit-scrollbar { display: none; }
-.tab {
-  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-  min-height: 36px; padding: 0 14px; border-radius: 999px;
-  border: 1px solid var(--line-2); background: var(--card); color: var(--ink-2);
-  font-size: 14px; font-weight: 500; transition: all .12s ease;
-}
-.tab.is-active { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+/* 分类色点(v0.67.0 起用于筛选面板「类型」chips;.tabs/.tab 行随布局整合删除) */
 .tab__dot { width: 8px; height: 8px; border-radius: 50%; }
 .tab__dot[data-cat-dot="opencall"]  { background: var(--c-opencall); }
 .tab__dot[data-cat-dot="residency"] { background: var(--c-residency); }
 .tab__dot[data-cat-dot="award"]     { background: var(--c-award); }
 .tab__dot[data-cat-dot="workshop"]  { background: var(--c-workshop); }
 
-/* ---------- 分类行(分类 tab + 结果数 + 筛选 + 排序,一行放齐) ---------- */
+/* ---------- 控制行(已选摘要 + 结果数 + 筛选 + 排序,一行放齐;v0.67.0 四频道通用) ---------- */
 .catrow { border-bottom: 1px solid var(--line); }
 .catrow__inner { max-width: var(--maxw); margin: 0 auto; padding: 7px 24px; display: flex; align-items: center; gap: 12px; }
-.catrow .tabs { flex: 1; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-.catrow .tabs::-webkit-scrollbar { display: none; }
-.catrow .result-count { flex: none; white-space: nowrap; }
+.catrow .result-count { flex: none; white-space: nowrap; margin-left: 0; }
 .more-toggle { position: relative; flex: none; min-height: 32px; }
 .more-toggle__chev { transition: transform .12s ease; }
 .more-toggle[aria-expanded="true"] .more-toggle__chev { transform: rotate(180deg); }
@@ -742,12 +732,9 @@ img { max-width: 100%; display: block; }
   .searchbar__input { height: 36px; padding-right: 96px; }
   .ai-search-btn { height: 28px; padding: 0 11px; font-size: 12px; }
 
-  /* 分类行:tab 横滑,筛选/排序钉在右端;结果数手机上不占位 */
+  /* 控制行:已选摘要占满中段(把筛选/排序钉在右端);结果数手机上不占位 */
   .catrow__inner { padding: 6px 12px; gap: 8px; }
   .catrow .result-count { display: none; }
-  .tabs { gap: 3px; }
-  .tab { min-height: 30px; padding: 0 7px; font-size: 12px; gap: 3px; }
-  .tab__dot { width: 5px; height: 5px; }
   .more-toggle { min-height: 30px; padding: 0 10px; font-size: 12px; }
   .sort-select { height: 30px; font-size: 12px; padding: 0 6px; }
   .main { padding: 12px 10px 40px; }
@@ -861,13 +848,7 @@ img { max-width: 100%; display: block; }
 .auth__nl { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; cursor: pointer; }
 .auth__nl input { margin-top: 2px; }
 
-/* ---------- 艺术门类标签行(v0.66.0,四频道通用) ---------- */
-.tagrow { border-bottom: 1px solid var(--line); background: var(--bg); }
-.tagrow__inner {
-  max-width: var(--maxw); margin: 0 auto; padding: 8px 24px;
-  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-}
-.tagrow__inner::-webkit-scrollbar { display: none; }
+/* ---------- 艺术门类 chips(v0.66.0;v0.67.0 起收进筛选面板,随 .chips 容器换行排布) ---------- */
 .tag-chip {
   flex: none; border: 1px solid var(--line-2); background: var(--card); color: var(--ink-2);
   font-size: 12.5px; line-height: 1; padding: 7px 12px; border-radius: 999px; cursor: pointer;
@@ -878,7 +859,21 @@ img { max-width: 100%; display: block; }
 .tag-chip__n { font-size: 11px; margin-left: 5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
 .tag-chip.is-active .tag-chip__n { color: inherit; opacity: .72; }
 .tag-chip--zero { opacity: .45; }
-@media (max-width: 767px) { .tagrow__inner { padding: 7px 12px; } }
+/* 面板内的门类 chips 与相邻分组的 .chip 同高同字号(作品上传表单里保持小号,不受影响) */
+.morefilters__body .tag-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; font-size: 13px; }
+
+/* 控制行「已选条件」摘要 chips(类型/门类/作品范围收进面板后在此回显,点 ✕ 移除)。
+   flex:1 是布局关键:吸收中段剩余空间,把 筛选/排序 钉在行右端(原 tabs 的职责),
+   chips 多时配合 min-width:0 + overflow 横滑。 */
+.active-chips { flex: 1; display: flex; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.active-chips::-webkit-scrollbar { display: none; }
+.achip {
+  flex: none; display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink);
+  font-size: 12px; line-height: 1; padding: 6px 10px; border-radius: 999px; cursor: pointer;
+}
+.achip span { opacity: .75; }
+.achip:hover span { opacity: 1; }
 
 /* 作品上传表单里的门类多选 chips(≤3) */
 .wk-tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 2px 0 4px; }
