@@ -104,6 +104,9 @@ export async function getDb() {
       );
       CREATE INDEX IF NOT EXISTS idx_nl_wid ON newsletter_sends(wid);
     `);
+    // v0.66.0:作品加艺术门类标签(作者自选 ≤3,tags.js 的 23 门类 slug)。
+    // 旧库无此列 → ALTER 补上;已有则报"duplicate column"忽略即可。
+    try { db.exec("ALTER TABLE works ADD COLUMN tags TEXT"); } catch (e) {}
     return db;
   } catch (e) {
     loadErr = new Error("SQLite 不可用(better-sqlite3 未安装?): " + (e.message || e));
@@ -344,11 +347,11 @@ export async function followRateOk(uid, max = 100) {
 }
 
 // ---------- 作品集(路线图 8.3):图片人工审核通过才公开 ----------
-const parseWork = r => ({ ...r, images: JSON.parse(r.images || "[]"), mod: r.mod ? JSON.parse(r.mod) : null });
-export async function insertWork({ uid, email, title, description, mod }) {
+const parseWork = r => ({ ...r, images: JSON.parse(r.images || "[]"), tags: JSON.parse(r.tags || "[]"), mod: r.mod ? JSON.parse(r.mod) : null });
+export async function insertWork({ uid, email, title, description, tags, mod }) {
   const d = await getDb();
-  const r = d.prepare("INSERT INTO works(uid,email,title,description,mod,created_at) VALUES(?,?,?,?,?,?)")
-    .run(uid, email || null, title, description || null, mod ? JSON.stringify(mod) : null, new Date().toISOString());
+  const r = d.prepare("INSERT INTO works(uid,email,title,description,tags,mod,created_at) VALUES(?,?,?,?,?,?,?)")
+    .run(uid, email || null, title, description || null, JSON.stringify(tags || []), mod ? JSON.stringify(mod) : null, new Date().toISOString());
   return Number(r.lastInsertRowid);
 }
 export async function setWorkImages(id, paths) {

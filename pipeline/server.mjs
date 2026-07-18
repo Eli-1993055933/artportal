@@ -346,12 +346,20 @@ async function publishSubmission(row) {
 // 人工审核通过才搬进 site/assets/works/ 公开;拒绝即删文件。文字部分照常机审。
 const WORKS_PENDING = join(__dir, "state", "works_pending");
 const WORKS_PUB = join(SITE, "assets", "works");
+// 艺术门类 slug 白名单(与前端 site/js/tags.js 的 23 门类一一对应;作品上传自选 ≤3)
+const ART_TAGS = new Set([
+  "painting", "ink", "printmaking", "illustration", "photography", "sculpture", "installation",
+  "video", "animation", "newmedia", "sound", "performance", "theater", "literature", "design",
+  "fashion", "architecture", "ceramics", "glass", "textile", "craft", "curation", "mixed"
+]);
 const WORK_IMG_RE = /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/;
 const workFileRe = /^w\d+-\d+\.jpg$/;          // 文件名只认我们自己生成的格式(防路径注入)
 function validateWork(b) {
   const s = v => String(v == null ? "" : v).trim();
   const title = s(b.title), description = s(b.description).slice(0, 500);
   if (title.length < 2 || title.length > 60) return { error: "作品标题需 2–60 字" };
+  // 门类标签:选填,只认白名单 slug,最多 3 个
+  const tags = (Array.isArray(b.tags) ? b.tags : []).filter(t => typeof t === "string" && ART_TAGS.has(t)).slice(0, 3);
   const imgs = Array.isArray(b.images) ? b.images : [];
   if (!imgs.length || imgs.length > 9) return { error: "请上传 1–9 张图片" };
   const bufs = [];
@@ -362,7 +370,7 @@ function validateWork(b) {
     if (buf.length < 100 || buf.length > 700000) return { error: "图片无效或过大(单张压缩后需 ≤700KB)" };
     bufs.push(buf);
   }
-  return { data: { title, description, bufs } };
+  return { data: { title, description, tags, bufs } };
 }
 // 评论可挂的四类内容(机会/资讯/招聘/作品)
 const CMT_KINDS = new Set(["opportunity", "news", "job", "work"]);
@@ -574,7 +582,7 @@ async function handleAuthApi(req, res, u) {
         // (注:DeepSeek 只能审文字;图片内容靠 后台可见+举报+下架 兜底)
         const mod = await moderateText(v.data.title + "\n" + v.data.description, "work");
         const autoPass = mod.verdict === "pass";
-        const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, mod });
+        const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, tags: v.data.tags, mod });
         const dir = autoPass ? WORKS_PUB : WORKS_PENDING;
         await mkdir(dir, { recursive: true });
         const names = [];
@@ -606,7 +614,7 @@ async function handleAuthApi(req, res, u) {
         const byId = new Map(mini.map(x => [x.id, x]));
         return json({ code: 200, body: { works: rows.map(w => ({
           id: w.id, uid: w.uid, title: w.title, description: w.description || "",
-          created_at: w.created_at, n: w.images.length,
+          created_at: w.created_at, n: w.images.length, tags: w.tags || [],
           images: w.images.map(n => "assets/works/" + n),
           author: byId.get(w.uid) || null
         })) } });
@@ -620,7 +628,7 @@ async function handleAuthApi(req, res, u) {
         const rows = await db.worksByUser(uid, own);
         return json({ code: 200, body: { works: rows.map(w => ({
           id: w.id, title: w.title, description: w.description || "",
-          created_at: w.created_at, n: w.images.length,
+          created_at: w.created_at, n: w.images.length, tags: w.tags || [],
           status: own ? w.status : "approved",
           images: w.status === "approved" ? w.images.map(n => "assets/works/" + n) : []
         })) } });
@@ -1027,7 +1035,15 @@ const AUTO_QUERIES = {
     "贵州 艺术乡建 驻留 项目", "兰州 甘肃 青海 艺术 征集", "哈尔滨 沈阳 大连 展览 征集",
     "郑州 河南 艺术 征集", "南昌 江西 景德镇 陶瓷 驻留", "桂林 广西 艺术驻留",
     "海南 三亚 艺术项目 征集", "山西 太原 艺术展 征集", "河北 石家庄 艺术 征集",
-    "香港 艺术资助 计划 申请", "澳门 艺术节 征集", "青年艺术家 扶持 计划 征集", "全国 美术作品 展览 征稿"
+    "香港 艺术资助 计划 申请", "澳门 艺术节 征集", "青年艺术家 扶持 计划 征集", "全国 美术作品 展览 征稿",
+    // —— 按艺术门类定向补词(v0.66.0 标签体系配套):让陶瓷/玻璃/纤维/声音/舞蹈/文学等
+    //    小众门类也持续有新机会进来,尽量拉平各门类内容量(轮转机制自动均匀取词)——
+    "陶瓷 陶艺 驻留 征集", "玻璃 琉璃 艺术 驻留 征集", "纤维艺术 染织 展览 征集",
+    "漆艺 金工 首饰 手工艺 征集", "版画 工作坊 征集 招募", "插画 绘本 大赛 征稿",
+    "动画 短片 征集", "声音艺术 音乐 委约 征集", "舞蹈 编舞 驻留 招募",
+    "戏剧 剧本 孵化 征集", "诗歌 文学 写作 驻留 征稿", "建筑 空间设计 竞赛 征集",
+    "服装 时尚 设计 大赛 征集", "书法 篆刻 展览 征稿", "行为艺术 现场 表演 征集",
+    "新媒体 数字艺术 征集 驻留", "摄影 大赛 征稿", "雕塑 公共艺术 征集", "艺术评论 策展 工作坊 招募"
   ],
   news: [
     "美术馆 新展 开幕", "双年展 艺术 新闻", "当代艺术 展览 报道", "艺术家 获奖 消息",
@@ -1036,7 +1052,11 @@ const AUTO_QUERIES = {
     "contemporary art exhibition news", "museum new exhibition opening", "art biennale news",
     "artist award announcement", "gallery show opening review", "art fair news",
     "青年艺术家 展览 报道", "艺术院校 毕业展 新闻", "驻留项目 成果 展览", "行为艺术 现场 报道",
-    "新媒体艺术 展览 消息", "艺术书 出版 消息"
+    "新媒体艺术 展览 消息", "艺术书 出版 消息",
+    // —— 按门类定向补词(小众门类的资讯也要有)——
+    "陶瓷 陶艺 展览 资讯", "玻璃艺术 展览 消息", "纤维 织物 艺术 展览 报道",
+    "声音艺术 演出 报道", "舞蹈 剧场 演出 资讯", "文学 诗歌 出版 消息",
+    "建筑 设计 展览 报道", "插画 绘本 出版 资讯", "动画 电影节 消息", "时装 时尚 设计 新闻"
   ],
   jobs: [
     "美术馆 招聘 策展", "画廊 招聘 助理", "艺术机构 招聘", "博物馆 招聘 公共教育",
@@ -1044,7 +1064,10 @@ const AUTO_QUERIES = {
     "museum curator job opening", "gallery assistant job", "art institution hiring",
     "artist studio assistant job", "art fair jobs", "auction house job opening",
     "文化机构 招聘 展览", "美术学院 招聘 教师", "艺术基金会 招聘", "设计工作室 招聘",
-    "art residency coordinator job", "museum registrar job"
+    "art residency coordinator job", "museum registrar job",
+    // —— 按门类定向补词(各门类艺术家都有对口岗位可看)——
+    "服装 时尚 设计师 招聘", "建筑 事务所 招聘 设计师", "出版社 艺术 编辑 招聘",
+    "剧院 舞团 招聘", "陶瓷 工作室 招聘", "动画 插画 招聘", "音乐 机构 招聘", "摄影 机构 招聘"
   ]
 };
 // 省额策略(2026-07-18,余额撑半年):每轮只跑【一个】频道,按 机会→资讯→机会→招聘 轮转

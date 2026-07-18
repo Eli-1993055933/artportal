@@ -44,10 +44,11 @@
 
   // ---------- 上传弹窗 ----------
   var upImgs = [];   // dataURL 列表
+  var upTags = [];   // 门类标签(≤3,tags.js 的 slug)
   function uploadOpen(onDone) {
     var me = AP.auth && AP.auth.current();
     if (!me) { AP.auth.openLogin(); return; }
-    upImgs = [];
+    upImgs = []; upTags = [];
     var el = document.getElementById("wkUpModal");
     if (!el) { el = document.createElement("div"); el.className = "auth"; el.id = "wkUpModal"; document.body.appendChild(el); }
     el.innerHTML =
@@ -59,6 +60,10 @@
         '<form class="auth__form" id="wkForm" novalidate>' +
           '<input type="text" id="wkTitle" maxlength="60" placeholder="' + esc(AP.t("wkTitlePh")) + '" />' +
           '<textarea id="wkDesc" maxlength="500" placeholder="' + esc(AP.t("wkDescPh")) + '"></textarea>' +
+          '<p class="wk-tags__hint">' + esc(AP.t("wkTagsHint")) + '</p>' +
+          '<div class="wk-tags" id="wkTags">' + (AP.TAGS || []).map(function (t) {
+            return '<button type="button" class="tag-chip" data-wtag="' + t.id + '">' + esc(AP.lang === "en" ? t.en : t.zh) + '</button>';
+          }).join("") + '</div>' +
           '<label class="btn btn--ghost pf-file wk-pick">' + esc(AP.t("wkPick")) + '<input type="file" id="wkFiles" accept="image/*" multiple hidden /></label>' +
           '<div class="wk-thumbs" id="wkThumbs"></div>' +
           '<div class="auth__err" id="wkErr"></div>' +
@@ -83,6 +88,16 @@
         }, function () { err.textContent = AP.t("pfErrImg"); });
       });
     });
+    // 门类多选(≤3):点选/取消;超过 3 个时提示
+    document.getElementById("wkTags").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-wtag]"); if (!b) return;
+      var id = b.getAttribute("data-wtag");
+      var i = upTags.indexOf(id);
+      if (i !== -1) { upTags.splice(i, 1); b.classList.remove("is-active"); }
+      else if (upTags.length >= 3) { document.getElementById("wkErr").textContent = AP.t("wkTagsMax"); return; }
+      else { upTags.push(id); b.classList.add("is-active"); }
+      document.getElementById("wkErr").textContent = "";
+    });
     document.getElementById("wkThumbs").addEventListener("click", function (e) {
       var b = e.target.closest("[data-rm]");
       if (!b) return;
@@ -97,7 +112,7 @@
       if (!upImgs.length) { err.textContent = AP.t("wkErrImgs"); return; }
       var btn = document.getElementById("wkGo");
       btn.disabled = true; btn.textContent = AP.t("wkUploading");
-      post("/api/works", { title: title, description: document.getElementById("wkDesc").value.trim(), images: upImgs })
+      post("/api/works", { title: title, description: document.getElementById("wkDesc").value.trim(), tags: upTags, images: upImgs })
         .then(function (r) {
           btn.disabled = false; btn.textContent = AP.t("wkSubmit");
           if (!r.ok) { err.textContent = (r.data && r.data.error) || AP.t("authNetErr"); return; }
@@ -176,6 +191,7 @@
             '<span class="wkview__ct">' + (i + 1) + " / " + w.images.length + '</span>' : "") +
           '<div class="wkview__meta">' +
             '<div class="wkview__title">' + esc(w.title) + '</div>' +
+            (w.tags && w.tags.length ? '<div>' + w.tags.map(function (t) { return '<span class="wk-tagchip">' + esc(AP.tagLabel(t)) + '</span>'; }).join("") + '</div>' : "") +
             (w.description ? '<div class="wkview__desc">' + esc(w.description) + '</div>' : "") +
             '<div class="wkview__ops">' +
               (isMe
@@ -229,7 +245,9 @@
     el.setAttribute("data-wid", w.id);
     el.innerHTML =
       '<img class="wk-card__img" loading="lazy" src="' + esc(w.images[0] || "") + '" alt="" />' +
-      '<div class="wk-card__t">' + esc(w.title) + (w.n > 1 ? ' <span class="wk-card__n">' + w.n + '</span>' : "") + '</div>' +
+      '<div class="wk-card__t">' + esc(w.title) + (w.n > 1 ? ' <span class="wk-card__n">' + w.n + '</span>' : "") +
+        (w.tags && w.tags.length ? ' <span class="wk-tagchip">' + esc(AP.tagLabel(w.tags[0])) + '</span>' : "") +
+      '</div>' +
       (w.author
         ? '<button type="button" class="wk-card__by" data-author="' + esc(w.author.id) + '">' +
             '<img src="' + esc(w.author.avatar || "") + '" alt="" /><span>' + esc(w.author.nickname) + '</span>' +

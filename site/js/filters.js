@@ -7,10 +7,10 @@
   var state = AP.filterState = {
     q: "",
     cat: "all",
+    tag: "",                   // 艺术门类(tags.js 的 23 门类,单选;""=全部;四频道共用)
     regions: new Set(),
     freeOnly: false,
     funds: new Set(),          // stipend / housing / travel
-    discs: new Set(),
     orgTypes: new Set(),       // official / independent / commercial
     verifiedOnly: false,
     sort: "deadline",
@@ -24,14 +24,14 @@
 
   AP.hasActiveMoreFilters = function () {
     return state.regions.size || state.freeOnly || state.funds.size ||
-           state.discs.size || state.orgTypes.size || state.verifiedOnly ||
+           state.orgTypes.size || state.verifiedOnly ||
            state.showPast === false || state.showUpcoming === false ||
            state.showUserSub === false || state.showAiSearch === false;
   };
 
   AP.clearMoreFilters = function () {
     state.regions.clear(); state.freeOnly = false; state.funds.clear();
-    state.discs.clear(); state.orgTypes.clear(); state.verifiedOnly = false;
+    state.orgTypes.clear(); state.verifiedOnly = false;
     state.showPast = true; state.showUpcoming = true;   // 复位为默认全显
     state.showUserSub = true; state.showAiSearch = true;
   };
@@ -53,6 +53,8 @@
       if (state.pinnedIds && state.pinnedIds.has(o.id)) return true;
       // 分类
       if (state.cat !== "all" && o.category !== state.cat) return false;
+      // 艺术门类(标签行,单选;tags.js 关键词匹配 disciplines/标题/摘要)
+      if (state.tag && AP.tagsOf(o, "opportunities").indexOf(state.tag) === -1) return false;
       // 三态显示范围:open 恒显;past/upcoming 默认显示,用户可在"更多筛选"里关掉
       var st = F.itemState(o);
       if (st === "past" && !state.showPast) return false;
@@ -72,13 +74,6 @@
         var ok = true;
         state.funds.forEach(function (k) { if (f[k] !== true) ok = false; });
         if (!ok) return false;
-      }
-      // 学科(任一命中即可)
-      if (state.discs.size) {
-        var ds = o.disciplines || [];
-        var hit = false;
-        state.discs.forEach(function (d) { if (ds.indexOf(d) !== -1) hit = true; });
-        if (!hit) return false;
       }
       // 机构类型(任一命中即可)
       if (state.orgTypes.size && !state.orgTypes.has(o.org_type)) return false;

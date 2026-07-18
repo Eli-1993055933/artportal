@@ -860,3 +860,29 @@ img { max-width: 100%; display: block; }
 /* 注册弹窗里的订阅勾选(明示同意,默认不勾) */
 .auth__nl { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; cursor: pointer; }
 .auth__nl input { margin-top: 2px; }
+
+/* ---------- 艺术门类标签行(v0.66.0,四频道通用) ---------- */
+.tagrow { border-bottom: 1px solid var(--line); background: var(--bg); }
+.tagrow__inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 8px 24px;
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.tagrow__inner::-webkit-scrollbar { display: none; }
+.tag-chip {
+  flex: none; border: 1px solid var(--line-2); background: var(--card); color: var(--ink-2);
+  font-size: 12.5px; line-height: 1; padding: 7px 12px; border-radius: 999px; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.tag-chip:hover { background: var(--hover); color: var(--ink); }
+.tag-chip.is-active { background: var(--ink); color: var(--on-ink); border-color: var(--ink); font-weight: 600; }
+.tag-chip__n { font-size: 11px; margin-left: 5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.tag-chip.is-active .tag-chip__n { color: inherit; opacity: .72; }
+.tag-chip--zero { opacity: .45; }
+@media (max-width: 767px) { .tagrow__inner { padding: 7px 12px; } }
+
+/* 作品上传表单里的门类多选 chips(≤3) */
+.wk-tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 2px 0 4px; }
+.wk-tags .tag-chip { font-size: 12px; padding: 6px 11px; }
+.wk-tags__hint { font-size: 11.5px; color: var(--ink-3); margin: 0 0 2px; }
+/* 作品卡片/查看器上的门类小标 */
+.wk-tagchip { display: inline-block; font-size: 10.5px; color: var(--ink-3); border: 1px solid var(--line-2); border-radius: 999px; padding: 1px 7px; margin-right: 4px; }

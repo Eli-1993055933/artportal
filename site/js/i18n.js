@@ -25,7 +25,8 @@
       f_region: "地区", region_cn: "中国大陆", region_hktw: "港澳台", region_asia: "亚洲其他", region_europe: "欧洲", region_namerica: "北美", region_other: "其他",
       f_fee: "费用", freeOnly: "仅看完全免费",
       f_funding: "资助", fund_stipend: "提供津贴", fund_housing: "提供住宿", fund_travel: "报销路费",
-      f_discipline: "学科", f_trust: "信任", verifiedOnly: "仅看已人工核实",
+      f_trust: "信任", verifiedOnly: "仅看已人工核实",
+      tagAll: "全部门类",
       f_orgtype: "机构类型", orgt_official: "官方体制", orgt_independent: "独立学术", orgt_commercial: "商业机构",
       f_scope: "显示范围", scope_past: "过往项目", scope_upcoming: "即将开启",
       scope_user: "用户上传", scope_ai: "AI 检索",
@@ -132,6 +133,7 @@
       wkPending: "审核中", wkRejected: "未通过", wkImgs: "张",
       wkPendingTip: "作品审核中,通过后即可查看大图",
       wkDelete: "删除作品", wkDelAsk: "删除这组作品?不可恢复。", wkDeleted: "已删除",
+      wkTagsHint: "作品门类(选填,最多选 3 个,方便同行按门类找到你)", wkTagsMax: "最多选 3 个门类",
       wkReported: "已收到举报,我们会尽快核查",
       // 评论(四类内容通用)
       cmt: "评论", cmtTitle: "评论",
@@ -187,7 +189,8 @@
       f_region: "Region", region_cn: "Mainland China", region_hktw: "HK·MO·TW", region_asia: "Rest of Asia", region_europe: "Europe", region_namerica: "N. America", region_other: "Other",
       f_fee: "Fee", freeOnly: "Fully free only",
       f_funding: "Funding", fund_stipend: "Stipend", fund_housing: "Housing", fund_travel: "Travel",
-      f_discipline: "Discipline", f_trust: "Trust", verifiedOnly: "Human-verified only",
+      f_trust: "Trust", verifiedOnly: "Human-verified only",
+      tagAll: "All disciplines",
       f_orgtype: "Institution", orgt_official: "Official", orgt_independent: "Independent", orgt_commercial: "Commercial",
       f_scope: "Show", scope_past: "Past projects", scope_upcoming: "Upcoming",
       scope_user: "User submissions", scope_ai: "AI-searched",
@@ -293,6 +296,7 @@
       wkPending: "In review", wkRejected: "Not approved", wkImgs: "imgs",
       wkPendingTip: "In review — images visible once approved",
       wkDelete: "Delete work", wkDelAsk: "Delete this work? This cannot be undone.", wkDeleted: "Deleted",
+      wkTagsHint: "Discipline tags (optional, up to 3 — helps peers find you)", wkTagsMax: "Up to 3 tags",
       wkReported: "Report received — we'll review it soon",
       // Comments
       cmt: "Comments", cmtTitle: "Comments",
@@ -327,9 +331,6 @@
     }
   };
 
-  // 筛选面板固定 6 个学科 chip 的英文名(数据里的自由学科文本由 disciplines_en 逐条翻译承担)
-  var DISC_CHIP = { "版画": "Printmaking", "绘画": "Painting", "雕塑": "Sculpture", "影像": "Moving Image", "装置": "Installation", "跨媒介": "Interdisciplinary" };
-
   var AP = window.AP || (window.AP = {});
   AP.lang = (function () {
     try { return localStorage.getItem("ap_lang") || "zh"; } catch (e) { return "zh"; }
@@ -351,12 +352,6 @@
     var arias = document.querySelectorAll("[data-i18n-aria]");
     for (var k = 0; k < arias.length; k++) {
       arias[k].setAttribute("aria-label", AP.t(arias[k].getAttribute("data-i18n-aria")));
-    }
-    // 学科筛选 chip:标签随语言切换(data-disc 值保持中文,筛选逻辑不受影响)
-    var discs = document.querySelectorAll("#discChips .chip");
-    for (var m = 0; m < discs.length; m++) {
-      var zh = discs[m].getAttribute("data-disc");
-      discs[m].textContent = AP.lang === "en" ? (DISC_CHIP[zh] || zh) : zh;
     }
   };
   AP.setLang = function (lang) {

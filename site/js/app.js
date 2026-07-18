@@ -82,11 +82,13 @@
     if (channel === "opportunities") {
       filtered = AP.applyFilters(allData);
     } else {
-      // 资讯/招聘:仅关键词过滤(无展览那套筛选);本次 AI 检索新增免过滤+置顶。
+      // 资讯/招聘/作品:关键词 + 艺术门类标签过滤;本次 AI 检索新增免过滤+置顶。
       var q = AP.filterState.q.trim().toLowerCase();
+      var tag = AP.filterState.tag;
       var pinned = AP.filterState.pinnedIds;
       filtered = allData.filter(function (o) {
         if (pinned && pinned.has(o.id)) return true;
+        if (tag && AP.tagsOf(o, channel).indexOf(tag) === -1) return false;
         return !q || channelSearchText(o).indexOf(q) !== -1;
       });
       filtered.sort(function (a, b) {
@@ -112,6 +114,35 @@
     appendPage();
     updateEmpty();
     updateFilterDot();
+    renderTagRow();
+  }
+
+  // ---------- 艺术门类标签行(v0.66.0,四频道通用) ----------
+  // 有内容的门类在前(带计数),暂无内容的置灰排后但仍可点(空态引导用 AI 检索充实,
+  // 保证所有门类的艺术家都能找到自己的入口——"内容量均等"由服务器定向词池持续充实)。
+  function renderTagRow() {
+    var box = $("tagChips");
+    if (!box || !AP.TAGS) return;
+    // 计数基于"该频道当前可见的全量数据"(机会频道套官网直达闸,与列表一致)
+    var pre = channel === "opportunities"
+      ? function (o) { return o.status !== "dead" && (F.officialUrl(o) || o.trust === "user"); }
+      : null;
+    var counts = AP.tagCounts(allData, channel, pre);
+    var cur = AP.filterState.tag;
+    var have = [], zero = [];
+    for (var i = 0; i < AP.TAGS.length; i++) {
+      (counts[AP.TAGS[i].id] ? have : zero).push(AP.TAGS[i]);
+    }
+    var html = '<button class="tag-chip' + (cur ? "" : " is-active") + '" data-tag="">' + AP.t("tagAll") + '</button>';
+    have.concat(zero).forEach(function (t) {
+      var n = counts[t.id] || 0;
+      html += '<button class="tag-chip' + (cur === t.id ? " is-active" : "") + (n ? "" : " tag-chip--zero") + '" data-tag="' + t.id + '">' +
+        (AP.lang === "en" ? t.en : t.zh) + (n ? '<span class="tag-chip__n">' + n + '</span>' : "") + '</button>';
+    });
+    box.innerHTML = html;
+    // 选中的 chip 滚进可视区(横滑行较长,别让用户找不到当前选中)
+    var act = box.querySelector(".tag-chip.is-active");
+    if (act && cur && act.scrollIntoView) act.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
   // 招聘排序分组:0=有截止且未过(最急最前) 1=无固定截止 2=已截止(置底)
   // "招满为止/滚动招聘"这类非 ISO 截止串解析不出日期,属"无固定截止",绝不能当已截止置底。
@@ -177,6 +208,7 @@
     $("moreFilters").hidden = true;
     AP.filterState.q = ""; if ($("searchInput")) $("searchInput").value = "";
     AP.filterState.cat = "all";
+    AP.filterState.tag = "";                   // 门类选择不跨频道带(各频道各选各的)
     AP.filterState.pinnedIds = null;           // 置顶集是"上一次检索"的,不跨频道带
     var sb = $("searchBanner"); if (sb) sb.hidden = true;   // 横幅说的是上个频道的检索,收起
     // placeholder 连同 data-i18n-ph 一起换:否则语言切换触发 applyI18n 时会被刷回机会频道文案
@@ -282,15 +314,17 @@
     $("moreScrim").addEventListener("click", closeMore);
     $("applyFilters").addEventListener("click", closeMore);
 
+    // 艺术门类标签行(四频道通用,单选;点当前选中项 = 取消)
+    $("tagChips").addEventListener("click", function (e) {
+      var c = e.target.closest(".tag-chip"); if (!c) return;
+      var t = c.getAttribute("data-tag");
+      st.tag = (t && st.tag !== t) ? t : "";
+      rerun();
+    });
     // 地区 chips(多选)
     $("regionChips").addEventListener("click", function (e) {
       var c = e.target.closest(".chip"); if (!c) return;
       toggleSetChip(c, st.regions, c.getAttribute("data-region")); rerun();
-    });
-    // 学科 chips(多选)
-    $("discChips").addEventListener("click", function (e) {
-      var c = e.target.closest(".chip"); if (!c) return;
-      toggleSetChip(c, st.discs, c.getAttribute("data-disc")); rerun();
     });
     // 机构类型 chips(多选)
     $("orgTypeChips").addEventListener("click", function (e) {
@@ -320,8 +354,9 @@
       if ($("showAiSearch")) $("showAiSearch").checked = true;
       $("freeOnly").checked = false; $("verifiedOnly").checked = false;
       var fb = document.querySelectorAll("[data-fund]"); for (var k = 0; k < fb.length; k++) fb[k].checked = false;
-      var chips = document.querySelectorAll("#regionChips .chip, #discChips .chip, #orgTypeChips .chip");
+      var chips = document.querySelectorAll("#regionChips .chip, #orgTypeChips .chip");
       for (var j = 0; j < chips.length; j++) chips[j].classList.remove("is-active");
+      st.tag = "";                             // 门类标签行一并复位
       rerun();
     }
     $("clearFilters").addEventListener("click", clearAll);
