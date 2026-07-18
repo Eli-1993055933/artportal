@@ -135,22 +135,46 @@
       .then(function (j) { if (curUid === reqUid) renderSummaryPanel(host, j.summary, j.fav_count || 0, j.min_favs || 3); })
       .catch(function () { if (curUid === reqUid) renderSummaryPanel(host, null, 0, 3); });
   }
-  function renderSummaryPanel(host, summary, favN, minN) {
-    if (!host) return;
-    var canGen = favN >= minN;
-    var bar = '<div class="pp-sum__bar"><span class="pp-sum__t">✦ ' + esc(AP.t("sumTitle")) + '</span>' +
-      '<button class="btn btn--dark pp-sum__gen" id="ppSumGen" type="button"' + (canGen ? "" : " disabled") + '>' +
-        esc(AP.t(summary ? "sumRegen" : "sumGen")) + '</button></div>';
-    var inner;
-    if (summary) {
-      if (AP.weekly && AP.weekly.ensureFont) AP.weekly.ensureFont();
-      inner = '<div class="pp-sum__art wra">' + (AP.weekly && AP.weekly.summaryHtml ? AP.weekly.summaryHtml(summary) : "") + '</div>';
-    } else {
-      inner = '<p class="pp-sum__intro">' + esc(canGen ? AP.t("sumIntro") : AP.t("sumNeedMore").replace("{n}", minN)) + '</p>';
-    }
-    host.innerHTML = bar + inner;
+  // 展开/收起偏好(默认收起,免得长文章挡住收藏内容;用户显式展开/收起才记忆)
+  function sumOpenPref() { try { return localStorage.getItem("ap_sum_open") === "1"; } catch (e) { return false; } }
+  function setSumOpenPref(v) { try { localStorage.setItem("ap_sum_open", v ? "1" : "0"); } catch (e) {} }
+  function wireSumGen(host) {
     var gen = document.getElementById("ppSumGen");
     if (gen) gen.addEventListener("click", function () { doGenerateSummary(host); });
+  }
+  // forceOpen: 传 true(刚生成完)当场展开看结果;不传则按记忆的偏好(默认收起)
+  function renderSummaryPanel(host, summary, favN, minN, forceOpen) {
+    if (!host) return;
+    var canGen = favN >= minN;
+    if (!summary) {
+      host.className = "pp-sum";
+      host.innerHTML = '<div class="pp-sum__bar"><span class="pp-sum__t">✦ ' + esc(AP.t("sumTitle")) + '</span>' +
+        '<button class="btn btn--dark pp-sum__gen" id="ppSumGen" type="button"' + (canGen ? "" : " disabled") + '>' + esc(AP.t("sumGen")) + '</button></div>' +
+        '<p class="pp-sum__intro">' + esc(canGen ? AP.t("sumIntro") : AP.t("sumNeedMore").replace("{n}", minN)) + '</p>';
+      wireSumGen(host);
+      return;
+    }
+    var open = (forceOpen != null) ? forceOpen : sumOpenPref();
+    if (AP.weekly && AP.weekly.ensureFont) AP.weekly.ensureFont();
+    host.className = "pp-sum " + (open ? "pp-sum--open" : "pp-sum--collapsed");
+    host.innerHTML =
+      '<div class="pp-sum__bar">' +
+        '<button type="button" class="pp-sum__head" id="ppSumToggle" aria-expanded="' + (open ? "true" : "false") + '">' +
+          '<span class="pp-sum__t">✦ ' + esc(AP.t("sumTitle")) + '</span>' +
+          '<span class="pp-sum__teaser">' + esc(summary.title || "") + '</span>' +
+          '<span class="pp-sum__chev" aria-hidden="true">▾</span>' +
+        '</button>' +
+        '<button class="btn btn--dark pp-sum__gen" id="ppSumGen" type="button"' + (canGen ? "" : " disabled") + '>' + esc(AP.t("sumRegen")) + '</button>' +
+      '</div>' +
+      '<div class="pp-sum__art wra">' + (AP.weekly && AP.weekly.summaryHtml ? AP.weekly.summaryHtml(summary) : "") + '</div>';
+    var toggle = document.getElementById("ppSumToggle");
+    if (toggle) toggle.addEventListener("click", function () {
+      var nowOpen = host.classList.toggle("pp-sum--open");
+      host.classList.toggle("pp-sum--collapsed", !nowOpen);
+      toggle.setAttribute("aria-expanded", nowOpen ? "true" : "false");
+      setSumOpenPref(nowOpen);
+    });
+    wireSumGen(host);
   }
   function doGenerateSummary(host) {
     var gen = document.getElementById("ppSumGen");
@@ -164,7 +188,7 @@
       .then(function (res) {
         if (curUid !== reqUid) return;
         if (!res.ok) { toast((res.data && res.data.error) || AP.t("authNetErr")); loadSummary(); return; }
-        renderSummaryPanel(host, res.data.summary, (res.data.summary && res.data.summary.fav_count) || 0, 3);
+        renderSummaryPanel(host, res.data.summary, (res.data.summary && res.data.summary.fav_count) || 0, 3, true);   // 生成完当场展开看结果
         toast(AP.t("sumDone"));
       })
       .catch(function () { if (curUid === reqUid) { toast(AP.t("authNetErr")); loadSummary(); } });
