@@ -35,9 +35,10 @@
   --danger:        #C0392B;   /* 红:紧急截止 */
   --danger-soft:   #FBEAE7;
 
-  /* 角标实底(白字専用):与"文字用色"的 --c-*/--warn/--ink-3 分离——
+  /* 角标实底(白字专用):与"文字用色"的 --c-系、--warn、--ink-3 分离——
      夜间那组会提亮以保深底上文字可读,但提亮色配白字会跌破对比线;
-     角标底色两种主题都保持饱和深色(白字对比与日间一致),故只在 :root 定义、夜间不覆盖。 */
+     角标底色两种主题都保持饱和深色(白字对比与日间一致),故只在 :root 定义、夜间不覆盖。
+     注意:注释里绝不能出现「星号+斜杠」,否则会提前结束本段注释、吃掉紧随其后的 --tag-opencall 声明。 */
   --tag-opencall:  #C0392B;
   --tag-residency: #2E6FA7;
   --tag-award:     #C08A1E;
@@ -292,7 +293,7 @@ img { max-width: 100%; display: block; }
 .card__media-go { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 6px; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
 .card__media-link:hover .card__media-go, .card__media-link:focus-visible .card__media-go { opacity: 1; }
 .card__tags { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
-.card__tags-l { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.card__tags-l { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; min-width: 0; }
 /* 周期展标记:一眼看出该卡片可推算下届开放(角标白字配 --tag-* 饱和底,两主题同对比) */
 .predict-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: #fff; background: var(--tag-warn); white-space: nowrap; }
 .past-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: #fff; background: var(--tag-muted); white-space: nowrap; }
@@ -306,7 +307,7 @@ img { max-width: 100%; display: block; }
 .card--past:hover { opacity: 1; box-shadow: var(--shadow); }
 .card--past:hover .card__body { opacity: 0.9; }
 .card--past:hover .card__media { filter: grayscale(0.3); }
-.cat-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: #fff; }
+.cat-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: #fff; white-space: nowrap; flex: 0 0 auto; }
 .cat-tag[data-cat="opencall"]  { background: var(--tag-opencall); }
 .cat-tag[data-cat="residency"] { background: var(--tag-residency); }
 .cat-tag[data-cat="award"]     { background: var(--tag-award); }
@@ -315,8 +316,9 @@ img { max-width: 100%; display: block; }
 .cat-tag[data-cat="jobs"]      { background: #2E8B57; }
 /* 资讯/招聘卡片:整卡可点(跳原文/申请) */
 .card--link { cursor: pointer; }
-/* 机构类型小标浮在封面图上:固定白底深字,与主题无关(图片上永远可读) */
-.org-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 11px; font-weight: 500; background: rgba(255,255,255,.92); color: #4A4A47; }
+/* 机构类型小标浮在封面图上:固定白底深字,与主题无关(图片上永远可读)。
+   nowrap+不收缩:避免"官方体制"等在窄卡/左侧标签多时被挤到第二行、撑破 24px 小框。 */
+.org-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 6px; font-size: 11px; font-weight: 500; background: rgba(255,255,255,.92); color: #4A4A47; white-space: nowrap; flex: 0 0 auto; }
 
 .card__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .card__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.35; text-wrap: balance; }
@@ -338,6 +340,8 @@ img { max-width: 100%; display: block; }
   display: inline-flex; align-items: center; gap: 4px;
   height: 24px; padding: 0 9px; border-radius: 6px;
   font-size: 12px; font-weight: 500; border: 1px solid transparent;
+  /* 招聘薪资等自由文本可能很长:单行不换行、超长省略,绝不在 24px 小框里提行溢出 */
+  white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
 }
 .badge--free   { color: var(--ok);   border-color: rgba(46,125,70,.35); background: var(--ok-soft); }
 .badge--fee    { color: var(--ink-2); border-color: var(--line-2); background: var(--card); }
