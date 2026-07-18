@@ -52,7 +52,16 @@
     page.className = "ppage"; page.id = "weeklyPage"; page.hidden = true;
     document.body.appendChild(page);
     page.addEventListener("click", function (e) {
-      if (e.target.closest("#wrBack")) { e.preventDefault(); AP.router.goList(); }
+      if (e.target.closest("#wrBack")) { e.preventDefault(); AP.router.goList(); return; }
+      // 文内引用/文末汇总里的机会深链:改走 router.goDetail(记录"站内进入"),
+      // 详情页点「返回」才会 history.back 回到本文(原生 <a> 跳转会让返回落到主列表)。
+      var a = e.target.closest('a[href^="#/o/"]');
+      if (a) {
+        e.preventDefault();
+        var oid = a.getAttribute("href").slice(4);
+        try { oid = decodeURIComponent(oid); } catch (err) {}
+        AP.router.goDetail(oid);
+      }
     });
   }
   function backBtn() {
@@ -153,7 +162,6 @@
     html += '<p class="wra-ainote">' + esc(AP.t("wraAiFoot")) + (en ? esc(" · Machine-translated from the Chinese original.") : "") + '</p>';
     html += archiveHtml(r.id) + '</div>';
     page.innerHTML = html;
-    page.scrollTop = 0;
   }
   function renderReport(r) {
     if (r.format === 2) { renderArticle(r); return; }
@@ -177,7 +185,6 @@
     if (r.ai_composed) html += '<p class="wra-ainote">' + esc(AP.t("wraAiFoot")) + '</p>';
     html += archiveHtml(r.id) + '</div>';
     page.innerHTML = html;
-    page.scrollTop = 0;
   }
   // 衬线 webfont(思源宋体分片)只在进入周刊阅读页时加载:主站不背这份体积,
   // 手机(安卓/微信无内置衬线中文字体)也能得到与电脑一致的宋体排版。
@@ -190,14 +197,25 @@
     l.href = "assets/fonts/noto-serif-sc/serif.css";
     document.head.appendChild(l);
   }
+  var savedScroll = {};   // 期号 -> 离开时的滚动位置(从详情返回/切期再回来时恢复,不跳回文章开头)
   function open(id) {
     build();
     ensureFont();
+    if (!page.hidden && curId && curId !== id) savedScroll[curId] = page.scrollTop;   // 页内切往期:记住当前期位置
     page.hidden = false;
     document.body.style.overflow = "hidden";
+    var sameIssue = curId === id;
     curId = id;
     if (!indexLoaded) loadIndex();   // 往期列表用
-    if (reports[id]) { renderReport(reports[id]); return; }
+    if (reports[id]) {
+      renderReport(reports[id]);
+      var target = savedScroll[id] || 0;       // 回到上次读到的位置(首次打开自然为 0)
+      page.scrollTop = target;
+      // 图片懒加载会在渲染后撑高页面:接近底部的位置首次恢复会被钳制,稍后再校正一次
+      if (target > 0) setTimeout(function () { if (curId === id && Math.abs(page.scrollTop - target) > 40) page.scrollTop = target; }, 350);
+      if (sameIssue) delete savedScroll[id];
+      return;
+    }
     page.innerHTML = '<div class="ppage__inner">' + backBtn() + '<p class="ppage__empty">…</p></div>';
     fetch("data/weekly/" + encodeURIComponent(id) + ".json", { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
@@ -212,7 +230,10 @@
       });
   }
   function close() {
-    if (page && !page.hidden) { page.hidden = true; document.body.style.overflow = ""; curId = null; }
+    if (page && !page.hidden) {
+      if (curId) savedScroll[curId] = page.scrollTop;   // 记住离开位置(点引用进详情后返回可接着读)
+      page.hidden = true; document.body.style.overflow = ""; curId = null;
+    }
   }
 
   // 路由:#/w/<id> 打开,其余关闭(router.parse 已识别 weekly)
@@ -226,5 +247,12 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  AP.weekly = { sync: sync, refresh: function () { if (page && !page.hidden && curId && reports[curId]) renderReport(reports[curId]); renderBar(); } };
+  AP.weekly = { sync: sync, refresh: function () {
+    if (page && !page.hidden && curId && reports[curId]) {
+      var keep = page.scrollTop;               // 语言切换重渲:停在原位,不跳回文章开头
+      renderReport(reports[curId]);
+      page.scrollTop = keep;
+    }
+    renderBar();
+  } };
 })();
