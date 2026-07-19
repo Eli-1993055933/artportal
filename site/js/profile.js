@@ -224,6 +224,8 @@
           (u.website ? '<p class="ppage__link"><a href="' + esc(u.website) + '" target="_blank" rel="noopener nofollow ugc">' + esc(u.website) + '</a></p>' : "") +
         '</div>' +
       '</div>' +
+      // 画室点评工具私密入口:仅本人 + 已授权(me.studio)可见,点开进 /studio(ArtPortal 反代到 Python 服务)
+      ((isMe && me && me.studio) ? '<a class="pp-studio" href="/studio/">🎨 <span class="pp-studio__t">' + esc(AP.t("studioEntry")) + '</span><span class="pp-studio__arr">→</span></a>' : '') +
       '<div class="ppage__tabs">' +
         '<button type="button" data-pptab="works" class="' + (curTab === "works" ? "is-active" : "") + '">' + esc(AP.t("ppTabWorks")) + " " + (u.works || 0) + '</button>' +
         '<button type="button" data-pptab="favs" class="' + (curTab === "favs" ? "is-active" : "") + '">' + esc(AP.t("ppTabFavs")) + favN + '</button>' +

@@ -8,7 +8,7 @@
 // 启动:  set -a && . ./.env && set +a && node server.mjs   (需 DEEPSEEK_API_KEY)
 // 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
 
-import { createServer } from "node:http";
+import { createServer, request as httpRequest } from "node:http";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { readFile, writeFile, stat, rename, mkdir, unlink, statfs, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -599,7 +599,14 @@ async function handleAuthApi(req, res, u) {
   const ip = ipOf(req);
   const p = u.pathname, m = req.method;
   try {
-    if (p === "/api/auth/me" && m === "GET") return json(auth.me(req));
+    if (p === "/api/auth/me" && m === "GET") {
+      const r = auth.me(req);
+      if (r.body && r.body.user) {   // 画室工具入口可见性:授权 uid 或管理员(STUDIO_OWNERS 未设时任何登录用户,先本人用)
+        const owners = (process.env.STUDIO_OWNERS || "").split(",").map(s => s.trim()).filter(Boolean);
+        r.body.user.studio = auth.isAdmin(req, ip) || owners.length === 0 || owners.includes(r.body.user.id);
+      }
+      return json(r);
+    }
     if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b.email, b.password, b.code, ip, b.newsletter === true)); }
     if (p === "/api/auth/sendcode" && m === "POST") { const b = await readBody(req); return json(await auth.sendEmailCode(b, ip)); }
     if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.email, b.password, ip)); }
@@ -1388,6 +1395,26 @@ createServer(async (req, res) => {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
       return res.end(body);
     } catch (e) { res.writeHead(404); return res.end("not found"); }
+  }
+  // —— 画室点评工具(独立 Python 服务,127.0.0.1:8791)反代到 /studio —— 私密:处理学生作品,仅授权用户可用。
+  //    STUDIO_OWNERS(.env,逗号分隔 uid)设了就只放行这些人 + 管理员;没设则任何登录用户(先本人用,拿到 uid 再收紧)。
+  if (u.pathname === "/studio") { res.writeHead(302, { Location: "/studio/" }); return res.end(); }
+  if (u.pathname.startsWith("/studio/")) {
+    const me = auth.userOf(req);
+    const owners = (process.env.STUDIO_OWNERS || "").split(",").map(s => s.trim()).filter(Boolean);
+    const ok = me && (auth.isAdmin(req, ipOf(req)) || owners.length === 0 || owners.includes(me.id));
+    if (!ok) {
+      res.writeHead(me ? 403 : 401, { "Content-Type": "text/html; charset=utf-8" });
+      return res.end('<meta charset="utf-8"><body style="font-family:sans-serif;padding:44px;text-align:center;color:#333"><h3>画室点评工具</h3><p>' + (me ? "你没有使用权限。" : "请先登录后再使用。") + '</p><a href="/">返回首页</a></body>');
+    }
+    const target = u.pathname.replace(/^\/studio/, "") + (u.search || "");
+    const pr = httpRequest({ host: "127.0.0.1", port: 8791, method: req.method, path: target,
+      headers: { ...req.headers, host: "127.0.0.1:8791" } }, (resp) => {
+      res.writeHead(resp.statusCode || 502, resp.headers); resp.pipe(res);
+    });
+    pr.on("error", () => { if (!res.headersSent) res.writeHead(502, { "Content-Type": "text/plain; charset=utf-8" }); res.end("画室服务未启动"); });
+    req.pipe(pr);
+    return;
   }
   if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname.startsWith("/api/summary") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);

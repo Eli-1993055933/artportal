@@ -124,6 +124,7 @@
       // 用户主页(8.1)
       menuMyPage: "我的主页", menuEditProfile: "编辑资料",
       ppJoined: "加入于", ppTabFavs: "收藏", ppTabSubs: "投稿",
+      studioEntry: "画室作业点评工具 · 上传合成图自动出每人 PPT(仅你可见)",
       ppFavPrivate: "TA 未公开收藏", ppFavEmpty: "还没有收藏",
       ppSubEmpty: "还没有通过审核的投稿", ppNotFound: "用户不存在或资料未完成",
       ppFields: "创作领域",
@@ -317,6 +318,7 @@
       // Profile page (8.1)
       menuMyPage: "My page", menuEditProfile: "Edit profile",
       ppJoined: "Joined", ppTabFavs: "Saved", ppTabSubs: "Submissions",
+      studioEntry: "Studio critique tool · upload class grid → per-student PPT (only you)",
       ppFavPrivate: "Saved items are private", ppFavEmpty: "Nothing saved yet",
       ppSubEmpty: "No approved submissions yet", ppNotFound: "User not found or profile incomplete",
       ppFields: "Fields",
