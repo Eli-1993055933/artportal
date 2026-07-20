@@ -91,8 +91,11 @@
     // 标题渲染成指向深链的真 <a>:键盘可 Tab 聚焦、回车打开,读屏识别为链接;
     // 鼠标点击仍由 grid 委托统一走 goDetail(app.js 里对该链接 preventDefault)。
     var titleHtml = '<a class="card__title-link" href="#/o/' + esc(encodeURIComponent(o.id)) + '">' + esc(titleTxt) + '</a>';
+    // 落点是可信平台(非主办方官网)时,按钮点名平台、不谎称"官网"(诚实红线);否则"前往官网"。
+    var visitPlat = visitUrl ? F.platformName(visitUrl) : null;
+    var visitLabel = visitPlat ? ((AP.lang === "en" ? "Visit " : "前往 ") + visitPlat) : AP.t("gotoSite");
     var visitBtn = visitUrl
-      ? '<a class="btn btn--dark" data-act="visit" data-gate="official" href="' + esc(visitUrl) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>'
+      ? '<a class="btn btn--dark" data-act="visit" data-gate="official" href="' + esc(visitUrl) + '" target="_blank" rel="noopener">' + esc(visitLabel) + '</a>'
       : '<button class="btn btn--ghost" type="button" disabled aria-disabled="true">' + AP.t("noOfficial") + '</button>';
     var predLabel = F.predictLabel(o);
     var predHtml = predLabel ? '<div class="card__predict"><span class="card__predict-ico" aria-hidden="true">◷</span>' + esc(predLabel) + '</div>' : '';
@@ -304,7 +307,7 @@
       '<div class="d-actions d-actions--top">' +
         '<button class="btn btn--ghost" data-act="copy" data-id="' + esc(o.id) + '" type="button">' + AP.t("copyLink") + '</button>' +
         (official
-          ? '<a class="btn btn--dark" data-gate="official" href="' + esc(official) + '" target="_blank" rel="noopener">' + AP.t("gotoSite") + '</a>'
+          ? '<a class="btn btn--dark" data-gate="official" href="' + esc(official) + '" target="_blank" rel="noopener">' + esc(F.platformName(official) ? ((en ? "Visit " : "前往 ") + F.platformName(official)) : AP.t("gotoSite")) + '</a>'
           : '<button class="btn btn--ghost" type="button" disabled aria-disabled="true">' + AP.t("noOfficial") + '</button>') +
       '</div>' +
       '<div>' + trustBadge(o) + '</div>' +

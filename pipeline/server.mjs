@@ -17,7 +17,7 @@ import { fetchSource } from "./lib/fetch.mjs";
 import { extract } from "./lib/extract.mjs";
 import { verifyRecord, isParseableDate } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
-import { isThirdParty } from "./lib/aggregators.mjs";
+import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { inspectChannel } from "./lib/qc.mjs";
@@ -209,7 +209,10 @@ async function searchAndHarvest(query, target = 6) {
   const seen = new Set(), cands = [];
   for (const u of rawUrls) {
     let host; try { host = new URL(u).host; } catch (e) { continue; }
-    if (BLOCK.test(u) || isThirdParty(u) || unsafeHost(host)) continue;   // 第三方聚合/门户不采;裸IP/内网host不抓(SSRF闸)
+    // 垃圾第三方(新闻转载/杂志/设计赛事门户/文档托管/社媒)不采;裸IP/内网 host 不抓(SSRF闸)。
+    // L1(v0.76.0):可信机会平台(CaFÉ/artcall/curatorspace/resartis 等)【放行】——国际机会常只在这上面,
+    // 入库如实标"平台登记·非官网直采",反幻觉 evidence 校验照旧。
+    if (BLOCK.test(u) || (isThirdParty(u) && !isTrustedPlatform(u)) || unsafeHost(host)) continue;
     const key = u.split("#")[0];
     if (seen.has(key)) continue;
     seen.add(key);

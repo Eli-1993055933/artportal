@@ -27,13 +27,34 @@ export const THIRD_PARTY = [
   "mp.weixin.qq.com", "weixin.qq.com", "xiaohongshu.com", "douyin.com", "weibo.com", "zhihu.com"
 ];
 
+// 可信机会/报名平台(TRUSTED_PLATFORMS,v0.76.0 L1)——第三方黑名单里【正经承载艺术机会/报名】的那一批。
+// 国际公开征集大量【只存在于这些平台】、没有独立主办方官网;硬守"官网必达"等于把它们全拒之门外。
+// L1 拆分:反幻觉红线(evidence 逐字校验)不变;"官网必达"放松为"官网优先、可信平台可接受(如实标注平台来源)"。
+// 只收【真正的机会/驻留/报名平台】,不含杂志/新闻门户/设计赛事转载/文档托管/社媒——那些仍是硬垃圾、绝不放行。
+export const TRUSTED_PLATFORMS = [
+  // 驻留 / 机会目录与平台
+  "curatorspace.com", "artconnect.com", "chinaresidencies.com", "resartis.org", "transartists.org",
+  "artistcommunities.org", "open-calls.art", "artresidencyguide.com", "art-hub.co.uk", "artrabbit.com",
+  "e-flux.com", "artenda.net",
+  // 公开征集 / 报名托管平台(国际机构常把"官方报名页"直接放这上面)
+  "callforentry.org", "submittable.com", "artcall.org", "entrythingy.com", "slideroom.com",
+  "zapplication.org", "theartlist.com"
+];
+
 export function hostOf(u) {
   try { return new URL(u).host.replace(/^www\./, "").toLowerCase(); } catch (e) { return ""; }
 }
 
-// 该 URL 是否落在第三方域名(= 不是主办方自己的官网)
+// 该 URL 是否落在第三方域名(= 不是主办方自己的官网)。语义不变,run.mjs/定位器/前端照旧。
 export function isThirdParty(u) {
   const h = hostOf(u);
   if (!h) return false;
   return THIRD_PARTY.some(t => h === t || h.endsWith("." + t));
+}
+
+// 该 URL 是否是"可信机会平台"(第三方,但可作为可接受的落点,须如实标注"平台登记·非官网直采")。
+export function isTrustedPlatform(u) {
+  const h = hostOf(u);
+  if (!h) return false;
+  return TRUSTED_PLATFORMS.some(t => h === t || h.endsWith("." + t));
 }

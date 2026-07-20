@@ -250,17 +250,21 @@
                    : "本条由用户投稿、管理员人工通过后发布;平台未逐字核实内容,申请前请务必以官网为准。"
       };
     }
-    // 检索(AI 全网搜)来的一律如实标"AI 检索·请核对官网",绝不谎称官网直采
-    // (程序无法可靠区分官网/二手,故不硬猜,交由用户点官网核对)
+    // 检索(AI 全网搜)来的一律如实标"AI 检索·请核对",绝不谎称官网直采。
+    // L1:若登记在可信机会平台(CaFÉ/artcall 等)则点名平台、标"平台登记·非官网直采"。
     if (o._via === "search") {
+      var pf = F.platformName(F.officialUrl(o) || o.url || "");
       return {
-        kind: "aggregator", platform: null,
-        label: en ? "AI web search · verify" : "AI 检索 · 请核对官网",
-        detail: en ? "Found by ArtPortal's AI via web search; NOT yet human-confirmed as the organizer's official site. Please verify there before applying."
-                   : "本条由 ArtPortal 的 AI 从全网检索到,尚未人工确认为主办方官网(可能来自转载)。请务必点开核对,以官网为准。"
+        kind: "aggregator", platform: pf,
+        label: en ? ("AI web search" + (pf ? " · via " + pf : "") + " · verify") : ("AI 检索" + (pf ? " · 转自 " + pf : "") + " · 请核对"),
+        detail: pf
+          ? (en ? ("Found by ArtPortal's AI on the " + pf + " platform (not the organizer's own website). Please verify there before applying.")
+                : ("本条由 ArtPortal 的 AI 检索到,登记在「" + pf + "」平台(非主办方官网直采)。请点开核对,以平台/官网信息为准。"))
+          : (en ? "Found by ArtPortal's AI via web search; NOT yet human-confirmed as the organizer's official site. Please verify there before applying."
+                : "本条由 ArtPortal 的 AI 从全网检索到,尚未人工确认为主办方官网(可能来自转载)。请务必点开核对,以官网为准。")
       };
     }
-    var name = AGG[o.domain];
+    var name = F.platformName(o.url || "") || AGG[o.domain];
     if (name) {
       return {
         kind: "aggregator", platform: name,
@@ -298,10 +302,33 @@
     }
     return false;
   };
-  // "前往官网"实际要去的地址:只允许主办方本站。优先 official_url;若原始 url 是第三方则不作为官网返回。
+  // 可信机会/报名平台(v0.76.0 L1)——与后端 aggregators.mjs TRUSTED_PLATFORMS 一致。
+  // 国际公开征集常只在这些平台上、无独立主办方官网;放行作为可接受落点,但如实标"平台登记·非官网直采"。
+  var PLATFORM_LABEL = {
+    "callforentry.org": "CaFÉ", "artcall.org": "ArtCall", "entrythingy.com": "EntryThingy",
+    "submittable.com": "Submittable", "slideroom.com": "SlideRoom", "zapplication.org": "ZAPPlication",
+    "curatorspace.com": "CuratorSpace", "artconnect.com": "ArtConnect", "resartis.org": "Res Artis",
+    "transartists.org": "TransArtists", "chinaresidencies.com": "China Residencies",
+    "artistcommunities.org": "Alliance of Artists Communities", "e-flux.com": "e-flux",
+    "artrabbit.com": "ArtRabbit", "open-calls.art": "Open-Calls.art", "art-hub.co.uk": "Art-Hub",
+    "artresidencyguide.com": "Art Residency Guide", "artenda.net": "Artenda", "theartlist.com": "The Art List"
+  };
+  F.isTrustedPlatform = function (u) {
+    var h; try { h = new URL(u).host.replace(/^www\./, "").toLowerCase(); } catch (e) { return false; }
+    for (var k in PLATFORM_LABEL) { if (h === k || h.slice(-(k.length + 1)) === "." + k) return true; }
+    return false;
+  };
+  F.platformName = function (u) {
+    var h; try { h = new URL(u).host.replace(/^www\./, "").toLowerCase(); } catch (e) { return null; }
+    for (var k in PLATFORM_LABEL) { if (h === k || h.slice(-(k.length + 1)) === "." + k) return PLATFORM_LABEL[k]; }
+    return null;
+  };
+  // "前往"实际要去的地址:官网优先;主办方本站(非第三方)其次;可信机会平台可作为落点(标注平台来源);垃圾第三方一律不返回。
   F.officialUrl = function (o) {
     if (o.official_url && !F.isThirdParty(o.official_url)) return o.official_url;
     if (o.url && !F.isThirdParty(o.url)) return o.url;
+    if (o.official_url && F.isTrustedPlatform(o.official_url)) return o.official_url;
+    if (o.url && F.isTrustedPlatform(o.url)) return o.url;
     return null;
   };
 
