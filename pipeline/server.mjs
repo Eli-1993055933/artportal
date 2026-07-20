@@ -1582,8 +1582,13 @@ createServer(async (req, res) => {
       return res.end('<meta charset="utf-8"><body style="font-family:sans-serif;padding:44px;text-align:center;color:#333"><h3>画室点评工具</h3><p>' + (me ? "你没有使用权限。" : "请先登录后再使用。") + '</p><a href="/">返回首页</a></body>');
     }
     const target = u.pathname.replace(/^\/studio/, "") + (u.search || "");
+    // 按用户隔离(2026-07-20 修多租户 bug):把已鉴权的 ArtPortal uid 作可信头注入,画室后端据此
+    // 给花名册/抬头/作业各存一份、互不可见。必须先剥离客户端自带的同名头,防伪造他人身份。
+    const fwd = { ...req.headers, host: "127.0.0.1:8791" };
+    delete fwd["x-studio-uid"];
+    fwd["X-Studio-Uid"] = me.id;
     const pr = httpRequest({ host: "127.0.0.1", port: 8791, method: req.method, path: target,
-      headers: { ...req.headers, host: "127.0.0.1:8791" } }, (resp) => {
+      headers: fwd }, (resp) => {
       res.writeHead(resp.statusCode || 502, resp.headers); resp.pipe(res);
     });
     pr.on("error", () => { if (!res.headersSent) res.writeHead(502, { "Content-Type": "text/plain; charset=utf-8" }); res.end("画室服务未启动"); });
