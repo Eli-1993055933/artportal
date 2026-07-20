@@ -42,7 +42,9 @@ function hostOf(u) { try { return new URL(u).host; } catch (e) { return ""; } }
 // 机构官网/官方来源的强信号:美院(edu.cn)、政府美术馆(gov)、机构基金(org.cn)、博物馆(museum)、科研(ac.cn)。
 // 命中 = 大概率第一手官网;不命中 = 无法确认是官网(可能是二手转载),标注上要如实说明。
 function officialHint(host) {
-  return /(\.edu\.cn|\.gov\.cn|\.gov|\.org\.cn|\.ac\.cn|\.museum)$/i.test(String(host)) ? 1 : 0;
+  // 机构官网/官方源强信号:中国(edu.cn/gov.cn/org.cn/ac.cn)+ 国际(museum/edu/ac.uk/org.uk/org/gov)。
+  // 国际官方站不再被排到末尾(此前只认 .cn,LA/NYC 的 .org/.edu 机构总凑不够 6 条轮不到)。
+  return /(\.edu\.cn|\.gov\.cn|\.org\.cn|\.ac\.cn|\.museum|\.ac\.uk|\.org\.uk|\.edu|\.gov|\.org)$/i.test(String(host)) ? 1 : 0;
 }
 
 // —— 收藏解析(v0.73.0 四频道收藏):把命名空间键(机会=裸 id;news:/job:/work: 前缀)
@@ -182,15 +184,25 @@ async function searchAndHarvest(query, target = 6) {
   // AI 理解需求 → 结构化意图(地点/领域 + 精准查询);理解失败退回关键词模板。
   const intent = await understandQuery(query);
   const loc = intent && intent.location ? String(intent.location).trim() : null;
-  process.stderr.write("  [意图] 地点=" + (loc || "—") + " 领域=" + ((intent && intent.subject) || "—") + "\n");
-  const OFFICIAL_SITES = "(site:edu.cn OR site:org.cn OR site:gov.cn OR site:ac.cn OR site:museum OR site:org.hk OR site:gov.tw OR site:org.tw)";
+  // 地点的中英文/别名数组(供相关性匹配,防"洛杉矶"匹配不到"Los Angeles");无则回退单地点
+  const locTerms = (intent && Array.isArray(intent.location_terms) && intent.location_terms.length)
+    ? intent.location_terms.map(s => String(s).trim()).filter(Boolean) : (loc ? [loc] : []);
+  // 检索地域/语言(2026-07-20):国际地点用 gl=us/hl=en,否则默认中国区中文——否则国际站被 Google 严重降权
+  const gl = (intent && intent.gl) ? String(intent.gl).toLowerCase() : "cn";
+  const hl = (intent && intent.hl) ? String(intent.hl) : "zh-cn";
+  const cnRegion = /^(cn|hk|tw|mo)$/.test(gl);
+  process.stderr.write("  [意图] 地点=" + (loc || "—") + " 领域=" + ((intent && intent.subject) || "—") + " 区域=" + gl + "\n");
+  // 官网限定查询按区域自适应:中国/港澳台用 .cn/.hk/.tw 官方后缀;国际用 .org/.edu/.gov/.museum/.ac.uk
+  const OFFICIAL_SITES = cnRegion
+    ? "(site:edu.cn OR site:org.cn OR site:gov.cn OR site:ac.cn OR site:museum OR site:org.hk OR site:gov.tw OR site:org.tw)"
+    : "(site:.org OR site:.edu OR site:.gov OR site:.museum OR site:.ac.uk OR site:.org.uk)";
   const baseQ = (intent && Array.isArray(intent.search_queries) && intent.search_queries.length)
     ? intent.search_queries.slice(0, 3).map(String)
     : [query + " 艺术 驻留 征集 报名", query + " 展览 征集 大赛 奖 官网", query + " art residency open call apply"];
   const queries = [(baseQ[0] || query) + " " + OFFICIAL_SITES].concat(baseQ);   // ① 官网限定 + ②③④ 意图查询
   const rawUrls = [];
   for (const q of queries) {
-    rawUrls.push(...await searchWeb(q));
+    rawUrls.push(...await searchWeb(q, { gl, hl }));
     await new Promise(r => setTimeout(r, 800)); // 对搜索端点客气一点
   }
   // 候选去重 + 过滤噪声
@@ -233,7 +245,7 @@ async function searchAndHarvest(query, target = 6) {
     const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
     if (v.dropped) { log.push("dropped " + host + " " + v.dropReason.slice(0, 40)); continue; }
     const rec = finalize(v.record, url, host);
-    if (loc && !matchLocation(rec, loc)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤
+    if (locTerms.length && !matchLocation(rec, locTerms)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤(中英别名任一命中即可)
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
     added.push(rec);
     log.push("✓ " + rec.title_zh);
@@ -290,34 +302,49 @@ async function understandQuery(userQuery) {
     "你是艺术机会检索的意图理解器。用户在找可申请的艺术展览/驻留/奖项/工作坊/征集等机会。" +
     "把用户这句需求拆成结构化检索意图,只输出一个 JSON,不要任何解释。\n" +
     "字段:\n" +
-    "  location: 用户明确提到的地点/城市/地区(如 大理、上海、香港),没提就 null。\n" +
+    "  location: 用户明确提到的地点/城市/地区(如 大理、上海、香港、洛杉矶、纽约、伦敦),没提就 null。\n" +
+    "  location_terms: 该地点的中英文/别名数组(便于匹配),如 [\"洛杉矶\",\"Los Angeles\",\"LA\"];没地点就 []。\n" +
     "  subject: 核心领域或形式(如 摄影、版画、驻留、雕塑),没提就 null。\n" +
-    "  search_queries: 2-3 条适合直接丢给搜索引擎的精准查询,每条都把地点/领域和机会类型词(征集/驻留/报名/申请/open call)组合好;以中文为主,可含 1 条英文覆盖国际。\n" +
-    '例 "大理" -> {"location":"大理","subject":null,"search_queries":["大理 艺术 驻留 征集 报名","大理 展览 征集 美术馆 艺术中心 官网","Dali Yunnan art residency open call"]}\n' +
-    '例 "面向青年的免费版画奖" -> {"location":null,"subject":"版画","search_queries":["版画 奖 青年 征集 报名","青年 版画 大赛 征稿 申请","printmaking award young artists open call"]}';
-  try {
-    const res = await fetch("https://api.deepseek.com/chat/completions", {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: process.env.EXTRACT_MODEL || "deepseek-chat",
-        temperature: 0.2, max_tokens: 400, response_format: { type: "json_object" },
-        messages: [{ role: "system", content: sys }, { role: "user", content: "用户需求:" + userQuery }]
-      }),
-      signal: AbortSignal.timeout(20000)
-    });
-    if (!res.ok) return null;
-    const j = await res.json();
-    const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
-    const m = /\{[\s\S]*\}/.exec(raw);
-    return m ? JSON.parse(m[0]) : null;
-  } catch (e) { return null; }
+    "  gl: 该地点所在国家的 Google 国家码(中国大陆=cn,香港=hk,台湾=tw,美国=us,英国=gb,法国=fr,日本=jp,德国=de…);地点为中国或没提地点则 cn。\n" +
+    "  hl: 检索界面语言(中国/港澳台=zh-cn,其余非中文地区=en)。\n" +
+    "  search_queries: 2-3 条适合直接丢给搜索引擎的精准查询,每条把地点/领域和机会类型词组合好。**关键:地点在非中文国家时,查询主要用当地语言/英文**(open call / call for artists / submissions / residency / grant / apply),配 1 条中文;地点在中国则以中文为主配 1 条英文。\n" +
+    '例 "大理" -> {"location":"大理","location_terms":["大理","Dali"],"subject":null,"gl":"cn","hl":"zh-cn","search_queries":["大理 艺术 驻留 征集 报名","大理 展览 征集 美术馆 艺术中心 官网","Dali Yunnan art residency open call"]}\n' +
+    '例 "洛杉矶" -> {"location":"洛杉矶","location_terms":["洛杉矶","Los Angeles","LA"],"subject":null,"gl":"us","hl":"en","search_queries":["Los Angeles art exhibition open call for artists submissions","Los Angeles artist residency grant apply 2026","洛杉矶 艺术 展览 征集"]}\n' +
+    '例 "面向青年的免费版画奖" -> {"location":null,"location_terms":[],"subject":"版画","gl":"cn","hl":"zh-cn","search_queries":["版画 奖 青年 征集 报名","青年 版画 大赛 征稿 申请","printmaking award young artists open call"]}';
+  // 重试(2026-07-20):意图解析是检索的舵。此前无重试,批量/突发时 DeepSeek 被 extract 打满 → 偶发限流/超时
+  //   → 返 null → 退回默认 cn 区 → 国际地点(纽约/伦敦)搜成无关中国结果。限流/5xx/超时/解析失败都退避重试。
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch("https://api.deepseek.com/chat/completions", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: process.env.EXTRACT_MODEL || "deepseek-chat",
+          temperature: 0.2, max_tokens: 400, response_format: { type: "json_object" },
+          messages: [{ role: "system", content: sys }, { role: "user", content: "用户需求:" + userQuery }]
+        }),
+        signal: AbortSignal.timeout(25000)
+      });
+      if (!res.ok) { if (res.status === 429 || res.status >= 500) { await sleep(600 * (attempt + 1)); continue; } return null; }
+      const j = await res.json();
+      const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+      const m = /\{[\s\S]*\}/.exec(raw);
+      if (m) { try { return JSON.parse(m[0]); } catch (e) { /* 解析失败→重试 */ } }
+      await sleep(400);
+    } catch (e) { await sleep(600 * (attempt + 1)); }   // 超时/网络错→退避重试
+  }
+  return null;
 }
-// 相关性把关:机会文本是否包含用户明确指定的地点(硬约束);不含则判为跑题、丢弃。
-function matchLocation(rec, loc) {
-  if (!loc) return true;
-  const hay = (rec.title_zh || "") + (rec.title_en || "") + (rec.city_zh || "") + (rec.country_zh || "") + (rec.org_zh || "") + (rec.summary_zh || "");
-  return hay.indexOf(loc) !== -1;
+// 相关性把关:机会文本是否包含用户指定地点的任一别名(中英,硬约束);全不含则判跑题、丢弃。
+// haystack 兼含中英字段,防"洛杉矶"匹配不到 city_en="Los Angeles"。
+function matchLocation(rec, locTerms) {
+  const terms = Array.isArray(locTerms) ? locTerms : (locTerms ? [locTerms] : []);
+  if (!terms.length) return true;
+  const hay = ((rec.title_zh || "") + (rec.title_en || "") + (rec.city_zh || "") + (rec.city_en || "") +
+    (rec.country_zh || "") + (rec.country_en || "") + (rec.org_zh || "") + (rec.org_en || "") +
+    (rec.summary_zh || "") + (rec.summary_en || "")).toLowerCase();
+  return terms.some(t => t && hay.indexOf(String(t).toLowerCase()) !== -1);
 }
 
 // —— 静态文件服务 ——

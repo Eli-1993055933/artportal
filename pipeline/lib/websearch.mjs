@@ -53,7 +53,9 @@ export async function searchWeb(query, opts) {
 }
 
 async function serperSearch(query, opts) {
-  const body = { q: query, num: 15, gl: "cn", hl: "zh-cn" };
+  // 地域/语言自适应(2026-07-20):默认中国区中文,但检索国际地点时由调用方传入 gl/hl
+  // (如洛杉矶 → gl=us/hl=en),否则 Google 只返中国区结果、国际站被严重降权。
+  const body = { q: query, num: 15, gl: (opts && opts.gl) || "cn", hl: (opts && opts.hl) || "zh-cn" };
   if (opts && opts.recent) body.tbs = "qdr:y";     // 最近一年(资讯要新)
   const res = await fetch("https://google.serper.dev/search", {
     method: "POST",
