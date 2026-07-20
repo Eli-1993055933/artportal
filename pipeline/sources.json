@@ -2613,6 +2613,253 @@
       "region_hint": "intl",
       "discipline_hint": "当代艺术(综合)",
       "notes": "HTTP 200;419059 bytes;命中 apply、Submission、Deadline、eligib、enter(26)、international(25);香港尚流艺术基金会亚洲艺术奖官方页,覆盖亚太含中国大陆/港/台艺术家;robots 允许该路径(仅禁 add-to-cart、wp-admin)。入选为画廊提名制(每画廊最多提名3人)。"
+    },
+    {
+      "id": "jiangsu-msg",
+      "org_zh": "江苏省美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.jssmsg.cn/Home/news1",
+      "domain": "jssmsg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "taiyuan-msg",
+      "org_zh": "太原美术馆(太原画院)",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.tymsg.org.cn/",
+      "domain": "tymsg.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "yunnan-msg",
+      "org_zh": "云南美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.ynmsg.cn/",
+      "domain": "ynmsg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "xafa-msg",
+      "org_zh": "西安美术学院美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "https://fineartmuseum.xafa.edu.cn/",
+      "domain": "fineartmuseum.xafa.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "hebei-afa",
+      "org_zh": "河北省美术家协会",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.hbafa.com/tzgg/27.htm",
+      "domain": "hbafa.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "wuhan-am",
+      "org_zh": "武汉美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "http://www.wuhanam.com/list/117.html",
+      "domain": "wuhanam.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "tianjin-msg",
+      "org_zh": "天津美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.tjmsg.cn/",
+      "domain": "tjmsg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "cafa-museum",
+      "org_zh": "中央美术学院美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.cafamuseum.org/",
+      "domain": "cafamuseum.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "qinghai-msg",
+      "org_zh": "青海美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "http://www.qhmsg.com.cn/",
+      "domain": "qhmsg.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "hunan-msg",
+      "org_zh": "湖南美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "https://www.hnmsg.net/",
+      "domain": "hnmsg.net",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "zhengzhou-msg",
+      "org_zh": "郑州美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "http://www.zzmsg.cn/msgapp/rd.aspx",
+      "domain": "zzmsg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "liaoning-msg",
+      "org_zh": "辽宁美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "http://www.lnmsg.com/",
+      "domain": "lnmsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
+    },
+    {
+      "id": "jingdezhen-msg",
+      "org_zh": "景德镇美术馆",
+      "name_zh": "展览/通知公告",
+      "url": "http://www.jdzmsg.cn/",
+      "domain": "jdzmsg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认"
     }
   ],
   "blocked_or_unverified": [
