@@ -10,7 +10,7 @@
 //
 // 合规:抓取合规逻辑在 fetch.mjs / robots.mjs;evidence 硬校验在 verify.mjs。
 
-import { readFile, writeFile, mkdir, appendFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir, appendFile, rename } from "node:fs/promises";
 import { reportAgent } from "./lib/agent-report.mjs";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -179,6 +179,7 @@ async function main() {
   // 合并:以既有数据为基底(保留 verified 与此前已上线的 auto),用本次新抽取的 auto 记录 upsert。
   // 关键:哈希未变而跳过的信源,其记录必须原样保留——绝不能因为本次没重抽就把整站数据抹掉。
   const existing = await readJson(DATA, { opportunities: [] });
+  const existingIds = new Set(existing.opportunities.map(o => o.id));   // 本次合并基线的 id 快照(下面并发防丢用)
   const byId = new Map(existing.opportunities.map(o => [o.id, o]));
   for (const r of autoRecords) {
     const prev = byId.get(r.id);
@@ -191,7 +192,19 @@ async function main() {
   }
   const dd = dedupe(Array.from(byId.values()));
 
-  await writeFile(DATA, JSON.stringify({ _meta: existing._meta || {}, generated_at: todayISO(), count: dd.list.length, opportunities: dd.list }, null, 2), "utf8");
+  // 并发安全(2026-07-21,为把每日抓取搬上常开服务器):run.mjs 与 server.mjs 是不同进程、不共享写锁,
+  //   若抓取/合并期间 server 端有线上检索入库/投稿/admin 写了 opportunities.json,本次整文件写会覆盖丢失。
+  //   对策:写前【再读一次 live】,把"不在合并基线快照里(=本次期间 server 新增)且不在本次结果里"的记录补回;
+  //   再【原子写 tmp+rename】(防非原子写被并发读到半截)。只补"基线后新增"的,绝不复活本轮去重掉的记录。
+  const finalById = new Map(dd.list.map(o => [o.id, o]));
+  try {
+    const live = await readJson(DATA, { opportunities: [] });
+    for (const o of live.opportunities) if (!existingIds.has(o.id) && !finalById.has(o.id)) finalById.set(o.id, o);
+  } catch (e) {}
+  const finalList = Array.from(finalById.values());
+  const _tmp = DATA + ".tmp-" + process.pid;
+  await writeFile(_tmp, JSON.stringify({ _meta: existing._meta || {}, generated_at: todayISO(), count: finalList.length, opportunities: finalList }, null, 2), "utf8");
+  await rename(_tmp, DATA);
   await writeFile(P("state", "review-queue.json"), JSON.stringify({ generated_at: todayISO(), count: pendingRecords.length, records: pendingRecords }, null, 2), "utf8");
   await writeFile(P("state", "hashes.json"), JSON.stringify(hashes, null, 2), "utf8");
 

@@ -9,6 +9,7 @@
 // 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
 
 import { createServer, request as httpRequest } from "node:http";
+import { spawn } from "node:child_process";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { readFile, writeFile, stat, rename, mkdir, unlink, statfs, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -1581,6 +1582,38 @@ if (process.env.QUALITY_CHECK === "1") {
   setTimeout(qcTick, 120 * 1000);
   setInterval(qcTick, 3600 * 1000);
   process.stderr.write(`[数据质检] 已开启:每日北京时间 ${Number(process.env.QUALITY_HOUR || 4)} 点巡检${process.env.QC_ARCHIVE === "1" ? "(含自动归档)" : "(仅标记,归档需后台确认)"}\n`);
+}
+
+// —— 每日数据抓取搬上服务器(2026-07-21)——
+// 本机 run-daily.bat 依赖夜间开机、7-16 后就没跑过,导致 sources.json 的 152 个信源基本闲置。搬到常开服务器,
+// 让存量信源每天真被抓、数据稳定增长。开关 DAILY_CRAWL=1;每日北京 DAILY_CRAWL_HOUR(默认 3)点跑一次(在质检 4 点前),
+// 幂等;spawn 子进程不阻塞 web 服务。run.mjs 已改并发安全(原子写+写前补回 server 期间新增),与 server.mjs 同写不丢数据。
+// 只跑 run.mjs(机会频道);截图(mShots 服务器被 403)留本机;翻译/官网定位后续再评估上服务器。
+if (process.env.DAILY_CRAWL === "1") {
+  let dcDay = null, dcRunning = false;
+  function dailyCrawlTick() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.DAILY_CRAWL_HOUR || 3)) return;
+    const day = bj.toISOString().slice(0, 10);
+    if (dcDay === day || dcRunning) return;
+    dcDay = day; dcRunning = true;
+    const t0 = Date.now();
+    const cap = String(Math.max(4, Number(process.env.DAILY_CRAWL_CAP || 12)));
+    process.stderr.write("[每日抓取] 启动 run.mjs --cap " + cap + "\n");
+    let tail = "";
+    const p = spawn(process.execPath, [join(__dir, "run.mjs"), "--cap", cap], { cwd: __dir, env: process.env });
+    p.stdout.on("data", d => { tail = (tail + d).slice(-1000); });
+    p.stderr.on("data", d => { tail = (tail + d).slice(-1000); });
+    p.on("close", (code) => {
+      dcRunning = false;
+      process.stderr.write("[每日抓取] run.mjs 结束 code=" + code + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
+      db.agentLog({ agent: "harvester", ok: code === 0, summary: "服务器每日抓取 run.mjs(code=" + code + "):" + tail.replace(/\s+/g, " ").slice(-150), took_ms: Date.now() - t0 }).catch(() => {});
+    });
+    p.on("error", (e) => { dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
+  }
+  setTimeout(dailyCrawlTick, 200 * 1000);
+  setInterval(dailyCrawlTick, 3600 * 1000);
+  process.stderr.write("[每日抓取] 已开启:每日北京时间 " + Number(process.env.DAILY_CRAWL_HOUR || 3) + " 点抓 sources.json 全部信源(run.mjs,并发安全)\n");
 }
 
 createServer(async (req, res) => {
