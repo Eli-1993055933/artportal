@@ -311,8 +311,10 @@ async function understandQuery(userQuery) {
     "  gl: 该地点所在国家的 Google 国家码(中国大陆=cn,香港=hk,台湾=tw,美国=us,英国=gb,法国=fr,日本=jp,德国=de…);地点为中国或没提地点则 cn。\n" +
     "  hl: 检索界面语言(中国/港澳台=zh-cn,其余非中文地区=en)。\n" +
     "  search_queries: 2-3 条适合直接丢给搜索引擎的精准查询,每条把地点/领域和机会类型词组合好。**关键:地点在非中文国家时,查询主要用当地语言/英文**(open call / call for artists / submissions / residency / grant / apply),配 1 条中文;地点在中国则以中文为主配 1 条英文。\n" +
+    "  · **中国的中小城市/地级市(如 呼伦贝尔、德阳、大连、宜昌)专项**:机会多挂在【本地官方机构】页,别只用泛泛的'城市+艺术+征集'(会被全国结果和媒体/百科淹没)。查询要点名本地机构类型:美术馆/文化馆/群众艺术馆/画院/文联/文旅局(文旅广电局)/艺术学院,配 展览/征集/招募/驻留/大赛,并带上所在省份(如'内蒙古 呼伦贝尔''四川 德阳')。\n" +
     '例 "大理" -> {"location":"大理","location_terms":["大理","Dali"],"subject":null,"gl":"cn","hl":"zh-cn","search_queries":["大理 艺术 驻留 征集 报名","大理 展览 征集 美术馆 艺术中心 官网","Dali Yunnan art residency open call"]}\n' +
     '例 "洛杉矶" -> {"location":"洛杉矶","location_terms":["洛杉矶","Los Angeles","LA"],"subject":null,"gl":"us","hl":"en","search_queries":["Los Angeles art exhibition open call for artists submissions","Los Angeles artist residency grant apply 2026","洛杉矶 艺术 展览 征集"]}\n' +
+    '例 "呼伦贝尔"(中国中小城市)-> {"location":"呼伦贝尔","location_terms":["呼伦贝尔","Hulunbuir"],"subject":null,"gl":"cn","hl":"zh-cn","search_queries":["呼伦贝尔 美术馆 文化馆 群众艺术馆 展览 征集 招募","内蒙古 呼伦贝尔 文旅局 画院 艺术项目 征集 大赛","呼伦贝尔 艺术空间 驻留 招募 官网"]}\n' +
     '例 "面向青年的免费版画奖" -> {"location":null,"location_terms":[],"subject":"版画","gl":"cn","hl":"zh-cn","search_queries":["版画 奖 青年 征集 报名","青年 版画 大赛 征稿 申请","printmaking award young artists open call"]}';
   // 重试(2026-07-20):意图解析是检索的舵。此前无重试,批量/突发时 DeepSeek 被 extract 打满 → 偶发限流/超时
   //   → 返 null → 退回默认 cn 区 → 国际地点(纽约/伦敦)搜成无关中国结果。限流/5xx/超时/解析失败都退避重试。
