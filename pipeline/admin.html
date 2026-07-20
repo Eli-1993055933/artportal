@@ -108,6 +108,7 @@
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
         <button data-view="agents">Agent 编队 <span class="badge" id="navAgentN">0</span></button>
+        <button data-view="qc">数据质检 <span class="badge" id="navQcN">0</span></button>
         <button data-view="weekly">AI 周报</button>
         <button data-view="summaries">用户总结 <span class="badge" id="navSumN">0</span></button>
         <button data-view="users">用户 <span class="badge" id="navUserN">0</span></button>
@@ -211,6 +212,27 @@
         <div class="cards" id="agCards" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))"></div>
         <h2 id="agLogTitle" hidden>工作记录</h2>
         <div class="scroll" id="agLogWrap" hidden><table id="agLogTbl"><thead><tr><th>时间</th><th>结果</th><th>摘要</th><th>耗时</th></tr></thead><tbody></tbody></table></div>
+      </section>
+
+      <!-- 数据质检「校勘」(v0.74.0):死链/过期/查重/存证抽查。归档进回收站可恢复,墓碑防夜间 sync 复活 -->
+      <section data-sec="qc" hidden>
+        <h1 class="sec__title">数据质检 <span class="muted" style="font-size:12px">(校勘 · 死链隐藏 / 过期归档 / 重复合并 / 存证抽查转人工)</span></h1>
+        <div class="cards" id="qcBrief"></div>
+        <div class="toolbar">
+          <button class="fchip" id="qcRun">立即巡检</button>
+          <label style="font-size:13px;display:inline-flex;align-items:center;gap:5px"><input type="checkbox" id="qcRunArchive" /> 本次含自动归档</label>
+          <button class="fchip" id="qcArchive">归档建议条目</button>
+          <span class="count" id="qcMsg"></span>
+        </div>
+        <p class="muted" style="font-size:12px;margin:2px 0 10px">归档=移入回收站(可在「回收站」一键恢复)并立墓碑,夜间同步两侧同删不复活;死链连续 3 天判 dead 自动隐藏;存证抽查只标记转人工,绝不擅改/删。</p>
+        <h2>各频道巡检结果</h2>
+        <div class="scroll"><table id="qcChTbl"><thead><tr><th>频道</th><th>巡检</th><th>探测</th><th>死链</th><th>新过期</th><th>重复</th><th>归档候选</th><th>存证抽查</th><th>存疑</th><th>已归档</th></tr></thead><tbody></tbody></table></div>
+        <h2>存证存疑(转人工复核) <span class="muted" style="font-size:12px">重抓原文 AI 复核后与库不符,请人工核对官网</span></h2>
+        <div class="scroll"><table id="qcEvTbl"><thead><tr><th>标题</th><th>疑点</th><th>原文</th></tr></thead><tbody></tbody></table></div>
+        <h2>疑似死链</h2>
+        <div class="scroll"><table id="qcDeadTbl"><thead><tr><th>标题</th><th>连败</th><th>原因</th><th>链接</th></tr></thead><tbody></tbody></table></div>
+        <h2>归档建议 <span class="muted" style="font-size:12px" id="qcArcHint"></span></h2>
+        <div class="scroll"><table id="qcArcTbl"><thead><tr><th>标题</th><th>原因</th><th>详情</th></tr></thead><tbody></tbody></table></div>
       </section>
 
       <!-- AI 周报(第 5 项):生成/试发/群发。群发受 NEWSLETTER_BULK 闸(备案后在 .env 开启) -->
@@ -350,6 +372,7 @@
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
     else if (view === "agents") renderAgents();
+    else if (view === "qc") renderQC();
     else if (view === "weekly") renderWeekly();
     else if (view === "summaries") renderSummaries();
     else if (view === "users") renderUsers();
@@ -367,7 +390,8 @@
     { id: "locator",       name: "寻址",  role: "主办方官网定位",              period: 1.6 * 86400e3, where: "本机 · 夜间" },
     { id: "photographer",  name: "快门",  role: "官网截图封面",                period: 1.6 * 86400e3, where: "本机 · 夜间" },
     { id: "cover-auditor", name: "鉴图",  role: "美术编辑 · 封面查重审核",     period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间" }
+    { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间" },
+    { id: "inspector",     name: "校勘",  role: "数据质检 · 死链/过期/查重/存证抽查", period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" }
   ];
   var agLastMap = {}, agSelected = null;
   function agLight(def, last) {
@@ -521,6 +545,97 @@
   $("wrBulk").addEventListener("click", function () {
     if (!confirm("群发给全部订阅用户?(逐封限速发送;同一期已发过的自动跳过)")) return;
     wrPost("/api/admin/weekly/send", {}, "群发启动中…");
+  });
+
+  // —— 数据质检「校勘」(v0.74.0):报告 + 立即巡检 + 一键归档建议条目 ——
+  var qcPoll = null;
+  function qcCard(k, v, good) {
+    var c = document.createElement("div"); c.className = "card";
+    c.innerHTML = '<div class="k"></div><div class="v" style="font-size:15px"></div>';
+    c.querySelector(".k").textContent = k;
+    var vv = c.querySelector(".v"); vv.textContent = v;
+    if (good === true) vv.style.color = "#7fd18b"; else if (good === false) vv.style.color = "#e0a24e";
+    return c;
+  }
+  function qcLinkTd(url) {
+    var el = document.createElement("td");
+    if (!url) { el.textContent = "—"; return el; }
+    var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "原文 ↗"; a.style.color = "#7eb8e0"; el.appendChild(a); return el;
+  }
+  function qcMsg(t) { $("qcMsg").textContent = t || ""; }
+  function renderQC() {
+    get("/api/admin/qc").then(function (s) {
+      var rep = s.report || null, T = (rep && rep.totals) || {};
+      var bb = $("qcBrief"); bb.textContent = "";
+      bb.appendChild(qcCard("定时质检", s.enabled ? ("每日北京 " + s.hour + " 点") : "未开(.env QUALITY_CHECK=1)", s.enabled));
+      bb.appendChild(qcCard("自动归档", s.auto_archive ? "已开启" : "关闭(仅标记待确认)", s.auto_archive));
+      bb.appendChild(qcCard("上次巡检", s.running ? "巡检中…" : (rep ? rel(rep.at) : "从未运行"), s.running ? false : !!rep));
+      bb.appendChild(qcCard("上次结果", rep ? ("死链 " + (T.dead || 0) + " · 新过期 " + (T.newly_expired || 0) + " · 重复 " + (T.duplicates || 0) + " · 存疑 " + (T.evidence_flags || 0)) : "—"));
+      var alerts = (T.evidence_flags || 0) + (T.dead || 0);
+      $("navQcN").textContent = String(alerts);
+      $("navQcN").className = "badge" + (alerts > 0 ? " hot" : "");
+      $("qcRun").disabled = !!s.running; $("qcRun").textContent = s.running ? "巡检中…" : "立即巡检";
+      var arcN = T.archive_candidates || 0;
+      $("qcArchive").disabled = !!s.running || arcN === 0;
+      $("qcArchive").textContent = "归档建议条目" + (arcN ? "(" + arcN + ")" : "");
+      $("qcArcHint").textContent = arcN ? ("共 " + arcN + " 条建议归档,点上方按钮一键移入回收站(可恢复)") : "";
+      if (s.running && !qcPoll) qcPoll = setInterval(function () {
+        if (view !== "qc") { clearInterval(qcPoll); qcPoll = null; return; }
+        renderQC();
+      }, 4000);
+      if (!s.running && qcPoll) { clearInterval(qcPoll); qcPoll = null; }
+      var CHN = { opportunities: "机会", news: "资讯", jobs: "招聘" };
+      var chans = (rep && rep.channels) || {}, chKeys = Object.keys(chans);
+      var chTb = $("qcChTbl").tBodies[0]; chTb.textContent = "";
+      if (!chKeys.length) emptyRow(chTb, "(还没有巡检记录;点「立即巡检」开始,约 1-2 分钟)", 10);
+      chKeys.forEach(function (k) {
+        var c = chans[k], tr = document.createElement("tr");
+        if (c.error) { tr.appendChild(td(CHN[k] || k)); var e = td("读取失败:" + c.error); e.colSpan = 9; tr.appendChild(e); chTb.appendChild(tr); return; }
+        tr.appendChild(td(CHN[k] || k));
+        [c.checked, c.probed, c.dead, c.newly_expired, c.duplicates, c.archive_candidates, (c.evidence_audited || 0), c.evidence_flags, c.archived].forEach(function (n) { tr.appendChild(td(n || 0, "mono")); });
+        chTb.appendChild(tr);
+      });
+      function allOf(field) { var out = []; chKeys.forEach(function (k) { ((chans[k] && chans[k][field]) || []).forEach(function (x) { out.push(x); }); }); return out; }
+      var evTb = $("qcEvTbl").tBodies[0]; evTb.textContent = "";
+      var evs = allOf("evidence_list");
+      if (!evs.length) emptyRow(evTb, "(无存证存疑)", 3);
+      evs.forEach(function (x) { var tr = document.createElement("tr"); tr.appendChild(td(x.title)); tr.appendChild(td(x.reason)); tr.appendChild(qcLinkTd(x.url)); evTb.appendChild(tr); });
+      var dTb = $("qcDeadTbl").tBodies[0]; dTb.textContent = "";
+      var deads = allOf("dead_list");
+      if (!deads.length) emptyRow(dTb, "(无疑似死链)", 4);
+      deads.forEach(function (x) { var tr = document.createElement("tr"); tr.appendChild(td(x.title)); tr.appendChild(td(x.streak, "mono")); tr.appendChild(td(x.reason)); tr.appendChild(qcLinkTd(x.url)); dTb.appendChild(tr); });
+      var RN = { "long-expired": "过期超 1 年", "duplicate": "重复条目", "job-expired": "招聘截止超 60 天", "job-stale": "招聘超 120 天无更新", "news-too-old": "资讯超 2 年" };
+      var aTb = $("qcArcTbl").tBodies[0]; aTb.textContent = "";
+      var arcs = allOf("archive_list");
+      if (!arcs.length) emptyRow(aTb, "(无归档建议)", 3);
+      arcs.slice(0, 200).forEach(function (x) {
+        var tr = document.createElement("tr"); tr.appendChild(td(x.title)); tr.appendChild(td(RN[x.reason] || x.reason));
+        var d = x.deadline ? ("截止 " + x.deadline) : (x.of ? ("重复于 " + x.of) : (x.published_at ? ("发布 " + x.published_at) : (x.since ? ("起 " + x.since) : "")));
+        if (x.daysStale) d += " (" + x.daysStale + " 天)";
+        tr.appendChild(td(d)); aTb.appendChild(tr);
+      });
+    }).catch(function () {});
+  }
+  $("qcRun").addEventListener("click", function () {
+    var archive = $("qcRunArchive").checked;
+    if (archive && !confirm("本次巡检将【自动归档】所有建议条目(移入回收站,可恢复)。继续?")) return;
+    qcMsg("巡检启动中(约 1-2 分钟,可留在本页看进度)…");
+    post("/api/admin/qc/run", { archive: archive }).then(function (r) {
+      if (r.ok && r.data.started) qcMsg("巡检进行中…");
+      else if (r.ok && r.data.running) qcMsg("已有巡检在跑,请稍候");
+      else qcMsg((r.data && r.data.error) || "启动失败");
+      renderQC();
+    }).catch(function () { qcMsg("网络异常"); });
+  });
+  $("qcArchive").addEventListener("click", function () {
+    var m = $("qcArchive").textContent.match(/\((\d+)\)/), n = m ? m[1] : "";
+    if (!confirm("把当前所有归档建议条目" + (n ? ("(" + n + " 条)") : "") + "移入回收站?(可在「回收站」一键恢复,夜间同步不复活)")) return;
+    qcMsg("归档中…");
+    post("/api/admin/qc/archive", {}).then(function (r) {
+      qcMsg(r.ok ? ("已归档 " + (r.data.archived || 0) + " 条 ✓") : ((r.data && r.data.error) || "归档失败"));
+      renderQC();
+    }).catch(function () { qcMsg("网络异常"); });
   });
 
   // —— 用户专属总结(v0.73.0):列表 + 点「查看」预览全文 ——

@@ -5,9 +5,11 @@ function fp(o) {
   const norm = (s) => String(s || "").toLowerCase().replace(/[\s　·:：()（）《》"'”“·-]/g, "");
   return createHash("md5").update(norm(o.title_zh) + "|" + norm(o.org_zh) + "|" + (o.deadline || "rolling")).digest("hex");
 }
+// 对外暴露指纹与完整度打分,供数据质检 agent(lib/qc.mjs)对存量库做重复条目巡检时复用同一口径。
+export { fp as fingerprint };
 
 // 完整度打分:非 null 的实质字段越多越完整
-function completeness(o) {
+export function completeness(o) {
   let n = 0;
   const bump = (v) => { if (v !== null && v !== undefined && v !== "") n++; };
   bump(o.title_en); bump(o.city_zh); bump(o.country_zh); bump(o.deadline);

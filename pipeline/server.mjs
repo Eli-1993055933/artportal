@@ -15,11 +15,12 @@ import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
 import { extract } from "./lib/extract.mjs";
-import { verifyRecord } from "./lib/verify.mjs";
+import { verifyRecord, isParseableDate } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
 import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
+import { inspectChannel } from "./lib/qc.mjs";
 import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
 import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
@@ -1060,6 +1061,31 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 200, body });
       } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
+    // —— 数据质检「校勘」(v0.74.0):报告 / 立即巡检 / 一键归档建议条目 ——
+    if (p === "/api/admin/qc" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      return json({ code: 200, body: {
+        enabled: process.env.QUALITY_CHECK === "1",
+        auto_archive: process.env.QC_ARCHIVE === "1",
+        hour: Number(process.env.QUALITY_HOUR || 4),
+        running: qcState.running, started_at: qcState.startedAt,
+        report: await readQcReport()
+      } });
+    }
+    if (p === "/api/admin/qc/run" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      if (qcState.running) return json({ code: 200, body: { ok: true, started: false, running: true } });
+      const b = await readBody(req);
+      runQualityCheck({ archive: !!b.archive, trigger: "manual" }).catch(() => {});   // 后台跑(约 1-2 分钟),前端轮询 GET
+      return json({ code: 200, body: { ok: true, started: true } });
+    }
+    if (p === "/api/admin/qc/archive" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      if (qcState.running) return json({ code: 409, body: { error: "质检进行中,请稍候" } });
+      const r = await runQualityCheck({ archive: true, probe: false, trigger: "manual-archive" });   // 免网络:按日期/查重规则归档建议条目
+      if (!r.ok) return json({ code: 500, body: { error: r.error || "归档失败" } });
+      return json({ code: 200, body: { ok: true, archived: r.report.totals.archived } });
+    }
     // —— AI 周报(第 5 项):状态 / 生成 / 试发 / 群发(群发有备案闸,见 NEWSLETTER_BULK) ——
     if (p === "/api/admin/weekly/status" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
@@ -1384,6 +1410,127 @@ if (process.env.AUTO_HARVEST === "1") {
   setTimeout(autoHarvestTick, boot * 1000);
   setInterval(autoHarvestTick, mins * 60 * 1000);
   process.stderr.write(`[自动检索] 已开启:每 ${mins} 分钟检索一个频道(机会→资讯→机会→招聘 轮转;首轮 ${boot} 秒后)\n`);
+}
+
+// —— 数据质检 agent「校勘」(v0.74.0)——
+// 四类离线巡检(死链/过期/查重/存证抽查)→ 在写锁内落库 → 写报告 → 巡视台打卡。
+// 复用现有件:探测/存证共用 fetchSource(lib/qc.mjs)、指纹用 dedupe、归档三件套(recycle+移除+墓碑,防夜间 sync 复活)。
+// 开关:QUALITY_CHECK=1 每日北京时间 QUALITY_HOUR(默认 4)点跑一次;QC_ARCHIVE=1 才自动归档(默认只标记,交后台一键归档)。
+const QC_REPORT_PATH = join(__dir, "state", "qc-report.json");
+const qcState = { running: false, startedAt: null, lastRun: null };
+async function readQcReport() { try { return JSON.parse(await readFile(QC_REPORT_PATH, "utf8")); } catch (e) { return null; } }
+
+// 存证抽查回调:重抓原文已在手,这里重跑入库同一条 extract+verifyRecord 管线,比对漂移(唯一可靠的存证复核)。
+// 只在强信号上转人工:①AI 复核判"已非可申请机会";②截止日期与原文核出的不一致;③原文已核不到原截止。绝不擅改/删。
+async function qcEvidenceAudit(o, text, ctx) {
+  let ex;
+  try { ex = await extract(text, { org_zh: o.org_zh || "", domain: ctx.domain, url: ctx.url, source_url: o.source_url || ctx.url, sourceText: text }); }
+  catch (e) { return null; }
+  if (!ex || !ex.data) return null;
+  const v = verifyRecord(ex.data, { sourceText: text, url: ctx.url, source_url: o.source_url || ctx.url, domain: ctx.domain });
+  if (v.dropped) return /not-applicable/.test(v.dropReason || "") ? { reason: "AI 复核:原文已非可申请机会" } : null;
+  const oldD = o.deadline, newD = v.record.deadline;
+  if (oldD && isParseableDate(oldD) && newD && isParseableDate(newD) && newD !== oldD) return { reason: `截止日期存疑:库 ${oldD} → 原文 ${newD}` };
+  if (oldD && isParseableDate(oldD) && !newD) return { reason: `原文已核不到截止日期(库 ${oldD})` };
+  return null;
+}
+
+async function runQualityCheck({ archive = false, probe = true, trigger = "auto", channels } = {}) {
+  if (qcState.running) return { skipped: true, reason: "already-running" };
+  qcState.running = true; qcState.startedAt = new Date().toISOString();
+  const t0 = Date.now();
+  const gate = { acquire: acquireSlot, release: releaseSlot };
+  const chList = channels || Object.keys(CH_FILES);
+  const rep = { at: new Date().toISOString(), trigger, took_ms: 0, archive_enabled: !!archive, channels: {}, totals: {} };
+  try {
+    for (const channel of chList) {
+      const [file, key] = CH_FILES[channel];
+      let doc, records;
+      try { doc = JSON.parse(await readFile(file, "utf8")); records = doc[key] || []; }
+      catch (e) { rep.channels[channel] = { error: "read-failed:" + String(e.message || e).slice(0, 80) }; continue; }
+
+      const insp = await inspectChannel(channel, records, {
+        today: todayISO(), gate, probe,
+        evidenceAudit: qcEvidenceAudit, evidenceSample: Number(process.env.QC_EVIDENCE_SAMPLE || 6)
+      });
+
+      const archivedIds = [];
+      await withWriteLock(async () => {
+        let cur, arr;
+        try { cur = JSON.parse(await readFile(file, "utf8")); arr = cur[key] || []; } catch (e) { return; }
+        const byId = new Map(arr.map(o => [o.id, o]));
+        if (archive) {                                   // 先把要归档的整条存进回收站(可恢复)
+          for (const a of insp.archiveCandidates) {
+            const recRow = byId.get(a.id);
+            if (!recRow) continue;
+            try { await db.recycleInsert(channel, recRow); archivedIds.push(a.id); } catch (e) {}
+          }
+        }
+        const drop = new Set(archivedIds);
+        const next = [];
+        for (const o of arr) {
+          if (drop.has(o.id)) continue;                  // 已进回收站 → 从文件移除
+          const patch = insp.mutations[o.id];
+          if (patch) Object.assign(o, patch);            // 就地更新 status/_fail_streak/last_seen/updated_at
+          next.push(o);
+        }
+        cur[key] = next;
+        if (cur.count != null) cur.count = next.length;
+        const tmp = file + ".tmp-" + process.pid;
+        await writeFile(tmp, JSON.stringify(cur, null, 2), "utf8");
+        await rename(tmp, file);
+      });
+      for (const id of archivedIds) {                    // 立墓碑(防夜间 sync 复活)+ 审计
+        try { await tombAdd(channel, id); } catch (e) {}
+        try { await db.logModeration("content", id, "archived", { by: "qc", channel }); } catch (e) {}
+      }
+
+      rep.channels[channel] = {
+        checked: insp.checked, probed: insp.probed,
+        dead: insp.deadCandidates.length, revived: insp.revived.length,
+        newly_expired: insp.newlyExpired.length,
+        duplicates: insp.duplicates.reduce((n, d) => n + d.drop.length, 0),
+        archive_candidates: insp.archiveCandidates.length, archived: archivedIds.length,
+        evidence_flags: insp.evidenceFlags.length, evidence_audited: insp.evidenceAudited,
+        dead_list: insp.deadCandidates.slice(0, 100),
+        evidence_list: insp.evidenceFlags.slice(0, 100),
+        archive_list: insp.archiveCandidates.slice(0, 300),
+        dup_list: insp.duplicates.slice(0, 100)
+      };
+    }
+    const agg = (f) => Object.values(rep.channels).reduce((n, c) => n + (c[f] || 0), 0);
+    rep.totals = { checked: agg("checked"), probed: agg("probed"), dead: agg("dead"), revived: agg("revived"),
+      newly_expired: agg("newly_expired"), duplicates: agg("duplicates"),
+      archive_candidates: agg("archive_candidates"), archived: agg("archived"),
+      evidence_audited: agg("evidence_audited"), evidence_flags: agg("evidence_flags") };
+    rep.took_ms = Date.now() - t0;
+    try { const tmp = QC_REPORT_PATH + ".tmp-" + process.pid; await writeFile(tmp, JSON.stringify(rep, null, 2), "utf8"); await rename(tmp, QC_REPORT_PATH); } catch (e) {}
+    qcState.lastRun = rep.at;
+    const T = rep.totals;
+    const summary = `巡检 ${T.checked} 条(探测 ${T.probed}):死链 ${T.dead}·新过期 ${T.newly_expired}·重复 ${T.duplicates}·存证存疑 ${T.evidence_flags}·归档 ${T.archived}/${T.archive_candidates}`;
+    db.agentLog({ agent: "inspector", ok: true, summary, metrics: T, took_ms: rep.took_ms }).catch(() => {});
+    process.stderr.write(`[数据质检] ${summary}\n`);
+    return { ok: true, report: rep };
+  } catch (e) {
+    process.stderr.write("[数据质检] 失败: " + String(e.message || e).slice(0, 160) + "\n");
+    db.agentLog({ agent: "inspector", ok: false, summary: "质检失败:" + String(e.message || e).slice(0, 120), took_ms: Date.now() - t0 }).catch(() => {});
+    return { ok: false, error: String(e.message || e) };
+  } finally { qcState.running = false; }
+}
+
+if (process.env.QUALITY_CHECK === "1") {
+  let qcDay = null;
+  async function qcTick() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.QUALITY_HOUR || 4)) return;   // 北京时间某点(默认凌晨 4 点低峰)
+    const day = bj.toISOString().slice(0, 10);
+    if (qcDay === day) return;                                                // 每日幂等
+    qcDay = day;
+    runQualityCheck({ archive: process.env.QC_ARCHIVE === "1", trigger: "auto" }).catch(() => {});
+  }
+  setTimeout(qcTick, 120 * 1000);
+  setInterval(qcTick, 3600 * 1000);
+  process.stderr.write(`[数据质检] 已开启:每日北京时间 ${Number(process.env.QUALITY_HOUR || 4)} 点巡检${process.env.QC_ARCHIVE === "1" ? "(含自动归档)" : "(仅标记,归档需后台确认)"}\n`);
 }
 
 createServer(async (req, res) => {
