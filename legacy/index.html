@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>ARTPORTAL · 全球艺术机会</title>
+  <meta name="description" content="聚合全球艺术展览征集、驻留、奖项、工作坊的申请机会,面向中国艺术家与艺术院校学生。真不真 · 急不急 · 给不给钱,一眼看清。" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <!-- 社交/微信转发预览卡 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ARTPORTAL · 全球艺术机会" />
+  <meta property="og:description" content="为中国艺术家汇集全球展览征集、驻留、奖项、工作坊。真不真 · 急不急 · 给不给钱,一眼看清。" />
+  <meta property="og:image" content="assets/hero.svg" />
+  <meta property="og:site_name" content="ARTPORTAL" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#F7F6F2" />
+  <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
+  <meta name="app-version" content="0.76.3" />
+  <!-- 主题预置:在 CSS 应用前把 data-theme 打到 <html> 上,并同步 meta theme-color,
+       避免夜间用户首屏页面/浏览器外壳闪白。手动选择存 localStorage(ap_theme);
+       没选过则跟随系统深浅色偏好(存储被禁时也走系统偏好)。 -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("ap_theme"); } catch (e) {}
+      if (t !== "dark" && t !== "light") {
+        try { t = (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light"; }
+        catch (e) { t = "light"; }
+      }
+      document.documentElement.setAttribute("data-theme", t);
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute("content", t === "dark" ? "#1B1A18" : "#F7F6F2");
+    })();
+  </script>
+  <!-- 资源版本号(SemVer):由 pipeline/bump-version.mjs 统一改写,强制浏览器加载新版本(避免缓存错配),勿手改 -->
+  <link rel="stylesheet" href="css/app.css?v=0.76.3" />
+</head>
+<body>
+  <!-- 吸顶头部:顶栏+频道+搜索+分类是【一个】sticky 容器 —— 单容器结构性根除
+       "多个 sticky 各自定 top 导致缝隙透出下层内容"的 bug;下滑时整体收起(沉浸浏览),上滑召回 -->
+  <div class="stickyhead" id="stickyHead">
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="#/" aria-label="ARTPORTAL 首页">
+        <img class="brand__logo" src="assets/mark.svg" alt="" aria-hidden="true" width="28" height="28" />
+        <span class="brand__mark">ARTPORTAL</span>
+        <span class="brand__sub" data-i18n="brandSub">· 全球艺术机会</span>
+      </a>
+      <div class="topbar__actions">
+        <!-- 我的收藏已收进用户主页(点头像 → 收藏 tab);顶栏只留 提交/主题/语言/头像 -->
+        <!-- 提交机会:站内投稿(submit.js),登录后填表 → 审核通过才发布 -->
+        <a class="btn btn--dark" id="submitBtn" href="#" data-i18n="submit">➕ 发布</a>
+        <!-- 日间/夜间手动切换:日间显示月亮(点了变夜间),夜间显示太阳;选择记忆在本机。
+             aria-pressed 由 app.js 按当前主题同步(读屏可感知开关状态) -->
+        <button class="icon-btn theme-toggle" id="themeBtn" type="button" aria-label="夜间模式" aria-pressed="false">
+          <svg class="theme-ico theme-ico--moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.6 12.2A6.6 6.6 0 0 1 7.8 4.4a.55.55 0 0 0-.74-.63 7.2 7.2 0 1 0 9.17 9.17.55.55 0 0 0-.63-.74Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <svg class="theme-ico theme-ico--sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M15.8 4.2l-1.5 1.5M5.7 14.3l-1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <button class="btn btn--ghost lang-switch" id="langBtn" type="button" aria-label="切换语言 / Switch language">中 / EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 频道 + 搜索同一行(手机换行为两行):AI 检索按钮内嵌在搜索框右端,不再独占一行 -->
+  <div class="headrow">
+    <div class="headrow__inner">
+      <nav class="channels" id="channelNav" aria-label="内容频道">
+        <button class="channel is-active" type="button" data-channel="opportunities" data-i18n="ch_opportunities">机会</button>
+        <button class="channel" type="button" data-channel="jobs" data-i18n="ch_jobs">招聘</button>
+        <button class="channel" type="button" data-channel="news" data-i18n="ch_news">资讯</button>
+        <button class="channel" type="button" data-channel="works" data-i18n="ch_works">作品</button>
+      </nav>
+      <div class="searchbar">
+        <svg class="searchbar__icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 3a5.5 5.5 0 1 0 3.4 9.8l3.6 3.7 1.4-1.4-3.6-3.6A5.5 5.5 0 0 0 8.5 3Zm0 2a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"/></svg>
+        <input type="search" id="searchInput" class="searchbar__input" autocomplete="off"
+               data-i18n-ph="searchPh" data-i18n-aria="searchAria"
+               placeholder="搜索标题、机构、城市、学科…" aria-label="搜索机会" />
+        <!-- AI 全网检索(抓官网原文→逐字校验→真实的才入库,绝不编造):内嵌胶囊按钮 -->
+        <button class="ai-search-btn" id="aiSearchBtn" type="button">
+          <span class="ai-search-btn__spin" aria-hidden="true"></span>
+          <span class="ai-search-btn__label" data-i18n="aiSearchBtnS">✦ AI 检索</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 艺术门类彩色标签行(v0.68.0,学资讯类产品参考:标签直接露在列表上方,横滑点选即筛;
+       浅色底同色系文字,选中=该色实底白字+✓;chips 由 app.js 按当前频道数据渲染,带条数) -->
+  <div class="tagbar">
+    <div class="tagbar__inner" id="tagChips" role="group" aria-label="艺术门类" data-i18n-aria="f_tag"></div>
+  </div>
+  <!-- 控制行(v0.67.0 布局整合,四频道统一):已选条件摘要 + 结果数 + 筛选 + 排序。
+       类型/作品范围与机会高级筛选在「筛选」面板;门类在上方彩色标签行(v0.68.0 请回台面)。 -->
+  <div class="catrow" id="catRow" data-ch="opportunities">
+    <div class="catrow__inner">
+      <div class="active-chips" id="activeChips" aria-live="polite"></div>
+      <span class="result-count" id="resultCount" aria-live="polite"></span>
+      <button class="btn btn--ghost more-toggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="moreFilters">
+        <span data-i18n="fFilter">筛选</span>
+        <span class="more-toggle__chev" aria-hidden="true">▾</span>
+        <span class="filter-active-dot" id="filterActiveDot" hidden></span>
+      </button>
+      <select id="sortSelect" class="sort-select" aria-label="排序" data-i18n-aria="sortBy">
+        <option value="deadline" data-i18n="sort_deadline">截止由近到远</option>
+        <option value="updated" data-i18n="sort_updated">最近更新</option>
+      </select>
+    </div>
+  </div>
+  <!-- AI 艺术周报入口(全局常显,位于筛选栏之下、列表之上;有期刊才出现,weekly.js 填充) -->
+  <div class="wr-bar" id="weeklyBar" hidden></div>
+  <!-- AI 检索结果条:检索完在周报栏下方常驻显示"本次检索结果",作为吸顶头部的一员,随周报/标签/栏目一起吸顶与收起 -->
+  <div class="search-banner" id="searchBanner" hidden>
+    <div class="search-banner__inner">
+      <span class="sb__ico" aria-hidden="true">✦</span>
+      <span class="sb__text" id="sbText"></span>
+      <button class="sb__close" id="sbClose" type="button" aria-label="关闭">✕</button>
+    </div>
+  </div>
+  </div><!-- /stickyhead -->
+
+
+
+  <!-- 更多筛选:桌面为内联展开;手机为底部抽屉 -->
+  <div class="morefilters" id="moreFilters" hidden>
+    <div class="morefilters__panel" role="group" aria-label="更多筛选">
+      <div class="morefilters__header">
+        <span data-i18n="moreFilters">更多筛选</span>
+        <button class="icon-btn morefilters__close" id="moreClose" type="button" aria-label="关闭">✕</button>
+      </div>
+      <div class="morefilters__body">
+        <!-- 各分组按频道显隐:data-fch="all"=四频道 / "opportunities" / "works"(app.js 控制) -->
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" id="fCatTitle" data-i18n="f_cat">类型</h3>
+          <div class="chips" id="catChips" role="group" aria-labelledby="fCatTitle">
+            <button class="chip is-active" data-cat="all" data-i18n="cat_all" aria-pressed="true">全部</button>
+            <button class="chip" data-cat="opencall" aria-pressed="false"><span class="tab__dot" data-cat-dot="opencall"></span><span data-i18n="cat_opencall">展览征集</span></button>
+            <button class="chip" data-cat="residency" aria-pressed="false"><span class="tab__dot" data-cat-dot="residency"></span><span data-i18n="cat_residency">驻留项目</span></button>
+            <button class="chip" data-cat="award" aria-pressed="false"><span class="tab__dot" data-cat-dot="award"></span><span data-i18n="cat_award">艺术奖项</span></button>
+            <button class="chip" data-cat="workshop" aria-pressed="false"><span class="tab__dot" data-cat-dot="workshop"></span><span data-i18n="cat_workshop">工作坊</span></button>
+          </div>
+        </section>
+        <!-- 门类组已移到搜索行下方的彩色标签行(v0.68.0);面板只留 类型/范围/高级筛选,不重复 -->
+        <section class="fgroup" data-fch="works">
+          <h3 class="fgroup__title" id="fWscopeTitle" data-i18n="f_wscope">作品范围</h3>
+          <div class="chips" id="scopeChips" role="group" aria-labelledby="fWscopeTitle">
+            <button class="chip is-active" data-wscope="all" data-i18n="wsAll" aria-pressed="true">全部作品</button>
+            <button class="chip" data-wscope="following" data-i18n="wsFollowing" aria-pressed="false">关注的人</button>
+          </div>
+        </section>
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" data-i18n="f_scope">显示范围</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" id="showPast" checked /><span data-i18n="scope_past">过往项目</span></label>
+            <label class="chip chip--check"><input type="checkbox" id="showUpcoming" checked /><span data-i18n="scope_upcoming">即将开启</span></label>
+            <label class="chip chip--check"><input type="checkbox" id="showUserSub" checked /><span data-i18n="scope_user">用户上传</span></label>
+            <label class="chip chip--check"><input type="checkbox" id="showAiSearch" checked /><span data-i18n="scope_ai">AI 检索</span></label>
+          </div>
+          <p class="fgroup__hint" data-i18n="scope_hint">默认全部显示。取消勾选即可只看正在开放的机会。</p>
+        </section>
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" data-i18n="f_region">地区</h3>
+          <div class="chips" id="regionChips">
+            <button class="chip" data-region="cn"        data-i18n="region_cn">中国大陆</button>
+            <button class="chip" data-region="hktw"      data-i18n="region_hktw">港澳台</button>
+            <button class="chip" data-region="asia"      data-i18n="region_asia">亚洲其他</button>
+            <button class="chip" data-region="europe"    data-i18n="region_europe">欧洲</button>
+            <button class="chip" data-region="namerica"  data-i18n="region_namerica">北美</button>
+            <button class="chip" data-region="other"     data-i18n="region_other">其他</button>
+          </div>
+        </section>
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" data-i18n="f_fee">费用</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" id="freeOnly" /><span data-i18n="freeOnly">仅看完全免费</span></label>
+          </div>
+        </section>
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" data-i18n="f_funding">资助</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" data-fund="stipend" /><span data-i18n="fund_stipend">提供津贴</span></label>
+            <label class="chip chip--check"><input type="checkbox" data-fund="housing" /><span data-i18n="fund_housing">提供住宿</span></label>
+            <label class="chip chip--check"><input type="checkbox" data-fund="travel" /><span data-i18n="fund_travel">报销路费</span></label>
+          </div>
+        </section>
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" data-i18n="f_orgtype">机构类型</h3>
+          <div class="chips" id="orgTypeChips">
+            <button class="chip" data-orgtype="official"    data-i18n="orgt_official">官方体制</button>
+            <button class="chip" data-orgtype="independent" data-i18n="orgt_independent">独立学术</button>
+            <button class="chip" data-orgtype="commercial"  data-i18n="orgt_commercial">商业机构</button>
+          </div>
+        </section>
+        <section class="fgroup" data-fch="opportunities">
+          <h3 class="fgroup__title" data-i18n="f_trust">信任</h3>
+          <div class="chips">
+            <label class="chip chip--check"><input type="checkbox" id="verifiedOnly" /><span data-i18n="verifiedOnly">仅看已人工核实</span></label>
+          </div>
+        </section>
+      </div>
+      <div class="morefilters__footer">
+        <button class="btn btn--ghost" id="clearFilters" type="button" data-i18n="clearFilters">清除筛选</button>
+        <button class="btn btn--dark morefilters__apply" id="applyFilters" type="button" data-i18n="applyFilters">查看结果</button>
+      </div>
+    </div>
+    <div class="morefilters__scrim" id="moreScrim"></div>
+  </div>
+
+  <!-- 列表 -->
+  <main class="main" id="main">
+    <div class="grid" id="grid" aria-live="polite"></div>
+
+    <!-- 骨架屏 -->
+    <div class="grid" id="skeleton" aria-hidden="true"></div>
+
+    <!-- 空状态 -->
+    <div class="state state--empty" id="emptyState" hidden>
+      <p class="state__title" data-i18n="empty_title">没有符合条件的机会</p>
+      <p class="state__desc" data-i18n="empty_desc">试试减少筛选条件,或打开"显示已截止"。</p>
+      <button class="btn btn--ghost" id="emptyClear" type="button" data-i18n="clearFilters">清除筛选</button>
+    </div>
+
+    <!-- 错误状态 -->
+    <div class="state state--error" id="errorState" hidden>
+      <p class="state__title" data-i18n="error_title">数据加载失败</p>
+      <p class="state__desc" data-i18n="error_desc">可能是网络问题。请检查连接后重试。</p>
+      <button class="btn btn--dark" id="retryBtn" type="button" data-i18n="retry">重试</button>
+    </div>
+
+    <!-- 无限滚动哨兵 -->
+    <div id="sentinel" class="sentinel"></div>
+    <div class="loading-more" id="loadingMore" hidden><span data-i18n="loadingMore">加载更多…</span></div>
+  </main>
+
+  <!-- 页脚常驻声明 -->
+  <footer class="sitefoot">
+    <p class="sitefoot__note" data-i18n="footer_note">
+      标注「自动收录」的条目由程序从机构官网抓取,尚未经人工逐条核实。申请前请以官网信息为准。
+    </p>
+    <!-- 备案信息:大陆备案站页脚强制展示。号未下发前保持 hidden,绝不填写编造/示例号。
+         ① ICP 备案通过后:去掉 #icpLink 的 hidden,把工信部下发的号填进 <span>(如 京ICP备2026xxxxxx号-1)。
+         ② 公安联网备案(上线约30日内办)通过后:去掉 #mpsLink 的 hidden,填公安备案号;
+            并把警徽图放到 site/assets/beian-gongan.png、去掉该 <img> 的 hidden。 -->
+    <p class="sitefoot__beian" id="siteBeian">
+      <a class="sitefoot__beian-link" id="icpLink" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+        <span class="sitefoot__icp">京ICP备2026044436号</span>
+      </a>
+      <a class="sitefoot__beian-link" id="mpsLink" href="https://beian.mps.gov.cn/" target="_blank" rel="noopener" hidden>
+        <img class="sitefoot__gongan" src="assets/beian-gongan.png" alt="" width="14" height="14" hidden />
+        <span class="sitefoot__mps"><!-- 例:京公网安备xxxxxxxxxxxxxx号 --></span>
+      </a>
+    </p>
+    <p class="sitefoot__ver">ARTPORTAL <span id="appVer">v0.76.3</span></p>
+  </footer>
+
+  <!-- 手机端投稿悬浮按钮(桌面隐藏;顶栏"提交机会"手机端放不下,移到这里) -->
+  <button class="submit-fab" id="submitFab" type="button" aria-label="提交机会" data-i18n-aria="submit">＋</button>
+
+  <!-- 详情:桌面右侧抽屉 / 手机全屏页 -->
+  <div class="detail" id="detail" hidden>
+    <div class="detail__scrim" id="detailScrim"></div>
+    <aside class="detail__panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle" tabindex="-1">
+      <div class="detail__bar">
+        <button class="icon-btn detail__back" id="detailBack" type="button" aria-label="返回">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 15 7.5 10l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="detail__back-label" data-i18n="back">返回</span>
+        </button>
+        <button class="icon-btn detail__fav" id="detailFav" type="button" aria-label="收藏"></button>
+      </div>
+      <div class="detail__scroll" id="detailBody"><!-- render.js 填充 --></div>
+    </aside>
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="js/i18n.js?v=0.76.3"></script>
+  <script src="js/tags.js?v=0.76.3"></script>
+  <script src="js/format.js?v=0.76.3"></script>
+  <script src="js/favorites.js?v=0.76.3"></script>
+  <script src="js/filters.js?v=0.76.3"></script>
+  <script src="js/render.js?v=0.76.3"></script>
+  <script src="js/router.js?v=0.76.3"></script>
+  <script src="js/app.js?v=0.76.3"></script>
+  <script src="js/auth.js?v=0.76.3"></script>
+  <script src="js/profile.js?v=0.76.3"></script>
+  <script src="js/search.js?v=0.76.3"></script>
+  <script src="js/works.js?v=0.76.3"></script>
+  <script src="js/comments.js?v=0.76.3"></script>
+  <script src="js/notify.js?v=0.76.3"></script>
+  <script src="js/submit.js?v=0.76.3"></script>
+  <script src="js/publish.js?v=0.76.3"></script>
+  <script src="js/weekly.js?v=0.76.3"></script>
+</body>
+</html>
