@@ -38,14 +38,8 @@
   .lg-item .nm{flex:1}
   .lg-item .ct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
   .lg-item.off{opacity:.38}
-  #topbar{position:fixed;right:26px;top:22px;display:flex;align-items:center;gap:6px;z-index:5}
-  .chip{font-size:13px;padding:8px 15px;border-radius:999px;border:1px solid transparent;background:transparent;
-    color:var(--sub);cursor:pointer;white-space:nowrap}
-  .chip:hover{background:#efeee8}
-  .chip.on{background:var(--ink);color:#fff}
-  #topbar .sep{width:1px;height:18px;background:var(--line);margin:0 4px}
   .lang{font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;color:var(--sub)}
-  .lang.on{background:var(--ink);color:#fff}
+  .lang:hover{background:#efeee8}
   #detail{position:fixed;right:26px;bottom:26px;width:368px;max-height:66vh;overflow-y:auto;background:var(--panel);border:1px solid var(--line);
     border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.14);padding:16px 18px;display:none;z-index:7;overscroll-behavior:contain}
   #d-cover{width:100%;height:132px;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block;background:#eceae2}
@@ -76,8 +70,9 @@
   #tip .tg{font-size:11px;color:var(--muted);margin-top:5px}
   #status{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);font-size:12px;color:var(--muted)}
   /* ===== 集成布局:站栏/页脚/切换(原有功能安放演示) ===== */
+  /* 顶栏无底色,与界面融合(同原分类条效果);按钮自身仍是药丸型 */
   #sitebar{position:fixed;left:0;right:0;top:0;height:56px;z-index:9;display:flex;align-items:center;gap:18px;
-    padding:0 22px;background:rgba(247,246,242,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    padding:0 22px;background:transparent}
   #sitebar .logo{display:flex;align-items:center;gap:9px;font-size:15px;letter-spacing:.2em;font-weight:600;white-space:nowrap}
   #sitebar .logo i{width:9px;height:9px;border-radius:50%;background:var(--opencall)}
   #chn{display:flex;gap:4px;margin-left:6px}
@@ -90,10 +85,18 @@
     color:var(--ink);cursor:pointer;white-space:nowrap}
   .abtn:hover{background:#efeee8}
   .abtn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .abtn.icon{padding:7px 10px}
+  .abtn.icon{padding:7px 10px;position:relative}
+  .abtn svg{vertical-align:-2.5px}
+  .abtn .av{width:22px;height:22px;border-radius:50%;object-fit:cover;vertical-align:-6px;margin:-3px 6px -3px -3px}
+  .bdg{position:absolute;top:-3px;right:-3px;background:var(--opencall);color:#fff;font-style:normal;
+    font-size:9px;line-height:1;border-radius:8px;padding:2px 4px;display:none}
   #brand{display:none}
-  #topbar{top:68px}
-  #panel{top:118px}
+  #panel{top:104px}
+  #btnPanel{position:fixed;left:26px;top:64px;z-index:5;font-size:12px;padding:6px 13px;border-radius:999px;
+    border:1px solid var(--line);background:var(--panel);color:var(--sub);cursor:pointer;
+    box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  #btnPanel:hover{background:#efeee8}
+  html.dark #btnPanel:hover{background:#262421}
   #foot{position:fixed;left:0;right:0;bottom:0;z-index:8;text-align:center;padding:7px 10px;
     font-size:11px;color:var(--muted);background:rgba(247,246,242,.82);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
   #foot a{color:var(--muted);text-decoration:none}
@@ -104,7 +107,7 @@
     font-size:12.5px;border-radius:999px;padding:9px 18px;display:none;box-shadow:0 8px 24px rgba(0,0,0,.2)}
   .search .ai{font-size:11.5px;color:#fff;background:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
   /* 抽屉列表(Airbnb 式左栏,与地球双向联动) */
-  #panel{top:118px;bottom:34px;width:330px}
+  #panel{top:104px;bottom:34px;width:330px}
   .listcard{flex:1;min-height:0;display:flex;flex-direction:column;padding:0;overflow:hidden}
   .lc-head{padding:13px 16px 9px;font-size:12px;color:var(--sub);border-bottom:1px solid var(--line)}
   .lc-scroll{overflow-y:auto;flex:1;padding:6px 8px 10px;overscroll-behavior:contain}
@@ -149,7 +152,6 @@
   /* 夜间主题(与主站共享 localStorage.ap_theme) */
   html.dark{--bg:#141311;--ink:#ece9e2;--sub:#a49e93;--muted:#6f6a61;--line:#2c2925;--panel:#1d1b18}
   html.dark body{background:var(--bg)}
-  html.dark #sitebar{background:rgba(20,19,17,.86)}
   html.dark #foot{background:rgba(20,19,17,.82)}
   html.dark .chip:hover,html.dark .abtn:hover,html.dark #chn .ch:hover,html.dark .lg-item:hover{background:#262421}
   html.dark .chip.on,html.dark #chn .ch.on{background:#ece9e2;color:#141311}
@@ -159,7 +161,6 @@
   @media (max-width:720px){
     #sitebar{gap:8px;padding:0 12px;overflow-x:auto}
     #sitebar .logo span{display:none}
-    #topbar{top:60px;left:12px;right:12px;bottom:auto;overflow-x:auto;justify-content:flex-start}
     #panel{top:auto;bottom:40px}
     #foot{font-size:10px;padding:5px 8px}
     #back{bottom:auto;top:104px;left:auto;right:14px}
@@ -170,10 +171,31 @@
     .card .tip{display:none}
     .legend{display:none}
     #brand{left:16px;top:14px}
-    #topbar{left:14px;right:14px;top:auto;bottom:74px;overflow-x:auto;justify-content:flex-start}
+    #btnPanel{left:14px;top:60px}
     #detail{left:14px;right:14px;width:auto;bottom:130px}
     #back{left:14px;bottom:200px}
   }
+  /* 个人主页浮层:磨砂背景内嵌主站深链(#/u/<uid>),原功能全保留;头部含用户检索 */
+  #propanel{position:fixed;left:0;right:0;top:56px;bottom:0;z-index:6;display:none;
+    background:rgba(247,246,242,.72);backdrop-filter:blur(7px)}
+  html.dark #propanel{background:rgba(20,19,17,.72)}
+  #propanel .pinner{max-width:1020px;height:100%;margin:0 auto;padding:12px 16px 22px;display:flex;flex-direction:column}
+  .pro-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;position:relative}
+  .pro-head .pro-title{font-size:14px;font-weight:600}
+  .pro-head input{margin-left:auto;flex:0 0 230px;font-size:12.5px;padding:7px 13px;border:1px solid var(--line);
+    border-radius:999px;outline:0;background:var(--panel);color:var(--ink)}
+  .pro-head .x2{font-size:19px;color:var(--muted);cursor:pointer;padding:0 4px;line-height:1}
+  .pro-head .x2:hover{color:var(--ink)}
+  #uqRes{position:absolute;right:30px;top:36px;width:262px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.15);display:none;overflow:hidden;z-index:9}
+  .uq-i{display:flex;align-items:center;gap:9px;padding:8px 12px;cursor:pointer;font-size:13px}
+  .uq-i:hover{background:#faf9f5}
+  html.dark .uq-i:hover{background:#242220}
+  .uq-i img{width:26px;height:26px;border-radius:50%;object-fit:cover;background:#eceae2}
+  .uq-i i{margin-left:auto;font-style:normal;font-size:11px;color:var(--muted)}
+  .uq-empty{padding:10px 12px;font-size:12px;color:var(--muted)}
+  #proFrame{flex:1;width:100%;border:1px solid var(--line);border-radius:14px;background:#fff}
+  html.dark #proFrame{background:#141311}
 </style>
 </head>
 <body>
@@ -190,33 +212,35 @@
   </nav>
   <div class="grow"></div>
   <div class="act">
-    <button class="abtn" id="btnList">☰ 列表视图</button>
-    <button class="abtn primary" id="btnPub">➕ 发布</button>
-    <button class="abtn icon" id="btnBell" title="通知">🔔</button>
-    <button class="abtn icon" id="btnTheme" title="夜间模式">🌙</button>
-    <button class="abtn" id="btnLogin">登录</button>
+    <button class="abtn primary" id="btnPub"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> <span id="pubTxt">发布</span></button>
+    <button class="abtn icon" id="btnBell" title="通知"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><i class="bdg" id="bellBdg"></i></button>
+    <button class="abtn icon" id="btnTheme" title="夜间模式"></button>
+    <span class="lang" id="btnLang">EN</span>
+    <button class="abtn" id="btnLogin"></button>
   </div>
 </div>
 <div id="brand"><span class="dot"></span><h1>ARTPORTAL GLOBE</h1><p>引领全球，搜寻最前沿的展览与驻留机遇</p></div>
+<button id="btnPanel">◂ 收起面板</button>
 <div id="panel">
   <div class="card">
-    <div class="hd"><span>实时索引库</span><span class="badge"><i></i>ACTIVE</span></div>
+    <div class="hd"><span id="libT">实时索引库</span><span class="badge"><i></i>ACTIVE</span></div>
     <div class="bignum" id="total">0<small>项全球活跃索引</small></div>
-    <div class="tip">拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。</div>
+    <div class="tip" id="libTip">拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。</div>
   </div>
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
-  <div class="card legend"><div class="lg-title">分类索引图例</div><div id="legend"></div></div>
+  <div class="card legend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div></div>
   <div class="card listcard"><div class="lc-head" id="lcCount">结果列表</div><div class="lc-scroll" id="lcList"></div></div>
 </div>
 <div id="chpanel"><div class="inner" id="chInner"></div></div>
-<div id="topbar">
-  <button class="chip on" data-cat="all">All</button>
-  <button class="chip" data-cat="opencall">展览征集</button>
-  <button class="chip" data-cat="residency">艺术家驻留</button>
-  <button class="chip" data-cat="award">艺术奖项</button>
-  <button class="chip" data-cat="workshop">研讨学术工坊</button>
-  <span class="sep"></span><span class="lang" data-l="en">EN</span><span class="lang on" data-l="zh">中</span>
-</div>
+<div id="propanel"><div class="pinner">
+  <div class="pro-head">
+    <span class="pro-title" id="proTitle">个人主页</span>
+    <input id="uq" placeholder="搜索用户昵称…" autocomplete="off" />
+    <span class="x2" id="proClose">×</span>
+    <div id="uqRes"></div>
+  </div>
+  <iframe id="proFrame" src="about:blank"></iframe>
+</div></div>
 <div id="detail"><span class="x" onclick="this.parentNode.style.display='none'">×</span>
   <img id="d-cover" alt="" hidden />
   <div><span class="cat" id="d-cat"></span><span class="badge2" id="d-trust"></span></div>
@@ -326,9 +350,10 @@
       for(var L=0;L<labelData.length;L++){ var d=labelData[L]; if(!frontC(d.cart)) continue;
         if(drilledCountry&&d.en===drilledCountry) continue;   // 下钻国不再标国名,让位区划名
         var p=proj(d.c), fs=Math.max(9,Math.min(22,d.sz*(sc/scale0)));
+        var lnm=(lang==='en')?d.en:d.nm;
         ctx.font='600 '+fs+'px "PingFang SC","Microsoft YaHei",sans-serif';
-        ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(d.nm,p[0],p[1]);
-        ctx.fillStyle=T.label; ctx.fillText(d.nm,p[0],p[1]); } }
+        ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(lnm,p[0],p[1]);
+        ctx.fillStyle=T.label; ctx.fillText(lnm,p[0],p[1]); } }
     // 行政区划地名:中国省级=省名、市级=市州名;他国=一级行政区名
     var AL=null;
     if(cnDrilled&&drillLevel===1) AL=provLabels;
@@ -536,14 +561,14 @@
     if(nm==='China'||nm==='Taiwan'){ drillChina(); return; }
     drilledCountry=nm; drilledFeat=feat; drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
     fitFly(feat, boundsCenter(feat), scale0*2.9);
-    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent='← 返回全球';
+    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW');
     loadAdmin('https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm,2); }
   function drillChina(){ drilledCountry='China'; drilledFeat=cnNE; drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
-    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent='← 返回全球';
+    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW');
     fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; }   // 省界来自 cnBase(启动已载),无需再请求
   function drillProvince(pf){ var ad=pf.properties.adcode; if(!ad) return;
     drillLevel=2; drilledProvAdcode=ad;
-    document.getElementById('back').textContent='← 返回上一级';
+    document.getElementById('back').textContent=L('backU');
     fitFly(pf, boundsCenter(pf), scale0*5.2);
     loadAdmin('https://geo.datav.aliyun.com/areas_v3/bound/'+ad+'_full.json',null,2); }
   function loadAdmin(url,filt,step){
@@ -562,7 +587,7 @@
     document.getElementById('detail').style.display='none'; tipEl.style.display='none';
     adminSeq++;   // 使在途 loadAdmin 结果作废
     if(drillLevel===2){ drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
-      document.getElementById('back').textContent='← 返回全球';
+      document.getElementById('back').textContent=L('backW');
       fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; return; }   // 市级 → 退回省级
     drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; maxK=9;
     document.getElementById('back').style.display='none';
@@ -577,12 +602,12 @@
   // —— 信息层 ——
   function daysLeft(dl){ if(!dl) return ''; var d=new Date(dl+'T23:59:59'); if(isNaN(d)) return '';
     var n=Math.ceil((d-Date.now())/86400000);
-    return n<0?'已截止':(n===0?'今天截止':(n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天'))); }
+    return n<0?L('dlOver'):(n===0?L('dlToday'):L('dlLeft')(n)); }
   function trustLabel(o){
-    if(o.trust==='user') return '用户投稿 · 未经核实';
-    if(o.trust==='verified') return '已人工核实';
-    if(o._via==='search') return 'AI 检索收录 · 请核对';
-    return '自动收录 · 未经核实'; }
+    if(o.trust==='user') return L('tUser');
+    if(o.trust==='verified') return L('tVer');
+    if(o._via==='search') return L('tAI');
+    return L('tAuto'); }
   // 结构化字段 → 人话(对齐主站 format.js 口径)
   function curSym(c){ return {CNY:'¥',USD:'$',EUR:'€',GBP:'£',JPY:'JP¥',HKD:'HK$'}[c]||((c||'')+' '); }
   function feeText(o){ var out=[], a=o.apply_fee, p=o.participation_fee;
@@ -611,37 +636,38 @@
     var lines=[];
     if(o.org_zh) lines.push(esc(o.org_zh));
     var loc=[o.city_zh,o.country_zh].filter(Boolean).join(' · '); if(loc) lines.push(esc(loc));
-    if(o.deadline){ var dl=daysLeft(o.deadline); lines.push('截止 '+esc(o.deadline)+(dl?(' · '+dl):'')); }
-    if(o.published_at) lines.push('发布 '+esc(String(o.published_at).slice(0,10)));
-    if(m.prec==='信源地') lines.push('落点=信源所在地(非内容发生地)');
-    var fee=feeText(o); if(fee) lines.push('费用 '+esc(fee));
-    var fnd=fundingText(o); if(fnd) lines.push('资助 '+esc(fnd));
-    var sum=o.summary_zh?esc(String(o.summary_zh).slice(0,76))+'…':'';
+    if(o.deadline){ var dl=daysLeft(o.deadline); lines.push(L('k_dl')+' '+esc(o.deadline)+(dl?(' · '+dl):'')); }
+    if(o.published_at) lines.push(L('k_pub')+' '+esc(String(o.published_at).slice(0,10)));
+    if(m.prec==='信源地') lines.push(L('srcLoc'));
+    var fee=feeText(o); if(fee) lines.push(L('k_fee')+' '+esc(fee));
+    var fnd=fundingText(o); if(fnd) lines.push(L('k_fund')+' '+esc(fnd));
+    var sum=ss(o)?esc(String(ss(o)).slice(0,76))+'…':'';
     var media=o.cover
       ?('<img class="timg" src="'+esc(o.cover)+'" onerror="this.style.display=\'none\'" alt="">')
-      :('<div class="tph" style="background:'+c.color+'">'+esc((o.title_zh||o.title_en||'·').charAt(0))+'</div>');
+      :('<div class="tph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</div>');
     tipEl.innerHTML=media+'<div class="tpad">'+
-      '<span class="tc" style="background:'+c.color+'">'+c.zh+'</span>'+
-      '<div class="tt">'+esc(o.title_zh||o.title_en||'(无标题)')+'</div>'+
+      '<span class="tc" style="background:'+c.color+'">'+catName(o.category)+'</span>'+
+      '<div class="tt">'+esc(tt(o)||'(无标题)')+'</div>'+
       '<div class="tm">'+lines.join('<br>')+'</div>'+
       (sum?'<div class="ts">'+sum+'</div>':'')+
-      '<div class="tg">'+trustLabel(o)+' · 点击看完整详情</div></div>'; }
+      '<div class="tg">'+trustLabel(o)+' · '+L('tipMore')+'</div></div>'; }
   function fillTipCluster(g){
     var cov='', i;
     for(i=0;i<g.items.length;i++){ if(matchFilter(g.items[i].o)&&g.items[i].o.cover){ cov=g.items[i].o.cover; break; } }
     tipEl.innerHTML=(cov?('<img class="timg" src="'+esc(cov)+'" onerror="this.style.display=\'none\'" alt="">'):'')+
-      '<div class="tpad"><div class="tt">'+esc(g.key)+'</div><div class="tm">'+g.count+' 项活跃机会</div>'+
-      '<div class="tg">点击放大展开</div></div>'; }
+      '<div class="tpad"><div class="tt">'+esc(g.key)+'</div><div class="tm">'+g.count+L('clusterN')+'</div>'+
+      '<div class="tg">'+L('clusterGo')+'</div></div>'; }
   function moveTip(e){ var x=e.clientX+16, y=e.clientY+16;
     if(x+312>window.innerWidth) x=e.clientX-316;
     var th=tipEl.offsetHeight||300;
     if(y+th+10>window.innerHeight) y=Math.max(8, e.clientY-th-16);
     tipEl.style.left=x+'px'; tipEl.style.top=y+'px'; }
   function showDetail(o){ var c=CAT[o.category]||CAT.opencall;
-    document.getElementById('d-cat').textContent=c.zh; document.getElementById('d-cat').style.background=c.color;
+    document.getElementById('d-cat').textContent=catName(o.category); document.getElementById('d-cat').style.background=c.color;
     document.getElementById('d-trust').textContent=trustLabel(o);
-    document.getElementById('d-title').textContent=o.title_zh||o.title_en||'(无标题)';
-    document.getElementById('d-sub').textContent=(o.title_zh&&o.title_en&&o.title_en!==o.title_zh)?o.title_en:'';
+    document.getElementById('d-title').textContent=tt(o)||'(无标题)';
+    var alt=(lang==='en')?o.title_zh:o.title_en;
+    document.getElementById('d-sub').textContent=(alt&&alt!==tt(o))?alt:'';
     var cov=document.getElementById('d-cover');
     if(o.cover){ cov.onerror=function(){ cov.hidden=true; }; cov.src=o.cover; cov.hidden=false; }
     else cov.hidden=true;
@@ -652,19 +678,20 @@
     var disc=Array.isArray(o.disciplines)?o.disciplines.join(' / '):(o.disciplines||'');
     var src=o.domain||(o.url?String(o.url).replace(/^https?:\/\//,'').split('/')[0]:'');
     document.getElementById('d-meta').innerHTML=
-      row('主办',o.org_zh)+
-      row('地点',[o.city_zh,o.country_zh].filter(Boolean).join(' · '))+
-      row('截止',dl)+
-      row('费用',fee)+
-      row('资助',fundingText(o))+
-      row('资格',eligText(o))+
-      row('门类',disc&&String(disc).slice(0,60))+
-      row('来源',src)+
-      (o.summary_zh?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(o.summary_zh).slice(0,230))+'</div>'):'');
+      row(L('k_org'),o.org_zh)+
+      row(L('k_loc'),[o.city_zh,o.country_zh].filter(Boolean).join(' · '))+
+      row(L('k_dl'),dl)+
+      row(L('k_fee'),fee)+
+      row(L('k_fund'),fundingText(o))+
+      row(L('k_elig'),eligText(o))+
+      row(L('k_disc'),disc&&String(disc).slice(0,60))+
+      row(L('k_src'),src)+
+      (ss(o)?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(ss(o)).slice(0,230))+'</div>'):'');
     var isCh=(o.category==='jobs'||o.category==='news'||o.category==='works');
     var go=document.getElementById('d-go'); go.href=o.url||o.source_url||'#';
-    go.textContent=(o.category==='jobs')?'前往申请 ↗':((o.category==='news')?'阅读原文 ↗':'前往官网 ↗');
+    go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read'):L('go'));
     var op=document.getElementById('d-open'); op.href='/#/o/'+encodeURIComponent(o.id||''); op.target='_blank'; op.onclick=null;
+    op.textContent=L('inSite');
     op.style.display=isCh?'none':'inline-block';   // 招聘/资讯暂无站内详情页
     var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; }
 
@@ -673,10 +700,70 @@
   function toast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.style.display='block';
     clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.style.display='none'; },2600); }
   function goMain(hint){ if(hint){ toast(hint); setTimeout(function(){ location.href='/'; },600); } else location.href='/'; }
+  // —— 中英文切换(与主站共享 localStorage.ap_lang;数据本身双语共存,这里切 UI 与标题选用) ——
+  var I18N={
+    zh:{idx:'索引',opportunities:'机会',jobs:'招聘',news:'资讯',works:'作品',pub:'发布',login:'登录',
+      libT:'实时索引库',unit:'项全球活跃索引',
+      libTip:'拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。',
+      searchPh:'检索展览、城市、机构、项目内容…',ai:'✦ AI 检索',aiing:'✦ 检索中…',
+      lgT:'分类索引图例',fold:'◂ 收起面板',unfold:'▸ 展开面板',backW:'← 返回全球',backU:'← 返回上一级',
+      go:'前往官网 ↗',apply:'前往申请 ↗',read:'阅读原文 ↗',inSite:'站内详情 →',
+      pro:'个人主页',uqPh:'搜索用户昵称…',uqNone:'没有匹配的用户',
+      k_org:'主办',k_loc:'地点',k_dl:'截止',k_fee:'费用',k_fund:'资助',k_elig:'资格',k_disc:'门类',k_src:'来源',k_pub:'发布',
+      srcLoc:'落点=信源所在地(非内容发生地)',tipMore:'点击看完整详情',clusterN:' 项活跃索引',clusterGo:'点击放大展开',
+      dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
+      tUser:'用户投稿 · 未经核实',tVer:'已人工核实',tAI:'AI 检索收录 · 请核对',tAuto:'自动收录 · 未经核实',
+      listN:function(n){return '结果列表 · '+n+' 项(点卡片飞过去)';},
+      marked:function(n,c){return '已标注 '+n+' 项 · '+c+' 国';}},
+    en:{idx:'Index',opportunities:'Open Calls',jobs:'Jobs',news:'News',works:'Works',pub:'Post',login:'Sign in',
+      libT:'LIVE INDEX',unit:' active listings worldwide',
+      libTip:'Drag to rotate, scroll or pinch to zoom. Numbered circles are city clusters — click to expand; click a country for its regions.',
+      searchPh:'Search shows, cities, institutions…',ai:'✦ AI Search',aiing:'✦ Searching…',
+      lgT:'Category index',fold:'◂ Collapse panel',unfold:'▸ Show panel',backW:'← Back to globe',backU:'← Back',
+      go:'Official site ↗',apply:'Apply ↗',read:'Read source ↗',inSite:'Details →',
+      pro:'Profile',uqPh:'Search users…',uqNone:'No matching users',
+      k_org:'Host',k_loc:'Place',k_dl:'Deadline',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligibility',k_disc:'Fields',k_src:'Source',k_pub:'Published',
+      srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
+      dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
+      tUser:'User submitted · unverified',tVer:'Verified',tAI:'AI-collected · please verify',tAuto:'Auto-collected · unverified',
+      listN:function(n){return 'Results · '+n+' (click to fly there)';},
+      marked:function(n,c){return n+' items · '+c+' countries';}}
+  };
+  var CAT_EN={opencall:'Open Calls',residency:'Residencies',award:'Awards & Grants',workshop:'Workshops & Forums',
+    jobs:'Art Jobs',news:'Art News',works:'Artist Works'};
+  var lang='zh'; try{ lang=(localStorage.getItem('ap_lang')==='en')?'en':'zh'; }catch(e){}
+  function L(k){ return I18N[lang][k]; }
+  function catName(k){ return lang==='en'?(CAT_EN[k]||k):(CAT[k]?CAT[k].zh:k); }
+  function tt(o){ return lang==='en'?(o.title_en||o.title_zh||''):(o.title_zh||o.title_en||''); }
+  function ss(o){ return lang==='en'?(o.summary_en||o.summary_zh||''):(o.summary_zh||o.summary_en||''); }
+  function applyLang(){
+    d3.selectAll('#chn .ch').text(function(){ var c=this.getAttribute('data-ch'); return c==='globe'?L('idx'):L(c); });
+    document.getElementById('pubTxt').textContent=L('pub');
+    var lt=document.getElementById('loginTxt'); if(lt) lt.textContent=L('login');
+    document.getElementById('proTitle').textContent=L('pro');
+    document.getElementById('uq').placeholder=L('uqPh');
+    document.getElementById('libT').textContent=L('libT');
+    document.getElementById('libTip').textContent=L('libTip');
+    document.getElementById('lgT').textContent=L('lgT');
+    document.getElementById('q').placeholder=L('searchPh');
+    if(!searching) document.getElementById('btnAI').textContent=L('ai');
+    document.getElementById('btnLang').textContent=(lang==='zh')?'EN':'中';
+    document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
+    document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
+    document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
+    renderLegend(); renderDrawer(); needDraw=true; }
+  document.getElementById('btnLang').addEventListener('click',function(){
+    lang=(lang==='zh')?'en':'zh';
+    try{ localStorage.setItem('ap_lang',lang); }catch(e){}
+    applyLang(); });
   // 主题:与主站共享 localStorage.ap_theme,画布配色同步换(THEMES/T 已在顶部声明)
+  var ICONS={
+    moon:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+    sun:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    user:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="8" r="4.5"/></svg>'};
   function applyTheme(name){ T=THEMES[name]||THEMES.light;
     document.documentElement.classList.toggle('dark',name==='dark');
-    document.getElementById('btnTheme').textContent=(name==='dark')?'☀️':'🌙';
+    document.getElementById('btnTheme').innerHTML=(name==='dark')?ICONS.sun:ICONS.moon;
     try{ localStorage.setItem('ap_theme',name); }catch(e){}
     needDraw=true; }
   (function(){ var t0=null; try{ t0=localStorage.getItem('ap_theme'); }catch(e){}
@@ -687,6 +774,7 @@
   var chCache={}, chStore={};
   d3.selectAll('#chn .ch').on('click',function(){ var el=this, ch=el.getAttribute('data-ch');
     d3.selectAll('#chn .ch').classed('on',function(){ return this===el; });
+    hideProfile();
     if(ch==='globe'){ hideChPanel(); return; }
     showChPanel(ch); });
   function hideChPanel(){ document.getElementById('chpanel').style.display='none'; }
@@ -698,10 +786,10 @@
       var os=chStore.opportunities||[];
       var orows=os.slice(0,120).map(function(o,i){
         var c=CAT[o.category]||CAT.opencall, cov=o.cover?esc(o.cover):'';
-        var th='<span class="rth"><span class="ph" style="background:'+c.color+'">'+esc((o.title_zh||o.title_en||'·').charAt(0))+'</span>'+
+        var th='<span class="rth"><span class="ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
           (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
-        var m=esc([o.org_zh,[o.city_zh,o.country_zh].filter(Boolean).join('·'),o.deadline?('截止 '+o.deadline):''].filter(Boolean).join(' · '));
-        return '<div class="row" data-oi="'+i+'">'+th+'<div class="rbody"><div class="rt">'+esc(o.title_zh||o.title_en||'')+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
+        var m=esc([o.org_zh,[o.city_zh,o.country_zh].filter(Boolean).join('·'),o.deadline?(L('k_dl')+' '+o.deadline):''].filter(Boolean).join(' · '));
+        return '<div class="row" data-oi="'+i+'">'+th+'<div class="rbody"><div class="rt">'+esc(tt(o))+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
       inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">机会 · '+os.length+
         ' 项 · 地球仍在背后,点「索引」即回(点击条目看详情)</div>'+(orows||'<div class="rm">还没有数据</div>');
       return; }
@@ -727,7 +815,7 @@
       var items=(ch==='jobs')?(j.jobs||j.items||[]):(j.items||[]);
       var phc=(ch==='jobs')?'#3A7D44':'#2A7F7A';
       var rows=items.slice(0,60).map(function(it){
-        var t=esc(it.title_zh||it.title||''), m;
+        var t=esc((lang==='en'?(it.title_en||it.title||it.title_zh):(it.title_zh||it.title))||''), m;
         if(ch==='jobs') m=esc([it.org_zh||it.org,it.city_zh||it.city,it.deadline?('截止 '+it.deadline):''].filter(Boolean).join(' · '));
         else m=esc([it.source,(it.published_at||'').slice(0,10)].filter(Boolean).join(' · '));
         var u=esc(it.apply_url||it.url||'#');
@@ -745,23 +833,59 @@
     var oi=d.getAttribute('data-oi');
     if(oi!=null){ var o=(chStore.opportunities||[])[+oi]; if(o) showDetail(o); return; }   // 机会行→详情卡(浮层之上)
     var u=d.getAttribute('data-u'); if(u&&u!=='#') window.open(u,'_blank','noopener'); });
-  // 左栏收起/展开(替代跳页)
-  document.getElementById('btnList').addEventListener('click',function(){
-    var p=document.getElementById('panel'), hiding=p.style.display!=='none';
-    p.style.display=hiding?'none':'flex';
-    this.textContent=hiding?'☰ 展开面板':'☰ 收起面板'; });
+  // 左栏收起/展开:按键在面板上方(不占顶栏)
+  var panelOpen=true;
+  document.getElementById('btnPanel').addEventListener('click',function(){
+    panelOpen=!panelOpen;
+    document.getElementById('panel').style.display=panelOpen?'flex':'none';
+    this.textContent=panelOpen?L('fold'):L('unfold'); });
   document.getElementById('btnPub').addEventListener('click',function(){ goMain('前往主站发布面板(需登录)…'); });
   document.getElementById('btnBell').addEventListener('click',function(){ goMain('前往主站通知中心…'); });
   document.getElementById('btnTheme').addEventListener('click',function(){
     applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'); });
+  // —— 个人主页:磨砂浮层内嵌主站深链 #/u/<uid>(原功能全保留),头部带用户检索 ——
   var meUser=null;
+  function setLoginBtn(){ var b=document.getElementById('btnLogin');
+    if(meUser) b.innerHTML=(meUser.avatar?('<img class="av" src="'+esc(meUser.avatar)+'" alt="">'):(ICONS.user+' '))+
+      '<span>'+esc(meUser.nickname||'')+'</span>';
+    else b.innerHTML=ICONS.user+' <span id="loginTxt">'+L('login')+'</span>'; }
+  function openProfile(uid){ hideChPanel();
+    d3.selectAll('#chn .ch').classed('on',false);
+    document.getElementById('propanel').style.display='block';
+    var fr=document.getElementById('proFrame'), url='/#/u/'+encodeURIComponent(uid);
+    if(fr.getAttribute('data-u')!==url){ fr.src=url; fr.setAttribute('data-u',url); } }
+  function hideProfile(){ document.getElementById('propanel').style.display='none';
+    document.getElementById('uqRes').style.display='none'; }
+  document.getElementById('proClose').addEventListener('click',function(){ hideProfile();
+    d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); });
   document.getElementById('btnLogin').addEventListener('click',function(){
-    if(meUser) location.href='/#/u/'+encodeURIComponent(meUser.id); else goMain('前往主站登录/注册…'); });
+    if(meUser) openProfile(meUser.id); else goMain('前往主站登录/注册…'); });
+  // 用户检索(/api/users/search):输入即搜,点结果在浮层内切换主页
+  var uqTimer=null;
+  document.getElementById('uq').addEventListener('input',function(){
+    var q2=this.value.trim(), box=document.getElementById('uqRes');
+    clearTimeout(uqTimer);
+    if(!q2){ box.style.display='none'; return; }
+    uqTimer=setTimeout(function(){
+      fetch('/api/users/search?q='+encodeURIComponent(q2),{credentials:'same-origin'})
+        .then(function(r){ return r.json(); })
+        .then(function(j){ var us=(j&&j.users)||[];
+          box.innerHTML=us.length?us.map(function(u2){
+            return '<div class="uq-i" data-id="'+esc(u2.id)+'"><img src="'+esc(u2.avatar||'')+'" alt="">'+
+              '<span>'+esc(u2.nickname)+'</span>'+(u2.identity?('<i>'+esc(u2.identity)+'</i>'):'')+'</div>'; }).join('')
+            :'<div class="uq-empty">'+L('uqNone')+'</div>';
+          box.style.display='block'; })
+        .catch(function(){ box.innerHTML='<div class="uq-empty">'+L('uqNone')+'</div>'; box.style.display='block'; });
+    },250); });
+  document.getElementById('uqRes').addEventListener('click',function(e){
+    var d=e.target.closest('.uq-i'); if(!d) return;
+    this.style.display='none'; document.getElementById('uq').value='';
+    openProfile(d.getAttribute('data-id')); });
   fetch('/api/auth/me').then(function(r){ return r.json(); }).then(function(j){
-    if(j&&j.user){ meUser=j.user;
-      document.getElementById('btnLogin').textContent='👤 '+(j.user.nickname||'我的主页');
+    if(j&&j.user){ meUser=j.user; setLoginBtn();
       fetch('/api/notifications?count=1').then(function(r){ return r.json(); }).then(function(n){
-        if(n&&n.unread>0) document.getElementById('btnBell').textContent='🔔'+(n.unread>9?'9+':n.unread); }).catch(function(){}); }
+        if(n&&n.unread>0){ var bd=document.getElementById('bellBdg');
+          bd.textContent=(n.unread>9?'9+':n.unread); bd.style.display='block'; } }).catch(function(){}); }
   }).catch(function(){});
   // 数据入库(初始加载与检索新增共用):建点/建簇/计数/图例
   var catCounts={opencall:0,residency:0,award:0,workshop:0,jobs:0,news:0,works:0}, placedTotal=0, seenIds={};
@@ -778,7 +902,7 @@
       var g=groups[key]||(groups[key]={key:key,ll:loc.ll,cart:ll2c(loc.ll),items:[],sx:null,sy:null,r:0,count:0,single:null});
       g.items.push(mk);
       catCounts[cat]=(catCounts[cat]||0)+1; placedTotal++; added++; });
-    document.getElementById('total').innerHTML=placedTotal+'<small>项全球活跃索引</small>';
+    document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
     renderLegend(); renderDrawer(); needDraw=true; return added; }
   // —— 抽屉列表:与地球同一份筛选状态,双向联动 ——
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); }
@@ -789,12 +913,12 @@
       if(!matchFilter(o)) continue; n++;
       if(out.length<400){ var c=CAT[o.category]||CAT.opencall;
         var cov=o.cover?esc(o.cover):'';
-        var th='<span class="th"><span class="ph" style="background:'+c.color+'">'+esc((o.title_zh||o.title_en||'·').charAt(0))+'</span>'+
+        var th='<span class="th"><span class="ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
           (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
         out.push('<div class="oc" data-i="'+markers[i].idx+'"><span class="bar" style="background:'+c.color+'"></span>'+th+'<div>'+
-          '<div class="t">'+esc(o.title_zh||o.title_en)+'</div>'+
-          '<div class="m">'+esc([o.city_zh||o.country_zh||o.org_zh,o.deadline?('截止 '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
-    document.getElementById('lcCount').textContent='结果列表 · '+n+' 项(点卡片飞过去)';
+          '<div class="t">'+esc(tt(o))+'</div>'+
+          '<div class="m">'+esc([o.city_zh||o.country_zh||o.org_zh,o.deadline?(L('k_dl')+' '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
+    document.getElementById('lcCount').textContent=L('listN')(n);
     el.innerHTML=out.join(''); }
   function selectCard(d){ var prev=document.querySelector('.oc.sel'); if(prev) prev.classList.remove('sel');
     if(d){ d.classList.add('sel'); d.scrollIntoView({block:'nearest'}); } }
@@ -812,10 +936,9 @@
     if(e.target.closest('.oc')){ focusMk=null; focusKey=null; needDraw=true; } });
   function renderLegend(){
     document.getElementById('legend').innerHTML=LEGEND_KEYS.map(function(k2){
-      return '<div class="lg-item'+((filterCat!=='all'&&filterCat!==k2)?' off':'')+'" data-cat="'+k2+'"><span class="sw" style="background:'+CAT[k2].color+'"></span><span class="nm">'+CAT[k2].zh+'</span><span class="ct">'+(catCounts[k2]||0)+'</span></div>'; }).join('');
+      return '<div class="lg-item'+((filterCat!=='all'&&filterCat!==k2)?' off':'')+'" data-cat="'+k2+'"><span class="sw" style="background:'+CAT[k2].color+'"></span><span class="nm">'+catName(k2)+'</span><span class="ct">'+(catCounts[k2]||0)+'</span></div>'; }).join('');
     d3.selectAll('#legend .lg-item').on('click',function(){ var k3=this.getAttribute('data-cat');
       filterCat=(filterCat===k3)?'all':k3;
-      d3.selectAll('#topbar .chip').classed('on',function(){ return this.getAttribute('data-cat')===filterCat; });
       syncLegend(); renderDrawer(); needDraw=true; }); }
   function flyToRecord(rec){ var loc=D.locate(rec); if(loc) flyTo(loc.ll, Math.max(splitScale()*1.5, proj.scale())); }
   // ✦ AI 检索:真调用 /api/search,新机会实时落点地球
@@ -824,7 +947,7 @@
     if(searching) return;
     var q2=document.getElementById('q').value.trim();
     if(!q2){ toast('输入关键词后点我:AI 全网检索,结果直接落点地球'); return; }
-    searching=true; var btn=document.getElementById('btnAI'); btn.textContent='✦ 检索中…';
+    searching=true; var btn=document.getElementById('btnAI'); btn.textContent=L('aiing');
     toast('AI 正在全网检索「'+q2+'」,通常 30~90 秒,期间可继续转地球…');
     fetch('/api/search?q='+encodeURIComponent(q2)+'&channel=opportunities')
       .then(function(r){ return r.json(); })
@@ -835,20 +958,18 @@
           if(n) flyToRecord(r.added[0]); }
         else toast((r&&(r.message||r.error))||'检索完成:本次未发现可核实的新机会'); })
       .catch(function(){ toast('检索失败,请稍后再试'); })
-      .then(function(){ searching=false; btn.textContent='✦ AI 检索'; }); }
+      .then(function(){ searching=false; btn.textContent=L('ai'); }); }
   document.getElementById('btnAI').addEventListener('click',runSearch);
   document.getElementById('q').addEventListener('keydown',function(e){ if(e.key==='Enter') runSearch(); });
 
-  // —— 面板 ——
-  d3.selectAll('#topbar .chip').on('click',function(){
-    d3.selectAll('#topbar .chip').classed('on',false); d3.select(this).classed('on',true);
-    filterCat=this.getAttribute('data-cat'); syncLegend(); renderDrawer(); needDraw=true; });
+  // —— 面板(分类过滤统一走左侧图例) ——
   function syncLegend(){ d3.selectAll('#legend .lg-item').classed('off',function(){
     return filterCat!=='all'&&this.getAttribute('data-cat')!==filterCat; }); }
   document.getElementById('q').addEventListener('input',function(e){ query=e.target.value.trim(); renderDrawer(); needDraw=true; });
   window.addEventListener('resize',resize);
 
   // —— 数据加载 ——
+  setLoginBtn(); applyLang();   // 登录钮默认态 + 语言应用(共享 ap_lang)
   resize(); proj.rotate([-100,-30]);
   // 招聘/资讯归一化成球面记录:字段对齐机会口径(city→city_zh 等),category 改频道键
   function normJob(it,i){ return Object.assign({},it,{ category:'jobs',
@@ -894,7 +1015,7 @@
       cnBaseFeats:function(){return cnBase;}, boundsCenter:boundsCenter,
       drillProvByName:function(n){for(var i=0;i<cnBase.length;i++){if(cnBase[i].properties.name===n){drillProvince(cnBase[i]);return cnBase[i].properties.adcode;}}return null;},
       exitDrill:function(){exitDrill();}};
-    var st=document.getElementById('status'); st.textContent='已标注 '+placedTotal+' 项 · '+countryFeats.length+' 国';
+    var st=document.getElementById('status'); st.textContent=L('marked')(placedTotal,countryFeats.length);
     setTimeout(function(){ st.style.display='none'; },2500);
     draw();
   }).catch(function(err){ document.getElementById('status').textContent='加载失败:'+err.message; });
