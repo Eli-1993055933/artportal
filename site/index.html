@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.7" />
+<meta name="app-version" content="0.77.8" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -186,11 +186,13 @@
     /* 顶栏压缩:去 logo、紧凑药丸、发布只留图标,保证一屏放得下 */
     /* 顶栏双行:第一行频道(可横滑),第二行操作钮靠右——彻底放得下 */
     #sitebar{flex-wrap:wrap;height:auto;padding:6px 8px 5px;gap:3px 6px}
-    #sitebar .logo{display:none}
+    /* 双层:上=logo+操作钮(头像),下=频道横排 */
+    #sitebar .logo{display:flex;font-size:12px;letter-spacing:.16em;gap:6px;order:1}
+    #sitebar .logo span{display:none}
     #sitebar .grow{display:none}
-    #chn{order:1;flex:1 1 100%;overflow-x:auto;margin-left:0;gap:2px}
-    #chn .ch{font-size:12.5px;padding:6px 11px;flex:0 0 auto}
     #sitebar .act{order:2;margin-left:auto;gap:5px}
+    #chn{order:3;flex:1 1 100%;overflow-x:auto;margin-left:0;gap:2px}
+    #chn .ch{font-size:12.5px;padding:6px 11px;flex:0 0 auto}
     .abtn{font-size:12px;padding:6px 9px}
     #pubTxt{display:none}
     #btnLogin span{display:none}
@@ -205,7 +207,7 @@
     #panel{left:10px;right:10px;top:15vh;bottom:0;width:auto;gap:6px;
       background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;
       box-shadow:0 -8px 30px rgba(0,0,0,.12);padding:0 10px 8px;
-      transform:translateY(41vh);will-change:transform;touch-action:none}
+      transform:translateY(59vh);will-change:transform;touch-action:none}
     #panel .lc-scroll{touch-action:pan-y}
     #panel input,#panel .ai{touch-action:auto}
     #sheetbar{display:flex;justify-content:center;padding:9px 0 3px;cursor:grab;touch-action:none;flex:0 0 auto}
@@ -384,11 +386,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.7</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.8</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.7"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.7"></script>
-<script src="js/globe-data.js?v=0.77.7"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.8"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.8"></script>
+<script src="js/globe-data.js?v=0.77.8"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1064,7 +1066,7 @@
     var sheet=document.getElementById('panel');
     var drag=false, sy=0, ty0=0, curTy=null, moved2=false, downT=null, pend=null, raf=false;
     function isMob(){ return window.innerWidth<=720; }
-    function maxTy(){ return Math.round(H*0.41); }   // 收起=下移 41vh(顶边落在 56vh)
+    function maxTy(){ return Math.round(H*0.59); }   // 收起=下移 59vh(顶边落在 74vh,只露把手+统计行,不挡地球)
     function setTy(ty,animate){
       var mx=maxTy(); ty=Math.max(0,Math.min(mx,ty)); curTy=ty;
       sheet.style.transition=animate?'transform .26s ease':'none';
