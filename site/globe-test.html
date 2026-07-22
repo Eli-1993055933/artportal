@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ArtPortal Globe</title>
+<style>
+  :root{
+    --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
+    --opencall:#C0392B; --residency:#2E6FA7; --award:#C08A1E; --workshop:#6B5B95;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);
+    font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;overflow:hidden;color:var(--ink)}
+  #gc{display:block;width:100vw;height:100vh;cursor:grab;touch-action:none}
+  #gc:active{cursor:grabbing}
+  #brand{position:fixed;left:26px;top:22px;pointer-events:none;z-index:5}
+  #brand .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--opencall);margin-right:9px;vertical-align:middle}
+  #brand h1{display:inline;font-size:16px;letter-spacing:.22em;font-weight:600;vertical-align:middle}
+  #brand p{margin:7px 0 0 1px;font-size:12px;color:var(--sub)}
+  #panel{position:fixed;left:26px;top:96px;width:290px;display:flex;flex-direction:column;gap:14px;z-index:5}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.05)}
+  .card .hd{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--sub);letter-spacing:.04em}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#2e8b57}
+  .badge i{width:7px;height:7px;border-radius:50%;background:#2e8b57;display:inline-block}
+  .bignum{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:8px 0 2px;line-height:1}
+  .bignum small{font-size:13px;font-weight:500;color:var(--sub);margin-left:6px}
+  .card .tip{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:8px}
+  .search{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:11px 14px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.05)}
+  .search input{border:0;outline:0;flex:1;font-size:13px;background:transparent;color:var(--ink)}
+  .search .kbd{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+  .legend .lg-title{font-size:12px;color:var(--sub);margin-bottom:12px}
+  .lg-item{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;cursor:pointer;border-radius:8px}
+  .lg-item:hover{background:#faf9f5}
+  .lg-item .sw{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+  .lg-item .nm{flex:1}
+  .lg-item .ct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .lg-item.off{opacity:.38}
+  #topbar{position:fixed;right:26px;top:22px;display:flex;align-items:center;gap:6px;z-index:5}
+  .chip{font-size:13px;padding:8px 15px;border-radius:999px;border:1px solid transparent;background:transparent;
+    color:var(--sub);cursor:pointer;white-space:nowrap}
+  .chip:hover{background:#efeee8}
+  .chip.on{background:var(--ink);color:#fff}
+  #topbar .sep{width:1px;height:18px;background:var(--line);margin:0 4px}
+  .lang{font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;color:var(--sub)}
+  .lang.on{background:var(--ink);color:#fff}
+  #detail{position:fixed;right:26px;bottom:26px;width:368px;max-height:66vh;overflow-y:auto;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.14);padding:16px 18px;display:none;z-index:7;overscroll-behavior:contain}
+  #d-cover{width:100%;height:132px;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block;background:#eceae2}
+  #d-cover[hidden]{display:none}
+  .badge2{font-size:11px;color:var(--sub);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;vertical-align:1px;margin-left:6px}
+  #detail .sub{font-size:11.5px;color:var(--muted);margin:-3px 0 8px;line-height:1.4}
+  #detail .meta .r{display:flex;gap:8px;padding:3px 0;line-height:1.6}
+  #detail .meta .k{color:var(--muted);flex:0 0 3em}
+  #detail .meta .v{flex:1;min-width:0}
+  #detail .cat{display:inline-block;font-size:11px;color:#fff;border-radius:5px;padding:2px 8px;margin-bottom:8px}
+  #detail h3{margin:0 0 6px;font-size:15px;line-height:1.4}
+  #detail .meta{font-size:12px;color:var(--sub);line-height:1.7}
+  #detail .go{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--opencall);text-decoration:none;font-weight:600}
+  #detail .x{position:absolute;right:12px;top:10px;color:var(--muted);cursor:pointer;font-size:16px}
+  #back{position:fixed;left:26px;bottom:26px;z-index:6;display:none;background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:9px 17px;font-size:13px;color:var(--ink);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+  #back:hover{background:#efeee8}
+  #tip{position:fixed;pointer-events:none;z-index:20;display:none;width:300px;background:#fff;
+    border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.18);padding:0;overflow:hidden}
+  #tip .timg{width:100%;height:156px;object-fit:cover;display:block;background:#eceae2}
+  #tip .tph{width:100%;height:110px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;font-weight:700}
+  #tip .tpad{padding:11px 13px}
+  #tip .ts{font-size:11.5px;color:var(--sub);line-height:1.6;margin-top:6px;border-top:1px dashed var(--line);padding-top:6px}
+  html.dark #tip .timg{background:#2a2721}
+  #tip .tt{font-size:13px;font-weight:600;line-height:1.35;margin:0 0 4px}
+  #tip .tc{display:inline-block;font-size:10.5px;color:#fff;border-radius:4px;padding:1px 6px;margin-bottom:5px}
+  #tip .tm{font-size:11.5px;color:var(--sub);line-height:1.65}
+  #tip .tg{font-size:11px;color:var(--muted);margin-top:5px}
+  #status{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);font-size:12px;color:var(--muted)}
+  /* ===== 集成布局:站栏/页脚/切换(原有功能安放演示) ===== */
+  #sitebar{position:fixed;left:0;right:0;top:0;height:56px;z-index:9;display:flex;align-items:center;gap:18px;
+    padding:0 22px;background:rgba(247,246,242,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  #sitebar .logo{display:flex;align-items:center;gap:9px;font-size:15px;letter-spacing:.2em;font-weight:600;white-space:nowrap}
+  #sitebar .logo i{width:9px;height:9px;border-radius:50%;background:var(--opencall)}
+  #chn{display:flex;gap:4px;margin-left:6px}
+  #chn .ch{font-size:13.5px;padding:7px 14px;border-radius:999px;color:var(--sub);cursor:pointer;white-space:nowrap}
+  #chn .ch:hover{background:#efeee8}
+  #chn .ch.on{background:var(--ink);color:#fff}
+  #sitebar .grow{flex:1}
+  #sitebar .act{display:flex;align-items:center;gap:8px}
+  .abtn{font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:#fff;
+    color:var(--ink);cursor:pointer;white-space:nowrap}
+  .abtn:hover{background:#efeee8}
+  .abtn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .abtn.icon{padding:7px 10px}
+  #brand{display:none}
+  #topbar{top:68px}
+  #panel{top:118px}
+  #foot{position:fixed;left:0;right:0;bottom:0;z-index:8;text-align:center;padding:7px 10px;
+    font-size:11px;color:var(--muted);background:rgba(247,246,242,.82);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+  #foot a{color:var(--muted);text-decoration:none}
+  #foot a:hover{color:var(--sub);text-decoration:underline}
+  #back{bottom:44px}
+  #detail{bottom:44px}
+  #toast{position:fixed;left:50%;top:70px;transform:translateX(-50%);z-index:30;background:var(--ink);color:#fff;
+    font-size:12.5px;border-radius:999px;padding:9px 18px;display:none;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+  .search .ai{font-size:11.5px;color:#fff;background:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+  /* 抽屉列表(Airbnb 式左栏,与地球双向联动) */
+  #panel{top:118px;bottom:34px;width:330px}
+  .listcard{flex:1;min-height:0;display:flex;flex-direction:column;padding:0;overflow:hidden}
+  .lc-head{padding:13px 16px 9px;font-size:12px;color:var(--sub);border-bottom:1px solid var(--line)}
+  .lc-scroll{overflow-y:auto;flex:1;padding:6px 8px 10px;overscroll-behavior:contain}
+  .oc{display:flex;gap:10px;padding:10px;border-radius:10px;cursor:pointer;align-items:stretch}
+  .oc:hover{background:#faf9f5}
+  .oc.sel{background:#f1efe8}
+  .oc .bar{width:4px;border-radius:3px;flex:0 0 auto}
+  .oc .t{font-size:13px;font-weight:600;line-height:1.35}
+  .oc .m{font-size:11.5px;color:var(--sub);margin-top:3px}
+  html.dark .oc:hover{background:#242220}
+  html.dark .oc.sel{background:#2b2823}
+  /* 频道浮层:切频道不换页,地球虚化留在背后 */
+  #chpanel{position:fixed;left:0;right:0;top:56px;bottom:26px;z-index:6;display:none;overflow-y:auto;
+    background:rgba(247,246,242,.72);backdrop-filter:blur(7px)}
+  #chpanel .inner{max-width:760px;margin:18px auto;padding:0 16px}
+  #chpanel .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer}
+  #chpanel .row:hover{border-color:#c6c1b4}
+  #chpanel .rt{font-size:14px;font-weight:600;line-height:1.45}
+  #chpanel .rm{font-size:12px;color:var(--sub);margin-top:4px}
+  html.dark #chpanel{background:rgba(20,19,17,.72)}
+  html.dark #chpanel .row:hover{border-color:#4a453c}
+  /* 配图:抽屉缩略图 + 频道行图 + 兜底海报块(老站三级兜底,永不空白) */
+  .oc .th{width:56px;height:42px;border-radius:8px;flex:0 0 auto;overflow:hidden;position:relative;background:#eceae2}
+  .oc .th img,#chpanel .rth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .th .ph,.rth .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+  .oc .th .ph{font-size:15px}
+  #chpanel .row{display:flex;gap:12px;align-items:center}
+  #chpanel .rth{width:88px;height:60px;border-radius:8px;flex:0 0 auto;overflow:hidden;position:relative;background:#eceae2}
+  #chpanel .rth .ph{font-size:18px}
+  #chpanel .rbody{flex:1;min-width:0}
+  html.dark .oc .th,html.dark #chpanel .rth{background:#2a2721}
+  /* 作品网格(老站瀑布卡形态) */
+  #chpanel .wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .wcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer}
+  .wcard:hover{border-color:#c6c1b4}
+  .wcard .wimg{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#eceae2}
+  .wcard .wt{font-size:13px;font-weight:600;padding:9px 12px 2px;line-height:1.35}
+  .wcard .wa{font-size:11.5px;color:var(--sub);padding:0 12px 10px}
+  html.dark .wcard:hover{border-color:#4a453c}
+  html.dark .wcard .wimg{background:#2a2721}
+  @media (max-width:720px){ .listcard{display:none} }
+  /* 夜间主题(与主站共享 localStorage.ap_theme) */
+  html.dark{--bg:#141311;--ink:#ece9e2;--sub:#a49e93;--muted:#6f6a61;--line:#2c2925;--panel:#1d1b18}
+  html.dark body{background:var(--bg)}
+  html.dark #sitebar{background:rgba(20,19,17,.86)}
+  html.dark #foot{background:rgba(20,19,17,.82)}
+  html.dark .chip:hover,html.dark .abtn:hover,html.dark #chn .ch:hover,html.dark .lg-item:hover{background:#262421}
+  html.dark .chip.on,html.dark #chn .ch.on{background:#ece9e2;color:#141311}
+  html.dark .abtn{background:#1d1b18;color:var(--ink);border-color:var(--line)}
+  html.dark .abtn.primary,html.dark .search .ai,html.dark #toast{background:#ece9e2;color:#141311;border-color:#ece9e2}
+  html.dark #tip,html.dark #detail{background:#1d1b18}
+  @media (max-width:720px){
+    #sitebar{gap:8px;padding:0 12px;overflow-x:auto}
+    #sitebar .logo span{display:none}
+    #topbar{top:60px;left:12px;right:12px;bottom:auto;overflow-x:auto;justify-content:flex-start}
+    #panel{top:auto;bottom:40px}
+    #foot{font-size:10px;padding:5px 8px}
+    #back{bottom:auto;top:104px;left:auto;right:14px}
+    #detail{bottom:40px}
+  }
+  @media (max-width:720px){
+    #panel{left:14px;right:14px;top:auto;bottom:14px;width:auto}
+    .card .tip{display:none}
+    .legend{display:none}
+    #brand{left:16px;top:14px}
+    #topbar{left:14px;right:14px;top:auto;bottom:74px;overflow-x:auto;justify-content:flex-start}
+    #detail{left:14px;right:14px;width:auto;bottom:130px}
+    #back{left:14px;bottom:200px}
+  }
+</style>
+</head>
+<body>
+<canvas id="gc"></canvas>
+<!-- 集成后的顶部站栏:原顶栏功能全部安放于此 -->
+<div id="sitebar">
+  <div class="logo"><i></i>ARTPORTAL<span>&nbsp;GLOBE</span></div>
+  <nav id="chn">
+    <span class="ch on" data-ch="opportunities">机会</span>
+    <span class="ch" data-ch="jobs">招聘</span>
+    <span class="ch" data-ch="news">资讯</span>
+    <span class="ch" data-ch="works">作品</span>
+  </nav>
+  <div class="grow"></div>
+  <div class="act">
+    <button class="abtn" id="btnList">☰ 列表视图</button>
+    <button class="abtn primary" id="btnPub">➕ 发布</button>
+    <button class="abtn icon" id="btnBell" title="通知">🔔</button>
+    <button class="abtn icon" id="btnTheme" title="夜间模式">🌙</button>
+    <button class="abtn" id="btnLogin">登录</button>
+  </div>
+</div>
+<div id="brand"><span class="dot"></span><h1>ARTPORTAL GLOBE</h1><p>引领全球，搜寻最前沿的展览与驻留机遇</p></div>
+<div id="panel">
+  <div class="card">
+    <div class="hd"><span>实时索引库</span><span class="badge"><i></i>ACTIVE</span></div>
+    <div class="bignum" id="total">0<small>项全球活跃机遇</small></div>
+    <div class="tip">拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。</div>
+  </div>
+  <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
+  <div class="card legend"><div class="lg-title">分类索引图例</div><div id="legend"></div></div>
+  <div class="card listcard"><div class="lc-head" id="lcCount">结果列表</div><div class="lc-scroll" id="lcList"></div></div>
+</div>
+<div id="chpanel"><div class="inner" id="chInner"></div></div>
+<div id="topbar">
+  <button class="chip on" data-cat="all">All</button>
+  <button class="chip" data-cat="opencall">展览征集</button>
+  <button class="chip" data-cat="residency">艺术家驻留</button>
+  <button class="chip" data-cat="award">艺术奖项</button>
+  <button class="chip" data-cat="workshop">研讨学术工坊</button>
+  <span class="sep"></span><span class="lang" data-l="en">EN</span><span class="lang on" data-l="zh">中</span>
+</div>
+<div id="detail"><span class="x" onclick="this.parentNode.style.display='none'">×</span>
+  <img id="d-cover" alt="" hidden />
+  <div><span class="cat" id="d-cat"></span><span class="badge2" id="d-trust"></span></div>
+  <h3 id="d-title"></h3><div class="sub" id="d-sub"></div>
+  <div class="meta" id="d-meta"></div>
+  <a class="go" id="d-go" target="_blank" rel="noopener">前往官网 ↗</a>
+  <a class="go" id="d-open" style="margin-left:14px;color:var(--sub)">站内详情 →</a></div>
+<button id="back">← 返回全球</button>
+<div id="tip"></div>
+<div id="status">加载中…</div>
+<div id="toast"></div>
+<!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
+<div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL v0.77.0-test</div>
+
+<script src="assets/vendor/d3.min.js"></script>
+<script src="assets/vendor/topojson-client.min.js"></script>
+<script src="js/globe-data.js"></script>
+<script>
+(function(){
+  var D=window.GLOBE_DATA, CAT=D.CATEGORY;
+  var canvas=document.getElementById('gc'), ctx=canvas.getContext('2d');
+  var tipEl=document.getElementById('tip');
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  var W,H,scale0, proj=d3.geoOrthographic().clipAngle(90), pathC=d3.geoPath(proj,ctx), grat=d3.geoGraticule10();
+  var SPHERE={type:'Sphere'};
+  var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null;
+  var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
+  var filterCat='all', query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
+  var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
+  var velX=0, velY=0, targetScale=null;
+  var perfTier=0, costArr=[];   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
+  // 画布主题配色(必须先于首帧 draw 定义;applyTheme 在下方接线区)
+  var THEMES={
+    light:{space:'#E3DED0',glow:'rgba(255,255,255,.95)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
+      land:'#ecebe5',landDim:'#f4f3ef',landSel:'#f5e9c8',border:'#d3cfc4',borderSel:'#b3a069',admin:'#aca696',
+      label:'#2b2822',halo:'rgba(247,246,242,.85)',mstroke:'#fff'},
+    dark:{space:'#0b0a08',glow:'rgba(84,74,56,.5)',sphere:'#201d18',sphereEdge:'#3d372d',grat:'#2b2721',
+      land:'#2e2a23',landDim:'#241f19',landSel:'#4c4126',border:'#403a30',borderSel:'#8f7c4c',admin:'#6e665a',
+      label:'#d8d3c8',halo:'rgba(20,18,15,.85)',mstroke:'#15130f'} };
+  var T=THEMES.light;
+
+  var PI=Math.PI, rc=[0,0,0];
+  function ll2c(ll){ var l=ll[0]*PI/180,p=ll[1]*PI/180,c=Math.cos(p); return [c*Math.cos(l),c*Math.sin(l),Math.sin(p)]; }
+  function updateRC(){ var r=proj.rotate(),l=-r[0]*PI/180,p=-r[1]*PI/180,c=Math.cos(p); rc[0]=c*Math.cos(l);rc[1]=c*Math.sin(l);rc[2]=Math.sin(p); }
+  function frontC(cart){ return cart[0]*rc[0]+cart[1]*rc[1]+cart[2]*rc[2]>0.02; }
+  function clampScale(s){ return Math.max(scale0*0.55, Math.min(scale0*9, s)); }
+  function clampLat(v){ return Math.max(-88, Math.min(88, v)); }
+  function splitScale(){ return scale0*2.6; }   // 小于此=聚合簇,大于=散开单点
+  function inMotion(){ return dragging||inertiaOn||spinning||targetScale!=null; }
+
+  function matchFilter(o){
+    if(filterCat!=='all' && o.category!==filterCat) return false;
+    if(query){ var s=(o.title_zh||'')+(o.org_zh||'')+(o.city_zh||'')+(o.country_zh||'')+(o.summary_zh||'');
+      if(s.toLowerCase().indexOf(query.toLowerCase())<0) return false; }
+    return true;
+  }
+
+  function sizeCanvas(){ canvas.width=W*dpr; canvas.height=H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function resize(){ W=window.innerWidth; H=window.innerHeight; sizeCanvas();
+    scale0=Math.min(W,H)*0.46; proj.translate([W/2,H/2]);
+    if(!inited){ proj.scale(scale0); inited=true; }
+    draw(); }
+
+  // —— 渲染 ——
+  function draw(){
+    var t0=performance.now();
+    var sc=proj.scale(); updateRC();
+    // 太空底色 + 地球缘光,让球从背景上"浮"出来
+    ctx.fillStyle=T.space; ctx.fillRect(0,0,W,H);
+    var rg=ctx.createRadialGradient(W/2,H/2,sc*0.9,W/2,H/2,sc*1.12);
+    rg.addColorStop(0,T.glow); rg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.12,0,2*PI); ctx.fill();
+    ctx.beginPath(); pathC(SPHERE); ctx.fillStyle=T.sphere; ctx.fill();
+    if(!(perfTier>=2&&inMotion())){
+      ctx.beginPath(); pathC(grat); ctx.lineWidth=0.4; ctx.strokeStyle=T.grat; ctx.stroke(); }
+    var cnDrilled=(drilledCountry==='China');
+    for(var i=0;i<countryFeats.length;i++){ var f=countryFeats[i];
+      var nm=f.properties.name;
+      if((nm==='China'||nm==='Taiwan')&&cnDrilled) continue;   // 下钻中国时改用 DataV 省界,跳过 NE
+      ctx.beginPath(); pathC(f);
+      var isCN=(nm==='China'||nm==='Taiwan');                  // 台湾与大陆同色一体
+      var isSel=drilledCountry&&nm===drilledCountry;
+      ctx.fillStyle=isCN?(drilledCountry?T.landDim:T.land):(drilledCountry?(isSel?T.landSel:T.landDim):T.land); ctx.fill();
+      ctx.lineWidth=isSel?1.2:0.45; ctx.strokeStyle=isSel?T.borderSel:T.border; ctx.stroke(); }
+    // 下钻中国:DataV 官方省/市界(仅此时绘制,重度抽稀省算力)
+    if(cnDrilled && cnBase && frontC(CN_CART)){
+      for(var ci=0;ci<cnBase.length;ci++){ var pf=cnBase[ci];
+        var provSel=(drillLevel>=2&&pf.properties.adcode===drilledProvAdcode);
+        ctx.beginPath(); pathC(pf);
+        ctx.fillStyle=(drillLevel>=2)?(provSel?T.landSel:T.landDim):T.landSel; ctx.fill();
+        ctx.lineWidth=provSel?1.1:0.5; ctx.strokeStyle=provSel?T.borderSel:T.admin; ctx.stroke(); } }
+    // 南海九段线(描边成线,非填充;中国可见时任何层级都画,合规标识)
+    if(cnJD && frontC(CN_CART)){ ctx.lineWidth=1.3; ctx.strokeStyle=T.admin; ctx.beginPath(); pathC(cnJD); ctx.stroke(); }
+    if(adminFeats.length){ ctx.lineWidth=0.6; ctx.strokeStyle=T.admin;
+      for(var a=0;a<adminFeats.length;a++){ ctx.beginPath(); pathC(adminFeats[a]); ctx.stroke(); } }
+    // 国名(高档画质或静止时)
+    if(sc>scale0*0.82 && !(perfTier>=2&&inMotion())){
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      for(var L=0;L<labelData.length;L++){ var d=labelData[L]; if(!frontC(d.cart)) continue;
+        var p=proj(d.c), fs=Math.max(9,Math.min(22,d.sz*(sc/scale0)));
+        ctx.font='600 '+fs+'px "PingFang SC","Microsoft YaHei",sans-serif';
+        ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(d.nm,p[0],p[1]);
+        ctx.fillStyle=T.label; ctx.fillText(d.nm,p[0],p[1]); } }
+    // 点位:聚合簇 或 散点
+    var m,mk,k,g;
+    if(sc<splitScale()){
+      for(m=0;m<markers.length;m++) markers[m].sx=null;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      for(k in groups){ g=groups[k];
+        if(!frontC(g.cart)){ g.sx=null; continue; }
+        var cnt=0, cc={opencall:0,residency:0,award:0,workshop:0}, single=null;
+        for(var t=0;t<g.items.length;t++){ if(matchFilter(g.items[t].o)){ cnt++; cc[g.items[t].o.category]=(cc[g.items[t].o.category]||0)+1; single=g.items[t]; } }
+        if(!cnt){ g.sx=null; continue; }
+        var pt=proj(g.ll); g.sx=pt[0]; g.sy=pt[1]; g.count=cnt; g.single=(cnt===1)?single:null;
+        var dom='opencall', dv=0; for(var c2 in cc){ if(cc[c2]>dv){ dv=cc[c2]; dom=c2; } }
+        if(cnt===1){ g.r=4;
+          ctx.beginPath(); ctx.arc(pt[0],pt[1],4,0,2*PI);
+          ctx.fillStyle=CAT[single.o.category]?CAT[single.o.category].color:'#C0392B'; ctx.fill();
+          ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke(); }
+        else { var r=8+Math.min(9,Math.sqrt(cnt)*1.7); g.r=r;
+          ctx.beginPath(); ctx.arc(pt[0],pt[1],r,0,2*PI);
+          ctx.fillStyle=CAT[dom].color; ctx.fill();
+          ctx.lineWidth=1.5; ctx.strokeStyle=T.mstroke; ctx.stroke();
+          ctx.font='600 '+(cnt>=100?10:11)+'px -apple-system,sans-serif';
+          ctx.fillStyle='#fff'; ctx.fillText(String(cnt),pt[0],pt[1]); }
+        if(g.key===focusKey){ ctx.beginPath(); ctx.arc(pt[0],pt[1],(cnt===1?4:g.r)+4,0,2*PI);
+          ctx.lineWidth=2; ctx.strokeStyle=CAT[dom].color; ctx.stroke(); } }
+    } else {
+      for(k in groups) groups[k].sx=null;
+      for(m=0;m<markers.length;m++){ mk=markers[m];
+        if(!matchFilter(mk.o) || !frontC(mk.cart)){ mk.sx=null; continue; }
+        var pt2=proj(mk.ll); mk.sx=pt2[0]; mk.sy=pt2[1];
+        ctx.beginPath(); ctx.arc(pt2[0],pt2[1],4,0,2*PI);
+        ctx.fillStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.fill();
+        ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke();
+        if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1],9,0,2*PI);
+          ctx.lineWidth=2; ctx.strokeStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.stroke(); } }
+    }
+    // FPS 守卫:近30帧均值超预算自动降档
+    var cost=performance.now()-t0; costArr.push(cost);
+    if(costArr.length>=30){ var sum=0; for(var q2=0;q2<costArr.length;q2++) sum+=costArr[q2];
+      var avg=sum/costArr.length; costArr.length=0;
+      if(avg>26&&perfTier===0){ perfTier=1; if(dpr>1){ dpr=1; sizeCanvas(); } }
+      else if(avg>26&&perfTier===1){ perfTier=2; } }
+  }
+
+  // —— 主循环:自动旋转/惯性/平滑缩放,统一在这里驱动 ——
+  var lastFrame=Date.now();
+  (function loop(){ requestAnimationFrame(loop);
+    if(!inited) return;   // 首次 resize 前不画(防脚本评估中途触发首帧)
+    var now=Date.now(), render=needDraw; needDraw=false;
+    if(targetScale!=null){ var s=proj.scale(), dd=targetScale-s;
+      if(Math.abs(dd)>0.5){ proj.scale(s+dd*0.22); render=true; }
+      else { proj.scale(targetScale); targetScale=null; render=true; } }
+    if(inertiaOn){ var r=proj.rotate();
+      proj.rotate([r[0]+velX, clampLat(r[1]+velY), r[2]]);
+      velX*=0.95; velY*=0.95; render=true;
+      if(Math.abs(velX)+Math.abs(velY)<0.02){ inertiaOn=false; resumeSoon(); } }
+    else if(spinning&&!dragging){ var r2=proj.rotate();
+      proj.rotate([r2[0]+(now-lastFrame)*0.004, r2[1], r2[2]]); render=true; }
+    else if(!spinning&&!dragging&&autoResumeAt&&now>autoResumeAt&&!drilledCountry&&targetScale==null){ spinning=true; autoResumeAt=0; }
+    lastFrame=now;
+    if(render) draw();
+  })();
+  function resumeSoon(){ if(!drilledCountry) autoResumeAt=Date.now()+3000; }
+
+  // —— 指针交互:鼠标+触控统一(单指拖转/双指捏合/惯性) ——
+  var pointers={}, pinch=null, lastX=0,lastY=0,lastT=0;
+  function pCount(){ var n=0,k; for(k in pointers) n++; return n; }
+  canvas.addEventListener('pointerdown',function(e){
+    if(canvas.setPointerCapture){ try{ canvas.setPointerCapture(e.pointerId); }catch(err){} }
+    pointers[e.pointerId]=[e.clientX,e.clientY];
+    spinning=false; inertiaOn=false;
+    var n=pCount();
+    if(n===1){ dragging=true; moved=false; lastX=e.clientX; lastY=e.clientY; lastT=performance.now(); velX=velY=0; }
+    else if(n===2){ dragging=false; var ks=Object.keys(pointers), a=pointers[ks[0]], b=pointers[ks[1]];
+      pinch={d0:Math.max(20,Math.hypot(a[0]-b[0],a[1]-b[1])), s0:proj.scale()}; }
+    e.preventDefault();
+  });
+  canvas.addEventListener('pointermove',function(e){
+    if(pointers[e.pointerId]) pointers[e.pointerId]=[e.clientX,e.clientY];
+    if(pinch&&pCount()>=2){ var ks=Object.keys(pointers), a=pointers[ks[0]], b=pointers[ks[1]];
+      var dd=Math.hypot(a[0]-b[0],a[1]-b[1]);
+      targetScale=clampScale(pinch.s0*dd/pinch.d0); e.preventDefault(); return; }
+    if(dragging){
+      var now=performance.now(), dx=e.clientX-lastX, dy=e.clientY-lastY;
+      if(Math.abs(dx)+Math.abs(dy)>2) moved=true;
+      var kk=70/proj.scale(), r=proj.rotate();
+      proj.rotate([r[0]+dx*kk, clampLat(r[1]-dy*kk), r[2]]);
+      var dt=Math.max(1,now-lastT), nvx=dx*kk*(16.7/dt), nvy=-dy*kk*(16.7/dt);
+      velX=velX*0.4+nvx*0.6; velY=velY*0.4+nvy*0.6;   // 平滑速度采样→松手惯性
+      lastX=e.clientX; lastY=e.clientY; lastT=now;
+      tipEl.style.display='none'; needDraw=true; e.preventDefault(); return; }
+    if(e.pointerType==='mouse') hoverTest(e);
+  });
+  function endPointer(e){ delete pointers[e.pointerId];
+    if(pCount()<2) pinch=null;
+    if(pCount()===0&&dragging){ dragging=false;
+      if((performance.now()-lastT)<120 && (Math.abs(velX)+Math.abs(velY))>0.03) inertiaOn=true;
+      else resumeSoon(); } }
+  canvas.addEventListener('pointerup',endPointer);
+  canvas.addEventListener('pointercancel',endPointer);
+  canvas.addEventListener('wheel',function(e){ e.preventDefault(); spinning=false;
+    var base=(targetScale!=null)?targetScale:proj.scale();
+    targetScale=clampScale(base*(e.deltaY<0?1.16:0.86)); resumeSoon(); },{passive:false});
+
+  // —— 命中检测(簇优先于散点,按当前模式) ——
+  function hoverTest(e){
+    var sc=proj.scale(), best=null, kind=null, k, g, m, mk;
+    if(sc<splitScale()){ var bd=1e9;
+      for(k in groups){ g=groups[k]; if(g.sx==null) continue;
+        var dx=g.sx-e.clientX, dy=g.sy-e.clientY, rr=(g.r+5)*(g.r+5), dd=dx*dx+dy*dy;
+        if(dd<rr&&dd<bd){ bd=dd; best=g; kind='c'; } } }
+    else { var bd2=121;
+      for(m=0;m<markers.length;m++){ mk=markers[m]; if(mk.sx==null) continue;
+        var dx2=mk.sx-e.clientX, dy2=mk.sy-e.clientY, dd2=dx2*dx2+dy2*dy2;
+        if(dd2<bd2){ bd2=dd2; best=mk; kind='m'; } } }
+    if(best){ canvas.style.cursor='pointer';
+      if(best!==hoverObj){ if(kind==='c'){ if(best.count===1) fillTip(best.single); else fillTipCluster(best); } else fillTip(best); }
+      moveTip(e); tipEl.style.display='block'; }
+    else { canvas.style.cursor='grab'; tipEl.style.display='none'; }
+    hoverObj=best; hoverKind=kind;
+  }
+  canvas.addEventListener('click',function(e){
+    if(moved) return;
+    hoverTest(e);
+    if(hoverObj){
+      if(hoverKind==='c'){ var g=hoverObj;
+        if(g.count===1){ showDetail(g.single.o); syncCard(g.single); }
+        else { tipEl.style.display='none'; flyTo(g.ll, Math.max(splitScale()*1.45, proj.scale()*1.9)); } }
+      else { showDetail(hoverObj.o); syncCard(hoverObj); }
+      return; }
+    var inv=proj.invert([e.clientX,e.clientY]); if(!inv) return;
+    if(drilledCountry==='China' && drillLevel===1 && cnBase){   // 省级视图:点省→下钻市级
+      for(var cj=0;cj<cnBase.length;cj++){ if(d3.geoContains(cnBase[cj],inv)){ drillProvince(cnBase[cj]); return; } } return; }
+    if(drillLevel===0){
+      for(var i=0;i<countryFeats.length;i++){ if(d3.geoContains(countryFeats[i],inv)){ drillInto(countryFeats[i]); return; } } }
+  });
+
+  function flyTo(centroid,ts){ spinning=false; inertiaOn=false; targetScale=null;
+    var r0=proj.rotate(), s0=proj.scale();
+    d3.transition().duration(900).tween('fly',function(){
+      var ir=d3.interpolate(r0,[-centroid[0],-centroid[1],0]), is=d3.interpolate(s0,clampScale(ts));
+      return function(t){ proj.rotate(ir(t)).scale(is(t)); needDraw=true; }; }); }
+
+  // —— 国家下钻:行政区划(加载时抽稀,渲染恒轻) ——
+  var adminCache={};
+  function decimateFC(fc,step){
+    function ring(r){ if(r.length<=10) return r; var out=[],i=0;
+      for(i=0;i<r.length;i+=step) out.push(r[i]);
+      if(out[out.length-1]!==r[r.length-1]) out.push(r[r.length-1]); return out; }
+    var fs=(fc.features||[]).map(function(f){ var gm=f.geometry; if(!gm) return f;
+      if(gm.type==='Polygon') gm={type:'Polygon',coordinates:gm.coordinates.map(ring)};
+      else if(gm.type==='MultiPolygon') gm={type:'MultiPolygon',coordinates:gm.coordinates.map(function(pg){return pg.map(ring);})};
+      return {type:'Feature',properties:f.properties,geometry:gm}; });
+    return fs; }
+  // DataV 的 GeoJSON 按平面惯例绕环,d3 球面填充会解释成"全球减去该区域"(整屏涂成地块色,
+  // geoContains 同步失灵);载入时按球面面积重定绕向:外环<2π、内环孔>2π。幂等,可重复调用
+  function rewindFC(fc){
+    function area(r){ return d3.geoArea({type:'Polygon',coordinates:[r]}); }
+    function fix(rings){ if(area(rings[0])>2*PI) rings[0].reverse();
+      for(var i=1;i<rings.length;i++){ if(area(rings[i])<2*PI) rings[i].reverse(); } }
+    (fc.features||[]).forEach(function(f){ var g=f.geometry; if(!g) return;
+      if(g.type==='Polygon') fix(g.coordinates);
+      else if(g.type==='MultiPolygon') g.coordinates.forEach(fix); });
+    return fc; }
+  var CN_URL='https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json';
+  function drillInto(feat){ var nm=feat.properties.name;
+    if(nm==='China'||nm==='Taiwan'){ drillChina(); return; }
+    drilledCountry=nm; drillLevel=1; drilledProvAdcode=null; adminFeats=[];
+    flyTo(d3.geoCentroid(feat), scale0*2.9);
+    document.getElementById('back').style.display='block';
+    loadAdmin('https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm,2); }
+  function drillChina(){ drilledCountry='China'; drillLevel=1; drilledProvAdcode=null; adminFeats=[];
+    document.getElementById('back').style.display='block';
+    flyTo([104,35.5], scale0*2.7); needDraw=true; }   // 省界来自 cnBase(启动已载),无需再请求
+  function drillProvince(pf){ var ad=pf.properties.adcode; if(!ad) return;
+    drillLevel=2; drilledProvAdcode=ad;
+    var cen=pf.properties.center||d3.geoCentroid(pf);
+    flyTo(cen, scale0*5.2);
+    loadAdmin('https://geo.datav.aliyun.com/areas_v3/bound/'+ad+'_full.json',null,2); }
+  function loadAdmin(url,filt,step){
+    var p=adminCache[url]?Promise.resolve(adminCache[url]):d3.json(url).then(function(j){ rewindFC(j); adminCache[url]=j; return j; });
+    p.then(function(j){ var fs=decimateFC(j,step||2);
+      if(filt) fs=fs.filter(function(f){ return f.properties&&f.properties.admin===filt; });
+      adminFeats=fs; needDraw=true; })
+     .catch(function(){ adminFeats=[]; needDraw=true; }); }
+  function exitDrill(){
+    if(drillLevel===2){ drillLevel=1; drilledProvAdcode=null; adminFeats=[];
+      flyTo([104,35.5], scale0*2.7); needDraw=true; return; }   // 市级 → 退回省级
+    drilledCountry=null; drillLevel=0; adminFeats=[]; drilledProvAdcode=null;
+    document.getElementById('back').style.display='none';
+    spinning=false; inertiaOn=false;
+    var r0=proj.rotate(), s0=proj.scale();
+    d3.transition().duration(800).tween('back',function(){
+      var ir=d3.interpolate(r0,[-100,-30,0]), is=d3.interpolate(s0,scale0);
+      return function(t){ proj.rotate(ir(t)).scale(is(t)); needDraw=true; }; });
+    autoResumeAt=Date.now()+2000; }
+  document.getElementById('back').addEventListener('click',exitDrill);
+
+  // —— 信息层 ——
+  function daysLeft(dl){ if(!dl) return ''; var d=new Date(dl+'T23:59:59'); if(isNaN(d)) return '';
+    var n=Math.ceil((d-Date.now())/86400000);
+    return n<0?'已截止':(n===0?'今天截止':(n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天'))); }
+  function trustLabel(o){
+    if(o.trust==='user') return '用户投稿 · 未经核实';
+    if(o.trust==='verified') return '已人工核实';
+    if(o._via==='search') return 'AI 检索收录 · 请核对';
+    return '自动收录 · 未经核实'; }
+  // 结构化字段 → 人话(对齐主站 format.js 口径)
+  function curSym(c){ return {CNY:'¥',USD:'$',EUR:'€',GBP:'£',JPY:'JP¥',HKD:'HK$'}[c]||((c||'')+' '); }
+  function feeText(o){ var out=[], a=o.apply_fee, p=o.participation_fee;
+    if(a&&typeof a==='object'){ if(a.free===true) out.push('免费申请');
+      else if(a.amount) out.push('申请费 '+curSym(a.currency)+a.amount); }
+    else if(a) out.push(String(a));
+    if(p&&typeof p==='object'){ if(p.required===true) out.push('入选后需付费'+(p.amount?(' '+curSym(p.currency)+p.amount):''));
+      else if(p.amount) out.push('参展费 '+curSym(p.currency)+p.amount); }
+    else if(p) out.push(String(p));
+    return out.join(' · '); }
+  function fundingText(o){ var f=o.funding; if(!f) return '';
+    if(typeof f!=='object') return String(f).slice(0,60);
+    var out=[];
+    if(f.stipend) out.push(f.stipend===true?'有津贴':('津贴 '+String(f.stipend).slice(0,24)));
+    if(f.housing) out.push('含住宿');
+    if(f.travel) out.push('报销路费');
+    return out.join(' · '); }
+  function eligText(o){ var e=o.eligibility; if(!e) return '';
+    if(typeof e!=='object') return String(e).slice(0,90);
+    var out=[];
+    if(e.nationality) out.push(String(e.nationality));
+    if(e.age_limit) out.push(String(e.age_limit));
+    if(e.students_ok===true) out.push('学生可申请');
+    return out.join(' · ').slice(0,90); }
+  function fillTip(m){ var o=m.o, c=CAT[o.category]||CAT.opencall;
+    var lines=[];
+    if(o.org_zh) lines.push(esc(o.org_zh));
+    var loc=[o.city_zh,o.country_zh].filter(Boolean).join(' · '); if(loc) lines.push(esc(loc));
+    if(o.deadline){ var dl=daysLeft(o.deadline); lines.push('截止 '+esc(o.deadline)+(dl?(' · '+dl):'')); }
+    var fee=feeText(o); if(fee) lines.push('费用 '+esc(fee));
+    var fnd=fundingText(o); if(fnd) lines.push('资助 '+esc(fnd));
+    var sum=o.summary_zh?esc(String(o.summary_zh).slice(0,76))+'…':'';
+    var media=o.cover
+      ?('<img class="timg" src="'+esc(o.cover)+'" onerror="this.style.display=\'none\'" alt="">')
+      :('<div class="tph" style="background:'+c.color+'">'+esc((o.title_zh||o.title_en||'·').charAt(0))+'</div>');
+    tipEl.innerHTML=media+'<div class="tpad">'+
+      '<span class="tc" style="background:'+c.color+'">'+c.zh+'</span>'+
+      '<div class="tt">'+esc(o.title_zh||o.title_en||'(无标题)')+'</div>'+
+      '<div class="tm">'+lines.join('<br>')+'</div>'+
+      (sum?'<div class="ts">'+sum+'</div>':'')+
+      '<div class="tg">'+trustLabel(o)+' · 点击看完整详情</div></div>'; }
+  function fillTipCluster(g){
+    var cov='', i;
+    for(i=0;i<g.items.length;i++){ if(matchFilter(g.items[i].o)&&g.items[i].o.cover){ cov=g.items[i].o.cover; break; } }
+    tipEl.innerHTML=(cov?('<img class="timg" src="'+esc(cov)+'" onerror="this.style.display=\'none\'" alt="">'):'')+
+      '<div class="tpad"><div class="tt">'+esc(g.key)+'</div><div class="tm">'+g.count+' 项活跃机会</div>'+
+      '<div class="tg">点击放大展开</div></div>'; }
+  function moveTip(e){ var x=e.clientX+16, y=e.clientY+16;
+    if(x+312>window.innerWidth) x=e.clientX-316;
+    var th=tipEl.offsetHeight||300;
+    if(y+th+10>window.innerHeight) y=Math.max(8, e.clientY-th-16);
+    tipEl.style.left=x+'px'; tipEl.style.top=y+'px'; }
+  function showDetail(o){ var c=CAT[o.category]||CAT.opencall;
+    document.getElementById('d-cat').textContent=c.zh; document.getElementById('d-cat').style.background=c.color;
+    document.getElementById('d-trust').textContent=trustLabel(o);
+    document.getElementById('d-title').textContent=o.title_zh||o.title_en||'(无标题)';
+    document.getElementById('d-sub').textContent=(o.title_zh&&o.title_en&&o.title_en!==o.title_zh)?o.title_en:'';
+    var cov=document.getElementById('d-cover');
+    if(o.cover){ cov.onerror=function(){ cov.hidden=true; }; cov.src=o.cover; cov.hidden=false; }
+    else cov.hidden=true;
+    function row(k,v){ return v?('<div class="r"><span class="k">'+k+'</span><span class="v">'+esc(v)+'</span></div>'):''; }
+    var dlx=daysLeft(o.deadline);
+    var dl=o.deadline?(o.deadline+(dlx?(' · '+dlx):'')+(o.deadline_note?(' · '+String(o.deadline_note).slice(0,40)):'')):(o.deadline_note||'');
+    var fee=feeText(o);
+    var disc=Array.isArray(o.disciplines)?o.disciplines.join(' / '):(o.disciplines||'');
+    var src=o.domain||(o.url?String(o.url).replace(/^https?:\/\//,'').split('/')[0]:'');
+    document.getElementById('d-meta').innerHTML=
+      row('主办',o.org_zh)+
+      row('地点',[o.city_zh,o.country_zh].filter(Boolean).join(' · '))+
+      row('截止',dl)+
+      row('费用',fee)+
+      row('资助',fundingText(o))+
+      row('资格',eligText(o))+
+      row('门类',disc&&String(disc).slice(0,60))+
+      row('来源',src)+
+      (o.summary_zh?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(o.summary_zh).slice(0,230))+'</div>'):'');
+    document.getElementById('d-go').href=o.url||o.source_url||'#';
+    var op=document.getElementById('d-open'); op.href='/#/o/'+encodeURIComponent(o.id||''); op.target='_blank'; op.onclick=null;
+    var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; }
+
+  // —— 真实功能接线 ——
+  var toastTimer=null;
+  function toast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.style.display='block';
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.style.display='none'; },2600); }
+  function goMain(hint){ if(hint){ toast(hint); setTimeout(function(){ location.href='/'; },600); } else location.href='/'; }
+  // 主题:与主站共享 localStorage.ap_theme,画布配色同步换(THEMES/T 已在顶部声明)
+  function applyTheme(name){ T=THEMES[name]||THEMES.light;
+    document.documentElement.classList.toggle('dark',name==='dark');
+    document.getElementById('btnTheme').textContent=(name==='dark')?'☀️':'🌙';
+    try{ localStorage.setItem('ap_theme',name); }catch(e){}
+    needDraw=true; }
+  (function(){ var t0=null; try{ t0=localStorage.getItem('ap_theme'); }catch(e){}
+    if(!t0) t0=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+    applyTheme(t0); })();
+  // 频道/列表/发布/通知/登录:接主站真页面
+  // 频道切换:不换页——地球虚化留在背后,该频道列表浮层展开(真数据)
+  var chCache={};
+  d3.selectAll('#chn .ch').on('click',function(){ var el=this, ch=el.getAttribute('data-ch');
+    d3.selectAll('#chn .ch').classed('on',function(){ return this===el; });
+    if(ch==='opportunities'){ hideChPanel(); return; }
+    showChPanel(ch); });
+  function hideChPanel(){ document.getElementById('chpanel').style.display='none'; }
+  function showChPanel(ch){
+    var pane=document.getElementById('chpanel'), inner=document.getElementById('chInner');
+    pane.style.display='block';
+    inner.innerHTML='<div class="rm" style="padding:8px 2px">加载中…</div>';
+    if(ch==='works'){
+      var loadW=chCache.works?Promise.resolve(chCache.works):fetch('/api/works/feed')
+        .then(function(r){ return r.json(); }).then(function(j){ chCache.works=j; return j; });
+      loadW.then(function(j){
+        var ws=(j&&j.works)||[];
+        var cards=ws.map(function(w){
+          var img=(w.images&&w.images[0])?esc(w.images[0]):'';
+          return '<div class="wcard" data-img="'+img+'">'+
+            (img?'<img class="wimg" loading="lazy" src="'+img+'" alt="">':'<div class="wimg"></div>')+
+            '<div class="wt">'+esc(w.title||'无题')+'</div>'+
+            '<div class="wa">'+esc((w.author&&w.author.nickname)||'佚名')+(w.n>1?(' · '+w.n+' 图'):'')+'</div></div>'; }).join('');
+        inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">作品广场 · '+ws.length+
+          ' 件(点击看大图;点赞评论于正式集成时并入)</div>'+
+          (cards?'<div class="wgrid">'+cards+'</div>':'<div class="rm">还没有公开作品</div>');
+      }).catch(function(){ inner.innerHTML='<div class="rm">加载失败</div>'; });
+      return; }
+    var load=chCache[ch]?Promise.resolve(chCache[ch]):fetch('data/'+(ch==='jobs'?'jobs':'news')+'.json')
+      .then(function(r){ return r.json(); }).then(function(j){ chCache[ch]=j; return j; });
+    load.then(function(j){
+      var items=(ch==='jobs')?(j.jobs||j.items||[]):(j.items||[]);
+      var phc=(ch==='jobs')?'#3A7D44':'#2A7F7A';
+      var rows=items.slice(0,60).map(function(it){
+        var t=esc(it.title_zh||it.title||''), m;
+        if(ch==='jobs') m=esc([it.org_zh||it.org,it.city_zh||it.city,it.deadline?('截止 '+it.deadline):''].filter(Boolean).join(' · '));
+        else m=esc([it.source,(it.published_at||'').slice(0,10)].filter(Boolean).join(' · '));
+        var u=esc(it.apply_url||it.url||'#');
+        var cov=it.cover?esc(it.cover):'';
+        var th='<span class="rth"><span class="ph" style="background:'+phc+'">'+esc((it.title_zh||it.title||'·').charAt(0))+'</span>'+
+          (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
+        return '<div class="row" data-u="'+u+'">'+th+'<div class="rbody"><div class="rt">'+t+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
+      inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">'+(ch==='jobs'?'招聘':'资讯')+' · '+items.length+
+        ' 条 · 地球仍在背后,点「机会」即回(点击条目直达原文)</div>'+rows;
+    }).catch(function(){ inner.innerHTML='<div class="rm">加载失败</div>'; }); }
+  document.getElementById('chInner').addEventListener('click',function(e){
+    var w=e.target.closest('.wcard');
+    if(w){ var im=w.getAttribute('data-img'); if(im) window.open(im,'_blank','noopener'); return; }
+    var d=e.target.closest('.row'); if(!d) return;
+    var u=d.getAttribute('data-u'); if(u&&u!=='#') window.open(u,'_blank','noopener'); });
+  // 左栏收起/展开(替代跳页)
+  document.getElementById('btnList').addEventListener('click',function(){
+    var p=document.getElementById('panel'), hiding=p.style.display!=='none';
+    p.style.display=hiding?'none':'flex';
+    this.textContent=hiding?'☰ 展开面板':'☰ 收起面板'; });
+  document.getElementById('btnPub').addEventListener('click',function(){ goMain('前往主站发布面板(需登录)…'); });
+  document.getElementById('btnBell').addEventListener('click',function(){ goMain('前往主站通知中心…'); });
+  document.getElementById('btnTheme').addEventListener('click',function(){
+    applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'); });
+  var meUser=null;
+  document.getElementById('btnLogin').addEventListener('click',function(){
+    if(meUser) location.href='/#/u/'+encodeURIComponent(meUser.id); else goMain('前往主站登录/注册…'); });
+  fetch('/api/auth/me').then(function(r){ return r.json(); }).then(function(j){
+    if(j&&j.user){ meUser=j.user;
+      document.getElementById('btnLogin').textContent='👤 '+(j.user.nickname||'我的主页');
+      fetch('/api/notifications?count=1').then(function(r){ return r.json(); }).then(function(n){
+        if(n&&n.unread>0) document.getElementById('btnBell').textContent='🔔'+(n.unread>9?'9+':n.unread); }).catch(function(){}); }
+  }).catch(function(){});
+  // 数据入库(初始加载与检索新增共用):建点/建簇/计数/图例
+  var catCounts={opencall:0,residency:0,award:0,workshop:0}, placedTotal=0, seenIds={};
+  function addRecords(arr){ var added=0;
+    (arr||[]).forEach(function(o){ if(!o||!o.id||seenIds[o.id]) return;
+      var loc=D.locate(o); if(!loc) return; seenIds[o.id]=1;
+      var cat=CAT[o.category]?o.category:'opencall';
+      var jx=(Math.random()-0.5)*1.1, jy=(Math.random()-0.5)*1.1;
+      var mll=[loc.ll[0]+jx,loc.ll[1]+jy];
+      var mk={o:o,ll:mll,cart:ll2c(mll),prec:loc.prec,sx:null,sy:null,idx:markers.length};
+      markers.push(mk);
+      var key=o.city_zh||o.country_zh||'其他';
+      var g=groups[key]||(groups[key]={key:key,ll:loc.ll,cart:ll2c(loc.ll),items:[],sx:null,sy:null,r:0,count:0,single:null});
+      g.items.push(mk);
+      catCounts[cat]=(catCounts[cat]||0)+1; placedTotal++; added++; });
+    document.getElementById('total').innerHTML=placedTotal+'<small>项全球活跃机遇</small>';
+    renderLegend(); renderDrawer(); needDraw=true; return added; }
+  // —— 抽屉列表:与地球同一份筛选状态,双向联动 ——
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); }
+  function renderDrawer(){
+    var el=document.getElementById('lcList'); if(!el) return;
+    var out=[], n=0;
+    for(var i=0;i<markers.length;i++){ var o=markers[i].o;
+      if(!matchFilter(o)) continue; n++;
+      if(out.length<400){ var c=CAT[o.category]||CAT.opencall;
+        var cov=o.cover?esc(o.cover):'';
+        var th='<span class="th"><span class="ph" style="background:'+c.color+'">'+esc((o.title_zh||o.title_en||'·').charAt(0))+'</span>'+
+          (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
+        out.push('<div class="oc" data-i="'+markers[i].idx+'"><span class="bar" style="background:'+c.color+'"></span>'+th+'<div>'+
+          '<div class="t">'+esc(o.title_zh||o.title_en)+'</div>'+
+          '<div class="m">'+esc([o.city_zh||o.country_zh,o.deadline?('截止 '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
+    document.getElementById('lcCount').textContent='结果列表 · '+n+' 项(点卡片飞过去)';
+    el.innerHTML=out.join(''); }
+  function selectCard(d){ var prev=document.querySelector('.oc.sel'); if(prev) prev.classList.remove('sel');
+    if(d){ d.classList.add('sel'); d.scrollIntoView({block:'nearest'}); } }
+  function syncCard(mk){ selectCard(document.querySelector('.oc[data-i="'+mk.idx+'"]')); }
+  document.getElementById('lcList').addEventListener('click',function(e){
+    var d=e.target.closest('.oc'); if(!d) return;
+    var mk=markers[+d.getAttribute('data-i')]; if(!mk) return;
+    selectCard(d); flyTo(mk.ll, Math.max(splitScale()*1.5, proj.scale())); showDetail(mk.o); });
+  // 悬停卡片 → 地球上对应点位/城市簇亮环(双向联动)
+  document.getElementById('lcList').addEventListener('mouseover',function(e){
+    var d=e.target.closest('.oc'); if(!d) return;
+    var mk=markers[+d.getAttribute('data-i')]; if(!mk) return;
+    focusMk=mk; focusKey=mk.o.city_zh||mk.o.country_zh||'其他'; needDraw=true; });
+  document.getElementById('lcList').addEventListener('mouseout',function(e){
+    if(e.target.closest('.oc')){ focusMk=null; focusKey=null; needDraw=true; } });
+  function renderLegend(){
+    document.getElementById('legend').innerHTML=['opencall','residency','award','workshop'].map(function(k2){
+      return '<div class="lg-item'+((filterCat!=='all'&&filterCat!==k2)?' off':'')+'" data-cat="'+k2+'"><span class="sw" style="background:'+CAT[k2].color+'"></span><span class="nm">'+CAT[k2].zh+'</span><span class="ct">'+(catCounts[k2]||0)+'</span></div>'; }).join('');
+    d3.selectAll('#legend .lg-item').on('click',function(){ var k3=this.getAttribute('data-cat');
+      filterCat=(filterCat===k3)?'all':k3;
+      d3.selectAll('#topbar .chip').classed('on',function(){ return this.getAttribute('data-cat')===filterCat; });
+      syncLegend(); renderDrawer(); needDraw=true; }); }
+  function flyToRecord(rec){ var loc=D.locate(rec); if(loc) flyTo(loc.ll, Math.max(splitScale()*1.5, proj.scale())); }
+  // ✦ AI 检索:真调用 /api/search,新机会实时落点地球
+  var searching=false;
+  function runSearch(){
+    if(searching) return;
+    var q2=document.getElementById('q').value.trim();
+    if(!q2){ toast('输入关键词后点我:AI 全网检索,结果直接落点地球'); return; }
+    searching=true; var btn=document.getElementById('btnAI'); btn.textContent='✦ 检索中…';
+    toast('AI 正在全网检索「'+q2+'」,通常 30~90 秒,期间可继续转地球…');
+    fetch('/api/search?q='+encodeURIComponent(q2)+'&channel=opportunities')
+      .then(function(r){ return r.json(); })
+      .then(function(r){
+        if(r&&r.added&&r.added.length){ var n=addRecords(r.added);
+          toast('检索完成:新收录 '+r.addedCount+' 条,'+n+' 条已落点地球');
+          if(n) flyToRecord(r.added[0]); }
+        else toast((r&&(r.message||r.error))||'检索完成:本次未发现可核实的新机会'); })
+      .catch(function(){ toast('检索失败,请稍后再试'); })
+      .then(function(){ searching=false; btn.textContent='✦ AI 检索'; }); }
+  document.getElementById('btnAI').addEventListener('click',runSearch);
+  document.getElementById('q').addEventListener('keydown',function(e){ if(e.key==='Enter') runSearch(); });
+
+  // —— 面板 ——
+  d3.selectAll('#topbar .chip').on('click',function(){
+    d3.selectAll('#topbar .chip').classed('on',false); d3.select(this).classed('on',true);
+    filterCat=this.getAttribute('data-cat'); syncLegend(); renderDrawer(); needDraw=true; });
+  function syncLegend(){ d3.selectAll('#legend .lg-item').classed('off',function(){
+    return filterCat!=='all'&&this.getAttribute('data-cat')!==filterCat; }); }
+  document.getElementById('q').addEventListener('input',function(e){ query=e.target.value.trim(); renderDrawer(); needDraw=true; });
+  window.addEventListener('resize',resize);
+
+  // —— 数据加载 ——
+  resize(); proj.rotate([-100,-30]);
+  Promise.all([
+    d3.json('data/geo/countries-110m.json'),
+    d3.json('data/opportunities.json').catch(function(){ return null; })
+  ]).then(function(res){
+    countryFeats=topojson.feature(res[0],res[0].objects.countries).features;
+    labelData=countryFeats.map(function(f){ var nm=D.NAME_ZH[f.properties.name]; if(!nm) return null;
+      if(f.properties.name==='Taiwan') return null;   // 台湾不作独立国家标注(属中国)
+      var ar=d3.geoArea(f), cen=d3.geoCentroid(f);
+      return {c:cen,cart:ll2c(cen),nm:nm,sz:ar>0.05?18:(ar>0.008?13:10)}; }).filter(Boolean);
+    // 载入 DataV 官方中国边界(合规:台湾省/港澳、九段线、藏南阿克赛钦按国标)
+    CN_CART=ll2c([104,35.5]);
+    d3.json(CN_URL).then(function(j){ var provs=[], jd=null; rewindFC(j);
+      (j.features||[]).forEach(function(f){ if(String(f.properties.adcode).indexOf('_JD')>=0) jd=f;
+        else if(f.properties.name) provs.push(f); });
+      cnProv=provs; cnBase=decimateFC({features:provs},8);   // 下钻才用,重度抽稀
+      if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
+      adminCache[CN_URL]=j; needDraw=true; }).catch(function(){});
+    var arr=res[1]?(res[1].items||res[1].opportunities||res[1]):[]; if(!Array.isArray(arr)) arr=[];
+    addRecords(arr);
+    window.__gd={groups:groups,markers:markers,proj:proj,splitScale:splitScale,CATc:CAT,  // 调试钩子(集成时移除)
+      state:function(){return {drillLevel:drillLevel,drilled:drilledCountry,prov:drilledProvAdcode,
+        cnBase:cnBase?cnBase.length:0,cnProvNames:cnBase?cnBase.map(function(f){return f.properties.name;}):[],
+        cnJD:!!cnJD,adminFeats:adminFeats.length};},
+      drillChina:function(){drillChina();},
+      drillProvByName:function(n){for(var i=0;i<cnBase.length;i++){if(cnBase[i].properties.name===n){drillProvince(cnBase[i]);return cnBase[i].properties.adcode;}}return null;},
+      exitDrill:function(){exitDrill();}};
+    var st=document.getElementById('status'); st.textContent='已标注 '+placedTotal+' 项 · '+countryFeats.length+' 国';
+    setTimeout(function(){ st.style.display='none'; },2500);
+    draw();
+  }).catch(function(err){ document.getElementById('status').textContent='加载失败:'+err.message; });
+})();
+</script>
+</body>
+</html>
