@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.8" />
+<meta name="app-version" content="0.78.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -386,11 +386,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.8</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.8"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.8"></script>
-<script src="js/globe-data.js?v=0.77.8"></script>
+<script src="assets/vendor/d3.min.js?v=0.78.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.78.0"></script>
+<script src="js/globe-data.js?v=0.78.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -401,7 +401,7 @@
   var SPHERE={type:'Sphere'};
   var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null;
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
-  var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=9, adminSeq=0;
+  var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=9, adminSeq=0, drilledAdmName=null;
   var filterCat='all', query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
   var velX=0, velY=0, targetScale=null;
@@ -478,10 +478,16 @@
         ctx.lineWidth=provSel?1.1:0.9; ctx.strokeStyle=provSel?T.borderSel:T.admin; ctx.stroke(); } }
     // 南海九段线(描边成线,非填充;中国可见时任何层级都画,合规标识)
     if(cnJD && frontC(CN_CART)){ ctx.lineWidth=1.3; ctx.strokeStyle=T.admin; ctx.beginPath(); pathC(cnJD); ctx.stroke(); }
-    if(adminFeats.length){ ctx.lineWidth=0.8; ctx.strokeStyle=T.admin;
-      for(var a=0;a<adminFeats.length;a++){ ctx.beginPath(); pathC(adminFeats[a]);
-        if(cnCityFill){ ctx.fillStyle=(a%2)?T.landSel:T.landSel2; ctx.fill(); }
-        ctx.stroke(); } }
+    if(adminFeats.length){
+      for(var a=0;a<adminFeats.length;a++){ var af=adminFeats[a];
+        ctx.beginPath(); pathC(af);
+        if(cnDrilled){   // 中国市级:细多边形交替填充(既有)
+          if(cnCityFill){ ctx.fillStyle=(a%2)?T.landSel:T.landSel2; ctx.fill(); }
+          ctx.lineWidth=0.8; ctx.strokeStyle=T.admin; ctx.stroke(); }
+        else {           // 他国一级区划:交替双色调;二级视图=选中金/其余压暗
+          var aSel=(drillLevel>=2&&af.properties&&af.properties.name===drilledAdmName);
+          ctx.fillStyle=(drillLevel>=2)?(aSel?T.landSel:T.landDim):((a%2)?T.landSel:T.landSel2); ctx.fill();
+          ctx.lineWidth=aSel?1.1:0.8; ctx.strokeStyle=aSel?T.borderSel:T.admin; ctx.stroke(); } } }
     // 国名(高档画质或静止时)
     // 地名门控:版图在屏幕上"装得下文字"才显示(小屏/缩小时自动少字,不再叠字)
     function fitsLabel(rRad,txt,fs2){
@@ -505,14 +511,15 @@
     if(AL&&AL.length&&!((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var A2=0;A2<AL.length;A2++){ var al=AL[A2]; if(!frontC(al.cart)) continue;
-        // 字号随区划屏上大小自适应(10–15px);连 10px 都装不下就不标,绝不叠字
-        var perCh=/[一-鿿]/.test(al.nm)?1:0.56, availW=2*(al.r||0)*sc;
-        if(availW < al.nm.length*10*perCh*1.1) continue;
-        var afs=Math.round(Math.min(15, availW*0.6/(al.nm.length*perCh)));
+        // 中文界面优先用 name_zh(NE 自带官方中文州名);字号随区划屏上大小自适应(10–15px),装不下不标
+        var atxt=(lang==='zh'&&al.zh)?al.zh:al.nm;
+        var perCh=/[一-鿿]/.test(atxt)?1:0.56, availW=2*(al.r||0)*sc;
+        if(availW < atxt.length*10*perCh*1.1) continue;
+        var afs=Math.round(Math.min(15, availW*0.6/(atxt.length*perCh)));
         var ap=proj(al.c); if(ap[0]<-30||ap[0]>W+30||ap[1]<-20||ap[1]>H+20) continue;
         ctx.font='500 '+afs+'px "PingFang SC","Microsoft YaHei",sans-serif';
-        ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(al.nm,ap[0],ap[1]);
-        ctx.fillStyle=T.label; ctx.fillText(al.nm,ap[0],ap[1]); } }
+        ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(atxt,ap[0],ap[1]);
+        ctx.fillStyle=T.label; ctx.fillText(atxt,ap[0],ap[1]); } }
     // 点位:聚合簇 或 散点
     var m,mk,k,g;
     if(sc<splitScale()){
@@ -646,15 +653,19 @@
       else { showDetail(hoverObj.o); syncCard(hoverObj); }
       return; }
     var inv=proj.invert([e.clientX,e.clientY]); if(!inv) return;
-    if(drillLevel===2){   // 市级视图:点选中省以外(邻省/境外/太空)→ 退回省级并收卡
-      var cur=null; for(var cp=0;cp<(cnBase||[]).length;cp++){ if(cnBase[cp].properties.adcode===drilledProvAdcode){ cur=cnBase[cp]; break; } }
+    if(drillLevel===2){   // 二级视图:点选中区划以外(邻区/境外/太空)→ 退回上一级并收卡
+      var cur=null;
+      if(drilledCountry==='China'){
+        for(var cp=0;cp<(cnBase||[]).length;cp++){ if(cnBase[cp].properties.adcode===drilledProvAdcode){ cur=cnBase[cp]; break; } } }
+      else { for(var ca=0;ca<adminFeats.length;ca++){ if(adminFeats[ca].properties&&adminFeats[ca].properties.name===drilledAdmName){ cur=adminFeats[ca]; break; } } }
       if(!cur||!d3.geoContains(cur,inv)) exitDrill();
       return; }
     if(drilledCountry==='China' && drillLevel===1 && cnBase){   // 省级视图:点省→下钻市级;点境外→回全球
       for(var cj=0;cj<cnBase.length;cj++){ if(d3.geoContains(cnBase[cj],inv)){ drillProvince(cnBase[cj]); return; } }
       if(drilledFeat&&d3.geoContains(drilledFeat,inv)) return;   // 省界抽稀缝隙内不误退
       exitDrill(); return; }
-    if(drilledCountry && drillLevel===1){   // 他国:点国境外→回全球
+    if(drilledCountry && drillLevel===1){   // 他国:点州/省→二级视图;点国境外→回全球
+      for(var aj=0;aj<adminFeats.length;aj++){ if(d3.geoContains(adminFeats[aj],inv)){ drillAdm1(adminFeats[aj]); return; } }
       if(drilledFeat&&d3.geoContains(drilledFeat,inv)) return;
       exitDrill(); return; }
     if(drillLevel===0){
@@ -704,6 +715,7 @@
       (j.features||[]).forEach(function(f){ if(String(f.properties.adcode).indexOf('_JD')>=0) jd=f;
         else if(f.properties.name) provs.push(f); });
       cnProv=provs; cnBase=decimateFC({features:provs},8);   // 下钻才用,重度抽稀(小区划自适应保真)
+      rewindFC({features:cnBase});   // 抽稀后重绕(防跨经线/临界环被抽翻)
       provLabels=cnBase.map(function(f){ var pr=f.properties, c=pr.center||d3.geoCentroid(f);
         return {c:c,cart:ll2c(c),nm:shortName(pr.name),r:Math.sqrt(d3.geoArea(f)/Math.PI)}; });
       if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
@@ -728,12 +740,19 @@
     if(hi<lo) hi+=360;   // 跨 180° 经线(俄罗斯等)
     var lon=(lo+hi)/2; if(lon>180) lon-=360;
     return [lon,(b[0][1]+b[1][1])/2]; }
+  // 他国一级区划(州/省/府/邦)同样自托管:data/geo/world/<国名slug>.json(NE 10m 切分),
+  // 远端 NE 50m 仅作最后兜底(只覆盖少数大国)
+  function admSlug(nm){ return String(nm).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
   function drillInto(feat){ var nm=feat.properties.name;
     if(nm==='China'||nm==='Taiwan'){ drillChina(); return; }
-    drilledCountry=nm; drilledFeat=feat; drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
+    drilledCountry=nm; drilledFeat=feat; drillLevel=1; drilledProvAdcode=null; drilledAdmName=null; adminFeats=[]; adminLabels=[];
     fitFly(feat, boundsCenter(feat), scale0*2.9);
     var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW');
-    loadAdmin('https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm,2); }
+    loadAdmin('data/geo/world/'+admSlug(nm)+'.json',null,2,
+      'https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm); }
+  function drillAdm1(f){ drillLevel=2; drilledAdmName=f.properties.name;
+    document.getElementById('back').textContent=L('backU');
+    fitFly(f, boundsCenter(f), scale0*5); }
   function drillChina(){ drilledCountry='China'; drilledFeat=cnNE; drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
     var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW');
     fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; }   // 省界来自 cnBase(启动已载),无需再请求
@@ -742,28 +761,36 @@
     document.getElementById('back').textContent=L('backU');
     fitFly(pf, boundsCenter(pf), scale0*5.2);
     loadAdmin(CN_LOCAL+ad+'_full.json',null,2,CN_REMOTE+ad+'_full.json'); }
-  function loadAdmin(url,filt,step,fbUrl){
+  function loadAdmin(url,filt,step,fbUrl,fbFilt){
     var seq=++adminSeq;   // 快速连点/中途退出时丢弃过期结果
     var p=adminCache[url]?Promise.resolve(adminCache[url]):d3.json(url).then(function(j){ rewindFC(j); adminCache[url]=j; return j; });
     p.then(function(j){ if(seq!==adminSeq) return;
       var fs=decimateFC(j,step||2);
+      rewindFC({features:fs});   // 抽稀可能把跨180°经线的环(阿拉斯加等)再次抽翻,抽完必须重绕
       if(filt) fs=fs.filter(function(f){ return f.properties&&f.properties.admin===filt; });
       adminFeats=fs;
-      adminLabels=fs.map(function(f){ var pr=f.properties||{}, c=pr.center||d3.geoCentroid(f);
+      adminLabels=fs.map(function(f){ var pr=f.properties||{};
+        var c=pr.center||((typeof pr.longitude==='number'&&typeof pr.latitude==='number')?[pr.longitude,pr.latitude]:d3.geoCentroid(f));
         var nm=shortName(pr.name||'');
-        return nm?{c:c,cart:ll2c(c),nm:nm,r:Math.sqrt(d3.geoArea(f)/Math.PI)}:null; }).filter(Boolean);
+        return nm?{c:c,cart:ll2c(c),nm:nm,zh:(pr.name_zh?shortName(pr.name_zh):null),
+          r:Math.sqrt(d3.geoArea(f)/Math.PI)}:null; }).filter(Boolean);
       needDraw=true; })
      .catch(function(){ if(seq!==adminSeq) return;
-       if(fbUrl){ loadAdmin(fbUrl,filt,step); return; }   // 本地缺失/失败 → 远端兜底
+       if(fbUrl){ loadAdmin(fbUrl,(fbFilt!==undefined)?fbFilt:filt,step); return; }   // 本地缺失/失败 → 远端兜底
        adminFeats=[]; adminLabels=[]; needDraw=true; }); }
   function exitDrill(){
     // 逐级退出时收起点开的项目卡与悬浮层
     document.getElementById('detail').style.display='none'; tipEl.style.display='none';
     adminSeq++;   // 使在途 loadAdmin 结果作废
-    if(drillLevel===2){ drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
+    if(drillLevel===2){
       document.getElementById('back').textContent=L('backW');
-      fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; return; }   // 市级 → 退回省级
-    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; maxK=9;
+      if(drilledCountry==='China'){   // 市级 → 退回省级
+        drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
+        fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; return; }
+      drillLevel=1; drilledAdmName=null;   // 他国二级 → 退回国家视图(区划保留)
+      if(drilledFeat) fitFly(drilledFeat, boundsCenter(drilledFeat), scale0*2.9);
+      needDraw=true; return; }
+    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; maxK=9;
     document.getElementById('back').style.display='none';
     spinning=false; inertiaOn=false;
     var r0=proj.rotate(), s0=proj.scale();
