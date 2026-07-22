@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.0" />
+<meta name="app-version" content="0.77.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -66,8 +66,9 @@
   #detail .meta{font-size:12px;color:var(--sub);line-height:1.7}
   #detail .go{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--opencall);text-decoration:none;font-weight:600}
   #detail .x{position:absolute;right:12px;top:10px;color:var(--muted);cursor:pointer;font-size:16px}
-  #back{position:fixed;left:26px;bottom:26px;z-index:6;display:none;background:var(--panel);border:1px solid var(--line);
-    border-radius:999px;padding:9px 17px;font-size:13px;color:var(--ink);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+  #back{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:6;display:none;background:var(--panel);
+    border:1px solid var(--line);border-radius:999px;padding:9px 17px;font-size:13px;color:var(--ink);cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,.1)}
   #back:hover{background:#efeee8}
   #tip{position:fixed;pointer-events:none;z-index:20;display:none;width:300px;background:#fff;
     border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.18);padding:0;overflow:hidden}
@@ -175,7 +176,7 @@
     #sitebar .logo span{display:none}
     #panel{top:auto;bottom:40px}
     #foot{font-size:10px;padding:5px 8px}
-    #back{bottom:auto;top:104px;left:auto;right:14px}
+    #back{bottom:auto;top:104px;left:auto;right:14px;transform:none}
     #detail{bottom:40px}
   }
   @media (max-width:720px){
@@ -185,20 +186,21 @@
     #brand{left:16px;top:14px}
     #btnPanel{left:14px;top:60px}
     #detail{left:14px;right:14px;width:auto;bottom:130px}
-    #back{left:14px;bottom:200px}
+    #back{left:14px;bottom:200px;transform:none}
+    #propanel{left:14px;right:14px;top:60px;bottom:40px;width:auto}
   }
-  /* 个人主页浮层:磨砂背景内嵌主站深链(#/u/<uid>),原功能全保留;头部含用户检索 */
-  #propanel{position:fixed;left:0;right:0;top:56px;bottom:0;z-index:6;display:none;
-    background:rgba(247,246,242,.72);backdrop-filter:blur(7px)}
-  html.dark #propanel{background:rgba(20,19,17,.72)}
-  #propanel .pinner{max-width:1020px;height:100%;margin:0 auto;padding:12px 16px 22px;display:flex;flex-direction:column}
-  .pro-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;position:relative}
-  .pro-head .pro-title{font-size:14px;font-weight:600}
-  .pro-head input{margin-left:auto;flex:0 0 230px;font-size:12.5px;padding:7px 13px;border:1px solid var(--line);
+  /* 个人主页:右侧竖向卡片面板(与左侧抽屉同款形态),从头像下方展开;头部含用户检索 */
+  #propanel{position:fixed;right:26px;top:64px;bottom:44px;width:362px;z-index:8;display:none;
+    flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 40px rgba(0,0,0,.14);overflow:hidden}
+  #propanel .pinner{flex:1;min-height:0;display:flex;flex-direction:column;padding:12px 14px 12px}
+  .pro-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;position:relative}
+  .pro-head .pro-title{font-size:13px;font-weight:600;white-space:nowrap}
+  .pro-head input{margin-left:auto;flex:1;min-width:0;font-size:12px;padding:6px 12px;border:1px solid var(--line);
     border-radius:999px;outline:0;background:var(--panel);color:var(--ink)}
   .pro-head .x2{font-size:19px;color:var(--muted);cursor:pointer;padding:0 4px;line-height:1}
   .pro-head .x2:hover{color:var(--ink)}
-  #uqRes{position:absolute;right:30px;top:36px;width:262px;background:var(--panel);border:1px solid var(--line);
+  #uqRes{position:absolute;left:0;right:26px;top:34px;background:var(--panel);border:1px solid var(--line);
     border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.15);display:none;overflow:hidden;z-index:9}
   .uq-i{display:flex;align-items:center;gap:9px;padding:8px 12px;cursor:pointer;font-size:13px}
   .uq-i:hover{background:#faf9f5}
@@ -206,12 +208,11 @@
   .uq-i img{width:26px;height:26px;border-radius:50%;object-fit:cover;background:#eceae2}
   .uq-i i{margin-left:auto;font-style:normal;font-size:11px;color:var(--muted)}
   .uq-empty{padding:10px 12px;font-size:12px;color:var(--muted)}
-  .pro-scroll{flex:1;overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;
-    padding:20px 22px;overscroll-behavior:contain}
-  /* 个人主页(原生实现,老站已退役) */
-  .pp-head{display:flex;gap:16px;align-items:flex-start}
-  .pp-ava{width:84px;height:84px;border-radius:50%;object-fit:cover;background:#eceae2;flex:0 0 auto}
-  .pp-name{font-size:19px;font-weight:700;margin:2px 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pro-scroll{flex:1;overflow-y:auto;padding:4px 2px 2px;overscroll-behavior:contain}
+  /* 个人主页(原生实现,老站已退役;窄竖面板排版) */
+  .pp-head{display:flex;gap:12px;align-items:flex-start}
+  .pp-ava{width:60px;height:60px;border-radius:50%;object-fit:cover;background:#eceae2;flex:0 0 auto}
+  .pp-name{font-size:16px;font-weight:700;margin:2px 0 4px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
   .pp-meta{font-size:12px;color:var(--sub);margin:3px 0}
   .pp-meta a{color:var(--sub)}
   .pp-bio{font-size:13px;line-height:1.7;margin:6px 0 0;white-space:pre-wrap}
@@ -223,7 +224,7 @@
   .pp-tabs{display:flex;gap:4px;margin:16px 0 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
   .pp-tabs button{font-size:13px;padding:8px 13px;border:0;background:none;color:var(--sub);cursor:pointer;border-bottom:2px solid transparent}
   .pp-tabs button.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
-  .pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}
   .pp-wk{border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;position:relative;background:var(--panel)}
   .pp-wk img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#eceae2}
   .pp-wk .wt{font-size:12px;padding:7px 9px;line-height:1.4}
@@ -331,11 +332,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.0"></script>
-<script src="js/globe-data.js?v=0.77.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.1"></script>
+<script src="js/globe-data.js?v=0.77.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -353,10 +354,10 @@
   var perfTier=0, costArr=[];   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
   // 画布主题配色(必须先于首帧 draw 定义;applyTheme 在下方接线区)
   var THEMES={
-    light:{space:'#E3DED0',glow:'rgba(255,255,255,.95)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
-      land:'#ecebe5',landDim:'#f4f3ef',landSel:'#f5e9c8',border:'#d3cfc4',borderSel:'#b3a069',admin:'#aca696',
+    light:{space:'#E3DED0',glow:'rgba(255,255,255,.32)',glow0:'rgba(255,255,255,0)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
+      land:'#ecebe5',landDim:'#f4f3ef',landSel:'#f2e8cf',border:'#d3cfc4',borderSel:'#b3a069',admin:'#aca696',
       label:'#2b2822',halo:'rgba(247,246,242,.85)',mstroke:'#fff'},
-    dark:{space:'#0b0a08',glow:'rgba(84,74,56,.5)',sphere:'#201d18',sphereEdge:'#3d372d',grat:'#2b2721',
+    dark:{space:'#0b0a08',glow:'rgba(84,74,56,.5)',glow0:'rgba(84,74,56,0)',sphere:'#201d18',sphereEdge:'#3d372d',grat:'#2b2721',
       land:'#2e2a23',landDim:'#241f19',landSel:'#4c4126',border:'#403a30',borderSel:'#8f7c4c',admin:'#6e665a',
       label:'#d8d3c8',halo:'rgba(20,18,15,.85)',mstroke:'#15130f'} };
   var T=THEMES.light;
@@ -390,8 +391,9 @@
     var sc=proj.scale(); updateRC();
     // 太空底色 + 地球缘光,让球从背景上"浮"出来
     ctx.fillStyle=T.space; ctx.fillRect(0,0,W,H);
+    // 渐变终点必须是同色透明:rgba(0,0,0,0) 会在插值中段混入黑,把光圈拉灰变脏
     var rg=ctx.createRadialGradient(W/2,H/2,sc*0.9,W/2,H/2,sc*1.12);
-    rg.addColorStop(0,T.glow); rg.addColorStop(1,'rgba(0,0,0,0)');
+    rg.addColorStop(0,T.glow); rg.addColorStop(1,T.glow0);
     ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.12,0,2*PI); ctx.fill();
     ctx.beginPath(); pathC(SPHERE); ctx.fillStyle=T.sphere; ctx.fill();
     if(!(perfTier>=2&&inMotion())){
@@ -403,7 +405,8 @@
       ctx.beginPath(); pathC(f);
       var isCN=(nm==='China'||nm==='Taiwan');                  // 台湾与大陆同色一体
       var isSel=drilledCountry&&nm===drilledCountry;
-      ctx.fillStyle=isCN?(drilledCountry?T.landDim:T.land):(drilledCountry?(isSel?T.landSel:T.landDim):T.land); ctx.fill();
+      // 下钻国保持正常陆地色(整片高亮色在浅色主题下显"错色"),靠邻国压暗+加重描边区分
+      ctx.fillStyle=isCN?(drilledCountry?T.landDim:T.land):(drilledCountry?(isSel?T.land:T.landDim):T.land); ctx.fill();
       ctx.lineWidth=isSel?1.2:0.45; ctx.strokeStyle=isSel?T.borderSel:T.border; ctx.stroke(); }
     // 下钻中国:DataV 官方省/市界(仅此时绘制,重度抽稀省算力)
     // 市级视图用细市多边形填充选中省(粗抽稀省面在高倍缩放下锯齿明显),粗省面只画未选中省
@@ -413,7 +416,7 @@
         var provSel=(drillLevel>=2&&pf.properties.adcode===drilledProvAdcode);
         if(provSel&&cnCityFill) continue;
         ctx.beginPath(); pathC(pf);
-        ctx.fillStyle=(drillLevel>=2)?(provSel?T.landSel:T.landDim):T.landSel; ctx.fill();
+        ctx.fillStyle=(drillLevel>=2)?(provSel?T.landSel:T.landDim):T.land; ctx.fill();
         ctx.lineWidth=provSel?1.1:0.5; ctx.strokeStyle=provSel?T.borderSel:T.admin; ctx.stroke(); } }
     // 南海九段线(描边成线,非填充;中国可见时任何层级都画,合规标识)
     if(cnJD && frontC(CN_CART)){ ctx.lineWidth=1.3; ctx.strokeStyle=T.admin; ctx.beginPath(); pathC(cnJD); ctx.stroke(); }
@@ -1174,8 +1177,7 @@
       '<span>'+esc(meUser.nickname||'')+'</span>';
     else b.innerHTML=ICONS.user+' <span id="loginTxt">'+L('login')+'</span>'; }
   function openProfile(uid){ hideChPanel();
-    d3.selectAll('#chn .ch').classed('on',false);
-    document.getElementById('propanel').style.display='block';
+    document.getElementById('propanel').style.display='flex';
     loadProfile(uid); }
   function hideProfile(){ document.getElementById('propanel').style.display='none';
     document.getElementById('uqRes').style.display='none'; }
