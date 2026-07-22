@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.78.0" />
+<meta name="app-version" content="0.78.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -386,11 +386,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.78.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.78.0"></script>
-<script src="js/globe-data.js?v=0.78.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.78.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.78.1"></script>
+<script src="js/globe-data.js?v=0.78.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -493,7 +493,21 @@
     function fitsLabel(rRad,txt,fs2){
       var cjk=/[一-鿿]/.test(txt);
       return 2*rRad*sc > txt.length*fs2*(cjk?1:0.56)*1.12; }
-    if(sc>scale0*0.82 && !((perfTier>=2&&inMotion())||sheetDrag)){
+    // —— 远景分层:最小=大洲名 → 稍放大=次区域名(两层均不画光标) → 再放大=国名+数字聚合点位 ——
+    var MARKER_MIN=scale0*((W<=720)?1.6:0.95);
+    var showMarkers=!!drilledCountry||sc>=MARKER_MIN;
+    if(!drilledCountry && sc<MARKER_MIN && !((perfTier>=2&&inMotion())||sheetDrag)){
+      var tierA=sc<scale0*((W<=720)?0.8:0.7);
+      var regs=tierA?D.REGIONS.continents:D.REGIONS.subregions;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.font=(tierA?'700 19px':'600 14px')+' "PingFang SC","Microsoft YaHei",sans-serif';
+      for(var rg2=0;rg2<regs.length;rg2++){ var re2=regs[rg2];
+        if(!re2.cart) re2.cart=ll2c(re2.ll);
+        if(!frontC(re2.cart)) continue;
+        var rp=proj(re2.ll), rtxt=(lang==='en')?re2.en:re2.zh;
+        ctx.lineWidth=4; ctx.strokeStyle=T.halo; ctx.strokeText(rtxt,rp[0],rp[1]);
+        ctx.fillStyle=T.label; ctx.fillText(rtxt,rp[0],rp[1]); } }
+    if(showMarkers && sc>scale0*0.82 && !((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var L=0;L<labelData.length;L++){ var d=labelData[L]; if(!frontC(d.cart)) continue;
         if(drilledCountry&&d.en===drilledCountry) continue;   // 下钻国不再标国名,让位区划名
@@ -520,9 +534,12 @@
         ctx.font='500 '+afs+'px "PingFang SC","Microsoft YaHei",sans-serif';
         ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(atxt,ap[0],ap[1]);
         ctx.fillStyle=T.label; ctx.fillText(atxt,ap[0],ap[1]); } }
-    // 点位:聚合簇 或 散点
+    // 点位:远景层级隐藏;之后聚合簇 或 散点
     var m,mk,k,g;
-    if(sc<splitScale()){
+    if(!showMarkers){
+      for(m=0;m<markers.length;m++) markers[m].sx=null;
+      for(k in groups) groups[k].sx=null;
+    } else if(sc<splitScale()){
       for(m=0;m<markers.length;m++) markers[m].sx=null;
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(k in groups){ g=groups[k];
@@ -1091,9 +1108,12 @@
   //    头部整区可拖(列表/输入除外)+ 点把手切换 + 松手吸附;地球同步缩小 ——
   (function(){
     var sheet=document.getElementById('panel');
-    var drag=false, sy=0, ty0=0, curTy=null, moved2=false, downT=null, pend=null, raf=false;
+    var drag=false, sy=0, ty0=0, curTy=null, moved2=false, downT=null, pend=null, raf=false, lastDy=0;
     function isMob(){ return window.innerWidth<=720; }
-    function maxTy(){ return Math.round(H*0.59); }   // 收起=下移 59vh(顶边落在 74vh,只露把手+统计行,不挡地球)
+    // 必须用布局视口高(与 CSS 的 vh 同基准):手机地址栏收放时 innerHeight 会变,
+    // 混用会导致"收回去的位置比初始位高一截"
+    function VH(){ return document.documentElement.clientHeight||H; }
+    function maxTy(){ return Math.round(VH()*0.59); }   // 收起=下移 59vh(顶边落在 74vh,只露把手+统计行)
     function setTy(ty,animate){
       var mx=maxTy(); ty=Math.max(0,Math.min(mx,ty)); curTy=ty;
       sheet.style.transition=animate?'transform .26s ease':'none';
@@ -1105,14 +1125,14 @@
     sheet.addEventListener('pointerdown',function(e){ if(!isMob()) return;
       var t=e.target;
       if(t.closest('.lc-scroll')||t.closest('input')||t.closest('.ai')||t.closest('.lg-item')) return;
-      drag=true; moved2=false; downT=t; sy=e.clientY;
-      ty0=(curTy!=null)?curTy:Math.max(0,Math.round(sheet.getBoundingClientRect().top-H*0.15));
+      drag=true; moved2=false; downT=t; sy=e.clientY; lastDy=0;
+      ty0=(curTy!=null)?curTy:Math.max(0,Math.round(sheet.getBoundingClientRect().top-VH()*0.15));
       sheetDrag=true; spinning=false;
       if(sheet.setPointerCapture){ try{ sheet.setPointerCapture(e.pointerId); }catch(err){} }
       e.preventDefault(); });
     sheet.addEventListener('pointermove',function(e){ if(!drag) return;
       var dy=e.clientY-sy; if(Math.abs(dy)>5) moved2=true;
-      pend=ty0+dy;
+      lastDy=dy; pend=ty0+dy;
       if(!raf){ raf=true; requestAnimationFrame(applyPend); }
       e.preventDefault(); });
     function up(){ if(!drag) return; drag=false; sheetDrag=false;
@@ -1120,7 +1140,7 @@
       if(!moved2){   // 点一下把手=展开/收起切换
         if(downT&&downT.closest('#sheetbar')) setTy(cur>mid?0:mx,true);
         return; }
-      setTy(cur<mid?0:mx,true); needDraw=true; }   // 吸附最近档
+      setTy(lastDy>0?mx:0,true); needDraw=true; }   // 按拖拽方向吸附:往下拖=收回原位,往上拖=展开
     sheet.addEventListener('pointerup',up);
     sheet.addEventListener('pointercancel',function(){ drag=false; sheetDrag=false; needDraw=true; });
     window.addEventListener('resize',function(){

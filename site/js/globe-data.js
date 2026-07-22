@@ -122,7 +122,27 @@
     "Kurimanzutto":"墨西哥城","Southeastern Louisiana":[-90.46,30.50],
     "MassArt":"波士顿","Massachusetts College":"波士顿","Museum of Contemporary Art Arlington":[-77.09,38.88]
   };
-  window.GLOBE_DATA = { CITY:CITY, COUNTRY:COUNTRY, NAME_ZH:NAME_ZH, CATEGORY:CATEGORY,
+  // 远景分层地名:缩到最小显大洲,稍放大显次区域(光标在这两层隐藏)
+  var REGIONS = {
+    continents: [
+      {ll:[90,48], zh:"亚洲", en:"Asia"}, {ll:[20,52], zh:"欧洲", en:"Europe"},
+      {ll:[18,4], zh:"非洲", en:"Africa"}, {ll:[-100,48], zh:"北美洲", en:"North America"},
+      {ll:[-60,-14], zh:"南美洲", en:"South America"}, {ll:[140,-26], zh:"大洋洲", en:"Oceania"}
+    ],
+    subregions: [
+      {ll:[108,36], zh:"东亚", en:"East Asia"}, {ll:[108,8], zh:"东南亚", en:"Southeast Asia"},
+      {ll:[77,21], zh:"南亚", en:"South Asia"}, {ll:[64,44], zh:"中亚", en:"Central Asia"},
+      {ll:[45,31], zh:"西亚", en:"West Asia"}, {ll:[100,63], zh:"西伯利亚", en:"Siberia"},
+      {ll:[2,47], zh:"西欧", en:"Western Europe"}, {ll:[17,63], zh:"北欧", en:"Northern Europe"},
+      {ll:[14,41], zh:"南欧", en:"Southern Europe"}, {ll:[31,53], zh:"东欧", en:"Eastern Europe"},
+      {ll:[13,26], zh:"北非", en:"North Africa"}, {ll:[-4,12], zh:"西非", en:"West Africa"},
+      {ll:[20,1], zh:"中非", en:"Central Africa"}, {ll:[38,3], zh:"东非", en:"East Africa"},
+      {ll:[24,-26], zh:"南部非洲", en:"Southern Africa"}, {ll:[-100,45], zh:"北美", en:"North America"},
+      {ll:[-90,16], zh:"中美洲", en:"Central America"}, {ll:[-60,-14], zh:"南美", en:"South America"},
+      {ll:[140,-26], zh:"大洋洲", en:"Oceania"}
+    ]
+  };
+  window.GLOBE_DATA = { CITY:CITY, COUNTRY:COUNTRY, NAME_ZH:NAME_ZH, CATEGORY:CATEGORY, REGIONS:REGIONS,
     // 条目 -> [lng,lat]:优先城市,其次国家中心;资讯再兜底信源驻地;都无则 null(不落点,绝不编造)
     locate:function(o){
       var c = o.city_zh && CITY[o.city_zh];
