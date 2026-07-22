@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.79.0" />
+<meta name="app-version" content="0.80.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -50,6 +50,18 @@
   .lg-item .nm{flex:1}
   .lg-item .ct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
   .lg-item.off{opacity:.38}
+  /* 门类/快捷筛选 chips(横滑一行,老站筛选体系并入) */
+  .tagrow{display:flex;gap:6px;overflow-x:auto;padding:7px 0 2px;margin-top:6px;border-top:1px dashed var(--line);
+    scrollbar-width:none}
+  .tagrow::-webkit-scrollbar{display:none}
+  .tgc{font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub);
+    cursor:pointer;white-space:nowrap;flex:0 0 auto;display:inline-flex;align-items:center;gap:5px}
+  .tgc i{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
+  .tgc.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  html.dark .tgc.on{background:#ece9e2;color:#141311}
+  .lc-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .lc-sort{cursor:pointer;color:var(--muted);font-size:11px;white-space:nowrap}
+  .lc-sort:hover{color:var(--sub)}
   .lang{font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;color:var(--sub)}
   .lang:hover{background:#efeee8}
   #detail{position:fixed;right:26px;bottom:26px;width:368px;max-height:66vh;overflow-y:auto;background:var(--panel);border:1px solid var(--line);
@@ -219,7 +231,12 @@
     html.dark #panel .search{background:#262320}
     .bignum{font-size:24px;margin:4px 0 0}
     .card .tip{display:none}
-    .legend{display:none}
+    /* 手机图例+筛选恢复:图例横向紧凑一行,门类/开关 chips 横滑 */
+    .legend .lg-title{display:none}
+    #legend{display:flex;overflow-x:auto;gap:2px;scrollbar-width:none}
+    #legend::-webkit-scrollbar{display:none}
+    #legend .lg-item{flex:0 0 auto;padding:4px 7px;font-size:11.5px;gap:5px}
+    #legend .lg-item .ct{font-size:10.5px}
     .listcard{padding:0}
     #btnPanel{display:none}
     #brand{left:16px;top:14px}
@@ -359,8 +376,10 @@
     <div class="tip" id="libTip">拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。</div>
   </div>
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
-  <div class="card legend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div></div>
-  <div class="card listcard"><div class="lc-head" id="lcCount">结果列表</div><div class="lc-scroll" id="lcList"></div></div>
+  <div class="card legend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div>
+    <div class="tagrow" id="tagRow"></div>
+    <div class="tagrow" id="fltRow"></div></div>
+  <div class="card listcard"><div class="lc-head"><span id="lcCount">结果列表</span><span class="lc-sort" id="lcSort"></span></div><div class="lc-scroll" id="lcList"></div></div>
 </div>
 <div id="chpanel"><div class="inner" id="chInner"></div></div>
 <div id="propanel"><div class="pinner">
@@ -386,11 +405,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.79.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.80.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.79.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.79.0"></script>
-<script src="js/globe-data.js?v=0.79.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.80.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.80.0"></script>
+<script src="js/globe-data.js?v=0.80.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -403,6 +422,8 @@
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
   var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=9, adminSeq=0, drilledAdmName=null;
   var filterCat='all', query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
+  // 筛选(老站体系移植):门类单选 + 快捷开关 + 抽屉排序
+  var tagSel='', fFree=false, fStipend=false, fHousing=false, fTravel=false, fVerified=false, fHidePast=false, sortBy='deadline';
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
   var velX=0, velY=0, targetScale=null;
   var perfTier=0, costArr=[], sheetDrag=false;   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
@@ -427,8 +448,23 @@
   function splitScale(){ return (W<=720)? scale0*8 : scale0*2.6; }
   function inMotion(){ return dragging||inertiaOn||spinning||targetScale!=null||sheetDrag; }
 
+  // 完全免费:明确 free===true 且入选后不需付费(口径同老站,宁严不虚)
+  function isFullyFree(o){ var a=o.apply_fee, p=o.participation_fee;
+    if(!(a&&typeof a==='object'&&a.free===true)) return false;
+    if(p&&typeof p==='object'&&(p.required===true||p.amount)) return false;
+    return true; }
+  function isPastRec(o){ if(o.status==='expired') return true;
+    if(!o.deadline) return false;
+    var d=new Date(o.deadline+'T23:59:59'); return !isNaN(d)&&d<Date.now(); }
   function matchFilter(o){
     if(filterCat!=='all' && o.category!==filterCat) return false;
+    if(tagSel && D.tagsOf(o).indexOf(tagSel)<0) return false;
+    if(fFree && !isFullyFree(o)) return false;
+    if(fVerified && o.trust!=='verified') return false;
+    if(fHidePast && isPastRec(o)) return false;
+    if(fStipend && !(o.funding&&o.funding.stipend===true)) return false;
+    if(fHousing && !(o.funding&&o.funding.housing===true)) return false;
+    if(fTravel && !(o.funding&&o.funding.travel===true)) return false;
     if(query){ var s=(o.title_zh||'')+(o.org_zh||'')+(o.city_zh||'')+(o.country_zh||'')+(o.summary_zh||'');
       if(s.toLowerCase().indexOf(query.toLowerCase())<0) return false; }
     return true;
@@ -955,6 +991,8 @@
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
       imgReady:' 张已就绪',studioT:'画室点评工具',
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
+      tagAll:'全部门类',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
+      fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',
       k_org:'主办',k_loc:'地点',k_dl:'截止',k_fee:'费用',k_fund:'资助',k_elig:'资格',k_disc:'门类',k_src:'来源',k_pub:'发布',
       srcLoc:'落点=信源所在地(非内容发生地)',tipMore:'点击看完整详情',clusterN:' 项活跃索引',clusterGo:'点击放大展开',
       dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
@@ -993,6 +1031,8 @@
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
       imgReady:' ready',studioT:'Studio critique tool',
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
+      tagAll:'All fields',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
+      fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',
       k_org:'Host',k_loc:'Place',k_dl:'Due',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligible',k_disc:'Fields',k_src:'Source',k_pub:'Date',
       srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
@@ -1024,7 +1064,7 @@
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
     document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
-    renderLegend(); renderDrawer(); needDraw=true; }
+    renderLegend(); renderTagRow(); renderFltRow(); renderDrawer(); needDraw=true; }
   document.getElementById('btnLang').addEventListener('click',function(){
     lang=(lang==='zh')?'en':'zh';
     try{ localStorage.setItem('ap_lang',lang); }catch(e){}
@@ -1650,16 +1690,26 @@
     renderLegend(); renderDrawer(); needDraw=true; return added; }
   // —— 抽屉列表:与地球同一份筛选状态,双向联动 ——
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); }
+  function dlRank(o){ if(!o.deadline) return 5e8;
+    var d=new Date(o.deadline+'T23:59:59'); if(isNaN(d)) return 5e8;
+    var n=Math.ceil((d-Date.now())/86400000);
+    return n<0 ? 2e9-n : n; }   // 未过期越近越前;常年居中后;已过期置底
   function renderDrawer(){
     var el=document.getElementById('lcList'); if(!el) return;
-    var out=[], n=0;
-    for(var i=0;i<markers.length;i++){ var o=markers[i].o;
-      if(!matchFilter(o)) continue; n++;
+    var srt=document.getElementById('lcSort');
+    if(srt) srt.textContent=(sortBy==='deadline'?L('sortDL'):L('sortNew'))+' ⇅';
+    var arr=[], n=0;
+    for(var i0=0;i0<markers.length;i0++){ if(matchFilter(markers[i0].o)) arr.push(markers[i0]); }
+    n=arr.length;
+    if(sortBy==='deadline') arr.sort(function(a,b){ return dlRank(a.o)-dlRank(b.o); });
+    else arr.sort(function(a,b){ return b.idx-a.idx; });
+    var out=[];
+    for(var i=0;i<arr.length;i++){ var o=arr[i].o;
       if(out.length<400){ var c=CAT[o.category]||CAT.opencall;
         var cov=o.cover?esc(o.cover):'';
         var th='<span class="th"><span class="ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
           (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
-        out.push('<div class="oc" data-i="'+markers[i].idx+'"><span class="bar" style="background:'+c.color+'"></span>'+th+'<div>'+
+        out.push('<div class="oc" data-i="'+arr[i].idx+'"><span class="bar" style="background:'+c.color+'"></span>'+th+'<div>'+
           '<div class="t">'+esc(tt(o))+'</div>'+
           '<div class="m">'+esc([o.city_zh||o.country_zh||o.org_zh,o.deadline?(L('k_dl')+' '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
     document.getElementById('lcCount').textContent=L('listN')(n);
@@ -1684,6 +1734,31 @@
     d3.selectAll('#legend .lg-item').on('click',function(){ var k3=this.getAttribute('data-cat');
       filterCat=(filterCat===k3)?'all':k3;
       syncLegend(); renderDrawer(); needDraw=true; }); }
+  // 门类 chips(单选,再点取消)+ 快捷筛选开关(多选)——老站筛选体系并入分类索引面板
+  function renderTagRow(){
+    var el=document.getElementById('tagRow'); if(!el) return;
+    el.innerHTML='<span class="tgc'+(tagSel===''?' on':'')+'" data-tag="">'+L('tagAll')+'</span>'+
+      D.TAGS.map(function(t){
+        return '<span class="tgc'+(tagSel===t.id?' on':'')+'" data-tag="'+t.id+'">'+
+          '<i style="background:hsl('+t.h+',45%,55%)"></i>'+(lang==='en'?t.en:t.zh)+'</span>'; }).join('');
+    d3.selectAll('#tagRow .tgc').on('click',function(){
+      var tg=this.getAttribute('data-tag');
+      tagSel=(tagSel===tg)?'':tg;
+      renderTagRow(); renderDrawer(); needDraw=true; }); }
+  function renderFltRow(){
+    var el=document.getElementById('fltRow'); if(!el) return;
+    var items=[['fFree',fFree],['fStipend',fStipend],['fHousing',fHousing],['fTravel',fTravel],
+      ['fVerified',fVerified],['fHidePast',fHidePast]];
+    el.innerHTML=items.map(function(x){
+      return '<span class="tgc'+(x[1]?' on':'')+'" data-f="'+x[0]+'">'+L(x[0])+'</span>'; }).join('');
+    d3.selectAll('#fltRow .tgc').on('click',function(){
+      var k4=this.getAttribute('data-f');
+      if(k4==='fFree') fFree=!fFree; else if(k4==='fStipend') fStipend=!fStipend;
+      else if(k4==='fHousing') fHousing=!fHousing; else if(k4==='fTravel') fTravel=!fTravel;
+      else if(k4==='fVerified') fVerified=!fVerified; else if(k4==='fHidePast') fHidePast=!fHidePast;
+      renderFltRow(); renderDrawer(); needDraw=true; }); }
+  document.getElementById('lcSort').addEventListener('click',function(){
+    sortBy=(sortBy==='deadline')?'new':'deadline'; renderDrawer(); });
   function flyToRecord(rec){ var loc=D.locate(rec); if(loc) flyTo(loc.ll, Math.max(splitScale()*1.5, proj.scale())); }
   // ✦ AI 检索:真调用 /api/search,新机会实时落点地球
   var searching=false;
@@ -1725,7 +1800,7 @@
   function normWork(w){ return { id:'work-'+w.id, category:'works',
     title_zh:w.title||'无题', title_en:w.title||'', org_zh:(w.author&&w.author.nickname)||'佚名',
     cover:(w.images&&w.images[0])||'', images:w.images||[], n:w.n||((w.images||[]).length),
-    summary_zh:w.description||'', trust:'user',
+    summary_zh:w.description||'', trust:'user', tags:w.tags||[],
     ip_region:w.ip_region||(w.author&&w.author.ip_region)||null }; }
   // 首屏只等最小关键路径(世界底图 ~110KB):先把地球画出来;
   // 四频道数据各自异步到达、增量落点(opportunities 已 1MB,绝不挡首屏)
