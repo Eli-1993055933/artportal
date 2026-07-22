@@ -182,7 +182,8 @@
 <div id="sitebar">
   <div class="logo"><i></i>ARTPORTAL<span>&nbsp;GLOBE</span></div>
   <nav id="chn">
-    <span class="ch on" data-ch="opportunities">机会</span>
+    <span class="ch on" data-ch="globe">索引</span>
+    <span class="ch" data-ch="opportunities">机会</span>
     <span class="ch" data-ch="jobs">招聘</span>
     <span class="ch" data-ch="news">资讯</span>
     <span class="ch" data-ch="works">作品</span>
@@ -200,7 +201,7 @@
 <div id="panel">
   <div class="card">
     <div class="hd"><span>实时索引库</span><span class="badge"><i></i>ACTIVE</span></div>
-    <div class="bignum" id="total">0<small>项全球活跃机遇</small></div>
+    <div class="bignum" id="total">0<small>项全球活跃索引</small></div>
     <div class="tip">拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。</div>
   </div>
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
@@ -611,6 +612,8 @@
     if(o.org_zh) lines.push(esc(o.org_zh));
     var loc=[o.city_zh,o.country_zh].filter(Boolean).join(' · '); if(loc) lines.push(esc(loc));
     if(o.deadline){ var dl=daysLeft(o.deadline); lines.push('截止 '+esc(o.deadline)+(dl?(' · '+dl):'')); }
+    if(o.published_at) lines.push('发布 '+esc(String(o.published_at).slice(0,10)));
+    if(m.prec==='信源地') lines.push('落点=信源所在地(非内容发生地)');
     var fee=feeText(o); if(fee) lines.push('费用 '+esc(fee));
     var fnd=fundingText(o); if(fnd) lines.push('资助 '+esc(fnd));
     var sum=o.summary_zh?esc(String(o.summary_zh).slice(0,76))+'…':'';
@@ -658,8 +661,11 @@
       row('门类',disc&&String(disc).slice(0,60))+
       row('来源',src)+
       (o.summary_zh?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(o.summary_zh).slice(0,230))+'</div>'):'');
-    document.getElementById('d-go').href=o.url||o.source_url||'#';
+    var isCh=(o.category==='jobs'||o.category==='news'||o.category==='works');
+    var go=document.getElementById('d-go'); go.href=o.url||o.source_url||'#';
+    go.textContent=(o.category==='jobs')?'前往申请 ↗':((o.category==='news')?'阅读原文 ↗':'前往官网 ↗');
     var op=document.getElementById('d-open'); op.href='/#/o/'+encodeURIComponent(o.id||''); op.target='_blank'; op.onclick=null;
+    op.style.display=isCh?'none':'inline-block';   // 招聘/资讯暂无站内详情页
     var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; }
 
   // —— 真实功能接线 ——
@@ -677,17 +683,28 @@
     if(!t0) t0=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
     applyTheme(t0); })();
   // 频道/列表/发布/通知/登录:接主站真页面
-  // 频道切换:不换页——地球虚化留在背后,该频道列表浮层展开(真数据)
-  var chCache={};
+  // 顶栏=索引(地球)+四频道;点频道不换页——地球虚化留在背后,该频道列表浮层展开(真数据)
+  var chCache={}, chStore={};
   d3.selectAll('#chn .ch').on('click',function(){ var el=this, ch=el.getAttribute('data-ch');
     d3.selectAll('#chn .ch').classed('on',function(){ return this===el; });
-    if(ch==='opportunities'){ hideChPanel(); return; }
+    if(ch==='globe'){ hideChPanel(); return; }
     showChPanel(ch); });
   function hideChPanel(){ document.getElementById('chpanel').style.display='none'; }
   function showChPanel(ch){
     var pane=document.getElementById('chpanel'), inner=document.getElementById('chInner');
     pane.style.display='block';
     inner.innerHTML='<div class="rm" style="padding:8px 2px">加载中…</div>';
+    if(ch==='opportunities'){   // 机会浮层:与其他频道同款磨砂列表,点行开详情卡
+      var os=chStore.opportunities||[];
+      var orows=os.slice(0,120).map(function(o,i){
+        var c=CAT[o.category]||CAT.opencall, cov=o.cover?esc(o.cover):'';
+        var th='<span class="rth"><span class="ph" style="background:'+c.color+'">'+esc((o.title_zh||o.title_en||'·').charAt(0))+'</span>'+
+          (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
+        var m=esc([o.org_zh,[o.city_zh,o.country_zh].filter(Boolean).join('·'),o.deadline?('截止 '+o.deadline):''].filter(Boolean).join(' · '));
+        return '<div class="row" data-oi="'+i+'">'+th+'<div class="rbody"><div class="rt">'+esc(o.title_zh||o.title_en||'')+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
+      inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">机会 · '+os.length+
+        ' 项 · 地球仍在背后,点「索引」即回(点击条目看详情)</div>'+(orows||'<div class="rm">还没有数据</div>');
+      return; }
     if(ch==='works'){
       var loadW=chCache.works?Promise.resolve(chCache.works):fetch('/api/works/feed')
         .then(function(r){ return r.json(); }).then(function(j){ chCache.works=j; return j; });
@@ -719,12 +736,14 @@
           (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
         return '<div class="row" data-u="'+u+'">'+th+'<div class="rbody"><div class="rt">'+t+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
       inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">'+(ch==='jobs'?'招聘':'资讯')+' · '+items.length+
-        ' 条 · 地球仍在背后,点「机会」即回(点击条目直达原文)</div>'+rows;
+        ' 条 · 地球仍在背后,点「索引」即回(点击条目直达原文)</div>'+rows;
     }).catch(function(){ inner.innerHTML='<div class="rm">加载失败</div>'; }); }
   document.getElementById('chInner').addEventListener('click',function(e){
     var w=e.target.closest('.wcard');
     if(w){ var im=w.getAttribute('data-img'); if(im) window.open(im,'_blank','noopener'); return; }
     var d=e.target.closest('.row'); if(!d) return;
+    var oi=d.getAttribute('data-oi');
+    if(oi!=null){ var o=(chStore.opportunities||[])[+oi]; if(o) showDetail(o); return; }   // 机会行→详情卡(浮层之上)
     var u=d.getAttribute('data-u'); if(u&&u!=='#') window.open(u,'_blank','noopener'); });
   // 左栏收起/展开(替代跳页)
   document.getElementById('btnList').addEventListener('click',function(){
@@ -745,7 +764,8 @@
         if(n&&n.unread>0) document.getElementById('btnBell').textContent='🔔'+(n.unread>9?'9+':n.unread); }).catch(function(){}); }
   }).catch(function(){});
   // 数据入库(初始加载与检索新增共用):建点/建簇/计数/图例
-  var catCounts={opencall:0,residency:0,award:0,workshop:0}, placedTotal=0, seenIds={};
+  var catCounts={opencall:0,residency:0,award:0,workshop:0,jobs:0,news:0,works:0}, placedTotal=0, seenIds={};
+  var LEGEND_KEYS=['opencall','residency','award','workshop','jobs','news','works'];
   function addRecords(arr){ var added=0;
     (arr||[]).forEach(function(o){ if(!o||!o.id||seenIds[o.id]) return;
       var loc=D.locate(o); if(!loc) return; seenIds[o.id]=1;
@@ -754,11 +774,11 @@
       var mll=[loc.ll[0]+jx,loc.ll[1]+jy];
       var mk={o:o,ll:mll,cart:ll2c(mll),prec:loc.prec,sx:null,sy:null,idx:markers.length};
       markers.push(mk);
-      var key=o.city_zh||o.country_zh||'其他';
+      var key=o.city_zh||(o.category==='news'&&o.source)||o.country_zh||'其他';   // 资讯按信源聚簇
       var g=groups[key]||(groups[key]={key:key,ll:loc.ll,cart:ll2c(loc.ll),items:[],sx:null,sy:null,r:0,count:0,single:null});
       g.items.push(mk);
       catCounts[cat]=(catCounts[cat]||0)+1; placedTotal++; added++; });
-    document.getElementById('total').innerHTML=placedTotal+'<small>项全球活跃机遇</small>';
+    document.getElementById('total').innerHTML=placedTotal+'<small>项全球活跃索引</small>';
     renderLegend(); renderDrawer(); needDraw=true; return added; }
   // —— 抽屉列表:与地球同一份筛选状态,双向联动 ——
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); }
@@ -773,7 +793,7 @@
           (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
         out.push('<div class="oc" data-i="'+markers[i].idx+'"><span class="bar" style="background:'+c.color+'"></span>'+th+'<div>'+
           '<div class="t">'+esc(o.title_zh||o.title_en)+'</div>'+
-          '<div class="m">'+esc([o.city_zh||o.country_zh,o.deadline?('截止 '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
+          '<div class="m">'+esc([o.city_zh||o.country_zh||o.org_zh,o.deadline?('截止 '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
     document.getElementById('lcCount').textContent='结果列表 · '+n+' 项(点卡片飞过去)';
     el.innerHTML=out.join(''); }
   function selectCard(d){ var prev=document.querySelector('.oc.sel'); if(prev) prev.classList.remove('sel');
@@ -791,7 +811,7 @@
   document.getElementById('lcList').addEventListener('mouseout',function(e){
     if(e.target.closest('.oc')){ focusMk=null; focusKey=null; needDraw=true; } });
   function renderLegend(){
-    document.getElementById('legend').innerHTML=['opencall','residency','award','workshop'].map(function(k2){
+    document.getElementById('legend').innerHTML=LEGEND_KEYS.map(function(k2){
       return '<div class="lg-item'+((filterCat!=='all'&&filterCat!==k2)?' off':'')+'" data-cat="'+k2+'"><span class="sw" style="background:'+CAT[k2].color+'"></span><span class="nm">'+CAT[k2].zh+'</span><span class="ct">'+(catCounts[k2]||0)+'</span></div>'; }).join('');
     d3.selectAll('#legend .lg-item').on('click',function(){ var k3=this.getAttribute('data-cat');
       filterCat=(filterCat===k3)?'all':k3;
@@ -810,6 +830,7 @@
       .then(function(r){ return r.json(); })
       .then(function(r){
         if(r&&r.added&&r.added.length){ var n=addRecords(r.added);
+          chStore.opportunities=(chStore.opportunities||[]).concat(r.added);
           toast('检索完成:新收录 '+r.addedCount+' 条,'+n+' 条已落点地球');
           if(n) flyToRecord(r.added[0]); }
         else toast((r&&(r.message||r.error))||'检索完成:本次未发现可核实的新机会'); })
@@ -829,9 +850,17 @@
 
   // —— 数据加载 ——
   resize(); proj.rotate([-100,-30]);
+  // 招聘/资讯归一化成球面记录:字段对齐机会口径(city→city_zh 等),category 改频道键
+  function normJob(it,i){ return Object.assign({},it,{ category:'jobs',
+    id:it.id||('job-x'+i), title_zh:it.title_zh||it.title, org_zh:it.org_zh||it.org,
+    city_zh:it.city_zh||it.city, country_zh:it.country_zh||it.country, url:it.apply_url||it.url }); }
+  function normNews(it,i){ return Object.assign({},it,{ category:'news', topic:it.category||'',
+    id:it.id||('news-x'+i), title_zh:it.title_zh||it.title, org_zh:it.org_zh||it.source, url:it.url }); }
   Promise.all([
     d3.json('data/geo/countries-110m.json'),
-    d3.json('data/opportunities.json').catch(function(){ return null; })
+    d3.json('data/opportunities.json').catch(function(){ return null; }),
+    d3.json('data/jobs.json').catch(function(){ return null; }),
+    d3.json('data/news.json').catch(function(){ return null; })
   ]).then(function(res){
     countryFeats=topojson.feature(res[0],res[0].objects.countries).features;
     countryFeats.forEach(function(f){ if(f.properties.name==='China') cnNE=f; });   // 下钻视野自适应与境外判定用
@@ -850,7 +879,9 @@
       if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
       adminCache[CN_URL]=j; needDraw=true; }).catch(function(){});
     var arr=res[1]?(res[1].items||res[1].opportunities||res[1]):[]; if(!Array.isArray(arr)) arr=[];
-    addRecords(arr);
+    chStore.opportunities=arr; addRecords(arr);
+    if(res[2]){ chCache.jobs=res[2]; addRecords((res[2].jobs||res[2].items||[]).map(normJob)); }
+    if(res[3]){ chCache.news=res[3]; addRecords((res[3].items||[]).map(normNews)); }
     window.__gd={groups:groups,markers:markers,proj:proj,splitScale:splitScale,CATc:CAT,  // 调试钩子(集成时移除)
       state:function(){return {drillLevel:drillLevel,drilled:drilledCountry,prov:drilledProvAdcode,
         cnBase:cnBase?cnBase.length:0,cnJD:!!cnJD,adminFeats:adminFeats.length,
