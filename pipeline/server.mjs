@@ -20,6 +20,7 @@ import { extract } from "./lib/extract.mjs";
 import { verifyRecord, isParseableDate } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
+import { ipRegion } from "./lib/ipregion.mjs";
 import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { inspectChannel } from "./lib/qc.mjs";
@@ -510,7 +511,7 @@ function submissionToOpportunity(p, subId) {
     source_note: p.source_note || null,
     org_type: null, trust: "user",
     status: computeStatus(p.deadline), verified_at: null,
-    last_seen: today, updated_at: today, _via: "submit"
+    last_seen: today, updated_at: today, _via: "submit", ip_region: p.ip_region
   };
 }
 
@@ -527,10 +528,10 @@ async function publishSubmission(row) {
       ? { id: "submit-j" + row.id, title: p.title, title_zh: p.title, org: p.org, org_zh: p.org,
           city: p.city, country: p.country, employment_type: p.employment_type, salary: p.salary,
           deadline: p.deadline, summary: p.summary, summary_zh: p.summary,
-          apply_url: p.url, url: p.url, domain: dom, posted_at: today, _via: "submit" }
+          apply_url: p.url, url: p.url, domain: dom, posted_at: today, _via: "submit", ip_region: p.ip_region }
       : { id: "submit-n" + row.id, title: p.title, title_zh: p.title, source: p.source,
           url: p.url, domain: dom, published_at: p.published_at || today,
-          summary: p.summary, summary_zh: p.summary, added_at: today, _via: "submit" };
+          summary: p.summary, summary_zh: p.summary, added_at: today, _via: "submit", ip_region: p.ip_region };
     let dup = false;
     await withWriteLock(async () => {
       const cur = JSON.parse(await readFile(file, "utf8"));
@@ -666,6 +667,8 @@ async function handleAuthApi(req, res, u) {
       if (r.body && r.body.user) {   // 画室工具入口可见性:授权 uid 或管理员(STUDIO_OWNERS 未设时任何登录用户,先本人用)
         const owners = (process.env.STUDIO_OWNERS || "").split(",").map(s => s.trim()).filter(Boolean);
         r.body.user.studio = auth.isAdmin(req, ip) || owners.length === 0 || owners.includes(r.body.user.id);
+        // IP 属地合规:每次心跳按当前 IP 刷新用户属地(境内省级/境外国家),主页与列表展示用
+        r.body.user.ip_region = auth.touchIpRegion(r.body.user.id, ipRegion(ip));
       }
       return json(r);
     }
@@ -751,6 +754,7 @@ async function handleAuthApi(req, res, u) {
           id: c.id, parent: c.parent || null, content: c.content, created_at: c.created_at,
           likes: c.likes, liked: liked.has(c.id),
           status: viewer && c.uid === viewer.id ? c.status : "approved",
+          ip_region: c.ip_region || null,
           uid: c.uid, author: byId.get(c.uid) || null
         })) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
@@ -778,7 +782,7 @@ async function handleAuthApi(req, res, u) {
         }
         const mod = await moderateText(content, "comment");
         const status = mod.verdict === "pass" ? "approved" : "pending";   // AI 干净即显示,可疑压下待人工
-        const id = await db.insertComment({ kind, target, uid: me.id, email: me.email, parent, content, mod, status });
+        const id = await db.insertComment({ kind, target, uid: me.id, email: me.email, parent, content, mod, status, ip_region: ipRegion(ip) });
         await db.logModeration("comment", id, (status === "approved" ? "auto-approved:" : "created:") + mod.verdict, { kind, target, uid: me.id });
         auth.logEvent("comment", { uid: me.id, email: me.email, ip, id: String(id) });
         if (status === "approved") await notifyForComment({ id, kind, target, uid: me.id, parent, content }).catch(() => {});
@@ -860,7 +864,7 @@ async function handleAuthApi(req, res, u) {
         // (注:DeepSeek 只能审文字;图片内容靠 后台可见+举报+下架 兜底)
         const mod = await moderateText(v.data.title + "\n" + v.data.description, "work");
         const autoPass = mod.verdict === "pass";
-        const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, tags: v.data.tags, mod });
+        const id = await db.insertWork({ uid: me.id, email: me.email, title: v.data.title, description: v.data.description, tags: v.data.tags, mod, ip_region: ipRegion(ip) });
         const dir = autoPass ? WORKS_PUB : WORKS_PENDING;
         await mkdir(dir, { recursive: true });
         const names = [];
@@ -894,6 +898,7 @@ async function handleAuthApi(req, res, u) {
           id: w.id, uid: w.uid, title: w.title, description: w.description || "",
           created_at: w.created_at, n: w.images.length, tags: w.tags || [],
           images: w.images.map(n => "assets/works/" + n),
+          ip_region: w.ip_region || null,
           author: byId.get(w.uid) || null
         })) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
@@ -907,7 +912,7 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 200, body: { works: rows.map(w => ({
           id: w.id, title: w.title, description: w.description || "",
           created_at: w.created_at, n: w.images.length, tags: w.tags || [],
-          status: own ? w.status : "approved",
+          status: own ? w.status : "approved", ip_region: w.ip_region || null,
           images: w.status === "approved" ? w.images.map(n => "assets/works/" + n) : []
         })) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
@@ -1083,6 +1088,7 @@ async function handleAuthApi(req, res, u) {
         if (!(await db.submissionRateOk(user.id))) return json({ code: 429, body: { error: "今天投稿已达上限(5 条),明天再来" } });
         const modText = [v.data.title, v.data.org, v.data.source, v.data.city, v.data.country, v.data.salary, v.data.summary, v.data.url, v.data.source_note].filter(Boolean).join("\n");
         const mod = await moderateText(modText);
+        v.data.ip_region = ipRegion(ip) || undefined;   // 用户投稿带发布时属地,发布记录透传展示
         const id = await db.insertSubmission({ uid: user.id, email: user.email, payload: v.data, mod, ip });
         await db.logModeration("submission", id, "created:" + mod.verdict, { hits: mod.hits, ai: mod.ai });
         auth.logEvent("submit", { uid: user.id, email: user.email, ip, id: String(id) });

@@ -285,7 +285,7 @@ export function usersMini(uids) {
   const byId = new Map(users.map(u => [u.id, u]));
   return uids.map(id => {
     const u = byId.get(id);
-    return u && u.nickname ? { id: u.id, nickname: u.nickname, avatar: u.avatar || null, identity: (u.profile || {}).identity || "" } : null;
+    return u && u.nickname ? { id: u.id, nickname: u.nickname, avatar: u.avatar || null, identity: (u.profile || {}).identity || "", ip_region: u.ip_region || null } : null;
   }).filter(Boolean);
 }
 export function userExists(uid) { return users.some(u => u.id === uid && u.nickname); }
@@ -303,8 +303,17 @@ export function publicProfile(uid, ip) {
     website: p.website || "", fields: p.fields || "",
     joined: String(u.created_at || "").slice(0, 10),
     fav_public: pub, fav_count: (u.favorites || []).length,
-    favorites: pub ? (u.favorites || []) : []
+    favorites: pub ? (u.favorites || []) : [],
+    ip_region: u.ip_region || null   // IP 属地合规展示(境内省级/境外国家,不含具体 IP)
   } } };
+}
+
+// IP 属地:按最近活跃 IP 更新(仅属地变化才落盘);返回当前属地供 me 响应
+export function touchIpRegion(uid, region) {
+  const u = users.find(x => x.id === uid);
+  if (!u) return region || null;
+  if (region && (!u.ip_region || u.ip_region.disp !== region.disp)) { u.ip_region = region; saveUsers(); }
+  return u.ip_region || null;
 }
 
 // ---------- 用户资料:昵称(全站唯一) + 头像(必填) ----------

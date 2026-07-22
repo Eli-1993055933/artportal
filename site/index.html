@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.78.3" />
+<meta name="app-version" content="0.79.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -386,11 +386,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.3</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.79.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.78.3"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.78.3"></script>
-<script src="js/globe-data.js?v=0.78.3"></script>
+<script src="assets/vendor/d3.min.js?v=0.79.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.79.0"></script>
+<script src="js/globe-data.js?v=0.79.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -858,6 +858,8 @@
     if(o.deadline){ var dl=daysLeft(o.deadline); lines.push(L('k_dl')+' '+esc(o.deadline)+(dl?(' · '+dl):'')); }
     if(o.published_at) lines.push(L('k_pub')+' '+esc(String(o.published_at).slice(0,10)));
     if(m.prec==='信源地') lines.push(L('srcLoc'));
+    if(o.ip_region) lines.push(L('ipLoc')+' '+esc(o.ip_region.disp));
+    if(m.prec==='IP属地') lines.push(L('ipPin'));
     var fee=feeText(o); if(fee) lines.push(L('k_fee')+' '+esc(fee));
     var fnd=fundingText(o); if(fnd) lines.push(L('k_fund')+' '+esc(fnd));
     var sum=ss(o)?esc(String(ss(o)).slice(0,76))+'…':'';
@@ -905,9 +907,14 @@
       row(L('k_elig'),eligText(o))+
       row(L('k_disc'),disc&&String(disc).slice(0,60))+
       row(L('k_src'),src)+
+      row(L('ipLoc'),o.ip_region&&o.ip_region.disp)+
       (ss(o)?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(ss(o)).slice(0,230))+'</div>'):'');
-    var go=document.getElementById('d-go'); go.href=o.url||o.source_url||'#';
-    go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read'):L('go'));
+    var go=document.getElementById('d-go');
+    if(o.category==='works'&&o.images&&o.images.length){   // 作品:前往=站内灯箱看大图
+      go.href='javascript:;'; go.textContent=L('viewImgs');
+      go.onclick=function(ev){ ev.preventDefault(); openLB(o.images,0); }; }
+    else { go.onclick=null; go.href=o.url||o.source_url||'#';
+      go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read'):L('go')); }
     var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; ensureGuard(); }
 
   // —— 真实功能接线 ——
@@ -947,6 +954,7 @@
       peWebsite:'个人网站(https:// 开头)',peBio:'个人简介',peFavPub:'公开我的收藏',peNlK:'订阅周报',
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
       imgReady:' 张已就绪',studioT:'画室点评工具',
+      ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
       k_org:'主办',k_loc:'地点',k_dl:'截止',k_fee:'费用',k_fund:'资助',k_elig:'资格',k_disc:'门类',k_src:'来源',k_pub:'发布',
       srcLoc:'落点=信源所在地(非内容发生地)',tipMore:'点击看完整详情',clusterN:' 项活跃索引',clusterGo:'点击放大展开',
       dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
@@ -984,6 +992,7 @@
       peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
       imgReady:' ready',studioT:'Studio critique tool',
+      ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
       k_org:'Host',k_loc:'Place',k_dl:'Due',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligible',k_disc:'Fields',k_src:'Source',k_pub:'Date',
       srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
@@ -1067,7 +1076,9 @@
           return '<div class="wcard" data-wj="'+wi+'">'+
             (img?'<img class="wimg" loading="lazy" src="'+img+'" alt="">':'<div class="wimg"></div>')+
             '<div class="wt">'+esc(w.title||'无题')+'</div>'+
-            '<div class="wa">'+esc((w.author&&w.author.nickname)||'佚名')+(w.n>1?(' · '+w.n+' 图'):'')+'</div></div>'; }).join('');
+            '<div class="wa">'+esc((w.author&&w.author.nickname)||'佚名')+(w.n>1?(' · '+w.n+' 图'):'')+
+            (function(){ var r3=w.ip_region||(w.author&&w.author.ip_region);
+              return r3&&r3.disp?(' · '+L('ipLoc')+'·'+esc(r3.disp)):''; })()+'</div></div>'; }).join('');
         inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">作品广场 · '+ws.length+
           ' 件(点击看大图)</div>'+
           (cards?'<div class="wgrid">'+cards+'</div>':'<div class="rm">还没有公开作品</div>');
@@ -1381,6 +1392,7 @@
     if(u.identity&&I18N[lang]['idn_'+u.identity]) meta.push(L('idn_'+u.identity));
     if(u.location) meta.push(esc(u.location));
     if(u.joined) meta.push(L('ppJoined')+' '+esc(u.joined));
+    if(u.ip_region&&u.ip_region.disp) meta.push(L('ipLoc')+':'+esc(u.ip_region.disp));
     var favN=(u.fav_public||isMe)?(' '+((u.favorites||[]).length)):'';
     var subs=proCur.submissions||[];
     var btns=isMe
@@ -1438,7 +1450,8 @@
               (cov?('<img loading="lazy" src="'+esc(cov)+'" alt="">'):'<div style="aspect-ratio:1/1;background:#eceae2"></div>')+
               ((isMe&&w.status&&w.status!=='approved')?('<span class="st">'+L(w.status==='rejected'?'wkRej':'wkPend')+'</span>'):'')+
               (isMe?('<button class="del" type="button" data-del="'+esc(w.id)+'">'+L('wkDel')+'</button>'):'')+
-              '<div class="wt">'+esc(w.title||'')+(w.n>1?(' · '+w.n):'')+'</div></div>'; }).join('')+'</div>')
+              '<div class="wt">'+esc(w.title||'')+(w.n>1?(' · '+w.n):'')+
+              (w.ip_region&&w.ip_region.disp?('<span style="color:var(--muted)"> · '+esc(w.ip_region.disp)+'</span>'):'')+'</div></div>'; }).join('')+'</div>')
             :('<div class="pp-empty">'+L('ppEmptyT')+'</div>'));
           var ub=body.querySelector('#ppUp');
           if(ub) ub.addEventListener('click',function(){ openWorkUp(function(){ loadProfile(u.id); }); });
@@ -1629,7 +1642,7 @@
       var mll=[loc.ll[0]+jx,loc.ll[1]+jy];
       var mk={o:o,ll:mll,cart:ll2c(mll),prec:loc.prec,sx:null,sy:null,idx:markers.length};
       markers.push(mk);
-      var key=o.city_zh||(o.category==='news'&&o.source)||o.country_zh||'其他';   // 资讯按信源聚簇
+      var key=o.city_zh||(o.category==='news'&&o.source)||(o.ip_region&&(o.ip_region.city||o.ip_region.disp))||o.country_zh||'其他';   // 资讯按信源聚簇,作品按属地聚簇
       var g=groups[key]||(groups[key]={key:key,ll:loc.ll,cart:ll2c(loc.ll),items:[],sx:null,sy:null,r:0,count:0,single:null});
       g.items.push(mk);
       catCounts[cat]=(catCounts[cat]||0)+1; placedTotal++; added++; });
@@ -1708,6 +1721,12 @@
     city_zh:it.city_zh||it.city, country_zh:it.country_zh||it.country, url:it.apply_url||it.url }); }
   function normNews(it,i){ return Object.assign({},it,{ category:'news', topic:it.category||'',
     id:it.id||('news-x'+i), title_zh:it.title_zh||it.title, org_zh:it.org_zh||it.source, url:it.url }); }
+  // 作品:按作品发布时 IP 属地落点(缺失回落作者当前属地),trust=用户投稿
+  function normWork(w){ return { id:'work-'+w.id, category:'works',
+    title_zh:w.title||'无题', title_en:w.title||'', org_zh:(w.author&&w.author.nickname)||'佚名',
+    cover:(w.images&&w.images[0])||'', images:w.images||[], n:w.n||((w.images||[]).length),
+    summary_zh:w.description||'', trust:'user',
+    ip_region:w.ip_region||(w.author&&w.author.ip_region)||null }; }
   // 首屏只等最小关键路径(世界底图 ~110KB):先把地球画出来;
   // 四频道数据各自异步到达、增量落点(opportunities 已 1MB,绝不挡首屏)
   d3.json('data/geo/countries-110m.json').then(function(res0){
@@ -1729,6 +1748,9 @@
     }).catch(function(){});
     d3.json('data/jobs.json').then(function(j){ chCache.jobs=j; addRecords((j.jobs||j.items||[]).map(normJob)); }).catch(function(){});
     d3.json('data/news.json').then(function(j){ chCache.news=j; addRecords((j.items||[]).map(normNews)); }).catch(function(){});
+    fetch('/api/works/feed').then(function(r){ return r.json(); }).then(function(j){
+      if(!j||!j.works) return; chCache.works=j;
+      addRecords(j.works.map(normWork)); }).catch(function(){});
     window.__gd={groups:groups,markers:markers,proj:proj,splitScale:splitScale,CATc:CAT,  // 调试钩子(集成时移除)
       state:function(){return {drillLevel:drillLevel,drilled:drilledCountry,prov:drilledProvAdcode,
         cnBase:cnBase?cnBase.length:0,cnJD:!!cnJD,adminFeats:adminFeats.length,

@@ -117,6 +117,9 @@ export async function getDb() {
     // v0.66.0:作品加艺术门类标签(作者自选 ≤3,tags.js 的 23 门类 slug)。
     // 旧库无此列 → ALTER 补上;已有则报"duplicate column"忽略即可。
     try { db.exec("ALTER TABLE works ADD COLUMN tags TEXT"); } catch (e) {}
+    // v0.79.0:IP 属地合规展示(发布/评论存创建时属地,JSON {country,province,city,disp})
+    try { db.exec("ALTER TABLE works ADD COLUMN ip_region TEXT"); } catch (e) {}
+    try { db.exec("ALTER TABLE comments ADD COLUMN ip_region TEXT"); } catch (e) {}
     return db;
   } catch (e) {
     loadErr = new Error("SQLite 不可用(better-sqlite3 未安装?): " + (e.message || e));
@@ -273,11 +276,13 @@ export async function notifMarkAllRead(uid) {
 }
 
 // ---------- 评论(路线图第 2 项):四类内容通用(opportunity/news/job/work),扁平+一层回复 ----------
-const parseCmt = r => ({ ...r, mod: r.mod ? JSON.parse(r.mod) : null });
-export async function insertComment({ kind, target, uid, email, parent, content, mod, status }) {
+const parseJsonCol = s => { if (!s) return null; try { return JSON.parse(s); } catch (e) { return null; } };
+const parseCmt = r => ({ ...r, mod: r.mod ? JSON.parse(r.mod) : null, ip_region: parseJsonCol(r.ip_region) });
+export async function insertComment({ kind, target, uid, email, parent, content, mod, status, ip_region }) {
   const d = await getDb();
-  const r = d.prepare("INSERT INTO comments(kind,target,uid,email,parent,content,mod,status,created_at) VALUES(?,?,?,?,?,?,?,?,?)")
-    .run(kind, target, uid, email || null, parent || null, content, mod ? JSON.stringify(mod) : null, status, new Date().toISOString());
+  const r = d.prepare("INSERT INTO comments(kind,target,uid,email,parent,content,mod,status,ip_region,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)")
+    .run(kind, target, uid, email || null, parent || null, content, mod ? JSON.stringify(mod) : null, status,
+      ip_region ? JSON.stringify(ip_region) : null, new Date().toISOString());
   return Number(r.lastInsertRowid);
 }
 // 某条内容下的评论:公开的(approved)+ 查看者自己的待审(让作者看到"审核中")
@@ -376,11 +381,13 @@ export async function followRateOk(uid, max = 100) {
 }
 
 // ---------- 作品集(路线图 8.3):图片人工审核通过才公开 ----------
-const parseWork = r => ({ ...r, images: JSON.parse(r.images || "[]"), tags: JSON.parse(r.tags || "[]"), mod: r.mod ? JSON.parse(r.mod) : null });
-export async function insertWork({ uid, email, title, description, tags, mod }) {
+const parseWork = r => ({ ...r, images: JSON.parse(r.images || "[]"), tags: JSON.parse(r.tags || "[]"),
+  mod: r.mod ? JSON.parse(r.mod) : null, ip_region: parseJsonCol(r.ip_region) });
+export async function insertWork({ uid, email, title, description, tags, mod, ip_region }) {
   const d = await getDb();
-  const r = d.prepare("INSERT INTO works(uid,email,title,description,tags,mod,created_at) VALUES(?,?,?,?,?,?,?)")
-    .run(uid, email || null, title, description || null, JSON.stringify(tags || []), mod ? JSON.stringify(mod) : null, new Date().toISOString());
+  const r = d.prepare("INSERT INTO works(uid,email,title,description,tags,mod,ip_region,created_at) VALUES(?,?,?,?,?,?,?,?)")
+    .run(uid, email || null, title, description || null, JSON.stringify(tags || []), mod ? JSON.stringify(mod) : null,
+      ip_region ? JSON.stringify(ip_region) : null, new Date().toISOString());
   return Number(r.lastInsertRowid);
 }
 export async function setWorkImages(id, paths) {

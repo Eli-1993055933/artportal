@@ -142,6 +142,15 @@
       {ll:[140,-26], zh:"大洋洲", en:"Oceania"}
     ]
   };
+  // 省(短名)-> 省会城市(IP 属地落点用:属地只到省级时按省会坐标,如实标注"IP属地")
+  var PROV_CAP = {
+    "北京":"北京","天津":"天津","河北":"石家庄","山西":"太原","内蒙古":"呼和浩特","辽宁":"沈阳",
+    "吉林":"长春","黑龙江":"哈尔滨","上海":"上海","江苏":"南京","浙江":"杭州","安徽":"合肥",
+    "福建":"福州","江西":"南昌","山东":"济南","河南":"郑州","湖北":"武汉","湖南":"长沙",
+    "广东":"广州","广西":"南宁","海南":"海口","重庆":"重庆","四川":"成都","贵州":"贵阳",
+    "云南":"昆明","西藏":"拉萨","陕西":"西安","甘肃":"兰州","青海":"西宁","宁夏":"银川",
+    "新疆":"乌鲁木齐","台湾":"台北","香港":"香港","澳门":"澳门"
+  };
   window.GLOBE_DATA = { CITY:CITY, COUNTRY:COUNTRY, NAME_ZH:NAME_ZH, CATEGORY:CATEGORY, REGIONS:REGIONS,
     // 条目 -> [lng,lat]:优先城市,其次国家中心;资讯再兜底信源驻地;都无则 null(不落点,绝不编造)
     locate:function(o){
@@ -153,6 +162,11 @@
         for(var key in SOURCE_LOC){ if(s.indexOf(key)>=0){
           var v=SOURCE_LOC[key], ll=(typeof v==='string')?CITY[v]:v;
           if(ll) return {ll:ll, prec:"信源地"}; } } }
+      // 作品/用户发布:按 IP 属地落点(境内省会/城市,境外国家中心),如实标注
+      if(o.ip_region){ var r2=o.ip_region, ll2=null;
+        if(r2.country==="中国") ll2=CITY[r2.city]||CITY[PROV_CAP[r2.province]]||COUNTRY["中国"];
+        else ll2=COUNTRY[r2.country]||null;
+        if(ll2) return {ll:ll2, prec:"IP属地"}; }
       return null;
     }
   };
