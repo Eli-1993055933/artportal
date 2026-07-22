@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.6" />
+<meta name="app-version" content="0.77.7" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -200,9 +200,14 @@
   }
   @media (max-width:720px){
     /* 底部抽屉:拖把手上滑展开列表,地球同步缩小(JS 联动) */
-    #panel{left:10px;right:10px;top:56vh;bottom:0;width:auto;gap:6px;
+    /* 高度定死(top:15vh),位置全靠 transform 平移:合成器动画不触发重排,拖拽跟手;
+       touch-action:none 防浏览器抢手势发 pointercancel(真机拖不动/卡顿的根源),列表区保留纵向滚动 */
+    #panel{left:10px;right:10px;top:15vh;bottom:0;width:auto;gap:6px;
       background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;
-      box-shadow:0 -8px 30px rgba(0,0,0,.12);padding:0 10px 8px}
+      box-shadow:0 -8px 30px rgba(0,0,0,.12);padding:0 10px 8px;
+      transform:translateY(41vh);will-change:transform;touch-action:none}
+    #panel .lc-scroll{touch-action:pan-y}
+    #panel input,#panel .ai{touch-action:auto}
     #sheetbar{display:flex;justify-content:center;padding:9px 0 3px;cursor:grab;touch-action:none;flex:0 0 auto}
     #sheetbar i{width:42px;height:4px;border-radius:2px;background:var(--line)}
     #panel .card{border:0;box-shadow:none;background:transparent;padding:6px 6px}
@@ -379,11 +384,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.6</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.7</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.6"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.6"></script>
-<script src="js/globe-data.js?v=0.77.6"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.7"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.7"></script>
+<script src="js/globe-data.js?v=0.77.7"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -415,7 +420,9 @@
   function frontC(cart){ return cart[0]*rc[0]+cart[1]*rc[1]+cart[2]*rc[2]>0.02; }
   function clampScale(s){ return Math.max(scale0*0.55, Math.min(scale0*maxK, s)); }   // maxK 随下钻自适应放宽
   function clampLat(v){ return Math.max(-88, Math.min(88, v)); }
-  function splitScale(){ return scale0*2.6; }   // 小于此=聚合簇,大于=散开单点
+  // 小于此=聚合簇(数字大圆),大于=散开单点可交互。
+  // 手机阈值大幅抬高:放大进最深层级前只见聚合圆,不出密密麻麻小点(防误触)
+  function splitScale(){ return (W<=720)? scale0*8 : scale0*2.6; }
   function inMotion(){ return dragging||inertiaOn||spinning||targetScale!=null||sheetDrag; }
 
   function matchFilter(o){
@@ -443,7 +450,7 @@
     rg.addColorStop(0,T.glow); rg.addColorStop(1,T.glow0);
     ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.12,0,2*PI); ctx.fill();
     ctx.beginPath(); pathC(SPHERE); ctx.fillStyle=T.sphere; ctx.fill();
-    if(!(perfTier>=2&&inMotion())){
+    if(!((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.beginPath(); pathC(grat); ctx.lineWidth=0.4; ctx.strokeStyle=T.grat; ctx.stroke(); }
     var cnDrilled=(drilledCountry==='China');
     for(var i=0;i<countryFeats.length;i++){ var f=countryFeats[i];
@@ -478,7 +485,7 @@
     function fitsLabel(rRad,txt,fs2){
       var cjk=/[一-鿿]/.test(txt);
       return 2*rRad*sc > txt.length*fs2*(cjk?1:0.56)*1.12; }
-    if(sc>scale0*0.82 && !(perfTier>=2&&inMotion())){
+    if(sc>scale0*0.82 && !((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var L=0;L<labelData.length;L++){ var d=labelData[L]; if(!frontC(d.cart)) continue;
         if(drilledCountry&&d.en===drilledCountry) continue;   // 下钻国不再标国名,让位区划名
@@ -493,7 +500,7 @@
     var AL=null;
     if(cnDrilled&&drillLevel===1) AL=provLabels;
     else if(drilledCountry&&adminLabels.length) AL=adminLabels;
-    if(AL&&AL.length&&!(perfTier>=2&&inMotion())){
+    if(AL&&AL.length&&!((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var A2=0;A2<AL.length;A2++){ var al=AL[A2]; if(!frontC(al.cart)) continue;
         // 字号随区划屏上大小自适应(10–15px);连 10px 都装不下就不标,绝不叠字
@@ -516,24 +523,25 @@
         if(!cnt){ g.sx=null; continue; }
         var pt=proj(g.ll); g.sx=pt[0]; g.sy=pt[1]; g.count=cnt; g.single=(cnt===1)?single:null;
         var dom='opencall', dv=0; for(var c2 in cc){ if(cc[c2]>dv){ dv=cc[c2]; dom=c2; } }
-        if(cnt===1){ g.r=4;
-          ctx.beginPath(); ctx.arc(pt[0],pt[1],4,0,2*PI);
+        if(cnt===1){ g.r=(W<=720)?6:4;
+          ctx.beginPath(); ctx.arc(pt[0],pt[1],g.r,0,2*PI);
           ctx.fillStyle=CAT[single.o.category]?CAT[single.o.category].color:'#C0392B'; ctx.fill();
           ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke(); }
-        else { var r=8+Math.min(9,Math.sqrt(cnt)*1.7); g.r=r;
+        else { var r=((W<=720)?10:8)+Math.min(9,Math.sqrt(cnt)*1.7); g.r=r;
           ctx.beginPath(); ctx.arc(pt[0],pt[1],r,0,2*PI);
           ctx.fillStyle=CAT[dom].color; ctx.fill();
           ctx.lineWidth=1.5; ctx.strokeStyle=T.mstroke; ctx.stroke();
           ctx.font='600 '+(cnt>=100?10:11)+'px -apple-system,sans-serif';
           ctx.fillStyle='#fff'; ctx.fillText(String(cnt),pt[0],pt[1]); }
-        if(g.key===focusKey){ ctx.beginPath(); ctx.arc(pt[0],pt[1],(cnt===1?4:g.r)+4,0,2*PI);
+        if(g.key===focusKey){ ctx.beginPath(); ctx.arc(pt[0],pt[1],g.r+4,0,2*PI);
           ctx.lineWidth=2; ctx.strokeStyle=CAT[dom].color; ctx.stroke(); } }
     } else {
       for(k in groups) groups[k].sx=null;
+      var mr=(W<=720)?5.5:4;   // 手机散点加大,好点
       for(m=0;m<markers.length;m++){ mk=markers[m];
         if(!matchFilter(mk.o) || !frontC(mk.cart)){ mk.sx=null; continue; }
         var pt2=proj(mk.ll); mk.sx=pt2[0]; mk.sy=pt2[1];
-        ctx.beginPath(); ctx.arc(pt2[0],pt2[1],4,0,2*PI);
+        ctx.beginPath(); ctx.arc(pt2[0],pt2[1],mr,0,2*PI);
         ctx.fillStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.fill();
         ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke();
         if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1],9,0,2*PI);
@@ -610,11 +618,11 @@
   // —— 命中检测(簇优先于散点,按当前模式) ——
   function hoverTest(e){
     var sc=proj.scale(), best=null, kind=null, k, g, m, mk;
-    if(sc<splitScale()){ var bd=1e9;
+    if(sc<splitScale()){ var bd=1e9, slop=(W<=720)?9:5;
       for(k in groups){ g=groups[k]; if(g.sx==null) continue;
-        var dx=g.sx-e.clientX, dy=g.sy-e.clientY, rr=(g.r+5)*(g.r+5), dd=dx*dx+dy*dy;
+        var dx=g.sx-e.clientX, dy=g.sy-e.clientY, rr=(g.r+slop)*(g.r+slop), dd=dx*dx+dy*dy;
         if(dd<rr&&dd<bd){ bd=dd; best=g; kind='c'; } } }
-    else { var bd2=121;
+    else { var bd2=(W<=720)?289:121;
       for(m=0;m<markers.length;m++){ mk=markers[m]; if(mk.sx==null) continue;
         var dx2=mk.sx-e.clientX, dy2=mk.sy-e.clientY, dd2=dx2*dx2+dy2*dy2;
         if(dd2<bd2){ bd2=dd2; best=mk; kind='m'; } } }
@@ -630,7 +638,8 @@
     if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
     if(hoverObj){
       if(hoverKind==='c'){ var g=hoverObj;
-        if(g.count===1){ showDetail(g.single.o); syncCard(g.single); }
+        // 手机:聚合圆(含单条)一律放大不弹卡——拆分成散点后点位才可交互
+        if(g.count===1&&W>720){ showDetail(g.single.o); syncCard(g.single); }
         else { tipEl.style.display='none'; flyTo(g.ll, Math.max(splitScale()*1.45, proj.scale()*1.9)); } }
       else { showDetail(hoverObj.o); syncCard(hoverObj); }
       return; }
@@ -1049,41 +1058,44 @@
     panelOpen=!panelOpen;
     document.getElementById('panel').style.display=panelOpen?'flex':'none';
     this.textContent=panelOpen?L('fold'):L('unfold'); });
-  // —— 移动端底部抽屉:头部整区可拖(列表/输入除外)+ 点把手切换 + 松手吸附最近档;地球同步缩小 ——
+  // —— 移动端底部抽屉:transform 平移(合成器,零重排)+ touch-action 锁手势,顺滑跟手;
+  //    头部整区可拖(列表/输入除外)+ 点把手切换 + 松手吸附;地球同步缩小 ——
   (function(){
     var sheet=document.getElementById('panel');
-    var drag=false, sy=0, st0=0, moved2=false, downT=null, pend=null, raf=false;
+    var drag=false, sy=0, ty0=0, curTy=null, moved2=false, downT=null, pend=null, raf=false;
     function isMob(){ return window.innerWidth<=720; }
-    function lim(){ return {min:Math.round(H*0.16), max:Math.round(H*0.56)}; }
-    function setTop(top,animate){
-      var Lm=lim(); top=Math.max(Lm.min,Math.min(Lm.max,top));
-      sheet.style.transition=animate?'top .28s ease':'none';
-      sheet.style.top=top+'px';
-      var p=(Lm.max-top)/(Lm.max-Lm.min);
+    function maxTy(){ return Math.round(H*0.41); }   // 收起=下移 41vh(顶边落在 56vh)
+    function setTy(ty,animate){
+      var mx=maxTy(); ty=Math.max(0,Math.min(mx,ty)); curTy=ty;
+      sheet.style.transition=animate?'transform .26s ease':'none';
+      sheet.style.transform='translateY('+Math.round(ty)+'px)';
+      var p=1-ty/mx;
       if(animate){ targetScale=clampScale(scale0*(1-0.4*p)); }
       else { targetScale=null; proj.scale(clampScale(scale0*(1-0.4*p))); needDraw=true; } }
-    function applyPend(){ raf=false; if(pend!=null&&drag){ setTop(pend,false); pend=null; } }
+    function applyPend(){ raf=false; if(pend!=null&&drag){ setTy(pend,false); pend=null; } }
     sheet.addEventListener('pointerdown',function(e){ if(!isMob()) return;
       var t=e.target;
       if(t.closest('.lc-scroll')||t.closest('input')||t.closest('.ai')||t.closest('.lg-item')) return;
-      drag=true; moved2=false; downT=t; sy=e.clientY; st0=sheet.getBoundingClientRect().top;
+      drag=true; moved2=false; downT=t; sy=e.clientY;
+      ty0=(curTy!=null)?curTy:Math.max(0,Math.round(sheet.getBoundingClientRect().top-H*0.15));
       sheetDrag=true; spinning=false;
       if(sheet.setPointerCapture){ try{ sheet.setPointerCapture(e.pointerId); }catch(err){} }
       e.preventDefault(); });
     sheet.addEventListener('pointermove',function(e){ if(!drag) return;
       var dy=e.clientY-sy; if(Math.abs(dy)>5) moved2=true;
-      pend=st0+dy;
+      pend=ty0+dy;
       if(!raf){ raf=true; requestAnimationFrame(applyPend); }
       e.preventDefault(); });
     function up(){ if(!drag) return; drag=false; sheetDrag=false;
-      var Lm=lim(), cur=sheet.getBoundingClientRect().top, mid=(Lm.min+Lm.max)/2;
+      var mx=maxTy(), cur=(curTy!=null)?curTy:mx, mid=mx/2;
       if(!moved2){   // 点一下把手=展开/收起切换
-        if(downT&&downT.closest('#sheetbar')) setTop(cur>mid?Lm.min:Lm.max,true);
+        if(downT&&downT.closest('#sheetbar')) setTy(cur>mid?0:mx,true);
         return; }
-      setTop(cur<mid?Lm.min:Lm.max,true); }   // 吸附最近档
+      setTy(cur<mid?0:mx,true); needDraw=true; }   // 吸附最近档
     sheet.addEventListener('pointerup',up);
-    sheet.addEventListener('pointercancel',function(){ drag=false; sheetDrag=false; });
-    window.addEventListener('resize',function(){ if(!isMob()){ sheet.style.top=''; sheet.style.transition=''; } });
+    sheet.addEventListener('pointercancel',function(){ drag=false; sheetDrag=false; needDraw=true; });
+    window.addEventListener('resize',function(){
+      if(!isMob()){ sheet.style.transform=''; sheet.style.transition=''; curTy=null; } });
   })();
   document.getElementById('btnPub').addEventListener('click',function(){ openPub(); });
   document.getElementById('btnBell').addEventListener('click',function(){ openNtf(); });
