@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.80.0" />
+<meta name="app-version" content="0.81.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -158,7 +158,24 @@
   /* 频道浮层:切频道不换页,地球虚化留在背后 */
   #chpanel{position:fixed;left:0;right:0;top:56px;bottom:26px;z-index:6;display:none;overflow-y:auto;
     background:rgba(247,246,242,.72);backdrop-filter:blur(7px)}
-  #chpanel .inner{max-width:760px;margin:18px auto;padding:0 16px}
+  #chpanel .inner{max-width:1080px;margin:14px auto;padding:0 16px}
+  /* 频道浮层顶部筛选条(与全局同一份筛选状态) */
+  #chpanel .chflt{margin-bottom:4px}
+  #chpanel .tagrow{border-top:0;margin-top:2px;padding:5px 0 3px}
+  /* 老站式卡片网格 */
+  .ogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin-top:8px}
+  .ocard{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer}
+  .ocard:hover{border-color:#c6c1b4}
+  html.dark .ocard:hover{border-color:#4a453c}
+  .oc-cov{position:relative;width:100%;aspect-ratio:16/9;background:#eceae2;overflow:hidden}
+  html.dark .oc-cov{background:#2a2721}
+  .oc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:700}
+  .oc-cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .oc-cat{position:absolute;left:8px;top:8px;font-size:10.5px;color:#fff;border-radius:5px;padding:2px 8px;z-index:1}
+  .oc-t{font-size:13.5px;font-weight:600;line-height:1.4;padding:9px 12px 3px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .oc-m{font-size:11.5px;color:var(--sub);padding:0 12px 10px;line-height:1.5}
+  @media (max-width:720px){ .ogrid{grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:10px} }
   #chpanel .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer}
   #chpanel .row:hover{border-color:#c6c1b4}
   #chpanel .rt{font-size:14px;font-weight:600;line-height:1.45}
@@ -240,10 +257,12 @@
     .listcard{padding:0}
     #btnPanel{display:none}
     #brand{left:16px;top:14px}
-    /* 点位详情卡:屏幕居中弹出(与桌面右下角区分) */
-    #detail{left:16px;right:16px;width:auto;top:50%;bottom:auto;transform:translateY(-50%);
-      max-height:72vh;padding-top:36px}
-    #back{left:50%;right:auto;transform:translateX(-50%);top:88px;bottom:auto;
+    /* 点位详情卡:屏幕居中、尺寸收紧(不与顶栏/返回键错位) */
+    #detail{left:22px;right:22px;width:auto;top:48%;bottom:auto;transform:translateY(-50%);
+      max-height:56vh;padding-top:34px}
+    #d-cover{height:104px}
+    /* 返回键:压到双行顶栏安全距离之下,并抬高层级防被顶栏文字盖住点不到 */
+    #back{left:50%;right:auto;transform:translateX(-50%);top:102px;bottom:auto;z-index:10;
       font-size:11.5px;padding:6px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
     #propanel{left:14px;right:14px;top:86px;bottom:45vh;width:auto}
     /* 关闭钮:手机统一左上「‹ 返回」 */
@@ -377,8 +396,8 @@
   </div>
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
   <div class="card legend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div>
-    <div class="tagrow" id="tagRow"></div>
-    <div class="tagrow" id="fltRow"></div></div>
+    <div class="tagrow" id="tagRow" data-tagrow></div>
+    <div class="tagrow" id="fltRow" data-fltrow></div></div>
   <div class="card listcard"><div class="lc-head"><span id="lcCount">结果列表</span><span class="lc-sort" id="lcSort"></span></div><div class="lc-scroll" id="lcList"></div></div>
 </div>
 <div id="chpanel"><div class="inner" id="chInner"></div></div>
@@ -405,11 +424,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.80.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.81.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.80.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.80.0"></script>
-<script src="js/globe-data.js?v=0.80.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.81.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.81.0"></script>
+<script src="js/globe-data.js?v=0.81.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -991,7 +1010,7 @@
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
       imgReady:' 张已就绪',studioT:'画室点评工具',
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
-      tagAll:'全部门类',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
+      tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
       fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',
       k_org:'主办',k_loc:'地点',k_dl:'截止',k_fee:'费用',k_fund:'资助',k_elig:'资格',k_disc:'门类',k_src:'来源',k_pub:'发布',
       srcLoc:'落点=信源所在地(非内容发生地)',tipMore:'点击看完整详情',clusterN:' 项活跃索引',clusterGo:'点击放大展开',
@@ -1031,7 +1050,7 @@
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
       imgReady:' ready',studioT:'Studio critique tool',
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
-      tagAll:'All fields',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
+      tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
       fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',
       k_org:'Host',k_loc:'Place',k_dl:'Due',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligible',k_disc:'Fields',k_src:'Source',k_pub:'Date',
       srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
@@ -1084,34 +1103,65 @@
     applyTheme(t0); })();
   // 频道/列表/发布/通知/登录:接主站真页面
   // 顶栏=索引(地球)+四频道;点频道不换页——地球虚化留在背后,该频道列表浮层展开(真数据)
-  var chCache={}, chStore={};
+  var chCache={}, chStore={}, chNorm={}, curCh=null, chView=[];
   d3.selectAll('#chn .ch').on('click',function(){ var el=this, ch=el.getAttribute('data-ch');
     d3.selectAll('#chn .ch').classed('on',function(){ return this===el; });
     hideProfile();
     if(ch==='globe'){ hideChPanel(); return; }
     showChPanel(ch); });
-  function hideChPanel(){ document.getElementById('chpanel').style.display='none'; releaseGuard(); }
+  function hideChPanel(){ curCh=null; document.getElementById('chpanel').style.display='none'; releaseGuard(); }
+  // 浮层筛选:与全局同一份状态;机会浮层额外吃"机会四类"chips(=全局 filterCat)
+  function chMatch(o,ch){
+    if(ch==='opportunities'&&filterCat!=='all'&&
+       ['opencall','residency','award','workshop'].indexOf(filterCat)>=0&&o.category!==filterCat) return false;
+    if(tagSel&&D.tagsOf(o).indexOf(tagSel)<0) return false;
+    if(fFree&&!isFullyFree(o)) return false;
+    if(fVerified&&o.trust!=='verified') return false;
+    if(fHidePast&&isPastRec(o)) return false;
+    if(fStipend&&!(o.funding&&o.funding.stipend===true)) return false;
+    if(fHousing&&!(o.funding&&o.funding.housing===true)) return false;
+    if(fTravel&&!(o.funding&&o.funding.travel===true)) return false;
+    return true; }
+  // 老站式卡片(封面 16:9 + 分类角标 + 标题两行 + 元信息)
+  function chCard(o,i){ var c=CAT[o.category]||CAT.opencall, cov=o.cover?esc(o.cover):'';
+    var meta=[o.org_zh,[o.city_zh,o.country_zh].filter(Boolean).join('·'),
+      o.deadline?(L('k_dl')+' '+o.deadline):(o.published_at?String(o.published_at).slice(0,10):''),
+      (o.ip_region&&o.ip_region.disp)?(L('ipLoc')+'·'+o.ip_region.disp):''].filter(Boolean).join(' · ');
+    return '<div class="ocard" data-ci="'+i+'">'+
+      '<div class="oc-cov"><span class="oc-ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
+        (cov?('<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">'):'')+
+        '<span class="oc-cat" style="background:'+c.color+'">'+catName(o.category)+'</span></div>'+
+      '<div class="oc-t">'+esc(tt(o))+'</div>'+
+      '<div class="oc-m">'+esc(meta)+'</div></div>'; }
+  // 浮层顶部筛选条(排版学老站):机会=分类 chips;各频道共用 门类标签行 + 快捷开关行
+  function chFltBar(ch){
+    var cats='';
+    if(ch==='opportunities'){
+      var ks=['all','opencall','residency','award','workshop'];
+      var isOpp=['opencall','residency','award','workshop'].indexOf(filterCat)>=0;
+      cats='<div class="tagrow chflt" id="chCats">'+ks.map(function(k){
+        var on=(k==='all')?!isOpp:(filterCat===k);
+        return '<span class="tgc'+(on?' on':'')+'" data-cc="'+k+'">'+(k==='all'?L('allCat'):catName(k))+'</span>'; }).join('')+'</div>'; }
+    return cats+'<div class="tagrow" data-tagrow></div><div class="tagrow" data-fltrow></div>'; }
   function showChPanel(ch){
+    curCh=ch;
     var pane=document.getElementById('chpanel'), inner=document.getElementById('chInner');
     pane.style.display='block'; ensureGuard();
-    inner.innerHTML='<div class="rm" style="padding:8px 2px">加载中…</div>';
-    if(ch==='opportunities'){   // 机会浮层:与其他频道同款磨砂列表,点行开详情卡
-      var os=chStore.opportunities||[];
-      var orows=os.slice(0,120).map(function(o,i){
-        var c=CAT[o.category]||CAT.opencall, cov=o.cover?esc(o.cover):'';
-        var th='<span class="rth"><span class="ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
-          (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
-        var m=esc([o.org_zh,[o.city_zh,o.country_zh].filter(Boolean).join('·'),o.deadline?(L('k_dl')+' '+o.deadline):''].filter(Boolean).join(' · '));
-        return '<div class="row" data-oi="'+i+'">'+th+'<div class="rbody"><div class="rt">'+esc(tt(o))+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
-      inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">机会 · '+os.length+
-        ' 项 · 地球仍在背后,点「索引」即回(点击条目看详情)</div>'+(orows||'<div class="rm">还没有数据</div>');
-      return; }
+    var chName={opportunities:L('opportunities'),jobs:L('jobs'),news:L('news'),works:L('works')}[ch];
+    function head(n){ return '<div class="rm" style="padding:2px 2px 0">'+chName+' · '+n+'</div>'+chFltBar(ch); }
+    function bindBar(){
+      renderTagRow(); renderFltRow();
+      d3.selectAll('#chCats .tgc').on('click',function(){
+        filterCat=this.getAttribute('data-cc');
+        syncLegend(); renderDrawer(); needDraw=true; showChPanel(ch); }); }
     if(ch==='works'){
       var loadW=chCache.works?Promise.resolve(chCache.works):fetch('/api/works/feed')
         .then(function(r){ return r.json(); }).then(function(j){ chCache.works=j; return j; });
-      loadW.then(function(j){
-        var ws=(j&&j.works)||[];
-        var cards=ws.map(function(w,wi){
+      loadW.then(function(j){ if(curCh!=='works') return;
+        var pairs=((j&&j.works)||[]).map(function(w){ return {w:w,o:normWork(w)}; })
+          .filter(function(p){ return chMatch(p.o,'works'); });
+        chView=pairs;
+        var cards=pairs.map(function(p,wi){ var w=p.w;
           var img=(w.images&&w.images[0])?esc(w.images[0]):'';
           return '<div class="wcard" data-wj="'+wi+'">'+
             (img?'<img class="wimg" loading="lazy" src="'+img+'" alt="">':'<div class="wimg"></div>')+
@@ -1119,37 +1169,24 @@
             '<div class="wa">'+esc((w.author&&w.author.nickname)||'佚名')+(w.n>1?(' · '+w.n+' 图'):'')+
             (function(){ var r3=w.ip_region||(w.author&&w.author.ip_region);
               return r3&&r3.disp?(' · '+L('ipLoc')+'·'+esc(r3.disp)):''; })()+'</div></div>'; }).join('');
-        inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">作品广场 · '+ws.length+
-          ' 件(点击看大图)</div>'+
-          (cards?'<div class="wgrid">'+cards+'</div>':'<div class="rm">还没有公开作品</div>');
+        inner.innerHTML=head(pairs.length)+
+          (cards?('<div class="wgrid">'+cards+'</div>'):('<div class="rm">'+L('ppEmptyT')+'</div>'));
+        bindBar();
       }).catch(function(){ inner.innerHTML='<div class="rm">加载失败</div>'; });
       return; }
-    var load=chCache[ch]?Promise.resolve(chCache[ch]):fetch('data/'+(ch==='jobs'?'jobs':'news')+'.json')
-      .then(function(r){ return r.json(); }).then(function(j){ chCache[ch]=j; return j; });
-    load.then(function(j){
-      var items=(ch==='jobs')?(j.jobs||j.items||[]):(j.items||[]);
-      var phc=(ch==='jobs')?'#3A7D44':'#2A7F7A';
-      var rows=items.slice(0,60).map(function(it){
-        var t=esc((lang==='en'?(it.title_en||it.title||it.title_zh):(it.title_zh||it.title))||''), m;
-        if(ch==='jobs') m=esc([it.org_zh||it.org,it.city_zh||it.city,it.deadline?('截止 '+it.deadline):''].filter(Boolean).join(' · '));
-        else m=esc([it.source,(it.published_at||'').slice(0,10)].filter(Boolean).join(' · '));
-        var u=esc(it.apply_url||it.url||'#');
-        var cov=it.cover?esc(it.cover):'';
-        var th='<span class="rth"><span class="ph" style="background:'+phc+'">'+esc((it.title_zh||it.title||'·').charAt(0))+'</span>'+
-          (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
-        return '<div class="row" data-u="'+u+'">'+th+'<div class="rbody"><div class="rt">'+t+'</div><div class="rm">'+m+'</div></div></div>'; }).join('');
-      inner.innerHTML='<div class="rm" style="padding:2px 2px 10px">'+(ch==='jobs'?'招聘':'资讯')+' · '+items.length+
-        ' 条 · 地球仍在背后,点「索引」即回(点击条目直达原文)</div>'+rows;
-    }).catch(function(){ inner.innerHTML='<div class="rm">加载失败</div>'; }); }
+    var list=(ch==='opportunities')?(chStore.opportunities||[]):(chNorm[ch]||[]);
+    var vs=list.filter(function(o){ return chMatch(o,ch); });
+    chView=vs;
+    inner.innerHTML=head(vs.length)+
+      (vs.length?('<div class="ogrid">'+vs.slice(0,150).map(chCard).join('')+'</div>')
+        :('<div class="rm">'+L('ppEmptyT')+'</div>'));
+    bindBar(); }
   document.getElementById('chInner').addEventListener('click',function(e){
     var w=e.target.closest('.wcard');
-    if(w){ var jw=chCache.works, wsx=(jw&&jw.works)||[];
-      var it2=wsx[+w.getAttribute('data-wj')];
-      if(it2&&it2.images&&it2.images.length) openLB(it2.images,0); return; }
-    var d=e.target.closest('.row'); if(!d) return;
-    var oi=d.getAttribute('data-oi');
-    if(oi!=null){ var o=(chStore.opportunities||[])[+oi]; if(o) showDetail(o); return; }   // 机会行→详情卡(浮层之上)
-    var u=d.getAttribute('data-u'); if(u&&u!=='#') window.open(u,'_blank','noopener'); });
+    if(w){ var p=chView[+w.getAttribute('data-wj')];
+      if(p&&p.w&&p.w.images&&p.w.images.length) openLB(p.w.images,0); return; }
+    var cdd=e.target.closest('.ocard');
+    if(cdd){ var o=chView[+cdd.getAttribute('data-ci')]; if(o) showDetail(o); return; } });
   // 左栏收起/展开:按键在面板上方(不占顶栏)
   var panelOpen=true;
   document.getElementById('btnPanel').addEventListener('click',function(){
@@ -1734,29 +1771,33 @@
     d3.selectAll('#legend .lg-item').on('click',function(){ var k3=this.getAttribute('data-cat');
       filterCat=(filterCat===k3)?'all':k3;
       syncLegend(); renderDrawer(); needDraw=true; }); }
-  // 门类 chips(单选,再点取消)+ 快捷筛选开关(多选)——老站筛选体系并入分类索引面板
+  // 门类 chips(单选,再点取消)+ 快捷筛选开关(多选)——面板与频道浮层多宿主同渲染,同一份状态
   function renderTagRow(){
-    var el=document.getElementById('tagRow'); if(!el) return;
-    el.innerHTML='<span class="tgc'+(tagSel===''?' on':'')+'" data-tag="">'+L('tagAll')+'</span>'+
+    var hosts=document.querySelectorAll('[data-tagrow]'); if(!hosts.length) return;
+    var html='<span class="tgc'+(tagSel===''?' on':'')+'" data-tag="">'+L('tagAll')+'</span>'+
       D.TAGS.map(function(t){
         return '<span class="tgc'+(tagSel===t.id?' on':'')+'" data-tag="'+t.id+'">'+
           '<i style="background:hsl('+t.h+',45%,55%)"></i>'+(lang==='en'?t.en:t.zh)+'</span>'; }).join('');
-    d3.selectAll('#tagRow .tgc').on('click',function(){
+    for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
+    d3.selectAll('[data-tagrow] .tgc').on('click',function(){
       var tg=this.getAttribute('data-tag');
       tagSel=(tagSel===tg)?'':tg;
-      renderTagRow(); renderDrawer(); needDraw=true; }); }
+      renderTagRow(); renderDrawer(); needDraw=true;
+      if(curCh) showChPanel(curCh); }); }
   function renderFltRow(){
-    var el=document.getElementById('fltRow'); if(!el) return;
+    var hosts=document.querySelectorAll('[data-fltrow]'); if(!hosts.length) return;
     var items=[['fFree',fFree],['fStipend',fStipend],['fHousing',fHousing],['fTravel',fTravel],
       ['fVerified',fVerified],['fHidePast',fHidePast]];
-    el.innerHTML=items.map(function(x){
+    var html=items.map(function(x){
       return '<span class="tgc'+(x[1]?' on':'')+'" data-f="'+x[0]+'">'+L(x[0])+'</span>'; }).join('');
-    d3.selectAll('#fltRow .tgc').on('click',function(){
+    for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
+    d3.selectAll('[data-fltrow] .tgc').on('click',function(){
       var k4=this.getAttribute('data-f');
       if(k4==='fFree') fFree=!fFree; else if(k4==='fStipend') fStipend=!fStipend;
       else if(k4==='fHousing') fHousing=!fHousing; else if(k4==='fTravel') fTravel=!fTravel;
       else if(k4==='fVerified') fVerified=!fVerified; else if(k4==='fHidePast') fHidePast=!fHidePast;
-      renderFltRow(); renderDrawer(); needDraw=true; }); }
+      renderFltRow(); renderDrawer(); needDraw=true;
+      if(curCh) showChPanel(curCh); }); }
   document.getElementById('lcSort').addEventListener('click',function(){
     sortBy=(sortBy==='deadline')?'new':'deadline'; renderDrawer(); });
   function flyToRecord(rec){ var loc=D.locate(rec); if(loc) flyTo(loc.ll, Math.max(splitScale()*1.5, proj.scale())); }
@@ -1821,8 +1862,10 @@
       var st2=document.getElementById('status');
       if(st2.style.display!=='none') st2.textContent=L('marked')(placedTotal,countryFeats.length);
     }).catch(function(){});
-    d3.json('data/jobs.json').then(function(j){ chCache.jobs=j; addRecords((j.jobs||j.items||[]).map(normJob)); }).catch(function(){});
-    d3.json('data/news.json').then(function(j){ chCache.news=j; addRecords((j.items||[]).map(normNews)); }).catch(function(){});
+    d3.json('data/jobs.json').then(function(j){ chCache.jobs=j;
+      chNorm.jobs=(j.jobs||j.items||[]).map(normJob); addRecords(chNorm.jobs); }).catch(function(){});
+    d3.json('data/news.json').then(function(j){ chCache.news=j;
+      chNorm.news=(j.items||[]).map(normNews); addRecords(chNorm.news); }).catch(function(){});
     fetch('/api/works/feed').then(function(r){ return r.json(); }).then(function(j){
       if(!j||!j.works) return; chCache.works=j;
       addRecords(j.works.map(normWork)); }).catch(function(){});
