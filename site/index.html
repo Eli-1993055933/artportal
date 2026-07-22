@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.5" />
+<meta name="app-version" content="0.77.6" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -379,11 +379,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.5</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.6</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.5"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.5"></script>
-<script src="js/globe-data.js?v=0.77.5"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.6"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.6"></script>
+<script src="js/globe-data.js?v=0.77.6"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -452,8 +452,9 @@
       ctx.beginPath(); pathC(f);
       var isCN=(nm==='China'||nm==='Taiwan');                  // 台湾与大陆同色一体
       var isSel=drilledCountry&&nm===drilledCountry;
-      // 下钻国用明显的暖金高亮(浅色主题原先太淡="没有颜色"),邻国压暗
-      ctx.fillStyle=isCN?(drilledCountry?T.landDim:T.land):(drilledCountry?(isSel?T.landSel:T.landDim):T.land); ctx.fill();
+      // 下钻国用明显的暖金高亮(浅色主题原先太淡="没有颜色"),邻国压暗;
+      // 下钻中国而省界数据未就绪时,NE 兜底也用金色高亮(不再压暗成"没颜色")
+      ctx.fillStyle=isCN?(cnDrilled?T.landSel:(drilledCountry?T.landDim:T.land)):(drilledCountry?(isSel?T.landSel:T.landDim):T.land); ctx.fill();
       ctx.lineWidth=isSel?1.2:0.45; ctx.strokeStyle=isSel?T.borderSel:T.border; ctx.stroke(); }
     // 下钻中国:DataV 官方省/市界(仅此时绘制,重度抽稀省算力)
     // 市级视图用细市多边形填充选中省(粗抽稀省面在高倍缩放下锯齿明显),粗省面只画未选中省
@@ -494,10 +495,13 @@
     else if(drilledCountry&&adminLabels.length) AL=adminLabels;
     if(AL&&AL.length&&!(perfTier>=2&&inMotion())){
       ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.font='500 12px "PingFang SC","Microsoft YaHei",sans-serif';
       for(var A2=0;A2<AL.length;A2++){ var al=AL[A2]; if(!frontC(al.cart)) continue;
-        if(al.r&&!fitsLabel(al.r,al.nm,12)) continue;
+        // 字号随区划屏上大小自适应(10–15px);连 10px 都装不下就不标,绝不叠字
+        var perCh=/[一-鿿]/.test(al.nm)?1:0.56, availW=2*(al.r||0)*sc;
+        if(availW < al.nm.length*10*perCh*1.1) continue;
+        var afs=Math.round(Math.min(15, availW*0.6/(al.nm.length*perCh)));
         var ap=proj(al.c); if(ap[0]<-30||ap[0]>W+30||ap[1]<-20||ap[1]>H+20) continue;
+        ctx.font='500 '+afs+'px "PingFang SC","Microsoft YaHei",sans-serif';
         ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(al.nm,ap[0],ap[1]);
         ctx.fillStyle=T.label; ctx.fillText(al.nm,ap[0],ap[1]); } }
     // 点位:聚合簇 或 散点
@@ -676,7 +680,24 @@
       if(g.type==='Polygon') fix(g.coordinates);
       else if(g.type==='MultiPolygon') g.coordinates.forEach(fix); });
     return fc; }
-  var CN_URL='https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json';
+  // 中国区划数据(高德系,DataV GeoAtlas 镜像)已全部自托管在 data/geo/cn/,
+  // 本地优先、阿里远端兜底、失败循环重试——不再因外部接口抽风丢省界
+  var CN_LOCAL='data/geo/cn/';
+  var CN_REMOTE='https://geo.datav.aliyun.com/areas_v3/bound/';
+  var CN_URLS=[CN_LOCAL+'100000_full.json', CN_REMOTE+'100000_full.json'];
+  function loadCN(i,cycle){
+    if(cnBase) return;
+    if(i>=CN_URLS.length){ if(cycle<5) setTimeout(function(){ loadCN(0,cycle+1); },6000); return; }
+    d3.json(CN_URLS[i]).then(function(j){ if(cnBase) return;
+      var provs=[], jd=null; rewindFC(j);
+      (j.features||[]).forEach(function(f){ if(String(f.properties.adcode).indexOf('_JD')>=0) jd=f;
+        else if(f.properties.name) provs.push(f); });
+      cnProv=provs; cnBase=decimateFC({features:provs},8);   // 下钻才用,重度抽稀(小区划自适应保真)
+      provLabels=cnBase.map(function(f){ var pr=f.properties, c=pr.center||d3.geoCentroid(f);
+        return {c:c,cart:ll2c(c),nm:shortName(pr.name),r:Math.sqrt(d3.geoArea(f)/Math.PI)}; });
+      if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
+      adminCache[CN_URLS[0]]=j; needDraw=true; })
+    .catch(function(){ loadCN(i+1,cycle); }); }
   // 区划短名:去"省/市/自治区/自治州/特别行政区"等后缀,标注更清爽
   function shortName(nm){ nm=String(nm||'');
     var s=nm.replace(/(维吾尔|壮族|回族)?自治区$|特别行政区$|(蒙古族|蒙古|朝鲜族|土家族|布依族|哈尼族|傈僳族|景颇族|柯尔克孜族|柯尔克孜|哈萨克族|哈萨克|维吾尔族|回族|藏族|彝族|傣族|白族|苗族|侗族|壮族|羌族|满族|瑶族|黎族|畲族|仡佬族|仫佬族|毛南族|各族){0,3}自治[州县旗]$|(地区|林区|新区|盟|省|市|县|区)$/,'');
@@ -709,8 +730,8 @@
     drillLevel=2; drilledProvAdcode=ad;
     document.getElementById('back').textContent=L('backU');
     fitFly(pf, boundsCenter(pf), scale0*5.2);
-    loadAdmin('https://geo.datav.aliyun.com/areas_v3/bound/'+ad+'_full.json',null,2); }
-  function loadAdmin(url,filt,step){
+    loadAdmin(CN_LOCAL+ad+'_full.json',null,2,CN_REMOTE+ad+'_full.json'); }
+  function loadAdmin(url,filt,step,fbUrl){
     var seq=++adminSeq;   // 快速连点/中途退出时丢弃过期结果
     var p=adminCache[url]?Promise.resolve(adminCache[url]):d3.json(url).then(function(j){ rewindFC(j); adminCache[url]=j; return j; });
     p.then(function(j){ if(seq!==adminSeq) return;
@@ -721,7 +742,9 @@
         var nm=shortName(pr.name||'');
         return nm?{c:c,cart:ll2c(c),nm:nm,r:Math.sqrt(d3.geoArea(f)/Math.PI)}:null; }).filter(Boolean);
       needDraw=true; })
-     .catch(function(){ if(seq!==adminSeq) return; adminFeats=[]; adminLabels=[]; needDraw=true; }); }
+     .catch(function(){ if(seq!==adminSeq) return;
+       if(fbUrl){ loadAdmin(fbUrl,filt,step); return; }   // 本地缺失/失败 → 远端兜底
+       adminFeats=[]; adminLabels=[]; needDraw=true; }); }
   function exitDrill(){
     // 逐级退出时收起点开的项目卡与悬浮层
     document.getElementById('detail').style.display='none'; tipEl.style.display='none';
@@ -1606,16 +1629,9 @@
       var ar=d3.geoArea(f), cen=d3.geoCentroid(f);
       return {c:cen,cart:ll2c(cen),nm:nm,en:f.properties.name,r:Math.sqrt(ar/Math.PI),
         sz:ar>0.05?18:(ar>0.008?13:10)}; }).filter(Boolean);
-    // 载入 DataV 官方中国边界(合规:台湾省/港澳、九段线、藏南阿克赛钦按国标)
+    // 载入中国官方边界(合规:台湾省/港澳、九段线、藏南阿克赛钦按国标;本地自托管+远端兜底+重试)
     CN_CART=ll2c([104,35.5]);
-    d3.json(CN_URL).then(function(j){ var provs=[], jd=null; rewindFC(j);
-      (j.features||[]).forEach(function(f){ if(String(f.properties.adcode).indexOf('_JD')>=0) jd=f;
-        else if(f.properties.name) provs.push(f); });
-      cnProv=provs; cnBase=decimateFC({features:provs},8);   // 下钻才用,重度抽稀
-      provLabels=cnBase.map(function(f){ var pr=f.properties, c=pr.center||d3.geoCentroid(f);
-        return {c:c,cart:ll2c(c),nm:shortName(pr.name),r:Math.sqrt(d3.geoArea(f)/Math.PI)}; });   // 省级视图地名(短名+门控半径)
-      if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
-      adminCache[CN_URL]=j; needDraw=true; }).catch(function(){});
+    loadCN(0,0);
     var arr=res[1]?(res[1].items||res[1].opportunities||res[1]):[]; if(!Array.isArray(arr)) arr=[];
     chStore.opportunities=arr; addRecords(arr);
     if(res[2]){ chCache.jobs=res[2]; addRecords((res[2].jobs||res[2].items||[]).map(normJob)); }
