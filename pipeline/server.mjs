@@ -9,6 +9,7 @@
 // 搜索环节用 DDG lite(免密钥);上线到大陆生产环境时可换成正规搜索 API(见 README)。
 
 import { createServer, request as httpRequest } from "node:http";
+import { gzipSync } from "node:zlib";
 import { spawn } from "node:child_process";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { readFile, writeFile, stat, rename, mkdir, unlink, statfs, readdir } from "node:fs/promises";
@@ -366,13 +367,40 @@ async function serveStatic(req, res) {
   try {
     const s = await stat(full);
     if (s.isDirectory()) { res.writeHead(403); return res.end(); }
-    const body = await readFile(full);
-    // HTML 绝不缓存(每次拿最新,带上最新的 ?v= 资源引用);其余交给 ?v= 版本号控缓存
-    const isHtml = extname(full) === ".html" || p === "/index.html";
-    res.writeHead(200, { "Content-Type": MIME[extname(full)] || "application/octet-stream", "Cache-Control": isHtml ? "no-store, no-cache, must-revalidate" : "no-cache" });
+    const ext = extname(full);
+    // HTML 绝不缓存(每次拿最新 ?v= 引用);带 ?v= 的资源与不可变数据(vendor/geo/封面/作品图)
+    // 长缓存 immutable;其余数据(opportunities/news/jobs 等,每日更新)5 分钟 + Last-Modified 304 协商。
+    // 头像路径固定、内容会换,不进长缓存。
+    const isHtml = ext === ".html" || p === "/index.html";
+    const hasV = /[?&]v=/.test(req.url);
+    const longCache = hasV || p.startsWith("/assets/vendor/") || p.startsWith("/data/geo/") ||
+      p.startsWith("/assets/covers/") || p.startsWith("/assets/works/");
+    const cc = isHtml ? "no-store, no-cache, must-revalidate"
+      : longCache ? "public, max-age=604800, immutable" : "public, max-age=300";
+    const lm = new Date(s.mtimeMs).toUTCString();
+    if (!isHtml && req.headers["if-modified-since"] === lm) {
+      res.writeHead(304, { "Cache-Control": cc, "Last-Modified": lm, "Vary": "Accept-Encoding" });
+      return res.end();
+    }
+    let body = await readFile(full);
+    const headers = { "Content-Type": MIME[ext] || "application/octet-stream", "Cache-Control": cc,
+      "Last-Modified": lm, "Vary": "Accept-Encoding" };
+    // gzip:文本类且客户端支持;按 mtime 缓存压缩结果(上限防内存膨胀)
+    if (GZ_TYPES.has(ext) && body.length > 1024 && String(req.headers["accept-encoding"] || "").includes("gzip")) {
+      let e = gzCache.get(full);
+      if (!e || e.mtimeMs !== s.mtimeMs) {
+        e = { mtimeMs: s.mtimeMs, buf: gzipSync(body, { level: 6 }) };
+        gzCache.set(full, e);
+        if (gzCache.size > 150) gzCache.delete(gzCache.keys().next().value);
+      }
+      body = e.buf; headers["Content-Encoding"] = "gzip";
+    }
+    res.writeHead(200, headers);
     res.end(body);
   } catch (e) { res.writeHead(404); res.end("not found"); }
 }
+const GZ_TYPES = new Set([".html", ".css", ".js", ".json", ".svg"]);
+const gzCache = new Map();   // full path -> {mtimeMs, buf}
 
 // 请求体读取(JSON,默认限 256KB;投稿带压缩封面 base64 时调用方放宽到 ~900KB)
 function readBody(req, max = 262144) {

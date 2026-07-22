@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.78.1" />
+<meta name="app-version" content="0.78.2" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -386,11 +386,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.2</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.78.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.78.1"></script>
-<script src="js/globe-data.js?v=0.78.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.78.2"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.78.2"></script>
+<script src="js/globe-data.js?v=0.78.2"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1677,13 +1677,10 @@
     city_zh:it.city_zh||it.city, country_zh:it.country_zh||it.country, url:it.apply_url||it.url }); }
   function normNews(it,i){ return Object.assign({},it,{ category:'news', topic:it.category||'',
     id:it.id||('news-x'+i), title_zh:it.title_zh||it.title, org_zh:it.org_zh||it.source, url:it.url }); }
-  Promise.all([
-    d3.json('data/geo/countries-110m.json'),
-    d3.json('data/opportunities.json').catch(function(){ return null; }),
-    d3.json('data/jobs.json').catch(function(){ return null; }),
-    d3.json('data/news.json').catch(function(){ return null; })
-  ]).then(function(res){
-    countryFeats=topojson.feature(res[0],res[0].objects.countries).features;
+  // 首屏只等最小关键路径(世界底图 ~110KB):先把地球画出来;
+  // 四频道数据各自异步到达、增量落点(opportunities 已 1MB,绝不挡首屏)
+  d3.json('data/geo/countries-110m.json').then(function(res0){
+    countryFeats=topojson.feature(res0,res0.objects.countries).features;
     countryFeats.forEach(function(f){ if(f.properties.name==='China') cnNE=f; });   // 下钻视野自适应与境外判定用
     labelData=countryFeats.map(function(f){ var nm=D.NAME_ZH[f.properties.name]; if(!nm) return null;
       if(f.properties.name==='Taiwan') return null;   // 台湾不作独立国家标注(属中国)
@@ -1693,10 +1690,14 @@
     // 载入中国官方边界(合规:台湾省/港澳、九段线、藏南阿克赛钦按国标;本地自托管+远端兜底+重试)
     CN_CART=ll2c([104,35.5]);
     loadCN(0,0);
-    var arr=res[1]?(res[1].items||res[1].opportunities||res[1]):[]; if(!Array.isArray(arr)) arr=[];
-    chStore.opportunities=arr; addRecords(arr);
-    if(res[2]){ chCache.jobs=res[2]; addRecords((res[2].jobs||res[2].items||[]).map(normJob)); }
-    if(res[3]){ chCache.news=res[3]; addRecords((res[3].items||[]).map(normNews)); }
+    d3.json('data/opportunities.json').then(function(j){
+      var arr=j?(j.items||j.opportunities||j):[]; if(!Array.isArray(arr)) arr=[];
+      chStore.opportunities=arr; addRecords(arr);
+      var st2=document.getElementById('status');
+      if(st2.style.display!=='none') st2.textContent=L('marked')(placedTotal,countryFeats.length);
+    }).catch(function(){});
+    d3.json('data/jobs.json').then(function(j){ chCache.jobs=j; addRecords((j.jobs||j.items||[]).map(normJob)); }).catch(function(){});
+    d3.json('data/news.json').then(function(j){ chCache.news=j; addRecords((j.items||[]).map(normNews)); }).catch(function(){});
     window.__gd={groups:groups,markers:markers,proj:proj,splitScale:splitScale,CATc:CAT,  // 调试钩子(集成时移除)
       state:function(){return {drillLevel:drillLevel,drilled:drilledCountry,prov:drilledProvAdcode,
         cnBase:cnBase?cnBase.length:0,cnJD:!!cnJD,adminFeats:adminFeats.length,
