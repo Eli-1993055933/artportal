@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.4" />
+<meta name="app-version" content="0.77.5" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -67,6 +67,13 @@
   #detail .meta{font-size:12px;color:var(--sub);line-height:1.7}
   #detail .go{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--opencall);text-decoration:none;font-weight:600}
   #detail .x{position:absolute;right:12px;top:10px;color:var(--muted);cursor:pointer;font-size:16px}
+  /* 触屏无真实 hover:点按后 :hover 粘滞会让按钮一直挂着浅色底(暗色主题下变亮块),统一中和 */
+  @media (hover:none){
+    #chn .ch:hover,.lang:hover,.lg-item:hover,.oc:hover,.pp-row:hover,.uq-i:hover,.pp-up:hover{background:transparent}
+    .abtn:hover,#back:hover,#btnPanel:hover,.pp-btn:hover,.pubgrid button:hover{background:var(--panel)}
+    .oc.sel{background:#f1efe8}
+    html.dark .oc.sel{background:#2b2823}
+  }
   /* 关闭钮双形态:桌面=右上小叉(.xm),手机=左上 iOS 式「‹ 返回」(.xb) */
   .xm,.xb{font-style:normal}
   .xb{display:none;font-weight:500;letter-spacing:.02em}
@@ -212,7 +219,8 @@
     /* 点位详情卡:屏幕居中弹出(与桌面右下角区分) */
     #detail{left:16px;right:16px;width:auto;top:50%;bottom:auto;transform:translateY(-50%);
       max-height:72vh;padding-top:36px}
-    #back{left:50%;right:auto;transform:translateX(-50%);top:88px;bottom:auto}
+    #back{left:50%;right:auto;transform:translateX(-50%);top:88px;bottom:auto;
+      font-size:11.5px;padding:6px 12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
     #propanel{left:14px;right:14px;top:86px;bottom:45vh;width:auto}
     /* 关闭钮:手机统一左上「‹ 返回」 */
     .xm{display:none}
@@ -371,11 +379,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.4</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.5</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.4"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.4"></script>
-<script src="js/globe-data.js?v=0.77.4"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.5"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.5"></script>
+<script src="js/globe-data.js?v=0.77.5"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -394,10 +402,10 @@
   // 画布主题配色(必须先于首帧 draw 定义;applyTheme 在下方接线区)
   var THEMES={
     light:{space:'#E3DED0',glow:'rgba(255,255,255,.32)',glow0:'rgba(255,255,255,0)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
-      land:'#ecebe5',landDim:'#f4f3ef',landSel:'#E8D8A0',border:'#d3cfc4',borderSel:'#b3a069',admin:'#aca696',
+      land:'#ecebe5',landDim:'#f4f3ef',landSel:'#E8D8A0',landSel2:'#F2E7C2',border:'#d3cfc4',borderSel:'#b3a069',admin:'#a89f8c',
       label:'#2b2822',halo:'rgba(247,246,242,.85)',mstroke:'#fff'},
     dark:{space:'#0b0a08',glow:'rgba(84,74,56,.5)',glow0:'rgba(84,74,56,0)',sphere:'#201d18',sphereEdge:'#3d372d',grat:'#2b2721',
-      land:'#2e2a23',landDim:'#241f19',landSel:'#4c4126',border:'#403a30',borderSel:'#8f7c4c',admin:'#6e665a',
+      land:'#2e2a23',landDim:'#241f19',landSel:'#4c4126',landSel2:'#5d5031',border:'#403a30',borderSel:'#8f7c4c',admin:'#7d7466',
       label:'#d8d3c8',halo:'rgba(20,18,15,.85)',mstroke:'#15130f'} };
   var T=THEMES.light;
 
@@ -455,13 +463,14 @@
         var provSel=(drillLevel>=2&&pf.properties.adcode===drilledProvAdcode);
         if(provSel&&cnCityFill) continue;
         ctx.beginPath(); pathC(pf);
-        ctx.fillStyle=(drillLevel>=2)?(provSel?T.landSel:T.landDim):T.landSel; ctx.fill();
-        ctx.lineWidth=provSel?1.1:0.5; ctx.strokeStyle=provSel?T.borderSel:T.admin; ctx.stroke(); } }
+        // 相邻区划交替双色调+加粗界线,每个行政区划肉眼可分
+        ctx.fillStyle=(drillLevel>=2)?(provSel?T.landSel:T.landDim):((ci%2)?T.landSel:T.landSel2); ctx.fill();
+        ctx.lineWidth=provSel?1.1:0.9; ctx.strokeStyle=provSel?T.borderSel:T.admin; ctx.stroke(); } }
     // 南海九段线(描边成线,非填充;中国可见时任何层级都画,合规标识)
     if(cnJD && frontC(CN_CART)){ ctx.lineWidth=1.3; ctx.strokeStyle=T.admin; ctx.beginPath(); pathC(cnJD); ctx.stroke(); }
-    if(adminFeats.length){ ctx.lineWidth=0.6; ctx.strokeStyle=T.admin;
+    if(adminFeats.length){ ctx.lineWidth=0.8; ctx.strokeStyle=T.admin;
       for(var a=0;a<adminFeats.length;a++){ ctx.beginPath(); pathC(adminFeats[a]);
-        if(cnCityFill){ ctx.fillStyle=T.landSel; ctx.fill(); }
+        if(cnCityFill){ ctx.fillStyle=(a%2)?T.landSel:T.landSel2; ctx.fill(); }
         ctx.stroke(); } }
     // 国名(高档画质或静止时)
     // 地名门控:版图在屏幕上"装得下文字"才显示(小屏/缩小时自动少字,不再叠字)
