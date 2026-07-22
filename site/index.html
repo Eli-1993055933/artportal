@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.78.2" />
+<meta name="app-version" content="0.78.3" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -374,7 +374,7 @@
 </div></div>
 <div id="mhost"></div>
 <div id="lightbox"></div>
-<div id="detail"><span class="x" onclick="this.parentNode.style.display='none'"><i class="xm">×</i><i class="xb"></i></span>
+<div id="detail"><span class="x" id="dClose"><i class="xm">×</i><i class="xb"></i></span>
   <img id="d-cover" alt="" hidden />
   <div><span class="cat" id="d-cat"></span><span class="badge2" id="d-trust"></span></div>
   <h3 id="d-title"></h3><div class="sub" id="d-sub"></div>
@@ -386,11 +386,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.2</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.78.3</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.78.2"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.78.2"></script>
-<script src="js/globe-data.js?v=0.78.2"></script>
+<script src="assets/vendor/d3.min.js?v=0.78.3"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.78.3"></script>
+<script src="js/globe-data.js?v=0.78.3"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -662,6 +662,7 @@
     if(moved) return;
     hoverTest(e);
     if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
+    if(W<=720&&drillLevel<2) hoverObj=null;  // 手机:进入最小行政区划(二级视图)前点位不可交互,点击只作用于区划(防误触)
     if(hoverObj){
       if(hoverKind==='c'){ var g=hoverObj;
         // 手机:聚合圆(含单条)一律放大不弹卡——拆分成散点后点位才可交互
@@ -764,14 +765,14 @@
     if(nm==='China'||nm==='Taiwan'){ drillChina(); return; }
     drilledCountry=nm; drilledFeat=feat; drillLevel=1; drilledProvAdcode=null; drilledAdmName=null; adminFeats=[]; adminLabels=[];
     fitFly(feat, boundsCenter(feat), scale0*2.9);
-    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW');
+    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW'); ensureGuard();
     loadAdmin('data/geo/world/'+admSlug(nm)+'.json',null,2,
       'https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm); }
   function drillAdm1(f){ drillLevel=2; drilledAdmName=f.properties.name;
     document.getElementById('back').textContent=L('backU');
     fitFly(f, boundsCenter(f), scale0*5); }
   function drillChina(){ drilledCountry='China'; drilledFeat=cnNE; drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
-    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW');
+    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW'); ensureGuard();
     fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; }   // 省界来自 cnBase(启动已载),无需再请求
   function drillProvince(pf){ var ad=pf.properties.adcode; if(!ad) return;
     drillLevel=2; drilledProvAdcode=ad;
@@ -814,7 +815,7 @@
     d3.transition().duration(800).tween('back',function(){
       var ir=d3.interpolate(r0,[-100,-30,0]), is=d3.interpolate(s0,scale0);
       return function(t){ proj.rotate(ir(t)).scale(is(t)); needDraw=true; }; });
-    autoResumeAt=Date.now()+2000; }
+    autoResumeAt=Date.now()+2000; releaseGuard(); }
   document.getElementById('back').addEventListener('click',exitDrill);
 
   // —— 信息层 ——
@@ -907,7 +908,7 @@
       (ss(o)?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(ss(o)).slice(0,230))+'</div>'):'');
     var go=document.getElementById('d-go'); go.href=o.url||o.source_url||'#';
     go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read'):L('go'));
-    var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; }
+    var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; ensureGuard(); }
 
   // —— 真实功能接线 ——
   var toastTimer=null;
@@ -1040,10 +1041,10 @@
     hideProfile();
     if(ch==='globe'){ hideChPanel(); return; }
     showChPanel(ch); });
-  function hideChPanel(){ document.getElementById('chpanel').style.display='none'; }
+  function hideChPanel(){ document.getElementById('chpanel').style.display='none'; releaseGuard(); }
   function showChPanel(ch){
     var pane=document.getElementById('chpanel'), inner=document.getElementById('chInner');
-    pane.style.display='block';
+    pane.style.display='block'; ensureGuard();
     inner.innerHTML='<div class="rm" style="padding:8px 2px">加载中…</div>';
     if(ch==='opportunities'){   // 机会浮层:与其他频道同款磨砂列表,点行开详情卡
       var os=chStore.opportunities||[];
@@ -1164,8 +1165,9 @@
     var m=h.firstChild;
     m.querySelector('.scrim').addEventListener('click',closeModal);
     m.querySelector('.mx').addEventListener('click',closeModal);
+    ensureGuard();
     return m; }
-  function closeModal(){ document.getElementById('mhost').innerHTML=''; }
+  function closeModal(){ document.getElementById('mhost').innerHTML=''; releaseGuard(); }
   // 图片压缩:长边 ≤max、JPEG(与老站同参:封面 1280/q.78,作品 1600/q.8)
   function shrinkImg(file,max,q,cb){
     if(!file||!/^image\//.test(file.type)){ cb(null); return; }
@@ -1359,10 +1361,10 @@
       '<span>'+esc(meUser.nickname||'')+'</span>';
     else b.innerHTML=ICONS.user+' <span id="loginTxt">'+L('login')+'</span>'; }
   function openProfile(uid){ hideChPanel();
-    document.getElementById('propanel').style.display='flex';
+    document.getElementById('propanel').style.display='flex'; ensureGuard();
     loadProfile(uid); }
   function hideProfile(){ document.getElementById('propanel').style.display='none';
-    document.getElementById('uqRes').style.display='none'; }
+    document.getElementById('uqRes').style.display='none'; releaseGuard(); }
   function loadProfile(uid){ proUid=uid; proTab='works'; proCur=null;
     document.getElementById('proBody').innerHTML='<div class="pp-empty">…</div>';
     fetch('/api/users/'+encodeURIComponent(uid),{credentials:'same-origin'})
@@ -1544,11 +1546,11 @@
     el.innerHTML='<span class="mx"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></span>'+
       '<span class="nav" data-d="-1" style="left:6px">‹</span><img alt="">'+
       '<span class="nav" data-d="1" style="right:6px">›</span><span class="cnt"></span>';
-    el.style.display='flex'; lbShow();
+    el.style.display='flex'; lbShow(); ensureGuard();
     el.onclick=function(e){
       var nv=e.target.closest('.nav');
       if(nv){ lbI=(lbI+(+nv.getAttribute('data-d'))+lbImgs.length)%lbImgs.length; lbShow(); return; }
-      if(e.target.tagName!=='IMG') el.style.display='none'; }; }
+      if(e.target.tagName!=='IMG'){ el.style.display='none'; releaseGuard(); } }; }
   function lbShow(){ var el=document.getElementById('lightbox');
     el.querySelector('img').src=lbImgs[lbI];
     el.querySelector('.cnt').textContent=(lbI+1)+' / '+lbImgs.length;
@@ -1556,9 +1558,38 @@
     for(var i2=0;i2<nvs.length;i2++) nvs[i2].style.display=lbImgs.length>1?'block':'none'; }
   document.addEventListener('keydown',function(e){ if(e.key!=='Escape') return;
     var lb=document.getElementById('lightbox');
-    if(lb.style.display==='flex'){ lb.style.display='none'; return; }
+    if(lb.style.display==='flex'){ lb.style.display='none'; releaseGuard(); return; }
     if(document.getElementById('mhost').innerHTML){ closeModal(); return; }
     hideProfile(); });
+  document.getElementById('dClose').addEventListener('click',function(){
+    document.getElementById('detail').style.display='none'; releaseGuard(); });
+  // —— 浏览器返回/手机侧滑在任意层级生效:单守卫历史条目,back 逐层关闭,关完才真正离站 ——
+  var apGuard=false, popSuppress=0;
+  function layerOpen(){
+    return document.getElementById('lightbox').style.display==='flex'
+      || !!document.getElementById('mhost').firstChild
+      || document.getElementById('detail').style.display==='block'
+      || document.getElementById('propanel').style.display==='flex'
+      || document.getElementById('chpanel').style.display==='block'
+      || drillLevel>0; }
+  function ensureGuard(){ if(!apGuard&&layerOpen()){ apGuard=true; try{ history.pushState({ap:1},''); }catch(e2){} } }
+  function releaseGuard(){ if(apGuard&&!layerOpen()){ apGuard=false; popSuppress++; try{ history.back(); }catch(e2){} } }
+  function closeTopLayer(){
+    var lb=document.getElementById('lightbox');
+    if(lb.style.display==='flex'){ lb.style.display='none'; return true; }
+    if(document.getElementById('mhost').firstChild){ closeModal(); return true; }
+    var det=document.getElementById('detail');
+    if(det.style.display==='block'){ det.style.display='none'; return true; }
+    if(document.getElementById('propanel').style.display==='flex'){ hideProfile();
+      d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); return true; }
+    if(document.getElementById('chpanel').style.display==='block'){ hideChPanel();
+      d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); return true; }
+    if(drillLevel>0){ exitDrill(); return true; }
+    return false; }
+  window.addEventListener('popstate',function(){
+    if(popSuppress>0){ popSuppress--; return; }
+    apGuard=false;
+    if(closeTopLayer()) ensureGuard(); });
   document.getElementById('proClose').addEventListener('click',function(){ hideProfile();
     d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); });
   document.getElementById('btnLogin').addEventListener('click',function(){
