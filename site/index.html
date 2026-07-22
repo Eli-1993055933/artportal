@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.3" />
+<meta name="app-version" content="0.77.4" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -67,6 +67,9 @@
   #detail .meta{font-size:12px;color:var(--sub);line-height:1.7}
   #detail .go{display:inline-block;margin-top:12px;font-size:12.5px;color:var(--opencall);text-decoration:none;font-weight:600}
   #detail .x{position:absolute;right:12px;top:10px;color:var(--muted);cursor:pointer;font-size:16px}
+  /* 关闭钮双形态:桌面=右上小叉(.xm),手机=左上 iOS 式「‹ 返回」(.xb) */
+  .xm,.xb{font-style:normal}
+  .xb{display:none;font-weight:500;letter-spacing:.02em}
   #back{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:6;display:none;background:var(--panel);
     border:1px solid var(--line);border-radius:999px;padding:9px 17px;font-size:13px;color:var(--ink);cursor:pointer;
     box-shadow:0 4px 16px rgba(0,0,0,.1)}
@@ -206,9 +209,19 @@
     .listcard{padding:0}
     #btnPanel{display:none}
     #brand{left:16px;top:14px}
-    #detail{left:14px;right:14px;width:auto;top:86px;bottom:auto;max-height:44vh}
+    /* 点位详情卡:屏幕居中弹出(与桌面右下角区分) */
+    #detail{left:16px;right:16px;width:auto;top:50%;bottom:auto;transform:translateY(-50%);
+      max-height:72vh;padding-top:36px}
     #back{left:50%;right:auto;transform:translateX(-50%);top:88px;bottom:auto}
     #propanel{left:14px;right:14px;top:86px;bottom:45vh;width:auto}
+    /* 关闭钮:手机统一左上「‹ 返回」 */
+    .xm{display:none}
+    .xb{display:inline}
+    #detail .x{left:12px;right:auto;top:11px;font-size:14px;color:var(--ink)}
+    .modal .mbox{padding-top:42px}
+    .modal .mx{left:12px;right:auto;font-size:13.5px;color:var(--ink)}
+    #lightbox .mx{left:16px;right:auto;font-size:15px}
+    .pro-head .x2{order:-1;font-size:13.5px;color:var(--ink);padding:0 2px}
   }
   /* 个人主页:右侧竖向卡片面板(与左侧抽屉同款形态),从头像下方展开;头部含用户检索 */
   #propanel{position:fixed;right:26px;top:64px;bottom:44px;width:362px;z-index:8;display:none;
@@ -339,14 +352,14 @@
   <div class="pro-head">
     <span class="pro-title" id="proTitle">个人主页</span>
     <input id="uq" placeholder="搜索用户昵称…" autocomplete="off" />
-    <span class="x2" id="proClose">×</span>
+    <span class="x2" id="proClose"><i class="xm">×</i><i class="xb"></i></span>
     <div id="uqRes"></div>
   </div>
   <div class="pro-scroll" id="proBody"></div>
 </div></div>
 <div id="mhost"></div>
 <div id="lightbox"></div>
-<div id="detail"><span class="x" onclick="this.parentNode.style.display='none'">×</span>
+<div id="detail"><span class="x" onclick="this.parentNode.style.display='none'"><i class="xm">×</i><i class="xb"></i></span>
   <img id="d-cover" alt="" hidden />
   <div><span class="cat" id="d-cat"></span><span class="badge2" id="d-trust"></span></div>
   <h3 id="d-title"></h3><div class="sub" id="d-sub"></div>
@@ -358,11 +371,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.3</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.4</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.3"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.3"></script>
-<script src="js/globe-data.js?v=0.77.3"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.4"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.4"></script>
+<script src="js/globe-data.js?v=0.77.4"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -451,16 +464,22 @@
         if(cnCityFill){ ctx.fillStyle=T.landSel; ctx.fill(); }
         ctx.stroke(); } }
     // 国名(高档画质或静止时)
+    // 地名门控:版图在屏幕上"装得下文字"才显示(小屏/缩小时自动少字,不再叠字)
+    function fitsLabel(rRad,txt,fs2){
+      var cjk=/[一-鿿]/.test(txt);
+      return 2*rRad*sc > txt.length*fs2*(cjk?1:0.56)*1.12; }
     if(sc>scale0*0.82 && !(perfTier>=2&&inMotion())){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var L=0;L<labelData.length;L++){ var d=labelData[L]; if(!frontC(d.cart)) continue;
         if(drilledCountry&&d.en===drilledCountry) continue;   // 下钻国不再标国名,让位区划名
-        var p=proj(d.c), fs=Math.max(9,Math.min(22,d.sz*(sc/scale0)));
+        var fs=Math.max(9,Math.min(22,d.sz*(sc/scale0)));
         var lnm=(lang==='en')?d.en:d.nm;
+        if(!fitsLabel(d.r,lnm,fs)) continue;
+        var p=proj(d.c);
         ctx.font='600 '+fs+'px "PingFang SC","Microsoft YaHei",sans-serif';
         ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(lnm,p[0],p[1]);
         ctx.fillStyle=T.label; ctx.fillText(lnm,p[0],p[1]); } }
-    // 行政区划地名:中国省级=省名、市级=市州名;他国=一级行政区名
+    // 行政区划地名:中国省级=省名、市级=市州名;他国=一级行政区名(同样按"装得下"门控)
     var AL=null;
     if(cnDrilled&&drillLevel===1) AL=provLabels;
     else if(drilledCountry&&adminLabels.length) AL=adminLabels;
@@ -468,6 +487,7 @@
       ctx.textAlign='center'; ctx.textBaseline='middle';
       ctx.font='500 12px "PingFang SC","Microsoft YaHei",sans-serif';
       for(var A2=0;A2<AL.length;A2++){ var al=AL[A2]; if(!frontC(al.cart)) continue;
+        if(al.r&&!fitsLabel(al.r,al.nm,12)) continue;
         var ap=proj(al.c); if(ap[0]<-30||ap[0]>W+30||ap[1]<-20||ap[1]>H+20) continue;
         ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(al.nm,ap[0],ap[1]);
         ctx.fillStyle=T.label; ctx.fillText(al.nm,ap[0],ap[1]); } }
@@ -594,6 +614,7 @@
   canvas.addEventListener('click',function(e){
     if(moved) return;
     hoverTest(e);
+    if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
     if(hoverObj){
       if(hoverKind==='c'){ var g=hoverObj;
         if(g.count===1){ showDetail(g.single.o); syncCard(g.single); }
@@ -625,12 +646,15 @@
   // —— 国家下钻:行政区划(加载时抽稀,渲染恒轻) ——
   var adminCache={};
   function decimateFC(fc,step){
-    function ring(r){ if(r.length<=10) return r; var out=[],i=0;
-      for(i=0;i<r.length;i+=step) out.push(r[i]);
+    function ring(r,st){ if(r.length<=10) return r; var out=[],i=0;
+      for(i=0;i<r.length;i+=st) out.push(r[i]);
       if(out[out.length-1]!==r[r.length-1]) out.push(r[r.length-1]); return out; }
     var fs=(fc.features||[]).map(function(f){ var gm=f.geometry; if(!gm) return f;
-      if(gm.type==='Polygon') gm={type:'Polygon',coordinates:gm.coordinates.map(ring)};
-      else if(gm.type==='MultiPolygon') gm={type:'MultiPolygon',coordinates:gm.coordinates.map(function(pg){return pg.map(ring);})};
+      // 按面积自适应:京津沪港澳等小区划不抽稀(重度抽稀会让它们显示畸形/点不中)
+      var ar=0; try{ ar=d3.geoArea(f); }catch(e2){}
+      var st=(ar>0&&ar<0.0008)?1:((ar>0&&ar<0.004)?Math.min(2,step):step);
+      if(gm.type==='Polygon') gm={type:'Polygon',coordinates:gm.coordinates.map(function(r){return ring(r,st);})};
+      else if(gm.type==='MultiPolygon') gm={type:'MultiPolygon',coordinates:gm.coordinates.map(function(pg){return pg.map(function(r){return ring(r,st);});})};
       return {type:'Feature',properties:f.properties,geometry:gm}; });
     return fs; }
   // DataV 的 GeoJSON 按平面惯例绕环,d3 球面填充会解释成"全球减去该区域"(整屏涂成地块色,
@@ -685,7 +709,8 @@
       if(filt) fs=fs.filter(function(f){ return f.properties&&f.properties.admin===filt; });
       adminFeats=fs;
       adminLabels=fs.map(function(f){ var pr=f.properties||{}, c=pr.center||d3.geoCentroid(f);
-        var nm=shortName(pr.name||''); return nm?{c:c,cart:ll2c(c),nm:nm}:null; }).filter(Boolean);
+        var nm=shortName(pr.name||'');
+        return nm?{c:c,cart:ll2c(c),nm:nm,r:Math.sqrt(d3.geoArea(f)/Math.PI)}:null; }).filter(Boolean);
       needDraw=true; })
      .catch(function(){ if(seq!==adminSeq) return; adminFeats=[]; adminLabels=[]; needDraw=true; }); }
   function exitDrill(){
@@ -809,7 +834,7 @@
       searchPh:'检索展览、城市、机构、项目内容…',ai:'✦ AI 检索',aiing:'✦ 检索中…',
       lgT:'分类索引图例',fold:'◂ 收起面板',unfold:'▸ 展开面板',backW:'← 返回全球',backU:'← 返回上一级',
       go:'前往官网 ↗',apply:'前往申请 ↗',read:'阅读原文 ↗',
-      pro:'个人主页',uqPh:'搜索用户昵称…',uqNone:'没有匹配的用户',
+      pro:'个人主页',uqPh:'搜索用户昵称…',uqNone:'没有匹配的用户',backX:'‹ 返回',
       authTitleL:'登录 ARTPORTAL',authTitleR:'注册 ARTPORTAL',authEmail:'邮箱',authPw:'密码(至少 6 位)',
       authCode:'邮箱验证码(6 位)',authSend:'发验证码',authGoL:'登 录',authGoR:'注 册',
       authSwapR:'没有账号?注册 →',authSwapL:'已有账号?登录 →',authNl:'订阅每周艺术机会周报',
@@ -846,7 +871,7 @@
       searchPh:'Search shows, cities, institutions…',ai:'✦ AI Search',aiing:'✦ Searching…',
       lgT:'Category index',fold:'◂ Collapse panel',unfold:'▸ Show panel',backW:'← Back to globe',backU:'← Back',
       go:'Official site ↗',apply:'Apply ↗',read:'Read source ↗',
-      pro:'Profile',uqPh:'Search users…',uqNone:'No matching users',
+      pro:'Profile',uqPh:'Search users…',uqNone:'No matching users',backX:'‹ Back',
       authTitleL:'Sign in to ARTPORTAL',authTitleR:'Join ARTPORTAL',authEmail:'Email',authPw:'Password (6+ chars)',
       authCode:'Email code (6 digits)',authSend:'Send code',authGoL:'Sign in',authGoR:'Sign up',
       authSwapR:'No account? Sign up →',authSwapL:'Have an account? Sign in →',authNl:'Subscribe to the weekly digest',
@@ -898,6 +923,7 @@
     document.getElementById('q').placeholder=L('searchPh');
     if(!searching) document.getElementById('btnAI').textContent=L('ai');
     document.getElementById('btnLang').textContent=(lang==='zh')?'EN':'中';
+    d3.selectAll('.xb').text(L('backX'));
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
     document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
@@ -1041,7 +1067,7 @@
   // 通用弹层
   function modal(html){ var h=document.getElementById('mhost');
     h.innerHTML='<div class="modal"><div class="scrim"></div><div class="mbox">'+
-      '<button class="mx" type="button">×</button>'+html+'</div></div>';
+      '<button class="mx" type="button"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></button>'+html+'</div></div>';
     var m=h.firstChild;
     m.querySelector('.scrim').addEventListener('click',closeModal);
     m.querySelector('.mx').addEventListener('click',closeModal);
@@ -1422,7 +1448,8 @@
   var lbImgs=[], lbI=0;
   function openLB(imgs,i){ lbImgs=imgs; lbI=i||0;
     var el=document.getElementById('lightbox');
-    el.innerHTML='<span class="mx">×</span><span class="nav" data-d="-1" style="left:6px">‹</span><img alt="">'+
+    el.innerHTML='<span class="mx"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></span>'+
+      '<span class="nav" data-d="-1" style="left:6px">‹</span><img alt="">'+
       '<span class="nav" data-d="1" style="right:6px">›</span><span class="cnt"></span>';
     el.style.display='flex'; lbShow();
     el.onclick=function(e){
@@ -1568,7 +1595,8 @@
     labelData=countryFeats.map(function(f){ var nm=D.NAME_ZH[f.properties.name]; if(!nm) return null;
       if(f.properties.name==='Taiwan') return null;   // 台湾不作独立国家标注(属中国)
       var ar=d3.geoArea(f), cen=d3.geoCentroid(f);
-      return {c:cen,cart:ll2c(cen),nm:nm,en:f.properties.name,sz:ar>0.05?18:(ar>0.008?13:10)}; }).filter(Boolean);
+      return {c:cen,cart:ll2c(cen),nm:nm,en:f.properties.name,r:Math.sqrt(ar/Math.PI),
+        sz:ar>0.05?18:(ar>0.008?13:10)}; }).filter(Boolean);
     // 载入 DataV 官方中国边界(合规:台湾省/港澳、九段线、藏南阿克赛钦按国标)
     CN_CART=ll2c([104,35.5]);
     d3.json(CN_URL).then(function(j){ var provs=[], jd=null; rewindFC(j);
@@ -1576,7 +1604,7 @@
         else if(f.properties.name) provs.push(f); });
       cnProv=provs; cnBase=decimateFC({features:provs},8);   // 下钻才用,重度抽稀
       provLabels=cnBase.map(function(f){ var pr=f.properties, c=pr.center||d3.geoCentroid(f);
-        return {c:c,cart:ll2c(c),nm:shortName(pr.name)}; });   // 省级视图地名(短名)
+        return {c:c,cart:ll2c(c),nm:shortName(pr.name),r:Math.sqrt(d3.geoArea(f)/Math.PI)}; });   // 省级视图地名(短名+门控半径)
       if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
       adminCache[CN_URL]=j; needDraw=true; }).catch(function(){});
     var arr=res[1]?(res[1].items||res[1].opportunities||res[1]):[]; if(!Array.isArray(arr)) arr=[];
