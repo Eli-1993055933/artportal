@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.81.0" />
+<meta name="app-version" content="0.81.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -397,6 +397,7 @@
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
   <div class="card legend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div>
     <div class="tagrow" id="tagRow" data-tagrow></div>
+    <div class="tagrow" id="regRow" data-regrow></div>
     <div class="tagrow" id="fltRow" data-fltrow></div></div>
   <div class="card listcard"><div class="lc-head"><span id="lcCount">结果列表</span><span class="lc-sort" id="lcSort"></span></div><div class="lc-scroll" id="lcList"></div></div>
 </div>
@@ -424,11 +425,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.81.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.81.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.81.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.81.0"></script>
-<script src="js/globe-data.js?v=0.81.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.81.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.81.1"></script>
+<script src="js/globe-data.js?v=0.81.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -441,8 +442,10 @@
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
   var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=9, adminSeq=0, drilledAdmName=null;
   var filterCat='all', query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
-  // 筛选(老站体系移植):门类单选 + 快捷开关 + 抽屉排序
+  // 筛选(老站体系移植):门类单选 + 快捷开关 + 地区多选 + 机构类型多选 + 来源开关 + 抽屉排序
   var tagSel='', fFree=false, fStipend=false, fHousing=false, fTravel=false, fVerified=false, fHidePast=false, sortBy='deadline';
+  var fRegs={}, fOrgOff=false, fOrgInd=false, fOrgCom=false, fSrcUser=true, fSrcAI=true;
+  function regsActive(){ for(var k in fRegs){ if(fRegs[k]) return true; } return false; }
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
   var velX=0, velY=0, targetScale=null;
   var perfTier=0, costArr=[], sheetDrag=false;   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
@@ -475,8 +478,8 @@
   function isPastRec(o){ if(o.status==='expired') return true;
     if(!o.deadline) return false;
     var d=new Date(o.deadline+'T23:59:59'); return !isNaN(d)&&d<Date.now(); }
-  function matchFilter(o){
-    if(filterCat!=='all' && o.category!==filterCat) return false;
+  // 通用细筛(门类/快捷开关/地区/机构类型/来源)——地球点位、左侧列表、频道浮层共用同一份状态
+  function extraMatch(o){
     if(tagSel && D.tagsOf(o).indexOf(tagSel)<0) return false;
     if(fFree && !isFullyFree(o)) return false;
     if(fVerified && o.trust!=='verified') return false;
@@ -484,6 +487,16 @@
     if(fStipend && !(o.funding&&o.funding.stipend===true)) return false;
     if(fHousing && !(o.funding&&o.funding.housing===true)) return false;
     if(fTravel && !(o.funding&&o.funding.travel===true)) return false;
+    if(regsActive() && !fRegs[D.regionOf(o)]) return false;
+    if(fOrgOff||fOrgInd||fOrgCom){
+      var ot=o.org_type;
+      if(!((fOrgOff&&ot==='official')||(fOrgInd&&ot==='independent')||(fOrgCom&&ot==='commercial'))) return false; }
+    if(!fSrcUser && (o.trust==='user'||o._via==='submit')) return false;
+    if(!fSrcAI && o._via==='search') return false;
+    return true; }
+  function matchFilter(o){
+    if(filterCat!=='all' && o.category!==filterCat) return false;
+    if(!extraMatch(o)) return false;
     if(query){ var s=(o.title_zh||'')+(o.org_zh||'')+(o.city_zh||'')+(o.country_zh||'')+(o.summary_zh||'');
       if(s.toLowerCase().indexOf(query.toLowerCase())<0) return false; }
     return true;
@@ -1012,6 +1025,9 @@
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
       tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
       fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',
+      regAll:'全部地区',reg_cn:'中国大陆',reg_hktw:'港澳台',reg_asia:'亚洲其他',reg_europe:'欧洲',
+      reg_namerica:'北美',reg_other:'其他地区',
+      fOrgOff:'官方机构',fOrgInd:'独立机构',fOrgCom:'商业机构',fSrcUser:'含用户投稿',fSrcAI:'含AI检索',
       k_org:'主办',k_loc:'地点',k_dl:'截止',k_fee:'费用',k_fund:'资助',k_elig:'资格',k_disc:'门类',k_src:'来源',k_pub:'发布',
       srcLoc:'落点=信源所在地(非内容发生地)',tipMore:'点击看完整详情',clusterN:' 项活跃索引',clusterGo:'点击放大展开',
       dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
@@ -1052,6 +1068,9 @@
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
       tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
       fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',
+      regAll:'All regions',reg_cn:'Mainland China',reg_hktw:'HK/MO/TW',reg_asia:'Asia',reg_europe:'Europe',
+      reg_namerica:'N. America',reg_other:'Other',
+      fOrgOff:'Official',fOrgInd:'Independent',fOrgCom:'Commercial',fSrcUser:'User posts',fSrcAI:'AI-collected',
       k_org:'Host',k_loc:'Place',k_dl:'Due',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligible',k_disc:'Fields',k_src:'Source',k_pub:'Date',
       srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
@@ -1083,7 +1102,7 @@
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
     document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
-    renderLegend(); renderTagRow(); renderFltRow(); renderDrawer(); needDraw=true; }
+    renderLegend(); renderTagRow(); renderRegRow(); renderFltRow(); renderDrawer(); needDraw=true; }
   document.getElementById('btnLang').addEventListener('click',function(){
     lang=(lang==='zh')?'en':'zh';
     try{ localStorage.setItem('ap_lang',lang); }catch(e){}
@@ -1114,14 +1133,7 @@
   function chMatch(o,ch){
     if(ch==='opportunities'&&filterCat!=='all'&&
        ['opencall','residency','award','workshop'].indexOf(filterCat)>=0&&o.category!==filterCat) return false;
-    if(tagSel&&D.tagsOf(o).indexOf(tagSel)<0) return false;
-    if(fFree&&!isFullyFree(o)) return false;
-    if(fVerified&&o.trust!=='verified') return false;
-    if(fHidePast&&isPastRec(o)) return false;
-    if(fStipend&&!(o.funding&&o.funding.stipend===true)) return false;
-    if(fHousing&&!(o.funding&&o.funding.housing===true)) return false;
-    if(fTravel&&!(o.funding&&o.funding.travel===true)) return false;
-    return true; }
+    return extraMatch(o); }
   // 老站式卡片(封面 16:9 + 分类角标 + 标题两行 + 元信息)
   function chCard(o,i){ var c=CAT[o.category]||CAT.opencall, cov=o.cover?esc(o.cover):'';
     var meta=[o.org_zh,[o.city_zh,o.country_zh].filter(Boolean).join('·'),
@@ -1142,7 +1154,7 @@
       cats='<div class="tagrow chflt" id="chCats">'+ks.map(function(k){
         var on=(k==='all')?!isOpp:(filterCat===k);
         return '<span class="tgc'+(on?' on':'')+'" data-cc="'+k+'">'+(k==='all'?L('allCat'):catName(k))+'</span>'; }).join('')+'</div>'; }
-    return cats+'<div class="tagrow" data-tagrow></div><div class="tagrow" data-fltrow></div>'; }
+    return cats+'<div class="tagrow" data-tagrow></div><div class="tagrow" data-regrow></div><div class="tagrow" data-fltrow></div>'; }
   function showChPanel(ch){
     curCh=ch;
     var pane=document.getElementById('chpanel'), inner=document.getElementById('chInner');
@@ -1150,7 +1162,7 @@
     var chName={opportunities:L('opportunities'),jobs:L('jobs'),news:L('news'),works:L('works')}[ch];
     function head(n){ return '<div class="rm" style="padding:2px 2px 0">'+chName+' · '+n+'</div>'+chFltBar(ch); }
     function bindBar(){
-      renderTagRow(); renderFltRow();
+      renderTagRow(); renderRegRow(); renderFltRow();
       d3.selectAll('#chCats .tgc').on('click',function(){
         filterCat=this.getAttribute('data-cc');
         syncLegend(); renderDrawer(); needDraw=true; showChPanel(ch); }); }
@@ -1784,10 +1796,25 @@
       tagSel=(tagSel===tg)?'':tg;
       renderTagRow(); renderDrawer(); needDraw=true;
       if(curCh) showChPanel(curCh); }); }
+  // 地区多选行(老站六大区,再点取消;「全部」清空)
+  var REG_KEYS=['cn','hktw','asia','europe','namerica','other'];
+  function renderRegRow(){
+    var hosts=document.querySelectorAll('[data-regrow]'); if(!hosts.length) return;
+    var html='<span class="tgc'+(!regsActive()?' on':'')+'" data-reg="all">'+L('regAll')+'</span>'+
+      REG_KEYS.map(function(k){
+        return '<span class="tgc'+(fRegs[k]?' on':'')+'" data-reg="'+k+'">'+L('reg_'+k)+'</span>'; }).join('');
+    for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
+    d3.selectAll('[data-regrow] .tgc').on('click',function(){
+      var rk=this.getAttribute('data-reg');
+      if(rk==='all') fRegs={}; else fRegs[rk]=!fRegs[rk];
+      renderRegRow(); renderDrawer(); needDraw=true;
+      if(curCh) showChPanel(curCh); }); }
   function renderFltRow(){
     var hosts=document.querySelectorAll('[data-fltrow]'); if(!hosts.length) return;
     var items=[['fFree',fFree],['fStipend',fStipend],['fHousing',fHousing],['fTravel',fTravel],
-      ['fVerified',fVerified],['fHidePast',fHidePast]];
+      ['fVerified',fVerified],['fHidePast',fHidePast],
+      ['fOrgOff',fOrgOff],['fOrgInd',fOrgInd],['fOrgCom',fOrgCom],
+      ['fSrcUser',fSrcUser],['fSrcAI',fSrcAI]];
     var html=items.map(function(x){
       return '<span class="tgc'+(x[1]?' on':'')+'" data-f="'+x[0]+'">'+L(x[0])+'</span>'; }).join('');
     for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
@@ -1796,6 +1823,9 @@
       if(k4==='fFree') fFree=!fFree; else if(k4==='fStipend') fStipend=!fStipend;
       else if(k4==='fHousing') fHousing=!fHousing; else if(k4==='fTravel') fTravel=!fTravel;
       else if(k4==='fVerified') fVerified=!fVerified; else if(k4==='fHidePast') fHidePast=!fHidePast;
+      else if(k4==='fOrgOff') fOrgOff=!fOrgOff; else if(k4==='fOrgInd') fOrgInd=!fOrgInd;
+      else if(k4==='fOrgCom') fOrgCom=!fOrgCom;
+      else if(k4==='fSrcUser') fSrcUser=!fSrcUser; else if(k4==='fSrcAI') fSrcAI=!fSrcAI;
       renderFltRow(); renderDrawer(); needDraw=true;
       if(curCh) showChPanel(curCh); }); }
   document.getElementById('lcSort').addEventListener('click',function(){

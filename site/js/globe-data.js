@@ -244,8 +244,29 @@
     "云南":"昆明","西藏":"拉萨","陕西":"西安","甘肃":"兰州","青海":"西宁","宁夏":"银川",
     "新疆":"乌鲁木齐","台湾":"台北","香港":"香港","澳门":"澳门"
   };
+  // 地区归类(老站六大区):cn 中国大陆 / hktw 港澳台 / asia 亚洲其他 / europe 欧洲 / namerica 北美 / other
+  // 无 country_zh 的记录(作品等)回落 IP 属地判断;境外属地是英文国名,单独分桶
+  function regionOf(o){
+    var c=o.country_zh||"", city=o.city_zh||"";
+    if(/香港|澳门|台湾|台北|高雄/.test(c) || /香港|澳门|台北|高雄|台中|台南/.test(city)) return "hktw";
+    if(c==="中国") return "cn";
+    if(/日本|韩国|新加坡|印度|泰国|越南|马来|菲律宾|印尼|蒙古|哈萨克|阿联酋|卡塔尔|以色列|土耳其/.test(c)) return "asia";
+    if(/法国|德国|荷兰|英国|意大利|西班牙|瑞士|比利时|奥地利|斯洛文尼亚|瑞典|挪威|芬兰|丹麦|波兰|葡萄牙|捷克|匈牙利|希腊|爱尔兰|冰岛|克罗地亚|俄罗斯/.test(c)) return "europe";
+    if(/美国|加拿大|墨西哥/.test(c)) return "namerica";
+    if(c) return "other";
+    var r=o.ip_region;
+    if(r){
+      if(r.country==="中国") return /香港|澳门|台湾/.test(r.province||"")?"hktw":"cn";
+      var e=r.country||"";
+      if(/Japan|Korea|Singapore|India|Thailand|Vietnam|Malaysia|Philippines|Indonesia|Mongolia|Kazakhstan|United Arab|Qatar|Israel|Turkey/i.test(e)) return "asia";
+      if(/France|Germany|Netherlands|United Kingdom|Italy|Spain|Switzerland|Belgium|Austria|Sweden|Norway|Finland|Denmark|Poland|Portugal|Czech|Hungary|Greece|Ireland|Iceland|Croatia|Russia/i.test(e)) return "europe";
+      if(/United States|Canada|Mexico/i.test(e)) return "namerica";
+      if(e) return "other";
+    }
+    return "other";
+  }
   window.GLOBE_DATA = { CITY:CITY, COUNTRY:COUNTRY, NAME_ZH:NAME_ZH, CATEGORY:CATEGORY, REGIONS:REGIONS,
-    TAGS:TAGS, tagsOf:tagsOf,
+    TAGS:TAGS, tagsOf:tagsOf, regionOf:regionOf,
     // 条目 -> [lng,lat]:优先城市,其次国家中心;资讯再兜底信源驻地;都无则 null(不落点,绝不编造)
     locate:function(o){
       var c = o.city_zh && CITY[o.city_zh];
