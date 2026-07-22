@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.77.2" />
+<meta name="app-version" content="0.77.3" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -60,6 +60,7 @@
   #detail .sub{font-size:11.5px;color:var(--muted);margin:-3px 0 8px;line-height:1.4}
   #detail .meta .r{display:flex;gap:8px;padding:3px 0;line-height:1.6}
   #detail .meta .k{color:var(--muted);flex:0 0 3em}
+  html.en #detail .meta .k{flex:0 0 4.4em}
   #detail .meta .v{flex:1;min-width:0}
   #detail .cat{display:inline-block;font-size:11px;color:#fff;border-radius:5px;padding:2px 8px;margin-bottom:8px}
   #detail h3{margin:0 0 6px;font-size:15px;line-height:1.4}
@@ -173,16 +174,18 @@
   html.dark #tip,html.dark #detail{background:#1d1b18}
   @media (max-width:720px){
     /* 顶栏压缩:去 logo、紧凑药丸、发布只留图标,保证一屏放得下 */
-    #sitebar{gap:3px;padding:0 6px;overflow-x:auto}
+    /* 顶栏双行:第一行频道(可横滑),第二行操作钮靠右——彻底放得下 */
+    #sitebar{flex-wrap:wrap;height:auto;padding:6px 8px 5px;gap:3px 6px}
     #sitebar .logo{display:none}
-    #chn{margin-left:0;gap:1px}
-    #chn .ch{font-size:11.5px;padding:5px 6px}
-    #sitebar .act{gap:3px}
-    .abtn{font-size:11.5px;padding:5px 6px}
+    #sitebar .grow{display:none}
+    #chn{order:1;flex:1 1 100%;overflow-x:auto;margin-left:0;gap:2px}
+    #chn .ch{font-size:12.5px;padding:6px 11px;flex:0 0 auto}
+    #sitebar .act{order:2;margin-left:auto;gap:5px}
+    .abtn{font-size:12px;padding:6px 9px}
     #pubTxt{display:none}
     #btnLogin span{display:none}
-    .abtn .av{width:19px;height:19px;margin:-2px 0}
-    .lang{padding:4px 7px;font-size:11px}
+    .abtn .av{width:20px;height:20px;margin:-2px 0}
+    .lang{padding:5px 8px;font-size:11.5px}
     #foot{font-size:10px;padding:5px 8px}
   }
   @media (max-width:720px){
@@ -192,16 +195,20 @@
       box-shadow:0 -8px 30px rgba(0,0,0,.12);padding:0 10px 8px}
     #sheetbar{display:flex;justify-content:center;padding:9px 0 3px;cursor:grab;touch-action:none;flex:0 0 auto}
     #sheetbar i{width:42px;height:4px;border-radius:2px;background:var(--line)}
-    #panel .card,#panel .search{border:0;box-shadow:none;background:transparent;padding:6px 6px}
+    #panel .card{border:0;box-shadow:none;background:transparent;padding:6px 6px}
+    /* AI 检索框:与抽屉底色拉开一档,一眼可见 */
+    #panel .search{border:1px solid var(--line);box-shadow:none;background:#efede6;
+      border-radius:12px;margin:0 4px;padding:8px 12px}
+    html.dark #panel .search{background:#262320}
     .bignum{font-size:24px;margin:4px 0 0}
     .card .tip{display:none}
     .legend{display:none}
     .listcard{padding:0}
     #btnPanel{display:none}
     #brand{left:16px;top:14px}
-    #detail{left:14px;right:14px;width:auto;top:60px;bottom:auto;max-height:46vh}
-    #back{left:50%;right:auto;transform:translateX(-50%);top:62px;bottom:auto}
-    #propanel{left:14px;right:14px;top:60px;bottom:45vh;width:auto}
+    #detail{left:14px;right:14px;width:auto;top:86px;bottom:auto;max-height:44vh}
+    #back{left:50%;right:auto;transform:translateX(-50%);top:88px;bottom:auto}
+    #propanel{left:14px;right:14px;top:86px;bottom:45vh;width:auto}
   }
   /* 个人主页:右侧竖向卡片面板(与左侧抽屉同款形态),从头像下方展开;头部含用户检索 */
   #propanel{position:fixed;right:26px;top:64px;bottom:44px;width:362px;z-index:8;display:none;
@@ -351,11 +358,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.2</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.77.3</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.77.2"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.77.2"></script>
-<script src="js/globe-data.js?v=0.77.2"></script>
+<script src="assets/vendor/d3.min.js?v=0.77.3"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.77.3"></script>
+<script src="js/globe-data.js?v=0.77.3"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -370,7 +377,7 @@
   var filterCat='all', query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
   var velX=0, velY=0, targetScale=null;
-  var perfTier=0, costArr=[];   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
+  var perfTier=0, costArr=[], sheetDrag=false;   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
   // 画布主题配色(必须先于首帧 draw 定义;applyTheme 在下方接线区)
   var THEMES={
     light:{space:'#E3DED0',glow:'rgba(255,255,255,.32)',glow0:'rgba(255,255,255,0)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
@@ -388,7 +395,7 @@
   function clampScale(s){ return Math.max(scale0*0.55, Math.min(scale0*maxK, s)); }   // maxK 随下钻自适应放宽
   function clampLat(v){ return Math.max(-88, Math.min(88, v)); }
   function splitScale(){ return scale0*2.6; }   // 小于此=聚合簇,大于=散开单点
-  function inMotion(){ return dragging||inertiaOn||spinning||targetScale!=null; }
+  function inMotion(){ return dragging||inertiaOn||spinning||targetScale!=null||sheetDrag; }
 
   function matchFilter(o){
     if(filterCat!=='all' && o.category!==filterCat) return false;
@@ -833,8 +840,8 @@
       tUser:'用户投稿 · 未经核实',tVer:'已人工核实',tAI:'AI 检索收录 · 请核对',tAuto:'自动收录 · 未经核实',
       listN:function(n){return '结果列表 · '+n+' 项(点卡片飞过去)';},
       marked:function(n,c){return '已标注 '+n+' 项 · '+c+' 国';}},
-    en:{idx:'Index',opportunities:'Open Calls',jobs:'Jobs',news:'News',works:'Works',pub:'Post',login:'Sign in',
-      libT:'LIVE INDEX',unit:' active listings worldwide',
+    en:{idx:'Index',opportunities:'Calls',jobs:'Jobs',news:'News',works:'Works',pub:'Post',login:'Sign in',
+      libT:'LIVE INDEX',unit:' live listings',
       libTip:'Drag to rotate, scroll or pinch to zoom. Numbered circles are city clusters — click to expand; click a country for its regions.',
       searchPh:'Search shows, cities, institutions…',ai:'✦ AI Search',aiing:'✦ Searching…',
       lgT:'Category index',fold:'◂ Collapse panel',unfold:'▸ Show panel',backW:'← Back to globe',backU:'← Back',
@@ -864,11 +871,11 @@
       peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
       imgReady:' ready',studioT:'Studio critique tool',
-      k_org:'Host',k_loc:'Place',k_dl:'Deadline',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligibility',k_disc:'Fields',k_src:'Source',k_pub:'Published',
+      k_org:'Host',k_loc:'Place',k_dl:'Due',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligible',k_disc:'Fields',k_src:'Source',k_pub:'Date',
       srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
       tUser:'User submitted · unverified',tVer:'Verified',tAI:'AI-collected · please verify',tAuto:'Auto-collected · unverified',
-      listN:function(n){return 'Results · '+n+' (click to fly there)';},
+      listN:function(n){return 'Results · '+n;},
       marked:function(n,c){return n+' items · '+c+' countries';}}
   };
   var CAT_EN={opencall:'Open Calls',residency:'Residencies',award:'Awards & Grants',workshop:'Workshops & Forums',
@@ -879,6 +886,7 @@
   function tt(o){ return lang==='en'?(o.title_en||o.title_zh||''):(o.title_zh||o.title_en||''); }
   function ss(o){ return lang==='en'?(o.summary_en||o.summary_zh||''):(o.summary_zh||o.summary_en||''); }
   function applyLang(){
+    document.documentElement.classList.toggle('en',lang==='en');   // 英文字段名更长,CSS 按此微调列宽
     d3.selectAll('#chn .ch').text(function(){ var c=this.getAttribute('data-ch'); return c==='globe'?L('idx'):L(c); });
     document.getElementById('pubTxt').textContent=L('pub');
     var lt=document.getElementById('loginTxt'); if(lt) lt.textContent=L('login');
@@ -983,26 +991,41 @@
     panelOpen=!panelOpen;
     document.getElementById('panel').style.display=panelOpen?'flex':'none';
     this.textContent=panelOpen?L('fold'):L('unfold'); });
-  // —— 移动端底部抽屉:拖把手上滑展开列表,地球同步缩小 ——
+  // —— 移动端底部抽屉:头部整区可拖(列表/输入除外)+ 点把手切换 + 松手吸附最近档;地球同步缩小 ——
   (function(){
-    var bar=document.getElementById('sheetbar'), sheet=document.getElementById('panel');
-    var drag=false, sy=0, st0=0;
+    var sheet=document.getElementById('panel');
+    var drag=false, sy=0, st0=0, moved2=false, downT=null, pend=null, raf=false;
     function isMob(){ return window.innerWidth<=720; }
-    function applyTop(top){
-      var minT=Math.round(H*0.16), maxT=Math.round(H*0.56);
-      top=Math.max(minT,Math.min(maxT,top));
+    function lim(){ return {min:Math.round(H*0.16), max:Math.round(H*0.56)}; }
+    function setTop(top,animate){
+      var Lm=lim(); top=Math.max(Lm.min,Math.min(Lm.max,top));
+      sheet.style.transition=animate?'top .28s ease':'none';
       sheet.style.top=top+'px';
-      var p=(maxT-top)/(maxT-minT);
-      spinning=false; targetScale=clampScale(scale0*(1-0.4*p)); }
-    bar.addEventListener('pointerdown',function(e){ if(!isMob()) return;
-      drag=true; sy=e.clientY; st0=sheet.getBoundingClientRect().top;
-      if(bar.setPointerCapture){ try{ bar.setPointerCapture(e.pointerId); }catch(err){} }
+      var p=(Lm.max-top)/(Lm.max-Lm.min);
+      if(animate){ targetScale=clampScale(scale0*(1-0.4*p)); }
+      else { targetScale=null; proj.scale(clampScale(scale0*(1-0.4*p))); needDraw=true; } }
+    function applyPend(){ raf=false; if(pend!=null&&drag){ setTop(pend,false); pend=null; } }
+    sheet.addEventListener('pointerdown',function(e){ if(!isMob()) return;
+      var t=e.target;
+      if(t.closest('.lc-scroll')||t.closest('input')||t.closest('.ai')||t.closest('.lg-item')) return;
+      drag=true; moved2=false; downT=t; sy=e.clientY; st0=sheet.getBoundingClientRect().top;
+      sheetDrag=true; spinning=false;
+      if(sheet.setPointerCapture){ try{ sheet.setPointerCapture(e.pointerId); }catch(err){} }
       e.preventDefault(); });
-    bar.addEventListener('pointermove',function(e){ if(!drag) return;
-      applyTop(st0+(e.clientY-sy)); e.preventDefault(); });
-    function end(){ drag=false; }
-    bar.addEventListener('pointerup',end); bar.addEventListener('pointercancel',end);
-    window.addEventListener('resize',function(){ if(!isMob()) sheet.style.top=''; });
+    sheet.addEventListener('pointermove',function(e){ if(!drag) return;
+      var dy=e.clientY-sy; if(Math.abs(dy)>5) moved2=true;
+      pend=st0+dy;
+      if(!raf){ raf=true; requestAnimationFrame(applyPend); }
+      e.preventDefault(); });
+    function up(){ if(!drag) return; drag=false; sheetDrag=false;
+      var Lm=lim(), cur=sheet.getBoundingClientRect().top, mid=(Lm.min+Lm.max)/2;
+      if(!moved2){   // 点一下把手=展开/收起切换
+        if(downT&&downT.closest('#sheetbar')) setTop(cur>mid?Lm.min:Lm.max,true);
+        return; }
+      setTop(cur<mid?Lm.min:Lm.max,true); }   // 吸附最近档
+    sheet.addEventListener('pointerup',up);
+    sheet.addEventListener('pointercancel',function(){ drag=false; sheetDrag=false; });
+    window.addEventListener('resize',function(){ if(!isMob()){ sheet.style.top=''; sheet.style.transition=''; } });
   })();
   document.getElementById('btnPub').addEventListener('click',function(){ openPub(); });
   document.getElementById('btnBell').addEventListener('click',function(){ openNtf(); });
