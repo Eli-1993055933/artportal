@@ -895,11 +895,14 @@ async function handleAuthApi(req, res, u) {
         } else rows = await db.worksFeed(200);
         const mini = auth.usersMini([...new Set(rows.map(w => w.uid))]);
         const byId = new Map(mini.map(x => [x.id, x]));
+        const viewer0 = auth.userOf(req);
+        const wl = await db.workLikesFor(rows.map(w => w.id), viewer0 ? viewer0.id : null);
         return json({ code: 200, body: { works: rows.map(w => ({
           id: w.id, uid: w.uid, title: w.title, description: w.description || "",
           created_at: w.created_at, n: w.images.length, tags: w.tags || [],
           images: w.images.map(n => "assets/works/" + n),
           ip_region: w.ip_region || null,
+          likes: wl.counts[w.id] || 0, liked: wl.liked.has(w.id),
           author: byId.get(w.uid) || null
         })) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
@@ -910,12 +913,30 @@ async function handleAuthApi(req, res, u) {
       const own = !!(viewer && viewer.id === uid);
       try {
         const rows = await db.worksByUser(uid, own);
+        const wl = await db.workLikesFor(rows.map(w => w.id), viewer ? viewer.id : null);
         return json({ code: 200, body: { works: rows.map(w => ({
           id: w.id, title: w.title, description: w.description || "",
           created_at: w.created_at, n: w.images.length, tags: w.tags || [],
           status: own ? w.status : "approved", ip_region: w.ip_region || null,
+          likes: wl.counts[w.id] || 0, liked: wl.liked.has(w.id),
           images: w.status === "approved" ? w.images.map(n => "assets/works/" + n) : []
         })) } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // 作品点赞(v0.82.1):一人一赞可取消;赞了通知作者(去重键防反复赞刷通知)
+    if (p === "/api/works/like" && m === "POST") {
+      const me = auth.userOf(req);
+      if (!me) return json({ code: 401, body: { error: "请先登录" } });
+      const b = await readBody(req);
+      try {
+        const w = await db.getWork(Number(b.id));
+        if (!w || w.status !== "approved") return json({ code: 404, body: { error: "作品不存在" } });
+        if (await db.isBlocked(w.uid, me.id)) return json({ code: 403, body: { error: "无法操作" } });
+        const lr = await db.workLikeToggle(me.id, w.id);
+        if (lr.liked && w.uid !== me.id)
+          await db.notify({ uid: w.uid, type: "like", actor: me.id, refkey: "wlike:" + w.id,
+            ref: { kind: "work", target: String(w.id), title: w.title } }).catch(() => {});
+        return json({ code: 200, body: lr });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     if (p === "/api/works/delete" && m === "POST") {

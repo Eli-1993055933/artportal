@@ -85,6 +85,10 @@ export async function getDb() {
         uid TEXT NOT NULL, cid INTEGER NOT NULL,
         PRIMARY KEY (uid, cid)
       );
+      CREATE TABLE IF NOT EXISTS work_likes (
+        uid TEXT NOT NULL, wid INTEGER NOT NULL,
+        PRIMARY KEY (uid, wid)
+      );
       CREATE TABLE IF NOT EXISTS works (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         uid TEXT NOT NULL, email TEXT,
@@ -310,6 +314,25 @@ export async function commentLikeToggle(uid, cid) {
     d.prepare("UPDATE comments SET likes=likes+1 WHERE id=?").run(cid);
   }
   return { liked: !had, likes: d.prepare("SELECT likes FROM comments WHERE id=?").get(cid).likes };
+}
+// 作品点赞(v0.82.1,IG/小红书式查看器):work_likes 一人一赞,计数即时 COUNT(免加列迁移)
+export async function workLikeToggle(uid, wid) {
+  const d = await getDb();
+  const had = d.prepare("SELECT 1 FROM work_likes WHERE uid=? AND wid=?").get(uid, wid);
+  if (had) d.prepare("DELETE FROM work_likes WHERE uid=? AND wid=?").run(uid, wid);
+  else d.prepare("INSERT INTO work_likes(uid,wid) VALUES(?,?)").run(uid, wid);
+  const likes = d.prepare("SELECT COUNT(*) c FROM work_likes WHERE wid=?").get(wid).c;
+  return { liked: !had, likes };
+}
+// 批量取一组作品的点赞数 + 观察者是否已赞(feed / 个人主页列表用)
+export async function workLikesFor(wids, uid) {
+  const d = await getDb();
+  const counts = {}, liked = new Set();
+  if (!wids.length) return { counts, liked };
+  const ph = wids.map(() => "?").join(",");
+  for (const r of d.prepare(`SELECT wid, COUNT(*) c FROM work_likes WHERE wid IN (${ph}) GROUP BY wid`).all(...wids)) counts[r.wid] = r.c;
+  if (uid) for (const r of d.prepare(`SELECT wid FROM work_likes WHERE uid=? AND wid IN (${ph})`).all(uid, ...wids)) liked.add(r.wid);
+  return { counts, liked };
 }
 export async function likedSet(uid, kind, target) {
   const d = await getDb();

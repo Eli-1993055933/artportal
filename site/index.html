@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.82.0" />
+<meta name="app-version" content="0.82.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -363,9 +363,42 @@
   #lightbox .nav:hover{opacity:1}
   #lightbox .cnt{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;opacity:.8}
   #lightbox .mx{position:absolute;top:12px;right:20px;color:#fff;font-size:26px;cursor:pointer}
-  #lightbox .lbcmt{position:absolute;bottom:18px;right:20px;background:rgba(255,255,255,.14);color:#fff;
-    border:1px solid rgba(255,255,255,.35);border-radius:999px;font-size:12.5px;padding:7px 14px;cursor:pointer}
-  #lightbox .lbcmt:hover{background:rgba(255,255,255,.25)}
+  /* 作品查看器(v0.82.1,IG/小红书式):图片主区 + 侧栏(作者/标题/描述/评论直接可见)+ 底部输入框+♥ */
+  #wview{position:fixed;inset:0;z-index:58;display:none;align-items:center;justify-content:center;background:rgba(10,9,7,.82)}
+  #wview .wv-card{display:flex;width:min(1040px,94vw);height:min(84vh,760px);background:var(--panel);
+    border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+  .wv-media{flex:1.35;min-width:0;background:#0d0c0a;position:relative;display:flex;align-items:center;justify-content:center}
+  .wv-media img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in}
+  .wv-media .nav{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;color:#fff;cursor:pointer;
+    padding:14px 16px;user-select:none;opacity:.75}
+  .wv-media .nav:hover{opacity:1}
+  .wv-media .cnt{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:#fff;font-size:11.5px;opacity:.8}
+  .wv-side{flex:0 0 384px;min-width:0;display:flex;flex-direction:column;border-left:1px solid var(--line)}
+  .wv-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .wv-head img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#eceae2;cursor:pointer;flex:0 0 auto}
+  .wv-head .nm{font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wv-head .rg{font-size:11px;color:var(--muted);flex:0 0 auto}
+  .wv-head .sp{flex:1}
+  .wv-x{border:0;background:none;font-size:17px;color:var(--muted);cursor:pointer;padding:2px 4px;line-height:1;flex:0 0 auto}
+  .wv-x:hover{color:var(--ink)}
+  .wv-body{flex:1;min-height:0;overflow-y:auto;padding:12px 15px;overscroll-behavior:contain}
+  .wv-title{font-size:15px;font-weight:700;line-height:1.5;margin:0 0 6px}
+  .wv-desc{font-size:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:break-word;margin:0 0 8px}
+  .wv-meta{font-size:11px;color:var(--muted);margin-bottom:8px}
+  .wv-body .cmts{margin-top:8px}
+  .wv-foot{border-top:1px solid var(--line);padding:9px 12px;display:flex;gap:8px;align-items:flex-end}
+  .wv-composer{flex:1;min-width:0;display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+  .wv-composer .cmts__replying{width:100%;margin:0}
+  .wv-composer .cmts__input{flex:1;min-width:0;min-height:38px;max-height:110px;border-radius:999px;padding:9px 14px}
+  .wv-composer .cmts__send{margin-top:0;flex:0 0 auto}
+  .wv-like{border:0;background:none;font-size:13.5px;color:var(--sub);cursor:pointer;padding:9px 2px;white-space:nowrap;flex:0 0 auto}
+  .wv-like.is-on{color:var(--opencall)}
+  @media (max-width:720px){
+    #wview .wv-card{flex-direction:column;width:100%;height:100%;max-height:none;border-radius:0}
+    .wv-media{flex:0 0 44vh}
+    .wv-side{flex:1;min-height:0;border-left:0}
+    .wv-foot{padding-bottom:calc(9px + env(safe-area-inset-bottom,0px))}
+  }
   /* 周刊阅读页(#/w/ 深链;老站 NYT 文章排版移植,思源宋体进页时按需加载) */
   #wkpage{position:fixed;left:0;right:0;top:0;bottom:26px;z-index:6;display:none;overflow-y:auto;
     background:var(--bg);overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -502,6 +535,7 @@
   <div class="pro-scroll" id="proBody"></div>
 </div></div>
 <div id="mhost"></div>
+<div id="wview"></div>
 <div id="lightbox"></div>
 <div id="detail"><span class="x" id="dClose"><i class="xm">×</i><i class="xb"></i></span>
   <img id="d-cover" alt="" hidden />
@@ -516,11 +550,11 @@
 <div id="toast"></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.82.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.82.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.82.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.82.0"></script>
-<script src="js/globe-data.js?v=0.82.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.82.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.82.1"></script>
+<script src="js/globe-data.js?v=0.82.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1070,9 +1104,11 @@
       (ss(o)?('<div class="r" style="display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)">'+esc(String(ss(o)).slice(0,230))+'</div>'):'');
     var go=document.getElementById('d-go');
     var cc=cmtKindOf(o);
-    if(o.category==='works'&&o.images&&o.images.length){   // 作品:前往=站内灯箱看大图
+    if(o.category==='works'&&o.images&&o.images.length){   // 作品:前往=打开作品查看器(IG/小红书式)
       go.href='javascript:;'; go.textContent=L('viewImgs');
-      go.onclick=function(ev){ ev.preventDefault(); openLB(o.images,0,cc); }; }
+      go.onclick=function(ev){ ev.preventDefault();
+        if(o._w) openWorkView(o._w);
+        else openLB(o.images,0); }; }
     else { go.onclick=null; go.href=o.url||o.source_url||'#';
       go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read'):L('go')); }
     // 评论:默认收起(点「💬 评论」在卡内展开;再点收起),换条目即复位
@@ -1136,7 +1172,7 @@
       cmtJustNow:'刚刚',cmtMinAgo:'分钟前',cmtHourAgo:'小时前',cmtDayAgo:'天前',
       cmtDelete:'删除',cmtDelAsk:'删除这条评论?(回复会一并删除)',cmtDeleted:'已删除',
       cmtSentLive:'已发布',cmtSentPending:'已提交,人工复核通过后显示',
-      cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',
+      cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',ntLikeWork:'赞了你的作品',
       dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
       tUser:'用户投稿 · 未经核实',tVer:'已人工核实',tAI:'AI 检索收录 · 请核对',tAuto:'自动收录 · 未经核实',
       listN:function(n){return '结果列表 · '+n+' 项(点卡片飞过去)';},
@@ -1188,7 +1224,7 @@
       cmtJustNow:'just now',cmtMinAgo:'min ago',cmtHourAgo:'h ago',cmtDayAgo:'d ago',
       cmtDelete:'Delete',cmtDelAsk:'Delete this comment? Replies will be removed too.',cmtDeleted:'Deleted',
       cmtSentLive:'Posted',cmtSentPending:'Submitted — visible after human review',
-      cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',
+      cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',ntLikeWork:'liked your work ',
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
       tUser:'User submitted · unverified',tVer:'Verified',tAI:'AI-collected · please verify',tAuto:'Auto-collected · unverified',
       listN:function(n){return 'Results · '+n;},
@@ -1322,8 +1358,7 @@
     if(wb){ openWeekly(wb.getAttribute('data-wk')); return; }
     var w=e.target.closest('.wcard');
     if(w){ var p=chView[+w.getAttribute('data-wj')];
-      if(p&&p.w&&p.w.images&&p.w.images.length)
-        openLB(p.w.images,0,{kind:'work',target:String(p.w.id),title:p.w.title||''});
+      if(p&&p.w&&p.w.images&&p.w.images.length) openWorkView(p.w);
       return; }
     var cdd=e.target.closest('.ocard');
     if(cdd){ var o=chView[+cdd.getAttribute('data-ci')]; if(o) showDetail(o); return; } });
@@ -1547,6 +1582,7 @@
     if(n.type==='weekly') return L('ntWeekly')+tl;
     if(n.type==='follow') return who+L('ntFollow');
     if(n.type==='reply') return who+L('ntReply')+pv;
+    if(n.type==='like'&&n.ref&&n.ref.kind==='work'&&!n.ref.cid) return who+L('ntLikeWork')+tl;
     if(n.type==='like') return who+L('ntLike')+pv;
     if(n.type==='comment') return who+L('ntComment')+tl+pv;
     if(n.type==='decide') return L('ntDecide')+' '+tl+((n.ref&&n.ref.preview)?('「'+esc(n.ref.preview)+'」'):'')+
@@ -1573,6 +1609,15 @@
           if(n.type==='follow'&&n.actor){ closeModal(); openProfile(n.actor.id); return; }
           if(n.type==='decide'){ closeModal(); openProfile(meUser.id); return; }
           var ref=n.ref||{};
+          if(ref.kind==='work'&&ref.target){ closeModal();
+            var openW=function(list2){ for(var j=0;j<list2.length;j++){
+                if(String(list2[j].id)===String(ref.target)){ openWorkView(list2[j]); return true; } } return false; };
+            if(openW((chCache.works&&chCache.works.works)||[])) return;
+            fetch('/api/works/feed',{credentials:'same-origin'}).then(function(r2){ return r2.json(); })
+              .then(function(j2){ chCache.works=j2;
+                if(!openW((j2&&j2.works)||[])) toast(L('notInLib')); })
+              .catch(function(){ toast(L('authNet')); });
+            return; }
           if(ref.kind==='opportunity'&&ref.target){
             for(var i2=0;i2<markers.length;i2++){ if(markers[i2].o.id===ref.target){ closeModal(); showDetail(markers[i2].o); return; } } } }); })
       .catch(function(){ var body=m.querySelector('#ntBody');
@@ -1682,7 +1727,7 @@
             var card=e.target.closest('[data-wi]'); if(!card) return;
             var w=ws[+card.getAttribute('data-wi')];
             if(w&&w.images&&w.images.length)
-              openLB(w.images,0,{kind:'work',target:String(w.id),title:w.title||''}); }; })
+              openWorkView(Object.assign({},w,{author:{id:u.id,nickname:u.nickname,avatar:u.avatar}})); }; })
         .catch(function(){ body.innerHTML='<div class="pp-empty">'+L('authNet')+'</div>'; });
       return; }
     if(t==='favs'){
@@ -1773,15 +1818,13 @@
       .catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }); }
   // —— 作品灯箱 ——
   var lbImgs=[], lbI=0;
-  function openLB(imgs,i,cmtCtx){ lbImgs=imgs; lbI=i||0;
+  function openLB(imgs,i){ lbImgs=imgs; lbI=i||0;   // 纯看大图(作品交互都在 wview 查看器里)
     var el=document.getElementById('lightbox');
     el.innerHTML='<span class="mx"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></span>'+
       '<span class="nav" data-d="-1" style="left:6px">‹</span><img alt="">'+
-      '<span class="nav" data-d="1" style="right:6px">›</span><span class="cnt"></span>'+
-      (cmtCtx?('<button class="lbcmt" type="button">'+L('cmtOpen')+'</button>'):'');
+      '<span class="nav" data-d="1" style="right:6px">›</span><span class="cnt"></span>';
     el.style.display='flex'; lbShow(); ensureGuard();
     el.onclick=function(e){
-      if(cmtCtx&&e.target.closest('.lbcmt')){ openCmtSheet(cmtCtx.kind,cmtCtx.target,cmtCtx.title); return; }
       var nv=e.target.closest('.nav');
       if(nv){ lbI=(lbI+(+nv.getAttribute('data-d'))+lbImgs.length)%lbImgs.length; lbShow(); return; }
       if(e.target.tagName!=='IMG'){ el.style.display='none'; releaseGuard(); } }; }
@@ -1806,8 +1849,9 @@
     if(s<86400) return Math.round(s/3600)+' '+L('cmtHourAgo');
     if(s<30*86400) return Math.round(s/86400)+' '+L('cmtDayAgo');
     return String(iso).slice(0,10); }
-  function cmtMount(box,kind,target){
+  function cmtMount(box,kind,target,opts){
     var list=[], replyTo=null;
+    var host=(opts&&opts.composerHost)||null;   // 提供则输入框渲染到该容器(作品查看器底栏),列表区只放评论
     box.classList.add('cmts');
     render(); load();
     function load(){
@@ -1830,32 +1874,39 @@
                :'<button type="button" class="cmt__op" data-cmtact="report" data-id="'+c.id+'">'+L('cmtReport')+'</button>')+'</div>'+
         (replies.length?'<div class="cmt__replies">'+replies.map(function(r2){ return item(r2,[],true); }).join('')+'</div>':'')+
         '</div></div>'; }
+    function composerHtml(){
+      return (replyTo?'<div class="cmts__replying">'+L('cmtReplyTo')+' @'+esc(replyTo.nick)+' <button type="button" class="cmts__cancel" data-cmtact="cancel">'+L('cmtCancel')+'</button></div>':'')+
+        '<textarea class="cmts__input" maxlength="500" placeholder="'+esc(L('cmtPh'))+'"></textarea>'+
+        '<button type="button" class="cmts__send" data-cmtact="send">'+L('cmtSend')+'</button>'; }
     function render(){
       var tops=list.filter(function(c){ return !c.parent; }).reverse();
       var byP={}; list.forEach(function(c){ if(c.parent)(byP[c.parent]=byP[c.parent]||[]).push(c); });
+      var kept=host?host.querySelector('.cmts__input'):null, keepVal=kept?kept.value:'';
       box.innerHTML='<div class="cmts__head">'+L('cmtTitle')+' <span class="cmts__n">'+list.length+'</span></div>'+
-        '<div class="cmts__composer">'+
-          (replyTo?'<div class="cmts__replying">'+L('cmtReplyTo')+' @'+esc(replyTo.nick)+' <button type="button" class="cmts__cancel" data-cmtact="cancel">'+L('cmtCancel')+'</button></div>':'')+
-          '<textarea class="cmts__input" maxlength="500" placeholder="'+esc(L('cmtPh'))+'"></textarea>'+
-          '<button type="button" class="cmts__send" data-cmtact="send">'+L('cmtSend')+'</button></div>'+
+        (host?'':'<div class="cmts__composer">'+composerHtml()+'</div>')+
         (tops.length?tops.map(function(c){ return item(c,byP[c.id]||[],false); }).join('')
-          :'<p class="cmts__empty">'+L('cmtEmpty')+'</p>'); }
+          :'<p class="cmts__empty">'+L('cmtEmpty')+'</p>');
+      if(host){ host.innerHTML=composerHtml();
+        var inp=host.querySelector('.cmts__input'); if(inp&&keepVal) inp.value=keepVal; } }
     function send(){
       if(!meUser){ openAuth('login'); return; }
-      var input=box.querySelector('.cmts__input'), content=input.value.trim();
+      var input=(host||box).querySelector('.cmts__input'), content=input.value.trim();
       if(!content){ input.focus(); return; }
-      var btn=box.querySelector('.cmts__send'); btn.disabled=true;
+      var btn=(host||box).querySelector('.cmts__send'); btn.disabled=true;
       postJ('/api/comments',{kind:kind,target:target,content:content,parent:replyTo?replyTo.id:null})
         .then(function(r){ btn.disabled=false;
           if(r.st===401){ openAuth('login'); return; }
           if(!r.ok){ toast((r.data&&r.data.error)||L('authNet')); return; }
-          replyTo=null; toast(L(r.data.status==='approved'?'cmtSentLive':'cmtSentPending')); load(); })
+          replyTo=null; input.value='';
+          toast(L(r.data.status==='approved'?'cmtSentLive':'cmtSentPending')); load(); })
         .catch(function(){ btn.disabled=false; toast(L('authNet')); }); }
-    box.onclick=function(e){
+    var onClick=function(e){
       var uEl=e.target.closest('[data-cmtu]');
       if(uEl&&uEl.getAttribute('data-cmtu')){ closeModal();
         var lb2=document.getElementById('lightbox');
         if(lb2.style.display==='flex') lb2.style.display='none';   // 灯箱(z60)会盖住主页面板,先收
+        var wv2=document.getElementById('wview');
+        if(wv2.style.display==='flex'){ wv2.style.display='none'; wv2.innerHTML=''; wvCur=null; }   // 作品查看器同理
         openProfile(uEl.getAttribute('data-cmtu')); return; }
       var op=e.target.closest('[data-cmtact]'); if(!op) return;
       var act=op.getAttribute('data-cmtact'), id=Number(op.getAttribute('data-id'));
@@ -1863,7 +1914,7 @@
       if(act==='send'){ send(); return; }
       if(act==='reply'){ if(!meUser){ openAuth('login'); return; }
         replyTo={id:id,nick:op.getAttribute('data-nick')||''}; render();
-        box.querySelector('.cmts__input').focus(); return; }
+        (host||box).querySelector('.cmts__input').focus(); return; }
       if(act==='like'){ if(!meUser){ openAuth('login'); return; }
         postJ('/api/comments/like',{id:id}).then(function(r){
           if(!r.ok){ toast((r.data&&r.data.error)||L('authNet')); return; }
@@ -1876,10 +1927,64 @@
           toast(L('cmtDeleted')); load(); });
         return; }
       if(act==='report'){ postJ('/api/comments/report',{id:id}).then(function(r){
-        toast(r.ok?L('cmtReported'):((r.data&&r.data.error)||L('authNet'))); }); } }; }
+        toast(r.ok?L('cmtReported'):((r.data&&r.data.error)||L('authNet'))); }); } };
+    box.onclick=onClick; if(host) host.onclick=onClick; }
   function openCmtSheet(kind,target,title){
     var m=modal('<h3>'+esc(title||L('cmtTitle'))+'</h3><div id="csBody"></div>');
     cmtMount(m.querySelector('#csBody'),kind,target); }
+  // ============================================================
+  //  作品查看器(v0.82.1,IG/小红书式,用户要求):图片主区(可翻页,点图放大)+
+  //  侧栏(作者→主页/标题/描述/评论列表直接可见)+ 底部固定输入框 + ♥ 作品点赞。
+  // ============================================================
+  var wvCur=null, wvI=0;
+  function wvShow(){ var el=document.getElementById('wview');
+    var img=el.querySelector('.wv-media img'); if(!img||!wvCur) return;
+    img.src=wvCur.images[wvI];
+    el.querySelector('.wv-media .cnt').textContent=(wvI+1)+' / '+wvCur.images.length;
+    var nvs=el.querySelectorAll('.wv-media .nav');
+    for(var i=0;i<nvs.length;i++) nvs[i].style.display=wvCur.images.length>1?'block':'none'; }
+  function closeWV(){ var el=document.getElementById('wview');
+    if(el.style.display==='flex'){ el.style.display='none'; el.innerHTML=''; wvCur=null; releaseGuard(); } }
+  function openWorkView(w){
+    if(!w||!w.images||!w.images.length) return;
+    wvCur=w; wvI=0;
+    var el=document.getElementById('wview'), a=w.author||{};
+    el.innerHTML='<div class="wv-card">'+
+      '<div class="wv-media"><img alt="">'+
+        '<span class="nav" data-d="-1" style="left:6px">‹</span><span class="nav" data-d="1" style="right:6px">›</span>'+
+        '<span class="cnt"></span></div>'+
+      '<div class="wv-side">'+
+        '<div class="wv-head">'+
+          (a.id?('<img src="'+esc(a.avatar||'')+'" data-wvu="'+esc(a.id)+'" alt="">'+
+            '<span class="nm" data-wvu="'+esc(a.id)+'">'+esc(a.nickname||'')+'</span>'):'')+
+          ((w.ip_region&&w.ip_region.disp)?('<span class="rg">'+L('ipLoc')+'·'+esc(w.ip_region.disp)+'</span>'):'')+
+          '<span class="sp"></span><button class="wv-x" type="button"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></button></div>'+
+        '<div class="wv-body">'+
+          '<div class="wv-title">'+esc(w.title||'')+'</div>'+
+          (w.description?('<p class="wv-desc">'+esc(w.description)+'</p>'):'')+
+          '<div class="wv-meta">'+esc(String(w.created_at||'').slice(0,10))+(w.n>1?(' · '+w.n+' 图'):'')+'</div>'+
+          '<div id="wvCmts"></div></div>'+
+        '<div class="wv-foot"><div class="wv-composer" id="wvComposer"></div>'+
+          '<button class="wv-like'+(w.liked?' is-on':'')+'" id="wvLike" type="button">♥ <span>'+(w.likes||0)+'</span></button></div>'+
+      '</div></div>';
+    el.style.display='flex'; ensureGuard(); wvShow();
+    cmtMount(el.querySelector('#wvCmts'),'work',String(w.id),{composerHost:el.querySelector('#wvComposer')});
+    el.onclick=function(e){
+      if(e.target===el){ closeWV(); return; }   // 点卡外遮罩关闭
+      if(e.target.closest('.wv-x')){ closeWV(); return; }
+      var uu=e.target.closest('[data-wvu]');
+      if(uu){ el.style.display='none'; el.innerHTML=''; wvCur=null; openProfile(uu.getAttribute('data-wvu')); return; }
+      var nv=e.target.closest('.wv-media .nav');
+      if(nv){ wvI=(wvI+(+nv.getAttribute('data-d'))+w.images.length)%w.images.length; wvShow(); return; }
+      if(e.target.closest('.wv-media img')){ openLB(w.images,wvI); return; }
+      var lk=e.target.closest('#wvLike');
+      if(lk){ if(!meUser){ openAuth('login'); return; }
+        postJ('/api/works/like',{id:w.id}).then(function(r){
+          if(!r.ok){ toast((r.data&&r.data.error)||L('authNet')); return; }
+          w.liked=r.data.liked; w.likes=r.data.likes;
+          lk.classList.toggle('is-on',w.liked);
+          lk.querySelector('span').textContent=w.likes; });
+        return; } }; }
   // ============================================================
   //  周刊阅读页(v0.82.0):#/w/ 深链;文章型(format2,NYT 排版+思源宋体)+
   //  清单式(format1)兜底;文内引用点开站内详情叠层;往期目录;复制分享链接。
@@ -2007,6 +2112,7 @@
     if(document.getElementById('mhost').innerHTML){ closeModal(); return; }   // 弹层 z70 在灯箱之上,先关它
     var lb=document.getElementById('lightbox');
     if(lb.style.display==='flex'){ lb.style.display='none'; releaseGuard(); return; }
+    if(document.getElementById('wview').style.display==='flex'){ closeWV(); return; }
     if(document.getElementById('wkpage').style.display==='block'){ closeWeekly(); return; }
     hideProfile(); });
   document.getElementById('dClose').addEventListener('click',function(){
@@ -2015,6 +2121,7 @@
   var apGuard=false, popSuppress=0;
   function layerOpen(){
     return document.getElementById('lightbox').style.display==='flex'
+      || document.getElementById('wview').style.display==='flex'
       || !!document.getElementById('mhost').firstChild
       || document.getElementById('detail').style.display==='block'
       || document.getElementById('propanel').style.display==='flex'
@@ -2027,6 +2134,8 @@
     if(document.getElementById('mhost').firstChild){ closeModal(); return true; }   // 弹层 z70 最高,先关
     var lb=document.getElementById('lightbox');
     if(lb.style.display==='flex'){ lb.style.display='none'; return true; }
+    var wv=document.getElementById('wview');
+    if(wv.style.display==='flex'){ wv.style.display='none'; wv.innerHTML=''; wvCur=null; return true; }
     var det=document.getElementById('detail');
     if(det.style.display==='block'){ det.style.display='none'; return true; }
     if(document.getElementById('propanel').style.display==='flex'){ hideProfile();
@@ -2236,7 +2345,8 @@
     title_zh:w.title||'无题', title_en:w.title||'', org_zh:(w.author&&w.author.nickname)||'佚名',
     cover:(w.images&&w.images[0])||'', images:w.images||[], n:w.n||((w.images||[]).length),
     summary_zh:w.description||'', trust:'user', tags:w.tags||[],
-    ip_region:w.ip_region||(w.author&&w.author.ip_region)||null }; }
+    ip_region:w.ip_region||(w.author&&w.author.ip_region)||null,
+    _w:w }; }   // 原始作品对象(查看器要作者/点赞等完整字段)
   // 首屏只等最小关键路径(世界底图 ~110KB):先把地球画出来;
   // 四频道数据各自异步到达、增量落点(opportunities 已 1MB,绝不挡首屏)
   d3.json('data/geo/countries-110m.json').then(function(res0){
