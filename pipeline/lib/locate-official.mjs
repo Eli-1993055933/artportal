@@ -10,6 +10,7 @@
 
 import { fetchSource } from "./fetch.mjs";
 import { isThirdParty, hostOf } from "./aggregators.mjs";
+import { extractGlmFree } from "./extract.mjs";
 
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36";
 const SOCIAL = /facebook|instagram|twitter|x\.com|linkedin|youtube|pinterest|t\.me|tiktok|vimeo|flickr|mailto/i;
@@ -103,13 +104,20 @@ async function judge(item, cand, pageText) {
       }),
       signal: AbortSignal.timeout(30000)
     });
-    if (!res.ok) return { level: "no" };
+    if (!res.ok) throw new Error("deepseek " + res.status);
     const j = await res.json();
     const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "{}";
     const m = /\{[\s\S]*\}/.exec(raw);
     const parsed = m ? JSON.parse(m[0]) : {};
     return { level: ["specific", "org", "no"].includes(parsed.level) ? parsed.level : "no", reason: parsed.reason };
-  } catch (e) { return { level: "no" }; }
+  } catch (e) {
+    // DeepSeek 不可用 → 免费 GLM 兜底(核实是短文本判断,flash 够用;存疑照旧给 no,红线不松)
+    try {
+      const g = await extractGlmFree(sys, user, 200);
+      const parsed = (g && g.data) || {};
+      return { level: ["specific", "org", "no"].includes(parsed.level) ? parsed.level : "no", reason: parsed.reason };
+    } catch (e2) { return { level: "no" }; }
+  }
 }
 
 // 主入口:返回 { url, level, reason } 或 null。

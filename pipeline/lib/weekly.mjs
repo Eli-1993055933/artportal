@@ -15,6 +15,7 @@ import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { isThirdParty } from "./aggregators.mjs";
+import { extractGlmFree } from "./extract.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "..", "site");
@@ -215,6 +216,7 @@ async function composeArticleAI(cand, weekId) {
     "E. 每个章节可选一张配图:字段 image 填某个标注[有配图]的候选编号(该章节确实谈到它时才配),否则填 null。\n\n" +
     '只输出一个 JSON:{"title":"…","subtitle":"…","sections":[{"heading":"…","image":编号或null,"paragraphs":["…","…"]}],"closing":"…"}';
   async function callOnce(extraNote) {
+    const userContent = "本期:" + weekId + (extraNote ? "\n(上一稿问题:" + extraNote + ",请重写并严格遵守铁律)" : "") + "\n\n候选清单:\n" + listText;
     try {
       const res = await fetch("https://api.deepseek.com/chat/completions", {
         method: "POST",
@@ -224,17 +226,22 @@ async function composeArticleAI(cand, weekId) {
           temperature: 0.75, max_tokens: 5000, response_format: { type: "json_object" },
           messages: [
             { role: "system", content: sys },
-            { role: "user", content: "本期:" + weekId + (extraNote ? "\n(上一稿问题:" + extraNote + ",请重写并严格遵守铁律)" : "") + "\n\n候选清单:\n" + listText }
+            { role: "user", content: userContent }
           ]
         }),
         signal: AbortSignal.timeout(150000)
       });
-      if (!res.ok) return null;
+      if (!res.ok) throw new Error("deepseek " + res.status);
       const j = await res.json();
       const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
       const m = /\{[\s\S]*\}/.exec(raw);
       return m ? JSON.parse(m[0]) : null;
-    } catch (e) { return null; }
+    } catch (e) {
+      // DeepSeek 不可用 → 免费 GLM 兜底成文(文笔弱一档;铁律仍由 inspect 校验+引用程序回填把关),
+      // 再不行 compose 会退回清单式程序模板,刊不断更。
+      try { const g = await extractGlmFree(sys, userContent, 5000); return (g && g.data) || null; }
+      catch (e2) { return null; }
+    }
   }
   // 稿件校验:结构完整 + 引用充分。不达标给一次重写机会(带上问题说明)。
   function inspect(out) {

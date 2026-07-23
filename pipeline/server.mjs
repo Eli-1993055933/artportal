@@ -22,6 +22,7 @@ import * as auth from "./lib/auth.mjs";
 import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 import { ipRegion } from "./lib/ipregion.mjs";
 import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
+import { extractGlmFree } from "./lib/extract.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { leadsTick } from "./lib/leads.mjs";
 import { feedbackAgentTick } from "./lib/feedback.mjs";
@@ -336,7 +337,7 @@ async function understandQuery(userQuery) {
         }),
         signal: AbortSignal.timeout(25000)
       });
-      if (!res.ok) { if (res.status === 429 || res.status >= 500) { await sleep(600 * (attempt + 1)); continue; } return null; }
+      if (!res.ok) { if (res.status === 429 || res.status >= 500) { await sleep(600 * (attempt + 1)); continue; } break; }   // 4xx(欠费等)不重试,转免费兜底
       const j = await res.json();
       const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
       const m = /\{[\s\S]*\}/.exec(raw);
@@ -344,6 +345,8 @@ async function understandQuery(userQuery) {
       await sleep(400);
     } catch (e) { await sleep(600 * (attempt + 1)); }   // 超时/网络错→退避重试
   }
+  // DeepSeek 不可用(欠费/连败)→ 免费 GLM 兜底一把:意图解析是检索的舵,能扶就扶
+  try { const g = await extractGlmFree(sys, "用户需求:" + userQuery, 400); if (g && g.data) return g.data; } catch (e) {}
   return null;
 }
 // 相关性把关:机会文本是否包含用户指定地点的任一别名(中英,硬约束);全不含则判跑题、丢弃。

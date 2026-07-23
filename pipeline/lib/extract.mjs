@@ -19,7 +19,8 @@ const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 // 价格(美元/百万 token)—— 仅用于费用报告估算,正式以账单为准。
 const PRICES = {
   deepseek: { in: 0.27, out: 1.10 },   // deepseek-chat 约值
-  anthropic: { in: 3, out: 15 }        // Sonnet 约值
+  anthropic: { in: 3, out: 15 },       // Sonnet 约值
+  "glm-free": { in: 0, out: 0 }        // 智谱 GLM-4-Flash(免费兜底)
 };
 
 let PROMPT = null;
@@ -49,9 +50,48 @@ export async function extract(sourceText, ctx) {
 // 底层出口:任意 system prompt + user 内容 → JSON 提取结果(资讯/招聘频道用自己的 prompt 走这里)。
 // provider 选择、JSON 模式、usage 统计与机会频道完全同一套。
 export async function llmExtract(system, user, maxTokens) {
-  if (DEEPSEEK_KEY) return extractDeepSeek(system, user, maxTokens);
+  if (DEEPSEEK_KEY) {
+    try { return await extractDeepSeek(system, user, maxTokens); }
+    catch (e) {
+      // DeepSeek 欠费/限流/故障 → 免费 GLM 兜底顶上(v0.83.1):提取质量弱一档但功能不断线;
+      // 反幻觉不受影响——evidence 是否原文子串由 verify.mjs 程序说了算,模型说了不算。
+      if (process.env.MOD_API_KEY) {
+        try { return await extractGlmFree(system, user, maxTokens); } catch (e2) {}
+      }
+      throw e;
+    }
+  }
+  if (process.env.MOD_API_KEY) return extractGlmFree(system, user, maxTokens);
   if (ANTHROPIC_KEY) return extractAnthropic(system, user, maxTokens);
   throw new Error("缺少 DEEPSEEK_API_KEY 或 ANTHROPIC_API_KEY(放进 pipeline/.env 或 GitHub Secrets)");
+}
+
+// 免费提取(智谱 GLM-4-Flash,OpenAI 兼容,长期免费):llmExtract 的兜底线,也可被各调用点直接用作主线。
+// 不传 response_format(flash 各版支持不一),输出可能包 markdown 代码块,剥掉再解析。
+export async function extractGlmFree(system, user, maxTokens) {
+  const key = process.env.MOD_API_KEY;
+  if (!key) throw new Error("缺少 MOD_API_KEY");
+  const res = await fetch(process.env.MOD_API_URL || "https://open.bigmodel.cn/api/paas/v4/chat/completions", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: process.env.MOD_MODEL || "glm-4-flash",
+      messages: [{ role: "system", content: system }, { role: "user", content: user }],
+      temperature: 0,
+      max_tokens: maxTokens || 1500
+    }),
+    signal: AbortSignal.timeout(90000)
+  });
+  if (!res.ok) throw new Error("GLM " + res.status + ": " + (await res.text()).slice(0, 300));
+  const j = await res.json();
+  let raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+  raw = raw.replace(/^\s*```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "");
+  const usage = {
+    provider: "glm-free",
+    input_tokens: (j.usage && j.usage.prompt_tokens) || 0,
+    output_tokens: (j.usage && j.usage.completion_tokens) || 0
+  };
+  return { data: parseJson(raw), usage, raw };
 }
 
 export { MAX_INPUT_CHARS };

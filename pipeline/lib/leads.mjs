@@ -16,6 +16,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { searchWebRich } from "./websearch.mjs";
+import { llmExtract, extractGlmFree } from "./extract.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE_PATH = join(__dir, "..", "state", "leads.json");
@@ -56,34 +57,23 @@ function libHas(name) {
   } catch (e) { return false; }
 }
 
-// DeepSeek 线索提炼:只允许从给定标题/摘要文本里抄机会名与主办方,提炼不出返回空数组。
+// 线索提炼(轻任务,免费 GLM 为主、DeepSeek 兜底,v0.83.1):
+// 只允许从给定标题/摘要文本里抄机会名与主办方,提炼不出返回空数组。
 async function distillClues(rows) {
-  const key = process.env.DEEPSEEK_API_KEY;
-  if (!key || !rows.length) return [];
+  if (!rows.length) return [];
   const text = rows.map((r, i) => `${i + 1}. ${r.title}${r.snippet ? " —— " + r.snippet : ""}`).join("\n");
-  const prompt =
+  const sys =
     "下面是社交媒体上关于艺术机会的帖子标题与摘要(搜索引擎索引,可能混有广告/个人日常/培训班营销)。\n" +
     "请从中提炼出【明确可辨识的真实艺术机会】(展览征集/驻留/奖项/工作坊),每条给出:\n" +
     "  name: 机会名称(必须直接出现在标题或摘要文本中,原样照抄,不许改写扩写)\n" +
     "  org: 主办方名称(同样必须出现在文本中;看不出来就填空字符串)\n" +
     "规则:辨识不出明确机会名的一律不要;广告、艺考培训、代报名、个人感想一律不要;拿不准就不要。\n" +
-    '只输出 JSON:{"clues":[{"name":"...","org":"..."}]}\n\n' + text;
-  const res = await fetch("https://api.deepseek.com/chat/completions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
-    body: JSON.stringify({
-      model: process.env.EXTRACT_MODEL || "deepseek-chat",
-      messages: [{ role: "user", content: prompt }],
-      response_format: { type: "json_object" },
-      temperature: 0.1,
-      max_tokens: 800
-    }),
-    signal: AbortSignal.timeout(60000)
-  });
-  if (!res.ok) throw new Error("deepseek " + res.status);
-  const j = await res.json();
-  let out;
-  try { out = JSON.parse(j.choices[0].message.content); } catch (e) { return []; }
+    '只输出 JSON:{"clues":[{"name":"...","org":"..."}]}';
+  let out = null;
+  if (process.env.MOD_API_KEY) {
+    try { out = (await extractGlmFree(sys, text, 800)).data; } catch (e) {}
+  }
+  if (!out) out = (await llmExtract(sys, text, 800)).data;
   const src = rows.map(r => (r.title + " " + r.snippet)).join("\n");
   return (Array.isArray(out.clues) ? out.clues : [])
     .map(c => ({ name: String(c.name || "").trim().slice(0, 60), org: String(c.org || "").trim().slice(0, 40) }))
