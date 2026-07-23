@@ -70,12 +70,40 @@ const AI_SYS = {
     '{"category":"正常|广告导流|涉政敏感|色情低俗|人身攻击","reason":"一句话理由"}\n' +
     "判定要点:正常的自我介绍都算【正常】;含联系方式导流或推销=广告导流。"
 };
+// —— 免费审核模型优先(v0.82.3,用户要求降成本):.env 配 MOD_API_KEY 即启用 ——
+// 默认接智谱 GLM-4-Flash(API 长期免费、国内直连、OpenAI 兼容格式);
+// MOD_API_URL / MOD_MODEL 可换任何 OpenAI 兼容服务(百炼 qwen-flash、硅基流动免费模型等)。
+// 免费模型失败自动回落 DeepSeek;两边都挂才算机审失败(转人工,fail-closed 兜底不变)。
+async function freeModerate(sys, user) {
+  const res = await fetch(process.env.MOD_API_URL || "https://open.bigmodel.cn/api/paas/v4/chat/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + process.env.MOD_API_KEY },
+    body: JSON.stringify({
+      model: process.env.MOD_MODEL || "glm-4-flash",
+      messages: [{ role: "system", content: sys }, { role: "user", content: user }],
+      temperature: 0.1,
+      max_tokens: 300
+    }),
+    signal: AbortSignal.timeout(30000)
+  });
+  if (!res.ok) throw new Error("mod-api " + res.status);
+  const j = await res.json();
+  const content = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+  const m = content.match(/\{[\s\S]*\}/);   // 免费模型可能包 markdown 代码块,剥出 JSON 再解析
+  if (!m) throw new Error("mod-api no-json");
+  return JSON.parse(m[0]);
+}
 async function aiModerate(text, kind) {
   const sys = AI_SYS[kind] || AI_SYS.submission;
-  const r = await llmExtract(sys, "【待审内容】\n" + String(text).slice(0, 3000), 300);
+  const user = "【待审内容】\n" + String(text).slice(0, 3000);
+  let data = null;
+  if (process.env.MOD_API_KEY) {
+    try { data = await freeModerate(sys, user); } catch (e) { data = null; }   // 免费模型挂了回落 DeepSeek
+  }
+  if (!data) { const r = await llmExtract(sys, user, 300); data = r.data; }
   return {
-    category: typeof r.data.category === "string" ? r.data.category.slice(0, 20) : "机审异常",
-    reason: typeof r.data.reason === "string" ? r.data.reason.slice(0, 200) : ""
+    category: typeof data.category === "string" ? data.category.slice(0, 20) : "机审异常",
+    reason: typeof data.reason === "string" ? data.reason.slice(0, 200) : ""
   };
 }
 
