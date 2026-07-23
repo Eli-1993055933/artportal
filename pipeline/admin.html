@@ -104,6 +104,7 @@
         <button data-view="subs">投稿审核 <span class="badge" id="navSubN">0</span></button>
         <button data-view="works">作品审核 <span class="badge" id="navWorkN">0</span></button>
         <button data-view="comments">评论审核 <span class="badge" id="navCmtN">0</span></button>
+        <button data-view="feedback">反馈信箱 <span class="badge" id="navFbN">0</span></button>
         <button data-view="content">内容管理 <span class="badge" id="navContentN">0</span></button>
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
@@ -167,6 +168,23 @@
         </div>
         <div class="scroll"><table id="cmtTbl"><thead><tr><th>时间</th><th>内容</th><th>挂在</th><th>作者</th><th>机审</th><th>赞</th><th>举报</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="cmtPager"></div>
+      </section>
+
+      <!-- 反馈信箱(v0.83.0):用户反馈/求助 + 被举报内容聚合;「信箱」agent 每日初判 -->
+      <section data-sec="feedback" hidden>
+        <h1 class="sec__title">反馈信箱 <span class="muted" style="font-size:12px">(全站反馈入口免登录可提;「信箱」每日 6 点初判+举报聚合)</span></h1>
+        <div class="cards" id="fbCards"></div>
+        <div class="toolbar" id="fbFilter">
+          <button class="fchip is-active" data-st="">全部</button>
+          <button class="fchip" data-st="new">待处理</button>
+          <button class="fchip" data-st="resolved">已处理</button>
+          <button class="fchip" data-st="dismissed">已忽略</button>
+          <span class="count" id="fbCount"></span>
+        </div>
+        <div class="scroll"><table id="fbTbl"><thead><tr><th>时间</th><th>类型</th><th>内容</th><th>联系</th><th>用户</th><th>属地</th><th>AI 初判</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="pager" id="fbPager"></div>
+        <h2>被举报内容 <span class="muted" style="font-size:12px">「保留」=内容没问题清零举报;「下架」走既有审核链路</span></h2>
+        <div class="scroll"><table id="fbRepTbl"><thead><tr><th>类型</th><th>内容</th><th>作者</th><th>举报数</th><th>AI 建议</th><th>操作</th></tr></thead><tbody></tbody></table></div>
       </section>
 
       <!-- 内容管理 -->
@@ -283,6 +301,7 @@
     subs:    { page: 1, per: 30, status: "" },
     works:   { page: 1, per: 30, status: "" },
     cmts:    { page: 1, per: 50, status: "" },
+    fb:      { page: 1, per: 30, status: "" },
     content: { page: 1, per: 50, q: "", via: "", channel: "opportunities" },
     recycle: { page: 1, per: 50 },
     ingest:  { page: 1, per: 50 },
@@ -368,6 +387,7 @@
     else if (view === "subs") renderSubs();
     else if (view === "works") renderWorks();
     else if (view === "comments") renderCmts();
+    else if (view === "feedback") renderFb();
     else if (view === "content") renderContent();
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
@@ -392,7 +412,8 @@
     { id: "cover-auditor", name: "鉴图",  role: "美术编辑 · 封面查重审核",     period: 1.6 * 86400e3, where: "本机 · 夜间" },
     { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间" },
     { id: "inspector",     name: "校勘",  role: "数据质检 · 死链/过期/查重/存证抽查", period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" },
-    { id: "detective",     name: "探长",  role: "自动发现 · 社媒线索→官网收录",  period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" }
+    { id: "detective",     name: "探长",  role: "自动发现 · 社媒线索→官网收录",  period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" },
+    { id: "mailbox",       name: "信箱",  role: "反馈初判 · 举报聚合处置建议",   period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" }
   ];
   var agLastMap = {}, agSelected = null;
   function agLight(def, last) {
@@ -1084,6 +1105,129 @@
     }).catch(function () {});
   }
 
+  // —— 反馈信箱(v0.83.0):反馈列表 + 被举报内容 + 「信箱」agent 简报 ——
+  var allFb = [], fbRep = { comments: [], works: [] }, fbReport = null;
+  var FB_TYPE_ZH = { bug: "bug", suggest: "建议", help: "求助", correction: "纠错", coop: "合作" };
+  function fbAdviceOf(kind, id) {
+    if (!fbReport || !fbReport.advices) return null;
+    for (var i = 0; i < fbReport.advices.length; i++) {
+      var a = fbReport.advices[i];
+      if (a.kind === kind && a.id === id) return a;
+    }
+    return null;
+  }
+  function renderFb() {
+    var box = $("fbCards"); box.textContent = "";
+    var newN = allFb.filter(function (f) { return f.status === "new"; }).length;
+    var urgentN = allFb.filter(function (f) { return f.status === "new" && f.ai && f.ai.urgent; }).length;
+    [["待处理反馈", newN, newN > 0], ["其中急件(AI 判求助)", urgentN, urgentN > 0],
+     ["被举报评论", fbRep.comments.length, fbRep.comments.length > 0],
+     ["被举报作品", fbRep.works.length, fbRep.works.length > 0],
+     ["信箱上次巡检", fbReport ? bj(fbReport.at) : "未跑", false]].forEach(function (d) {
+      var c = document.createElement("div"); c.className = "card";
+      var k = document.createElement("div"); k.className = "k"; k.textContent = d[0];
+      var v = document.createElement("div"); v.className = "v" + (d[2] ? " hot" : "");
+      v.textContent = String(d[1]);
+      c.appendChild(k); c.appendChild(v); box.appendChild(c);
+    });
+    var s = st.fb;
+    var list = allFb.filter(function (f) { return !s.status || f.status === s.status; });
+    $("fbCount").textContent = "共 " + list.length + " 条";
+    paginate(list, s, $("fbPager"), function (f) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(bj(f.created_at)));
+      tr.appendChild(td(FB_TYPE_ZH[f.type] || f.type));
+      var ct = td(f.content); ct.style.maxWidth = "340px"; ct.style.whiteSpace = "pre-wrap"; tr.appendChild(ct);
+      tr.appendChild(td(f.contact || "—", f.contact ? "" : "muted"));
+      tr.appendChild(td(f.user ? f.user.nickname : "游客", f.user ? "" : "muted"));
+      tr.appendChild(td(f.ip_region && f.ip_region.disp || "—", "muted"));
+      var ai = td(f.ai ? (f.ai.category + (f.ai.urgent ? " · 急" : "") + (f.ai.note ? " · " + f.ai.note : "")) : "待初判",
+        f.ai && f.ai.urgent ? "" : "muted");
+      tr.appendChild(ai);
+      var stc = document.createElement("td");
+      var pill = document.createElement("span");
+      pill.className = "pill" + (f.status === "new" ? " on" : "");
+      pill.textContent = { new: "待处理", resolved: "已处理", dismissed: "已忽略" }[f.status] || f.status;
+      pill.title = f.note || "";
+      stc.appendChild(pill); tr.appendChild(stc);
+      var ops = document.createElement("td");
+      function fop(label, status, bg, fg, askNote) {
+        var b = document.createElement("button");
+        b.textContent = label;
+        b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + bg + ";color:" + fg;
+        b.addEventListener("click", function () {
+          var note = askNote ? (prompt("处理备注(可空):", f.note || "") || "") : (f.note || "");
+          post("/api/admin/feedback/decide", { id: f.id, status: status, note: note }).then(function (r) {
+            if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+            refreshFb();
+          });
+        });
+        ops.appendChild(b);
+      }
+      if (f.status === "new") { fop("标记已处理", "resolved", "#1d3a24", "#7ee08a", true); fop("忽略", "dismissed", "#333", "#bbb", false); }
+      else fop("重开", "new", "#1d2a3a", "#8ac0ff", false);
+      tr.appendChild(ops);
+      $("fbTbl").tBodies[0].appendChild(tr);
+    }, $("fbTbl").tBodies[0], 9, "(还没有反馈)");
+    // 被举报内容表
+    var rb = $("fbRepTbl").tBodies[0]; rb.textContent = "";
+    var reps = fbRep.comments.map(function (c) { return { kind: "comment", it: c }; })
+      .concat(fbRep.works.map(function (w) { return { kind: "work", it: w }; }));
+    if (!reps.length) { emptyRow(rb, "(没有被举报的内容)", 6); }
+    reps.forEach(function (r0) {
+      var it = r0.it, tr = document.createElement("tr");
+      tr.appendChild(td(r0.kind === "work" ? "作品" : "评论(" + (it.kind || "") + ")"));
+      var ct = td(r0.kind === "work" ? it.title : it.content); ct.style.maxWidth = "340px"; tr.appendChild(ct);
+      tr.appendChild(td(it.author ? it.author.nickname : "—", "muted"));
+      tr.appendChild(td(it.reports, "mono"));
+      var adv = fbAdviceOf(r0.kind, it.id);
+      var ac = td(adv ? (adv.advice + (adv.reason ? " · " + adv.reason : "")) : "—", adv && adv.advice === "删除" ? "" : "muted");
+      tr.appendChild(ac);
+      var ops = document.createElement("td");
+      function rop(label, fn, bg, fg) {
+        var b = document.createElement("button");
+        b.textContent = label;
+        b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + bg + ";color:" + fg;
+        b.addEventListener("click", fn);
+        ops.appendChild(b);
+      }
+      rop("下架", function () {
+        if (!confirm("下架这条" + (r0.kind === "work" ? "作品" : "评论") + "?")) return;
+        var url = r0.kind === "work" ? "/api/admin/works/decide" : "/api/admin/comments/decide";
+        post(url, { id: it.id, action: "reject" }).then(function (r) {
+          if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+          refreshFb(); refreshCmts(); refreshWorks();
+        });
+      }, "#3a1d1d", "#ff9a8a");
+      rop("保留(清零举报)", function () {
+        post("/api/admin/reported/clear", { kind: r0.kind, id: it.id }).then(function (r) {
+          if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+          refreshFb();
+        });
+      }, "#1d3a24", "#7ee08a");
+      tr.appendChild(ops);
+      rb.appendChild(tr);
+    });
+  }
+  $("fbFilter").addEventListener("click", function (e) {
+    var c = e.target.closest(".fchip"); if (!c) return;
+    st.fb.status = c.getAttribute("data-st"); st.fb.page = 1;
+    var chips = this.querySelectorAll(".fchip");
+    for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("is-active", chips[i] === c);
+    renderFb();
+  });
+  function refreshFb() {
+    get("/api/admin/feedback").then(function (r) {
+      allFb = r.list || [];
+      fbRep = r.reported || { comments: [], works: [] };
+      fbReport = r.report || null;
+      var n = allFb.filter(function (f) { return f.status === "new"; }).length + fbRep.comments.length + fbRep.works.length;
+      $("navFbN").textContent = String(n);
+      $("navFbN").className = "badge" + (n > 0 ? " hot" : "");
+      if (view === "feedback") renderFb();
+    }).catch(function () {});
+  }
+
   // —— 数据刷新:导航角标每次都更新;表格只重渲当前模块(保留页码,不打断操作) ——
   function refreshSubs() {
     get("/api/admin/submissions").then(function (r) {
@@ -1123,6 +1267,7 @@
     refreshSubs();
     refreshWorks();
     refreshCmts();
+    refreshFb();
     refreshContent();
     if (view === "weekly") renderWeekly();   // 群发进行中时进度条 10 秒一跳
     if (view === "agents") renderAgents();   // 巡视台跟随 10 秒自动刷新

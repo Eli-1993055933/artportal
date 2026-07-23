@@ -24,6 +24,7 @@ import { ipRegion } from "./lib/ipregion.mjs";
 import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { leadsTick } from "./lib/leads.mjs";
+import { feedbackAgentTick } from "./lib/feedback.mjs";
 import { inspectChannel } from "./lib/qc.mjs";
 import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
@@ -627,6 +628,16 @@ function reportLimited(ip) {
   arr.push(now); reportHits.set(ip, arr);
   return false;
 }
+// 反馈限频(v0.83.0,免登录可提所以按 IP):单 IP 每天 10 条
+const FB_TYPES = new Set(["bug", "suggest", "help", "correction", "coop"]);
+const fbHits = new Map();
+function fbLimited(ip) {
+  const now = Date.now();
+  const arr = (fbHits.get(ip) || []).filter(t => now - t < 24 * 3600e3);
+  if (arr.length >= 10) { fbHits.set(ip, arr); return true; }
+  arr.push(now); fbHits.set(ip, arr);
+  return false;
+}
 
 // —— 墓碑(tombstones):后台删除的记录 id 落此文件,夜间 sync 据此在两侧同删,
 //    防止"服务器删了、本机还有 → 合并又复活"。恢复时从墓碑移除。 ——
@@ -921,6 +932,66 @@ async function handleAuthApi(req, res, u) {
           likes: wl.counts[w.id] || 0, liked: wl.liked.has(w.id),
           images: w.status === "approved" ? w.images.map(n => "assets/works/" + n) : []
         })) } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 反馈/求助(v0.83.0):免登录可提(登录不上的用户也要能求助);IP 限频;进 admin「反馈信箱」 ——
+    if (p === "/api/feedback" && m === "POST") {
+      if (fbLimited(ip)) return json({ code: 429, body: { error: "今天反馈太多了,明天再来" } });
+      const b = await readBody(req);
+      const type = FB_TYPES.has(String(b.type)) ? String(b.type) : "suggest";
+      const content = String(b.content || "").trim().slice(0, 1000);
+      const contact = String(b.contact || "").trim().slice(0, 120);
+      const page = String(b.page || "").slice(0, 120);
+      if (content.length < 5) return json({ code: 400, body: { error: "请把内容写清楚一点(至少 5 个字)" } });
+      const meF = auth.userOf(req);
+      try {
+        const id = await db.insertFeedback({ uid: meF ? meF.id : null, contact, type, content, page, ip_region: ipRegion(ip) });
+        auth.logEvent("feedback", { ...(meF ? { uid: meF.id, email: meF.email } : {}), ip, id: String(id), type });
+        return json({ code: 200, body: { ok: true, id } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/admin/feedback" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try {
+        const list = await db.feedbackList(300);
+        const reported = await db.reportedContent();
+        const mini = auth.usersMini([...new Set([
+          ...reported.comments.map(c => c.uid), ...reported.works.map(w => w.uid),
+          ...list.map(f => f.uid).filter(Boolean)])]);
+        const byId = new Map(mini.map(x => [x.id, x]));
+        let report = null;
+        try { report = JSON.parse(await readFile(join(__dir, "state", "feedback-report.json"), "utf8")); } catch (e) {}
+        return json({ code: 200, body: {
+          list: list.map(f => ({ ...f, user: f.uid ? (byId.get(f.uid) || null) : null })),
+          reported: {
+            comments: reported.comments.map(c => ({ id: c.id, kind: c.kind, target: c.target, content: c.content,
+              reports: c.reports, author: byId.get(c.uid) || null, created_at: c.created_at })),
+            works: reported.works.map(w => ({ id: w.id, title: w.title, reports: w.reports,
+              author: byId.get(w.uid) || null, cover: w.images[0] ? ("assets/works/" + w.images[0]) : "" }))
+          },
+          report } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    if (p === "/api/admin/feedback/decide" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const status = ["new", "resolved", "dismissed"].includes(String(b.status)) ? String(b.status) : null;
+      if (!status || !Number(b.id)) return json({ code: 400, body: { error: "参数不正确" } });
+      try {
+        await db.decideFeedback(Number(b.id), status, String(b.note || "").slice(0, 200));
+        return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // 被举报内容裁决「保留」:内容没问题,举报计数清零(下架走既有 comments/works decide)
+    if (p === "/api/admin/reported/clear" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      const kind = b.kind === "work" ? "work" : "comment";
+      if (!Number(b.id)) return json({ code: 400, body: { error: "参数不正确" } });
+      try {
+        await db.clearReports(kind, Number(b.id));
+        await db.logModeration(kind, Number(b.id), "reports-cleared", null);
+        return json({ code: 200, body: { ok: true } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     // 作品点赞(v0.82.1):一人一赞可取消;赞了通知作者(去重键防反复赞刷通知)
@@ -1706,6 +1777,33 @@ if (process.env.AUTO_DISCOVER === "1") {
   process.stderr.write("[自动发现] 已开启:每日北京时间 " + Number(process.env.DISCOVER_HOUR || 5) + " 点社媒线索一勘(只取线索身份,官网管线收录)\n");
 }
 
+// —— 反馈/举报处理 agent「信箱」(v0.83.0,路线图第 15 项)——
+// 每日北京 FEEDBACK_HOUR(默认 6)点:新反馈 AI 初判(免费通道优先)+ 被举报内容处置建议 →
+// state/feedback-report.json 供 /admin「反馈信箱」;开关 FEEDBACK_AGENT=1。
+if (process.env.FEEDBACK_AGENT === "1") {
+  let fbDay = null, fbRunning = false;
+  async function feedbackRun() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.FEEDBACK_HOUR || 6)) return;
+    const day = bj.toISOString().slice(0, 10);
+    if (fbDay === day || fbRunning) return;
+    fbDay = day; fbRunning = true;
+    try {
+      const r = await feedbackAgentTick();
+      db.agentLog({ agent: "mailbox", ok: true,
+        summary: `新反馈 ${r.newCount} 待处理` + (r.aiOn ? `,初判 ${r.judged}(急 ${r.urgent})` : ",AI 不可用仅聚合") +
+          `,被举报 评论${r.reported.comments}/作品${r.reported.works}`,
+        metrics: r, took_ms: r.took_ms }).catch(() => {});
+      process.stderr.write(`[信箱] 初判${r.judged} 急${r.urgent} 举报 c${r.reported.comments}/w${r.reported.works}\n`);
+    } catch (e) {
+      db.agentLog({ agent: "mailbox", ok: false, summary: "信箱巡检失败:" + String(e.message || e).slice(0, 120) }).catch(() => {});
+    } finally { fbRunning = false; }
+  }
+  setTimeout(feedbackRun, 240 * 1000);
+  setInterval(feedbackRun, 3600 * 1000);
+  process.stderr.write("[信箱] 已开启:每日北京时间 " + Number(process.env.FEEDBACK_HOUR || 6) + " 点反馈初判+举报聚合\n");
+}
+
 createServer(async (req, res) => {
   const u = new URL(req.url, "http://x");
   // 管理后台页面(不在 site/ 公开目录里,由这里单独路由;页面数据全靠带管理 cookie 的 API)
@@ -1741,7 +1839,7 @@ createServer(async (req, res) => {
     req.pipe(pr);
     return;
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname.startsWith("/api/summary") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname.startsWith("/api/summary") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/feedback" || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   // Agent 打卡(v0.72.0 巡视台):本机管道脚本干完活上报;AGENT_KEY 鉴权(sha256 恒时比较)

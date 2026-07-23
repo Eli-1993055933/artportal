@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.82.3" />
+<meta name="app-version" content="0.83.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -456,6 +456,13 @@
     .wra-p{font-size:16px}
     .wr-bar .d{display:none}
   }
+  /* 反馈浮标(桌面右下角小胶囊;z4 低于详情卡 z7,详情打开时被盖住属预期;手机走页脚入口) */
+  #fbBtn{position:fixed;right:26px;bottom:44px;z-index:4;background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:8px 14px;font-size:12.5px;color:var(--sub);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+  #fbBtn:hover{color:var(--ink);background:#efeee8}
+  html.dark #fbBtn:hover{background:#262421}
+  @media (max-width:720px){ #fbBtn{display:none} }
+  #foot a{cursor:pointer}
   /* 评论区(四类内容通用:详情卡内嵌 + 灯箱弹层) */
   .cmts{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
   .cmts__head{font-size:13px;font-weight:700;margin-bottom:8px}
@@ -549,13 +556,15 @@
 <div id="tip"></div>
 <div id="status">加载中…</div>
 <div id="toast"></div>
+<button id="fbBtn" type="button">✉ 反馈/求助</button>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.82.3</span></div>
+  <a href="javascript:;" id="fbLink">反馈/求助</a> ·
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.83.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.82.3"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.82.3"></script>
-<script src="js/globe-data.js?v=0.82.3"></script>
+<script src="assets/vendor/d3.min.js?v=0.83.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.83.0"></script>
+<script src="js/globe-data.js?v=0.83.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1174,6 +1183,10 @@
       cmtDelete:'删除',cmtDelAsk:'删除这条评论?(回复会一并删除)',cmtDeleted:'已删除',
       cmtSentLive:'已发布',cmtSentPending:'已提交,人工复核通过后显示',
       cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',ntLikeWork:'赞了你的作品',
+      fbT:'反馈 / 求助',fbNote:'遇到问题、有建议,或需要帮助都可以写在这里;无需登录。',
+      fbPh:'说说你遇到的情况…',fbGo:'提 交',fbThanks:'已收到,谢谢你!我们会尽快处理',
+      errFb:'请把内容写清楚一点(至少 5 个字)',fbBtnT:'✉ 反馈/求助',f_contact:'联系方式(选填,邮箱/微信)',
+      fb_bug:'问题故障',fb_suggest:'建议',fb_help:'求助',fb_correction:'内容纠错',fb_coop:'合作',
       dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
       tUser:'用户投稿 · 未经核实',tVer:'已人工核实',tAI:'AI 检索收录 · 请核对',tAuto:'自动收录 · 未经核实',
       listN:function(n){return '结果列表 · '+n+' 项(点卡片飞过去)';},
@@ -1226,6 +1239,10 @@
       cmtDelete:'Delete',cmtDelAsk:'Delete this comment? Replies will be removed too.',cmtDeleted:'Deleted',
       cmtSentLive:'Posted',cmtSentPending:'Submitted — visible after human review',
       cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',ntLikeWork:'liked your work ',
+      fbT:'Feedback / Help',fbNote:'Bugs, ideas, or anything you need help with — no sign-in required.',
+      fbPh:'Tell us what happened…',fbGo:'Submit',fbThanks:'Received — thank you!',
+      errFb:'Please write at least 5 characters',fbBtnT:'✉ Feedback',f_contact:'Contact (optional, email/WeChat)',
+      fb_bug:'Bug',fb_suggest:'Suggestion',fb_help:'Help',fb_correction:'Correction',fb_coop:'Partnership',
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
       tUser:'User submitted · unverified',tVer:'Verified',tAI:'AI-collected · please verify',tAuto:'Auto-collected · unverified',
       listN:function(n){return 'Results · '+n;},
@@ -1251,6 +1268,7 @@
     document.getElementById('q').placeholder=L('searchPh');
     if(!searching) document.getElementById('btnAI').textContent=L('ai');
     document.getElementById('btnLang').textContent=(lang==='zh')?'EN':'中';
+    document.getElementById('fbBtn').textContent=L('fbBtnT');
     d3.selectAll('.xb').text(L('backX'));
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
     document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
@@ -1933,6 +1951,33 @@
   function openCmtSheet(kind,target,title){
     var m=modal('<h3>'+esc(title||L('cmtTitle'))+'</h3><div id="csBody"></div>');
     cmtMount(m.querySelector('#csBody'),kind,target); }
+  // —— 反馈/求助(v0.83.0):免登录可提;桌面右下浮标 + 页脚链接两处入口 ——
+  function openFeedback(){
+    var fType='suggest';
+    var m=modal('<h3>'+L('fbT')+'</h3><p class="note">'+L('fbNote')+'</p>'+
+      '<div class="tagrow" id="fbTypes" style="border-top:0;margin-top:0;padding-top:0">'+
+        ['bug','suggest','help','correction','coop'].map(function(k){
+          return '<span class="tgc'+(k===fType?' on':'')+'" data-ft="'+k+'">'+L('fb_'+k)+'</span>'; }).join('')+'</div>'+
+      '<textarea id="fbC" maxlength="1000" placeholder="'+esc(L('fbPh'))+'"></textarea>'+
+      '<input id="fbK" maxlength="120" placeholder="'+esc(L('f_contact'))+'">'+
+      '<div class="merr" id="fbE"></div><button class="mgo" id="fbGo" type="button">'+L('fbGo')+'</button>');
+    m.querySelector('#fbTypes').addEventListener('click',function(e){
+      var t=e.target.closest('[data-ft]'); if(!t) return;
+      fType=t.getAttribute('data-ft');
+      var cs=this.querySelectorAll('.tgc');
+      for(var i=0;i<cs.length;i++) cs[i].classList.toggle('on',cs[i]===t); });
+    m.querySelector('#fbGo').addEventListener('click',function(){
+      var c=m.querySelector('#fbC').value.trim(), err=m.querySelector('#fbE'), b=this;
+      if(c.length<5){ err.textContent=L('errFb'); return; }
+      b.disabled=true;
+      postJ('/api/feedback',{type:fType,content:c,contact:m.querySelector('#fbK').value.trim(),
+        page:(curCh?('ch:'+curCh):'globe')+(wkCur?(' wk:'+wkCur):'')})
+      .then(function(r){ b.disabled=false;
+        if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
+        closeModal(); toast(L('fbThanks')); })
+      .catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }); }
+  document.getElementById('fbBtn').addEventListener('click',openFeedback);
+  document.getElementById('fbLink').addEventListener('click',openFeedback);
   // ============================================================
   //  作品查看器(v0.82.1,IG/小红书式,用户要求):图片主区(可翻页,点图放大)+
   //  侧栏(作者→主页/标题/描述/评论列表直接可见)+ 底部固定输入框 + ♥ 作品点赞。

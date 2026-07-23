@@ -74,7 +74,7 @@ const AI_SYS = {
 // 默认接智谱 GLM-4-Flash(API 长期免费、国内直连、OpenAI 兼容格式);
 // MOD_API_URL / MOD_MODEL 可换任何 OpenAI 兼容服务(百炼 qwen-flash、硅基流动免费模型等)。
 // 免费模型失败自动回落 DeepSeek;两边都挂才算机审失败(转人工,fail-closed 兜底不变)。
-async function freeModerate(sys, user) {
+export async function freeModerate(sys, user) {
   const res = await fetch(process.env.MOD_API_URL || "https://open.bigmodel.cn/api/paas/v4/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: "Bearer " + process.env.MOD_API_KEY },

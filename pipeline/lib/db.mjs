@@ -89,6 +89,18 @@ export async function getDb() {
         uid TEXT NOT NULL, wid INTEGER NOT NULL,
         PRIMARY KEY (uid, wid)
       );
+      CREATE TABLE IF NOT EXISTS feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT, contact TEXT,
+        type TEXT NOT NULL,
+        content TEXT NOT NULL,
+        page TEXT, ip_region TEXT,
+        ai TEXT,
+        status TEXT NOT NULL DEFAULT 'new',
+        note TEXT,
+        created_at TEXT NOT NULL, decided_at TEXT
+      );
+      CREATE INDEX IF NOT EXISTS idx_feedback_status ON feedback(status);
       CREATE TABLE IF NOT EXISTS works (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         uid TEXT NOT NULL, email TEXT,
@@ -333,6 +345,49 @@ export async function workLikesFor(wids, uid) {
   for (const r of d.prepare(`SELECT wid, COUNT(*) c FROM work_likes WHERE wid IN (${ph}) GROUP BY wid`).all(...wids)) counts[r.wid] = r.c;
   if (uid) for (const r of d.prepare(`SELECT wid FROM work_likes WHERE uid=? AND wid IN (${ph})`).all(uid, ...wids)) liked.add(r.wid);
   return { counts, liked };
+}
+
+// ---------- 反馈信箱(v0.83.0):用户反馈/求助 + 被举报内容聚合 ----------
+const parseFb = r => r ? ({ ...r, ip_region: parseJsonCol(r.ip_region), ai: r.ai ? JSON.parse(r.ai) : null }) : null;
+export async function insertFeedback({ uid, contact, type, content, page, ip_region }) {
+  const d = await getDb();
+  const r = d.prepare("INSERT INTO feedback(uid,contact,type,content,page,ip_region,created_at) VALUES(?,?,?,?,?,?,?)")
+    .run(uid || null, contact || null, type, content, page || null,
+      ip_region ? JSON.stringify(ip_region) : null, new Date().toISOString());
+  return Number(r.lastInsertRowid);
+}
+export async function feedbackList(limit = 300) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM feedback ORDER BY (status='new') DESC, id DESC LIMIT ?").all(limit).map(parseFb);
+}
+export async function decideFeedback(id, status, note) {
+  const d = await getDb();
+  d.prepare("UPDATE feedback SET status=?, note=?, decided_at=? WHERE id=?")
+    .run(status, note || null, new Date().toISOString(), id);
+}
+export async function feedbackPendingAI(limit = 30) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM feedback WHERE ai IS NULL ORDER BY id ASC LIMIT ?").all(limit).map(parseFb);
+}
+export async function setFeedbackAI(id, ai) {
+  const d = await getDb();
+  d.prepare("UPDATE feedback SET ai=? WHERE id=?").run(JSON.stringify(ai), id);
+}
+export async function feedbackNewCount() {
+  const d = await getDb();
+  return d.prepare("SELECT COUNT(*) n FROM feedback WHERE status='new'").get().n;
+}
+// 被举报且仍公开的内容(评论/作品),按举报数倒序,交「信箱」聚合与人工裁决
+export async function reportedContent() {
+  const d = await getDb();
+  const comments = d.prepare("SELECT * FROM comments WHERE reports>0 AND status='approved' ORDER BY reports DESC, id DESC LIMIT 50").all().map(parseCmt);
+  const works = d.prepare("SELECT * FROM works WHERE reports>0 AND status='approved' ORDER BY reports DESC, id DESC LIMIT 50").all().map(parseWork);
+  return { comments, works };
+}
+// 「保留」裁决:内容没问题,举报计数清零(免得永远挂在被举报列表里)
+export async function clearReports(kind, id) {
+  const d = await getDb();
+  d.prepare(kind === "work" ? "UPDATE works SET reports=0 WHERE id=?" : "UPDATE comments SET reports=0 WHERE id=?").run(id);
 }
 export async function likedSet(uid, kind, target) {
   const d = await getDb();
