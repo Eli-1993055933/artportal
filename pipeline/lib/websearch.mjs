@@ -52,6 +52,27 @@ export async function searchWeb(query, opts) {
   return await ddgSearch(query);
 }
 
+// 富结果搜索(自动化发现用):只回 SERP 的标题+摘要,【刻意不回链接】——
+// 社媒(小红书等)只能当"线索",下游拿不到链接就永远不可能去抓页面/存外链,合规由结构保证。
+// 仅走 serper(计预算);没 key 或没余量直接空手而归(发现属锦上添花,不做 DDG 兜底)。
+export async function searchWebRich(query, opts) {
+  if (!process.env.SERPER_API_KEY || serperBudgetLeft() <= 0) return [];
+  bumpBudget();
+  const body = { q: query, num: 15, gl: (opts && opts.gl) || "cn", hl: (opts && opts.hl) || "zh-cn" };
+  if (opts && opts.recent) body.tbs = "qdr:m";     // 线索要新:最近一个月
+  const res = await fetch("https://google.serper.dev/search", {
+    method: "POST",
+    headers: { "X-API-KEY": process.env.SERPER_API_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!res.ok) throw new Error("serper " + res.status);
+  const j = await res.json();
+  return (j.organic || [])
+    .map(o => ({ title: String(o.title || "").slice(0, 200), snippet: String(o.snippet || "").slice(0, 300) }))
+    .filter(o => o.title);
+}
+
 async function serperSearch(query, opts) {
   // 地域/语言自适应(2026-07-20):默认中国区中文,但检索国际地点时由调用方传入 gl/hl
   // (如洛杉矶 → gl=us/hl=en),否则 Google 只返中国区结果、国际站被严重降权。

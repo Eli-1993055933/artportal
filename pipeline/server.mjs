@@ -23,6 +23,7 @@ import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 import { ipRegion } from "./lib/ipregion.mjs";
 import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
+import { leadsTick } from "./lib/leads.mjs";
 import { inspectChannel } from "./lib/qc.mjs";
 import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
@@ -1648,6 +1649,40 @@ if (process.env.DAILY_CRAWL === "1") {
   setTimeout(dailyCrawlTick, 200 * 1000);
   setInterval(dailyCrawlTick, 3600 * 1000);
   process.stderr.write("[每日抓取] 已开启:每日北京时间 " + Number(process.env.DAILY_CRAWL_HOUR || 3) + " 点抓 sources.json 全部信源(run.mjs,并发安全)\n");
+}
+
+// —— 自动化发现「探长」(v0.82.0,路线图第 6 项合规可行版)——
+// 社媒(小红书/微博)只作线索:只读搜索引擎索引的标题/摘要(拿不到链接,结构上不可能抓社媒页面),
+// DeepSeek 提炼机会名+主办方(原文子串校验)→ 走 searchAndHarvest 官网检索管线,evidence 过关才入库。
+// 开关 AUTO_DISCOVER=1;每日北京 DISCOVER_HOUR(默认 5)点一勘(质检 4 点之后);DISCOVER_CAP 每日线索上限(默认 2)。
+// serper 余量 < 15 直接休勘让路(线索 1 次 + 每线索官网检索多次,勘一轮成本不小)。
+if (process.env.AUTO_DISCOVER === "1") {
+  let ldDay = null, ldRunning = false;
+  async function leadsRun() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.DISCOVER_HOUR || 5)) return;
+    const day = bj.toISOString().slice(0, 10);
+    if (ldDay === day || ldRunning) return;
+    ldDay = day; ldRunning = true;
+    const t0 = Date.now();
+    try {
+      if (serperBudgetLeft() < 15) {
+        db.agentLog({ agent: "detective", ok: true, summary: "serper 余量不足,今日休勘(保用户检索)", metrics: { skipped: true } }).catch(() => {});
+        return;
+      }
+      const r = await leadsTick({ harvest: (q, t) => searchAndHarvest(q, t) });
+      const brief = r.clueNames.length ? ":" + r.clueNames.join("、") : "";
+      db.agentLog({ agent: "detective", ok: true,
+        summary: `线索面 ${r.rows} 条 → 提炼 ${r.distilled} → 追查 ${r.tried} → 官网收录 ${r.added}${brief}`,
+        metrics: r, took_ms: Date.now() - t0 }).catch(() => {});
+      process.stderr.write(`[自动发现] ${r.query} → 提炼${r.distilled} 追查${r.tried} 收录${r.added}\n`);
+    } catch (e) {
+      db.agentLog({ agent: "detective", ok: false, summary: "发现失败:" + String(e.message || e).slice(0, 120), took_ms: Date.now() - t0 }).catch(() => {});
+    } finally { ldRunning = false; }
+  }
+  setTimeout(leadsRun, 300 * 1000);
+  setInterval(leadsRun, 3600 * 1000);
+  process.stderr.write("[自动发现] 已开启:每日北京时间 " + Number(process.env.DISCOVER_HOUR || 5) + " 点社媒线索一勘(只取线索身份,官网管线收录)\n");
 }
 
 createServer(async (req, res) => {

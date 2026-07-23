@@ -391,7 +391,8 @@
     { id: "photographer",  name: "快门",  role: "官网截图封面",                period: 1.6 * 86400e3, where: "本机 · 夜间" },
     { id: "cover-auditor", name: "鉴图",  role: "美术编辑 · 封面查重审核",     period: 1.6 * 86400e3, where: "本机 · 夜间" },
     { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "inspector",     name: "校勘",  role: "数据质检 · 死链/过期/查重/存证抽查", period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" }
+    { id: "inspector",     name: "校勘",  role: "数据质检 · 死链/过期/查重/存证抽查", period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" },
+    { id: "detective",     name: "探长",  role: "自动发现 · 社媒线索→官网收录",  period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" }
   ];
   var agLastMap = {}, agSelected = null;
   function agLight(def, last) {
