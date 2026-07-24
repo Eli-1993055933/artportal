@@ -481,6 +481,13 @@ export function setFavorites(req, ids) {
   return { code: 200, body: { ok: true, count: u.favorites.length } };
 }
 
+// 全站收藏总数(数据面板用)
+export function favTotal() {
+  let n = 0;
+  for (const u of users) n += (u.favorites || []).length;
+  return n;
+}
+
 // ---------- 在线追踪 ----------
 function markOnline(key, kind, label) {
   // 已存在的直接刷新;新增前若超容量则先清过期,仍超则丢弃(防伪造 anon 灌爆内存)
@@ -498,8 +505,15 @@ export function track(req, payload, ip) {
   const anon = String((payload || {}).anon || "").slice(0, 40);
   if (u) { markOnline("user:" + u.id, "user", u.email); if (anon) online.delete("anon:" + anon); }  // 登录后清掉同人的访客条目,免重复计数
   else if (anon) markOnline("anon:" + anon, "anon", anon.slice(0, 8));
-  if (type === "visit" || type === "outbound") {
-    logEvent(type, { ...(u ? { uid: u.id, email: u.email } : { anon: anon.slice(0, 8) }), ip, ...(payload.id ? { id: String(payload.id).slice(0, 120) } : {}) });
+  // 落盘事件白名单(v0.85.0 扩展):visit 进站 / outbound 前往官网 / view 看详情 /
+  // fav 收藏切换 / wkread 读周刊;其余(hb 心跳)只更新在线表不落盘。
+  if (type === "visit" || type === "outbound" || type === "view" || type === "fav" || type === "wkread") {
+    logEvent(type, {
+      ...(u ? { uid: u.id, email: u.email } : { anon: anon.slice(0, 8) }), ip,
+      ...(payload.id ? { id: String(payload.id).slice(0, 120) } : {}),
+      ...(payload.cat ? { cat: String(payload.cat).slice(0, 20) } : {}),
+      ...(type === "fav" && payload.on != null ? { on: payload.on ? 1 : 0 } : {})
+    });
   }
   // type === "hb" 只更新在线表,不落盘
   return { code: 200, body: { ok: true } };

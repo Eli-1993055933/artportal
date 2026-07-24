@@ -949,7 +949,7 @@ async function handleAuthApi(req, res, u) {
       const meF = auth.userOf(req);
       try {
         const id = await db.insertFeedback({ uid: meF ? meF.id : null, contact, type, content, page, ip_region: ipRegion(ip) });
-        auth.logEvent("feedback", { ...(meF ? { uid: meF.id, email: meF.email } : {}), ip, id: String(id), type });
+        auth.logEvent("feedback", { ...(meF ? { uid: meF.id, email: meF.email } : {}), ip, id: String(id), fb_type: type });   // 别用 type 键:会覆盖事件类型
         return json({ code: 200, body: { ok: true, id } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
@@ -983,6 +983,64 @@ async function handleAuthApi(req, res, u) {
       try {
         await db.decideFeedback(Number(b.id), status, String(b.note || "").slice(0, 200));
         return json({ code: 200, body: { ok: true } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // —— 自托管数据面板(v0.85.0):解析 events.jsonl(+轮转档)聚合近 14 天;无任何第三方统计 ——
+    if (p === "/api/admin/stats" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try {
+        const bjDayOf = t => new Date(Date.parse(t) + 8 * 3600e3).toISOString().slice(0, 10);
+        const since = Date.now() - 14 * 86400e3, since7 = Date.now() - 7 * 86400e3;
+        let lines = [];
+        for (const f of [join(__dir, "state", "events.jsonl.1"), join(__dir, "state", "events.jsonl")]) {
+          try { lines.push(...(await readFile(f, "utf8")).trim().split("\n")); } catch (e) {}
+        }
+        const days = new Map();          // day -> { visitors:Set, ...计数 }
+        const itemHits = new Map();      // id -> {views, outs}
+        const qHits = new Map();         // 检索词 -> n
+        const EVT = ["visit", "view", "outbound", "fav", "wkread", "search", "comment", "work", "submit", "register", "login", "follow", "feedback"];
+        for (const line of lines) {
+          let e; try { e = JSON.parse(line); } catch (x) { continue; }
+          const ts = Date.parse(e.t); if (!ts || ts < since) continue;
+          const day = bjDayOf(e.t);
+          let d = days.get(day);
+          if (!d) { d = { visitors: new Set() }; EVT.forEach(k => d[k] = 0); days.set(day, d); }
+          if (d[e.type] != null) d[e.type]++;
+          d.visitors.add(e.uid || e.anon || e.ip || "?");
+          if (ts >= since7) {
+            if ((e.type === "view" || e.type === "outbound") && e.id) {
+              const h = itemHits.get(e.id) || { views: 0, outs: 0 };
+              if (e.type === "view") h.views++; else h.outs++;
+              itemHits.set(e.id, h);
+            }
+            if (e.type === "search" && e.q) qHits.set(e.q, (qHits.get(e.q) || 0) + 1);
+          }
+        }
+        // 近 14 天补全空日,老→新排序
+        const out = [];
+        for (let i = 13; i >= 0; i--) {
+          const day = bjDayOf(new Date(Date.now() - i * 86400e3).toISOString());
+          const d = days.get(day) || { visitors: new Set() };
+          const row = { day, visitors: d.visitors.size };
+          EVT.forEach(k => row[k] = d[k] || 0);
+          out.push(row);
+        }
+        // 热门条目标题解析(只解析 top 12,三频道映射逐个试)
+        const top = [...itemHits.entries()].sort((a, b) => (b[1].views + b[1].outs) - (a[1].views + a[1].outs)).slice(0, 12);
+        const topItems = [];
+        for (const [id, h] of top) {
+          let title = null, ch = null;
+          if (/^work-/.test(id)) { title = "作品 #" + id.slice(5); ch = "works"; }
+          else for (const c of ["opportunities", "news", "jobs"]) {
+            const mp = await favChannelMap(c);
+            const it = mp.get(String(id));
+            if (it) { title = it.title_zh || it.title || id; ch = c; break; }
+          }
+          topItems.push({ id, title: title || id, ch, views: h.views, outs: h.outs });
+        }
+        const topSearches = [...qHits.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([q, n]) => ({ q, n }));
+        const favTotal = auth.favTotal ? auth.favTotal() : null;
+        return json({ code: 200, body: { days: out, topItems, topSearches, fav_total: favTotal } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     // 被举报内容裁决「保留」:内容没问题,举报计数清零(下架走既有 comments/works decide)

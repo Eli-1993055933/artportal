@@ -101,6 +101,7 @@
       <div class="side__brand">ArtPortal 后台<small id="now"></small></div>
       <nav class="nav" id="nav">
         <button data-view="overview" class="is-active">概览</button>
+        <button data-view="stats">数据</button>
         <button data-view="subs">投稿审核 <span class="badge" id="navSubN">0</span></button>
         <button data-view="works">作品审核 <span class="badge" id="navWorkN">0</span></button>
         <button data-view="comments">评论审核 <span class="badge" id="navCmtN">0</span></button>
@@ -126,6 +127,19 @@
         <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
         <h2>近期事件(最新 30 条)</h2>
         <div class="scroll"><table id="evtTbl"><thead><tr><th>时间</th><th>类型</th><th>谁</th><th>详情</th></tr></thead><tbody></tbody></table></div>
+      </section>
+
+      <!-- 数据面板(v0.85.0):自托管埋点聚合,零第三方统计 -->
+      <section data-sec="stats" hidden>
+        <h1 class="sec__title">数据 <span class="muted" style="font-size:12px">(自托管埋点:进站/看详情/去官网/收藏/读周刊;近 14 天)</span></h1>
+        <div class="cards" id="stCards"></div>
+        <h2>近 14 天独立访客</h2>
+        <div id="stBars" style="display:flex;align-items:flex-end;gap:6px;height:130px;padding:6px 2px 0"></div>
+        <div class="scroll" style="margin-top:10px"><table id="stDayTbl"><thead><tr><th>日期</th><th>访客</th><th>进站</th><th>看详情</th><th>去官网</th><th>收藏</th><th>检索</th><th>读周刊</th><th>评论</th><th>注册</th></tr></thead><tbody></tbody></table></div>
+        <h2>近 7 天热门条目 <span class="muted" style="font-size:12px">按 看详情+去官网 排序</span></h2>
+        <div class="scroll"><table id="stTopTbl"><thead><tr><th>条目</th><th>频道</th><th>看详情</th><th>去官网</th></tr></thead><tbody></tbody></table></div>
+        <h2>近 7 天热门检索词</h2>
+        <div class="scroll"><table id="stQTbl"><thead><tr><th>检索词</th><th>次数</th></tr></thead><tbody></tbody></table></div>
       </section>
 
       <!-- 投稿审核 -->
@@ -384,6 +398,7 @@
   });
   function renderActive() {
     if (view === "overview") { /* overview 由 refresh 渲染 */ }
+    else if (view === "stats") { stData = null; renderStats(); }   // 进面板时重新拉一次
     else if (view === "subs") renderSubs();
     else if (view === "works") renderWorks();
     else if (view === "comments") renderCmts();
@@ -1103,6 +1118,69 @@
       $("navCmtN").className = "badge" + (pending > 0 ? " hot" : "");
       if (view === "comments") renderCmts();
     }).catch(function () {});
+  }
+
+  // —— 数据面板(v0.85.0):/api/admin/stats 按需拉取(解析日志有成本,不进 10 秒轮询) ——
+  var stData = null, stLoading = false;
+  function renderStats() {
+    if (!stData) {
+      if (stLoading) return;
+      stLoading = true;
+      get("/api/admin/stats").then(function (r) { stLoading = false; stData = r; renderStats(); })
+        .catch(function () { stLoading = false; });
+      return;
+    }
+    var days = stData.days || [];
+    var w7 = days.slice(-7);
+    function sum(k) { var n = 0; w7.forEach(function (d) { n += d[k] || 0; }); return n; }
+    var box = $("stCards"); box.textContent = "";
+    [["近7天独立访客", w7.reduce(function (m, d) { return m + d.visitors; }, 0)],
+     ["看详情", sum("view")], ["去官网", sum("outbound")], ["收藏操作", sum("fav")],
+     ["AI 检索", sum("search")], ["读周刊", sum("wkread")],
+     ["全站收藏总数", stData.fav_total == null ? "—" : stData.fav_total]].forEach(function (d) {
+      var c = document.createElement("div"); c.className = "card";
+      var k = document.createElement("div"); k.className = "k"; k.textContent = d[0];
+      var v = document.createElement("div"); v.className = "v"; v.textContent = String(d[1]);
+      c.appendChild(k); c.appendChild(v); box.appendChild(c);
+    });
+    // 柱状:纯 CSS,高度按 14 天最大访客数归一
+    var bars = $("stBars"); bars.textContent = "";
+    var mx = Math.max(1, Math.max.apply(null, days.map(function (d) { return d.visitors; })));
+    days.forEach(function (d) {
+      var col = document.createElement("div");
+      col.style.cssText = "flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0";
+      var n = document.createElement("div"); n.textContent = d.visitors;
+      n.style.cssText = "font-size:11px;color:#9a958a";
+      var b = document.createElement("div");
+      b.style.cssText = "width:70%;border-radius:4px 4px 0 0;background:#5b8a72;height:" +
+        Math.max(2, Math.round(d.visitors / mx * 88)) + "px";
+      var t = document.createElement("div"); t.textContent = d.day.slice(5);
+      t.style.cssText = "font-size:10px;color:#9a958a;white-space:nowrap";
+      col.appendChild(n); col.appendChild(b); col.appendChild(t); bars.appendChild(col);
+    });
+    var tb = $("stDayTbl").tBodies[0]; tb.textContent = "";
+    days.slice().reverse().forEach(function (d) {
+      var tr = document.createElement("tr");
+      [d.day, d.visitors, d.visit, d.view, d.outbound, d.fav, d.search, d.wkread, d.comment, d.register]
+        .forEach(function (v, i) { tr.appendChild(td(v, i > 0 && !v ? "muted" : "")); });
+      tb.appendChild(tr);
+    });
+    var tt = $("stTopTbl").tBodies[0]; tt.textContent = "";
+    if (!(stData.topItems || []).length) emptyRow(tt, "(近 7 天还没有浏览记录)", 4);
+    (stData.topItems || []).forEach(function (it) {
+      var tr = document.createElement("tr");
+      var c1 = td(it.title); c1.style.maxWidth = "420px"; tr.appendChild(c1);
+      tr.appendChild(td({ opportunities: "机会", news: "资讯", jobs: "招聘", works: "作品" }[it.ch] || "—", "muted"));
+      tr.appendChild(td(it.views, "mono")); tr.appendChild(td(it.outs, "mono"));
+      tt.appendChild(tr);
+    });
+    var tq = $("stQTbl").tBodies[0]; tq.textContent = "";
+    if (!(stData.topSearches || []).length) emptyRow(tq, "(近 7 天还没有检索)", 2);
+    (stData.topSearches || []).forEach(function (s) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(s.q)); tr.appendChild(td(s.n, "mono"));
+      tq.appendChild(tr);
+    });
   }
 
   // —— 反馈信箱(v0.83.0):反馈列表 + 被举报内容 + 「信箱」agent 简报 ——

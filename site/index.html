@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.84.0" />
+<meta name="app-version" content="0.85.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -492,6 +492,7 @@
   .cmt__replies{margin-top:4px;border-left:2px solid var(--line);padding-left:10px}
   #detail .dcmt-toggle{display:inline-block;margin:12px 0 0 14px;font-size:12.5px;color:var(--sub);cursor:pointer;font-weight:600}
   #detail .dcmt-toggle:hover{color:var(--ink)}
+  #detail #dFav.is-on{color:var(--opencall)}
 </style>
 </head>
 <body>
@@ -550,7 +551,7 @@
   <div><span class="cat" id="d-cat"></span><span class="badge2" id="d-trust"></span></div>
   <h3 id="d-title"></h3><div class="sub" id="d-sub"></div>
   <div class="meta" id="d-meta"></div>
-  <a class="go" id="d-go" target="_blank" rel="noopener">前往官网 ↗</a><span class="dcmt-toggle" id="dCmtT"></span>
+  <a class="go" id="d-go" target="_blank" rel="noopener">前往官网 ↗</a><span class="dcmt-toggle" id="dFav"></span><span class="dcmt-toggle" id="dCmtT"></span>
   <div id="d-cmt"></div></div>
 <button id="back">← 返回全球</button>
 <div id="tip"></div>
@@ -561,11 +562,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.84.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.85.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.84.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.84.0"></script>
-<script src="js/globe-data.js?v=0.84.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.85.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.85.0"></script>
+<script src="js/globe-data.js?v=0.85.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1128,7 +1129,24 @@
     ct.onclick=function(){
       if(cbox.innerHTML){ cbox.innerHTML=''; cbox.className=''; ct.textContent=L('cmtOpen'); return; }
       cmtMount(cbox,cc.kind,cc.target); ct.textContent='▴ '+L('cmtTitle'); };
-    var box=document.getElementById('detail'); box.style.display='block'; box.scrollTop=0; ensureGuard(); }
+    // 收藏 ♥(四频道通用):登录后云同步;再点取消
+    var fv=document.getElementById('dFav'), fk=favKeyOf(o);
+    function favPaint(){ var on=favKeys.has(fk);
+      fv.textContent=(on?'♥ ':'♡ ')+L(on?'favedT':'favT');
+      fv.classList.toggle('is-on',on); }
+    favPaint();
+    fv.onclick=function(){
+      if(!meUser){ openAuth('login'); return; }
+      var on=!favKeys.has(fk);
+      if(on) favKeys.add(fk); else favKeys.delete(fk);
+      favPaint(); favSync(); trackJ('fav',{id:o.id,on:on}); };
+    trackJ('view',{id:o.id,cat:o.category});
+    var box=document.getElementById('detail'); box._repaintFav=favPaint; box._cur=o;
+    box.style.display='block'; box.scrollTop=0; ensureGuard(); }
+  // 前往官网/申请/原文的外链点击 → outbound 事件(作品的站内查看不算)
+  document.getElementById('d-go').addEventListener('click',function(){
+    var o=document.getElementById('detail')._cur;
+    if(o&&/^https?:/i.test(this.href||'')) trackJ('outbound',{id:o.id,cat:o.category}); });
 
   // —— 真实功能接线 ——
   var toastTimer=null;
@@ -1186,6 +1204,7 @@
       cmtDelete:'删除',cmtDelAsk:'删除这条评论?(回复会一并删除)',cmtDeleted:'已删除',
       cmtSentLive:'已发布',cmtSentPending:'已提交,人工复核通过后显示',
       cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',ntLikeWork:'赞了你的作品',
+      favT:'收藏',favedT:'已收藏',
       fbT:'反馈 / 求助',fbNote:'遇到问题、有建议,或需要帮助都可以写在这里;无需登录。',
       fbPh:'说说你遇到的情况…',fbGo:'提 交',fbThanks:'已收到,谢谢你!我们会尽快处理',
       errFb:'请把内容写清楚一点(至少 5 个字)',fbBtnT:'✉ 反馈/求助',f_contact:'联系方式(选填,邮箱/微信)',
@@ -1244,6 +1263,7 @@
       cmtDelete:'Delete',cmtDelAsk:'Delete this comment? Replies will be removed too.',cmtDeleted:'Deleted',
       cmtSentLive:'Posted',cmtSentPending:'Submitted — visible after human review',
       cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',ntLikeWork:'liked your work ',
+      favT:'Save',favedT:'Saved',
       fbT:'Feedback / Help',fbNote:'Bugs, ideas, or anything you need help with — no sign-in required.',
       fbPh:'Tell us what happened…',fbGo:'Submit',fbThanks:'Received — thank you!',
       errFb:'Please write at least 5 characters',fbBtnT:'✉ Feedback',f_contact:'Contact (optional, email/WeChat)',
@@ -1445,6 +1465,25 @@
   function postJ(url,data){ return fetch(url,{method:'POST',credentials:'same-origin',
     headers:{'Content-Type':'application/json'},body:JSON.stringify(data||{})})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,st:r.status,data:j}; }); }); }
+  // —— 自托管埋点(v0.85.0,零第三方):匿名 id + 进站/心跳/看详情/去官网/收藏/读周刊 ——
+  var apAnon='';
+  try{ apAnon=localStorage.getItem('ap_anon')||'';
+    if(!apAnon){ apAnon=Math.random().toString(36).slice(2,12)+Date.now().toString(36);
+      localStorage.setItem('ap_anon',apAnon); } }catch(e){}
+  function trackJ(type,extra){
+    try{ fetch('/api/track',{method:'POST',credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(Object.assign({type:type,anon:apAnon},extra||{}))}).catch(function(){}); }catch(e){} }
+  trackJ('visit');
+  setInterval(function(){ trackJ('hb'); },60000);   // 在线表心跳(admin 概览"当前在线")
+  // —— 收藏(v0.85.0 找回,v0.73 功能在地球站改版中遗失):四频道命名空间键,云端全量同步 ——
+  var favKeys=new Set();
+  function favKeyOf(o){
+    if(o.category==='works') return 'work:'+String(o.id).replace(/^work-/,'');
+    if(o.category==='jobs') return 'job:'+String(o.id);
+    if(o.category==='news') return 'news:'+String(o.id);
+    return String(o.id); }
+  function favSync(){ postJ('/api/favorites',{ids:Array.from(favKeys)}).catch(function(){}); }
   // 通用弹层
   function modal(html){ var h=document.getElementById('mhost');
     h.innerHTML='<div class="modal"><div class="scrim"></div><div class="mbox">'+
@@ -2129,6 +2168,7 @@
   function wkRender(r){ document.getElementById('wkpage').innerHTML=
     '<div class="wk-in wra">'+wkTopHtml()+(r.format===2?wkArticleHtml(r):wkListHtml(r))+wkArchHtml(r.id)+'</div>'; }
   function openWeekly(id){
+    trackJ('wkread',{id:id});
     wkEnsureFont();
     var el=document.getElementById('wkpage');
     if(wkCur&&wkCur!==id&&el.style.display==='block') wkScroll[wkCur]=el.scrollTop;
@@ -2232,7 +2272,10 @@
     this.style.display='none'; document.getElementById('uq').value='';
     openProfile(d.getAttribute('data-id')); });
   fetch('/api/auth/me',{credentials:'same-origin'}).then(function(r){ return r.json(); }).then(function(j){
-    if(j&&j.user){ meUser=j.user; setLoginBtn(); pollNtf(); setInterval(pollNtf,60000); }
+    if(j&&j.user){ meUser=j.user; setLoginBtn(); pollNtf(); setInterval(pollNtf,60000);
+      favKeys=new Set(j.user.favorites||[]);   // 收藏云端为准
+      var det=document.getElementById('detail');
+      if(det.style.display==='block'&&det._repaintFav) det._repaintFav(); }
   }).catch(function(){});
   // —— 深链(#/w/期号 直开周刊;#/o/机会id 等数据到达后弹详情;仅进站时解析一次,
   //    站内导航走单守卫历史体系,不写 hash ——
