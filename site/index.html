@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.92.0" />
+<meta name="app-version" content="0.92.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.92.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.92.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.92.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.92.0"></script>
-<script src="js/globe-data.js?v=0.92.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.92.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.92.1"></script>
+<script src="js/globe-data.js?v=0.92.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -801,24 +801,29 @@
     ctx.beginPath(); ctx.arc(x,y,r,0,2*PI); ctx.fillStyle=color; ctx.fill();
     if(!lite){ ctx.beginPath(); ctx.arc(x-r*0.3,y-r*0.34,r*0.42,0,2*PI); ctx.fillStyle='rgba(255,255,255,.42)'; ctx.fill(); }
     ctx.beginPath(); ctx.arc(x,y,r,0,2*PI); ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke(); }
-  // 用户"你在这里":扩散光环 + 立体定位针(蓝),站在属地坐标上
+  // 项目单点=水滴针(B3,用户选定):尖端指向落点,头在上;命中仍以基点为准
+  function pin3d(x,y,r,color,lite){
+    var cy=y-r*1.7;
+    if(!lite){ ctx.beginPath(); ctx.ellipse(x,y,r*0.6,r*0.22,0,0,2*PI); ctx.fillStyle=T.pinShadow; ctx.fill(); }
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-r*0.86,cy); ctx.lineTo(x+r*0.86,cy); ctx.closePath(); ctx.fillStyle=color; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,cy,r,0,2*PI); ctx.fillStyle=color; ctx.fill();
+    if(!lite){ ctx.beginPath(); ctx.arc(x-r*0.3,cy-r*0.32,r*0.4,0,2*PI); ctx.fillStyle='rgba(255,255,255,.4)'; ctx.fill(); }
+    ctx.beginPath(); ctx.arc(x,cy,r,0,2*PI); ctx.lineWidth=1.1; ctx.strokeStyle=T.mstroke; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x,cy,r*0.36,0,2*PI); ctx.fillStyle='rgba(0,0,0,.32)'; ctx.fill(); }
+  // 用户"你在这里":iOS 蓝点(A2,用户选定)——柔光晕 + 单圈精度环扩散 + 实心蓝点白描边
   function drawBeacon(now){
     if(!userLL) return;
     if(!userCart) userCart=ll2c(userLL);
     if(!frontC(userCart)) return;
-    var p=proj(userLL), x=p[0], y=p[1], rk=T.meRing, i;
-    for(i=0;i<2;i++){ var ph=((now/1600)+i*0.5)%1, rr=6+ph*32;
-      ctx.beginPath(); ctx.arc(x,y,rr,0,2*PI); ctx.lineWidth=2;
-      ctx.strokeStyle='rgba('+rk+','+(0.55*(1-ph)).toFixed(3)+')'; ctx.stroke(); }
-    var r=(W<=720)?7:6, cy=y-r*2.2;
-    ctx.beginPath(); ctx.ellipse(x,y,r*0.7,r*0.26,0,0,2*PI); ctx.fillStyle=T.pinShadow; ctx.fill();
-    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,cy); ctx.lineWidth=Math.max(1.4,r*0.32); ctx.strokeStyle=T.me; ctx.stroke();
-    var glow=0.5+0.5*Math.sin(now/480);
-    ctx.beginPath(); ctx.arc(x,cy,r+2.5,0,2*PI); ctx.fillStyle='rgba('+rk+','+(0.22*glow).toFixed(3)+')'; ctx.fill();
-    ctx.beginPath(); ctx.arc(x,cy,r,0,2*PI); ctx.fillStyle=T.me; ctx.fill();
-    ctx.beginPath(); ctx.arc(x-r*0.3,cy-r*0.34,r*0.4,0,2*PI); ctx.fillStyle='rgba(255,255,255,.5)'; ctx.fill();
-    ctx.beginPath(); ctx.arc(x,cy,r,0,2*PI); ctx.lineWidth=1.4; ctx.strokeStyle='#fff'; ctx.stroke(); }
-  // 点开项目:从用户属地到项目的大圆弧 + 朝项目方向流动的箭头
+    var p=proj(userLL), x=p[0], y=p[1], rk=T.meRing;
+    ctx.beginPath(); ctx.arc(x,y,15,0,2*PI); ctx.fillStyle='rgba('+rk+',0.12)'; ctx.fill();
+    var ph=(now/1900)%1;
+    ctx.beginPath(); ctx.arc(x,y,7+ph*17,0,2*PI); ctx.lineWidth=2;
+    ctx.strokeStyle='rgba('+rk+','+(0.45*(1-ph)).toFixed(3)+')'; ctx.stroke();
+    var r=(W<=720)?7:6;
+    ctx.beginPath(); ctx.arc(x,y,r,0,2*PI); ctx.fillStyle=T.me; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y,r,0,2*PI); ctx.lineWidth=2.4; ctx.strokeStyle='#fff'; ctx.stroke(); }
+  // 点开项目:从用户属地到项目的大圆弧 + 虚线朝项目方向流动(C2,用户选定)
   function drawFlow(now){
     if(!userLL||!flowTarget) return;
     if(!userCart) userCart=ll2c(userLL);
@@ -827,19 +832,13 @@
     var interp=d3.geoInterpolate(userLL,flowTarget), i, N=70, coords=[];
     for(i=0;i<=N;i++) coords.push(interp(i/N));
     ctx.lineCap='round';
-    ctx.beginPath(); pathC({type:'LineString',coordinates:coords}); ctx.lineWidth=5; ctx.strokeStyle=T.flowGlow; ctx.stroke();
-    ctx.beginPath(); pathC({type:'LineString',coordinates:coords}); ctx.lineWidth=1.6; ctx.strokeStyle=T.flow; ctx.stroke();
-    var K=9, base=(now/900)%1;
-    for(i=0;i<K;i++){ var t=((i/K)+base)%1, pp=interp(t);
-      if(!frontC(ll2c(pp))) continue;
-      var s=proj(pp), s2=proj(interp(Math.min(1,t+0.02)));
-      var ang=Math.atan2(s2[1]-s[1],s2[0]-s[0]);
-      ctx.save(); ctx.translate(s[0],s[1]); ctx.rotate(ang);
-      ctx.beginPath(); ctx.moveTo(5.5,0); ctx.lineTo(-4,-3.4); ctx.lineTo(-4,3.4); ctx.closePath();
-      ctx.fillStyle=T.flowArrow; ctx.fill(); ctx.restore(); }
-    if(frontC(tc)){ var tp=proj(flowTarget), ph=(now/1000)%1;
-      ctx.beginPath(); ctx.arc(tp[0],tp[1],4+ph*11,0,2*PI); ctx.lineWidth=1.6;
-      ctx.strokeStyle='rgba('+T.meRing+','+(0.6*(1-ph)).toFixed(3)+')'; ctx.stroke(); }
+    ctx.beginPath(); pathC({type:'LineString',coordinates:coords}); ctx.lineWidth=4.5; ctx.strokeStyle=T.flowGlow; ctx.stroke();
+    ctx.setLineDash([7,7]); ctx.lineDashOffset=-(now/40)%14;
+    ctx.beginPath(); pathC({type:'LineString',coordinates:coords}); ctx.lineWidth=2.4; ctx.strokeStyle=T.flow; ctx.stroke();
+    ctx.setLineDash([]); ctx.lineDashOffset=0;
+    if(frontC(tc)){ var tp=proj(flowTarget), phz=(now/1000)%1;
+      ctx.beginPath(); ctx.arc(tp[0],tp[1],4+phz*11,0,2*PI); ctx.lineWidth=1.6;
+      ctx.strokeStyle='rgba('+T.meRing+','+(0.6*(1-phz)).toFixed(3)+')'; ctx.stroke(); }
     ctx.lineCap='butt'; }
   function draw(){
     var t0=performance.now(), nowMs=Date.now();
@@ -948,8 +947,8 @@
         if(!cnt){ g.sx=null; continue; }
         var pt=proj(g.ll); g.sx=pt[0]; g.sy=pt[1]; g.count=cnt; g.single=(cnt===1)?single:null;
         var dom='opencall', dv=0; for(var c2 in cc){ if(cc[c2]>dv){ dv=cc[c2]; dom=c2; } }
-        if(cnt===1){ g.r=(W<=720)?6:4;
-          bead3d(pt[0],pt[1],g.r,CAT[single.o.category]?CAT[single.o.category].color:'#C0392B',lite); }
+        if(cnt===1){ var pr0=(W<=720)?7:5.5; g.r=pr0*2.2;   // 单点=水滴针;命中半径覆盖针头
+          pin3d(pt[0],pt[1],pr0,CAT[single.o.category]?CAT[single.o.category].color:'#C0392B',lite); }
         else { var r=((W<=720)?10:8)+Math.min(9,Math.sqrt(cnt)*1.7); g.r=r;
           bead3d(pt[0],pt[1],r,CAT[dom].color,lite);
           ctx.font='600 '+(cnt>=100?10:11)+'px "Inter",-apple-system,sans-serif';
@@ -959,12 +958,12 @@
           ctx.lineWidth=2; ctx.strokeStyle=CAT[dom].color; ctx.stroke(); } }
     } else {
       for(k in groups) groups[k].sx=null;
-      var mr=(W<=720)?5.5:4;   // 手机散点加大,好点
+      var pr1=(W<=720)?7:5.5;   // 散点=水滴针
       for(m=0;m<markers.length;m++){ mk=markers[m];
         if(!matchFilter(mk.o) || !frontC(mk.cart)){ mk.sx=null; continue; }
         var pt2=proj(mk.ll); mk.sx=pt2[0]; mk.sy=pt2[1];
-        bead3d(pt2[0],pt2[1],mr,CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B',lite);
-        if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1],mr+5,0,2*PI);
+        pin3d(pt2[0],pt2[1],pr1,CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B',lite);
+        if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1]-pr1*1.7,pr1+3,0,2*PI);
           ctx.lineWidth=2; ctx.strokeStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.stroke(); } }
     }
     // 流动线(用户→项目)在点位之上、用户光标最顶层
@@ -1064,7 +1063,7 @@
       for(k in groups){ g=groups[k]; if(g.sx==null) continue;
         var dx=g.sx-e.clientX, dy=g.sy-e.clientY, rr=(g.r+slop)*(g.r+slop), dd=dx*dx+dy*dy;
         if(dd<rr&&dd<bd){ bd=dd; best=g; kind='c'; } } }
-    else { var bd2=(W<=720)?289:121;
+    else { var bd2=(W<=720)?324:225;   // 水滴针针头在基点上方,命中范围相应放宽
       for(m=0;m<markers.length;m++){ mk=markers[m]; if(mk.sx==null) continue;
         var dx2=mk.sx-e.clientX, dy2=mk.sy-e.clientY, dd2=dx2*dx2+dy2*dy2;
         if(dd2<bd2){ bd2=dd2; best=mk; kind='m'; } } }
