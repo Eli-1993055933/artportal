@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.86.0" />
+<meta name="app-version" content="0.87.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -24,7 +24,8 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:var(--bg);
     font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;overflow:hidden;color:var(--ink)}
-  #gc{display:block;width:100vw;height:100vh;cursor:grab;touch-action:none}
+  /* 光标学 Apple Maps:静止=普通箭头(Windows 的 grab 抓手土),按下拖动才变抓手 */
+  #gc{display:block;width:100vw;height:100vh;cursor:default;touch-action:none}
   #gc:active{cursor:grabbing}
   #brand{position:fixed;left:26px;top:22px;pointer-events:none;z-index:5}
   #brand .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--opencall);margin-right:9px;vertical-align:middle}
@@ -493,6 +494,65 @@
   #detail .dcmt-toggle{display:inline-block;margin:12px 0 0 14px;font-size:12.5px;color:var(--sub);cursor:pointer;font-weight:600}
   #detail .dcmt-toggle:hover{color:var(--ink)}
   #detail #dFav.is-on{color:var(--opencall)}
+  /* ===== Apple 风打磨层(v0.87.0):细边/毛玻璃/大圆角/弹簧入场/蓝焦点环/细滚动条/按压回弹 =====
+     统一放最后覆盖前面的基础样式;改回退只删本段 */
+  :root{--ap-blur:saturate(1.8) blur(22px);--ap-blue:#0A84FF}
+  button,.tgc,.ch,.abtn,.pp-btn,.lg-item,.oc,.ocard,.wcard,.pp-row,.wr-bar,.wr-item,.uq-i,.dcmt-toggle,.wv-like,.cmt__op{
+    transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease,box-shadow .18s ease,opacity .18s ease}
+  .abtn:active,.pp-btn:active,.mgo:active,.search .ai:active,#btnPanel:active,#back:active,.tgc:active,
+  .pubgrid button:active,.cmts__send:active,#fbBtn:active,.gd-skip:active,.wv-like:active{transform:scale(.96)}
+  #chn .ch:active,.lg-item:active{transform:scale(.97)}
+  @keyframes apPop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+  .modal .scrim{background:rgba(20,18,15,.32);backdrop-filter:var(--ap-blur);-webkit-backdrop-filter:var(--ap-blur)}
+  .modal .mbox{border-radius:20px;border-color:rgba(0,0,0,.05);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 24px 70px rgba(0,0,0,.22);
+    animation:apPop .34s cubic-bezier(.32,.72,0,1)}
+  html.dark .modal .mbox{border-color:rgba(255,255,255,.08)}
+  #detail{border-radius:18px;box-shadow:0 0 0 .5px rgba(0,0,0,.05),0 18px 50px rgba(0,0,0,.16);
+    animation:apPop .3s cubic-bezier(.32,.72,0,1)}
+  #tip{border-radius:14px;box-shadow:0 0 0 .5px rgba(0,0,0,.05),0 14px 40px rgba(0,0,0,.18)}
+  .card,#propanel{border-radius:16px}
+  #wview .wv-card{border-radius:20px;animation:apPop .3s cubic-bezier(.32,.72,0,1)}
+  #chpanel{backdrop-filter:var(--ap-blur);-webkit-backdrop-filter:var(--ap-blur)}
+  .modal input,.modal select,.modal textarea{border-radius:12px}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ap-blue) !important;
+    box-shadow:0 0 0 3.5px rgba(10,132,255,.22)}
+  /* AI 检索输入框无边框嵌在胶囊里:焦点环打在容器上,输入框本身不发光 */
+  .search:focus-within,#panel .search:focus-within{border-color:var(--ap-blue);box-shadow:0 0 0 3.5px rgba(10,132,255,.18)}
+  .search input:focus{box-shadow:none;border-color:transparent !important}
+  input[type=checkbox]{accent-color:var(--ap-blue);width:15px;height:15px}
+  .mgo{border-radius:13px;font-weight:600;letter-spacing:.01em}
+  .mgo:hover{opacity:.9}
+  /* 桌面关闭钮:灰圆底 ×(Apple sheet 式);手机保持「‹ 返回」文字 */
+  @media (min-width:721px){
+    .modal .mx,#detail .x{width:27px;height:27px;border-radius:50%;background:rgba(120,120,128,.14);
+      display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;top:12px}
+    .modal .mx:hover,#detail .x:hover{background:rgba(120,120,128,.24);color:var(--ink)}
+    #detail .x{right:12px}
+    html.dark .modal .mx,html.dark #detail .x{background:rgba(200,200,210,.16)}
+  }
+  #toast{backdrop-filter:var(--ap-blur);-webkit-backdrop-filter:var(--ap-blur);
+    background:rgba(28,26,23,.85);box-shadow:0 10px 34px rgba(0,0,0,.25)}
+  html.dark #toast{background:rgba(240,238,232,.92)}
+  /* 细滚动条(Windows 默认滚动条厚重出戏) */
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.16);border-radius:99px;
+    background-clip:padding-box;border:2px solid transparent}
+  ::-webkit-scrollbar-thumb:hover{background-color:rgba(0,0,0,.3)}
+  html.dark ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);background-clip:padding-box;border:2px solid transparent}
+  /* 新手引导(Apple onboarding 式;.gd 前缀提特异性压过 .modal h3) */
+  .gd{text-align:center;padding:10px 4px 2px}
+  .gd .gd-ico{font-size:46px;line-height:1;margin:8px 0 18px}
+  .gd .gd-title{font-size:21px;font-weight:700;letter-spacing:-.015em;margin:0 0 9px}
+  .gd .gd-desc{font-size:14px;color:var(--sub);line-height:1.8;margin:0 auto 18px;max-width:300px}
+  .gd-dots{margin:0 0 18px}
+  .gd-dots i{width:7px;height:7px;border-radius:50%;display:inline-block;margin:0 3.5px;
+    background:var(--line);transition:background .25s ease,transform .25s ease}
+  .gd-dots i.on{background:var(--ink);transform:scale(1.15)}
+  .gd-skip{display:block;margin:12px auto 2px;border:0;background:none;color:var(--muted);
+    font-size:13px;cursor:pointer;padding:4px 10px}
+  .gd-skip:hover{color:var(--sub)}
 </style>
 </head>
 <body>
@@ -562,11 +622,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.86.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.87.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.86.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.86.0"></script>
-<script src="js/globe-data.js?v=0.86.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.87.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.87.0"></script>
+<script src="js/globe-data.js?v=0.87.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -2017,16 +2077,15 @@
     try{ localStorage.setItem('ap_guided','1'); }catch(e){}   // 弹过即记,任何方式关掉都不再打扰
     var s=GUIDE_STEPS[step], last=step===GUIDE_STEPS.length-1;
     var dots=GUIDE_STEPS.map(function(_,i){
-      return '<i style="width:7px;height:7px;border-radius:50%;display:inline-block;margin:0 3px;background:'+
-        (i===step?'var(--ink)':'var(--line)')+'"></i>'; }).join('');
-    var m=modal('<div style="text-align:center;padding:6px 2px 0">'+
-      '<div style="font-size:40px;line-height:1;margin:6px 0 14px">'+s.icon+'</div>'+
-      '<h3 style="margin:0 0 8px">'+L(s.t)+'</h3>'+
-      '<p class="note" style="margin:0 0 14px;text-align:center">'+L(s.d)+'</p>'+
-      '<div style="margin:2px 0 14px">'+dots+'</div>'+
+      return '<i class="'+(i===step?'on':'')+'"></i>'; }).join('');
+    var m=modal('<div class="gd">'+
+      '<div class="gd-ico">'+s.icon+'</div>'+
+      '<h3 class="gd-title">'+L(s.t)+'</h3>'+
+      '<p class="gd-desc">'+L(s.d)+'</p>'+
+      '<div class="gd-dots">'+dots+'</div>'+
       '<button class="mgo" id="gdNext" type="button">'+L(last?'gdDone':'gdNext')+'</button>'+
-      '<label class="chk" style="cursor:pointer;justify-content:center" id="gdSkip">'+
-        (last?(step>0?L('gdPrev'):''):L('gdSkip'))+'</label></div>');
+      '<button class="gd-skip" id="gdSkip" type="button">'+
+        (last?(step>0?L('gdPrev'):''):L('gdSkip'))+'</button></div>');
     m.querySelector('#gdNext').addEventListener('click',function(){
       if(last) closeModal(); else openGuide(step+1); });
     var sk=m.querySelector('#gdSkip');
