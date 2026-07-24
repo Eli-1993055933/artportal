@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.89.0" />
+<meta name="app-version" content="0.89.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -566,6 +566,9 @@
   .fbar-btn .n{background:var(--ink);color:#fff;border-radius:99px;font-size:10px;padding:1px 6px;font-weight:700}
   html.dark .fbar-btn .n{background:#ece9e2;color:#141311}
   .fbar-sum{font-size:11px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  /* 展开后内容超高:图例卡内部滚动(细滚动条),结果列表保底 150px 不被挤没 */
+  #cardLegend{overflow-y:auto;overscroll-behavior:contain}
+  .listcard{min-height:150px}
   #fltPanel{animation:apPop .22s cubic-bezier(.32,.72,0,1)}
   #fltPanel .fgrp-t{font-size:11px;color:var(--muted);margin:9px 0 1px;letter-spacing:.05em}
   #fltPanel .tagrow{border-top:0;margin-top:0;padding-top:3px}
@@ -651,11 +654,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.89.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.89.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.89.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.89.0"></script>
-<script src="js/globe-data.js?v=0.89.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.89.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.89.1"></script>
+<script src="js/globe-data.js?v=0.89.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
