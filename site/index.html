@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.93.0" />
+<meta name="app-version" content="0.93.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.93.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.93.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.93.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.93.0"></script>
-<script src="js/globe-data.js?v=0.93.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.93.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.93.1"></script>
+<script src="js/globe-data.js?v=0.93.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -801,9 +801,11 @@
   // —— 发光数据尖刺(v0.93.0,仿 WebGL Globe):从落点沿"离球心"真 3D 方向外延,
   //    高度 h=球半径分数(簇按数量,单点固定);基点常驻发光点(可点),杆顶白尖。正交投影线性
   //    → 屏上尖刺=从屏幕中心过基点的射线,长度 = h·|基点距中心|(自带 3D 透视foreshorten)。
+  // 数据量→尖刺高度分数:越多越高(sqrt 平滑,封顶);每个光标据此变高矮
+  function spikeH(n){ return 0.045+Math.min(0.20,Math.sqrt(n||1)*0.03); }
   function spike3d(bx,by,color,h,lite){
     var dx=bx-W/2, dy=by-H/2, dist=Math.sqrt(dx*dx+dy*dy)||0.001;
-    var len=Math.min(30,h*dist), ux=dx/dist, uy=dy/dist, tx=bx+ux*len, ty=by+uy*len;
+    var len=Math.min(60,h*dist), ux=dx/dist, uy=dy/dist, tx=bx+ux*len, ty=by+uy*len;
     ctx.lineCap='round';
     if(!lite){ ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(tx,ty); ctx.lineWidth=3.6; ctx.strokeStyle=hexA(color,0.16); ctx.stroke(); }
     ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(tx,ty); ctx.lineWidth=1.7; ctx.strokeStyle=color; ctx.stroke();
@@ -873,19 +875,14 @@
   function draw(){
     var t0=performance.now(), nowMs=Date.now();
     var sc=proj.scale(); updateRC();
-    // 太空底色 + 地球缘光,让球从背景上"浮"出来
     ctx.fillStyle=T.space; ctx.fillRect(0,0,W,H);
-    // 渐变终点必须是同色透明:rgba(0,0,0,0) 会在插值中段混入黑,把光圈拉灰变脏
-    var rg=ctx.createRadialGradient(W/2,H/2,sc*0.9,W/2,H/2,sc*1.12);
-    rg.addColorStop(0,T.glow); rg.addColorStop(1,T.glow0);
-    ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.12,0,2*PI); ctx.fill();
-    // 明亮大气层辉光环(v0.93.0,仿 WebGL Globe):球缘外一圈冷白蓝辉光,把球从太空里"点亮"
-    var atmo=ctx.createRadialGradient(W/2,H/2,sc*0.93,W/2,H/2,sc*1.16);
-    atmo.addColorStop(0,'rgba('+T.atmo+',0)'); atmo.addColorStop(0.74,'rgba('+T.atmo+',0)');
-    atmo.addColorStop(0.9,'rgba('+T.atmo+',0.42)'); atmo.addColorStop(1,'rgba('+T.atmo+',0)');
-    ctx.fillStyle=atmo; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.16,0,2*PI); ctx.fill();
+    // 大气层辉光环(v0.93.1 仅深色主题:仿 WebGL Globe 把球从太空点亮;去掉旧灰缘光/硬边圈,浅色主题不画保持干净)
+    if(document.documentElement.classList.contains('dark')){
+      var atmo=ctx.createRadialGradient(W/2,H/2,sc*0.93,W/2,H/2,sc*1.18);
+      atmo.addColorStop(0,'rgba('+T.atmo+',0)'); atmo.addColorStop(0.76,'rgba('+T.atmo+',0)');
+      atmo.addColorStop(0.9,'rgba('+T.atmo+',0.4)'); atmo.addColorStop(1,'rgba('+T.atmo+',0)');
+      ctx.fillStyle=atmo; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.18,0,2*PI); ctx.fill(); }
     ctx.beginPath(); pathC(SPHERE); ctx.fillStyle=T.sphere; ctx.fill();
-    ctx.beginPath(); ctx.arc(W/2,H/2,sc,0,2*PI); ctx.lineWidth=1.2; ctx.strokeStyle='rgba('+T.atmo+',0.5)'; ctx.stroke();
     if(!((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.beginPath(); pathC(grat); ctx.lineWidth=0.4; ctx.strokeStyle=T.grat; ctx.stroke(); }
     var cnDrilled=(drilledCountry==='China');
@@ -959,8 +956,8 @@
     if(AL&&AL.length&&!((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var A2=0;A2<AL.length;A2++){ var al=AL[A2]; if(!frontC(al.cart)) continue;
-        // 中文界面优先用 name_zh(NE 自带官方中文州名);字号随区划屏上大小自适应(10–15px),装不下不标
-        var atxt=(lang==='zh'&&al.zh)?al.zh:al.nm;
+        // 英文界面:优先英文名(中国省份用 PROV_EN,他国用 NE 英文 nm);中文界面用中文 zh。装不下不标
+        var atxt=(lang==='en')?(al.en||al.nm):(al.zh||al.nm);
         var perCh=/[一-鿿]/.test(atxt)?1:0.56, availW=2*(al.r||0)*sc;
         if(availW < atxt.length*10*perCh*1.1) continue;
         var afs=Math.round(Math.min(15, availW*0.6/(atxt.length*perCh)));
@@ -983,12 +980,12 @@
         if(!cnt){ g.sx=null; continue; }
         var pt=proj(g.ll); g.sx=pt[0]; g.sy=pt[1]; g.count=cnt; g.single=(cnt===1)?single:null;
         var dom='opencall', dv=0; for(var c2 in cc){ if(cc[c2]>dv){ dv=cc[c2]; dom=c2; } }
+        var hh=spikeH(cnt);   // 尖刺高度 = 该城市数据量
         if(cnt===1){ g.r=(W<=720)?9:7;
-          spike3d(pt[0],pt[1],CAT[single.o.category]?CAT[single.o.category].color:'#C0392B',0.05,lite); }
+          spike3d(pt[0],pt[1],CAT[single.o.category]?CAT[single.o.category].color:'#C0392B',hh,lite); }
         else { g.r=(W<=720)?11:9;
-          var hh=0.06+Math.min(0.24,Math.log(cnt+1)/Math.LN2*0.045);   // 尖刺高度 ∝ 数量(对数)
           spike3d(pt[0],pt[1],CAT[dom].color,hh,lite);
-          var dxx=pt[0]-W/2,dyy=pt[1]-H/2,dd0=Math.sqrt(dxx*dxx+dyy*dyy)||1,ll0=Math.min(30,hh*dd0);
+          var dxx=pt[0]-W/2,dyy=pt[1]-H/2,dd0=Math.sqrt(dxx*dxx+dyy*dyy)||1,ll0=Math.min(60,hh*dd0);
           var nx=pt[0]+dxx/dd0*(ll0+7),ny=pt[1]+dyy/dd0*(ll0+7);
           ctx.font='600 '+(cnt>=100?9:10)+'px "Inter",-apple-system,sans-serif';
           ctx.textAlign='center'; ctx.textBaseline='middle';
@@ -1001,7 +998,7 @@
       for(m=0;m<markers.length;m++){ mk=markers[m];
         if(!matchFilter(mk.o) || !frontC(mk.cart)){ mk.sx=null; continue; }
         var pt2=proj(mk.ll); mk.sx=pt2[0]; mk.sy=pt2[1];
-        spike3d(pt2[0],pt2[1],CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B',0.05,lite);
+        spike3d(pt2[0],pt2[1],CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B',spikeH(mk.gc),lite);
         if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1],9,0,2*PI);
           ctx.lineWidth=2; ctx.strokeStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.stroke(); } }
     }
@@ -1188,11 +1185,18 @@
         else if(f.properties.name) provs.push(f); });
       cnProv=provs; cnBase=decimateFC({features:provs},8);   // 下钻才用,重度抽稀(小区划自适应保真)
       rewindFC({features:cnBase});   // 抽稀后重绕(防跨经线/临界环被抽翻)
-      provLabels=cnBase.map(function(f){ var pr=f.properties, c=pr.center||d3.geoCentroid(f);
-        return {c:c,cart:ll2c(c),nm:shortName(pr.name),r:Math.sqrt(d3.geoArea(f)/Math.PI)}; });
+      provLabels=cnBase.map(function(f){ var pr=f.properties, c=pr.center||d3.geoCentroid(f), zh=shortName(pr.name);
+        return {c:c,cart:ll2c(c),nm:zh,zh:zh,en:PROV_EN[zh]||null,r:Math.sqrt(d3.geoArea(f)/Math.PI)}; });
       if(jd) cnJD=jd;   // 九段线不抽稀(段小,抽稀会破坏),描边渲染
       adminCache[CN_URLS[0]]=j; needDraw=true; })
     .catch(function(){ loadCN(i+1,cycle); }); }
+  // 中国省级英文名(短名→英文):英文模式下中国地名用它,不再显示中文
+  var PROV_EN={"北京":"Beijing","天津":"Tianjin","河北":"Hebei","山西":"Shanxi","内蒙古":"Inner Mongolia",
+    "辽宁":"Liaoning","吉林":"Jilin","黑龙江":"Heilongjiang","上海":"Shanghai","江苏":"Jiangsu","浙江":"Zhejiang",
+    "安徽":"Anhui","福建":"Fujian","江西":"Jiangxi","山东":"Shandong","河南":"Henan","湖北":"Hubei","湖南":"Hunan",
+    "广东":"Guangdong","广西":"Guangxi","海南":"Hainan","重庆":"Chongqing","四川":"Sichuan","贵州":"Guizhou",
+    "云南":"Yunnan","西藏":"Tibet","陕西":"Shaanxi","甘肃":"Gansu","青海":"Qinghai","宁夏":"Ningxia",
+    "新疆":"Xinjiang","台湾":"Taiwan","香港":"Hong Kong","澳门":"Macau"};
   // 区划短名:去"省/市/自治区/自治州/特别行政区"等后缀,标注更清爽
   function shortName(nm){ nm=String(nm||'');
     var s=nm.replace(/(维吾尔|壮族|回族)?自治区$|特别行政区$|(蒙古族|蒙古|朝鲜族|土家族|布依族|哈尼族|傈僳族|景颇族|柯尔克孜族|柯尔克孜|哈萨克族|哈萨克|维吾尔族|回族|藏族|彝族|傣族|白族|苗族|侗族|壮族|羌族|满族|瑶族|黎族|畲族|仡佬族|仫佬族|毛南族|各族){0,3}自治[州县旗]$|(地区|林区|新区|盟|省|市|县|区)$/,'');
@@ -2703,6 +2707,8 @@
       markers.push(mk);
       g.items.push(mk);
       catCounts[cat]=(catCounts[cat]||0)+1; placedTotal++; added++; });
+    // 每个 marker 记下所在地(城市簇)数据量 gc,尖刺高度按它变化(每个光标高度=该地数据量)
+    for(var gk in groups){ var gg=groups[gk], gn=gg.items.length; for(var ii=0;ii<gn;ii++) gg.items[ii].gc=gn; }
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
     renderLegend(); renderDrawer(); needDraw=true;
     if(pendingOid){   // #/o/<id> 深链:数据分批异步到达,哪批里有就哪批弹出
