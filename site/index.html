@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.93.2" />
+<meta name="app-version" content="0.94.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.93.2</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.94.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.93.2"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.93.2"></script>
-<script src="js/globe-data.js?v=0.93.2"></script>
+<script src="assets/vendor/d3.min.js?v=0.94.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.94.0"></script>
+<script src="js/globe-data.js?v=0.94.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -721,6 +721,8 @@
   var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null;
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
   var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=100, adminSeq=0, drilledAdmName=null;
+  // 中国三级下钻(L3=区县):点开某市→载该市区县多边形+区县名;直辖市/港澳/县级市(childrenNum=0)无此级
+  var drilledCityAdcode=null, drilledCityName=null, districtFeats=[], districtLabels=[];
   // 分类索引多选(v0.88.0 用户要求):空集合=全部;可同时点亮多个分类
   var filterCats=new Set(), query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
   // 筛选(老站体系移植):门类单选 + 快捷开关 + 地区多选 + 机构类型多选 + 来源开关 + 抽屉排序
@@ -731,7 +733,7 @@
   var velX=0, velY=0, targetScale=null;
   // 立体光标(v0.91.0):userLL=用户属地坐标(扩散光环定位针);flowTarget=点开项目的坐标(流动箭头线)
   var userLL=null, userCart=null, flowTarget=null, lastAnimFrame=0;
-  var perfTier=0, costArr=[], sheetDrag=false;   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
+  var perfTier=0, costArr=[], sheetDrag=false;   // 0=全画质 1=降dpr+扁珠 2=运动中省经纬网(地名已解耦不再随档位隐藏)
   // 画布主题配色(必须先于首帧 draw 定义;applyTheme 在下方接线区)
   var THEMES={
     light:{space:'#E3DED0',glow:'rgba(255,255,255,.32)',glow0:'rgba(255,255,255,0)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
@@ -907,13 +909,24 @@
     if(adminFeats.length){
       for(var a=0;a<adminFeats.length;a++){ var af=adminFeats[a];
         ctx.beginPath(); pathC(af);
-        if(cnDrilled){   // 中国市级:细多边形交替填充(既有)
-          if(cnCityFill){ ctx.fillStyle=(a%2)?T.landSel:T.landSel2; ctx.fill(); }
-          ctx.lineWidth=0.8; ctx.strokeStyle=T.admin; ctx.stroke(); }
+        if(cnDrilled){   // 中国市级:细多边形交替填充;L3 时选中市让位给区县,其余压暗、选中市描金边
+          var cityDrilled=(drillLevel===3&&af.properties&&af.properties.adcode===drilledCityAdcode);
+          var districtsReady=(cityDrilled&&districtFeats.length>0);   // 区县到货后才跳填让位;未到货/加载失败则先高亮实填,避免空洞
+          if(cnCityFill&&!districtsReady){ ctx.fillStyle=(drillLevel===3)?(cityDrilled?T.landSel:T.landDim):((a%2)?T.landSel:T.landSel2); ctx.fill(); }
+          ctx.lineWidth=cityDrilled?1.1:0.8; ctx.strokeStyle=cityDrilled?T.borderSel:T.admin; ctx.stroke(); }
         else {           // 他国一级区划:交替双色调;二级视图=选中金/其余压暗
           var aSel=(drillLevel>=2&&af.properties&&af.properties.name===drilledAdmName);
           ctx.fillStyle=(drillLevel>=2)?(aSel?T.landSel:T.landDim):((a%2)?T.landSel:T.landSel2); ctx.fill();
           ctx.lineWidth=aSel?1.1:0.8; ctx.strokeStyle=aSel?T.borderSel:T.admin; ctx.stroke(); } } }
+    // 中国三级:选中市的区县多边形(交替双色),叠在市面之上;区县名随后在标签层画
+    if(districtFeats.length && cnDrilled && drillLevel===3){
+      for(var dd=0;dd<districtFeats.length;dd++){ var dfe=districtFeats[dd];
+        ctx.beginPath(); pathC(dfe);
+        ctx.fillStyle=(dd%2)?T.landSel:T.landSel2; ctx.fill();
+        ctx.lineWidth=0.9; ctx.strokeStyle=T.admin; ctx.stroke(); }
+      // 选中市金边补描在区县之上(否则被区县灰边盖住看不见)
+      for(var dg=0;dg<adminFeats.length;dg++){ if(adminFeats[dg].properties&&adminFeats[dg].properties.adcode===drilledCityAdcode){
+        ctx.beginPath(); pathC(adminFeats[dg]); ctx.lineWidth=1.3; ctx.strokeStyle=T.borderSel; ctx.stroke(); break; } } }
     // 国名(高档画质或静止时)
     // 地名门控:版图在屏幕上"装得下文字"才显示(小屏/缩小时自动少字,不再叠字)
     function fitsLabel(rRad,txt,fs2){
@@ -922,7 +935,7 @@
     // —— 远景分层:最小=大洲名 → 稍放大=次区域名(两层均不画光标) → 再放大=国名+数字聚合点位 ——
     var MARKER_MIN=scale0*((W<=720)?1.6:0.95);
     var showMarkers=!!drilledCountry||sc>=MARKER_MIN;
-    if(!drilledCountry && sc<MARKER_MIN && !((perfTier>=2&&inMotion())||sheetDrag)){
+    if(!drilledCountry && sc<MARKER_MIN && !sheetDrag){   // 地名不随运动隐藏(文字很廉价);仅手机拖底卡时让位
       var tierA=sc<scale0*((W<=720)?0.8:0.7);
       var regs=tierA?D.REGIONS.continents:D.REGIONS.subregions;
       ctx.textAlign='center'; ctx.textBaseline='middle';
@@ -933,7 +946,7 @@
         var rp=proj(re2.ll), rtxt=(lang==='en')?re2.en:re2.zh;
         ctx.lineWidth=4; ctx.strokeStyle=T.halo; ctx.strokeText(rtxt,rp[0],rp[1]);
         ctx.fillStyle=T.label; ctx.fillText(rtxt,rp[0],rp[1]); } }
-    if(showMarkers && sc>scale0*0.82 && !((perfTier>=2&&inMotion())||sheetDrag)){
+    if(showMarkers && sc>scale0*0.82 && !sheetDrag){   // 同上:国名/区划名运动中不消失(修"挪动地图地名会消失")
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var L=0;L<labelData.length;L++){ var d=labelData[L]; if(!frontC(d.cart)) continue;
         if(drilledCountry&&d.en===drilledCountry) continue;   // 下钻国不再标国名,让位区划名
@@ -947,8 +960,9 @@
     // 行政区划地名:中国省级=省名、市级=市州名;他国=一级行政区名(同样按"装得下"门控)
     var AL=null;
     if(cnDrilled&&drillLevel===1) AL=provLabels;
+    else if(cnDrilled&&drillLevel===3) AL=districtLabels;   // 三级=区县名
     else if(drilledCountry&&adminLabels.length) AL=adminLabels;
-    if(AL&&AL.length&&!((perfTier>=2&&inMotion())||sheetDrag)){
+    if(AL&&AL.length&&!sheetDrag){
       ctx.textAlign='center'; ctx.textBaseline='middle';
       for(var A2=0;A2<AL.length;A2++){ var al=AL[A2]; if(!frontC(al.cart)) continue;
         // 英文界面:优先英文名(中国省份用 PROV_EN,他国用 NE 英文 nm);中文界面用中文 zh。装不下不标
@@ -1006,6 +1020,7 @@
       var avg=sum/costArr.length; costArr.length=0;
       if(avg>26&&perfTier===0){ perfTier=1; if(dpr>1){ dpr=1; sizeCanvas(); } }
       else if(avg>26&&perfTier===1){ perfTier=2; } }
+      // 注:地名已改为不随运动隐藏(见标签层),故降档不再影响"挪动时地名消失";不做自动升档以免边界机型档位来回跳造成珠子/画质闪烁
   }
 
   // —— 主循环:自动旋转/惯性/平滑缩放,统一在这里驱动 ——
@@ -1117,11 +1132,23 @@
       else { showDetail(hoverObj.o); syncCard(hoverObj); }
       return; }
     var inv=proj.invert([e.clientX,e.clientY]); if(!inv) return;
-    if(drillLevel===2){   // 二级视图:点选中区划以外(邻区/境外/太空)→ 退回上一级并收卡
-      var cur=null;
-      if(drilledCountry==='China'){
-        for(var cp=0;cp<(cnBase||[]).length;cp++){ if(cnBase[cp].properties.adcode===drilledProvAdcode){ cur=cnBase[cp]; break; } } }
-      else { for(var ca=0;ca<adminFeats.length;ca++){ if(adminFeats[ca].properties&&adminFeats[ca].properties.name===drilledAdmName){ cur=adminFeats[ca]; break; } } }
+    if(drillLevel===3){   // 三级(中国区县):点选中市/其区县以内=停留(区县为末级);点市外→退回市级视图
+      var inCity=false;   // 命中优先用当前显示的更精细区县多边形,再退回市多边形(市来自省文件,较粗,边界区县会伸出其外→防误退)
+      for(var dq=0;dq<districtFeats.length;dq++){ if(d3.geoContains(districtFeats[dq],inv)){ inCity=true; break; } }
+      if(!inCity){ for(var dc=0;dc<adminFeats.length;dc++){ if(adminFeats[dc].properties&&adminFeats[dc].properties.adcode===drilledCityAdcode&&d3.geoContains(adminFeats[dc],inv)){ inCity=true; break; } } }
+      if(!inCity) exitDrill();   // L3→L2
+      return; }
+    if(drillLevel===2){   // 二级视图
+      if(drilledCountry==='China'){   // 市级视图:先用更精细的市多边形命中→有区县的市下钻、县级市停留;都没命中再用粗省界判省内缝隙(停留)/省外(退回省级)
+        for(var ct=0;ct<adminFeats.length;ct++){ if(d3.geoContains(adminFeats[ct],inv)){
+          if(adminFeats[ct].properties&&adminFeats[ct].properties.childrenNum>0) drillCity(adminFeats[ct]);
+          return; } }
+        var prov=null;
+        for(var cp=0;cp<(cnBase||[]).length;cp++){ if(cnBase[cp].properties.adcode===drilledProvAdcode){ prov=cnBase[cp]; break; } }
+        if(prov&&d3.geoContains(prov,inv)) return;   // 省内市界缝隙 → 停留
+        exitDrill(); return; }   // 省外 → 退回省级
+      var cur=null;   // 他国二级:点选中州/省以外 → 退回国家视图
+      for(var ca=0;ca<adminFeats.length;ca++){ if(adminFeats[ca].properties&&adminFeats[ca].properties.name===drilledAdmName){ cur=adminFeats[ca]; break; } }
       if(!cur||!d3.geoContains(cur,inv)) exitDrill();
       return; }
     if(drilledCountry==='China' && drillLevel===1 && cnBase){   // 省级视图:点省→下钻市级;点境外→回全球
@@ -1228,10 +1255,31 @@
     var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW'); ensureGuard();
     fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; }   // 省界来自 cnBase(启动已载),无需再请求
   function drillProvince(pf){ var ad=pf.properties.adcode; if(!ad) return;
-    drillLevel=2; drilledProvAdcode=ad;
+    drillLevel=2; drilledProvAdcode=ad; drilledCityAdcode=null; drilledCityName=null; districtFeats=[]; districtLabels=[];
     document.getElementById('back').textContent=L('backU');
     fitFly(pf, boundsCenter(pf), scale0*5.2);
     loadAdmin(CN_LOCAL+ad+'_full.json',null,2,CN_REMOTE+ad+'_full.json'); }
+  // 三级下钻:市→区县。仅 childrenNum>0 的地级市(排除直辖市/港澳/县级市,它们无下辖区县)
+  function drillCity(cf){ var ad=cf.properties&&cf.properties.adcode; if(!ad||!(cf.properties.childrenNum>0)) return;
+    drillLevel=3; drilledCityAdcode=ad; drilledCityName=shortName(cf.properties.name); districtFeats=[]; districtLabels=[];
+    document.getElementById('back').textContent=L('backU');
+    fitFly(cf, boundsCenter(cf), scale0*9);
+    loadDistricts(ad); }
+  // 区县多边形+区县名(本地优先→DataV 远端兜底;与 loadAdmin 共用 adminSeq 作废机制)
+  function loadDistricts(ad){
+    var seq=++adminSeq, local=CN_LOCAL+ad+'_full.json', remote=CN_REMOTE+ad+'_full.json';
+    function apply(j){ if(seq!==adminSeq) return;
+      var fs=decimateFC(j,1); rewindFC({features:fs});   // 区县本就小/点少,不抽稀保形;抽后重绕防跨经线翻面
+      districtFeats=fs;
+      districtLabels=fs.map(function(f){ var pr=f.properties||{}, c=pr.center||d3.geoCentroid(f), nm=shortName(pr.name||'');
+        return nm?{c:c,cart:ll2c(c),nm:nm,zh:nm,en:null,r:Math.sqrt(d3.geoArea(f)/Math.PI)}:null; }).filter(Boolean);
+      needDraw=true; }
+    if(adminCache[local]){ apply(adminCache[local]); return; }
+    if(adminCache[remote]){ apply(adminCache[remote]); return; }
+    d3.json(local).then(function(j){ rewindFC(j); adminCache[local]=j; apply(j); })
+      .catch(function(){ if(seq!==adminSeq) return;
+        d3.json(remote).then(function(j){ rewindFC(j); adminCache[remote]=j; apply(j); })
+          .catch(function(){ if(seq!==adminSeq) return; districtFeats=[]; districtLabels=[]; needDraw=true; }); }); }
   function loadAdmin(url,filt,step,fbUrl,fbFilt){
     var seq=++adminSeq;   // 快速连点/中途退出时丢弃过期结果
     var p=adminCache[url]?Promise.resolve(adminCache[url]):d3.json(url).then(function(j){ rewindFC(j); adminCache[url]=j; return j; });
@@ -1252,7 +1300,13 @@
   function exitDrill(){
     // 逐级退出时收起点开的项目卡与悬浮层
     document.getElementById('detail').style.display='none'; tipEl.style.display='none';
-    adminSeq++;   // 使在途 loadAdmin 结果作废
+    adminSeq++;   // 使在途 loadAdmin/loadDistricts 结果作废
+    if(drillLevel===3){   // 区县 → 退回市级(省界+市面仍在,仅清区县层,回到该省市级视野)
+      drillLevel=2; drilledCityAdcode=null; drilledCityName=null; districtFeats=[]; districtLabels=[];
+      document.getElementById('back').textContent=L('backU');
+      var pf3=null; for(var p3=0;p3<(cnBase||[]).length;p3++){ if(cnBase[p3].properties.adcode===drilledProvAdcode){ pf3=cnBase[p3]; break; } }
+      if(pf3) fitFly(pf3, boundsCenter(pf3), scale0*5.2); else needDraw=true;
+      return; }
     if(drillLevel===2){
       document.getElementById('back').textContent=L('backW');
       if(drilledCountry==='China'){   // 市级 → 退回省级
@@ -1261,7 +1315,7 @@
       drillLevel=1; drilledAdmName=null;   // 他国二级 → 退回国家视图(区划保留)
       if(drilledFeat) fitFly(drilledFeat, boundsCenter(drilledFeat), scale0*2.9);
       needDraw=true; return; }
-    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; maxK=100;
+    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; drilledCityAdcode=null; drilledCityName=null; districtFeats=[]; districtLabels=[]; maxK=100;
     document.getElementById('back').style.display='none';
     spinning=false; inertiaOn=false;
     var r0=proj.rotate(), s0=proj.scale();
@@ -1575,7 +1629,7 @@
     document.getElementById('fbBtn').textContent=L('fbBtnT');
     d3.selectAll('.xb').text(L('backX'));
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
-    document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
+    document.getElementById('back').textContent=(drillLevel>=2)?L('backU'):L('backW');
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
     var g1=document.getElementById('gT1'); if(g1){ g1.textContent=L('gTag');
       document.getElementById('gT2').textContent=L('gReg');
@@ -2911,16 +2965,17 @@
       if(!j||!j.works) return; chCache.works=j;
       addRecords(j.works.map(normWork)); }).catch(function(){});
     window.__gd={groups:groups,markers:markers,proj:proj,splitScale:splitScale,CATc:CAT,  // 调试钩子(集成时移除)
-      state:function(){return {drillLevel:drillLevel,drilled:drilledCountry,prov:drilledProvAdcode,
-        cnBase:cnBase?cnBase.length:0,cnJD:!!cnJD,adminFeats:adminFeats.length,
-        provLabels:provLabels.length,adminLabels:adminLabels.map(function(a){return a.nm;}),
+      state:function(){return {drillLevel:drillLevel,drilled:drilledCountry,prov:drilledProvAdcode,city:drilledCityAdcode,cityName:drilledCityName,
+        cnBase:cnBase?cnBase.length:0,cnJD:!!cnJD,adminFeats:adminFeats.length,districtFeats:districtFeats.length,
+        provLabels:provLabels.length,adminLabels:adminLabels.map(function(a){return a.nm;}),districtLabels:districtLabels.map(function(a){return a.nm;}),
         maxK:Math.round(maxK*10)/10,scaleK:Math.round(proj.scale()/scale0*100)/100,
         rot:proj.rotate().map(function(v){return Math.round(v*10)/10;}),
         detailOpen:document.getElementById('detail').style.display==='block'};},
       drillChina:function(){drillChina();},
       fitScaleFor:fitScaleFor, cnNE:function(){return cnNE;}, scale0:function(){return scale0;},
-      cnBaseFeats:function(){return cnBase;}, boundsCenter:boundsCenter,
+      cnBaseFeats:function(){return cnBase;}, boundsCenter:boundsCenter, adminFeatsArr:function(){return adminFeats;},
       drillProvByName:function(n){for(var i=0;i<cnBase.length;i++){if(cnBase[i].properties.name===n){drillProvince(cnBase[i]);return cnBase[i].properties.adcode;}}return null;},
+      drillCityByAdcode:function(ad){for(var i=0;i<adminFeats.length;i++){if(adminFeats[i].properties.adcode===ad){drillCity(adminFeats[i]);return true;}}return false;},
       exitDrill:function(){exitDrill();}};
     var st=document.getElementById('status'); st.textContent=L('marked')(placedTotal,countryFeats.length);
     setTimeout(function(){ st.style.display='none'; },2500);
