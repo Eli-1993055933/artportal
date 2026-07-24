@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.90.1" />
+<meta name="app-version" content="0.91.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.90.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.91.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.90.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.90.1"></script>
-<script src="js/globe-data.js?v=0.90.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.91.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.91.0"></script>
+<script src="js/globe-data.js?v=0.91.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -729,15 +729,19 @@
   function regsActive(){ for(var k in fRegs){ if(fRegs[k]) return true; } return false; }
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
   var velX=0, velY=0, targetScale=null;
+  // 立体光标(v0.91.0):userLL=用户属地坐标(扩散光环定位针);flowTarget=点开项目的坐标(流动箭头线)
+  var userLL=null, userCart=null, flowTarget=null, lastAnimFrame=0;
   var perfTier=0, costArr=[], sheetDrag=false;   // 0=全画质 1=降dpr 2=运动中省文字/经纬网
   // 画布主题配色(必须先于首帧 draw 定义;applyTheme 在下方接线区)
   var THEMES={
     light:{space:'#E3DED0',glow:'rgba(255,255,255,.32)',glow0:'rgba(255,255,255,0)',sphere:'#fff',sphereEdge:'#cfc9ba',grat:'#e6e3db',
       land:'#ecebe5',landDim:'#f4f3ef',landSel:'#E8D8A0',landSel2:'#F2E7C2',border:'#d3cfc4',borderSel:'#b3a069',admin:'#a89f8c',
-      label:'#2b2822',halo:'rgba(247,246,242,.85)',mstroke:'#fff'},
+      label:'#2b2822',halo:'rgba(247,246,242,.85)',mstroke:'#fff',
+      pinShadow:'rgba(70,60,40,.20)',me:'#0A84FF',flow:'rgba(10,132,255,.9)',flowGlow:'rgba(10,132,255,.22)',flowArrow:'#0A84FF',meRing:'10,132,255'},
     dark:{space:'#0b0a08',glow:'rgba(84,74,56,.5)',glow0:'rgba(84,74,56,0)',sphere:'#201d18',sphereEdge:'#3d372d',grat:'#2b2721',
       land:'#2e2a23',landDim:'#241f19',landSel:'#4c4126',landSel2:'#5d5031',border:'#403a30',borderSel:'#8f7c4c',admin:'#7d7466',
-      label:'#d8d3c8',halo:'rgba(20,18,15,.85)',mstroke:'#15130f'} };
+      label:'#d8d3c8',halo:'rgba(20,18,15,.85)',mstroke:'#15130f',
+      pinShadow:'rgba(0,0,0,.45)',me:'#4aa8ff',flow:'rgba(74,168,255,.92)',flowGlow:'rgba(74,168,255,.25)',flowArrow:'#8fc8ff',meRing:'74,168,255'} };
   var T=THEMES.light;
 
   var PI=Math.PI, rc=[0,0,0];
@@ -791,8 +795,54 @@
     draw(); }
 
   // —— 渲染 ——
+  // —— 立体光标(v0.91.0):项目=玻璃质感 3D 珠(居中落点,命中不变),高光+落影读出立体 ——
+  function bead3d(x,y,r,color,lite){
+    if(!lite){ ctx.beginPath(); ctx.ellipse(x,y+r*0.62,r*0.85,r*0.30,0,0,2*PI); ctx.fillStyle=T.pinShadow; ctx.fill(); }
+    ctx.beginPath(); ctx.arc(x,y,r,0,2*PI); ctx.fillStyle=color; ctx.fill();
+    if(!lite){ ctx.beginPath(); ctx.arc(x-r*0.3,y-r*0.34,r*0.42,0,2*PI); ctx.fillStyle='rgba(255,255,255,.42)'; ctx.fill(); }
+    ctx.beginPath(); ctx.arc(x,y,r,0,2*PI); ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke(); }
+  // 用户"你在这里":扩散光环 + 立体定位针(蓝),站在属地坐标上
+  function drawBeacon(now){
+    if(!userLL) return;
+    if(!userCart) userCart=ll2c(userLL);
+    if(!frontC(userCart)) return;
+    var p=proj(userLL), x=p[0], y=p[1], rk=T.meRing, i;
+    for(i=0;i<2;i++){ var ph=((now/1600)+i*0.5)%1, rr=6+ph*32;
+      ctx.beginPath(); ctx.arc(x,y,rr,0,2*PI); ctx.lineWidth=2;
+      ctx.strokeStyle='rgba('+rk+','+(0.55*(1-ph)).toFixed(3)+')'; ctx.stroke(); }
+    var r=(W<=720)?7:6, cy=y-r*2.2;
+    ctx.beginPath(); ctx.ellipse(x,y,r*0.7,r*0.26,0,0,2*PI); ctx.fillStyle=T.pinShadow; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,cy); ctx.lineWidth=Math.max(1.4,r*0.32); ctx.strokeStyle=T.me; ctx.stroke();
+    var glow=0.5+0.5*Math.sin(now/480);
+    ctx.beginPath(); ctx.arc(x,cy,r+2.5,0,2*PI); ctx.fillStyle='rgba('+rk+','+(0.22*glow).toFixed(3)+')'; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,cy,r,0,2*PI); ctx.fillStyle=T.me; ctx.fill();
+    ctx.beginPath(); ctx.arc(x-r*0.3,cy-r*0.34,r*0.4,0,2*PI); ctx.fillStyle='rgba(255,255,255,.5)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,cy,r,0,2*PI); ctx.lineWidth=1.4; ctx.strokeStyle='#fff'; ctx.stroke(); }
+  // 点开项目:从用户属地到项目的大圆弧 + 朝项目方向流动的箭头
+  function drawFlow(now){
+    if(!userLL||!flowTarget) return;
+    if(!userCart) userCart=ll2c(userLL);
+    var tc=ll2c(flowTarget);
+    if(!frontC(userCart)&&!frontC(tc)) return;
+    var interp=d3.geoInterpolate(userLL,flowTarget), i, N=70, coords=[];
+    for(i=0;i<=N;i++) coords.push(interp(i/N));
+    ctx.lineCap='round';
+    ctx.beginPath(); pathC({type:'LineString',coordinates:coords}); ctx.lineWidth=5; ctx.strokeStyle=T.flowGlow; ctx.stroke();
+    ctx.beginPath(); pathC({type:'LineString',coordinates:coords}); ctx.lineWidth=1.6; ctx.strokeStyle=T.flow; ctx.stroke();
+    var K=9, base=(now/900)%1;
+    for(i=0;i<K;i++){ var t=((i/K)+base)%1, pp=interp(t);
+      if(!frontC(ll2c(pp))) continue;
+      var s=proj(pp), s2=proj(interp(Math.min(1,t+0.02)));
+      var ang=Math.atan2(s2[1]-s[1],s2[0]-s[0]);
+      ctx.save(); ctx.translate(s[0],s[1]); ctx.rotate(ang);
+      ctx.beginPath(); ctx.moveTo(5.5,0); ctx.lineTo(-4,-3.4); ctx.lineTo(-4,3.4); ctx.closePath();
+      ctx.fillStyle=T.flowArrow; ctx.fill(); ctx.restore(); }
+    if(frontC(tc)){ var tp=proj(flowTarget), ph=(now/1000)%1;
+      ctx.beginPath(); ctx.arc(tp[0],tp[1],4+ph*11,0,2*PI); ctx.lineWidth=1.6;
+      ctx.strokeStyle='rgba('+T.meRing+','+(0.6*(1-ph)).toFixed(3)+')'; ctx.stroke(); }
+    ctx.lineCap='butt'; }
   function draw(){
-    var t0=performance.now();
+    var t0=performance.now(), nowMs=Date.now();
     var sc=proj.scale(); updateRC();
     // 太空底色 + 地球缘光,让球从背景上"浮"出来
     ctx.fillStyle=T.space; ctx.fillRect(0,0,W,H);
@@ -883,8 +933,8 @@
         ctx.font='500 '+afs+'px "PingFang SC","Microsoft YaHei",sans-serif';
         ctx.lineWidth=3; ctx.strokeStyle=T.halo; ctx.strokeText(atxt,ap[0],ap[1]);
         ctx.fillStyle=T.label; ctx.fillText(atxt,ap[0],ap[1]); } }
-    // 点位:远景层级隐藏;之后聚合簇 或 散点
-    var m,mk,k,g;
+    // 点位:远景层级隐藏;之后聚合簇 或 散点。立体珠在降档(perfTier≥1)时退回扁平圆省算力
+    var m,mk,k,g, lite=perfTier>=1;
     if(!showMarkers){
       for(m=0;m<markers.length;m++) markers[m].sx=null;
       for(k in groups) groups[k].sx=null;
@@ -899,14 +949,11 @@
         var pt=proj(g.ll); g.sx=pt[0]; g.sy=pt[1]; g.count=cnt; g.single=(cnt===1)?single:null;
         var dom='opencall', dv=0; for(var c2 in cc){ if(cc[c2]>dv){ dv=cc[c2]; dom=c2; } }
         if(cnt===1){ g.r=(W<=720)?6:4;
-          ctx.beginPath(); ctx.arc(pt[0],pt[1],g.r,0,2*PI);
-          ctx.fillStyle=CAT[single.o.category]?CAT[single.o.category].color:'#C0392B'; ctx.fill();
-          ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke(); }
+          bead3d(pt[0],pt[1],g.r,CAT[single.o.category]?CAT[single.o.category].color:'#C0392B',lite); }
         else { var r=((W<=720)?10:8)+Math.min(9,Math.sqrt(cnt)*1.7); g.r=r;
-          ctx.beginPath(); ctx.arc(pt[0],pt[1],r,0,2*PI);
-          ctx.fillStyle=CAT[dom].color; ctx.fill();
-          ctx.lineWidth=1.5; ctx.strokeStyle=T.mstroke; ctx.stroke();
+          bead3d(pt[0],pt[1],r,CAT[dom].color,lite);
           ctx.font='600 '+(cnt>=100?10:11)+'px "Inter",-apple-system,sans-serif';
+          ctx.textAlign='center'; ctx.textBaseline='middle';
           ctx.fillStyle='#fff'; ctx.fillText(String(cnt),pt[0],pt[1]); }
         if(g.key===focusKey){ ctx.beginPath(); ctx.arc(pt[0],pt[1],g.r+4,0,2*PI);
           ctx.lineWidth=2; ctx.strokeStyle=CAT[dom].color; ctx.stroke(); } }
@@ -916,12 +963,13 @@
       for(m=0;m<markers.length;m++){ mk=markers[m];
         if(!matchFilter(mk.o) || !frontC(mk.cart)){ mk.sx=null; continue; }
         var pt2=proj(mk.ll); mk.sx=pt2[0]; mk.sy=pt2[1];
-        ctx.beginPath(); ctx.arc(pt2[0],pt2[1],mr,0,2*PI);
-        ctx.fillStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.fill();
-        ctx.lineWidth=1.2; ctx.strokeStyle=T.mstroke; ctx.stroke();
-        if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1],9,0,2*PI);
+        bead3d(pt2[0],pt2[1],mr,CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B',lite);
+        if(mk===focusMk){ ctx.beginPath(); ctx.arc(pt2[0],pt2[1],mr+5,0,2*PI);
           ctx.lineWidth=2; ctx.strokeStyle=CAT[mk.o.category]?CAT[mk.o.category].color:'#C0392B'; ctx.stroke(); } }
     }
+    // 流动线(用户→项目)在点位之上、用户光标最顶层
+    if(flowTarget) drawFlow(nowMs);
+    drawBeacon(nowMs);
     // FPS 守卫:近30帧均值超预算自动降档
     var cost=performance.now()-t0; costArr.push(cost);
     if(costArr.length>=30){ var sum=0; for(var q2=0;q2<costArr.length;q2++) sum+=costArr[q2];
@@ -959,6 +1007,9 @@
         lastSpin=now; render=true; } }
     else { lastSpin=now;
       if(!spinning&&!dragging&&autoResumeAt&&now>autoResumeAt&&!drilledCountry&&targetScale==null){ spinning=true; autoResumeAt=0; } }
+    // 立体光标脉冲/流动箭头:未被全屏浮层遮挡时以 ~30fps 独立驱动(不依赖自转)
+    if(!render && !coveredLayer() && now-lastAnimFrame>=33){
+      if(flowTarget || (userLL && frontC(userCart||(userCart=ll2c(userLL))))){ lastAnimFrame=now; render=true; } }
     lastFrame=now;
     if(render) draw();
   })();
@@ -972,7 +1023,8 @@
     pointers[e.pointerId]=[e.clientX,e.clientY];
     spinning=false; inertiaOn=false;
     var n=pCount();
-    if(n===1){ dragging=true; moved=false; lastX=e.clientX; lastY=e.clientY; lastT=performance.now(); velX=velY=0; }
+    if(n===1){ dragging=true; moved=false; lastX=e.clientX; lastY=e.clientY; lastT=performance.now(); velX=velY=0;
+      canvas.style.cursor='var(--cur-fist)'; }   // 抓握拳(macOS grabbing)
     else if(n===2){ dragging=false; var ks=Object.keys(pointers), a=pointers[ks[0]], b=pointers[ks[1]];
       pinch={d0:Math.max(20,Math.hypot(a[0]-b[0],a[1]-b[1])), s0:proj.scale()}; }
     e.preventDefault();
@@ -995,6 +1047,7 @@
   });
   function endPointer(e){ delete pointers[e.pointerId];
     if(pCount()<2) pinch=null;
+    canvas.style.cursor='var(--cur-arrow)';
     if(pCount()===0&&dragging){ dragging=false;
       if((performance.now()-lastT)<120 && (Math.abs(velX)+Math.abs(velY))>0.03) inertiaOn=true;
       else resumeSoon(); } }
@@ -1015,10 +1068,10 @@
       for(m=0;m<markers.length;m++){ mk=markers[m]; if(mk.sx==null) continue;
         var dx2=mk.sx-e.clientX, dy2=mk.sy-e.clientY, dd2=dx2*dx2+dy2*dy2;
         if(dd2<bd2){ bd2=dd2; best=mk; kind='m'; } } }
-    if(best){ canvas.style.cursor='pointer';
+    if(best){ canvas.style.cursor='var(--cur-hand)';   // 命中项目=macOS 指点手(非系统 pointer)
       if(best!==hoverObj){ if(kind==='c'){ if(best.count===1) fillTip(best.single); else fillTipCluster(best); } else fillTip(best); }
       moveTip(e); tipEl.style.display='block'; }
-    else { canvas.style.cursor='grab'; tipEl.style.display='none'; }
+    else { canvas.style.cursor='var(--cur-arrow)'; tipEl.style.display='none'; }
     hoverObj=best; hoverKind=kind;
   }
   canvas.addEventListener('click',function(e){
@@ -1247,6 +1300,11 @@
     if(y+th+10>window.innerHeight) y=Math.max(8, e.clientY-th-16);
     tipEl.style.left=x+'px'; tipEl.style.top=y+'px'; }
   function showDetail(o){ var c=CAT[o.category]||CAT.opencall;
+    // 流动线:从用户属地飞向本项目(仅当已知用户位置且项目已落点)
+    flowTarget=null;
+    if(userLL){ for(var fm=0;fm<markers.length;fm++){ if(markers[fm].o.id===o.id){ flowTarget=markers[fm].ll; break; } }
+      if(!flowTarget){ var fl=D.locate(o); if(fl) flowTarget=fl.ll; }
+      if(flowTarget) needDraw=true; }
     document.getElementById('d-cat').textContent=catName(o.category); document.getElementById('d-cat').style.background=c.color;
     document.getElementById('d-trust').textContent=trustLabel(o);
     document.getElementById('d-title').textContent=tt(o)||'(无标题)';
@@ -1301,10 +1359,20 @@
     trackJ('view',{id:o.id,cat:o.category});
     var box=document.getElementById('detail'); box._repaintFav=favPaint; box._cur=o;
     box.style.display='block'; box.scrollTop=0; ensureGuard(); }
-  // 前往官网/申请/原文的外链点击 → outbound 事件(作品的站内查看不算)
-  document.getElementById('d-go').addEventListener('click',function(){
+  // 注册墙(v0.91.0 恢复,地球迁移时丢失):未登录用户点「前往官网」前 FREE_VISITS 次免费,之后弹注册。
+  //   高意愿时机(要去官网了)转化;登录后不拦;注册/登录成功清零计数。
+  var FREE_VISITS=3;
+  function gateHit(){
+    var n=0; try{ n=parseInt(localStorage.getItem('ap_free')||'0',10)||0; }catch(e){}
+    if(n>=FREE_VISITS) return true;   // 免费额度用尽 → 本次拦截
+    try{ localStorage.setItem('ap_free',String(n+1)); }catch(e){}
+    return false; }
+  // 前往官网/申请/原文的外链点击 → 注册墙 + outbound 事件(作品的站内查看不算)
+  document.getElementById('d-go').addEventListener('click',function(ev){
     var o=document.getElementById('detail')._cur;
-    if(o&&/^https?:/i.test(this.href||'')) trackJ('outbound',{id:o.id,cat:o.category}); });
+    if(o&&/^https?:/i.test(this.href||'')){
+      if(!meUser&&gateHit()){ ev.preventDefault(); openAuth('register','gate'); return; }
+      trackJ('outbound',{id:o.id,cat:o.category}); } });
 
   // —— 真实功能接线 ——
   var toastTimer=null;
@@ -1323,6 +1391,7 @@
       authCode:'邮箱验证码(6 位)',authSend:'发验证码',authGoL:'登 录',authGoR:'注 册',
       authSwapR:'没有账号?注册 →',authSwapL:'已有账号?登录 →',authNl:'订阅每周艺术机会周报',
       authAgree:'我已阅读并同意',authTerms:'《用户协议》',authPrivacy:'《隐私政策》',
+      gateNote:'再多看几个机会前,先花一分钟注册吧 —— 永久免费,还能云端收藏、换设备不丢记录。',
       errAgree:'请先阅读并勾选同意用户协议与隐私政策',
       authBadEmail:'邮箱格式不对',authBadPw:'密码至少 6 位',authNet:'网络错误,稍后再试',
       pubTitle:'发布',pubNote:'选择要发布的内容类型;内容经 AI 审核,干净即发、可疑转人工,发布后标注「用户投稿」。',
@@ -1387,6 +1456,7 @@
       authCode:'Email code (6 digits)',authSend:'Send code',authGoL:'Sign in',authGoR:'Sign up',
       authSwapR:'No account? Sign up →',authSwapL:'Have an account? Sign in →',authNl:'Subscribe to the weekly digest',
       authAgree:'I have read and agree to the ',authTerms:'Terms',authPrivacy:'& Privacy Policy',
+      gateNote:'Enjoying ARTPORTAL? Sign up (free, 1 min) to keep exploring — plus cloud-synced saves across devices.',
       errAgree:'Please read and accept the Terms and Privacy Policy first',
       authBadEmail:'Invalid email',authBadPw:'Password needs 6+ chars',authNet:'Network error, try again',
       pubTitle:'Post',pubNote:'Pick a content type. Posts go through AI review; clean ones publish instantly, flagged ones go to manual review.',
@@ -1727,10 +1797,11 @@
     (function next(){ if(i>=files.length||out.length>=limit){ cb(out); return; }
       shrinkImg(files[i++],max,q,function(d){ if(d) out.push(d); next(); }); })(); }
   // —— 登录/注册(邮箱验证码,同老站链路) ——
-  function openAuth(mode){
+  function openAuth(mode,gate){
     var reg=(mode==='register'), em='';
     try{ em=localStorage.getItem('ap_email')||''; }catch(e){}
     var m=modal('<h3>'+L(reg?'authTitleR':'authTitleL')+'</h3>'+
+      (gate?('<p class="note">'+L('gateNote')+'</p>'):'')+
       '<input id="aEmail" type="email" placeholder="'+L('authEmail')+'" value="'+esc(em)+'">'+
       '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+
       (reg?('<div class="mrow"><input id="aCode" maxlength="6" placeholder="'+L('authCode')+'">'+
@@ -1766,7 +1837,7 @@
          newsletter:reg&&!!m.querySelector('#aNl').checked})
       .then(function(r){
         if(!r.ok){ b.disabled=false; err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
-        try{ localStorage.setItem('ap_email',email); }catch(e){}
+        try{ localStorage.setItem('ap_email',email); localStorage.removeItem('ap_free'); }catch(e){}
         location.reload(); })
       .catch(function(){ b.disabled=false; err.textContent=L('authNet'); });
     }); }
@@ -2448,7 +2519,7 @@
     if(document.getElementById('wkpage').style.display==='block'){ closeWeekly(); return; }
     hideProfile(); });
   document.getElementById('dClose').addEventListener('click',function(){
-    document.getElementById('detail').style.display='none'; releaseGuard(); });
+    document.getElementById('detail').style.display='none'; flowTarget=null; needDraw=true; releaseGuard(); });
   // —— 浏览器返回/手机侧滑在任意层级生效:单守卫历史条目,back 逐层关闭,关完才真正离站 ——
   var apGuard=false, popSuppress=0;
   function layerOpen(){
@@ -2469,7 +2540,7 @@
     var wv=document.getElementById('wview');
     if(wv.style.display==='flex'){ wv.style.display='none'; wv.innerHTML=''; wvCur=null; return true; }
     var det=document.getElementById('detail');
-    if(det.style.display==='block'){ det.style.display='none'; return true; }
+    if(det.style.display==='block'){ det.style.display='none'; flowTarget=null; needDraw=true; return true; }
     if(document.getElementById('propanel').style.display==='flex'){ hideProfile();
       d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); return true; }
     var wkp=document.getElementById('wkpage');
@@ -2508,12 +2579,21 @@
     var d=e.target.closest('.uq-i'); if(!d) return;
     this.style.display='none'; document.getElementById('uq').value='';
     openProfile(d.getAttribute('data-id')); });
+  // 用户属地→坐标(复用 D.locate 的 ip_region 解析:境内省会/城市、境外国家中心)
+  function setUserLoc(region){ if(!region||userLL) return;
+    var uloc=D.locate({ip_region:region});
+    if(uloc){ userLL=uloc.ll; userCart=ll2c(userLL); needDraw=true; } }
+  window.__setMeLoc=function(ll){ userLL=ll; userCart=ll2c(ll); needDraw=true; };   // 调试/手动定位
   fetch('/api/auth/me',{credentials:'same-origin'}).then(function(r){ return r.json(); }).then(function(j){
     if(j&&j.user){ meUser=j.user; setLoginBtn(); pollNtf(); setInterval(pollNtf,60000);
       favKeys=new Set(j.user.favorites||[]);   // 收藏云端为准
+      setUserLoc(j.user.ip_region);
       var det=document.getElementById('detail');
       if(det.style.display==='block'&&det._repaintFav) det._repaintFav(); }
   }).catch(function(){});
+  // 匿名访客(或登录用户缺属地)兜底:粗属地定位,与全站 IP 属地同口径
+  fetch('/api/geo',{credentials:'same-origin'}).then(function(r){ return r.json(); })
+    .then(function(j){ if(j&&j.ip_region) setUserLoc(j.ip_region); }).catch(function(){});
   // —— 深链(#/w/期号 直开周刊;#/o/机会id 等数据到达后弹详情;仅进站时解析一次,
   //    站内导航走单守卫历史体系,不写 hash ——
   var pendingOid=null;

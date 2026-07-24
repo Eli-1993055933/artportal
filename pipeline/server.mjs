@@ -937,6 +937,10 @@ async function handleAuthApi(req, res, u) {
         })) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
+    // 访客属地(v0.91.0):供地球"你在这里"立体光标定位;粗到省/国,与全站 IP 属地同口径,不含具体 IP
+    if (p === "/api/geo" && m === "GET") {
+      return json({ code: 200, body: { ip_region: ipRegion(ip) } });
+    }
     // —— 反馈/求助(v0.83.0):免登录可提(登录不上的用户也要能求助);IP 限频;进 admin「反馈信箱」 ——
     if (p === "/api/feedback" && m === "POST") {
       if (fbLimited(ip)) return json({ code: 429, body: { error: "今天反馈太多了,明天再来" } });
@@ -1900,7 +1904,7 @@ createServer(async (req, res) => {
     req.pipe(pr);
     return;
   }
-  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname.startsWith("/api/summary") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/feedback" || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
+  if (u.pathname.startsWith("/api/auth/") || u.pathname === "/api/track" || u.pathname.startsWith("/api/favorites") || u.pathname.startsWith("/api/summary") || u.pathname === "/api/submit" || u.pathname === "/api/follow" || u.pathname === "/api/block" || u.pathname === "/api/works" || u.pathname.startsWith("/api/works/") || u.pathname === "/api/comments" || u.pathname.startsWith("/api/comments/") || u.pathname === "/api/feedback" || u.pathname === "/api/geo" || u.pathname === "/api/notifications" || u.pathname.startsWith("/api/notifications/") || u.pathname.startsWith("/api/admin/") || u.pathname.startsWith("/api/users/")) {
     return handleAuthApi(req, res, u);
   }
   // Agent 打卡(v0.72.0 巡视台):本机管道脚本干完活上报;AGENT_KEY 鉴权(sha256 恒时比较)
