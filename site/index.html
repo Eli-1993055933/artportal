@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.88.0" />
+<meta name="app-version" content="0.88.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -635,11 +635,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.88.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.88.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.88.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.88.0"></script>
-<script src="js/globe-data.js?v=0.88.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.88.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.88.1"></script>
+<script src="js/globe-data.js?v=0.88.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -650,7 +650,7 @@
   var SPHERE={type:'Sphere'};
   var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null;
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
-  var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=20, adminSeq=0, drilledAdmName=null;
+  var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=100, adminSeq=0, drilledAdmName=null;
   // 分类索引多选(v0.88.0 用户要求):空集合=全部;可同时点亮多个分类
   var filterCats=new Set(), query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
   // 筛选(老站体系移植):门类单选 + 快捷开关 + 地区多选 + 机构类型多选 + 来源开关 + 抽屉排序
@@ -1030,7 +1030,7 @@
     var s=p2.scale(); return (isFinite(s)&&s>0)?Math.min(s,scale0*120):null; }
   function fitFly(feat,cen,fallback){
     var ts=(feat&&fitScaleFor(feat,cen))||fallback;
-    maxK=Math.max(20, ts/scale0*2.2);
+    maxK=Math.max(100, ts/scale0*2.2);   // 下钻也绝不把上限压到 100× 以下
     flyTo(cen,ts); }
   // 视野中心用边界盒中点(DataV properties.center 是省会/驻地坐标,偏一角会把区域挤出屏)
   function boundsCenter(feat){ var b=d3.geoBounds(feat), lo=b[0][0], hi=b[1][0];
@@ -1087,7 +1087,7 @@
       drillLevel=1; drilledAdmName=null;   // 他国二级 → 退回国家视图(区划保留)
       if(drilledFeat) fitFly(drilledFeat, boundsCenter(drilledFeat), scale0*2.9);
       needDraw=true; return; }
-    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; maxK=20;
+    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; maxK=100;
     document.getElementById('back').style.display='none';
     spinning=false; inertiaOn=false;
     var r0=proj.rotate(), s0=proj.scale();
@@ -2433,12 +2433,15 @@
     (arr||[]).forEach(function(o){ if(!o||!o.id||seenIds[o.id]) return;
       var loc=D.locate(o); if(!loc) return; seenIds[o.id]=1;
       var cat=CAT[o.category]?o.category:'opencall';
-      var jx=(Math.random()-0.5)*1.1, jy=(Math.random()-0.5)*1.1;
-      var mll=[loc.ll[0]+jx,loc.ll[1]+jy];
-      var mk={o:o,ll:mll,cart:ll2c(mll),prec:loc.prec,sx:null,sy:null,idx:markers.length};
-      markers.push(mk);
       var key=o.city_zh||(o.category==='news'&&o.source)||(o.ip_region&&(o.ip_region.city||o.ip_region.disp))||o.country_zh||'其他';   // 资讯按信源聚簇,作品按属地聚簇
       var g=groups[key]||(groups[key]={key:key,ll:loc.ll,cart:ll2c(loc.ll),items:[],sx:null,sy:null,r:0,count:0,single:null});
+      // 簇内落点:葵花螺旋(黄金角)确定性排布,替代随机抖动——保证任意两点最小间距,
+      // 深度放大(100×)后必然彼此分开可点;随机抖动会小概率撞位,放多大都分不开。
+      var gi=g.items.length, ga=gi*2.39996, gr=0.12*Math.sqrt(gi);
+      var latC=Math.max(0.3,Math.cos(loc.ll[1]*PI/180));   // 高纬经度收缩补偿,横向间距不塌
+      var mll=[loc.ll[0]+gr*Math.cos(ga)/latC, loc.ll[1]+gr*Math.sin(ga)];
+      var mk={o:o,ll:mll,cart:ll2c(mll),prec:loc.prec,sx:null,sy:null,idx:markers.length};
+      markers.push(mk);
       g.items.push(mk);
       catCounts[cat]=(catCounts[cat]||0)+1; placedTotal++; added++; });
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
