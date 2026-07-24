@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.83.1" />
+<meta name="app-version" content="0.84.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -559,12 +559,13 @@
 <button id="fbBtn" type="button">✉ 反馈/求助</button>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
+  <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.83.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.84.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.83.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.83.1"></script>
-<script src="js/globe-data.js?v=0.83.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.84.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.84.0"></script>
+<script src="js/globe-data.js?v=0.84.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1145,6 +1146,8 @@
       authTitleL:'登录 ARTPORTAL',authTitleR:'注册 ARTPORTAL',authEmail:'邮箱',authPw:'密码(至少 6 位)',
       authCode:'邮箱验证码(6 位)',authSend:'发验证码',authGoL:'登 录',authGoR:'注 册',
       authSwapR:'没有账号?注册 →',authSwapL:'已有账号?登录 →',authNl:'订阅每周艺术机会周报',
+      authAgree:'我已阅读并同意',authTerms:'《用户协议》',authPrivacy:'《隐私政策》',
+      errAgree:'请先阅读并勾选同意用户协议与隐私政策',
       authBadEmail:'邮箱格式不对',authBadPw:'密码至少 6 位',authNet:'网络错误,稍后再试',
       pubTitle:'发布',pubNote:'选择要发布的内容类型;内容经 AI 审核,干净即发、可疑转人工,发布后标注「用户投稿」。',
       pubOpp:'机会',pubOppD:'展览征集 · 驻留 · 奖项',pubJob:'招聘',pubJobD:'发布艺术类岗位',
@@ -1201,6 +1204,8 @@
       authTitleL:'Sign in to ARTPORTAL',authTitleR:'Join ARTPORTAL',authEmail:'Email',authPw:'Password (6+ chars)',
       authCode:'Email code (6 digits)',authSend:'Send code',authGoL:'Sign in',authGoR:'Sign up',
       authSwapR:'No account? Sign up →',authSwapL:'Have an account? Sign in →',authNl:'Subscribe to the weekly digest',
+      authAgree:'I have read and agree to the ',authTerms:'Terms',authPrivacy:'& Privacy Policy',
+      errAgree:'Please read and accept the Terms and Privacy Policy first',
       authBadEmail:'Invalid email',authBadPw:'Password needs 6+ chars',authNet:'Network error, try again',
       pubTitle:'Post',pubNote:'Pick a content type. Posts go through AI review; clean ones publish instantly, flagged ones go to manual review.',
       pubOpp:'Opportunity',pubOppD:'Open call · residency · award',pubJob:'Job',pubJobD:'Post an art-sector job',
@@ -1486,7 +1491,10 @@
       '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+
       (reg?('<div class="mrow"><input id="aCode" maxlength="6" placeholder="'+L('authCode')+'">'+
         '<button type="button" class="pp-btn" id="aSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>'+
-        '<label class="chk"><input type="checkbox" id="aNl">'+L('authNl')+'</label>'):'')+
+        '<label class="chk"><input type="checkbox" id="aNl">'+L('authNl')+'</label>'+
+        '<label class="chk"><input type="checkbox" id="aTos">'+L('authAgree')+
+          '<a href="/terms.html" target="_blank" rel="noopener">'+L('authTerms')+'</a>'+
+          '<a href="/privacy.html" target="_blank" rel="noopener">'+L('authPrivacy')+'</a></label>'):'')+
       '<div class="merr" id="aErr"></div>'+
       '<button class="mgo" id="aGo" type="button">'+L(reg?'authGoR':'authGoL')+'</button>'+
       '<label class="chk" style="cursor:pointer;justify-content:center" id="aSwap">'+L(reg?'authSwapL':'authSwapR')+'</label>');
@@ -1507,6 +1515,7 @@
       var err=m.querySelector('#aErr'), b=this;
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent=L('authBadEmail'); return; }
       if(pw.length<6){ err.textContent=L('authBadPw'); return; }
+      if(reg&&!m.querySelector('#aTos').checked){ err.textContent=L('errAgree'); return; }
       b.disabled=true;
       postJ(reg?'/api/auth/register':'/api/auth/login',
         {email:email,password:pw,code:reg?m.querySelector('#aCode').value.trim():'',
