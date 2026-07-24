@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.87.0" />
+<meta name="app-version" content="0.88.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -553,6 +553,17 @@
   .gd-skip{display:block;margin:12px auto 2px;border:0;background:none;color:var(--muted);
     font-size:13px;cursor:pointer;padding:4px 10px}
   .gd-skip:hover{color:var(--sub)}
+  /* 标签行展开(v0.88.0):⌄ 展开成多行全览,⌃ 收回横滑单行 */
+  .tagrow.wrapopen{flex-wrap:wrap;overflow-x:visible}
+  .tgc.tgx{font-weight:700;padding:4px 8px;color:var(--muted)}
+  .tgc.tgx:hover{color:var(--ink)}
+  /* 左栏三段拖拽调高(v0.88.0,桌面):把手在卡片之间,双击复位 */
+  .pdiv{height:11px;margin:-4px 0;display:flex;align-items:center;justify-content:center;
+    cursor:ns-resize;flex:0 0 auto;touch-action:none;z-index:1}
+  .pdiv i{width:38px;height:4px;border-radius:2px;background:var(--line);transition:background .15s}
+  .pdiv:hover i,.pdiv.on i{background:#b9b3a6}
+  #cardStats,#cardLegend{min-height:0}
+  @media (max-width:720px){ .pdiv{display:none} }
 </style>
 </head>
 <body>
@@ -580,16 +591,18 @@
 <button id="btnPanel">◂ 收起面板</button>
 <div id="panel">
   <div id="sheetbar"><i></i></div>
-  <div class="card">
+  <div class="card" id="cardStats">
     <div class="hd"><span id="libT">实时索引库</span><span class="badge"><i></i>ACTIVE</span></div>
     <div class="bignum" id="total">0<small>项全球活跃索引</small></div>
     <div class="tip" id="libTip">拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。</div>
   </div>
+  <div class="pdiv" data-rz="cardStats" title="拖动调整高度,双击复位"><i></i></div>
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
-  <div class="card legend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div>
+  <div class="card legend" id="cardLegend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div>
     <div class="tagrow" id="tagRow" data-tagrow></div>
     <div class="tagrow" id="regRow" data-regrow></div>
     <div class="tagrow" id="fltRow" data-fltrow></div></div>
+  <div class="pdiv" data-rz="cardLegend" title="拖动调整高度,双击复位"><i></i></div>
   <div class="card listcard"><div class="lc-head"><span id="lcCount">结果列表</span><span class="lc-sort" id="lcSort"></span></div><div class="lc-scroll" id="lcList"></div></div>
 </div>
 <div id="chpanel"><div class="inner" id="chInner"></div></div>
@@ -622,11 +635,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.87.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.88.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.87.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.87.0"></script>
-<script src="js/globe-data.js?v=0.87.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.88.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.88.0"></script>
+<script src="js/globe-data.js?v=0.88.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -637,8 +650,9 @@
   var SPHERE={type:'Sphere'};
   var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null;
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
-  var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=9, adminSeq=0, drilledAdmName=null;
-  var filterCat='all', query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
+  var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=20, adminSeq=0, drilledAdmName=null;
+  // 分类索引多选(v0.88.0 用户要求):空集合=全部;可同时点亮多个分类
+  var filterCats=new Set(), query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
   // 筛选(老站体系移植):门类单选 + 快捷开关 + 地区多选 + 机构类型多选 + 来源开关 + 抽屉排序
   var tagSel='', fFree=false, fStipend=false, fHousing=false, fTravel=false, fVerified=false, fHidePast=false, sortBy='deadline';
   var fRegs={}, fOrgOff=false, fOrgInd=false, fOrgCom=false, fSrcUser=true, fSrcAI=true;
@@ -692,7 +706,7 @@
     if(!fSrcAI && o._via==='search') return false;
     return true; }
   function matchFilter(o){
-    if(filterCat!=='all' && o.category!==filterCat) return false;
+    if(filterCats.size && !filterCats.has(o.category)) return false;
     if(!extraMatch(o)) return false;
     if(query){ var s=(o.title_zh||'')+(o.org_zh||'')+(o.city_zh||'')+(o.country_zh||'')+(o.summary_zh||'');
       if(s.toLowerCase().indexOf(query.toLowerCase())<0) return false; }
@@ -1016,7 +1030,7 @@
     var s=p2.scale(); return (isFinite(s)&&s>0)?Math.min(s,scale0*120):null; }
   function fitFly(feat,cen,fallback){
     var ts=(feat&&fitScaleFor(feat,cen))||fallback;
-    maxK=Math.max(9, ts/scale0*1.6);
+    maxK=Math.max(20, ts/scale0*2.2);
     flyTo(cen,ts); }
   // 视野中心用边界盒中点(DataV properties.center 是省会/驻地坐标,偏一角会把区域挤出屏)
   function boundsCenter(feat){ var b=d3.geoBounds(feat), lo=b[0][0], hi=b[1][0];
@@ -1073,7 +1087,7 @@
       drillLevel=1; drilledAdmName=null;   // 他国二级 → 退回国家视图(区划保留)
       if(drilledFeat) fitFly(drilledFeat, boundsCenter(drilledFeat), scale0*2.9);
       needDraw=true; return; }
-    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; maxK=9;
+    drilledCountry=null; drilledFeat=null; drillLevel=0; adminFeats=[]; adminLabels=[]; drilledProvAdcode=null; drilledAdmName=null; maxK=20;
     document.getElementById('back').style.display='none';
     spinning=false; inertiaOn=false;
     var r0=proj.rotate(), s0=proj.scale();
@@ -1397,10 +1411,12 @@
     if(ch==='globe'){ hideChPanel(); return; }
     showChPanel(ch); });
   function hideChPanel(){ curCh=null; document.getElementById('chpanel').style.display='none'; releaseGuard(); }
-  // 浮层筛选:与全局同一份状态;机会浮层额外吃"机会四类"chips(=全局 filterCat)
+  // 浮层筛选:与全局同一份状态;机会浮层额外吃"机会四类"chips(=全局 filterCats 多选集合)
+  var OPP_CATS=['opencall','residency','award','workshop'];
   function chMatch(o,ch){
-    if(ch==='opportunities'&&filterCat!=='all'&&
-       ['opencall','residency','award','workshop'].indexOf(filterCat)>=0&&o.category!==filterCat) return false;
+    if(ch==='opportunities'){
+      var sel=OPP_CATS.filter(function(k){ return filterCats.has(k); });
+      if(sel.length&&sel.indexOf(o.category)<0) return false; }
     return extraMatch(o); }
   // 老站式卡片(封面 16:9 + 分类角标 + 标题两行 + 元信息)
   function chCard(o,i){ var c=CAT[o.category]||CAT.opencall, cov=o.cover?esc(o.cover):'';
@@ -1418,9 +1434,9 @@
     var cats='';
     if(ch==='opportunities'){
       var ks=['all','opencall','residency','award','workshop'];
-      var isOpp=['opencall','residency','award','workshop'].indexOf(filterCat)>=0;
+      var nOpp=OPP_CATS.filter(function(k){ return filterCats.has(k); }).length;
       cats='<div class="tagrow chflt" id="chCats">'+ks.map(function(k){
-        var on=(k==='all')?!isOpp:(filterCat===k);
+        var on=(k==='all')?!nOpp:filterCats.has(k);
         return '<span class="tgc'+(on?' on':'')+'" data-cc="'+k+'">'+(k==='all'?L('allCat'):catName(k))+'</span>'; }).join('')+'</div>'; }
     return cats+'<div class="tagrow" data-tagrow></div><div class="tagrow" data-regrow></div><div class="tagrow" data-fltrow></div>'; }
   function showChPanel(ch){
@@ -1432,7 +1448,9 @@
     function bindBar(){
       renderTagRow(); renderRegRow(); renderFltRow();
       d3.selectAll('#chCats .tgc').on('click',function(){
-        filterCat=this.getAttribute('data-cc');
+        var cc=this.getAttribute('data-cc');
+        if(cc==='all') OPP_CATS.forEach(function(k){ filterCats.delete(k); });   // 「全部」=清空机会四类
+        else { if(filterCats.has(cc)) filterCats.delete(cc); else filterCats.add(cc); }
         syncLegend(); renderDrawer(); needDraw=true; showChPanel(ch); }); }
     if(ch==='works'){
       var loadW=chCache.works?Promise.resolve(chCache.works):fetch('/api/works/feed')
@@ -1521,6 +1539,32 @@
     sheet.addEventListener('pointercancel',function(){ drag=false; sheetDrag=false; needDraw=true; });
     window.addEventListener('resize',function(){
       if(!isMob()){ sheet.style.transform=''; sheet.style.transition=''; curTy=null; } });
+  })();
+  // —— 左栏三段拖拽调高(v0.88.0,桌面):拖把手改上方卡片高度,localStorage 持久,双击复位 ——
+  (function(){
+    var store={}; try{ store=JSON.parse(localStorage.getItem('ap_panel_sz')||'{}'); }catch(e){}
+    function applySz(id,h){ var el=document.getElementById(id); if(!el) return;
+      if(h){ el.style.height=h+'px'; el.style.overflowY='auto'; el.style.flex='0 0 auto'; }
+      else { el.style.height=''; el.style.overflowY=''; el.style.flex=''; } }
+    function saveSz(){ try{ localStorage.setItem('ap_panel_sz',JSON.stringify(store)); }catch(e){} }
+    if(window.innerWidth>720) Object.keys(store).forEach(function(k){ applySz(k,store[k]); });
+    [].forEach.call(document.querySelectorAll('.pdiv'),function(dv){
+      var tgt=dv.getAttribute('data-rz');
+      dv.addEventListener('pointerdown',function(e){
+        if(window.innerWidth<=720) return;
+        var el=document.getElementById(tgt); if(!el) return;
+        var y0=e.clientY, h0=el.getBoundingClientRect().height;
+        dv.classList.add('on');
+        if(dv.setPointerCapture){ try{ dv.setPointerCapture(e.pointerId); }catch(err){} }
+        function mv(ev){ var h=Math.max(52,Math.min(window.innerHeight*0.7,h0+(ev.clientY-y0)));
+          applySz(tgt,h); store[tgt]=Math.round(h); }
+        function up(){ dv.classList.remove('on');
+          dv.removeEventListener('pointermove',mv); dv.removeEventListener('pointerup',up);
+          dv.removeEventListener('pointercancel',up); saveSz(); }
+        dv.addEventListener('pointermove',mv); dv.addEventListener('pointerup',up);
+        dv.addEventListener('pointercancel',up);
+        e.preventDefault(); });
+      dv.addEventListener('dblclick',function(){ delete store[tgt]; applySz(tgt,null); saveSz(); }); });
   })();
   document.getElementById('btnPub').addEventListener('click',function(){ openPub(); });
   document.getElementById('btnBell').addEventListener('click',function(){ openNtf(); });
@@ -2445,19 +2489,29 @@
     if(e.target.closest('.oc')){ focusMk=null; focusKey=null; needDraw=true; } });
   function renderLegend(){
     document.getElementById('legend').innerHTML=LEGEND_KEYS.map(function(k2){
-      return '<div class="lg-item'+((filterCat!=='all'&&filterCat!==k2)?' off':'')+'" data-cat="'+k2+'"><span class="sw" style="background:'+CAT[k2].color+'"></span><span class="nm">'+catName(k2)+'</span><span class="ct">'+(catCounts[k2]||0)+'</span></div>'; }).join('');
+      return '<div class="lg-item'+((filterCats.size&&!filterCats.has(k2))?' off':'')+'" data-cat="'+k2+'"><span class="sw" style="background:'+CAT[k2].color+'"></span><span class="nm">'+catName(k2)+'</span><span class="ct">'+(catCounts[k2]||0)+'</span></div>'; }).join('');
     d3.selectAll('#legend .lg-item').on('click',function(){ var k3=this.getAttribute('data-cat');
-      filterCat=(filterCat===k3)?'all':k3;
-      syncLegend(); renderDrawer(); needDraw=true; }); }
+      if(filterCats.has(k3)) filterCats.delete(k3); else filterCats.add(k3);   // 多选:逐个点亮/熄灭
+      if(filterCats.size===LEGEND_KEYS.length) filterCats.clear();             // 全选=不筛,回到全部
+      syncLegend(); renderDrawer(); needDraw=true;
+      if(curCh) showChPanel(curCh); }); }
   // 门类 chips(单选,再点取消)+ 快捷筛选开关(多选)——面板与频道浮层多宿主同渲染,同一份状态
+  // 行首 ⌄/⌃ 展开钮(v0.88.0):横滑单行看不全 → 展开成多行全览(三行各自记状态)
+  var rowOpen={tag:false,reg:false,flt:false};
+  function rowXBtn(kind){ return '<span class="tgc tgx" data-xr="'+kind+'" title="'+(rowOpen[kind]?'收起':'展开全部')+'">'+(rowOpen[kind]?'⌃':'⌄')+'</span>'; }
+  function rowXApply(hosts,kind){ for(var hi=0;hi<hosts.length;hi++) hosts[hi].classList.toggle('wrapopen',rowOpen[kind]); }
+  function rowXClick(el,rerender){ var k=el.getAttribute('data-xr'); if(!k) return false;
+    rowOpen[k]=!rowOpen[k]; rerender(); return true; }
   function renderTagRow(){
     var hosts=document.querySelectorAll('[data-tagrow]'); if(!hosts.length) return;
-    var html='<span class="tgc'+(tagSel===''?' on':'')+'" data-tag="">'+L('tagAll')+'</span>'+
+    var html=rowXBtn('tag')+'<span class="tgc'+(tagSel===''?' on':'')+'" data-tag="">'+L('tagAll')+'</span>'+
       D.TAGS.map(function(t){
         return '<span class="tgc'+(tagSel===t.id?' on':'')+'" data-tag="'+t.id+'">'+
           '<i style="background:hsl('+t.h+',45%,55%)"></i>'+(lang==='en'?t.en:t.zh)+'</span>'; }).join('');
     for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
+    rowXApply(hosts,'tag');
     d3.selectAll('[data-tagrow] .tgc').on('click',function(){
+      if(rowXClick(this,renderTagRow)) return;
       var tg=this.getAttribute('data-tag');
       tagSel=(tagSel===tg)?'':tg;
       renderTagRow(); renderDrawer(); needDraw=true;
@@ -2466,11 +2520,13 @@
   var REG_KEYS=['cn','hktw','asia','europe','namerica','other'];
   function renderRegRow(){
     var hosts=document.querySelectorAll('[data-regrow]'); if(!hosts.length) return;
-    var html='<span class="tgc'+(!regsActive()?' on':'')+'" data-reg="all">'+L('regAll')+'</span>'+
+    var html=rowXBtn('reg')+'<span class="tgc'+(!regsActive()?' on':'')+'" data-reg="all">'+L('regAll')+'</span>'+
       REG_KEYS.map(function(k){
         return '<span class="tgc'+(fRegs[k]?' on':'')+'" data-reg="'+k+'">'+L('reg_'+k)+'</span>'; }).join('');
     for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
+    rowXApply(hosts,'reg');
     d3.selectAll('[data-regrow] .tgc').on('click',function(){
+      if(rowXClick(this,renderRegRow)) return;
       var rk=this.getAttribute('data-reg');
       if(rk==='all') fRegs={}; else fRegs[rk]=!fRegs[rk];
       renderRegRow(); renderDrawer(); needDraw=true;
@@ -2481,10 +2537,12 @@
       ['fVerified',fVerified],['fHidePast',fHidePast],
       ['fOrgOff',fOrgOff],['fOrgInd',fOrgInd],['fOrgCom',fOrgCom],
       ['fSrcUser',fSrcUser],['fSrcAI',fSrcAI]];
-    var html=items.map(function(x){
+    var html=rowXBtn('flt')+items.map(function(x){
       return '<span class="tgc'+(x[1]?' on':'')+'" data-f="'+x[0]+'">'+L(x[0])+'</span>'; }).join('');
     for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
+    rowXApply(hosts,'flt');
     d3.selectAll('[data-fltrow] .tgc').on('click',function(){
+      if(rowXClick(this,renderFltRow)) return;
       var k4=this.getAttribute('data-f');
       if(k4==='fFree') fFree=!fFree; else if(k4==='fStipend') fStipend=!fStipend;
       else if(k4==='fHousing') fHousing=!fHousing; else if(k4==='fTravel') fTravel=!fTravel;
@@ -2520,7 +2578,7 @@
 
   // —— 面板(分类过滤统一走左侧图例) ——
   function syncLegend(){ d3.selectAll('#legend .lg-item').classed('off',function(){
-    return filterCat!=='all'&&this.getAttribute('data-cat')!==filterCat; }); }
+    return filterCats.size&&!filterCats.has(this.getAttribute('data-cat')); }); }
   document.getElementById('q').addEventListener('input',function(e){ query=e.target.value.trim(); renderDrawer(); needDraw=true; });
   window.addEventListener('resize',resize);
 
