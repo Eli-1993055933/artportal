@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.89.1" />
+<meta name="app-version" content="0.90.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -553,6 +553,57 @@
   .gd-skip{display:block;margin:12px auto 2px;border:0;background:none;color:var(--muted);
     font-size:13px;cursor:pointer;padding:4px 10px}
   .gd-skip:hover{color:var(--sub)}
+  /* ===== v0.90.0 打磨:SF 系数字字体 / macOS 光标 / 动画衔接补齐 ===== */
+  /* 数字字体:自托管 Inter latin 子集(48KB,变量字重,与 SF Pro 同源气质);中文自动落回原字体 */
+  @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;
+    src:url('assets/fonts/inter/inter-latin.woff2') format('woff2')}
+  .bignum{font-family:'Inter',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+    font-feature-settings:'tnum';letter-spacing:-.035em}
+  .lg-item .ct,.bdg,.fbar-btn .n,.cmts__n,.wv-like,#lightbox .cnt,.wv-media .cnt,
+  .oc .m,.wra-sup,.pp-tabs button{font-variant-numeric:tabular-nums}
+  .lg-item .ct,.bdg,.fbar-btn .n{font-family:'Inter',-apple-system,sans-serif}
+  /* macOS 式光标:黑箭头白描边 / 白指点手 / 抓握拳(SVG 内联,系统光标只作兜底) */
+  :root{
+    --cur-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='24' viewBox='0 0 22 24'%3E%3Cpath d='M5 1.8v15.4l4.1-3.9 2.4 5.9 3-1.3-2.4-5.6h5.5z' fill='%231b1b1d' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 2,default;
+    --cur-hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M10.1 2.6c.8 0 1.5.7 1.5 1.5v6.4l4.9 1.1c1.1.2 1.8 1.2 1.7 2.3l-.2 3.4c-.1 1.9-1.7 3.4-3.6 3.4h-3.6c-1.1 0-2.2-.5-2.9-1.4l-3-4c-.5-.7-.4-1.6.2-2.1.6-.5 1.5-.4 2 .2l1.5 1.6V4.1c0-.8.7-1.5 1.5-1.5z' fill='%23fff' stroke='%231b1b1d' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 10 3,pointer;
+    --cur-fist:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.6 10.2c0-.8.6-1.4 1.4-1.4.7 0 1.3.6 1.3 1.4v.7c0-.9.6-1.5 1.4-1.5.8 0 1.4.6 1.4 1.4v.4c0-.8.6-1.4 1.4-1.4.8 0 1.4.6 1.4 1.4v.5c0-.7.6-1.3 1.3-1.3.8 0 1.4.6 1.4 1.4v3.1c0 3-2.4 5.4-5.4 5.4h-.9c-1.8 0-3.4-.9-4.4-2.3l-2-2.9c-.5-.7-.3-1.6.3-2.1.7-.5 1.6-.3 2.1.3l.3.4v-3.5z' fill='%23fff' stroke='%231b1b1d' stroke-width='1.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 11 10,grabbing;
+  }
+  html,body,#gc{cursor:var(--cur-arrow)}
+  #gc:active{cursor:var(--cur-fist)}
+  a,button,select,label.chk,.tgc,.ch,.abtn,.pp-btn,.lg-item,.oc,.ocard,.wcard,.pp-row,.pp-wk,.uq-i,
+  .wr-bar,.wr-item,.wr-arch__row,.dcmt-toggle,.cmt__op,.cmt__nick,.cmt__ava,.fbar-btn,.mgo,
+  .modal .mx,.wv-x,#detail .x,.pro-head .x2,.gd-skip,.lc-sort,.lang,.search .ai,#fbBtn,#back,
+  #btnPanel,.pubgrid button,.cmts__send,.cmts__cancel,.wra-ref,#lightbox .nav,#lightbox .mx,
+  .wv-media .nav,.wv-media img,.wv-head img,.wv-head .nm,.wv-like,#foot a,.pp-up,.uq-i,#sheetbar{cursor:var(--cur-hand)}
+  .pdiv{cursor:ns-resize}
+  /* 动画衔接补齐:各层入场统一 Apple 弹簧/淡入;弹层增加关闭动效;步进内容滑切 */
+  @keyframes apFade{from{opacity:0}to{opacity:1}}
+  @keyframes apRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes apSlideL{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+  @keyframes apDrop{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+  @keyframes apOut{to{opacity:0;transform:scale(.96) translateY(8px)}}
+  @keyframes apFadeOut{to{opacity:0}}
+  #chpanel{animation:apFade .26s ease}
+  #chpanel .inner{animation:apRise .34s cubic-bezier(.32,.72,0,1)}
+  #propanel{animation:apSlideL .3s cubic-bezier(.32,.72,0,1)}
+  #wkpage{animation:apFade .24s ease}
+  #wkpage .wk-in{animation:apRise .34s cubic-bezier(.32,.72,0,1)}
+  #lightbox{animation:apFade .2s ease}
+  #lightbox img{animation:apPop .26s cubic-bezier(.32,.72,0,1)}
+  #wview{animation:apFade .22s ease}
+  #toast{animation:apDrop .3s cubic-bezier(.32,.72,0,1)}
+  .modal.closing{pointer-events:none}
+  .modal.closing .mbox{animation:apOut .16s ease forwards}
+  .modal.closing .scrim{animation:apFadeOut .16s ease forwards}
+  .gd.stepin{animation:apRise .26s cubic-bezier(.32,.72,0,1)}
+  /* 卡片悬停微抬(过渡已在 v0.87 打磨层声明) */
+  .ocard:hover,.wcard:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
+  html.dark .ocard:hover,html.dark .wcard:hover{box-shadow:0 8px 22px rgba(0,0,0,.3)}
+  .tgc:hover{border-color:#c6c1b4;color:var(--ink)}
+  /* 尊重系统"减弱动态效果"(Apple 无障碍惯例) */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
   /* 标签行展开(v0.88.0):⌄ 展开成多行全览,⌃ 收回横滑单行 */
   .tagrow.wrapopen{flex-wrap:wrap;overflow-x:visible}
   .tgc.tgx{font-weight:700;padding:4px 8px;color:var(--muted)}
@@ -654,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.89.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.90.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.89.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.89.1"></script>
-<script src="js/globe-data.js?v=0.89.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.90.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.90.0"></script>
+<script src="js/globe-data.js?v=0.90.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -855,7 +906,7 @@
           ctx.beginPath(); ctx.arc(pt[0],pt[1],r,0,2*PI);
           ctx.fillStyle=CAT[dom].color; ctx.fill();
           ctx.lineWidth=1.5; ctx.strokeStyle=T.mstroke; ctx.stroke();
-          ctx.font='600 '+(cnt>=100?10:11)+'px -apple-system,sans-serif';
+          ctx.font='600 '+(cnt>=100?10:11)+'px "Inter",-apple-system,sans-serif';
           ctx.fillStyle='#fff'; ctx.fillText(String(cnt),pt[0],pt[1]); }
         if(g.key===focusKey){ ctx.beginPath(); ctx.arc(pt[0],pt[1],g.r+4,0,2*PI);
           ctx.lineWidth=2; ctx.strokeStyle=CAT[dom].color; ctx.stroke(); } }
@@ -1629,7 +1680,11 @@
     m.querySelector('.mx').addEventListener('click',closeModal);
     ensureGuard();
     return m; }
-  function closeModal(){ document.getElementById('mhost').innerHTML=''; releaseGuard(); }
+  function closeModal(){
+    var h=document.getElementById('mhost'), m=h.firstChild;
+    if(!m){ releaseGuard(); return; }
+    m.classList.add('closing');   // 关闭动效(v0.90.0):缩退+淡出,170ms 后真正移除
+    setTimeout(function(){ if(h.firstChild===m) h.innerHTML=''; releaseGuard(); },170); }
   // 图片压缩:长边 ≤max、JPEG(与老站同参:封面 1280/q.78,作品 1600/q.8)
   function shrinkImg(file,max,q,cb){
     if(!file||!/^image\//.test(file.type)){ cb(null); return; }
@@ -2146,19 +2201,24 @@
     var s=GUIDE_STEPS[step], last=step===GUIDE_STEPS.length-1;
     var dots=GUIDE_STEPS.map(function(_,i){
       return '<i class="'+(i===step?'on':'')+'"></i>'; }).join('');
-    var m=modal('<div class="gd">'+
-      '<div class="gd-ico">'+s.icon+'</div>'+
+    var inner='<div class="gd-ico">'+s.icon+'</div>'+
       '<h3 class="gd-title">'+L(s.t)+'</h3>'+
       '<p class="gd-desc">'+L(s.d)+'</p>'+
       '<div class="gd-dots">'+dots+'</div>'+
       '<button class="mgo" id="gdNext" type="button">'+L(last?'gdDone':'gdNext')+'</button>'+
       '<button class="gd-skip" id="gdSkip" type="button">'+
-        (last?(step>0?L('gdPrev'):''):L('gdSkip'))+'</button></div>');
-    m.querySelector('#gdNext').addEventListener('click',function(){
-      if(last) closeModal(); else openGuide(step+1); });
+        (last?(step>0?L('gdPrev'):''):L('gdSkip'))+'</button>';
+    var host=document.getElementById('mhost'), gd=host.querySelector('.modal .gd'), m;
+    if(gd){   // 步进衔接(v0.90.0):弹层不整层重弹,内容原地轻滑切换
+      gd.innerHTML=inner;
+      gd.classList.remove('stepin'); void gd.offsetWidth; gd.classList.add('stepin');
+      m=host.firstChild; }
+    else m=modal('<div class="gd">'+inner+'</div>');
+    m.querySelector('#gdNext').onclick=function(){
+      if(last) closeModal(); else openGuide(step+1); };
     var sk=m.querySelector('#gdSkip');
-    if(sk.textContent) sk.addEventListener('click',function(){
-      if(last) openGuide(step-1); else closeModal(); }); }
+    if(sk.textContent) sk.onclick=function(){
+      if(last) openGuide(step-1); else closeModal(); }; }
   (function(){ var seen=null; try{ seen=localStorage.getItem('ap_guided'); }catch(e){}
     if(!seen) setTimeout(function(){ if(!layerOpen()) openGuide(0); },1500); })();
   // —— 反馈/求助(v0.83.0):免登录可提;桌面右下浮标 + 页脚链接两处入口 ——
@@ -2633,6 +2693,7 @@
 
   // —— 数据加载 ——
   setLoginBtn(); applyLang();   // 登录钮默认态 + 语言应用(共享 ap_lang)
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ needDraw=true; });   // Inter 就绪后重画聚合圆数字
   resize(); proj.rotate([-100,-30]);
   // 招聘/资讯归一化成球面记录:字段对齐机会口径(city→city_zh 等),category 改频道键
   function normJob(it,i){ return Object.assign({},it,{ category:'jobs',
