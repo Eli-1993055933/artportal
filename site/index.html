@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.85.0" />
+<meta name="app-version" content="0.86.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -561,12 +561,12 @@
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
-  <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.85.0</span></div>
+  <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.86.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.85.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.85.0"></script>
-<script src="js/globe-data.js?v=0.85.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.86.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.86.0"></script>
+<script src="js/globe-data.js?v=0.86.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1205,6 +1205,10 @@
       cmtSentLive:'已发布',cmtSentPending:'已提交,人工复核通过后显示',
       cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',ntLikeWork:'赞了你的作品',
       favT:'收藏',favedT:'已收藏',
+      gdT1:'转动这颗地球',gdD1:'全球艺术机会都铺在球面上:拖拽旋转、滚轮或双指缩放;数字圆是城市机会数,点它放大展开,点国家版图还能看行政区划。',
+      gdT2:'找到你的机会',gdD2:'顶栏切换 机会/招聘/资讯/作品 四个频道;左侧(手机在底部)可按门类、地区、免费与否筛选。想找特定城市?输入关键词点「✦ AI 检索」,全网检索结果直接落点地球。',
+      gdT3:'收藏与社区',gdD3:'点开任何条目:♥ 收藏云同步、💬 和大家讨论;注册后还能上传作品、关注同行、订阅每周艺术机会周刊。',
+      gdNext:'下一步',gdPrev:'← 上一步',gdSkip:'跳过引导',gdDone:'开始探索 →',gdLink:'新手引导',
       fbT:'反馈 / 求助',fbNote:'遇到问题、有建议,或需要帮助都可以写在这里;无需登录。',
       fbPh:'说说你遇到的情况…',fbGo:'提 交',fbThanks:'已收到,谢谢你!我们会尽快处理',
       errFb:'请把内容写清楚一点(至少 5 个字)',fbBtnT:'✉ 反馈/求助',f_contact:'联系方式(选填,邮箱/微信)',
@@ -1264,6 +1268,10 @@
       cmtSentLive:'Posted',cmtSentPending:'Submitted — visible after human review',
       cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',ntLikeWork:'liked your work ',
       favT:'Save',favedT:'Saved',
+      gdT1:'Spin the globe',gdD1:'Every opportunity sits on the globe: drag to rotate, scroll or pinch to zoom. Numbered circles are city clusters — click to expand; click a country for its regions.',
+      gdT2:'Find your call',gdD2:'Switch channels (Calls / Jobs / News / Works) in the top bar; filter by field, region or fee on the left panel (bottom drawer on mobile). Type a city or keyword and hit “✦ AI Search” — results land on the globe.',
+      gdT3:'Save & connect',gdD3:'Open any item: ♥ save with cloud sync, 💬 join the discussion. Sign up to upload works, follow artists and subscribe to the weekly digest.',
+      gdNext:'Next',gdPrev:'← Back',gdSkip:'Skip',gdDone:'Start exploring →',gdLink:'Guide',
       fbT:'Feedback / Help',fbNote:'Bugs, ideas, or anything you need help with — no sign-in required.',
       fbPh:'Tell us what happened…',fbGo:'Submit',fbThanks:'Received — thank you!',
       errFb:'Please write at least 5 characters',fbBtnT:'✉ Feedback',f_contact:'Contact (optional, email/WeChat)',
@@ -1999,6 +2007,33 @@
   function openCmtSheet(kind,target,title){
     var m=modal('<h3>'+esc(title||L('cmtTitle'))+'</h3><div id="csBody"></div>');
     cmtMount(m.querySelector('#csBody'),kind,target); }
+  // —— 新手引导(v0.86.0):首访 3 步浮层,可跳过;页脚「新手引导」可重看 ——
+  var GUIDE_STEPS=[
+    {icon:'🌍',t:'gdT1',d:'gdD1'},
+    {icon:'✦',t:'gdT2',d:'gdD2'},
+    {icon:'♥',t:'gdT3',d:'gdD3'}];
+  function openGuide(step){
+    step=step||0;
+    try{ localStorage.setItem('ap_guided','1'); }catch(e){}   // 弹过即记,任何方式关掉都不再打扰
+    var s=GUIDE_STEPS[step], last=step===GUIDE_STEPS.length-1;
+    var dots=GUIDE_STEPS.map(function(_,i){
+      return '<i style="width:7px;height:7px;border-radius:50%;display:inline-block;margin:0 3px;background:'+
+        (i===step?'var(--ink)':'var(--line)')+'"></i>'; }).join('');
+    var m=modal('<div style="text-align:center;padding:6px 2px 0">'+
+      '<div style="font-size:40px;line-height:1;margin:6px 0 14px">'+s.icon+'</div>'+
+      '<h3 style="margin:0 0 8px">'+L(s.t)+'</h3>'+
+      '<p class="note" style="margin:0 0 14px;text-align:center">'+L(s.d)+'</p>'+
+      '<div style="margin:2px 0 14px">'+dots+'</div>'+
+      '<button class="mgo" id="gdNext" type="button">'+L(last?'gdDone':'gdNext')+'</button>'+
+      '<label class="chk" style="cursor:pointer;justify-content:center" id="gdSkip">'+
+        (last?(step>0?L('gdPrev'):''):L('gdSkip'))+'</label></div>');
+    m.querySelector('#gdNext').addEventListener('click',function(){
+      if(last) closeModal(); else openGuide(step+1); });
+    var sk=m.querySelector('#gdSkip');
+    if(sk.textContent) sk.addEventListener('click',function(){
+      if(last) openGuide(step-1); else closeModal(); }); }
+  (function(){ var seen=null; try{ seen=localStorage.getItem('ap_guided'); }catch(e){}
+    if(!seen) setTimeout(function(){ if(!layerOpen()) openGuide(0); },1500); })();
   // —— 反馈/求助(v0.83.0):免登录可提;桌面右下浮标 + 页脚链接两处入口 ——
   function openFeedback(){
     var fType='suggest';
@@ -2026,6 +2061,7 @@
       .catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }); }
   document.getElementById('fbBtn').addEventListener('click',openFeedback);
   document.getElementById('fbLink').addEventListener('click',openFeedback);
+  document.getElementById('gdLink').addEventListener('click',function(){ openGuide(0); });
   // ============================================================
   //  作品查看器(v0.82.1,IG/小红书式,用户要求):图片主区(可翻页,点图放大)+
   //  侧栏(作者→主页/标题/描述/评论列表直接可见)+ 底部固定输入框 + ♥ 作品点赞。
