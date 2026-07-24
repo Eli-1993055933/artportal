@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.92.1" />
+<meta name="app-version" content="0.92.2" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.92.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.92.2</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.92.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.92.1"></script>
-<script src="js/globe-data.js?v=0.92.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.92.2"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.92.2"></script>
+<script src="js/globe-data.js?v=0.92.2"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1412,6 +1412,8 @@
       peNick:'昵称',peIdentity:'身份',peFields:'创作领域(如 油画/摄影)',peLocation:'所在地',
       peWebsite:'个人网站(https:// 开头)',peBio:'个人简介',peFavPub:'公开我的收藏',peNlK:'订阅周报',
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
+      cpT:'完善资料',cpNote:'设置一个昵称就能开始使用(头像不传会自动生成)。不想现在设置?可直接退出登录。',
+      cpSave:'保存并开始使用',cpNeedNick:'昵称至少 2 个字',
       imgReady:' 张已就绪',studioT:'画室点评工具',
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
       tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
@@ -1477,6 +1479,8 @@
       peNick:'Nickname',peIdentity:'Identity',peFields:'Fields (e.g. painting/photo)',peLocation:'Location',
       peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
+      cpT:'Finish your profile',cpNote:'Pick a nickname to get started (an avatar is auto-generated if you skip it). Not now? You can sign out.',
+      cpSave:'Save and start',cpNeedNick:'Nickname needs 2+ characters',
       imgReady:' ready',studioT:'Studio critique tool',
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
       tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
@@ -1754,18 +1758,19 @@
     if(o.category==='news') return 'news:'+String(o.id);
     return String(o.id); }
   function favSync(){ postJ('/api/favorites',{ids:Array.from(favKeys)}).catch(function(){}); }
-  // 通用弹层
-  function modal(html){ var h=document.getElementById('mhost');
-    h.innerHTML='<div class="modal"><div class="scrim"></div><div class="mbox">'+
-      '<button class="mx" type="button"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></button>'+html+'</div></div>';
+  // 通用弹层。forced=强制窗(不可关闭:无 X、点遮罩/ESC/返回都不关),只能内部操作后走
+  function modal(html,forced){ var h=document.getElementById('mhost');
+    h.innerHTML='<div class="modal'+(forced?' forced':'')+'"><div class="scrim"></div><div class="mbox">'+
+      (forced?'':'<button class="mx" type="button"><i class="xm">×</i><i class="xb">'+L('backX')+'</i></button>')+html+'</div></div>';
     var m=h.firstChild;
-    m.querySelector('.scrim').addEventListener('click',closeModal);
-    m.querySelector('.mx').addEventListener('click',closeModal);
+    if(!forced){ m.querySelector('.scrim').addEventListener('click',closeModal);
+      m.querySelector('.mx').addEventListener('click',closeModal); }
     ensureGuard();
     return m; }
   function closeModal(){
     var h=document.getElementById('mhost'), m=h.firstChild;
     if(!m){ releaseGuard(); return; }
+    if(m.classList&&m.classList.contains('forced')) return;   // 强制窗:不可关闭(补全或退出登录才走)
     m.classList.add('closing');   // 关闭动效(v0.90.0):缩退+淡出,170ms 后真正移除
     setTimeout(function(){ if(h.firstChild===m) h.innerHTML=''; releaseGuard(); },170); }
   // 图片压缩:长边 ≤max、JPEG(与老站同参:封面 1280/q.78,作品 1600/q.8)
@@ -1796,6 +1801,41 @@
     (function next(){ if(i>=files.length||out.length>=limit){ cb(out); return; }
       shrinkImg(files[i++],max,q,function(d){ if(d) out.push(d); next(); }); })(); }
   // —— 登录/注册(邮箱验证码,同老站链路) ——
+  // 默认头像(首字+色块,画布生成)——补全时没上传就自动给一个,用户永不被卡住
+  function genDefaultAvatar(name){
+    var c=document.createElement('canvas'); c.width=c.height=256; var g=c.getContext('2d');
+    var cols=['#C0392B','#2E6FA7','#C08A1E','#6B5B95','#3A7D44','#2A7F7A','#B0578D'];
+    var ch=String(name||'A').trim().charAt(0)||'A';
+    g.fillStyle=cols[ch.charCodeAt(0)%cols.length]; g.fillRect(0,0,256,256);
+    g.fillStyle='#fff'; g.font='700 132px -apple-system,"PingFang SC",sans-serif';
+    g.textAlign='center'; g.textBaseline='middle'; g.fillText(ch.toUpperCase(),128,140);
+    return c.toDataURL('image/jpeg',0.85); }
+  // 强制资料补全(v0.92.2 恢复,地球迁移丢失):登录后缺昵称/头像 → 弹此窗;
+  //   昵称必填,头像可上传或"生成默认",保存即解锁;底部「退出登录」逃生口(修"退不出去"的核心 bug)
+  function completeProfile(){
+    var newAva=null;
+    var m=modal('<h3>'+L('cpT')+'</h3><p class="note">'+L('cpNote')+'</p>'+
+      '<div class="avarow"><img id="cpAv" src="'+esc((meUser&&meUser.avatar)||'')+'" alt="">'+
+        '<label class="pp-btn" style="cursor:pointer">'+L('peAva')+'<input type="file" id="cpF" accept="image/*" hidden></label></div>'+
+      '<input id="cpN" maxlength="20" placeholder="'+L('peNick')+'" value="'+esc((meUser&&meUser.nickname)||'')+'">'+
+      '<div class="merr" id="cpE"></div>'+
+      '<button class="mgo" id="cpGo" type="button">'+L('cpSave')+'</button>'+
+      '<button class="gd-skip" id="cpOut" type="button">'+L('ppLogout')+'</button>', true);
+    m.querySelector('#cpF').addEventListener('change',function(){
+      var f=this.files&&this.files[0]; if(!f) return;
+      squareAva(f,function(d){ if(d){ newAva=d; m.querySelector('#cpAv').src=d; }
+        else m.querySelector('#cpE').textContent=L('errImgBad'); }); });
+    m.querySelector('#cpGo').addEventListener('click',function(){
+      var nk=m.querySelector('#cpN').value.trim(), err=m.querySelector('#cpE'), b=this;
+      if(nk.length<2){ err.textContent=L('cpNeedNick'); return; }
+      var ava=newAva||(meUser&&meUser.avatar)||genDefaultAvatar(nk);   // 没上传就自动生成,不卡人
+      b.disabled=true;
+      postJ('/api/auth/profile',{nickname:nk,avatar:ava}).then(function(r){ b.disabled=false;
+        if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
+        location.reload(); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
+    m.querySelector('#cpOut').addEventListener('click',function(){
+      postJ('/api/auth/logout',{}).then(function(){ try{ localStorage.removeItem('ap_email'); }catch(e){} location.reload(); })
+        .catch(function(){ try{ localStorage.removeItem('ap_email'); }catch(e){} location.reload(); }); }); }
   function openAuth(mode,gate){
     var reg=(mode==='register'), em='';
     try{ em=localStorage.getItem('ap_email')||''; }catch(e){}
@@ -2556,7 +2596,9 @@
   document.getElementById('proClose').addEventListener('click',function(){ hideProfile();
     d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); });
   document.getElementById('btnLogin').addEventListener('click',function(){
-    if(meUser) openProfile(meUser.id); else openAuth('login'); });
+    if(!meUser){ openAuth('login'); return; }
+    if(!meUser.nickname||!meUser.avatar){ completeProfile(); return; }   // 资料不全:走补全窗(否则撞 404 主页,退不出去)
+    openProfile(meUser.id); });
   // 用户检索(/api/users/search):输入即搜,点结果在浮层内切换主页
   var uqTimer=null;
   document.getElementById('uq').addEventListener('input',function(){
@@ -2588,7 +2630,8 @@
       favKeys=new Set(j.user.favorites||[]);   // 收藏云端为准
       setUserLoc(j.user.ip_region);
       var det=document.getElementById('detail');
-      if(det.style.display==='block'&&det._repaintFav) det._repaintFav(); }
+      if(det.style.display==='block'&&det._repaintFav) det._repaintFav();
+      if(!meUser.nickname||!meUser.avatar) completeProfile(); }   // 缺昵称/头像:进站即弹强制补全窗(可退出登录)
   }).catch(function(){});
   // 匿名访客(或登录用户缺属地)兜底:粗属地定位,与全站 IP 属地同口径
   fetch('/api/geo',{credentials:'same-origin'}).then(function(r){ return r.json(); })
