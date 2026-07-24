@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.88.1" />
+<meta name="app-version" content="0.89.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -557,6 +557,19 @@
   .tagrow.wrapopen{flex-wrap:wrap;overflow-x:visible}
   .tgc.tgx{font-weight:700;padding:4px 8px;color:var(--muted)}
   .tgc.tgx:hover{color:var(--ink)}
+  /* 筛选栏(v0.89.0):门类/地区/条件收进一栏,平时收起,点开弹出全览 */
+  .fbar{display:flex;align-items:center;gap:8px;border-top:1px dashed var(--line);margin-top:9px;padding-top:9px;min-width:0}
+  .fbar-btn{font-size:12px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);cursor:pointer;
+    color:var(--sub);font-weight:600;white-space:nowrap;flex:0 0 auto;display:inline-flex;gap:5px;align-items:center}
+  .fbar-btn:hover{color:var(--ink);background:#efeee8}
+  html.dark .fbar-btn:hover{background:#262421}
+  .fbar-btn .n{background:var(--ink);color:#fff;border-radius:99px;font-size:10px;padding:1px 6px;font-weight:700}
+  html.dark .fbar-btn .n{background:#ece9e2;color:#141311}
+  .fbar-sum{font-size:11px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #fltPanel{animation:apPop .22s cubic-bezier(.32,.72,0,1)}
+  #fltPanel .fgrp-t{font-size:11px;color:var(--muted);margin:9px 0 1px;letter-spacing:.05em}
+  #fltPanel .tagrow{border-top:0;margin-top:0;padding-top:3px}
+  #fltPanel .tgx{display:none}
   /* 左栏三段拖拽调高(v0.88.0,桌面):把手在卡片之间,双击复位 */
   .pdiv{height:11px;margin:-4px 0;display:flex;align-items:center;justify-content:center;
     cursor:ns-resize;flex:0 0 auto;touch-action:none;z-index:1}
@@ -599,9 +612,12 @@
   <div class="pdiv" data-rz="cardStats" title="拖动调整高度,双击复位"><i></i></div>
   <div class="search"><input id="q" placeholder="检索展览、城市、机构、项目内容…" /><span class="ai" id="btnAI">✦ AI 检索</span></div>
   <div class="card legend" id="cardLegend"><div class="lg-title" id="lgT">分类索引图例</div><div id="legend"></div>
-    <div class="tagrow" id="tagRow" data-tagrow></div>
-    <div class="tagrow" id="regRow" data-regrow></div>
-    <div class="tagrow" id="fltRow" data-fltrow></div></div>
+    <div class="fbar"><span class="fbar-btn" id="fltToggle">筛选 ⌄</span><span class="fbar-sum" id="fltSum"></span></div>
+    <div id="fltPanel" hidden>
+      <div class="fgrp-t" id="gT1">门类</div><div class="tagrow" id="tagRow" data-tagrow></div>
+      <div class="fgrp-t" id="gT2">地区</div><div class="tagrow" id="regRow" data-regrow></div>
+      <div class="fgrp-t" id="gT3">条件</div><div class="tagrow" id="fltRow" data-fltrow></div>
+    </div></div>
   <div class="pdiv" data-rz="cardLegend" title="拖动调整高度,双击复位"><i></i></div>
   <div class="card listcard"><div class="lc-head"><span id="lcCount">结果列表</span><span class="lc-sort" id="lcSort"></span></div><div class="lc-scroll" id="lcList"></div></div>
 </div>
@@ -635,11 +651,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.88.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.89.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.88.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.88.1"></script>
-<script src="js/globe-data.js?v=0.88.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.89.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.89.0"></script>
+<script src="js/globe-data.js?v=0.89.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1264,6 +1280,7 @@
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
       tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
       fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',
+      fltBarT:'筛选',gTag:'门类',gReg:'地区',gCond:'条件',
       regAll:'全部地区',reg_cn:'中国大陆',reg_hktw:'港澳台',reg_asia:'亚洲其他',reg_europe:'欧洲',
       reg_namerica:'北美',reg_other:'其他地区',
       fOrgOff:'官方机构',fOrgInd:'独立机构',fOrgCom:'商业机构',fSrcUser:'含用户投稿',fSrcAI:'含AI检索',
@@ -1327,6 +1344,7 @@
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
       tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
       fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',
+      fltBarT:'Filters',gTag:'Field',gReg:'Region',gCond:'Criteria',
       regAll:'All regions',reg_cn:'Mainland China',reg_hktw:'HK/MO/TW',reg_asia:'Asia',reg_europe:'Europe',
       reg_namerica:'N. America',reg_other:'Other',
       fOrgOff:'Official',fOrgInd:'Independent',fOrgCom:'Commercial',fSrcUser:'User posts',fSrcAI:'AI-collected',
@@ -1380,6 +1398,9 @@
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
     document.getElementById('back').textContent=(drillLevel===2)?L('backU'):L('backW');
     document.getElementById('total').innerHTML=placedTotal+'<small>'+L('unit')+'</small>';
+    var g1=document.getElementById('gT1'); if(g1){ g1.textContent=L('gTag');
+      document.getElementById('gT2').textContent=L('gReg');
+      document.getElementById('gT3').textContent=L('gCond'); }
     renderLegend(); renderTagRow(); renderRegRow(); renderFltRow(); renderDrawer(); needDraw=true;
     // 周刊阅读页开着 → 按新语言重渲(停在原位)
     var wkEl=document.getElementById('wkpage');
@@ -2502,9 +2523,27 @@
   // 行首 ⌄/⌃ 展开钮(v0.88.0):横滑单行看不全 → 展开成多行全览(三行各自记状态)
   var rowOpen={tag:false,reg:false,flt:false};
   function rowXBtn(kind){ return '<span class="tgc tgx" data-xr="'+kind+'" title="'+(rowOpen[kind]?'收起':'展开全部')+'">'+(rowOpen[kind]?'⌃':'⌄')+'</span>'; }
-  function rowXApply(hosts,kind){ for(var hi=0;hi<hosts.length;hi++) hosts[hi].classList.toggle('wrapopen',rowOpen[kind]); }
+  function rowXApply(hosts,kind){ for(var hi=0;hi<hosts.length;hi++)
+    hosts[hi].classList.toggle('wrapopen',rowOpen[kind]||!!hosts[hi].closest('#fltPanel'));   // 筛选栏内恒为多行全览
+    renderFltSummary(); }   // 三行任何一行重渲都同步刷新筛选栏摘要与角标
   function rowXClick(el,rerender){ var k=el.getAttribute('data-xr'); if(!k) return false;
     rowOpen[k]=!rowOpen[k]; rerender(); return true; }
+  // 筛选栏(v0.89.0):平时收起,按钮带生效数角标;摘要一行速览当前筛选
+  var fltOpen=false;
+  function renderFltSummary(){
+    var el=document.getElementById('fltSum'), btn=document.getElementById('fltToggle');
+    if(!el||!btn) return;
+    var parts=[];
+    if(tagSel){ var t0=D.TAGS.filter(function(x){ return x.id===tagSel; })[0];
+      if(t0) parts.push(lang==='en'?t0.en:t0.zh); }
+    REG_KEYS.forEach(function(k){ if(fRegs[k]) parts.push(L('reg_'+k)); });
+    [['fFree',fFree],['fStipend',fStipend],['fHousing',fHousing],['fTravel',fTravel],
+     ['fVerified',fVerified],['fHidePast',fHidePast],
+     ['fOrgOff',fOrgOff],['fOrgInd',fOrgInd],['fOrgCom',fOrgCom]].forEach(function(x){ if(x[1]) parts.push(L(x[0])); });
+    if(!fSrcUser) parts.push(L('fSrcUser')+'✕');   // 来源开关默认开,关掉才算生效的筛选
+    if(!fSrcAI) parts.push(L('fSrcAI')+'✕');
+    btn.innerHTML=L('fltBarT')+(parts.length?' <span class="n">'+parts.length+'</span>':'')+' '+(fltOpen?'⌃':'⌄');
+    el.textContent=parts.join(' · '); }
   function renderTagRow(){
     var hosts=document.querySelectorAll('[data-tagrow]'); if(!hosts.length) return;
     var html=rowXBtn('tag')+'<span class="tgc'+(tagSel===''?' on':'')+'" data-tag="">'+L('tagAll')+'</span>'+
@@ -2557,6 +2596,10 @@
       if(curCh) showChPanel(curCh); }); }
   document.getElementById('lcSort').addEventListener('click',function(){
     sortBy=(sortBy==='deadline')?'new':'deadline'; renderDrawer(); });
+  document.getElementById('fltToggle').addEventListener('click',function(){
+    fltOpen=!fltOpen;
+    document.getElementById('fltPanel').hidden=!fltOpen;
+    renderFltSummary(); });
   function flyToRecord(rec){ var loc=D.locate(rec); if(loc) flyTo(loc.ll, Math.max(splitScale()*1.5, proj.scale())); }
   // ✦ AI 检索:真调用 /api/search,新机会实时落点地球
   var searching=false;
