@@ -300,7 +300,8 @@
           <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称搜索…" />
           <span class="count" id="userCount"></span>
         </div>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>验证</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>验证</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -797,6 +798,19 @@
       tr.appendChild(td(bj(u.created_at, true), "mono"));
       tr.appendChild(td(rel(u.last_seen), "mono"));
       tr.appendChild(td(u.favorites, "mono"));
+      // 画室工具授权(v0.92.0):默认关,勾选即授予,持久到用户记录;取消回滚勾选态
+      var stc = document.createElement("td");
+      var scb = document.createElement("input");
+      scb.type = "checkbox"; scb.checked = !!u.studio;
+      scb.title = "画室点评工具使用权限(默认关)";
+      scb.style.cssText = "width:16px;height:16px;cursor:pointer";
+      scb.addEventListener("change", function () {
+        post("/api/admin/user/studio", { uid: u.id, on: scb.checked }).then(function (r) {
+          if (!r.ok) { alert(r.data && r.data.error || "操作失败"); scb.checked = !scb.checked; return; }
+          u.studio = scb.checked;
+        }).catch(function () { scb.checked = !scb.checked; });
+      });
+      stc.appendChild(scb); tr.appendChild(stc);
       // 封禁/解封:封禁即杀会话+禁登录(8.4 二期)
       var ops = document.createElement("td");
       var bb = document.createElement("button");

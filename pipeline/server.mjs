@@ -679,9 +679,8 @@ async function handleAuthApi(req, res, u) {
   try {
     if (p === "/api/auth/me" && m === "GET") {
       const r = auth.me(req);
-      if (r.body && r.body.user) {   // 画室工具入口可见性:授权 uid 或管理员(STUDIO_OWNERS 未设时任何登录用户,先本人用)
-        const owners = (process.env.STUDIO_OWNERS || "").split(",").map(s => s.trim()).filter(Boolean);
-        r.body.user.studio = auth.isAdmin(req, ip) || owners.length === 0 || owners.includes(r.body.user.id);
+      if (r.body && r.body.user) {   // 画室工具入口可见性:管理员本人,或被管理员在名册里勾选授权的用户(默认关)
+        r.body.user.studio = auth.isAdmin(req, ip) || auth.studioEnabled(r.body.user.id);
         // IP 属地合规:每次心跳按当前 IP 刷新用户属地(境内省级/境外国家),主页与列表展示用
         r.body.user.ip_region = auth.touchIpRegion(r.body.user.id, ipRegion(ip));
       }
@@ -936,6 +935,13 @@ async function handleAuthApi(req, res, u) {
           images: w.status === "approved" ? w.images.map(n => "assets/works/" + n) : []
         })) } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // 画室工具授权开关(v0.92.0):仅管理员;按 uid 勾选/取消,持久到用户记录
+    if (p === "/api/admin/user/studio" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const b = await readBody(req);
+      if (!b.uid) return json({ code: 400, body: { error: "参数不正确" } });
+      return json(auth.adminSetStudio(String(b.uid), b.on === true));
     }
     // 访客属地(v0.91.0):供地球"你在这里"立体光标定位;粗到省/国,与全站 IP 属地同口径,不含具体 IP
     if (p === "/api/geo" && m === "GET") {
@@ -1884,8 +1890,8 @@ createServer(async (req, res) => {
   if (u.pathname === "/studio") { res.writeHead(302, { Location: "/studio/" }); return res.end(); }
   if (u.pathname.startsWith("/studio/")) {
     const me = auth.userOf(req);
-    const owners = (process.env.STUDIO_OWNERS || "").split(",").map(s => s.trim()).filter(Boolean);
-    const ok = me && (auth.isAdmin(req, ipOf(req)) || owners.length === 0 || owners.includes(me.id));
+    // 访问控制(v0.92.0):默认关,只放行管理员本人 + 名册里被授权的用户(前端隐藏链接不算安全,这里才是闸)
+    const ok = me && (auth.isAdmin(req, ipOf(req)) || auth.studioEnabled(me.id));
     if (!ok) {
       res.writeHead(me ? 403 : 401, { "Content-Type": "text/html; charset=utf-8" });
       return res.end('<meta charset="utf-8"><body style="font-family:sans-serif;padding:44px;text-align:center;color:#333"><h3>画室点评工具</h3><p>' + (me ? "你没有使用权限。" : "请先登录后再使用。") + '</p><a href="/">返回首页</a></body>');

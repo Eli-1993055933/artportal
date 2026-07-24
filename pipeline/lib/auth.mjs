@@ -599,11 +599,24 @@ export async function adminOverview() {
 }
 export function adminUsers() {
   const list = users.slice().reverse().map(u => ({
-    email: u.email, nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
+    id: u.id, email: u.email, nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
     last_seen: u.last_seen, favorites: (u.favorites || []).length,
-    verified: !!u.email_verified, banned: !!u.banned
+    verified: !!u.email_verified, banned: !!u.banned, studio: !!u.studio
   }));
   return { code: 200, body: { total: list.length, users: list } };
+}
+// 画室工具授权(v0.92.0):按用户持久标志,默认关;仅管理员可改、管理员本人恒开。
+export function studioEnabled(uid) {
+  const u = users.find(x => x.id === uid);
+  return !!(u && u.studio);
+}
+export function adminSetStudio(uid, on) {
+  const u = users.find(x => x.id === uid);
+  if (!u) return { code: 404, body: { error: "用户不存在" } };
+  u.studio = !!on;
+  saveUsers();
+  logEvent("studio", { uid: u.id, email: u.email, on: on ? 1 : 0 });
+  return { code: 200, body: { ok: true, studio: u.studio } };
 }
 // 封禁/解封(admin):封禁即杀掉该用户所有会话,登录也被拒
 export function adminSetBan(email, on) {
