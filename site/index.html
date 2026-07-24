@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.94.0" />
+<meta name="app-version" content="0.95.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.94.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.95.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.94.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.94.0"></script>
-<script src="js/globe-data.js?v=0.94.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.95.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.95.0"></script>
+<script src="js/globe-data.js?v=0.95.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1119,11 +1119,33 @@
     else { canvas.style.cursor='var(--cur-arrow)'; tipEl.style.display='none'; }
     hoverObj=best; hoverKind=kind;
   }
+  // —— 是否已到"最细行政区划"(此时项目点才可点开卡片;更浅层级点击只用于下钻/预览) ——
+  function atFinestAdmin(){
+    if(drilledCountry==='China'){
+      if(drillLevel>=3) return true;   // 区县级=最细
+      // 直辖市/港澳:省级下钻直接就是区级(adminFeats 即 district),二级即最细
+      if(drillLevel===2 && adminFeats.length && adminFeats[0].properties && adminFeats[0].properties.level==='district') return true;
+      return false;
+    }
+    return drillLevel>=2;   // 他国:二级(选中州放大)即当前可达最细
+  }
+  // 例外:中国市级视图点到"无下辖区县的县级市(东莞/中山/嘉峪关等)"上的项目=该处已最细,允许弹卡
+  function markerAtFinest(obj){
+    if(drilledCountry==='China' && drillLevel===2 && obj && obj.ll){
+      for(var i=0;i<adminFeats.length;i++){ var p=adminFeats[i].properties;
+        if(p && p.level==='city' && (p.childrenNum||0)===0 && d3.geoContains(adminFeats[i],obj.ll)) return true; }
+    }
+    return false;
+  }
   canvas.addEventListener('click',function(e){
     if(moved) return;
     hoverTest(e);
     if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
-    if(W<=720&&drillLevel<2) hoverObj=null;  // 手机:进入最小行政区划(二级视图)前点位不可交互,点击只作用于区划(防误触)
+    // 项目卡仅在最细行政区划才点开;更浅层级点击让位给下钻(悬停预览不受影响)。
+    // 手机沿用既有:未到最细一律不可交互(点位/聚合圆都让位下钻);桌面则凡"会弹卡"的点击(单个点位 或 只含1条的聚合圆)都让位,
+    // 只含多条的聚合圆桌面仍可点开缩放导航(不弹卡)。
+    if(hoverObj && !atFinestAdmin() && !markerAtFinest(hoverObj)
+       && (W<=720 || hoverKind==='m' || (hoverKind==='c' && hoverObj.count===1))) hoverObj=null;
     if(hoverObj){
       if(hoverKind==='c'){ var g=hoverObj;
         // 手机:聚合圆(含单条)一律放大不弹卡——拆分成散点后点位才可交互
@@ -1245,14 +1267,14 @@
     if(nm==='China'||nm==='Taiwan'){ drillChina(); return; }
     drilledCountry=nm; drilledFeat=feat; drillLevel=1; drilledProvAdcode=null; drilledAdmName=null; adminFeats=[]; adminLabels=[];
     fitFly(feat, boundsCenter(feat), scale0*2.9);
-    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW'); ensureGuard();
+    ensureGuard();   // 返回上一级按钮已移除(用户要求);逐级返回改走:点区划外 / 手机侧滑 / 桌面浏览器后退
     loadAdmin('data/geo/world/'+admSlug(nm)+'.json',null,2,
       'https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm); }
   function drillAdm1(f){ drillLevel=2; drilledAdmName=f.properties.name;
     document.getElementById('back').textContent=L('backU');
     fitFly(f, boundsCenter(f), scale0*5); }
   function drillChina(){ drilledCountry='China'; drilledFeat=cnNE; drillLevel=1; drilledProvAdcode=null; adminFeats=[]; adminLabels=[];
-    var bk=document.getElementById('back'); bk.style.display='block'; bk.textContent=L('backW'); ensureGuard();
+    ensureGuard();   // 返回按钮已移除;逐级返回走点区划外/侧滑/浏览器后退
     fitFly(cnNE,[104,35.5],scale0*2.7); needDraw=true; }   // 省界来自 cnBase(启动已载),无需再请求
   function drillProvince(pf){ var ad=pf.properties.adcode; if(!ad) return;
     drillLevel=2; drilledProvAdcode=ad; drilledCityAdcode=null; drilledCityName=null; districtFeats=[]; districtLabels=[];
@@ -2976,6 +2998,7 @@
       cnBaseFeats:function(){return cnBase;}, boundsCenter:boundsCenter, adminFeatsArr:function(){return adminFeats;},
       drillProvByName:function(n){for(var i=0;i<cnBase.length;i++){if(cnBase[i].properties.name===n){drillProvince(cnBase[i]);return cnBase[i].properties.adcode;}}return null;},
       drillCityByAdcode:function(ad){for(var i=0;i<adminFeats.length;i++){if(adminFeats[i].properties.adcode===ad){drillCity(adminFeats[i]);return true;}}return false;},
+      atFinest:function(){return atFinestAdmin();},
       exitDrill:function(){exitDrill();}};
     var st=document.getElementById('status'); st.textContent=L('marked')(placedTotal,countryFeats.length);
     setTimeout(function(){ st.style.display='none'; },2500);
