@@ -686,9 +686,11 @@ async function handleAuthApi(req, res, u) {
       }
       return json(r);
     }
-    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b.email, b.password, b.code, ip, b.newsletter === true)); }
+    if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b, ip)); }
     if (p === "/api/auth/sendcode" && m === "POST") { const b = await readBody(req); return json(await auth.sendEmailCode(b, ip)); }
-    if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.email, b.password, ip)); }
+    if (p === "/api/auth/sms-code" && m === "POST") { const b = await readBody(req); return json(await auth.sendPhoneCode(b, ip)); }
+    if (p === "/api/auth/bind-phone" && m === "POST") { const b = await readBody(req); return json(await auth.bindPhone(req, b, ip)); }
+    if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.identifier || b.email, b.password, ip)); }
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }
     if (p === "/api/favorites" && m === "POST") { const b = await readBody(req); return json(auth.setFavorites(req, b.ids)); }
@@ -776,6 +778,7 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/comments" && m === "POST") {
       const me = auth.userOf(req);
       if (!me) return json({ code: 401, body: { error: "请先登录再评论" } });
+      if (auth.needsPhone(me)) return json({ code: 403, body: { error: "请先绑定手机号完成实名后再发布" } });
       const b = await readBody(req);
       const kind = String(b.kind || ""), target = String(b.target || "").slice(0, 200);
       const content = String(b.content || "").trim().slice(0, 500);
@@ -868,6 +871,7 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/works" && m === "POST") {
       const me = auth.userOf(req);
       if (!me) return json({ code: 401, body: { error: "请先登录再上传作品" } });
+      if (auth.needsPhone(me)) return json({ code: 403, body: { error: "请先绑定手机号完成实名后再发布" } });
       const b = await readBody(req, 9 * 1024 * 1024);   // ≤9 张压缩图
       const v = validateWork(b);
       if (v.error) return json({ code: 400, body: { error: v.error } });
@@ -1237,14 +1241,16 @@ async function handleAuthApi(req, res, u) {
     if (p === "/api/admin/users/ban" && m === "POST") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
       const b = await readBody(req);
-      const r = auth.adminSetBan(b.email, !!b.on);
-      if (r.code === 200) await db.logModeration("user", String(b.email), b.on ? "banned" : "unbanned", null).catch(() => {});
+      const key = b.uid || b.email;   // 优先 uid(手机注册用户 email 可为 null)
+      const r = auth.adminSetBan(key, !!b.on);
+      if (r.code === 200) await db.logModeration("user", String(key), b.on ? "banned" : "unbanned", null).catch(() => {});
       return json(r);
     }
     // —— 投稿:提交 / 后台队列 / 人工裁决 ——
     if (p === "/api/submit" && m === "POST") {
       const user = auth.userOf(req);
       if (!user) return json({ code: 401, body: { error: "请先登录后再投稿" } });
+      if (auth.needsPhone(user)) return json({ code: 403, body: { error: "请先绑定手机号完成实名后再发布" } });
       const b = await readBody(req, 900 * 1024);   // 放宽:压缩封面 base64
       const v = validateSubmission(b);
       if (v.error) return json({ code: 400, body: { error: v.error } });

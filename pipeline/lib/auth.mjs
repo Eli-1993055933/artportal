@@ -7,13 +7,14 @@
 // - 事件:events.jsonl 追加(visit/outbound/search/register/login),心跳只进内存不落盘。
 
 import { readFile, writeFile, rename, mkdir, appendFile } from "node:fs/promises";
-import { randomBytes, scryptSync, timingSafeEqual, createHash, createHmac } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual, createHash, createHmac, createCipheriv, createDecipheriv } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { Resolver } from "node:dns/promises";
 import { wordHits, moderateText } from "./moderation.mjs";
 import { logModeration } from "./db.mjs";
 import { mailerOn, sendVerifyCode } from "./mailer.mjs";
+import { smsOn, sendSmsCode } from "./sms.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE = join(__dir, "..", "state");
@@ -33,6 +34,7 @@ function beijingDay(iso) { return new Date((iso ? Date.parse(iso) : Date.now()) 
 // ---------- 存储 ----------
 let users = [];                                // {id,email,salt,hash,nickname,created_at,last_seen,favorites,profile}
 let byEmail = new Map();
+let byPhone = new Map();                        // phone_hmac -> user(手机号唯一性索引;明文手机号加密存储)
 let sessions = new Map();                      // token -> {uid, created_at, last_seen}
 const online = new Map();                      // key -> {kind:'user'|'anon', label, last}
 const adminTokens = new Map();                 // token -> expiry
@@ -44,7 +46,8 @@ export async function initAuth() {
     const d = JSON.parse(await readFile(USERS_FILE, "utf8"));
     users = Array.isArray(d.users) ? d.users : [];
   } catch (e) { users = []; }
-  byEmail = new Map(users.map(u => [u.email, u]));
+  byEmail = new Map(users.filter(u => u.email).map(u => [u.email, u]));
+  byPhone = new Map(users.filter(u => u.phone_hmac).map(u => [u.phone_hmac, u]));
   rebuildNickIndex();
   try {
     const d = JSON.parse(await readFile(SESS_FILE, "utf8"));
@@ -114,11 +117,11 @@ export function newsletterUnsub(email, token) {
 }
 // 群发名单:勾选了订阅、未被封禁的用户(邮箱验证过的优先在前,退信少)
 export function newsletterAudience() {
-  return users.filter(u => u.newsletter && !u.banned)
+  return users.filter(u => u.newsletter && !u.banned && u.email)   // 手机注册用户 email 可为 null,无邮箱不进群发名单
     .sort((a, b) => (b.email_verified ? 1 : 0) - (a.email_verified ? 1 : 0))
     .map(u => ({ email: u.email, id: u.id }));
 }
-export function newsletterCount() { return users.filter(u => u.newsletter && !u.banned).length; }
+export function newsletterCount() { return users.filter(u => u.newsletter && !u.banned && u.email).length; }
 // 站内周刊通知的收件人:所有未封禁用户(站内通知是低打扰的铃铛提示,邮件才受订阅开关约束)
 export function allUserIds() { return users.filter(u => !u.banned).map(u => u.id); }
 
@@ -211,6 +214,79 @@ export async function sendEmailCode(body, ip) {
   return { code: 200, body: { ok: true } };
 }
 
+// ---------- 手机号实名(备案安全评估「真实身份核验」;仅 smsOn() 时启用,阿里云短信配好即生效) ----------
+// 明文手机号绝不落盘明文:phone_hmac(不可逆,做唯一性/查找)+ phone(AES-256-GCM 加密,可解密用于掩码展示/依法调取)。
+const PHONE_RE = /^1[3-9]\d{9}$/;                          // 中国大陆手机号
+let phoneKey = null;
+function phoneEncKey() { if (!phoneKey) phoneKey = scryptSync(mailSecret, "ap-phone-enc-v1", 32); return phoneKey; }  // 由服务器本地密钥派生,稳定、无需新增 .env
+function phoneHmac(phone) { return createHmac("sha256", mailSecret).update(String(phone)).digest("hex"); }
+function encPhone(phone) {
+  const iv = randomBytes(12), c = createCipheriv("aes-256-gcm", phoneEncKey(), iv);
+  const ct = Buffer.concat([c.update(String(phone), "utf8"), c.final()]);
+  return iv.toString("hex") + ":" + c.getAuthTag().toString("hex") + ":" + ct.toString("hex");
+}
+function decPhone(enc) {
+  try {
+    const [iv, tag, ct] = String(enc).split(":");
+    const d = createDecipheriv("aes-256-gcm", phoneEncKey(), Buffer.from(iv, "hex"));
+    d.setAuthTag(Buffer.from(tag, "hex"));
+    return Buffer.concat([d.update(Buffer.from(ct, "hex")), d.final()]).toString("utf8");
+  } catch (e) { return null; }
+}
+function maskPhone(phone) { const s = String(phone || ""); return PHONE_RE.test(s) ? s.slice(0, 3) + "****" + s.slice(-4) : null; }
+export function needsPhone(u) { return smsOn() && !!u && !u.phone_verified; }   // 发布门:开启实名后,未绑手机不得发布
+
+const smsCodes = new Map();                                // phone -> { code, exp, tries }
+// 发手机验证码。purpose: register(注册,手机号须未占用) / bind(老用户绑定,手机号须未被他人占用)
+export async function sendPhoneCode(body, ip) {
+  if (!smsOn()) return { code: 400, body: { error: "当前无需手机验证码" } };
+  const phone = String((body || {}).phone || "").trim();
+  if (!PHONE_RE.test(phone)) return { code: 400, body: { error: "手机号格式不正确" } };
+  if (byPhone.has(phoneHmac(phone))) return { code: 409, body: { error: (body || {}).purpose === "bind" ? "该手机号已被其他账号绑定" : "该手机号已注册,请直接登录" } };
+  if (authLimited("sms:" + phone, 3, 10 * 60 * 1000)) return { code: 429, body: { error: "该手机号请求验证码太频繁,请稍后再试" } };
+  if (authLimited("smsip:" + ip, 8, 10 * 60 * 1000)) return { code: 429, body: { error: "发送太频繁,请稍后再试" } };
+  const code = String(100000 + (randomBytes(4).readUInt32BE(0) % 900000));
+  smsCodes.set(phone, { code, exp: Date.now() + 10 * 60 * 1000, tries: 0 });
+  if (smsCodes.size > 10000) { const now = Date.now(); for (const [k, v] of smsCodes) if (now > v.exp) smsCodes.delete(k); }
+  try { await sendSmsCode(phone, code); }
+  catch (e) {
+    smsCodes.delete(phone);
+    process.stderr.write("[sms] 发送失败 " + phone + ": " + (e.message || e) + "\n");
+    return { code: 503, body: { error: "验证码发送失败,请稍后再试" } };
+  }
+  logEvent("smscode", { phone: maskPhone(phone), ip });
+  return { code: 200, body: { ok: true } };
+}
+// 校验并消费手机验证码:通过返回 null,否则返回错误文案
+function consumeSmsCode(phone, code) {
+  const rec = smsCodes.get(phone);
+  if (!rec || Date.now() > rec.exp) return "请先获取手机验证码";
+  rec.tries++;
+  if (rec.tries > 5) { smsCodes.delete(phone); return "尝试次数过多,请重新获取验证码"; }
+  if (String(code || "").trim() !== rec.code) return "验证码不正确";
+  smsCodes.delete(phone);
+  return null;
+}
+// 老用户绑定手机号完成实名(登录后强制)
+export function bindPhone(req, body, ip) {
+  const u = userOf(req);
+  if (!u) return { code: 401, body: { error: "未登录" } };
+  if (!smsOn()) return { code: 400, body: { error: "当前无需绑定手机号" } };
+  if (authLimited("bind:" + u.id, 8, 10 * 60 * 1000)) return { code: 429, body: { error: "操作太频繁,请稍后再试" } };
+  const phone = String((body || {}).phone || "").trim();
+  if (!PHONE_RE.test(phone)) return { code: 400, body: { error: "手机号格式不正确" } };
+  const holder = byPhone.get(phoneHmac(phone));
+  if (holder && holder.id !== u.id) return { code: 409, body: { error: "该手机号已被其他账号绑定" } };
+  const err = consumeSmsCode(phone, (body || {}).code);
+  if (err) return { code: 400, body: { error: err } };
+  if (u.phone_hmac) byPhone.delete(u.phone_hmac);
+  u.phone = encPhone(phone); u.phone_hmac = phoneHmac(phone); u.phone_verified = true;
+  byPhone.set(u.phone_hmac, u);
+  saveUsers();
+  logEvent("bindphone", { uid: u.id, phone: maskPhone(phone), ip });
+  return { code: 200, body: { user: publicUser(u) } };
+}
+
 // ---------- 会话 ----------
 function newSession(uid) {
   const token = randomBytes(32).toString("hex");
@@ -262,6 +338,8 @@ function publicUser(u) {
     newsletter: !!u.newsletter,                // 周报订阅(注册勾选/资料页可改/邮件可退订)
     nickname_changed_at: u.nickname_changed_at || null,
     email_verified: !!u.email_verified,
+    phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null),   // 掩码手机号(138****5678);绝不返回明文
+    phone_verified: !!u.phone_verified,
     needs_profile: !(u.nickname && u.avatar)   // 昵称+头像必填;缺任一,前端强制补全
   };
 }
@@ -330,6 +408,7 @@ const NICK_COOLDOWN = 7 * 24 * 3600 * 1000;   // 改名冷静期 7 天(防冒充
 export async function setProfile(req, body, ip) {
   const u = userOf(req);
   if (!u) return { code: 401, body: { error: "未登录" } };
+  if (needsPhone(u)) return { code: 403, body: { error: "请先绑定手机号完成实名后再发布" } };   // 资料是公开可检索内容,同发布口径受实名门控
   if (authLimited("profile:" + u.id, 12, 10 * 60 * 1000)) return { code: 429, body: { error: "操作太频繁,请稍后再试" } };
   const nickname = String((body || {}).nickname || "").trim().replace(/\s+/g, " ");
   if (!NICK_RE.test(nickname.replace(/ /g, ""))) return { code: 400, body: { error: "昵称需 2–20 字,可用中英文、数字、_-·" } };
@@ -391,17 +470,51 @@ export async function setProfile(req, body, ip) {
   return { code: 200, body: { user: publicUser(u) } };
 }
 
-export async function register(email, password, code, ip, newsletter) {
+export async function register(body, ip) {
   if (authLimited(ip)) return { code: 429, body: { error: "尝试太频繁,请稍后再试" } };
-  email = String(email || "").trim().toLowerCase();
-  password = String(password || "");
+  body = body || {};
+  const password = String(body.password || "");
+  const newsletter = body.newsletter === true;   // 《个保法》明示同意,绝不默认勾
+
+  if (smsOn()) {
+    // —— 手机号短信验证码实名注册(阿里云短信配好后的主通道)——
+    const phone = String(body.phone || "").trim();
+    // 前端 me() 加载失败时可能停在邮箱表单(无手机框),此时提交带 email 无 phone → 提示刷新用手机注册
+    if (!phone && body.email) return { code: 400, body: { error: "页面需刷新后用手机号注册,请刷新页面重试" } };
+    if (!PHONE_RE.test(phone)) return { code: 400, body: { error: "手机号格式不正确" } };
+    if (password.length < 6 || password.length > 72) return { code: 400, body: { error: "密码需 6–72 位" } };
+    if (byPhone.has(phoneHmac(phone))) return { code: 409, body: { error: "该手机号已注册,请直接登录" } };
+    if (users.length >= MAX_USERS) return { code: 503, body: { error: "注册暂时关闭,请稍后再试" } };
+    let email = String(body.email || "").trim().toLowerCase();   // 邮箱选填(通知/找回)
+    if (email) {
+      if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
+      if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已被使用" } };
+    }
+    const err = consumeSmsCode(phone, body.code);   // 前端在手机模式下把短信码放 code 字段
+    if (err) return { code: 400, body: { error: err } };
+    const salt = randomBytes(16).toString("hex");
+    const u = {
+      id: "u" + randomBytes(6).toString("hex"),
+      email: email || null, salt, hash: hashPassword(password, salt), email_verified: false,
+      phone: encPhone(phone), phone_hmac: phoneHmac(phone), phone_verified: true,
+      newsletter, nickname: null, profile: {}, favorites: [],
+      created_at: new Date().toISOString(), last_seen: new Date().toISOString()
+    };
+    users.push(u); byPhone.set(u.phone_hmac, u); if (email) byEmail.set(email, u); saveUsers();
+    logEvent("register", { uid: u.id, phone: maskPhone(phone), ip });
+    const token = newSession(u.id);
+    return { code: 200, body: { user: publicUser(u) }, headers: { "Set-Cookie": sessionCookie(token) } };
+  }
+
+  // —— 邮箱注册(未开启手机实名时的原有通道,校验顺序与改动前逐字一致)——
+  const email = String(body.email || "").trim().toLowerCase();
+  const code = body.code;
   if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
   if (password.length < 6 || password.length > 72) return { code: 400, body: { error: "密码需 6–72 位" } };
   if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已注册,请直接登录" } };
   if (users.length >= MAX_USERS) return { code: 503, body: { error: "注册暂时关闭,请稍后再试" } };
   let verified = false;
   if (mailerOn()) {
-    // 发信已配置:必须携带发到邮箱的 6 位验证码(能收到 = 邮箱真实且是本人)
     const rec = emailCodes.get(email);
     if (!rec || Date.now() > rec.exp) return { code: 400, body: { error: "请先获取邮箱验证码" } };
     rec.tries++;
@@ -410,17 +523,14 @@ export async function register(email, password, code, ip, newsletter) {
     emailCodes.delete(email);
     verified = true;
   } else {
-    // 发信未配置:退化为真实性弱校验(一次性邮箱黑名单 + 域名 MX/A 记录),挡住乱编的域名
     const realErr = await emailRealErr(email);
     if (realErr) return { code: 400, body: { error: realErr } };
   }
   const salt = randomBytes(16).toString("hex");
   const u = {
     id: "u" + randomBytes(6).toString("hex"),
-    email, salt, hash: hashPassword(password, salt),
-    email_verified: verified,
-    newsletter: !!newsletter,     // 注册页勾选"订阅周报"才 true(《个保法》明示同意,绝不默认勾)
-    nickname: null, profile: {}, favorites: [],
+    email, salt, hash: hashPassword(password, salt), email_verified: verified,
+    newsletter, nickname: null, profile: {}, favorites: [],
     created_at: new Date().toISOString(), last_seen: new Date().toISOString()
   };
   users.push(u); byEmail.set(email, u); saveUsers();
@@ -429,16 +539,17 @@ export async function register(email, password, code, ip, newsletter) {
   return { code: 200, body: { user: publicUser(u) }, headers: { "Set-Cookie": sessionCookie(token) } };
 }
 
-export function login(email, password, ip) {
+// 登录:标识符既可是邮箱、也可是手机号(手机实名开启后新用户用手机登录)
+export function login(identifier, password, ip) {
   if (authLimited(ip)) return { code: 429, body: { error: "尝试太频繁,请稍后再试" } };
-  email = String(email || "").trim().toLowerCase();
-  const u = byEmail.get(email);
-  // 统一报错文案 + 恒定耗时(邮箱不存在也跑一次假哈希),不泄露"邮箱是否注册过"
-  if (!u) { burnPassword(password); return { code: 401, body: { error: "邮箱或密码不正确" } }; }
-  if (!checkPassword(password, u)) return { code: 401, body: { error: "邮箱或密码不正确" } };
+  identifier = String(identifier || "").trim();
+  const u = PHONE_RE.test(identifier) ? byPhone.get(phoneHmac(identifier)) : byEmail.get(identifier.toLowerCase());
+  // 统一报错文案 + 恒定耗时(账号不存在也跑一次假哈希),不泄露"是否注册过"
+  if (!u) { burnPassword(password); return { code: 401, body: { error: "账号或密码不正确" } }; }
+  if (!checkPassword(password, u)) return { code: 401, body: { error: "账号或密码不正确" } };
   if (u.banned) return { code: 403, body: { error: "该账号已被停用。如有疑问请通过页脚反馈联系平台。" } };
   u.last_seen = new Date().toISOString(); saveUsers();
-  logEvent("login", { uid: u.id, email, ip });
+  logEvent("login", { uid: u.id, email: u.email || maskPhone(u.phone ? decPhone(u.phone) : null), ip });
   const token = newSession(u.id);
   return { code: 200, body: { user: publicUser(u) }, headers: { "Set-Cookie": sessionCookie(token) } };
 }
@@ -453,7 +564,7 @@ export function me(req) {
   const u = userOf(req);
   let headers = null;
   if (u) {
-    markOnline("user:" + u.id, "user", u.email);
+    markOnline("user:" + u.id, "user", u.email || u.nickname || u.id);
     // last_seen 落盘限流:5 分钟一次,避免每次心跳都写文件
     if (Date.now() - Date.parse(u.last_seen || 0) > 5 * 60 * 1000) { u.last_seen = new Date().toISOString(); saveUsers(); }
     // 会话滑动续期:原来 180 天从"首次登录"起算且 cookie 不刷新,活跃老用户会莫名掉线
@@ -467,8 +578,13 @@ export function me(req) {
       headers = { "Set-Cookie": sessionCookie(token) };
     }
   }
-  // email_code_required:告诉前端注册是否需要验证码(mailer 配置好即 true)
-  return { code: 200, body: { user: u ? publicUser(u) : null, email_code_required: mailerOn() }, ...(headers ? { headers } : {}) };
+  // email_code_required:注册是否需要邮箱验证码;sms_on:是否已开启手机实名(前端据此切换注册表单为手机号);
+  // needs_phone_bind:已登录但未绑手机(仅 smsOn 时),前端强制弹绑定窗(登录即要求绑定)
+  return { code: 200, body: {
+    user: u ? publicUser(u) : null,
+    email_code_required: mailerOn(), sms_on: smsOn(),
+    needs_phone_bind: needsPhone(u)
+  }, ...(headers ? { headers } : {}) };
 }
 
 export function setFavorites(req, ids) {
@@ -503,7 +619,7 @@ export function track(req, payload, ip) {
   const type = String((payload || {}).type || "");
   const u = userOf(req);
   const anon = String((payload || {}).anon || "").slice(0, 40);
-  if (u) { markOnline("user:" + u.id, "user", u.email); if (anon) online.delete("anon:" + anon); }  // 登录后清掉同人的访客条目,免重复计数
+  if (u) { markOnline("user:" + u.id, "user", u.email || u.nickname || u.id); if (anon) online.delete("anon:" + anon); }  // 登录后清掉同人的访客条目,免重复计数
   else if (anon) markOnline("anon:" + anon, "anon", anon.slice(0, 8));
   // 落盘事件白名单(v0.85.0 扩展):visit 进站 / outbound 前往官网 / view 看详情 /
   // fav 收藏切换 / wkread 读周刊;其余(hb 心跳)只更新在线表不落盘。
@@ -599,9 +715,9 @@ export async function adminOverview() {
 }
 export function adminUsers() {
   const list = users.slice().reverse().map(u => ({
-    id: u.id, email: u.email, nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
+    id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null), nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
     last_seen: u.last_seen, favorites: (u.favorites || []).length,
-    verified: !!u.email_verified, banned: !!u.banned, studio: !!u.studio
+    verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio
   }));
   return { code: 200, body: { total: list.length, users: list } };
 }
@@ -618,9 +734,11 @@ export function adminSetStudio(uid, on) {
   logEvent("studio", { uid: u.id, email: u.email, on: on ? 1 : 0 });
   return { code: 200, body: { ok: true, studio: u.studio } };
 }
-// 封禁/解封(admin):封禁即杀掉该用户所有会话,登录也被拒
-export function adminSetBan(email, on) {
-  const u = byEmail.get(String(email || "").trim().toLowerCase());
+// 封禁/解封(admin):封禁即杀掉该用户所有会话,登录也被拒。
+// key 优先按 uid(手机注册用户 email 可为 null,不能只靠 byEmail,否则封不掉),兼容旧的按 email。
+export function adminSetBan(key, on) {
+  const k = String(key || "").trim();
+  const u = users.find(x => x.id === k) || byEmail.get(k.toLowerCase());
   if (!u) return { code: 404, body: { error: "用户不存在" } };
   u.banned = !!on;
   if (on) {
@@ -628,6 +746,6 @@ export function adminSetBan(email, on) {
     saveSessions();
   }
   saveUsers();
-  logEvent("ban", { uid: u.id, email: u.email, on: on ? 1 : 0 });
+  logEvent("ban", { uid: u.id, email: u.email || maskPhone(u.phone ? decPhone(u.phone) : null), on: on ? 1 : 0 });
   return { code: 200, body: { ok: true, banned: u.banned } };
 }

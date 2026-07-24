@@ -1502,6 +1502,10 @@
       pro:'个人主页',uqPh:'搜索用户昵称…',uqNone:'没有匹配的用户',backX:'‹ 返回',
       authTitleL:'登录 ARTPORTAL',authTitleR:'注册 ARTPORTAL',authEmail:'邮箱',authPw:'密码(至少 6 位)',
       authCode:'邮箱验证码(6 位)',authSend:'发验证码',authGoL:'登 录',authGoR:'注 册',
+      authPhone:'手机号',authIdent:'手机号或邮箱',authSmsCode:'短信验证码(6 位)',authEmailOpt:'邮箱(选填,用于找回)',
+      authRealname:'按国家规定,注册与发布需完成手机号实名;手机号仅用于实名核验,不对外展示。',
+      authBadPhone:'请输入正确的手机号',authNeedId:'请输入手机号或邮箱',
+      bindT:'绑定手机号完成实名',bindNote:'按国家规定,继续使用需完成手机号实名核验。手机号仅用于核验,不对外展示。',bindGo:'绑 定',
       authSwapR:'没有账号?注册 →',authSwapL:'已有账号?登录 →',authNl:'订阅每周艺术机会周报',
       authAgree:'我已阅读并同意',authTerms:'《用户协议》',authPrivacy:'《隐私政策》',
       gateNote:'再多看几个机会前,先花一分钟注册吧 —— 永久免费,还能云端收藏、换设备不丢记录。',
@@ -1569,6 +1573,10 @@
       pro:'Profile',uqPh:'Search users…',uqNone:'No matching users',backX:'‹ Back',
       authTitleL:'Sign in to ARTPORTAL',authTitleR:'Join ARTPORTAL',authEmail:'Email',authPw:'Password (6+ chars)',
       authCode:'Email code (6 digits)',authSend:'Send code',authGoL:'Sign in',authGoR:'Sign up',
+      authPhone:'Mobile number',authIdent:'Phone or email',authSmsCode:'SMS code (6 digits)',authEmailOpt:'Email (optional, for recovery)',
+      authRealname:'Real-name mobile verification is required to register and post; your number is used only for verification and never shown publicly.',
+      authBadPhone:'Enter a valid mobile number',authNeedId:'Enter your phone or email',
+      bindT:'Verify your mobile (real-name)',bindNote:'To continue, real-name mobile verification is required. Your number is used only for verification and never shown publicly.',bindGo:'Verify',
       authSwapR:'No account? Sign up →',authSwapL:'Have an account? Sign in →',authNl:'Subscribe to the weekly digest',
       authAgree:'I have read and agree to the ',authTerms:'Terms',authPrivacy:'& Privacy Policy',
       gateNote:'Enjoying ARTPORTAL? Sign up (free, 1 min) to keep exploring — plus cloud-synced saves across devices.',
@@ -1849,7 +1857,7 @@
   // ============================================================
   //  地球界面即主站(老版已退役进 legacy/):登录/发布/通知/个人主页全部原生实现
   // ============================================================
-  var meUser=null;
+  var meUser=null, apSmsOn=false;   // apSmsOn=服务器已开启手机号实名(阿里云短信配好),注册表单据此切手机号
   function postJ(url,data){ return fetch(url,{method:'POST',credentials:'same-origin',
     headers:{'Content-Type':'application/json'},body:JSON.stringify(data||{})})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,st:r.status,data:j}; }); }); }
@@ -1950,50 +1958,104 @@
     m.querySelector('#cpOut').addEventListener('click',function(){
       postJ('/api/auth/logout',{}).then(function(){ try{ localStorage.removeItem('ap_email'); }catch(e){} location.reload(); })
         .catch(function(){ try{ localStorage.removeItem('ap_email'); }catch(e){} location.reload(); }); }); }
+  // 验证码倒计时(60s);r=postJ 结果,b=按钮,err=错误位
+  function codeCountdown(r,b,err){
+    if(!r.ok){ b.disabled=false; err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
+    err.textContent=''; var n=60; b.textContent=n+'s';
+    var tm=setInterval(function(){ if(!document.getElementById('mhost').innerHTML){ clearInterval(tm); return; }
+      if(--n<=0){ clearInterval(tm); b.disabled=false; b.textContent=L('authSend'); } else b.textContent=n+'s'; },1000); }
+  var PHONE_RE=/^1[3-9]\d{9}$/, EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   function openAuth(mode,gate){
-    var reg=(mode==='register'), em='';
-    try{ em=localStorage.getItem('ap_email')||''; }catch(e){}
+    var reg=(mode==='register'), sms=apSmsOn;   // sms=手机号实名模式(阿里云短信已配)
+    var em=''; try{ em=localStorage.getItem('ap_email')||''; }catch(e){}
+    var idv=em; try{ idv=localStorage.getItem('ap_ident')||em; }catch(e){}
+    var codeRow='<div class="mrow"><input id="aCode" maxlength="6" placeholder="'+L(sms?'authSmsCode':'authCode')+'">'+
+      '<button type="button" class="pp-btn" id="aSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>';
+    var agreeRow='<label class="chk"><input type="checkbox" id="aNl">'+L('authNl')+'</label>'+
+      '<label class="chk"><input type="checkbox" id="aTos">'+L('authAgree')+
+        '<a href="/terms.html" target="_blank" rel="noopener">'+L('authTerms')+'</a>'+
+        '<a href="/privacy.html" target="_blank" rel="noopener">'+L('authPrivacy')+'</a></label>';
+    var fields;
+    if(sms){   // 手机号实名:注册=手机号+密码+短信码+选填邮箱;登录=手机号或邮箱+密码
+      fields=reg
+        ? ('<input id="aPhone" type="tel" maxlength="11" placeholder="'+L('authPhone')+'">'+
+           '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+codeRow+
+           '<input id="aEmail" type="email" placeholder="'+L('authEmailOpt')+'" value="'+esc(em)+'">'+agreeRow)
+        : ('<input id="aId" type="text" placeholder="'+L('authIdent')+'" value="'+esc(idv)+'">'+
+           '<input id="aPw" type="password" placeholder="'+L('authPw')+'">');
+    } else {   // 邮箱模式(原有,未配短信时)
+      fields='<input id="aEmail" type="email" placeholder="'+L('authEmail')+'" value="'+esc(em)+'">'+
+        '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+(reg?(codeRow+agreeRow):'');
+    }
     var m=modal('<h3>'+L(reg?'authTitleR':'authTitleL')+'</h3>'+
       (gate?('<p class="note">'+L('gateNote')+'</p>'):'')+
-      '<input id="aEmail" type="email" placeholder="'+L('authEmail')+'" value="'+esc(em)+'">'+
-      '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+
-      (reg?('<div class="mrow"><input id="aCode" maxlength="6" placeholder="'+L('authCode')+'">'+
-        '<button type="button" class="pp-btn" id="aSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>'+
-        '<label class="chk"><input type="checkbox" id="aNl">'+L('authNl')+'</label>'+
-        '<label class="chk"><input type="checkbox" id="aTos">'+L('authAgree')+
-          '<a href="/terms.html" target="_blank" rel="noopener">'+L('authTerms')+'</a>'+
-          '<a href="/privacy.html" target="_blank" rel="noopener">'+L('authPrivacy')+'</a></label>'):'')+
+      (sms&&reg?('<p class="note">'+L('authRealname')+'</p>'):'')+fields+
       '<div class="merr" id="aErr"></div>'+
       '<button class="mgo" id="aGo" type="button">'+L(reg?'authGoR':'authGoL')+'</button>'+
       '<label class="chk" style="cursor:pointer;justify-content:center" id="aSwap">'+L(reg?'authSwapL':'authSwapR')+'</label>');
     m.querySelector('#aSwap').addEventListener('click',function(){ openAuth(reg?'login':'register'); });
-    if(reg) m.querySelector('#aSend').addEventListener('click',function(){
-      var email=m.querySelector('#aEmail').value.trim(), err=m.querySelector('#aErr'), b=this;
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent=L('authBadEmail'); return; }
-      b.disabled=true;
-      postJ('/api/auth/sendcode',{email:email}).then(function(r){
-        if(!r.ok){ b.disabled=false; err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
-        err.textContent=''; var n=60; b.textContent=n+'s';
-        var tm=setInterval(function(){ if(!document.getElementById('mhost').innerHTML){ clearInterval(tm); return; }
-          if(--n<=0){ clearInterval(tm); b.disabled=false; b.textContent=L('authSend'); } else b.textContent=n+'s'; },1000);
-      }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); });
+    // 发验证码(仅注册):手机模式发短信,邮箱模式发邮件
+    var sendBtn=reg?m.querySelector('#aSend'):null;
+    if(sendBtn) sendBtn.addEventListener('click',function(){
+      var err=m.querySelector('#aErr'), b=this;
+      if(sms){ var phone=m.querySelector('#aPhone').value.trim();
+        if(!PHONE_RE.test(phone)){ err.textContent=L('authBadPhone'); return; }
+        b.disabled=true; postJ('/api/auth/sms-code',{phone:phone}).then(function(r){ codeCountdown(r,b,err); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); });
+      } else { var email=m.querySelector('#aEmail').value.trim();
+        if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
+        b.disabled=true; postJ('/api/auth/sendcode',{email:email}).then(function(r){ codeCountdown(r,b,err); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }
     });
     m.querySelector('#aGo').addEventListener('click',function(){
-      var email=m.querySelector('#aEmail').value.trim(), pw=m.querySelector('#aPw').value;
-      var err=m.querySelector('#aErr'), b=this;
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent=L('authBadEmail'); return; }
+      var err=m.querySelector('#aErr'), b=this, pw=m.querySelector('#aPw').value;
       if(pw.length<6){ err.textContent=L('authBadPw'); return; }
-      if(reg&&!m.querySelector('#aTos').checked){ err.textContent=L('errAgree'); return; }
+      var url, payload, sk, sv;
+      if(sms&&reg){
+        var phone=m.querySelector('#aPhone').value.trim();
+        if(!PHONE_RE.test(phone)){ err.textContent=L('authBadPhone'); return; }
+        if(!m.querySelector('#aTos').checked){ err.textContent=L('errAgree'); return; }
+        var em2=m.querySelector('#aEmail').value.trim();
+        url='/api/auth/register'; sk='ap_ident'; sv=phone;
+        payload={phone:phone,password:pw,code:m.querySelector('#aCode').value.trim(),newsletter:!!m.querySelector('#aNl').checked};
+        if(em2){ if(!EMAIL_RE.test(em2)){ err.textContent=L('authBadEmail'); return; } payload.email=em2; }
+      } else if(sms){   // 手机模式登录:手机号或邮箱
+        var id=m.querySelector('#aId').value.trim();
+        if(!id){ err.textContent=L('authNeedId'); return; }
+        url='/api/auth/login'; payload={identifier:id,password:pw}; sk='ap_ident'; sv=id;
+      } else {   // 邮箱模式
+        var email=m.querySelector('#aEmail').value.trim();
+        if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
+        if(reg&&!m.querySelector('#aTos').checked){ err.textContent=L('errAgree'); return; }
+        url=reg?'/api/auth/register':'/api/auth/login'; sk='ap_email'; sv=email;
+        payload={email:email,password:pw,code:reg?m.querySelector('#aCode').value.trim():'',newsletter:reg&&!!m.querySelector('#aNl').checked};
+      }
       b.disabled=true;
-      postJ(reg?'/api/auth/register':'/api/auth/login',
-        {email:email,password:pw,code:reg?m.querySelector('#aCode').value.trim():'',
-         newsletter:reg&&!!m.querySelector('#aNl').checked})
-      .then(function(r){
+      postJ(url,payload).then(function(r){
         if(!r.ok){ b.disabled=false; err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
-        try{ localStorage.setItem('ap_email',email); localStorage.removeItem('ap_free'); }catch(e){}
-        location.reload(); })
-      .catch(function(){ b.disabled=false; err.textContent=L('authNet'); });
+        try{ localStorage.setItem(sk,sv); localStorage.removeItem('ap_free'); }catch(e){}
+        location.reload(); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); });
     }); }
+  // 老用户强制绑定手机号完成实名(登录即弹,不可跳过;底部退出登录逃生口)
+  function bindPhoneModal(){
+    var m=modal('<h3>'+L('bindT')+'</h3><p class="note">'+L('bindNote')+'</p>'+
+      '<input id="bPhone" type="tel" maxlength="11" placeholder="'+L('authPhone')+'">'+
+      '<div class="mrow"><input id="bCode" maxlength="6" placeholder="'+L('authSmsCode')+'">'+
+        '<button type="button" class="pp-btn" id="bSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>'+
+      '<div class="merr" id="bErr"></div>'+
+      '<button class="mgo" id="bGo" type="button">'+L('bindGo')+'</button>'+
+      '<button class="gd-skip" id="bOut" type="button">'+L('ppLogout')+'</button>', true);
+    m.querySelector('#bSend').addEventListener('click',function(){
+      var phone=m.querySelector('#bPhone').value.trim(), err=m.querySelector('#bErr'), b=this;
+      if(!PHONE_RE.test(phone)){ err.textContent=L('authBadPhone'); return; }
+      b.disabled=true; postJ('/api/auth/sms-code',{phone:phone,purpose:'bind'}).then(function(r){ codeCountdown(r,b,err); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
+    m.querySelector('#bGo').addEventListener('click',function(){
+      var phone=m.querySelector('#bPhone').value.trim(), err=m.querySelector('#bErr'), b=this;
+      if(!PHONE_RE.test(phone)){ err.textContent=L('authBadPhone'); return; }
+      b.disabled=true;
+      postJ('/api/auth/bind-phone',{phone:phone,code:m.querySelector('#bCode').value.trim()}).then(function(r){ b.disabled=false;
+        if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
+        location.reload(); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
+    m.querySelector('#bOut').addEventListener('click',function(){
+      postJ('/api/auth/logout',{}).then(function(){ location.reload(); }).catch(function(){ location.reload(); }); }); }
   // —— 统一发布(机会/招聘/资讯→/api/submit,作品→/api/works;AI 审核链路不变) ——
   function openPub(){ if(!meUser){ openAuth('login'); return; }
     var m=modal('<h3>'+L('pubTitle')+'</h3><p class="note">'+L('pubNote')+'</p>'+
@@ -2740,12 +2802,14 @@
     if(uloc){ userLL=uloc.ll; userCart=ll2c(userLL); needDraw=true; } }
   window.__setMeLoc=function(ll){ userLL=ll; userCart=ll2c(ll); needDraw=true; };   // 调试/手动定位
   fetch('/api/auth/me',{credentials:'same-origin'}).then(function(r){ return r.json(); }).then(function(j){
+    apSmsOn=!!(j&&j.sms_on);   // 未登录也要知道(注册表单用)
     if(j&&j.user){ meUser=j.user; setLoginBtn(); pollNtf(); setInterval(pollNtf,60000);
       favKeys=new Set(j.user.favorites||[]);   // 收藏云端为准
       setUserLoc(j.user.ip_region);
       var det=document.getElementById('detail');
       if(det.style.display==='block'&&det._repaintFav) det._repaintFav();
-      if(!meUser.nickname||!meUser.avatar) completeProfile(); }   // 缺昵称/头像:进站即弹强制补全窗(可退出登录)
+      if(j.needs_phone_bind) bindPhoneModal();                    // 登录即要求绑定手机号实名(最优先,先于补资料)
+      else if(!meUser.nickname||!meUser.avatar) completeProfile(); }   // 缺昵称/头像:进站即弹强制补全窗(可退出登录)
   }).catch(function(){});
   // 匿名访客(或登录用户缺属地)兜底:粗属地定位,与全站 IP 属地同口径
   fetch('/api/geo',{credentials:'same-origin'}).then(function(r){ return r.json(); })

@@ -301,7 +301,7 @@
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>验证</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>手机</th><th>验证</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -787,7 +787,8 @@
       else av.textContent = "—";
       tr.appendChild(av);
       tr.appendChild(td(u.nickname || "(未设置)", u.nickname ? "" : "muted"));
-      tr.appendChild(td(u.email));
+      tr.appendChild(td(u.email || "—", u.email ? "" : "muted"));
+      tr.appendChild(td(u.phone_masked || "—", u.phone_masked ? "" : "muted"));   // 手机号掩码(实名);未绑显示 —
       // 邮箱验证:验证码注册的 ✓;发信启用前注册的老账号显示 —(仅弱校验)
       var vc = document.createElement("td");
       var vp = document.createElement("span");
@@ -817,8 +818,8 @@
       bb.textContent = u.banned ? "解封" : "封禁";
       bb.style.cssText = "padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + (u.banned ? "#1d3a24;color:#7ee08a" : "#3a1d1d;color:#ff9a8a");
       bb.addEventListener("click", function () {
-        if (!confirm((u.banned ? "解封" : "封禁(踢下线+禁止登录)") + ":" + u.email + "?")) return;
-        post("/api/admin/users/ban", { email: u.email, on: !u.banned }).then(function (r) {
+        if (!confirm((u.banned ? "解封" : "封禁(踢下线+禁止登录)") + ":" + (u.email || u.phone_masked || u.nickname || u.id) + "?")) return;
+        post("/api/admin/users/ban", { uid: u.id, on: !u.banned }).then(function (r) {   // 按 uid 封禁(手机注册用户 email 可为空)
           if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
           get("/api/admin/users").then(function (x) { allUsers = x.users || []; renderUsers(); }).catch(function () {});
         });
