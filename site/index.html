@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.93.1" />
+<meta name="app-version" content="0.93.2" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.93.1</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.93.2</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.93.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.93.1"></script>
-<script src="js/globe-data.js?v=0.93.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.93.2"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.93.2"></script>
+<script src="js/globe-data.js?v=0.93.2"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -876,12 +876,7 @@
     var t0=performance.now(), nowMs=Date.now();
     var sc=proj.scale(); updateRC();
     ctx.fillStyle=T.space; ctx.fillRect(0,0,W,H);
-    // 大气层辉光环(v0.93.1 仅深色主题:仿 WebGL Globe 把球从太空点亮;去掉旧灰缘光/硬边圈,浅色主题不画保持干净)
-    if(document.documentElement.classList.contains('dark')){
-      var atmo=ctx.createRadialGradient(W/2,H/2,sc*0.93,W/2,H/2,sc*1.18);
-      atmo.addColorStop(0,'rgba('+T.atmo+',0)'); atmo.addColorStop(0.76,'rgba('+T.atmo+',0)');
-      atmo.addColorStop(0.9,'rgba('+T.atmo+',0.4)'); atmo.addColorStop(1,'rgba('+T.atmo+',0)');
-      ctx.fillStyle=atmo; ctx.beginPath(); ctx.arc(W/2,H/2,sc*1.18,0,2*PI); ctx.fill(); }
+    // (v0.93.2 去掉地球外围的大气辉光圈——用户不要那圈亮环,球体直接坐在深空背景上)
     ctx.beginPath(); pathC(SPHERE); ctx.fillStyle=T.sphere; ctx.fill();
     if(!((perfTier>=2&&inMotion())||sheetDrag)){
       ctx.beginPath(); pathC(grat); ctx.lineWidth=0.4; ctx.strokeStyle=T.grat; ctx.stroke(); }
