@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.90.0" />
+<meta name="app-version" content="0.90.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -705,11 +705,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.90.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.90.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.90.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.90.0"></script>
-<script src="js/globe-data.js?v=0.90.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.90.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.90.1"></script>
+<script src="js/globe-data.js?v=0.90.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -932,6 +932,16 @@
 
   // —— 主循环:自动旋转/惯性/平滑缩放,统一在这里驱动 ——
   var lastFrame=Date.now();
+  // —— 卡顿治理(v0.90.1)——
+  // ① 全屏浮层(频道/周刊/查看器/灯箱/弹层)盖着时冻结自转:画布静止→毛玻璃背景可被
+  //    合成器缓存,每帧 blur 重算成本归零;时间基准同步冻结,恢复时不猛跳。
+  // ② 静止自转限 ~30fps(转速不变,重绘减半);拖拽/惯性/缩放交互仍全帧率保跟手。
+  var lastSpin=Date.now(), elCov=null;
+  function coveredLayer(){
+    if(!elCov) elCov={ch:document.getElementById('chpanel'),wk:document.getElementById('wkpage'),
+      wv:document.getElementById('wview'),lb:document.getElementById('lightbox'),mh:document.getElementById('mhost')};
+    return elCov.ch.style.display==='block'||elCov.wk.style.display==='block'
+      ||elCov.wv.style.display==='flex'||elCov.lb.style.display==='flex'||!!elCov.mh.firstChild; }
   (function loop(){ requestAnimationFrame(loop);
     if(!inited) return;   // 首次 resize 前不画(防脚本评估中途触发首帧)
     var now=Date.now(), render=needDraw; needDraw=false;
@@ -942,9 +952,13 @@
       proj.rotate([r[0]+velX, clampLat(r[1]+velY), r[2]]);
       velX*=0.95; velY*=0.95; render=true;
       if(Math.abs(velX)+Math.abs(velY)<0.02){ inertiaOn=false; resumeSoon(); } }
-    else if(spinning&&!dragging){ var r2=proj.rotate();
-      proj.rotate([r2[0]+(now-lastFrame)*0.004, r2[1], r2[2]]); render=true; }
-    else if(!spinning&&!dragging&&autoResumeAt&&now>autoResumeAt&&!drilledCountry&&targetScale==null){ spinning=true; autoResumeAt=0; }
+    else if(spinning&&!dragging){
+      if(coveredLayer()){ lastSpin=now; }
+      else if(now-lastSpin>=33){ var r2=proj.rotate();
+        proj.rotate([r2[0]+(now-lastSpin)*0.004, r2[1], r2[2]]);
+        lastSpin=now; render=true; } }
+    else { lastSpin=now;
+      if(!spinning&&!dragging&&autoResumeAt&&now>autoResumeAt&&!drilledCountry&&targetScale==null){ spinning=true; autoResumeAt=0; } }
     lastFrame=now;
     if(render) draw();
   })();
