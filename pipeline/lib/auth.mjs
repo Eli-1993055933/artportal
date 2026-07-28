@@ -14,7 +14,7 @@ import { Resolver } from "node:dns/promises";
 import { wordHits, moderateText } from "./moderation.mjs";
 import { logModeration } from "./db.mjs";
 import { mailerOn, sendVerifyCode } from "./mailer.mjs";
-import { smsOn, sendSmsCode } from "./sms.mjs";
+import { smsOn, sendSmsCode, checkSmsCode } from "./sms.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE = join(__dir, "..", "state");
@@ -236,8 +236,8 @@ function decPhone(enc) {
 function maskPhone(phone) { const s = String(phone || ""); return PHONE_RE.test(s) ? s.slice(0, 3) + "****" + s.slice(-4) : null; }
 export function needsPhone(u) { return smsOn() && !!u && !u.phone_verified; }   // 发布门:开启实名后,未绑手机不得发布
 
-const smsCodes = new Map();                                // phone -> { code, exp, tries }
 // 发手机验证码。purpose: register(注册,手机号须未占用) / bind(老用户绑定,手机号须未被他人占用)
+// 验证码由阿里云生成+记忆+校验(见 sms.mjs);我方只做发送前的占用查重与限频。
 export async function sendPhoneCode(body, ip) {
   if (!smsOn()) return { code: 400, body: { error: "当前无需手机验证码" } };
   const phone = String((body || {}).phone || "").trim();
@@ -245,30 +245,24 @@ export async function sendPhoneCode(body, ip) {
   if (byPhone.has(phoneHmac(phone))) return { code: 409, body: { error: (body || {}).purpose === "bind" ? "该手机号已被其他账号绑定" : "该手机号已注册,请直接登录" } };
   if (authLimited("sms:" + phone, 3, 10 * 60 * 1000)) return { code: 429, body: { error: "该手机号请求验证码太频繁,请稍后再试" } };
   if (authLimited("smsip:" + ip, 8, 10 * 60 * 1000)) return { code: 429, body: { error: "发送太频繁,请稍后再试" } };
-  const code = String(100000 + (randomBytes(4).readUInt32BE(0) % 900000));
-  smsCodes.set(phone, { code, exp: Date.now() + 10 * 60 * 1000, tries: 0 });
-  if (smsCodes.size > 10000) { const now = Date.now(); for (const [k, v] of smsCodes) if (now > v.exp) smsCodes.delete(k); }
-  try { await sendSmsCode(phone, code); }
+  try { await sendSmsCode(phone); }
   catch (e) {
-    smsCodes.delete(phone);
     process.stderr.write("[sms] 发送失败 " + phone + ": " + (e.message || e) + "\n");
     return { code: 503, body: { error: "验证码发送失败,请稍后再试" } };
   }
   logEvent("smscode", { phone: maskPhone(phone), ip });
   return { code: 200, body: { ok: true } };
 }
-// 校验并消费手机验证码:通过返回 null,否则返回错误文案
-function consumeSmsCode(phone, code) {
-  const rec = smsCodes.get(phone);
-  if (!rec || Date.now() > rec.exp) return "请先获取手机验证码";
-  rec.tries++;
-  if (rec.tries > 5) { smsCodes.delete(phone); return "尝试次数过多,请重新获取验证码"; }
-  if (String(code || "").trim() !== rec.code) return "验证码不正确";
-  smsCodes.delete(phone);
-  return null;
+// 校验手机验证码(调阿里云 CheckSmsVerifyCode):通过返回 null,否则返回错误文案。
+async function checkPhoneCode(phone, code) {
+  if (!/^\d{4,6}$/.test(String(code || "").trim())) return "请填写收到的手机验证码";
+  let pass;
+  try { pass = await checkSmsCode(phone, code); }
+  catch (e) { process.stderr.write("[sms] 校验失败 " + phone + ": " + (e.message || e) + "\n"); return "验证码校验失败,请稍后再试"; }
+  return pass ? null : "验证码不正确或已过期";
 }
 // 老用户绑定手机号完成实名(登录后强制)
-export function bindPhone(req, body, ip) {
+export async function bindPhone(req, body, ip) {
   const u = userOf(req);
   if (!u) return { code: 401, body: { error: "未登录" } };
   if (!smsOn()) return { code: 400, body: { error: "当前无需绑定手机号" } };
@@ -277,7 +271,7 @@ export function bindPhone(req, body, ip) {
   if (!PHONE_RE.test(phone)) return { code: 400, body: { error: "手机号格式不正确" } };
   const holder = byPhone.get(phoneHmac(phone));
   if (holder && holder.id !== u.id) return { code: 409, body: { error: "该手机号已被其他账号绑定" } };
-  const err = consumeSmsCode(phone, (body || {}).code);
+  const err = await checkPhoneCode(phone, (body || {}).code);
   if (err) return { code: 400, body: { error: err } };
   if (u.phone_hmac) byPhone.delete(u.phone_hmac);
   u.phone = encPhone(phone); u.phone_hmac = phoneHmac(phone); u.phone_verified = true;
@@ -490,7 +484,7 @@ export async function register(body, ip) {
       if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
       if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已被使用" } };
     }
-    const err = consumeSmsCode(phone, body.code);   // 前端在手机模式下把短信码放 code 字段
+    const err = await checkPhoneCode(phone, body.code);   // 前端在手机模式下把短信码放 code 字段
     if (err) return { code: 400, body: { error: err } };
     const salt = randomBytes(16).toString("hex");
     const u = {
