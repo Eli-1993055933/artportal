@@ -31,6 +31,7 @@ import { moderateText } from "./lib/moderation.mjs";
 import * as db from "./lib/db.mjs";
 import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
 import { mailerOn, sendMail } from "./lib/mailer.mjs";
+import { loadRegions, dueNow, pickQueries, dayIndex, rosterView, recordShift, reportView } from "./lib/regions.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -158,6 +159,8 @@ function withWriteLock(fn) {
   writeChain = p.then(() => {}, () => {});
   return p;
 }
+// 区域经理「立即上班」句柄(在下方调度块里赋值;/admin 手动排班用)
+let regionRunNow = null;
 // 2) 并发信号量:同时进行的检索上限;超出的"排队等待"(不是拒绝)。检索大多在等网络IO,故上限可较高。
 const MAX_CONCURRENT = Math.max(4, Number(process.env.MAX_CONCURRENT || 24));
 let running = 0;
@@ -189,25 +192,35 @@ function rateLimited(ip) {
   return false;
 }
 
-async function searchAndHarvest(query, target = 6) {
-  // AI 理解需求 → 结构化意图(地点/领域 + 精准查询);理解失败退回关键词模板。
-  const intent = await understandQuery(query);
-  const loc = intent && intent.location ? String(intent.location).trim() : null;
+// hint(v0.98.0 区域经理):地区本就已知时直接把 gl/hl/地点别名给死,【跳过 AI 意图理解】。
+//   两个好处:①省一次 AI 调用(每班一次,天天在跑)②不会猜错——日志实证 AI 把"北欧"
+//   猜成 gl=dk(丹麦),整轮检索就偏到丹麦去了。用户手动检索(地区未知)仍走 AI 理解,不变。
+async function searchAndHarvest(query, target = 6, hint = null) {
+  const intent = hint ? null : await understandQuery(query);
+  const loc = hint ? (hint.location || null) : (intent && intent.location ? String(intent.location).trim() : null);
   // 地点的中英文/别名数组(供相关性匹配,防"洛杉矶"匹配不到"Los Angeles");无则回退单地点
-  const locTerms = (intent && Array.isArray(intent.location_terms) && intent.location_terms.length)
-    ? intent.location_terms.map(s => String(s).trim()).filter(Boolean) : (loc ? [loc] : []);
+  const locTerms = hint
+    ? (Array.isArray(hint.terms) ? hint.terms.filter(Boolean).map(String) : [])
+    : ((intent && Array.isArray(intent.location_terms) && intent.location_terms.length)
+        ? intent.location_terms.map(s => String(s).trim()).filter(Boolean) : (loc ? [loc] : []));
   // 检索地域/语言(2026-07-20):国际地点用 gl=us/hl=en,否则默认中国区中文——否则国际站被 Google 严重降权
-  const gl = (intent && intent.gl) ? String(intent.gl).toLowerCase() : "cn";
-  const hl = (intent && intent.hl) ? String(intent.hl) : "zh-cn";
+  const gl = hint ? String(hint.gl || "cn").toLowerCase() : ((intent && intent.gl) ? String(intent.gl).toLowerCase() : "cn");
+  const hl = hint ? String(hint.hl || "zh-cn") : ((intent && intent.hl) ? String(intent.hl) : "zh-cn");
   const cnRegion = /^(cn|hk|tw|mo)$/.test(gl);
-  process.stderr.write("  [意图] 地点=" + (loc || "—") + " 领域=" + ((intent && intent.subject) || "—") + " 区域=" + gl + "\n");
+  process.stderr.write(hint
+    ? "  [区域] " + (hint.label || loc || "—") + " 区域=" + gl + "(已知地区,跳过意图理解)\n"
+    : "  [意图] 地点=" + (loc || "—") + " 领域=" + ((intent && intent.subject) || "—") + " 区域=" + gl + "\n");
   // 官网限定查询按区域自适应:中国/港澳台用 .cn/.hk/.tw 官方后缀;国际用 .org/.edu/.gov/.museum/.ac.uk
   const OFFICIAL_SITES = cnRegion
     ? "(site:edu.cn OR site:org.cn OR site:gov.cn OR site:ac.cn OR site:museum OR site:org.hk OR site:gov.tw OR site:org.tw)"
     : "(site:.org OR site:.edu OR site:.gov OR site:.museum OR site:.ac.uk OR site:.org.uk)";
-  const baseQ = (intent && Array.isArray(intent.search_queries) && intent.search_queries.length)
-    ? intent.search_queries.slice(0, 3).map(String)
-    : [query + " 艺术 驻留 征集 报名", query + " 展览 征集 大赛 奖 官网", query + " art residency open call apply"];
+  // 区域经理的词池本就是人工调好的成品(已含 open call / 征集 等意图词),不再派生三条变体:
+  // 每班从 4 次 serper 降到 2 次(官网限定 + 原词),同样的预算能多排一倍班次。
+  const baseQ = hint
+    ? [query]
+    : ((intent && Array.isArray(intent.search_queries) && intent.search_queries.length)
+        ? intent.search_queries.slice(0, 3).map(String)
+        : [query + " 艺术 驻留 征集 报名", query + " 展览 征集 大赛 奖 官网", query + " art residency open call apply"]);
   const queries = [(baseQ[0] || query) + " " + OFFICIAL_SITES].concat(baseQ);   // ① 官网限定 + ②③④ 意图查询
   const rawUrls = [];
   for (const q of queries) {
@@ -302,7 +315,10 @@ function finalize(rec, url, host) {
     org_type: "official",
     trust: "auto",                    // evidence 已过;前端标"AI 检索·请核对官网"(见 provenance)
     status: computeStatus(rec.deadline),
-    verified_at: null, last_seen: today, updated_at: today, _via: "search"
+    // first_seen = 【首次收录日】,写死不再改(v0.98.0)。前端「今日新增/NEW」只认它:
+    // added_at 只存在于 83/392 条老数据且早已停更,updated_at 会被每日管道/质检/翻译回填触碰
+    // —— 拿这两个判"新",管道跑一晚就会把几百条老条目全标成 NEW。
+    verified_at: null, first_seen: today, last_seen: today, updated_at: today, _via: "search"
   };
 }
 
@@ -1310,6 +1326,42 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 200, body });
       } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
+    // —— 区域经理编队(v0.98.0):工牌墙数据 = 档案 + 当值状态 + 成绩单 + 辖区信源数 ——
+    if (p === "/api/admin/regions" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      try {
+        const cfg = await loadRegions();
+        const now = new Date();
+        const roster = rosterView(cfg.managers, now);
+        const score = await reportView();
+        // 辖区信源数:sources.json 里 region_hint 指向该经理的条数(未来信源扩量后按区分片抓取的依据)
+        const byRegion = {};
+        try {
+          const sj = JSON.parse(await readFile(join(__dir, "sources.json"), "utf8"));
+          for (const s of (Array.isArray(sj) ? sj : (sj.sources || []))) {
+            const r = s && s.region_hint; if (r) byRegion[r] = (byRegion[r] || 0) + 1;
+          }
+        } catch (e) {}
+        return json({ code: 200, body: {
+          enabled: process.env.REGION_HARVEST === "1",
+          per_shift: Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3)),
+          serper_left: serperBudgetLeft(),
+          utc_hour: now.getUTCHours(),
+          day_index: dayIndex(now),
+          desk: cfg.desk,
+          managers: roster.map(r => ({ ...r, score: score[r.id] || null, sources: byRegion[r.id] || 0 }))
+        } });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    // 「立即上班」:手动排一班(开幕/演示前想当场补内容用)。异步跑,不阻塞后台页面。
+    if (p === "/api/admin/regions/run" && m === "POST") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      if (!regionRunNow) return json({ code: 503, body: { error: "调度未就绪" } });
+      const b = await readBody(req).catch(() => ({}));
+      const who = b && b.id ? String(b.id).slice(0, 40) : null;
+      regionRunNow(who).catch(e => process.stderr.write("[区域经理] 手动排班失败:" + String(e.message || e).slice(0, 120) + "\n"));
+      return json({ code: 200, body: { ok: true, started: who || "auto" } });
+    }
     // —— 数据质检「校勘」(v0.74.0):报告 / 立即巡检 / 一键归档建议条目 ——
     if (p === "/api/admin/qc" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
@@ -1671,12 +1723,125 @@ async function autoHarvestTick() {
     db.agentLog({ agent: "scout", ok: false, summary: `${ch}「${q}」失败:` + String(e.message || e).slice(0, 120) }).catch(() => {});
   }
 }
-if (process.env.AUTO_HARVEST === "1") {
+// REGION_HARVEST=1 时由区域经理编队接管机会频道(见下),这里的旧轮转必须让位,否则双份花 serper。
+if (process.env.AUTO_HARVEST === "1" && process.env.REGION_HARVEST !== "1") {
   const mins = Math.max(10, Number(process.env.AUTO_HARVEST_MINUTES || 480));   // 默认 8 小时一轮(省额);下限 10 分钟防手滑
   const boot = Math.max(5, Number(process.env.AUTO_HARVEST_BOOT || 180));
   setTimeout(autoHarvestTick, boot * 1000);
   setInterval(autoHarvestTick, mins * 60 * 1000);
   process.stderr.write(`[自动检索] 已开启:每 ${mins} 分钟检索一个频道(机会→资讯→机会→招聘 轮转;首轮 ${boot} 秒后)\n`);
+}
+
+// —— 区域经理编队(v0.98.0,路线图第 18 项 L3)——
+// 用户诉求:在全球艺术兴盛的地方各设"区域经理",轮流每天抓取,既摊平能耗又让站点天天有新内容。
+// 调度规则见 lib/regions.mjs 与 regions.json:中国基本盘常驻天天上班 + 中国/国际两组各轮值一位,
+// 每位在【当地】上午上班 —— 负载天然摊到 24 小时,用户任何时候刷新都能看到刚入库的新条目。
+// 抓取本身完全复用 searchAndHarvest(反幻觉 evidence 逐字校验一条不改),只是把地区给死、跳过 AI 猜地点。
+// 开关 REGION_HARVEST=1;每班词数 REGION_QUERIES_PER_SHIFT(默认 3)。
+// 预算账(每词 2 次 serper:官网限定 + 原词):每天 3 位经理 × 3 词 × 2 = 18,加编辑部 2 班约 8,
+// 合计约 26 次/天 —— 日预算 70 下仍给用户手动检索和「探长」留足余量。
+// 调度体在模块级(不裹在开关里):/admin 的「立即上班」要能手动调,便于开幕前当场补一班内容。
+{
+  const doneShifts = new Set();                        // "日序号:经理id" —— 每人每天只上一次班(幂等,防重启重跑)
+  let regionRunning = false;
+
+  async function runShift(m, q) {
+    const t0 = Date.now();
+    await acquireSlot();                               // 与用户检索共用并发闸,互不挤占
+    try {
+      const r = await searchAndHarvest(q, 6, { gl: m.gl, hl: m.hl, terms: m.terms, label: m.zh });
+      for (const rec of r.added) {
+        db.ingestInsert({ channel: "opportunities", record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "region:" + m.id, ip: "server" });
+      }
+      process.stderr.write(`[区域经理·${m.zh}] "${q}" → 探测${r.probed} 入库${r.added.length} (${Math.round((Date.now() - t0) / 1000)}s,今日搜索余量${serperBudgetLeft()})\n`);
+      await recordShift(m.id, { q, probed: r.probed, added: r.added.length, ok: true, took_ms: Date.now() - t0 });
+      return r.added.length;
+    } catch (e) {
+      const msg = String(e.message || e).slice(0, 120);
+      process.stderr.write(`[区域经理·${m.zh}] "${q}" 失败: ${msg}\n`);
+      await recordShift(m.id, { q, probed: 0, added: 0, ok: false, error: msg, took_ms: Date.now() - t0 });
+      return 0;
+    } finally { releaseSlot(); }
+  }
+
+  // forceId:/admin「立即上班」传经理 id —— 跳过"当值日 + 上班点 + 今日已跑"三道判定,直接排一班。
+  async function regionTick(forceId = null) {
+    if (regionRunning) return { skipped: "running" };    // 上一班还没跑完就跳过(一班可能要几分钟)
+    let cfg;
+    try { cfg = await loadRegions(); }
+    catch (e) { process.stderr.write("[区域经理] regions.json 读取失败,本轮跳过:" + String(e.message || e).slice(0, 100) + "\n"); return { error: "config" }; }
+    const now = new Date();
+    const day = dayIndex(now);
+    // 幂等两道:①进程内 doneShifts ②成绩单里的 last_at 落在同一个北京日 —— 第②道是给【重启】兜底的,
+    // 否则 systemd 重启一次就会把当天已跑过的班再花一遍 serper。
+    let score = {};
+    try { score = await reportView(); } catch (e) {}
+    const ranToday = (id) => {
+      const la = score[id] && score[id].last_at;
+      return !!la && Math.floor((new Date(la).getTime() + 8 * 3600e3) / 86400000) === day;
+    };
+    const forced = forceId ? cfg.managers.filter(m => m.id === forceId) : null;
+    if (forceId && !forced.length) return { error: "no-such-manager" };
+    const due = forced || dueNow(cfg.managers, now).filter(m => !doneShifts.has(day + ":" + m.id) && !ranToday(m.id));
+    // 编辑部班次:资讯/招聘不按地区,每天固定两班,保持三频道都在长
+    const deskDue = forceId ? [] : cfg.desk.filter(s => s.utc_hour === now.getUTCHours() && !doneShifts.has(day + ":desk-" + s.channel));
+    if (!due.length && !deskDue.length) return { skipped: "nothing-due" };
+
+    if (process.env.SERPER_API_KEY && serperBudgetLeft() < 6) {
+      process.stderr.write("[区域经理] 今日搜索预算余量不足,本班让路(优先保用户手动检索)\n");
+      db.agentLog({ agent: "scout", ok: true, summary: "预算不足,区域经理本班让路", metrics: { skipped: true } }).catch(() => {});
+      return { skipped: "budget" };                      // 不标记 done:预算恢复后(或明天)还能补上
+    }
+
+    regionRunning = true;
+    const done = [];
+    try {
+      const perShift = Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3));
+      for (const m of due) {
+        doneShifts.add(day + ":" + m.id);
+        let added = 0;
+        const qs = pickQueries(m, perShift, now);
+        for (const q of qs) {
+          if (process.env.SERPER_API_KEY && serperBudgetLeft() < 4) break;   // 班中余量见底就收工
+          added += await runShift(m, q);
+        }
+        db.agentLog({ agent: "region:" + m.id, ok: true,
+          summary: `${m.zh} 当班 ${qs.length} 词 → 入库 ${added}`,
+          metrics: { region: m.id, queries: qs.length, added } }).catch(() => {});
+        done.push({ id: m.id, zh: m.zh, queries: qs.length, added });
+      }
+      for (const s of deskDue) {
+        doneShifts.add(day + ":desk-" + s.channel);
+        const pool = AUTO_QUERIES[s.channel];
+        if (!pool || !pool.length) continue;
+        const q = pool[day % pool.length];               // 确定性取词,长期均匀走完词池
+        const t0 = Date.now();
+        await acquireSlot();
+        try {
+          const r = await harvestChannel(s.channel, q, 6);
+          for (const rec of r.added) db.ingestInsert({ channel: s.channel, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "desk", ip: "server" });
+          process.stderr.write(`[编辑部·${s.channel}] "${q}" → 探测${r.probed} 入库${r.added.length} (${Math.round((Date.now() - t0) / 1000)}s)\n`);
+          db.agentLog({ agent: "scout", ok: true, summary: `${s.channel}「${q}」探测${r.probed} 入库${r.added.length}`, metrics: { channel: s.channel, q, probed: r.probed, added: r.added.length }, took_ms: Date.now() - t0 }).catch(() => {});
+        } catch (e) {
+          process.stderr.write(`[编辑部·${s.channel}] "${q}" 失败: ${String(e.message || e).slice(0, 120)}\n`);
+        } finally { releaseSlot(); }
+      }
+    } finally {
+      regionRunning = false;
+      if (doneShifts.size > 400) doneShifts.clear();     // 跨天累积清理(键含日序号,清了也不会重跑当天已跑的班——最坏多跑一班)
+    }
+    return { ok: true, shifts: done, serper_left: serperBudgetLeft() };
+  }
+  regionRunNow = regionTick;                             // 交给 /admin「立即上班」
+
+  if (process.env.REGION_HARVEST === "1") {
+    setTimeout(() => regionTick(), 70 * 1000);
+    setInterval(() => regionTick(), 10 * 60 * 1000);      // 每 10 分钟对一次表,不会错过整点班次
+    loadRegions().then(c => {
+      const cn = c.managers.filter(m => m.kind !== "intl").length, intl = c.managers.filter(m => m.kind === "intl").length;
+      process.stderr.write(`[区域经理] 编队已就位:${c.managers.length} 位(中国 ${cn} · 国际 ${intl}),按当地上班时间错峰轮值,每班 ${Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3))} 词\n`);
+    }).catch(e => process.stderr.write("[区域经理] 档案加载失败:" + String(e.message || e).slice(0, 120) + "\n"));
+  }
 }
 
 // —— 数据质检 agent「校勘」(v0.74.0)——

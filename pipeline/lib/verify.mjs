@@ -75,6 +75,20 @@ export function verifyRecord(extracted, ctx) {
     rec.deadline = null;
   }
 
+  // 3.5) 【新增 v0.98.0】截止日期已过 → 整条丢弃,绝不入库。
+  // 招聘频道早有这道闸(channels.mjs 的 job-expired),机会频道一直没有——以前每日抓的是机构官网
+  // 最新公告页,过期条目少见;区域经理做定向检索后会翻出归档老页面(实测抓到 2017/2019 年的征集),
+  // 让用户点开一个 7 年前的截止日期,比少一条更伤可信度。存量老数据由「校勘」按既有规则归档,这里只管入口。
+  // 已入库条目的到期不受影响(本函数只在【新提取】时调用);ctx.today 可注入便于测试。
+  if (rec.deadline != null) {
+    const today = ctx && ctx.today ? String(ctx.today) : new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);
+    const grace = Math.max(0, Number(process.env.OPP_EXPIRED_GRACE_DAYS || 0));
+    const cutoff = grace ? new Date(Date.parse(today + "T00:00:00Z") - grace * 86400e3).toISOString().slice(0, 10) : today;
+    if (String(rec.deadline).slice(0, 10) < cutoff) {
+      return { dropped: true, dropReason: "expired:" + rec.deadline, nulled, record: null };
+    }
+  }
+
   // 4) 详情页 URL 必须与信源同域名,否则整条丢弃
   const url = rec.url || ctx.url;
   if (!sameDomain(url, ctx.domain)) {

@@ -186,6 +186,9 @@ async function main() {
     if (prev && prev.trust === "verified") { stats.updated++; continue; } // 人工核实的不被 auto 覆盖
     // 保留此前已找到的封面(含联网检索来的),避免每日重跑用页面 og 图覆盖更贴切的封面
     if (prev && prev.cover && !r.cover) { r.cover = prev.cover; r.cover_source = prev.cover_source; }
+    // 首次收录日只写一次:本函数整条替换旧记录,不继承的话每晚重抓都会把 first_seen 刷成今天,
+    // 前端就会把全库老条目都标成"今日新增"。旧数据没有该字段 → 留空,前端按"不是新的"处理。
+    if (prev && prev.first_seen) r.first_seen = prev.first_seen;
     carryTranslations(prev, r);   // 源文未变的英文翻译按字段继承,防每晚重抽抹掉翻译
     if (prev) stats.updated++; else stats.added++;
     byId.set(r.id, r);
@@ -268,7 +271,9 @@ function finalizeRecord(rec, src, trust) {
     org_type: src.org_type || "official",
     trust,                                   // auto | pending —— 绝不自动写 verified
     status: computeStatus(rec.deadline),
-    verified_at: null, last_seen: today, updated_at: today
+    // first_seen = 首次收录日(v0.98.0),下面 upsert 时会从旧记录继承,保证它永远是"第一次见到"的日子。
+    // 前端「今日新增/NEW」只认它——updated_at/last_seen 每晚重抓都会刷新,拿来判"新"会把全库标成 NEW。
+    verified_at: null, first_seen: today, last_seen: today, updated_at: today
   };
 }
 function computeStatus(deadline) {

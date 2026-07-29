@@ -110,6 +110,7 @@
         <button data-view="recycle">回收站 <span class="badge" id="navRecycleN">0</span></button>
         <button data-view="ingest">检索溯源</button>
         <button data-view="agents">Agent 编队 <span class="badge" id="navAgentN">0</span></button>
+        <button data-view="regions">区域经理 <span class="badge" id="navRegionN">0</span></button>
         <button data-view="qc">数据质检 <span class="badge" id="navQcN">0</span></button>
         <button data-view="weekly">AI 周报</button>
         <button data-view="summaries">用户总结 <span class="badge" id="navSumN">0</span></button>
@@ -244,6 +245,25 @@
         <div class="cards" id="agCards" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))"></div>
         <h2 id="agLogTitle" hidden>工作记录</h2>
         <div class="scroll" id="agLogWrap" hidden><table id="agLogTbl"><thead><tr><th>时间</th><th>结果</th><th>摘要</th><th>耗时</th></tr></thead><tbody></tbody></table></div>
+      </section>
+
+      <!-- 区域经理编队(v0.98.0):全球分区轮值抓取。中国基本盘常驻 + 中国/国际两组各轮值一位,按当地上班时间错峰 -->
+      <section data-sec="regions" hidden>
+        <h1 class="sec__title">区域经理 <span class="muted" style="font-size:12px">(每片地区一位经理:🟢今日当值 ⚪轮休 · 按【当地】上班时间错峰,负载摊到 24 小时)</span></h1>
+        <div class="cards" id="rgBrief"></div>
+        <div class="toolbar">
+          <button class="fchip" id="rgRunAuto">按表补跑当值班次</button>
+          <span class="count" id="rgMsg"></span>
+        </div>
+        <p class="muted" style="font-size:12px;margin:2px 0 10px">
+          抓取走的是与用户检索完全同一条反幻觉管线(搜索→抓原文→evidence 逐字校验→真实才入库),区域经理只决定
+          <b>抓哪片地区、什么时候抓</b>。已知地区会跳过 AI 意图理解:省一次 AI 调用,也不会把"北欧"猜成丹麦。
+          点工牌上的「立即上班」可当场补一班(会花 serper 额度)。
+        </p>
+        <h2>今日排班</h2>
+        <div id="rgToday" class="muted" style="font-size:13px;margin-bottom:14px"></div>
+        <h2>编队工牌</h2>
+        <div class="cards" id="rgCards" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))"></div>
       </section>
 
       <!-- 数据质检「校勘」(v0.74.0):死链/过期/查重/存证抽查。归档进回收站可恢复,墓碑防夜间 sync 复活 -->
@@ -408,10 +428,92 @@
     else if (view === "recycle") renderRecycle();
     else if (view === "ingest") renderIngests();
     else if (view === "agents") renderAgents();
+    else if (view === "regions") renderRegions();
     else if (view === "qc") renderQC();
     else if (view === "weekly") renderWeekly();
     else if (view === "summaries") renderSummaries();
     else if (view === "users") renderUsers();
+  }
+
+  // —— 区域经理编队工牌墙(v0.98.0)——
+  // 数据全部来自 /api/admin/regions:档案(regions.json)+ 当值状态(日序号轮值)+ 成绩单(state/regions-report.json)。
+  function rgFmtUtc(h) { var bj = (h + 8) % 24; return "UTC " + (h < 10 ? "0" : "") + h + ":00(北京 " + (bj < 10 ? "0" : "") + bj + ":00)"; }
+  function renderRegions() {
+    get("/api/admin/regions").then(function (r) {
+      var ms = r.managers || [];
+      $("navRegionN").textContent = String(ms.filter(function (m) { return m.on_duty; }).length);
+      // 简报
+      var bb = $("rgBrief"); bb.textContent = "";
+      var duty = ms.filter(function (m) { return m.on_duty; });
+      var todayAdded = ms.reduce(function (n, m) {
+        var s = m.score; if (!s || !s.last_at) return n;
+        var d = new Date(Date.parse(s.last_at) + 8 * 3600e3).toISOString().slice(0, 10);
+        var t = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);
+        return d === t ? n + (s.last_added || 0) : n;
+      }, 0);
+      [["编队规模", ms.length + " 位"],
+       ["今日当值", duty.length + " 位"],
+       ["今日入库(当值经理)", todayAdded + " 条"],
+       ["搜索余量(serper)", (r.serper_left != null ? r.serper_left + " 次" : "—")],
+       ["调度开关", r.enabled ? "已开启" : "未开启(REGION_HARVEST=1)"],
+       ["每班词数", (r.per_shift || 0) + " 词"]
+      ].forEach(function (d) {
+        var c = document.createElement("div"); c.className = "card";
+        c.innerHTML = '<div class="k"></div><div class="v" style="font-size:15px"></div>';
+        c.querySelector(".k").textContent = d[0]; c.querySelector(".v").textContent = d[1];
+        bb.appendChild(c);
+      });
+      // 今日排班(按 UTC 上班时间排序,一眼看出负载是摊开的)
+      var line = duty.slice().sort(function (a, b) { return a.utc_hour - b.utc_hour; }).map(function (m) {
+        return m.zh + " → " + rgFmtUtc(m.utc_hour);
+      });
+      (r.desk || []).forEach(function (s) { line.push("编辑部·" + s.channel + " → " + rgFmtUtc(s.utc_hour)); });
+      $("rgToday").textContent = line.length ? line.join("   ·   ") : "(今日无当值班次)";
+      // 工牌
+      var box = $("rgCards"); box.textContent = "";
+      ms.slice().sort(function (a, b) {
+        if (a.on_duty !== b.on_duty) return a.on_duty ? -1 : 1;      // 当值的排前面
+        return a.next_in_days - b.next_in_days;
+      }).forEach(function (m) {
+        var s = m.score || {};
+        var rate = s.probed ? Math.round((s.added || 0) / s.probed * 100) : null;
+        var c = document.createElement("div"); c.className = "card";
+        if (m.on_duty) c.style.borderColor = "#7ee08a";
+        var h = document.createElement("div");
+        h.style.cssText = "display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px";
+        h.textContent = (m.on_duty ? "🟢 " : "⚪ ") + m.zh;
+        var sub = document.createElement("div");
+        sub.className = "muted"; sub.style.cssText = "font-size:11.5px;margin-top:4px;line-height:1.7";
+        sub.textContent =
+          (m.kind === "resident" ? "常驻 · 天天上班" : (m.on_duty ? "今日当值" : "轮休 · " + m.next_in_days + " 天后当值")) + "\n" +
+          "上班:当地 " + m.hour + " 点 = " + rgFmtUtc(m.utc_hour) + "\n" +
+          "检索区域 gl=" + m.gl + " · 词池 " + m.queries + " 条 · 辖区信源 " + m.sources + " 个\n" +
+          "累计:上班 " + (s.shifts || 0) + " 班 · 探测 " + (s.probed || 0) + " · 入库 " + (s.added || 0) +
+          (rate != null ? "(入库率 " + rate + "%)" : "") +
+          (s.fails ? " · 失败 " + s.fails : "");
+        sub.style.whiteSpace = "pre-line";
+        var last = document.createElement("div");
+        last.className = "muted"; last.style.cssText = "font-size:11.5px;margin-top:6px;color:#8b8f98";
+        last.textContent = s.last_at
+          ? ("上次:" + String(s.last_at).replace("T", " ").slice(0, 16) + " 「" + (s.last_q || "") + "」入库 " + (s.last_added || 0))
+          : "尚未上过班";
+        var btn = document.createElement("button");
+        btn.className = "fchip"; btn.style.cssText = "margin-top:8px;font-size:12px";
+        btn.textContent = "立即上班";
+        btn.onclick = function () {
+          if (!confirm("让「" + m.zh + "」立刻上一班?会消耗 serper 额度(约 " + (r.per_shift || 3) * 2 + " 次),抓取需要几分钟。")) return;
+          btn.disabled = true; $("rgMsg").textContent = m.zh + " 已排班,抓取中…";
+          // 注意 post() 不会因非 2xx 而 reject,得看 res.ok
+          post("/api/admin/regions/run", { id: m.id }).then(function (res) {
+            if (!res.ok) { $("rgMsg").textContent = "排班失败:" + ((res.data && res.data.error) || "未知错误"); btn.disabled = false; return; }
+            $("rgMsg").textContent = m.zh + " 已开工,几分钟后回来看成绩单。";
+            setTimeout(renderRegions, 60000);
+          }).catch(function (e) { $("rgMsg").textContent = "排班失败:" + e.message; btn.disabled = false; });
+        };
+        c.appendChild(h); c.appendChild(sub); c.appendChild(last); c.appendChild(btn);
+        box.appendChild(c);
+      });
+    }).catch(function (e) { $("rgMsg").textContent = "读取失败:" + e.message; });
   }
 
   // —— Agent 编队巡视台(v0.72.0):工牌注册表(岗位/周期/驻地),状态由打卡记录推断 ——
@@ -655,6 +757,16 @@
       });
     }).catch(function () {});
   }
+  // 区域经理:「按表补跑当值班次」= 不指定 id,让调度自己判断今天谁该上而还没上(与定时器同一逻辑)
+  $("rgRunAuto").addEventListener("click", function () {
+    if (!confirm("按今日排班表补跑还没上过班的当值经理?会消耗 serper 额度。")) return;
+    $("rgMsg").textContent = "已触发,抓取中…";
+    post("/api/admin/regions/run", {}).then(function (res) {
+      $("rgMsg").textContent = res.ok ? "已触发,几分钟后回来看成绩单。" : ("失败:" + ((res.data && res.data.error) || "未知错误"));
+      if (res.ok) setTimeout(renderRegions, 60000);
+    }).catch(function (e) { $("rgMsg").textContent = "失败:" + e.message; });
+  });
+
   $("qcRun").addEventListener("click", function () {
     var archive = $("qcRunArchive").checked;
     if (archive && !confirm("本次巡检将【自动归档】所有建议条目(移入回收站,可恢复)。继续?")) return;
@@ -1364,6 +1476,7 @@
     refreshContent();
     if (view === "weekly") renderWeekly();   // 群发进行中时进度条 10 秒一跳
     if (view === "agents") renderAgents();   // 巡视台跟随 10 秒自动刷新
+    if (view === "regions") renderRegions();  // 区域经理工牌墙同上(当值/成绩单会随抓取变化)
   }
 })();
 </script>

@@ -1,0 +1,392 @@
+{
+  "version": 1,
+  "updated": "2026-07-30",
+  "note": "区域经理档案(v0.98.0)。每个经理 = 一片地区 + 该地区的检索词池 + 上班时间(按【当地】时区)。调度见 lib/regions.mjs:①kind=resident 天天上班(中国基本盘,主力用户是中国艺术院校毕业生,内容绝不能断档);②kind=cn / intl 按日序号轮值(不用星期几——星期只有 7 天,装不下 10 个国际大区)。上班时间取当地上午,好处是机构刚发完通知、当地站点就近、且服务器负载摊平到 24 小时(不再凌晨一次性灌)。gl/hl/cities 直接给死,检索时【跳过 AI 意图理解】——地区本就已知,让 AI 再猜一次既费钱又会漂(日志实证:'北欧' 被猜成 gl=dk)。",
+  "schema": {
+    "id": "唯一标识,也是 sources.json 的 region_hint 取值",
+    "zh/en": "工牌显示名",
+    "kind": "resident=常驻天天上班 | cn=中国轮值组 | intl=国际轮值组",
+    "tz": "当地 UTC 偏移(小时),决定几点上班",
+    "hour": "当地上班整点(0-23)",
+    "gl/hl": "检索的国家码/界面语言,直接喂给 serper,不再由 AI 推断",
+    "terms": "地点相关性硬过滤用的中英别名(搜北京不含北京的条目丢弃)",
+    "queries": "该地区的检索词池,每班随机取 REGION_QUERIES_PER_SHIFT 条"
+  },
+  "managers": [
+    {
+      "id": "cn-tier1",
+      "zh": "中国·一线",
+      "en": "China Tier-1",
+      "kind": "resident",
+      "tz": 8,
+      "hour": 10,
+      "gl": "cn",
+      "hl": "zh-cn",
+      "terms": ["北京", "上海", "广州", "深圳", "杭州", "Beijing", "Shanghai", "Guangzhou", "Shenzhen", "Hangzhou"],
+      "queries": [
+        "北京 展览 征集 报名",
+        "北京 艺术驻留 申请",
+        "上海 展览 征集 投稿",
+        "上海 艺术家 驻留 项目",
+        "广州 艺术 征集 展览",
+        "深圳 公共艺术 征集",
+        "深圳 设计 双年展 征集",
+        "杭州 艺术项目 征集",
+        "北京 青年艺术家 扶持 计划 征集",
+        "上海 美术馆 年度 展览 征集 报名",
+        "广州 深圳 画廊 青年艺术家 计划 征集",
+        "杭州 中国美院 学术展 征集 官网"
+      ]
+    },
+    {
+      "id": "cn-north",
+      "zh": "中国·华北东北",
+      "en": "North & Northeast China",
+      "kind": "cn",
+      "slot": 0,
+      "tz": 8,
+      "hour": 15,
+      "gl": "cn",
+      "hl": "zh-cn",
+      "terms": ["天津", "河北", "石家庄", "山西", "太原", "内蒙古", "呼和浩特", "辽宁", "沈阳", "大连", "吉林", "长春", "黑龙江", "哈尔滨"],
+      "queries": [
+        "天津 艺术 展览 征集",
+        "河北 石家庄 艺术 征集",
+        "山西 太原 艺术展 征集",
+        "内蒙古 呼和浩特 艺术项目 展览",
+        "哈尔滨 沈阳 大连 展览 征集",
+        "包头 大同 太原 艺术展 征集",
+        "大连 沈阳 长春 艺术 征集 驻留",
+        "东北 美术馆 美协 展览 征集 官网"
+      ]
+    },
+    {
+      "id": "cn-east",
+      "zh": "中国·华东",
+      "en": "East China",
+      "kind": "cn",
+      "slot": 1,
+      "tz": 8,
+      "hour": 15,
+      "gl": "cn",
+      "hl": "zh-cn",
+      "terms": ["江苏", "南京", "苏州", "无锡", "常州", "徐州", "扬州", "南通", "浙江", "宁波", "温州", "绍兴", "嘉兴", "金华", "台州", "安徽", "合肥", "山东", "济南", "青岛", "烟台", "潍坊", "临沂", "福建", "福州", "厦门", "泉州"],
+      "queries": [
+        "南京 江苏 艺术项目 征集",
+        "苏州 美术馆 展览 征集",
+        "宁波 温州 艺术 征集 驻留",
+        "无锡 常州 苏州 艺术展 征集",
+        "山东 济南 青岛 艺术 征集",
+        "烟台 潍坊 临沂 艺术展 征集",
+        "徐州 扬州 南通 艺术 征集",
+        "绍兴 嘉兴 金华 台州 艺术驻留",
+        "厦门 福建 艺术驻留 征集",
+        "泉州 福州 厦门 艺术驻留 征集",
+        "安徽 合肥 美术馆 展览 征集"
+      ]
+    },
+    {
+      "id": "cn-south",
+      "zh": "中国·华南",
+      "en": "South China",
+      "kind": "cn",
+      "slot": 2,
+      "tz": 8,
+      "hour": 15,
+      "gl": "cn",
+      "hl": "zh-cn",
+      "terms": ["广东", "佛山", "东莞", "中山", "珠海", "惠州", "江门", "汕头", "潮州", "湛江", "广西", "南宁", "柳州", "桂林", "海南", "三亚", "海口"],
+      "queries": [
+        "佛山 东莞 艺术 征集 驻留",
+        "惠州 中山 江门 珠海 艺术征集",
+        "湛江 汕头 潮州 艺术 征集",
+        "南宁 柳州 桂林 艺术 征集",
+        "桂林 广西 艺术驻留",
+        "海南 三亚 艺术项目 征集",
+        "广东 文旅厅 美术 作品 征集 官网"
+      ]
+    },
+    {
+      "id": "cn-central-west",
+      "zh": "中国·华中西部",
+      "en": "Central & West China",
+      "kind": "cn",
+      "slot": 3,
+      "tz": 8,
+      "hour": 15,
+      "gl": "cn",
+      "hl": "zh-cn",
+      "terms": ["湖北", "武汉", "湖南", "长沙", "常德", "岳阳", "河南", "郑州", "洛阳", "开封", "江西", "南昌", "景德镇", "四川", "成都", "重庆", "云南", "昆明", "大理", "丽江", "贵州", "贵阳", "遵义", "陕西", "西安", "甘肃", "兰州", "青海", "西宁", "宁夏", "银川", "新疆", "乌鲁木齐", "西藏", "拉萨"],
+      "queries": [
+        "武汉 湖北 艺术展 征集",
+        "长沙 湖南 青年艺术家 征集",
+        "常德 岳阳 湖南 艺术项目 征集",
+        "郑州 河南 艺术 征集",
+        "洛阳 开封 郑州 艺术展 征集",
+        "南昌 江西 景德镇 陶瓷 驻留",
+        "宜兴 龙泉 德化 陶瓷 驻留 征集",
+        "成都 艺术展 征集 驻留",
+        "重庆 展览 征集 投稿",
+        "云南 大理 昆明 艺术驻留",
+        "丽江 大理 昆明 艺术驻留 征集",
+        "贵州 艺术乡建 驻留 项目",
+        "遵义 贵阳 艺术 驻留 项目",
+        "西安 陕西 美术 征集",
+        "兰州 甘肃 青海 艺术 征集",
+        "银川 西宁 拉萨 艺术项目 征集",
+        "新疆 乌鲁木齐 艺术展 征集"
+      ]
+    },
+    {
+      "id": "cn-hkmotw",
+      "zh": "中国·港澳台",
+      "en": "HK · Macao · Taiwan",
+      "kind": "cn",
+      "slot": 4,
+      "tz": 8,
+      "hour": 15,
+      "gl": "hk",
+      "hl": "zh-cn",
+      "terms": ["香港", "澳門", "澳门", "台灣", "台湾", "台北", "台中", "高雄", "臺北", "Hong Kong", "Macao", "Macau", "Taiwan", "Taipei"],
+      "queries": [
+        "香港 艺术资助 计划 申请",
+        "澳门 艺术节 征集",
+        "台灣 藝術 徵件 駐村 申請",
+        "台北 美術館 徵件 展覽 官網",
+        "香港 藝術發展局 資助 計劃 申請",
+        "高雄 台中 藝術 徵件 駐村",
+        "Hong Kong artist residency open call apply"
+      ]
+    },
+
+    {
+      "id": "intl-east-asia",
+      "zh": "东亚·日韩",
+      "en": "East Asia (JP · KR)",
+      "kind": "intl",
+      "slot": 0,
+      "tz": 9,
+      "hour": 10,
+      "gl": "jp",
+      "hl": "en",
+      "terms": ["日本", "东京", "京都", "大阪", "横滨", "韩国", "首尔", "釜山", "Japan", "Tokyo", "Kyoto", "Osaka", "Yokohama", "Korea", "Seoul", "Busan"],
+      "queries": [
+        "Japan artist residency open call application",
+        "Tokyo art award open call for artists submissions",
+        "Korea artist residency grant open call apply",
+        "Seoul art museum open call for artists",
+        "东京 艺术 驻留 征集",
+        "首尔 艺术 驻留 征集",
+        "Kyoto Osaka art project open call artists",
+        "Japan Korea art foundation grant fellowship artists"
+      ]
+    },
+    {
+      "id": "intl-sea-sa",
+      "zh": "东南亚·南亚",
+      "en": "SE & South Asia",
+      "kind": "intl",
+      "slot": 1,
+      "tz": 7,
+      "hour": 10,
+      "gl": "sg",
+      "hl": "en",
+      "terms": ["新加坡", "泰国", "曼谷", "印尼", "雅加达", "越南", "马来西亚", "吉隆坡", "菲律宾", "印度", "新德里", "孟买", "Singapore", "Thailand", "Bangkok", "Indonesia", "Jakarta", "Vietnam", "Malaysia", "Kuala Lumpur", "Philippines", "India", "Delhi", "Mumbai"],
+      "queries": [
+        "Singapore art open call for artists application",
+        "Southeast Asia artist residency open call apply",
+        "Bangkok Thailand art residency open call",
+        "Indonesia Jakarta art award open call artists",
+        "India artist residency fellowship open call apply",
+        "新加坡 艺术 征集 驻留",
+        "Malaysia Vietnam Philippines art open call artists",
+        "Asia art biennale open call for artists submissions"
+      ]
+    },
+    {
+      "id": "intl-na-east",
+      "zh": "北美·东岸",
+      "en": "North America East",
+      "kind": "intl",
+      "slot": 2,
+      "tz": -5,
+      "hour": 10,
+      "gl": "us",
+      "hl": "en",
+      "terms": ["纽约", "波士顿", "华盛顿", "费城", "迈阿密", "芝加哥", "多伦多", "蒙特利尔", "New York", "Boston", "Washington", "Philadelphia", "Miami", "Chicago", "Toronto", "Montreal", "Canada"],
+      "queries": [
+        "New York artist residency open call application",
+        "New York art grant fellowship open call for artists",
+        "Boston Philadelphia art open call for artists submissions",
+        "Chicago artist residency open call apply",
+        "Toronto Montreal Canada artist grant open call",
+        "Miami art award open call for artists",
+        "纽约 艺术 驻留 征集 申请",
+        "芝加哥 艺术 征集 展览",
+        "多伦多 温哥华 艺术 征集",
+        "US museum open call for artists exhibition proposals"
+      ]
+    },
+    {
+      "id": "intl-na-west",
+      "zh": "北美·西岸",
+      "en": "North America West",
+      "kind": "intl",
+      "slot": 3,
+      "tz": -8,
+      "hour": 10,
+      "gl": "us",
+      "hl": "en",
+      "terms": ["洛杉矶", "旧金山", "西雅图", "圣地亚哥", "波特兰", "拉斯维加斯", "丹佛", "温哥华", "Los Angeles", "San Francisco", "Seattle", "San Diego", "Portland", "Las Vegas", "Denver", "Vancouver"],
+      "queries": [
+        "Los Angeles artist residency open call application",
+        "San Francisco Bay Area art open call for artists",
+        "Seattle Portland artist grant open call apply",
+        "Las Vegas Denver public art call for artists",
+        "Vancouver artist residency open call Canada",
+        "洛杉矶 艺术 展览 征集",
+        "旧金山 艺术家 驻留 申请",
+        "California art fellowship grant open call artists",
+        "West Coast public art commission call for artists"
+      ]
+    },
+    {
+      "id": "intl-west-europe",
+      "zh": "西欧",
+      "en": "Western Europe",
+      "kind": "intl",
+      "slot": 4,
+      "tz": 1,
+      "hour": 10,
+      "gl": "gb",
+      "hl": "en",
+      "terms": ["伦敦", "曼彻斯特", "格拉斯哥", "爱丁堡", "巴黎", "里昂", "阿姆斯特丹", "鹿特丹", "布鲁塞尔", "都柏林", "London", "Manchester", "Glasgow", "Edinburgh", "Paris", "Lyon", "Amsterdam", "Rotterdam", "Brussels", "Dublin"],
+      "queries": [
+        "London artist residency open call application",
+        "UK arts council grant open call for artists apply",
+        "Paris artist residency open call application France",
+        "Amsterdam Rotterdam artist residency open call",
+        "Brussels Dublin art open call for artists",
+        "伦敦 艺术 驻留 open call",
+        "巴黎 艺术家 驻留 征集",
+        "阿姆斯特丹 艺术驻留 征集",
+        "Europe art prize open call for artists submissions"
+      ]
+    },
+    {
+      "id": "intl-central-europe",
+      "zh": "中南欧",
+      "en": "Central & South Europe",
+      "kind": "intl",
+      "slot": 5,
+      "tz": 2,
+      "hour": 10,
+      "gl": "de",
+      "hl": "en",
+      "terms": ["柏林", "慕尼黑", "科隆", "维也纳", "苏黎世", "巴塞尔", "米兰", "威尼斯", "罗马", "都灵", "巴塞罗那", "马德里", "里斯本", "雅典", "Berlin", "Munich", "Cologne", "Vienna", "Zurich", "Basel", "Milan", "Venice", "Rome", "Turin", "Barcelona", "Madrid", "Lisbon", "Athens"],
+      "queries": [
+        "Berlin artist residency open call application Germany",
+        "Vienna Zurich Basel art open call for artists",
+        "Italy artist residency open call Milan Venice Rome",
+        "Barcelona Madrid artist residency open call Spain",
+        "Lisbon Athens art open call for artists apply",
+        "柏林 艺术 驻留 申请",
+        "威尼斯 米兰 艺术 征集",
+        "巴塞罗那 马德里 艺术驻留",
+        "Germany art foundation stipend open call artists"
+      ]
+    },
+    {
+      "id": "intl-north-east-europe",
+      "zh": "北欧·东欧",
+      "en": "Nordic & Eastern Europe",
+      "kind": "intl",
+      "slot": 6,
+      "tz": 2,
+      "hour": 10,
+      "gl": "se",
+      "hl": "en",
+      "terms": ["斯德哥尔摩", "哥本哈根", "奥斯陆", "赫尔辛基", "雷克雅未克", "华沙", "布拉格", "布达佩斯", "塔林", "里加", "Stockholm", "Copenhagen", "Oslo", "Helsinki", "Reykjavik", "Warsaw", "Prague", "Budapest", "Tallinn", "Riga"],
+      "queries": [
+        "Nordic artist residency open call application",
+        "Stockholm Copenhagen Oslo art open call for artists",
+        "Helsinki Iceland artist residency open call apply",
+        "Poland Czech Hungary artist residency open call",
+        "Baltic art open call for artists submissions",
+        "北欧 艺术 驻留 征集",
+        "Eastern Europe art grant fellowship open call artists"
+      ]
+    },
+    {
+      "id": "intl-oceania",
+      "zh": "大洋洲",
+      "en": "Oceania",
+      "kind": "intl",
+      "slot": 7,
+      "tz": 10,
+      "hour": 10,
+      "gl": "au",
+      "hl": "en",
+      "terms": ["悉尼", "墨尔本", "布里斯班", "珀斯", "阿德莱德", "堪培拉", "奥克兰", "惠灵顿", "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Canberra", "Auckland", "Wellington", "Australia", "New Zealand"],
+      "queries": [
+        "Australia artist residency open call application",
+        "Sydney Melbourne art prize open call for artists",
+        "Australia Council arts grant open call apply artists",
+        "New Zealand artist residency open call Auckland",
+        "Brisbane Perth Adelaide public art call for artists",
+        "悉尼 墨尔本 艺术驻留 征集",
+        "Oceania art award open call for artists submissions"
+      ]
+    },
+    {
+      "id": "intl-mena-africa",
+      "zh": "中东·非洲",
+      "en": "Middle East & Africa",
+      "kind": "intl",
+      "slot": 8,
+      "tz": 3,
+      "hour": 10,
+      "gl": "ae",
+      "hl": "en",
+      "terms": ["迪拜", "阿布扎比", "沙迦", "多哈", "特拉维夫", "伊斯坦布尔", "开罗", "拉各斯", "内罗毕", "开普敦", "约翰内斯堡", "Dubai", "Abu Dhabi", "Sharjah", "Doha", "Tel Aviv", "Istanbul", "Cairo", "Lagos", "Nairobi", "Cape Town", "Johannesburg"],
+      "queries": [
+        "Dubai Sharjah art open call for artists application",
+        "Middle East artist residency open call apply",
+        "Istanbul art biennial open call for artists",
+        "Africa artist residency open call application",
+        "Lagos Nairobi Cape Town art open call for artists",
+        "迪拜 中东 艺术驻留",
+        "Qatar Saudi art grant fellowship open call artists"
+      ]
+    },
+    {
+      "id": "intl-latam",
+      "zh": "拉丁美洲",
+      "en": "Latin America",
+      "kind": "intl",
+      "slot": 9,
+      "tz": -3,
+      "hour": 10,
+      "gl": "br",
+      "hl": "en",
+      "terms": ["圣保罗", "里约", "墨西哥城", "布宜诺斯艾利斯", "波哥大", "圣地亚哥", "利马", "哈瓦那", "Sao Paulo", "Rio", "Mexico City", "Buenos Aires", "Bogota", "Santiago", "Lima", "Havana"],
+      "queries": [
+        "Latin America artist residency open call application",
+        "Sao Paulo Rio art open call for artists Brazil",
+        "Mexico City artist residency open call apply",
+        "Buenos Aires Bogota art open call for artists",
+        "Chile Peru artist residency grant open call",
+        "拉丁美洲 艺术 驻留 征集",
+        "Latin American art prize open call for artists"
+      ]
+    }
+  ],
+
+  "desk": {
+    "note": "编辑部班次:资讯/招聘不按地区分,每天固定两班保持三频道都在长(沿用原 AUTO_QUERIES 的 news/jobs 词池)。",
+    "shifts": [
+      { "channel": "news", "utc_hour": 4 },
+      { "channel": "jobs", "utc_hour": 12 }
+    ]
+  }
+}

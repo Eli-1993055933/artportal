@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.97.0" />
+<meta name="app-version" content="0.98.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -173,6 +173,17 @@
   .oc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-weight:700}
   .oc-cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .oc-cat{position:absolute;left:8px;top:8px;font-size:10.5px;color:#fff;border-radius:5px;padding:2px 8px;z-index:1}
+  /* 今日新增(v0.98.0):区域经理编队每天在全球各地入库,让"今天刚收录"这件事看得见 */
+  .oc-new{position:absolute;right:8px;top:8px;font-size:10px;font-weight:700;letter-spacing:.3px;color:#fff;
+    background:linear-gradient(135deg,#ff5c5c,#ff8a3d);border-radius:5px;padding:2px 7px;z-index:2;
+    box-shadow:0 1px 6px rgba(255,92,92,.45)}
+  .newdot{display:inline-block;vertical-align:middle;margin-left:6px;font-size:9.5px;font-weight:700;color:#fff;
+    background:linear-gradient(135deg,#ff5c5c,#ff8a3d);border-radius:4px;padding:1px 5px;line-height:1.5}
+  .todaybar{font-size:11.5px;color:var(--muted);margin-left:8px;white-space:nowrap}
+  .todaybar b{color:#ff6a4d;font-weight:700}
+  @keyframes newpulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+  .oc-new,.newdot{animation:newpulse 2.4s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){.oc-new,.newdot{animation:none}}
   .oc-t{font-size:13.5px;font-weight:600;line-height:1.4;padding:9px 12px 3px;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .oc-m{font-size:11.5px;color:var(--sub);padding:0 12px 10px;line-height:1.5}
@@ -705,11 +716,11 @@
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.97.0</span></div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> · ARTPORTAL <span id="appVer">v0.98.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.97.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.97.0"></script>
-<script src="js/globe-data.js?v=0.97.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.98.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.98.1"></script>
+<script src="js/globe-data.js?v=0.98.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -726,7 +737,9 @@
   // 分类索引多选(v0.88.0 用户要求):空集合=全部;可同时点亮多个分类
   var filterCats=new Set(), query='', hoverObj=null, hoverKind=null, inited=false, focusMk=null, focusKey=null;
   // 筛选(老站体系移植):门类单选 + 快捷开关 + 地区多选 + 机构类型多选 + 来源开关 + 抽屉排序
-  var tagSel='', fFree=false, fStipend=false, fHousing=false, fTravel=false, fVerified=false, fHidePast=false, sortBy='deadline';
+  // fHidePast 默认【开】(v0.98.0):库里 63% 的机会已过截止日,默认展示等于每 3 条有 2 条点开是死的,
+  // 与本站"真实可信"的定位相悖。默认只呈现还能申请的(未来截止 + 常年/滚动),开关仍在、一点即可看历史。
+  var tagSel='', fFree=false, fStipend=false, fHousing=false, fTravel=false, fVerified=false, fHidePast=true, sortBy='deadline';
   var fRegs={}, fOrgOff=false, fOrgInd=false, fOrgCom=false, fSrcUser=true, fSrcAI=true;
   function regsActive(){ for(var k in fRegs){ if(fRegs[k]) return true; } return false; }
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
@@ -765,12 +778,65 @@
   function isPastRec(o){ if(o.status==='expired') return true;
     if(!o.deadline) return false;
     var d=new Date(o.deadline+'T23:59:59'); return !isNaN(d)&&d<Date.now(); }
+  // —— 「前往官网必达主办方本站」(v0.98.0 找回;v0.77 地球站大重写时丢失,继收藏/埋点/注册墙之后第 4 处)——
+  //   原硬性保证:定位不到主办方官网的条目一律不展示,用户点到的每一条都直达主办方本站,0 例外。
+  //   地球站此前直接 go.href=o.url,等于这道闸整个没了 —— 实测线上 228 条可见条目里,
+  //   35 条明明有 official_url 却被送到聚合站(如"哈佛拉德克利夫研究员项目"落到 artconnect 而非 radcliffe.harvard.edu),
+  //   4 条落到新闻/征稿门户。名单与 pipeline/lib/aggregators.mjs 保持同步(那边是权威源)。
+  var THIRD_PARTY=["curatorspace.com","artconnect.com","chinaresidencies.com","resartis.org",
+    "transartists.org","artenda.net","open-calls.art","artresidencyguide.com",
+    "artistcommunities.org","e-flux.com","art-hub.co.uk","artrabbit.com",
+    "artforum.com.cn","artealdia.com","leapleapleap.com","artforum.com","artsy.net",
+    "news.qq.com","qq.com","chinanews.com.cn","gmw.cn","xinhuanet.com","zijing.com.cn","china.cn","52hrtt.com",
+    "people.com.cn","sina.com.cn","sohu.com","163.com","thepaper.cn","artron.net",
+    "dayoo.com","oeeee.com",                                   // v0.98.0 新增:大洋网/南方都市报(区域经理抓到,实测会把用户送去新闻页)
+    "scribd.com","docin.com","doc88.com",
+    "shejijingsai.com","xingxiancn.com","sj33.cn","archcollege.com","cn5v.com","gaoyy.com","chinaawards.net",
+    "huaxiajiang.com","zjideas.com","whaleideas.com","yczhansai.com","cnyisai.com","eduzs.org.cn","10100.com",
+    "jsmsg.com","zhiliaobiaoxun.com","ogdcn.com","zcool.com.cn","gtn9.com","logohhh.com","arting365.com","68design.net","shijue.me","missku.com",
+    "mp.weixin.qq.com","weixin.qq.com","xiaohongshu.com","douyin.com","weibo.com","zhihu.com"];
+  // 可信机会平台(L1,v0.76.0):国际公开征集大量只存在于这些平台、没有独立主办方官网。
+  // 放行但【如实标注平台来源】,按钮点名平台,绝不谎称官网。
+  var PLATFORM_LABEL={"callforentry.org":"CaFÉ","artcall.org":"ArtCall","entrythingy.com":"EntryThingy",
+    "submittable.com":"Submittable","slideroom.com":"SlideRoom","zapplication.org":"ZAPPlication",
+    "curatorspace.com":"CuratorSpace","artconnect.com":"ArtConnect","resartis.org":"Res Artis",
+    "transartists.org":"TransArtists","chinaresidencies.com":"China Residencies",
+    "artistcommunities.org":"Alliance of Artists Communities","e-flux.com":"e-flux",
+    "artrabbit.com":"ArtRabbit","open-calls.art":"Open-Calls.art","art-hub.co.uk":"Art-Hub",
+    "artresidencyguide.com":"Art Residency Guide","artenda.net":"Artenda","theartlist.com":"The Art List"};
+  // 机会四类判定(独立于下方的 OPP_CATS,避免依赖变量声明顺序)
+  function isOppCat(c){ return c==='opencall'||c==='residency'||c==='award'||c==='workshop'; }
+  function hostOf(u){ try{ return new URL(u).host.replace(/^www\./,'').toLowerCase(); }catch(e){ return ''; } }
+  function hitList(u,list){ var h=hostOf(u); if(!h) return false;
+    for(var i=0;i<list.length;i++){ var t=list[i]; if(h===t||h.slice(-(t.length+1))==='.'+t) return true; } return false; }
+  function isThirdParty(u){ return hitList(u,THIRD_PARTY); }
+  function platformName(u){ var h=hostOf(u); if(!h) return null;
+    for(var k in PLATFORM_LABEL){ if(h===k||h.slice(-(k.length+1))==='.'+k) return PLATFORM_LABEL[k]; } return null; }
+  // 「前往」真正该去的地址:官网优先 → 主办方本站(非第三方)→ 可信平台(标注来源);垃圾第三方一律不返回。
+  function officialUrl(o){
+    if(o.official_url&&!isThirdParty(o.official_url)) return o.official_url;
+    if(o.url&&!isThirdParty(o.url)) return o.url;
+    if(o.official_url&&platformName(o.official_url)) return o.official_url;
+    if(o.url&&platformName(o.url)) return o.url;
+    return null; }
+
+  // 今日新增(v0.98.0):区域经理编队按当地上班时间错峰入库,一天里陆续有新条目落库。
+  // ★只认 first_seen(后端入库时写死、重抓时继承)。绝不用 updated_at/last_seen ——
+  //   它们每晚被抓取/质检/翻译回填刷新,拿来判"新"会把全库几百条老条目全标成 NEW。
+  //   老数据没有 first_seen 字段 → 一律视为"不是新的",宁可少标不错标。
+  function bjToday(){ return new Date(Date.now()+8*3600e3).toISOString().slice(0,10); }
+  function isNewRec(o){ return !!o.first_seen && String(o.first_seen).slice(0,10)===bjToday(); }
+  function newBadge(){ return '<span class="oc-new">NEW</span>'; }
   // 通用细筛(门类/快捷开关/地区/机构类型/来源)——地球点位、左侧列表、频道浮层共用同一份状态
   function extraMatch(o){
     if(tagSel && D.tagsOf(o).indexOf(tagSel)<0) return false;
     if(fFree && !isFullyFree(o)) return false;
     if(fVerified && o.trust!=='verified') return false;
     if(fHidePast && isPastRec(o)) return false;
+    // 官网必达硬闸(v0.98.0 找回):机会条目定位不到主办方官网(或可信报名平台)就不展示——
+    // 宁可少一条,也不让用户点「前往官网」落到新闻转载/征稿门户上。用户投稿按老站口径豁免(它自带"未经核实"标)。
+    // 只管机会四类:资讯本就该去原文媒体、招聘该去申请页、作品是站内内容,都不适用这条。
+    if(isOppCat(o.category) && o.trust!=='user' && !officialUrl(o)) return false;
     if(fStipend && !(o.funding&&o.funding.stipend===true)) return false;
     if(fHousing && !(o.funding&&o.funding.housing===true)) return false;
     if(fTravel && !(o.funding&&o.funding.travel===true)) return false;
@@ -1450,8 +1516,14 @@
       go.onclick=function(ev){ ev.preventDefault();
         if(o._w) openWorkView(o._w);
         else openLB(o.images,0); }; }
-    else { go.onclick=null; go.href=o.url||o.source_url||'#';
-      go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read'):L('go')); }
+    else { go.onclick=null;
+      // 机会频道走"官网必达"(官网优先、垃圾第三方不落);资讯/招聘/作品本就以原文/申请页为准,维持原样。
+      var dest=(o.category==='news'||o.category==='jobs')?(o.url||o.source_url):(officialUrl(o)||o.url||o.source_url);
+      go.href=dest||'#';
+      var pf=(o.category==='news'||o.category==='jobs')?null:platformName(dest);
+      // 落到可信平台就点名平台,绝不谎称"官网"
+      go.textContent=(o.category==='jobs')?L('apply'):((o.category==='news')?L('read')
+        :(pf?L('goPlatform')(pf):L('go'))); }
     // 评论:默认收起(点「💬 评论」在卡内展开;再点收起),换条目即复位
     var ct=document.getElementById('dCmtT'), cbox=document.getElementById('d-cmt');
     cbox.innerHTML=''; cbox.className=''; ct.textContent=L('cmtOpen');
@@ -1499,6 +1571,7 @@
       searchPh:'检索展览、城市、机构、项目内容…',ai:'✦ AI 检索',aiing:'✦ 检索中…',
       lgT:'分类索引图例',fold:'◂ 收起面板',unfold:'▸ 展开面板',backW:'← 返回全球',backU:'← 返回上一级',
       go:'前往官网 ↗',apply:'前往申请 ↗',read:'阅读原文 ↗',
+      goPlatform:function(p){return '前往 '+p+' 报名页 ↗';},
       pro:'个人主页',uqPh:'搜索用户昵称…',uqNone:'没有匹配的用户',backX:'‹ 返回',
       authTitleL:'登录 ARTPORTAL',authTitleR:'注册 ARTPORTAL',authEmail:'邮箱',authPw:'密码(至少 6 位)',
       authCode:'邮箱验证码(6 位)',authSend:'发验证码',authGoL:'登 录',authGoR:'注 册',
@@ -1563,6 +1636,7 @@
       dlOver:'已截止',dlToday:'今天截止',dlLeft:function(n){return n<=7?('仅剩 '+n+' 天'):('还有 '+n+' 天');},
       tUser:'用户投稿 · 未经核实',tVer:'已人工核实',tAI:'AI 检索收录 · 请核对',tAuto:'自动收录 · 未经核实',
       listN:function(n){return '结果列表 · '+n+' 项(点卡片飞过去)';},
+      todayNew:function(n,c){return '今日新增 <b>'+n+'</b> 条'+(c?(' · '+c+' 个地区'):'');},
       marked:function(n,c){return '已标注 '+n+' 项 · '+c+' 国';}},
     en:{idx:'Index',opportunities:'Calls',jobs:'Jobs',news:'News',works:'Works',pub:'Post',login:'Sign in',
       libT:'LIVE INDEX',unit:' live listings',
@@ -1570,6 +1644,7 @@
       searchPh:'Search shows, cities, institutions…',ai:'✦ AI Search',aiing:'✦ Searching…',
       lgT:'Category index',fold:'◂ Collapse panel',unfold:'▸ Show panel',backW:'← Back to globe',backU:'← Back',
       go:'Official site ↗',apply:'Apply ↗',read:'Read source ↗',
+      goPlatform:function(p){return 'Open on '+p+' ↗';},
       pro:'Profile',uqPh:'Search users…',uqNone:'No matching users',backX:'‹ Back',
       authTitleL:'Sign in to ARTPORTAL',authTitleR:'Join ARTPORTAL',authEmail:'Email',authPw:'Password (6+ chars)',
       authCode:'Email code (6 digits)',authSend:'Send code',authGoL:'Sign in',authGoR:'Sign up',
@@ -1634,6 +1709,7 @@
       dlOver:'Closed',dlToday:'Closes today',dlLeft:function(n){return n+' days left';},
       tUser:'User submitted · unverified',tVer:'Verified',tAI:'AI-collected · please verify',tAuto:'Auto-collected · unverified',
       listN:function(n){return 'Results · '+n;},
+      todayNew:function(n,c){return '<b>'+n+'</b> new today'+(c?(' · '+c+' regions'):'');},
       marked:function(n,c){return n+' items · '+c+' countries';}}
   };
   var CAT_EN={opencall:'Open Calls',residency:'Residencies',award:'Awards & Grants',workshop:'Workshops & Forums',
@@ -1710,7 +1786,8 @@
     return '<div class="ocard" data-ci="'+i+'">'+
       '<div class="oc-cov"><span class="oc-ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
         (cov?('<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">'):'')+
-        '<span class="oc-cat" style="background:'+c.color+'">'+catName(o.category)+'</span></div>'+
+        '<span class="oc-cat" style="background:'+c.color+'">'+catName(o.category)+'</span>'+
+        (isNewRec(o)?newBadge():'')+'</div>'+
       '<div class="oc-t">'+esc(tt(o))+'</div>'+
       '<div class="oc-m">'+esc(meta)+'</div></div>'; }
   // 浮层顶部筛选条(排版学老站):机会=分类 chips;各频道共用 门类标签行 + 快捷开关行
@@ -2872,9 +2949,15 @@
         var th='<span class="th"><span class="ph" style="background:'+c.color+'">'+esc((tt(o)||'·').charAt(0))+'</span>'+
           (cov?'<img loading="lazy" src="'+cov+'" onerror="this.style.display=\'none\'" alt="">':'')+'</span>';
         out.push('<div class="oc" data-i="'+arr[i].idx+'"><span class="bar" style="background:'+c.color+'"></span>'+th+'<div>'+
-          '<div class="t">'+esc(tt(o))+'</div>'+
+          '<div class="t">'+esc(tt(o))+(isNewRec(o)?'<span class="newdot">NEW</span>':'')+'</div>'+
           '<div class="m">'+esc([o.city_zh||o.country_zh||o.org_zh,o.deadline?(L('k_dl')+' '+o.deadline):''].filter(Boolean).join(' · '))+'</div></div></div>'); } }
-    document.getElementById('lcCount').textContent=L('listN')(n);
+    // 今日新增计数:数【全部频道】当天入库的条目,不受门类/地区等筛选影响——它讲的是"站点今天长了多少"。
+    // 但排除已截止的:默认视图看不到它们,报一个用户翻不到的数字等于骗人。区域经理错峰上班,白天这个数会一路涨。
+    var newN=0, newPlaces={};
+    for(var q0=0;q0<markers.length;q0++){ var mo=markers[q0].o;
+      if(isNewRec(mo)&&!isPastRec(mo)){ newN++; var pl=mo.country_zh||mo.country_en||mo.city_zh; if(pl) newPlaces[pl]=1; } }
+    document.getElementById('lcCount').innerHTML=esc(L('listN')(n))+
+      (newN?('<span class="todaybar">'+L('todayNew')(newN,Object.keys(newPlaces).length)+'</span>'):'');
     el.innerHTML=out.join(''); }
   function selectCard(d){ var prev=document.querySelector('.oc.sel'); if(prev) prev.classList.remove('sel');
     if(d){ d.classList.add('sel'); d.scrollIntoView({block:'nearest'}); } }

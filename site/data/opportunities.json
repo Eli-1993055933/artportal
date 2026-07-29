@@ -7,7 +7,7 @@
     "count": 16
   },
   "generated_at": "2026-07-18",
-  "count": 307,
+  "count": 326,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -21932,6 +21932,884 @@
       "last_seen": "2026-07-17",
       "updated_at": "2026-07-17",
       "_via": "search"
+    },
+    {
+      "id": "search-lumei-破冰艺术计划丨2020年度展览征集",
+      "category": "opencall",
+      "title_zh": "破冰艺术计划丨2020年度展览征集",
+      "title_en": null,
+      "org_zh": "鲁迅美术学院人文学院",
+      "city_zh": "沈阳",
+      "country_zh": "中国",
+      "deadline": "2020-09-01",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "1980年后出生",
+        "nationality": null
+      },
+      "disciplines": [
+        "油画",
+        "版画",
+        "综合绘画",
+        "水墨",
+        "水彩",
+        "雕塑",
+        "装置影像",
+        "新媒体艺术",
+        "公共艺术",
+        "表演"
+      ],
+      "summary_zh": "破冰艺术计划由鲁迅美术学院人文学院发起，面向1980年后出生的青年艺术家征集原创作品，媒介不限，入选作品将在沈阳专业场馆展出，设立创作奖金，并赠送画册。",
+      "url": "https://www.lumei.edu.cn/rwxy/info/1004/1085.htm",
+      "source_url": "https://www.lumei.edu.cn/rwxy/info/1004/1085.htm",
+      "domain": "lumei.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-banyuetan-2016首届虚苑国际版画双年展",
+      "category": "opencall",
+      "title_zh": "2016首届虚苑国际版画双年展",
+      "title_en": null,
+      "org_zh": "北京虚苑国际版画创研中心",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2016-04-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画"
+      ],
+      "summary_zh": "首届虚苑国际版画双年展面向全球征集版画作品，无需报名及参展费。展期2016年9月中旬，地点北京、南京、济南。设特等奖1名，收藏费15000美金，主办方承担获奖者食宿，交通自理。",
+      "url": "http://www.banyuetan.org/chcontent/xyz/snz/213703.shtml",
+      "source_url": "http://www.banyuetan.org/chcontent/xyz/snz/213703.shtml",
+      "domain": "banyuetan.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-arthing-艺术驻留-征集-open-call-2024",
+      "category": "opencall",
+      "title_zh": "艺术驻留&征集｜OPEN CALL 2024",
+      "title_en": null,
+      "org_zh": "ARThing艺术活",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "多个截止日期，详见各子项目",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "ARThing艺术活发布2024年多个艺术驻留与征集项目，包括K11 Art Foundation奖项、A4国际驻留、福冈亚洲美术馆驻留、柏林戏剧节论坛、三影堂无界展览、芷美生态双年展、我织我在SPACE展览、致敬费里尼作品征集、上海思南公馆艺术展、柳浪闻莺驻留及IMXS潮牌征集等。",
+      "url": "https://www.arthing.org/archives/2024/01/open-call-2024.html",
+      "source_url": "https://www.arthing.org/archives/2024/01/open-call-2024.html",
+      "domain": "arthing.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-siximuseum-四禧国际艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "四禧国际艺术家驻留项目",
+      "title_en": null,
+      "org_zh": "四禧美术馆",
+      "city_zh": "南京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "公开招募2027年春季&秋季，但未给出具体截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "四禧国际艺术家驻留项目于2024年启动，支持年轻新锐艺术家，提供生活和工作空间、资金支持，每期两位艺术家，驻留结束时有机会展示成果。",
+      "url": "https://siximuseum.com/residency/",
+      "source_url": "https://siximuseum.com/residency/",
+      "domain": "siximuseum.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-dunhuangartmuseum-2026敦煌国际艺术驻地",
+      "category": "residency",
+      "title_zh": "2026敦煌国际艺术驻地",
+      "title_en": null,
+      "org_zh": "敦煌当代美术馆",
+      "city_zh": "敦煌",
+      "country_zh": "中国",
+      "deadline": "2026-01-15",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "敦煌当代美术馆在全球范围内招募创意人才，通过艺术驻留、展览推广、国际交换驻地等方式，激活敦煌、上海与国际艺术生态的交流互鉴，将中国青年艺术新锐推向更广阔的国际舞台。2026敦煌国际艺术驻地即将开启。",
+      "url": "https://www.dunhuangartmuseum.com/895439641007",
+      "source_url": "https://www.dunhuangartmuseum.com/895439641007",
+      "domain": "dunhuangartmuseum.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-cdnongyuan-ny20-国际驻留计划",
+      "category": "residency",
+      "title_zh": "NY20+国际驻留计划",
+      "title_en": null,
+      "org_zh": "浓园文化",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "NY20+是浓园文化旗下的国际驻留项目，自2008年启动，以成都巴蜀文化为基点，通过在地创作、交流和展示，推动跨国艺术生态发展。项目覆盖40余国，开展展览、学术讨论等活动。",
+      "url": "http://www.cdnongyuan.com/brand/83.html",
+      "source_url": "http://www.cdnongyuan.com/brand/83.html",
+      "domain": "cdnongyuan.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-mee-2023年六五环境日主题摄影作品征集活动",
+      "category": "opencall",
+      "title_zh": "2023年六五环境日主题摄影作品征集活动",
+      "title_en": null,
+      "org_zh": "生态环境部",
+      "city_zh": null,
+      "country_zh": "中国",
+      "deadline": "2023-05-05",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "面向社会公开征集摄影作品，主题为建设人与自然和谐共生的现代化、自然风光美丽中国、生物多样生态之美。不收取任何费用，获奖者获颁证书。",
+      "url": "https://www.mee.gov.cn/ywgz/xcjy/shxc/202304/t20230417_1026884.shtml",
+      "source_url": "https://www.mee.gov.cn/ywgz/xcjy/shxc/202304/t20230417_1026884.shtml",
+      "domain": "mee.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-icrc-第十六届人道新闻摄影金奖作品征集",
+      "category": "award",
+      "title_zh": "第十六届人道新闻摄影金奖作品征集",
+      "title_en": null,
+      "org_zh": "红十字国际委员会",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-05-27",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "红十字国际委员会诚邀专业摄影记者参加第十六届人道新闻摄影金奖比赛，主题为“武装冲突中平民的命运”。获奖者将获得8000欧元奖金，用于日后摄影项目。截止日期：2026年5月27日。",
+      "url": "https://www.icrc.org/zh/article/call-entries-16th-humanitarian-visa-dor-award",
+      "source_url": "https://www.icrc.org/zh/article/call-entries-16th-humanitarian-visa-dor-award",
+      "domain": "icrc.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-photobeijing-影像-文明-新质-北京国际摄影周2025报名展征集",
+      "category": "opencall",
+      "title_zh": "影像：文明·新质 | 北京国际摄影周2025报名展征集",
+      "title_en": null,
+      "org_zh": "北京国际摄影周",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": "2025-08-25",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 5000,
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "影像",
+        "多媒体装置"
+      ],
+      "summary_zh": "北京国际摄影周2025报名展面向国内外摄影组织、团体、策展人、摄影师征集摄影、短视频、多媒体装置作品。展览于2025年10月18-27日在北京和·艺术馆举办。截稿日期2025年8月25日。服务费5000元/5延米，不收取报名费。",
+      "url": "https://www.photobeijing.com/news/1803",
+      "source_url": "https://www.photobeijing.com/news/1803",
+      "domain": "photobeijing.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-silkroad-2022首届-丝路-国际青少年摄影-短视频大赛",
+      "category": "opencall",
+      "title_zh": "2022首届“丝路”国际青少年摄影、短视频大赛",
+      "title_en": "The First Silk Road International Youth Photography and Short Video Competition",
+      "org_zh": "丝路国际青少年摄影短视频大赛组委会",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "短视频"
+      ],
+      "summary_zh": "2022首届“丝路”国际青少年摄影、短视频大赛面向青少年征稿，参赛者需通过官网下载报名表，将作品及报名表投递至指定邮箱。",
+      "url": "https://silkroad.fjsen.com/2022-04/07/content_31002009.htm",
+      "source_url": "https://silkroad.fjsen.com/2022-04/07/content_31002009.htm",
+      "domain": "silkroad.fjsen.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-photocontest-尼康影像与摄影大赛",
+      "category": "opencall",
+      "title_zh": "尼康影像与摄影大赛",
+      "title_en": null,
+      "org_zh": "株式会社尼康",
+      "city_zh": null,
+      "country_zh": "日本",
+      "deadline": "2025-03-16",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "尼康影像与摄影大赛面向全球专业及业余摄影师，主题为“Inspire”，设单张照片和摄影叙事两个组别，提供奖金及尼康相机镜头等奖品，不收取参赛费用，投稿截止至2025年3月16日。",
+      "url": "https://photocontest.nikon.com.cn/cn/photo/entryguideline/",
+      "source_url": "https://photocontest.nikon.com.cn/cn/photo/entryguideline/",
+      "domain": "photocontest.nikon.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-unescosilkroadphotocontest-丝绸之路青年之眼国际摄影大赛",
+      "category": "opencall",
+      "title_zh": "丝绸之路青年之眼国际摄影大赛",
+      "title_en": "Youth Eyes on the Silk Roads International Photo Contest",
+      "org_zh": "联合国教科文组织",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-06-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "14-17岁，18-25岁",
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "一年一度的丝绸之路青年之眼国际摄影大赛，面向14-25岁年轻人，2026年主题为“丝绸之路沿线的活态遗产”，征集体现丝绸之路共同遗产的照片，获奖者将获得相机，优秀作品收录影集并展出。",
+      "url": "https://unescosilkroadphotocontest.org/zh-hans/node/14",
+      "source_url": "https://unescosilkroadphotocontest.org/zh-hans/node/14",
+      "domain": "unescosilkroadphotocontest.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-18",
+      "updated_at": "2026-07-18",
+      "_via": "search"
+    },
+    {
+      "id": "search-cdnongyuan-疫见-2020线上国际艺术展",
+      "category": "opencall",
+      "title_zh": "“疫见”2020线上国际艺术展",
+      "title_en": "Coantivirus International Online Art Exhibition",
+      "org_zh": "成都浓园国际艺术村",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": "2020-08-30",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "摄影",
+        "装置",
+        "插画"
+      ],
+      "summary_zh": "“疫见”2020线上国际艺术展面向全球艺术家和艺术爱好者征集关于新冠疫情期间所见所闻所思所感的作品，形式不限，包括架上绘画、摄影、街头艺术、装置、插画等。展览免费参展，免费向公众开放。",
+      "url": "http://www.cdnongyuan.com/submit/127.html",
+      "source_url": "http://www.cdnongyuan.com/submit/127.html",
+      "domain": "cdnongyuan.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-20",
+      "updated_at": "2026-07-20",
+      "_via": "search"
+    },
+    {
+      "id": "search-sichuan-成都非遗节标识征集",
+      "category": "opencall",
+      "title_zh": "成都非遗节标识征集",
+      "title_en": null,
+      "org_zh": "中国成都非物质文化遗产节",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": "2021-08-02",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计"
+      ],
+      "summary_zh": "第八届中国成都非物质文化遗产节面向全社会公开征集非遗节标识，专业设计师、艺术院校师生、设计爱好者均可参加，公开征集时间为2021年7月19日至8月2日，最高奖金8万元。",
+      "url": "https://sichuan.scol.com.cn/ggxw/202107/58219161.html",
+      "source_url": "https://sichuan.scol.com.cn/ggxw/202107/58219161.html",
+      "domain": "sichuan.scol.com.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-20",
+      "updated_at": "2026-07-20",
+      "_via": "search"
+    },
+    {
+      "id": "search-ny20plus-ny20-国际驻留项目",
+      "category": "residency",
+      "title_zh": "NY20+ 国际驻留项目",
+      "title_en": null,
+      "org_zh": "成都浓园文化艺术传播有限公司",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止日期",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "影像",
+        "雕塑",
+        "装置",
+        "综合材料",
+        "陶瓷",
+        "舞蹈",
+        "其他"
+      ],
+      "summary_zh": "NY20+位于四川成都，是浓园文化旗下的专业艺术推广机构，自2008年启动艺术家驻留项目，通过在地创作、交流和展示推进互动，打造国际化、多元化的国际驻留项目。",
+      "url": "http://www.ny20plus.com/h-col-112.html",
+      "source_url": "http://www.ny20plus.com/h-col-112.html",
+      "domain": "ny20plus.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-20",
+      "updated_at": "2026-07-20",
+      "_via": "search"
+    },
+    {
+      "id": "search-grs-关于面向研究生征集第十二届中国艺术节参展作品的通知",
+      "category": "opencall",
+      "title_zh": "关于面向研究生征集第十二届中国艺术节参展作品的通知",
+      "title_en": null,
+      "org_zh": "中国美术学院研究生处",
+      "city_zh": "杭州市",
+      "country_zh": "中国",
+      "deadline": "2019-01-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "书法篆刻",
+        "摄影",
+        "美术"
+      ],
+      "summary_zh": "中国美术学院研究生处面向在读研究生征集书法篆刻、摄影和美术作品，参展作品应为近三年创作。",
+      "url": "https://grs.caa.edu.cn/info/1048/1105.htm",
+      "source_url": "https://grs.caa.edu.cn/info/1048/1105.htm",
+      "domain": "grs.caa.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-30",
+      "updated_at": "2026-07-30",
+      "_via": "search",
+      "first_seen": "2026-07-30"
+    },
+    {
+      "id": "search-yuzmshanghai-x的30天-用30天记录你眼中的-x",
+      "category": "opencall",
+      "title_zh": "“X的30天”| 用30天记录你眼中的“X”",
+      "title_en": null,
+      "org_zh": "Yuz Museum Shanghai",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2017-10-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "余德耀美术馆举办“X的30天”摄影作品征集活动，面向所有摄影爱好者，要求以‘物’为对象，拍摄为期30天，每天呈现1张摄影作品，共30张作品。",
+      "url": "http://www.yuzmshanghai.org/x-30days/?lang=en",
+      "source_url": "http://www.yuzmshanghai.org/x-30days/?lang=en",
+      "domain": "yuzmshanghai.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "expired",
+      "verified_at": null,
+      "last_seen": "2026-07-30",
+      "updated_at": "2026-07-30",
+      "_via": "search",
+      "first_seen": "2026-07-30"
+    },
+    {
+      "id": "search-shyp-2026杨浦区学生国际艺术双年展作品征集启动-让艺术成为世界交流的纽带",
+      "category": "opencall",
+      "title_zh": "2026杨浦区学生国际艺术双年展作品征集启动！让艺术成为世界交流的纽带",
+      "title_en": null,
+      "org_zh": "上海市杨浦区人民政府",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": "2026-10-31",
+      "deadline_note": "",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "4-18岁",
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "摄影",
+        "戏剧",
+        "模型",
+        "视觉设计"
+      ],
+      "summary_zh": "2026杨浦区学生国际艺术双年展征稿启动，面向全球4-18岁学生，作品形式不限，包括绘画、雕塑、摄影等，投稿截止日期为2026年10月31日。",
+      "url": "https://www.shyp.gov.cn/shypq/ggfw-bmgg/20250919/490537.html",
+      "source_url": "https://www.shyp.gov.cn/shypq/ggfw-bmgg/20250919/490537.html",
+      "domain": "shyp.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-30",
+      "updated_at": "2026-07-30",
+      "_via": "search",
+      "first_seen": "2026-07-30"
+    },
+    {
+      "id": "search-artmuseumonline-上海美术馆成立70周年-等待大家讲述温暖的独家记忆",
+      "category": "opencall",
+      "title_zh": "上海美术馆成立70周年 等待大家讲述温暖的独家记忆",
+      "title_en": null,
+      "org_zh": "中华艺术宫",
+      "city_zh": null,
+      "country_zh": null,
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "上海美术馆成立70周年，面向广大观众征集关于上海美术馆的独家记忆，包括文字故事、影像记忆、创意slogan和实物珍藏。投稿方式包括扫码和邮箱。",
+      "url": "https://www.artmuseumonline.org/art/art/visitGuide/xwgg/2026/07/06/2c906d9b9e0127fe019f3aa095d6627a.html",
+      "source_url": "https://www.artmuseumonline.org/art/art/visitGuide/xwgg/2026/07/06/2c906d9b9e0127fe019f3aa095d6627a.html",
+      "domain": "artmuseumonline.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "last_seen": "2026-07-30",
+      "updated_at": "2026-07-30",
+      "_via": "search",
+      "first_seen": "2026-07-30"
     }
   ]
 }
