@@ -159,7 +159,7 @@ function withWriteLock(fn) {
   return p;
 }
 // 2) 并发信号量:同时进行的检索上限;超出的"排队等待"(不是拒绝)。检索大多在等网络IO,故上限可较高。
-const MAX_CONCURRENT = 12;
+const MAX_CONCURRENT = Math.max(4, Number(process.env.MAX_CONCURRENT || 24));
 let running = 0;
 const waiters = [];
 function acquireSlot() {
@@ -176,8 +176,11 @@ const inFlight = new Set();                  // 正在检索中的词(小写)
 const QUERY_TTL = 8 * 60 * 1000;
 function recentlyDone(q) { const t = recentQ.get(q); return t && (Date.now() - t < QUERY_TTL); }
 // 4) 简易 IP 限频:同一来源每分钟检索上限,防单人狂刷烧钱。
+// ★ v0.97.0 现场化:展会/学校/公司都是一个出口 IP 后面几十上百人(NAT),原来的 4 次/分
+//   等于"整个会场每分钟只能检索 4 次"。放宽到 12;**真正的成本闸是 SERPER_DAILY_BUDGET
+//   日预算(超了自动降级 DDG,不烧钱)**,IP 限频只用来挡住单机脚本狂刷。
 const ipHits = new Map();                    // ip -> [时间戳...]
-const IP_WINDOW = 60 * 1000, IP_MAX = 4;
+const IP_WINDOW = 60 * 1000, IP_MAX = Math.max(2, Number(process.env.RL_SEARCH_PER_MIN || 12));
 function rateLimited(ip) {
   const now = Date.now();
   const arr = (ipHits.get(ip) || []).filter(t => now - t < IP_WINDOW);
@@ -417,11 +420,20 @@ function readBody(req, max = 262144) {
     req.on("error", reject);
   });
 }
-// 客户端 IP:默认只信 socket 真实地址(当前 IP 直连、无反代,X-Forwarded-For 可被任意伪造,
-// 若信它则所有限频形同虚设)。以后套 nginx 反代时设 TRUST_PROXY=1 才改用 XFF 首值。
+// 客户端 IP:默认只信 socket 真实地址(裸奔直连时 X-Forwarded-For 可被任意伪造,
+// 若信它则所有限频形同虚设)。套 nginx 反代后设 TRUST_PROXY=1。
+// ★ 取值顺序修正(v0.97.0):优先 X-Real-IP —— nginx 配的是 `X-Real-IP $remote_addr`,
+//   恒等于真实 peer,客户端伪造不了;而 XFF 用的是 `$proxy_add_x_forwarded_for`
+//   =「客户端自带的 XFF, 真实IP」,**首值恰恰是客户端可自填的**,拿首值做限频等于留了个绕过口。
+//   故 XFF 兜底时取【最后一跳】(nginx 追加的那个才是真的)。
 const TRUST_PROXY = process.env.TRUST_PROXY === "1";
 const ipOf = req => {
-  if (TRUST_PROXY && req.headers["x-forwarded-for"]) return String(req.headers["x-forwarded-for"]).split(",")[0].trim();
+  if (TRUST_PROXY) {
+    const real = req.headers["x-real-ip"];
+    if (real) return String(real).trim();
+    const xff = req.headers["x-forwarded-for"];
+    if (xff) { const a = String(xff).split(","); return a[a.length - 1].trim(); }
+  }
   return String(req.socket.remoteAddress || "?");
 };
 
@@ -622,22 +634,22 @@ async function notifyForComment(c) {
     if (w) await db.notify({ uid: w.uid, type: "comment", actor: c.uid, ref: { kind: "work", target: c.target, cid: c.id, preview, title: w.title } });
   }
 }
-// 作品举报限频(防刷):单 IP 每天 20 次
+// 作品举报限频(防刷):单 IP 每天 60 次(v0.97.0 由 20 放宽,同一 WiFi 出口可能几十人)
 const reportHits = new Map();
 function reportLimited(ip) {
   const now = Date.now();
   const arr = (reportHits.get(ip) || []).filter(t => now - t < 24 * 3600e3);
-  if (arr.length >= 20) { reportHits.set(ip, arr); return true; }
+  if (arr.length >= Math.max(5, Number(process.env.RL_REPORT_PER_DAY || 60))) { reportHits.set(ip, arr); return true; }
   arr.push(now); reportHits.set(ip, arr);
   return false;
 }
-// 反馈限频(v0.83.0,免登录可提所以按 IP):单 IP 每天 10 条
+// 反馈限频(v0.83.0,免登录可提所以按 IP):单 IP 每天 40 条(v0.97.0 由 10 放宽,同上)
 const FB_TYPES = new Set(["bug", "suggest", "help", "correction", "coop"]);
 const fbHits = new Map();
 function fbLimited(ip) {
   const now = Date.now();
   const arr = (fbHits.get(ip) || []).filter(t => now - t < 24 * 3600e3);
-  if (arr.length >= 10) { fbHits.set(ip, arr); return true; }
+  if (arr.length >= Math.max(5, Number(process.env.RL_FEEDBACK_PER_DAY || 40))) { fbHits.set(ip, arr); return true; }
   arr.push(now); fbHits.set(ip, arr);
   return false;
 }

@@ -244,15 +244,33 @@ export async function sendPhoneCode(body, ip) {
   if (!PHONE_RE.test(phone)) return { code: 400, body: { error: "手机号格式不正确" } };
   if (byPhone.has(phoneHmac(phone))) return { code: 409, body: { error: (body || {}).purpose === "bind" ? "该手机号已被其他账号绑定" : "该手机号已注册,请直接登录" } };
   if (authLimited("sms:" + phone, 3, 10 * 60 * 1000)) return { code: 429, body: { error: "该手机号请求验证码太频繁,请稍后再试" } };
-  if (authLimited("smsip:" + ip, 8, 10 * 60 * 1000)) return { code: 429, body: { error: "发送太频繁,请稍后再试" } };
+  // 按 IP:原 8 次/10 分 = 同一 WiFi 出口 10 分钟只能有 8 个人注册,活动现场直接卡死。放宽到 40。
+  if (authLimited("smsip:" + ip, Math.max(5, Number(process.env.RL_SMS_IP_PER_10MIN || 40)), 10 * 60 * 1000))
+    return { code: 429, body: { error: "发送太频繁,请稍后再试" } };
+  // ★ 真正护住短信额度的是这道全局日闸(阿里云按条计费,赠送额度有限):
+  //   放宽按 IP 阈值后,必须有一道全站上限兜底,否则脚本换号狂发能把额度/余额烧光。
+  if (smsDayCapped()) {
+    process.stderr.write("[sms] 今日发送已达全局上限 " + smsDayCap() + " 条,暂停发码(调 SMS_DAILY_CAP 放宽)\n");
+    return { code: 429, body: { error: "今日验证码发送量已达上限,请稍后或联系站长" } };
+  }
   try { await sendSmsCode(phone); }
   catch (e) {
     process.stderr.write("[sms] 发送失败 " + phone + ": " + (e.message || e) + "\n");
     return { code: 503, body: { error: "验证码发送失败,请稍后再试" } };
   }
+  smsDayBump();
   logEvent("smscode", { phone: maskPhone(phone), ip });
   return { code: 200, body: { ok: true } };
 }
+// 短信全局日闸(v0.97.0):只统计【真发出去】的条数(发送失败不计,免把额度算错)。
+// 进程内计数,重启归零——短信额度是"天级"资源,重启少算几条可接受,不值得为它落盘。
+// 默认 300 条/天:活动现场百人注册够用,又不至于被刷爆额度;要更严/更松改 .env SMS_DAILY_CAP。
+let smsDay = null, smsDayN = 0;
+function smsDayCap() { return Math.max(10, Number(process.env.SMS_DAILY_CAP || 300)); }
+function smsToday() { return new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10); }   // 按北京日切
+function smsDayCapped() { if (smsDay !== smsToday()) { smsDay = smsToday(); smsDayN = 0; } return smsDayN >= smsDayCap(); }
+function smsDayBump() { if (smsDay !== smsToday()) { smsDay = smsToday(); smsDayN = 0; } smsDayN++; }
+export function smsDayUsed() { return smsDay === smsToday() ? smsDayN : 0; }   // /admin 简报可读
 // 校验手机验证码(调阿里云 CheckSmsVerifyCode):通过返回 null,否则返回错误文案。
 async function checkPhoneCode(phone, code) {
   if (!/^\d{4,6}$/.test(String(code || "").trim())) return "请填写收到的手机验证码";
@@ -310,8 +328,11 @@ function sessionCookie(token) { return `ap_sess=${token}; Path=/; HttpOnly; Same
 const CLEAR_COOKIE = "ap_sess=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0";
 
 // ---------- 认证接口限频(比检索更严:防爆破/批量注册) ----------
+// ★ v0.97.0 现场化:所有按 IP 的阈值都要按「一个出口 IP 后面几十上百人」(展会/学校/公司 NAT)
+//   来定,否则活动现场第 11 个人就注册不了。真正的防爆破靠的是**按账号/按手机号**那几条
+//   (sms:<手机号> 3次/10分、login 失败计数、bind:<uid>),那些一律不放宽。
 const authHits = new Map();                    // ip -> [ts...]
-function authLimited(ip, max = 10, windowMs = 10 * 60 * 1000) {
+function authLimited(ip, max = Math.max(5, Number(process.env.RL_AUTH_PER_10MIN || 60)), windowMs = 10 * 60 * 1000) {
   const now = Date.now();
   const arr = (authHits.get(ip) || []).filter(t => now - t < windowMs);
   if (arr.length >= max) { authHits.set(ip, arr); return true; }
@@ -340,7 +361,7 @@ function publicUser(u) {
 
 // 用户搜索(8.2):按昵称归一化子串匹配;只出已完成资料的用户、公开最小字段(绝不含邮箱)
 export function searchUsers(q, ip) {
-  if (authLimited("usearch:" + ip, 30, 60 * 1000)) return { code: 429, body: { error: "搜索太频繁,歇一下" } };
+  if (authLimited("usearch:" + ip, Math.max(10, Number(process.env.RL_USEARCH_PER_MIN || 120)), 60 * 1000)) return { code: 429, body: { error: "搜索太频繁,歇一下" } };
   q = String(q || "").trim().toLowerCase().replace(/\s+/g, "");
   if (!q || q.length > 30) return { code: 400, body: { error: "关键词 1–30 字" } };
   const out = [];
@@ -364,7 +385,7 @@ export function userExists(uid) { return users.some(u => u.id === uid && u.nickn
 
 // 用户公开主页(8.1):任何人可看。只出公开字段——绝不含邮箱/收藏之外的任何隐私(红线)。
 export function publicProfile(uid, ip) {
-  if (authLimited("pub:" + ip, 60, 60 * 1000)) return { code: 429, body: { error: "请求太频繁,请稍后再试" } };
+  if (authLimited("pub:" + ip, Math.max(20, Number(process.env.RL_PUBLIC_PER_MIN || 300)), 60 * 1000)) return { code: 429, body: { error: "请求太频繁,请稍后再试" } };
   const u = users.find(x => x.id === uid);
   if (!u || !u.nickname) return { code: 404, body: { error: "用户不存在" } };   // 资料未完成的暂不展示
   const p = u.profile || {};
@@ -633,7 +654,8 @@ const trackHits = new Map();
 function trackLimited(ip) {
   const now = Date.now();
   const arr = (trackHits.get(ip) || []).filter(t => now - t < 60 * 1000);
-  if (arr.length >= 40) { trackHits.set(ip, arr); return true; }
+  // v0.97.0:每人每分钟 1 次心跳,原 40 次/分 = 同一 WiFi 下 40 人封顶,在线数会失真。放宽到 300。
+  if (arr.length >= Math.max(20, Number(process.env.RL_TRACK_PER_MIN || 300))) { trackHits.set(ip, arr); return true; }
   arr.push(now); trackHits.set(ip, arr);
   return false;
 }
