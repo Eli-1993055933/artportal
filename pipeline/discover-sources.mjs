@@ -56,7 +56,13 @@ function titleToOrg(title, domain) {
 // 抓了也没有可发现的详情链接,徒增噪声。先在这挡掉,比事后清理省事。
 const STORAGE_HOST = /(^|\.)(s3[.-][a-z0-9-]+\.amazonaws\.com|amazonaws\.com|cloudfront\.net|googleusercontent\.com|blob\.core\.windows\.net|storage\.googleapis\.com|wixsite\.com|weebly\.com)$/i;
 function domainOf(u) { try { return new URL(u).host.replace(/^www\./, "").toLowerCase(); } catch (e) { return null; } }
-function slug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 20) || "src"; }
+// 同 seed-known-institutions.mjs 的坑:纯中文标题会被滤空,统一兜底成 "src" 会导致互相撞车丢数据。
+function slug(s) {
+  const base = String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 20);
+  if (base) return base;
+  let h = 0; for (const ch of String(s || "")) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return "cn-" + h.toString(36).slice(0, 8);
+}
 
 async function main() {
   const cfg = await loadRegions();
