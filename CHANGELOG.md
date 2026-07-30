@@ -34,6 +34,14 @@
 
 <!-- bump-version.mjs 会在本注释的下一行插入新版本段,勿删勿改本行 -->
 
+## [0.99.0] - 2026-07-30
+> 路线图第 30.1 项:区域经理续做——给辖区找信源,零 serper 成本的可持续增长引擎。
+
+- **新增 `discover-sources.mjs`(信源自动发现)**:搜索(真实结果)→ 过滤黑名单/已有 → 真实抓取校验(robots+可达+正文非空壳)→ 写入 `sources.json`。反幻觉红线同标准:域名/URL 一律取自真实搜索结果不编造,`org_zh` 取自真实页面标题(清洗常见后缀)不由 AI 生成,`reachable` 是真实 HTTP 探测结果不是猜的,一律 `confirmed:false` 与现有 152 条同一惯例——机器只负责"够得着的候选",是否真是通知公告列表页仍由 `run.mjs` 的 `discoverDetailLinks` + `verify.mjs` 的 evidence 校验兜底,拿不准不会污染正文数据。
+- `lib/websearch.mjs` 新增 `searchWebFull`:发现信源需要同时要标题**和**链接,`searchWeb` 只回链接、`searchWebRich`(线索用途)故意不回链接,都不够用,故新增专用函数,复用同一份 serper 预算记账。
+- 首批发现聚焦**信源最薄弱的国际大区**(东南亚南亚/北美西岸/大洋洲此前各仅 1 个信源):新增 **27 个真实机构**(National Gallery Singapore、Hammer Museum、MOCA、LACMA、Australian Museum、Creative Australia 等),三区信源从各 1 个提升到 8–10 个。中东非洲/拉丁美洲/北美东岸本批未获新增(候选被黑名单/已有过滤掉),留作下一批换查询词再试。
+- 途中修了一个真实踩到的坑:候选里出现过 S3 云存储直链(`*.amazonaws.com` 的单个文件),`fetchSource` 对它也返回 200,但那不是可发现详情链接的"通知栏目页"——加了 `STORAGE_HOST` 黑名单(S3/CloudFront/Blob Storage 等)+ 正文长度阈值(<200 字视为空壳/纯 JS 渲染)双重过滤。
+
 ## [0.98.1] - 2026-07-30
 - **🔴 找回「前往官网必达主办方本站」硬闸**(v0.77 地球站大重写时丢失,继收藏 v0.85、埋点 v0.85、注册墙 v0.91 之后**第 4 处迁移遗失**)。地球站此前是 `go.href = o.url`,把 `official_url` 优先、第三方黑名单、可信平台标注整套逻辑全绕过了。实测线上 228 条默认可见的机会里:**35 条明明有 `official_url` 却被送到聚合站**(如「哈佛拉德克利夫研究员项目」落到 artconnect 而非 radcliffe.harvard.edu;十余条驻留落到 transartists 而非机构本站),4 条落到征稿门户/新闻站。现已移植 `isThirdParty`/`platformName`/`officialUrl` 到 `site/index.html`,并恢复 `extraMatch` 里的硬闸:机会四类定位不到主办方官网(或可信报名平台)一律不展示,用户投稿按老站口径豁免。资讯/招聘/作品不适用(本就该去原文/申请页/站内)。
   - 端到端实测:`#/o/hkbu-iww-2027` 的按钮从 transartists.org → **iww.hkbu.edu.hk**;`#/o/curatorspace-...-krate` 文案从「前往官网」→ **「前往 CuratorSpace 报名页」**(如实点名平台,不谎称官网)。

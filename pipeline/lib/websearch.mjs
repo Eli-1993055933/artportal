@@ -73,6 +73,27 @@ export async function searchWebRich(query, opts) {
     .filter(o => o.title);
 }
 
+// 全量搜索(信源发现用,discover-sources.mjs):同时要标题【和】链接——
+// searchWeb 只回链接、searchWebRich 故意不回链接(social 线索用途),都不够用。
+// 计同一份 serper 预算;没 key 或余量不足直接空手而归(信源发现是锦上添花,不做 DDG 兜底,
+// 免得把低质量结果当真实机构收进 sources.json)。
+export async function searchWebFull(query, opts) {
+  if (!process.env.SERPER_API_KEY || serperBudgetLeft() <= 0) return [];
+  bumpBudget();
+  const body = { q: query, num: 15, gl: (opts && opts.gl) || "cn", hl: (opts && opts.hl) || "zh-cn" };
+  const res = await fetch("https://google.serper.dev/search", {
+    method: "POST",
+    headers: { "X-API-KEY": process.env.SERPER_API_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!res.ok) throw new Error("serper " + res.status);
+  const j = await res.json();
+  return (j.organic || [])
+    .map(o => ({ title: String(o.title || "").slice(0, 200), link: String(o.link || "") }))
+    .filter(o => o.link);
+}
+
 async function serperSearch(query, opts) {
   // 地域/语言自适应(2026-07-20):默认中国区中文,但检索国际地点时由调用方传入 gl/hl
   // (如洛杉矶 → gl=us/hl=en),否则 Google 只返中国区结果、国际站被严重降权。

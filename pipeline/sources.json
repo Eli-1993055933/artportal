@@ -2968,6 +2968,546 @@
       "confirmed": false,
       "notes": "L2b 2026-07-21 机器发现+discoverDetailLinks 验证(样例确认艺术展览/征集);省市美术馆/美协,机构名待人工确认",
       "region_hint": "cn-central-west"
+    },
+    {
+      "id": "nationalgallery-auto",
+      "org_zh": "nationalgallery.sg",
+      "name_zh": "机器发现",
+      "url": "https://www.nationalgallery.sg/",
+      "domain": "nationalgallery.sg",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "channelnewsasia-auto",
+      "org_zh": "channelnewsasia.com",
+      "name_zh": "机器发现",
+      "url": "https://www.channelnewsasia.com/singapore/national-gallery-singapore-worlds-first-museum-healing-arts-centre-excellence-5569976",
+      "domain": "channelnewsasia.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "singaporeartmuseum-auto",
+      "org_zh": "singaporeartmuseum.sg",
+      "name_zh": "机器发现",
+      "url": "https://www.singaporeartmuseum.sg/",
+      "domain": "singaporeartmuseum.sg",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "artsg-auto",
+      "org_zh": "Applications Now Open",
+      "name_zh": "机器发现",
+      "url": "https://artsg.com/",
+      "domain": "artsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "artweek-auto",
+      "org_zh": "Singapore Art Week",
+      "name_zh": "机器发现",
+      "url": "https://www.artweek.sg/",
+      "domain": "artweek.sg",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "cdc-auto",
+      "org_zh": "WeCare Arts Exhibition",
+      "name_zh": "机器发现",
+      "url": "https://www.cdc.gov.sg/wecare-arts-exhibition-cdc/",
+      "domain": "cdc.gov.sg",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "nac-auto",
+      "org_zh": "National Arts Council",
+      "name_zh": "机器发现",
+      "url": "https://www.nac.gov.sg/about-us/media-centre/press-releases",
+      "domain": "nac.gov.sg",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "www2-auto",
+      "org_zh": "www2.fundsforngos.org",
+      "name_zh": "机器发现",
+      "url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「泰国 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "arts-auto",
+      "org_zh": "British Council Arts",
+      "name_zh": "机器发现",
+      "url": "https://arts.britishcouncil.org/get-involved/opportunities",
+      "domain": "arts.britishcouncil.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「泰国 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-sea-sa"
+    },
+    {
+      "id": "hammer-auto",
+      "org_zh": "Hammer Museum",
+      "name_zh": "机器发现",
+      "url": "https://hammer.ucla.edu/",
+      "domain": "hammer.ucla.edu",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "moca-auto",
+      "org_zh": "Home • MOCA",
+      "name_zh": "机器发现",
+      "url": "https://www.moca.org/",
+      "domain": "moca.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "lacma-auto",
+      "org_zh": "LACMA",
+      "name_zh": "机器发现",
+      "url": "https://www.lacma.org/",
+      "domain": "lacma.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "lapca-auto",
+      "org_zh": "lapca.org",
+      "name_zh": "机器发现",
+      "url": "https://lapca.org/",
+      "domain": "lapca.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "camla-auto",
+      "org_zh": "華美博物館",
+      "name_zh": "机器发现",
+      "url": "https://camla.org/zh/%E4%B8%BB%E9%A0%81/",
+      "domain": "camla.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "molaa-auto",
+      "org_zh": "molaa.org",
+      "name_zh": "机器发现",
+      "url": "https://molaa.org/",
+      "domain": "molaa.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "lbma-auto",
+      "org_zh": "Long Beach Museum of Art",
+      "name_zh": "机器发现",
+      "url": "https://lbma.org/",
+      "domain": "lbma.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "caforthearts-auto",
+      "org_zh": "California Arts Council",
+      "name_zh": "机器发现",
+      "url": "https://www.caforthearts.org/jobs/california-arts-council---grant-panelists",
+      "domain": "caforthearts.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「旧金山 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "thisiscolossal-auto",
+      "org_zh": "thisiscolossal.com",
+      "name_zh": "机器发现",
+      "url": "https://www.thisiscolossal.com/2025/10/november-2025-funding-for-artists/",
+      "domain": "thisiscolossal.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「旧金山 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "kala-auto",
+      "org_zh": "CAC",
+      "name_zh": "机器发现",
+      "url": "https://www.kala.org/community-projects/cac-individual-artist-fellowships/",
+      "domain": "kala.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「旧金山 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "sydney-auto",
+      "org_zh": "Sydney arts & culture",
+      "name_zh": "机器发现",
+      "url": "https://www.sydney.com/things-to-do/arts-and-culture",
+      "domain": "sydney.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「悉尼 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "australian-auto",
+      "org_zh": "The Australian Museum",
+      "name_zh": "机器发现",
+      "url": "https://australian.museum/learn/news/",
+      "domain": "australian.museum",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「悉尼 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "mhnsw-auto",
+      "org_zh": "Museum of Sydney",
+      "name_zh": "机器发现",
+      "url": "https://mhnsw.au/visit-us/museum-of-sydney/",
+      "domain": "mhnsw.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「悉尼 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "therocks-auto",
+      "org_zh": "MCA Sydney",
+      "name_zh": "机器发现",
+      "url": "https://www.therocks.com/see-do-stay/museum-of-contemporary-art-australia",
+      "domain": "therocks.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「悉尼 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "creative-auto",
+      "org_zh": "creative.gov.au",
+      "name_zh": "机器发现",
+      "url": "https://creative.gov.au/investments-opportunities/arts-projects-individuals-and-groups",
+      "domain": "creative.gov.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「墨尔本 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "merri-bek-auto",
+      "org_zh": "Arts grants",
+      "name_zh": "机器发现",
+      "url": "https://www.merri-bek.vic.gov.au/my-council/grants-and-awards/arts-grants/",
+      "domain": "merri-bek.vic.gov.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「墨尔本 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "midsumma-auto",
+      "org_zh": "List of Grants",
+      "name_zh": "机器发现",
+      "url": "https://www.midsumma.org.au/resources/list-of-grants/",
+      "domain": "midsumma.org.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「墨尔本 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "melbourne-auto",
+      "org_zh": "Melbourne",
+      "name_zh": "机器发现",
+      "url": "https://melbourne.smartygrants.com.au/ArtsGrants2025/386084/download.pdf",
+      "domain": "melbourne.smartygrants.com.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「墨尔本 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
     }
   ],
   "blocked_or_unverified": [
