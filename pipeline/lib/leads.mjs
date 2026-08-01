@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { searchWebRich } from "./websearch.mjs";
-import { llmExtract, extractGlmFree } from "./extract.mjs";
+import { extractGlmFree } from "./extract.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE_PATH = join(__dir, "..", "state", "leads.json");
@@ -57,7 +57,7 @@ function libHas(name) {
   } catch (e) { return false; }
 }
 
-// 线索提炼(轻任务,免费 GLM 为主、DeepSeek 兜底,v0.83.1):
+// 线索提炼(轻任务,专用 GLM,v0.99.2 起不再兜底 DeepSeek——断粮期间兜底只会白白失败):
 // 只允许从给定标题/摘要文本里抄机会名与主办方,提炼不出返回空数组。
 async function distillClues(rows) {
   if (!rows.length) return [];
@@ -69,11 +69,7 @@ async function distillClues(rows) {
     "  org: 主办方名称(同样必须出现在文本中;看不出来就填空字符串)\n" +
     "规则:辨识不出明确机会名的一律不要;广告、艺考培训、代报名、个人感想一律不要;拿不准就不要。\n" +
     '只输出 JSON:{"clues":[{"name":"...","org":"..."}]}';
-  let out = null;
-  if (process.env.MOD_API_KEY) {
-    try { out = (await extractGlmFree(sys, text, 800)).data; } catch (e) {}
-  }
-  if (!out) out = (await llmExtract(sys, text, 800)).data;
+  const out = (await extractGlmFree(sys, text, 800)).data;
   const src = rows.map(r => (r.title + " " + r.snippet)).join("\n");
   return (Array.isArray(out.clues) ? out.clues : [])
     .map(c => ({ name: String(c.name || "").trim().slice(0, 60), org: String(c.org || "").trim().slice(0, 40) }))

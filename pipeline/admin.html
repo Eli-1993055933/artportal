@@ -137,6 +137,8 @@
         <h2>近 14 天独立访客</h2>
         <div id="stBars" style="display:flex;align-items:flex-end;gap:6px;height:130px;padding:6px 2px 0"></div>
         <div class="scroll" style="margin-top:10px"><table id="stDayTbl"><thead><tr><th>日期</th><th>访客</th><th>进站</th><th>看详情</th><th>去官网</th><th>收藏</th><th>检索</th><th>读周刊</th><th>评论</th><th>注册</th></tr></thead><tbody></tbody></table></div>
+        <p class="muted" style="font-size:12px;margin:6px 0 0">点某一天可查看当天是谁访问过(登录用户按邮箱/昵称,匿名按 IP 属地归堆)。</p>
+        <div id="stDayDetail" hidden style="margin-top:8px"></div>
         <h2>近 7 天热门条目 <span class="muted" style="font-size:12px">按 看详情+去官网 排序</span></h2>
         <div class="scroll"><table id="stTopTbl"><thead><tr><th>条目</th><th>频道</th><th>看详情</th><th>去官网</th></tr></thead><tbody></tbody></table></div>
         <h2>近 7 天热门检索词</h2>
@@ -317,7 +319,7 @@
       <section data-sec="users" hidden>
         <h1 class="sec__title">注册用户名册</h1>
         <div class="toolbar">
-          <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称搜索…" />
+          <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称搜索…" autocomplete="off" />
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
@@ -364,6 +366,14 @@
     return Math.round(s / 86400) + " 天前";
   }
   function td(text, cls) { var el = document.createElement("td"); el.textContent = text == null ? "—" : String(text); if (cls) el.className = cls; return el; }
+  // agent 打卡摘要有时来自子进程输出流,遇到编码问题会出现"锟斤拷"式乱码/替换符——
+  // 与其把乱码糊用户脸上,不如给个明确提示(v0.99.2)。
+  function cleanText(s, fallback) {
+    s = s == null ? "" : String(s);
+    if (!s) return fallback;
+    if (/[�\x00-\x08\x0E-\x1F]/.test(s)) return "(日志文本含乱码,已隐藏——不影响功能)";
+    return s;
+  }
   // 事件/注册时间存的是 UTC ISO;后台按【北京时间】显示(+8 小时)
   function bj(iso, withDate) {
     if (!iso) return "—";
@@ -577,7 +587,7 @@
           var mo = r.moderation || {};
           line2.textContent = "24h:审 " + (mo.total || 0) + " 件(自动放行 " + (mo.auto || 0) + " · 转人工 " + (mo.pending || 0) + " · 人工裁决 " + (mo.decided || 0) + " · 举报 " + (mo.reported || 0) + ")";
         } else if (last) {
-          line2.textContent = rel(last.at) + (last.took_ms ? " · 用时 " + Math.round(last.took_ms / 1000) + "s" : "") + "\n" + (last.summary || "");
+          line2.textContent = rel(last.at) + (last.took_ms ? " · 用时 " + Math.round(last.took_ms / 1000) + "s" : "") + "\n" + cleanText(last.summary, "(无摘要)");
           line2.style.whiteSpace = "pre-wrap";
         } else {
           line2.textContent = "还没有打卡记录";
@@ -609,7 +619,7 @@
           pill.className = "pill" + (x.ok ? " on" : "");
           pill.textContent = x.ok ? "完成" : "失败";
           st.appendChild(pill); tr.appendChild(st);
-          tr.appendChild(td(x.summary || "—"));
+          tr.appendChild(td(cleanText(x.summary, "—")));
           tr.appendChild(td(x.took_ms ? Math.round(x.took_ms / 1000) + "s" : "—", "mono"));
           tb.appendChild(tr);
         });
@@ -1288,8 +1298,11 @@
     var tb = $("stDayTbl").tBodies[0]; tb.textContent = "";
     days.slice().reverse().forEach(function (d) {
       var tr = document.createElement("tr");
+      tr.style.cursor = "pointer";
+      tr.title = "点击查看 " + d.day + " 的访客明细";
       [d.day, d.visitors, d.visit, d.view, d.outbound, d.fav, d.search, d.wkread, d.comment, d.register]
         .forEach(function (v, i) { tr.appendChild(td(v, i > 0 && !v ? "muted" : "")); });
+      tr.addEventListener("click", function () { loadDayDetail(d.day); });
       tb.appendChild(tr);
     });
     var tt = $("stTopTbl").tBodies[0]; tt.textContent = "";
@@ -1307,6 +1320,57 @@
       var tr = document.createElement("tr");
       tr.appendChild(td(s.q)); tr.appendChild(td(s.n, "mono"));
       tq.appendChild(tr);
+    });
+  }
+
+  // 访客明细(v0.99.2):点某天,拉 /api/admin/stats/day 看当天具体是谁
+  function loadDayDetail(day) {
+    var box = $("stDayDetail"); box.hidden = false;
+    box.innerHTML = "";
+    var h = document.createElement("div"); h.className = "muted"; h.style.fontSize = "12px"; h.textContent = day + " 访客明细加载中…";
+    box.appendChild(h);
+    get("/api/admin/stats/day?day=" + encodeURIComponent(day)).then(function (r) {
+      box.innerHTML = "";
+      var title = document.createElement("h2"); title.style.margin = "4px 0 8px"; title.textContent = day + " 访客明细";
+      box.appendChild(title);
+      var users = r.users || [], anon = r.anon || [];
+      if (!users.length && !anon.length) {
+        var e = document.createElement("div"); e.className = "muted"; e.style.fontSize = "12px"; e.textContent = "(这天没有访客记录)";
+        box.appendChild(e); return;
+      }
+      if (users.length) {
+        var t1 = document.createElement("table");
+        t1.innerHTML = "<thead><tr><th>登录用户</th><th>事件数</th></tr></thead>";
+        var b1 = document.createElement("tbody");
+        users.forEach(function (x) {
+          var tr = document.createElement("tr");
+          tr.appendChild(td(x.email || x.nickname || ("用户 " + x.id)));
+          tr.appendChild(td(x.events, "mono"));
+          b1.appendChild(tr);
+        });
+        t1.appendChild(b1);
+        var s1 = document.createElement("div"); s1.className = "scroll"; s1.style.marginBottom = "10px"; s1.appendChild(t1);
+        box.appendChild(s1);
+      }
+      if (anon.length) {
+        var t2 = document.createElement("table");
+        t2.innerHTML = "<thead><tr><th>匿名访客(按 IP 属地归堆)</th><th>人数</th><th>事件数</th></tr></thead>";
+        var b2 = document.createElement("tbody");
+        anon.forEach(function (x) {
+          var tr = document.createElement("tr");
+          tr.appendChild(td(x.region));
+          tr.appendChild(td(x.visitors, "mono"));
+          tr.appendChild(td(x.events, "mono"));
+          b2.appendChild(tr);
+        });
+        t2.appendChild(b2);
+        var s2 = document.createElement("div"); s2.className = "scroll"; s2.appendChild(t2);
+        box.appendChild(s2);
+      }
+    }).catch(function () {
+      box.innerHTML = "";
+      var e = document.createElement("div"); e.className = "muted"; e.style.fontSize = "12px"; e.textContent = "加载失败,重新点一下试试。";
+      box.appendChild(e);
     });
   }
 

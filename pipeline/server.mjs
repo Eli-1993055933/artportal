@@ -1048,7 +1048,9 @@ async function handleAuthApi(req, res, u) {
           let d = days.get(day);
           if (!d) { d = { visitors: new Set() }; EVT.forEach(k => d[k] = 0); days.set(day, d); }
           if (d[e.type] != null) d[e.type]++;
-          d.visitors.add(e.uid || e.anon || e.ip || "?");
+          // 去重口径(v0.99.2):登录用 uid,匿名用 ip——不用 anon(小程序/微信内置浏览器等场景
+          // localStorage 常被清,同一人反复打开会换新 anon,导致同人同天被记成多个访客)。
+          d.visitors.add(e.uid || e.ip || "?");
           if (ts >= since7) {
             if ((e.type === "view" || e.type === "outbound") && e.id) {
               const h = itemHits.get(e.id) || { views: 0, outs: 0 };
@@ -1083,6 +1085,40 @@ async function handleAuthApi(req, res, u) {
         const topSearches = [...qHits.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([q, n]) => ({ q, n }));
         const favTotal = auth.favTotal ? auth.favTotal() : null;
         return json({ code: 200, body: { days: out, topItems, topSearches, fav_total: favTotal } });
+      } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
+    }
+    // 访客明细(v0.99.2):某天具体是谁——登录用户给邮箱/昵称,匿名按 IP 属地归堆(不出具体 IP)。
+    if (p === "/api/admin/stats/day" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const day = String(u.searchParams.get("day") || "").slice(0, 10);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return json({ code: 400, body: { error: "参数不正确" } });
+      try {
+        const bjDayOf = t => new Date(Date.parse(t) + 8 * 3600e3).toISOString().slice(0, 10);
+        let lines = [];
+        for (const f of [join(__dir, "state", "events.jsonl.1"), join(__dir, "state", "events.jsonl")]) {
+          try { lines.push(...(await readFile(f, "utf8")).trim().split("\n")); } catch (e) {}
+        }
+        const uidHits = new Map(), ipHits = new Map();
+        for (const line of lines) {
+          let e; try { e = JSON.parse(line); } catch (x) { continue; }
+          if (!e.t || bjDayOf(e.t) !== day) continue;
+          if (e.uid) uidHits.set(e.uid, (uidHits.get(e.uid) || 0) + 1);
+          else if (e.ip) ipHits.set(e.ip, (ipHits.get(e.ip) || 0) + 1);
+        }
+        const mini = auth.usersForAdminLookup([...uidHits.keys()]);
+        const byId = new Map(mini.map(x => [x.id, x]));
+        const users = [...uidHits.entries()]
+          .map(([id, events]) => ({ id, email: (byId.get(id) || {}).email || null, nickname: (byId.get(id) || {}).nickname || null, events }))
+          .sort((a, b) => b.events - a.events);
+        const regionAgg = new Map();
+        for (const [ipAddr, events] of ipHits) {
+          const region = ipRegion(ipAddr) || "未知地区";
+          const r = regionAgg.get(region) || { region, visitors: 0, events: 0 };
+          r.visitors++; r.events += events;
+          regionAgg.set(region, r);
+        }
+        const anon = [...regionAgg.values()].sort((a, b) => b.visitors - a.visitors);
+        return json({ code: 200, body: { day, users, anon } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     // 被举报内容裁决「保留」:内容没问题,举报计数清零(下架走既有 comments/works decide)
@@ -1766,7 +1802,16 @@ if (process.env.AUTO_HARVEST === "1" && process.env.REGION_HARVEST !== "1") {
 
   // forceId:/admin「立即上班」传经理 id —— 跳过"当值日 + 上班点 + 今日已跑"三道判定,直接排一班。
   async function regionTick(forceId = null) {
-    if (regionRunning) return { skipped: "running" };    // 上一班还没跑完就跳过(一班可能要几分钟)
+    if (regionRunning) {
+      // ★ 2026-07-30 修复:手动触发撞上服务器自己每 10 分钟一次的自动排班,原实现直接放弃并
+      //   静默返回 skipped——而 /api/admin/regions/run 端点又是 fire-and-forget(不等这个 Promise
+      //   就先回 200),两者叠加=页面显示"已开工"但实际啥也没干,批量补种时曾丢过 7/15 个班次。
+      //   现在改成:手动触发时【等锁释放】(最多等 8 分钟,与单班上限接近),而不是立刻放弃;
+      //   自动调度(forceId=null)维持原样直接跳过——它有下一个 10 分钟窗口,没必要等。
+      if (!forceId) return { skipped: "running" };
+      for (let waited = 0; regionRunning && waited < 480; waited += 3) await new Promise(r => setTimeout(r, 3000));
+      if (regionRunning) return { skipped: "running-timeout" };
+    }
     let cfg;
     try { cfg = await loadRegions(); }
     catch (e) { process.stderr.write("[区域经理] regions.json 读取失败,本轮跳过:" + String(e.message || e).slice(0, 100) + "\n"); return { error: "config" }; }
@@ -1981,14 +2026,18 @@ if (process.env.DAILY_CRAWL === "1") {
     const t0 = Date.now();
     const cap = String(Math.max(4, Number(process.env.DAILY_CRAWL_CAP || 12)));
     process.stderr.write("[每日抓取] 启动 run.mjs --cap " + cap + "\n");
-    let tail = "";
+    // 攒 Buffer 收尾一次性解码,别逐块 toString()——中文字符可能被切在两个 data 块中间,
+    // 逐块解码会拼出乱码(v0.99.2 修:「铁犁」打卡摘要经常出现替换符就是这个坑)。
+    let tailBuf = Buffer.alloc(0);
+    function pushChunk(d) { tailBuf = Buffer.concat([tailBuf, d]); if (tailBuf.length > 4000) tailBuf = tailBuf.subarray(tailBuf.length - 4000); }
     const p = spawn(process.execPath, [join(__dir, "run.mjs"), "--cap", cap], { cwd: __dir, env: process.env });
-    p.stdout.on("data", d => { tail = (tail + d).slice(-1000); });
-    p.stderr.on("data", d => { tail = (tail + d).slice(-1000); });
+    p.stdout.on("data", pushChunk);
+    p.stderr.on("data", pushChunk);
     p.on("close", (code) => {
       dcRunning = false;
+      const tail = tailBuf.toString("utf8").replace(/\s+/g, " ").slice(-150);
       process.stderr.write("[每日抓取] run.mjs 结束 code=" + code + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
-      db.agentLog({ agent: "harvester", ok: code === 0, summary: "服务器每日抓取 run.mjs(code=" + code + "):" + tail.replace(/\s+/g, " ").slice(-150), took_ms: Date.now() - t0 }).catch(() => {});
+      db.agentLog({ agent: "harvester", ok: code === 0, summary: "服务器每日抓取 run.mjs(code=" + code + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
     });
     p.on("error", (e) => { dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
   }
@@ -1999,7 +2048,8 @@ if (process.env.DAILY_CRAWL === "1") {
 
 // —— 自动化发现「探长」(v0.82.0,路线图第 6 项合规可行版)——
 // 社媒(小红书/微博)只作线索:只读搜索引擎索引的标题/摘要(拿不到链接,结构上不可能抓社媒页面),
-// DeepSeek 提炼机会名+主办方(原文子串校验)→ 走 searchAndHarvest 官网检索管线,evidence 过关才入库。
+// GLM(免费档,v0.99.2 起专用——DeepSeek 断粮期间不再兜底)提炼机会名+主办方(原文子串校验)
+// → 走 searchAndHarvest 官网检索管线,evidence 过关才入库。
 // 开关 AUTO_DISCOVER=1;每日北京 DISCOVER_HOUR(默认 5)点一勘(质检 4 点之后);DISCOVER_CAP 每日线索上限(默认 2)。
 // serper 余量 < 15 直接休勘让路(线索 1 次 + 每线索官网检索多次,勘一轮成本不小)。
 if (process.env.AUTO_DISCOVER === "1") {
