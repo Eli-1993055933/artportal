@@ -2,10 +2,12 @@
 // 的联系人发 ArtPortal 正式上线通知。跟站内周报订阅系统(newsletter/NEWSLETTER_BULK)完全独立,
 // 收件人不在 users 表里,不走那条通道,也不受那道群发闸控制。
 //
-// 用法:node mail-survey-announce.mjs [--dry]
-//   --dry  只打印将发给谁,不真发信(核对名单用)。
+// 用法:node mail-survey-announce.mjs [--dry] [--delay=毫秒]
+//   --dry     只打印将发给谁,不真发信(核对名单用)。
+//   --delay   逐封间隔,默认 3000ms。首次运行 86 封发到 18 封就被 QQ 邮箱 SMTP 登录频率限制拦了
+//             (535 login frequency limited)——个人 QQ 邮箱本不是给批量发信设计的,连续开太多次
+//             登录会被临时限速。重试时拉长间隔(比如 --delay=25000)能大大降低再次触发的概率。
 // 可重复运行:已成功发过的邮箱记在 state/survey-mail-log.json 里,重跑会跳过,不会给同一人发两遍。
-// 逐封限速 3 秒(和周报群发同一节奏),对 SMTP 服务商客气。
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -16,6 +18,8 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const LIST_PATH = join(__dir, "state", "survey-emails.json");
 const LOG_PATH = join(__dir, "state", "survey-mail-log.json");
 const dry = process.argv.includes("--dry");
+const delayArg = process.argv.find(a => a.startsWith("--delay="));
+const DELAY_MS = delayArg ? Math.max(1000, Number(delayArg.slice(8)) || 3000) : 3000;
 
 const SUBJECT = "ArtPortal 正式上线了 —— 感谢你参与过我们的问卷";
 const TEXT =
@@ -67,23 +71,27 @@ async function main() {
   if (!dry && !mailerOn()) { console.error("发信未配置(.env 缺 SMTP_HOST/USER/PASS),中止。"); process.exit(1); }
 
   const todo = list.filter(e => !log.sent[e]);
-  console.log(`总名单 ${list.length} 个,已发过 ${list.length - todo.length} 个,本次待发 ${todo.length} 个${dry ? "(--dry 演习,不真发)" : ""}`);
+  console.log(`总名单 ${list.length} 个,已发过 ${list.length - todo.length} 个,本次待发 ${todo.length} 个,间隔 ${DELAY_MS}ms${dry ? "(--dry 演习,不真发)" : ""}`);
 
-  let ok = 0, fail = 0;
+  let ok = 0, fail = 0, consecutiveLimit = 0;
   for (const email of todo) {
     if (dry) { console.log("  [演习] " + email); continue; }
     try {
       await sendMail({ to: email, subject: SUBJECT, text: TEXT, html: HTML });
       log.sent[email] = new Date().toISOString();
-      ok++;
+      ok++; consecutiveLimit = 0;
       console.log("  ✓ " + email);
     } catch (e) {
-      log.failed[email] = { at: new Date().toISOString(), err: String(e.message || e) };
+      const msg = String(e.message || e);
+      log.failed[email] = { at: new Date().toISOString(), err: msg };
       fail++;
-      console.log("  ✗ " + email + " —— " + String(e.message || e).slice(0, 120));
+      console.log("  ✗ " + email + " —— " + msg.slice(0, 120));
+      // 还在被限速就别硬顶着发——连续 3 次同类失败直接停,免得越拦越久,下次调大 --delay 再试
+      if (/frequency limit|535/.test(msg)) { consecutiveLimit++; if (consecutiveLimit >= 3) { console.log("连续 3 次被限速,提前停止,过会儿加大 --delay 重试。"); break; } }
+      else consecutiveLimit = 0;
     }
     writeFileSync(LOG_PATH, JSON.stringify(log, null, 2), "utf8");   // 每封都落盘,中断也不丢进度
-    await new Promise(r => setTimeout(r, 3000));
+    await new Promise(r => setTimeout(r, DELAY_MS));
   }
   console.log(dry ? "演习结束。" : `发送完成:成功 ${ok},失败 ${fail}。`);
 }
