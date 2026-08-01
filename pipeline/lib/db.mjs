@@ -521,6 +521,13 @@ export async function decideWork(id, status, note) {
     .run(status, new Date().toISOString(), note || null, id);
   return parseWork(row);
 }
+// 恢复期已过的下架/拒绝作品(v0.100.0):它们的图片还占着非公开目录,交由清理任务删。
+// 只挑 decided_at 明确早于截止时间的,decided_at 为空的老数据不动(宁可留着也别误删)。
+export async function worksRejectedBefore(isoCutoff) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM works WHERE status='rejected' AND decided_at IS NOT NULL AND decided_at < ?")
+    .all(isoCutoff).map(parseWork);
+}
 export async function deleteWork(id) {
   const d = await getDb();
   const row = d.prepare("SELECT * FROM works WHERE id=?").get(id);

@@ -319,7 +319,9 @@
       <section data-sec="users" hidden>
         <h1 class="sec__title">注册用户名册</h1>
         <div class="toolbar">
-          <input class="searchbox" id="userSearch" placeholder="按邮箱/昵称搜索…" autocomplete="off" />
+          <!-- type=search + 中性 name + 各家密码管理器的忽略标记:合力挡住"自动填上次填过的邮箱" -->
+          <input class="searchbox" id="userSearch" type="search" name="ap-filter-kw" placeholder="按邮箱/昵称搜索…"
+                 autocomplete="off" data-lpignore="true" data-form-type="other" data-1p-ignore />
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
@@ -366,13 +368,23 @@
     return Math.round(s / 86400) + " 天前";
   }
   function td(text, cls) { var el = document.createElement("td"); el.textContent = text == null ? "—" : String(text); if (cls) el.className = cls; return el; }
-  // agent 打卡摘要有时来自子进程输出流,遇到编码问题会出现"锟斤拷"式乱码/替换符——
-  // 与其把乱码糊用户脸上,不如给个明确提示(v0.99.2)。
-  function cleanText(s, fallback) {
-    s = s == null ? "" : String(s);
+  // agent 打卡摘要:正常的原样显示;极少数老记录因编码问题损坏(2026-07-18 之前的本机脚本,
+  // GBK 输出被当 UTF-8 读,原字节已不可逆丢失),那就用大白话讲清楚这次干成没干成,
+  // 顺带把还能读出来的数字带上,别让用户对着乱码或"已隐藏"发懵(v0.100.0)。
+  function isGarbled(s) { return /[�\x00-\x08\x0E-\x1F]/.test(s); }
+  function plainSummary(x, fallback) {
+    var s = x && x.summary != null ? String(x.summary) : "";
+    if (s && !isGarbled(s)) return s;
     if (!s) return fallback;
-    if (/[�\x00-\x08\x0E-\x1F]/.test(s)) return "(日志文本含乱码,已隐藏——不影响功能)";
-    return s;
+    var out = x.ok ? "这次跑完了,是成功的。" : "这次没跑成功。";
+    var nums = [];
+    try {
+      var m = x.metrics ? (typeof x.metrics === "string" ? JSON.parse(x.metrics) : x.metrics) : null;
+      if (m) for (var k in m) if (typeof m[k] === "number") nums.push(k + " " + m[k]);
+    } catch (e) {}
+    if (nums.length) out += "记录到的数字:" + nums.join("、") + "。";
+    out += "当时那句中文说明因为编码坏了没存住(老毛病,已修好,之后的记录都是正常中文)。";
+    return out;
   }
   // 事件/注册时间存的是 UTC ISO;后台按【北京时间】显示(+8 小时)
   function bj(iso, withDate) {
@@ -442,7 +454,14 @@
     else if (view === "qc") renderQC();
     else if (view === "weekly") renderWeekly();
     else if (view === "summaries") renderSummaries();
-    else if (view === "users") renderUsers();
+    else if (view === "users") {
+      // 每次进「用户」栏都从"显示全部"开始(v0.100.0)。
+      // 浏览器/密码管理器会无视 autocomplete=off 往搜索框里塞记住过的邮箱,
+      // 结果一进来就只剩那一个用户。这里强制清空输入框和过滤条件,眼见即全部。
+      $("userSearch").value = "";
+      st.users.q = ""; st.users.page = 1;
+      renderUsers();
+    }
   }
 
   // —— 区域经理编队工牌墙(v0.98.0)——
@@ -527,21 +546,36 @@
   }
 
   // —— Agent 编队巡视台(v0.72.0):工牌注册表(岗位/周期/驻地),状态由打卡记录推断 ——
+  // plain = 这个岗位到底在干嘛的大白话(鼠标停在工牌上会显示)
   var AGENTS = [
-    { id: "scout",         name: "小采",  role: "采编记者 · 全网自动检索",     period: 8.5 * 3600e3,  where: "服务器 · 每8小时" },
-    { id: "eli",           name: "Eli",   role: "主笔 · AI 艺术周刊",          period: 7.5 * 86400e3, where: "服务器 · 每周一" },
-    { id: "postman",       name: "邮差",  role: "周报群发投递",                period: 0,             where: "服务器 · 事件触发" },
-    { id: "moderator",     name: "审读",  role: "一线内容审核(敏感词+AI)",   period: 0,             where: "服务器 · 实时", special: "moderation" },
-    { id: "harvester",     name: "铁犁",  role: "每日机会抓取管线",            period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "channels",      name: "双线",  role: "资讯/招聘每日抓取",           period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "translator",    name: "译者",  role: "中英双语回填",                period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "locator",       name: "寻址",  role: "主办方官网定位",              period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "photographer",  name: "快门",  role: "官网截图封面",                period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "cover-auditor", name: "鉴图",  role: "美术编辑 · 封面查重审核",     period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间" },
-    { id: "inspector",     name: "校勘",  role: "数据质检 · 死链/过期/查重/存证抽查", period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" },
-    { id: "detective",     name: "探长",  role: "自动发现 · 社媒线索→官网收录",  period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" },
-    { id: "mailbox",       name: "信箱",  role: "反馈初判 · 举报聚合处置建议",   period: 1.2 * 86400e3, where: "服务器 · 每日凌晨" }
+    { id: "scout",         name: "小采",  role: "采编记者 · 全网自动检索",     period: 8.5 * 3600e3,  where: "服务器 · 每8小时",
+      plain: "每 8 小时自动上网搜一轮艺术机会,搜到的先核对官网原文,对得上才收进库。" },
+    { id: "eli",           name: "Eli",   role: "主笔 · AI 艺术周刊",          period: 7.5 * 86400e3, where: "服务器 · 每周一",
+      plain: "每周一把这一周的新机会写成一篇艺术周刊文章。" },
+    { id: "postman",       name: "邮差",  role: "周报群发投递",                period: 0,             where: "服务器 · 事件触发",
+      plain: "周刊写好后,负责把邮件一封封发给订阅的用户。" },
+    { id: "moderator",     name: "审读",  role: "一线内容审核(敏感词+AI)",   period: 0,             where: "服务器 · 实时", special: "moderation",
+      plain: "用户发的评论和作品,先过一遍敏感词和 AI 审核;拿不准的转给你人工定。" },
+    { id: "harvester",     name: "铁犁",  role: "每日机会抓取管线",            period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "每晚把库里几百个机构官网挨个抓一遍,看有没有发新的征集/驻留/奖项。" },
+    { id: "channels",      name: "双线",  role: "资讯/招聘每日抓取",           period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "每晚抓一遍艺术资讯和招聘岗位这两个频道的内容。" },
+    { id: "translator",    name: "译者",  role: "中英双语回填",                period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "把只有中文或只有英文的条目补上另一种语言,机翻的会如实标注。" },
+    { id: "locator",       name: "寻址",  role: "主办方官网定位",              period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "帮那些只有聚合站链接的条目找到主办方真正的官网,让用户能直接点过去。" },
+    { id: "photographer",  name: "快门",  role: "官网截图封面",                period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "给没有配图的条目去官网截一张图当封面。" },
+    { id: "cover-auditor", name: "鉴图",  role: "美术编辑 · 封面查重审核",     period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "检查封面图有没有重复、有没有配错张冠李戴,发现了就换掉。" },
+    { id: "syncer",        name: "摆渡",  role: "数据双向同步上线",            period: 1.6 * 86400e3, where: "本机 · 夜间",
+      plain: "把你这台电脑和服务器上的数据对一遍,两边按条合并,谁的都不会丢。" },
+    { id: "inspector",     name: "校勘",  role: "数据质检 · 死链/过期/查重/存证抽查", period: 1.2 * 86400e3, where: "服务器 · 每日凌晨",
+      plain: "每天凌晨体检:链接打不开的、已经截止的、重复的、原文对不上的,都挑出来。" },
+    { id: "detective",     name: "探长",  role: "自动发现 · 社媒线索→官网收录",  period: 1.2 * 86400e3, where: "服务器 · 每日凌晨",
+      plain: "从社交媒体的公开搜索结果里找线索(只看标题摘要,不抓社媒页面),顺藤摸瓜找到主办方官网再收录。" },
+    { id: "mailbox",       name: "信箱",  role: "反馈初判 · 举报聚合处置建议",   period: 1.2 * 86400e3, where: "服务器 · 每日凌晨",
+      plain: "把用户的反馈和举报归一归类,给出处理建议,你只需最后拍板。" }
   ];
   var agLastMap = {}, agSelected = null;
   function agLight(def, last) {
@@ -578,6 +612,7 @@
         if (light === "🔴" || light === "🟡") alerts++;
         var c = document.createElement("div");
         c.className = "card"; c.style.cursor = "pointer";
+        c.title = def.plain || "";      // 鼠标停上去看这个岗位到底在干嘛(大白话)
         if (agSelected === def.id) c.style.borderColor = "#7eb8e0";
         var line1 = document.createElement("div");
         line1.className = "k"; line1.textContent = light + " " + def.name + " · " + def.role;
@@ -587,7 +622,7 @@
           var mo = r.moderation || {};
           line2.textContent = "24h:审 " + (mo.total || 0) + " 件(自动放行 " + (mo.auto || 0) + " · 转人工 " + (mo.pending || 0) + " · 人工裁决 " + (mo.decided || 0) + " · 举报 " + (mo.reported || 0) + ")";
         } else if (last) {
-          line2.textContent = rel(last.at) + (last.took_ms ? " · 用时 " + Math.round(last.took_ms / 1000) + "s" : "") + "\n" + cleanText(last.summary, "(无摘要)");
+          line2.textContent = rel(last.at) + (last.took_ms ? " · 用时 " + Math.round(last.took_ms / 1000) + "s" : "") + "\n" + plainSummary(last, "(这次没留下说明)");
           line2.style.whiteSpace = "pre-wrap";
         } else {
           line2.textContent = "还没有打卡记录";
@@ -619,7 +654,7 @@
           pill.className = "pill" + (x.ok ? " on" : "");
           pill.textContent = x.ok ? "完成" : "失败";
           st.appendChild(pill); tr.appendChild(st);
-          tr.appendChild(td(cleanText(x.summary, "—")));
+          tr.appendChild(td(plainSummary(x, "—")));
           tr.appendChild(td(x.took_ms ? Math.round(x.took_ms / 1000) + "s" : "—", "mono"));
           tb.appendChild(tr);
         });
@@ -1166,12 +1201,26 @@
         });
         ops.appendChild(b);
       }
+      var days = w.restore_days_total || 30;
       if (w.status === "pending") {
         opBtn("通过", "approve", "通过并公开", "#1d3a24", "#7ee08a");
-        opBtn("拒绝", "reject", "拒绝(图片将删除)", "#3a1d1d", "#ff9a8a");
+        opBtn("拒绝", "reject", "拒绝(不公开;图片保留 " + days + " 天,期间可恢复)", "#3a1d1d", "#ff9a8a");
       } else if (w.status === "approved") {
         // AI 自动通过的也在这里:人工复核发现问题可随时下架(图片撤回非公开目录留证)
-        opBtn("下架", "reject", "下架(从作品频道撤下,图片留证)", "#3a2a1d", "#ffc38a");
+        opBtn("下架", "reject", "下架(从作品频道撤下;图片保留 " + days + " 天,期间可恢复)", "#3a2a1d", "#ffc38a");
+      } else if (w.status === "rejected") {
+        // v0.100.0:下架/拒绝后 N 天内可反悔,图片一直留着没删
+        var left = w.restore_days_left;
+        if (left > 0) {
+          opBtn("恢复", "approve", "恢复上架(重新公开到作品频道)", "#1d3a24", "#7ee08a");
+          var tip = document.createElement("span");
+          tip.className = "muted"; tip.style.fontSize = "12px";
+          tip.textContent = "还剩 " + left + " 天可恢复";
+          ops.appendChild(tip);
+        } else {
+          ops.textContent = "已过 " + days + " 天恢复期,图片已清理";
+          ops.className = "muted";
+        }
       } else ops.textContent = "—";
       tr.appendChild(ops);
       $("workTbl").tBodies[0].appendChild(tr);

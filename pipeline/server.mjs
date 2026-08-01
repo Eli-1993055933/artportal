@@ -608,9 +608,19 @@ async function publishSubmission(row) {
 
 // —— 作品集(路线图 8.3)——
 // 合规关键:待审图片存【非公开目录】pipeline/state/works_pending(直链访问不到),
-// 人工审核通过才搬进 site/assets/works/ 公开;拒绝即删文件。文字部分照常机审。
+// 人工审核通过才搬进 site/assets/works/ 公开。文字部分照常机审。
+// v0.100.0:拒绝/下架不再立刻删图——图片退回非公开目录留 WORK_RESTORE_DAYS 天反悔窗口,
+// 到期由清理任务删。非公开目录始终直链访问不到,留着不影响合规。
 const WORKS_PENDING = join(__dir, "state", "works_pending");
 const WORKS_PUB = join(SITE, "assets", "works");
+const WORK_RESTORE_DAYS = Math.max(1, Number(process.env.WORK_RESTORE_DAYS || 30));
+// 距恢复期结束还剩几天(向上取整,>0 才可恢复);没有裁决时间的老数据按可恢复处理,不误伤
+function workRestoreDaysLeft(w) {
+  if (!w || !w.decided_at) return WORK_RESTORE_DAYS;
+  const passed = (Date.now() - Date.parse(w.decided_at)) / 86400e3;
+  if (!isFinite(passed)) return WORK_RESTORE_DAYS;
+  return Math.max(0, Math.ceil(WORK_RESTORE_DAYS - passed));
+}
 // 艺术门类 slug 白名单(与前端 site/js/tags.js 的 23 门类一一对应;作品上传自选 ≤3)
 const ART_TAGS = new Set([
   "painting", "ink", "printmaking", "illustration", "photography", "sculpture", "installation",
@@ -1181,7 +1191,15 @@ async function handleAuthApi(req, res, u) {
     // —— 作品审核(admin):列表 / 待审图预览(图在非公开目录,只有管理员能看) / 裁决 ——
     if (p === "/api/admin/works" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
-      try { return json({ code: 200, body: { list: await db.worksAdminList() } }); }
+      try {
+        // 带上恢复期剩余天数,前端据此显示「恢复」按钮(v0.100.0)
+        const list = (await db.worksAdminList()).map(w => ({
+          ...w,
+          restore_days_left: w.status === "rejected" ? workRestoreDaysLeft(w) : null,
+          restore_days_total: WORK_RESTORE_DAYS
+        }));
+        return json({ code: 200, body: { list } });
+      }
       catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
     }
     if (p === "/api/admin/works/img" && m === "GET") {
@@ -1213,6 +1231,26 @@ async function handleAuthApi(req, res, u) {
           await db.logModeration("work", w.id, "takedown", null);
           return json({ code: 200, body: { ok: true } });
         }
+        // 恢复(v0.100.0):下架/拒绝后 WORK_RESTORE_DAYS(默认 30)天内可反悔——图片一直留在非公开
+        // 目录没删,把它移回公开目录、状态改回已通过即可。超期的图片已被清理任务删掉,恢复不了才拒绝。
+        if (w.status === "rejected" && action === "approved") {
+          const left = workRestoreDaysLeft(w);
+          if (left <= 0) return json({ code: 400, body: { error: `已超过 ${WORK_RESTORE_DAYS} 天恢复期,图片已清理,无法恢复` } });
+          await mkdir(WORKS_PUB, { recursive: true });
+          const missing = [];
+          for (const n of w.images) {
+            if (!workFileRe.test(n)) continue;
+            try { await rename(join(WORKS_PENDING, n), join(WORKS_PUB, n)); }
+            catch (e) { missing.push(n); }
+          }
+          if (missing.length === w.images.length && w.images.length) {
+            return json({ code: 400, body: { error: "图片文件已不在,无法恢复" } });
+          }
+          await db.decideWork(w.id, "approved", "管理员恢复上架");
+          await db.logModeration("work", w.id, "restored", null);
+          await db.notify({ uid: w.uid, type: "decide", ref: { what: "work", title: w.title, result: "approved" } }).catch(() => {});
+          return json({ code: 200, body: { ok: true, restored: true } });
+        }
         if (w.status !== "pending") return json({ code: 400, body: { error: "该作品已裁决过" } });
         if (action === "approved") {
           await mkdir(WORKS_PUB, { recursive: true });
@@ -1220,12 +1258,9 @@ async function handleAuthApi(req, res, u) {
             if (!workFileRe.test(n)) continue;
             await rename(join(WORKS_PENDING, n), join(WORKS_PUB, n));   // 过审才进公开目录
           }
-        } else {
-          for (const n of w.images) {
-            if (!workFileRe.test(n)) continue;
-            await unlink(join(WORKS_PENDING, n)).catch(() => {});       // 拒绝即删文件
-          }
         }
+        // 注:拒绝不再立刻删图(v0.100.0)——图片留在非公开目录,给 WORK_RESTORE_DAYS 天反悔窗口,
+        // 到期由清理任务统一删。误判拒绝的作品以前一删就永久没了,现在能救回来。
         await db.decideWork(w.id, action, b.note);
         await db.logModeration("work", w.id, "decided:" + action, null);
         await db.notify({ uid: w.uid, type: "decide", ref: { what: "work", title: w.title, result: action } }).catch(() => {});
@@ -1993,6 +2028,37 @@ async function runQualityCheck({ archive = false, probe = true, trigger = "auto"
     db.agentLog({ agent: "inspector", ok: false, summary: "质检失败:" + String(e.message || e).slice(0, 120), took_ms: Date.now() - t0 }).catch(() => {});
     return { ok: false, error: String(e.message || e) };
   } finally { qcState.running = false; }
+}
+
+// —— 下架作品恢复期清理(v0.100.0)——
+// 拒绝/下架的作品图片留在非公开目录给 WORK_RESTORE_DAYS 天反悔窗口,过期就真删,
+// 免得非公开目录无限堆积。每天跑一次;数据库记录保留(留审计痕迹),只删图片文件。
+async function purgeExpiredWorkImages() {
+  const cutoff = new Date(Date.now() - WORK_RESTORE_DAYS * 86400e3).toISOString();
+  let files = 0, works = 0;
+  try {
+    for (const w of await db.worksRejectedBefore(cutoff)) {
+      let hit = false;
+      for (const n of w.images) {
+        if (!workFileRe.test(n)) continue;
+        try { await unlink(join(WORKS_PENDING, n)); files++; hit = true; } catch (e) {}   // 已删过就跳过
+      }
+      if (hit) works++;
+    }
+    if (files) process.stderr.write(`[作品清理] 恢复期(${WORK_RESTORE_DAYS} 天)已过:清理 ${works} 组作品共 ${files} 张图\n`);
+  } catch (e) { process.stderr.write("[作品清理] 失败:" + String(e.message || e).slice(0, 120) + "\n"); }
+  return { works, files };
+}
+{
+  let pwDay = null;
+  function purgeTick() {
+    const day = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);
+    if (pwDay === day) return;                 // 每日幂等
+    pwDay = day;
+    purgeExpiredWorkImages().catch(() => {});
+  }
+  setTimeout(purgeTick, 150 * 1000);
+  setInterval(purgeTick, 3600 * 1000);
 }
 
 if (process.env.QUALITY_CHECK === "1") {
