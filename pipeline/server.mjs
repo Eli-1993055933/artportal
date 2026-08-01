@@ -1666,7 +1666,11 @@ async function sendWeeklyBulk(report) {
       process.stderr.write(`[周报] 发送失败 ${t.email}: ${String(e.message || e).slice(0, 100)}\n`);
     }
     nlState.done++;
-    await new Promise(r => setTimeout(r, 3000));   // 逐封限速:对 SMTP 服务商客气,防触发风控
+    // 逐封限速:对 SMTP 服务商客气,防触发风控。可用 .env 的 NEWSLETTER_SEND_DELAY_MS 调。
+    // ★ 2026-08-01 实测:个人 QQ 邮箱在 3 秒/封下发到第 18 封就被
+    //   「535 Login fail... login frequency limited」拦停(那次是 86 封的问卷群发);
+    //   拉到 25 秒/封后 68 封零失败。量大或刚发过信时,务必调高这个值。
+    await new Promise(r => setTimeout(r, Math.max(1000, Number(process.env.NEWSLETTER_SEND_DELAY_MS || 3000))));
   }
   process.stderr.write(`[周报] 群发结束 ${report.id}:成功 ${nlState.ok}/${nlState.total}\n`);
   db.agentLog({ agent: "postman", ok: nlState.ok === nlState.total, summary: `群发 ${report.id}:成功 ${nlState.ok}/${nlState.total}`, metrics: { wid: report.id, ok: nlState.ok, total: nlState.total } }).catch(() => {});

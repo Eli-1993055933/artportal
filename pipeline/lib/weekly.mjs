@@ -14,6 +14,7 @@
 import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
 import { isThirdParty } from "./aggregators.mjs";
 import { extractGlmFree } from "./extract.mjs";
 
@@ -61,7 +62,7 @@ function collectOpps(doc) {
       org_en: o.org_en || null, city_en: o.city_en || null, country_en: o.country_en || null,
       category: o.category || "", deadline: o.deadline || null,
       summary: String(o.summary_zh || "").slice(0, 160),
-      cover: o.cover || null
+      cover: o.cover || null, cover_source: o.cover_source || ""
     });
   }
   // 截止近的在前(无截止按更新日新在前),候选给 AI 最多 40 条
@@ -91,7 +92,7 @@ function collectNews(doc) {
       published_at: n.published_at || null,
       url: n.url,
       summary: String(n.summary_zh || n.summary || "").slice(0, 160),
-      cover: n.cover || null
+      cover: n.cover || null, cover_source: n.cover_source || ""
     });
   }
   ok.sort((a, b) => String(b.published_at || "").localeCompare(String(a.published_at || "")));
@@ -119,7 +120,7 @@ function collectJobs(doc) {
       org: j.org_zh || j.org || "", location: [j.city, j.country].filter(Boolean).join(" "),
       deadline: j.deadline || null, url: j.apply_url || j.url,
       summary: String(j.summary_zh || j.summary || "").slice(0, 100),
-      cover: j.cover || null
+      cover: j.cover || null, cover_source: j.cover_source || ""
     };
     if ((j.posted_at || j.added_at || "") >= since) fresh.push(item); else open.push(item);
   }
@@ -167,7 +168,7 @@ function enName(s) {
   if (latin.length >= 3) return latin;                        // "Tate 泰特英国美术馆" → "Tate"
   return s;                                                   // 纯中文专有名词:保留原文,不硬译
 }
-function candLine(c, i) {
+function candLine(c, i, hasCover) {
   const bits = [c.title];
   if (c.kind === "opp") {
     if (c.org) bits.push(c.org);
@@ -184,20 +185,41 @@ function candLine(c, i) {
     if (c.deadline) bits.push("截止" + c.deadline);
   }
   if (c.summary) bits.push(c.summary);
-  if (c.cover) bits.push("[有配图]");
+  // [有配图] 必须以【验过的】封面为准 —— 只看 cover 字段会把 logo/二维码/死链也标成有图
+  if (c.cover && (!hasCover || hasCover(c))) bits.push("[有配图]");
   return "[" + i + "] " + bits.join(" | ");
 }
 async function composeArticleAI(cand, weekId) {
   const key = process.env.DEEPSEEK_API_KEY;
   if (!key) return null;
   // 全局连续编号的候选表(三段展示,编号不分段,防 AI 混淆)
-  const C = [].concat(cand.opps.slice(0, 30), cand.news.slice(0, 25), cand.jobs.slice(0, 12));
+  // ★ 先把封面验一遍再选材(2026-08-01):原来 [有配图] 只看 cover 字段在不在,可那些 cover
+  //   很多是 og:image 抓来的 logo/徽章/微信二维码,甚至是死链——模型照着"有配图"去写,
+  //   最后一张能用的都没有。现在先验后选:验过并落地到本站的才算数,并让它们优先进候选池,
+  //   这样模型写到的条目大概率真有海报。
+  const poolAll = [].concat(cand.opps.slice(0, 40), cand.news.slice(0, 30), cand.jobs.slice(0, 12));
+  const coverMap = new Map();
+  {
+    const srcs = [...new Set(poolAll.filter(c => c.cover).map(c => c.cover))];
+    await Promise.all(srcs.map(async src => {
+      try { const local = await coverUsable(src, SITE); if (local) coverMap.set(src, local); } catch (e) {}
+    }));
+    process.stderr.write("[周报] 封面候选 " + srcs.length + " 张,通过校验并落地 " + coverMap.size + " 张\n");
+  }
+  const hasPoster = c => !!(c.cover && coverMap.has(c.cover));
+  // cover_source==="screenshot" 是「快门」agent 拍的【整页网页截图】。它给站内卡片当缩略图没问题,
+  // 但放进邮件就是一屏密密麻麻的正文(实测中国美协那张公告页截图),很难看。
+  // og:image 才是站点自己选的代表图,通常就是海报/作品原图 —— 优先用它,截图只在没别的可选时兜底。
+  const isShot = c => String(c.cover_source || "") === "screenshot";
+  const grade = c => (hasPoster(c) ? (isShot(c) ? 1 : 2) : 0);      // 2=真海报 1=网页截图 0=没图
+  const rank = list => list.slice().sort((a, b) => grade(b) - grade(a));
+  const C = [].concat(rank(cand.opps).slice(0, 30), rank(cand.news).slice(0, 25), cand.jobs.slice(0, 12));
   if (!C.length) return null;
   let listText = "【机会(可申请的展览征集/驻留/奖项)】\n";
   C.forEach((c, i) => {
     if (i === cand.opps.slice(0, 30).length) listText += "\n【资讯(本周艺术新闻,来自国内外一线艺术媒体,已标注国内/国际)】\n";
     if (i === cand.opps.slice(0, 30).length + cand.news.slice(0, 25).length) listText += "\n【招聘(在招艺术岗位)】\n";
-    listText += candLine(c, i) + "\n";
+    listText += candLine(c, i, hasPoster) + "\n";
   });
   const sys =
     "你是艺术平台 ArtPortal 的特约主笔,笔名 Eli。写作水准对标《纽约时报》艺术版与 e-flux criticism:严谨、克制、具体、有洞察。\n" +
@@ -278,7 +300,8 @@ async function composeArticleAI(cand, weekId) {
     problem = inspect(out);
     if (problem) { process.stderr.write("[周报] 重写仍未过(" + problem + "),退回清单式\n"); return null; }
   }
-  const { article, refNum } = assembleArticle(out, C, weekId);
+  // 封面已在选材前统一验过并落地到本站(见本函数开头的 coverMap),这里直接用
+  const { article, refNum } = assembleArticle(out, C, weekId, coverMap);
   // 英文平行版(中英切换):忠实翻译原稿(保留 [[编号:文字]] 标记),用同一套引用编号组装;
   // 翻译失败/结构走样 → 不挂 en,前端英文界面回退中文(诚实降级,绝不硬凑)。
   try {
@@ -360,22 +383,122 @@ function assembleEnSections(enOut, C, refNum) {
     }))
     .filter(sec => sec.paragraphs.length);
 }
-function assembleArticle(out, C, weekId) {
+// ============================ 封面配图可用性校验(2026-08-01) ============================
+// 起因:周刊章节配图直接用条目的 cover,结果实测三张里一张打不开(外站抓不到)、一张是
+// 【微信视频号二维码】、一张是【市政府徽章】——一张真海报都没有。cover 来自 og:image,
+// 政府/协会站点的 og:image 常是 logo/徽章/二维码,拿来当"海报"既难看又不专业。
+// 这里在用图前把它抓下来验一遍,不合格就换下一个候选,都不合格就【这一章不配图】——
+// 宁可没有图,也不能在周刊里放一张二维码。
+const _COVER_JUNK = /logo|qrcode|qr_|ewm|erweima|shipinhao|weibo|wechat|weixin|icon|favicon|share|seal|avatar|badge|watermark|placeholder|default/i;
+
+// 纯 JS 读图片尺寸(服务器没装 sharp/jimp,不为这点事引依赖)。支持 PNG/JPEG/GIF/WebP。
+function imageSize(buf) {
+  if (!buf || buf.length < 24) return null;
+  // PNG
+  if (buf[0] === 0x89 && buf[1] === 0x50) return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+  // GIF
+  if (buf[0] === 0x47 && buf[1] === 0x49) return { w: buf.readUInt16LE(6), h: buf.readUInt16LE(8) };
+  // WebP (VP8X / VP8 / VP8L 只处理常见的 VP8X)
+  if (buf.slice(0, 4).toString("ascii") === "RIFF" && buf.slice(8, 12).toString("ascii") === "WEBP") {
+    if (buf.slice(12, 16).toString("ascii") === "VP8X")
+      return { w: 1 + buf.readUIntLE(24, 3), h: 1 + buf.readUIntLE(27, 3) };
+    return null;
+  }
+  // JPEG:逐段扫 SOFn
+  if (buf[0] === 0xFF && buf[1] === 0xD8) {
+    let i = 2;
+    while (i < buf.length - 9) {
+      if (buf[i] !== 0xFF) { i++; continue; }
+      const m = buf[i + 1];
+      if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC)
+        return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+      i += 2 + buf.readUInt16BE(i + 2);
+    }
+  }
+  return null;
+}
+
+// 一张封面能不能当章节配图。过关返回【本站相对路径】(外链会被抓下来存到本站),不过关返回 ""。
+// ★ 为什么要落地到本站:实测巴黎国际艺术城那张海报从本服务器抓要 26.7 秒——收件人邮箱同样会慢
+//   甚至加载不出来;而且不少站点禁外链盗图。生成时抓一次存本站,邮件里引用 artportal123.com 的
+//   地址,又快又稳,还不依赖对方站点一直在线。
+async function coverUsable(src, siteDir) {
+  if (!src) return "";
+  if (_COVER_JUNK.test(String(src).split("/").pop() || "")) return "";      // 文件名一眼是 logo/二维码
+  let buf = null;
+  const remote = /^https?:/i.test(src);
+  try {
+    if (remote) {
+      // 30 秒:国内服务器抓境外站点确实慢(实测 26.7s),超时太短会把真海报误杀
+      const r = await fetch(src, { signal: AbortSignal.timeout(30000), redirect: "follow" });
+      if (!r.ok) return "";
+      if (!/^image\//i.test(r.headers.get("content-type") || "")) return "";
+      buf = Buffer.from(await r.arrayBuffer());
+    } else {
+      buf = await readFile(join(siteDir, src));                             // 本机截图 assets/covers/*
+    }
+  } catch (e) { return ""; }                                                // 抓不到=不可用(死链当场挡掉)
+  if (!buf || buf.length < 6 * 1024) return "";                             // 太小,多半是图标
+  if (buf.length > 6 * 1024 * 1024) return "";                              // 太大,邮件里不合适
+  const d = imageSize(buf);
+  if (!d || !d.w || !d.h) return "";
+  if (Math.max(d.w, d.h) < 400) return "";                                  // 分辨率太低,放进邮件糊
+  const ar = d.w / d.h;
+  if (ar > 0.92 && ar < 1.09) return "";                                    // ★方图:二维码/徽章/头像/logo 的典型形状,海报几乎不是正方形
+  if (ar > 4 || ar < 0.25) return "";                                       // 细长条:多半是页头 banner
+  if (!remote) return src;                                                  // 本机截图已经在本站,直接用
+  // 外链 → 落地到本站 assets/covers/wk/
+  const ext = buf[0] === 0x89 ? "png" : (buf.slice(0, 4).toString("ascii") === "RIFF" ? "webp"
+    : (buf[0] === 0x47 ? "gif" : "jpg"));
+  const name = createHash("sha1").update(src).digest("hex").slice(0, 16) + "." + ext;
+  const rel = "assets/covers/wk/" + name;
+  try {
+    await mkdir(join(siteDir, "assets", "covers", "wk"), { recursive: true });
+    await writeFile(join(siteDir, rel), buf);
+  } catch (e) { return ""; }                                                // 存不下就别用(邮件里挂外链不可靠)
+  return rel;
+}
+
+function assembleArticle(out, C, weekId, coverMap) {
   const s = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
   const refOrder = [];                       // 首次出现顺序 → 文末编号 1..n
   const refNum = new Map();                  // 候选下标 → 文末编号
+  const usedCover = new Set();               // 同一张封面不在多个章节重复出现
+  // coverMap:预先验过并落地到本站的封面(原始 URL → 本站路径,见 coverUsable)。
+  // 没传就退化成"只要有 cover 就用"(CLI 旧行为)。
+  const okCover = (c) => !!(c && c.cover) && (!coverMap || coverMap.has(c.cover));
+  const srcOf = (c) => (coverMap && coverMap.get(c.cover)) || c.cover;
+  const mkImage = (c) => {
+    const enBy = c.org_en || enName(c.org || c.source || "");
+    return {
+      src: srcOf(c),
+      caption: c.title + (c.org || c.source ? " · " + (c.org || c.source) : ""),
+      caption_en: c.title_en ? c.title_en + (enBy ? " · " + enBy : "") : null
+    };
+  };
   const sections = (out.sections || []).map(sec => {
     const paras = (Array.isArray(sec.paragraphs) ? sec.paragraphs : []).map(p => buildSegs(s(p, 2000), C, refNum, refOrder));
     let image = null;
     const iv = Number(sec.image);
-    if (Number.isInteger(iv) && iv >= 0 && iv < C.length && C[iv].cover) {
-      const c = C[iv];
-      const enBy = c.org_en || enName(c.org || c.source || "");
-      image = {
-        src: c.cover,
-        caption: c.title + (c.org || c.source ? " · " + (c.org || c.source) : ""),
-        caption_en: c.title_en ? c.title_en + (enBy ? " · " + enBy : "") : null
-      };
+    if (Number.isInteger(iv) && iv >= 0 && iv < C.length && okCover(C[iv]) && !usedCover.has(C[iv].cover)) {
+      image = mkImage(C[iv]);
+      usedCover.add(C[iv].cover);
+    }
+    // ★ 配图确定性回填(2026-08-01):模型没挑图时,从【这个章节自己引用到的条目】里取第一张封面。
+    //   起因是免费 GLM 兜底成文时完全无视提示词里的配图指令(image 全填 null),整期一张图都没有;
+    //   DeepSeek 那几期是正常的。图不能靠模型自觉——它只是从本章真正谈到的条目里取封面,
+    //   图注仍是该条目的标题+主办方,不会张冠李戴,也不引入任何模型判断。
+    if (!image) {
+      // 两轮:先只挑【真海报】(og:image),都没有才退而用网页截图 —— 保证优先级,而不是碰上谁算谁
+      const cands = [];
+      for (const seg of paras.flat()) {
+        const oid = seg && seg.ref && seg.ref.oid;
+        if (!oid) continue;
+        const c = C.find(x => x.oid === oid);
+        if (okCover(c) && !usedCover.has(c.cover)) cands.push(c);
+      }
+      const pick = cands.find(c => String(c.cover_source || "") !== "screenshot") || cands[0];
+      if (pick) { image = mkImage(pick); usedCover.add(pick.cover); }
     }
     return { heading: s(sec.heading, 60), image, paragraphs: paras };
   }).filter(sec => sec.paragraphs.length);
