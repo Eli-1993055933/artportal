@@ -18,6 +18,8 @@ pipeline/state/mail-secret
 pipeline/state/search-budget.json
 pipeline/state/events.jsonl*
 pipeline/state/summaries/       # 用户专属总结(私密,服务器 only,同 users.json)
+pipeline/state/survey-emails.json     # 问卷收集的邮箱名单(PII,只服务器发信用,不入库)
+pipeline/state/survey-mail-log.json   # 上面这批的发送记录(含邮箱)
 
 # 翻译回滚备份
 site/data/opportunities.json.bak-*
