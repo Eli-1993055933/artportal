@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.101.0" />
+<meta name="app-version" content="0.101.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -342,6 +342,14 @@
   .pp-th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
   .pp-th .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
   /* 收藏页工具条(v0.101.0):隐藏已过期 / 按截止排序 / 上地球看行程 */
+  /* 分类条:只列出真的收藏过的类别 */
+  .fav-cats{display:flex;gap:6px;flex-wrap:wrap;padding:2px 4px 8px}
+  .fav-cat{font:inherit;font-size:12px;padding:4px 10px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line);background:transparent;color:var(--muted);
+    display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+  .fav-cat i{width:7px;height:7px;border-radius:50%;display:inline-block;flex:0 0 auto}
+  .fav-cat:hover{border-color:var(--ink);color:var(--ink)}
+  .fav-cat.on{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
   .fav-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 4px 10px;font-size:12.5px}
   .fav-ck{display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--muted);user-select:none}
   .fav-ck input{cursor:pointer}
@@ -749,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v0.101.0</span></div>
+  ARTPORTAL <span id="appVer">v0.101.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.101.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.101.0"></script>
-<script src="js/globe-data.js?v=0.101.0"></script>
+<script src="assets/vendor/d3.min.js?v=0.101.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.101.1"></script>
+<script src="js/globe-data.js?v=0.101.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -796,7 +804,13 @@
   function ll2c(ll){ var l=ll[0]*PI/180,p=ll[1]*PI/180,c=Math.cos(p); return [c*Math.cos(l),c*Math.sin(l),Math.sin(p)]; }
   function updateRC(){ var r=proj.rotate(),l=-r[0]*PI/180,p=-r[1]*PI/180,c=Math.cos(p); rc[0]=c*Math.cos(l);rc[1]=c*Math.sin(l);rc[2]=Math.sin(p); }
   function frontC(cart){ return cart[0]*rc[0]+cart[1]*rc[1]+cart[2]*rc[2]>0.02; }
-  function clampScale(s){ return Math.max(scale0*0.55, Math.min(scale0*maxK, s)); }   // maxK 随下钻自适应放宽
+  // maxK 随下钻自适应放宽。★ 兜底 isFinite:调用方漏传目标缩放时 s 是 undefined,
+  // 算出来的 NaN 一旦进了 proj.scale() 会让整个投影失效、地球全黑(2026-08-02 踩过)。
+  // 这种"一个参数没传就整屏消失"的失败方式太脆,这里直接兜住,退回当前缩放。
+  function clampScale(s){
+    if(!isFinite(s)) s=proj.scale();
+    if(!isFinite(s)) s=scale0;
+    return Math.max(scale0*0.55, Math.min(scale0*maxK, s)); }
   function clampLat(v){ return Math.max(-88, Math.min(88, v)); }
   // 小于此=聚合簇(数字大圆),大于=散开单点可交互。
   // 手机阈值大幅抬高:放大进最深层级前只见聚合圆,不出密密麻麻小点(防误触)
@@ -1659,7 +1673,7 @@
       cmtSentLive:'已发布',cmtSentPending:'已提交,人工复核通过后显示',
       cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',ntLikeWork:'赞了你的作品',
       favT:'收藏',favedT:'已收藏',
-      favHideExp:'隐藏已过期',favSortFav:'按收藏时间',favSortDl:'按截止日期',
+      favCatAll:'全部',favHideExp:'隐藏已过期',favSortFav:'按收藏时间',favSortDl:'按截止日期',
       favDue:'截止',favExpired:'已截止',favNoneLeft:'筛选后没有剩下的条目',
       favRouteBtn:'🌍 在地球上看行程',
       rtTitle:'我的申请行程',rtHint:'按截止日期先后连成一条线;点圆点看详情',
@@ -1737,7 +1751,7 @@
       cmtSentLive:'Posted',cmtSentPending:'Submitted — visible after human review',
       cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',ntLikeWork:'liked your work ',
       favT:'Save',favedT:'Saved',
-      favHideExp:'Hide expired',favSortFav:'By date saved',favSortDl:'By deadline',
+      favCatAll:'All',favHideExp:'Hide expired',favSortFav:'By date saved',favSortDl:'By deadline',
       favDue:'Due',favExpired:'Closed',favNoneLeft:'Nothing left after filtering',
       favRouteBtn:'🌍 View as itinerary',
       rtTitle:'My application itinerary',rtHint:'Linked in deadline order — tap a dot for details',
@@ -2333,14 +2347,21 @@
     var cities={}; rs.forEach(function(p){ cities[(p.mk.o.city_zh||p.mk.o.country_zh||'?')]=1; });
     document.getElementById('rtInfo').textContent=
       d0+' → '+d1+' · '+L('rtSpan')+' '+days+' '+L('rtDays')+' · '+Object.keys(cities).length+' '+L('rtCities');
-    // 转到第一站,让用户一眼看到起点
-    flyTo(rs[0].mk.ll);
+    // 转到第一站并退回全球视角,让整条线尽量入画。
+    // ★ 第二个参数(目标缩放)必须传:flyTo 内部会 clampScale(ts),漏传会算出 NaN 传给
+    //   proj.scale(),整个投影失效、地球一片黑(2026-08-02 上线后当场踩到)。
+    flyTo(rs[0].mk.ll, scale0);
   }
   function exitRoute(){ routeOn=false; routePts=[];
     document.getElementById('rtBar').style.display='none'; }
   // 画大圆弧:d3.geoInterpolate 取球面最短路径上的采样点,背面的段自动断开(不画穿过地球的直线)
   function drawRoute(nowMs){
     if(!routeOn||routePts.length<2) return;
+    try{ drawRouteInner(nowMs); }
+    catch(e){ routeOn=false;                      // 行程绘制万一出错,自己退场,绝不连累整个地球
+      try{ document.getElementById('rtBar').style.display='none'; }catch(e2){} }
+  }
+  function drawRouteInner(nowMs){
     var i,j;
     for(i=0;i<routePts.length-1;i++){
       var a=routePts[i].mk.ll, b=routePts[i+1].mk.ll;
@@ -2438,7 +2459,13 @@
     }
     renderProTab(u,isMe); }
   // —— 收藏页:过期筛选 / 截止排序 / 一键上地球看行程(v0.101.0)——
-  var favAll=[], favState={hideExpired:false, sort:'fav'};
+  var favAll=[], favState={hideExpired:false, sort:'fav', cat:'all'};
+  // 收藏分类:机会频道按 category 细分(展览征集/驻留/奖金/工作坊),其余按频道分
+  function favCatOf(x){
+    if(!x) return 'other';
+    if(x.channel==='opportunities'){ var c=(x.item||{}).category||'opencall'; return CAT[c]?c:'opencall'; }
+    return x.channel;   // jobs / news / works
+  }
   function favDeadline(x){ var it=(x&&x.item)||{}; var d=it.deadline||''; return /^\d{4}-\d{2}-\d{2}$/.test(d)?d:''; }
   function favExpired(x){ var d=favDeadline(x); return !!d && d < new Date(Date.now()+8*3600e3).toISOString().slice(0,10); }
   // 参与行程的收藏:必须在地球上真有落点(markers 里能按 id 找到)且有截止日期——没日期排不进时间线
@@ -2454,13 +2481,23 @@
   }
   function drawFavs(body,isMe){
     var list=favAll.slice();
+    if(favState.cat!=='all') list=list.filter(function(x){ return favCatOf(x)===favState.cat; });
     if(favState.hideExpired) list=list.filter(function(x){ return !favExpired(x); });
     if(favState.sort==='deadline') list.sort(function(a,b){
       var da=favDeadline(a), db=favDeadline(b);
       if(!da&&!db) return 0; if(!da) return 1; if(!db) return -1;   // 没截止日期的沉底
       return da<db?-1:da>db?1:0; });
     var nExp=favAll.filter(favExpired).length, nRoute=favRoutable().length;
-    var bar='<div class="fav-bar">'+
+    // 分类条:只列出这个人真的收藏过的类别(空类别不占位),各带条数
+    var cnt={}; favAll.forEach(function(x){ var k=favCatOf(x); cnt[k]=(cnt[k]||0)+1; });
+    var order=['opencall','residency','award','workshop','jobs','news','works'];
+    var chips='<button class="fav-cat'+(favState.cat==='all'?' on':'')+'" data-fc="all">'+
+      L('favCatAll')+' '+favAll.length+'</button>';
+    order.forEach(function(k){ if(!cnt[k]) return;
+      var c=CAT[k]||CAT.opencall;
+      chips+='<button class="fav-cat'+(favState.cat===k?' on':'')+'" data-fc="'+k+'">'+
+        '<i style="background:'+c.color+'"></i>'+catName(k)+' '+cnt[k]+'</button>'; });
+    var bar='<div class="fav-cats">'+chips+'</div><div class="fav-bar">'+
       '<label class="fav-ck"><input type="checkbox" id="favHide"'+(favState.hideExpired?' checked':'')+'>'+
         L('favHideExp')+(nExp?(' ('+nExp+')'):'')+'</label>'+
       '<select id="favSort" class="fav-sel"><option value="fav"'+(favState.sort==='fav'?' selected':'')+'>'+L('favSortFav')+'</option>'+
@@ -2486,6 +2523,8 @@
     if(sb) sb.onchange=function(){ favState.sort=sb.value; drawFavs(body,isMe); };
     var rb=document.getElementById('favRoute');
     if(rb) rb.onclick=function(){ startRoute(); };
+    Array.prototype.forEach.call(body.querySelectorAll('[data-fc]'),function(el){
+      el.onclick=function(){ favState.cat=el.getAttribute('data-fc'); drawFavs(body,isMe); }; });
     body.onclick=function(e){ var d=e.target.closest('[data-fk]'); if(!d) return;
       var fk=d.getAttribute('data-fk'), x=null;
       for(var i=0;i<favAll.length;i++) if(favAll[i].key===fk){ x=favAll[i]; break; }
