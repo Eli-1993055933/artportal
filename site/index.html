@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.101.1" />
+<meta name="app-version" content="0.101.2" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v0.101.1</span></div>
+  ARTPORTAL <span id="appVer">v0.101.2</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.101.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.101.1"></script>
-<script src="js/globe-data.js?v=0.101.1"></script>
+<script src="assets/vendor/d3.min.js?v=0.101.2"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.101.2"></script>
+<script src="js/globe-data.js?v=0.101.2"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -2361,35 +2361,53 @@
     catch(e){ routeOn=false;                      // 行程绘制万一出错,自己退场,绝不连累整个地球
       try{ document.getElementById('rtBar').style.display='none'; }catch(e2){} }
   }
+  // 一段行程弧:完全沿用「定位→项目」那条蓝色抛物线的画法(见 drawFlow)——
+  // 把大圆插值点沿【屏幕中心→该点】方向径向抬起 hump = maxH·sin(πt),就成了浮在球面之上的抛物线;
+  // 再叠三层:外发光 → 实心细线 → 会流动的虚线(线型偏移随时间走,看得出方向)。
+  // 抬升高度随两点角距增大(近的平、远的高),系数与 drawFlow 一致,观感统一。
+  function routeArc(a, b, now, dashPhase){
+    var ca=ll2c(a), cb=ll2c(b);
+    if(!frontC(ca)&&!frontC(cb)) return;                  // 两端都在背面:整段不画
+    var ip=d3.geoInterpolate(a,b);
+    var cosang=Math.max(-1,Math.min(1,ca[0]*cb[0]+ca[1]*cb[1]+ca[2]*cb[2]));
+    var maxH=Math.min(0.55,0.12+Math.acos(cosang)*0.32), N=80, pts=[], i;
+    for(i=0;i<=N;i++){ var t=i/N, bp=ip(t);
+      if(!frontC(ll2c(bp))){ pts.push(null); continue; }  // 转到球背面:断笔,不画穿心直线
+      var sp=proj(bp), hump=maxH*Math.sin(Math.PI*t);
+      pts.push([W/2+(1+hump)*(sp[0]-W/2), H/2+(1+hump)*(sp[1]-H/2)]); }
+    function seg(lw,style,dash,off){ ctx.lineWidth=lw; ctx.strokeStyle=style; ctx.lineCap='round';
+      if(dash){ ctx.setLineDash(dash); ctx.lineDashOffset=off; }
+      ctx.beginPath(); var pen=false,j,q;
+      for(j=0;j<pts.length;j++){ q=pts[j]; if(!q){ pen=false; continue; }
+        if(!pen){ ctx.moveTo(q[0],q[1]); pen=true; } else ctx.lineTo(q[0],q[1]); }
+      ctx.stroke(); if(dash){ ctx.setLineDash([]); ctx.lineDashOffset=0; } }
+    seg(5,T.flowGlow,null,0);
+    seg(1.8,T.flow,null,0);
+    seg(2.4,'rgba('+T.meRing+',0.95)',[8,11],-(now/34)%19 - dashPhase);
+    ctx.lineCap='butt';
+  }
+
   function drawRouteInner(nowMs){
-    var i,j;
-    for(i=0;i<routePts.length-1;i++){
-      var a=routePts[i].mk.ll, b=routePts[i+1].mk.ll;
-      var ip=d3.geoInterpolate(a,b), N=48, pen=false;
-      ctx.lineWidth=2; ctx.strokeStyle='rgba(126,214,160,0.9)';
-      ctx.beginPath();
-      for(j=0;j<=N;j++){
-        var ll=ip(j/N);
-        if(!frontC(ll2c(ll))){ pen=false; continue; }      // 转到地球背面 → 断笔,别连出穿心直线
-        var p=proj(ll);
-        if(!pen){ ctx.moveTo(p[0],p[1]); pen=true; } else ctx.lineTo(p[0],p[1]);
-      }
-      ctx.stroke();
-    }
-    // 站点:序号圆点(1,2,3…),当前朝向正面的才画
+    var i;
+    // 逐段抛物线;各段虚线相位错开,整条路线看起来是一路往前流的
+    for(i=0;i<routePts.length-1;i++)
+      routeArc(routePts[i].mk.ll, routePts[i+1].mk.ll, nowMs, i*6);
+    // 站点序号圆点:与线同一套蓝色身份;起点带脉冲圈,标出「从这儿开始」
     ctx.textAlign='center'; ctx.textBaseline='middle';
     for(i=0;i<routePts.length;i++){
       var mk=routePts[i].mk;
       if(!frontC(mk.cart)) continue;
       var p2=proj(mk.ll), rr=(W<=720)?11:10;
-      var pulse=(i===0)?(1+0.18*Math.sin(nowMs/380)):1;    // 起点轻微呼吸,标出"从这儿开始"
-      ctx.beginPath(); ctx.arc(p2[0],p2[1],rr*pulse+3,0,2*PI);
-      ctx.fillStyle='rgba(47,111,79,0.28)'; ctx.fill();
+      if(i===0){ var phz=(nowMs/1000)%1;
+        ctx.beginPath(); ctx.arc(p2[0],p2[1],rr+phz*13,0,2*PI); ctx.lineWidth=1.6;
+        ctx.strokeStyle='rgba('+T.meRing+','+(0.6*(1-phz)).toFixed(3)+')'; ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(p2[0],p2[1],rr+3,0,2*PI);
+      ctx.fillStyle=T.flowGlow; ctx.fill();
       ctx.beginPath(); ctx.arc(p2[0],p2[1],rr,0,2*PI);
-      ctx.fillStyle='#2f6f4f'; ctx.fill();
-      ctx.lineWidth=1.6; ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.stroke();
-      ctx.font='700 '+(rr)+'px "Inter",-apple-system,sans-serif';
-      ctx.fillStyle='#fff'; ctx.fillText(String(i+1),p2[0],p2[1]+0.5);
+      ctx.fillStyle=T.flowArrow; ctx.fill();
+      ctx.lineWidth=1.6; ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.stroke();
+      ctx.font='700 '+rr+'px "Inter",-apple-system,sans-serif';
+      ctx.fillStyle='#0b1420'; ctx.fillText(String(i+1),p2[0],p2[1]+0.5);
     }
   }
 
