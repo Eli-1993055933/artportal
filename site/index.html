@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="0.100.2" />
+<meta name="app-version" content="0.101.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -336,8 +336,35 @@
   .pp-tag{display:inline-block;font-size:10.5px;color:#fff;border-radius:5px;padding:1.5px 7px;flex:0 0 auto}
   .pp-th{width:46px;height:36px;border-radius:8px;overflow:hidden;position:relative;background:#eceae2;flex:0 0 auto}
   html.dark .pp-th{background:#2a2721}
-  .pp-th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  /* ★ border-radius:0 必须写:上面 .pp-row img 那条把所有行内图片做成了圆形(50%),
+     缩略图落在 .pp-th 方框里就成了「方框套圆框」、封面被裁掉一圈(用户 2026-08-02 报的问题)。
+     两条选择器权重相同,靠后者胜出,但那条只覆盖了尺寸没覆盖圆角,所以圆角一直漏下来。 */
+  .pp-th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
   .pp-th .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+  /* 收藏页工具条(v0.101.0):隐藏已过期 / 按截止排序 / 上地球看行程 */
+  .fav-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 4px 10px;font-size:12.5px}
+  .fav-ck{display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--muted);user-select:none}
+  .fav-ck input{cursor:pointer}
+  .fav-sel{font:inherit;padding:3px 6px;border-radius:7px;border:1px solid var(--line);background:transparent;color:inherit;cursor:pointer}
+  .fav-go{font:inherit;font-weight:600;padding:4px 11px;border-radius:8px;border:none;cursor:pointer;
+    background:#2f6f4f;color:#fff;margin-left:auto}
+  .fav-go:hover{background:#38855e}
+  .fav-dl{font-size:11.5px;color:var(--muted);margin-left:7px;white-space:nowrap}
+  .fav-dl.ex{color:#b4553f}
+  .pp-row.fav-old{opacity:.55}
+  /* 行程条:浮在地球上方,不挡中心视野 */
+  #rtBar{display:none;position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:60;
+    align-items:center;gap:14px;padding:9px 14px;border-radius:12px;
+    background:rgba(18,22,20,.88);color:#eee;backdrop-filter:blur(8px);
+    box-shadow:0 6px 24px rgba(0,0,0,.34);font-size:13px;max-width:94vw}
+  #rtBar .rt-l{display:flex;flex-direction:column;gap:2px;min-width:0}
+  #rtBar b{font-size:13.5px;color:#7ed6a0}
+  #rtBar #rtInfo{font-size:12px;color:#cfcac2}
+  #rtBar .rt-hint{font-size:11px;color:#8f8a82}
+  #rtBar button{font:inherit;padding:5px 12px;border-radius:8px;border:1px solid #4a4a46;
+    background:transparent;color:#ddd;cursor:pointer;flex:0 0 auto}
+  #rtBar button:hover{background:rgba(255,255,255,.09)}
+  @media(max-width:720px){ #rtBar{top:8px;gap:9px;padding:7px 11px} #rtBar .rt-hint{display:none} }
   .pp-empty{font-size:12.5px;color:var(--muted);padding:18px 4px}
   .pp-up{font-size:12.5px;padding:8px 14px;border:1px dashed var(--line);border-radius:10px;background:none;color:var(--sub);cursor:pointer;margin-bottom:12px}
   .pp-up:hover{color:var(--ink);border-color:#c6c1b4}
@@ -712,17 +739,21 @@
 <div id="status">加载中…</div>
 <div id="toast"></div>
 <button id="fbBtn" type="button">✉ 反馈/求助</button>
+<!-- 收藏行程条(v0.101.0):进入行程模式后浮在地球上方,显示跨度并提供退出 -->
+<div id="rtBar"><div class="rt-l"><b id="rtTitle">我的申请行程</b><span id="rtInfo"></span>
+  <span class="rt-hint" id="rtHint">按截止日期先后连成一条线;点圆点看详情</span></div>
+  <button id="rtExit" type="button">退出行程</button></div>
 <!-- 集成后的页脚:备案号固定首页底部居中(工信部要求) -->
 <div id="foot">标注「自动收录」条目由程序自官网抓取,未经人工逐条核实,申请前请以官网为准 ·
   <a href="/about.html">关于</a> · <a href="/terms.html">用户协议</a> · <a href="/privacy.html">隐私政策</a> ·
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v0.100.2</span></div>
+  ARTPORTAL <span id="appVer">v0.101.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=0.100.2"></script>
-<script src="assets/vendor/topojson-client.min.js?v=0.100.2"></script>
-<script src="js/globe-data.js?v=0.100.2"></script>
+<script src="assets/vendor/d3.min.js?v=0.101.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=0.101.0"></script>
+<script src="js/globe-data.js?v=0.101.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1082,6 +1113,7 @@
     // 流动线(用户→项目)在点位之上、用户光标最顶层
     if(flowTarget) drawFlow(nowMs);
     drawBeacon(nowMs);
+    drawRoute(nowMs);        // 收藏行程连线画在最上层(v0.101.0),不参与降档:线本身很便宜
     // FPS 守卫:近30帧均值超预算自动降档
     var cost=performance.now()-t0; costArr.push(cost);
     if(costArr.length>=30){ var sum=0; for(var q2=0;q2<costArr.length;q2++) sum+=costArr[q2];
@@ -1627,6 +1659,11 @@
       cmtSentLive:'已发布',cmtSentPending:'已提交,人工复核通过后显示',
       cmtReport:'举报',cmtReported:'已收到举报,我们会尽快核查',cmtOpen:'💬 评论',ntLikeWork:'赞了你的作品',
       favT:'收藏',favedT:'已收藏',
+      favHideExp:'隐藏已过期',favSortFav:'按收藏时间',favSortDl:'按截止日期',
+      favDue:'截止',favExpired:'已截止',favNoneLeft:'筛选后没有剩下的条目',
+      favRouteBtn:'🌍 在地球上看行程',
+      rtTitle:'我的申请行程',rtHint:'按截止日期先后连成一条线;点圆点看详情',
+      rtExit:'退出行程',rtSpan:'跨度',rtDays:'天',rtCities:'个城市',rtNeed:'至少要有 2 个「有截止日期且未过期」的收藏才能排行程',
       gdT1:'转动这颗地球',gdD1:'全球艺术机会都铺在球面上:拖拽旋转、滚轮或双指缩放;数字圆是城市机会数,点它放大展开,点国家版图还能看行政区划。',
       gdT2:'找到你的机会',gdD2:'顶栏切换 机会/招聘/资讯/作品 四个频道;左侧(手机在底部)可按门类、地区、免费与否筛选。想找特定城市?输入关键词点「✦ AI 检索」,全网检索结果直接落点地球。',
       gdT3:'收藏与社区',gdD3:'点开任何条目:♥ 收藏云同步、💬 和大家讨论;注册后还能上传作品、关注同行、订阅每周艺术机会周刊。',
@@ -1700,6 +1737,12 @@
       cmtSentLive:'Posted',cmtSentPending:'Submitted — visible after human review',
       cmtReport:'Report',cmtReported:"Report received — we'll review it soon",cmtOpen:'💬 Comments',ntLikeWork:'liked your work ',
       favT:'Save',favedT:'Saved',
+      favHideExp:'Hide expired',favSortFav:'By date saved',favSortDl:'By deadline',
+      favDue:'Due',favExpired:'Closed',favNoneLeft:'Nothing left after filtering',
+      favRouteBtn:'🌍 View as itinerary',
+      rtTitle:'My application itinerary',rtHint:'Linked in deadline order — tap a dot for details',
+      rtExit:'Exit itinerary',rtSpan:'Span',rtDays:'days',rtCities:'cities',
+      rtNeed:'Need at least 2 saved items with an upcoming deadline to build an itinerary',
       gdT1:'Spin the globe',gdD1:'Every opportunity sits on the globe: drag to rotate, scroll or pinch to zoom. Numbered circles are city clusters — click to expand; click a country for its regions.',
       gdT2:'Find your call',gdD2:'Switch channels (Calls / Jobs / News / Works) in the top bar; filter by field, region or fee on the left panel (bottom drawer on mobile). Type a city or keyword and hit “✦ AI Search” — results land on the globe.',
       gdT3:'Save & connect',gdD3:'Open any item: ♥ save with cloud sync, 💬 join the discussion. Sign up to upload works, follow artists and subscribe to the weekly digest.',
@@ -1735,6 +1778,9 @@
     if(!searching) document.getElementById('btnAI').textContent=L('ai');
     document.getElementById('btnLang').textContent=(lang==='zh')?'EN':'中';
     document.getElementById('fbBtn').textContent=L('fbBtnT');
+    document.getElementById('rtTitle').textContent=L('rtTitle');
+    document.getElementById('rtHint').textContent=L('rtHint');
+    document.getElementById('rtExit').textContent=L('rtExit');
     d3.selectAll('.xb').text(L('backX'));
     document.getElementById('btnPanel').textContent=panelOpen?L('fold'):L('unfold');
     document.getElementById('back').textContent=(drillLevel>=2)?L('backU'):L('backW');
@@ -2271,6 +2317,61 @@
     if(meUser) b.innerHTML=(meUser.avatar?('<img class="av" src="'+esc(meUser.avatar)+'" alt="">'):(ICONS.user+' '))+
       '<span>'+esc(meUser.nickname||'')+'</span>';
     else b.innerHTML=ICONS.user+' <span id="loginTxt">'+L('login')+'</span>'; }
+  // ============ 收藏行程(v0.101.0):把收藏按截止日期串成地球上的一条线 ============
+  // 只收「在地球上真有落点 + 有截止日期 + 未过期」的收藏(见 favRoutable),按截止日期排序,
+  // 相邻两点用大圆弧连起来 —— 就是一条"先去哪、再去哪"的申请/看展路线。
+  // 不编造任何数据:落点用既有 markers 的坐标,日期用条目自己的 deadline。
+  var routeOn=false, routePts=[];
+  function startRoute(){
+    var rs=favRoutable();
+    if(rs.length<2){ toast(L('rtNeed')); return; }
+    routePts=rs; routeOn=true;
+    hideProfile();
+    document.getElementById('rtBar').style.display='flex';
+    var d0=rs[0].d, d1=rs[rs.length-1].d;
+    var days=Math.max(1,Math.round((Date.parse(d1)-Date.parse(d0))/86400000));
+    var cities={}; rs.forEach(function(p){ cities[(p.mk.o.city_zh||p.mk.o.country_zh||'?')]=1; });
+    document.getElementById('rtInfo').textContent=
+      d0+' → '+d1+' · '+L('rtSpan')+' '+days+' '+L('rtDays')+' · '+Object.keys(cities).length+' '+L('rtCities');
+    // 转到第一站,让用户一眼看到起点
+    flyTo(rs[0].mk.ll);
+  }
+  function exitRoute(){ routeOn=false; routePts=[];
+    document.getElementById('rtBar').style.display='none'; }
+  // 画大圆弧:d3.geoInterpolate 取球面最短路径上的采样点,背面的段自动断开(不画穿过地球的直线)
+  function drawRoute(nowMs){
+    if(!routeOn||routePts.length<2) return;
+    var i,j;
+    for(i=0;i<routePts.length-1;i++){
+      var a=routePts[i].mk.ll, b=routePts[i+1].mk.ll;
+      var ip=d3.geoInterpolate(a,b), N=48, pen=false;
+      ctx.lineWidth=2; ctx.strokeStyle='rgba(126,214,160,0.9)';
+      ctx.beginPath();
+      for(j=0;j<=N;j++){
+        var ll=ip(j/N);
+        if(!frontC(ll2c(ll))){ pen=false; continue; }      // 转到地球背面 → 断笔,别连出穿心直线
+        var p=proj(ll);
+        if(!pen){ ctx.moveTo(p[0],p[1]); pen=true; } else ctx.lineTo(p[0],p[1]);
+      }
+      ctx.stroke();
+    }
+    // 站点:序号圆点(1,2,3…),当前朝向正面的才画
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    for(i=0;i<routePts.length;i++){
+      var mk=routePts[i].mk;
+      if(!frontC(mk.cart)) continue;
+      var p2=proj(mk.ll), rr=(W<=720)?11:10;
+      var pulse=(i===0)?(1+0.18*Math.sin(nowMs/380)):1;    // 起点轻微呼吸,标出"从这儿开始"
+      ctx.beginPath(); ctx.arc(p2[0],p2[1],rr*pulse+3,0,2*PI);
+      ctx.fillStyle='rgba(47,111,79,0.28)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(p2[0],p2[1],rr,0,2*PI);
+      ctx.fillStyle='#2f6f4f'; ctx.fill();
+      ctx.lineWidth=1.6; ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.stroke();
+      ctx.font='700 '+(rr)+'px "Inter",-apple-system,sans-serif';
+      ctx.fillStyle='#fff'; ctx.fillText(String(i+1),p2[0],p2[1]+0.5);
+    }
+  }
+
   function openProfile(uid){ hideChPanel();
     document.getElementById('propanel').style.display='flex'; ensureGuard();
     loadProfile(uid); }
@@ -2336,6 +2437,63 @@
           if(r.ok) loadProfile(u.id); else toast((r.data&&r.data.error)||L('authNet')); }); });
     }
     renderProTab(u,isMe); }
+  // —— 收藏页:过期筛选 / 截止排序 / 一键上地球看行程(v0.101.0)——
+  var favAll=[], favState={hideExpired:false, sort:'fav'};
+  function favDeadline(x){ var it=(x&&x.item)||{}; var d=it.deadline||''; return /^\d{4}-\d{2}-\d{2}$/.test(d)?d:''; }
+  function favExpired(x){ var d=favDeadline(x); return !!d && d < new Date(Date.now()+8*3600e3).toISOString().slice(0,10); }
+  // 参与行程的收藏:必须在地球上真有落点(markers 里能按 id 找到)且有截止日期——没日期排不进时间线
+  function favRoutable(){
+    var out=[];
+    favAll.forEach(function(x){
+      var it=(x&&x.item)||{}, d=favDeadline(x);
+      if(!d||favExpired(x)) return;
+      for(var i=0;i<markers.length;i++) if(markers[i].o.id===it.id){ out.push({mk:markers[i],x:x,d:d}); return; }
+    });
+    out.sort(function(a,b){ return a.d<b.d?-1:a.d>b.d?1:0; });
+    return out;
+  }
+  function drawFavs(body,isMe){
+    var list=favAll.slice();
+    if(favState.hideExpired) list=list.filter(function(x){ return !favExpired(x); });
+    if(favState.sort==='deadline') list.sort(function(a,b){
+      var da=favDeadline(a), db=favDeadline(b);
+      if(!da&&!db) return 0; if(!da) return 1; if(!db) return -1;   // 没截止日期的沉底
+      return da<db?-1:da>db?1:0; });
+    var nExp=favAll.filter(favExpired).length, nRoute=favRoutable().length;
+    var bar='<div class="fav-bar">'+
+      '<label class="fav-ck"><input type="checkbox" id="favHide"'+(favState.hideExpired?' checked':'')+'>'+
+        L('favHideExp')+(nExp?(' ('+nExp+')'):'')+'</label>'+
+      '<select id="favSort" class="fav-sel"><option value="fav"'+(favState.sort==='fav'?' selected':'')+'>'+L('favSortFav')+'</option>'+
+        '<option value="deadline"'+(favState.sort==='deadline'?' selected':'')+'>'+L('favSortDl')+'</option></select>'+
+      (isMe&&nRoute>=2?('<button id="favRoute" class="fav-go">'+L('favRouteBtn')+' ('+nRoute+')</button>'):'')+
+      '</div>';
+    var rows=list.map(function(x){ var it=x.item||{};
+      var ck=(x.channel==='opportunities')?(it.category||'opencall'):x.channel;
+      var c=CAT[ck]||CAT.opencall;
+      var tt2=(lang==='en'?(it.title_en||it.title_zh||it.title):(it.title_zh||it.title||it.title_en))||'';
+      var cov=it.cover||((it.images&&it.images[0])||'');
+      var dl=favDeadline(x), ex=favExpired(x);
+      var th='<span class="pp-th"><span class="ph" style="background:'+c.color+'">'+esc((tt2||'·').charAt(0))+'</span>'+
+        (cov?('<img loading="lazy" src="'+esc(cov)+'" onerror="this.style.display=\'none\'" alt="">'):'')+'</span>';
+      var meta=dl?('<span class="fav-dl'+(ex?' ex':'')+'">'+(ex?L('favExpired'):L('favDue'))+' '+dl+'</span>'):'';
+      return '<div class="pp-row'+(ex?' fav-old':'')+'" data-fk="'+esc(x.key)+'">'+th+
+        '<span style="flex:1;min-width:0"><span class="pp-tag" style="background:'+c.color+'">'+catName(ck)+'</span> '+
+        esc(tt2)+meta+'</span></div>'; }).join('');
+    body.innerHTML=bar+(rows||('<div class="pp-empty">'+L('favNoneLeft')+'</div>'));
+    var hb=document.getElementById('favHide');
+    if(hb) hb.onchange=function(){ favState.hideExpired=hb.checked; drawFavs(body,isMe); };
+    var sb=document.getElementById('favSort');
+    if(sb) sb.onchange=function(){ favState.sort=sb.value; drawFavs(body,isMe); };
+    var rb=document.getElementById('favRoute');
+    if(rb) rb.onclick=function(){ startRoute(); };
+    body.onclick=function(e){ var d=e.target.closest('[data-fk]'); if(!d) return;
+      var fk=d.getAttribute('data-fk'), x=null;
+      for(var i=0;i<favAll.length;i++) if(favAll[i].key===fk){ x=favAll[i]; break; }
+      var it=(x&&x.item)||{};
+      for(var i2=0;i2<markers.length;i2++){ if(markers[i2].o.id===it.id){ showDetail(markers[i2].o); return; } }
+      var u3=it.url||it.apply_url; if(u3) window.open(u3,'_blank','noopener'); };
+  }
+
   function renderProTab(u,isMe){ var body=document.getElementById('ppBody'); if(!body) return;
     var t=proTab;
     if(t==='works'){ body.innerHTML='<div class="pp-empty">…</div>';
@@ -2375,19 +2533,9 @@
       postJ('/api/favorites/resolve',{keys:keys}).then(function(r){ if(proTab!=='favs') return;
         var items=(r.data&&r.data.items)||[];
         if(!items.length){ body.innerHTML='<div class="pp-empty">'+L('ppEmptyT')+'</div>'; return; }
-        body.innerHTML=items.map(function(x,i){ var it=x.item||{};
-          var ck=(x.channel==='opportunities')?(it.category||'opencall'):x.channel;
-          var c=CAT[ck]||CAT.opencall;
-          var tt2=(lang==='en'?(it.title_en||it.title_zh||it.title):(it.title_zh||it.title||it.title_en))||'';
-          var cov=it.cover||((it.images&&it.images[0])||'');
-          var th='<span class="pp-th"><span class="ph" style="background:'+c.color+'">'+esc((tt2||'·').charAt(0))+'</span>'+
-            (cov?('<img loading="lazy" src="'+esc(cov)+'" onerror="this.style.display=\'none\'" alt="">'):'')+'</span>';
-          return '<div class="pp-row" data-fi="'+i+'">'+th+
-            '<span style="flex:1;min-width:0"><span class="pp-tag" style="background:'+c.color+'">'+catName(ck)+'</span> '+esc(tt2)+'</span></div>'; }).join('');
-        body.onclick=function(e){ var d=e.target.closest('[data-fi]'); if(!d) return;
-          var x=items[+d.getAttribute('data-fi')], it=(x&&x.item)||{};
-          for(var i2=0;i2<markers.length;i2++){ if(markers[i2].o.id===it.id){ showDetail(markers[i2].o); return; } }
-          var u3=it.url||it.apply_url; if(u3) window.open(u3,'_blank','noopener'); }; })
+        favAll=items;
+        drawFavs(body,isMe);
+      })
         .catch(function(){ body.innerHTML='<div class="pp-empty">'+L('authNet')+'</div>'; });
       return; }
     if(t==='subs'){ var subs=proCur.submissions||[];
@@ -2626,6 +2774,7 @@
         closeModal(); toast(L('fbThanks')); })
       .catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }); }
   document.getElementById('fbBtn').addEventListener('click',openFeedback);
+  document.getElementById('rtExit').addEventListener('click',exitRoute);
   document.getElementById('fbLink').addEventListener('click',openFeedback);
   document.getElementById('gdLink').addEventListener('click',function(){ openGuide(0); });
   // ============================================================
