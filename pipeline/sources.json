@@ -4067,6 +4067,120 @@
       "discipline_hint": [
         "戏剧"
       ]
+    },
+    {
+      "id": "p79-residency",
+      "org_zh": "P79 Project(坡上村79)",
+      "name_zh": "P79国际艺术驻留",
+      "url": "https://p79project.com/residency",
+      "domain": "p79project.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "crawl": false,
+      "notes": "独立艺术机构,安徽铜陵坡上村驻地项目;来自公众号推文提供的官网链接核实",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "corsicana-100w-residency",
+      "org_zh": "100 W Corsicana",
+      "name_zh": "100 W Corsicana 驻留",
+      "url": "https://www.corsicanaresidency.org/apply",
+      "domain": "corsicanaresidency.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "crawl": false,
+      "notes": "美国德克萨斯州科西卡纳,全额资助工作室驻留;来自公众号推文提供的官网链接核实",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "prisma-art-prize",
+      "org_zh": "Prisma Art Prize",
+      "name_zh": "Prisma Art Prize 绘画奖",
+      "url": "https://www.prismaartprize.com/",
+      "domain": "prismaartprize.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "crawl": false,
+      "notes": "意大利罗马,面向绘画/素描/版画的国际奖项;来自公众号推文提供的官网链接核实",
+      "region_hint": "intl-central-europe"
+    },
+    {
+      "id": "khmessen-residency",
+      "org_zh": "Kunstnarhuset Messen",
+      "name_zh": "Messen 国际艺术家驻留",
+      "url": "https://www.khmessen.no/",
+      "domain": "khmessen.no",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "crawl": true,
+      "notes": "挪威哈当厄尔峡湾艺术中心,面向多领域驻留;来自公众号推文提供的官网链接核实",
+      "region_hint": "intl-north-east-europe"
+    },
+    {
+      "id": "adobe-max-creativity-awards",
+      "org_zh": "Adobe",
+      "name_zh": "Adobe MAX Creativity Awards",
+      "url": "https://max.adobe.com/creativity-awards",
+      "domain": "adobe.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "crawl": false,
+      "notes": "Adobe MAX年度创意奖,面向设计/摄影/视频/Motion;来自公众号推文提供的官网链接核实",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "photovogue-open-call-2026",
+      "org_zh": "PhotoVogue / Vogue",
+      "name_zh": "PhotoVogue Global Open Call",
+      "url": "https://www.vogue.com/article/brave-new-visions-creativity-as-rebellion-a-global-open-call-by-photovogue",
+      "domain": "vogue.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "crawl": false,
+      "notes": "本届征集专属文章页,非常设列表页——下一届征集大概率是新URL,需人工每年重新核实链接;来自公众号推文提供的官网链接核实",
+      "region_hint": "intl-na-east"
     }
   ],
   "blocked_or_unverified": [
@@ -4163,5 +4277,10 @@
     "at": "2026-07-14",
     "note": "未覆盖领域(插画/动画/时尚/公共艺术/字体/声音)+ 面向国际开放的驻留/奖项",
     "count": 39
+  },
+  "_added_batch4": {
+    "at": "2026-08-03",
+    "note": "用户从公众号文章核实到的6条真实机会(附官网链接)反查补源:P79/100W Corsicana/Prisma Art Prize/Kunstnarhuset Messen/Adobe MAX/PhotoVogue",
+    "count": 6
   }
 }
