@@ -4185,82 +4185,46 @@
   ],
   "blocked_or_unverified": [
     {
-      "org_zh": "深圳观澜国际版画双年展",
-      "domain": "guanlanprints.com",
-      "reason": "SSL 证书为 *.fkw.com(凡科建站)与域名不匹配,WebFetch 失败;报名疑走微信公众号",
-      "action": "人工用真实浏览器核验;版画类核心信源,值得保留"
-    },
-    {
       "org_zh": "上海双年展(PSA)",
       "domain": "powerstationofart.com",
       "reason": "页面存活(200)但正文 JS 渲染,WebFetch 只拿到标题",
-      "action": "候选 url https://www.powerstationofart.com/whats-on/programs/shanghai-bienniale,pipeline 需动态渲染"
+      "action": "候选 url https://www.powerstationofart.com/whats-on/programs/shanghai-bienniale,pipeline 需动态渲染(需上无头浏览器能力,属功能决策非小修)"
     },
     {
       "org_zh": "武汉双年展",
       "domain": "wuhanbiennial.com",
-      "reason": "证书过期(2024展期已结束)",
-      "action": "人工复核是否仍在办"
+      "reason": "2026-08-04 复测:域名已完全无法解析(DNS ENOTFOUND),非证书问题而是域名本身已下线",
+      "action": "大概率已停办或迁移新域名,建议人工搜索确认现状,原域名不可再收录"
     },
     {
       "org_zh": "青年艺术100",
       "domain": "artnova100.com",
-      "reason": "服务器对抓取器 Socket closed",
-      "action": "人工浏览器核验"
-    },
-    {
-      "org_zh": "约翰·莫尔绘画奖(中国)",
-      "domain": "johnmooreschina.com",
-      "reason": "Socket closed;搜索显示含200元报名费",
-      "action": "人工核验;正好是'有申请费'样本"
+      "reason": "2026-08-04 复测:TLS 握手阶段即被 ECONNRESET(非 UA/robots 问题,连接层面被拦),与 7/9 一致",
+      "action": "人工用真实浏览器核验是否仍可访问"
     },
     {
       "org_zh": "假杂志",
       "domain": "jiazazhi.com",
-      "reason": "Socket closed,且未找到正式驻留 open call 页",
-      "action": "确认其是否设驻留项目"
+      "reason": "2026-08-04 复测:TLS 握手阶段 ECONNRESET,与 7/9 一致;且未找到正式驻留 open call 页",
+      "action": "人工浏览器核验,并确认是否设驻留项目"
     },
     {
       "org_zh": "OCAT",
       "domain": "ocat.org.cn",
-      "reason": "正牌域名证书过期未打开",
+      "reason": "2026-08-04 复测:证书仍处于过期状态(CERT_HAS_EXPIRED),与 7/9 一致",
       "action": "★高危:旧域名 ocat.com.cn 已被劫持为成人站,绝不可收录;仅用 ocat.org.cn 且需人工确认证书修复"
-    },
-    {
-      "org_zh": "江苏省美术馆",
-      "domain": "jsmsg.com",
-      "reason": "WAF 按 UA 拦截,连 robots 都打不开",
-      "action": "候选 url /news/news1.aspx;需真实浏览器"
-    },
-    {
-      "org_zh": "深圳关山月美术馆",
-      "domain": "gsyart.com",
-      "reason": "服务器 Socket closed 拒绝连接",
-      "action": "人工核验"
     },
     {
       "org_zh": "山东美术馆",
       "domain": "sdam.org.cn",
-      "reason": "服务器 Socket closed 拒绝连接",
-      "action": "人工核验"
-    },
-    {
-      "org_zh": "e-flux",
-      "domain": "e-flux.com",
-      "reason": "HTTP 403,robots 封禁 ClaudeBot",
-      "action": "open calls 在 /announcements/;若我方 UA 被 * 允许可抓,否则守 robots 跳过"
-    },
-    {
-      "org_zh": "ISCP(纽约)",
-      "domain": "iscp-nyc.org",
-      "reason": "HTTP 403,robots 封禁 AI 爬虫",
-      "action": "apply 页 /apply;同上"
+      "reason": "2026-08-04 复测:★证书 altname 指向完全无关的域名 www.sddksd.com(非 fkw/凡科类建站误配,像是域名到期被转卖/劫持),与深圳观澜的建站商证书错配性质不同",
+      "action": "★高危,不可直接尝试绕过证书访问;需人工确认该馆当前真实官网域名(可能已更换),原域名疑似不再由美术馆掌控"
     },
     {
       "org_zh": "Res Artis",
       "domain": "resartis.org",
-      "reason": "全域 Socket closed(7+ 次)",
-      "action": "候选 /open-calls/;人工核验"
+      "reason": "2026-08-04 复测:DNS 解析不稳定,同一次核验内一次 202 一次 ENOTFOUND,判断为网络路径抖动/间歇性可达",
+      "action": "候选 /open-calls/;需人工用真实浏览器多次核验后再定"
     }
   ],
   "_added_batch": {
