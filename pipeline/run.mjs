@@ -293,4 +293,5 @@ async function runHealth() {
 
 const _t0 = Date.now();
 main().then(() => reportAgent("harvester", true, "每日机会抓取管线完成(含健康检查)", null, Date.now() - _t0))
-  .catch(async e => { console.error("管道异常:", e); await reportAgent("harvester", false, String(e.message || e).slice(0, 150), null, Date.now() - _t0); process.exit(1); });
+  .catch(async e => { console.error("管道异常:", e); await reportAgent("harvester", false, String(e.message || e).slice(0, 150), null, Date.now() - _t0); process.exit(1); })
+  .finally(async () => { const { closeBrowser } = await import("./lib/render.mjs"); await closeBrowser(); });   // 用过无头浏览器才会真的启动,没用过是空操作;不关会挂住进程退出

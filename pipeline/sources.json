@@ -869,6 +869,26 @@
       "region_hint": "cn-tier1"
     },
     {
+      "id": "psa-announcements",
+      "org_zh": "上海当代艺术博物馆(PSA)· 上海双年展",
+      "name_zh": "公告(New/Announcements)",
+      "url": "https://www.powerstationofart.com/whats-on/news?newsType=announcement",
+      "domain": "powerstationofart.com",
+      "type": "html",
+      "render": true,
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "2026-08-04 用无头浏览器(lib/render.mjs,新增能力)渲染确认:纯 fetch 只拿到 SPA 空壳(<title>之外几乎无正文),渲染后 200,真实公告列表。命中'第15届上海双年展宣布参展艺术家名单''青策计划2024招募启动'等真实条目,青策计划(Emerging Curators Project)是常设的策展人公开招募,属于本站'opencall'范畴。原候选 url(/whats-on/programs/shanghai-bienniale)已404,站点已改版,改用此公告列表页。robots.txt 存在且允许。",
+      "region_hint": "cn-tier1"
+    },
+    {
       "id": "gdmoa-bid",
       "org_zh": "广东美术馆",
       "name_zh": "展览申办(公开征集/申办)",
@@ -4184,12 +4204,6 @@
     }
   ],
   "blocked_or_unverified": [
-    {
-      "org_zh": "上海双年展(PSA)",
-      "domain": "powerstationofart.com",
-      "reason": "页面存活(200)但正文 JS 渲染,WebFetch 只拿到标题",
-      "action": "候选 url https://www.powerstationofart.com/whats-on/programs/shanghai-bienniale,pipeline 需动态渲染(需上无头浏览器能力,属功能决策非小修)"
-    },
     {
       "org_zh": "武汉双年展",
       "domain": "wuhanbiennial.com",

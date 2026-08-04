@@ -112,12 +112,18 @@ export async function fetchSource(src) {
     }
   }
 
-  // 2) 限速后抓取
+  // 2) 限速后抓取。src.render=true → 该站是 JS 渲染空壳,纯 fetch 只能拿到骨架,走无头浏览器
+  //    (仅限个别站点显式标记,其余 207 个信源行为不变)。
   await throttle(u.host);
-  const accept = src.type === "rss" ? "application/rss+xml,application/xml,text/xml" : "text/html,application/xhtml+xml";
   let r;
-  try { r = await rawFetch(targetUrl, accept); }
-  catch (e) { return { skipped: true, reason: "fetch-error", error: String(e.name || e.message || e) }; }
+  if (src.render) {
+    try { const { renderPage } = await import("./render.mjs"); r = await renderPage(targetUrl); }
+    catch (e) { return { skipped: true, reason: "render-error", error: String(e.name || e.message || e) }; }
+  } else {
+    const accept = src.type === "rss" ? "application/rss+xml,application/xml,text/xml" : "text/html,application/xhtml+xml";
+    try { r = await rawFetch(targetUrl, accept); }
+    catch (e) { return { skipped: true, reason: "fetch-error", error: String(e.name || e.message || e) }; }
+  }
 
   if (!r.ok) return { skipped: true, reason: "http-" + r.status, status: r.status };
 
