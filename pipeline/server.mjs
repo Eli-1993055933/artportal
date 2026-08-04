@@ -2116,6 +2116,61 @@ if (process.env.DAILY_CRAWL === "1") {
   process.stderr.write("[每日抓取] 已开启:每日北京时间 " + Number(process.env.DAILY_CRAWL_HOUR || 3) + " 点抓 sources.json 全部信源(run.mjs,并发安全)\n");
 }
 
+// —— 双线/译者/寻址 也搬上服务器(2026-08-04)——
+// 本机 run-daily.bat 依赖夜间开机,用户电脑晚上实际关机,这几个 agent 长期"从未打卡"。
+// 只有截图(mShots 服务器访问被 403)必须留本机,其余都是纯 API 调用,没有本机依赖,可以搬。
+// 服务器内存吃紧(实测 swap 已用 ~1.7G/3G),同一时刻只跑一个子进程(串行,不并发),
+// 且挑开 DAILY_CRAWL(3点)/质检(4点)/AUTO_DISCOVER(5点)之外的时段。
+function runChild(scriptFile, args = []) {
+  return new Promise((resolve) => {
+    const t0 = Date.now();
+    let tailBuf = Buffer.alloc(0);
+    function pushChunk(d) { tailBuf = Buffer.concat([tailBuf, d]); if (tailBuf.length > 4000) tailBuf = tailBuf.subarray(tailBuf.length - 4000); }
+    const p = spawn(process.execPath, [join(__dir, scriptFile), ...args], { cwd: __dir, env: process.env });
+    p.stdout.on("data", pushChunk);
+    p.stderr.on("data", pushChunk);
+    p.on("close", (code) => {
+      process.stderr.write("[" + scriptFile + "] 结束 code=" + code + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
+      resolve(code);
+    });
+    p.on("error", (e) => { process.stderr.write("[" + scriptFile + "] spawn 失败:" + e.message + "\n"); resolve(-1); });
+  });
+}
+if (process.env.CHANNELS_CRAWL === "1") {
+  let ccDay = null, ccRunning = false;
+  async function channelsCrawlTick() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.CHANNELS_CRAWL_HOUR || 2)) return;
+    const day = bj.toISOString().slice(0, 10);
+    if (ccDay === day || ccRunning) return;
+    ccDay = day; ccRunning = true;
+    process.stderr.write("[双线/译者(资讯招聘)] 启动\n");
+    await runChild("run-channels.mjs");        // 资讯/招聘每日抓取(agent: channels,脚本自带 reportAgent)
+    await runChild("backfill-channel-i18n.mjs"); // 资讯/招聘补双语(无独立 agent 工牌,归在此块日志里)
+    ccRunning = false;
+  }
+  setTimeout(channelsCrawlTick, 260 * 1000);
+  setInterval(channelsCrawlTick, 3600 * 1000);
+  process.stderr.write("[双线] 已开启:每日北京时间 " + Number(process.env.CHANNELS_CRAWL_HOUR || 2) + " 点抓资讯/招聘 + 补双语(串行,不与截图抢本机)\n");
+}
+if (process.env.BACKFILL_EN === "1") {
+  let beDay = null, beRunning = false;
+  async function backfillEnTick() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.BACKFILL_EN_HOUR || 6)) return;
+    const day = bj.toISOString().slice(0, 10);
+    if (beDay === day || beRunning) return;
+    beDay = day; beRunning = true;
+    process.stderr.write("[译者/寻址(机会双语+官网定位)] 启动\n");
+    await runChild("backfill-en.mjs");         // 机会条目双语回填(agent: translator)
+    await runChild("backfill-official.mjs");   // 主办方官网定位(agent: locator)
+    beRunning = false;
+  }
+  setTimeout(backfillEnTick, 320 * 1000);
+  setInterval(backfillEnTick, 3600 * 1000);
+  process.stderr.write("[译者/寻址] 已开启:每日北京时间 " + Number(process.env.BACKFILL_EN_HOUR || 6) + " 点补双语 + 定位官网(串行)\n");
+}
+
 // —— 自动化发现「探长」(v0.82.0,路线图第 6 项合规可行版)——
 // 社媒(小红书/微博)只作线索:只读搜索引擎索引的标题/摘要(拿不到链接,结构上不可能抓社媒页面),
 // GLM(免费档,v0.99.2 起专用——DeepSeek 断粮期间不再兜底)提炼机会名+主办方(原文子串校验)
