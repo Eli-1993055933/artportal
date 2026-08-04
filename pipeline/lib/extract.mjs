@@ -49,21 +49,24 @@ export async function extract(sourceText, ctx) {
 
 // 底层出口:任意 system prompt + user 内容 → JSON 提取结果(资讯/招聘频道用自己的 prompt 走这里)。
 // provider 选择、JSON 模式、usage 统计与机会频道完全同一套。
+// GLM 免费档为主(2026-08-02 定调长期主力,DeepSeek 不再充值);DeepSeek/Anthropic 仅作 GLM 失败时的备份。
 export async function llmExtract(system, user, maxTokens) {
-  if (DEEPSEEK_KEY) {
-    try { return await extractDeepSeek(system, user, maxTokens); }
+  if (process.env.MOD_API_KEY) {
+    try { return await extractGlmFree(system, user, maxTokens); }
     catch (e) {
-      // DeepSeek 欠费/限流/故障 → 免费 GLM 兜底顶上(v0.83.1):提取质量弱一档但功能不断线;
-      // 反幻觉不受影响——evidence 是否原文子串由 verify.mjs 程序说了算,模型说了不算。
-      if (process.env.MOD_API_KEY) {
-        try { return await extractGlmFree(system, user, maxTokens); } catch (e2) {}
+      // GLM 故障/限流 → 有余额的 DeepSeek 顶上;反幻觉不受影响——evidence 是否原文子串由 verify.mjs 程序说了算。
+      if (DEEPSEEK_KEY) {
+        try { return await extractDeepSeek(system, user, maxTokens); } catch (e2) {}
+      }
+      if (ANTHROPIC_KEY) {
+        try { return await extractAnthropic(system, user, maxTokens); } catch (e3) {}
       }
       throw e;
     }
   }
-  if (process.env.MOD_API_KEY) return extractGlmFree(system, user, maxTokens);
+  if (DEEPSEEK_KEY) return extractDeepSeek(system, user, maxTokens);
   if (ANTHROPIC_KEY) return extractAnthropic(system, user, maxTokens);
-  throw new Error("缺少 DEEPSEEK_API_KEY 或 ANTHROPIC_API_KEY(放进 pipeline/.env 或 GitHub Secrets)");
+  throw new Error("缺少 MOD_API_KEY / DEEPSEEK_API_KEY / ANTHROPIC_API_KEY(放进 pipeline/.env 或 GitHub Secrets)");
 }
 
 // 免费提取(智谱 GLM-4-Flash,OpenAI 兼容,长期免费):llmExtract 的兜底线,也可被各调用点直接用作主线。

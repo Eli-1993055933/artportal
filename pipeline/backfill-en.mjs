@@ -12,13 +12,16 @@
 
 import { readFile, writeFile, copyFile, rename } from "node:fs/promises";
 import { reportAgent } from "./lib/agent-report.mjs";
+import { llmExtract } from "./lib/extract.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dir, "..", "site", "data", "opportunities.json");
-const KEY = process.env.DEEPSEEK_API_KEY;
-if (!KEY) { console.error("缺 DEEPSEEK_API_KEY(先 source .env)"); process.exit(1); }
+// GLM 免费档为主(2026-08-02 定调长期主力),DeepSeek/Anthropic 由 llmExtract 按需兜底,见 lib/extract.mjs。
+if (!process.env.MOD_API_KEY && !process.env.DEEPSEEK_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+  console.error("缺 MOD_API_KEY / DEEPSEEK_API_KEY / ANTHROPIC_API_KEY(先 source .env)"); process.exit(1);
+}
 
 const BATCH = 6;        // 每次 API 调用翻译的条数(太大易被 max_tokens 截断)
 const CONCURRENCY = 5;  // 并发调用数
@@ -55,33 +58,15 @@ function needsOf(o) {
 
 async function translateBatch(items) {
   const payload = items.map(({ id, src }) => ({ id, ...src }));
-  const body = {
-    model: "deepseek-chat",
-    temperature: 0.3,   // 忠实翻译要低随机性;高温会放大 id 改写/串位概率
-    max_tokens: 4000,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content:
-        "你是专业中译英译者,翻译艺术机会(展览征集/驻留/奖项/工作坊)条目字段。规则:" +
-        "1) 忠实翻译,绝不增删信息、绝不猜测补全;" +
-        "2) 机构/展览如有通行官方英文名就用官方英文名,不确定就直译;地名用通行英文写法(如 北京→Beijing);" +
-        "3) disciplines 是数组,输出 disciplines_en 必须与其等长、逐项对应;已是英文的项原样保留;" +
-        "4) 输出 JSON 对象:{\"items\":[{\"id\":...,\"title_en\"?,\"summary_en\"?,\"org_en\"?,\"city_en\"?,\"country_en\"?,\"deadline_note_en\"?,\"age_limit_en\"?,\"nationality_en\"?,\"disciplines_en\"?}]}," +
-        "每条只输出输入里给了源文的对应字段,id 原样返回。" },
-      { role: "user", content: JSON.stringify(payload, null, 0) }
-    ]
-  };
-  const res = await fetch("https://api.deepseek.com/chat/completions", {
-    method: "POST",
-    headers: { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(180000)
-  });
-  if (!res.ok) throw new Error("deepseek " + res.status + " " + (await res.text()).slice(0, 200));
-  const j = await res.json();
-  if (j.choices?.[0]?.finish_reason === "length") throw new Error("输出被 max_tokens 截断");
-  const content = j.choices?.[0]?.message?.content || "{}";
-  const parsed = JSON.parse(content);
+  const sys =
+    "你是专业中译英译者,翻译艺术机会(展览征集/驻留/奖项/工作坊)条目字段。规则:" +
+    "1) 忠实翻译,绝不增删信息、绝不猜测补全;" +
+    "2) 机构/展览如有通行官方英文名就用官方英文名,不确定就直译;地名用通行英文写法(如 北京→Beijing);" +
+    "3) disciplines 是数组,输出 disciplines_en 必须与其等长、逐项对应;已是英文的项原样保留;" +
+    "4) 输出 JSON 对象:{\"items\":[{\"id\":...,\"title_en\"?,\"summary_en\"?,\"org_en\"?,\"city_en\"?,\"country_en\"?,\"deadline_note_en\"?,\"age_limit_en\"?,\"nationality_en\"?,\"disciplines_en\"?}]}," +
+    "每条只输出输入里给了源文的对应字段,id 原样返回。";
+  // 忠实翻译要低随机性;高温会放大 id 改写/串位概率——llmExtract 内部固定 temperature:0,足够低。
+  const { data: parsed } = await llmExtract(sys, JSON.stringify(payload, null, 0), 4000);
   // 顶层结构兼容:{items:[...]} / 直接数组 / 其他键名包着的数组
   let out = Array.isArray(parsed) ? parsed
           : Array.isArray(parsed.items) ? parsed.items

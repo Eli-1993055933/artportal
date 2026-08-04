@@ -7,12 +7,15 @@
 // 用法: cd pipeline && set -a && . ./.env && set +a && node backfill-channel-i18n.mjs
 
 import { readFile, writeFile, rename } from "node:fs/promises";
+import { llmExtract } from "./lib/extract.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const KEY = process.env.DEEPSEEK_API_KEY;
-if (!KEY) { console.error("缺 DEEPSEEK_API_KEY"); process.exit(1); }
+// GLM 免费档为主(2026-08-02 定调长期主力),DeepSeek/Anthropic 由 llmExtract 按需兜底,见 lib/extract.mjs。
+if (!process.env.MOD_API_KEY && !process.env.DEEPSEEK_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+  console.error("缺 MOD_API_KEY / DEEPSEEK_API_KEY / ANTHROPIC_API_KEY"); process.exit(1);
+}
 
 const FILES = [
   { path: join(__dir, "..", "site", "data", "news.json"), key: "items" },
@@ -24,26 +27,12 @@ function needs(o) { return o.title && (!o.title_zh || !o.title_en || (o.summary 
 
 async function translateBatch(items) {
   const payload = items.map(o => ({ id: o.id, title: o.title, summary: o.summary || "" }));
-  const body = {
-    model: "deepseek-chat", temperature: 0.3, max_tokens: 4000,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content:
-        "你是专业中英双语译者。给你艺术资讯/招聘条目的 title 和 summary(可能中文或英文)。" +
-        "为每条输出中文版与英文版,忠实翻译、不增删信息。已是某语言的原文保留原文,另一语言给准确译文。" +
-        "机构/媒体/人名有通行译名就用,否则保留原文。输出 JSON:" +
-        '{"items":[{"id":...,"title_zh":...,"title_en":...,"summary_zh":...,"summary_en":...}]},id 原样返回。' },
-      { role: "user", content: JSON.stringify(payload) }
-    ]
-  };
-  const res = await fetch("https://api.deepseek.com/chat/completions", {
-    method: "POST", headers: { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" },
-    body: JSON.stringify(body), signal: AbortSignal.timeout(180000)
-  });
-  if (!res.ok) throw new Error("deepseek " + res.status);
-  const j = await res.json();
-  if (j.choices?.[0]?.finish_reason === "length") throw new Error("截断");
-  const parsed = JSON.parse(j.choices?.[0]?.message?.content || "{}");
+  const sys =
+    "你是专业中英双语译者。给你艺术资讯/招聘条目的 title 和 summary(可能中文或英文)。" +
+    "为每条输出中文版与英文版,忠实翻译、不增删信息。已是某语言的原文保留原文,另一语言给准确译文。" +
+    "机构/媒体/人名有通行译名就用,否则保留原文。输出 JSON:" +
+    '{"items":[{"id":...,"title_zh":...,"title_en":...,"summary_zh":...,"summary_en":...}]},id 原样返回。';
+  const { data: parsed } = await llmExtract(sys, JSON.stringify(payload), 4000);
   return Array.isArray(parsed.items) ? parsed.items : (Array.isArray(parsed) ? parsed : []);
 }
 const s = v => typeof v === "string" && v.trim() ? v.trim() : null;

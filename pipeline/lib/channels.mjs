@@ -286,6 +286,11 @@ export const CHANNELS = {
 // ---------------------------------------------------------------------------
 
 export async function understandChannelQuery(chKey, userQuery) {
+  const sys = CHANNELS[chKey].intentSystem();
+  const user = "用户需求:" + userQuery;
+  // GLM 免费档为主(意图理解是轻任务,flash 足够,且是长期主力,见 2026-08-02 决策)
+  try { const g = await extractGlmFree(sys, user, 400); if (g && g.data) return g.data; } catch (e) {}
+  // GLM 不可用时 DeepSeek 兜底
   const key = process.env.DEEPSEEK_API_KEY;
   if (!key) return null;
   try {
@@ -296,22 +301,18 @@ export async function understandChannelQuery(chKey, userQuery) {
         model: process.env.EXTRACT_MODEL || "deepseek-chat",
         temperature: 0.2, max_tokens: 400, response_format: { type: "json_object" },
         messages: [
-          { role: "system", content: CHANNELS[chKey].intentSystem() },
-          { role: "user", content: "用户需求:" + userQuery }
+          { role: "system", content: sys },
+          { role: "user", content: user }
         ]
       }),
       signal: AbortSignal.timeout(20000)
     });
-    if (!res.ok) throw new Error("deepseek " + res.status);
+    if (!res.ok) return null;
     const j = await res.json();
     const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
     const m = /\{[\s\S]*\}/.exec(raw);
     return m ? JSON.parse(m[0]) : null;
-  } catch (e) {
-    // DeepSeek 不可用 → 免费 GLM 兜底(意图理解是轻任务,flash 足够)
-    try { const g = await extractGlmFree(CHANNELS[chKey].intentSystem(), "用户需求:" + userQuery, 400); return g && g.data || null; }
-    catch (e2) { return null; }
-  }
+  } catch (e) { return null; }
 }
 
 // 相关性把关:用户明确指定了地点,而这条内容各字段都不含该地点 → 判为跑题丢弃(与机会频道同)。

@@ -81,8 +81,6 @@ async function search(query) {
 // DeepSeek 判定:候选页面是否确为该主办方本站,且与此机会相关。
 // 返回 { level: "specific"|"org"|"no" }:specific=正是这个机会的官网页;org=主办方官网但不是本机会专页;no=不相关/是第三方。
 async function judge(item, cand, pageText) {
-  const key = process.env.DEEPSEEK_API_KEY;
-  if (!key) return { level: "no" };
   const sys =
     "你在核对一个「艺术机会」的官网链接是否可信。给你:机会的标题/主办方,以及一个候选网页的 URL 和正文节选。\n" +
     "判断该候选页面是不是【主办方自己官网】上的页面(不是新闻转载、不是聚合平台、不是他人博客)。只输出 JSON:\n" +
@@ -93,6 +91,15 @@ async function judge(item, cand, pageText) {
     "存疑一律给 no。绝不为了凑答案而给 specific/org。";
   const user = "机会标题:" + (item.title || "") + "\n主办方:" + (item.org || "") +
     "\n候选URL:" + cand.url + "\n候选网页正文节选:\n" + String(pageText || "").slice(0, 2500);
+  // GLM 免费档为主(核实是短文本判断,flash 够用,且是长期主力,见 2026-08-02 决策;存疑照旧给 no,红线不松)
+  try {
+    const g = await extractGlmFree(sys, user, 200);
+    const parsed = (g && g.data) || {};
+    if (parsed.level) return { level: ["specific", "org", "no"].includes(parsed.level) ? parsed.level : "no", reason: parsed.reason };
+  } catch (e) {}
+  // GLM 不可用时 DeepSeek 兜底
+  const key = process.env.DEEPSEEK_API_KEY;
+  if (!key) return { level: "no" };
   try {
     const res = await fetch("https://api.deepseek.com/chat/completions", {
       method: "POST",
@@ -104,19 +111,13 @@ async function judge(item, cand, pageText) {
       }),
       signal: AbortSignal.timeout(30000)
     });
-    if (!res.ok) throw new Error("deepseek " + res.status);
+    if (!res.ok) return { level: "no" };
     const j = await res.json();
     const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "{}";
     const m = /\{[\s\S]*\}/.exec(raw);
     const parsed = m ? JSON.parse(m[0]) : {};
     return { level: ["specific", "org", "no"].includes(parsed.level) ? parsed.level : "no", reason: parsed.reason };
-  } catch (e) {
-    // DeepSeek 不可用 → 免费 GLM 兜底(核实是短文本判断,flash 够用;存疑照旧给 no,红线不松)
-    try {
-      const g = await extractGlmFree(sys, user, 200);
-      const parsed = (g && g.data) || {};
-      return { level: ["specific", "org", "no"].includes(parsed.level) ? parsed.level : "no", reason: parsed.reason };
-    } catch (e2) { return { level: "no" }; }
+  } catch (e) { return { level: "no" };
   }
 }
 

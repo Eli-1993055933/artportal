@@ -190,8 +190,6 @@ function candLine(c, i, hasCover) {
   return "[" + i + "] " + bits.join(" | ");
 }
 async function composeArticleAI(cand, weekId) {
-  const key = process.env.DEEPSEEK_API_KEY;
-  if (!key) return null;
   // 全局连续编号的候选表(三段展示,编号不分段,防 AI 混淆)
   // ★ 先把封面验一遍再选材(2026-08-01):原来 [有配图] 只看 cover 字段在不在,可那些 cover
   //   很多是 og:image 抓来的 logo/徽章/微信二维码,甚至是死链——模型照着"有配图"去写,
@@ -232,13 +230,19 @@ async function composeArticleAI(cand, weekId) {
     "5. 结语:一段,收束本周观察,给创作者一个具体的行动建议。\n\n" +
     "铁律(违反任何一条即废稿):\n" +
     "A. 一切事实(项目/机构/人名/日期/地点/数字)只能来自候选清单;绝不引入清单之外的展览、机构或事件。\n" +
-    "B. 正文每次提到候选条目,必须用 [[编号:显示文字]] 标记,如 [[3:未来世代艺术奖]];显示文字须是该条目的实际名称或自然简称;至少提及 8 个不同条目,机会/资讯/招聘三类都要覆盖。\n" +
+    "B. 正文每次提到候选条目,必须用双方括号 [[编号:显示文字]] 标记,如 [[3:未来世代艺术奖]];" +
+    "只写 [3] 或 【未来世代艺术奖】这种单括号/无编号形式一律无效、算没有引用;显示文字须是该条目的实际名称或自然简称;至少提及 8 个不同条目,机会/资讯/招聘三类都要覆盖。\n" +
     "C. 理论只能【转述观点】,绝不使用带引号的直接引语,绝不编造书名页码、年份、出版细节;理论家人名与理论名称须是公认常识。\n" +
     "D. 语言:中文书面语;不用『震撼』『必看』『重磅』等营销腔;不吹捧任何机构。\n" +
     "E. 每个章节可选一张配图:字段 image 填某个标注[有配图]的候选编号(该章节确实谈到它时才配),否则填 null。\n\n" +
     '只输出一个 JSON:{"title":"…","subtitle":"…","sections":[{"heading":"…","image":编号或null,"paragraphs":["…","…"]}],"closing":"…"}';
   async function callOnce(extraNote) {
     const userContent = "本期:" + weekId + (extraNote ? "\n(上一稿问题:" + extraNote + ",请重写并严格遵守铁律)" : "") + "\n\n候选清单:\n" + listText;
+    // GLM 免费档为主(长期主力,见 2026-08-02 决策;写作质量弱一档,靠下面 inspect 校验+引用程序回填把关);
+    // DeepSeek 仅作 GLM 失败/被限流时的备份。
+    try { const g = await extractGlmFree(sys, userContent, 5000); if (g && g.data) return g.data; } catch (e) {}
+    const key = process.env.DEEPSEEK_API_KEY;
+    if (!key) return null;
     try {
       const res = await fetch("https://api.deepseek.com/chat/completions", {
         method: "POST",
@@ -253,17 +257,12 @@ async function composeArticleAI(cand, weekId) {
         }),
         signal: AbortSignal.timeout(150000)
       });
-      if (!res.ok) throw new Error("deepseek " + res.status);
+      if (!res.ok) return null;
       const j = await res.json();
       const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
       const m = /\{[\s\S]*\}/.exec(raw);
       return m ? JSON.parse(m[0]) : null;
-    } catch (e) {
-      // DeepSeek 不可用 → 免费 GLM 兜底成文(文笔弱一档;铁律仍由 inspect 校验+引用程序回填把关),
-      // 再不行 compose 会退回清单式程序模板,刊不断更。
-      try { const g = await extractGlmFree(sys, userContent, 5000); return (g && g.data) || null; }
-      catch (e2) { return null; }
-    }
+    } catch (e) { return null; }
   }
   // 稿件校验:结构完整 + 引用充分。不达标给一次重写机会(带上问题说明)。
   function inspect(out) {
@@ -532,8 +531,6 @@ function assembleArticle(out, C, weekId, coverMap) {
 
 // ---------- DeepSeek:选条 + 导语(只准引用候选,绝不产出事实字段) ----------
 async function composeWithAI(cand, weekId) {
-  const key = process.env.DEEPSEEK_API_KEY;
-  if (!key) return null;
   const numbered = (arr) => arr.map((x, i) =>
     "[" + i + "] " + x.title +
     (x.org ? "|" + x.org : "") + (x.source ? "|" + x.source : "") +
@@ -548,41 +545,50 @@ async function composeWithAI(cand, weekId) {
     "本期:" + weekId + "\n\n【机会候选】\n" + (numbered(cand.opps) || "(空)") +
     "\n\n【资讯候选】\n" + (numbered(cand.news) || "(空)") +
     "\n\n【招聘候选】\n" + (numbered(cand.jobs) || "(空)");
-  try {
-    const res = await fetch("https://api.deepseek.com/chat/completions", {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: process.env.EXTRACT_MODEL || "deepseek-chat",
-        temperature: 0.5, max_tokens: 1200, response_format: { type: "json_object" },
-        messages: [{ role: "system", content: sys }, { role: "user", content: user }]
-      }),
-      signal: AbortSignal.timeout(60000)
-    });
-    if (!res.ok) return null;
-    const j = await res.json();
-    const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
-    const m = /\{[\s\S]*\}/.exec(raw);
-    if (!m) return null;
-    const out = JSON.parse(m[0]);
-    // 选条只认合法编号;文本字段限长防跑飞
-    const picks = (arr, pool, cap) => {
-      const seen = new Set(), r = [];
-      for (const n of (Array.isArray(arr) ? arr : [])) {
-        const i = Number(n);
-        if (Number.isInteger(i) && i >= 0 && i < pool.length && !seen.has(i)) { seen.add(i); r.push(pool[i]); }
-        if (r.length >= cap) break;
-      }
-      return r;
-    };
-    const s = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
-    return {
-      title: s(out.title, 40), intro: s(out.intro, 300),
-      opps_note: s(out.opps_note, 80), news_note: s(out.news_note, 80), jobs_note: s(out.jobs_note, 80),
-      outro: s(out.outro, 150),
-      opps: picks(out.opps, cand.opps, 12), news: picks(out.news, cand.news, 10), jobs: picks(out.jobs, cand.jobs, 8)
-    };
-  } catch (e) { return null; }
+  // GLM 免费档为主(长期主力,见 2026-08-02 决策);DeepSeek 仅作 GLM 失败时的备份。
+  let out = null;
+  try { const g = await extractGlmFree(sys, user, 1200); out = (g && g.data) || null; } catch (e) {}
+  if (!out) {
+    const key = process.env.DEEPSEEK_API_KEY;
+    if (key) {
+      try {
+        const res = await fetch("https://api.deepseek.com/chat/completions", {
+          method: "POST",
+          headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: process.env.EXTRACT_MODEL || "deepseek-chat",
+            temperature: 0.5, max_tokens: 1200, response_format: { type: "json_object" },
+            messages: [{ role: "system", content: sys }, { role: "user", content: user }]
+          }),
+          signal: AbortSignal.timeout(60000)
+        });
+        if (res.ok) {
+          const j = await res.json();
+          const raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+          const m = /\{[\s\S]*\}/.exec(raw);
+          if (m) out = JSON.parse(m[0]);
+        }
+      } catch (e) {}
+    }
+  }
+  if (!out) return null;
+  // 选条只认合法编号;文本字段限长防跑飞
+  const picks = (arr, pool, cap) => {
+    const seen = new Set(), r = [];
+    for (const n of (Array.isArray(arr) ? arr : [])) {
+      const i = Number(n);
+      if (Number.isInteger(i) && i >= 0 && i < pool.length && !seen.has(i)) { seen.add(i); r.push(pool[i]); }
+      if (r.length >= cap) break;
+    }
+    return r;
+  };
+  const s = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
+  return {
+    title: s(out.title, 40), intro: s(out.intro, 300),
+    opps_note: s(out.opps_note, 80), news_note: s(out.news_note, 80), jobs_note: s(out.jobs_note, 80),
+    outro: s(out.outro, 150),
+    opps: picks(out.opps, cand.opps, 12), news: picks(out.news, cand.news, 10), jobs: picks(out.jobs, cand.jobs, 8)
+  };
 }
 
 // AI 不可用时的纯程序降级:按规则取前 N,固定文案(如实、不装 AI)
@@ -674,8 +680,6 @@ export async function generateWeekly({ force = false } = {}) {
 // ③中文单语(用户选择,省一半 AI 成本,不译英);④口吻"为你综述"。反幻觉红线完全一致。
 // 入参 favItems: [{channel:"opportunities"|"news"|"jobs", item:原始对象}](works 不进文字综述)。
 export async function generatePersonalSummary(favItems, opts = {}) {
-  const key = process.env.DEEPSEEK_API_KEY;
-  if (!key) return null;
   const opps = [], news = [], jobs = [];
   for (const f of (favItems || [])) {
     const o = f.item || {};
@@ -716,11 +720,17 @@ export async function generatePersonalSummary(favItems, opts = {}) {
     "结构:1)有观点的标题 + 一句副题(点出这位用户的收藏主线);2)正文 2–3 个章节,每章 2–3 段,段落之间有承转;3)结语一段,给 TA 一个具体的行动建议。\n\n" +
     "铁律(违反任何一条即废稿):\n" +
     "A. 一切事实(项目/机构/人名/日期/地点/数字)只能来自候选清单,绝不引入清单之外的任何内容。\n" +
-    "B. 正文每次提到候选条目必须用 [[编号:显示文字]] 标记(如 [[2:未来世代艺术奖]]);显示文字须是该条目实际名称或自然简称;至少提及 6 个不同条目。\n" +
+    "B. 正文每次提到候选条目必须用双方括号 [[编号:显示文字]] 标记(如 [[2:未来世代艺术奖]]);" +
+    "只写 [2] 或 【未来世代艺术奖】这种单括号/无编号形式一律无效、算没有引用;显示文字须是该条目实际名称或自然简称;至少提及 6 个不同条目。\n" +
     "C. 不用营销腔(『必看』『重磅』『震撼』);不吹捧机构;可克制地转述当代艺术理论帮助解读,但绝不使用带引号的直接引语、绝不编造书名页码年份等出版细节。\n" +
     "D. 语言:中文书面语。E. 每个章节可选一张配图:字段 image 填某个标注[有配图]的候选编号(该章确实谈到它时才配),否则填 null。\n\n" +
     '只输出一个 JSON:{"title":"…","subtitle":"…","sections":[{"heading":"…","image":编号或null,"paragraphs":["…","…"]}],"closing":"…"}';
   async function callOnce(extra) {
+    const userContent = (nick ? "用户昵称:" + nick + "\n" : "") + "收藏清单:\n" + listText + (extra ? "\n(上一稿问题:" + extra + ",请重写并严格遵守铁律)" : "");
+    // GLM 免费档为主(长期主力,见 2026-08-02 决策);DeepSeek 仅作 GLM 失败时的备份,不再默认优先尝试。
+    try { const g = await extractGlmFree(sys, userContent, 4000); if (g && g.data) return g.data; } catch (e) {}
+    const key = process.env.DEEPSEEK_API_KEY;
+    if (!key) return null;
     try {
       const res = await fetch("https://api.deepseek.com/chat/completions", {
         method: "POST",
@@ -730,7 +740,7 @@ export async function generatePersonalSummary(favItems, opts = {}) {
           temperature: 0.7, max_tokens: 4000, response_format: { type: "json_object" },
           messages: [
             { role: "system", content: sys },
-            { role: "user", content: (nick ? "用户昵称:" + nick + "\n" : "") + "收藏清单:\n" + listText + (extra ? "\n(上一稿问题:" + extra + ",请重写并严格遵守铁律)" : "") }
+            { role: "user", content: userContent }
           ]
         }),
         signal: AbortSignal.timeout(150000)
