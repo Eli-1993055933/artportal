@@ -404,7 +404,7 @@ export function upsertChannelRecords(chKey, records) {
 // 检索闭环(供 /api/search?channel=news|jobs):与机会频道同一套流程与预算
 // ---------------------------------------------------------------------------
 
-export async function harvestChannel(chKey, query, target = 6) {
+export async function harvestChannel(chKey, query, target = 6, who = "channels") {
   const ch = CHANNELS[chKey];
   const intent = await understandChannelQuery(chKey, query);
   const loc = intent && intent.location ? String(intent.location).trim() : null;
@@ -415,7 +415,7 @@ export async function harvestChannel(chKey, query, target = 6) {
 
   const rawUrls = [];
   for (const q of queries) {
-    rawUrls.push(...await searchWeb(q, { recent: ch.recentBias }));
+    rawUrls.push(...await searchWeb(q, { recent: ch.recentBias, who }));
     await sleep(800);   // 对搜索端点客气一点
   }
 

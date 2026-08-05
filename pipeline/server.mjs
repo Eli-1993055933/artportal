@@ -21,7 +21,7 @@ import { verifyRecord, isParseableDate } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 import { ipRegion } from "./lib/ipregion.mjs";
-import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft } from "./lib/websearch.mjs";
+import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft, serperUsageToday } from "./lib/websearch.mjs";
 import { extractGlmFree } from "./lib/extract.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { leadsTick } from "./lib/leads.mjs";
@@ -195,7 +195,8 @@ function rateLimited(ip) {
 // hint(v0.98.0 区域经理):地区本就已知时直接把 gl/hl/地点别名给死,【跳过 AI 意图理解】。
 //   两个好处:①省一次 AI 调用(每班一次,天天在跑)②不会猜错——日志实证 AI 把"北欧"
 //   猜成 gl=dk(丹麦),整轮检索就偏到丹麦去了。用户手动检索(地区未知)仍走 AI 理解,不变。
-async function searchAndHarvest(query, target = 6, hint = null) {
+async function searchAndHarvest(query, target = 6, hint = null, who = null) {
+  who = who || (hint ? "region" : "user");   // serper 分桶审计(v1.5.0):区域班默认 region,其余默认 user,调用方可显式覆盖
   const intent = hint ? null : await understandQuery(query);
   const loc = hint ? (hint.location || null) : (intent && intent.location ? String(intent.location).trim() : null);
   // 地点的中英文/别名数组(供相关性匹配,防"洛杉矶"匹配不到"Los Angeles");无则回退单地点
@@ -224,7 +225,7 @@ async function searchAndHarvest(query, target = 6, hint = null) {
   const queries = [(baseQ[0] || query) + " " + OFFICIAL_SITES].concat(baseQ);   // ① 官网限定 + ②③④ 意图查询
   const rawUrls = [];
   for (const q of queries) {
-    rawUrls.push(...await searchWeb(q, { gl, hl }));
+    rawUrls.push(...await searchWeb(q, { gl, hl, who }));
     await new Promise(r => setTimeout(r, 800)); // 对搜索端点客气一点
   }
   // 候选去重 + 过滤噪声
@@ -1383,7 +1384,7 @@ async function handleAuthApi(req, res, u) {
         const who = u.searchParams.get("agent");
         if (who) body.recent = await db.agentRecent(String(who).slice(0, 40), 30);
         // 今日简报:搜索余量 / 磁盘 / 三频道今日更新 / 待人工事项
-        const brief = { serper_left: serperBudgetLeft(), disk_free_gb: null, today: {}, pending: 0 };
+        const brief = { serper_left: serperBudgetLeft(), serper_usage: serperUsageToday(), disk_free_gb: null, today: {}, pending: 0 };
         try { const fsx = await statfs(SITE); brief.disk_free_gb = Math.round(fsx.bsize * fsx.bavail / 1e9 * 10) / 10; } catch (e) {}
         try {
           const today = todayISO();
@@ -1786,7 +1787,7 @@ async function autoHarvestTick() {
     await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
     try {
       const t0 = Date.now();
-      const r = ch === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(ch, q, 6);
+      const r = ch === "opportunities" ? await searchAndHarvest(q, 6, null, "auto") : await harvestChannel(ch, q, 6, "auto");
       for (const rec of r.added) {
         db.ingestInsert({ channel: ch, record_id: rec.id, title: rec.title_zh || rec.title, q, uid: null, email: "auto-hourly", ip: "server" });
       }
@@ -2214,7 +2215,7 @@ if (process.env.AUTO_DISCOVER === "1") {
         db.agentLog({ agent: "detective", ok: true, summary: "serper 余量不足,今日休勘(保用户检索)", metrics: { skipped: true } }).catch(() => {});
         return;
       }
-      const r = await leadsTick({ harvest: (q, t) => searchAndHarvest(q, t) });
+      const r = await leadsTick({ harvest: (q, t) => searchAndHarvest(q, t, null, "detective") });
       const brief = r.clueNames.length ? ":" + r.clueNames.join("、") : "";
       db.agentLog({ agent: "detective", ok: true,
         summary: `线索面 ${r.rows} 条 → 提炼 ${r.distilled} → 追查 ${r.tried} → 官网收录 ${r.added}${brief}`,
@@ -2340,7 +2341,7 @@ createServer(async (req, res) => {
     try {
       const user = auth.userOf(req);
       auth.logEvent("search", { q: q.slice(0, 80), channel, ip, ...(user ? { uid: user.id, email: user.email } : {}) });
-      const r = channel === "opportunities" ? await searchAndHarvest(q, 6) : await harvestChannel(channel, q, 6);
+      const r = channel === "opportunities" ? await searchAndHarvest(q, 6, null, "user") : await harvestChannel(channel, q, 6, "user");
       // 检索入库溯源:每条新入库记录记下"谁的哪次检索带进来的"(后台可查)
       for (const rec of r.added) {
         db.ingestInsert({ channel, record_id: rec.id, title: rec.title_zh || rec.title, q: q.slice(0, 80), uid: user ? user.id : null, email: user ? user.email : null, ip });
