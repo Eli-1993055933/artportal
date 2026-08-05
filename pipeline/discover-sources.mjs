@@ -40,6 +40,12 @@ const ONLY_REGIONS = (opt("--regions", "") || "").split(",").map(s => s.trim()).
 // 这里是"找机构本身",目标是官网/通知栏目页,不是具体某条公告)。
 const CN_INST_KW = ["美术馆 画院 文联 官网 通知公告", "文化馆 展览 征集 官网", "美术家协会 官网 通知"];
 const INTL_INST_KW = ["art museum cultural center official website news", "arts council open call grants apply", "art foundation official website exhibitions"];
+// 空洞区本地语言词池(v1.4.0):拉美英文检索漏西语/葡语机构,按区覆盖本地叫法(convocatoria=征集/edital=公告)
+const INTL_KW_BY_REGION = {
+  "intl-latam": ["museo de arte convocatoria sitio oficial", "residencia artística convocatoria abierta", "museu de arte edital convocatória site oficial"],
+  "intl-mena-africa": ["art foundation open call official website", "biennial art residency application official", "arts council grants apply official site"],
+  "intl-north-east-europe": ["kunsthalle art centre open call official", "artist residency application official website", "art museum grants open call official"]
+};
 
 function titleToOrg(title, domain) {
   let t = String(title || "").trim();
@@ -87,8 +93,10 @@ async function main() {
   for (const m of targets) {
     if (serperBudgetLeft() <= 2) { console.log("⚠️ serper 余量不足,后续区域跳过"); break; }
     const cn = m.kind !== "intl";
-    const kw = cn ? CN_INST_KW : INTL_INST_KW;
-    const terms = m.terms.slice(0, PER_REGION);
+    const kw = cn ? CN_INST_KW : (INTL_KW_BY_REGION[m.id] || INTL_INST_KW);
+    // 国际区优先用拉丁字母城市名(terms 前半是中文名,拼进英/西语检索词效果差)
+    const pool = cn ? m.terms : m.terms.filter(t => /^[\x20-\x7E]+$/.test(t));
+    const terms = (pool.length ? pool : m.terms).slice(0, PER_REGION);
     if (!terms.length) continue;
 
     for (let i = 0; i < Math.min(PER_REGION, terms.length); i++) {

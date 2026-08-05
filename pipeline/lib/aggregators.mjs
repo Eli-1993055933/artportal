@@ -9,6 +9,7 @@ export const THIRD_PARTY = [
   "curatorspace.com", "artconnect.com", "chinaresidencies.com", "resartis.org",
   "transartists.org", "artenda.net", "open-calls.art", "artresidencyguide.com",
   "artistcommunities.org", "e-flux.com", "art-hub.co.uk", "artrabbit.com",
+  "artsandculture.google.com", "substack.com",   // 平台/个人媒体,非主办方官网(v1.4.0 区域扩员实测混入)
   // 杂志 / 艺讯
   "artforum.com.cn", "artealdia.com", "leapleapleap.com", "artforum.com", "artsy.net",
   // 新闻门户 / 转载

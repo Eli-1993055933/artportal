@@ -34,6 +34,15 @@
 
 <!-- bump-version.mjs 会在本注释的下一行插入新版本段,勿删勿改本行 -->
 
+## [1.4.0] - 2026-08-05
+- **区域空洞扩员**:拉美/中东非洲/北欧东欧三大近空白区(此前 1/1/4 个信源)定向发现,
+  仅花 9 次 serper;`discover-sources.mjs` 增补本地语言词池(西语 convocatoria/葡语 edital)+
+  国际区改用拉丁字母城市名检索。机器发现 22 个候选,人工复核剔除 6 个
+  (澳大利亚 Denmark 镇误中/经济部门/Google A&C 聚合/Substack 个人媒体/评论站/地产站),
+  实收 **16 个真机构**(Fotografiska、丹麦国家艺术基金 kunst.dk、挪威 OCA、Art Dubai、
+  阿布扎比文化基金会、圣保罗 MASP/MAM/MAC-USP 等),三区信源 5/7/10 个。
+  Substack 与 Google Arts&Culture 入第三方黑名单防再混入。
+
 ## [1.3.0] - 2026-08-05
 - **RSS 自动发现回填**(`discover-feeds.mjs`):对 207 个 HTML 信源探测页面声明的 RSS/Atom,
   验证能解析出条目后切换抓取方式,RSS 信源 1→**18** 个(A4美术馆/泰康空间/FIRST影展/Sundance/
