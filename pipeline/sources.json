@@ -360,8 +360,8 @@
       "name_zh": "驻留公开招募",
       "url": "https://www.a4artmuseum.com/en/a4-residencyartcenter/residing/latest-recruitment/",
       "domain": "a4artmuseum.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.a4artmuseum.com/en/feed/",
       "org_type": "independent",
       "category_hint": [
         "residency"
@@ -369,7 +369,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "robots 仅禁 /wp-admin;已见 2027 open call(截止2026-06-30,可能已过期)",
+      "notes": "robots 仅禁 /wp-admin;已见 2027 open call(截止2026-06-30,可能已过期) | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-central-west"
     },
     {
@@ -424,7 +424,8 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "RSS 有效但为综合新闻流需过滤;calls 专属 feed 不存在(404)",
-      "region_hint": "intl-west-europe"
+      "region_hint": "intl-west-europe",
+      "rss_hint": "https://www.citeinternationaledesarts.fr/feed"
     },
     {
       "id": "rijksakademie-apply",
@@ -819,8 +820,8 @@
       "name_zh": "公共项目/工作坊(All Events)",
       "url": "https://tam.taikang.com/page-events/all-events/",
       "domain": "tam.taikang.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://tam.taikang.com/feed/",
       "org_type": "independent",
       "category_hint": [
         "workshop"
@@ -828,7 +829,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "notes": "curl HTTP 200, 252089 bytes。命中 Workshop/工作坊(工作坊x3等);双语活动列表。身份确认 泰康x17/TAIKANG ART MUSEUM。服务端HTML列表(WordPress风格),非JS空壳。robots.txt 返回403(openresty,无法读取)→unknown,但目标路径本身200可达。泰康保险集团创办的非营利美术馆。",
+      "notes": "curl HTTP 200, 252089 bytes。命中 Workshop/工作坊(工作坊x3等);双语活动列表。身份确认 泰康x17/TAIKANG ART MUSEUM。服务端HTML列表(WordPress风格),非JS空壳。robots.txt 返回403(openresty,无法读取)→unknown,但目标路径本身200可达。泰康保险集团创办的非营利美术馆。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-tier1"
     },
     {
@@ -1055,8 +1056,8 @@
       "name_zh": "What's On(展覽/駐場計劃/公開招募)",
       "url": "https://www.mill6chat.org/whats-on/",
       "domain": "www.mill6chat.org",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.mill6chat.org/feed/",
       "org_type": "independent",
       "category_hint": [
         "residency",
@@ -1066,7 +1067,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "HTTP 200, 152762 bytes(WordPress SSR)。本次抓取命中 'Residency/resid' x6,机构名 'CHAT' x21 / 'Heritage, Arts' x11 / 'mill6' 多次,正文可读非空壳。为节目/駐場計劃專欄頁(當前主要呈現駐場與展覽)。robots: User-agent:* 僅 Disallow /wp-admin/ 及 /2016-2018/*/ 舊年份歸檔,/whats-on/ 未被禁。獨立非牟利紡織文化藝術館(Mill6 Foundation)官网。",
+      "notes": "HTTP 200, 152762 bytes(WordPress SSR)。本次抓取命中 'Residency/resid' x6,机构名 'CHAT' x21 / 'Heritage, Arts' x11 / 'mill6' 多次,正文可读非空壳。为节目/駐場計劃專欄頁(當前主要呈現駐場與展覽)。robots: User-agent:* 僅 Disallow /wp-admin/ 及 /2016-2018/*/ 舊年份歸檔,/whats-on/ 未被禁。獨立非牟利紡織文化藝術館(Mill6 Foundation)官网。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-hkmotw"
     },
     {
@@ -1365,8 +1366,8 @@
       "name_zh": "电影市场 · 创投会 (Financing Forum)",
       "url": "https://www.firstfilm.org.cn/annual/financing-forum/",
       "domain": "firstfilm.org.cn",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.firstfilm.org.cn/feed/",
       "org_type": "independent",
       "category_hint": [
         "opencall"
@@ -1375,7 +1376,7 @@
       "robots": "none",
       "confirmed": false,
       "discipline_hint": "电影",
-      "notes": "curl HTTP200; 50070字节; 命中 创投×13/章程×3/截止×2/competition×2; 机构名 FIRST×23/firstfilm×135; robots.txt HTTP404(无robots,无限制)。属FIRST官网 annual 栏目下创投会专栏页。",
+      "notes": "curl HTTP200; 50070字节; 命中 创投×13/章程×3/截止×2/competition×2; 机构名 FIRST×23/firstfilm×135; robots.txt HTTP404(无robots,无限制)。属FIRST官网 annual 栏目下创投会专栏页。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-central-west"
     },
     {
@@ -1441,8 +1442,8 @@
       "name_zh": "CCDF 华人纪录片提案大会 · 征案",
       "url": "https://ccdf.cnexdoc.com/zh-cn/",
       "domain": "cnexdoc.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://ccdf.cnexdoc.com/zh-cn/feed/",
       "org_type": "independent",
       "category_hint": [
         "opencall"
@@ -1451,7 +1452,7 @@
       "robots": "allow",
       "confirmed": false,
       "discipline_hint": "电影",
-      "notes": "curl HTTP200; 126551字节; 命中 提案×61/征件×15/徵件×1; 机构名 CNEX/CCDF(密集); robots.txt HTTP200仅content-signals注释,无User-agent/Disallow(允许抓取)。纪录片(电影影像)提案征案官网。注:CNEX为跨两岸华人纪录片非营利机构,提案大会主体于台北,region暂定tw。",
+      "notes": "curl HTTP200; 126551字节; 命中 提案×61/征件×15/徵件×1; 机构名 CNEX/CCDF(密集); robots.txt HTTP200仅content-signals注释,无User-agent/Disallow(允许抓取)。纪录片(电影影像)提案征案官网。注:CNEX为跨两岸华人纪录片非营利机构,提案大会主体于台北,region暂定tw。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-hkmotw"
     },
     {
@@ -1518,8 +1519,8 @@
       "name_zh": "舞蹈青年(專才培訓/舞者招募)",
       "url": "https://www.ccdc.com.hk/dc/talent-development/wudaoqingnian/",
       "domain": "ccdc.com.hk",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.ccdc.com.hk/feed/",
       "org_type": "independent",
       "category_hint": [
         "workshop",
@@ -1529,7 +1530,7 @@
       "robots": "allow",
       "confirmed": false,
       "discipline_hint": "舞蹈",
-      "notes": "curl HTTP 200, 145KB 服务端渲染;命中 報名×3/apply×3;机构名 城市當代舞蹈團×8、CCDC×36。robots.txt: User-agent:* 仅 Disallow:/wp-admin/(本路径允许)。CCDC为香港首个全职专业当代舞团,舞蹈青年每年面向社区公开招募舞者。",
+      "notes": "curl HTTP 200, 145KB 服务端渲染;命中 報名×3/apply×3;机构名 城市當代舞蹈團×8、CCDC×36。robots.txt: User-agent:* 仅 Disallow:/wp-admin/(本路径允许)。CCDC为香港首个全职专业当代舞团,舞蹈青年每年面向社区公开招募舞者。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-hkmotw"
     },
     {
@@ -1818,8 +1819,8 @@
       "name_zh": "设计竞赛",
       "url": "https://www.szdesigncenter.com/design_competition",
       "domain": "szdesigncenter.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.szdesigncenter.com/rss",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -1829,7 +1830,7 @@
       "robots": "allow",
       "confirmed": false,
       "discipline_hint": "建筑",
-      "notes": "HTTP 200, 22686字节, server-rendered(无SPA标记); grep命中 竞赛×14/设计×30/公开×1, 机构名×49(页脚版权'深圳市城市设计促进中心版权所有'); 列表含真实竞赛条目如'东莞潮玩文旅片区发展策划与规划设计竞赛''超级总部基地DU01-02地块建筑设计'; robots.txt存在(HTTP200)且'User-agent:*'无Disallow=全允许。该中心为深圳规划局所属非营利公共机构(邮箱@pnr.sz.gov.cn),设于深圳雕塑院,亦承办公共艺术/建筑竞赛。",
+      "notes": "HTTP 200, 22686字节, server-rendered(无SPA标记); grep命中 竞赛×14/设计×30/公开×1, 机构名×49(页脚版权'深圳市城市设计促进中心版权所有'); 列表含真实竞赛条目如'东莞潮玩文旅片区发展策划与规划设计竞赛''超级总部基地DU01-02地块建筑设计'; robots.txt存在(HTTP200)且'User-agent:*'无Disallow=全允许。该中心为深圳规划局所属非营利公共机构(邮箱@pnr.sz.gov.cn),设于深圳雕塑院,亦承办公共艺术/建筑竞赛。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-tier1"
     },
     {
@@ -2421,7 +2422,8 @@
       "confirmed": false,
       "region_hint": "intl-east-asia",
       "discipline_hint": "contemporary-art",
-      "notes": "HTTP 200, 8831 bytes(开放征集索引页,命中 Open Call(6)/residency(17);机构名 ARCUS)。对国际开放已核实:项目页 /en/residence-program/artist-in-residence-program/(45512 bytes)含 international/overseas/foreign/nationality,面向 residing outside Japan 的国际艺术家。robots.txt 仅 Disallow /wp/wp-admin/,目标路径允许。"
+      "notes": "HTTP 200, 8831 bytes(开放征集索引页,命中 Open Call(6)/residency(17);机构名 ARCUS)。对国际开放已核实:项目页 /en/residence-program/artist-in-residence-program/(45512 bytes)含 international/overseas/foreign/nationality,面向 residing outside Japan 的国际艺术家。robots.txt 仅 Disallow /wp/wp-admin/,目标路径允许。",
+      "rss_hint": "https://www.arcus-project.com/feed"
     },
     {
       "id": "jp-acac-opencall",
@@ -2537,7 +2539,8 @@
       "confirmed": false,
       "region_hint": "intl-central-europe",
       "discipline_hint": "视觉艺术",
-      "notes": "HTTP200,~146KB;命中 open call×10/deadline×7/application×38/apply×31/international×15。柏林国际工作室计划(International Studio Programme),既通过全球伙伴机构招募,也接受无机构合作的直接申请(年度截止约10月底),明确面向国际艺术家。robots.txt:User-agent:* Allow:/(仅禁 /admin/ /login/ /private/ 等及 *.pdf),/en/application/ 目标路径允许。同机构 /en/international-studio-program/ 也已 HTTP200 核验(140KB,international×33)。"
+      "notes": "HTTP200,~146KB;命中 open call×10/deadline×7/application×38/apply×31/international×15。柏林国际工作室计划(International Studio Programme),既通过全球伙伴机构招募,也接受无机构合作的直接申请(年度截止约10月底),明确面向国际艺术家。robots.txt:User-agent:* Allow:/(仅禁 /admin/ /login/ /private/ 等及 *.pdf),/en/application/ 目标路径允许。同机构 /en/international-studio-program/ 也已 HTTP200 核验(140KB,international×33)。",
+      "rss_hint": "https://bethanien.de/feed"
     },
     {
       "id": "na-res-vermont-studio-center",
@@ -2575,7 +2578,8 @@
       "confirmed": false,
       "region_hint": "intl-na-west",
       "discipline_hint": "跨学科/视觉艺术/影像/写作/建筑",
-      "notes": "HTTP200,648KB;命中 Apply/international。WebFetch确认页面正文实在(非JS空壳),明确面向 'local, national, and international artists'(需基本英语口语)——对全球艺术家开放。AIR为全额资助驻留,年度open call约每年4/1开放、6/1截止,申请入口经此页/programs跳转(app.entrythingy.com)。robots.txt:User-agent:* Disallow:(空)=全站允许,Crawl-delay:10。同域 /programs/ 亦已HTTP200(609KB,application×12)。"
+      "notes": "HTTP200,648KB;命中 Apply/international。WebFetch确认页面正文实在(非JS空壳),明确面向 'local, national, and international artists'(需基本英语口语)——对全球艺术家开放。AIR为全额资助驻留,年度open call约每年4/1开放、6/1截止,申请入口经此页/programs跳转(app.entrythingy.com)。robots.txt:User-agent:* Disallow:(空)=全站允许,Crawl-delay:10。同域 /programs/ 亦已HTTP200(609KB,application×12)。",
+      "rss_hint": "https://www.headlands.org/feed"
     },
     {
       "id": "eu-res-fabrica",
@@ -2583,8 +2587,8 @@
       "name_zh": "Fabrica 驻留 / Residency",
       "url": "https://www.fabrica.it/residency/",
       "domain": "fabrica.it",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.fabrica.it/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall"
@@ -2594,7 +2598,7 @@
       "confirmed": false,
       "region_hint": "intl-central-europe",
       "discipline_hint": "设计/传播/跨界创意(视觉、影像、出版等)",
-      "notes": "HTTP200,47KB;命中 apply×7/application×4/International/international×2/world。意大利Treviso,United Colors of Benetton创立的创意驻留,面向 'from all over the world / around the globe' 的全球创作者,滚动作品集申请(通过筛选后邀请2周试用期)。注意:设25岁以下年龄门槛(属年龄/职业阶段限制,非国籍限制,不触发铁律#4否决)。robots仅禁 /wp-admin/,目标路径允许。"
+      "notes": "HTTP200,47KB;命中 apply×7/application×4/International/international×2/world。意大利Treviso,United Colors of Benetton创立的创意驻留,面向 'from all over the world / around the globe' 的全球创作者,滚动作品集申请(通过筛选后邀请2周试用期)。注意:设25岁以下年龄门槛(属年龄/职业阶段限制,非国籍限制,不触发铁律#4否决)。robots仅禁 /wp-admin/,目标路径允许。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回"
     },
     {
       "id": "na-res-bemis",
@@ -3067,7 +3071,8 @@
       "robots": "none",
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「新加坡 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
-      "region_hint": "intl-sea-sa"
+      "region_hint": "intl-sea-sa",
+      "rss_hint": "https://artsg.com/feed"
     },
     {
       "id": "artweek-auto",
@@ -3147,7 +3152,8 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「泰国 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
-      "region_hint": "intl-sea-sa"
+      "region_hint": "intl-sea-sa",
+      "rss_hint": "https://www2.fundsforngos.org/feed"
     },
     {
       "id": "arts-auto",
@@ -3167,7 +3173,8 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「泰国 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
-      "region_hint": "intl-sea-sa"
+      "region_hint": "intl-sea-sa",
+      "rss_hint": "https://arts.britishcouncil.org/rss.xml"
     },
     {
       "id": "hammer-auto",
@@ -3187,7 +3194,8 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
-      "region_hint": "intl-na-west"
+      "region_hint": "intl-na-west",
+      "rss_hint": "https://hammer.ucla.edu/rss.xml"
     },
     {
       "id": "moca-auto",
@@ -3227,7 +3235,8 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
-      "region_hint": "intl-na-west"
+      "region_hint": "intl-na-west",
+      "rss_hint": "https://www.lacma.org/rss.xml"
     },
     {
       "id": "lapca-auto",
@@ -3235,8 +3244,8 @@
       "name_zh": "机器发现",
       "url": "https://lapca.org/",
       "domain": "lapca.org",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://lapca.org/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -3246,7 +3255,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "notes": "机器发现(v0.99.0,搜索词「洛杉矶 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-na-west"
     },
     {
@@ -3335,8 +3344,8 @@
       "name_zh": "机器发现",
       "url": "https://www.thisiscolossal.com/2025/10/november-2025-funding-for-artists/",
       "domain": "thisiscolossal.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.thisiscolossal.com/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -3346,7 +3355,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "机器发现(v0.99.0,搜索词「旧金山 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "notes": "机器发现(v0.99.0,搜索词「旧金山 arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-na-west"
     },
     {
@@ -3386,7 +3395,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "机器发现(v0.99.0,搜索词「悉尼 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "notes": "机器发现(v0.99.0,搜索词「悉尼 art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰 | RSS探测复核(2026-08-05):页面声明的是全站媒体流(时尚杂志/旅游文章),与目标内容无关,不切换",
       "region_hint": "intl-oceania"
     },
     {
@@ -3609,8 +3618,8 @@
       "name_zh": "机器发现·用户点名机构",
       "url": "https://www.adiaf.com",
       "domain": "adiaf.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.adiaf.com/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -3621,7 +3630,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(推测域名),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定",
+      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(推测域名),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-west-europe",
       "discipline_hint": [
         "跨媒介"
@@ -3658,8 +3667,8 @@
       "name_zh": "机器发现·用户点名机构",
       "url": "https://civitella.org",
       "domain": "civitella.org",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://civitella.org/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -3670,7 +3679,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定",
+      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-central-europe",
       "discipline_hint": [
         "音乐",
@@ -3700,7 +3709,8 @@
       "discipline_hint": [
         "音乐",
         "跨媒介"
-      ]
+      ],
+      "rss_hint": "https://www.akademie-solitude.de/feed"
     },
     {
       "id": "royaumont-known",
@@ -3708,8 +3718,8 @@
       "name_zh": "机器发现·用户点名机构",
       "url": "https://www.royaumont.com",
       "domain": "royaumont.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.royaumont.com/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -3720,7 +3730,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定",
+      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-west-europe",
       "discipline_hint": [
         "音乐"
@@ -3756,8 +3766,8 @@
       "name_zh": "机器发现·用户点名机构",
       "url": "https://iscm.org",
       "domain": "iscm.org",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://iscm.org/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -3768,7 +3778,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定",
+      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-central-europe",
       "discipline_hint": [
         "音乐"
@@ -3868,7 +3878,8 @@
       "region_hint": "intl-central-europe",
       "discipline_hint": [
         "舞蹈"
-      ]
+      ],
+      "rss_hint": "https://www.prixdelausanne.org/feed"
     },
     {
       "id": "cn-eq8xzw-known",
@@ -3997,8 +4008,8 @@
       "name_zh": "机器发现·用户点名机构",
       "url": "https://www.sundance.org",
       "domain": "sundance.org",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.sundance.org/feed/",
       "org_type": "official",
       "category_hint": [
         "opencall",
@@ -4009,7 +4020,7 @@
       "reachable": true,
       "robots": "allow",
       "confirmed": false,
-      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定",
+      "notes": "v0.99.1 用户口播视频调研点名的行业顶级机构(核实链接(调研)),已过真实可达性校验;是否真有可申请机会仍由 discoverDetailLinks + evidence 校验决定 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-na-west",
       "discipline_hint": [
         "电影"
@@ -4132,8 +4143,8 @@
       "name_zh": "Prisma Art Prize 绘画奖",
       "url": "https://www.prismaartprize.com/",
       "domain": "prismaartprize.com",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.prismaartprize.com/feed/",
       "org_type": "independent",
       "category_hint": [
         "award"
@@ -4142,7 +4153,7 @@
       "robots": "allow",
       "confirmed": false,
       "crawl": false,
-      "notes": "意大利罗马,面向绘画/素描/版画的国际奖项;来自公众号推文提供的官网链接核实",
+      "notes": "意大利罗马,面向绘画/素描/版画的国际奖项;来自公众号推文提供的官网链接核实 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-central-europe"
     },
     {
@@ -4151,8 +4162,8 @@
       "name_zh": "Messen 国际艺术家驻留",
       "url": "https://www.khmessen.no/",
       "domain": "khmessen.no",
-      "type": "html",
-      "rss": null,
+      "type": "rss",
+      "rss": "https://www.khmessen.no/feed/",
       "org_type": "official",
       "category_hint": [
         "residency"
@@ -4161,7 +4172,7 @@
       "robots": "allow",
       "confirmed": false,
       "crawl": true,
-      "notes": "挪威哈当厄尔峡湾艺术中心,面向多领域驻留;来自公众号推文提供的官网链接核实",
+      "notes": "挪威哈当厄尔峡湾艺术中心,面向多领域驻留;来自公众号推文提供的官网链接核实 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "intl-north-east-europe"
     },
     {
@@ -4199,7 +4210,7 @@
       "robots": "allow",
       "confirmed": false,
       "crawl": false,
-      "notes": "本届征集专属文章页,非常设列表页——下一届征集大概率是新URL,需人工每年重新核实链接;来自公众号推文提供的官网链接核实",
+      "notes": "本届征集专属文章页,非常设列表页——下一届征集大概率是新URL,需人工每年重新核实链接;来自公众号推文提供的官网链接核实 | RSS探测复核(2026-08-05):页面声明的是全站媒体流(时尚杂志/旅游文章),与目标内容无关,不切换",
       "region_hint": "intl-na-east"
     }
   ],

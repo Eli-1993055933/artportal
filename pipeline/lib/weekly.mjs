@@ -138,6 +138,39 @@ function collectJobs(doc) {
 //   - 全文如实标注"AI 撰写·条目事实以原文为准";生成后程序校验(结构/引用数),不达标重试一次,
 //     再不行退回清单式保底出刊(绝不因为追求文采而停刊或编造)。
 const REF_RE = /\[\[(\d+)[::]([^\]]{1,60})\]\]/g;
+
+// —— 引用格式宽容解析(v1.3.1)——
+// GLM 免费档实测死活不写 [[编号:文字]] 双方括号(反例强调也无效,能力上限),常写成
+// [3]、[[3]]、[3:文字]、【条目标题】 等变体 → inspect 判"引用不足"→ 整篇退回模板,浪费一次好稿。
+// 修法遵循"弱模型不听话就代码兜底":把能【无歧义】还原的变体规范成 [[n:文字]],拿不准的绝不硬转。
+function normalizeRefs(out, C) {
+  if (!out || !Array.isArray(out.sections)) return out;
+  // 标题索引:全称 + 去书名号形态 → 编号(仅唯一映射才收,重名标题直接放弃防张冠李戴)
+  const byTitle = new Map();
+  C.forEach((c, i) => {
+    for (const t of [c.title, String(c.title || "").replace(/[《》]/g, "")]) {
+      const k = String(t || "").trim();
+      if (k.length < 4) continue;                          // 太短的标题当锚点误配率高,不收
+      byTitle.set(k, byTitle.has(k) && byTitle.get(k) !== i ? -1 : i);   // 冲突标 -1
+    }
+  });
+  const nameOf = i => String((C[i] && C[i].title) || "").replace(/[《》]/g, "").slice(0, 40) || ("条目" + i);
+  const fix = s => String(s)
+    // [[3]] / [3] / 〔3〕 → [[3:标题]](编号须在候选范围内)
+    .replace(/\[\[?(\d{1,3})\]\]?/g, (m, n) => (+n >= 0 && +n < C.length) ? `[[${n}:${nameOf(+n)}]]` : m)
+    // [3:文字] 单方括号 → 双方括号
+    .replace(/(^|[^\[])\[(\d{1,3})[::]([^\]]{1,60})\](?!\])/g, (m, pre, n, t) => (+n < C.length) ? `${pre}[[${n}:${t}]]` : m)
+    // 【标题】→ 标题能唯一对上候选才转
+    .replace(/【([^】]{4,60})】/g, (m, t) => {
+      const i = byTitle.get(t.trim());
+      return (i != null && i >= 0) ? `[[${i}:${t.trim()}]]` : m;
+    });
+  for (const sec of out.sections) {
+    if (Array.isArray(sec.paragraphs)) sec.paragraphs = sec.paragraphs.map(p => typeof p === "string" ? fix(p) : p);
+  }
+  if (typeof out.closing === "string") out.closing = fix(out.closing);
+  return out;
+}
 // 中文媒体/机构名 → 通行英文名(仅收录确知的权威对应,绝不臆造;表外用启发式:
 // 名称含拉丁品牌词时取拉丁部分,如 "Tate 泰特英国美术馆"→"Tate";纯中文且无对应则保留原文——专有名词不硬译)
 const SOURCE_EN = {
@@ -286,7 +319,7 @@ async function composeArticleAI(cand, weekId) {
     if (totalLen < 600) return "正文太短";
     return null;
   }
-  let out = await callOnce(null);
+  let out = normalizeRefs(await callOnce(null), C);
   let problem = inspect(out);
   if (problem) {
     // 诊断:把首段样本打出来,看模型实际用了什么标记格式(排查 [[编号:文字]] 走样)
@@ -295,7 +328,7 @@ async function composeArticleAI(cand, weekId) {
       if (p0) process.stderr.write("[周报] 首段样本:" + String(p0).slice(0, 260) + "\n");
     } catch (e) {}
     process.stderr.write("[周报] 初稿未过校验(" + problem + "),重写一次\n");
-    out = await callOnce(problem);
+    out = normalizeRefs(await callOnce(problem), C);
     problem = inspect(out);
     if (problem) { process.stderr.write("[周报] 重写仍未过(" + problem + "),退回清单式\n"); return null; }
   }
@@ -769,9 +802,9 @@ export async function generatePersonalSummary(favItems, opts = {}) {
     if (totalLen < 400) return "正文太短";
     return null;
   }
-  let out = await callOnce(null);
+  let out = normalizeRefs(await callOnce(null), C);
   let problem = inspect(out);
-  if (problem) { out = await callOnce(problem); problem = inspect(out); if (problem) return null; }
+  if (problem) { out = normalizeRefs(await callOnce(problem), C); problem = inspect(out); if (problem) return null; }
   const { article } = assembleArticle(out, C, "");
   article.author = "ArtPortal";
   delete article.en;                              // 个人总结中文单语,不挂英文版
