@@ -6,6 +6,8 @@
 //  3. 详情页网址必须与信源同域名,否则整条丢弃。
 //  4. 缺截止日期或缺网址的,不许自动上线(交由 trust 分级降级为 pending)。
 
+import { hasApplySignal } from "./applicability.mjs";
+
 // 空白归一:压缩所有空白为单空格,便于容忍 HTML 抽取造成的空白差异。不改字符本身。
 function norm(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").trim(); }
 
@@ -53,6 +55,13 @@ export function verifyRecord(extracted, ctx) {
   // 0) 不是可申请机会 → 丢弃
   if (extracted.applicable === false) {
     return { dropped: true, dropReason: "not-applicable:" + (extracted.reason || ""), nulled, record: null };
+  }
+
+  // 0.5) 【v1.0.1 硬闸】原文连一个"申请/征集"动词都没有 → 不可能是可申请机会。
+  // 提示词第 9 条(展讯新闻→applicable:false)弱模型经常不执行,观展资讯被硬凑成机会;
+  // 这条纯程序规则不依赖 AI 自觉,对典型观展页(只有 开幕/展期/门票/预约)一刀切拦截。
+  if (ctx.sourceText && !hasApplySignal(ctx.sourceText)) {
+    return { dropped: true, dropReason: "not-applicable:no-apply-signal(原文无任何申请/征集动词,疑为观展资讯)", nulled, record: null };
   }
 
   // 1) 标题 evidence 必须过(标题是身份,过不了整条存疑)

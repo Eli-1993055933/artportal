@@ -9,6 +9,7 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { hasApplySignal, judgeApplicability } from "./applicability.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const MAX_INPUT_CHARS = 24000;                    // 原文过长时截断,控制成本
@@ -44,7 +45,17 @@ function buildUserContent(text, ctx) {
 export async function extract(sourceText, ctx) {
   const prompt = await getPrompt();
   const user = buildUserContent(sourceText.slice(0, MAX_INPUT_CHARS), ctx);
-  return llmExtract(prompt, user);
+  const r = await llmExtract(prompt, user);
+  // 窄二判(v1.0.1):大提取里"展讯新闻→applicable:false"这条弱模型常不执行,改用它能胜任的
+  // A/B 二选一把关。只对含申请动词的页面加判(无动词的 verifyRecord 硬闸直接拦,不花这次调用);
+  // 只在"确信 B 且 evidence 过原文子串校验"时拦截,拿不准放行。二判失败绝不拦路。
+  try {
+    if (r && r.data && r.data.applicable !== false && hasApplySignal(sourceText)) {
+      const v2 = await judgeApplicability(sourceText, r.data.title_zh || "");
+      if (v2 && v2.block) r.data = { applicable: false, reason: "二判观展资讯:" + (v2.evidence || "").slice(0, 60) };
+    }
+  } catch (e) { /* 二判挂了不影响主流程 */ }
+  return r;
 }
 
 // 底层出口:任意 system prompt + user 内容 → JSON 提取结果(资讯/招聘频道用自己的 prompt 走这里)。

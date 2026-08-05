@@ -18,6 +18,7 @@
 import { isParseableDate } from "./verify.mjs";
 import { fetchSource } from "./fetch.mjs";
 import { fingerprint, completeness } from "./dedupe.mjs";
+import { hasApplySignal } from "./applicability.mjs";
 
 // 频道差异:链接字段 / 日期字段 / 归档规则。键名与 sync 墓碑、CH_FILES 一致。
 export const CH_META = {
@@ -198,6 +199,12 @@ export async function inspectChannel(channel, records, opts = {}) {
         report.revived.push({ id: o.id });
       }
       mut(o.id, patch);
+      // ⑤ 可申请性巡检(v1.0.1):活着的机会页原文若连一个"申请/征集"动词都没有,
+      // 说明是被弱模型误收的观展资讯 → 建议归档(与其他建议同走后台一键归档,人工核实条目照旧豁免)。
+      // 死链探测反正每晚逐条重抓全库,这里零额外抓取成本,存量污染 1~2 晚扫清。
+      if (meta.kind === "opp" && pr.text && pr.text.length > 200 && !hasApplySignal(pr.text)) {
+        pushArchive(o, "no-apply-signal", { note: "原文无申请/征集动词,疑为观展资讯" });
+      }
       // ④ 存证抽查(仅样本内、活着、原文够长):重抓原文已在手,直接交注入的 evidenceAudit 复核
       if (evidenceAudit && evSample.has(o.id) && pr.text && pr.text.length > 200) {
         report.evidenceAudited++;
