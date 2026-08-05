@@ -2,28 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "artportal",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["--env-file=pipeline/.env", "pipeline/server.mjs"],
-      "port": 8080
-    },
-    {
-      "name": "artportal-dev",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["--env-file=pipeline/.env", "--env-file=pipeline/.env.dev", "pipeline/server.mjs"],
-      "port": 8090
-    },
-    {
-      "name": "studio",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["D:\\画室点评工具\\web\\app.py"],
-      "port": 8790
-    },
-    {
-      "name": "artportal-site",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "serve", "site", "-l", "4321"],
-      "port": 4321
+      "name": "site-static",
+      "runtimeExecutable": "D:\\Node.js\\node.exe",
+      "runtimeArgs": ["C:\\Users\\34714\\AppData\\Local\\Temp\\claude\\D--Claude-Code\\cc0a147a-f6fb-4f74-a876-6b1783713d06\\scratchpad\\static-server.mjs"],
+      "port": 8123
     }
   ]
 }

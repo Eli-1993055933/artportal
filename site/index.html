@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.0.1" />
+<meta name="app-version" content="1.1.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.0.1</span></div>
+  ARTPORTAL <span id="appVer">v1.1.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.0.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.0.1"></script>
-<script src="js/globe-data.js?v=1.0.1"></script>
+<script src="assets/vendor/d3.min.js?v=1.1.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.1.0"></script>
+<script src="js/globe-data.js?v=1.1.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -782,6 +782,8 @@
   // 与本站"真实可信"的定位相悖。默认只呈现还能申请的(未来截止 + 常年/滚动),开关仍在、一点即可看历史。
   var tagSel='', fFree=false, fStipend=false, fHousing=false, fTravel=false, fVerified=false, fHidePast=true, sortBy='deadline';
   var fRegs={}, fOrgOff=false, fOrgInd=false, fOrgCom=false, fSrcUser=true, fSrcAI=true;
+  // 机会浮层排序(v1.1.0):综合(原始顺序)/最新收录/截止最近;localStorage 记住选择
+  var chSort='default'; try{ chSort=localStorage.getItem('chSort')||'default'; }catch(e){}
   function regsActive(){ for(var k in fRegs){ if(fRegs[k]) return true; } return false; }
   var needDraw=false, spinning=true, dragging=false, moved=false, inertiaOn=false, autoResumeAt=0;
   var velX=0, velY=0, targetScale=null;
@@ -1656,7 +1658,7 @@
       imgReady:' 张已就绪',studioT:'画室点评工具',
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
       tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
-      fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',
+      fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',sortMix:'综合',
       fltBarT:'筛选',gTag:'门类',gReg:'地区',gCond:'条件',
       regAll:'全部地区',reg_cn:'中国大陆',reg_hktw:'港澳台',reg_asia:'亚洲其他',reg_europe:'欧洲',
       reg_namerica:'北美',reg_other:'其他地区',
@@ -1734,7 +1736,7 @@
       imgReady:' ready',studioT:'Studio critique tool',
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
       tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
-      fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',
+      fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',sortMix:'Default',
       fltBarT:'Filters',gTag:'Field',gReg:'Region',gCond:'Criteria',
       regAll:'All regions',reg_cn:'Mainland China',reg_hktw:'HK/MO/TW',reg_asia:'Asia',reg_europe:'Europe',
       reg_namerica:'N. America',reg_other:'Other',
@@ -1860,7 +1862,10 @@
       var nOpp=OPP_CATS.filter(function(k){ return filterCats.has(k); }).length;
       cats='<div class="tagrow chflt" id="chCats">'+ks.map(function(k){
         var on=(k==='all')?!nOpp:filterCats.has(k);
-        return '<span class="tgc'+(on?' on':'')+'" data-cc="'+k+'">'+(k==='all'?L('allCat'):catName(k))+'</span>'; }).join('')+'</div>'; }
+        return '<span class="tgc'+(on?' on':'')+'" data-cc="'+k+'">'+(k==='all'?L('allCat'):catName(k))+'</span>'; }).join('')+'</div>';
+      // 排序 chips(v1.1.0):综合 / 最新收录 / 截止最近
+      cats+='<div class="tagrow chflt" id="chSortRow">'+[['default','sortMix'],['new','sortNew'],['deadline','sortDL']].map(function(s){
+        return '<span class="tgc'+(chSort===s[0]?' on':'')+'" data-cs="'+s[0]+'">'+L(s[1])+'</span>'; }).join('')+'</div>'; }
     return cats+'<div class="tagrow" data-tagrow></div><div class="tagrow" data-regrow></div><div class="tagrow" data-fltrow></div>'; }
   function showChPanel(ch){
     curCh=ch;
@@ -1874,7 +1879,11 @@
         var cc=this.getAttribute('data-cc');
         if(cc==='all') OPP_CATS.forEach(function(k){ filterCats.delete(k); });   // 「全部」=清空机会四类
         else { if(filterCats.has(cc)) filterCats.delete(cc); else filterCats.add(cc); }
-        syncLegend(); renderDrawer(); needDraw=true; showChPanel(ch); }); }
+        syncLegend(); renderDrawer(); needDraw=true; showChPanel(ch); });
+      d3.selectAll('#chSortRow .tgc').on('click',function(){
+        chSort=this.getAttribute('data-cs');
+        try{ localStorage.setItem('chSort',chSort); }catch(e){}
+        showChPanel(ch); }); }
     if(ch==='works'){
       var loadW=chCache.works?Promise.resolve(chCache.works):fetch('/api/works/feed')
         .then(function(r){ return r.json(); }).then(function(j){ chCache.works=j; return j; });
@@ -1897,6 +1906,11 @@
       return; }
     var list=(ch==='opportunities')?(chStore.opportunities||[]):(chNorm[ch]||[]);
     var vs=list.filter(function(o){ return chMatch(o,ch); });
+    // 机会浮层排序(v1.1.0):综合=原始顺序;最新收录=first_seen 倒序;截止最近=复用抽屉 dlRank(常年居中、过期置底)
+    if(ch==='opportunities'&&chSort!=='default'){
+      vs=vs.slice();
+      if(chSort==='deadline') vs.sort(function(a,b){ return dlRank(a)-dlRank(b); });
+      else vs.sort(function(a,b){ return String(b.first_seen||b.updated_at||'').localeCompare(String(a.first_seen||a.updated_at||'')); }); }
     chView=vs;
     var wkbar='';
     if(ch==='news'){   // 资讯浮层顶部周刊横条(最新一期入口;目录未就绪时异步补渲)
