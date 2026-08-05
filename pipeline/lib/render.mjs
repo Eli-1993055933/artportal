@@ -32,6 +32,26 @@ export async function renderPage(url, { timeout = 25000, settleMs = 1500 } = {})
   }
 }
 
+// 截图(v1.2.0):渲染后整页视口截 JPEG,与 mShots 同规格(默认 1000x750,4:3 适配卡片封面)。
+// 返回 { ok, bytes };体积过小(占位/近空白)判失败,与 lib/screenshot.mjs 同一把尺子,宁缺毋滥。
+export async function screenshotPage(url, outPath, { w = 1000, h = 750, timeout = 25000, settleMs = 1200, minBytes = 14000 } = {}) {
+  const { writeFile } = await import("node:fs/promises");
+  const browser = await getBrowser();
+  const page = await browser.newPage();
+  try {
+    await page.setUserAgent(USER_AGENT);
+    await page.setViewport({ width: w, height: h, deviceScaleFactor: 1 });
+    await page.goto(url, { waitUntil: "networkidle2", timeout });
+    await new Promise(r => setTimeout(r, settleMs));
+    const buf = await page.screenshot({ type: "jpeg", quality: 72 });
+    if (!buf || buf.length < minBytes) return { ok: false, bytes: buf ? buf.length : 0 };
+    await writeFile(outPath, buf);
+    return { ok: true, bytes: buf.length };
+  } finally {
+    await page.close();
+  }
+}
+
 export async function closeBrowser() {
   if (!browserPromise) return;
   const b = await browserPromise;

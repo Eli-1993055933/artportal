@@ -194,3 +194,5 @@ console.log(`撤换 ${bad.size} 条:og 重取 ${fixedOg} · 官网截图 ${fixed
 console.log(`数据已写回;夜间 sync-server 会把结果同步到服务器(封面文件增量补传)。`);
 await reportAgent("cover-auditor", true, `撤换 ${bad.size} 条雷同/错放封面:og 重取 ${fixedOg} · 截图 ${fixedShot} · 重定位 ${relocated} · 置空 ${emptied}`,
   { bad: bad.size, og: fixedOg, shot: fixedShot, relocated, emptied }, Date.now() - T0);
+const { closeShotBrowser } = await import("./lib/screenshot.mjs");
+await closeShotBrowser();   // puppeteer 模式必须收浏览器,否则进程不退出;mShots 模式空操作

@@ -10,7 +10,7 @@ import { readFile, writeFile, rename, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { captureScreenshot } from "./lib/screenshot.mjs";
+import { captureScreenshot, closeShotBrowser } from "./lib/screenshot.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -57,3 +57,4 @@ for (const F of FILES) {
   console.log(`  ${F.key}: 截到 ${got} 张`);
 }
 console.log("完成");
+await closeShotBrowser();   // puppeteer 模式必须收浏览器,否则进程不退出;mShots 模式空操作

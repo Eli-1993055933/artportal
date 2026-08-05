@@ -2171,6 +2171,29 @@ if (process.env.BACKFILL_EN === "1") {
   process.stderr.write("[译者/寻址] 已开启:每日北京时间 " + Number(process.env.BACKFILL_EN_HOUR || 6) + " 点补双语 + 定位官网(串行)\n");
 }
 
+// —— 「快门」截图封面也搬上服务器(v1.2.0)——
+// 曾因 mShots 封服务器 IP 只能本机跑,但用户电脑晚上关机,新条目永远轮不到截图,无封面缺口每日扩大
+// (2026-08-04 实测 685 条可见有 367 条无封面)。现改 SHOT_PROVIDER=puppeteer 本地无头浏览器截图,
+// 与 mShots 彻底解耦。子进程串行跑(跑完退出释放 Chromium 内存,2核2G 扛得住),每晚上限由
+// SHOT_MAX 控制,几晚清完存量,之后新条目当晚有图。
+if (process.env.SCREENSHOT_BACKFILL === "1") {
+  let ssDay = null, ssRunning = false;
+  async function screenshotTick() {
+    const bj = new Date(Date.now() + 8 * 3600e3);
+    if (bj.getUTCHours() !== Number(process.env.SCREENSHOT_HOUR || 7)) return;
+    const day = bj.toISOString().slice(0, 10);
+    if (ssDay === day || ssRunning) return;
+    ssDay = day; ssRunning = true;
+    process.stderr.write("[快门(截图封面)] 启动\n");
+    await runChild("backfill-screenshots.mjs");     // 机会封面(agent: photographer,脚本自带打卡)
+    await runChild("backfill-channel-covers.mjs");  // 资讯/招聘封面
+    ssRunning = false;
+  }
+  setTimeout(screenshotTick, 380 * 1000);
+  setInterval(screenshotTick, 3600 * 1000);
+  process.stderr.write("[快门] 已开启:每日北京时间 " + Number(process.env.SCREENSHOT_HOUR || 7) + " 点补截图封面(puppeteer,串行,上限 SHOT_MAX)\n");
+}
+
 // —— 自动化发现「探长」(v0.82.0,路线图第 6 项合规可行版)——
 // 社媒(小红书/微博)只作线索:只读搜索引擎索引的标题/摘要(拿不到链接,结构上不可能抓社媒页面),
 // GLM(免费档,v0.99.2 起专用——DeepSeek 断粮期间不再兜底)提炼机会名+主办方(原文子串校验)

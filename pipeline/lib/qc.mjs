@@ -202,8 +202,11 @@ export async function inspectChannel(channel, records, opts = {}) {
       // ⑤ 可申请性巡检(v1.0.1):活着的机会页原文若连一个"申请/征集"动词都没有,
       // 说明是被弱模型误收的观展资讯 → 建议归档(与其他建议同走后台一键归档,人工核实条目照旧豁免)。
       // 死链探测反正每晚逐条重抓全库,这里零额外抓取成本,存量污染 1~2 晚扫清。
+      // ★双确认(2026-08-05 首轮实测修订):JS 渲染站抓到的是骨架文本,单看页面会误伤真机会
+      // (如"全国版画作品展征稿");必须库内存字段(标题/摘要)也全无申请动词才列为候选。
       if (meta.kind === "opp" && pr.text && pr.text.length > 200 && !hasApplySignal(pr.text)) {
-        pushArchive(o, "no-apply-signal", { note: "原文无申请/征集动词,疑为观展资讯" });
+        const stored = [o.title_zh, o.title_en, o.summary_zh, o.summary_en, o.deadline_note].filter(Boolean).join(" ");
+        if (!hasApplySignal(stored)) pushArchive(o, "no-apply-signal", { note: "页面与库内字段均无申请/征集动词,疑为观展资讯" });
       }
       // ④ 存证抽查(仅样本内、活着、原文够长):重抓原文已在手,直接交注入的 evidenceAudit 复核
       if (evidenceAudit && evSample.has(o.id) && pr.text && pr.text.length > 200) {

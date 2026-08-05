@@ -11,7 +11,7 @@ import { reportAgent } from "./lib/agent-report.mjs";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { captureScreenshot } from "./lib/screenshot.mjs";
+import { captureScreenshot, closeShotBrowser } from "./lib/screenshot.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
@@ -70,3 +70,4 @@ await writeFile(DATA + ".tmp", JSON.stringify(fresh, null, 2), "utf8");
 await rename(DATA + ".tmp", DATA);
 console.log(`完成:截到 ${got} 张,写回 ${merged} 条。其余留待下次重试(前端先用设计海报卡兜底)。`);
 await reportAgent("photographer", true, `官网截图封面:截到 ${got} 张,写回 ${merged} 条`, { got, merged });
+await closeShotBrowser();   // puppeteer 模式必须收浏览器,否则进程不退出;mShots 模式空操作

@@ -9,6 +9,14 @@ import { writeFile } from "node:fs/promises";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36";
 
 export async function captureScreenshot(url, outPath, opts = {}) {
+  // SHOT_PROVIDER=puppeteer(v1.2.0):改用本地无头浏览器截图(服务器访问 mShots 被 403,
+  // 截图链路搬服务器就靠它;质量闸同一把尺子)。默认仍走 mShots,本机零变化。
+  if ((process.env.SHOT_PROVIDER || "").toLowerCase() === "puppeteer") {
+    try {
+      const { screenshotPage } = await import("./render.mjs");
+      return await screenshotPage(url, outPath, { w: opts.w || 1000, h: opts.h || 750 });
+    } catch (e) { return { ok: false, error: String(e.message || e).slice(0, 80) }; }
+  }
   const w = opts.w || 1000, h = opts.h || 750;    // 4:3,适配卡片封面
   const tries = opts.tries || 8, wait = opts.wait || 9000;
   const shot = "https://s.wordpress.com/mshots/v1/" + encodeURIComponent(url) + "?w=" + w + "&h=" + h;
@@ -27,4 +35,9 @@ export async function captureScreenshot(url, outPath, opts = {}) {
     if (i < tries - 1) await new Promise(x => setTimeout(x, wait));
   }
   return { ok: false };
+}
+
+// puppeteer 模式下浏览器会保活事件循环,截图脚本收尾必须调它才能正常退出;mShots 模式下是空操作。
+export async function closeShotBrowser() {
+  try { const { closeBrowser } = await import("./render.mjs"); await closeBrowser(); } catch (e) {}
 }
