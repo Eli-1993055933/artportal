@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.5.0" />
+<meta name="app-version" content="1.6.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -740,7 +740,7 @@
   <div><span class="cat" id="d-cat"></span><span class="badge2" id="d-trust"></span></div>
   <h3 id="d-title"></h3><div class="sub" id="d-sub"></div>
   <div class="meta" id="d-meta"></div>
-  <a class="go" id="d-go" target="_blank" rel="noopener">前往官网 ↗</a><span class="dcmt-toggle" id="dFav"></span><span class="dcmt-toggle" id="dCmtT"></span>
+  <a class="go" id="d-go" target="_blank" rel="noopener">前往官网 ↗</a><span class="dcmt-toggle" id="dFav"></span><span class="dcmt-toggle" id="dCmtT"></span><span class="dcmt-toggle" id="dRpt"></span>
   <div id="d-cmt"></div></div>
 <button id="back">← 返回全球</button>
 <div id="tip"></div>
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.5.0</span></div>
+  ARTPORTAL <span id="appVer">v1.6.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.5.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.5.0"></script>
-<script src="js/globe-data.js?v=1.5.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.6.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.6.0"></script>
+<script src="js/globe-data.js?v=1.6.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1591,6 +1591,22 @@
       var on=!favKeys.has(fk);
       if(on) favKeys.add(fk); else favKeys.delete(fk);
       favPaint(); favSync(); trackJ('fav',{id:o.id,on:on}); };
+    // 一键报错(v1.6.0):⚑ 报错 → 已截止/信息有误 两键;走现有 /api/feedback(type:correction),
+    // 内容自动带条目 id/标题/链接,「信箱」agent 日常初判——用户就是免费校对员
+    var rp=document.getElementById('dRpt');
+    rp.textContent=L('rptT'); rp.onclick=function(){
+      if(rp._open){ rp.textContent=L('rptT'); rp._open=false; return; }
+      rp._open=true; rp.textContent='';
+      [['rptExp','已截止'],['rptWrong','信息有误']].forEach(function(pair){
+        var s=document.createElement('span'); s.textContent=L(pair[0]); s.style.marginRight='8px';
+        s.onclick=function(ev){ ev.stopPropagation();
+          postJ('/api/feedback',{type:'correction',
+            content:'[一键报错·'+pair[1]+'] '+(tt(o)||o.id)+' · id='+o.id+' · '+(o.url||''),
+            page:'#/o/'+encodeURIComponent(o.id)})
+            .then(function(r){ toast(r&&r.ok?L('rptOk'):((r&&r.data&&r.data.error)||L('rptFail'))); })
+            .catch(function(){ toast(L('rptFail')); });
+          rp.textContent=L('rptT'); rp._open=false; };
+        rp.appendChild(s); }); };
     trackJ('view',{id:o.id,cat:o.category});
     var box=document.getElementById('detail'); box._repaintFav=favPaint; box._cur=o;
     box.style.display='block'; box.scrollTop=0; ensureGuard(); }
@@ -1621,6 +1637,7 @@
       searchPh:'检索展览、城市、机构、项目内容…',ai:'✦ AI 检索',aiing:'✦ 检索中…',
       lgT:'分类索引图例',fold:'◂ 收起面板',unfold:'▸ 展开面板',backW:'← 返回全球',backU:'← 返回上一级',
       go:'前往官网 ↗',apply:'前往申请 ↗',read:'阅读原文 ↗',
+      rptT:'⚑ 报错',rptExp:'❑ 已截止',rptWrong:'❑ 信息有误',rptOk:'已提交,感谢反馈!',rptFail:'提交失败,请稍后再试',
       goPlatform:function(p){return '前往 '+p+' 报名页 ↗';},
       pro:'个人主页',uqPh:'搜索用户昵称…',uqNone:'没有匹配的用户',backX:'‹ 返回',
       authTitleL:'登录 ARTPORTAL',authTitleR:'注册 ARTPORTAL',authEmail:'邮箱',authPw:'密码(至少 6 位)',
@@ -1699,6 +1716,7 @@
       searchPh:'Search shows, cities, institutions…',ai:'✦ AI Search',aiing:'✦ Searching…',
       lgT:'Category index',fold:'◂ Collapse panel',unfold:'▸ Show panel',backW:'← Back to globe',backU:'← Back',
       go:'Official site ↗',apply:'Apply ↗',read:'Read source ↗',
+      rptT:'⚑ Report',rptExp:'❑ Expired',rptWrong:'❑ Incorrect info',rptOk:'Submitted, thanks!',rptFail:'Failed, try later',
       goPlatform:function(p){return 'Open on '+p+' ↗';},
       pro:'Profile',uqPh:'Search users…',uqNone:'No matching users',backX:'‹ Back',
       authTitleL:'Sign in to ARTPORTAL',authTitleR:'Join ARTPORTAL',authEmail:'Email',authPw:'Password (6+ chars)',
