@@ -41,7 +41,10 @@ export async function screenshotPage(url, outPath, { w = 1000, h = 750, timeout 
   try {
     await page.setUserAgent(USER_AGENT);
     await page.setViewport({ width: w, height: h, deviceScaleFactor: 1 });
-    await page.goto(url, { waitUntil: "networkidle2", timeout });
+    // networkidle2 超时不放弃(v1.2.1):重资源/带轮询的站永远安静不下来,但首屏早就渲染完了——
+    // 首轮实测 279 条里 113 条失败大半是这种。超时就直接截当前画面,空白页会被下面的体积闸拒掉。
+    try { await page.goto(url, { waitUntil: "networkidle2", timeout }); }
+    catch (e) { if (!/timeout/i.test(String(e && e.name || e))) throw e; }
     await new Promise(r => setTimeout(r, settleMs));
     const buf = await page.screenshot({ type: "jpeg", quality: 72 });
     if (!buf || buf.length < minBytes) return { ok: false, bytes: buf ? buf.length : 0 };
