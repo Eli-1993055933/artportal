@@ -12,7 +12,13 @@
     "  confirmed  —— 是否经过【人工】最终确认。false = 目前仅由自动搜索验证存在,等你拍板。脚本永远不许写 true。",
     "  reachable  —— 本次自动核验时 WebFetch 能否成功打开(true/false)。false 不代表站点不存在,可能是它拒绝境外/非浏览器抓取或证书过期。",
     "  robots     —— none(无robots文件,视为允许) | allow | disallow | unknown(未取到)",
-    "所有 URL 均来自 2026-07-09 的实际联网核验,没有一条来自记忆或猜测。reachable=false 的一律未写 url。"
+    "所有 URL 均来自 2026-07-09 的实际联网核验,没有一条来自记忆或猜测。reachable=false 的一律未写 url。",
+    "以下字段由 run.mjs 每次跑完自动回写,不需要人工填(2026-08-06,采集管线重构 P2/P3):",
+    "  yield_count —— 该信源累计产出的机会条数(auto+pending),用于判断产出分级",
+    "  fail_count  —— 连续零产出的运行次数(未变/无候选/抓取失败都算),产出一次即清零",
+    "  tier        —— high(累计产出≥5)| low(连续14次零产出)| normal(默认);low 会被降频到每3天才查一次,省带宽",
+    "  last_polled —— 上次【真正检查过内容】的日期(YYYY-MM-DD),robots拒绝/网络失败不计入;供 sitemap 通道判断'自那天以来谁变了'",
+    "  sitemap     —— true=该域名确认有 sitemap.xml(会用来补充详情页发现)| false=探测过没有,以后跳过这次额外请求 | 不存在=还没试过"
   ],
   "generated_at": "2026-07-09",
   "sources": [

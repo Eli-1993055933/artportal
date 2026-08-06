@@ -293,6 +293,8 @@ async function searchAndHarvest(query, target = 6, hint = null, who = null) {
       return fresh;
     });
   }
+  // P5(补源信号):这次检索一条都没收进来,记下词+区域+探测规模,供人工看板判断该往哪补源。
+  if (!saved.length) db.logZeroQuery({ q: query, who, gl, hl, probed, candidates: cands.length }).catch(() => {});
   return { added: saved, probed, candidates: cands.length, log };
 }
 
@@ -1095,7 +1097,8 @@ async function handleAuthApi(req, res, u) {
         }
         const topSearches = [...qHits.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([q, n]) => ({ q, n }));
         const favTotal = auth.favTotal ? auth.favTotal() : null;
-        return json({ code: 200, body: { days: out, topItems, topSearches, fav_total: favTotal } });
+        const topZero = await db.topZeroQueries(30, 15); // P5 补源看板:近30天反复零结果的检索词
+        return json({ code: 200, body: { days: out, topItems, topSearches, topZero, fav_total: favTotal } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     // 访客明细(v0.99.2):某天具体是谁——登录用户给邮箱/昵称,匿名按 IP 属地归堆(不出具体 IP)。

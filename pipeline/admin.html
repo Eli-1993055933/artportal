@@ -143,6 +143,8 @@
         <div class="scroll"><table id="stTopTbl"><thead><tr><th>条目</th><th>频道</th><th>看详情</th><th>去官网</th></tr></thead><tbody></tbody></table></div>
         <h2>近 7 天热门检索词</h2>
         <div class="scroll"><table id="stQTbl"><thead><tr><th>检索词</th><th>次数</th></tr></thead><tbody></tbody></table></div>
+        <h2>补源信号 <span class="muted" style="font-size:12px">近 30 天反复搜不到结果的词,指导该往哪补信源</span></h2>
+        <div class="scroll"><table id="stZeroTbl"><thead><tr><th>检索词</th><th>零结果次数</th><th>最近一次</th></tr></thead><tbody></tbody></table></div>
       </section>
 
       <!-- 投稿审核 -->
@@ -1378,6 +1380,13 @@
       var tr = document.createElement("tr");
       tr.appendChild(td(s.q)); tr.appendChild(td(s.n, "mono"));
       tq.appendChild(tr);
+    });
+    var tz = $("stZeroTbl").tBodies[0]; tz.textContent = "";
+    if (!(stData.topZero || []).length) emptyRow(tz, "(近 30 天没有零结果检索)", 3);
+    (stData.topZero || []).forEach(function (s) {
+      var tr = document.createElement("tr");
+      tr.appendChild(td(s.q)); tr.appendChild(td(s.n, "mono")); tr.appendChild(td(String(s.last_at || "").slice(0, 10), "muted"));
+      tz.appendChild(tr);
     });
   }
 

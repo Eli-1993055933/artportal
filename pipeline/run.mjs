@@ -17,6 +17,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
 import { discoverDetailLinks } from "./lib/discover.mjs";
+import { discoverViaSitemap } from "./lib/sitemap.mjs";
 import { extractCover, extractContentImages, looksGeneric } from "./lib/cover.mjs";
 import { extract, estimateCost, parseJson } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
@@ -67,20 +68,51 @@ async function main() {
   const stats = {
     at: new Date().toISOString(), sourcesTotal: sources.length, sourcesOk: 0, sourcesFailed: [],
     unchanged: 0, extracted: 0, added: 0, updated: 0, pending: 0, dropped: 0,
-    hallucinations: 0, cost: 0, tokensIn: 0, tokensOut: 0
+    hallucinations: 0, cost: 0, tokensIn: 0, tokensOut: 0, tierSkipped: 0
   };
   const autoRecords = [], pendingRecords = [];
   await mkdir(P("state", "samples"), { recursive: true });
+  const today = todayISO();
+  const dom_ = new Date().getDate(); // 日期序号,给低产出源"每 3 天才查一次"降频用
 
   for (const src of sources) {
+    // 产出分级降频(P2):yield_count/fail_count/tier 由本轮跑完后写回 sources.json(见下方 finishSource)。
+    // 只有 tier==='low'(连续 14 次零产出)才降频,且 --only 单跑指定源时不受影响,方便调试验证。
+    if (!onlyIds.length && src.tier === "low" && dom_ % 3 !== 0) {
+      stats.tierSkipped++;
+      process.stderr.write(`\n[跳过·低产出源降频] ${src.id}(tier=low,fail_count=${src.fail_count || 0},每 3 天查一次)\n`);
+      continue;
+    }
     process.stderr.write(`\n[抓取] ${src.id}  ${src.url}\n`);
-    const f = await fetchSource(src);
+    let addedThisSrc = 0;
+    const finishSource = (polled) => {
+      // P2:更新信源产出字段。polled=false(robots/网络层面直接跳过)不计入 last_polled,
+      // 避免污染 sitemap sinceDate 的基准(那是"上次真正检查过内容"的日期,不是"上次尝试"的日期)。
+      src.yield_count = (src.yield_count || 0) + addedThisSrc;
+      if (addedThisSrc > 0) src.fail_count = 0;
+      else src.fail_count = (src.fail_count || 0) + 1;
+      if (src.yield_count >= 5) src.tier = "high";
+      else if ((src.fail_count || 0) >= 14 && !src.yield_count) src.tier = "low";
+      else if (src.tier !== "low" || addedThisSrc > 0) src.tier = "normal";
+      if (polled) src.last_polled = today;
+    };
+    const f = await fetchSource(src, hashes[src.id]);
     if (f.skipped) {
       stats.sourcesFailed.push({ id: src.id, reason: f.reason + (f.error ? (":" + f.error) : "") });
       process.stderr.write(`  跳过: ${f.reason}${f.error ? " " + f.error : ""}\n`);
+      finishSource(false);
       continue;
     }
     stats.sourcesOk++;
+
+    // 条件请求(P3):服务器回 304 → 内容确定没变,不用比对哈希也不用往下走,直接当"未变"处理。
+    if (f.notModified) {
+      stats.unchanged++;
+      process.stderr.write("  304 未修改(条件请求命中),跳过\n");
+      if (f.etag || f.lastModified) hashes[src.id] = Object.assign({}, hashes[src.id], { at: today, etag: f.etag || (hashes[src.id] && hashes[src.id].etag), lastModified: f.lastModified || (hashes[src.id] && hashes[src.id].lastModified) });
+      finishSource(true);
+      continue;
+    }
     process.stderr.write(`  状态 ${f.status} · robots=${f.robots} · 正文 ${f.text.length} 字 · hash ${f.hash.slice(0, 12)}\n`);
 
     // --fetch-only:存样本,不提取
@@ -93,9 +125,11 @@ async function main() {
     if (hashes[src.id] && hashes[src.id].hash === f.hash) {
       stats.unchanged++;
       process.stderr.write("  内容未变,跳过提取\n");
+      hashes[src.id] = Object.assign({}, hashes[src.id], { at: today, etag: f.etag || hashes[src.id].etag, lastModified: f.lastModified || hashes[src.id].lastModified });
+      finishSource(true);
       continue;
     }
-    hashes[src.id] = { hash: f.hash, at: todayISO() };
+    hashes[src.id] = { hash: f.hash, at: today, etag: f.etag || null, lastModified: f.lastModified || null };
 
     // 候选:HTML 列表页 → 发现详情链接并逐条抓取(每条自己算哈希,变了才提取);
     //       RSS → 逐条 item;单详情页(crawl:false)→ 整页作一条。
@@ -104,13 +138,31 @@ async function main() {
       candidates = f.text.split(/\n\n---\n\n/).slice(0, 8).map((t, i) => ({ sourceText: t, url: src.url, key: src.id + "#" + i }));
     } else if (src.crawl !== false) {
       const links = discoverDetailLinks(f.rawHtml, src.url, src.domain, { cap: src.cap || CAP });
+      // sitemap 补充发现(P3):不取代列表页发现,只补它漏掉的(西式 slug 链接/分页外的旧详情页)。
+      // sinceDate 只在 lastmod 被判定为可信时才生效(见 sitemap.mjs 的自检),否则只按数量截断。
+      if (src.sitemap !== false) {
+        let origin = null; try { origin = new URL(src.url).origin; } catch (e) {}
+        const sm = origin ? await discoverViaSitemap(origin, src.domain, { cap: src.cap || CAP, sinceDate: src.last_polled }) : null;
+        if (sm) {
+          src.sitemap = true;
+          if (sm.urls.length) {
+            const seenUrl = new Set(links.map(l => l.url));
+            let addedFromSitemap = 0;
+            for (const su of sm.urls) if (!seenUrl.has(su.url)) { links.push({ url: su.url, text: "" }); seenUrl.add(su.url); addedFromSitemap++; }
+            process.stderr.write(`  sitemap 补充候选 ${addedFromSitemap} 条(站内共 ${sm.totalInSitemap} 条,lastmod${sm.trustLastmod ? "可信" : "不可信/未按时间过滤"})\n`);
+          }
+        } else {
+          src.sitemap = false; // 探测过、确认没有 sitemap.xml,以后跳过这次额外请求
+        }
+      }
       process.stderr.write(`  发现 ${links.length} 条候选详情链接\n`);
       for (const ln of links) {
         const detailKey = src.id + "|" + ln.url;
-        const df = await fetchSource({ url: ln.url, domain: src.domain, type: "html" });
+        const df = await fetchSource({ url: ln.url, domain: src.domain, type: "html" }, hashes[detailKey]);
         if (df.skipped) { process.stderr.write(`    详情跳过 ${ln.url}: ${df.reason}\n`); continue; }
-        if (hashes[detailKey] && hashes[detailKey].hash === df.hash) { stats.unchanged++; continue; }
-        hashes[detailKey] = { hash: df.hash, at: todayISO() };
+        if (df.notModified) { stats.unchanged++; hashes[detailKey] = Object.assign({}, hashes[detailKey], { at: today, etag: df.etag || (hashes[detailKey] && hashes[detailKey].etag), lastModified: df.lastModified || (hashes[detailKey] && hashes[detailKey].lastModified) }); continue; }
+        if (hashes[detailKey] && hashes[detailKey].hash === df.hash) { stats.unchanged++; hashes[detailKey] = Object.assign({}, hashes[detailKey], { at: today, etag: df.etag || hashes[detailKey].etag, lastModified: df.lastModified || hashes[detailKey].lastModified }); continue; }
+        hashes[detailKey] = { hash: df.hash, at: today, etag: df.etag || null, lastModified: df.lastModified || null };
         candidates.push({ sourceText: df.text, url: ln.url, key: detailKey, rawHtml: df.rawHtml });
       }
       if (!candidates.length) candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0", rawHtml: f.rawHtml }];
@@ -167,8 +219,10 @@ async function main() {
       }
       if (g.trust === "auto") { autoRecords.push(rec); }
       else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
+      addedThisSrc++;
       process.stderr.write(`  → ${g.trust}${g.reasons.length ? " (" + g.reasons.join("; ") + ")" : ""}  evidence作废 ${v.nulled.length} 处\n`);
     }
+    finishSource(true);
   }
 
   if (hasFlag("--fetch-only")) {
@@ -210,6 +264,12 @@ async function main() {
   await rename(_tmp, DATA);
   await writeFile(P("state", "review-queue.json"), JSON.stringify({ generated_at: todayISO(), count: pendingRecords.length, records: pendingRecords }, null, 2), "utf8");
   await writeFile(P("state", "hashes.json"), JSON.stringify(hashes, null, 2), "utf8");
+
+  // P2:回写 sources.json 里本轮更新过的 yield_count/fail_count/tier/last_polled/sitemap 字段。
+  // sourcesDoc.sources 里未被本轮处理的信源(reachable:false 或 --only 未选中)引用未变,原样写回。
+  const srcTmp = sourcesPath + ".tmp-" + process.pid;
+  await writeFile(srcTmp, JSON.stringify(sourcesDoc, null, 2), "utf8");
+  await rename(srcTmp, sourcesPath);
 
   console.log("\n" + buildReport(stats));
 }

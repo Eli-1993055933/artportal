@@ -38,17 +38,22 @@ function throttle(host) {
   return p;
 }
 
-async function rawFetch(url, accept) {
+// condHeaders(P3,条件请求):{If-None-Match, If-Modified-Since} —— 服务器支持则回 304 不下发正文,
+// 省的是带宽(项目真正的瓶颈是出口带宽~20Mbps,不是 CPU/模型钱)。不支持的服务器照常 200 全量返回,零副作用。
+async function rawFetch(url, accept, condHeaders) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(url, {
-      signal: ctrl.signal,
-      redirect: "follow",
-      headers: { "User-Agent": USER_AGENT, "Accept": accept || "text/html,application/xhtml+xml" }
-    });
+    const headers = Object.assign(
+      { "User-Agent": USER_AGENT, "Accept": accept || "text/html,application/xhtml+xml" },
+      condHeaders || {}
+    );
+    const res = await fetch(url, { signal: ctrl.signal, redirect: "follow", headers });
+    const etag = res.headers.get("etag") || null;
+    const lastModified = res.headers.get("last-modified") || null;
+    if (res.status === 304) return { ok: true, status: 304, notModified: true, url: res.url || url, etag, lastModified };
     const body = await res.text();
-    return { ok: res.ok, status: res.status, body, url: res.url || url };   // res.url = 重定向后的最终地址
+    return { ok: res.ok, status: res.status, body, url: res.url || url, etag, lastModified };   // res.url = 重定向后的最终地址
   } finally { clearTimeout(t); }
 }
 
@@ -98,7 +103,8 @@ function safeCP(cp) { try { return String.fromCodePoint(cp); } catch (e) { retur
 export function sha256(str) { return createHash("sha256").update(str, "utf8").digest("hex"); }
 
 // 抓取一个信源。返回 { skipped, reason, status, text, hash, isRss }
-export async function fetchSource(src) {
+// cache(P3,条件请求,可选):上次抓取存下的 {etag, lastModified} —— 带上去问,服务器支持就回 304 不下正文。
+export async function fetchSource(src, cache) {
   // RSS 源抓 feed 地址;HTML 源抓页面地址
   const targetUrl = (src.type === "rss" && src.rss) ? src.rss : src.url;
   const u = new URL(targetUrl);
@@ -121,10 +127,16 @@ export async function fetchSource(src) {
     catch (e) { return { skipped: true, reason: "render-error", error: String(e.name || e.message || e) }; }
   } else {
     const accept = src.type === "rss" ? "application/rss+xml,application/xml,text/xml" : "text/html,application/xhtml+xml";
-    try { r = await rawFetch(targetUrl, accept); }
+    const cond = {};
+    if (cache && cache.etag) cond["If-None-Match"] = cache.etag;
+    if (cache && cache.lastModified) cond["If-Modified-Since"] = cache.lastModified;
+    try { r = await rawFetch(targetUrl, accept, cond); }
     catch (e) { return { skipped: true, reason: "fetch-error", error: String(e.name || e.message || e) }; }
   }
 
+  if (r.notModified) {
+    return { skipped: false, notModified: true, status: 304, isRss: src.type === "rss", etag: r.etag, lastModified: r.lastModified };
+  }
   if (!r.ok) return { skipped: true, reason: "http-" + r.status, status: r.status };
 
   const isRss = src.type === "rss";
@@ -134,8 +146,26 @@ export async function fetchSource(src) {
     rawHtml: r.body, text,
     hash: sha256(text),
     finalUrl: r.url,      // 跟随重定向后的最终地址(调用方可据此做落点安全校验)
-    robots: rb.none ? "none" : (rb.error ? "unknown" : "allow")
+    robots: rb.none ? "none" : (rb.error ? "unknown" : "allow"),
+    etag: r.etag, lastModified: r.lastModified
   };
+}
+
+// fetchRaw(P3,给 sitemap.mjs 用):同样过 robots + 同域限速 + 署名 UA,但不转纯文本,原样返回 body。
+// 用于抓 sitemap.xml 这类非 HTML 正文的资源;不满足抓取条件时返回 { skipped:true }。
+export async function fetchRaw(url, accept) {
+  let u; try { u = new URL(url); } catch (e) { return { skipped: true, reason: "bad-url" }; }
+  const origin = u.origin;
+  const rb = await getRobots(origin);
+  if (!rb.none && !rb.error && !isAllowed(rb.rules, u.pathname)) {
+    return { skipped: true, reason: "robots-disallow" };
+  }
+  await throttle(u.host);
+  try {
+    const r = await rawFetch(url, accept || "application/xml,text/xml");
+    if (!r.ok) return { skipped: true, reason: "http-" + r.status, status: r.status };
+    return { skipped: false, ok: true, status: r.status, body: r.body, url: r.url };
+  } catch (e) { return { skipped: true, reason: "fetch-error", error: String(e.name || e.message || e) }; }
 }
 
 // RSS/Atom → 逐条 item 的文本(标题 + 链接 + 描述/日期)。极简解析,无第三方依赖。

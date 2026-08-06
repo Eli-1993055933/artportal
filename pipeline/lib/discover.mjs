@@ -77,4 +77,4 @@ export function discoverDetailLinks(rawHtml, listUrl, domain, opts) {
   return results;
 }
 
-export { extractAnchors };
+export { extractAnchors, looksLikeDetail };

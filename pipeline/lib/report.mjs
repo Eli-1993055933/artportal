@@ -4,8 +4,9 @@ export function buildReport(stats) {
   const lines = [];
   lines.push("========== ArtPortal 数据管道运行报告 ==========");
   lines.push("时间: " + stats.at);
-  lines.push("信源: 共 " + stats.sourcesTotal + " 个,成功 " + stats.sourcesOk + ",跳过/失败 " + stats.sourcesFailed.length);
-  lines.push("哈希未变跳过(省钱): " + stats.unchanged + " 个");
+  lines.push("信源: 共 " + stats.sourcesTotal + " 个,成功 " + stats.sourcesOk + ",跳过/失败 " + stats.sourcesFailed.length +
+    (stats.tierSkipped ? ",低产出降频跳过 " + stats.tierSkipped : ""));
+  lines.push("哈希/条件请求未变跳过(省钱): " + stats.unchanged + " 个");
   lines.push("调用 AI 提取: " + stats.extracted + " 次");
   lines.push("");
   lines.push("新增上线(auto): " + stats.added);

@@ -129,6 +129,13 @@ export async function getDb() {
         at TEXT NOT NULL
       );
       CREATE INDEX IF NOT EXISTS idx_agent_log ON agent_log(agent, id);
+      CREATE TABLE IF NOT EXISTS zero_queries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        q TEXT NOT NULL, who TEXT, gl TEXT, hl TEXT,
+        probed INTEGER, candidates INTEGER,
+        at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_zero_q ON zero_queries(q);
     `);
     // v0.66.0:作品加艺术门类标签(作者自选 ≤3,tags.js 的 23 门类 slug)。
     // 旧库无此列 → ALTER 补上;已有则报"duplicate column"忽略即可。
@@ -214,6 +221,26 @@ export async function ingestMap() {
     for (const r of rows) m[r.record_id] = r.email || ("访客 " + String(r.ip || "").slice(0, 18));
     return m;
   } catch (e) { return {}; }
+}
+
+// 检索一无所获(P5,补源信号):谁/搜了什么词/在哪个区域/探了多少候选,一条都没收进来。
+// 便宜的长期信号——同一词反复零结果,说明这类源现在库里是空白,指导人工补源方向。不影响检索主流程,写失败静默跳过。
+export async function logZeroQuery({ q, who, gl, hl, probed, candidates }) {
+  try {
+    const d = await getDb();
+    d.prepare("INSERT INTO zero_queries(q,who,gl,hl,probed,candidates,at) VALUES(?,?,?,?,?,?,?)")
+      .run(String(q || "").slice(0, 200), who || null, gl || null, hl || null, probed || 0, candidates || 0, new Date().toISOString());
+  } catch (e) {}
+}
+// 近 N 天零结果检索词,按出现次数排序(补源看板用)
+export async function topZeroQueries(days = 30, limit = 20) {
+  try {
+    const d = await getDb();
+    const since = new Date(Date.now() - days * 86400e3).toISOString();
+    return d.prepare(
+      "SELECT q, COUNT(*) n, MAX(at) last_at FROM zero_queries WHERE at >= ? GROUP BY q ORDER BY n DESC, last_at DESC LIMIT ?"
+    ).all(since, limit);
+  } catch (e) { return []; }
 }
 
 // 某用户已通过审核的投稿(用户主页"投稿"tab;对应机会 id = "submit-" + 投稿id)
