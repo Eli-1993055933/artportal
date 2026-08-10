@@ -377,7 +377,7 @@
         if(/Poland|Czech|Hungary|Slovakia|Slovenia|Croatia|Serbia|Bulgaria|Romania|Russia|Ukraine|Belarus|Lithuania|Latvia|Estonia/i.test(e)) return "europe-east";
         if(/United States|Canada/i.test(e)) return "namerica";
         if(/Mexico|Brazil|Argentina|Chile|Peru|Colombia|Venezuela|Ecuador|Bolivia|Paraguay|Uruguay|Cuba|Jamaica|Panama|Costa Rica|Guatemala|Honduras|Nicaragua|El Salvador|Dominican Republic|Haiti/i.test(e)) return "latam";
-        if(/Egypt|South Africa|Nigeria|Kenya|Ethiopia|Morocco|Ghana|Tanzania|Uganda|Algeria|Sudan|Libya|Tunisia|Congo|Cameroon|Côte d'Ivoire|Senegal|Mali|Burkina Faso|Malawi|Zambia|Zimbabwe|Mozambique|Madagascar/i.test(e)) return "africa";
+        if(/Egypt|South Africa|Nigeria|Kenya|Ethiopia|Morocco|Ghana|Tanzania|Uganda|Algeria|Sudan|Libya|Tunisia|Congo|Cameroon|Cote dIvoire|Senegal|Mali|Burkina Faso|Malawi|Zambia|Zimbabwe|Mozambique|Madagascar/i.test(e)) return "africa";
         if(/United Arab Emirates|Qatar|Israel|Turkey|Saudi Arabia|Kuwait|Bahrain|Oman|Yemen|Iran|Iraq|Jordan|Lebanon|Syria|Palestine/i.test(e)) return "middle-east";
         if(/Australia|New Zealand|Fiji|Papua New Guinea|Samoa|Tonga/i.test(e)) return "oceania";
       }
