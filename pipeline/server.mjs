@@ -28,6 +28,7 @@ import { leadsTick } from "./lib/leads.mjs";
 import { feedbackAgentTick } from "./lib/feedback.mjs";
 import { inspectChannel } from "./lib/qc.mjs";
 import { moderateText } from "./lib/moderation.mjs";
+import { fillGeoFallback } from "./lib/geolocation-fallback.mjs";
 import * as db from "./lib/db.mjs";
 import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
 import { mailerOn, sendMail } from "./lib/mailer.mjs";
@@ -302,11 +303,15 @@ function finalize(rec, url, host) {
   const dom = host.replace(/^www\./, "");
   const id = "search-" + dom.split(".")[0] + "-" + slug(rec.title_zh || rec.title_en || "item");
   const today = todayISO();
+  // 地理信息兜底:如果 AI 没有提取到城市/国家,尝试从原文和域名推断
+  const geoCtx = { domain: dom, source_url: url };
+  const geoFilled = fillGeoFallback(rec, geoCtx, rec._sourceText || "");
   return {
     id,
     category: rec.category || "opencall",
     title_zh: rec.title_zh || null, title_en: rec.title_en || null,
-    org_zh: rec.org_zh || null, city_zh: rec.city_zh || null, country_zh: rec.country_zh || null,
+    org_zh: rec.org_zh || null,
+    city_zh: geoFilled.city_zh || "未知", country_zh: geoFilled.country_zh || "未知",
     deadline: rec.deadline || null, deadline_note: rec.deadline_note || "",
     apply_fee: rec.apply_fee || { free: null, amount: null, currency: null },
     participation_fee: rec.participation_fee || { required: null, amount: null, currency: null },
@@ -536,7 +541,7 @@ function submissionToOpportunity(p, subId) {
   return {
     id: "submit-" + subId,
     category: p.category, title_zh: p.title, title_en: null,
-    org_zh: p.org, city_zh: p.city, country_zh: p.country,
+    org_zh: p.org || null, city_zh: p.city || "未知", country_zh: p.country || "未知",
     deadline: p.deadline, deadline_note: "",
     apply_fee: { free: null, amount: null, currency: null },
     participation_fee: { required: null, amount: null, currency: null },
@@ -729,8 +734,10 @@ async function handleAuthApi(req, res, u) {
     }
     if (p === "/api/auth/register" && m === "POST") { const b = await readBody(req); return json(await auth.register(b, ip)); }
     if (p === "/api/auth/sendcode" && m === "POST") { const b = await readBody(req); return json(await auth.sendEmailCode(b, ip)); }
+    if (p === "/api/auth/sendcode-bind" && m === "POST") { const b = await readBody(req); return json(await auth.sendEmailCodeForBind(req, b, ip)); }
     if (p === "/api/auth/sms-code" && m === "POST") { const b = await readBody(req); return json(await auth.sendPhoneCode(b, ip)); }
     if (p === "/api/auth/bind-phone" && m === "POST") { const b = await readBody(req); return json(await auth.bindPhone(req, b, ip)); }
+    if (p === "/api/auth/bind-email" && m === "POST") { const b = await readBody(req); return json(await auth.bindEmail(req, b, ip)); }
     if (p === "/api/auth/login" && m === "POST") { const b = await readBody(req); return json(auth.login(b.identifier || b.email, b.password, ip)); }
     if (p === "/api/auth/logout" && m === "POST") return json(auth.logout(req));
     if (p === "/api/auth/profile" && m === "POST") { const b = await readBody(req, 400 * 1024); return json(await auth.setProfile(req, b, ip)); }

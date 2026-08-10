@@ -1,0 +1,25 @@
+{
+  "updated": "2026-07-29T16:59:01.694Z",
+  "managers": {
+    "cn-tier1": {
+      "shifts": 1,
+      "probed": 8,
+      "added": 4,
+      "fails": 0,
+      "recent": [
+        {
+          "at": "2026-07-29T16:59:01.694Z",
+          "q": "上海 美术馆 年度 展览 征集 报名",
+          "probed": 8,
+          "added": 4,
+          "ok": true,
+          "error": null,
+          "took_ms": 121991
+        }
+      ],
+      "last_at": "2026-07-29T16:59:01.694Z",
+      "last_q": "上海 美术馆 年度 展览 征集 报名",
+      "last_added": 4
+    }
+  }
+}

@@ -189,11 +189,8 @@ async function emailRealErr(email) {
 
 // ---------- 邮箱验证码(mailer 配置好后启用;未配置时注册走上面的弱校验) ----------
 const emailCodes = new Map();   // email -> { code, exp, tries }
-export async function sendEmailCode(body, ip) {
-  if (!mailerOn()) return { code: 400, body: { error: "当前无需验证码,直接注册即可" } };
-  const email = String((body || {}).email || "").trim().toLowerCase();
-  if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
-  if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已注册,请直接登录" } };
+// 生成+发送验证码的共用逻辑(注册发码 sendEmailCode 与老用户补验证发码 sendEmailCodeForBind 共用)。
+async function issueEmailCode(email, ip) {
   const realErr = await emailRealErr(email);
   if (realErr) return { code: 400, body: { error: realErr } };
   if (authLimited("code:" + email, 3, 10 * 60 * 1000)) return { code: 429, body: { error: "该邮箱请求验证码太频繁,请稍后再试" } };
@@ -212,6 +209,25 @@ export async function sendEmailCode(body, ip) {
   }
   logEvent("sendcode", { email, ip });
   return { code: 200, body: { ok: true } };
+}
+export async function sendEmailCode(body, ip) {
+  if (!mailerOn()) return { code: 400, body: { error: "当前无需验证码,直接注册即可" } };
+  const email = String((body || {}).email || "").trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
+  if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已注册,请直接登录" } };
+  return issueEmailCode(email, ip);
+}
+// 已登录老用户补验证/换绑邮箱发验证码(2026-08-06,邮箱验证变必需):目标邮箱允许是【自己】名下
+// 已存但未验证的邮箱(sendEmailCode 会因"已注册"拒掉这种情况,故单独一个函数),不允许是别人的。
+export async function sendEmailCodeForBind(req, body, ip) {
+  if (!mailerOn()) return { code: 400, body: { error: "当前无需验证码" } };
+  const u = userOf(req);
+  if (!u) return { code: 401, body: { error: "未登录" } };
+  const email = String((body || {}).email || "").trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
+  const holder = byEmail.get(email);
+  if (holder && holder.id !== u.id) return { code: 409, body: { error: "该邮箱已被其他账号使用" } };
+  return issueEmailCode(email, ip);
 }
 
 // ---------- 手机号实名(备案安全评估「真实身份核验」;仅 smsOn() 时启用,阿里云短信配好即生效) ----------
@@ -235,6 +251,8 @@ function decPhone(enc) {
 }
 function maskPhone(phone) { const s = String(phone || ""); return PHONE_RE.test(s) ? s.slice(0, 3) + "****" + s.slice(-4) : null; }
 export function needsPhone(u) { return smsOn() && !!u && !u.phone_verified; }   // 发布门:开启实名后,未绑手机不得发布
+// 2026-08-06:邮箱验证变必需——mailer 配好后,没有已验证邮箱的老用户(含没填过邮箱的)登录即强制补验证。
+export function needsEmailVerify(u) { return mailerOn() && !!u && !u.email_verified; }
 
 // 发手机验证码。purpose: register(注册,手机号须未占用) / bind(老用户绑定,手机号须未被他人占用)
 // 验证码由阿里云生成+记忆+校验(见 sms.mjs);我方只做发送前的占用查重与限频。
@@ -296,6 +314,30 @@ export async function bindPhone(req, body, ip) {
   byPhone.set(u.phone_hmac, u);
   saveUsers();
   logEvent("bindphone", { uid: u.id, phone: maskPhone(phone), ip });
+  return { code: 200, body: { user: publicUser(u) } };
+}
+
+// 老用户绑定/补验证邮箱(2026-08-06,登录后强制;也用于换绑邮箱)
+export async function bindEmail(req, body, ip) {
+  const u = userOf(req);
+  if (!u) return { code: 401, body: { error: "未登录" } };
+  if (!mailerOn()) return { code: 400, body: { error: "当前无需验证邮箱" } };
+  if (authLimited("bindemail:" + u.id, 8, 10 * 60 * 1000)) return { code: 429, body: { error: "操作太频繁,请稍后再试" } };
+  const email = String((body || {}).email || "").trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
+  const holder = byEmail.get(email);
+  if (holder && holder.id !== u.id) return { code: 409, body: { error: "该邮箱已被其他账号使用" } };
+  const rec = emailCodes.get(email);
+  if (!rec || Date.now() > rec.exp) return { code: 400, body: { error: "请先获取邮箱验证码" } };
+  rec.tries++;
+  if (rec.tries > 5) { emailCodes.delete(email); return { code: 429, body: { error: "尝试次数过多,请重新获取验证码" } }; }
+  if (String((body || {}).code || "").trim() !== rec.code) return { code: 400, body: { error: "验证码不正确" } };
+  emailCodes.delete(email);
+  if (u.email && u.email !== email) byEmail.delete(u.email);
+  u.email = email; u.email_verified = true;
+  byEmail.set(email, u);
+  saveUsers();
+  logEvent("bindemail", { uid: u.id, email, ip });
   return { code: 200, body: { user: publicUser(u) } };
 }
 
@@ -505,8 +547,22 @@ export async function register(body, ip) {
     if (password.length < 6 || password.length > 72) return { code: 400, body: { error: "密码需 6–72 位" } };
     if (byPhone.has(phoneHmac(phone))) return { code: 409, body: { error: "该手机号已注册,请直接登录" } };
     if (users.length >= MAX_USERS) return { code: 503, body: { error: "注册暂时关闭,请稍后再试" } };
-    let email = String(body.email || "").trim().toLowerCase();   // 邮箱选填(通知/找回)
-    if (email) {
+    let email = String(body.email || "").trim().toLowerCase();
+    let emailVerified = false;
+    // 2026-08-06:mailer 配好后邮箱变必填+必须验证(此前仅选填、从不验证);
+    // mailer 未配置(如本地开发、或邮件服务临时故障)时退回原有弱校验,不因基础设施问题拖垮整个注册通道。
+    if (mailerOn()) {
+      if (!email) return { code: 400, body: { error: "请填写邮箱并获取验证码" } };
+      if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
+      if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已被使用" } };
+      const rec = emailCodes.get(email);
+      if (!rec || Date.now() > rec.exp) return { code: 400, body: { error: "请先获取邮箱验证码" } };
+      rec.tries++;
+      if (rec.tries > 5) { emailCodes.delete(email); return { code: 429, body: { error: "尝试次数过多,请重新获取验证码" } }; }
+      if (String(body.email_code || "").trim() !== rec.code) return { code: 400, body: { error: "邮箱验证码不正确" } };
+      emailCodes.delete(email);
+      emailVerified = true;
+    } else if (email) {
       if (!EMAIL_RE.test(email) || email.length > 254) return { code: 400, body: { error: "邮箱格式不正确" } };
       if (byEmail.has(email)) return { code: 409, body: { error: "该邮箱已被使用" } };
     }
@@ -515,7 +571,7 @@ export async function register(body, ip) {
     const salt = randomBytes(16).toString("hex");
     const u = {
       id: "u" + randomBytes(6).toString("hex"),
-      email: email || null, salt, hash: hashPassword(password, salt), email_verified: false,
+      email: email || null, salt, hash: hashPassword(password, salt), email_verified: emailVerified,
       phone: encPhone(phone), phone_hmac: phoneHmac(phone), phone_verified: true,
       newsletter, nickname: null, profile: {}, favorites: [],
       created_at: new Date().toISOString(), last_seen: new Date().toISOString()
@@ -598,12 +654,14 @@ export function me(req) {
       headers = { "Set-Cookie": sessionCookie(token) };
     }
   }
-  // email_code_required:注册是否需要邮箱验证码;sms_on:是否已开启手机实名(前端据此切换注册表单为手机号);
-  // needs_phone_bind:已登录但未绑手机(仅 smsOn 时),前端强制弹绑定窗(登录即要求绑定)
+  // email_code_required:注册是否需要邮箱验证码(mailer 配好);sms_on:是否已开启手机实名(前端据此切换注册表单为手机号);
+  // needs_phone_bind:已登录但未绑手机(仅 smsOn 时);needs_email_verify:已登录但没有已验证邮箱(仅 mailerOn 时,2026-08-06)
+  // ——前端登录即强制弹相应绑定/验证窗,不可跳过
   return { code: 200, body: {
     user: u ? publicUser(u) : null,
     email_code_required: mailerOn(), sms_on: smsOn(),
-    needs_phone_bind: needsPhone(u)
+    needs_phone_bind: needsPhone(u),
+    needs_email_verify: needsEmailVerify(u)
   }, ...(headers ? { headers } : {}) };
 }
 

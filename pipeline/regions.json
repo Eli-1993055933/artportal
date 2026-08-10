@@ -72,17 +72,26 @@
       "hl": "zh-cn",
       "terms": ["江苏", "南京", "苏州", "无锡", "常州", "徐州", "扬州", "南通", "浙江", "宁波", "温州", "绍兴", "嘉兴", "金华", "台州", "安徽", "合肥", "山东", "济南", "青岛", "烟台", "潍坊", "临沂", "福建", "福州", "厦门", "泉州"],
       "queries": [
-        "南京 江苏 艺术项目 征集",
-        "苏州 美术馆 展览 征集",
-        "宁波 温州 艺术 征集 驻留",
+        "南京 江苏 艺术项目 征集 2025",
+        "苏州 美术馆 展览 征集 open call",
+        "宁波 温州 艺术 驻留 征集",
         "无锡 常州 苏州 艺术展 征集",
-        "山东 济南 青岛 艺术 征集",
+        "山东 济南 青岛 艺术 征集 申请",
         "烟台 潍坊 临沂 艺术展 征集",
         "徐州 扬州 南通 艺术 征集",
         "绍兴 嘉兴 金华 台州 艺术驻留",
         "厦门 福建 艺术驻留 征集",
         "泉州 福州 厦门 艺术驻留 征集",
-        "安徽 合肥 美术馆 展览 征集"
+        "安徽 合肥 美术馆 展览 征集",
+        "上海 西岸 美术馆 公开 征集",
+        "上海 双年展 征集 作品",
+        "江苏 美术馆 联盟 展览 征集",
+        "浙江 美术馆 公共艺术 征集",
+        "华东 青年艺术家 扶持计划 征集",
+        "南京艺术学院 美术馆 征集",
+        "中国美院 展览 公开 征集",
+        "上海当代艺术博物馆 征集",
+        "苏州金鸡湖美术馆 征集"
       ]
     },
     {
@@ -103,7 +112,15 @@
         "南宁 柳州 桂林 艺术 征集",
         "桂林 广西 艺术驻留",
         "海南 三亚 艺术项目 征集",
-        "广东 文旅厅 美术 作品 征集 官网"
+        "广东 文旅厅 美术 作品 征集 官网",
+        "广州 美术馆 展览 公开 征集",
+        "深圳 公共艺术 征集 2025",
+        "广州 艺术节 作品 征集",
+        "深圳 当代艺术 展 征集",
+        "珠海 艺术 驻留 项目",
+        "广东 青年艺术家 扶持 计划",
+        "广州 艺术 博览会 征集",
+        "深圳 设计周 艺术 征集"
       ]
     },
     {
@@ -134,7 +151,14 @@
         "西安 陕西 美术 征集",
         "兰州 甘肃 青海 艺术 征集",
         "银川 西宁 拉萨 艺术项目 征集",
-        "新疆 乌鲁木齐 艺术展 征集"
+        "新疆 乌鲁木齐 艺术展 征集",
+        "四川 美术馆 公开 征集",
+        "湖北 美术馆 展览 征集",
+        "湖南 青年艺术家 扶持 计划",
+        "河南 艺术 博览会 征集",
+        "陕西 美术 家协会 征集",
+        "云南 艺术 基金会 驻留",
+        "重庆 当代艺术 展 征集"
       ]
     },
     {
@@ -175,10 +199,17 @@
         "Tokyo art award open call for artists submissions",
         "Korea artist residency grant open call apply",
         "Seoul art museum open call for artists",
-        "东京 艺术 驻留 征集",
+        "东京 艺术 驻留 征集 2025",
         "首尔 艺术 驻留 征集",
         "Kyoto Osaka art project open call artists",
-        "Japan Korea art foundation grant fellowship artists"
+        "Japan Korea art foundation grant fellowship artists",
+        "日本 美術 展覧会 公募 2025",
+        "韓國 아트 레지던시 공개 모집",
+        "Tokyo National Museum open call artists",
+        "Seoul Museum of Art call for artists",
+        "Asian Art Biennial open call submissions",
+        "Japan Foundation art fellowship artists",
+        "Korean Artist Project open call"
       ]
     },
     {
@@ -200,7 +231,14 @@
         "India artist residency fellowship open call apply",
         "新加坡 艺术 征集 驻留",
         "Malaysia Vietnam Philippines art open call artists",
-        "Asia art biennale open call for artists submissions"
+        "Asia art biennale open call for artists submissions",
+        "Singapore Art Museum open call artists",
+        "Thailand National Gallery art call for artists",
+        "India National Museum art fellowship open call",
+        "Guggenheim UBS MAP Asia Pacific art",
+        "Asian art residency program open call",
+        "Southeast Asia contemporary art open call 2025",
+        "SAF National Arts Council Singapore grant"
       ]
     },
     {
@@ -314,7 +352,15 @@
         "Poland Czech Hungary artist residency open call",
         "Baltic art open call for artists submissions",
         "北欧 艺术 驻留 征集",
-        "Eastern Europe art grant fellowship open call artists"
+        "Eastern Europe art grant fellowship open call artists",
+        "Norwegian Arts Council grant open call artists",
+        "Swedish Arts Committee art fellowship",
+        "Danish Arts Foundation open call",
+        "Finnish Art Council residency program",
+        "Polish Institute art open call",
+        "Czech Art Foundation residency",
+        "Hungarian Academy of Arts open call",
+        "Baltic Sea art residency program"
       ]
     },
     {
@@ -356,7 +402,15 @@
         "Africa artist residency open call application",
         "Lagos Nairobi Cape Town art open call for artists",
         "迪拜 中东 艺术驻留",
-        "Qatar Saudi art grant fellowship open call artists"
+        "Qatar Saudi art grant fellowship open call artists",
+        "UAE art foundation open call artists",
+        "Turkish art biennial open call submissions",
+        "Cairo art residency open call Egypt",
+        "South Africa art fellowship residency",
+        "Nigeria art commission open call",
+        "Kenya art open call for artists",
+        "African Art Initiative fellowship",
+        "Middle East art prize open call"
       ]
     },
     {
@@ -377,7 +431,15 @@
         "Buenos Aires Bogota art open call for artists",
         "Chile Peru artist residency grant open call",
         "拉丁美洲 艺术 驻留 征集",
-        "Latin American art prize open call for artists"
+        "Latin American art prize open call for artists",
+        "Brazilian art biennial open call submissions",
+        "Mexico art fellowship residency program",
+        "Argentina art open call for artists",
+        "Colombian art commission open call",
+        "Chilean art residency program",
+        "Peruvian art open call for artists",
+        "Latin American art foundation grant",
+        "Pan American art biennial open call"
       ]
     }
   ],

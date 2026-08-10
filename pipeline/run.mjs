@@ -27,6 +27,7 @@ import { healthCheck } from "./lib/healthcheck.mjs";
 import { buildReport } from "./lib/report.mjs";
 import { locateOfficial } from "./lib/locate-official.mjs";
 import { isThirdParty } from "./lib/aggregators.mjs";
+import { fillGeoFallback } from "./lib/geolocation-fallback.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const P = (...p) => join(__dir, ...p);
@@ -44,6 +45,29 @@ function todayISO() {
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 async function readJson(path, fallback) { try { return JSON.parse(await readFile(path, "utf8")); } catch (e) { return fallback; } }
+
+// 区域经理 terms 查找(地理信息兜底用)
+let _regionTermsCache = null;
+async function loadRegionTermsMap() {
+  if (_regionTermsCache) return _regionTermsCache;
+  try {
+    const regions = JSON.parse(await readFile(P("regions.json"), "utf8"));
+    _regionTermsCache = {};
+    for (const m of (regions.managers || [])) {
+      if (m.id && Array.isArray(m.terms)) {
+        _regionTermsCache[m.id] = m.terms;
+      }
+    }
+  } catch (e) {
+    _regionTermsCache = {};
+  }
+  return _regionTermsCache;
+}
+function getRegionTerms(regionId) {
+  // 同步访问(数据已在 main 中预加载),兜底返回空数组
+  if (!_regionTermsCache) return [];
+  return _regionTermsCache[regionId] || [];
+}
 
 // 离线提取:从文件按 key 取预先算好的提取结果(演示用)。key = source.id + "#" + itemIndex
 let OFFLINE = null;
@@ -65,6 +89,8 @@ async function main() {
   if (hasFlag("--health-only")) return runHealth();
 
   const hashes = await readJson(P("state", "hashes.json"), {});
+  // 预加载区域经理 terms(地理信息兜底用)
+  await loadRegionTermsMap();
   const stats = {
     at: new Date().toISOString(), sourcesTotal: sources.length, sourcesOk: 0, sourcesFailed: [],
     unchanged: 0, extracted: 0, added: 0, updated: 0, pending: 0, dropped: 0,
@@ -173,7 +199,8 @@ async function main() {
     for (const cand of candidates) {
       const ctx = {
         org_zh: src.org_zh, domain: src.domain, url: cand.url, source_url: src.url,
-        sourceText: cand.sourceText
+        sourceText: cand.sourceText,
+        region: src.region_hint ? { id: src.region_hint, terms: getRegionTerms(src.region_hint) } : null
       };
       let ex;
       try { ex = await getExtract(cand.sourceText, ctx, cand.key); }
@@ -184,6 +211,14 @@ async function main() {
 
       const v = verifyRecord(ex.data, ctx);
       if (v.dropped) { stats.dropped++; process.stderr.write("  丢弃: " + v.dropReason + "\n"); continue; }
+
+      // 地理信息兜底(v1.8.0):对 city_zh/country_zh 为空的记录,逐级回退补全
+      const geoResult = fillGeoFallback(v.record, ctx, cand.sourceText);
+      if (geoResult.geo_fallback !== "ai") {
+        v.record.city_zh = geoResult.city_zh;
+        v.record.country_zh = geoResult.country_zh;
+        process.stderr.write(`  地理兜底: city=${geoResult.city_zh} country=${geoResult.country_zh} (来源:${geoResult.geo_fallback})\n`);
+      }
 
       // 记幻觉日志
       if (v.nulled.length) {
@@ -319,7 +354,7 @@ function finalizeRecord(rec, src, trust) {
     category: rec.category || null,
     title_zh: rec.title_zh || null, title_en: rec.title_en || null,
     org_zh: rec.org_zh || src.org_zh || null,
-    city_zh: rec.city_zh || null, country_zh: rec.country_zh || null,
+    city_zh: rec.city_zh || "未知", country_zh: rec.country_zh || "未知",
     deadline: rec.deadline || null, deadline_note: rec.deadline_note || "",
     apply_fee: rec.apply_fee || { free: null, amount: null, currency: null },
     participation_fee: rec.participation_fee || { required: null, amount: null, currency: null },

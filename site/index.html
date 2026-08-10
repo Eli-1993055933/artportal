@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.6.0" />
+<meta name="app-version" content="1.8.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.6.0</span></div>
+  ARTPORTAL <span id="appVer">v1.8.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.6.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.6.0"></script>
-<script src="js/globe-data.js?v=1.6.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.8.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.8.0"></script>
+<script src="js/globe-data.js?v=1.8.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1646,6 +1646,7 @@
       authRealname:'按国家规定,注册与发布需完成手机号实名;手机号仅用于实名核验,不对外展示。',
       authBadPhone:'请输入正确的手机号',authNeedId:'请输入手机号或邮箱',
       bindT:'绑定手机号完成实名',bindNote:'按国家规定,继续使用需完成手机号实名核验。手机号仅用于核验,不对外展示。',bindGo:'绑 定',
+      authEmailCode:'邮箱验证码(6 位)',bindEmailT:'验证邮箱',bindEmailNote:'为了能帮您找回账号、接收重要通知,请验证一个可用邮箱。',
       authSwapR:'没有账号?注册 →',authSwapL:'已有账号?登录 →',authNl:'订阅每周艺术机会周报',
       authAgree:'我已阅读并同意',authTerms:'《用户协议》',authPrivacy:'《隐私政策》',
       gateNote:'再多看几个机会前,先花一分钟注册吧 —— 永久免费,还能云端收藏、换设备不丢记录。',
@@ -1725,6 +1726,7 @@
       authRealname:'Real-name mobile verification is required to register and post; your number is used only for verification and never shown publicly.',
       authBadPhone:'Enter a valid mobile number',authNeedId:'Enter your phone or email',
       bindT:'Verify your mobile (real-name)',bindNote:'To continue, real-name mobile verification is required. Your number is used only for verification and never shown publicly.',bindGo:'Verify',
+      authEmailCode:'Email code (6 digits)',bindEmailT:'Verify your email',bindEmailNote:'To help you recover your account and receive important notices, please verify a valid email.',
       authSwapR:'No account? Sign up →',authSwapL:'Have an account? Sign in →',authNl:'Subscribe to the weekly digest',
       authAgree:'I have read and agree to the ',authTerms:'Terms',authPrivacy:'& Privacy Policy',
       gateNote:'Enjoying ARTPORTAL? Sign up (free, 1 min) to keep exploring — plus cloud-synced saves across devices.',
@@ -2028,7 +2030,7 @@
   // ============================================================
   //  地球界面即主站(老版已退役进 legacy/):登录/发布/通知/个人主页全部原生实现
   // ============================================================
-  var meUser=null, apSmsOn=false;   // apSmsOn=服务器已开启手机号实名(阿里云短信配好),注册表单据此切手机号
+  var meUser=null, apSmsOn=false, apMailOn=false;   // apSmsOn=服务器已开启手机号实名;apMailOn=mailer已配好,注册表单据此要求邮箱必填并验证
   function postJ(url,data){ return fetch(url,{method:'POST',credentials:'same-origin',
     headers:{'Content-Type':'application/json'},body:JSON.stringify(data||{})})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,st:r.status,data:j}; }); }); }
@@ -2142,16 +2144,19 @@
     var idv=em; try{ idv=localStorage.getItem('ap_ident')||em; }catch(e){}
     var codeRow='<div class="mrow"><input id="aCode" maxlength="6" placeholder="'+L(sms?'authSmsCode':'authCode')+'">'+
       '<button type="button" class="pp-btn" id="aSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>';
+    var emailCodeRow='<div class="mrow"><input id="aEmailCode" maxlength="6" placeholder="'+L('authEmailCode')+'">'+
+      '<button type="button" class="pp-btn" id="aEmailSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>';
     var agreeRow='<label class="chk"><input type="checkbox" id="aNl">'+L('authNl')+'</label>'+
       '<label class="chk"><input type="checkbox" id="aTos">'+L('authAgree')+
         '<a href="/terms.html" target="_blank" rel="noopener">'+L('authTerms')+'</a>'+
         '<a href="/privacy.html" target="_blank" rel="noopener">'+L('authPrivacy')+'</a></label>';
     var fields;
-    if(sms){   // 手机号实名:注册=手机号+密码+短信码+选填邮箱;登录=手机号或邮箱+密码
+    if(sms){   // 手机号实名:注册=手机号+密码+短信码+邮箱(mailer已配则必填并验证,否则选填);登录=手机号或邮箱+密码
       fields=reg
         ? ('<input id="aPhone" type="tel" maxlength="11" placeholder="'+L('authPhone')+'">'+
            '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+codeRow+
-           '<input id="aEmail" type="email" placeholder="'+L('authEmailOpt')+'" value="'+esc(em)+'">'+agreeRow)
+           '<input id="aEmail" type="email" placeholder="'+L(apMailOn?'authEmail':'authEmailOpt')+'" value="'+esc(em)+'">'+
+           (apMailOn?emailCodeRow:'')+agreeRow)
         : ('<input id="aId" type="text" placeholder="'+L('authIdent')+'" value="'+esc(idv)+'">'+
            '<input id="aPw" type="password" placeholder="'+L('authPw')+'">');
     } else {   // 邮箱模式(原有,未配短信时)
@@ -2176,6 +2181,13 @@
         if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
         b.disabled=true; postJ('/api/auth/sendcode',{email:email}).then(function(r){ codeCountdown(r,b,err); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }
     });
+    // 手机+邮箱双验证模式(mailer 已配好):额外的邮箱验证码发送按钮,和上面手机短信码按钮并存
+    var emailSendBtn=(reg&&sms&&apMailOn)?m.querySelector('#aEmailSend'):null;
+    if(emailSendBtn) emailSendBtn.addEventListener('click',function(){
+      var email=m.querySelector('#aEmail').value.trim(), err=m.querySelector('#aErr'), b=this;
+      if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
+      b.disabled=true; postJ('/api/auth/sendcode',{email:email}).then(function(r){ codeCountdown(r,b,err); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); });
+    });
     m.querySelector('#aGo').addEventListener('click',function(){
       var err=m.querySelector('#aErr'), b=this, pw=m.querySelector('#aPw').value;
       if(pw.length<6){ err.textContent=L('authBadPw'); return; }
@@ -2187,7 +2199,10 @@
         var em2=m.querySelector('#aEmail').value.trim();
         url='/api/auth/register'; sk='ap_ident'; sv=phone;
         payload={phone:phone,password:pw,code:m.querySelector('#aCode').value.trim(),newsletter:!!m.querySelector('#aNl').checked};
-        if(em2){ if(!EMAIL_RE.test(em2)){ err.textContent=L('authBadEmail'); return; } payload.email=em2; }
+        if(apMailOn){   // 邮箱必填并验证(2026-08-06)
+          if(!EMAIL_RE.test(em2)){ err.textContent=L('authBadEmail'); return; }
+          payload.email=em2; payload.email_code=m.querySelector('#aEmailCode').value.trim();
+        } else if(em2){ if(!EMAIL_RE.test(em2)){ err.textContent=L('authBadEmail'); return; } payload.email=em2; }
       } else if(sms){   // 手机模式登录:手机号或邮箱
         var id=m.querySelector('#aId').value.trim();
         if(!id){ err.textContent=L('authNeedId'); return; }
@@ -2226,6 +2241,28 @@
         if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
         location.reload(); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
     m.querySelector('#bOut').addEventListener('click',function(){
+      postJ('/api/auth/logout',{}).then(function(){ location.reload(); }).catch(function(){ location.reload(); }); }); }
+  // 老用户强制补验证邮箱(2026-08-06,邮箱验证变必需;登录即弹,不可跳过;底部退出登录逃生口)
+  function bindEmailModal(){
+    var m=modal('<h3>'+L('bindEmailT')+'</h3><p class="note">'+L('bindEmailNote')+'</p>'+
+      '<input id="beEmail" type="email" placeholder="'+L('authEmail')+'" value="'+esc((meUser&&meUser.email)||'')+'">'+
+      '<div class="mrow"><input id="beCode" maxlength="6" placeholder="'+L('authEmailCode')+'">'+
+        '<button type="button" class="pp-btn" id="beSend" style="flex:0 0 auto">'+L('authSend')+'</button></div>'+
+      '<div class="merr" id="beErr"></div>'+
+      '<button class="mgo" id="beGo" type="button">'+L('bindGo')+'</button>'+
+      '<button class="gd-skip" id="beOut" type="button">'+L('ppLogout')+'</button>', true);
+    m.querySelector('#beSend').addEventListener('click',function(){
+      var email=m.querySelector('#beEmail').value.trim(), err=m.querySelector('#beErr'), b=this;
+      if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
+      b.disabled=true; postJ('/api/auth/sendcode-bind',{email:email}).then(function(r){ codeCountdown(r,b,err); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
+    m.querySelector('#beGo').addEventListener('click',function(){
+      var email=m.querySelector('#beEmail').value.trim(), err=m.querySelector('#beErr'), b=this;
+      if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
+      b.disabled=true;
+      postJ('/api/auth/bind-email',{email:email,code:m.querySelector('#beCode').value.trim()}).then(function(r){ b.disabled=false;
+        if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
+        location.reload(); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
+    m.querySelector('#beOut').addEventListener('click',function(){
       postJ('/api/auth/logout',{}).then(function(){ location.reload(); }).catch(function(){ location.reload(); }); }); }
   // —— 统一发布(机会/招聘/资讯→/api/submit,作品→/api/works;AI 审核链路不变) ——
   function openPub(){ if(!meUser){ openAuth('login'); return; }
@@ -3119,13 +3156,14 @@
     if(uloc){ userLL=uloc.ll; userCart=ll2c(userLL); needDraw=true; } }
   window.__setMeLoc=function(ll){ userLL=ll; userCart=ll2c(ll); needDraw=true; };   // 调试/手动定位
   fetch('/api/auth/me',{credentials:'same-origin'}).then(function(r){ return r.json(); }).then(function(j){
-    apSmsOn=!!(j&&j.sms_on);   // 未登录也要知道(注册表单用)
+    apSmsOn=!!(j&&j.sms_on); apMailOn=!!(j&&j.email_code_required);   // 未登录也要知道(注册表单用)
     if(j&&j.user){ meUser=j.user; setLoginBtn(); pollNtf(); setInterval(pollNtf,60000);
       favKeys=new Set(j.user.favorites||[]);   // 收藏云端为准
       setUserLoc(j.user.ip_region);
       var det=document.getElementById('detail');
       if(det.style.display==='block'&&det._repaintFav) det._repaintFav();
       if(j.needs_phone_bind) bindPhoneModal();                    // 登录即要求绑定手机号实名(最优先,先于补资料)
+      else if(j.needs_email_verify) bindEmailModal();             // 其次要求验证邮箱(2026-08-06)
       else if(!meUser.nickname||!meUser.avatar) completeProfile(); }   // 缺昵称/头像:进站即弹强制补全窗(可退出登录)
   }).catch(function(){});
   // 匿名访客(或登录用户缺属地)兜底:粗属地定位,与全站 IP 属地同口径

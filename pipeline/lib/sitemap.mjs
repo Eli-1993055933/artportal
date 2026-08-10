@@ -16,6 +16,42 @@ const MAX_URLS_PER_SITEMAP = 5000; // 单个 sitemap 最多解析这么多条,�
 // 非内容页"的宽松过滤,真伪仍交给下游 verify.mjs 的 evidence 校验——过滤太严会让 sitemap 通道白搭。
 const EXCLUDE_EXT = /\.(jpg|jpeg|png|gif|svg|webp|css|js|pdf|zip|ico|xml|json|mp4|mp3)$/i;
 const EXCLUDE_SEGMENT = /^\/(tag|tags|category|categories|author|authors|page|search|cart|checkout|login|register|account|wp-json|wp-content|feed|sitemap|privacy|terms|cookie|accessibility|contact|about|team|staff)(\/|$)/i;
+
+// 艺术机会相关关键词:用于给 sitemap URL 打分,优先抓取高价值页面
+const ART_OPPORTUNITY_KEYWORDS = [
+  // 英文
+  "open.call", "opencall", "call.for.artists", "call.for.entries",
+  "residency", "fellowship", "grant", "award", "prize",
+  "exhibition", "exhibit", "show", "biennale", "triennale",
+  "submission", "apply", "application", "deadline",
+  "public.art", "commission", "artist.in.residence",
+  "opportunity", "program", "project", "competition",
+  "festival", "symposium", "workshop", "residencies",
+  // 中文
+  "征集", "公开", "驻留", "奖", "资助", "展览", "展出",
+  "投稿", "申请", "截止", "报名", "入选", "公示",
+  "艺术", "作品", "项目", "计划", "招募"
+];
+
+// URL 打分:分数越高越可能是艺术机会页面
+function scoreUrlForArtOpportunity(urlStr) {
+  let score = 0;
+  try {
+    const u = new URL(urlStr);
+    // 解码 URL(处理中文等非 ASCII 字符)
+    const decodedPath = decodeURIComponent(u.pathname + u.search).toLowerCase();
+    const lowerFull = decodedPath;
+    
+    for (const kw of ART_OPPORTUNITY_KEYWORDS) {
+      const kwPattern = kw.replace(/\./g, "[./-]");
+      if (new RegExp(kwPattern, "iu").test(lowerFull)) {
+        score += kw.length > 3 ? 3 : 2; // 长关键词权重更高
+      }
+    }
+  } catch (e) {}
+  return score;
+}
+
 function looksLikeContentPage(u) {
   const p = u.pathname;
   if (!p || p === "/") return false;
@@ -93,8 +129,13 @@ export async function discoverViaSitemap(origin, domain, opts) {
     const key = u.href.split("#")[0];
     if (seen.has(key)) continue;
     seen.add(key);
-    filtered.push({ url: key, lastmod: e.lastmod });
-    if (filtered.length >= cap) break;
+    // 为每个 URL 计算艺术机会评分
+    const artScore = scoreUrlForArtOpportunity(key);
+    filtered.push({ url: key, lastmod: e.lastmod, artScore });
   }
-  return { urls: filtered, totalInSitemap: entries.length, trustLastmod };
+  // 按艺术机会评分排序,高分优先(更可能是征集/驻留/奖项页面)
+  filtered.sort((a, b) => b.artScore - a.artScore);
+  // 取前 cap 条
+  const result = filtered.slice(0, cap).map(({ url, lastmod }) => ({ url, lastmod }));
+  return { urls: result, totalInSitemap: entries.length, trustLastmod };
 }

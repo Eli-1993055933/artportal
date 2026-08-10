@@ -2450,5 +2450,245 @@
   "world_press_photo_contest|https://www.worldpressphoto.org/contest/2026/jury-perspectives": {
     "hash": "c656f68dfc59b6d23bc11d7617635ba8f027217faaf05e0e477935f4854bcf0a",
     "at": "2026-07-14"
+  },
+  "jiangsu-msg": {
+    "hash": "10471a191e5c13168439cd53363177b622686a21873e8bbb2f3852b433dddc72",
+    "at": "2026-07-21"
+  },
+  "jiangsu-msg|https://www.jssmsg.cn/Home/detail?Id=1503&amp;mtt=3": {
+    "hash": "b53b3a796ccbc5e07f68f0386a998d0a8758a23bcea0b6d8f4c547246a253b2b",
+    "at": "2026-07-21"
+  },
+  "jiangsu-msg|https://www.jssmsg.cn/Home/detail?Id=1480&amp;mtt=3": {
+    "hash": "b341bc60de50c8d26964aa61b4e5d187c34daca0c8b6c282d03014a6e146c289",
+    "at": "2026-07-21"
+  },
+  "jiangsu-msg|https://www.jssmsg.cn/Home/detail?Id=1472&amp;mtt=3": {
+    "hash": "895f5cef0f8e4a272377e34b6a1653def4e0219b053365741cb5fab10b259790",
+    "at": "2026-07-21"
+  },
+  "jiangsu-msg|https://www.jssmsg.cn/Home/detail?Id=1457&amp;mtt=3": {
+    "hash": "054f8766b94461acebd7e1d10516dbdbab66aec28904dcf9011507f41f33f635",
+    "at": "2026-07-21"
+  },
+  "jiangsu-msg|https://www.jssmsg.cn/Home/detail?Id=1452&amp;mtt=3": {
+    "hash": "5867134e3f6a1f8b24f464887debba6fa614ad1636f0e2b72344199885533274",
+    "at": "2026-07-21"
+  },
+  "jiangsu-msg|https://www.jssmsg.cn/Home/detail?Id=1449&amp;mtt=3": {
+    "hash": "3c9d5ce60ec8bfe251f83d0fbeb5a480f100d29c1a91f3dcc87c4f7c1705354f",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg": {
+    "hash": "77e8db24021f60cab15a2b232803e1de0aa9ece8e8d6a1cc4bbf39393ec7f08c",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg|https://www.tymsg.org.cn/gczj/HD25463140.html": {
+    "hash": "7e92121d6be567c6f6620146e0eabacce7fc212feb3afc6472a35ba8fb778145",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg|https://www.tymsg.org.cn/msgzyzc/2001115969807626241.html": {
+    "hash": "c6cba93b047263899ca3abe642076a8d2e0673a806b1b7a8757e0b98851d5695",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg|https://www.tymsg.org.cn/msgzyzc/2022230690891739138.html": {
+    "hash": "15b4c14750736af0f393a4b39f318c098d049e2cf9338dcec9b8f276ac877ed0",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg|https://www.tymsg.org.cn/msgzyzc/2018962686934446082.html": {
+    "hash": "bf9e67407361350660fc923d32be1768e989a945f8dfd2035bbb18ffc1b0462f",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg|https://www.tymsg.org.cn/msgzyzc/2018960923300917249.html": {
+    "hash": "dfc8e9f1c777407a90cfeb08df1294d6ad3a15a73b2403d07e4bb84106673d2a",
+    "at": "2026-07-21"
+  },
+  "taiyuan-msg|https://www.tymsg.org.cn/msgzyzc/2018957677077393409.html": {
+    "hash": "fd23c112e60cb2a1a05e8b7a697cde3238140db75e0dc56bb61bdcbf4be688dd",
+    "at": "2026-07-21"
+  },
+  "hunan-msg": {
+    "hash": "d12a81f2de68c9aa75e074dad066f59c0149ecc1c4daf1d7e7ecc845b621b579",
+    "at": "2026-07-21"
+  },
+  "hunan-msg|https://www.hnmsg.net/default.php?mod=channel&a=list&temp=list&channel_id=2&sp=1": {
+    "hash": "ac0f8921797cea5b94a43533d645edf09de4ba572f19e1b67d650ab2a2336f5f",
+    "at": "2026-07-21"
+  },
+  "hunan-msg|https://www.hnmsg.net/default.php?mod=channel&a=list&temp=list&channel_id=3&sp=1": {
+    "hash": "497d4db3371d903d7905986248825f43e0b1ab5756401fa2b5f3114e21e4f34a",
+    "at": "2026-07-21"
+  },
+  "hunan-msg|https://www.hnmsg.net/default.php?mod=channel&a=list&temp=list&channel_id=4&sp=1": {
+    "hash": "3abb60623997562dc092fc93b588a6105a40e3575436def2bf5ef73c4927e611",
+    "at": "2026-07-21"
+  },
+  "hunan-msg|https://www.hnmsg.net/default.php?mod=channel&a=list&temp=list&channel_id=5&sp=1": {
+    "hash": "ca61a36e62c4de403060b015a41fe0e3b1099f666655a4b398d3e8ae5d46c45d",
+    "at": "2026-07-21"
+  },
+  "hunan-msg|https://www.hnmsg.net/default.php?mod=channel&a=list&temp=list&channel_id=6&sp=1": {
+    "hash": "31aaa0def35130af552c1c3833f0af36c8edfe9d9dd8164ef8c320c195bd71fa",
+    "at": "2026-07-21"
+  },
+  "hunan-msg|https://www.hnmsg.net/default.php?mod=channel&a=list&temp=list&channel_id=7&sp=1": {
+    "hash": "133035335aa35502e256fd76a20bb409fa3025e7a70424be53fc49843d4ac436",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg": {
+    "hash": "d0eaff61caa9c2b68c7347e0d171973818590684a09cebe1da508aa99a34ab2b",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg|http://www.jdzmsg.cn/dongtai/wzxl.asp?xxid=562": {
+    "hash": "81b7de22b48f967cd97c47871899847e8164cc7c7237d47f58fa57aa5bcc1b2b",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg|http://www.jdzmsg.cn/dongtai/index.asp?classid=2&sid=12": {
+    "hash": "46752692f3f7db3e92c38c52afb563e16813715b078606fd93265560dc6502b9",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg|http://www.jdzmsg.cn/dongtai/index.asp?classid=2&sid=13": {
+    "hash": "d11840f9cc45ffedecfe58f6b78cdffa35528f410eef6a20a7a89a9c0ff80503",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg|http://www.jdzmsg.cn/dongtai/wzxl.asp?xxid=561": {
+    "hash": "f0b456e1c49946c8a6d0f12fa21dec4d5844bd8f4bf69ec7bd02d733f62d2a2c",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg|http://www.jdzmsg.cn/dongtai/wzxl.asp?xxid=560": {
+    "hash": "47c3576db2ef1d5a0606d8ebd91284114266197b9409a94997475e42e00c7eeb",
+    "at": "2026-07-21"
+  },
+  "jingdezhen-msg|http://www.jdzmsg.cn/dongtai/wzxl.asp?xxid=559": {
+    "hash": "bbe3a78ca4ac656889ee0ce13da8a20588b668237316a8aaa33865adbe787d1c",
+    "at": "2026-07-21"
+  },
+  "p79-residency": {
+    "hash": "0232e67b4093ce628c07bca905d7a322c54b5fc43e1ace7b7853214af9d52704",
+    "at": "2026-08-03"
+  },
+  "corsicana-100w-residency": {
+    "hash": "36b342a72f2a4865a0b98cd37dea5e997fb6d727901043673c04aaf105a7b8e4",
+    "at": "2026-08-03"
+  },
+  "prisma-art-prize": {
+    "hash": "86730d75473fb8fc456dd51b5fb6c6bab874ecb7b33b56a6dce39bb1659de77b",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency": {
+    "hash": "ec5d26c65d7ba6b83cc1ec8b136ff04416982955c2a54d373818acd53b1e63ff",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/how-to-apply/": {
+    "hash": "9f3fc8d205b3ee58fa0e56a7a75dbea9c0ea8402ca15e349f17e40a5dd2d29bd",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/06/03/writing-on-wild-water/": {
+    "hash": "cc9fefbfa059bccfc6a703d8e27fc5c0d7792882513ee076bcfa87a217274e12",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/05/25/open-studio-may-3/": {
+    "hash": "420dfc7b8a41c42cf0c71fcdb232617785a33f90e609eba8eb13dee32f794bc8",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/04/27/open-studio-april-2/": {
+    "hash": "212bde88110a442d69896de32a9e4f03a53db10e53da68061d4fba1ef4cb91c8",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/04/27/sesongopning-av-messen-kunstpark-i-alvik/": {
+    "hash": "e0b5eddb382b3e4205c9a12c1bf9fb025075d01754ced898ebbbb74695482073",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/03/21/open-studio-march-3/": {
+    "hash": "2fce714b58b174187d8bfdaa9a73deb84f60398be98d1f2809a201db3b434d16",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/02/14/open-studio-february-3/": {
+    "hash": "7b8b6444e9b46e447cf4e381d0e9966a2f9353f28d287832cc8e3cae7e7ef228",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2026/01/07/bye-bye-2025-and-hello-2026/": {
+    "hash": "9a419758f4b57575bd30c22093aedcf7738eb90746c2d1e498705f7a0c901a33",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/10/19/open-studio-october-3/": {
+    "hash": "a07d790ce6b2af97778586d0b4c8bc7824f3636ab6eb4133c2aab946622fe466",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/08/25/open-studio-august-7/": {
+    "hash": "1d045817a771d76475f74a9c59fc26a8caac7056c0dd2f1f405d7aa9deca2c09",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/06/29/open-studio-june-2025/": {
+    "hash": "d2471fcafefb54e422cd5434e07880c0d1f1b57c16b2a233cec7445ec9b5d361",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/05/29/ope-studio-may/": {
+    "hash": "392a3c20a97774ce0bf5c7d27a177ab0175b9d1f2d436dd5807af851de273ab4",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/05/25/open-studio-may-2/": {
+    "hash": "45f9283f74ffc3c2df536e98302d82e0ba4648b9d854866a87cc0a3d7a4297aa",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/05/14/opning-av-kunstpark-2025/": {
+    "hash": "6b38657087eadff3532ace566af42e15b24c5a302b1114b48ba74cbb9514bd8f",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/04/28/kunstpark-2025/": {
+    "hash": "a14aee1852f248db6883ec0653c5ff390b2e8b6920dc828a7241d250bdaa11cd",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/04/27/open-studio-april/": {
+    "hash": "2b50342492436d55423e54fe8d23f33eeb0dcbd2caa5011ad83fa7f1bf34f8da",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/03/26/ope-studio-march/": {
+    "hash": "b31b9348c9d5c4690e2fcec51cdad5f4a191fd72fa37a9d87b5ac7f66febc40c",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/03/02/open-studio-feb/": {
+    "hash": "11676bf39cf080ab7249fbbe40475425a80aec017d08a1b05357e144851a884b",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/01/24/open-studio-jan-2025/": {
+    "hash": "1fcf56544969306027f20c441ac1957948e4759b2618b46f28a7e20de12eb6f5",
+    "at": "2026-08-03"
+  },
+  "khmessen-residency|https://www.khmessen.no/blog/2025/01/06/503035/": {
+    "hash": "ec9ce400900b3994d1e72d1fc51eef497cbf3a2106ec27907b4136cc592d18e0",
+    "at": "2026-08-03"
+  },
+  "adobe-max-creativity-awards": {
+    "hash": "37eaab1a3bb15e4af78a34c44f64acdaf1d5e463c569f988fc1b55905a51d578",
+    "at": "2026-08-03"
+  },
+  "photovogue-open-call-2026": {
+    "hash": "8b32c1e4066dd7ea917209366939f62f98e9cb21ee8f74ca6d86c3a0b439fb8f",
+    "at": "2026-08-03"
+  },
+  "psa-announcements": {
+    "hash": "365c31b4394b69ff6bacf147ee2f6c3ba09d80501bc1bd3f3a38ee6e9de070d8",
+    "at": "2026-08-04"
+  },
+  "psa-announcements|https://www.powerstationofart.com/whats-on/news/15th-shb-artist-list": {
+    "hash": "c192473946641c53f40fee850c997906b1ecde1b05b4476b733d061a60bc7c81",
+    "at": "2026-08-04"
+  },
+  "psa-announcements|https://www.powerstationofart.com/whats-on/news/15shb-creative-team": {
+    "hash": "c192473946641c53f40fee850c997906b1ecde1b05b4476b733d061a60bc7c81",
+    "at": "2026-08-04"
+  },
+  "psa-announcements|https://www.powerstationofart.com/whats-on/news/next-cultural-producer-s3": {
+    "hash": "c192473946641c53f40fee850c997906b1ecde1b05b4476b733d061a60bc7c81",
+    "at": "2026-08-04"
+  },
+  "psa-announcements|https://www.powerstationofart.com/whats-on/news/15-shb-curator": {
+    "hash": "c192473946641c53f40fee850c997906b1ecde1b05b4476b733d061a60bc7c81",
+    "at": "2026-08-04"
+  },
+  "psa-announcements|https://www.powerstationofart.com/whats-on/news/ecp-24": {
+    "hash": "c192473946641c53f40fee850c997906b1ecde1b05b4476b733d061a60bc7c81",
+    "at": "2026-08-04"
   }
 }

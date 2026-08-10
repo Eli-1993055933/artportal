@@ -6,6 +6,12 @@
       "runtimeExecutable": "D:\\Node.js\\node.exe",
       "runtimeArgs": ["C:\\Users\\34714\\AppData\\Local\\Temp\\claude\\D--Claude-Code\\cc0a147a-f6fb-4f74-a876-6b1783713d06\\scratchpad\\static-server.mjs"],
       "port": 8123
+    },
+    {
+      "name": "artportal-server",
+      "runtimeExecutable": "D:\\Node.js\\node.exe",
+      "runtimeArgs": ["D:\\Claude Code\\pipeline\\dev-server.mjs"],
+      "port": 8080
     }
   ]
 }
