@@ -5725,6 +5725,746 @@
       "confirmed": false,
       "notes": "奥克兰美术馆,新西兰最大艺术机构",
       "region_hint": "intl-oceania"
+    },
+    {
+      "id": "tjswl-auto",
+      "org_zh": "天津文艺界",
+      "name_zh": "机器发现",
+      "url": "https://www.tjswl.cn/",
+      "domain": "tjswl.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「天津 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "tjmsg-auto",
+      "org_zh": "天津美术馆官方网站",
+      "name_zh": "机器发现",
+      "url": "https://www.tjmsg.com/",
+      "domain": "tjmsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「天津 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "artmuseum-auto",
+      "org_zh": "清华大学艺术博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.artmuseum.tsinghua.edu.cn/",
+      "domain": "artmuseum.tsinghua.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「天津 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "tjbwg-auto",
+      "org_zh": "天津博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.tjbwg.cn/",
+      "domain": "tjbwg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「天津 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "zh-auto",
+      "org_zh": "维基百科，自由的百科全书",
+      "name_zh": "机器发现",
+      "url": "https://zh.wikipedia.org/zh-hans/%E5%A4%A9%E6%B4%A5%E7%BE%8E%E6%9C%AF%E9%A6%86",
+      "domain": "zh.wikipedia.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「天津 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "whly-auto",
+      "org_zh": "河北省文化和旅游厅",
+      "name_zh": "机器发现",
+      "url": "https://whly.hebei.gov.cn/xwzx/zyxx/",
+      "domain": "whly.hebei.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「河北 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "sjz-auto",
+      "org_zh": "文化艺术",
+      "name_zh": "机器发现",
+      "url": "https://www.sjz.gov.cn/columns/f9dc20f0-1926-4100-bc9e-7fa9e0a51532/index.html",
+      "domain": "sjz.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「河北 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "s-auto",
+      "org_zh": "河北省博物馆",
+      "name_zh": "机器发现",
+      "url": "https://s.visitbeijing.com.cn/attraction/119259",
+      "domain": "s.visitbeijing.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「河北 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "m-auto",
+      "org_zh": "【河北展览馆】河北展览馆有哪些",
+      "name_zh": "机器发现",
+      "url": "https://m.sjz.bendibao.com/jingdian/sheng-hebeisheng-zhanlanguan/",
+      "domain": "m.sjz.bendibao.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「河北 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "wenwu-auto",
+      "org_zh": "河北省文物局",
+      "name_zh": "机器发现",
+      "url": "http://wenwu.hebei.gov.cn/zdgz/bwgzsly/bwgdt/index.shtml",
+      "domain": "wenwu.hebei.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「河北 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-north"
+    },
+    {
+      "id": "jswyw-auto",
+      "org_zh": "江苏文艺网 江苏文联",
+      "name_zh": "机器发现",
+      "url": "https://www.jswyw.com/",
+      "domain": "jswyw.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「江苏 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "wl-auto",
+      "org_zh": "苏州文学艺术网",
+      "name_zh": "机器发现",
+      "url": "http://www.wl.suzhou.gov.cn/",
+      "domain": "wl.suzhou.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「江苏 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "jsmsj-auto",
+      "org_zh": "新闻资讯/ 公告通知",
+      "name_zh": "机器发现",
+      "url": "https://www.jsmsj.org/JiangsuArtists/webbase/gonggaotongzhi/",
+      "domain": "jsmsj.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「江苏 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "njstm-auto",
+      "org_zh": "南京科技馆",
+      "name_zh": "机器发现",
+      "url": "https://www.njstm.org.cn/",
+      "domain": "njstm.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「南京 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "museum-auto",
+      "org_zh": "南京大学博物馆",
+      "name_zh": "机器发现",
+      "url": "https://museum.nju.edu.cn/",
+      "domain": "museum.nju.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「南京 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "njiemuseum-auto",
+      "org_zh": "南京中国科举博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.njiemuseum.com/",
+      "domain": "njiemuseum.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「南京 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "19371213-auto",
+      "org_zh": "侵华日军南京大屠杀遇难同胞纪念馆",
+      "name_zh": "机器发现",
+      "url": "https://www.19371213.com.cn/",
+      "domain": "19371213.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「南京 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "shpx-auto",
+      "org_zh": "南京博物院",
+      "name_zh": "机器发现",
+      "url": "https://shpx.nju.edu.cn/9a/aa/c59556a694954/page.htm",
+      "domain": "shpx.nju.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「南京 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "gdmuseum-auto",
+      "org_zh": "广东省博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.gdmuseum.org.cn/",
+      "domain": "gdmuseum.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「广东 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "msg-auto",
+      "org_zh": "广州美术馆",
+      "name_zh": "机器发现",
+      "url": "https://msg.gzarts.edu.cn/",
+      "domain": "msg.gzarts.edu.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「广东 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "gzam-auto",
+      "org_zh": "广州艺术博物院",
+      "name_zh": "机器发现",
+      "url": "https://www.gzam.com.cn/",
+      "domain": "gzam.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「广东 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "gz-auto",
+      "org_zh": "广州艺术博物院（广州美术馆）新馆",
+      "name_zh": "机器发现",
+      "url": "https://www.gz.gov.cn/zlgz/gzly/wzgz/wbcg/content/post_9375725.html",
+      "domain": "gz.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「广东 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "gdhuayuan-auto",
+      "org_zh": "优秀作品展",
+      "name_zh": "机器发现",
+      "url": "https://www.gdhuayuan.com/about/2665.html",
+      "domain": "gdhuayuan.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「广东 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "nhmuseum-auto",
+      "org_zh": "南海博物馆,南海区博物馆,佛山市南海区博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.nhmuseum.org/",
+      "domain": "nhmuseum.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「佛山 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "xinguimuseum-auto",
+      "org_zh": "佛山市顺德区新桂自然文化博物馆",
+      "name_zh": "机器发现",
+      "url": "http://xinguimuseum.com/",
+      "domain": "xinguimuseum.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「佛山 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "gddaguanmuseum-auto",
+      "org_zh": "广东大观博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.gddaguanmuseum.com/",
+      "domain": "gddaguanmuseum.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「佛山 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "sdmuseum-auto",
+      "org_zh": "顺德区博物馆集群云服务平台",
+      "name_zh": "机器发现",
+      "url": "https://www.sdmuseum.com.cn/museum.html?id=1122",
+      "domain": "sdmuseum.com.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「佛山 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "gdsqyg-auto",
+      "org_zh": "广东省文化馆",
+      "name_zh": "机器发现",
+      "url": "http://www.gdsqyg.com/agdwhhd/index",
+      "domain": "gdsqyg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「佛山 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "fs-auto",
+      "org_zh": "佛山文化馆一览（附具体地址）",
+      "name_zh": "机器发现",
+      "url": "http://fs.bendibao.com/xiuxian/202184/103929.shtm",
+      "domain": "fs.bendibao.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「佛山 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "thebroad-auto",
+      "org_zh": "The Broad",
+      "name_zh": "机器发现",
+      "url": "https://www.thebroad.org/",
+      "domain": "thebroad.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Los Angeles art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "latimes-auto",
+      "org_zh": "and Los Angeles with it",
+      "name_zh": "机器发现",
+      "url": "https://www.latimes.com/0000019d-6980-dbcd-a5ff-f9aab6970000-123",
+      "domain": "latimes.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Los Angeles art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "lacountyarts-auto",
+      "org_zh": "lacountyarts.org",
+      "name_zh": "机器发现",
+      "url": "https://www.lacountyarts.org/los-angeles-county-museum-art",
+      "domain": "lacountyarts.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Los Angeles art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "nytimes-auto",
+      "org_zh": "The New York Times",
+      "name_zh": "机器发现",
+      "url": "https://www.nytimes.com/topic/organization/los-angeles-county-museum-of-art",
+      "domain": "nytimes.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Los Angeles art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "collections-auto",
+      "org_zh": "Browse the Collection",
+      "name_zh": "机器发现",
+      "url": "https://collections.lacma.org/search",
+      "domain": "collections.lacma.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Los Angeles art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "en-auto",
+      "org_zh": "Wikipedia",
+      "name_zh": "机器发现",
+      "url": "https://en.wikipedia.org/wiki/Los_Angeles_County_Museum_of_Art",
+      "domain": "en.wikipedia.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Los Angeles art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "us-auto",
+      "org_zh": "United States",
+      "name_zh": "机器发现",
+      "url": "https://us.fundsforngos.org/donor/san-francisco-arts-commission-sfac/",
+      "domain": "us.fundsforngos.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「San Francisco arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-west"
+    },
+    {
+      "id": "sydneymuseums-auto",
+      "org_zh": "sydneymuseums.com.au",
+      "name_zh": "机器发现",
+      "url": "https://sydneymuseums.com.au/art-museums-in-sydney/",
+      "domain": "sydneymuseums.com.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Sydney art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
     }
   ],
   "blocked_or_unverified": [

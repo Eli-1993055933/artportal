@@ -26,7 +26,16 @@ import { searchWebFull, serperBudgetLeft, braveBudgetLeft, BLOCK, unsafeHost } f
 import { fetchSource } from "./lib/fetch.mjs";
 import { THIRD_PARTY } from "./lib/aggregators.mjs";
 
+// 自动加载 .env(如果存在)
 const __dir = dirname(fileURLToPath(import.meta.url));
+const envPath = join(__dir, ".env");
+try {
+  const envText = await readFile(envPath, "utf8");
+  for (const line of envText.split("\n")) {
+    const m = line.match(/^([A-Z_]+)=(.+)/);
+    if (m) process.env[m[1]] = m[2].trim().replace(/^['"]|['"]$/g, "");
+  }
+} catch (e) { /* .env 不存在则跳过 */ }
 const SRC_PATH = join(__dir, "sources.json");
 
 const argv = process.argv.slice(2);
