@@ -26,7 +26,8 @@
 ## 用户数据红线(不可违反)
 1. **用户数据是最高优先级**:所有用户数据(users.json、sessions.json、artportal.db、events.jsonl)必须时刻可恢复。
 2. **部署前自动备份**:每次执行 `node pipeline/deploy.mjs` 自动触发本地 state/ 备份到 `backups/predeploy_<timestamp>/`。
-3. **定期远程备份**:每周至少执行一次 `node pipeline/backup.mjs`(远程备份,从服务器拉取 state/ 到本地 `backups/snapshot_<timestamp>/`)。
-4. **GitHub 版本控制**:所有代码(包括 backup.mjs、deploy.mjs、cleanup.mjs)必须提交到 GitHub,确保任何代码变更可回滚。用户数据通过 backup.mjs 生成快照。
-5. **禁止手动操作**:绝对禁止手动 tar 打包 pipeline/ 目录,绝对禁止手动 scp 覆盖 state/ 文件。所有部署只能通过 `deploy.mjs`。
-6. **数据恢复流程**:如用户数据丢失,先检查 `backups/` 目录下的最近快照,按 `restore.sh` / `restore.cmd` 恢复。如果本地有备份,将 `backups/predeploy_<timestamp>/` 中的文件复制回 `pipeline/state/` 并重启服务。
+3. **服务器自动备份**:服务器每天凌晨 3:00 自动执行 `backup-server.sh`，备份 state/ 到 `deploy_backups/auto/`，保留最近 7 天。
+4. **定期远程备份**:每周至少执行一次 `node pipeline/backup.mjs`(远程备份,从服务器拉取 state/ 到本地 `backups/snapshot_<timestamp>/`)。
+5. **GitHub 版本控制**:所有代码(包括 backup.mjs、deploy.mjs、cleanup.mjs、backup-server.sh)必须提交到 GitHub,确保任何代码变更可回滚。用户数据通过 backup.mjs 生成快照。
+6. **禁止手动操作**:绝对禁止手动 tar 打包 pipeline/ 目录,绝对禁止手动 scp 覆盖 state/ 文件。所有部署只能通过 `deploy.mjs`。
+7. **数据恢复流程**:如用户数据丢失,先检查本地 `backups/` 目录下的最近快照,或服务器 `deploy_backups/auto/` 下的最近备份,按 `restore.sh` / `restore.cmd` 恢复。

@@ -1,0 +1,187 @@
+{
+  "users": [
+    {
+      "id": "uc8709233aeb7",
+      "email": "alice@example.com",
+      "salt": "04d23c0cc0207f9c5faf902b3b6a8dbf",
+      "hash": "a5c875ef568e9b459d6fe08dee0f226c73cb5bdd91cb5179fb956b71c810fcd72645d04cbef48a5e99e5c6fb9c4c9bf58843bf947587ab264494156327c11719",
+      "nickname": null,
+      "profile": {},
+      "favorites": [
+        "xafa-naf-mixedmedia-2026"
+      ],
+      "created_at": "2026-07-15T13:50:11.487Z",
+      "last_seen": "2026-07-15T18:05:53.411Z"
+    },
+    {
+      "id": "u1d80d1acb20c",
+      "email": "carol@example.com",
+      "salt": "5508a11337eb2894aa10808a0d277df4",
+      "hash": "1630b37c75997d1b47e1204fcae8cf751a3b90dfdc8bc021f74cc05f434ac9358e1a9d7b8f8e4e265283967a3ab9f26662e35f21ef5a127cafd3ad1abeff3adf",
+      "nickname": null,
+      "profile": {},
+      "favorites": [],
+      "created_at": "2026-07-15T13:50:51.184Z",
+      "last_seen": "2026-07-15T13:50:51.184Z"
+    },
+    {
+      "id": "ufef005d0d370",
+      "email": "3471483657@qq.com",
+      "salt": "9ece92e832b30127c1e08e27053ccb88",
+      "hash": "60afb4fb40159184314ce672da6137128899fc9fde3f10aa5b2a66f12672f2886545592c9eccd4a3a9443659da7cdbf4d40c8f967c8e735b064edd517e7e3b6b",
+      "nickname": "张拙淳",
+      "profile": {
+        "bio": "",
+        "identity": "",
+        "fields": "",
+        "location": "",
+        "website": ""
+      },
+      "favorites": [
+        "agg-take-to-the-greenwood-cur",
+        "agg-suspended-last-few-places-added-cur"
+      ],
+      "created_at": "2026-07-15T14:04:25.527Z",
+      "last_seen": "2026-08-10T19:07:48.325Z",
+      "avatar": "assets/avatars/ufef005d0d370.jpg",
+      "phone_verified": true
+    },
+    {
+      "id": "u5d8cd63518fc",
+      "email": "test-profile-1784221512614@example.com",
+      "salt": "a636fd799c6fd29109fc7077bd81be7d",
+      "hash": "ef7b781a15514bbea48333a7e71e8221aa6c46ff5bbaf3b5fa33b3b98c87d55de570844adec8c946a4e37fa5bcbd848e6b953366756f126722ad81b3d348ca24",
+      "nickname": "改名测试甲",
+      "profile": {
+        "bio": "画油画的,现居大理,喜欢山和云。",
+        "identity": "artist",
+        "fields": "油画、水彩",
+        "location": "云南大理",
+        "website": "https://example.com/me",
+        "fav_public": false
+      },
+      "favorites": [
+        "agg-e-sun-art-awards-2026-art"
+      ],
+      "created_at": "2026-07-16T17:05:12.651Z",
+      "last_seen": "2026-07-17T16:28:29.049Z",
+      "avatar": "assets/avatars/u5d8cd63518fc.jpg",
+      "nickname_changed_at": "2026-07-16T17:07:10.755Z"
+    },
+    {
+      "id": "u02ed495c7743",
+      "email": "test-follow-1784251304576@example.com",
+      "salt": "78448247b5e1953de50e43fc353e0045",
+      "hash": "3b9eaadf5ede25d100d390cf9369d743a387b18ba470883beb984ec2db5eb51e4003d3a4365c77d24803fac03da8323e9470c63aefb2ef20c7b17b3e4ada51e9",
+      "nickname": "测试画家乙4620",
+      "profile": {
+        "bio": "",
+        "identity": "",
+        "fields": "",
+        "location": "",
+        "website": ""
+      },
+      "favorites": [],
+      "created_at": "2026-07-17T01:21:44.610Z",
+      "last_seen": "2026-07-17T11:14:47.940Z",
+      "avatar": "assets/avatars/u02ed495c7743.jpg",
+      "banned": false
+    },
+    {
+      "id": "u851d32816bf4",
+      "email": "user@zheshigebucunzai-domain-9527.com",
+      "salt": "e8fcd820b29b9aa767eae90785439753",
+      "hash": "848156f22f28ba15f9dcd4d119baec171df30b5233b4ce185848bda8a2294aa6333c6107af675245ef6c7bc95cd1b4fd7eca9fd75ab7eab85488d858f1473191",
+      "email_verified": false,
+      "nickname": null,
+      "profile": {},
+      "favorites": [],
+      "created_at": "2026-07-17T01:46:22.121Z",
+      "last_seen": "2026-07-17T01:46:22.121Z"
+    },
+    {
+      "id": "u512ce17b16f4",
+      "email": "mx-test-1784252782132@qq.com",
+      "salt": "df62b5d40cfaa0ff49c7ae79a63ca3bd",
+      "hash": "0f720116f000e018c558bf7f933038cb5818d6e06ddc247d0beb48c59249cc8641a242cb9522d97467a65317e2bdba3a082c4c83a54097ba65e2ab8d1d53320a",
+      "email_verified": false,
+      "nickname": null,
+      "profile": {},
+      "favorites": [],
+      "created_at": "2026-07-17T01:46:25.669Z",
+      "last_seen": "2026-07-17T01:46:25.669Z"
+    },
+    {
+      "id": "ud3dd37c4ba70",
+      "email": "mx-ok-1784252949484@163.com",
+      "salt": "8e2ab204aef4f13ec1d5d6e1fdb34e16",
+      "hash": "c9c66ccc4afcfa5f8d0ef8bf79925873614ff3dfed13aca9684040841fd2c14fafc4867546cf812d0b0718a37a45aa8d80ecd3351b989f2f05befd4e06affe25",
+      "email_verified": false,
+      "nickname": null,
+      "profile": {},
+      "favorites": [],
+      "created_at": "2026-07-17T01:49:09.572Z",
+      "last_seen": "2026-07-17T01:49:09.572Z"
+    },
+    {
+      "id": "ue629ef3a2538",
+      "email": "code-test-1784253043965@qq.com",
+      "salt": "2bcfdb6dcd5e5a97c5475dc8c8c31a50",
+      "hash": "2807f64da138bfbdd518565589f0dd372643a575c8cdc5c994209a44c76b2c2c48119e224096ab1f9134a687d517939e7a495721e7348c1fefc86404a867cc30",
+      "email_verified": true,
+      "nickname": null,
+      "profile": {},
+      "favorites": [],
+      "created_at": "2026-07-17T01:51:04.761Z",
+      "last_seen": "2026-07-17T03:38:39.701Z"
+    },
+    {
+      "id": "u12dc30772871",
+      "email": "weeklytest@qq.com",
+      "salt": "74e444e2d089f2792cc603e80af46684",
+      "hash": "6cf4fe55293ca7f8afac33f836336693a9ae3d553ea4e8e3016e43dbcac3ac8a6ec0666d9a88d6cbd23ae672d6c6f71e308eb2201d6019da08d7abfa6b3a89a7",
+      "email_verified": true,
+      "newsletter": false,
+      "nickname": "周刊测试员",
+      "profile": {
+        "bio": "",
+        "identity": "",
+        "fields": "",
+        "location": "",
+        "website": ""
+      },
+      "favorites": [
+        "agg-post-animal-signal-cur",
+        "news:news-ctxwlq-hong-kong-house-2026-opening-and-exchang",
+        "detour-hk-pmq-detour-2026-创意方案公开征集",
+        "future_generation_art_prize-未来世代艺术奖",
+        "agg-take-to-the-greenwood-cur",
+        "job:job-1ea523-faculty-associate-in-art-工作室艺术-兼职教师"
+      ],
+      "created_at": "2026-07-18T01:22:00.566Z",
+      "last_seen": "2026-08-02T06:19:11.432Z",
+      "avatar": "assets/avatars/u12dc30772871.jpg",
+      "studio": false
+    },
+    {
+      "id": "ua084a02049d4",
+      "email": "teststuck@gmail.com",
+      "salt": "c75cb2b81082cd1b488605eb9643e8da",
+      "hash": "ab3e55928f0735e3d770b5a03ecadcb9498f51bff1777e7dd2d4c65055635001d570df3f947ed02ef7783272cec4d7405bc436b1c0bb9dceacfb740ced34c3ff",
+      "email_verified": true,
+      "newsletter": false,
+      "nickname": "测试用户小明",
+      "profile": {
+        "bio": "",
+        "identity": "",
+        "fields": "",
+        "location": "",
+        "website": ""
+      },
+      "favorites": [],
+      "created_at": "2026-07-24T10:07:51.518Z",
+      "last_seen": "2026-07-24T14:42:34.365Z",
+      "avatar": "assets/avatars/ua084a02049d4.jpg"
+    }
+  ]
+}

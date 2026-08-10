@@ -1,0 +1,21 @@
+{
+  "_comment": "seed 数据的原文 evidence 存档(逐字句)。前端公开数据不含 evidence;此处保留以备核对与'信息有误'审计。均来自 2026-07-09 对机构官网原文的实际抓取。",
+  "records": {
+    "namoc-innovation-2026": { "deadline": "自本通知发布之日起至2026年6月21日(逾期不予受理)", "fee": "原文未提及费用", "title": "2026全国中青年创新艺术展" },
+    "xafa-naf-mixedmedia-2026": { "deadline": "即日起至2026年5月31日24:00前(以收到邮件时间为准)", "participation": "参加培训学员在培训期间的往返一次交通费、培训期间的食宿、学习费用均由项目主体承担。", "title": "国家艺术基金2026年度艺术人才培训资助项目《'一带一路'主题综合材料绘画创作人才培训》" },
+    "hbmoa-collection-2026": { "deadline": "自本公告发布之日起至2026年12月31日", "participation": "本次征集为无偿捐赠", "title": "湖北美术馆2026年藏品征集公告" },
+    "caanet-beijing-biennial-10": { "deadline": "报名时间:即日起至2025年8月15日,报送材料逾期将不被接受。", "fee": "报名参选北京双年展无需交纳报名及参展费等任何费用。", "title": "第十届中国北京国际美术双年展" },
+    "cafa-youth-printmaking-2": { "deadline": "投稿截止日期:2025年11月16日(含)", "participation": "每位参展作者获赠画册一本", "title": "第二届中国青年版画双年展" },
+    "cafa-zhiyi-xiangjian-2025": { "deadline": "自招生简章发布之日起至2026年6月8日止", "fee": "本项目为北京文化艺术基金2025年资助项目,不收取学员学费、听课费等培训费用", "participation": "培训期间,学员交通、食宿等费用自理", "title": "北京文化艺术基金2025年资助项目《智艺乡建——面向乡村振兴的数字化文化设计人才培养项目》" },
+    "gdmoa-archive-opencall": { "deadline": "此征集函常年有效", "fee": "原文未提及费用", "title": "广东美术馆关于征集美术文献的通告" },
+    "threeshadows-award-13": { "deadline": "March 30, 2024 – April 28, 2024 (exhibition dates only; no application deadline stated)", "funding": "Grand Prize ... 80,000 RMB (before tax) ...; Charles Jin Collection Prize ... 80,000 RMB; 'Luo Bonian Photographer Prize' ... 10,000 RMB", "title": "THE 13TH THREE SHADOWS PHOTOGRAPHY AWARD" },
+    "a4-residency-fellowship": { "deadline": "The deadline of 2028 all year recruitment is currently located on the 31/12/2026", "funding": "Private workspace and living quarters provided; Round-trip airfare (Economy) or Train (2nd Class) within a set budget; RMB 10,000 per project for materials/production", "title": "International Residency Fellowship (Fully Funded)" },
+    "a4-residency-light": { "deadline": "The deadline of 2028 all year recruitment is currently located on the 31/12/2026", "participation": "Travel (airfare/train) and production costs are to be covered by residency creators", "title": "A4 Residency 'Light Version' (Self-Funded)" },
+    "cite-institutfrancais-2026": { "deadline": "Du 02 juillet au 08 octobre 2026", "funding": "Une allocation de résidence (de minimum 1100 € par mois, versée directement à l'artiste)", "nationality": "L'appel s'adresse aux artistes ... de toutes nationalités, sans limite d'âge", "title": "Institut français x Cité internationale des arts", "note": "evidence 为法语,校验须比对法语原页" },
+    "cite-francoise-2026": { "deadline": "Du 09 juillet au 16 août 2026", "funding": "d'une bourse de 1 000 euros nets de taxes par mois", "nationality": "s'adresse à un artiste-auteur ou une artiste-autrice de toute discipline, en milieu de carrière ou confirmé, et de toute nationalité", "title": "Association Françoise pour l'œuvre contemporaine x Cité internationale des arts" },
+    "cite-bridges-2026": { "deadline": "Du 02 juillet au 30 août 2026", "funding": "Une bourse de vie mensuelle d'un montant minimal de 1000 euros nets de taxes", "nationality": "Résider hors de France hexagonale", "title": "Bridges" },
+    "pier2-2027": { "deadline": "The application is online with a deadline of July 5, 2026.", "funding": "A daily living allowance of NTD 800 per artist / per group.", "nationality": "There is no restriction on nationality.", "title": "Pier-2 Art Center 2027 Open Call" },
+    "kinosaki-air-2027": { "deadline": "The application deadline is 17:00 Japan Standard Time on Saturday, 27th June 2026.", "participation": "each person pays 350 yen per day to Toyooka City for utilities", "funding": "Free use of the residence of up to 7 rooms.", "title": "Kinosaki International Arts Center AiR 2027/2028" },
+    "artcircle-slovenia-2026": { "deadline": "The deadline for applying is 25 June 2026.", "funding": "free accommodation and meals during the residency period", "title": "ART CIRCLE Slovenia 2026" }
+  }
+}

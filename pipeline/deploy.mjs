@@ -12,7 +12,7 @@
 //   - 部署后验证 HTTP 200
 
 import { execFileSync, execSync } from "node:child_process";
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, cpSync, rmSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -52,28 +52,68 @@ async function main() {
   // 1. 打包代码(排除 state/ 和 .env)
   const tarName = `artportal-${TAG}.tar.gz`;
   const tarPath = join(__dir, tarName);
-  const excludeState = "--exclude='pipeline/state' --exclude='pipeline/.env' --exclude='site/assets/works' --exclude='site/assets/avatars' --exclude='node_modules'";
 
-  if (FRONTEND_ONLY) {
-    // 只打包前端
-    if (!DRY) {
-      execFileSync("tar", ["czf", tarPath, "-C", ROOT, "--exclude=node_modules", "site/"], { encoding: "utf8", timeout: 120000 });
-      log(`前端包已创建: ${tarName} (${Math.round(readFileSync(tarPath).length / 1024)} KB)`);
-    } else {
-      log(`[DRY] tar czf ${tarName} -C ${ROOT} --exclude=node_modules site/`);
+  // 在临时目录中构建要打包的文件列表，避免 Windows tar 的 exclude 兼容性问题
+  // 注意: TMP 必须在项目根目录，不能放在 pipeline/ 下，否则复制 pipeline/ 时会递归复制自身
+  const TMP = join(ROOT, ".deploy_tmp");
+  const EXCLUDES = ["pipeline/state", "pipeline/.env", "pipeline/node_modules", "node_modules", "site/assets/works", "site/assets/avatars", tarName];
+
+  function shouldExclude(name) {
+    // 统一路径分隔符为 /（Windows 下 join 产生 \，而 EXCLUDES 用 /）
+    const n = name.replace(/\\/g, "/");
+    // 排除任何层级的 .deploy_tmp（防止递归复制自身）
+    if (n === ".deploy_tmp" || n.endsWith("/.deploy_tmp")) return true;
+    return EXCLUDES.some(e => n === e || n.startsWith(e + "/"));
+  }
+
+  if (!DRY) {
+    // 创建临时目录，并清理可能残留的旧 .deploy_tmp
+    if (existsSync(TMP)) rmSync(TMP, { recursive: true });
+    const oldTmp = join(__dir, ".deploy_tmp");
+    if (existsSync(oldTmp)) rmSync(oldTmp, { recursive: true });
+    mkdirSync(TMP, { recursive: true });
+
+    // 复制 pipeline/ 和 site/（排除敏感目录）
+    for (const dir of ["pipeline", "site"]) {
+      const src = join(ROOT, dir);
+      const dst = join(TMP, dir);
+      if (existsSync(src)) {
+        copyRecursive(src, dst, dir, shouldExclude);
+      }
     }
+
+    // 复制 VERSION 和 CHANGELOG.md
+    for (const f of ["VERSION", "CHANGELOG.md"]) {
+      const src = join(ROOT, f);
+      if (existsSync(src)) {
+        cpSync(src, join(TMP, f));
+      }
+    }
+
+    // 打包临时目录
+    execFileSync("tar", ["czf", tarPath, "-C", TMP, "."], { encoding: "utf8", timeout: 120000 });
+    log(`包已创建: ${tarName} (${Math.round(readFileSync(tarPath).length / 1024)} KB)`);
+
+    // 清理临时目录
+    rmSync(TMP, { recursive: true });
   } else {
-    // 打包前端+后端(排除数据文件)
-    if (!DRY) {
-      execFileSync("tar", ["czf", tarPath, "-C", ROOT,
-        "--exclude=pipeline/state", "--exclude=pipeline/.env",
-        "--exclude=pipeline/node_modules", "--exclude=node_modules",
-        "--exclude=site/assets/works", "--exclude=site/assets/avatars",
-        "pipeline/", "site/", "VERSION", "CHANGELOG.md"
-      ], { encoding: "utf8", timeout: 120000 });
-      log(`全量包已创建: ${tarName} (${Math.round(readFileSync(tarPath).length / 1024)} KB)`);
-    } else {
-      log(`[DRY] tar czf ${tarName} -C ${ROOT} --exclude=pipeline/state --exclude=pipeline/.env ... pipeline/ site/`);
+    log(`[DRY] 将会打包 pipeline/ site/ VERSION CHANGELOG.md（排除 ${EXCLUDES.join(", ")}）`);
+  }
+
+  // 辅助函数:递归复制目录，跳过排除项
+  function copyRecursive(src, dst, relPrefix, excludeFn) {
+    mkdirSync(dst, { recursive: true });
+    const items = readdirSync(src, { withFileTypes: true });
+    for (const item of items) {
+      const relPath = relPrefix ? join(relPrefix, item.name) : item.name;
+      if (excludeFn(relPath)) continue;
+      const fullSrc = join(src, item.name);
+      const fullDst = join(dst, item.name);
+      if (item.isDirectory()) {
+        copyRecursive(fullSrc, fullDst, relPath, excludeFn);
+      } else {
+        cpSync(fullSrc, fullDst);
+      }
     }
   }
 
@@ -111,8 +151,8 @@ async function main() {
     cmds.push(`echo "服务已重启: $(sudo systemctl is-active artportal)"`);
   }
 
-  // 验证
-  cmds.push(`curl -so /dev/null -w '%{http_code}' http://localhost:8080/`);
+  // 验证（等待服务就绪）
+  cmds.push(`sleep 2 && curl -so /dev/null -w '%{http_code}' http://localhost:8080/`);
 
   const fullCmd = cmds.join(" && ");
   if (!DRY) {
@@ -131,7 +171,7 @@ async function main() {
 
   // 清理本地临时包
   if (!DRY) {
-    try { execFileSync("rm", ["-f", tarPath]); } catch (e) {}
+    try { rmSync(tarPath); } catch (e) {}
     log("本地临时包已清理");
   }
 }
