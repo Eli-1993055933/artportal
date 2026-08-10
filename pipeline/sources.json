@@ -20,7 +20,7 @@
     "  last_polled —— 上次【真正检查过内容】的日期(YYYY-MM-DD),robots拒绝/网络失败不计入;供 sitemap 通道判断'自那天以来谁变了'",
     "  sitemap     —— true=该域名确认有 sitemap.xml(会用来补充详情页发现)| false=探测过没有,以后跳过这次额外请求 | 不存在=还没试过"
   ],
-  "generated_at": "2026-07-09",
+  "generated_at": "2026-08-11",
   "sources": [
     {
       "id": "cafa-tzgg",
@@ -1478,7 +1478,7 @@
       "confirmed": false,
       "discipline_hint": "电影",
       "notes": "curl HTTP200; 37625字节; 命中 申请×2/'calls for ...IDP submissions'/'Online Submission'; 机构名 HAF/HKIFF; robots.txt 返回HTML首页(无有效robots规则,无限制)。HAF 官网 In-Development Projects 征件专栏页,附 idp-submission-period-and-fee 子页(申请×14)。页面含部分往届存档文案。",
-      "region_hint": "intl-latam"
+      "region_hint": "cn-hkmotw"
     },
     {
       "id": "tpac-fringe",
@@ -4555,7 +4555,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "southeast-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "singapore-nationalgallery",
@@ -4573,7 +4573,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "southeast-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "malaysia-nationalvisualart",
@@ -4590,7 +4590,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "southeast-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "indonesia-macgallery",
@@ -4607,7 +4607,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "southeast-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "philippines-c-cubego",
@@ -4625,7 +4625,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "southeast-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "brazil-museuart",
@@ -4643,7 +4643,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "south-america"
+      "region_hint": "intl-latam"
     },
     {
       "id": "argentina-macba",
@@ -4661,7 +4661,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "south-america"
+      "region_hint": "intl-latam"
     },
     {
       "id": "chile-macn",
@@ -4678,7 +4678,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "south-america"
+      "region_hint": "intl-latam"
     },
     {
       "id": "colombia-museo-nacional",
@@ -4694,8 +4694,7 @@
       ],
       "reachable": true,
       "robots": "unknown",
-      "confirmed": false,
-      "region_hint": "south-america"
+      "confirmed": false
     },
     {
       "id": "egypt-cairoopera",
@@ -4712,7 +4711,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "africa"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "southafrica-gipca",
@@ -4730,7 +4729,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "africa"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "kenya-nairobicontemporary",
@@ -4747,7 +4746,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "africa"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "morocco-marrakec",
@@ -4765,7 +4764,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "africa"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "uae-louvre-abu-dhabi",
@@ -4783,7 +4782,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "middle-east"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "qatar-mathaf",
@@ -4801,7 +4800,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "middle-east"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "israel-israel-museum",
@@ -4819,7 +4818,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "middle-east"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "saudi-dmi",
@@ -4836,7 +4835,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "middle-east"
+      "region_hint": "intl-mena-africa"
     },
     {
       "id": "poland-zacheta",
@@ -4854,7 +4853,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "eastern-europe"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "hungary-mnm",
@@ -4871,7 +4870,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "eastern-europe"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "czech-national-gallery",
@@ -4889,7 +4888,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "eastern-europe"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "slovakia-sng",
@@ -4905,8 +4904,7 @@
       ],
       "reachable": true,
       "robots": "unknown",
-      "confirmed": false,
-      "region_hint": "eastern-europe"
+      "confirmed": false
     },
     {
       "id": "denmark-statensmuseum",
@@ -4924,7 +4922,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "nordic"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "sweden-moderna-museet",
@@ -4942,7 +4940,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "nordic"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "northern-nordland",
@@ -4959,7 +4957,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "nordic"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "finland-kiasma",
@@ -4977,7 +4975,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "nordic"
+      "region_hint": "intl-north-east-europe"
     },
     {
       "id": "spain-museo-del-prado",
@@ -4994,7 +4992,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "western-europe"
+      "region_hint": "intl-central-europe"
     },
     {
       "id": "portugal-gulbenkian",
@@ -5013,7 +5011,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "western-europe"
+      "region_hint": "intl-central-europe"
     },
     {
       "id": "greece-benaki",
@@ -5029,8 +5027,7 @@
       ],
       "reachable": true,
       "robots": "unknown",
-      "confirmed": false,
-      "region_hint": "western-europe"
+      "confirmed": false
     },
     {
       "id": "austria-belvedere",
@@ -5048,7 +5045,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "western-europe"
+      "region_hint": "intl-central-europe"
     },
     {
       "id": "korea-mmca",
@@ -5066,7 +5063,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "east-asia"
+      "region_hint": "intl-east-asia"
     },
     {
       "id": "korea-seoul-museum",
@@ -5083,7 +5080,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "east-asia"
+      "region_hint": "intl-east-asia"
     },
     {
       "id": "japan-mori-art-museum",
@@ -5101,7 +5098,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "east-asia"
+      "region_hint": "intl-east-asia"
     },
     {
       "id": "japan-tama-art-university",
@@ -5118,7 +5115,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "east-asia"
+      "region_hint": "intl-east-asia"
     },
     {
       "id": "india-ngma",
@@ -5135,7 +5132,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "south-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "india-kerala-lalitakala",
@@ -5152,7 +5149,7 @@
       "reachable": true,
       "robots": "unknown",
       "confirmed": false,
-      "region_hint": "south-asia"
+      "region_hint": "intl-sea-sa"
     },
     {
       "id": "russia-tretyakov",
@@ -5168,8 +5165,7 @@
       ],
       "reachable": true,
       "robots": "unknown",
-      "confirmed": false,
-      "region_hint": "eastern-europe"
+      "confirmed": false
     },
     {
       "id": "russia-moscow-museum",
@@ -5186,8 +5182,7 @@
       ],
       "reachable": true,
       "robots": "unknown",
-      "confirmed": false,
-      "region_hint": "eastern-europe"
+      "confirmed": false
     },
     {
       "id": "dubai-art-fair",
@@ -5307,7 +5302,7 @@
       "domain": "artsgilman.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "southeast-asia",
+      "region_hint": "intl-sea-sa",
       "notes": "新加坡 Arts Gilman 艺术展"
     },
     {
@@ -5318,7 +5313,7 @@
       "domain": "bangkokartfest.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "southeast-asia",
+      "region_hint": "intl-sea-sa",
       "notes": "泰国曼谷艺术节"
     },
     {
@@ -5329,7 +5324,7 @@
       "domain": "jakartartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "southeast-asia",
+      "region_hint": "intl-sea-sa",
       "notes": "印度尼西亚雅加达艺术博览会"
     },
     {
@@ -5340,7 +5335,7 @@
       "domain": "manilaartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "southeast-asia",
+      "region_hint": "intl-sea-sa",
       "notes": "菲律宾马尼拉艺术博览会"
     },
     {
@@ -5351,7 +5346,7 @@
       "domain": "hanoibiennale.org",
       "type": "html",
       "org_type": "official",
-      "region_hint": "southeast-asia",
+      "region_hint": "intl-sea-sa",
       "notes": "越南河内双年展"
     },
     {
@@ -5362,7 +5357,7 @@
       "domain": "warsawartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "eastern-europe",
+      "region_hint": "intl-north-east-europe",
       "notes": "波兰华沙艺术博览会"
     },
     {
@@ -5373,7 +5368,7 @@
       "domain": "praguebiennale.org",
       "type": "html",
       "org_type": "official",
-      "region_hint": "eastern-europe",
+      "region_hint": "intl-north-east-europe",
       "notes": "捷克布拉格双年展"
     },
     {
@@ -5384,7 +5379,7 @@
       "domain": "budapestartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "eastern-europe",
+      "region_hint": "intl-north-east-europe",
       "notes": "匈牙利布达佩斯艺术展"
     },
     {
@@ -5395,7 +5390,7 @@
       "domain": "bucharestartweek.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "eastern-europe",
+      "region_hint": "intl-central-europe",
       "notes": "罗马尼亚布加勒斯特艺术周"
     },
     {
@@ -5406,7 +5401,6 @@
       "domain": "sofiaartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "eastern-europe",
       "notes": "保加利亚索非亚艺术展"
     },
     {
@@ -5417,7 +5411,7 @@
       "domain": "stockholmartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "nordic",
+      "region_hint": "intl-north-east-europe",
       "notes": "瑞典斯德哥尔摩艺术博览会"
     },
     {
@@ -5428,7 +5422,7 @@
       "domain": "osloartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "nordic",
+      "region_hint": "intl-north-east-europe",
       "notes": "挪威奥斯陆艺术展"
     },
     {
@@ -5439,7 +5433,7 @@
       "domain": "copenhagenartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "nordic",
+      "region_hint": "intl-north-east-europe",
       "notes": "丹麦哥本哈根艺术展"
     },
     {
@@ -5450,7 +5444,7 @@
       "domain": "helsinkibiennale.org",
       "type": "html",
       "org_type": "official",
-      "region_hint": "nordic",
+      "region_hint": "intl-north-east-europe",
       "notes": "芬兰赫尔辛基双年展"
     },
     {
@@ -5461,8 +5455,276 @@
       "domain": "reykjavikartfair.com",
       "type": "html",
       "org_type": "official",
-      "region_hint": "nordic",
+      "region_hint": "intl-north-east-europe",
       "notes": "冰岛雷克雅未克艺术展"
+    },
+    {
+      "id": "szam-tzgg",
+      "org_zh": "深圳美术馆",
+      "name_zh": "通知公告",
+      "url": "https://www.szam.org/",
+      "domain": "szam.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "深圳美术馆,华南重要艺术机构",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "gxmsg-tzgg",
+      "org_zh": "广西美术馆",
+      "name_zh": "新闻公告",
+      "url": "https://www.gxmsg.com/",
+      "domain": "gxmsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "广西美术馆,南宁",
+      "region_hint": "cn-south"
+    },
+    {
+      "id": "fjmsg-tzgg",
+      "org_zh": "福建省美术馆",
+      "name_zh": "通知公告",
+      "url": "https://www.fjmsg.org.cn/",
+      "domain": "fjmsg.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "福建省美术馆,福州",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "ahsmsg-tzgg",
+      "org_zh": "安徽省美术馆",
+      "name_zh": "新闻公告",
+      "url": "https://www.ahsmsg.com/",
+      "domain": "ahsmsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "安徽省美术馆,合肥",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "nbmsg-tzgg",
+      "org_zh": "宁波美术馆",
+      "name_zh": "展览征集",
+      "url": "https://www.nbmsg.com/",
+      "domain": "nbmsg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "宁波美术馆,浙江",
+      "region_hint": "cn-east"
+    },
+    {
+      "id": "moma-open-call",
+      "org_zh": "MoMA",
+      "name_zh": "Open Call",
+      "url": "https://www.moma.org/",
+      "domain": "moma.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "纽约现代艺术博物馆,全球顶级当代艺术机构",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "whitney-open-call",
+      "org_zh": "Whitney Museum of American Art",
+      "name_zh": "Open Call",
+      "url": "https://whitney.org/",
+      "domain": "whitney.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "惠特尼美国艺术博物馆,纽约",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "guggenheim-fellowship",
+      "org_zh": "Guggenheim Museum",
+      "name_zh": "Fellowship",
+      "url": "https://www.guggenheim.org/",
+      "domain": "guggenheim.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "fellowship"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "古根海姆博物馆,纽约",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "creative-capital-grants",
+      "org_zh": "Creative Capital",
+      "name_zh": "Grants",
+      "url": "https://creative-capital.org/",
+      "domain": "creative-capital.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "Creative Capital,纽约,艺术家资助基金会",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "newmuseum-open-call",
+      "org_zh": "New Museum",
+      "name_zh": "Open Call",
+      "url": "https://www.newmuseum.org/",
+      "domain": "newmuseum.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "新美术馆,纽约当代艺术先锋机构",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "mca-australia-open-call",
+      "org_zh": "Museum of Contemporary Art Australia",
+      "name_zh": "Open Call",
+      "url": "https://www.mca.com.au/",
+      "domain": "mca.com.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "澳大利亚当代艺术博物馆,悉尼",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "ngv-vic-open-call",
+      "org_zh": "National Gallery of Victoria",
+      "name_zh": "Open Call",
+      "url": "https://www.ngv.vic.gov.au/",
+      "domain": "ngv.vic.gov.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "维多利亚国立美术馆,墨尔本,澳洲最大美术馆",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "artgallery-nsw-open-call",
+      "org_zh": "Art Gallery of New South Wales",
+      "name_zh": "Open Call",
+      "url": "https://www.artgallery.nsw.gov.au/",
+      "domain": "artgallery.nsw.gov.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "新南威尔士州美术馆,悉尼",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "auckland-art-gallery-open-call",
+      "org_zh": "Auckland Art Gallery",
+      "name_zh": "Open Call",
+      "url": "https://www.aucklandartgallery.com/",
+      "domain": "aucklandartgallery.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "unknown",
+      "confirmed": false,
+      "notes": "奥克兰美术馆,新西兰最大艺术机构",
+      "region_hint": "intl-oceania"
     }
   ],
   "blocked_or_unverified": [

@@ -34,6 +34,12 @@
 
 <!-- bump-version.mjs 会在本注释的下一行插入新版本段,勿删勿改本行 -->
 
+## [1.10.0] - 2026-08-11
+- **信源区域名归一化**:将旧6大区名称(eastern-europe/nordic/southeast-asia等)合并到新14区ID体系,按区域经理档案重新分类
+- **信源持续扩容**:手动补充14条高价值信源,覆盖华南(深圳美术馆/广西美术馆)、华东(福建/安徽/宁波美术馆)、北美东岸(MoMA/Whitney/Guggenheim/New Museum/Creative Capital)、大洋洲(MCA Australia/NGV/Art Gallery NSW/Auckland Art Gallery)
+- **区域误判修复**:摩洛哥马拉喀什艺术中心(cn-central-west→intl-mena-africa)、香港国际电影节(intl-latam→cn-hkmotw)
+- 信源总数 287→301 条
+
 ## [1.9.1] - 2026-08-11
 - **紧急修复**:I18N 对象中带连字符的属性名(reg_asia-east/reg_europe-west/reg_middle-east 等)未加引号,导致 JavaScript 语法错误,网站白屏
 
