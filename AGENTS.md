@@ -19,6 +19,6 @@
 
 ## 部署与数据
 - 数据同步:`cd pipeline && node sync-server.mjs`(按条合并双向同步,谁的数据都不丢;--dry 先看)。每晚 run-daily.bat 自动跑。
-- 代码部署:tar 打包 scp 到 admin@60.205.212.195:/home/admin/artportal 解压;改了 pipeline 后端需 `sudo systemctl restart artportal`,纯前端不用重启。
-- **绝不整文件覆盖服务器的 data/*.json 和 pipeline/state/**(用户/会话/事件数据只在服务器)。
+- 代码部署:使用 `node pipeline/deploy.mjs`(自动排除 state/ 和 .env,部署前备份,部署后验证 HTTP 200);纯前端需加 `--frontend-only`。**绝对不要手动 tar 打包 pipeline/**,这会覆盖服务器 state/ 导致用户数据丢失。
+- **绝不整文件覆盖服务器的 data/*.json 和 pipeline/state/**(用户/会话/事件数据只在服务器)。部署统一用 `node pipeline/deploy.mjs`(自动排除 state/)。
 - **版本号(SemVer)**:改前端 JS/CSS 必须升版——`node pipeline/bump-version.mjs patch|minor|major`(自动同步根 VERSION、index.html 的 ?v=/meta/页脚、pipeline/package.json,并在 CHANGELOG.md 插新段);升完在 CHANGELOG 补一句变更说明,提交后 `git tag v<版本>`。patch=修bug,minor=新功能,major=不兼容大改;**1.0.0 留给备案正式上线**。

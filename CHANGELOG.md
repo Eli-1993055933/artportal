@@ -34,8 +34,10 @@
 
 <!-- bump-version.mjs 会在本注释的下一行插入新版本段,勿删勿改本行 -->
 
-## [1.12.0] - 2026-08-11
-- (待补充变更说明)
+## [1.12.1] - 2026-08-11
+- **数据恢复修复**:为用户3471483657@qq.com恢复phone_verified状态,修复手机号验证问题
+- **事故排查**:确认作品数据丢失因早期手动tar部署未排除state/目录导致数据库覆盖,所有备份同样被覆盖
+- **部署安全加固**:确认deploy.mjs脚本正确排除state/和.env,部署前自动备份,部署后验证HTTP 200
 
 ## [1.12.0] - 2026-08-11
 - **信源自动发现第二波**:运行 discover-sources.mjs 覆盖5个薄弱区域(cn-central-west/intl-latam/intl-west-europe/intl-east-asia/intl-na-east),发现40个新信源
