@@ -1,0 +1,258 @@
+DFA設計獎
+
+EN
+繁
+简
+
+關於我們
+
+關於 DFA 設計獎
+
+鳴謝單位
+
+關於香港設計中心
+
+設計獎
+
+DFA 亞洲設計終身成就獎
+
+簡介
+
+評審資訊
+
+得獎者
+
+媒體中心
+
+DFA 設計領袖獎
+
+簡介
+
+評審資訊
+
+得獎者
+
+媒體中心
+
+DFA 世界傑出華人設計師
+
+簡介
+
+評審資訊
+
+得獎者
+
+媒體中心
+
+DFA 年度設計師
+
+簡介
+
+評審資訊
+
+得獎者
+
+媒體中心
+
+DFA 亞洲設計先鋒
+
+簡介
+
+評審資訊
+
+得獎者
+
+媒體中心
+
+DFA 亞洲最具影響力設計獎
+
+簡介
+
+參加資訊
+(僅限受邀者)
+
+得獎者
+
+媒體中心
+
+DFA 香港青年設計才俊獎
+
+簡介
+
+參加資訊
+
+獎項及條款
+
+得獎者 (2025)
+
+歷屆得獎者 (2005 - 2024)
+
+媒體中心
+
+媒體中心
+
+最新消息
+
+活動花絮
+
+新聞稿
+
+影像資源
+
+刊物
+
+網上展廳
+
+網上活動
+
+DFA
+
+LAA
+
+DFA 亞洲設計終身成就獎
+
+DFA
+
+DLA
+
+DFA 設計領袖獎
+
+DFA
+
+WOCD
+
+DFA 世界傑出華人設計師
+
+DFA
+
+DOY
+
+DFA 年度設計師
+
+DFA
+
+ADV
+
+DFA 亞洲設計先鋒
+
+DFA
+
+DFAA
+
+DFA 亞洲最具影響力設計獎
+
+DFA
+
+HKYDTA
+
+DFA 香港青年設計才俊獎
+
+最新消息
+
+亞洲最具影響力設計獎
+
+2026-07-10
+
+【DFA 亞洲最具影響力設計獎2026】7 月 15 日截止報名！
+
+亞洲最具影響力設計獎
+
+2026-06-29
+
+【DFA 亞洲最具影響力設計獎2026】報名日期延長至7月15日！
+
+DFA
+
+設計獎
+
+2026-05-29
+
+【活動花絮 | 設計對談 香港 - 設計的日常細語】
+
+更多
+
+訂閱通訊
+
+{"errorMessage":{"errorCheckingCallbackFunction":"errorCheckingCallbackFunction.","required":"Required field.","url":"Please enter valid URL.","email":"Please enter valid Email.","number":"Please enter valid number.","phone_number":"Please enter valid number and at least 8 digits.","chinese":"Please enter valid Chinese text.","english-only":"English only.","username":"Username must be at least 5 to 16 characters with no space","wordcount":"Wordcount error.","characters_count":"Characters error.","matrix-error":"Required field.","password":"Password must be at least 8 characters with no space"},"ENABLE_MOD_SECURITY":false,"imageThumbSize":"s","noScroll":true}
+
+[]
+
+false
+
+[]
+
+{"email":{"9A393":{"regex":"^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$","flag":"i","php_flag":"i","errMsg":"email","isGetErrMsg":true,"desc":"email pattern needed"}}}
+
+[]
+
+提交
+
+[]
+
+false
+
+[]
+
+false
+
+[]
+
+false
+
+DFA 設計獎
+
+DFA 亞洲設計終身成就獎 | DFA 設計領袖獎 | DFA 世界傑出華人設計師 | DFA 年度設計師 | DFA 亞洲設計先鋒 | DFA 亞洲最具影響力設計獎 | DFA 香港青年設計才俊獎
+
+訂閱我們
+
+主辦機構
+
+主要贊助機構
+
+香港深水埗通州街280號香港設計中心DX 設計館4樓
+
++852 3793 8467
+
+dfaa@dfaawards.com
+
+免責聲明： 香港特別行政區政府僅為香港設計中心多個活動／項目提供資助，除此之外並無參與該等資助活動／項目。在本刊物及相關資料／活動內（或由項目小組成員）表達的任何意見、研究成果、結論或建議，均不代表香港特別行政區政府、文化體育及旅遊局、文創產業發展處、「創意智優計劃」秘書處或「創意智優計劃」審核委員會的觀點。
+
+使用條款及隱私政策
+
+© 2026 香港設計中心 版權所有
+
+DFA 設計獎
+
+DFA 亞洲設計終身成就獎
+
+訂閱我們
+
+主辦機構
+
+hkdc
+
+主要贊助機構
+
+香港深水埗通州街280號香港設計中心DX 設計館4樓
+
++852 3793 8467
+
+dfaa@dfaawards.com
+
+使用條款及隱私政策
+
+© 2026 香港設計中心 版權所有
+
+DFA 亞洲最具影響力設計獎
+
+DFA 亞洲設計終身成就獎
+
+DFA 設計領袖獎
+
+DFA 世界傑出華人設計師
+
+DFA 年度設計師
+
+DFA 亞洲設計先鋒
+
+DFA 香港青年設計才俊獎

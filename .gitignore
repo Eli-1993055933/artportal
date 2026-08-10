@@ -24,6 +24,10 @@ pipeline/state/survey-mail-log.json   # 上面这批的发送记录(含邮箱)
 # 翻译回滚备份
 site/data/opportunities.json.bak-*
 
+# 临时脚本
+tmp_*.cjs
+tmp_*.mjs
+
 # 系统
 .DS_Store
 Thumbs.db
