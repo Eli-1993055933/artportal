@@ -10,6 +10,14 @@
 
 ---
 
+## v1.12.2 (2026-08-11)
+
+- **服务器版本完整归档到 GitHub**:所有代码 + 服务器数据快照推送到 https://github.com/Eli-1993055933/artportal
+- **新增 `backup.mjs`**:拉取服务器状态快照(state + code)并生成本地回档文件(含 restore.sh 一键回档脚本)
+- **收纳 `backups/` 目录**:时间戳快照含 state.tar.gz(服务器状态)、code.tar.gz(代码)、version.json、restore.sh
+- **回档方式**:`git checkout v1.12.2` → 解压 `backups/*/state.tar.gz` 到服务器 → 执行 `restore.sh`
+- **Git Tag**:v1.12.2
+
 ## 规划中(Planned)
 
 > 与 `路线图.md` 优先级表一一对应。版本号为**计划值**(新功能=minor 递增),中途插入 bug 修复(patch)或调整顺序时顺延,以实际发布为准。
