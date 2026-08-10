@@ -34,6 +34,14 @@
 
 <!-- bump-version.mjs 会在本注释的下一行插入新版本段,勿删勿改本行 -->
 
+## [1.12.0] - 2026-08-11
+- (待补充变更说明)
+
+## [1.12.0] - 2026-08-11
+- **信源自动发现第二波**:运行 discover-sources.mjs 覆盖5个薄弱区域(cn-central-west/intl-latam/intl-west-europe/intl-east-asia/intl-na-east),发现40个新信源
+- **信源扩容**:总数 338→378 条,关键提升:cn-central-west 19→26、intl-east-asia 11→24、intl-na-east 11→22、intl-west-europe 11→19
+- **Brave 消耗**:仅10次查询完成全部发现,Serper 余量保持12次未动
+
 ## [1.11.0] - 2026-08-11
 - **集成 Brave Search API**:实现 Brave → Serper → DuckDuckGo 三级搜索架构,优先使用 Brave 免费额度(每月 $5/1000次),降低搜索成本
 - **预算管理系统**:Brave 和 Serper 各自独立每日预算,超预算自动降级到下一级搜索源

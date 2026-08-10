@@ -6465,6 +6465,806 @@
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「Sydney art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
       "region_hint": "intl-oceania"
+    },
+    {
+      "id": "hbwy-auto",
+      "org_zh": "湖北省文学艺术界联合会",
+      "name_zh": "机器发现",
+      "url": "https://www.hbwy.org.cn/",
+      "domain": "hbwy.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「湖北 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "wuhan-auto",
+      "org_zh": "武汉美术馆最新公告：正常对外开放",
+      "name_zh": "机器发现",
+      "url": "https://www.wuhan.gov.cn/zwgk/tzgg/202405/t20240501_2396465.shtml",
+      "domain": "wuhan.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「湖北 美术馆 画院 文联 官网 通知公告」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "wlj-auto",
+      "org_zh": "武汉博物馆（武汉市文物交流中心）",
+      "name_zh": "机器发现",
+      "url": "https://wlj.wuhan.gov.cn/zfxxgk/fdzdgknr/jgjj/zsdw/202008/t20200827_1437246.shtml",
+      "domain": "wlj.wuhan.gov.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「武汉 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "whgmbwg-auto",
+      "org_zh": "武汉革命博物馆",
+      "name_zh": "机器发现",
+      "url": "http://www.whgmbwg.com/",
+      "domain": "whgmbwg.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「武汉 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "hbqyg-auto",
+      "org_zh": "湖北省数字文化馆",
+      "name_zh": "机器发现",
+      "url": "https://www.hbqyg.cn/",
+      "domain": "hbqyg.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「武汉 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "pcticket-auto",
+      "org_zh": "湖北省博物馆",
+      "name_zh": "机器发现",
+      "url": "https://pcticket.hbww.org.cn/",
+      "domain": "pcticket.hbww.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「武汉 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "hbww-auto",
+      "org_zh": "湖北省博物馆",
+      "name_zh": "机器发现",
+      "url": "https://www.hbww.org.cn/home/index.html",
+      "domain": "hbww.org.cn",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「武汉 文化馆 展览 征集 官网」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "cn-central-west"
+    },
+    {
+      "id": "mot-art-museum-auto",
+      "org_zh": "mot-art-museum.jp",
+      "name_zh": "机器发现",
+      "url": "https://www.mot-art-museum.jp/en/",
+      "domain": "mot-art-museum.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "kanazawa21-auto",
+      "org_zh": "kanazawa21.jp",
+      "name_zh": "机器发现",
+      "url": "https://www.kanazawa21.jp/en/",
+      "domain": "kanazawa21.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "nact-auto",
+      "org_zh": "nact.jp",
+      "name_zh": "机器发现",
+      "url": "https://www.nact.jp/english/",
+      "domain": "nact.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "tobikan-auto",
+      "org_zh": "tobikan.jp",
+      "name_zh": "机器发现",
+      "url": "https://www.tobikan.jp/en/",
+      "domain": "tobikan.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "ncar-auto",
+      "org_zh": "ncar.artmuseums.go.jp",
+      "name_zh": "机器发现",
+      "url": "https://ncar.artmuseums.go.jp/en/",
+      "domain": "ncar.artmuseums.go.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "artmuseums-auto",
+      "org_zh": "artmuseums.go.jp",
+      "name_zh": "机器发现",
+      "url": "https://www.artmuseums.go.jp/en/visit",
+      "domain": "artmuseums.go.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "tnm-auto",
+      "org_zh": "TOKYO NATIONAL MUSEUM",
+      "name_zh": "机器发现",
+      "url": "https://www.tnm.jp/modules/r_db/index.php?controller=list&amp=&t=news",
+      "domain": "tnm.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "nmwa-auto",
+      "org_zh": "nmwa.go.jp",
+      "name_zh": "机器发现",
+      "url": "https://www.nmwa.go.jp/en/",
+      "domain": "nmwa.go.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "japan-auto",
+      "org_zh": "Travel Japan",
+      "name_zh": "机器发现",
+      "url": "https://www.japan.travel/en/spot/1697/",
+      "domain": "japan.travel",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "gotokyo-auto",
+      "org_zh": "gotokyo.org",
+      "name_zh": "机器发现",
+      "url": "https://www.gotokyo.org/en/spot/141/index.html",
+      "domain": "gotokyo.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "matsumoto-artmuse-auto",
+      "org_zh": "matsumoto-artmuse.jp",
+      "name_zh": "机器发现",
+      "url": "https://matsumoto-artmuse.jp/en/",
+      "domain": "matsumoto-artmuse.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Japan art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "artscouncil-tokyo-auto",
+      "org_zh": "Arts Council Tokyo",
+      "name_zh": "机器发现",
+      "url": "https://www.artscouncil-tokyo.jp/en/grants/",
+      "domain": "artscouncil-tokyo.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Tokyo arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "opencall-auto",
+      "org_zh": "Open Call Japan",
+      "name_zh": "机器发现",
+      "url": "https://opencall.aedo.jp/",
+      "domain": "opencall.aedo.jp",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Tokyo arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-east-asia"
+    },
+    {
+      "id": "bronxmuseum-auto",
+      "org_zh": "The Bronx Museum",
+      "name_zh": "机器发现",
+      "url": "https://bronxmuseum.org/",
+      "domain": "bronxmuseum.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "newyork-auto",
+      "org_zh": "Arte Museum New York",
+      "name_zh": "机器发现",
+      "url": "https://newyork.artemuseum.com/",
+      "domain": "newyork.artemuseum.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "mcny-auto",
+      "org_zh": "mcny.org",
+      "name_zh": "机器发现",
+      "url": "https://www.mcny.org/",
+      "domain": "mcny.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "nyc-auto",
+      "org_zh": "nyc.gov",
+      "name_zh": "机器发现",
+      "url": "https://www.nyc.gov/site/dcla/index.page",
+      "domain": "nyc.gov",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "frick-auto",
+      "org_zh": "The Frick Collection",
+      "name_zh": "机器发现",
+      "url": "https://www.frick.org/",
+      "domain": "frick.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "canyon-auto",
+      "org_zh": "CANYON",
+      "name_zh": "机器发现",
+      "url": "https://www.canyon.org/",
+      "domain": "canyon.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "newarkmuseumart-auto",
+      "org_zh": "The Newark Museum of Art",
+      "name_zh": "机器发现",
+      "url": "https://newarkmuseumart.org/about/press/",
+      "domain": "newarkmuseumart.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「New York art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "boston-auto",
+      "org_zh": "Boston Cultural Council",
+      "name_zh": "机器发现",
+      "url": "https://www.boston.gov/departments/arts-and-culture/boston-cultural-council",
+      "domain": "boston.gov",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Boston arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "artsake-auto",
+      "org_zh": "artsake.massculturalcouncil.org",
+      "name_zh": "机器发现",
+      "url": "https://artsake.massculturalcouncil.org/artist-opportunities-sit-and-stay/",
+      "domain": "artsake.massculturalcouncil.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Boston arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "northendregionalrevi-auto",
+      "org_zh": "northendregionalreview.com",
+      "name_zh": "机器发现",
+      "url": "https://northendregionalreview.com/2022/09/08/applications-open-for-2022-2023-boston-cultural-council-grants/",
+      "domain": "northendregionalreview.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Boston arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "content-auto",
+      "org_zh": "content.boston.gov",
+      "name_zh": "机器发现",
+      "url": "https://content.boston.gov/sites/default/files/file/2024/08/FY25%20BCC%20Org%20Grant%20Guidelines%20&%20Scoring%20Rubric.pdf",
+      "domain": "content.boston.gov",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Boston arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-na-east"
+    },
+    {
+      "id": "londonmuseum-auto",
+      "org_zh": "London Museum",
+      "name_zh": "机器发现",
+      "url": "https://www.londonmuseum.org.uk/",
+      "domain": "londonmuseum.org.uk",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「London art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "vam-auto",
+      "org_zh": "vam.ac.uk",
+      "name_zh": "机器发现",
+      "url": "https://www.vam.ac.uk/",
+      "domain": "vam.ac.uk",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「London art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "timeout-auto",
+      "org_zh": "London Art Galleries",
+      "name_zh": "机器发现",
+      "url": "https://www.timeout.com/london/art",
+      "domain": "timeout.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「London art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "saatchigallery-auto",
+      "org_zh": "saatchigallery.com",
+      "name_zh": "机器发现",
+      "url": "https://www.saatchigallery.com/",
+      "domain": "saatchigallery.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「London art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "theartnewspaper-auto",
+      "org_zh": "The Art Newspaper",
+      "name_zh": "机器发现",
+      "url": "https://www.theartnewspaper.com/keywords/london",
+      "domain": "theartnewspaper.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「London art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "whichmuseum-auto",
+      "org_zh": "WhichMuseum",
+      "name_zh": "机器发现",
+      "url": "https://whichmuseum.com/place/london-2050/t-contemporary-art",
+      "domain": "whichmuseum.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「London art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "greatermanchester-ca-auto",
+      "org_zh": "greatermanchester-ca.gov.uk",
+      "name_zh": "机器发现",
+      "url": "https://www.greatermanchester-ca.gov.uk/news/greater-manchester-culture-fund-opens-for-applications/",
+      "domain": "greatermanchester-ca.gov.uk",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Manchester arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "manchesterct-auto",
+      "org_zh": "manchesterct.gov",
+      "name_zh": "机器发现",
+      "url": "https://www.manchesterct.gov/Government/Town-Leadership/Boards-Commissions-Committees/Art-Commission",
+      "domain": "manchesterct.gov",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Manchester arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-west-europe"
+    },
+    {
+      "id": "arteinformado-auto",
+      "org_zh": "ARTEINFORMADO",
+      "name_zh": "机器发现",
+      "url": "https://www.arteinformado.com/guia/o/museu-de-arte-moderna-de-so-paulo-mam-sp-100354",
+      "domain": "arteinformado.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Sao Paulo museo de arte convocatoria sitio oficial」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-latam"
     }
   ],
   "blocked_or_unverified": [
