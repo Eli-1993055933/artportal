@@ -11,7 +11,7 @@
 //   - 部署前在服务器自动创建备份
 //   - 部署后验证 HTTP 200
 
-import { execFileSync } from "node:child_process";
+import { execFileSync, execSync } from "node:child_process";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,6 +34,20 @@ function log(msg) { process.stderr.write("[deploy] " + msg + "\n"); }
 async function main() {
   log(`版本: ${TAG} | 目标: ${HOST}:${RBASE} | 模式: ${FRONTEND_ONLY ? "前端-only" : "全量"}`);
   if (DRY) log("*** DRY RUN — 不会真正执行 ***");
+
+  // 【保险】部署前强制备份本地 state/（用户数据红线，不可丢失）
+  if (!DRY) {
+    log("【保险】部署前备份本地 state/ ...");
+    try {
+      execSync(`node "${join(__dir, "backup.mjs")}" --local`, { stdio: "pipe" });
+      log("【保险】本地 state/ 备份完成");
+    } catch (e) {
+      log("【保险】本地备份失败: " + (e.message || e));
+      // 备份失败不应阻止部署，但发出警告
+    }
+  } else {
+    log("[DRY] 跳过本地 state/ 备份");
+  }
 
   // 1. 打包代码(排除 state/ 和 .env)
   const tarName = `artportal-${TAG}.tar.gz`;
