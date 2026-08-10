@@ -22,7 +22,7 @@ import { readFile, writeFile, rename, copyFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadRegions } from "./lib/regions.mjs";
-import { searchWebFull, serperBudgetLeft, BLOCK, unsafeHost } from "./lib/websearch.mjs";
+import { searchWebFull, serperBudgetLeft, braveBudgetLeft, BLOCK, unsafeHost } from "./lib/websearch.mjs";
 import { fetchSource } from "./lib/fetch.mjs";
 import { THIRD_PARTY } from "./lib/aggregators.mjs";
 
@@ -85,13 +85,13 @@ async function main() {
     : cfg.managers.slice().sort((a, b) => (counted[a.id] || 0) - (counted[b.id] || 0)).slice(0, 6);
 
   console.log(`目标区域(${targets.length} 个):` + targets.map(m => `${m.zh}(现${counted[m.id] || 0}个)`).join("、"));
-  console.log(`每区 ${PER_REGION} 词,serper 余量 ${serperBudgetLeft()}\n`);
+  console.log(`每区 ${PER_REGION} 词,Brave 余量 ${braveBudgetLeft()}, Serper 余量 ${serperBudgetLeft()}\n`);
 
   const added = [], skippedExisting = [], skippedBlock = [], skippedUnreachable = [], checked = new Set();
   let checksLeft = LIMIT_CHECKS;
 
   for (const m of targets) {
-    if (serperBudgetLeft() <= 2) { console.log("⚠️ serper 余量不足,后续区域跳过"); break; }
+    if (braveBudgetLeft() <= 0 && serperBudgetLeft() <= 2) { console.log("⚠️ Brave 和 Serper 余量均不足,后续区域跳过"); break; }
     const cn = m.kind !== "intl";
     const kw = cn ? CN_INST_KW : (INTL_KW_BY_REGION[m.id] || INTL_INST_KW);
     // 国际区优先用拉丁字母城市名(terms 前半是中文名,拼进英/西语检索词效果差)
@@ -105,7 +105,7 @@ async function main() {
       let results;
       try { results = await searchWebFull(q, { gl: m.gl, hl: m.hl }); }
       catch (e) { console.log(`  [${m.zh}] "${q}" 搜索失败:${e.message}`); continue; }
-      process.stderr.write(`  [${m.zh}] "${q}" → ${results.length} 条结果(serper 余量 ${serperBudgetLeft()})\n`);
+      process.stderr.write(`  [${m.zh}] "${q}" → ${results.length} 条结果(Brave 余量 ${braveBudgetLeft()}, Serper 余量 ${serperBudgetLeft()})\n`);
 
       for (const r of results) {
         const dom = domainOf(r.link);

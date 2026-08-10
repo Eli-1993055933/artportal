@@ -486,6 +486,7 @@
        ["今日当值", duty.length + " 位"],
        ["今日入库(当值经理)", todayAdded + " 条"],
        ["搜索余量(serper)", (r.serper_left != null ? r.serper_left + " 次" : "—")],
+       ["搜索余量(Brave)", (r.brave_left != null ? r.brave_left + " 次" : "—")],
        ["调度开关", r.enabled ? "已开启" : "未开启(REGION_HARVEST=1)"],
        ["每班词数", (r.per_shift || 0) + " 词"]
       ].forEach(function (d) {
@@ -595,15 +596,21 @@
       var bb = $("agBrief"); bb.textContent = "";
       var brief = r.brief || {};
       var t = brief.today || {};
-      [["搜索余量(serper)", (function () {
+      [["搜索余量(Serper)", (function () {
         var base = brief.serper_left != null ? brief.serper_left + " 次" : "—";
         var u = brief.serper_usage;
         if (!u || !u.used) return base;
-        // 分桶审计(v1.5.0):今日谁花了多少 + 缓存命中省了多少
         var NAMES = { user: "用户", region: "区域", detective: "探长", auto: "自动", channels: "频道", discover: "发现", other: "其他" };
         var parts = Object.keys(u.by || {}).map(function (k) { return (NAMES[k] || k) + u.by[k]; });
         var hits = Object.keys(u.hits || {}).reduce(function (n, k) { return n + u.hits[k]; }, 0);
         return base + "(今日" + u.used + ":" + parts.join("·") + (hits ? " | 缓存省" + hits : "") + ")";
+      })()],
+       ["搜索余量(Brave)", (function () {
+        var base = brief.brave_left != null ? brief.brave_left + " 次" : "—";
+        var u = brief.brave_usage;
+        if (!u || !u.used) return base;
+        var parts = Object.keys(u.by || {}).map(function (k) { return k + u.by[k]; });
+        return base + "(今日" + u.used + ":" + parts.join("·") + ")";
       })()],
        ["磁盘剩余", brief.disk_free_gb != null ? brief.disk_free_gb + " GB" : "—"],
        ["今日内容更新", (t.opp || 0) + " 机会 · " + (t.news || 0) + " 资讯 · " + (t.jobs || 0) + " 招聘"],

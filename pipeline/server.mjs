@@ -21,7 +21,7 @@ import { verifyRecord, isParseableDate } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 import { ipRegion } from "./lib/ipregion.mjs";
-import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft, serperUsageToday } from "./lib/websearch.mjs";
+import { searchWeb, BLOCK, unsafeHost, serperBudgetLeft, serperUsageToday, braveBudgetLeft, braveUsageToday } from "./lib/websearch.mjs";
 import { extractGlmFree } from "./lib/extract.mjs";
 import { CHANNELS, harvestChannel } from "./lib/channels.mjs";
 import { leadsTick } from "./lib/leads.mjs";
@@ -1394,7 +1394,7 @@ async function handleAuthApi(req, res, u) {
         const who = u.searchParams.get("agent");
         if (who) body.recent = await db.agentRecent(String(who).slice(0, 40), 30);
         // 今日简报:搜索余量 / 磁盘 / 三频道今日更新 / 待人工事项
-        const brief = { serper_left: serperBudgetLeft(), serper_usage: serperUsageToday(), disk_free_gb: null, today: {}, pending: 0 };
+        const brief = { serper_left: serperBudgetLeft(), serper_usage: serperUsageToday(), brave_left: braveBudgetLeft(), brave_usage: braveUsageToday(), disk_free_gb: null, today: {}, pending: 0 };
         try { const fsx = await statfs(SITE); brief.disk_free_gb = Math.round(fsx.bsize * fsx.bavail / 1e9 * 10) / 10; } catch (e) {}
         try {
           const today = todayISO();
@@ -1428,6 +1428,7 @@ async function handleAuthApi(req, res, u) {
           enabled: process.env.REGION_HARVEST === "1",
           per_shift: Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3)),
           serper_left: serperBudgetLeft(),
+          brave_left: braveBudgetLeft(),
           utc_hour: now.getUTCHours(),
           day_index: dayIndex(now),
           desk: cfg.desk,

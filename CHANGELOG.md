@@ -34,6 +34,13 @@
 
 <!-- bump-version.mjs 会在本注释的下一行插入新版本段,勿删勿改本行 -->
 
+## [1.11.0] - 2026-08-11
+- **集成 Brave Search API**:实现 Brave → Serper → DuckDuckGo 三级搜索架构,优先使用 Brave 免费额度(每月 $5/1000次),降低搜索成本
+- **预算管理系统**:Brave 和 Serper 各自独立每日预算,超预算自动降级到下一级搜索源
+- **搜索结果缓存**:对 Brave/Serper 结果进行 7 天缓存,减少重复 API 调用
+- **管理面板适配**:admin 面板添加 Brave 搜索余量和用量监控
+- **信源发现适配**:discover-sources.mjs 优先使用 Brave 预算,Serper 退为备选
+
 ## [1.10.0] - 2026-08-11
 - **信源区域名归一化**:将旧6大区名称(eastern-europe/nordic/southeast-asia等)合并到新14区ID体系,按区域经理档案重新分类
 - **信源持续扩容**:手动补充14条高价值信源,覆盖华南(深圳美术馆/广西美术馆)、华东(福建/安徽/宁波美术馆)、北美东岸(MoMA/Whitney/Guggenheim/New Museum/Creative Capital)、大洋洲(MCA Australia/NGV/Art Gallery NSW/Auckland Art Gallery)
