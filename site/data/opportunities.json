@@ -1084,7 +1084,7 @@
       "title_zh": "ART CIRCLE 斯洛文尼亚 2026",
       "title_en": "ART CIRCLE Slovenia 2026",
       "org_zh": "Art Circle",
-      "city_zh": "未知",
+      "city_zh": "卢布尔雅那",
       "country_zh": "斯洛文尼亚",
       "deadline": "2026-06-25",
       "deadline_note": "",
@@ -1145,7 +1145,8 @@
         "disciplines": "1k5it7h"
       },
       "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
-      "cover_source": "artcircle.si"
+      "cover_source": "artcircle.si",
+      "geo_fallback": "v2_capital_infer"
     },
     {
       "title_en": "TED and POSCA Residency",
@@ -1358,7 +1359,7 @@
     },
     {
       "title_en": "Modes of Access — Digital Residencies 2026",
-      "city_zh": "未知",
+      "city_zh": "线上",
       "deadline": "2026-06-27",
       "deadline_note": "",
       "apply_fee": {
@@ -1394,7 +1395,7 @@
       "category": "residency",
       "title_zh": "Modes of Access 数字驻留 2026",
       "org_zh": "Modes of Access",
-      "country_zh": "线上",
+      "country_zh": "全球",
       "summary_zh": "面向媒体艺术家的四个线上数字驻留,为期12周(8-10月),以“可及性”为艺术方法,强调残障正义原则与灵活参与。提供2500欧艺术家费、500欧材料预算及额外无障碍支持。",
       "url": "https://www.transartists.org/en/news/modes-access-digital-residencies-2026",
       "source_url": "https://www.transartists.org/en/transartists-calls",
@@ -1426,7 +1427,8 @@
       },
       "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
       "cover_source": "screenshot",
-      "_fail_streak": 14
+      "_fail_streak": 14,
+      "geo_fallback": "v2_online"
     },
     {
       "id": "agg-e-sun-art-awards-2026-art",
@@ -1833,8 +1835,8 @@
       "title_zh": "Joan Wakelin 助学金",
       "title_en": "The Joan Wakelin Bursary",
       "org_zh": "皇家摄影学会",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
       "deadline": "2026-07-12",
       "deadline_note": "",
       "apply_fee": {
@@ -1889,7 +1891,8 @@
         "disciplines": "1s9bus6"
       },
       "_fail_streak": 0,
-      "_ev_audit": "2026-07-24"
+      "_ev_audit": "2026-07-24",
+      "geo_fallback": "v2_org_keyword"
     },
     {
       "id": "agg-ceske-budejovice-ecoc-2028-perma-culture-art",
@@ -2775,8 +2778,8 @@
       "title_zh": "《事物的表皮之下》",
       "title_en": "Under the Skin of Things",
       "org_zh": "CISTA ARTS",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-15",
       "deadline_note": "",
       "apply_fee": {
@@ -2841,7 +2844,8 @@
       "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
       "cover_source": "cistaarts.com",
       "_fail_streak": 0,
-      "_ev_audit": "2026-07-27"
+      "_ev_audit": "2026-07-27",
+      "geo_fallback": "v2_online"
     },
     {
       "id": "agg-the-ghost-in-the-space-cur",
@@ -2927,8 +2931,8 @@
       "title_zh": "《植物 / 动物》摄影展",
       "title_en": "Flora / Fauna Photography Exhibition",
       "org_zh": "Solas Shadow",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-15",
       "deadline_note": "",
       "apply_fee": {
@@ -2990,7 +2994,8 @@
       "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
       "cover_source": "curatorspace.com",
       "_fail_streak": 0,
-      "_ev_audit": "2026-07-27"
+      "_ev_audit": "2026-07-27",
+      "geo_fallback": "v2_online"
     },
     {
       "id": "agg-open-call-museum-of-homeland-cur",
@@ -2998,8 +3003,8 @@
       "title_zh": "公开征集:《家园博物馆》",
       "title_en": "Open Call: Museum of Homeland",
       "org_zh": "家园博物馆 (Museum of Homeland)",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": null,
       "deadline_note": "列表显示18/07/2026;FAQ称目前无固定截止日期,滚动审阅",
       "apply_fee": {
@@ -3060,7 +3065,8 @@
       },
       "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
       "cover_source": "museumderheimat.de",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_online"
     },
     {
       "id": "agg-post-animal-signal-cur",
@@ -3215,8 +3221,8 @@
       "title_zh": "《春分》——BobCat画廊线上展",
       "title_en": "Equinox - Virtual Exhibition with BobCat Gallery",
       "org_zh": "BobCat 画廊",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-26",
       "deadline_note": "",
       "apply_fee": {
@@ -3280,7 +3286,8 @@
       "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
       "cover_source": "bobcatgallery.co.uk",
       "_fail_streak": 0,
-      "_ev_audit": "2026-07-28"
+      "_ev_audit": "2026-07-28",
+      "geo_fallback": "v2_online"
     },
     {
       "id": "agg-stories-in-motion-call-for-young-artists-ages-7--cur",
@@ -3822,8 +3829,8 @@
       "title_zh": "现场项目策展人",
       "title_en": "Live Programmes Curator",
       "org_zh": "蛇形画廊",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
       "deadline": "2026-07-10",
       "deadline_note": "",
       "apply_fee": {
@@ -3877,7 +3884,8 @@
         "org": "eu0ihd",
         "disciplines": "1tl8y1s"
       },
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_org_keyword"
     },
     {
       "id": "artconnect-opportunities-欧洲及更远流动性计划",
@@ -24547,8 +24555,8 @@
       "title_zh": "法国时尚大奖",
       "title_en": "French Fashion Awards",
       "org_zh": "国际奖项协会",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "巴黎",
+      "country_zh": "法国",
       "deadline": "2026-07-21",
       "deadline_note": "",
       "apply_fee": {
@@ -24585,7 +24593,8 @@
       "last_seen": "2026-08-03",
       "updated_at": "2026-07-22",
       "_via": "search",
-      "_fail_streak": 1
+      "_fail_streak": 1,
+      "geo_fallback": "v2_domain_pattern"
     },
     {
       "id": "search-bjbiennale-第五届深圳大芬国际油画双年展征稿",
@@ -25426,8 +25435,8 @@
       "title_zh": "VH AWARD",
       "title_en": "VH AWARD",
       "org_zh": "现代汽车集团",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-21",
       "deadline_note": "",
       "apply_fee": {
@@ -25473,7 +25482,8 @@
       "cover_source": "artconnect.com",
       "official_url": "https://vhaward.com/",
       "official_located": "specific",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_online"
     },
     {
       "id": "artconnect-opportunities-普林斯顿展览",
@@ -30333,8 +30343,8 @@
       "title_zh": "Experimental Visual Art for Hardcover Book Editions & Online",
       "title_en": "Experimental Visual Art for Hardcover Book Editions & Online",
       "org_zh": "Point Pleasant Publishing",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-24",
       "deadline_note": "",
       "apply_fee": {
@@ -30382,7 +30392,8 @@
       "cover_source": "artconnect.com",
       "official_url": "https://www.pointpleasantpublishing.net/info-callforartists",
       "official_located": "specific",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_online"
     },
     {
       "id": "artconnect-opportunities-公共艺术征稿-纪念公园-artconnect",
@@ -32649,8 +32660,8 @@
       "title_zh": "Creative Synergies Online Residency & Mentorship Program",
       "title_en": "Creative Synergies Online Residency & Mentorship Program",
       "org_zh": "All About Curating",
-      "city_zh": "Berlin",
-      "country_zh": null,
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-26",
       "deadline_note": "",
       "apply_fee": {
@@ -32714,7 +32725,8 @@
       "cover_source": "artconnect.com",
       "official_url": "https://www.allaboutcurating.com/creative-synergies",
       "official_located": "specific",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_online"
     },
     {
       "id": "artconnect-opportunities-研究策展人职位",
@@ -33451,7 +33463,7 @@
       "title_en": null,
       "org_zh": "香港文聯",
       "city_zh": "深圳",
-      "country_zh": null,
+      "country_zh": "中国香港",
       "deadline": "2024-05-10",
       "deadline_note": "",
       "apply_fee": {
@@ -33499,7 +33511,8 @@
       "last_seen": "2026-08-04",
       "updated_at": "2026-07-26",
       "_via": "search",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_domain_pattern"
     },
     {
       "id": "search-caanet-第十四届全国美术作品展览港澳台-海外华人作品展征稿通知",
@@ -37648,7 +37661,7 @@
       "title_en": "CLUSTER LONDON ARTIST-IN-RESIDENCE",
       "org_zh": "CLUSTER London",
       "city_zh": "London",
-      "country_zh": null,
+      "country_zh": "英国",
       "deadline": null,
       "deadline_note": "Applications are now open",
       "apply_fee": {
@@ -37690,7 +37703,8 @@
       "last_seen": "2026-08-04",
       "updated_at": "2026-07-30",
       "_via": "search",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_domain_pattern"
     },
     {
       "id": "search-copenhagenphotofestival-2027年个人艺术家征稿-哥本哈根摄影节",
@@ -38640,8 +38654,8 @@
       "title_zh": "2026 Graton艺术家机会 - 圣丹斯研究所",
       "title_en": "2026 Graton Artist Opportunity - Sundance Institute",
       "org_zh": "圣丹斯研究所",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "线上",
+      "country_zh": "全球",
       "deadline": "2026-07-31",
       "deadline_note": "周五，2026年7月31日，下午3:30 PT/4:30 MT/6:30 ET",
       "apply_fee": {
@@ -38680,7 +38694,8 @@
       "updated_at": "2026-08-01",
       "cover": "https://d3ovk0g3go3fof.cloudfront.net/media/img/smapply/powered-by-apply-grey.png",
       "cover_source": "sundance.org",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_online"
     },
     {
       "id": "search-artexplora-art-explora-cit-internationale-des-arts-",
@@ -40046,8 +40061,8 @@
       "title_zh": "Eamonn McCabe奖学金",
       "title_en": "the eamonn mccabe bursary",
       "org_zh": "皇家摄影学会",
-      "city_zh": "未知",
-      "country_zh": "未知",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
       "deadline": "2026-08-03",
       "deadline_note": "",
       "apply_fee": {
@@ -40088,7 +40103,8 @@
       "cover_source": "artconnect.com",
       "official_url": "https://rps.org/opportunities/bursaries/eamonn-mccabe-bursary/",
       "official_located": "specific",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "geo_fallback": "v2_org_keyword"
     },
     {
       "id": "artconnect-opportunities-artist-open-call-daisy-chain",

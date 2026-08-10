@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.8.0" />
+<meta name="app-version" content="1.9.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.8.0</span></div>
+  ARTPORTAL <span id="appVer">v1.9.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.8.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.8.0"></script>
-<script src="js/globe-data.js?v=1.8.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.9.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.9.0"></script>
+<script src="js/globe-data.js?v=1.9.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1301,9 +1301,14 @@
       for(var i=0;i<countryFeats.length;i++){ if(d3.geoContains(countryFeats[i],inv)){ drillInto(countryFeats[i]); return; } } }
   });
 
+  // flyTo 优化版:更平滑的缓动函数 + 自适应时长
   function flyTo(centroid,ts){ spinning=false; inertiaOn=false; targetScale=null;
     var r0=proj.rotate(), s0=proj.scale();
-    d3.transition().duration(900).tween('fly',function(){
+    // 计算旋转角度以自适应动画时长
+    var dLat=Math.abs(centroid[0]-r0[0]), dLon=Math.abs(centroid[1]-r0[1]);
+    var dist=Math.sqrt(dLat*dLat+dLon*dLon);
+    var dur=700+Math.min(500,dist*20);  // 近距离快,远距离慢
+    d3.transition().duration(dur).ease(d3.easeCubicInOut).tween('fly',function(){
       var ir=d3.interpolate(r0,[-centroid[0],-centroid[1],0]), is=d3.interpolate(s0,clampScale(ts));
       return function(t){ proj.rotate(ir(t)).scale(is(t)); needDraw=true; }; }); }
 
@@ -1678,8 +1683,9 @@
       tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
       fVerified:'仅已核实',fHidePast:'隐藏已截止',sortDL:'按截止排序',sortNew:'最新收录',sortMix:'综合',
       fltBarT:'筛选',gTag:'门类',gReg:'地区',gCond:'条件',
-      regAll:'全部地区',reg_cn:'中国大陆',reg_hktw:'港澳台',reg_asia:'亚洲其他',reg_europe:'欧洲',
-      reg_namerica:'北美',reg_other:'其他地区',
+      regAll:'全部地区',reg_cn:'中国大陆',reg_hktw:'港澳台',reg_asia-east:'东亚',reg_asia-sea:'东南亚/海岛',reg_asia-south:'南亚',
+      reg_europe-west:'西欧',reg_europe-north:'北欧',reg_europe-south:'南欧',reg_europe-east:'东欧',
+      reg_namerica:'北美',reg_latam:'拉丁美洲',reg_africa:'非洲',reg_middle-east:'中东',reg_oceania:'大洋洲',
       fOrgOff:'官方机构',fOrgInd:'独立机构',fOrgCom:'商业机构',fSrcUser:'含用户投稿',fSrcAI:'含AI检索',
       k_org:'主办',k_loc:'地点',k_dl:'截止',k_fee:'费用',k_fund:'资助',k_elig:'资格',k_disc:'门类',k_src:'来源',k_pub:'发布',
       srcLoc:'落点=信源所在地(非内容发生地)',tipMore:'点击看完整详情',clusterN:' 项活跃索引',clusterGo:'点击放大展开',
@@ -1758,8 +1764,9 @@
       tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
       fVerified:'Verified',fHidePast:'Hide closed',sortDL:'By deadline',sortNew:'Newest',sortMix:'Default',
       fltBarT:'Filters',gTag:'Field',gReg:'Region',gCond:'Criteria',
-      regAll:'All regions',reg_cn:'Mainland China',reg_hktw:'HK/MO/TW',reg_asia:'Asia',reg_europe:'Europe',
-      reg_namerica:'N. America',reg_other:'Other',
+      regAll:'All regions',reg_cn:'Mainland China',reg_hktw:'HK/MO/TW',reg_asia-east:'E. Asia',reg_asia-sea:'SE Asia/Islands',reg_asia-south:'S. Asia',
+      reg_europe-west:'W. Europe',reg_europe-north:'N. Europe',reg_europe-south:'S. Europe',reg_europe-east:'E. Europe',
+      reg_namerica:'N. America',reg_latam:'Latin America',reg_africa:'Africa',reg_middle-east:'Middle East',reg_oceania:'Oceania',
       fOrgOff:'Official',fOrgInd:'Independent',fOrgCom:'Commercial',fSrcUser:'User posts',fSrcAI:'AI-collected',
       k_org:'Host',k_loc:'Place',k_dl:'Due',k_fee:'Fee',k_fund:'Funding',k_elig:'Eligible',k_disc:'Fields',k_src:'Source',k_pub:'Date',
       srcLoc:'Pinned at source HQ (not story location)',tipMore:'Click for full details',clusterN:' active listings',clusterGo:'Click to expand',
@@ -3298,8 +3305,8 @@
       tagSel=(tagSel===tg)?'':tg;
       renderTagRow(); renderDrawer(); needDraw=true;
       if(curCh) showChPanel(curCh); }); }
-  // 地区多选行(老站六大区,再点取消;「全部」清空)
-  var REG_KEYS=['cn','hktw','asia','europe','namerica','other'];
+  // 地区多选行(v1.9.0优化):扩展为12个区域,支持更细粒度筛选
+  var REG_KEYS=['cn','hktw','asia-east','asia-sea','asia-south','europe-west','europe-north','europe-south','europe-east','namerica','latam','africa','middle-east','oceania'];
   function renderRegRow(){
     var hosts=document.querySelectorAll('[data-regrow]'); if(!hosts.length) return;
     var html=rowXBtn('reg')+'<span class="tgc'+(!regsActive()?' on':'')+'" data-reg="all">'+L('regAll')+'</span>'+
@@ -3313,14 +3320,26 @@
       if(rk==='all') fRegs={}; else fRegs[rk]=!fRegs[rk];
       renderRegRow(); renderDrawer(); needDraw=true;
       if(curCh) showChPanel(curCh); }); }
+  // 统计过期记录数量（用于筛选栏提示）
+  function countExpiredOpp(){
+    var list=chStore.opportunities||[];
+    var expired=0;
+    for(var i=0;i<list.length;i++){ if(isPastRec(list[i])) expired++; }
+    return expired;
+  }
   function renderFltRow(){
     var hosts=document.querySelectorAll('[data-fltrow]'); if(!hosts.length) return;
+    var expiredCount=countExpiredOpp();
     var items=[['fFree',fFree],['fStipend',fStipend],['fHousing',fHousing],['fTravel',fTravel],
       ['fVerified',fVerified],['fHidePast',fHidePast],
       ['fOrgOff',fOrgOff],['fOrgInd',fOrgInd],['fOrgCom',fOrgCom],
       ['fSrcUser',fSrcUser],['fSrcAI',fSrcAI]];
     var html=rowXBtn('flt')+items.map(function(x){
-      return '<span class="tgc'+(x[1]?' on':'')+'" data-f="'+x[0]+'">'+L(x[0])+'</span>'; }).join('');
+      var label=L(x[0]);
+      if(x[0]==='fHidePast' && expiredCount>0 && fHidePast){
+        label=label+' <span style="color:var(--dim);font-size:0.72em">('+expiredCount+' 已隐藏)</span>';
+      }
+      return '<span class="tgc'+(x[1]?' on':'')+'" data-f="'+x[0]+'">'+label+'</span>'; }).join('');
     for(var hi=0;hi<hosts.length;hi++) hosts[hi].innerHTML=html;
     rowXApply(hosts,'flt');
     d3.selectAll('[data-fltrow] .tgc').on('click',function(){
@@ -3403,6 +3422,7 @@
       chStore.opportunities=arr; addRecords(arr);
       var st2=document.getElementById('status');
       if(st2.style.display!=='none') st2.textContent=L('marked')(placedTotal,countryFeats.length);
+      renderFltRow();  // 更新筛选栏统计提示
     }).catch(function(){});
     d3.json('data/jobs.json').then(function(j){ chCache.jobs=j;
       chNorm.jobs=(j.jobs||j.items||[]).map(normJob); addRecords(chNorm.jobs); }).catch(function(){});

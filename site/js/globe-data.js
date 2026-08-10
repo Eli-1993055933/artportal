@@ -328,24 +328,59 @@
     "云南":"昆明","西藏":"拉萨","陕西":"西安","甘肃":"兰州","青海":"西宁","宁夏":"银川",
     "新疆":"乌鲁木齐","台湾":"台北","香港":"香港","澳门":"澳门"
   };
-  // 地区归类(老站六大区):cn 中国大陆 / hktw 港澳台 / asia 亚洲其他 / europe 欧洲 / namerica 北美 / other
-  // 无 country_zh 的记录(作品等)回落 IP 属地判断;境外属地是英文国名,单独分桶
+  // 地区归类(v1.9.0优化):14个细粒度区域
+  // cn 中国大陆 / hktw 港澳台 / asia-east 东亚 / asia-sea 东南亚海岛 / asia-south 南亚
+  // europe-west 西欧 / europe-north 北欧 / europe-south 南欧 / europe-east 东欧
+  // namerica 北美 / latam 拉丁美洲 / africa 非洲 / middle-east 中东 / oceania 大洋洲
   function regionOf(o){
     var c=o.country_zh||"", city=o.city_zh||"";
+    // 港澳台
     if(/香港|澳门|台湾|台北|高雄/.test(c) || /香港|澳门|台北|高雄|台中|台南/.test(city)) return "hktw";
+    // 中国大陆
     if(c==="中国") return "cn";
-    if(/日本|韩国|新加坡|印度|泰国|越南|马来|菲律宾|印尼|蒙古|哈萨克|阿联酋|卡塔尔|以色列|土耳其/.test(c)) return "asia";
-    if(/法国|德国|荷兰|英国|意大利|西班牙|瑞士|比利时|奥地利|斯洛文尼亚|瑞典|挪威|芬兰|丹麦|波兰|葡萄牙|捷克|匈牙利|希腊|爱尔兰|冰岛|克罗地亚|俄罗斯/.test(c)) return "europe";
-    if(/美国|加拿大|墨西哥/.test(c)) return "namerica";
-    if(c) return "other";
-    var r=o.ip_region;
-    if(r){
-      if(r.country==="中国") return /香港|澳门|台湾/.test(r.province||"")?"hktw":"cn";
-      var e=r.country||"";
-      if(/Japan|Korea|Singapore|India|Thailand|Vietnam|Malaysia|Philippines|Indonesia|Mongolia|Kazakhstan|United Arab|Qatar|Israel|Turkey/i.test(e)) return "asia";
-      if(/France|Germany|Netherlands|United Kingdom|Italy|Spain|Switzerland|Belgium|Austria|Sweden|Norway|Finland|Denmark|Poland|Portugal|Czech|Hungary|Greece|Ireland|Iceland|Croatia|Russia/i.test(e)) return "europe";
-      if(/United States|Canada|Mexico/i.test(e)) return "namerica";
-      if(e) return "other";
+    // 东亚
+    if(/日本|韩国|朝鲜|蒙古/.test(c)) return "asia-east";
+    // 东南亚/海岛
+    if(/新加坡|印度尼西亚|印尼|菲律宾|马来西亚|泰国|越南|柬埔寨|老挝|缅甸|文莱|东帝汶/.test(c)) return "asia-sea";
+    // 南亚
+    if(/印度|巴基斯坦|孟加拉国|斯里兰卡|尼泊尔|不丹|马尔代夫|阿富汗/.test(c)) return "asia-south";
+    // 西欧
+    if(/法国|德国|荷兰|英国|爱尔兰|比利时|卢森堡/.test(c)) return "europe-west";
+    // 北欧
+    if(/瑞典|挪威|芬兰|丹麦|冰岛/.test(c)) return "europe-north";
+    // 南欧
+    if(/意大利|西班牙|葡萄牙|希腊|马耳他|塞浦路斯/.test(c)) return "europe-south";
+    // 东欧
+    if(/波兰|捷克|匈牙利|斯洛伐克|斯洛文尼亚|克罗地亚|塞尔维亚|保加利亚|罗马尼亚|俄罗斯|乌克兰|白俄罗斯|立陶宛|拉脱维亚|爱沙尼亚/.test(c)) return "europe-east";
+    // 北美
+    if(/美国|加拿大/.test(c)) return "namerica";
+    // 拉丁美洲
+    if(/墨西哥|巴西|阿根廷|智利|秘鲁|哥伦比亚|委内瑞拉|厄瓜多尔|玻利维亚|巴拉圭|乌拉圭|古巴|牙买加|巴拿马|哥斯达黎加|危地马拉|洪都拉斯|尼加拉瓜|萨尔瓦多|多米尼加|海地/.test(c)) return "latam";
+    // 非洲
+    if(/埃及|南非|尼日利亚|肯尼亚|埃塞俄比亚|摩洛哥|加纳|坦桑尼亚|乌干达|阿尔及利亚|苏丹|利比亚|突尼斯|刚果|喀麦隆|科特迪瓦|塞内加尔|马里|布基纳法索|马拉维|赞比亚|津巴布韦|莫桑比克|马达加斯加/.test(c)) return "africa";
+    // 中东
+    if(/阿联酋|卡塔尔|以色列|土耳其|沙特阿拉伯|科威特|巴林|阿曼|也门|伊朗|伊拉克|约旦|黎巴嫩|叙利亚|巴勒斯坦/.test(c)) return "middle-east";
+    // 大洋洲
+    if(/澳大利亚|新西兰|斐济|巴布亚新几内亚|萨摩亚|汤加/.test(c)) return "oceania";
+    // 无 country_zh 的记录回落 IP 属地判断
+    if(!c){
+      var r=o.ip_region;
+      if(r){
+        if(r.country==="中国") return /香港|澳门|台湾/.test(r.province||"")?"hktw":"cn";
+        var e=r.country||"";
+        if(/Japan|Korea|North Korea|Mongolia/i.test(e)) return "asia-east";
+        if(/Singapore|Indonesia|Philippines|Malaysia|Thailand|Vietnam|Cambodia|Laos|Myanmar|Brunei|Timor-Leste/i.test(e)) return "asia-sea";
+        if(/India|Pakistan|Bangladesh|Sri Lanka|Nepal|Bhutan|Maldives|Afghanistan/i.test(e)) return "asia-south";
+        if(/France|Germany|Netherlands|United Kingdom|Ireland|Belgium|Luxembourg/i.test(e)) return "europe-west";
+        if(/Sweden|Norway|Finland|Denmark|Iceland/i.test(e)) return "europe-north";
+        if(/Italy|Spain|Portugal|Greece|Malta|Cyprus/i.test(e)) return "europe-south";
+        if(/Poland|Czech|Hungary|Slovakia|Slovenia|Croatia|Serbia|Bulgaria|Romania|Russia|Ukraine|Belarus|Lithuania|Latvia|Estonia/i.test(e)) return "europe-east";
+        if(/United States|Canada/i.test(e)) return "namerica";
+        if(/Mexico|Brazil|Argentina|Chile|Peru|Colombia|Venezuela|Ecuador|Bolivia|Paraguay|Uruguay|Cuba|Jamaica|Panama|Costa Rica|Guatemala|Honduras|Nicaragua|El Salvador|Dominican Republic|Haiti/i.test(e)) return "latam";
+        if(/Egypt|South Africa|Nigeria|Kenya|Ethiopia|Morocco|Ghana|Tanzania|Uganda|Algeria|Sudan|Libya|Tunisia|Congo|Cameroon|Côte d'Ivoire|Senegal|Mali|Burkina Faso|Malawi|Zambia|Zimbabwe|Mozambique|Madagascar/i.test(e)) return "africa";
+        if(/United Arab Emirates|Qatar|Israel|Turkey|Saudi Arabia|Kuwait|Bahrain|Oman|Yemen|Iran|Iraq|Jordan|Lebanon|Syria|Palestine/i.test(e)) return "middle-east";
+        if(/Australia|New Zealand|Fiji|Papua New Guinea|Samoa|Tonga/i.test(e)) return "oceania";
+      }
     }
     return "other";
   }
