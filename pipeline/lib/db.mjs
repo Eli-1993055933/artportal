@@ -566,7 +566,7 @@ export async function workReport(id) {
   const d = await getDb();
   d.prepare("UPDATE works SET reports=reports+1 WHERE id=?").run(id);
 }
-export async function workRateOk(uid, max = 3) {   // 单用户 24 小时最多 3 组作品
+export async function workRateOk(uid, max = 10) {   // 单用户 24 小时最多 10 组作品
   const d = await getDb();
   const since = new Date(Date.now() - 24 * 3600e3).toISOString();
   return d.prepare("SELECT COUNT(*) n FROM works WHERE uid=? AND created_at>?").get(uid, since).n < max;

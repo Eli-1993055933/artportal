@@ -924,7 +924,7 @@ async function handleAuthApi(req, res, u) {
       const v = validateWork(b);
       if (v.error) return json({ code: 400, body: { error: v.error } });
       try {
-        if (!(await db.workRateOk(me.id))) return json({ code: 429, body: { error: "今天上传已达上限(3 组),明天再来" } });
+        if (!(await db.workRateOk(me.id))) return json({ code: 429, body: { error: "今天上传已达上限(10 组),明天再来" } });
         // 审核策略(2026-07-17 起):文字机审 pass → 自动通过、图片直接进公开目录即时发布;
         // review/reject → 图片留在非公开待审目录,交人工。后台全量可见,已发布的可"下架"。
         // (注:DeepSeek 只能审文字;图片内容靠 后台可见+举报+下架 兜底)
