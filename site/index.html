@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.13.2" />
+<meta name="app-version" content="1.13.3" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.13.2</span></div>
+  ARTPORTAL <span id="appVer">v1.13.3</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.13.2"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.13.2"></script>
-<script src="js/globe-data.js?v=1.13.2"></script>
+<script src="assets/vendor/d3.min.js?v=1.13.3"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.13.3"></script>
+<script src="js/globe-data.js?v=1.13.3"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1676,6 +1676,7 @@
       peNick:'昵称',peIdentity:'身份',peFields:'创作领域(如 油画/摄影)',peLocation:'所在地',
       peWebsite:'个人网站(https:// 开头)',peBio:'个人简介',peFavPub:'公开我的收藏',peNlK:'订阅周报',
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
+      cropTitle:'调整头像裁切',cropHint:'拖动方框选择裁切区域',cropCancel:'取消',cropConfirm:'确认裁切',
       cpT:'完善资料',cpNote:'设置一个昵称就能开始使用(头像不传会自动生成)。不想现在设置?可直接退出登录。',
       cpSave:'保存并开始使用',cpNeedNick:'昵称至少 2 个字',
       imgReady:' 张已就绪',studioT:'画室点评工具',
@@ -1757,6 +1758,7 @@
       peNick:'Nickname',peIdentity:'Identity',peFields:'Fields (e.g. painting/photo)',peLocation:'Location',
       peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
+      cropTitle:'Crop avatar',cropHint:'Drag the box to select crop area',cropCancel:'Cancel',cropConfirm:'Confirm crop',
       cpT:'Finish your profile',cpNote:'Pick a nickname to get started (an avatar is auto-generated if you skip it). Not now? You can sign out.',
       cpSave:'Save and start',cpNeedNick:'Nickname needs 2+ characters',
       imgReady:' ready',studioT:'Studio critique tool',
@@ -2089,15 +2091,51 @@
       cb(d.length>800000?null:d); };
     img.onerror=function(){ URL.revokeObjectURL(obj); cb(null); };
     img.src=obj; }
-  function squareAva(file,cb){
-    if(!file||!/^image\//.test(file.type)){ cb(null); return; }
+  // 头像裁切:弹出可拖动裁切框,用户调整后生成 256×256 JPEG
+  function showCropper(file,imgEl,errEl,cb){
+    if(!file||!/^image\//.test(file.type)){ if(errEl) errEl.textContent=L('errImgBad'); cb(null); return; }
     var obj=URL.createObjectURL(file), img=new Image();
     img.onload=function(){ URL.revokeObjectURL(obj);
-      var s=Math.min(img.width,img.height), c=document.createElement('canvas');
-      c.width=c.height=256;
-      c.getContext('2d').drawImage(img,(img.width-s)/2,(img.height-s)/2,s,s,0,0,256,256);
-      cb(c.toDataURL('image/jpeg',0.85)); };
-    img.onerror=function(){ URL.revokeObjectURL(obj); cb(null); };
+      var maxW=280,maxH=280, sc=Math.min(maxW/img.width,maxH/img.height);
+      var dw=Math.round(img.width*sc), dh=Math.round(img.height*sc);
+      var sz=Math.min(dw,dh), cx=Math.round((dw-sz)/2), cy=Math.round((dh-sz)/2);
+      var ov=document.createElement('div');
+      ov.style.cssText='position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.8);padding:16px;';
+      ov.innerHTML='<div style="background:#1a2230;padding:16px;border-radius:12px;max-width:92vw;">'+
+        '<h3 style="color:#fff;margin:0 0 12px;text-align:center;font-size:16px;">'+L('cropTitle')+'</h3>'+
+        '<div class="crop-area" style="position:relative;width:'+dw+'px;height:'+dh+'px;overflow:hidden;border-radius:8px;">'+
+        '<img src="'+img.src+'" style="width:'+dw+'px;height:'+dh+'px;display:block;opacity:.4;">'+
+        '<div class="crop-box" style="position:absolute;left:'+cx+'px;top:'+cy+'px;width:'+sz+'px;height:'+sz+'px;border:2px solid #fff;cursor:move;box-sizing:border-box;overflow:hidden;">'+
+        '<img src="'+img.src+'" style="position:absolute;left:-'+cx+'px;top:-'+cy+'px;width:'+dw+'px;height:'+dh+'px;display:block;">'+
+        '</div></div>'+
+        '<p style="color:#8899aa;text-align:center;margin:8px 0;font-size:13px;">'+L('cropHint')+'</p>'+
+        '<div style="display:flex;gap:8px;justify-content:center;">'+
+        '<button class="pp-btn" id="cropCancel" type="button">'+L('cropCancel')+'</button>'+
+        '<button class="mgo" id="cropConfirm" type="button" style="min-width:100px;">'+L('cropConfirm')+'</button></div></div>';
+      document.body.appendChild(ov);
+      var box=ov.querySelector('.crop-box'), boxImg=box.querySelector('img');
+      function moveBox(nx,ny){ nx=Math.max(0,Math.min(nx,dw-sz)); ny=Math.max(0,Math.min(ny,dh-sz));
+        box.style.left=nx+'px'; box.style.top=ny+'px'; boxImg.style.left=(-nx)+'px'; boxImg.style.top=(-ny)+'px'; }
+      var drag=false,sx=0,sy=0,bx=cx,by=cy;
+      box.addEventListener('mousedown',function(e){ drag=true; sx=e.clientX; sy=e.clientY; bx=parseFloat(box.style.left); by=parseFloat(box.style.top); e.preventDefault(); });
+      function mm(e){ if(!drag) return; moveBox(bx+(e.clientX-sx),by+(e.clientY-sy)); }
+      function mu(){ drag=false; }
+      document.addEventListener('mousemove',mm); document.addEventListener('mouseup',mu);
+      box.addEventListener('touchstart',function(e){ var t=e.touches[0]; drag=true; sx=t.clientX; sy=t.clientY; bx=parseFloat(box.style.left); by=parseFloat(box.style.top); e.preventDefault(); },{passive:false});
+      function tm(e){ if(!drag) return; var t=e.touches[0]; moveBox(bx+(t.clientX-sx),by+(t.clientY-sy)); e.preventDefault(); }
+      function te(){ drag=false; }
+      document.addEventListener('touchmove',tm,{passive:false}); document.addEventListener('touchend',te);
+      function cleanup(){ document.removeEventListener('mousemove',mm); document.removeEventListener('mouseup',mu);
+        document.removeEventListener('touchmove',tm); document.removeEventListener('touchend',te); ov.remove(); }
+      ov.querySelector('#cropConfirm').addEventListener('click',function(){
+        var rx=parseFloat(box.style.left)/sc, ry=parseFloat(box.style.top)/sc, rs=sz/sc;
+        var c=document.createElement('canvas'); c.width=c.height=256;
+        c.getContext('2d').drawImage(img,rx,ry,rs,rs,0,0,256,256);
+        var d=c.toDataURL('image/jpeg',0.85); cleanup();
+        if(imgEl) imgEl.src=d; cb(d); });
+      ov.querySelector('#cropCancel').addEventListener('click',function(){ cleanup(); cb(null); });
+    };
+    img.onerror=function(){ URL.revokeObjectURL(obj); if(errEl) errEl.textContent=L('errImgBad'); cb(null); };
     img.src=obj; }
   function filesToDataURLs(files,max,q,limit,cb){ var out=[],i=0;
     (function next(){ if(i>=files.length||out.length>=limit){ cb(out); return; }
@@ -2125,8 +2163,7 @@
       '<button class="gd-skip" id="cpOut" type="button">'+L('ppLogout')+'</button>', true);
     m.querySelector('#cpF').addEventListener('change',function(){
       var f=this.files&&this.files[0]; if(!f) return;
-      squareAva(f,function(d){ if(d){ newAva=d; m.querySelector('#cpAv').src=d; }
-        else m.querySelector('#cpE').textContent=L('errImgBad'); }); });
+      showCropper(f,m.querySelector('#cpAv'),m.querySelector('#cpE'),function(d){ if(d) newAva=d; }); });
     m.querySelector('#cpGo').addEventListener('click',function(){
       var nk=m.querySelector('#cpN').value.trim(), err=m.querySelector('#cpE'), b=this;
       if(nk.length<2){ err.textContent=L('cpNeedNick'); return; }
@@ -2719,8 +2756,7 @@
       '<div class="merr" id="peE"></div><button class="mgo" id="peGo" type="button">'+L('peSave')+'</button>');
     m.querySelector('#peF').addEventListener('change',function(){
       var f=this.files&&this.files[0]; if(!f) return;
-      squareAva(f,function(d){ if(d){ newAva=d; m.querySelector('#peAv').src=d; }
-        else m.querySelector('#peE').textContent=L('errImgBad'); }); });
+      showCropper(f,m.querySelector('#peAv'),m.querySelector('#peE'),function(d){ if(d) newAva=d; }); });
     m.querySelector('#peGo').addEventListener('click',function(){
       var err=m.querySelector('#peE'), b=this, web=m.querySelector('#peW').value.trim();
       if(web&&!/^https?:\/\//i.test(web)){ err.textContent=L('errUrl'); return; }

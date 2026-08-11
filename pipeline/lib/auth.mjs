@@ -522,7 +522,7 @@ export async function setProfile(req, body, ip) {
     if (buf.length < 100 || buf.length > 220000) return { code: 400, body: { error: "头像图片无效或过大" } };
     await mkdir(AVATARS, { recursive: true });
     await writeFile(join(AVATARS, u.id + ".jpg"), buf);
-    u.avatar = "assets/avatars/" + u.id + ".jpg";
+    u.avatar = "assets/avatars/" + u.id + ".jpg?v=" + Date.now();
   }
   if (u.nickname) byNick.delete(nickKey(u.nickname));
   if (changingNick) u.nickname_changed_at = new Date().toISOString();
