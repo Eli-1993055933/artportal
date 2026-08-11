@@ -208,7 +208,9 @@ async function issueEmailCode(email, ip) {
     return { code: 503, body: { error: "验证码发送失败,请稍后再试" } };
   }
   logEvent("sendcode", { email, ip });
-  return { code: 200, body: { ok: true } };
+  const resp = { ok: true };
+  if (process.env.MAIL_DEBUG === "1") resp.debug_code = code;
+  return { code: 200, body: resp };
 }
 export async function sendEmailCode(body, ip) {
   if (!mailerOn()) return { code: 400, body: { error: "当前无需验证码,直接注册即可" } };
@@ -278,7 +280,9 @@ export async function sendPhoneCode(body, ip) {
   }
   smsDayBump();
   logEvent("smscode", { phone: maskPhone(phone), ip });
-  return { code: 200, body: { ok: true } };
+  const resp = { ok: true };
+  if (process.env.SMS_DEBUG === "1") resp.debug_code = "000000";
+  return { code: 200, body: resp };
 }
 // 短信全局日闸(v0.97.0):只统计【真发出去】的条数(发送失败不计,免把额度算错)。
 // 进程内计数,重启归零——短信额度是"天级"资源,重启少算几条可接受,不值得为它落盘。

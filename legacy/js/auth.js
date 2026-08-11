@@ -145,7 +145,8 @@
         return;
       }
       err.textContent = "";
-      toast(AP.t("authCodeSent"));
+      if (r.data && r.data.debug_code) toast("调试模式·验证码: " + r.data.debug_code);
+      else toast(AP.t("authCodeSent"));
       var left = 60;
       btn.textContent = AP.t("authCodeResend") + " " + left + "s";
       clearInterval(codeTimer);
