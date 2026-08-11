@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.13.3" />
+<meta name="app-version" content="1.13.4" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.13.3</span></div>
+  ARTPORTAL <span id="appVer">v1.13.4</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.13.3"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.13.3"></script>
-<script src="js/globe-data.js?v=1.13.3"></script>
+<script src="assets/vendor/d3.min.js?v=1.13.4"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.13.4"></script>
+<script src="js/globe-data.js?v=1.13.4"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -2095,7 +2095,7 @@
   function showCropper(file,imgEl,errEl,cb){
     if(!file||!/^image\//.test(file.type)){ if(errEl) errEl.textContent=L('errImgBad'); cb(null); return; }
     var obj=URL.createObjectURL(file), img=new Image();
-    img.onload=function(){ URL.revokeObjectURL(obj);
+    img.onload=function(){
       var maxW=280,maxH=280, sc=Math.min(maxW/img.width,maxH/img.height);
       var dw=Math.round(img.width*sc), dh=Math.round(img.height*sc);
       var sz=Math.min(dw,dh), cx=Math.round((dw-sz)/2), cy=Math.round((dh-sz)/2);
@@ -2126,7 +2126,7 @@
       function te(){ drag=false; }
       document.addEventListener('touchmove',tm,{passive:false}); document.addEventListener('touchend',te);
       function cleanup(){ document.removeEventListener('mousemove',mm); document.removeEventListener('mouseup',mu);
-        document.removeEventListener('touchmove',tm); document.removeEventListener('touchend',te); ov.remove(); }
+        document.removeEventListener('touchmove',tm); document.removeEventListener('touchend',te); ov.remove(); URL.revokeObjectURL(obj); }
       ov.querySelector('#cropConfirm').addEventListener('click',function(){
         var rx=parseFloat(box.style.left)/sc, ry=parseFloat(box.style.top)/sc, rs=sz/sc;
         var c=document.createElement('canvas'); c.width=c.height=256;
