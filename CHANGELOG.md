@@ -10,6 +10,16 @@
 
 ---
 
+## v1.15.0 (2026-08-15)
+
+- **机会信息批量冲刺 +244 条可用**:针对"检索到信息量太少"的一次性大规模收割,今日(2026-08-15)first_seen 新增 **244 条全部 open 可用**(含 deadline 147 条;分类 residency 114 / opencall 109 / award 16 / grant 5)。库内 opportunities 同步后 690 条(open 407、expired 264)。
+  - 聚合器分页深挖:ArtConnect(第3~8页)、CuratorSpace(第3~7页)、Funds for NGOs(艺术文化分类第2~5页)、Alliance of Artists Communities(open-calls/residencies/ongoing 三个目录)新增分页源并批量收割,单页 13~24 条。
+  - 新源探测:新增约 16 个分页/目录源入 `sources.json`(共 397 源),实探验证可达性;RSS 类源与一批国际驻留/奖项源实抓评估,低产/不可达源如实标记不凑数。
+  - 修复 `_tmp-harvest-bulk.mjs` 批次分配 bug:同域源原会被静默跳过且不进入后续批次导致遗漏(ArtConnect p6/p7、CuratorSpace p6、Funds for NGOs p5 曾被漏),改为同域分桶、逐桶并行,确保全部收割。
+  - 搜索预算二轮:Brave 50/50 已用完,Serper 12/12 已用完(二轮 20 词),DDG 免费兜底。
+- **常态化增量上线**:服务器 `.env` 开启 `DAILY_CRAWL=1`(每日北京时间 3 点抓 `sources.json` 全部信源,并发安全)与 `REGION_HARVEST=1`(16 位区域经理按当地上班时间错峰轮值,每班 3 词),重启 `artportal.service` 生效,日志确认两者均已就位。
+- 数据经 `sync-server.mjs` 双向合并推送至服务器(本地新增 247 条,墓碑并集 248 条未误伤任何新条目),服务器 opportunities 690 条、open 407。
+
 ## v1.14.0 (2026-08-11)
 
 - **内容质量根治——过期机会(第 35 节计划第 1 项)**:新增"无日期无标注"机会的全面闸门。
