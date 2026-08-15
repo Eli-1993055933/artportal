@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.13.6" />
+<meta name="app-version" content="1.14.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.13.6</span></div>
+  ARTPORTAL <span id="appVer">v1.14.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.13.6"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.13.6"></script>
-<script src="js/globe-data.js?v=1.13.6"></script>
+<script src="assets/vendor/d3.min.js?v=1.14.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.14.0"></script>
+<script src="js/globe-data.js?v=1.14.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -825,7 +825,7 @@
     if(p&&typeof p==='object'&&(p.required===true||p.amount)) return false;
     return true; }
   function isPastRec(o){ if(o.status==='expired') return true;
-    if(!o.deadline) return false;
+    if(!o.deadline) return !/常年|长期|滚动|rolling|ongoing|开放申请|长期有效/i.test(o.deadline_note||'');   // v1.14.0:无日期且非常年 → 视为可疑/过期
     var d=new Date(o.deadline+'T23:59:59'); return !isNaN(d)&&d<Date.now(); }
   // —— 「前往官网必达主办方本站」(v0.98.0 找回;v0.77 地球站大重写时丢失,继收藏/埋点/注册墙之后第 4 处)——
   //   原硬性保证:定位不到主办方官网的条目一律不展示,用户点到的每一条都直达主办方本站,0 例外。

@@ -248,7 +248,7 @@ async function searchAndHarvest(query, target = 6, hint = null, who = null) {
   // 现有库(去重基底)
   const doc = JSON.parse(await readFile(DATA, "utf8"));
   const existIds = new Set(doc.opportunities.map(o => o.id));
-  const existUrls = new Set(doc.opportunities.map(o => o.url));
+  const existUrls = new Set(doc.opportunities.map(o => normUrl(o.url)));   // v1.14.0 归一化 URL 去重
 
   const added = [], log = [];
   let probed = 0;
@@ -258,7 +258,7 @@ async function searchAndHarvest(query, target = 6, hint = null, who = null) {
   for (const url of cands) {
     if (added.length >= target || probed >= MAX_PROBE) break;
     if (Date.now() - t0 > BUDGET) { log.push("time-budget-reached"); break; }
-    if (existUrls.has(url)) continue;
+    if (existUrls.has(normUrl(url))) continue;
     probed++;
     let host; try { host = new URL(url).host; } catch (e) { continue; }
     const domain = host.replace(/^www\./, "");
@@ -271,6 +271,10 @@ async function searchAndHarvest(query, target = 6, hint = null, who = null) {
     catch (e) { log.push("extract-fail " + host); continue; }
     const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
     if (v.dropped) { log.push("dropped " + host + " " + v.dropReason.slice(0, 40)); continue; }
+    // v1.14.0 检索路径无日期闸:无 deadline 且非常年标注 → 不进库。
+    // 检索路径与每日管道同源(gradeTrust 判 pending),但检索无 review-queue 机制,直接 drop 更安全——
+    // 否则 AI 漏提截止的机会经此路径 trust:"auto" 硬上线,前端"隐藏已截止"对它无效,污染全库。
+    if (!v.flags.hasDeadline) { log.push("dropped no-deadline " + host); continue; }
     const rec = finalize(v.record, url, host);
     if (locTerms.length && !matchLocation(rec, locTerms)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤(中英别名任一命中即可)
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
@@ -284,8 +288,12 @@ async function searchAndHarvest(query, target = 6, hint = null, who = null) {
     saved = await withWriteLock(async () => {
       const cur = JSON.parse(await readFile(DATA, "utf8"));
       const ids = new Set(cur.opportunities.map(o => o.id));
-      const urls = new Set(cur.opportunities.map(o => o.url));
-      const fresh = added.filter(o => !ids.has(o.id) && !urls.has(o.url));  // 并发下再去一次重
+      const urls = new Set(cur.opportunities.map(o => normUrl(o.url)));   // v1.14.0 归一化 URL 并发下去重
+      const fresh = added.filter(o => {
+        if (ids.has(o.id)) return false;
+        const nu = normUrl(o.url);
+        return !nu || !urls.has(nu);              // 归一化失败(空)时不参与 URL 去重,仍有 id 兜底
+      });
       if (fresh.length) {
         cur.opportunities.push(...fresh);
         cur.count = cur.opportunities.length;

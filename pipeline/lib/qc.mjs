@@ -17,7 +17,7 @@
 
 import { isParseableDate } from "./verify.mjs";
 import { fetchSource } from "./fetch.mjs";
-import { fingerprint, completeness } from "./dedupe.mjs";
+import { fingerprint, clusterKeys, completeness } from "./dedupe.mjs";
 import { hasApplySignal } from "./applicability.mjs";
 
 // 频道差异:链接字段 / 日期字段 / 归档规则。键名与 sync 墓碑、CH_FILES 一致。
@@ -92,6 +92,7 @@ export async function inspectChannel(channel, records, opts = {}) {
   const jobsExpireDays = opts.jobsExpireDays || 60;
   const jobsStaleDays = opts.jobsStaleDays || 120;
   const verifiedSafe = opts.verifiedSafe !== false;   // 人工核实(verified)条目默认免于自动归档/判重淘汰
+  const noDateDays = opts.noDateDays == null ? 90 : opts.noDateDays;   // v1.14.0:无日期无标注的机会,入库超此天数即列归档候选
   const evidenceAudit = (meta.kind === "opp" && typeof opts.evidenceAudit === "function") ? opts.evidenceAudit : null;
   const evidenceSample = opts.evidenceSample == null ? 6 : opts.evidenceSample;
 
@@ -120,18 +121,22 @@ export async function inspectChannel(channel, records, opts = {}) {
     }
   }
 
-  // —— ③ 重复条目:同指纹聚簇,保留最全者,其余建议归档 ——
+  // —— ③ 重复条目:多口径聚簇(v1.14.0),保留最全者,其余建议归档 ——
   {
-    const byFp = new Map();
+    const byKey = new Map();
     for (const o of records) {
-      const k = meta.kind === "opp"
-        ? fingerprint(o)
+      const keys = meta.kind === "opp"
+        ? clusterKeys(o)                                   // 机会:URL归一化 + 标题强归一化 + 原指纹 任一命中即聚簇
         : (String(o.title_zh || o.title || "").toLowerCase().replace(/\s+/g, "") + "|" + (o[meta.urlField] || ""));
-      if (!k || /^\|+$/.test(k)) continue;
-      if (!byFp.has(k)) byFp.set(k, []);
-      byFp.get(k).push(o);
+      if (!keys || (typeof keys === "string" ? /^\|+$/.test(keys) : !keys.length)) continue;
+      const keyList = Array.isArray(keys) ? keys : [keys];
+      for (const k of keyList) {
+        if (!byKey.has(k)) byKey.set(k, []);
+        byKey.get(k).push(o);
+      }
     }
-    for (const [k, group] of byFp) {
+    for (const [k, group0] of byKey) {
+      const group = [...new Set(group0)];                  // 同一条可能命中多个 key,组内去重
       if (group.length < 2) continue;
       const score = meta.kind === "opp" ? completeness : (o => Object.values(o).filter(v => v != null && v !== "").length);
       const keep = group.slice().sort((a, b) => score(b) - score(a))[0];
@@ -147,6 +152,16 @@ export async function inspectChannel(channel, records, opts = {}) {
       if (o.deadline && isParseableDate(o.deadline) && o.deadline < today) {
         const stale = daysBetween(today, o.deadline);
         if (stale != null && stale > archiveExpiredDays) pushArchive(o, "long-expired", { deadline: o.deadline, daysStale: stale });
+      }
+      // v1.14.0 无日期启发式:无 deadline 且无"常年/滚动"标注的机会,大概率是 AI 漏提截止的过期货。
+      // ① 有 first_seen/added_at 且入库超 noDateDays 天 → 候选;② 连入库时间戳都没有(v0.98 前的早期老数据)
+      //    → 视为年龄未知的存量可疑,同样列候选。verified 条目由 pushArchive 豁免。
+      // 注意:不能拿 updated_at 判龄——它被每日管道/质检回填成今天,永远不算旧。
+      if (!o.deadline && !/(常年|长期|滚动|rolling|ongoing|开放申请|长期有效)/i.test(o.deadline_note || "")) {
+        const ts = o.first_seen || o.added_at;
+        const age = ts ? daysBetween(today, ts) : null;
+        if (ts && age != null && age > noDateDays) pushArchive(o, "no-deadline-stale", { since: ts, daysStale: age });
+        else if (!ts) pushArchive(o, "no-deadline-stale", { since: null, note: "无入库时间戳(早期老数据)" });
       }
     } else if (meta.kind === "jobs") {
       if (o.deadline && isParseableDate(o.deadline)) {

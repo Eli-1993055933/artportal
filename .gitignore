@@ -21,6 +21,10 @@ pipeline/state/summaries/       # 用户专属总结(私密,服务器 only,同 u
 pipeline/state/survey-emails.json     # 问卷收集的邮箱名单(PII,只服务器发信用,不入库)
 pipeline/state/survey-mail-log.json   # 上面这批的发送记录(含邮箱)
 
+# 用户数据备份快照 —— 含裸用户数据(users.json/artportal.db/mail-secret 等),绝不入库。
+# 回档能力由 backup.mjs 远程快照 + 本地/服务器备份目录保障,不进 git 版本控制。
+backups/
+
 # 翻译回滚备份
 site/data/opportunities.json.bak-*
 
