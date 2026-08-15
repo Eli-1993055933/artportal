@@ -24,6 +24,7 @@
   - **Artenda(国际)**:6 个分类目录源(竞赛/项目资助/津贴/驻留/展览/公共艺术),实抓 10 条(其中 competition/project-grant/stipend/public-art 分类页结构异常 0 产出,residency/exhibition 正常出货)。
   - 实测不可抓并如实标记:CaFÉ(callforentry.org)搜索页抓取失败/目录 404、Submittable 为 JS 渲染 0 详情链接、artrabbit/art-hub 目录 404、open-calls.art/artresidencyguide 文本过短近空壳——均不凑数。
 - 数据经 `sync-server.mjs` 双向合并推送至服务器(三轮新增均全量同步),服务器 opportunities 790 条、open 526。
+- **第四轮冲刺(+518,open 突破 1000 里程碑)**:用户"这次必须推进到 1000"。新源 35 个(sources.json 433→468):**ArtRabbit(国际)** 12 个分类目录源(opportunities/residency/grant/open-call + exhibition/prize/competition/fellowship/workshop/collaboration 类型过滤页 + p3/p4 分页,单页 63+ 条)、**YICCA 国际艺术竞赛** 目录源、**ArtConnect 深页分页源 25 个**(opportunities-p13~p37)。ArtConnect 深页实抓 +197(去重后净增,总 1267→1308,open 1004→1045);脚本完成后关闭 7 条已过期仍 open 的存量 → **最终 open 1038 / total 1308**(open 含 deadline 673)。全程 0 重复 URL、0 缺源;trust auto 1025 / verified 2。**✅ open 1000 里程碑达成(2026-08-15,下一目标 1500)**。
 
 ## v1.14.0 (2026-08-11)
 

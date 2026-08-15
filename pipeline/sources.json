@@ -7874,7 +7874,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "award"],
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7890,7 +7893,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "award"],
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7906,7 +7912,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "award"],
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7922,7 +7931,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall"],
+      "category_hint": [
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7938,7 +7949,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall"],
+      "category_hint": [
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7954,7 +7967,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall"],
+      "category_hint": [
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7970,7 +7985,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["award", "opencall"],
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -7986,7 +8004,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["award", "opencall"],
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8002,7 +8023,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["award", "opencall"],
+      "category_hint": [
+        "award",
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8018,7 +8042,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "exhibition"],
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8034,7 +8061,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "exhibition"],
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8050,7 +8080,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "exhibition"],
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8066,7 +8099,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["grant", "award"],
+      "category_hint": [
+        "grant",
+        "award"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8082,7 +8118,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["residency"],
+      "category_hint": [
+        "residency"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8098,7 +8136,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "award"],
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8114,7 +8155,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall"],
+      "category_hint": [
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8130,7 +8173,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["workshop"],
+      "category_hint": [
+        "workshop"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8146,7 +8191,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["workshop"],
+      "category_hint": [
+        "workshop"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8162,7 +8209,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall"],
+      "category_hint": [
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8178,7 +8227,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "award"],
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8194,7 +8246,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["grant"],
+      "category_hint": [
+        "grant"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8210,7 +8264,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["grant", "opencall"],
+      "category_hint": [
+        "grant",
+        "opencall"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8226,7 +8283,9 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["residency"],
+      "category_hint": [
+        "residency"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8242,7 +8301,10 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "exhibition"],
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
@@ -8258,11 +8320,2420 @@
       "type": "html",
       "rss": null,
       "org_type": "independent",
-      "category_hint": ["opencall", "public-art"],
+      "category_hint": [
+        "opencall",
+        "public-art"
+      ],
       "reachable": true,
       "robots": "none",
       "confirmed": false,
       "notes": "2026-08-15 实探:白名单平台,分类页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p15",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第15页",
+      "url": "https://www.artconnect.com/opportunities?page=15",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第15页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p16",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第16页",
+      "url": "https://www.artconnect.com/opportunities?page=16",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第16页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p17",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第17页",
+      "url": "https://www.artconnect.com/opportunities?page=17",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第17页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p18",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第18页",
+      "url": "https://www.artconnect.com/opportunities?page=18",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第18页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p19",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第19页",
+      "url": "https://www.artconnect.com/opportunities?page=19",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第19页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p20",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第20页",
+      "url": "https://www.artconnect.com/opportunities?page=20",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第20页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p21",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第21页",
+      "url": "https://www.artconnect.com/opportunities?page=21",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第21页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p22",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第22页",
+      "url": "https://www.artconnect.com/opportunities?page=22",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第22页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p23",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第23页",
+      "url": "https://www.artconnect.com/opportunities?page=23",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第23页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p24",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第24页",
+      "url": "https://www.artconnect.com/opportunities?page=24",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第24页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p25",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第25页",
+      "url": "https://www.artconnect.com/opportunities?page=25",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第25页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p26",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第26页",
+      "url": "https://www.artconnect.com/opportunities?page=26",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第26页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p27",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第27页",
+      "url": "https://www.artconnect.com/opportunities?page=27",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第27页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p28",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第28页",
+      "url": "https://www.artconnect.com/opportunities?page=28",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第28页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p29",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第29页",
+      "url": "https://www.artconnect.com/opportunities?page=29",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第29页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p30",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第30页",
+      "url": "https://www.artconnect.com/opportunities?page=30",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第30页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p31",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第31页",
+      "url": "https://www.artconnect.com/opportunities?page=31",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第31页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p32",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第32页",
+      "url": "https://www.artconnect.com/opportunities?page=32",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第32页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p33",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第33页",
+      "url": "https://www.artconnect.com/opportunities?page=33",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第33页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p34",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第34页",
+      "url": "https://www.artconnect.com/opportunities?page=34",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第34页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p35",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第35页",
+      "url": "https://www.artconnect.com/opportunities?page=35",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第35页分页,13 详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p11",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第11页",
+      "url": "https://www.curatorspace.com/opportunities?page=11",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第11页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p12",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第12页",
+      "url": "https://www.curatorspace.com/opportunities?page=12",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第12页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p13",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第13页",
+      "url": "https://www.curatorspace.com/opportunities?page=13",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第13页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p14",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第14页",
+      "url": "https://www.curatorspace.com/opportunities?page=14",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第14页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p15",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第15页",
+      "url": "https://www.curatorspace.com/opportunities?page=15",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第15页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p16",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第16页",
+      "url": "https://www.curatorspace.com/opportunities?page=16",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第16页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p17",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第17页",
+      "url": "https://www.curatorspace.com/opportunities?page=17",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第17页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p18",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第18页",
+      "url": "https://www.curatorspace.com/opportunities?page=18",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第18页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p19",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第19页",
+      "url": "https://www.curatorspace.com/opportunities?page=19",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第19页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p20",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第20页",
+      "url": "https://www.curatorspace.com/opportunities?page=20",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第20页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p21",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第21页",
+      "url": "https://www.curatorspace.com/opportunities?page=21",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第21页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p22",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第22页",
+      "url": "https://www.curatorspace.com/opportunities?page=22",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第22页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p23",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第23页",
+      "url": "https://www.curatorspace.com/opportunities?page=23",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第23页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-p24",
+      "org_zh": "CuratorSpace(英国/全球)",
+      "name_zh": "Opportunities 第24页",
+      "url": "https://www.curatorspace.com/opportunities?page=24",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:第24页分页",
+      "trust_auto": true
+    },
+    {
+      "id": "eflux-announcements-p1",
+      "org_zh": "e-flux(国际)",
+      "name_zh": "Announcements 第1页",
+      "url": "https://www.e-flux.com/announcements/",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:announcements 分页第1页,22 详情链接,详情页含申请信号",
+      "trust_auto": true
+    },
+    {
+      "id": "eflux-announcements-p2",
+      "org_zh": "e-flux(国际)",
+      "name_zh": "Announcements 第2页",
+      "url": "https://www.e-flux.com/announcements/?page=2",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:announcements 分页第2页,22 详情链接,详情页含申请信号",
+      "trust_auto": true
+    },
+    {
+      "id": "eflux-announcements-p3",
+      "org_zh": "e-flux(国际)",
+      "name_zh": "Announcements 第3页",
+      "url": "https://www.e-flux.com/announcements/?page=3",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:announcements 分页第3页,22 详情链接,详情页含申请信号",
+      "trust_auto": true
+    },
+    {
+      "id": "eflux-announcements-p4",
+      "org_zh": "e-flux(国际)",
+      "name_zh": "Announcements 第4页",
+      "url": "https://www.e-flux.com/announcements/?page=4",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:announcements 分页第4页,22 详情链接,详情页含申请信号",
+      "trust_auto": true
+    },
+    {
+      "id": "eflux-announcements-p5",
+      "org_zh": "e-flux(国际)",
+      "name_zh": "Announcements 第5页",
+      "url": "https://www.e-flux.com/announcements/?page=5",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:announcements 分页第5页,22 详情链接,详情页含申请信号",
+      "trust_auto": true
+    },
+    {
+      "id": "eflux-announcements-p6",
+      "org_zh": "e-flux(国际)",
+      "name_zh": "Announcements 第6页",
+      "url": "https://www.e-flux.com/announcements/?page=6",
+      "domain": "e-flux.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:announcements 分页第6页,22 详情链接,详情页含申请信号",
+      "trust_auto": true
+    },
+    {
+      "id": "theartlist-exhibitions-p4",
+      "org_zh": "TheArtList(美国/全球)",
+      "name_zh": "展览征集 第4页",
+      "url": "https://www.theartlist.com/category/exhibitions?page=4",
+      "domain": "theartlist.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:分页第4页",
+      "trust_auto": true
+    },
+    {
+      "id": "theartlist-art-photo-p4",
+      "org_zh": "TheArtList(美国/全球)",
+      "name_zh": "艺术与摄影征集 第4页",
+      "url": "https://www.theartlist.com/category/art-and-photo-calls?page=4",
+      "domain": "theartlist.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:分页第4页",
+      "trust_auto": true
+    },
+    {
+      "id": "theartlist-art-photo-p5",
+      "org_zh": "TheArtList(美国/全球)",
+      "name_zh": "艺术与摄影征集 第5页",
+      "url": "https://www.theartlist.com/category/art-and-photo-calls?page=5",
+      "domain": "theartlist.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:分页第5页",
+      "trust_auto": true
+    },
+    {
+      "id": "theartlist-exhibitions-p5",
+      "org_zh": "TheArtList(美国/全球)",
+      "name_zh": "展览征集 第5页",
+      "url": "https://www.theartlist.com/category/exhibitions?page=5",
+      "domain": "theartlist.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:分页第5页",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-call-for-artists",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-艺术家征集",
+      "url": "https://www.artjobs.com/open-calls/call-for-artists",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-call-for-entries",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-投稿征集",
+      "url": "https://www.artjobs.com/open-calls/call-for-entries",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-notforprofit",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-非营利征集",
+      "url": "https://www.artjobs.com/open-calls/notforprofit",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-award",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-奖项",
+      "url": "https://www.artjobs.com/open-calls/award",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-competitions",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-竞赛",
+      "url": "https://www.artjobs.com/open-calls/competitions",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-performance",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-表演征集",
+      "url": "https://www.artjobs.com/open-calls/performance",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-exhibitions",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-展览征集",
+      "url": "https://www.artjobs.com/open-calls/exhibitions",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "exhibition",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-films",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-影视征集",
+      "url": "https://www.artjobs.com/open-calls/films",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-festivals",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-艺术节",
+      "url": "https://www.artjobs.com/open-calls/festivals",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-photography",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-摄影征集",
+      "url": "https://www.artjobs.com/open-calls/photography",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-residencies",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-驻留",
+      "url": "https://www.artjobs.com/open-calls/residencies",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-visual-arts",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-视觉艺术征集",
+      "url": "https://www.artjobs.com/open-calls/visual-arts",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artjobs-workshops",
+      "org_zh": "artjobs.com(国际)",
+      "name_zh": "Open Calls-工作坊",
+      "url": "https://www.artjobs.com/open-calls/workshops",
+      "domain": "artjobs.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:artjobs 分类目录页,10-16 真实详情链接",
+      "trust_auto": true
+    },
+    {
+      "id": "artisttrust-awards",
+      "org_zh": "Artist Trust(美国)",
+      "name_zh": "奖项与资助",
+      "url": "https://artisttrust.org/",
+      "domain": "artisttrust.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:3 条奖项公告",
+      "trust_auto": true
+    },
+    {
+      "id": "artquest-opportunities-p1",
+      "org_zh": "ArtQuest(英国)",
+      "name_zh": "机会列表 第1页",
+      "url": "https://artquest.org.uk/opportunities/",
+      "domain": "artquest.org.uk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:18 机会详情,纯HTML",
+      "trust_auto": true
+    },
+    {
+      "id": "artquest-opportunities-p2",
+      "org_zh": "ArtQuest(英国)",
+      "name_zh": "机会列表 第2页",
+      "url": "https://artquest.org.uk/opportunities/page/2/",
+      "domain": "artquest.org.uk",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:18 机会详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-residency-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-驻留 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=residency&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-residency-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-驻留 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=residency&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-open_call-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-公开征集 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=open_call&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-open_call-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-公开征集 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=open_call&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-award-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-奖项 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=award&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-award-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-奖项 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=award&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-grant-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-资助 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=grant&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-grant-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-资助 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=grant&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-exhibition-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-展览 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=exhibition&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "exhibition",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-exhibition-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-展览 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=exhibition&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "exhibition",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-competition-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-竞赛 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=competition&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-competition-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-竞赛 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=competition&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-biennale-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-双年展 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=biennale&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-biennale-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-双年展 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=biennale&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-fellowship-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-研究金 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=fellowship&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "grant",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-fellowship-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-研究金 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=fellowship&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "grant",
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-artist-in-residence-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-驻留艺术家 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=artist-in-residence&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-artist-in-residence-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-驻留艺术家 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=artist-in-residence&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-call-for-artists-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-艺术家征集 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=call-for-artists&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-call-for-artists-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-艺术家征集 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=call-for-artists&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-call-for-entry-p1",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-投稿征集 第1页",
+      "url": "https://www.artconnect.com/opportunities?type=call-for-entry&page=1",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-type-call-for-entry-p2",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "按类型-投稿征集 第2页",
+      "url": "https://www.artconnect.com/opportunities?type=call-for-entry&page=2",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:按类型过滤页,10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p2",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第2页",
+      "url": "https://artistcommunities.org/residencies?page=2",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,每页约 20+ 详情,与 open-calls/residencies 目录不同",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p3",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第3页",
+      "url": "https://artistcommunities.org/residencies?page=3",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,每页约 20+ 详情,与 open-calls/residencies 目录不同",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p4",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第4页",
+      "url": "https://artistcommunities.org/residencies?page=4",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,每页约 20+ 详情,与 open-calls/residencies 目录不同",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p5",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第5页",
+      "url": "https://artistcommunities.org/residencies?page=5",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,每页约 20+ 详情,与 open-calls/residencies 目录不同",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p6",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第6页",
+      "url": "https://artistcommunities.org/residencies?page=6",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,每页约 20+ 详情,与 open-calls/residencies 目录不同",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p36",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第36页",
+      "url": "https://www.artconnect.com/opportunities?page=36",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:10 机会/页",
+      "trust_auto": true
+    },
+    {
+      "id": "artconnect-opportunities-p37",
+      "org_zh": "ArtConnect(全球)",
+      "name_zh": "Opportunities 第37页",
+      "url": "https://www.artconnect.com/opportunities?page=37",
+      "domain": "artconnect.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:5 机会/页,p38 起为空",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p7",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第7页",
+      "url": "https://artistcommunities.org/residencies?page=7",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p7 仍有新内容",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p8",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第8页",
+      "url": "https://artistcommunities.org/residencies?page=8",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p8 仍有新内容",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p9",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第9页",
+      "url": "https://artistcommunities.org/residencies?page=9",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p9 仍有新内容",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p10",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第10页",
+      "url": "https://artistcommunities.org/residencies?page=10",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p10 仍有新内容",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p11",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第11页",
+      "url": "https://artistcommunities.org/residencies?page=11",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p11 仍有新内容",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p12",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第12页",
+      "url": "https://artistcommunities.org/residencies?page=12",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p12 仍有新内容",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p1",
+      "org_zh": "CuratorSpace(英国)",
+      "name_zh": "机会目录 第1页",
+      "url": "https://curatorspace.com/opportunities?page=1",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:主机会目录分页,13 详情/页,部分与 calls 目录重复",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p2",
+      "org_zh": "CuratorSpace(英国)",
+      "name_zh": "机会目录 第2页",
+      "url": "https://curatorspace.com/opportunities?page=2",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:主机会目录分页,13 详情/页,部分与 calls 目录重复",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p3",
+      "org_zh": "CuratorSpace(英国)",
+      "name_zh": "机会目录 第3页",
+      "url": "https://curatorspace.com/opportunities?page=3",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:主机会目录分页,13 详情/页,部分与 calls 目录重复",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p4",
+      "org_zh": "CuratorSpace(英国)",
+      "name_zh": "机会目录 第4页",
+      "url": "https://curatorspace.com/opportunities?page=4",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:主机会目录分页,13 详情/页,部分与 calls 目录重复",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p5",
+      "org_zh": "CuratorSpace(英国)",
+      "name_zh": "机会目录 第5页",
+      "url": "https://curatorspace.com/opportunities?page=5",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:主机会目录分页,13 详情/页,部分与 calls 目录重复",
+      "trust_auto": true
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p6",
+      "org_zh": "CuratorSpace(英国)",
+      "name_zh": "机会目录 第6页",
+      "url": "https://curatorspace.com/opportunities?page=6",
+      "domain": "curatorspace.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "commission"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:主机会目录分页,13 详情/页,部分与 calls 目录重复",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p13",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第13页",
+      "url": "https://artistcommunities.org/residencies?page=13",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p13 仍有 ~30 目录详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p14",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第14页",
+      "url": "https://artistcommunities.org/residencies?page=14",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p14 仍有 ~30 目录详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p15",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第15页",
+      "url": "https://artistcommunities.org/residencies?page=15",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p15 仍有 ~30 目录详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p16",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第16页",
+      "url": "https://artistcommunities.org/residencies?page=16",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:驻留目录分页,p16 仍有 ~30 目录详情",
+      "trust_auto": true
+    },
+    {
+      "id": "theocp-archive",
+      "org_zh": "The Open Call Platform(OCP)",
+      "name_zh": "开放征集归档",
+      "url": "https://theocp.live/open-calls/archive",
+      "domain": "theocp.live",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:34 条详情,全部为新",
+      "trust_auto": true
+    },
+    {
+      "id": "theocp-archive-photo",
+      "org_zh": "The Open Call Platform(OCP)",
+      "name_zh": "开放征集归档-摄影",
+      "url": "https://theocp.live/open-calls/archive?category=Photography",
+      "domain": "theocp.live",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "exhibition"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:34 条详情(与归档页有重叠)",
+      "trust_auto": true
+    },
+    {
+      "id": "rivet-calls",
+      "org_zh": "Rivet(西班牙)",
+      "name_zh": "开放征集列表",
+      "url": "https://rivet.es/calls/",
+      "domain": "rivet.es",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:约 4 条当前征集",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p17",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第17页",
+      "url": "https://artistcommunities.org/residencies?page=17",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:p17 仍有 ~40 条目录详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artistcommunities-residencies-p18",
+      "org_zh": "Alliance of Artists Communities(美国)",
+      "name_zh": "驻留目录 第18页",
+      "url": "https://artistcommunities.org/residencies?page=18",
+      "domain": "artistcommunities.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:p18 仍有 ~40 条目录详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-all",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-全部",
+      "url": "https://www.artrabbit.com/artist-opportunities",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:63 条详情全部为新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-residency",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-驻留",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Artist+in+Residence",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "residency"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:16 条驻留",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-grant",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-资助",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Grant",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "grant",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:9 条资助",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-opencall",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-开放征集",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Open+Call",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:5 条征集",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-p2",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-第2页",
+      "url": "https://www.artrabbit.com/artist-opportunities?page=2",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:63 详情,31 新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-exhibition",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-展览",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Exhibition+Opportunity",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "exhibition",
+        "opencall"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:18 详情,9 新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-prize",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-奖项",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Prize",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "award",
+        "prize"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:12 详情,5 新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-competition",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-竞赛",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Competition",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "competition",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:10 详情,4 新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-fellowship",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-奖学金",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Fellowship",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "fellowship",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:7 详情,3 新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-workshop",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-工作坊",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Workshops",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:5 详情,1 新",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-p3",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-第3页",
+      "url": "https://www.artrabbit.com/artist-opportunities?page=3",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:63 详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-p4",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-第4页",
+      "url": "https://www.artrabbit.com/artist-opportunities?page=4",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "residency",
+        "award",
+        "grant"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:63 详情",
+      "trust_auto": true
+    },
+    {
+      "id": "artrabbit-opps-collab",
+      "org_zh": "ArtRabbit(国际)",
+      "name_zh": "艺术家机会-合作",
+      "url": "https://www.artrabbit.com/artist-opportunities?type=Collaboration",
+      "domain": "artrabbit.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "opencall",
+        "collaboration"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:9 详情",
+      "trust_auto": true
+    },
+    {
+      "id": "yicca-contests",
+      "org_zh": "YICCA(国际)",
+      "name_zh": "艺术竞赛",
+      "url": "https://yicca.org/en/contest",
+      "domain": "yicca.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "independent",
+      "category_hint": [
+        "competition",
+        "award"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "2026-08-15 实探:6 详情(竞赛)",
       "trust_auto": true
     }
   ],
@@ -8323,5 +10794,6 @@
     "at": "2026-08-03",
     "note": "用户从公众号文章核实到的6条真实机会(附官网链接)反查补源:P79/100W Corsicana/Prisma Art Prize/Kunstnarhuset Messen/Adobe MAX/PhotoVogue",
     "count": 6
-  }
+  },
+  "_source_count": 516
 }
