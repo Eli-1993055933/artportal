@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.15.1" />
+<meta name="app-version" content="1.15.2" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.15.1</span></div>
+  ARTPORTAL <span id="appVer">v1.15.2</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.15.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.15.1"></script>
-<script src="js/globe-data.js?v=1.15.1"></script>
+<script src="assets/vendor/d3.min.js?v=1.15.2"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.15.2"></script>
+<script src="js/globe-data.js?v=1.15.2"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1256,22 +1256,64 @@
     }
     return false;
   }
+  // 点位是否落在"当前可下钻/停留的活动区划"内(点此处的空白会下钻/停留,不会退回上一级)。
+  // 与下方空白点击分支的判定口径保持一致:命中→点位让位下钻(机会密集处点得进板块);
+  // 未命中(板块外)→点位保持可交互,直接弹卡进入项目,避免被空白分支判"板块外"而 exitDrill 跳回上级。
+  function pointInActiveZone(p){
+    if(drilledCountry==='China'){
+      if(drillLevel>=3) return true;                 // 区县=最细,点空白只停留
+      if(drillLevel===2){                            // 市级:省内=停留/下钻;省外=退回省级
+        var prov=null;
+        for(var cp2=0;cp2<(cnBase||[]).length;cp2++){ if(cnBase[cp2].properties.adcode===drilledProvAdcode){ prov=cnBase[cp2]; break; } }
+        if(prov&&d3.geoContains(prov,p)) return true;
+        return false;
+      }
+      if(drillLevel===1){                            // 省级:点省=下钻市级;境外=退回全球
+        for(var cj2=0;cj2<(cnBase||[]).length;cj2++){ if(d3.geoContains(cnBase[cj2],p)) return true; }
+        if(drilledFeat&&d3.geoContains(drilledFeat,p)) return true;   // 省界抽稀缝隙
+        return false;
+      }
+      for(var cg=0;cg<countryFeats.length;cg++){ if(d3.geoContains(countryFeats[cg],p)) return true; }   // 全球:点国家=下钻
+      return false;                                  // 全球海洋上的游离点位=板块外,可交互
+    }
+    if(drillLevel===2){                              // 他国二级:选中州/省内=停留;州外=退回国家
+      var cur=null;
+      for(var ca2=0;ca2<adminFeats.length;ca2++){ if(adminFeats[ca2].properties&&adminFeats[ca2].properties.name===drilledAdmName){ cur=adminFeats[ca2]; break; } }
+      if(cur&&d3.geoContains(cur,p)) return true;
+      return false;
+    }
+    if(drillLevel===1){                              // 他国:点州/省=下钻;国境外=回全球
+      for(var aj2=0;aj2<adminFeats.length;aj2++){ if(d3.geoContains(adminFeats[aj2],p)) return true; }
+      if(drilledFeat&&d3.geoContains(drilledFeat,p)) return true;
+      return false;
+    }
+    for(var cg2=0;cg2<countryFeats.length;cg2++){ if(d3.geoContains(countryFeats[cg2],p)) return true; }
+    return false;
+  }
   canvas.addEventListener('click',function(e){
     if(moved) return;
     hoverTest(e);
     if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
-    // 项目卡:点到"具体机会"(散点 或 只含1条的聚合圆)一律直接弹卡进入项目,不分手机/桌面、不卡最细层级。
-    // 关键:不能把这类点击让位给下钻——当点位坐标落在当前板块多边形之外时,空白分支会判定为"板块外"
-    // 而触发 exitDrill 退回上一级,项目卡永远弹不出来(用户反馈"坐标在板块外,点击跳回地球上一级")。
-    // 仅"含多条"的聚合圆:手机未到最细让位下钻(放大导航);桌面保留为放大导航(不弹卡)。
-    if(hoverObj && hoverKind==='c' && hoverObj.count>1 && W<=720 && !atFinestAdmin() && !markerAtFinest(hoverObj)) hoverObj=null;
+    // —— 机会点命中逻辑(用户需求定稿)——
+    // 1) 含多条机会的聚合圆 → 一律放大导航(拆成散点后再点单条),不弹卡、不退出。
+    // 2) 未到最细层级、且点位落在当前可下钻区划内 → 让位给下钻:机会密集处点得进板块(不弹卡)。
+    // 3) 未到最细层级、但点位在板块外(点此空白会 exitDrill) → 点位仍可交互,直接弹卡进入项目,
+    //    不再跳回上一级;仅"板块外空白"才返回上一级。
+    // 4) 已到最细行政区划 → 点位一律弹卡进入项目。
     if(hoverObj){
-      if(hoverKind==='c'){ var g=hoverObj;
-        // 聚合圆:只含1条=唯一机会,直接弹卡;含多条=放大导航(拆分成散点后再点单条)
-        if(g.count===1){ showDetail(g.single.o); syncCard(g.single); }
-        else { tipEl.style.display='none'; flyTo(g.ll, Math.max(splitScale()*1.45, proj.scale()*1.9)); } }
-      else { showDetail(hoverObj.o); syncCard(hoverObj); }
-      return; }   // 命中机会点后即返回,不再走空白下钻(否则板块外点位会触发 exitDrill 跳回上级)
+      var hit=(hoverKind==='c')?hoverObj.single:hoverObj;
+      if(hoverKind==='c' && hoverObj.count>1){
+        tipEl.style.display='none';
+        flyTo(hoverObj.ll, Math.max(splitScale()*1.45, proj.scale()*1.9));
+        return;
+      }
+      if(!atFinestAdmin() && !markerAtFinest(hoverObj) && pointInActiveZone(hoverObj.ll)){
+        hoverObj=null;   // 让位下钻(机会密集处点得进板块)
+      } else {
+        showDetail(hit.o); syncCard(hit);
+        return;
+      }
+    }
     var inv=proj.invert([e.clientX,e.clientY]); if(!inv) return;
     if(drillLevel===3){   // 三级(中国区县):点选中市/其区县以内=停留(区县为末级);点市外→退回市级视图
       var inCity=false;   // 命中优先用当前显示的更精细区县多边形,再退回市多边形(市来自省文件,较粗,边界区县会伸出其外→防误退)
