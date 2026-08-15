@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.15.0" />
+<meta name="app-version" content="1.15.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.15.0</span></div>
+  ARTPORTAL <span id="appVer">v1.15.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.15.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.15.0"></script>
-<script src="js/globe-data.js?v=1.15.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.15.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.15.1"></script>
+<script src="js/globe-data.js?v=1.15.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1260,18 +1260,18 @@
     if(moved) return;
     hoverTest(e);
     if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
-    // 项目卡仅在最细行政区划才点开;更浅层级点击让位给下钻(悬停预览不受影响)。
-    // 手机沿用既有:未到最细一律不可交互(点位/聚合圆都让位下钻);桌面则凡"会弹卡"的点击(单个点位 或 只含1条的聚合圆)都让位,
-    // 只含多条的聚合圆桌面仍可点开缩放导航(不弹卡)。
-    if(hoverObj && !atFinestAdmin() && !markerAtFinest(hoverObj)
-       && (W<=720 || hoverKind==='m' || (hoverKind==='c' && hoverObj.count===1))) hoverObj=null;
+    // 项目卡:点到"具体机会"(散点 或 只含1条的聚合圆)一律直接弹卡进入项目,不分手机/桌面、不卡最细层级。
+    // 关键:不能把这类点击让位给下钻——当点位坐标落在当前板块多边形之外时,空白分支会判定为"板块外"
+    // 而触发 exitDrill 退回上一级,项目卡永远弹不出来(用户反馈"坐标在板块外,点击跳回地球上一级")。
+    // 仅"含多条"的聚合圆:手机未到最细让位下钻(放大导航);桌面保留为放大导航(不弹卡)。
+    if(hoverObj && hoverKind==='c' && hoverObj.count>1 && W<=720 && !atFinestAdmin() && !markerAtFinest(hoverObj)) hoverObj=null;
     if(hoverObj){
       if(hoverKind==='c'){ var g=hoverObj;
-        // 手机:聚合圆(含单条)一律放大不弹卡——拆分成散点后点位才可交互
-        if(g.count===1&&W>720){ showDetail(g.single.o); syncCard(g.single); }
+        // 聚合圆:只含1条=唯一机会,直接弹卡;含多条=放大导航(拆分成散点后再点单条)
+        if(g.count===1){ showDetail(g.single.o); syncCard(g.single); }
         else { tipEl.style.display='none'; flyTo(g.ll, Math.max(splitScale()*1.45, proj.scale()*1.9)); } }
       else { showDetail(hoverObj.o); syncCard(hoverObj); }
-      return; }
+      return; }   // 命中机会点后即返回,不再走空白下钻(否则板块外点位会触发 exitDrill 跳回上级)
     var inv=proj.invert([e.clientX,e.clientY]); if(!inv) return;
     if(drillLevel===3){   // 三级(中国区县):点选中市/其区县以内=停留(区县为末级);点市外→退回市级视图
       var inCity=false;   // 命中优先用当前显示的更精细区县多边形,再退回市多边形(市来自省文件,较粗,边界区县会伸出其外→防误退)
