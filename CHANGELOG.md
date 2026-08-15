@@ -12,13 +12,18 @@
 
 ## v1.15.0 (2026-08-15)
 
-- **机会信息批量冲刺 +244 条可用**:针对"检索到信息量太少"的一次性大规模收割,今日(2026-08-15)first_seen 新增 **244 条全部 open 可用**(含 deadline 147 条;分类 residency 114 / opencall 109 / award 16 / grant 5)。库内 opportunities 同步后 690 条(open 407、expired 264)。
-  - 聚合器分页深挖:ArtConnect(第3~8页)、CuratorSpace(第3~7页)、Funds for NGOs(艺术文化分类第2~5页)、Alliance of Artists Communities(open-calls/residencies/ongoing 三个目录)新增分页源并批量收割,单页 13~24 条。
-  - 新源探测:新增约 16 个分页/目录源入 `sources.json`(共 397 源),实探验证可达性;RSS 类源与一批国际驻留/奖项源实抓评估,低产/不可达源如实标记不凑数。
-  - 修复 `_tmp-harvest-bulk.mjs` 批次分配 bug:同域源原会被静默跳过且不进入后续批次导致遗漏(ArtConnect p6/p7、CuratorSpace p6、Funds for NGOs p5 曾被漏),改为同域分桶、逐桶并行,确保全部收割。
-  - 搜索预算二轮:Brave 50/50 已用完,Serper 12/12 已用完(二轮 20 词),DDG 免费兜底。
+- **机会信息批量冲刺 +299 条可用**:针对"检索到信息量太少"的一次性大规模收割,今日(2026-08-15)first_seen 新增 **299 条全部 open 可用**(含 deadline 200 条;分类 residency 131 / opencall 134 / award 29 / grant 5)。库内 opportunities 同步后 744 条(open 461、expired 283)。分两轮完成:
+  - 第一轮(+244):聚合器分页深挖(ArtConnect 第3~8页、CuratorSpace 第3~7页、Funds for NGOs 艺术文化分类第2~5页)、Alliance of Artists Communities 三目录、一轮 20 词搜索发现(Brave 50/50 + Serper 12/12 用完,DDG 兜底)。
+  - 第二轮(+55):继续深挖 ArtConnect 第9~14页、CuratorSpace 第8~10页(9 个分页源,sources.json 400→409);50 条含 deadline、0 过期,产出质量最高的平台继续加量。
+  - 新源探测:实探 13 个 TRUSTED_PLATFORMS 白名单未覆盖平台(callforentry/submittable/slideroom/entrythingy/zapplication/artrabbit/resartis/artenda/art-hub/open-calls.art/artresidencyguide/artcall/theartlist),仅 zapplication 有 50 条详情链接但为 Angular SPA 模板未渲染、静态提取不可用,如实不收割;其余登录制/JS 渲染/详情链接不足,如实标记不凑数。
+  - 修复 `_tmp-harvest-bulk.mjs` 批次分配 bug:同域源原会被静默跳过且不进入后续批次导致遗漏,改为同域分桶、逐桶并行,确保全部收割。
+  - 搜索预算二轮:Brave 50/50 已用完,Serper 12/12 已用完,DDG 免费兜底。
 - **常态化增量上线**:服务器 `.env` 开启 `DAILY_CRAWL=1`(每日北京时间 3 点抓 `sources.json` 全部信源,并发安全)与 `REGION_HARVEST=1`(16 位区域经理按当地上班时间错峰轮值,每班 3 词),重启 `artportal.service` 生效,日志确认两者均已就位。
-- 数据经 `sync-server.mjs` 双向合并推送至服务器(本地新增 247 条,墓碑并集 248 条未误伤任何新条目),服务器 opportunities 690 条、open 407。
+- **第三轮收割(+46,可信平台白名单继续深挖)**:净增 **46 条全部 open 且含 deadline、0 过期**,库内 opportunities 744→790(open 461→526,**突破 500 里程碑**)。新增两类纯 HTML 可抓的白名单平台目录源(sources.json 409→433):
+  - **TheArtList(美国)**:19 个分类目录源(艺术摄影征集/投稿征集/竞赛评审/展览 各3页分页 + 资助奖学金/驻留/展会/公开征集/工作坊/线上工作坊/职位 单页),实抓 37 条 call-for-entry,多数含截止日期。
+  - **Artenda(国际)**:6 个分类目录源(竞赛/项目资助/津贴/驻留/展览/公共艺术),实抓 10 条(其中 competition/project-grant/stipend/public-art 分类页结构异常 0 产出,residency/exhibition 正常出货)。
+  - 实测不可抓并如实标记:CaFÉ(callforentry.org)搜索页抓取失败/目录 404、Submittable 为 JS 渲染 0 详情链接、artrabbit/art-hub 目录 404、open-calls.art/artresidencyguide 文本过短近空壳——均不凑数。
+- 数据经 `sync-server.mjs` 双向合并推送至服务器(三轮新增均全量同步),服务器 opportunities 790 条、open 526。
 
 ## v1.14.0 (2026-08-11)
 

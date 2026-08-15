@@ -16,7 +16,7 @@
     }
   },
   "generated_at": "2026-08-15",
-  "count": 690,
+  "count": 790,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -41093,6 +41093,5386 @@
       "url": "https://www.artconnect.com/opportunity/8DHCCf1mePqrAYDw__Rk7",
       "source_url": "https://www.artconnect.com/opportunities?page=8",
       "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-对话书-创意驻留项目",
+      "category": "residency",
+      "title_zh": "“对话书”创意驻留项目",
+      "title_en": "the 'Dialogue Book' creative residency",
+      "org_zh": "ArtConnect",
+      "city_zh": "Lucinges",
+      "country_zh": "France",
+      "deadline": "2026-08-30",
+      "deadline_note": "Aug. 30, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Design",
+        "Writing",
+        "Visual Arts",
+        "Interdisciplinary"
+      ],
+      "summary_zh": "Archipel Butor创意驻留项目旨在接待一位作者与一位视觉艺术家合作进行对话书项目。这次停留旨在为这对夫妇提供反思和创作的专属时间，将有助于突出艺术家书籍的文化和艺术创作过程中的合作重要性。",
+      "url": "https://www.artconnect.com/opportunity/BU2mbMO8K4GLAQ5LnRpxh",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-kunsthalle-hochschwarzwald-foundation-cu",
+      "category": "award",
+      "title_zh": "Kunsthalle Hochschwarzwald Foundation Cultural Prize",
+      "title_en": "Kunsthalle Hochschwarzwald Foundation Cultural Prize",
+      "org_zh": "Kunsthalle Hochschwarzwald",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-30",
+      "deadline_note": "Aug. 30, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Printmaking",
+        "Performance",
+        "Visual Arts",
+        "Interdisciplinary"
+      ],
+      "summary_zh": "Kunsthalle Hochschwarzwald Foundation Cultural Prize，每年颁发一次，在“Fine Arts”（侧重版画）和“Performing Arts”类别之间交替。2026年首次在“Fine Arts”类别颁发。",
+      "url": "https://www.artconnect.com/opportunity/FQVmIKnDsBze8WWNeKAfk",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-水体与生态研究项目",
+      "category": "opencall",
+      "title_zh": "水体与生态研究项目",
+      "title_en": "Water Bodies and Ecology Research Project",
+      "org_zh": "Dot Line Space Art Foundation",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-30",
+      "deadline_note": "Aug. 30, 2026 at 17:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "Water Bodies & Ecology 2026 是由 Dot Line Space Art Foundation 策划的多学科倡议，旨在促进艺术家对水、生态、气候、记忆和环境意识等问题的艺术参与。该项目旨在通过基于研究和场地响应的方法，在当代艺术实践和生态关注之间建立有意义的对话。",
+      "url": "https://www.artconnect.com/opportunity/jL6MRh53_CXNnv3iKAWw3",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-art-at-a-time-like-this",
+      "category": "opencall",
+      "title_zh": "Art at a Time Like This",
+      "title_en": "Art at a Time Like This",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-30",
+      "deadline_note": "Aug. 30, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Public Art",
+        "Visual Arts"
+      ],
+      "summary_zh": "Art at a Time Like This启动了开放征召，邀请艺术家提出一项普通民众可以采取的行动来保护民主。该项目要求艺术如何超越反思，走向参与。在民权和全球人权受到威胁等公民和环境危机中，该项目探讨了集体行动的意义。",
+      "url": "https://www.artconnect.com/opportunity/OLyOzxq6hBm3PhL5sDh0y",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-bavc-mediamaker-fellowship",
+      "category": "opencall",
+      "title_zh": "BAVC MediaMaker Fellowship",
+      "title_en": "BAVC MediaMaker Fellowship",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-30",
+      "deadline_note": "Aug. 30, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Film",
+        "Video"
+      ],
+      "summary_zh": "The MediaMaker Fellowship is devoted to supporting documentary filmmakers using bold cinematic language and innovative impact strategies to grapple with critical issues of our time.",
+      "url": "https://www.artconnect.com/opportunity/P1HXOhgMCrCq-VrIP_8e5",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-面向中西部非洲策展人的开放征选",
+      "category": "residency",
+      "title_zh": "面向中西部非洲策展人的开放征选",
+      "title_en": "Open Call for Curators Based in Central and West Africa",
+      "org_zh": "Delfina Foundation",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-08-30",
+      "deadline_note": "Aug. 30, 2026 at 22:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Curating"
+      ],
+      "summary_zh": "Delfina Foundation是一个非营利组织，致力于通过驻留、伙伴关系和公共项目促进艺术交流和发展创意实践。我们欢迎来自中西部非洲的策展人申请在伦敦的驻留项目，该项目由Delfina的非洲赞助者网络支持。入选者将被提供在2027年冬季（2027年1月5日至3月28日）为期六或十二周的驻留机会。",
+      "url": "https://www.artconnect.com/opportunity/ImNAJ1ujjPOGhB643lCl0",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-视觉艺术创作补助金",
+      "category": "award",
+      "title_zh": "视觉艺术创作补助金",
+      "title_en": "Grant for Visual Art Creation",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 08:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Visual Arts"
+      ],
+      "summary_zh": "支持专业艺术家在视觉艺术领域（除电影和建筑外）发展和实施创意项目。",
+      "url": "https://www.artconnect.com/opportunity/NmzMWvHbRRIj2PlymqgMr",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-drift-wave-2-for-mid-career-choreographe",
+      "category": "residency",
+      "title_zh": "DRIFT: Wave 2 for Mid-career Choreographers",
+      "title_en": "DRIFT: Wave 2 for Mid-career Choreographers",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 08:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Dance",
+        "Performance",
+        "Interdisciplinary"
+      ],
+      "summary_zh": "DRIFT是一个Creative Europe合作项目，旨在通过结合艺术研究、驻留、指导、国际展示和潜在的合作制作及巡演机会，支持10位中高级舞蹈编舞家的国际发展。",
+      "url": "https://www.artconnect.com/opportunity/SJ0qRNYReN26VbzKReJZ8",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-作家和翻译家驻留项目",
+      "category": "residency",
+      "title_zh": "作家和翻译家驻留项目",
+      "title_en": "Residency for Writers and Translators",
+      "org_zh": "Fondation Jan Michalski",
+      "city_zh": "Montricher",
+      "country_zh": "瑞士",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 08:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Writing",
+        "Research",
+        "Interdisciplinary"
+      ],
+      "summary_zh": "Fondation Jan Michalski位于瑞士Montricher的作家和翻译家驻留项目，现在正在招募2026年度的申请者。该项目对所有类型的写作和所有语言开放，但优先考虑文学作家和翻译家。",
+      "url": "https://www.artconnect.com/opportunity/T2mUNJt6sG5xaX5WIPn8N",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p9-2026-art-writing-prize",
+      "category": "award",
+      "title_zh": "2026 Art Writing Prize",
+      "title_en": "2026 art writing prize",
+      "org_zh": "The Emerging Art Foundation",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 08:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Writing",
+        "Research",
+        "Curating"
+      ],
+      "summary_zh": "The Art Writing Prize seeks to discover and celebrate innovative forms of art writing. The term ‘art writing’ refers to forms of writerly practice that hold a central concern with the condition and possible forms of art making. It therefore encompasses writing that is about art — essays, reviews, criticism, fiction — as well as visual art which incorporates forms of writing, with submissions encouraged from artists, curators, art historians and critics, as well as other interdisciplinary practitioners.",
+      "url": "https://www.artconnect.com/opportunity/KUcP50lNO9tuwzPsaJsPQ",
+      "source_url": "https://www.artconnect.com/opportunities?page=9",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-justart-newspaper-club-art-review",
+      "category": "opencall",
+      "title_zh": "JustArt Newspaper Club - Art Review",
+      "title_en": null,
+      "org_zh": "JustArt Collective",
+      "city_zh": "未知",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-10-01",
+      "deadline_note": "Deadline: 01/10/2026",
+      "apply_fee": {
+        "free": false,
+        "amount": "£230",
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "£130",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": "under 30",
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "JustArt Collective 现在接受艺术家申请参与其艺术评论系列，帮助艺术家从画廊和艺术机构的视角了解其作品的发展，同时支持艺术实践。",
+      "url": "https://www.curatorspace.com/opportunities/detail/justart-newspaper-club--art-review/10623",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-v-v-noon杂志艺术家和作家征稿",
+      "category": "opencall",
+      "title_zh": "VŨV:Noon杂志艺术家和作家征稿",
+      "title_en": "call for magazine artists and writers",
+      "org_zh": "CuratorSpace",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-10-01",
+      "deadline_note": "原文截止 + 1/10/2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "VŨV杂志正在寻找学生和新兴艺术家、艺术史学家/评论家提交作品，以在首期秋季/冬季版发表。",
+      "url": "https://www.curatorspace.com/opportunities/detail/call-for-magazine-artists-and-writers/11005",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-call-for-interviewee-research-on-generat",
+      "category": "opencall",
+      "title_zh": "Call for Interviewee - Research on Generative AI Art Practice",
+      "title_en": "Call for Interviewee - Research on Generative AI Art Practice",
+      "org_zh": "CuratorSpace",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-10-09",
+      "deadline_note": "Deadline: 09/10/2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": 18,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "CuratorSpace 正在寻找有经验的艺术家参与关于生成式人工智能艺术实践的研究，参与者将接受30-45分钟的在线访谈，有机会获得10英镑的补偿。",
+      "url": "https://www.curatorspace.com/opportunities/detail/call-for-interviewee--research-on-generative-ai-art-practice/10572",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-et-soudain",
+      "category": "opencall",
+      "title_zh": "Et Soudain",
+      "title_en": null,
+      "org_zh": "CuratorSpace",
+      "city_zh": "Paris",
+      "country_zh": "France",
+      "deadline": "2026-10-15",
+      "deadline_note": "Call for applications: until October 15, 2026 (midnight)",
+      "apply_fee": {
+        "free": false,
+        "amount": "€30",
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "€30",
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": "French artists, or artists residing in France"
+      },
+      "disciplines": [
+        "Painting",
+        "Sculpture",
+        "Drawing",
+        "Photography",
+        "Installation"
+      ],
+      "summary_zh": "Vagabond Art Club的首次艺术奖2026是对法国艺术家或居住在法国的艺术家开放，主题为Et soudain，探索惊讶、暂时性和瞬息万变。",
+      "url": "https://www.curatorspace.com/opportunities/detail/et-soudain/10886",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-艺术征稿-membrane-伦敦se1",
+      "category": "opencall",
+      "title_zh": "艺术征稿 'Membrane', 伦敦SE1",
+      "title_en": "Call for Art 'Membrane', London SE1",
+      "org_zh": "CuratorSpace",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-10-05",
+      "deadline_note": "所有作品必须在2026年10月5日23:59 GMT之前提交",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "Physical exhibition (wall space): £150 per 1 metre\nDigital work, sculpture, and video: £150 per piece",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "CuratorSpace正在举办名为'Membrane'的艺术征稿，邀请艺术家提交作品，以回应'通过你的是什么，不通过的是什么？'这一主题。",
+      "url": "https://www.curatorspace.com/opportunities/detail/call-for-art-membrane-london-se/10980",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-ryedale-open-studios-2026",
+      "category": "opencall",
+      "title_zh": "Ryedale open studios 2026",
+      "title_en": "Ryedale open studios 2026",
+      "org_zh": "CuratorSpace",
+      "city_zh": "Ryedale",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-10-12",
+      "deadline_note": "12th October 1700 hrs.",
+      "apply_fee": {
+        "free": false,
+        "amount": "£35",
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "£35",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Ryedale Open Studios 是一个年度艺术活动，致力于庆祝北约克郡 Ryedale 地区的丰富创造力和艺术才能。艺术家、制作者和创作者将在两个周末期间开放他们的工作室、工作室和住宅，为公众提供直接了解艺术家的机会，并有机会直接购买艺术品。",
+      "url": "https://www.curatorspace.com/opportunities/detail/ryedale-open-studios/10999",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-artgeminiprize-2026-call-for-artists",
+      "category": "opencall",
+      "title_zh": "ArtGeminiPrize 2026 - Call For Artists",
+      "title_en": "ArtGeminiPrize 2026 - Call For Artists",
+      "org_zh": "CuratorSpace",
+      "city_zh": "London",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-10-19",
+      "deadline_note": "Deadline: 19/10/2026",
+      "apply_fee": {
+        "free": false,
+        "amount": {
+          "Early bird": "15.00 GBP",
+          "Standard": "21.00 GBP"
+        },
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Photography",
+        "Sculpture"
+      ],
+      "summary_zh": "ArtGeminiPrize 2026艺术家征选，包括绘画、摄影和雕塑类别，奖金总额2000英镑，并提供伦敦艺术工作坊和展览机会。",
+      "url": "https://www.curatorspace.com/opportunities/detail/artgeminiprize---call-for-artists/10887",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-scott-creative-arts-foundation-emerging-",
+      "category": "award",
+      "title_zh": "Scott Creative Arts Foundation Emerging Artist Award 2027",
+      "title_en": "Scott Creative Arts Foundation Emerging Artist Award 2027",
+      "org_zh": "Scott Creative Arts Foundation",
+      "city_zh": "Halifax",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-10-31",
+      "deadline_note": "Deadline: 31/10/2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "painting",
+        "sculpture",
+        "image",
+        "sound",
+        "video",
+        "graphics"
+      ],
+      "summary_zh": "Scott Creative Arts Foundation (SCAF) 邀请居住或工作在约克郡的新兴艺术家提交作品提案，以回应今年的主题：张力。入选作品将作为2027年新兴艺术家奖的一部分展出。",
+      "url": "https://www.curatorspace.com/opportunities/detail/scott-creative-arts-foundation-emerging-artist-award/10627",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-静默建筑-数字展览",
+      "category": "opencall",
+      "title_zh": "静默建筑 - 数字展览",
+      "title_en": "Architecture of Silence - Digital Exhibition",
+      "org_zh": "CuratorSpace",
+      "city_zh": "马德里",
+      "country_zh": "西班牙",
+      "deadline": "2027-01-31",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": false,
+        "amount": "75",
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "75",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "数字艺术",
+        "人工智能",
+        "摄影",
+        "动态影像"
+      ],
+      "summary_zh": "CuratorSpace举办的‘静默建筑’数字展览，邀请艺术家提交在数字艺术、人工智能、摄影和动态影像领域的作品。",
+      "url": "https://www.curatorspace.com/opportunities/detail/architecture-of-silence--digital-exhibition-madrid-spain/10734",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p8-沉默的建筑-艺术家开放征选",
+      "category": "opencall",
+      "title_zh": "“沉默的建筑”艺术家开放征选",
+      "title_en": "Open call for Artists",
+      "org_zh": "CuratorSpace",
+      "city_zh": "Madrid",
+      "country_zh": "Spain",
+      "deadline": "2026-12-15",
+      "deadline_note": "原文截止 + 15th December 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": "300",
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "300",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "CuratorSpace举办的“沉默的建筑”艺术家开放征选，邀请艺术家提交作品，展览将在马德里市中心的一个当代空间举行。",
+      "url": "https://www.curatorspace.com/opportunities/detail/open-call-for-artists/10776",
+      "source_url": "https://www.curatorspace.com/opportunities?page=8",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-2026-ecco-eco-award",
+      "category": "award",
+      "title_zh": "2026 Ecco Eco Award",
+      "title_en": "2026 ecco eco award",
+      "org_zh": "Classical Roman Arts Foundation",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 15:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Sculpture",
+        "Installation",
+        "Architecture",
+        "Digital"
+      ],
+      "summary_zh": "Classical Roman Arts Foundation (CRAF) 为庆祝古典罗马艺术，设立Ecco Eco Awards，旨在表彰在古典罗马艺术传统、风格和影响下工作的当代艺术家或研究者。",
+      "url": "https://www.artconnect.com/opportunity/QhVk1UeLKS72roBnDoQb1",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-the-impart-nalli-fellowships",
+      "category": "award",
+      "title_zh": "The Impart & Nalli Fellowships",
+      "title_en": "The Impart & Nalli Fellowships",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 12:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Textiles",
+        "Research",
+        "Interdisciplinary",
+        "Visual Arts",
+        "Curating",
+        "Education"
+      ],
+      "summary_zh": "The Impart and Nalli Fellowships, a collaboration between Nalli Silks and Impart, is calling for applications for research into under-explored textile-related histories, practices, and traditions across South Asia.",
+      "url": "https://www.artconnect.com/opportunity/kM3ex_V-x6vexEKskBmYn",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-acentricspace-winter-open-call",
+      "category": "residency",
+      "title_zh": "ACENTRICSPACE Winter Open Call",
+      "title_en": "ACENTRICSPACE Winter Open Call",
+      "org_zh": "ArtConnect",
+      "city_zh": "Shanghai",
+      "country_zh": "China",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 08:00 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts"
+      ],
+      "summary_zh": "ACENTRICSPACE艺术家驻留项目鼓励年轻艺术家在毕业后继续他们的实践，并帮助在新的环境中受到启发的成熟艺术家。旨在为驻留艺术家提供一个理想的创意、生活和展览空间。全年向所有当代艺术家开放。在驻留期间，艺术家被鼓励创作新的作品集并与来自中国和世界各地的艺术家进行交流。",
+      "url": "https://www.artconnect.com/opportunity/IMd8aWyN_opuewGhZia_d",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-文化产业-2026年项目征集",
+      "category": "opencall",
+      "title_zh": "文化产业：2026年项目征集",
+      "title_en": "Cultural Industries: Calls for Projects 2026",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "截止日期：Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Visual Arts",
+        "Writing",
+        "Video"
+      ],
+      "summary_zh": "作为其“文化产业与可发现性”项目的一部分，OIF 正在启动四个与艺术家流动性、法语内容可发现性、写作和（共同）制作及其影像基金相关的项目征集。",
+      "url": "https://www.artconnect.com/opportunity/2Bd6AO8nnFO-4m4dH5-XX",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-外国作者驻留项目",
+      "category": "residency",
+      "title_zh": "外国作者驻留项目",
+      "title_en": "Residencies for Foreign Authors",
+      "org_zh": "Passa Porta",
+      "city_zh": "布鲁塞尔",
+      "country_zh": "比利时",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Writing"
+      ],
+      "summary_zh": "Passa Porta，布鲁塞尔的国际文学之家，是一个多语言交流场所，欢迎国内外作家。每年接待最多九位外国作家，为他们提供理想的工作环境，包括宽敞的公寓和津贴。",
+      "url": "https://www.artconnect.com/opportunity/4L_KhTSZRTDymMZvqoD90",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-2027驻留奖学金",
+      "category": "residency",
+      "title_zh": "2027驻留奖学金",
+      "title_en": "2027 Residency Grant",
+      "org_zh": "Stadt Duisburg",
+      "city_zh": "杜伊斯堡",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "under 40",
+        "nationality": "Germany"
+      },
+      "disciplines": [
+        "Video",
+        "Visual Arts",
+        "Performance",
+        "Photography",
+        "Drawing"
+      ],
+      "summary_zh": "杜伊斯堡市与杜伊斯堡艺术家协会第九次颁发受欢迎的驻留奖学金，邀请40岁以下的德国艺术家申请免费的工作室，并提供额外的福利。",
+      "url": "https://www.artconnect.com/opportunity/yXvK8rx3NXRrQCh3UHSt5",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-uwe-l-ders-艺术奖学金",
+      "category": "award",
+      "title_zh": "Uwe Lüders 艺术奖学金",
+      "title_en": "Uwe Lüders Art Scholarship",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "Uwe Lüders 艺术奖学金由 Uwe Lüders Trust Foundation 提供，为视觉艺术家提供三个月的工作和工作室津贴，旨在减轻艺术家在停留期间的财务压力，创造最佳工作条件，并为其未来的艺术发展开辟新的视角。",
+      "url": "https://www.artconnect.com/opportunity/dJ3V8xDuHSwXBa3P5x4LS",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-bridge-building-revising-including",
+      "category": "residency",
+      "title_zh": "BRIDGE: Building, Revising, Including",
+      "title_en": "BRIDGE: Building, Revising, Including",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Deadline: Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "AWARE (巴黎), 女性之城 (卢布尔雅那), 和格拉茨艺术之家正在启动一项开放征召，提供三个研究性居留机会，作为BRIDGE：建设、修订、包容——流散与性别平等两年创意欧洲项目的一部分。主题集中在欧洲流亡或具有移民或流散背景的女性和非二元艺术家。",
+      "url": "https://www.artconnect.com/opportunity/ZctrwpoVoeXDQeT36K0nZ",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p10-photography-open-call-un-stable-lands-an",
+      "category": "opencall",
+      "title_zh": "Photography+ Open Call: Un/Stable: Lands, Anxieties, Dreams",
+      "title_en": "Photography+ Open Call: Un/Stable: Lands, Anxieties, Dreams",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "The next issue of Photography+ , titled Un/Stable: Lands, Anxieties, Dreams , will explore the fragile and shifting conditions shaping our lives, environments, and collective futures. We are interested in photographic work that responds to instability, uncertainty, and transformation across lands, bodies, communities, identities, histories, and memories.",
+      "url": "https://www.artconnect.com/opportunity/kUWMydbLFV9jf_pFzl9Te",
+      "source_url": "https://www.artconnect.com/opportunities?page=10",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p9-儿童及青少年艺术机会",
+      "category": "opencall",
+      "title_zh": "儿童及青少年艺术机会",
+      "title_en": "Children`s and Young People`s Art Opportunity",
+      "org_zh": "CuratorSpace",
+      "city_zh": "Bradford",
+      "country_zh": "United Kingdom",
+      "deadline": null,
+      "deadline_note": "This is ongoing; therefore, the deadline does not apply. However, the sooner you submit work, the sooner it may be selected.",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": 18,
+        "nationality": null
+      },
+      "disciplines": [
+        "paint",
+        "pastel",
+        "collage",
+        "digital",
+        "drawings"
+      ],
+      "summary_zh": "这是一个面向4至18岁儿童和青少年的艺术展示机会，通过报纸向广泛受众展示作品。提交作品必须由成人进行。",
+      "url": "https://www.curatorspace.com/opportunities/detail/childrens-and-young-peoples-art-opportunity/10238",
+      "source_url": "https://www.curatorspace.com/opportunities?page=9",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-arsversa-art-foundation-financial-suppor",
+      "category": "award",
+      "title_zh": "ArsVersa Art Foundation Financial Support",
+      "title_en": "ArsVersa Kunst-Stiftung",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Deadline: Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Visual Arts"
+      ],
+      "summary_zh": "The ArsVersa Foundation focuses on promoting visual arts, particularly painting and its related fields. The board decides on funding twice a year.",
+      "url": "https://www.artconnect.com/opportunity/pqUS_oqYd9rttfDRdxOEf",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-let-our-hearts-speak-open-call",
+      "category": "opencall",
+      "title_zh": "Let Our Hearts Speak : Open Call",
+      "title_en": "Let Our Hearts Speak : Open Call",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "ArtConnect的开放征稿项目“Let Our Hearts Speak”，邀请艺术家提交与“东欧”概念相关的作品，探索历史如何在身体、边界和时间中传递和转变。",
+      "url": "https://www.artconnect.com/opportunity/FkGzmMzM_nzncswhU4LGB",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-2027艺术家奖学金",
+      "category": "residency",
+      "title_zh": "2027艺术家奖学金",
+      "title_en": "2027 Artist Fellowships",
+      "org_zh": "ArtConnect",
+      "city_zh": "Schöppingen",
+      "country_zh": "德国",
+      "deadline": "2026-08-31",
+      "deadline_note": "截止日期：Aug. 31, 2026 at 16:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术",
+        "写作",
+        "声音艺术"
+      ],
+      "summary_zh": "自1989年以来，Künstler*dorf Schöppingen通过其驻留计划支持国际艺术家。为期两个月至六个月的奖学金资助使艺术家能够在文学、视觉艺术和作曲领域实现项目。",
+      "url": "https://www.artconnect.com/opportunity/KieBEVHCW-Hmb2MUut1aG",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-independet-art-residency",
+      "category": "residency",
+      "title_zh": "INDEPENDET ART RESIDENCY",
+      "title_en": "INDEPENDET ART RESIDENCY",
+      "org_zh": "ArtConnect",
+      "city_zh": "Antigua Guatemala",
+      "country_zh": "Guatemala",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 18:00 UTC",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Design",
+        "Digital",
+        "Drawing",
+        "Interdisciplinary",
+        "Painting",
+        "Photography",
+        "Textiles",
+        "Writing",
+        "Visual Arts",
+        "Video"
+      ],
+      "summary_zh": "位于危地马拉安提瓜的独立艺术居留地，与来自世界各地的创意人士合作，支持创意工作、过程和目的的研究、创作和联系。",
+      "url": "https://www.artconnect.com/opportunity/nQQYFJdz1XoCzHTRhYUYS",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-petals-of-creativity-12th-flower-art-con",
+      "category": "award",
+      "title_zh": "Petals of Creativity | 12th Flower Art Contest",
+      "title_en": "Petals of Creativity | 12th Flower Art Contest",
+      "org_zh": "TERAVARNA",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "Deadline: August 31, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": 20,
+        "currency": "USD"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": 20,
+        "currency": "USD"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Design",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Public Art",
+        "Sculpture",
+        "Visual Arts"
+      ],
+      "summary_zh": "参与TERAVARNA举办的第12届花卉艺术竞赛，创作与花卉世界相关的艺术作品，争夺最高5000美元的现金奖励，并走向国际舞台。",
+      "url": "https://www.artconnect.com/opportunity/9MLlkv4NVoeMwJ2c5Vah5",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-teravarna个人艺术展",
+      "category": "opencall",
+      "title_zh": "TERAVARNA个人艺术展",
+      "title_en": "Solo Art Exhibition | TERAVARNA",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 18:15 UTC",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Public Art",
+        "Sculpture",
+        "Visual Arts"
+      ],
+      "summary_zh": "注册TERAVARNA的个人艺术展，需支付35美元的注册费。作品将由专家评审团评审，一旦选中，可以选择三个专为匹配您的艺术目标设计的独家个人展览项目。",
+      "url": "https://www.artconnect.com/opportunity/-qMBDaoo99Gcx4RMQDloK",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-industra-art-open-call-2027",
+      "category": "opencall",
+      "title_zh": "INDUSTRA ART OPEN CALL 2027",
+      "title_en": "INDUSTRA ART OPEN CALL 2027",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:00 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Visual Arts",
+        "Sculpture",
+        "Applied Arts",
+        "Architecture",
+        "Installation",
+        "Interdisciplinary",
+        "Textiles",
+        "Design",
+        "Video"
+      ],
+      "summary_zh": "INDUSTRA ART Gallery 举办面向艺术学校学生、毕业生和成熟艺术家的开放征稿活动，展览项目需能占据布拉格前压缩机工厂内的工业画廊整个空间。特别重视特定地点的项目，这些项目带来新的策展解决方案并发展当代艺术领域的当前讨论。",
+      "url": "https://www.artconnect.com/opportunity/zwiDvZZOfEeSH9OVwLwVo",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-摄影师驻留计划-the-art-of-building",
+      "category": "residency",
+      "title_zh": "摄影师驻留计划 | The Art of Building",
+      "title_en": "Photographer-in-Residence | ArtConnect",
+      "org_zh": "ArtConnect",
+      "city_zh": "McLean",
+      "country_zh": "United States",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "1906 Group，一家在房地产、建筑和金融领域拥有私人资产的资产创造公司，寻求第七位摄影师驻留艺术家，作为《建筑艺术》计划的一部分。摄影师驻留艺术家将在12-18个月内（由双方共同决定）访问美国各地的工地、办公室和制造设施，捕捉“建筑艺术”。",
+      "url": "https://www.artconnect.com/opportunity/0hnDmtYLgV6q0yyD5d7QG",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-liu-shiming-art-foundation-艺术家补助金-2026",
+      "category": "award",
+      "title_zh": "Liu Shiming Art Foundation 艺术家补助金 2026",
+      "title_en": "Liu Shiming Art Foundation Artist Grants 2026",
+      "org_zh": "Liu Shiming Art Foundation",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Visual Arts"
+      ],
+      "summary_zh": "旨在支持视觉艺术家在其职业生涯的前十年期间的工作，Liu Shiming 艺术家补助金支持探索传统文化或历史影响与当代艺术实践之间相互作用的新的或完成中的项目。每年最多有五名艺术家将获得5000美元的补助金。",
+      "url": "https://www.artconnect.com/opportunity/caMB_8xSb4chAD58fmbz-",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p11-bryn-du-mansion艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "Bryn Du Mansion艺术家驻留项目",
+      "title_en": "Artist in Residence | ArtConnect",
+      "org_zh": "ArtConnect",
+      "city_zh": "Granville",
+      "country_zh": "USA",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "Bryn Du的艺术家驻留项目旨在通过引入新的艺术家来提升Granville社区对艺术的认知和参与度。艺术家将在Bryn Du庄园背后的Cramer House居住，进行为期8或12周的艺术创作。",
+      "url": "https://www.artconnect.com/opportunity/AMnG2pyInP2Y_M0Q1ZhVG",
+      "source_url": "https://www.artconnect.com/opportunities?page=11",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "curatorspace-opportunities-p10-the-nook-exhibitions",
+      "category": "opencall",
+      "title_zh": "The Nook Exhibitions",
+      "title_en": null,
+      "org_zh": "CuratorSpace",
+      "city_zh": "leeds",
+      "country_zh": "United Kingdom",
+      "deadline": null,
+      "deadline_note": "The Nook is an ongoing opportunity that does not currently have a deadline",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "The Nook is a new micro-gallery that offers a space for students to exhibit their work within the Union and make creative connections in the City. We offer our spaces for artists to exhibit their work free of charge, letting them engage audiences further, without financial restraints.",
+      "url": "https://www.curatorspace.com/opportunities/detail/the-nook-exhibitions/7552",
+      "source_url": "https://www.curatorspace.com/opportunities?page=10",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-diverse-expressions-residency",
+      "category": "residency",
+      "title_zh": "Diverse Expressions Residency",
+      "title_en": "Diverse Expressions Residency",
+      "org_zh": "ArtConnect",
+      "city_zh": "Corning",
+      "country_zh": "USA",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Sculpture",
+        "Visual Arts",
+        "Design"
+      ],
+      "summary_zh": "Diverse Expressions Residency 是 The Studio 的艺术家驻留计划的扩展。通过这个专门的驻留计划，博物馆旨在欢迎代表性不足的艺术家，同时积极培养一个包容的文化和社区，促进、尊重和庆祝多样性。",
+      "url": "https://www.artconnect.com/opportunity/7Zd1IqGh5I4rc4SoyL4Fe",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-2027-residency-artconnect",
+      "category": "residency",
+      "title_zh": "2027 Residency | ArtConnect",
+      "title_en": "2027 residency",
+      "org_zh": "ArtConnect",
+      "city_zh": "Homer",
+      "country_zh": "USA",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Writing"
+      ],
+      "summary_zh": "Storyknife 提供女性艺术家在阿拉斯加霍默的驻地项目，为期两周或四周，覆盖食宿，但往返霍默的交通费用由艺术家承担。",
+      "url": "https://www.artconnect.com/opportunity/wVpzkzsYFxHAiLyztnalP",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-the-woodward-newman-award",
+      "category": "award",
+      "title_zh": "The Woodward/Newman Award",
+      "title_en": "the woodward/newman award",
+      "org_zh": "Constellation Stage & Screen",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Writing",
+        "Performance"
+      ],
+      "summary_zh": "The Woodward/Newman Award 是由 Constellation Stage & Screen 提供的独家荣誉，庆祝 Paul Newman & Joanne Woodward 在舞台和屏幕上的卓越历史。它每年颁发给最佳未发表剧本，奖金为 3000 美元，并作为 Constellation 的 Mainstage 季度的一部分进行完整制作。",
+      "url": "https://www.artconnect.com/opportunity/zSZe5YxxB-A1CnnMpJohz",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-community-park-sculpture-series",
+      "category": "opencall",
+      "title_zh": "Community Park Sculpture Series",
+      "title_en": null,
+      "org_zh": "ArtConnect",
+      "city_zh": "Jefferson",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Sculpture",
+        "Visual Arts",
+        "Public Art"
+      ],
+      "summary_zh": "ArtConnect的Community Park Sculpture Series项目，旨在通过公共艺术庆祝Jefferson City历史步行区的历史。艺术家被邀请创作原创雕塑作品，灵感来源于1900年代至1960年代在该地区生活和工作过的非裔美国人的经历、韧性和贡献，重点是公共安全和社区承诺的主题。",
+      "url": "https://www.artconnect.com/opportunity/scTXr-XsWlT8pg9lMoe91",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-旅行津贴与委托-artconnect",
+      "category": "opencall",
+      "title_zh": "旅行津贴与委托 | ArtConnect",
+      "title_en": "Travel Stipend & Commission | ArtConnect",
+      "org_zh": "ArtConnect",
+      "city_zh": "Jefferson",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Writing"
+      ],
+      "summary_zh": "ArtConnect正在寻找新的和现有的以自然为主题的叙事故事，通过多种故事格式传达真实的场所感，包括：散文、短篇小说、诗歌、散文、歌曲、民谣等。故事应捕捉地区的精髓，突出地区的独特自然特征、植物、动物、社区和历史。为更多详细信息，请参阅以下故事标准。",
+      "url": "https://www.artconnect.com/opportunity/-gKgADDhG-BjLzo7nsDHk",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "艺术家驻留项目",
+      "title_en": "Artist-in-Residence Program",
+      "org_zh": "ArtConnect",
+      "city_zh": "普林斯顿",
+      "country_zh": "美国",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影",
+        "视频",
+        "视觉艺术"
+      ],
+      "summary_zh": "Ooika的艺术家驻留项目专注于日本抹茶工艺，旨在培养美国本土的创造力。项目包括艺术家讲座、作品在Ooika网站和社交媒体上展出、产品包装以及即将出版的年度oAir杂志。驻留艺术家将在10月24日至25日在新泽西州普林斯顿展出作品，并在10月24日进行艺术家讲座。",
+      "url": "https://www.artconnect.com/opportunity/mKCTT4tcJcG75fV_HrQeU",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-非营利合作-影响艺术家",
+      "category": "opencall",
+      "title_zh": "非营利合作：影响艺术家",
+      "title_en": "Nonprofit Co-lab: Impact Artists",
+      "org_zh": "ArtConnect",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Design",
+        "Visual Arts"
+      ],
+      "summary_zh": "这是一个结构化的冲刺项目，非营利组织将活动从想法发展到准备就绪。加速器涵盖了策略、信息、设计和PSA活动的初始建设，以便社区组织可以直接将资源投入到分发和长期增长中。",
+      "url": "https://www.artconnect.com/opportunity/AllzmsG_4zjW3luF4e2LC",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p12-david-whitehouse-research-residency-for-",
+      "category": "residency",
+      "title_zh": "David Whitehouse Research Residency for Artists",
+      "title_en": "David Whitehouse Research Residency for Artists",
+      "org_zh": "ArtConnect",
+      "city_zh": "Corning",
+      "country_zh": "USA",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts"
+      ],
+      "summary_zh": "David Whitehouse Research Residency for Artists 是一个艺术家研究居留项目，旨在利用博物馆的资源，包括永久收藏和Rakow研究图书馆的藏品，来丰富艺术家的实践。",
+      "url": "https://www.artconnect.com/opportunity/BdMVkB1bA4aATdkLrgGgc",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p13-2026-刘世明杰出教育家奖",
+      "category": "award",
+      "title_zh": "2026 刘世明杰出教育家奖",
+      "title_en": "2026 LIU SHIMING DISTINGUISHED EDUCATOR AWARD",
+      "org_zh": "刘世明艺术基金会",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "视觉艺术",
+        "绘画",
+        "教育",
+        "摄影",
+        "版画",
+        "跨媒介",
+        "装置",
+        "纺织",
+        "公共艺术"
+      ],
+      "summary_zh": "为纪念刘世明作为艺术家和教育家的遗产，刘世明杰出教育家奖表彰了对教学、指导以及激发下一代视觉艺术家有深厚承诺的杰出工作室艺术家-教育家。",
+      "url": "https://www.artconnect.com/opportunity/a1b_KzQYHvnHHIRRjbmKy",
+      "source_url": "https://www.artconnect.com/opportunities?page=13",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p13-japan-new-year-retreat",
+      "category": "residency",
+      "title_zh": "JAPAN NEW YEAR RETREAT",
+      "title_en": "japan new year retreat",
+      "org_zh": "BONFIRE Art Platform",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Deadline: Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "BONFIRE Nomadic Retreats 是一个艺术家的驻地项目，旨在分享对世界各地特定地区的关注和深刻联系。每个版本都会在精心挑选的地点举行，邀请一小群创作者以缓慢、慷慨和尊重的方式与人类和超人类建立联系。",
+      "url": "https://www.artconnect.com/opportunity/q4UKunpi-nHq8g-BcqXUU",
+      "source_url": "https://www.artconnect.com/opportunities?page=13",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p13-tallahassee-florida-wildlife-corridor-mu",
+      "category": "opencall",
+      "title_zh": "Tallahassee Florida Wildlife Corridor Mural",
+      "title_en": "Tallahassee Florida Wildlife Corridor Mural",
+      "org_zh": "COCA / Tallahassee Arts",
+      "city_zh": "Tallahassee",
+      "country_zh": "United States",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Public Art"
+      ],
+      "summary_zh": "The Tallahassee/Leon County Council on Culture & Arts is seeking experienced regional or local artists for a large-scale mural project exploring the theme of connection through the lens of the Florida Wildlife Corridor. Artists are encouraged to interpret the Corridor as both a physical and/or symbolic network that connects people, wildlife, water, working lands, communities, cultures, and landscapes.",
+      "url": "https://www.artconnect.com/opportunity/9UU5yOqNENbk2Z6jsqJ-0",
+      "source_url": "https://www.artconnect.com/opportunities?page=13",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p13-queer-photo-award-2026",
+      "category": "award",
+      "title_zh": "Queer Photo Award 2026",
+      "title_en": "the queer photo award 2026",
+      "org_zh": "GAZE",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 22:00 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "GAZE是一个在德国全国范围内有影响力和国际影响力的活动家文化项目，由LGBTQIA+社区创建和运营。通过年度公开征召，GAZE邀请参与者利用摄影来展示酷儿现实，保存故事，并创造对话和代际交流的空间。",
+      "url": "https://www.artconnect.com/opportunity/QeMTuHxo_e8dKSo5Ql5Ar",
+      "source_url": "https://www.artconnect.com/opportunities?page=13",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artconnect-opportunities-p13-bring-your-art-to-milan-open-call",
+      "category": "opencall",
+      "title_zh": "Bring Your Art to Milan – Open Call",
+      "title_en": "Bring Your Art to Milan – Open Call",
+      "org_zh": "ArtConnect",
+      "city_zh": "Milan",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Aug. 31, 2026 at 22:00 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "ArtConnect举办的在米兰的开放征稿活动，邀请艺术家参与在米兰Navigli地区的三天展览。",
+      "url": "https://www.artconnect.com/opportunity/lIEQq5IWgt9lMYD6kqD-p",
+      "source_url": "https://www.artconnect.com/opportunities?page=13",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p1-goddessarts-magazine-open-call-magazine-",
+      "category": "opencall",
+      "title_zh": "Goddessarts Magazine - Open Call Magazine Feature!",
+      "title_en": null,
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-15",
+      "deadline_note": "Our deadline is August 15",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Goddessarts Magazine - Open Call Magazine Feature! 提供艺术家提交作品的机会，作品类型包括水彩、摄影、粉彩、油画、雕塑、金属工艺、混合媒体、珠宝、插画、平面设计、玻璃马赛克、纤维、手工艺、陶瓷和丙烯。",
+      "url": "https://www.theartlist.com/goddessarts-magazine-open-call-magazine-feature",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p1-nyc4pa-参赛征稿-腐蚀-锈蚀-生锈",
+      "category": "opencall",
+      "title_zh": "NYC4PA 参赛征稿 - 腐蚀、锈蚀、生锈",
+      "title_en": "NYC4PA CALL FOR ENTRY - DECAY CORROSION RUST",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-16",
+      "deadline_note": "原文截止 + August 16, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "时间、忽视和元素暴露可以对许多事物的外观产生惊人的效果。尽管通常关注的是新的光鲜物体，但这些往往不如那些经得起时间考验并呈现自己独特吸引力的事物在视觉上那么引人注目。",
+      "url": "https://www.theartlist.com/nyc4pa-call-for-entry-decay-corrosion-rust",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p1-a-smith-gallery-在线摄影征稿-视角",
+      "category": "opencall",
+      "title_zh": "A Smith Gallery | 在线摄影征稿 '视角'",
+      "title_en": "A Smith Gallery | Online photographic call for entry 'perspectives'",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-17",
+      "deadline_note": "原文截止 + August 17, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": 40,
+        "currency": "USD"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "A Smith Gallery在线摄影征稿，主题为'视角'，征稿截止至2026年8月17日。",
+      "url": "https://www.theartlist.com/a-smith-gallery-online-photographic-call-for-entry-perspectives",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p1-clover-gallery-open-call-under-the-surfa",
+      "category": "opencall",
+      "title_zh": "Clover Gallery Open Call: Under the Surface - 国际在线团体展览",
+      "title_en": "Clover Gallery Open Call: Under the Surface - International Online Group Exhibition",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-17",
+      "deadline_note": "原文截止 + August 17, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "30",
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Clover Gallery正在接受提交，为在线展览《Under the Surface – 第二版》征集作品。我们寻找探索情感、记忆、身份、脆弱性、转变以及塑造我们内心世界的隐藏真相的艺术作品。所有视觉风格和媒介都欢迎。请在2026年8月17日之前提交最多3件作品。全球开放。无提交费用。如果作品被选中，将收取30欧元的选择费，以支持展览及其推广。",
+      "url": "https://www.theartlist.com/clover-gallery-open-call-under-the-surface-international-online-group-exhibition",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p1-arrival-gallery-艺术家征召-将您的艺术作品展示在纽约时代广场屏幕",
+      "category": "opencall",
+      "title_zh": "Arrival Gallery：艺术家征召 – 将您的艺术作品展示在纽约时代广场屏幕上",
+      "title_en": "Arrival Gallery: Call for Artists – Put Your Art on Screen in Times Square – New York",
+      "org_zh": "TheArtList",
+      "city_zh": "纽约",
+      "country_zh": "美国",
+      "deadline": "2026-08-17",
+      "deadline_note": "原文截止 + August 17, 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Art Seen 正在邀请 40 位视觉艺术家参与在纽约时代广场的集体数字广告牌展示。",
+      "url": "https://www.theartlist.com/arrival-gallery-call-for-artists-put-your-art-on-screen-in-times-square-new-york",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p2-artfundme-summer-2026-award-1-800-grant-",
+      "category": "award",
+      "title_zh": "ArtFundMe Summer 2026 Award – $1,800 Grant for Artists and Makers",
+      "title_en": "ArtFundMe Summer 2026 Award – $1,800 Grant for Artists and Makers",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-20",
+      "deadline_note": "Deadline: August 20, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ArtFundMe邀请来自所有背景和学科的艺术家、制作者和创意故事讲述者申请其2026年夏季奖项。一位选定的艺术家将获得1800美元的奖金来支持他们的实践，并伴随着专门的编辑可见性，不仅关注作品，还关注其背后的故事。",
+      "url": "https://www.theartlist.com/10072026114129-artfundme-summer-2026-award-1800-grant-for-artists-and-makers",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p2-a-smith-gallery-参赛征稿-二联画-三联画-多联画-拼贴",
+      "category": "opencall",
+      "title_zh": "A Smith Gallery | 参赛征稿 '二联画/三联画/多联画/拼贴'",
+      "title_en": "A Smith Gallery | Call for Entry 'diptych/triptych/multiples/collage'",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文截止 + October 05, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": "40",
+        "currency": "USD"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "摄影师们被邀请提交反映主题 '二联画/三联画/多联画/拼贴' 的作品至 A Smith Gallery，截止日期为 2026 年 10 月 5 日。",
+      "url": "https://www.theartlist.com/a-smith-gallery-call-for-entry-diptychtriptychmultiplescollage",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p2-cica-museum-call-for-artists-cica-experi",
+      "category": "opencall",
+      "title_zh": "CICA Museum - Call for Artists: CICA Experimental Film and Video 2027",
+      "title_en": "CICA Museum - Call for Artists: CICA Experimental Film and Video 2027",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-18",
+      "deadline_note": "Deadline: August 18, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital Media",
+        "Installation",
+        "Video Art",
+        "Animations"
+      ],
+      "summary_zh": "CICA Museum邀请全球实验电影制作者和艺术家参加2027年的CICA实验电影和视频展览。我们接受单频道实验电影、视频艺术和动画。",
+      "url": "https://www.theartlist.com/03082026075344-cica-museum-call-for-artists-cica-experimental-film-and-video-2027",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p2-cica-museum-call-for-artists-photography",
+      "category": "opencall",
+      "title_zh": "CICA Museum - Call for Artists: Photography Now 2027",
+      "title_en": "CICA Museum - Call for Artists: Photography Now 2027",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-20",
+      "deadline_note": "Deadline: August 20, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "CICA Museum 邀请全球艺术家参与‘Photography Now 2027’国际摄影展，欢迎提交传统、数字摄影及实验性作品。",
+      "url": "https://www.theartlist.com/cica-museum-call-for-artists-photography-now-2027",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p2-艺术家开放征稿-arrival-gallery巴黎展览2026",
+      "category": "opencall",
+      "title_zh": "艺术家开放征稿：ARRIVAL Gallery巴黎展览2026",
+      "title_en": "Open Call for Artists: ARRIVAL Gallery Paris Exhibition 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "巴黎",
+      "country_zh": "美国/全球",
+      "deadline": "2026-08-21",
+      "deadline_note": "原文截止 + August 21, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery邀请新兴和独立艺术家参加在巴黎的国际群展。",
+      "url": "https://www.theartlist.com/open-call-for-artists-arrival-gallery-paris-exhibition-2026",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p2-非洲根源-美国果实-第67届nca艺术家大会展览",
+      "category": "exhibition",
+      "title_zh": "非洲根源/美国果实：第67届NCA艺术家大会展览",
+      "title_en": "African Roots / American Fruits: 67th NCA Artists Convention Exhibitions",
+      "org_zh": "TheArtList",
+      "city_zh": "新奥尔良",
+      "country_zh": "美国",
+      "deadline": "2026-08-21",
+      "deadline_note": "原文截止 + August 21, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "作为第67届国家艺术家大会（NCA）全国大会的一部分，NCA新奥尔良分会将在路易斯安那州谢泼德大学举办，并致力于推广非洲后裔的视觉艺术。NCA邀请视觉艺术家提交作品，以展示2026年9月25-26日在路易斯安那州新奥尔良举行的“非洲根源，美国果实”主题。",
+      "url": "https://www.theartlist.com/28072026215826-african-roots-american-fruits-67th-nca-artists-convention-exhibitions",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p3-art-fluent-call-for-art-pure-abstraction",
+      "category": "opencall",
+      "title_zh": "Art Fluent: Call for Art - PURE ABSTRACTION",
+      "title_en": "Art Fluent: Call for Art - PURE ABSTRACTION",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-28",
+      "deadline_note": "JPEGs due by Friday, August 28, 2026, at midnight MST",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Art Fluent 邀请全球艺术家提交作品参加我们的在线展览，主题为纯粹抽象。",
+      "url": "https://www.theartlist.com/art-fluent-call-for-art-pure-abstraction",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-art-photo-p3-cica当代艺术个展系列春季2027征稿",
+      "category": "opencall",
+      "title_zh": "CICA当代艺术个展系列春季2027征稿",
+      "title_en": "Call for Artists: CICA Contemporary Art Solo Show Series Spring 2027",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-27",
+      "deadline_note": "原文截止 + August 27, 2026: Close submissions.",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "CICA博物馆邀请全球艺术家参与当代艺术个展系列和出版物。每位选定的艺术家将在画廊空间（约44平方米）举办为期一周的个展（周三至周日的日程）。艺术家还将被收录在CICA Art Now 2027电子书中，该电子书可通过Amazon Kindle获取。印刷版可通过订购获得。",
+      "url": "https://www.theartlist.com/call-for-artists-cica-contemporary-art-solo-show-series-spring-2027",
+      "source_url": "https://www.theartlist.com/category/art-and-photo-calls?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-residency-德国2026年顶级艺术驻地项目",
+      "category": "artist_residency",
+      "title_zh": "德国2026年顶级艺术驻地项目",
+      "title_en": "Top Art Residencies in Germany 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Sound",
+        "Literature",
+        "Music"
+      ],
+      "summary_zh": "Artenda网站提供了一系列德国2026年的顶级艺术驻地项目，包括不同艺术领域的艺术家驻地，提供资金支持和工作条件。",
+      "url": "https://artenda.net/selected-country/residency/Germany",
+      "source_url": "https://artenda.net/art-open-call-opportunity/residency",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-residency-2026年美国顶级艺术驻地项目",
+      "category": "artist_residency",
+      "title_zh": "2026年美国顶级艺术驻地项目",
+      "title_en": "Top Art Residencies in the USA 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Sound",
+        "Painting",
+        "Drawing",
+        "Literature",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics"
+      ],
+      "summary_zh": "Artenda网站提供2026年美国顶级艺术驻地项目的开放申请，包括多种艺术领域。",
+      "url": "https://artenda.net/selected-country/residency/United-States-of-America",
+      "source_url": "https://artenda.net/art-open-call-opportunity/residency",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-residency-art-open-calls-international-exhibition-",
+      "category": "opencall",
+      "title_zh": "Art Open Calls: International Exhibition Calls 2026",
+      "title_en": "Art Open Calls: International Exhibition Calls 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-20",
+      "deadline_note": "Deadline Aug 20, 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Printmaking",
+        "Digital",
+        "Video",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Sound",
+        "Curatorial",
+        "Music",
+        "Jewellery"
+      ],
+      "summary_zh": "Artenda(国际)发布2026年国际艺术展览开放征稿，涵盖绘画、雕塑、摄影等多个艺术领域。",
+      "url": "https://artenda.net/art-open-call-opportunity/exhibition",
+      "source_url": "https://artenda.net/art-open-call-opportunity/residency",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-residency-2026荷兰顶级艺术驻地项目",
+      "category": "residency",
+      "title_zh": "2026荷兰顶级艺术驻地项目",
+      "title_en": "Top Art Residencies in the Netherlands 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-27",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "9,228 €",
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics"
+      ],
+      "summary_zh": "Artenda(国际)提供的2026年荷兰顶级艺术驻地项目，涵盖多种艺术领域，提供3个月的工作条件和住宿。",
+      "url": "https://artenda.net/selected-country/residency/Netherlands",
+      "source_url": "https://artenda.net/art-open-call-opportunity/residency",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-residency-2026年英国顶级艺术驻地项目",
+      "category": "artist_residency",
+      "title_zh": "2026年英国顶级艺术驻地项目",
+      "title_en": "Top Art Residencies in the United Kingdom 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Curatorial"
+      ],
+      "summary_zh": "Artenda网站提供了一系列2026年英国的艺术驻地项目，包括数字、绘画、摄影等多个艺术领域。",
+      "url": "https://artenda.net/selected-country/residency/United-Kingdom",
+      "source_url": "https://artenda.net/art-open-call-opportunity/residency",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-exhibition-德国2026年顶级展览开放征稿",
+      "category": "opencall",
+      "title_zh": "德国2026年顶级展览开放征稿",
+      "title_en": "Top Exhibitions in Germany 2026 | Artenda",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "素描",
+        "摄影",
+        "版画",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "Artenda(国际)发布2026年德国顶级展览开放征稿信息，包括不同主题和艺术领域的展览。",
+      "url": "https://artenda.net/selected-country/exhibition/Germany",
+      "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-exhibition-法国2026年顶级展览开放征稿",
+      "category": "opencall",
+      "title_zh": "法国2026年顶级展览开放征稿",
+      "title_en": "Top Exhibitions in France 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "Deadline: Aug 31, 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Photography",
+        "Printmaking",
+        "Installation",
+        "Sculpture"
+      ],
+      "summary_zh": "Artenda(国际)发布2026年法国顶级展览开放征稿信息，包括绘画、摄影、版画、装置和雕塑等多个艺术领域。",
+      "url": "https://artenda.net/selected-country/exhibition/France",
+      "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-exhibition-2026年美国顶级展览开放征稿",
+      "category": "opencall",
+      "title_zh": "2026年美国顶级展览开放征稿",
+      "title_en": "Top Exhibitions in the USA 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Curatorial"
+      ],
+      "summary_zh": "Artenda(国际)发布2026年美国顶级展览开放征稿信息，涵盖多个艺术领域。",
+      "url": "https://artenda.net/selected-country/exhibition/United-States-of-America",
+      "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "artenda-exhibition-2026年英国顶级展览开放征稿",
+      "category": "opencall",
+      "title_zh": "2026年英国顶级展览开放征稿",
+      "title_en": "Top Exhibitions in the United Kingdom 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-16",
+      "deadline_note": "原文截止 + \"Deadline Aug 16, 2026\"",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Sound",
+        "Painting",
+        "Drawing",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Curatorial",
+        "Music"
+      ],
+      "summary_zh": "Artenda(国际)发布2026年英国顶级展览开放征稿信息，涵盖多个艺术领域。",
+      "url": "https://artenda.net/selected-country/exhibition/United-Kingdom",
+      "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-calls-submissions-p3-国际开放征稿-斯坦尼斯拉夫-利本斯基奖2026",
+      "category": "opencall",
+      "title_zh": "国际开放征稿：斯坦尼斯拉夫·利本斯基奖2026",
+      "title_en": "International Open Call: Stanislav Libensk&yacute; Award 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Deadline: August 31, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": "79 EUR",
+        "currency": "EUR"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": 25,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "混合媒体",
+        "珠宝",
+        "玻璃，马赛克",
+        "陶瓷"
+      ],
+      "summary_zh": "面向年轻玻璃艺术家或近期艺术毕业生，提交作品参加斯坦尼斯拉夫·利本斯基奖2026，展示才华，获得全球艺术生涯的飞跃机会。",
+      "url": "https://www.theartlist.com/international-open-call-stanislav-libensky-award-2026",
+      "source_url": "https://www.theartlist.com/category/calls-for-submissions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-calls-submissions-p3-2026-american-art-awards",
+      "category": "award",
+      "title_zh": "2026 AMERICAN ART AWARDS",
+      "title_en": "2026 AMERICAN ART AWARDS",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-08-31",
+      "deadline_note": "Deadline: August 31, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "USA's TOP 20 Galleries sent ONLINE ART images to score (artists in all countries can submit). All 50 CATEGORIES have 1st to 6th Place winners so 300+ winners will get GREAT PRESS! 70 NEWS ARTICLES show winning images (as BEST IN CATEGORY and BEST IN COUNTRY). Site has entry discount special, voting galleries, previous winning art, press articles on previous winners...",
+      "url": "https://www.theartlist.com/2026-american-art-awards",
+      "source_url": "https://www.theartlist.com/category/calls-for-submissions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-calls-submissions-p3-2026年母乳喂养艺术展征稿",
+      "category": "opencall",
+      "title_zh": "2026年母乳喂养艺术展征稿",
+      "title_en": "Call for Art - 2026 Art of Breastfeeding Exhibition",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-09-01",
+      "deadline_note": "原文截止 + September 01, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "The Art of Breastfeeding (AOB) Exhibition is a community art exhibition celebrating the beauty, complexity, and everyday realities of breastfeeding. Through visual art and creative expression, the exhibition seeks to foster understanding, normalize breastfeeding, and inspire conversations that support families wherever their feeding journeys take place. Now in its 6th year, BreastfeedMIAMI invites artists to explore the theme: Empowering breastfeeding parents at home and at work. Breastfeeding is possible everywhere with the help and support of everyone. Artists are encouraged to interpret this theme broadly through artwork that reflects nurturing relationships, family and community support, healthcare and lactation professionals, pumping and returning to work, cultural traditions, public breastfeeding, and the many ways communities help families thrive. This exhibition brings together artists working across a wide range of creative disciplines, including painting, photography, sculpture, illustration, mixed media, digital art, poetry, music, and more—to celebrate, educate, and inspire families through the power of storytelling. More than an art exhibition, AOB celebrates the families, caregivers, healthcare professionals, workplaces, and communities that help make breastfeeding possible.",
+      "url": "https://www.theartlist.com/call-for-art-2026-art-of-breastfeeding-exhibition",
+      "source_url": "https://www.theartlist.com/category/calls-for-submissions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-calls-submissions-p3-wayne-art-center-2026-craftforms-call-fo",
+      "category": "opencall",
+      "title_zh": "Wayne Art Center 2026 CraftForms Call for Entry",
+      "title_en": "Wayne Art Center 2026 CraftForms Call for Entry",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-09-08",
+      "deadline_note": "Deadline: September 08, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "basketry",
+        "ceramics",
+        "fiber",
+        "furniture",
+        "glass",
+        "jewelry",
+        "metal",
+        "mixed media",
+        "paper",
+        "wearable art",
+        "wood",
+        "CAD/CAM technologies",
+        "3D printing tools"
+      ],
+      "summary_zh": "Wayne Art Center 正在寻求CraftForms 2026的投稿，这是第31届国际当代精细工艺评审展，接受以下媒介的投稿：篮艺、陶瓷、纤维、家具、玻璃、珠宝、金属、混合媒体、纸张、可穿戴艺术和木材。使用CAD/CAM技术和3D打印工具创作的作品也符合资格。",
+      "url": "https://www.theartlist.com/wayne-art-center-2026-craftforms-call-for-entry",
+      "source_url": "https://www.theartlist.com/category/calls-for-submissions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-contests-p3-ten-moir-gallery-每月主题艺术挑战-免费艺术家开放征稿",
+      "category": "opencall",
+      "title_zh": "Ten Moir Gallery | 每月主题艺术挑战 | 免费艺术家开放征稿",
+      "title_en": "Ten Moir Gallery | Monthly Themed Art Challenges | Free Entry Open Call for Artists",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "常年接受申请",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Ten Moir Gallery 邀请全球艺术家和摄影师提交作品参加我们的旋转在线艺术挑战。每个挑战都围绕一个独特的主题，为艺术家提供一个在精选在线展示中分享有意义、创意作品的机会。",
+      "url": "https://www.theartlist.com/ten-moir-gallery-monthly-themed-art-challenges-free-entry-open-call-for-artists",
+      "source_url": "https://www.theartlist.com/category/contests-and-juried-shows?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p1-arrival-gallery-米兰开放征稿-2026年9月",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery 米兰开放征稿 – 2026年9月",
+      "title_en": "ARRIVAL Gallery Milan Open Call – September 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "米兰",
+      "country_zh": "美国/全球",
+      "deadline": "2026-09-01",
+      "deadline_note": "September 01, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery 邀请新兴和独立艺术家参加在米兰的亲密国际展览。",
+      "url": "https://www.theartlist.com/10072026105634-arrival-gallery-milan-open-call-september-2026",
+      "source_url": "https://www.theartlist.com/category/exhibitions",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p1-arrival-gallery-call-for-artists-show-yo",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery - Call for Artists: Show Your Art in Athens This September 2026",
+      "title_en": "ARRIVAL Gallery - Call for Artists: Show Your Art in Athens This September 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "Athens",
+      "country_zh": "美国/全球",
+      "deadline": "2026-09-11",
+      "deadline_note": "Deadline: September 11, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery 正在为艺术家提供一个在雅典举办的国际展览机会，欢迎来自世界各地的艺术家提交作品。",
+      "url": "https://www.theartlist.com/arrival-gallery-call-for-artists-show-your-art-in-athens-this-september-2026",
+      "source_url": "https://www.theartlist.com/category/exhibitions",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p1-艺术家征稿-在马尼拉展示您的艺术-arrival-gallery-数字展览",
+      "category": "exhibitions",
+      "title_zh": "艺术家征稿：在马尼拉展示您的艺术 - Arrival Gallery 数字展览",
+      "title_en": "Call for Artists: Show Your Art in Manila – Arrival Gallery Digital Showcase",
+      "org_zh": "TheArtList",
+      "city_zh": "马尼拉",
+      "country_zh": "菲律宾",
+      "deadline": "2026-09-17",
+      "deadline_note": "Deadline: September 17, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Arrival Gallery 邀请艺术家申请其马尼拉数字展览，这是一个为期一个月的数字展览，将于2026年10月在菲律宾马尼拉Monarch Gallery举行。",
+      "url": "https://www.theartlist.com/call-for-artists-show-your-art-in-manila-arrival-gallery-digital-showcase",
+      "source_url": "https://www.theartlist.com/category/exhibitions",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-arrival-gallery-osaka-open-call-october-",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery Osaka Open Call – October 2026",
+      "title_en": "ARRIVAL Gallery Osaka Open Call – October 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "Osaka",
+      "country_zh": "美国/全球",
+      "deadline": "2026-10-01",
+      "deadline_note": "Deadline: October 01, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery邀请新兴和独立艺术家参加在Osaka的专注国际展览。",
+      "url": "https://www.theartlist.com/10072026110036-call-for-artists-arrival-gallery-osaka-open-call-october-2026",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-arrival-gallery-阿姆斯特丹开放征稿-2026年10月",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery 阿姆斯特丹开放征稿 – 2026年10月",
+      "title_en": "ARRIVAL Gallery Amsterdam Open Call – October 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "阿姆斯特丹",
+      "country_zh": "美国",
+      "deadline": "2026-10-10",
+      "deadline_note": "Deadline: October 10, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery 邀请新兴和独立艺术家参加在阿姆斯特丹精心策划的国际展览。",
+      "url": "https://www.theartlist.com/10072026110656-arrival-gallery-amsterdam-open-call-october-2026",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-jmac-worcester-ma-展览提案征稿",
+      "category": "opencall",
+      "title_zh": "JMAC WORCESTER, MA 展览提案征稿",
+      "title_en": "CALL FOR EXHIBITION PROPOSALS! JMAC WORCESTER, MA",
+      "org_zh": "TheArtList",
+      "city_zh": "Worcester",
+      "country_zh": "美国",
+      "deadline": "2026-09-30",
+      "deadline_note": "Deadline: September 30, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "TheArtList征稿JMAC WORCESTER, MA的展览提案，主题围绕Hedwig and the Angry Inch，接受多种媒介艺术家的提案。",
+      "url": "https://www.theartlist.com/call-for-exhibition-proposals-jmac-worcester-ma",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-arrival-gallery伦敦开放征稿-2026年11月",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery伦敦开放征稿 – 2026年11月",
+      "title_en": "Call for Artists: ARRIVAL Gallery London Open Call – November 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "伦敦",
+      "country_zh": "美国/全球",
+      "deadline": "2026-11-01",
+      "deadline_note": "Deadline: November 01, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery邀请新兴和独立艺术家参加在伦敦的亲密国际展览。",
+      "url": "https://www.theartlist.com/10072026112857-call-for-artists-arrival-gallery-london-open-call-november-2026",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-the-arts-center-in-orange-grills-gallery",
+      "category": "opencall",
+      "title_zh": "THE ARTS CENTER IN ORANGE - GRILLS GALLERY OPEN CALL",
+      "title_en": "THE ARTS CENTER IN ORANGE - GRILLS GALLERY OPEN CALL",
+      "org_zh": "The Arts Center in Orange",
+      "city_zh": "Orange",
+      "country_zh": "美国",
+      "deadline": "2026-10-23",
+      "deadline_note": "Deadline: October 23, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "The Arts Center in Orange - Grills Gallery 正在进行开放征稿，面向视觉艺术家和摄影师。",
+      "url": "https://www.theartlist.com/the-arts-center-in-orange-grills-gallery-open-call",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-艺术家征稿-在10月布里斯顿展示您的艺术作品-arrival-gallery",
+      "category": "exhibitions",
+      "title_zh": "艺术家征稿：在10月布里斯顿展示您的艺术作品 – Arrival Gallery",
+      "title_en": "Call for Artists: Show Your Art in Brighton This October – Arrival Gallery",
+      "org_zh": "TheArtList",
+      "city_zh": "布里斯顿",
+      "country_zh": "英国",
+      "deadline": "2026-10-16",
+      "deadline_note": "Deadline: October 16, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Arrival Gallery邀请艺术家申请其布里斯顿展示，这是一个从2026年10月30日到11月1日在英国布里斯顿举行的为期三天的展览。",
+      "url": "https://www.theartlist.com/call-for-artists-show-your-art-in-brighton-this-october-arrival-gallery",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-arrival-gallery-brooklyn-2027-艺术家开放征稿",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery - Brooklyn 2027 艺术家开放征稿",
+      "title_en": "ARRIVAL Gallery - Brooklyn 2027 Artist Open Call",
+      "org_zh": "TheArtList",
+      "city_zh": "Brooklyn",
+      "country_zh": "美国",
+      "deadline": "2027-02-25",
+      "deadline_note": "Deadline: February 25, 2027",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery 在纽约布鲁克林举办专注于艺术家的展览，面向绘画、摄影、雕塑、插画、纺织艺术、混合媒体、陶瓷、绘画、数字艺术等当代视觉艺术实践。",
+      "url": "https://www.theartlist.com/arrival-gallery-brooklyn-2027-artist-open-call",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-艺术家招募-将您的艺术作品带到巴塞罗那-到达画廊展览",
+      "category": "exhibitions",
+      "title_zh": "艺术家招募：将您的艺术作品带到巴塞罗那 - 到达画廊展览",
+      "title_en": "Call for Artists: Bring Your Art to Barcelona – Arrival Gallery Exhibition",
+      "org_zh": "TheArtList",
+      "city_zh": "巴塞罗那",
+      "country_zh": "西班牙",
+      "deadline": "2027-03-26",
+      "deadline_note": "Deadline: March 26, 2027",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "到达画廊邀请艺术家申请其巴塞罗那展示活动，这是一个为期四天的展览，将于2027年4月9日至12日在西班牙巴塞罗那举行。",
+      "url": "https://www.theartlist.com/call-for-artists-bring-your-art-to-barcelona-arrival-gallery-exhibition",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-arrival-gallery-马德里开放征稿-2026年12月",
+      "category": "opencall",
+      "title_zh": "ARRIVAL Gallery 马德里开放征稿 – 2026年12月",
+      "title_en": "ARRIVAL Gallery Madrid Open Call – December 2026",
+      "org_zh": "TheArtList",
+      "city_zh": "马德里",
+      "country_zh": "西班牙",
+      "deadline": "2026-11-24",
+      "deadline_note": "Deadline: November 24, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "ARRIVAL Gallery 邀请新兴和独立艺术家参加在西班牙马德里举办的国际展览。",
+      "url": "https://www.theartlist.com/10072026113258-arrival-gallery-madrid-open-call-december-2026",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p2-第40届切尔西国际美术竞赛",
+      "category": "opencall",
+      "title_zh": "第40届切尔西国际美术竞赛",
+      "title_en": "The 40th Chelsea International Fine Art Competition",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography",
+        "Oil",
+        "Sculpture",
+        "Mixed media",
+        "Drawing/Illustration",
+        "Digital Media",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Agora Gallery庆祝第40届切尔西国际美术竞赛，展出来自世界各地的40位杰出艺术家的作品。展览于2026年8月1日至29日举行，由著名评委团选出的多元化当代视角作品将在8月6日晚上6点至8点的开幕式上展出。",
+      "url": "https://www.theartlist.com/21072026072323-the-40th-chelsea-international-fine-art-competition",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-exhibitions-p3-arrival-gallery-call-for-artists-august-",
+      "category": "opencall",
+      "title_zh": "Arrival Gallery - Call for Artists: August 2026 Online Exhibition",
+      "title_en": "Arrival Gallery - Call for Artists: August 2026 Online Exhibition",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Arrival Online呈现一个为艺术家和摄影师创建的新数字展览体验，让艺术家和摄影师与全球观众分享他们的作品。通过精心呈现的在线展览，将艺术家聚集在一起，向国际开放，具有透明的入口和没有销售佣金。艺术家可以通过三种展览格式参与：团体展览、个展和摄影展览，允许不同的创意实践在专业在线环境中展示。",
+      "url": "https://www.theartlist.com/arrival-gallery-call-for-artists-august-2026-online-exhibition",
+      "source_url": "https://www.theartlist.com/category/exhibitions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-residencies-aadk-spain-residency-cruce-space-for-tra",
+      "category": "residency",
+      "title_zh": "AADK Spain - Residency Cruce, Space for transformation",
+      "title_en": "AADK Spain - Residency Cruce, Space for transformation",
+      "org_zh": "TheArtList",
+      "city_zh": "Blanca",
+      "country_zh": "Spain",
+      "deadline": null,
+      "deadline_note": "ONGOING",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Cruce是AADK Spain的一个持续进行的计划，在西班牙Blanca（穆尔西亚）的乡村小镇提供一个转变和创意退修的空间。自2020年以来，它已经接待了来自不同学科的70多名艺术家、研究人员和专业人士。位于Centro Negra，一个俯瞰Ricote山谷的山坡综合体的修复场所，Cruce邀请参与者在一个艺术、研究和日常生活融合的协作环境中工作、生活和联系。该计划鼓励独立、文化多样性和新的领土居住方式。参与者可以停留2周到6个月，使用工作室、协同办公区域和活动空间。",
+      "url": "https://www.theartlist.com/17022026120350-aadk-spain-residency-cruce-space-for-transformation",
+      "source_url": "https://www.theartlist.com/category/residencies",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-residencies-2027艺术家驻留开放征召",
+      "category": "residency",
+      "title_zh": "2027艺术家驻留开放征召",
+      "title_en": "2027 Artist Residency Open Call at The Factory",
+      "org_zh": "TheArtList",
+      "city_zh": "Manchester, NH",
+      "country_zh": "美国",
+      "deadline": "2026-11-30",
+      "deadline_note": "Deadline: November 30, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Glass, Mosaic",
+        "Fiber",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "一个为期12周的驻留项目，旨在将来自世界各地的创意人士带到新罕布什尔州的曼彻斯特。体验一个允许创意自由的环境，以发现、定义和精炼你的创意实践。",
+      "url": "https://www.theartlist.com/2027-artist-residency-open-call-at-the-factory",
+      "source_url": "https://www.theartlist.com/category/residencies",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-residencies-kimmel-harding-nelson-center-for-the-art",
+      "category": "residency",
+      "title_zh": "Kimmel Harding Nelson Center for the Arts",
+      "title_en": null,
+      "org_zh": "Kimmel Harding Nelson Center for the Arts",
+      "city_zh": "Nebraska City",
+      "country_zh": "美国",
+      "deadline": "2026-09-01",
+      "deadline_note": "Deadline: September 01, 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "位于美国内布拉斯加州内布拉斯卡市的Kimmel Harding Nelson Center for the Arts为作曲家、作家、跨学科和视觉艺术家提供两周至两个月不等的驻留机会。居民将获得私人卧室、私人浴室和独立的工作室，同时与另一位居民共享厨房和居住空间（作曲家有位于作曲工作室下的独立效率公寓）。提供每周175美元的食物津贴，以及周一前往当地杂货店的交通，对于通过奥马哈或林肯飞行的申请人，提供往返机场的免费出租车。申请费为35美元。",
+      "url": "https://www.theartlist.com/11062026214159-kimmel-harding-nelson-center-for-the-arts",
+      "source_url": "https://www.theartlist.com/category/residencies",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-fairs-evanston-art-center-冬季艺术与工艺展艺术家征召",
+      "category": "opencall",
+      "title_zh": "Evanston Art Center 冬季艺术与工艺展艺术家征召",
+      "title_en": "Evanston Art Center Winter Arts and Craft Expo Call for Artists",
+      "org_zh": "TheArtList",
+      "city_zh": "美国",
+      "country_zh": "全球",
+      "deadline": "2026-10-08",
+      "deadline_note": "原文截止 + October 08, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Metalsmithing",
+        "Mixed media",
+        "Jewelry",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Glass, Mosaic",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "Evanston Art Center 冬季艺术与工艺展征召艺术家，包括珠宝、陶瓷、纤维、金属、玻璃、绘画、摄影、混合媒体等多种手工艺品。",
+      "url": "https://www.theartlist.com/evanston-art-center-winter-arts-and-craft-expo-call-for-artists",
+      "source_url": "https://www.theartlist.com/category/fairs-festivals",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "updated_at": "2026-08-15"
+    },
+    {
+      "id": "theartlist-rfps-call-for-art-two-dimensional-temporary-p",
+      "category": "opencall",
+      "title_zh": "Call for Art: Two-Dimensional Temporary Public Art Installation for Fall 2026",
+      "title_en": "Call for Art: Two-Dimensional Temporary Public Art Installation for Fall 2026",
+      "org_zh": "Rochester Contemporary Art Center (RoCo)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-09-15",
+      "deadline_note": "Deadline: September 15, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Mixed media",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Fiber",
+        "Digital Media",
+        "Crafts",
+        "Acrylic"
+      ],
+      "summary_zh": "Rochester Contemporary Art Center (RoCo) 邀请艺术家提交三个图像，用于在秋季2026年的临时公共艺术装置。作品需与地点、社区和历史相关联，挑战参观者和路人，并解决重要的社会和政治问题。",
+      "url": "https://www.theartlist.com/call-for-art-two-dimensional-temporary-public-art-installation-for-fall-2026",
+      "source_url": "https://www.theartlist.com/category/rfps",
+      "domain": "theartlist.com",
       "org_type": "independent",
       "trust": "auto",
       "status": "open",
