@@ -11,15 +11,10 @@ pipeline/state/samples/
 pipeline/state/demo-*.json
 pipeline/state/offline-*.json
 
-# 账号系统数据 —— 含用户邮箱 / 口令哈希 / 会话令牌 / IP,绝不入库(PII)
-pipeline/state/users.json
-pipeline/state/sessions.json
-pipeline/state/mail-secret
-pipeline/state/search-budget.json
-pipeline/state/events.jsonl*
-pipeline/state/summaries/       # 用户专属总结(私密,服务器 only,同 users.json)
-pipeline/state/survey-emails.json     # 问卷收集的邮箱名单(PII,只服务器发信用,不入库)
-pipeline/state/survey-mail-log.json   # 上面这批的发送记录(含邮箱)
+# 账号系统与用户数据 —— 整个 state/ 目录为服务器运行态+用户数据(含邮箱/口令哈希/会话/作品库),绝不入库。
+# 本地 state/ 仅作同步副本;真相在服务器。hallucination.log 是反幻觉审计日志(无 PII),特意保留。
+pipeline/state/*
+!pipeline/state/hallucination.log
 
 # 用户数据备份快照 —— 含裸用户数据(users.json/artportal.db/mail-secret 等),绝不入库。
 # 回档能力由 backup.mjs 远程快照 + 本地/服务器备份目录保障,不进 git 版本控制。
