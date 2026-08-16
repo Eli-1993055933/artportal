@@ -5086,7 +5086,8 @@
       "_fail_streak": 0,
       "_ev_audit": "2026-07-31",
       "source_platform": "CuratorSpace",
-      "official_url": null
+      "official_url": "https://callforcurators.com/call/",
+      "official_located": "org"
     },
     {
       "id": "curatorspace-opportunities-amanda-moriarty纪念奖-与emma-woffenden的导师指导",
@@ -16329,7 +16330,8 @@
       "cover_source": "artconnect.com",
       "_fail_streak": 0,
       "source_platform": "北悉尼议会",
-      "official_url": null
+      "official_url": "https://www.sydneyolympicpark.nsw.gov.au/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-视觉艺术项目奖2027",
@@ -16436,7 +16438,8 @@
       "cover_source": "curatorspace.com",
       "_fail_streak": 0,
       "source_platform": "CuratorSpace",
-      "official_url": null
+      "official_url": "https://callforcurators.com/call/",
+      "official_located": "org"
     },
     {
       "id": "curatorspace-opportunities-抽象-2026国际在线群展",
@@ -27029,7 +27032,9 @@
       "source_url": "https://www.artistcommunities.org/directory/open-calls",
       "domain": "artistcommunities.org",
       "_fail_streak": 0,
-      "last_seen": "2026-08-16"
+      "last_seen": "2026-08-16",
+      "source_platform": "James Castle House",
+      "official_url": null
     },
     {
       "id": "search-nkfsweden-艺术家驻留项目-nkf-北欧艺术协会",
@@ -27672,7 +27677,9 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "_via": "search",
-      "geo_fallback": "geo_nationalize"
+      "geo_fallback": "geo_nationalize",
+      "source_platform": "The Place",
+      "official_url": null
     },
     {
       "id": "search-sim-residency-sim-reykjav-k-2027年驻留项目",
@@ -27771,7 +27778,9 @@
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
-      "_via": "search"
+      "_via": "search",
+      "source_platform": "M-Cult",
+      "official_url": null
     },
     {
       "id": "search-swissartawards-swiss-art-awards-2027-开放征稿",
@@ -27874,7 +27883,9 @@
       "updated_at": "2026-08-15",
       "_via": "search",
       "__country": "瑞士",
-      "geo_fallback": "geo_backfill_evidence"
+      "geo_fallback": "geo_backfill_evidence",
+      "source_platform": "Artenda",
+      "official_url": null
     },
     {
       "id": "search-reviewedbyartists-seto-art-residency-2027-fully-funded-artist-resi",
@@ -28045,7 +28056,9 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "__country": "线上",
-      "geo_fallback": "geo_backfill_online"
+      "geo_fallback": "geo_backfill_online",
+      "source_platform": "Artist Communities Alliance",
+      "official_url": null
     },
     {
       "id": "artistcommunities-residencies-arts-industry-residency",
@@ -28094,7 +28107,9 @@
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-16",
       "updated_at": "2026-08-16",
-      "geo_fallback": "geo_nationalize"
+      "geo_fallback": "geo_nationalize",
+      "source_platform": "John Michael Kohler Arts Center",
+      "official_url": null
     },
     {
       "id": "artistcommunities-residencies-加德满都国际艺术家驻留计划-kiar-2027",
@@ -28181,7 +28196,9 @@
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16"
+      "updated_at": "2026-08-16",
+      "source_platform": "艺术家社区联盟",
+      "official_url": null
     },
     {
       "id": "artistcommunities-residencies-kala-yatra艺术家驻留项目-尼泊尔-2026-27",
@@ -28265,7 +28282,9 @@
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16"
+      "updated_at": "2026-08-16",
+      "source_platform": "Kala Yatra艺术家集体",
+      "official_url": null
     },
     {
       "id": "artistcommunities-residencies-100-west-corsicana艺术家与作家驻留项目",
@@ -28347,7 +28366,9 @@
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16"
+      "updated_at": "2026-08-16",
+      "source_platform": "Corsicana艺术家与作家驻留",
+      "official_url": null
     },
     {
       "id": "artistcommunities-residencies-funded-residency-2027",
@@ -28429,7 +28450,9 @@
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16"
+      "updated_at": "2026-08-16",
+      "source_platform": "Corsicana Artist and Writer Residency",
+      "official_url": null
     },
     {
       "id": "artistcommunities-residencies-2025-oolite-arts-live-in-art-residency-p",
