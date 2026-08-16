@@ -10735,6 +10735,146 @@
       "confirmed": false,
       "notes": "2026-08-15 实探:6 详情(竞赛)",
       "trust_auto": true
+    },
+    {
+      "id": "mgnsw-auto",
+      "org_zh": "MGNSW",
+      "name_zh": "机器发现",
+      "url": "https://mgnsw.org.au/organisations/museum-contemporary-art-australia/",
+      "domain": "mgnsw.org.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Sydney art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "besydney-auto",
+      "org_zh": "besydney.com.au",
+      "name_zh": "机器发现",
+      "url": "https://www.besydney.com.au/news-insights/arts-and-culture-in-sydney/",
+      "domain": "besydney.com.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Sydney art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "sydneycontemporary-auto",
+      "org_zh": "Sydney Contemporary",
+      "name_zh": "机器发现",
+      "url": "https://sydneycontemporary.com.au/",
+      "domain": "sydneycontemporary.com.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Sydney art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "whatson-auto",
+      "org_zh": "Events in Sydney",
+      "name_zh": "机器发现",
+      "url": "https://whatson.cityofsydney.nsw.gov.au/venues/museum-of-contemporary-art",
+      "domain": "whatson.cityofsydney.nsw.gov.au",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Sydney art museum cultural center official website news」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "mavacollective-auto",
+      "org_zh": "Artist Callouts",
+      "name_zh": "机器发现",
+      "url": "https://www.mavacollective.com/artist-callouts",
+      "domain": "mavacollective.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Melbourne arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "fundsforcompanies-auto",
+      "org_zh": "Funds for Companies",
+      "name_zh": "机器发现",
+      "url": "https://fundsforcompanies.fundsforngos.org/grant/open-call-for-music-works-grant-program-australia/",
+      "domain": "fundsforcompanies.fundsforngos.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Melbourne arts council open call grants apply」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-oceania"
+    },
+    {
+      "id": "convocatorias-auto",
+      "org_zh": "Secretaría de Cultura",
+      "name_zh": "机器发现",
+      "url": "https://convocatorias.cultura.gob.mx/vigentes/detalle/4061/residencias-artisticas-2026",
+      "domain": "convocatorias.cultura.gob.mx",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Rio residencia artística convocatoria abierta」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-latam"
     }
   ],
   "blocked_or_unverified": [
