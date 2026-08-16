@@ -80,7 +80,7 @@ async function search(query) {
 
 // DeepSeek 判定:候选页面是否确为该主办方本站,且与此机会相关。
 // 返回 { level: "specific"|"org"|"no" }:specific=正是这个机会的官网页;org=主办方官网但不是本机会专页;no=不相关/是第三方。
-async function judge(item, cand, pageText) {
+export async function judge(item, cand, pageText) {
   const sys =
     "你在核对一个「艺术机会」的官网链接是否可信。给你:机会的标题/主办方,以及一个候选网页的 URL 和正文节选。\n" +
     "判断该候选页面是不是【主办方自己官网】上的页面(不是新闻转载、不是聚合平台、不是他人博客)。只输出 JSON:\n" +

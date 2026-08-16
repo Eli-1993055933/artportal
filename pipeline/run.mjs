@@ -25,8 +25,8 @@ import { dedupe } from "./lib/dedupe.mjs";
 import { gradeTrust } from "./lib/trust.mjs";
 import { healthCheck } from "./lib/healthcheck.mjs";
 import { buildReport } from "./lib/report.mjs";
-import { locateOfficial } from "./lib/locate-official.mjs";
-import { isThirdParty } from "./lib/aggregators.mjs";
+import { resolve, classifySource } from "./lib/resolve-official.mjs";
+import { hostOf } from "./lib/aggregators.mjs";
 import { fillGeoFallback } from "./lib/geolocation-fallback.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
@@ -38,6 +38,8 @@ const getOpt = (f) => { const i = args.indexOf(f); return i !== -1 ? args[i + 1]
 // 每个信源最多向下钻取的详情页数量。首跑用 --cap 8 控成本;不传则默认 20。
 const CAP = Math.max(1, parseInt(getOpt("--cap") || "20", 10) || 20);
 const onlyIds = (getOpt("--only") || "").split(",").map(s => s.trim()).filter(Boolean);
+// 官网溯源本轮搜索预算(共享全站账本,超 Brave/Serper 日配额自动停);默认 80,可用 --resolve-budget 调。
+const RESOLVE_BUDGET = Math.max(0, parseInt(getOpt("--resolve-budget") || "80", 10) || 80);
 const DATA = getOpt("--out") || P("..", "site", "data", "opportunities.json"); // --out 可指向演示输出,避免覆盖 seed
 
 function todayISO() {
@@ -100,6 +102,7 @@ async function main() {
   await mkdir(P("state", "samples"), { recursive: true });
   const today = todayISO();
   const dom_ = new Date().getDate(); // 日期序号,给低产出源"每 3 天才查一次"降频用
+  let resolveSearched = 0; // 本轮官网溯源已消耗的搜索次数(共享 RESOLVE_BUDGET)
 
   for (const src of sources) {
     // 产出分级降频(P2):yield_count/fail_count/tier 由本轮跑完后写回 sources.json(见下方 finishSource)。
@@ -240,17 +243,28 @@ async function main() {
         }
         if (cv) { rec.cover = cv; rec.cover_source = src.domain; }
       }
-      // 「前往官网必达主办方本站」:抓到聚合/新闻来源的条目,立刻用其页面HTML + AI/搜索定位主办方真官网。
-      // 源链接(rec.url)照留作"信息来源";找到官网写 official_url,前端优先用它。找不到就留空(夜间 backfill 重试)。
-      if (isThirdParty(rec.url)) {
+      // 「前往官网必达主办方本站」——官网溯源多关卡(用户核心诉求):
+      //   关卡1来源权威分类:主办方官网不动链接;转载/可信平台入口才溯源。
+      //   关卡2转载页内挖主办方官网(JSON-LD sameAs / "官网|visit site" 锚点);
+      //   关卡3按【转载页标题全称 + 主办方】检索候选官网(共享全站搜索预算,超配额自动停);
+      //   关卡4候选真实性校验(程序硬闸 A/B + AI 定级 specific/org/no 两道才放行);
+      //   关卡5落库:official_url 只写验证过的,绝不硬造;找不到如实标注留待存量回填。
+      // 源链接(rec.url)照留作"信息来源";找到官网写 official_url,前端优先用它。
+      if (classifySource(src.domain && src.domain) !== "official" && resolveSearched < RESOLVE_BUDGET) {
         try {
-          const loc = await locateOfficial(
-            { title: rec.title_zh || rec.title_en, org: rec.org_zh || rec.org_en, city: rec.city_zh, country: rec.country_zh },
-            { sourceHtml: cand.rawHtml, sourceUrl: rec.url }
+          const res = await resolve(
+            { title: rec.title_zh || rec.title_en, org: rec.org_zh || rec.org_en, sourceHtml: cand.rawHtml, sourceUrl: rec.url },
+            { domain: src.domain || hostOf(rec.url), name_zh: rec.org_zh, org_zh: rec.org_zh },
+            { budget: RESOLVE_BUDGET - resolveSearched, maxProbe: 6 }
           );
-          if (loc && loc.url && !isThirdParty(loc.url)) { rec.official_url = loc.url; rec.official_located = loc.level; process.stderr.write(`    → 官网定位: ${loc.url} (${loc.level})\n`); }
-          else process.stderr.write("    → 官网暂未定位(留待夜间重试)\n");
-        } catch (e) { process.stderr.write("    → 官网定位失败: " + e.message + "\n"); }
+          resolveSearched += (res.searched || 0);
+          if (res.official_url) { rec.official_url = res.official_url; rec.official_located = res.official_located; }
+          if (res.via_repost) rec.via_repost = true;
+          if (res.source_platform) rec.source_platform = res.source_platform;
+          rec.resolve_classify = res.classify;
+          rec.resolve_gates = (res.gates || []).length;
+          process.stderr.write(`    → 官网溯源:${res.classify} ${res.official_located || "-"}${res.official_url ? " " + res.official_url : ""} 搜索${res.searched}\n`);
+        } catch (e) { process.stderr.write("    → 官网溯源失败: " + e.message + "\n"); }
       }
       if (g.trust === "auto") { autoRecords.push(rec); }
       else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
