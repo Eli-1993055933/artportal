@@ -149,7 +149,7 @@ export async function searchWebRich(query, opts) {
 
 // 全量搜索(信源发现用):同时要标题【和】链接——
 // searchWeb 只回链接、searchWebRich 故意不回链接,都不够用。
-// 用 Brave 或 Serper;没 key 或余量不足直接空手而归。
+// 用 Brave → Serper;两者都没 key 或余量不足走免费 DDG 兜底(不花付费额度)。
 export async function searchWebFull(query, opts) {
   const key = cacheKey("full", query, opts);
   const hit = cacheGet(key);
@@ -169,9 +169,10 @@ export async function searchWebFull(query, opts) {
       bumpBudget("serper", (opts && opts.who) || "discover");
       const out = await serperSearchFull(query, opts);
       if (out.length) { cachePut(key, out); return out; }
-    } catch (e) { return []; }
+    } catch (e) { /* 降级到 DDG */ }
   }
-  return [];
+  // 免费兜底(不记付费账本,不缓存 —— DDG 限流且与付费源结果独立)
+  return await ddgSearchFull(query);
 }
 
 // ============================================================
@@ -286,6 +287,28 @@ async function ddgSearch(query) {
     const out = [];
     for (const m of html.matchAll(/uddg=([^&"']+)/g)) {
       try { out.push(decodeURIComponent(m[1])); } catch (e) {}
+    }
+    return out;
+  } catch (e) { return []; }
+}
+
+// DDG lite 全量(标题+链接),免费兜底用;goo.gl 转跳链接统一解码回真实目标。
+async function ddgSearchFull(query) {
+  const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
+  try {
+    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(10000) });
+    const html = await res.text();
+    const out = [];
+    for (const m of html.matchAll(/<a[^>]+rel="nofollow"[^>]+href="([^"]*uddg=[^"]*)"[^>]*>([\s\S]*?)<\/a>/gi)) {
+      const href = m[1];
+      const title = String(m[2] || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 200);
+      const um = href.match(/uddg=([^&]+)/);
+      if (!um) continue;
+      let target;
+      try { target = decodeURIComponent(um[1]); } catch (e) { continue; }
+      if (!/^https?:\/\//.test(target)) continue;
+      if (!title) continue;
+      out.push({ title, link: target });
     }
     return out;
   } catch (e) { return []; }

@@ -15,7 +15,7 @@
       "afterCountryNull": 85
     }
   },
-  "generated_at": "2026-08-16",
+  "generated_at": "2026-08-17",
   "count": 1326,
   "opportunities": [
     {
@@ -10551,7 +10551,8 @@
       "_fail_streak": 0,
       "via_repost": true,
       "source_platform": "北京波普文化艺术中心",
-      "official_url": null
+      "official_url": "https://www.everyart.cn/single/16658",
+      "official_located": "org"
     },
     {
       "id": "search-archcollege-景镇融合-魔鬼城-西部乌镇2025首届艺术装置设计大赛",
@@ -28516,7 +28517,8 @@
       "last_seen": "2026-08-16",
       "updated_at": "2026-08-16",
       "source_platform": "Oolite Arts",
-      "official_url": null
+      "official_url": "https://oolitearts.submittable.com/submit/332955/2026-studio-residency-program",
+      "official_located": "specific"
     },
     {
       "id": "artistcommunities-residencies-2025-artist-writer-residencies-at-gibral",
@@ -29339,7 +29341,7 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "__country": null,
-      "official_url": "https://aca.submittable.com/submit/344900/hannah-drake-residency-198",
+      "official_url": "https://atlanticcenterforthearts.org/mentoring-artists-in-residence/",
       "official_located": "specific",
       "source_platform": "Atlantic Center for the Arts"
     },
@@ -29389,7 +29391,7 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "__country": null,
-      "official_url": "https://artistcommunities.submittable.com/submit",
+      "official_url": "https://artistcommunities.submittable.com/",
       "official_located": "org",
       "source_platform": "Artist Communities Alliance SAMPLE"
     },
@@ -39645,7 +39647,8 @@
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://visualartjournal.com/",
+      "official_located": "org"
     },
     {
       "id": "curatorspace-opportunities-p6-black-white-photography-exhibition",
@@ -41388,7 +41391,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://arts.ca.gov/grantee/the-center-for-cultural-innovation/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p8-hale-精细艺术大师奖学金",
@@ -41447,7 +41451,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "艺术家协会纳特克特",
-      "official_url": null
+      "official_url": "https://yesterdaysisland.com/artists-reflect-on-the-world-around-them/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p8-the-way-we-live-in-the-eye-of-architect",
@@ -41567,7 +41572,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://opportunities.wearecreativewest.org/opportunity/17399/CAFE",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p8-rtm-pitch-artconnect",
@@ -42083,7 +42089,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "Fondation Jan Michalski",
-      "official_url": null
+      "official_url": "https://fondation-janmichalski.com/en/residences",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p9-2026-art-writing-prize",
@@ -42391,7 +42398,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "CuratorSpace",
-      "official_url": null
+      "official_url": "https://callforcurators.com/",
+      "official_located": "org"
     },
     {
       "id": "curatorspace-opportunities-p8-ryedale-open-studios-2026",
@@ -42543,7 +42551,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Scott Creative Arts Foundation",
-      "official_url": null
+      "official_url": "https://www.scafemergingartist.co.uk/2027-award-enter/",
+      "official_located": "specific"
     },
     {
       "id": "curatorspace-opportunities-p8-静默建筑-数字展览",
@@ -42644,7 +42653,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "CuratorSpace",
-      "official_url": null
+      "official_url": "https://www.tokyoartsandspace.jp/en/application/index.html",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p10-2026-ecco-eco-award",
@@ -42697,7 +42707,8 @@
       "__country": "意大利",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "Classical Roman Arts Foundation",
-      "official_url": null
+      "official_url": "https://www.classicalromanartsfoundation.org/inauguration",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p10-the-impart-nalli-fellowships",
@@ -42750,7 +42761,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://imp-art.org/fellowship-grant/impart-x-nalli-fellowships/?tab=ABOUT+THE+FELLOWSHIP",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p10-acentricspace-winter-open-call",
@@ -42935,7 +42947,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "Passa Porta",
-      "official_url": null
+      "official_url": "https://www.passaporta.be/en/in-residence",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p10-2027驻留奖学金",
@@ -42988,7 +43001,8 @@
       "__country": "德国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "Stadt Duisburg",
-      "official_url": null
+      "official_url": "https://www.duisburg.de/microsites/kulturbuero-duisburg/aktuelles/inhaltsseiten/Ausschreibung-Aufenthaltsstipendium-2027",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p10-uwe-l-ders-艺术奖学金",
@@ -43060,7 +43074,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://noted.art/opportunities/uwe-luders-art-scholarship",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p10-bridge-building-revising-including",
@@ -43235,7 +43250,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "CuratorSpace",
-      "official_url": null
+      "official_url": "https://callforcurators.com/call/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p11-arsversa-art-foundation-financial-suppor",
@@ -43356,7 +43372,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://www.artjobs.com/open-calls/call-entries/international/105924/let-our-hearts-speak-open-call",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p11-2027艺术家奖学金",
@@ -43988,7 +44005,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "Constellation Stage & Screen",
-      "official_url": null
+      "official_url": "https://www.nycplaywrights.org/2024/04/woodwardnewman-award-2025.html",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p12-community-park-sculpture-series",
@@ -44039,7 +44057,8 @@
       "__country": "美国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://www.newportbeachca.gov/government/departments/library-services/cultural-arts/sculpture-in-civic-center-park-exhibition",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p12-旅行津贴与委托-artconnect",
@@ -44314,7 +44333,8 @@
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "source_platform": "刘世明艺术基金会",
-      "official_url": null
+      "official_url": "https://www.lsmartfund.org/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p13-japan-new-year-retreat",
@@ -44908,7 +44928,7 @@
       "updated_at": "2026-08-15",
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
-      "official_url": "https://www.theartlist.com/category/art-and-photo-callsphotography?page=8",
+      "official_url": "https://www.artfundme.com/",
       "official_located": "org",
       "source_platform": "TheArtList"
     },
@@ -44958,7 +44978,7 @@
       "updated_at": "2026-08-15",
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
-      "official_url": "https://www.theartlist.com/a-smith-gallery-online-photographic-call-for-entry-portraits",
+      "official_url": "https://www.theartlist.com/a-smith-gallery-photographic-call-for-entry-story",
       "official_located": "specific",
       "source_platform": "TheArtList"
     },
@@ -45495,7 +45515,8 @@
       "last_seen": "2026-08-16",
       "updated_at": "2026-08-16",
       "source_platform": "Artenda(国际)",
-      "official_url": null
+      "official_url": "https://www.artcaller.art/open-calls",
+      "official_located": "org"
     },
     {
       "id": "artenda-residency-2026荷兰顶级艺术驻地项目",
@@ -45601,7 +45622,8 @@
       "last_seen": "2026-08-16",
       "updated_at": "2026-08-16",
       "source_platform": "Artenda(国际)",
-      "official_url": null
+      "official_url": "https://the-arthouse.org.uk/news/international-residency-open-call-2026/",
+      "official_located": "org"
     },
     {
       "id": "artenda-exhibition-德国2026年顶级展览开放征稿",
@@ -46198,7 +46220,7 @@
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
-      "official_url": "https://www.theartlist.com/arrival-gallery-open-call-free-exhibition-slots-for-artists",
+      "official_url": "https://www.theartlist.com/arrival-gallery-x-milan-2026",
       "official_located": "specific",
       "source_platform": "TheArtList"
     },
@@ -46324,7 +46346,7 @@
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
-      "official_url": "https://www.theartlist.com/arrival-gallery-open-call-free-exhibition-slots-for-artists",
+      "official_url": "https://www.theartlist.com/arrival-gallery-x-milan-2026",
       "official_located": "specific",
       "source_platform": "TheArtList"
     },
@@ -46387,7 +46409,7 @@
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
-      "official_url": "https://www.theartlist.com/arrival-gallery-open-call-free-exhibition-slots-for-artists",
+      "official_url": "https://www.theartlist.com/arrival-gallery-calling-all-artists-osaka-2026-awaits-1",
       "official_located": "specific",
       "source_platform": "TheArtList"
     },
@@ -47199,7 +47221,8 @@
       "last_seen": "2026-08-16",
       "updated_at": "2026-08-16",
       "source_platform": "Kimmel Harding Nelson Center for the Arts",
-      "official_url": null
+      "official_url": "https://www.khncenterforthearts.org/",
+      "official_located": "specific"
     },
     {
       "id": "theartlist-fairs-evanston-art-center-冬季艺术与工艺展艺术家征召",
@@ -48125,7 +48148,8 @@
       "__c": "美国",
       "geo_fallback": "geo_backfill_locscan",
       "source_platform": "Arkansas State University–Mountain Home",
-      "official_url": null
+      "official_url": "https://asumh.edu/mh-art-walk/",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p22-2026-award-artconnect",
@@ -48588,7 +48612,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://chapmanculturalcenter.org/crosswalk/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p24-changing-asia-2026-artconnect",
@@ -49644,7 +49669,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://open-source-gallery.org/open-call-for-2027-exhibitions/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p16-2027-open-call-for-curators",
@@ -50681,7 +50707,8 @@
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "The Hunt Museum",
-      "official_url": null
+      "official_url": "https://huntmuseum.oess1.uk/",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p18-where-is-the-tomorrow-we-saw-yesterday",
@@ -50753,7 +50780,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "spazioSERRA",
-      "official_url": null
+      "official_url": "https://www.spazioserra.org/exhibitions/open-call-2026-2027",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p18-arcane-scholarship-2026",
@@ -51091,7 +51119,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Jupiterfab Arts Residency",
-      "official_url": null
+      "official_url": "https://www.jupiterfab.com/the-artist/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p18-普林斯顿艺术奖学金",
@@ -51422,7 +51451,8 @@
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "ArtConnect(全球)",
-      "official_url": null
+      "official_url": "https://www.teravarna.com/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p21-jentel艺术家驻留",
@@ -51654,7 +51684,8 @@
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "source_platform": "GlogauAIR",
-      "official_url": null
+      "official_url": "https://glogauair.net/apply/on-line-application/",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p23-在马尼拉展示你的艺术-数字展示-arrival-gallery",
@@ -52332,7 +52363,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://ars.electronica.art/export/en/ecoc2028-ars-biologica-art-science-residency/",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p25-ai-art-award-next-art-ai-2026",
@@ -53942,7 +53974,8 @@
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "source_platform": "TCG Gallery",
-      "official_url": null
+      "official_url": "https://chateaugallery.com/call-for-entries/nocturne-photography-after-dark",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p28-v-v-noon-magazine艺术家和作家征稿",
@@ -54213,7 +54246,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://www.altiba9.com/open-calls-for-artists",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p29-publisher-work-grant",
@@ -54735,7 +54769,8 @@
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://artisttrust.org/opportunities/the-meridian-award-1000-unrestricted-cash-prize-for-contemporary-artists-calls-submissions/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p30-art-exhibition-a-common-ground-with-no-o",
@@ -55125,7 +55160,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://bisai.nuanque.com/sjss/1757.html",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p30-媒体艺术家项目-创作",
@@ -55323,7 +55359,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "ArtConnect(全球)",
-      "official_url": null
+      "official_url": "https://glogauair.net/collaborators/artconnect/",
+      "official_located": "org"
     },
     {
       "id": "artquest-opportunities-p1-the-photographers-gallery-cite-the-past-",
@@ -55744,7 +55781,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://www.gc.cuny.edu/art-science-connect",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p31-artistic-research-at-cnes-2027",
@@ -55933,7 +55971,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Spokane Falls Community College",
-      "official_url": null
+      "official_url": "https://sfcc.spokane.edu/Artist-in-Residence-Program",
+      "official_located": "specific"
     },
     {
       "id": "artconnect-opportunities-p31-perform-europe",
@@ -56099,7 +56138,8 @@
       "__country": "美国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "TERAVARNA ART GALLERY",
-      "official_url": null
+      "official_url": "https://www.teravarna.com/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p31-基于过程的阿伊吉纳岛工作室驻留",
@@ -56954,7 +56994,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "ArtConnect",
-      "official_url": null
+      "official_url": "https://www.artconnect.space/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p33-sixi国际艺术家驻留项目",
@@ -57167,7 +57208,8 @@
       "__country": "美国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "内布拉斯加州艺术委员会",
-      "official_url": null
+      "official_url": "https://www.arts.gov/grants",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p33-unknown-objects-spaces-time-2026-residen",
@@ -57473,7 +57515,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "Coconino Center for the Arts",
-      "official_url": null
+      "official_url": "https://coconinoarts.org/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p34-madrid-tower-photography-prize",
@@ -58694,7 +58737,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Künstlerhaus Horb",
-      "official_url": null
+      "official_url": "https://www.kh-do.de/en/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-opportunities-p35-jfkl-small-grant-programme",
@@ -59196,7 +59240,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "Al-Tiba9当代艺术",
-      "official_url": null
+      "official_url": "https://www.altiba9.com/",
+      "official_located": "org"
     },
     {
       "id": "artconnect-type-residency-p1-prospect-art-2027-new-work-委托项目",
@@ -60835,7 +60880,8 @@
       "updated_at": "2026-08-15",
       "__country": null,
       "source_platform": "Banff Centre for Arts & Creativity",
-      "official_url": null
+      "official_url": "https://www.banffcentre.ca/",
+      "official_located": "org"
     },
     {
       "id": "artistcommunities-residencies-p3-deep-winter-writers-2027",
@@ -62490,7 +62536,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "Pilchuck玻璃学校",
-      "official_url": null
+      "official_url": "https://www.pilchuck.org/",
+      "official_located": "org"
     },
     {
       "id": "artistcommunities-residencies-p6-emmanuel-college-artist-residency-ecar",
@@ -62639,7 +62686,8 @@
       "updated_at": "2026-08-15",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Alliance of Artists Communities",
-      "official_url": null
+      "official_url": "https://www.chateauorquevaux.com/",
+      "official_located": "org"
     },
     {
       "id": "artistcommunities-residencies-p6-2027-essere-residency",
@@ -67970,7 +68018,8 @@
       "last_seen": "2026-08-15",
       "updated_at": "2026-08-15",
       "source_platform": "CuratorSpace",
-      "official_url": null
+      "official_url": "https://curatorguide.squarespace.com/",
+      "official_located": "org"
     },
     {
       "id": "curatorspace-opportunities-dir-p4-2026年团体展览开放征稿",
