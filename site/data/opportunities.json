@@ -16,7 +16,7 @@
     }
   },
   "generated_at": "2026-08-16",
-  "count": 1319,
+  "count": 1325,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -4502,79 +4502,6 @@
       "cover_audit": "2026-07-18 审核撤换(URL 共用×17)",
       "cover_source": "screenshot",
       "_fail_streak": 0
-    },
-    {
-      "id": "chinaresidencies-directory-no-name-studio-艺术家驻地",
-      "category": "residency",
-      "title_zh": "No.name Studio 艺术家驻地",
-      "title_en": "No.name Studio Artist Residency",
-      "org_zh": "No.name Studio",
-      "city_zh": "上海",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "常年接受申请",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": 7000,
-        "currency": "RMB"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "跨媒介"
-      ],
-      "summary_zh": "No.name Studio位于上海朱家角古镇，提供1周至3个月的艺术家驻地，欢迎任何形式的艺术创作。驻地费用冬季7000元，春夏秋季10000元，艺术家需自理交通、餐饮、材料等个人费用。提供机场接送。",
-      "url": "https://www.chinaresidencies.com/residencies/no-name-studio",
-      "source_url": "https://www.chinaresidencies.com/residencies",
-      "domain": "chinaresidencies.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "dead",
-      "verified_at": null,
-      "last_seen": "2026-07-13",
-      "updated_at": "2026-07-23",
-      "cover": "https://images.squarespace-cdn.com/content/v1/5f0321bfff991535d3d8bd39/d3da2cdb-33f6-4e2f-8ac9-74814a0e5717/gallery_WechatIMG14.jpeg",
-      "cover_source": "images.squarespace-cdn.com",
-      "summary_en": "No.name Studio is located in Zhujiajiao Ancient Town, Shanghai, offering artist residencies from 1 week to 3 months, welcoming any form of artistic creation. Residency fee is 7000 RMB in winter, 10000 RMB in spring/summer/autumn. Artists are responsible for their own travel, meals, materials, and personal expenses. Airport pickup available.",
-      "org_en": "No.name Studio",
-      "city_en": "Shanghai",
-      "country_en": "China",
-      "deadline_note_en": "Applications accepted year-round",
-      "disciplines_en": [
-        "Cross-media"
-      ],
-      "en_mt_fields": [
-        "summary",
-        "org",
-        "city",
-        "country",
-        "deadline_note",
-        "disciplines"
-      ],
-      "en_src": {
-        "summary": "19ii436",
-        "org": "1xwhlj1",
-        "city": "3ttdk",
-        "country": "3tz79",
-        "deadline_note": "ozvm0v",
-        "disciplines": "926vrm"
-      },
-      "official_url": "https://nonamestudiosh.com/open-call",
-      "official_located": "specific",
-      "_fail_streak": 14
     },
     {
       "id": "chinaresidencies-directory-fuse-驻留项目",
@@ -19105,11 +19032,11 @@
       "title_en": "Top Artist Opportunities for 2026",
       "org_zh": "ArtConnect(全球)",
       "city_zh": "未知",
-      "country_zh": "全球",
-      "deadline": "2026-09-18",
-      "deadline_note": "",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
       "apply_fee": {
-        "free": true,
+        "free": null,
         "amount": null,
         "currency": null
       },
@@ -19129,7 +19056,7 @@
         "nationality": null
       },
       "disciplines": [],
-      "summary_zh": "ArtConnect(全球)发布2026年艺术家机会，包括开放征稿、艺术驻留、展览机会、奖金、艺术工作等。",
+      "summary_zh": "ArtConnect(全球)提供了2026年的艺术家机会，包括开放征稿、艺术驻留、展览机会、奖金、艺术工作等。",
       "url": "https://www.artconnect.com/opportunities?types=OPEN_CALL",
       "source_url": "https://www.artconnect.com/opportunities",
       "domain": "artconnect.com",
@@ -19138,13 +19065,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-07-31",
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-08-01",
-      "cover": "https://www.artconnect.com/ac.png",
-      "cover_source": "artconnect.com",
-      "_fail_streak": 0,
-      "__country": "全球(国际)",
-      "geo_fallback": "geo_backfill_global"
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
     },
     {
       "id": "artconnect-opportunities-experimental-visual-art-for-hardcover-bo",
@@ -27474,63 +27396,6 @@
       "updated_at": "2026-08-15",
       "_via": "search",
       "geo_fallback": "geo_nationalize"
-    },
-    {
-      "id": "search-proyectoace-proyecto-ace国际艺术家驻留项目",
-      "category": "residency",
-      "title_zh": "Proyecto´ace国际艺术家驻留项目",
-      "title_en": null,
-      "org_zh": "Proyecto´ace",
-      "city_zh": "布宜诺斯艾利斯",
-      "country_zh": "阿根廷",
-      "deadline": "2026-10-31",
-      "deadline_note": "原文截止 + Deadline October 31, 2026",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "Curatorship",
-        "Digital media",
-        "Printmaking",
-        "Illustration",
-        "Installation",
-        "Mural Painting",
-        "Other",
-        "Painting",
-        "Performance Art",
-        "Sculpture",
-        "Sound art",
-        "Video"
-      ],
-      "summary_zh": "Proyecto´ace国际艺术家驻留项目，旨在当代艺术的创作与反思，开放给不同艺术领域的艺术家申请。",
-      "url": "https://www.proyectoace.org/en/actividades/open-buenos-aires-workshops-talks-and-demos-by-artists/",
-      "source_url": "https://www.proyectoace.org/en/actividades/open-buenos-aires-workshops-talks-and-demos-by-artists/",
-      "domain": "proyectoace.org",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "_via": "search"
     },
     {
       "id": "search-artrabbit-stomping-ground-call-out",
@@ -74810,9 +74675,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "__country": null
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
     },
     {
       "id": "chinaresidencies-directory-鹿栖驻地计划",
@@ -74870,9 +74734,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "__country": null
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
     },
     {
       "id": "chinaresidencies-directory-tao-hua-han-artist-retreat",
@@ -74881,7 +74744,7 @@
       "title_en": null,
       "org_zh": "China Residencies",
       "city_zh": "Xuancheng",
-      "country_zh": "加拿大",
+      "country_zh": "未知",
       "deadline": null,
       "deadline_note": "原文未提及截止时间",
       "apply_fee": {
@@ -74916,10 +74779,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "__country": "加拿大",
-      "geo_fallback": "geo_backfill_evidence"
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
     },
     {
       "id": "chinaresidencies-directory-a4国际驻留项目",
@@ -74972,9 +74833,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "__country": null
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
     },
     {
       "id": "chinaresidencies-directory-acentricspace艺术家驻地",
@@ -75016,9 +74876,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "__country": null
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
     },
     {
       "id": "chinaresidencies-directory-关山月原创版画基地驻留项目",
@@ -79119,6 +78978,402 @@
       "source_url": "https://artenda.net/art-open-call-opportunity/residency",
       "domain": "artenda.net",
       "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "artconnect-opportunities-2026-2027罗马陶瓷与视觉艺术驻留项目",
+      "category": "residency",
+      "title_zh": "2026/2027罗马陶瓷与视觉艺术驻留项目",
+      "title_en": "ceramics and visual art residencies 2026/2027",
+      "org_zh": "ArtConnect",
+      "city_zh": "罗马",
+      "country_zh": "意大利",
+      "deadline": "2026-09-01",
+      "deadline_note": "Sep. 1, 2026 at 21:45 UTC",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "雕塑",
+        "视觉艺术"
+      ],
+      "summary_zh": "ArtConnect提供的罗马陶瓷与视觉艺术驻留项目，为陶瓷艺术家和视觉艺术家提供半私人的装备工作室，技术协助获取材料，罗马及以外博物馆、画廊和地点的建议。最终群展为艺术家提供展示驻留期间作品的机会。住宿不包括在内。",
+      "url": "https://www.artconnect.com/opportunity/uLAJ4oac3ER2dsPUUFFVt",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "chinaresidencies-directory-no-name-艺术家驻地",
+      "category": "residency",
+      "title_zh": "No.name 艺术家驻地",
+      "title_en": null,
+      "org_zh": "No.name",
+      "city_zh": "上海市",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": {
+          "winter": "7000",
+          "spring_summer_autumn": "10000"
+        },
+        "currency": "RMB"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "由艺术家Carlo Maria Rossi与关敏佳创立，位于上海朱家角古镇的No.name是一个为艺术家与藏家提供集工作室，居所，和画廊为一体的空间。No.name吸引着世界各地的艺术人士与机构，致力于激发创作性能量与启发性对话。任何形式的艺术创作都将被接纳并支持。",
+      "url": "https://www.chinaresidencies.com/residencies/no-name-studio",
+      "source_url": "https://www.chinaresidencies.com/residencies",
+      "domain": "chinaresidencies.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "arabculturefund-auto-women-in-film-iii-training-through-pract",
+      "category": "residency",
+      "title_zh": "WOMEN IN FILM III: Training Through Practice",
+      "title_en": "WOMEN IN FILM III: Training Through Practice",
+      "org_zh": "AFAC",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "Call Closes 29 Jul 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "23 and 30",
+        "nationality": "Arab women residents of Egypt, Jordan, Kuwait, Saudi Arabia, or the UAE"
+      },
+      "disciplines": [
+        "cinematography",
+        "sound design",
+        "editing",
+        "writing",
+        "directing",
+        "producing"
+      ],
+      "summary_zh": "AFAC与Netflix合作推出针对阿拉伯女性电影制作人的培训项目，面向居住在阿联酋、沙特阿拉伯、科威特、约旦和埃及的阿拉伯女性电影制作人，提供短期电影项目培训。",
+      "url": "https://www.arabculturefund.org/Programs/78",
+      "source_url": "https://www.arabculturefund.org/Programs",
+      "domain": "arabculturefund.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "421-auto-regionally-logical-2022",
+      "category": "opencall",
+      "title_zh": "Regionally Logical 2022",
+      "title_en": "Regionally Logical 2022",
+      "org_zh": "421",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "Applications are accepted on a rolling basis.",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "designers",
+        "artists",
+        "creatives",
+        "printed matter",
+        "publishing",
+        "jewelry making",
+        "textiles",
+        "ceramics",
+        "fashion",
+        "furniture and homeware design",
+        "photography and image-making",
+        "children&rsquo;s products"
+      ],
+      "summary_zh": "421邀请阿联酋和地区内的设计师、艺术家和创意人士提交他们的产品，以参与Regionally Logical 2022开放征召，有机会成为Dukkan421的一部分，我们的商店拥有各种设计导向的产品和物品。我们鼓励来自所有学科和背景的创意和设计师申请，包括那些从事印刷品、出版、珠宝制作、纺织品、陶瓷、时尚、家具和家居设计、摄影和图像制作以及儿童产品的工作者。",
+      "url": "https://www.421.online/en/opportunities/dukkan421-regionally-logical-2023/",
+      "source_url": "https://www.421.online/opportunities/",
+      "domain": "421.online",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "421-auto-421展览提案公开征选",
+      "category": "opencall",
+      "title_zh": "421展览提案公开征选",
+      "title_en": "Open Call for Exhibition Proposals",
+      "org_zh": "421",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "421邀请策展人和策展集体提交展览提案，该展览将在2027年冬季/春季在421举办。此机会支持策展人在阿联酋和更广泛的阿拉伯语地理区域进行研究和学习，包括离散语境中的当代艺术实践。",
+      "url": "https://www.421.online/en/opportunities/open-call-for-exhibition-proposals/",
+      "source_url": "https://www.421.online/opportunities/",
+      "domain": "421.online",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "callforcurators-auto-sam-residencies-open-call-cycle-4-2027-2",
+      "category": "residency",
+      "title_zh": "SAM Residencies – Open Call: Cycle 4 (2027/2028)",
+      "title_en": "SAM Residencies – Open Call: Cycle 4 (2027/2028)",
+      "org_zh": "SAM",
+      "city_zh": "Singapore",
+      "country_zh": "未知",
+      "deadline": "2026-09-30",
+      "deadline_note": "Application deadline: 30 September 2026, 11:59 PM (GMT+8)",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "artists",
+        "curators",
+        "educators",
+        "researchers",
+        "creative practitioners",
+        "all mediums and disciplines"
+      ],
+      "summary_zh": "SAM Residencies 正在邀请艺术家、策展人、教育工作者、研究人员和创意实践者申请第四轮 residency，时间为 2027 年 6 月至 2028 年 12 月。申请者需符合特定主题，进行独立研究，并与新加坡社区和公众互动。",
+      "url": "https://callforcurators.com/call/residencies-for-artists-curators-educators/",
+      "source_url": "https://callforcurators.com/call/residency-programme-5/",
+      "domain": "callforcurators.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "rizqart-auto-rai-residency",
+      "category": "residency",
+      "title_zh": "RAi Residency",
+      "title_en": null,
+      "org_zh": "Rizq Art Initiative (RAi)",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": null,
+      "deadline_note": "Applications are currently closed.",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "RAi Residency是一个为期12周的艺术家、策展人和理论家项目，旨在提供一个工作室环境，让他们发展实践，通过社区和机构的合作来扩展他们的作品。",
+      "url": "https://www.rizqart.com/programmes/residencies-/",
+      "source_url": "https://www.rizqart.com/programmes/residencies-/",
+      "domain": "rizqart.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "id": "proyectoace-auto-proyecto-ace国际艺术家驻留项目",
+      "category": "residency",
+      "title_zh": "Proyecto´ace国际艺术家驻留项目",
+      "title_en": "Proyecto´ace Artist-in-Residence International Program",
+      "org_zh": "Proyecto´ace",
+      "city_zh": "布宜诺斯艾利斯",
+      "country_zh": "阿根廷",
+      "deadline": "2026-10-31",
+      "deadline_note": "原文截止 + Deadline October 31st, 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Curatorship",
+        "Digital media",
+        "Printmaking",
+        "Illustration",
+        "Installation",
+        "Mural Painting",
+        "Other",
+        "Painting",
+        "Performance Art",
+        "Sculpture",
+        "Sound art",
+        "Video"
+      ],
+      "summary_zh": "Proyecto´ace国际艺术家驻留项目，提供艺术家在阿根廷布宜诺斯艾利斯进行创作和反思的机会。",
+      "url": "https://www.proyectoace.org/en/24688-2/",
+      "source_url": "https://www.proyectoace.org/en/actividades/3rd-open-call-production-and-exploration-residencies/",
+      "domain": "proyectoace.org",
+      "org_type": "official",
       "trust": "auto",
       "status": "open",
       "verified_at": null,

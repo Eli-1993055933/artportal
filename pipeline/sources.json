@@ -10875,6 +10875,246 @@
       "confirmed": false,
       "notes": "机器发现(v0.99.0,搜索词「Rio residencia artística convocatoria abierta」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
       "region_hint": "intl-latam"
+    },
+    {
+      "id": "arabculturefund-auto",
+      "org_zh": "arabculturefund.org",
+      "name_zh": "机器发现",
+      "url": "https://www.arabculturefund.org/Programs",
+      "domain": "arabculturefund.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "none",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Dubai art foundation open call official website」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "opencallforartists-auto",
+      "org_zh": "Open Call For Artists",
+      "name_zh": "机器发现",
+      "url": "https://opencallforartists.com/listing/361-dubai-art-show-2026",
+      "domain": "opencallforartists.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Dubai art foundation open call official website」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "421-auto",
+      "org_zh": "Opportunities",
+      "name_zh": "机器发现",
+      "url": "https://www.421.online/opportunities/",
+      "domain": "421.online",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Abu Dhabi biennial art residency application official」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "diarbid-auto",
+      "org_zh": "Art Events in UAE",
+      "name_zh": "机器发现",
+      "url": "https://diarbid.com/events/open-call-art-residency-programme-abu-dhabi-cultural-foundation",
+      "domain": "diarbid.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Abu Dhabi biennial art residency application official」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "callforcurators-auto",
+      "org_zh": "Residency Programme",
+      "name_zh": "机器发现",
+      "url": "https://callforcurators.com/call/residency-programme-5/",
+      "domain": "callforcurators.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Abu Dhabi biennial art residency application official」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "rizqart-auto",
+      "org_zh": "RAi Residencies",
+      "name_zh": "机器发现",
+      "url": "https://www.rizqart.com/programmes/residencies-/",
+      "domain": "rizqart.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Abu Dhabi biennial art residency application official」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "alqasimifoundation-auto",
+      "org_zh": "Artist Residency Grants",
+      "name_zh": "机器发现",
+      "url": "https://www.alqasimifoundation.com/artist-residency",
+      "domain": "alqasimifoundation.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Abu Dhabi biennial art residency application official」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "unesco-auto",
+      "org_zh": "Residency programs",
+      "name_zh": "机器发现",
+      "url": "https://www.unesco.org/creativity/en/policy-monitoring-platform/residency-programs",
+      "domain": "unesco.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Abu Dhabi biennial art residency application official」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-mena-africa"
+    },
+    {
+      "id": "proyectoace-auto",
+      "org_zh": "proyectoace.org",
+      "name_zh": "机器发现",
+      "url": "https://www.proyectoace.org/en/actividades/3rd-open-call-production-and-exploration-residencies/",
+      "domain": "proyectoace.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Rio residencia artística convocatoria abierta」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-latam"
+    },
+    {
+      "id": "laboralcentrodearte-auto",
+      "org_zh": "LABoral",
+      "name_zh": "机器发现",
+      "url": "https://laboralcentrodearte.org/en/calls/i-call-for-artistic-residencies-2026/",
+      "domain": "laboralcentrodearte.org",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Rio residencia artística convocatoria abierta」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-latam"
+    },
+    {
+      "id": "gestoradenuevosproye-auto",
+      "org_zh": "gestoradenuevosproyectos.com",
+      "name_zh": "机器发现",
+      "url": "https://www.gestoradenuevosproyectos.com/residencias-artisticas-andalucia-2026/",
+      "domain": "gestoradenuevosproyectos.com",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Rio residencia artística convocatoria abierta」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-latam"
+    },
+    {
+      "id": "unia-auto",
+      "org_zh": "Residencias artísticas",
+      "name_zh": "机器发现",
+      "url": "https://www.unia.es/vida-universitaria/cultura/residencias-artisticas",
+      "domain": "unia.es",
+      "type": "html",
+      "rss": null,
+      "org_type": "official",
+      "category_hint": [
+        "opencall",
+        "award",
+        "workshop"
+      ],
+      "reachable": true,
+      "robots": "allow",
+      "confirmed": false,
+      "notes": "机器发现(v0.99.0,搜索词「Rio residencia artística convocatoria abierta」)· 未核实是否为通知公告列表页,首轮抓取按 discoverDetailLinks 表现淘汰",
+      "region_hint": "intl-latam"
     }
   ],
   "blocked_or_unverified": [
