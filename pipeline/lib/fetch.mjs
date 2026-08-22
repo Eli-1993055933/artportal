@@ -107,7 +107,10 @@ export function sha256(str) { return createHash("sha256").update(str, "utf8").di
 export async function fetchSource(src, cache) {
   // RSS 源抓 feed 地址;HTML 源抓页面地址
   const targetUrl = (src.type === "rss" && src.rss) ? src.rss : src.url;
-  const u = new URL(targetUrl);
+  // 摊到整条信源层面防御:单条信源带非法 URL 时,跳过该信源而不是让整轮抓取抛 ERR_INVALID_URL 作废。
+  // (2026-08-23 线上事故:信源 id=abu-dhabi-art 的 url=`https://abu Dhabi art fair` 含空格,new URL 直接抛错,
+  //   导致每日抓取连续 7 天 code=1、数据停更。此处兜底后,坏 URL 只跳过该信源,不再拖垮全轮。)
+  let u; try { u = new URL(targetUrl); } catch (e) { return { skipped: true, reason: "bad-url", error: String(e.message || e) }; }
   const origin = u.origin;
 
   // 1) robots

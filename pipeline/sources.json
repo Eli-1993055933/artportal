@@ -5199,12 +5199,12 @@
       "id": "abu-dhabi-art",
       "org_zh": "阿布扎比艺术展",
       "name_zh": "艺术家征集",
-      "url": "https://abu Dhabi art fair",
+      "url": "https://www.abudhabiartfair.com",
       "domain": "abudhabiartfair.com",
       "type": "html",
       "org_type": "official",
       "region_hint": "intl-mena-africa",
-      "notes": "待验证URL"
+      "notes": "官网(修复:原URL含空格非法导致每日抓取连续7天失败,2026-08-23)"
     },
     {
       "id": "cairo-biennale",
