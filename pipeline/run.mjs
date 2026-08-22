@@ -170,8 +170,12 @@ async function main() {
       continue;
     }
 
+    // --no-hash-save:对照计时用。不读哈希缓存(强制完整重抓重提取),也不写回(不污染下次正常跑),
+    // 让"并发 vs 串行"两轮在同一批候选上干净对比,不被条件请求/内容未变跳过干扰。
+    const noHashSave = hasFlag("--no-hash-save");
+
     // 哈希未变 → 跳过,不调用 AI(省钱)
-    if (hashes[src.id] && hashes[src.id].hash === f.hash) {
+    if (!noHashSave && hashes[src.id] && hashes[src.id].hash === f.hash) {
       stats.unchanged++;
       process.stderr.write("  内容未变,跳过提取\n");
       hashes[src.id] = Object.assign({}, hashes[src.id], { at: today, etag: f.etag || hashes[src.id].etag, lastModified: f.lastModified || hashes[src.id].lastModified });
@@ -179,6 +183,7 @@ async function main() {
       continue;
     }
     hashes[src.id] = { hash: f.hash, at: today, etag: f.etag || null, lastModified: f.lastModified || null };
+    if (noHashSave) delete hashes[src.id]; // 对照计时:本轮不记缓存,下一源也不复用
 
     // 候选:HTML 列表页 → 发现详情链接并逐条抓取(每条自己算哈希,变了才提取);
     //       RSS → 逐条 item;单详情页(crawl:false)→ 整页作一条。
@@ -344,7 +349,7 @@ async function main() {
   await writeFile(_tmp, JSON.stringify({ _meta: existing._meta || {}, generated_at: todayISO(), count: finalList.length, opportunities: finalList }, null, 2), "utf8");
   await rename(_tmp, DATA);
   await writeFile(P("state", "review-queue.json"), JSON.stringify({ generated_at: todayISO(), count: pendingRecords.length, records: pendingRecords }, null, 2), "utf8");
-  await writeFile(P("state", "hashes.json"), JSON.stringify(hashes, null, 2), "utf8");
+  if (!hasFlag("--no-hash-save")) await writeFile(P("state", "hashes.json"), JSON.stringify(hashes, null, 2), "utf8");
 
   // P2:回写 sources.json 里本轮更新过的 yield_count/fail_count/tier/last_polled/sitemap 字段。
   // sourcesDoc.sources 里未被本轮处理的信源(reachable:false 或 --only 未选中)引用未变,原样写回。
