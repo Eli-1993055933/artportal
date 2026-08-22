@@ -7,7 +7,7 @@ rem
 rem 2026-08-04:抓取/双语/官网定位已搬上服务器(不依赖本机夜间开机,见 server.mjs 的
 rem DAILY_CRAWL/CHANNELS_CRAWL/BACKFILL_EN),本机只保留 mShots 服务器端会被 403 拦截、
 rem 必须本机跑的截图相关步骤,以及负责本机↔服务器双向同步的 sync-server.mjs。
-set PIPE=D:\Claude Code\pipeline
+set PIPE=D:\Vibe Coding\Trae\pipeline
 cd /d "%PIPE%"
 echo ==== run at %date% %time% ==== >> "%PIPE%\state\cron.log"
 rem 先同步一次:把服务器夜里抓到的新条目拉下来,本机才知道哪些还缺封面

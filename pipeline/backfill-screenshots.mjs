@@ -12,19 +12,22 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { captureScreenshot, closeShotBrowser } from "./lib/screenshot.mjs";
-import { isThirdParty } from "./lib/aggregators.mjs";
+import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
 const DATA = join(SITE, "data", "opportunities.json");
 const COVERS = join(SITE, "assets", "covers");
 const CONC = Number(process.env.SHOT_CONC || 3);        // 并发(mShots 免费服务,别太猛)
-const MAX = Number(process.env.SHOT_MAX || 300);
+const getOpt = k => { const i = process.argv.indexOf("--" + k); return i !== -1 ? process.argv[i + 1] : null; };
+const MAX = Math.max(1, parseInt(process.env.SHOT_MAX || getOpt("max") || "300", 10) || 300);
 
-// 截图目标:优先主办方官网(非第三方),其次原始 url
+// 截图目标:优先主办方官网(official_url 已验过,直接截);其次原始 url——
+//   官网直采页面,或 CaFÉ/ArtConnect 等"可信申请平台"的申请界面(这些正是用户要的申请页照片)。
+//   只挡硬垃圾(新闻/杂志/赛事转载/文档托管/社媒),这类截图无意义。
 function target(o) {
-  if (o.official_url && !isThirdParty(o.official_url)) return o.official_url;
-  if (o.url && !isThirdParty(o.url)) return o.url;
+  if (o.official_url) return o.official_url;
+  if (o.url && (!isThirdParty(o.url) || isTrustedPlatform(o.url))) return o.url;
   return null;
 }
 // 需要截图 = 完全没有封面 且 有可截的官网页
@@ -40,9 +43,31 @@ if (!todo.length) process.exit(0);
 let done = 0, got = 0;
 const results = new Map();     // id -> "assets/covers/xxx.jpg"
 const queue = todo.slice();
+const checkpoint = Math.max(10, Number(process.env.SHOT_CHECKPOINT || 30)); // 每 N 条落盘一次(长跑中断只丢一点进度,幂等续跑)
+
+// 把已截到的 cover 按 id 合并回写数据(原子写)。幂等:已带 cover 的不覆盖。
+async function flushCover() {
+  if (!results.size) return;
+  const fresh = JSON.parse(await readFile(DATA, "utf8"));
+  const byId = new Map(fresh.opportunities.map(o => [o.id, o]));
+  let n = 0;
+  for (const [id, cover] of results) {
+    const o = byId.get(id);
+    if (!o || o.cover) continue;
+    o.cover = cover;
+    o.cover_source = "screenshot";
+    n++;
+  }
+  results.clear();   // 已落盘的不再重复写
+  await writeFile(DATA + ".tmp", JSON.stringify(fresh, null, 2), "utf8");
+  await rename(DATA + ".tmp", DATA);
+  return n;
+}
+
 async function worker() {
   while (queue.length) {
     const o = queue.shift();
+    if (!o || typeof o.id !== "string" || !o.id) { done++; continue; }  // 坏数据跳过,别崩整批
     const url = target(o);
     const file = fnameOf(o.id);
     let r = { ok: false };
@@ -50,24 +75,14 @@ async function worker() {
     if (r.ok) { results.set(o.id, "assets/covers/" + file); got++; }
     done++;
     process.stderr.write(`\r进度 ${done}/${todo.length}(截到 ${got})`);
+    if (done % checkpoint === 0) await flushCover();   // 增量落盘,防长跑中断丢整批
   }
 }
 await Promise.all(Array.from({ length: CONC }, worker));
 process.stderr.write("\n");
 
-// 回写:重读最新数据,按 id 合并 cover(截图期间检索/翻译可能写过库),原子替换
-const fresh = JSON.parse(await readFile(DATA, "utf8"));
-const byId = new Map(fresh.opportunities.map(o => [o.id, o]));
-let merged = 0;
-for (const [id, cover] of results) {
-  const o = byId.get(id);
-  if (!o || o.cover) continue;          // 期间已被别的途径补了封面就不覆盖
-  o.cover = cover;
-  o.cover_source = "screenshot";
-  merged++;
-}
-await writeFile(DATA + ".tmp", JSON.stringify(fresh, null, 2), "utf8");
-await rename(DATA + ".tmp", DATA);
+// 收尾回写(处理完 + 信号时兜底一次),保证最终一致
+let merged = await flushCover();
 console.log(`完成:截到 ${got} 张,写回 ${merged} 条。其余留待下次重试(前端先用设计海报卡兜底)。`);
-await reportAgent("photographer", true, `官网截图封面:截到 ${got} 张,写回 ${merged} 条`, { got, merged });
+await reportAgent("photographer", true, `官网截图封面:截到 ${got} 张`, { got, merged });
 await closeShotBrowser();   // puppeteer 模式必须收浏览器,否则进程不退出;mShots 模式空操作
