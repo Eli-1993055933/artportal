@@ -18,6 +18,9 @@ rem 资讯/招聘无封面条目截图(同上,mShots 本机跑)
 "D:\Node.js\node.exe" --env-file="%PIPE%\.env" "%PIPE%\backfill-channel-covers.mjs" >> "%PIPE%\state\cron.log" 2>&1
 rem 封面审核 agent:雷同/错放封面审计(URL 共用/截图同内容/第三方图),重找官网封面,找不到宁缺毋滥(cover-audit.mjs)
 "D:\Node.js\node.exe" --env-file="%PIPE%\.env" "%PIPE%\cover-audit.mjs" >> "%PIPE%\state\cron.log" 2>&1
+rem 机会类型均衡巡检(2026-08-22):统计 官方/商业/独立学术×收费/免费×类别 分布,短板输出到 state\balance-report.json
+rem 结果供每日调度(服务器自动检索线程 + run-daily)按短板词定向补抓,让各种类型都平均
+"D:\Node.js\node.exe" "%PIPE%\balance.mjs" >> "%PIPE%\state\cron.log" 2>&1
 rem 再同步一次:把本机新截好的封面推回服务器
 "D:\Node.js\node.exe" "%PIPE%\sync-server.mjs" >> "%PIPE%\state\cron.log" 2>&1
 echo ==== done at %date% %time% ==== >> "%PIPE%\state\cron.log"

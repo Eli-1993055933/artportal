@@ -1762,7 +1762,22 @@ const AUTO_QUERIES = {
     // —— 机构类型定向(体制内 / 学术 / 商业)——
     "省文化和旅游厅 美术 作品 征集 官网", "市画院 美协 文联 展览 征集", "地方美术馆 年度 展览 征集 报名",
     "美术学院 学术展 征集 官网", "艺术研究院 大学 美术馆 项目 征集", "文创园区 艺术空间 驻留 招募",
-    "商业画廊 青年艺术家 计划 征集", "艺术基金会 资助 扶持 计划 申请", "高校 研究生 毕业 创作 征集展"
+    "商业画廊 青年艺术家 计划 征集", "艺术基金会 资助 扶持 计划 申请", "高校 研究生 毕业 创作 征集展",
+    // —— 类型均衡(2026-08-22):实测缺口=商业3/grant11/workshop13,补以下短板定向词——
+    //   商业/市场类(商业galery/艺博会/拍卖/品牌赞助)
+    "commercial gallery open call emerging artists", "art fair open call artists application",
+    "auction house art prize open call", "当代艺术品 拍卖 征集 委托", "品牌 艺术 赞助 项目 征集 | 商业艺术 大赛 报名",
+    "commercial art award cash prize open call", "luxury brand art collaboration open call",
+    //   grant/基金/资助类(免费资金来源,独立学术/非营利主流)
+    "art grant for independent artists apply", "artist emergency grant application",
+    "open call art fund stipend 2026", "艺术家 创作 基金 申请 开放", "艺术非营利 机构 资助 项目 申请",
+    "art foundation fellowship grant open", "independent artist project support grant",
+    //   workshop/工作坊/大师班类
+    "art workshop open call participants", "艺术家 工作坊 招募 报名 免费", "masterclass art open call apply",
+    "artist residency workshop program application", "版画 工作坊 招募 艺术家",
+    //   drop-in/独立学术/策展实验室
+    "independent curator open call exhibition", "艺术策展 实验室 招募 申报", "独立艺术空间 open call 征集",
+    "artist collective open call join", "free art residency no fee apply", "零费用 艺术驻留 申请 免费"
   ],
   news: [
     "美术馆 新展 开幕", "双年展 艺术 新闻", "当代艺术 展览 报道", "艺术家 获奖 消息",
@@ -1801,7 +1816,17 @@ async function autoHarvestTick() {
   }
   const ch = AUTO_ROTATION[autoTickN++ % AUTO_ROTATION.length];
   const pool = AUTO_QUERIES[ch];
-  const q = pool[Math.floor(Math.random() * pool.length)];   // 随机取词:长期均匀覆盖词池,无需持久化游标
+  // 类型均衡短板感知(2026-08-22):有机会时,把 balance.mjs 识别的短板类定向词加权并入选词池,
+  // 让商业/grant/workshop/官方/独立/免费/收费各类型不再纯靠运气。只影响机会频道,读盘失败静默兜底随机。
+  let cand = pool;
+  if (ch === "opportunities") {
+    try {
+      const report = JSON.parse(await readFile(join(__dir, "state", "balance-report.json"), "utf8"));
+      const terms = Object.values(report.recommended_terms || {}).flat();
+      if (terms.length) cand = terms.concat(pool); // 短板词前置,天然加权 → 更可能被随机命中
+    } catch (e) { /* 未生成报告:维持原词池 */ }
+  }
+  const q = cand[Math.floor(Math.random() * cand.length)];   // 随机取词:长期均匀覆盖词池,无需持久化游标
   try {
     await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
     try {
