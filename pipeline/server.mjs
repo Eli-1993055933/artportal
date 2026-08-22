@@ -1,7 +1,7 @@
 // server.mjs —— 本地一体化服务:①托管静态站(site/) ②提供"按需 AI 检索"接口 /api/search
 //
 // 「搜索即检索」闭环(严守反幻觉红线,与每日管道同一套校验):
-//   用户搜关键词 → DuckDuckGo 找相关官网页 → 抓官网原文 → DeepSeek 提取+逐字 evidence
+//   用户搜关键词 → 必应(cn.bing,免费兜底)找相关官网页 → 抓官网原文 → DeepSeek 提取+逐字 evidence
 //   → verify.mjs 程序校验 evidence 是原文子串 → 只有真实、校验通过的才写入 opportunities.json
 // 数量尽力(默认目标 6),真实优先:某词真实只找到 3 条就是 3 条,绝不编造凑数。
 //

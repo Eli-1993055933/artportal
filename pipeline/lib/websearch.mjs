@@ -39,6 +39,9 @@ function bumpCacheHit(who) {
 }
 export function serperBudgetLeft() { const b = readBudget(); return SERPER_BUDGET - (b.serper ? b.serper.used : 0); }
 export function braveBudgetLeft() { const b = readBudget(); return BRAVE_BUDGET - (b.brave ? b.brave.used : 0); }
+// Serper 熔断:付费账号余额耗尽/失效时,本进程后续直接跳过(账本每日重置会误报"还有余额",熔断防止每次白打 400)。
+let serperDead = false;
+function noteSerperResult(res) { if (!res.ok && (res.status === 400 || res.status === 401 || res.status === 429 || res.status >= 500)) serperDead = true; }
 // 今日用量报表(供 admin 简报)
 export function serperUsageToday() {
   const b = readBudget();
@@ -97,7 +100,7 @@ export function unsafeHost(host) {
 //  对外接口: searchWeb / searchWebRich / searchWebFull
 // ============================================================
 
-// 统一入口(回链接数组)。优先级: Brave → Serper → DDG。
+// 统一入口(回链接数组)。优先级: Brave → Serper → 必应(免费)。
 // opts.recent=true 时偏向最近结果;opts.who 标注花钱方(分桶审计)。
 // 近 7 天同词缓存命中直接复用,不花额度。
 export async function searchWeb(query, opts) {
@@ -114,21 +117,21 @@ export async function searchWeb(query, opts) {
       if (links.length) { cachePut(key, links); return links; }
     } catch (e) { /* 降级到下一级 */ }
   }
-  // Serper 次之
-  if (process.env.SERPER_API_KEY && serperBudgetLeft() > 0) {
+  // Serper 次之(余额熔断后跳过)
+  if (process.env.SERPER_API_KEY && !serperDead && serperBudgetLeft() > 0) {
     try {
       bumpBudget("serper", opts && opts.who);
       const links = await serperSearch(query, opts);
       if (links.length) { cachePut(key, links); return links; }
-    } catch (e) { /* 降级到 DDG */ }
+    } catch (e) { /* 降级到必应 */ }
   }
-  // DDG 兜底
-  return await ddgSearch(query);
+  // 必应(免费)兜底
+  return await bingSearch(query);
 }
 
 // 富结果搜索(自动化发现用):只回标题+摘要,【刻意不回链接】——
 // 社媒只能当线索,下游拿不到链接就永远不可能去抓页面/存外链,合规由结构保证。
-// 用 Brave 或 Serper;没 key 或没余量直接空手而归(发现属锦上添花,不做 DDG 兜底)。
+// 用 Brave 或 Serper;没 key 或没余量直接空手而归(发现属锦上添花,不做免费兜底)。
 export async function searchWebRich(query, opts) {
   // Brave 优先
   if (process.env.BRAVE_API_KEY && braveBudgetLeft() > 0) {
@@ -137,8 +140,8 @@ export async function searchWebRich(query, opts) {
       return await braveSearchRich(query, opts);
     } catch (e) { /* 降级 */ }
   }
-  // Serper 次之
-  if (process.env.SERPER_API_KEY && serperBudgetLeft() > 0) {
+  // Serper 次之(余额熔断后跳过)
+  if (process.env.SERPER_API_KEY && !serperDead && serperBudgetLeft() > 0) {
     try {
       bumpBudget("serper", (opts && opts.who) || "detective");
       return await serperSearchRich(query, opts);
@@ -149,7 +152,7 @@ export async function searchWebRich(query, opts) {
 
 // 全量搜索(信源发现用):同时要标题【和】链接——
 // searchWeb 只回链接、searchWebRich 故意不回链接,都不够用。
-// 用 Brave → Serper;两者都没 key 或余量不足走免费 DDG 兜底(不花付费额度)。
+// 用 Brave → Serper;两者都没 key 或余量不足走免费必应兜底(不花付费额度)。
 export async function searchWebFull(query, opts) {
   const key = cacheKey("full", query, opts);
   const hit = cacheGet(key);
@@ -163,16 +166,16 @@ export async function searchWebFull(query, opts) {
       if (out.length) { cachePut(key, out); return out; }
     } catch (e) { /* 降级 */ }
   }
-  // Serper 次之
-  if (process.env.SERPER_API_KEY && serperBudgetLeft() > 0) {
+  // Serper 次之(余额熔断后跳过)
+  if (process.env.SERPER_API_KEY && !serperDead && serperBudgetLeft() > 0) {
     try {
       bumpBudget("serper", (opts && opts.who) || "discover");
       const out = await serperSearchFull(query, opts);
       if (out.length) { cachePut(key, out); return out; }
-    } catch (e) { /* 降级到 DDG */ }
+    } catch (e) { /* 降级到必应 */ }
   }
-  // 免费兜底(不记付费账本,不缓存 —— DDG 限流且与付费源结果独立)
-  return await ddgSearchFull(query);
+  // 免费兜底(不记付费账本,不缓存 —— 必应限流且与付费源结果独立)
+  return await bingSearchFull(query);
 }
 
 // ============================================================
@@ -238,6 +241,7 @@ async function serperSearch(query, opts) {
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(15000)
   });
+  noteSerperResult(res);
   if (!res.ok) throw new Error("serper " + res.status);
   const j = await res.json();
   return (j.organic || []).map(o => o.link).filter(Boolean);
@@ -252,6 +256,7 @@ async function serperSearchRich(query, opts) {
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(15000)
   });
+  noteSerperResult(res);
   if (!res.ok) throw new Error("serper " + res.status);
   const j = await res.json();
   return (j.organic || [])
@@ -267,6 +272,7 @@ async function serperSearchFull(query, opts) {
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(15000)
   });
+  noteSerperResult(res);
   if (!res.ok) throw new Error("serper " + res.status);
   const j = await res.json();
   const out = (j.organic || [])
@@ -276,39 +282,47 @@ async function serperSearchFull(query, opts) {
 }
 
 // ============================================================
-//  DuckDuckGo 降级(免费,限流不稳定)
+//  必应免费兜底(国内直连,限流不稳定)。
+//  原 DDG 在服务器网络层被墙(TCP 连不上),2026-08-23 更换为 cn.bing —
+//  服务器可直连(实测返回 200),结果页含真实绝对链接,无需额外 API/key。
 // ============================================================
 
-async function ddgSearch(query) {
-  const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
+// 结果页顶部固定白名单(必应导航/备案/百度百科兜底)直接过滤,避免污染机会链接
+const BING_NAV = /bing\.com|microsoft\.com|msn\.com|miit\.gov\.cn|beian\b|baike\.baidu\.com|go\.microsoft\.com|javascript:|^#|^\//;
+
+async function bingFetch(htmlUrl) {
+  const res = await fetch(htmlUrl, { headers: { "User-Agent": BROWSER_UA, "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8" }, signal: AbortSignal.timeout(12000) });
+  if (!res.ok) throw new Error("bing " + res.status);
+  return await res.text();
+}
+
+// 从必应结果页抽真实绝对链接(回链接数组)
+async function bingSearch(query) {
   try {
-    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(10000) });
-    const html = await res.text();
+    const html = await bingFetch("https://cn.bing.com/search?q=" + encodeURIComponent(query));
     const out = [];
-    for (const m of html.matchAll(/uddg=([^&"']+)/g)) {
-      try { out.push(decodeURIComponent(m[1])); } catch (e) {}
+    for (const m of html.matchAll(/<a\s+href="(https?:\/\/[^"]+)"[^>]*>/g)) {
+      const u = m[1].replace(/&amp;/g, "&");
+      if (!/^https?:\/\//.test(u) || BING_NAV.test(u)) continue;
+      if (!out.includes(u)) out.push(u);
+      if (out.length >= 15) break;
     }
     return out;
   } catch (e) { return []; }
 }
 
-// DDG lite 全量(标题+链接),免费兜底用;goo.gl 转跳链接统一解码回真实目标。
-async function ddgSearchFull(query) {
-  const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
+// 必应全量(标题+链接),免费兜底用。
+async function bingSearchFull(query) {
   try {
-    const res = await fetch(url, { headers: { "User-Agent": BROWSER_UA }, signal: AbortSignal.timeout(10000) });
-    const html = await res.text();
+    const html = await bingFetch("https://cn.bing.com/search?q=" + encodeURIComponent(query));
     const out = [];
-    for (const m of html.matchAll(/<a[^>]+rel="nofollow"[^>]+href="([^"]*uddg=[^"]*)"[^>]*>([\s\S]*?)<\/a>/gi)) {
-      const href = m[1];
+    // <h2><a href="...">标题</a></h2> —— 必应结果标准结构
+    for (const m of html.matchAll(/<h2[^>]*>\s*<a[^>]+href="(https?:\/\/[^"]+)"[^>]*>([\s\S]*?)<\/a><\/h2>/g)) {
+      const link = m[1].replace(/&amp;/g, "&");
       const title = String(m[2] || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 200);
-      const um = href.match(/uddg=([^&]+)/);
-      if (!um) continue;
-      let target;
-      try { target = decodeURIComponent(um[1]); } catch (e) { continue; }
-      if (!/^https?:\/\//.test(target)) continue;
+      if (!/^https?:\/\//.test(link) || BING_NAV.test(link)) continue;
       if (!title) continue;
-      out.push({ title, link: target });
+      out.push({ title, link });
     }
     return out;
   } catch (e) { return []; }

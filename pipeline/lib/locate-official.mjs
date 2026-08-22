@@ -54,23 +54,37 @@ export function extractOrgLinksFromHtml(html, baseUrl) {
   return out;
 }
 
+// Serper 熔断:一旦确认余额耗尽/失效,本进程后续搜索直接跳过它,避免每次溯源白打一次 400 拖慢。
+let serperDead = false;
 async function serperSearch(query) {
+  if (serperDead) throw new Error("serper dead");
   const res = await fetch("https://google.serper.dev/search", {
     method: "POST",
     headers: { "X-API-KEY": process.env.SERPER_API_KEY, "Content-Type": "application/json" },
     body: JSON.stringify({ q: query, num: 10, gl: "cn", hl: "zh-cn" }),
     signal: AbortSignal.timeout(15000)
   });
-  if (!res.ok) throw new Error("serper " + res.status);
+  if (!res.ok) {
+    if (res.status === 400 || res.status === 401 || res.status === 429 || res.status >= 500) serperDead = true; // 额度耗尽/失效:熔断
+    throw new Error("serper " + res.status);
+  }
   const j = await res.json();
   return (j.organic || []).map(o => ({ url: o.link, title: o.title, snippet: o.snippet })).filter(x => x.url);
 }
+// 免费兜底:必应(cn.bing,国内直连)。原 DDG 在服务器网络层被墙不可达,2026-08-23 改必应。
 async function ddgSearch(query) {
-  const url = "https://lite.duckduckgo.com/lite/?q=" + encodeURIComponent(query);
-  const res = await fetch(url, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(10000) });
+  const url = "https://cn.bing.com/search?q=" + encodeURIComponent(query);
+  const res = await fetch(url, { headers: { "User-Agent": UA, "Accept-Language": "zh-CN,zh;q=0.9" }, signal: AbortSignal.timeout(12000) });
+  if (!res.ok) throw new Error("bing " + res.status);
   const html = await res.text();
   const out = [];
-  for (const m of html.matchAll(/uddg=([^&"']+)/g)) { try { out.push({ url: decodeURIComponent(m[1]) }); } catch (e) {} }
+  const NAV = /bing\.com|microsoft\.com|msn\.com|miit\.gov\.cn|beian\b|baike\.baidu\.com|go\.microsoft\.com|javascript:|^#|^\//;
+  for (const m of html.matchAll(/<a\s+href="(https?:\/\/[^"]+)"[^>]*>/g)) {
+    const u = m[1].replace(/&amp;/g, "&");
+    if (!/^https?:\/\//.test(u) || NAV.test(u)) continue;
+    out.push({ url: u });
+    if (out.length >= 10) break;
+  }
   return out;
 }
 async function search(query) {
