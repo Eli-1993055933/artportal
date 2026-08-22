@@ -16,7 +16,8 @@ export const USER_AGENT =
   `${UA_TOKEN}/0.1 (+ArtPortal art-opportunity aggregator; official sites and public RSS only; contact: atsang799@gmail.com)`;
 
 const MIN_INTERVAL_MS = 3000;         // 同域名最小间隔
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 15000;             // 默认连接超时(完整页抓取)(2026-08-23 提速:详情页/sitemap 等次要请求用更短超时,见 fetchSource timeoutMs)
+const TIMEOUT_MS_DETAIL = 5000;       // 详情页/探测的超时:连不上的站(如 caa.edu.cn)快速失败,不再白等 15 秒拖慢整轮
 const lastHitByHost = new Map();
 const robotsCache = new Map();
 
@@ -40,9 +41,9 @@ function throttle(host) {
 
 // condHeaders(P3,条件请求):{If-None-Match, If-Modified-Since} —— 服务器支持则回 304 不下发正文,
 // 省的是带宽(项目真正的瓶颈是出口带宽~20Mbps,不是 CPU/模型钱)。不支持的服务器照常 200 全量返回,零副作用。
-async function rawFetch(url, accept, condHeaders) {
+async function rawFetch(url, accept, condHeaders, timeoutMs) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  const t = setTimeout(() => ctrl.abort(), timeoutMs || TIMEOUT_MS);
   try {
     const headers = Object.assign(
       { "User-Agent": USER_AGENT, "Accept": accept || "text/html,application/xhtml+xml" },
@@ -104,9 +105,10 @@ export function sha256(str) { return createHash("sha256").update(str, "utf8").di
 
 // 抓取一个信源。返回 { skipped, reason, status, text, hash, isRss }
 // cache(P3,条件请求,可选):上次抓取存下的 {etag, lastModified} —— 带上去问,服务器支持就回 304 不下正文。
-export async function fetchSource(src, cache) {
+export async function fetchSource(src, cache, opts) {
   // RSS 源抓 feed 地址;HTML 源抓页面地址
   const targetUrl = (src.type === "rss" && src.rss) ? src.rss : src.url;
+  const timeoutMs = (opts && opts.timeoutMs) || (src.timeoutMs) || TIMEOUT_MS;
   // 摊到整条信源层面防御:单条信源带非法 URL 时,跳过该信源而不是让整轮抓取抛 ERR_INVALID_URL 作废。
   // (2026-08-23 线上事故:信源 id=abu-dhabi-art 的 url=`https://abu Dhabi art fair` 含空格,new URL 直接抛错,
   //   导致每日抓取连续 7 天 code=1、数据停更。此处兜底后,坏 URL 只跳过该信源,不再拖垮全轮。)
@@ -133,7 +135,7 @@ export async function fetchSource(src, cache) {
     const cond = {};
     if (cache && cache.etag) cond["If-None-Match"] = cache.etag;
     if (cache && cache.lastModified) cond["If-Modified-Since"] = cache.lastModified;
-    try { r = await rawFetch(targetUrl, accept, cond); }
+    try { r = await rawFetch(targetUrl, accept, cond, timeoutMs); }
     catch (e) { return { skipped: true, reason: "fetch-error", error: String(e.name || e.message || e) }; }
   }
 
@@ -156,16 +158,17 @@ export async function fetchSource(src, cache) {
 
 // fetchRaw(P3,给 sitemap.mjs 用):同样过 robots + 同域限速 + 署名 UA,但不转纯文本,原样返回 body。
 // 用于抓 sitemap.xml 这类非 HTML 正文的资源;不满足抓取条件时返回 { skipped:true }。
-export async function fetchRaw(url, accept) {
+export async function fetchRaw(url, accept, opts) {
   let u; try { u = new URL(url); } catch (e) { return { skipped: true, reason: "bad-url" }; }
   const origin = u.origin;
+  const timeoutMs = (opts && opts.timeoutMs) || TIMEOUT_MS;
   const rb = await getRobots(origin);
   if (!rb.none && !rb.error && !isAllowed(rb.rules, u.pathname)) {
     return { skipped: true, reason: "robots-disallow" };
   }
   await throttle(u.host);
   try {
-    const r = await rawFetch(url, accept || "application/xml,text/xml");
+    const r = await rawFetch(url, accept || "application/xml,text/xml", undefined, timeoutMs);
     if (!r.ok) return { skipped: true, reason: "http-" + r.status, status: r.status };
     return { skipped: false, ok: true, status: r.status, body: r.body, url: r.url };
   } catch (e) { return { skipped: true, reason: "fetch-error", error: String(e.name || e.message || e) }; }

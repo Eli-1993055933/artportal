@@ -90,7 +90,7 @@ export async function discoverViaSitemap(origin, domain, opts) {
   const sinceDate = opts.sinceDate || null;
 
   let r;
-  try { r = await fetchRaw(origin.replace(/\/$/, "") + "/sitemap.xml", "application/xml,text/xml"); }
+  try { r = await fetchRaw(origin.replace(/\/$/, "") + "/sitemap.xml", "application/xml,text/xml", { timeoutMs: 5000 }); }
   catch (e) { return null; }
   if (!r || r.skipped || !r.ok || !r.body || !/<(urlset|sitemapindex)/i.test(r.body)) return null;
 
@@ -99,7 +99,7 @@ export async function discoverViaSitemap(origin, domain, opts) {
     const children = parseChildSitemaps(r.body).slice(0, MAX_CHILD_SITEMAPS);
     for (const childUrl of children) {
       try {
-        const cr = await fetchRaw(childUrl, "application/xml,text/xml");
+        const cr = await fetchRaw(childUrl, "application/xml,text/xml", { timeoutMs: 5000 });
         if (cr && !cr.skipped && cr.ok && cr.body) entries.push(...parseLocLastmod(cr.body));
       } catch (e) { /* 单个子 sitemap 失败不影响其它子文件 */ }
     }

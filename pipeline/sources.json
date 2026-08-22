@@ -40,7 +40,10 @@
       "robots": "none",
       "confirmed": false,
       "notes": "分页公告列表,含挑战杯/招聘等,需过滤出真正可申请机会",
-      "region_hint": "cn-tier1"
+      "region_hint": "cn-tier1",
+      "yield_count": 0,
+      "fail_count": 1,
+      "tier": "normal"
     },
     {
       "id": "caa-tzgg",
@@ -79,7 +82,12 @@
       "robots": "none",
       "confirmed": false,
       "notes": "",
-      "region_hint": "cn-north"
+      "region_hint": "cn-north",
+      "sitemap": false,
+      "yield_count": 0,
+      "fail_count": 1,
+      "tier": "normal",
+      "last_polled": "2026-08-23"
     },
     {
       "id": "tjarts-tzgg",
@@ -98,7 +106,12 @@
       "robots": "none",
       "confirmed": false,
       "notes": "另有展览讯息栏 https://www.tjarts.edu.cn/index/zlxx.htm(未单独核验)",
-      "region_hint": "cn-north"
+      "region_hint": "cn-north",
+      "sitemap": false,
+      "yield_count": 0,
+      "fail_count": 1,
+      "tier": "normal",
+      "last_polled": "2026-08-23"
     },
     {
       "id": "gzarts-gsgg",
@@ -117,7 +130,12 @@
       "robots": "allow",
       "confirmed": false,
       "notes": "唯一有 robots.txt 的院校,User-agent:* 无 Disallow",
-      "region_hint": "cn-tier1"
+      "region_hint": "cn-tier1",
+      "sitemap": false,
+      "yield_count": 0,
+      "fail_count": 1,
+      "tier": "normal",
+      "last_polled": "2026-08-23"
     },
     {
       "id": "scfai-xwgg",
