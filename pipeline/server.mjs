@@ -32,7 +32,8 @@ import { fillGeoFallback } from "./lib/geolocation-fallback.mjs";
 import * as db from "./lib/db.mjs";
 import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
 import { mailerOn, sendMail } from "./lib/mailer.mjs";
-import { loadRegions, dueNow, pickQueries, dayIndex, rosterView, recordShift, reportView } from "./lib/regions.mjs";
+import { loadRegions, dueNow, pickQueries, dayIndex, rosterView, recordShift, reportView, setShortagePool, getShortagePool } from "./lib/regions.mjs";
+import { computeShortageTerms } from "./balance.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SITE = join(__dir, "..", "site");
@@ -1808,6 +1809,30 @@ const AUTO_QUERIES = {
 // (机会双倍权重);当天 serper 预算余量不足时整轮让路,把余量留给用户手动检索。
 const AUTO_ROTATION = ["opportunities", "news", "opportunities", "jobs"];
 let autoTickN = 0;
+
+// —— 机会类型均衡短板感知(2026-08-23 线上化)——
+// 服务器自给自足:每小时用【服务器本地】机会数据 realtime 算短板词(官方/商业/独立学术 × 免费/收费 × 类别),
+// 结果注入区域经理选词与自动检索机会渠道。全程无本机依赖:电脑关机,服务器照样每天补短板类型。
+async function balanceTick() {
+  try {
+    const raw = JSON.parse(await readFile(DATA, "utf8"));
+    const arr = Array.isArray(raw) ? raw : (raw.opportunities || raw.items || []);
+    const res = computeShortageTerms(arr);
+    const shortPool = Object.values(res.recommended_terms || {}).flat();
+    setShortagePool(shortPool);                                  // 供区域经理 pickQueries + 自动检索前置短板词
+    if (res.shortages.length) {
+      const buckets = res.shortages.map(s => s.bucket).join(",");
+      process.stderr.write(`[均衡感知] 短板 ${buckets} → 已注入 ${shortPool.length} 个短板补抓词入区域经理/自动检索选词池\n`);
+      db.agentLog({ agent: "balance", ok: true, summary: `短板感知:${buckets}`, metrics: { shortages: res.shortages.length, terms: shortPool.length, total: res.total } }).catch(() => {});
+    }
+  } catch (e) {
+    process.stderr.write(`[均衡感知] 计算失败(静默,不影响其余线程):${String(e.message || e).slice(0, 120)}\n`);
+  }
+}
+// 每小时算一次短板;首轮 3 分钟后跑,让启动期先有一次覆盖
+setTimeout(balanceTick, 180 * 1000);
+setInterval(balanceTick, 3600 * 1000);
+
 async function autoHarvestTick() {
   if (process.env.SERPER_API_KEY && serperBudgetLeft() < 6) {
     process.stderr.write("[自动检索] 今日搜索预算余量不足,本轮让路(优先保用户手动检索)\n");
@@ -1815,18 +1840,14 @@ async function autoHarvestTick() {
     return;
   }
   const ch = AUTO_ROTATION[autoTickN++ % AUTO_ROTATION.length];
-  const pool = AUTO_QUERIES[ch];
-  // 类型均衡短板感知(2026-08-22):有机会时,把 balance.mjs 识别的短板类定向词加权并入选词池,
-  // 让商业/grant/workshop/官方/独立/免费/收费各类型不再纯靠运气。只影响机会频道,读盘失败静默兜底随机。
-  let cand = pool;
-  if (ch === "opportunities") {
-    try {
-      const report = JSON.parse(await readFile(join(__dir, "state", "balance-report.json"), "utf8"));
-      const terms = Object.values(report.recommended_terms || {}).flat();
-      if (terms.length) cand = terms.concat(pool); // 短板词前置,天然加权 → 更可能被随机命中
-    } catch (e) { /* 未生成报告:维持原词池 */ }
+  let pool = AUTO_QUERIES[ch];
+  // 类型均衡短板感知(2026-08-23 线上化):机会渠道随机取词时,若存在短板词,从短板词池里随机挑,让
+  // 商业/grant/workshop/免费等短板类型不再纯靠运气。短线词池由 balanceTick 每小时在【服务器本地】实时算并更新。
+  if (ch === "opportunities" && getShortagePool().length) {
+    const sp = getShortagePool();
+    if (Math.random() < 0.6) pool = [sp[Math.floor(Math.random() * sp.length)]].concat(Object.keys(AUTO_QUERIES).length ? AUTO_QUERIES.opportunities : []);
   }
-  const q = cand[Math.floor(Math.random() * cand.length)];   // 随机取词:长期均匀覆盖词池,无需持久化游标
+  const q = pool[Math.floor(Math.random() * pool.length)];   // 随机取词:长期均匀覆盖词池,无需持久化游标
   try {
     await acquireSlot();                       // 和用户检索共用并发闸,互不挤占
     try {

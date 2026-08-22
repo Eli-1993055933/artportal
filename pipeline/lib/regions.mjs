@@ -110,6 +110,11 @@ export function rosterView(managers, now = new Date()) {
 // ---------- 取词 ----------
 // 每班取 n 条不重复的词。取词用【日序号 + 经理 id】做确定性起点再顺序取,
 // 不用 Math.random:同一天重启进程不会重复抓同几条,长期又能把词池均匀走完。
+// 类型均衡短板感知(2026-08-23):server 每小时用服务器本地机会数据算短板词,调 setShortagePool 注入。
+// 有短板时,把短板词【前置】到本班取词最前 —— 从而商业/grant/workshop/免费等短板类型每天优先被补。
+let shortagePool = [];
+export function setShortagePool(terms) { shortagePool = Array.isArray(terms) ? terms.filter(Boolean).map(String).slice(0, 60) : []; }
+export function getShortagePool() { return shortagePool; }
 export function pickQueries(m, n, now = new Date()) {
   const pool = m.queries;
   if (!pool.length) return [];
@@ -117,7 +122,11 @@ export function pickQueries(m, n, now = new Date()) {
   for (const ch of m.id) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
   const start = seed % pool.length;
   const out = [];
-  for (let i = 0; i < Math.min(n, pool.length); i++) out.push(pool[(start + i) % pool.length]);
+  // 短板词前置:本班优先补短板类型(只取池里确实存在的,避免抓到经理从没监听过的地区/方向)
+  if (shortagePool.length) {
+    for (const t of shortagePool) { if (pool.includes(t) && !out.includes(t)) out.push(t); if (out.length >= n) return out; }
+  }
+  for (let i = 0; i < Math.min(n, pool.length); i++) { const t = pool[(start + i) % pool.length]; if (!out.includes(t)) out.push(t); if (out.length >= n) break; }
   return out;
 }
 
