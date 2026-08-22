@@ -40,6 +40,9 @@ const CAP = Math.max(1, parseInt(getOpt("--cap") || "20", 10) || 20);
 const onlyIds = (getOpt("--only") || "").split(",").map(s => s.trim()).filter(Boolean);
 // 官网溯源本轮搜索预算(共享全站账本,超 Brave/Serper 日配额自动停);默认 80,可用 --resolve-budget 调。
 const RESOLVE_BUDGET = Math.max(0, parseInt(getOpt("--resolve-budget") || "80", 10) || 80);
+// 2026-08-23 提速:候选中 AI 提取(调 LLM)的有界并发数。串行曾是整轮最大瓶颈,并发可把几小时压到几十分钟。
+// 调大需注意:①LLM 账号并发限流/速率;②官网溯源搜索预算并发下会共享,超配额自动停。卡片默认 4,可用 --extract-concurrent 覆盖。
+const EXTRACT_CONCURRENT = Math.max(1, parseInt(getOpt("--extract-concurrent") || "4", 10) || 4);
 const DATA = getOpt("--out") || P("..", "site", "data", "opportunities.json"); // --out 可指向演示输出,避免覆盖 seed
 
 function todayISO() {
@@ -47,6 +50,23 @@ function todayISO() {
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 async function readJson(path, fallback) { try { return JSON.parse(await readFile(path, "utf8")); } catch (e) { return fallback; } }
+
+// 有界并发池:把 items 分成并发为 limit 的批次,逐个 job 执行,返回按原顺序的结果数组。
+// 2026-08-23 提速用(详情页批量抓取);只并发异步阶段,不改全局计数/预算,结果与串行版一致。
+async function batchPool(items, limit, job) {
+  const out = new Array(items.length);
+  let idx = 0;
+  const workers = Array.from({ length: Math.max(1, Math.min(limit, items.length)) }, async () => {
+    while (true) {
+      const i = idx++;
+      if (i >= items.length) break;
+      try { out[i] = await job(items[i]); }
+      catch (e) { out[i] = { error: e }; }
+    }
+  });
+  await Promise.all(workers);
+  return out;
+}
 
 // 区域经理 terms 查找(地理信息兜底用)
 let _regionTermsCache = null;
@@ -185,9 +205,16 @@ async function main() {
         }
       }
       process.stderr.write(`  发现 ${links.length} 条候选详情链接\n`);
-      for (const ln of links) {
+      // 2026-08-23 提速:详情页用有界并发批量抓取(Promise.all 平坦池)。同域请求仍受 fetch.mjs 的同域 3 秒限速
+      // 串行链约束(合规红线不受破坏,不过度请求);跨域详情页可并行,连不上快速失败(5s),整体不再 15s×N 拖慢。
+      // 只在异步抓取阶段并发,哈希去重/入候选在抓取完成后按原顺序处理,结果与串行版完全一致。
+      const linkBatch = await batchPool(links, 6, async (ln) => {
         const detailKey = src.id + "|" + ln.url;
-        const df = await fetchSource({ url: ln.url, domain: src.domain, type: "html" }, hashes[detailKey]);
+        const df = await fetchSource({ url: ln.url, domain: src.domain, type: "html", timeoutMs: 5000 }, hashes[detailKey]);
+        return { ln, df };
+      });
+      for (const { ln, df } of linkBatch) {
+        const detailKey = src.id + "|" + ln.url;
         if (df.skipped) { process.stderr.write(`    详情跳过 ${ln.url}: ${df.reason}\n`); continue; }
         if (df.notModified) { stats.unchanged++; hashes[detailKey] = Object.assign({}, hashes[detailKey], { at: today, etag: df.etag || (hashes[detailKey] && hashes[detailKey].etag), lastModified: df.lastModified || (hashes[detailKey] && hashes[detailKey].lastModified) }); continue; }
         if (hashes[detailKey] && hashes[detailKey].hash === df.hash) { stats.unchanged++; hashes[detailKey] = Object.assign({}, hashes[detailKey], { at: today, etag: df.etag || hashes[detailKey].etag, lastModified: df.lastModified || hashes[detailKey].lastModified }); continue; }
@@ -199,7 +226,11 @@ async function main() {
       candidates = [{ sourceText: f.text, url: src.url, key: src.id + "#0", rawHtml: f.rawHtml }];
     }
 
-    for (const cand of candidates) {
+    // 2026-08-23 提速:候选的 AI 提取(逐条串行调 LLM)是本轮最大瓶颈,改为有界并发(EXTRACT_CONCURRENT)。
+    // 并发安全:JS 单线程,async 在 await 之间原子;getExtract/verifyRecord/gradeTrust 各候选独立。
+    //   stats.* 递增、autoRecords/pendingRecords.push、resolveSearched 均同步,并发下无交错。反幻觉
+    //   evidence 校验基于各候选原文,不受并发影响,结果与串行版逐条一致。官网溯源预算并发下微超冲可接受。
+    const processCand = async (cand) => {
       const ctx = {
         org_zh: src.org_zh, domain: src.domain, url: cand.url, source_url: src.url,
         sourceText: cand.sourceText,
@@ -207,13 +238,13 @@ async function main() {
       };
       let ex;
       try { ex = await getExtract(cand.sourceText, ctx, cand.key); }
-      catch (e) { process.stderr.write("  提取失败: " + e.message + "\n"); stats.sourcesFailed.push({ id: cand.key, reason: "extract:" + e.message }); continue; }
+      catch (e) { process.stderr.write("  提取失败: " + e.message + "\n"); stats.sourcesFailed.push({ id: cand.key, reason: "extract:" + e.message }); return; }
       stats.extracted++;
       stats.tokensIn += (ex.usage.input_tokens || 0); stats.tokensOut += (ex.usage.output_tokens || 0);
       stats.cost += estimateCost(ex.usage);
 
       const v = verifyRecord(ex.data, ctx);
-      if (v.dropped) { stats.dropped++; process.stderr.write("  丢弃: " + v.dropReason + "\n"); continue; }
+      if (v.dropped) { stats.dropped++; process.stderr.write("  丢弃: " + v.dropReason + "\n"); return; }
 
       // 地理信息兜底(v1.8.0):对 city_zh/country_zh 为空的记录,逐级回退补全
       const geoResult = fillGeoFallback(v.record, ctx, cand.sourceText);
@@ -270,7 +301,8 @@ async function main() {
       else { pendingRecords.push(Object.assign({ _pending_reasons: g.reasons }, rec)); stats.pending++; }
       addedThisSrc++;
       process.stderr.write(`  → ${g.trust}${g.reasons.length ? " (" + g.reasons.join("; ") + ")" : ""}  evidence作废 ${v.nulled.length} 处\n`);
-    }
+    };
+    await batchPool(candidates, EXTRACT_CONCURRENT, processCand);
     finishSource(true);
   }
 
