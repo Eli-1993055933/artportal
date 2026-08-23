@@ -41,8 +41,9 @@ const onlyIds = (getOpt("--only") || "").split(",").map(s => s.trim()).filter(Bo
 // 官网溯源本轮搜索预算(共享全站账本,超 Brave/Serper 日配额自动停);默认 80,可用 --resolve-budget 调。
 const RESOLVE_BUDGET = Math.max(0, parseInt(getOpt("--resolve-budget") || "80", 10) || 80);
 // 2026-08-23 提速:候选中 AI 提取(调 LLM)的有界并发数。串行曾是整轮最大瓶颈,并发可把几小时压到几十分钟。
-// 调大需注意:①LLM 账号并发限流/速率;②官网溯源搜索预算并发下会共享,超配额自动停。卡片默认 4,可用 --extract-concurrent 覆盖。
-const EXTRACT_CONCURRENT = Math.max(1, parseInt(getOpt("--extract-concurrent") || "4", 10) || 4);
+// 2026-08-23 改:默认 4→2,把峰值 LLM 并发压在源6×提取2=12 路内(此前 6×4=24 路屡爆 GLM 免费档 429)。
+// 调大需注意:①LLM 账号并发限流/速率;②官网溯源搜索预算并发下会共享,超配额自动停。可用 --extract-concurrent 覆盖。
+const EXTRACT_CONCURRENT = Math.max(1, parseInt(getOpt("--extract-concurrent") || "2", 10) || 2);
 // 2026-08-23 提速:信源级并发(整轮真正的吞吐瓶颈)。默认信源逐源串行:每源"抓列表页→抓详情→并发提取+溯源"
 // 全完成才轮到下一个,577 源累下来就是十几小时。这里改为有界并发同时抓多个源,总耗时 ≈ 最慢源而非所有源之和。
 // 并发安全:JS 单线程,hashes/stats/autoRecords/pendingRecords/resolveSearched 均为同步原子,共享搜索预算超配额自动停,

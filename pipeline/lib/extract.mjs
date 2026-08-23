@@ -60,24 +60,33 @@ export async function extract(sourceText, ctx) {
 
 // 底层出口:任意 system prompt + user 内容 → JSON 提取结果(资讯/招聘频道用自己的 prompt 走这里)。
 // provider 选择、JSON 模式、usage 统计与机会频道完全同一套。
-// GLM 免费档为主(2026-08-02 定调长期主力,DeepSeek 不再充值);DeepSeek/Anthropic 仅作 GLM 失败时的备份。
+// 2026-08-23 改:DeepSeek(付费、稳、大陆直连)优先 → GLM 免费档兜底 → Anthropic。
+//   此前(2026-08-02 起)GLM 免费档为主,DeepSeek 仅作失败备份;但信源并发6×提取并发4=24 路峰值时 GLM
+//   免费档高频 429(实测一轮 1767 次 429、被拖 4.45h、丢候选),故升级 DeepSeek 为主力、GLM 仅失败兜底。
 export async function llmExtract(system, user, maxTokens) {
-  if (process.env.MOD_API_KEY) {
-    try { return await extractGlmFree(system, user, maxTokens); }
+  if (DEEPSEEK_KEY) {
+    try { return await extractDeepSeek(system, user, maxTokens); }
     catch (e) {
-      // GLM 故障/限流 → 有余额的 DeepSeek 顶上;反幻觉不受影响——evidence 是否原文子串由 verify.mjs 程序说了算。
-      if (DEEPSEEK_KEY) {
-        try { return await extractDeepSeek(system, user, maxTokens); } catch (e2) {}
-      }
       if (ANTHROPIC_KEY) {
-        try { return await extractAnthropic(system, user, maxTokens); } catch (e3) {}
+        try { return await extractAnthropic(system, user, maxTokens); } catch (e2) {}
+      }
+      if (process.env.MOD_API_KEY) {
+        try { return await extractGlmFree(system, user, maxTokens); } catch (e3) {}
       }
       throw e;
     }
   }
-  if (DEEPSEEK_KEY) return extractDeepSeek(system, user, maxTokens);
+  if (process.env.MOD_API_KEY) {
+    try { return await extractGlmFree(system, user, maxTokens); }
+    catch (e) {
+      if (ANTHROPIC_KEY) {
+        try { return await extractAnthropic(system, user, maxTokens); } catch (e2) {}
+      }
+      throw e;
+    }
+  }
   if (ANTHROPIC_KEY) return extractAnthropic(system, user, maxTokens);
-  throw new Error("缺少 MOD_API_KEY / DEEPSEEK_API_KEY / ANTHROPIC_API_KEY(放进 pipeline/.env 或 GitHub Secrets)");
+  throw new Error("缺少 DEEPSEEK_API_KEY / MOD_API_KEY / ANTHROPIC_API_KEY(放进 pipeline/.env 或 GitHub Secrets)");
 }
 
 // 免费提取(智谱 GLM-4-Flash,OpenAI 兼容,长期免费):llmExtract 的兜底线,也可被各调用点直接用作主线。
@@ -85,19 +94,40 @@ export async function llmExtract(system, user, maxTokens) {
 export async function extractGlmFree(system, user, maxTokens) {
   const key = process.env.MOD_API_KEY;
   if (!key) throw new Error("缺少 MOD_API_KEY");
-  const res = await fetch(process.env.MOD_API_URL || "https://open.bigmodel.cn/api/paas/v4/chat/completions", {
-    method: "POST",
-    headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: process.env.MOD_MODEL || "glm-4-flash",
-      messages: [{ role: "system", content: system }, { role: "user", content: user }],
-      temperature: 0,
-      max_tokens: maxTokens || 1500
-    }),
-    signal: AbortSignal.timeout(90000)
+  const url = process.env.MOD_API_URL || "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+  const body = JSON.stringify({
+    model: process.env.MOD_MODEL || "glm-4-flash",
+    messages: [{ role: "system", content: system }, { role: "user", content: user }],
+    temperature: 0,
+    max_tokens: maxTokens || 1500
   });
-  if (!res.ok) throw new Error("GLM " + res.status + ": " + (await res.text()).slice(0, 300));
-  const j = await res.json();
+  // 2026-08-23:GLM 免费档并发突增时高频 429,加指数退避重试(0.5s→1s→2s→4s,共 4 次
+  // 重试,累计约 7.5s),尽量兜住限流期,减少候选丢失。付费 DeepSeek 为主力后此路径很少触发。
+  let lastErr = null;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    let res;
+    try {
+      res = await fetch(url, {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+        body,
+        signal: AbortSignal.timeout(90000)
+      });
+    } catch (e) { lastErr = e; await sleep(1000 * (attempt + 1)); continue; }
+    if (res.status === 429 && attempt < 4) {
+      await sleep(500 * (2 ** attempt));
+      continue;
+    }
+    if (!res.ok) throw new Error("GLM " + res.status + ": " + (await res.text()).slice(0, 300));
+    const j = await res.json();
+    // 复用最后一个成功分支的解析,单独放在函数末尾
+    return finishGlm(j);
+  }
+  throw lastErr || new Error("GLM 429 重试耗尽");
+}
+
+// 解析 GLM 成功响应(剥离可能包裹的 markdown 代码块后取 JSON)。
+function finishGlm(j) {
   let raw = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
   raw = raw.replace(/^\s*```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "");
   const usage = {
@@ -107,6 +137,8 @@ export async function extractGlmFree(system, user, maxTokens) {
   };
   return { data: parseJson(raw), usage, raw };
 }
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 export { MAX_INPUT_CHARS };
 
