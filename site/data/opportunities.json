@@ -15,8 +15,8 @@
       "afterCountryNull": 85
     }
   },
-  "generated_at": "2026-08-22",
-  "count": 1325,
+  "generated_at": "2026-08-23",
+  "count": 1324,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -12341,77 +12341,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "search-wglj-第二十届中国长春电影节-金鹿创投-新摇篮计划项目征集公告",
-      "category": "opencall",
-      "title_zh": "第二十届中国长春电影节“金鹿创投”新摇篮计划项目征集公告",
-      "title_en": "The 20th China Changchun Film Festival \"Golden Deer Venture\" New Cradle Program Call for Projects",
-      "org_zh": "中国长春电影节",
-      "city_zh": "长春",
-      "country_zh": "中国",
-      "deadline": "2025-08-22",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "电影"
-      ],
-      "summary_zh": "第二十届中国长春电影节“金鹿创投”新摇篮计划面向华语电影项目征集，分为常规单元和大学生单元，要求已完成剧本的故事片，未拍摄未完成融资。报名截止2025年8月22日，入围路演项目有机会获得奖金资助。",
-      "url": "http://wglj.changchun.gov.cn/jdhy_44809/zjdc/202507/t20250725_3417145.html",
-      "source_url": "http://wglj.changchun.gov.cn/jdhy_44809/zjdc/202507/t20250725_3417145.html",
-      "domain": "wglj.changchun.gov.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-15",
-      "_via": "search",
-      "summary_en": "The 20th China Changchun Film Festival \"Golden Deer Venture\" New Cradle Program is open to Chinese-language film projects, divided into a Regular Section and a College Student Section. Projects must have a completed script, be feature-length, and not yet shot or fully financed. Registration deadline: August 22, 2025. Selected pitch projects may receive funding awards.",
-      "org_en": "China Changchun Film Festival",
-      "city_en": "Changchun",
-      "country_en": "China",
-      "disciplines_en": [
-        "Film"
-      ],
-      "en_mt_fields": [
-        "title",
-        "summary",
-        "org",
-        "city",
-        "country",
-        "disciplines"
-      ],
-      "en_src": {
-        "title": "17ca7pb",
-        "summary": "1q4j9u",
-        "org": "m68lhl",
-        "city": "2qtkv",
-        "country": "3tz79",
-        "disciplines": "1uq4y6f"
-      },
-      "_fail_streak": 0,
-      "cover": "assets/covers/816358ba66fcd101.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "search-xingping-第八届-玉琮杯-清廉微电影微视频大赛",
       "category": "award",
       "title_zh": "第八届\"玉琮杯\"清廉微电影微视频大赛",
@@ -20670,10 +20599,10 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-26",
+      "last_seen": "2026-08-23",
+      "updated_at": "2026-08-23",
       "cover": "https://r2.ac-img.com/2026/ec0e1ffc-f335-4fb9-9567-0102ba8639aa.jpg",
       "cover_source": "artconnect.com",
       "official_url": "https://www.cometonina.com/artist-residency",
@@ -27427,7 +27356,7 @@
       "source_url": "https://www.artistcommunities.org/directory/open-calls",
       "domain": "artistcommunities.org",
       "_fail_streak": 0,
-      "last_seen": "2026-08-22",
+      "last_seen": "2026-08-23",
       "source_platform": "James Castle House",
       "official_url": "https://www.jamescastlehouse.org/residencies/apply/",
       "official_located": "specific"
@@ -35638,17 +35567,18 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-23",
+      "updated_at": "2026-08-23",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://www.cistaarts.com/",
       "official_located": "org",
       "source_platform": "CISTA ARTS",
       "cover": "assets/covers/619458f3bfa609e3.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p2-rhythm-special-edition",
@@ -35875,17 +35805,18 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-23",
+      "updated_at": "2026-08-23",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://thisiscentralstation.com/featured-blog/curatorspace/",
       "official_located": "org",
       "source_platform": "CuratorSpace",
       "cover": "assets/covers/813ee51e365d1938.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p2-季节艺术家开放征选-秋季2026",
