@@ -43,6 +43,14 @@ const RESOLVE_BUDGET = Math.max(0, parseInt(getOpt("--resolve-budget") || "80", 
 // 2026-08-23 提速:候选中 AI 提取(调 LLM)的有界并发数。串行曾是整轮最大瓶颈,并发可把几小时压到几十分钟。
 // 调大需注意:①LLM 账号并发限流/速率;②官网溯源搜索预算并发下会共享,超配额自动停。卡片默认 4,可用 --extract-concurrent 覆盖。
 const EXTRACT_CONCURRENT = Math.max(1, parseInt(getOpt("--extract-concurrent") || "4", 10) || 4);
+// 2026-08-23 提速:信源级并发(整轮真正的吞吐瓶颈)。默认信源逐源串行:每源"抓列表页→抓详情→并发提取+溯源"
+// 全完成才轮到下一个,577 源累下来就是十几小时。这里改为有界并发同时抓多个源,总耗时 ≈ 最慢源而非所有源之和。
+// 并发安全:JS 单线程,hashes/stats/autoRecords/pendingRecords/resolveSearched 均为同步原子,共享搜索预算超配额自动停,
+//   各源闭包(addedThisSrc/finishSource)独立,结果与串行版逐条一致。警告:并发源数 × EXTRACT_CONCURRENT = 峰值 LLM 并发,
+//   调大需注意 GLM 免费档/搜索 API 限流;默认 6,可用 --source-concurrent 覆盖。
+// 实测(2026-08-23,577 源并发=6):稳态日更轮多数源 304/未变,一二十分钟内跑完;内容大改的全量重扫轮受"同域 3s 合规限速
+//   × 详情页数 + LLM 提取"串行拖累,约一小时余。想更快可临时 --source-concurrent 8~12,但勿超 LLM/搜索 API 限流。
+const SOURCE_CONCURRENT = Math.max(1, parseInt(getOpt("--source-concurrent") || "6", 10) || 6);
 const DATA = getOpt("--out") || P("..", "site", "data", "opportunities.json"); // --out 可指向演示输出,避免覆盖 seed
 
 function todayISO() {
@@ -124,13 +132,13 @@ async function main() {
   const dom_ = new Date().getDate(); // 日期序号,给低产出源"每 3 天才查一次"降频用
   let resolveSearched = 0; // 本轮官网溯源已消耗的搜索次数(共享 RESOLVE_BUDGET)
 
-  for (const src of sources) {
+  const processSource = async (src) => {
     // 产出分级降频(P2):yield_count/fail_count/tier 由本轮跑完后写回 sources.json(见下方 finishSource)。
     // 只有 tier==='low'(连续 14 次零产出)才降频,且 --only 单跑指定源时不受影响,方便调试验证。
     if (!onlyIds.length && src.tier === "low" && dom_ % 3 !== 0) {
       stats.tierSkipped++;
       process.stderr.write(`\n[跳过·低产出源降频] ${src.id}(tier=low,fail_count=${src.fail_count || 0},每 3 天查一次)\n`);
-      continue;
+      return;
     }
     process.stderr.write(`\n[抓取] ${src.id}  ${src.url}\n`);
     let addedThisSrc = 0;
@@ -150,7 +158,7 @@ async function main() {
       stats.sourcesFailed.push({ id: src.id, reason: f.reason + (f.error ? (":" + f.error) : "") });
       process.stderr.write(`  跳过: ${f.reason}${f.error ? " " + f.error : ""}\n`);
       finishSource(false);
-      continue;
+      return;
     }
     stats.sourcesOk++;
 
@@ -160,14 +168,14 @@ async function main() {
       process.stderr.write("  304 未修改(条件请求命中),跳过\n");
       if (f.etag || f.lastModified) hashes[src.id] = Object.assign({}, hashes[src.id], { at: today, etag: f.etag || (hashes[src.id] && hashes[src.id].etag), lastModified: f.lastModified || (hashes[src.id] && hashes[src.id].lastModified) });
       finishSource(true);
-      continue;
+      return;
     }
     process.stderr.write(`  状态 ${f.status} · robots=${f.robots} · 正文 ${f.text.length} 字 · hash ${f.hash.slice(0, 12)}\n`);
 
     // --fetch-only:存样本,不提取
     if (hasFlag("--fetch-only")) {
       await writeFile(P("state", "samples", src.id + ".txt"), f.text, "utf8");
-      continue;
+      return;
     }
 
     // --no-hash-save:对照计时用。不读哈希缓存(强制完整重抓重提取),也不写回(不污染下次正常跑),
@@ -180,7 +188,7 @@ async function main() {
       process.stderr.write("  内容未变,跳过提取\n");
       hashes[src.id] = Object.assign({}, hashes[src.id], { at: today, etag: f.etag || hashes[src.id].etag, lastModified: f.lastModified || hashes[src.id].lastModified });
       finishSource(true);
-      continue;
+      return;
     }
     hashes[src.id] = { hash: f.hash, at: today, etag: f.etag || null, lastModified: f.lastModified || null };
     if (noHashSave) delete hashes[src.id]; // 对照计时:本轮不记缓存,下一源也不复用
@@ -310,6 +318,12 @@ async function main() {
     await batchPool(candidates, EXTRACT_CONCURRENT, processCand);
     finishSource(true);
   }
+
+  // 2026-08-23 提速:信源级有界并发 —— 替代原先"逐源串行"的 for 循环。多个信源同时"抓列表→抓详情→并发提取+溯源"。
+  // 同一时刻在途源数 = SOURCE_CONCURRENT;每源内部详情页并发 6、提取并发 EXTRACT_CONCURRENT,
+  // 峰值 LLM 并发 ≈ SOURCE_CONCURRENT × EXTRACT_CONCURRENT(默 3×4=12),总耗时 ≈ 各源实际耗时之和 / 并发卷绕,
+  // 远小于原"所有源串行累加"。并发安全见 processSource 内注释(JS 单线程,计数/预算为同步原子)。
+  await batchPool(sources, SOURCE_CONCURRENT, processSource);
 
   if (hasFlag("--fetch-only")) {
     process.stderr.write("\n[fetch-only] 原文样本已存到 state/samples/\n");
