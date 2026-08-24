@@ -16,7 +16,7 @@
     }
   },
   "generated_at": "2026-08-24",
-  "count": 1468,
+  "count": 1462,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -16799,51 +16799,6 @@
       "_fail_streak": 0
     },
     {
-      "id": "qinghai-msg-青海美术馆志愿者招募",
-      "category": "opencall",
-      "title_zh": "青海美术馆志愿者招募",
-      "title_en": null,
-      "org_zh": "青海美术馆",
-      "city_zh": "西宁",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "长期招募",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": "16周岁以上",
-        "nationality": null
-      },
-      "disciplines": [],
-      "summary_zh": "青海美术馆长期招募志愿者，要求热爱公益、有艺术认知，16周岁以上。服务时间分上午、下午、晚间。优秀志愿者可获实习岗位和证书。",
-      "url": "http://www.qhmsg.com.cn/about3/show.php?id=127",
-      "source_url": "http://www.qhmsg.com.cn/",
-      "domain": "qhmsg.com.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-21",
-      "cover": "http://www.qhmsg.com.cn/upload/202204/1651123370.png",
-      "cover_source": "qhmsg.com.cn",
-      "_fail_streak": 0
-    },
-    {
       "id": "search-laaa-2025年公开征集展",
       "category": "opencall",
       "title_zh": "2025年公开征集展",
@@ -20674,52 +20629,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "search-zwfw-new-岳阳市美术馆志愿者招募",
-      "category": "opencall",
-      "title_zh": "岳阳市美术馆志愿者招募",
-      "title_en": null,
-      "org_zh": "岳阳市美术馆",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "长期有效",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [],
-      "summary_zh": "岳阳市美术馆面向社会公开招募艺术志愿者，提供志愿者专业培训课程，参与幕后专业工作，享受就餐补助和交通津贴等福利。",
-      "url": "https://zwfw-new.hunan.gov.cn/onething/basic/city/whsw/xl_whhd.jsp?type=2&activity_id=3535",
-      "source_url": "https://zwfw-new.hunan.gov.cn/onething/basic/city/whsw/xl_whhd.jsp?type=2&activity_id=3535",
-      "domain": "zwfw-new.hunan.gov.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-26",
-      "_via": "search",
-      "_fail_streak": 0,
-      "cover": "assets/covers/1b0ed856d2073474.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "search-asifa-animage国际动画节征集正在进行中",
       "category": "opencall",
       "title_zh": "ANIMAGE国际动画节征集正在进行中",
@@ -21579,51 +21488,6 @@
       "_fail_streak": 0
     },
     {
-      "id": "cpaa-zhenggao-platform-中国摄影家协会征稿平台",
-      "category": "opencall",
-      "title_zh": "中国摄影家协会征稿平台",
-      "title_en": null,
-      "org_zh": "中国摄影家协会",
-      "city_zh": "未知",
-      "country_zh": "未知",
-      "deadline": null,
-      "deadline_note": "原文未提及截止时间",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "摄影"
-      ],
-      "summary_zh": "中国摄影家协会征稿平台，面向摄影艺术家征稿。",
-      "url": "https://zg.cpanet.cn/",
-      "source_url": "https://zg.cpanet.cn/",
-      "domain": "zg.cpanet.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-24",
-      "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24"
-    },
-    {
       "id": "search-threeshadows-影像策展创作计划",
       "category": "residency",
       "title_zh": "影像策展创作计划",
@@ -22092,53 +21956,6 @@
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/f01beacfdf7c112b.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-artmuseumonline-上海美术馆成立70周年-等待大家讲述温暖的独家记忆",
-      "category": "opencall",
-      "title_zh": "上海美术馆成立70周年 等待大家讲述温暖的独家记忆",
-      "title_en": null,
-      "org_zh": "中华艺术宫",
-      "city_zh": "上海",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "常年接受申请",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [],
-      "summary_zh": "上海美术馆成立70周年，面向广大观众征集关于上海美术馆的独家记忆，包括文字故事、影像记忆、创意slogan和实物珍藏。投稿方式包括扫码和邮箱。",
-      "url": "https://www.artmuseumonline.org/art/art/visitGuide/xwgg/2026/07/06/2c906d9b9e0127fe019f3aa095d6627a.html",
-      "source_url": "https://www.artmuseumonline.org/art/art/visitGuide/xwgg/2026/07/06/2c906d9b9e0127fe019f3aa095d6627a.html",
-      "domain": "artmuseumonline.org",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-30",
-      "_via": "search",
-      "first_seen": "2026-07-30",
-      "_fail_streak": 0,
-      "cover": "assets/covers/39cc6200ffc2b249.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -23984,53 +23801,6 @@
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/6473f6b9862732f1.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-bwg-兰州大学博物馆展览申办程序",
-      "category": "opencall",
-      "title_zh": "兰州大学博物馆展览申办程序",
-      "title_en": null,
-      "org_zh": "兰州大学博物馆",
-      "city_zh": "兰州",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [],
-      "summary_zh": "艺术家本人或办展单位向兰州大学博物馆提出申请，填写《兰州大学博物馆展览申请登记表》。提交艺术家的艺术简历、展览策划方案以及拟办展览的全部资料（含作品图片或画册）。应有我国地市级以上的文化部门作为主办单位，并提供该部门作为主办单位的信函原件或法人委托书。",
-      "url": "https://bwg.lzu.edu.cn/static/zlsb/",
-      "source_url": "https://bwg.lzu.edu.cn/static/zlsb/",
-      "domain": "bwg.lzu.edu.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-07-30",
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-30",
-      "_via": "search",
-      "_fail_streak": 0,
-      "cover": "assets/covers/db7534993e738c54.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -74956,53 +74726,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "artrabbit-opps-all-fine招聘驻店细线纹身艺术家",
-      "category": "job",
-      "title_zh": "FINE招聘驻店细线纹身艺术家",
-      "title_en": "Job opportunity for resident fine-line tattoo artists",
-      "org_zh": "FINE",
-      "city_zh": "Glasgow",
-      "country_zh": "United Kingdom",
-      "deadline": "2026-08-30",
-      "deadline_note": "Deadline 30 August 2026",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "细线纹身"
-      ],
-      "summary_zh": "FINE正在寻找有经验的细线纹身艺术家加入其新设计导向的纹身工作室和特色咖啡吧，该工作室将于今年秋季在格拉斯哥的肖兰兹开业。",
-      "url": "https://www.artrabbit.com/artist-opportunities/2026/august/job-opportunity-for-resident-fine-line-tattoo-arti",
-      "source_url": "https://www.artrabbit.com/artist-opportunities",
-      "domain": "artrabbit.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-15",
-      "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
-      "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
-      "cover_source": "artrabbit.com"
-    },
-    {
       "id": "artrabbit-opps-all-open-call-london-design-festival-2026-ev",
       "category": "opencall",
       "title_zh": "Open Call: London Design Festival 2026 | Everything Then Is Now II – PLATFORM 0",
@@ -88793,154 +88516,6 @@
       "updated_at": "2026-08-24"
     },
     {
-      "id": "caanet-bjbiennale-中国美术家协会个人会员入会细则",
-      "category": "opencall",
-      "title_zh": "中国美术家协会个人会员入会细则",
-      "title_en": null,
-      "org_zh": "中国美术家协会",
-      "city_zh": "北京市",
-      "country_zh": "中国",
-      "deadline": null,
-      "deadline_note": "原文未提及截止时间",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "版画",
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "跨媒介"
-      ],
-      "summary_zh": "中国美术家协会个人会员入会细则，包括申报条件、业绩积分标准、申报程序等内容。",
-      "url": "https://www.caanet.org.cn/Member.mx?id=4",
-      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=9815",
-      "domain": "caanet.org.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-24",
-      "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24"
-    },
-    {
-      "id": "shcdf-jjhdt-共绘-十五五-文化繁荣新画卷-上海文化发展基金会就今年项目资助答申报者问",
-      "category": "opencall",
-      "title_zh": "共绘“十五五”文化繁荣新画卷——上海文化发展基金会就今年项目资助答申报者问",
-      "title_en": null,
-      "org_zh": "上海文化发展基金会",
-      "city_zh": "未知",
-      "country_zh": "未知",
-      "deadline": null,
-      "deadline_note": "原文未提及截止时间",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "版画",
-        "绘画",
-        "雕塑",
-        "影像",
-        "装置",
-        "跨媒介"
-      ],
-      "summary_zh": "上海文化发展基金会就今年项目资助答申报者问，重点资助全面贯彻落实习近平总书记考察上海重要讲话精神和对文艺界重要指示精神、本市宣传思想文化工作会议部署要求，讴歌时代精神、抒发人民心声、与时代同频共振的精品佳作。",
-      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/6c885601-5202-425b-80c7-0cca9348d3f7.html",
-      "source_url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
-      "domain": "shcdf.org.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-24",
-      "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24"
-    },
-    {
-      "id": "shcdf-jjhdt-勇担文化新使命-再攀文艺新高峰-上海文化发展基金会就今年第二期项目资助答申报者问",
-      "category": "opencall",
-      "title_zh": "勇担文化新使命 再攀文艺新高峰 ——上海文化发展基金会就今年第二期项目资助答申报者问",
-      "title_en": null,
-      "org_zh": "上海文化发展基金会",
-      "city_zh": "未知",
-      "country_zh": "未知",
-      "deadline": null,
-      "deadline_note": "原文未提及截止时间",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "红色题材",
-        "现实题材",
-        "中华优秀传统文化",
-        "优秀IP跨艺术门类转化"
-      ],
-      "summary_zh": "上海文化发展基金会就今年第二期项目资助答申报者问，重点资助反映中国式现代化建设的重大题材文艺精品创作，包括红色题材、现实题材、中华优秀传统文化和优秀IP跨艺术门类转化的相关创作。",
-      "url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/content/cd22c90a-3174-41c1-ad8d-09bda2bf53ff.html",
-      "source_url": "https://www.shcdf.org.cn/shwhfzjjh/jjhdt/jjhdt.html",
-      "domain": "shcdf.org.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-24",
-      "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24"
-    },
-    {
       "id": "shcdf-jjhdt-守正创新-建设习近平文化思想最佳实践地-上海文化发展基金会二-二四年度第一期资助",
       "category": "opencall",
       "title_zh": "守正创新 建设习近平文化思想最佳实践地——上海文化发展基金会二〇二四年度第一期资助项目申报指南",
@@ -90540,6 +90115,159 @@
       "url": "https://www.cqwl.org/web/article/2026/07/17/1528699196386963456/web/content_1528699196386963456.html",
       "source_url": "https://www.cqwl.org/web/article/2026/07/17/1528699196386963456/web/content_1528699196386963456.html",
       "domain": "cqwl.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-24",
+      "last_seen": "2026-08-24",
+      "updated_at": "2026-08-24",
+      "_via": "search"
+    },
+    {
+      "id": "search-lnwyw-向海图强-辽宁沿海经济带六市美术作品联展",
+      "category": "opencall",
+      "title_zh": "向海图强——辽宁沿海经济带六市美术作品联展",
+      "title_en": null,
+      "org_zh": "辽宁省美术家协会",
+      "city_zh": "大连",
+      "country_zh": "中国",
+      "deadline": "2026-09-20",
+      "deadline_note": "投稿作者应于 9月20日前向所在市美协提交作品",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": false,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "水彩·粉画",
+        "综合材料绘画",
+        "宣传画",
+        "漫画",
+        "插图·连环画",
+        "钢笔画"
+      ],
+      "summary_zh": "为深入贯彻落实海洋强国战略，助力海洋强省建设，展示辽宁沿海经济带文化建设成果与艺术创作活力，特策划举办“向海图强——辽宁沿海经济带六市美术作品联展”。",
+      "url": "http://www.lnwyw.org.cn/gsgd/202605/t20260527_1359832.html",
+      "source_url": "http://www.lnwyw.org.cn/gsgd/202605/t20260527_1359832.html",
+      "domain": "lnwyw.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-24",
+      "last_seen": "2026-08-24",
+      "updated_at": "2026-08-24",
+      "_via": "search"
+    },
+    {
+      "id": "search-ahwl-关于举办安徽省第四届体育美术-书法和摄影作品展的通知",
+      "category": "opencall",
+      "title_zh": "关于举办安徽省第四届体育美术、书法和摄影作品展的通知",
+      "title_en": null,
+      "org_zh": "安徽省文学艺术界联合会",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": "2026-08-31",
+      "deadline_note": "即日起至2026年8月31日",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "本次展览面向本省作者征稿，作品以体育题材为主，包括美术、书法和摄影作品。投稿截止至2026年8月31日。",
+      "url": "http://www.ahwl.org.cn/wlgz/tzgg/202605/t20260522_1359731.html",
+      "source_url": "http://www.ahwl.org.cn/wlgz/tzgg/202605/t20260522_1359731.html",
+      "domain": "ahwl.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-24",
+      "last_seen": "2026-08-24",
+      "updated_at": "2026-08-24",
+      "_via": "search"
+    },
+    {
+      "id": "search-ahczwx-凤阳是个好地方-全国美术写生作品展征稿启事",
+      "category": "opencall",
+      "title_zh": "“凤阳是个好地方”全国美术写生作品展征稿启事",
+      "title_en": null,
+      "org_zh": "中共凤阳县委宣传部、滁州市美术家协会",
+      "city_zh": "凤阳县",
+      "country_zh": "中国",
+      "deadline": "2026-10-31",
+      "deadline_note": "2026年4月至2026年10月31日（以寄送地邮戳时间为准）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "油画",
+        "水彩（粉）",
+        "国画"
+      ],
+      "summary_zh": "为深入贯彻落实党的二十大和二十届历次全会精神，生动展现凤阳县深厚的历史文化、优美的自然生态、群众的幸福生活以及在新时代取得的辉煌成就，特举办“凤阳是个好地方”全国美术写生作品展，现面向全国征稿。",
+      "url": "https://ahczwx.org/sxwl/fy/9270.html",
+      "source_url": "https://ahczwx.org/sxwl/fy/9270.html",
+      "domain": "ahczwx.org",
       "org_type": "official",
       "trust": "auto",
       "status": "open",
