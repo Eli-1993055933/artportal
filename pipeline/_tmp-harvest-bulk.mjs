@@ -17,7 +17,7 @@ const DATA = join(__dir, "..", "site", "data", "opportunities.json");
 const P = s => join(__dir, s);
 
 const CONCURRENT_SOURCES = 5;  // 同时跑 5 个不同域名源
-const CONCURRENT_EXTRACT = 3;  // 提取并发数
+const CONCURRENT_EXTRACT = 1;  // 提取并发数(降为1:GLM 免费档并发易 429,串行最稳)
 const DETAIL_CAP = 10;         // 每源最多详情页
 const args = process.argv.slice(2);
 const getOpt = f => { const i = args.indexOf(f); return i !== -1 ? args[i + 1] : null; };

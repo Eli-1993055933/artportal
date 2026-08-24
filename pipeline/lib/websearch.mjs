@@ -290,18 +290,24 @@ async function serperSearchFull(query, opts) {
 // 结果页顶部固定白名单(必应导航/备案/百度百科兜底)直接过滤,避免污染机会链接
 const BING_NAV = /bing\.com|microsoft\.com|msn\.com|miit\.gov\.cn|beian\b|baike\.baidu\.com|go\.microsoft\.com|javascript:|^#|^\//;
 
+// 必应免费兜底改用 RSS 端点(www.bing.com/search?format=rss):
+// 2026-08-24 起 cn.bing.com 的 HTML 结果页对脚本返回空壳(内嵌 CSS、无 b_algo),旧的 <a> 正则抽不到任何链接;
+// format=rss 仍返回干净的 <item><title>/<link></item>,免费且绕开 bot 空壳页。注意:www.bing.com + mkt=zh-CN 有效,cn.bing.com 的 RSS 为空。
+function bingRssUrl(query) {
+  return "https://www.bing.com/search?format=rss&mkt=zh-CN&q=" + encodeURIComponent(query);
+}
 async function bingFetch(htmlUrl) {
   const res = await fetch(htmlUrl, { headers: { "User-Agent": BROWSER_UA, "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8" }, signal: AbortSignal.timeout(12000) });
   if (!res.ok) throw new Error("bing " + res.status);
   return await res.text();
 }
 
-// 从必应结果页抽真实绝对链接(回链接数组)
+// 从必应 RSS 抽真实绝对链接(回链接数组)。BING_NAV 顺带剔掉 RSS 频道自身的 bing 链接。
 async function bingSearch(query) {
   try {
-    const html = await bingFetch("https://cn.bing.com/search?q=" + encodeURIComponent(query));
+    const xml = await bingFetch(bingRssUrl(query));
     const out = [];
-    for (const m of html.matchAll(/<a\s+href="(https?:\/\/[^"]+)"[^>]*>/g)) {
+    for (const m of xml.matchAll(/<link>([^<]+)<\/link>/g)) {
       const u = m[1].replace(/&amp;/g, "&");
       if (!/^https?:\/\//.test(u) || BING_NAV.test(u)) continue;
       if (!out.includes(u)) out.push(u);
@@ -311,15 +317,14 @@ async function bingSearch(query) {
   } catch (e) { return []; }
 }
 
-// 必应全量(标题+链接),免费兜底用。
+// 必应全量(标题+链接),免费兜底用(RSS 的 <item> 块含 <title> 与 <link>)。
 async function bingSearchFull(query) {
   try {
-    const html = await bingFetch("https://cn.bing.com/search?q=" + encodeURIComponent(query));
+    const xml = await bingFetch(bingRssUrl(query));
     const out = [];
-    // <h2><a href="...">标题</a></h2> —— 必应结果标准结构
-    for (const m of html.matchAll(/<h2[^>]*>\s*<a[^>]+href="(https?:\/\/[^"]+)"[^>]*>([\s\S]*?)<\/a><\/h2>/g)) {
-      const link = m[1].replace(/&amp;/g, "&");
-      const title = String(m[2] || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 200);
+    for (const it of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
+      const link = (it[1].match(/<link>([^<]+)<\/link>/) || ["", ""])[1].replace(/&amp;/g, "&");
+      const title = (it[1].match(/<title>([^<]*)<\/title>/) || ["", ""])[1].trim().slice(0, 200);
       if (!/^https?:\/\//.test(link) || BING_NAV.test(link)) continue;
       if (!title) continue;
       out.push({ title, link });
