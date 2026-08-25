@@ -72,12 +72,13 @@
     .nav button { flex: none; padding: 7px 12px; }
     .side__foot { display: none; }
     .main { padding: 14px 12px 50px; }
+    body { overflow-x: hidden; }
     .searchbox { width: 100%; }
     .count { margin-left: 0; width: 100%; }
-    /* 手机端:保留常规横排列表(信息密度优先),窄屏靠横向滚动;仅缩小贴点与字号 */
-    .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #2a2e36; border-radius: 10px; background: #16181c; }
-    table { min-width: 640px; }
-    th, td { font-size: 12px; padding: 5px 8px; }
+    /* 手机端:不横向滚动,让表格自适应容器宽+单元格换行,所有列一屏可见;字体/间距再收紧 */
+    .scroll { overflow: visible; border: 1px solid #2a2e36; border-radius: 10px; background: #16181c; }
+    table { min-width: 0; width: 100%; }
+    th, td { font-size: 11px; padding: 4px 6px; white-space: normal; word-break: break-word; }
   }
   .sumprev:empty { display: none; }
   .sumprev { margin-top: 18px; padding: 18px 20px; border: 1px solid #2a2e36; border-radius: 12px; background: #14161b; max-width: 760px; line-height: 1.7; }

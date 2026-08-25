@@ -1,6 +1,6 @@
 {
   "name": "artportal-pipeline",
-  "version": "1.26.5",
+  "version": "1.26.6",
   "private": true,
   "type": "module",
   "description": "ArtPortal 数据管道:抓取机构官网/RSS → AI 提取 → 程序校验 → 更新 site/data/opportunities.json",
