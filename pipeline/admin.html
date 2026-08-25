@@ -31,24 +31,24 @@
   .nav button:hover { background: #1d2026; color: #e8e8e6; }
   .nav button.is-active { background: #23272e; color: #fff; font-weight: 600; }
   .side__foot { margin-top: auto; padding: 10px 12px; font-size: 11px; color: #666b75; }
-  .main { flex: 1; min-width: 0; padding: 20px 22px 60px; }
-  .sec__title { font-size: 16px; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
+  .main { flex: 1; min-width: 0; padding: 16px 18px 50px; }
+  .sec__title { font-size: 15px; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
   /* 概览卡 */
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-bottom: 22px; }
-  .card { background: #1d2026; border: 1px solid #2a2e36; border-radius: 10px; padding: 12px 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: 8px; margin-bottom: 14px; }
+  .card { background: #1d2026; border: 1px solid #2a2e36; border-radius: 10px; padding: 9px 12px; }
   .card .k { font-size: 12px; color: #8b8f98; }
-  .card .v { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .card .v { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 1px; }
   .card .v.hot { color: #7ee08a; }
-  h2 { font-size: 14px; color: #aab; margin: 24px 0 10px; }
+  h2 { font-size: 14px; color: #aab; margin: 14px 0 6px; }
   /* 工具条:搜索 + 过滤 chips + 计数 */
-  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
   .searchbox { width: 250px; max-width: 100%; height: 34px; border-radius: 8px; border: 1px solid #333; background: #1d2026; color: #fff; padding: 0 10px; font-size: 13px; }
   .fchip { border: 1px solid #2a2e36; background: #1d2026; color: #aab; font-size: 12px; padding: 5px 12px; border-radius: 999px; cursor: pointer; }
   .fchip.is-active { background: #e8e8e6; color: #14161a; border-color: #e8e8e6; font-weight: 600; }
   .count { font-size: 12px; color: #8b8f98; margin-left: auto; }
   /* 表格 */
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #2a2e36; white-space: nowrap; }
+  th, td { text-align: left; padding: 6px 9px; border-bottom: 1px solid #2a2e36; white-space: nowrap; }
   th { color: #8b8f98; font-weight: 500; font-size: 12px; position: sticky; top: 0; background: #1d2026; }
   td.mono { font-variant-numeric: tabular-nums; color: #aab; }
   .scroll { overflow-x: auto; border: 1px solid #2a2e36; border-radius: 10px; background: #1d2026; }
@@ -1565,15 +1565,15 @@
   }
   function renderPie(comp) {
     var el = $("stPie"), leg = $("stPieLegend"); el.innerHTML = ""; leg.innerHTML = "";
-    el.style.display = "flex"; el.style.gap = "26px"; el.style.alignItems = "flex-start"; el.style.flexWrap = "wrap";
+    el.style.cssText = "display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap";
     var colors = "#5b8a72,#7eb8e0,#d4a05b,#b48ad4,#e06f6f,#6fb8c0,#9ac264,#c97ba6,#e8997e,#7ea8c2".split(",");
     if (!comp) { el.textContent = "暂无数据"; return; }
-    // 单张环形图:viewBox 按实际占用放大到 110×110,圆心/半径/环宽按比例取,保证不会被裁切
+    // 单张环形图:viewBox 110×110,圆心/半径/环宽按比例取,保证不会被裁切;手机端并排不换行不错位
     function donut(data) {
-      var size = 110, C = size / 2, R = size * 0.34, th = size * 0.16;
+      var size = 100, C = size / 2, R = size * 0.34, th = size * 0.16;
       var arr = (data || []).filter(function (d) { return d.n > 0; });
       var total = arr.reduce(function (s, d) { return s + d.n; }, 0);
-      if (!total) return '<div class="muted" style="font-size:12px">暂无数据</div>';
+      if (!total) return '<div class="muted" style="font-size:11px">暂无数据</div>';
       var seg = [], acc = 0;
       arr.forEach(function (d, ci) {
         var frac = d.n / total, a0 = acc * Math.PI * 2, a1 = (acc + frac) * Math.PI * 2;
@@ -1582,25 +1582,33 @@
         var x0 = C + R * Math.cos(a0), y0 = C + R * Math.sin(a0), x1 = C + R * Math.cos(a1), y1 = C + R * Math.sin(a1);
         seg.push('<path d="M' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A' + R + ' ' + R + ' 0 ' + large + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + '" fill="none" stroke="' + colors[ci % colors.length] + '" stroke-width="' + th + '" opacity="0.92"/>');
       });
-      return '<div style="text-align:center"><svg viewBox="0 0 ' + size + ' ' + size + '" style="width:' + size + 'px;height:' + size + 'px;transform:rotate(-90deg)">' + seg.join("") + '</svg></div>';
+      return '<svg viewBox="0 0 ' + size + ' ' + size + '" style="width:' + size + 'px;height:' + size + 'px;display:block;margin:0 auto;transform:rotate(-90deg)">' + seg.join("") + '</svg>';
     }
-    function block(label, data) {
+    // 每个维度:标题 + 环图(并排一行,尺寸统一→手机端也整整齐齐)
+    function sec(label, data) {
       var wrap = document.createElement("div");
-      wrap.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:8px;min-width:140px";
-      var t = document.createElement("div"); t.style.cssText = "font-size:12.5px;color:#cdd2da;font-weight:600";
-      t.textContent = label + " (" + (data || []).reduce(function (s, d) { return s + d.n; }, 0) + ")";
+      wrap.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:3px;flex:none";
+      var n = (data || []).reduce(function (s, d) { return s + d.n; }, 0);
+      var t = document.createElement("div"); t.style.cssText = "font-size:11.5px;color:#cdd2da;font-weight:600;white-space:nowrap";
+      t.textContent = label + (n ? " (" + n + ")" : "");
       wrap.appendChild(t);
-      var holder = document.createElement("div"); holder.innerHTML = donut(data); wrap.appendChild(holder.firstChild);
-      var items = document.createElement("div"); items.className = "muted"; items.style.cssText = "text-align:center;font-size:11.5px;line-height:1.7";
-      (data || []).forEach(function (d) { var r = document.createElement("div"); r.textContent = d.label + ": " + d.n; items.appendChild(r); });
-      wrap.appendChild(items);
-      el.appendChild(wrap);
+      var holder = document.createElement("div"); holder.appendChild(donutNode(donut(data))); wrap.appendChild(holder);
+      return wrap;
     }
-    block("性别", comp.gender || []);
-    block("年龄", comp.age || []);
-    block("地区(前8)", (comp.region || []).slice(0, 8));
-    var totalEl = document.createElement("div"); totalEl.className = "muted"; totalEl.style.cssText = "font-size:12px;margin-top:6px";
-    totalEl.textContent = "注册用户合计 " + (comp.total || 0) + " · 下列数据仅含已填资料/有属地的用户";
+    function donutNode(html) { var t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; }
+    el.appendChild(sec("性别", comp.gender || []));
+    el.appendChild(sec("年龄", comp.age || []));
+    el.appendChild(sec("地区(前8)", (comp.region || []).slice(0, 8)));
+    // 图例:紧凑网格(手机2列,桌面3+列),不再和环图抢高度错位
+    leg.style.cssText = "width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 16px;font-size:11px;color:#8b8f98;margin-top:8px;align-items:start";
+    function legItems(label, data) {
+      (data || []).forEach(function (d) { var r = document.createElement("div"); r.textContent = label + " · " + d.label + ": " + d.n; leg.appendChild(r); });
+    }
+    legItems("性别", comp.gender || []);
+    legItems("年龄", comp.age || []);
+    legItems("地区", (comp.region || []).slice(0, 8));
+    var totalEl = document.createElement("div"); totalEl.className = "muted"; totalEl.style.cssText = "font-size:11px;margin-top:6px;grid-column:1/-1";
+    totalEl.textContent = "注册用户合计 " + (comp.total || 0) + " · 仅含已填资料/有属地的用户";
     leg.appendChild(totalEl);
   }
 
