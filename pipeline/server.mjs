@@ -1719,32 +1719,68 @@ function sendWeeklyTo(report, email) {
   });
 }
 // 群发状态(单例:同一时间只跑一场;断点续发靠 newsletter_sends 里的成功记录)
-const nlState = { running: false, wid: null, done: 0, ok: 0, total: 0 };
+//
+// —— 分批发送(2026-08 起):个人 QQ SMTP 连续发会被「535 login frequency」临时风控。
+//   所以群发改成【分批 + 分时段 + 自动续发】的常驻引擎,完全自动、无需人工盯:
+//     · 每批最多 NEWSLETTER_BATCH 封(默认 15),批内逐封限速 NEWSLETTER_SEND_DELAY_MS;
+//     · 每发完一批歇 NEWSLETTER_BATCH_GAP_MS(默认 30 分),把发送摊到周一不同时段,降低被风控概率;
+//     · 一旦某封命中风控(535)就把这封放回去(不算成功也不算失败),冷却
+//       NEWSLETTER_COOLDOWN_MS(默认 30 分)后自动重试,直到 QQ 解除限制再继续后面剩下的;
+//     · 中途服务重启也不怕:成功记录已落库,每周一的 hourly tick 会断点续发剩下没发的。
+const nlState = { running: false, wid: null, done: 0, ok: 0, total: 0, pending: 0, phase: "idle", coolUntil: 0 };
+const NL_BATCH = Math.max(1, Number(process.env.NEWSLETTER_BATCH || 15));
+const NL_EMAIL_GAP = Math.max(2000, Number(process.env.NEWSLETTER_SEND_DELAY_MS || 6000));
+const NL_BATCH_GAP = Math.max(0, Number(process.env.NEWSLETTER_BATCH_GAP_MS || 30 * 60 * 1000));
+const NL_COOL_MS = Math.max(30 * 1000, Number(process.env.NEWSLETTER_COOLDOWN_MS || 30 * 60 * 1000));
+function rateLimited(err) {
+  const s = String(err && (err.message || err) || "");
+  return /535|login|frequency|限流|风控|abnormal/i.test(s);
+}
 async function sendWeeklyBulk(report) {
   const audience = auth.newsletterAudience();
   const sent = await db.nlSentSet(report.id);
   const targets = audience.filter(a => !sent.has(a.email));
-  nlState.running = true; nlState.wid = report.id; nlState.done = 0; nlState.ok = 0; nlState.total = targets.length;
-  process.stderr.write(`[周报] 群发开始 ${report.id}:订阅 ${audience.length},本轮待发 ${targets.length}\n`);
-  for (const t of targets) {
+  if (!targets.length) { process.stderr.write(`[周报] ${report.id} 已全部发完,无需再发\n`); return; }
+  nlState.running = true; nlState.wid = report.id; nlState.done = 0; nlState.ok = 0;
+  nlState.total = targets.length; nlState.pending = targets.length; nlState.phase = "sending"; nlState.coolUntil = 0;
+  process.stderr.write(`[周报] 分批群发开始 ${report.id}:待发 ${targets.length}(每批≤${NL_BATCH} 封, 批间隔 ${Math.round(NL_BATCH_GAP / 60000)} 分, 风控冷却 ${Math.round(NL_COOL_MS / 60000)} 分) 逐封 ${NL_EMAIL_GAP}ms\n`);
+  let batchOk = 0;
+  for (let i = 0; i < targets.length; i++) {
+    // 批间暂停:本批已发满且还有剩下,先把发送摊到下一个时段,降低连续发送被风控的概率
+    if (batchOk >= NL_BATCH) {
+      batchOk = 0;
+      nlState.phase = "wait-batch";
+      await new Promise(r => setTimeout(r, NL_BATCH_GAP));
+      nlState.phase = "sending";
+    }
+    const t = targets[i];
     try {
       await sendWeeklyTo(report, t.email);
       await db.nlLogSend(report.id, t.email, true, null);
-      nlState.ok++;
+      batchOk++; nlState.ok++;
     } catch (e) {
+      if (rateLimited(e)) {
+        // 风控命中:这封不记成功也不记失败,放进冷却,解除后再补发(批计数清空、放慢节奏)
+        nlState.phase = "cooling";
+        process.stderr.write(`[周报] 命中风控(${t.email}):${String(e.message || e).slice(0, 80)}… 冷却 ${Math.round(NL_COOL_MS / 60000)} 分后自动补发(累计已发 ${nlState.ok}/${targets.length})\n`);
+        await new Promise(r => setTimeout(r, NL_COOL_MS));
+        nlState.coolUntil = Date.now() + NL_COOL_MS;
+        nlState.phase = "sending";
+        batchOk = 0;
+        i--;          // 回到这封,解除后再发
+        continue;
+      }
       await db.nlLogSend(report.id, t.email, false, e.message);
       process.stderr.write(`[周报] 发送失败 ${t.email}: ${String(e.message || e).slice(0, 100)}\n`);
     }
     nlState.done++;
-    // 逐封限速:对 SMTP 服务商客气,防触发风控。可用 .env 的 NEWSLETTER_SEND_DELAY_MS 调。
-    // ★ 2026-08-01 实测:个人 QQ 邮箱在 3 秒/封下发到第 18 封就被
-    //   「535 Login fail... login frequency limited」拦停(那次是 86 封的问卷群发);
-    //   拉到 25 秒/封后 68 封零失败。量大或刚发过信时,务必调高这个值。
-    await new Promise(r => setTimeout(r, Math.max(1000, Number(process.env.NEWSLETTER_SEND_DELAY_MS || 3000))));
+    await new Promise(r => setTimeout(r, NL_EMAIL_GAP));
   }
-  process.stderr.write(`[周报] 群发结束 ${report.id}:成功 ${nlState.ok}/${nlState.total}\n`);
-  db.agentLog({ agent: "postman", ok: nlState.ok === nlState.total, summary: `群发 ${report.id}:成功 ${nlState.ok}/${nlState.total}`, metrics: { wid: report.id, ok: nlState.ok, total: nlState.total } }).catch(() => {});
+  nlState.pending = targets.length - nlState.ok;
+  process.stderr.write(`[周报] 分批群发结束 ${report.id}:成功 ${nlState.ok}/${targets.length},待发 ${nlState.pending}${nlState.pending ? "(下轮流派续发)" : "(全部完成)"}\n`);
+  db.agentLog({ agent: "postman", ok: nlState.pending === 0, summary: `分批群发 ${report.id}:成功 ${nlState.ok}/${targets.length}${nlState.pending ? ",待续 " + nlState.pending : ""}`, metrics: { wid: report.id, ok: nlState.ok, total: targets.length, pending: nlState.pending } }).catch(() => {});
   nlState.running = false;
+  nlState.phase = nlState.pending === 0 ? "done" : "idle";
 }
 // 每周自动出刊:.env 设 WEEKLY_REPORT=1 开启 —— 每小时看一眼,北京时间周一 9 点后本周还没出就生成;
 // 生成后若 NEWSLETTER_AUTO=1 且群发闸(NEWSLETTER_BULK=1)已开、发信已配置,则自动群发(备案后的全自动形态)。
