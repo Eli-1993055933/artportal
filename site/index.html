@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.24.0" />
+<meta name="app-version" content="1.25.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.24.0</span></div>
+  ARTPORTAL <span id="appVer">v1.25.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.24.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.24.0"></script>
-<script src="js/globe-data.js?v=1.24.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.25.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.25.0"></script>
+<script src="js/globe-data.js?v=1.25.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1723,8 +1723,8 @@
       peWebsite:'个人网站(https:// 开头)',peBio:'个人简介',peFavPub:'公开我的收藏',peNlK:'订阅周报',
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
       cropTitle:'调整头像裁切',cropHint:'拖动方框移动,拖右下角手柄或滚轮缩放',cropCancel:'取消',cropConfirm:'确认裁切',
-      cpT:'完善资料',cpNote:'设置一个昵称就能开始使用(头像不传会自动生成)。不想现在设置?可直接退出登录。',
-      cpSave:'保存并开始使用',cpNeedNick:'昵称至少 2 个字',
+      cpT:'完善资料',cpNote:'设置昵称并上传一张真实头像即可开始使用,未补齐前无法继续。不想现在完善?可退出登录。',
+      cpSave:'保存并开始使用',cpNeedNick:'昵称至少 2 个字',cpNeedAva:'请上传一张头像图片（不可使用初始首字母头像）',
       imgReady:' 张已就绪',studioT:'画室点评工具',
       ipLoc:'IP属地',ipPin:'落点=作者IP属地',viewImgs:'查看大图 ↗',
       tagAll:'全部门类',allCat:'全部',fFree:'免费申请',fStipend:'含津贴',fHousing:'含住宿',fTravel:'报销路费',
@@ -1806,8 +1806,8 @@
       peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
       cropTitle:'Crop avatar',cropHint:'Drag box to move, drag bottom-right handle or scroll to zoom',cropCancel:'Cancel',cropConfirm:'Confirm crop',
-      cpT:'Finish your profile',cpNote:'Pick a nickname to get started (an avatar is auto-generated if you skip it). Not now? You can sign out.',
-      cpSave:'Save and start',cpNeedNick:'Nickname needs 2+ characters',
+      cpT:'Finish your profile',cpNote:'Pick a nickname and upload a real avatar to get started. You cannot continue until both are done. Not now? You can sign out.',
+      cpSave:'Save and start',cpNeedNick:'Nickname needs 2+ characters',cpNeedAva:'Please upload an avatar (initial-based avatars are not allowed)',
       imgReady:' ready',studioT:'Studio critique tool',
       ipLoc:'IP region',ipPin:'Pinned by IP region',viewImgs:'View images ↗',
       tagAll:'All fields',allCat:'All',fFree:'Free apply',fStipend:'Stipend',fHousing:'Housing',fTravel:'Travel',
@@ -2219,17 +2219,8 @@
     (function next(){ if(i>=files.length||out.length>=limit){ cb(out); return; }
       shrinkImg(files[i++],max,q,function(d){ if(d) out.push(d); next(); }); })(); }
   // —— 登录/注册(邮箱验证码,同老站链路) ——
-  // 默认头像(首字+色块,画布生成)——补全时没上传就自动给一个,用户永不被卡住
-  function genDefaultAvatar(name){
-    var c=document.createElement('canvas'); c.width=c.height=256; var g=c.getContext('2d');
-    var cols=['#C0392B','#2E6FA7','#C08A1E','#6B5B95','#3A7D44','#2A7F7A','#B0578D'];
-    var ch=String(name||'A').trim().charAt(0)||'A';
-    g.fillStyle=cols[ch.charCodeAt(0)%cols.length]; g.fillRect(0,0,256,256);
-    g.fillStyle='#fff'; g.font='700 132px -apple-system,"PingFang SC",sans-serif';
-    g.textAlign='center'; g.textBaseline='middle'; g.fillText(ch.toUpperCase(),128,140);
-    return c.toDataURL('image/jpeg',0.85); }
-  // 强制资料补全(v0.92.2 恢复,地球迁移丢失):登录后缺昵称/头像 → 弹此窗;
-  //   昵称必填,头像可上传或"生成默认",保存即解锁;底部「退出登录」逃生口(修"退不出去"的核心 bug)
+  // 强制资料补全:登录后缺昵称/头像 → 弹此窗(不可关闭,底部「退出登录」逃生口);
+  //   昵称必填、头像必须上传真实图片(不再自动生成首字母头像),保存即解锁。
   function completeProfile(){
     var newAva=null;
     var m=modal('<h3>'+L('cpT')+'</h3><p class="note">'+L('cpNote')+'</p>'+
@@ -2245,9 +2236,10 @@
     m.querySelector('#cpGo').addEventListener('click',function(){
       var nk=m.querySelector('#cpN').value.trim(), err=m.querySelector('#cpE'), b=this;
       if(nk.length<2){ err.textContent=L('cpNeedNick'); return; }
-      var ava=newAva||(meUser&&meUser.avatar)||genDefaultAvatar(nk);   // 没上传就自动生成,不卡人
+      var haveAva=!!newAva||!!(meUser&&meUser.avatar);
+      if(!haveAva){ err.textContent=L('cpNeedAva'); return; }   // 头像必传:不自动生成首字母,必须上传真实图片
       b.disabled=true;
-      postJ('/api/auth/profile',{nickname:nk,avatar:ava}).then(function(r){ b.disabled=false;
+      postJ('/api/auth/profile',{nickname:nk,avatar:newAva||''}).then(function(r){ b.disabled=false;
         if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
         location.reload(); }).catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); });
     m.querySelector('#cpOut').addEventListener('click',function(){
@@ -3265,7 +3257,7 @@
     d3.selectAll('#chn .ch').classed('on',function(){ return this.getAttribute('data-ch')==='globe'; }); });
   document.getElementById('btnLogin').addEventListener('click',function(){
     if(!meUser){ openAuth('login'); return; }
-    if(!meUser.nickname||!meUser.avatar){ completeProfile(); return; }   // 资料不全:走补全窗(否则撞 404 主页,退不出去)
+    if(!meUser.nickname||!meUser.avatar){ completeProfile(); return; }   // 资料不全(缺昵称/头像):走补全窗,强制真实头像(不自动生成)
     openProfile(meUser.id); });
   // 用户检索(/api/users/search):输入即搜,点结果在浮层内切换主页
   var uqTimer=null;

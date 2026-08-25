@@ -542,7 +542,7 @@ export async function setProfile(req, body, ip) {
   }
   // 头像:必须有(新传的 base64,或此前已设置过)
   const avatar = typeof (body || {}).avatar === "string" ? body.avatar : "";
-  if (!avatar && !u.avatar) return { code: 400, body: { error: "请设置头像(上传图片或使用默认头像)" } };
+  if (!avatar && !u.avatar) return { code: 400, body: { error: "请上传一张头像图片" } };
   if (avatar) {
     if (!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(avatar) || avatar.length > 300000) {
       return { code: 400, body: { error: "头像图片无效或过大" } };
