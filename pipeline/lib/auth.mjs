@@ -804,6 +804,20 @@ export function adminUsers() {
   }));
   return { code: 200, body: { total: list.length, users: list } };
 }
+// 用户完整档案(admin 专用):比列表多出属地/资料/收藏明细/订阅标志,供「点名字看档案」用
+export function adminUserDetail(uid) {
+  const u = users.find(x => x.id === uid);
+  if (!u) return null;
+  const p = u.profile || {};
+  return {
+    id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null),
+    nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at, last_seen: u.last_seen,
+    verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio, newsletter: !!u.newsletter,
+    ip_region: u.ip_region || null, fav_count: (u.favorites || []).length,
+    bio: p.bio || "", identity: p.identity || "", location: p.location || "", website: p.website || "", fields: p.fields || "",
+    favorites: u.favorites || []
+  };
+}
 // 画室工具授权(v0.92.0):按用户持久标志,默认关;仅管理员可改、管理员本人恒开。
 export function studioEnabled(uid) {
   const u = users.find(x => x.id === uid);

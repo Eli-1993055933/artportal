@@ -84,6 +84,25 @@
   .sumprev p { margin: 0 0 10px; color: #c2c7d0; }
   .sumprev b { color: #7eb8e0; font-weight: 600; }
   .sumprev p.mono { font-size: 12.5px; color: #8b93a1; }
+  /* 详情抽屉浮层(v0.101.0):点用户/区域经理卡片弹出的右侧面板 */
+  .ovl { position: fixed; inset: 0; background: rgba(8,10,14,.62); z-index: 60; display: flex; align-items: flex-start; justify-content: flex-end; }
+  .ovl__panel { width: min(720px, 100vw); height: 100vh; background: #171a20; border-left: 1px solid #2a2e36; overflow-y: auto; padding: 20px 24px 60px; }
+  .ovl__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .ovl__title { font-size: 15px; font-weight: 700; }
+  .ovl__sub { font-size: 12px; color: #8b8f98; }
+  .ovl__close { border: 1px solid #2a2e36; background: #1d2026; color: #aab; border-radius: 8px; padding: 5px 12px; cursor: pointer; }
+  .ovl__close:hover { color: #fff; }
+  .ovl h3 { font-size: 13px; color: #aab; margin: 20px 0 8px; }
+  .ovl .kv { font-size: 12.5px; color: #c7ccd6; margin: 4px 0; }
+  .ovl .kv b { color: #8b8f98; font-weight: 500; margin-right: 6px; }
+  .ovl .tl { display: flex; gap: 10px; align-items: baseline; font-size: 12.5px; padding: 6px 0; border-bottom: 1px solid #2a2e36; }
+  .ovl .tl .t { color: #8b8f98; font-variant-numeric: tabular-nums; flex: none; min-width: 116px; }
+  .ovl .tl .ty { flex: none; width: 64px; color: #7eb8e0; }
+  .ovl .tl .d { color: #d7dbe2; word-break: break-all; }
+  /* 图表容器与图例 */
+  .chart-wrap { background: #1d2026; border: 1px solid #2a2e36; border-radius: 10px; padding: 14px 16px 10px; margin-bottom: 14px; }
+  .chart-legend { font-size: 11px; color: #8b8f98; margin-top: 6px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .chart-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
 </style>
 </head>
 <body>
@@ -134,6 +153,10 @@
       <section data-sec="stats" hidden>
         <h1 class="sec__title">数据 <span class="muted" style="font-size:12px">(自托管埋点:进站/看详情/去官网/收藏/读周刊;近 14 天)</span></h1>
         <div class="cards" id="stCards"></div>
+        <h2>日活 / 每日新增注册 <span class="muted" style="font-size:12px">近 14 天折线</span></h2>
+        <div class="chart-wrap"><div id="stLine" style="width:100%"></div></div>
+        <h2>行为构成 <span class="muted" style="font-size:12px">近 14 天各行为占比</span></h2>
+        <div class="chart-wrap" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><div id="stPie" style="flex:none"></div><div class="chart-legend" id="stPieLegend" style="flex:1;min-width:200px"></div></div>
         <h2>近 14 天独立访客</h2>
         <div id="stBars" style="display:flex;align-items:flex-end;gap:6px;height:130px;padding:6px 2px 0"></div>
         <div class="scroll" style="margin-top:10px"><table id="stDayTbl"><thead><tr><th>日期</th><th>访客</th><th>进站</th><th>看详情</th><th>去官网</th><th>收藏</th><th>检索</th><th>读周刊</th><th>评论</th><th>注册</th></tr></thead><tbody></tbody></table></div>
@@ -331,6 +354,11 @@
         <div class="pager" id="userPager"></div>
       </section>
     </main>
+  </div>
+
+  <!-- 详情抽屉浮层(v0.101.0):点用户/区域经理卡片时挂载到这里 -->
+  <div class="ovl" id="ovl" hidden>
+    <div class="ovl__panel" id="ovlPanel"></div>
   </div>
 <script>
 (function () {
@@ -542,7 +570,14 @@
             setTimeout(renderRegions, 60000);
           }).catch(function (e) { $("rgMsg").textContent = "排班失败:" + e.message; btn.disabled = false; });
         };
-        c.appendChild(h); c.appendChild(sub); c.appendChild(last); c.appendChild(btn);
+        var viewBtn = document.createElement("button");
+        viewBtn.className = "fchip"; viewBtn.style.cssText = "margin-top:8px;margin-left:6px;font-size:12px";
+        viewBtn.textContent = "查看入库";
+        viewBtn.title = "看「" + m.zh + "」在档期内实际入库了哪些机会";
+        viewBtn.onclick = function () { openRegionOpps(m.id, m.zh + " · 共入库 " + (s.added || 0) + " 条"); };
+        var btns = document.createElement("div"); btns.style.display = "flex";
+        btns.appendChild(btn); btns.appendChild(viewBtn);
+        c.appendChild(h); c.appendChild(sub); c.appendChild(last); c.appendChild(btns);
         box.appendChild(c);
       });
     }).catch(function (e) { $("rgMsg").textContent = "读取失败:" + e.message; });
@@ -958,10 +993,15 @@
     paginate(list, st.users, $("userPager"), function (u) {
       var tr = document.createElement("tr");
       var av = document.createElement("td");
+      av.style.cssText = "cursor:pointer"; av.title = "点击查看完整档案与行为记录";
       if (u.avatar) { var im = document.createElement("img"); im.src = "/" + u.avatar; im.style.cssText = "width:26px;height:26px;border-radius:50%;object-fit:cover;display:block"; av.appendChild(im); }
       else av.textContent = "—";
+      av.addEventListener("click", function () { openUserDetail(u.id); });
       tr.appendChild(av);
-      tr.appendChild(td(u.nickname || "(未设置)", u.nickname ? "" : "muted"));
+      var nickTd = td(u.nickname || "(未设置)", u.nickname ? "" : "muted");
+      nickTd.style.cssText = "cursor:pointer;color:#7eb8e0"; nickTd.title = "点击查看完整档案与行为记录";
+      nickTd.addEventListener("click", function () { openUserDetail(u.id); });
+      tr.appendChild(nickTd);
       tr.appendChild(td(u.email || "—", u.email ? "" : "muted"));
       tr.appendChild(td(u.phone_masked || "—", u.phone_masked ? "" : "muted"));   // 手机号掩码(实名);未绑显示 —
       // 邮箱验证:验证码注册的 ✓;发信启用前注册的老账号显示 —(仅弱校验)
@@ -1336,6 +1376,8 @@
     }
     var days = stData.days || [];
     var w7 = days.slice(-7);
+    var lineEl = $("stLine"), pieEl = $("stPie"), pieLeg = $("stPieLegend");
+    if (lineEl.parentElement) { renderLineChart(days); renderPie(days); }
     function sum(k) { var n = 0; w7.forEach(function (d) { n += d[k] || 0; }); return n; }
     var box = $("stCards"); box.textContent = "";
     [["近7天独立访客", w7.reduce(function (m, d) { return m + d.visitors; }, 0)],
@@ -1395,6 +1437,182 @@
       tr.appendChild(td(s.q)); tr.appendChild(td(s.n, "mono")); tr.appendChild(td(String(s.last_at || "").slice(0, 10), "muted"));
       tz.appendChild(tr);
     });
+  }
+
+  // 详情抽屉(v0.101.0):统一的右侧浮层,返回 body 容器供异步填充
+  function openOvl(title, sub) {
+    var panel = $("ovlPanel"); panel.innerHTML = "";
+    var head = document.createElement("div"); head.className = "ovl__head";
+    var t = document.createElement("div");
+    var th = document.createElement("div"); th.className = "ovl__title"; th.textContent = title || "";
+    var ts = document.createElement("div"); ts.className = "ovl__sub"; ts.textContent = sub || "";
+    t.appendChild(th); t.appendChild(ts);
+    var b = document.createElement("button"); b.className = "ovl__close"; b.textContent = "关闭";
+    b.addEventListener("click", closeOvl);
+    head.appendChild(t); head.appendChild(b);
+    panel.appendChild(head);
+    var body = document.createElement("div"); body.id = "ovlBody";
+    panel.appendChild(body);
+    $("ovl").hidden = false;
+    return body;
+  }
+  function closeOvl() { $("ovl").hidden = true; $("ovlPanel").innerHTML = ""; }
+  $("ovl").addEventListener("click", function (e) { if (e.target === $("ovl")) closeOvl(); });
+
+  // —— 数据面板:折线图(日活/新增注册) + 环形饼图(行为构成),纯 SVG,零依赖 ——
+  function renderLineChart(days) {
+    var el = $("stLine"); el.innerHTML = "";
+    if (!days || !days.length) { el.textContent = "暂无数据"; return; }
+    var W = 720, H = 210, P = { l: 36, r: 14, t: 16, b: 26 };
+    var iw = W - P.l - P.r, ih = H - P.t - P.b;
+    var vs = days.map(function (d) { return d.visitors || 0; });
+    var rs = days.map(function (d) { return d.register || 0; });
+    var mx = Math.max(1, Math.max.apply(null, vs.concat(rs)));
+    function x(i) { return vs.length === 1 ? P.l + iw / 2 : P.l + (i / (vs.length - 1)) * iw; }
+    function y(v) { return P.t + ih - (v / mx) * ih; }
+    function pts(arr) { return arr.map(function (v, i) { return x(i).toFixed(1) + "," + y(v).toFixed(1); }).join(" "); }
+    var out = [];
+    for (var gi = 0; gi <= 4; gi++) {
+      var gy = P.t + ih / 4 * gi;
+      out.push('<line x1="' + P.l + '" y1="' + gy + '" x2="' + (P.l + iw) + '" y2="' + gy + '" stroke="#23272e" stroke-width="1"/>');
+      out.push('<text x="' + (P.l - 6) + '" y="' + (gy + 3.5) + '" fill="#8b8f98" font-size="9" text-anchor="end">' + Math.round(mx * (1 - gi / 4)) + '</text>');
+    }
+    days.forEach(function (d, i) { out.push('<text x="' + x(i).toFixed(1) + '" y="' + (H - P.b + 14) + '" fill="#8b8f98" font-size="9" text-anchor="middle">' + d.day.slice(5) + '</text>'); });
+    out.push('<polyline points="' + pts(vs) + '" fill="none" stroke="#5b8a72" stroke-width="2"/>');
+    out.push('<polyline points="' + pts(rs) + '" fill="none" stroke="#7eb8e0" stroke-width="2"/>');
+    vs.forEach(function (v, i) { out.push('<circle cx="' + x(i).toFixed(1) + '" cy="' + y(v).toFixed(1) + '" r="2.6" fill="#5b8a72"/>'); });
+    rs.forEach(function (v, i) { out.push('<circle cx="' + x(i).toFixed(1) + '" cy="' + y(v).toFixed(1) + '" r="2.6" fill="#7eb8e0"/>'); });
+    out.push('<text x="' + P.l + '" y="' + (P.t - 2) + '" fill="#5b8a72" font-size="10">—— 日活(独立访客)</text>');
+    out.push('<text x="' + (P.l + 96) + '" y="' + (P.t - 2) + '" fill="#7eb8e0" font-size="10">—— 每日新增注册</text>');
+    el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;display:block">' + out.join("") + '</svg>';
+  }
+  function mkLegend(color, label) {
+    var d = document.createElement("div"); d.style.cssText = "display:flex;align-items:center;gap:6px;font-size:12px;color:#cdd2da";
+    var i = document.createElement("i"); i.style.cssText = "width:10px;height:10px;border-radius:2px;background:" + color;
+    d.appendChild(i); d.appendChild(document.createTextNode(label)); return d;
+  }
+  function renderPie(days) {
+    var el = $("stPie"), leg = $("stPieLegend"); el.innerHTML = ""; leg.innerHTML = "";
+    if (!days || !days.length) { el.textContent = "暂无数据"; return; }
+    var SERIES = [["visit", "进站"], ["view", "看详情"], ["outbound", "去官网"], ["fav", "收藏"], ["search", "AI检索"], ["comment", "评论"], ["register", "注册"], ["login", "登录"]];
+    var data = [], total = 0;
+    SERIES.forEach(function (s) { var n = 0; days.forEach(function (d) { n += d[s[0]] || 0; }); data.push({ label: s[1], n: n }); total += n; });
+    if (!total) { el.textContent = "暂无行为数据"; return; }
+    var i = 0; data.forEach(function (d) { if (d.n) { leg.appendChild(mkLegend("#5b8a72,#7eb8e0,#d4a05b,#b48ad4,#e06f6f,#6fb8c0,#9ac264,#c97ba6".split(",")[i % 8], d.label + " · " + d.n)); } i++; });
+    var totEl = document.createElement("div"); totEl.textContent = "合计 " + total; totEl.style.cssText = "margin-bottom:6px;font-size:12.5px;color:#aab;font-weight:600";
+    leg.insertBefore(totEl, leg.firstChild);
+    var R = 54, C = 60, th = 26, seg = [], acc = 0, colors = "#5b8a72,#7eb8e0,#d4a05b,#b48ad4,#e06f6f,#6fb8c0,#9ac264,#c97ba6".split(",");
+    data.filter(function (d) { return d.n > 0; }).forEach(function (d, ci) {
+      var frac = d.n / total, a0 = acc * Math.PI * 2, a1 = (acc + frac) * Math.PI * 2;
+      var large = (a1 - a0) > Math.PI ? 1 : 0;
+      var x0 = C + R * Math.cos(a0), y0 = C + R * Math.sin(a0), x1 = C + R * Math.cos(a1), y1 = C + R * Math.sin(a1);
+      seg.push('<path d="M' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A' + R + ' ' + R + ' 0 ' + large + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + '" fill="none" stroke="' + colors[ci % colors.length] + '" stroke-width="' + th + '" opacity="0.92"/>');
+      acc += frac;
+    });
+    el.innerHTML = '<div style="display:inline-block"><svg viewBox="0 0 120 120" style="width:' + (C * 2 + th + 4) + 'px;height:' + (C * 2 + th + 4) + 'px;display:block;margin:auto;transform:rotate(-90deg)">' + seg.join("") + '</svg></div>';
+  }
+
+  // —— 用户档案(v0.101.0):点名字/头像看完整档案 + 收藏 + 作品/评论 + 行为时间线 ——
+  var EVLABEL = { visit: "进站", view: "看详情", outbound: "去官网", fav: "收藏", search: "AI检索", register: "注册", login: "登录", profile: "完善资料", comment: "评论", work: "发布作品", submit: "投稿", follow: "关注", feedback: "反馈", wkread: "读周刊", ban: "封禁/解封", studio: "画室授权" };
+  function renderUserDetail(body, r) {
+    var u = r.user || {};
+    var head = document.createElement("div");
+    head.style.cssText = "display:flex;align-items:center;gap:14px;margin-bottom:14px";
+    if (u.avatar) { var im = document.createElement("img"); im.src = "/" + u.avatar; im.style.cssText = "width:52px;height:52px;border-radius:50%;object-fit:cover"; head.appendChild(im); }
+    var nm = document.createElement("div");
+    var n1 = document.createElement("div"); n1.style.cssText = "font-size:17px;font-weight:700"; n1.textContent = u.nickname || "(未设置昵称)";
+    var n2 = document.createElement("div"); n2.style.cssText = "font-size:12px;color:#8b8f98"; n2.textContent = u.email || "无邮箱";
+    nm.appendChild(n1); nm.appendChild(n2); head.appendChild(nm);
+    if (u.banned) { var bd = document.createElement("span"); bd.className = "pill"; bd.textContent = "已封禁"; nm.appendChild(bd); }
+    body.appendChild(head);
+    var kv = document.createElement("div");
+    var rows = [
+      ["注册时间", bj(u.created_at, true)], ["最近活跃", rel(u.last_seen)],
+      ["IP 属地", u.ip_region || "—"], ["手机", u.phone_masked || "—"],
+      ["邮箱验证", u.verified ? "已验证" : "未验证"], ["实名", u.phone_verified ? "已验证" : "未验证"],
+      ["收藏数", u.fav_count], ["粉丝 / 关注", (r.follow ? r.follow.followers : 0) + " / " + (r.follow ? r.follow.following : 0)],
+      ["画室工具", u.studio ? "已授权" : "未授权"], ["周刊订阅", u.newsletter ? "已订阅" : "未订阅"]
+    ];
+    rows.forEach(function (x) { var d = document.createElement("div"); d.className = "kv"; var b0 = document.createElement("b"); b0.textContent = x[0] + "："; d.appendChild(b0); d.appendChild(document.createTextNode(String(x[1]))); kv.appendChild(d); });
+    if (u.bio) { var bio = document.createElement("div"); bio.className = "kv"; var b0 = document.createElement("b"); b0.textContent = "简介："; bio.appendChild(b0); bio.appendChild(document.createTextNode(u.bio)); kv.appendChild(bio); }
+    body.appendChild(kv);
+    // 收藏
+    body.appendChild(document.createElement("h3")).textContent = "收藏 (" + (r.favorites || []).length + ")";
+    if (!(r.favorites || []).length) { body.appendChild(mutedEl("(还没有收藏)")); }
+    (r.favorites || []).forEach(function (f) {
+      var d = document.createElement("div"); d.className = "kv";
+      d.appendChild(anchorEl(f.item.title || f.item.id, f.item.url || f.item.apply_url || f.item.source_url || "#"));
+      body.appendChild(d);
+    });
+    // 作品
+    body.appendChild(document.createElement("h3")).textContent = "作品发布 (" + (r.works || []).length + ")";
+    if (!(r.works || []).length) { body.appendChild(mutedEl("(还没有作品)")); }
+    (r.works || []).forEach(function (w) {
+      var d = document.createElement("div"); d.className = "kv";
+      var st = { approved: ["已过审", "#7ee08a"], pending: ["审核中", "#d4a05b"], rejected: ["未通过", "#ff7a6e"] }[w.status] || [w.status, "#aab"];
+      d.appendChild(document.createTextNode("[" + st[0] + "] "));
+      d.appendChild(document.createTextNode(w.title + (w.tags && w.tags.length ? " · " + w.tags.join("/") : "")));
+      d.appendChild(document.createTextNode(" · " + (w.images || []).length + " 张 · " + bj(w.created_at, true)));
+      body.appendChild(d);
+    });
+    // 评论
+    body.appendChild(document.createElement("h3")).textContent = "评论 (" + (r.comments || []).length + ")";
+    if (!(r.comments || []).length) { body.appendChild(mutedEl("(还没有评论)")); }
+    (r.comments || []).forEach(function (c) {
+      var d = document.createElement("div"); d.className = "kv";
+      d.appendChild(document.createTextNode("[" + ({ approved: "已显示", pending: "待审", rejected: "未通过" }[c.status] || c.status) + "] " + String(c.content).slice(0, 120) + " · " + bj(c.created_at, true)));
+      body.appendChild(d);
+    });
+    // 行为时间线
+    body.appendChild(document.createElement("h3")).textContent = "行为时间线 (" + (r.timeline || []).length + ")";
+    var tl = r.timeline || [];
+    if (!tl.length) { body.appendChild(mutedEl("(还没有埋点记录)")); }
+    tl.forEach(function (e) {
+      var d = document.createElement("div"); d.className = "tl";
+      var t = document.createElement("span"); t.className = "t"; t.textContent = bj(e.t, true);
+      var ty = document.createElement("span"); ty.className = "ty"; ty.textContent = EVLABEL[e.type] || e.type;
+      var dt = document.createElement("span"); dt.className = "d"; dt.textContent = e.detail || "";
+      d.appendChild(t); d.appendChild(ty); d.appendChild(dt); body.appendChild(d);
+    });
+  }
+  function openUserDetail(uid) {
+    var body = openOvl("用户档案", "加载中…");
+    body.appendChild(mutedEl("正在读取该用户的收藏、作品、评论与行为记录…"));
+    get("/api/admin/user?id=" + encodeURIComponent(uid)).then(function (r) {
+      body.innerHTML = "";
+      if (!r || !r.user) { body.appendChild(mutedEl("未找到该用户")); return; }
+      renderUserDetail(body, r);
+    }).catch(function (e) { body.innerHTML = ""; body.appendChild(mutedEl("加载失败:" + (e && e.message || "网络错误"))); });
+  }
+  function mutedEl(txt) { var d = document.createElement("div"); d.className = "muted"; d.style.fontSize = "12.5px"; d.textContent = txt; return d; }
+  function anchorEl(txt, href) { var a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noreferrer"; a.textContent = txt; a.style.cssText = "color:#7eb8e0;word-break:break-all"; return a; }
+
+  // —— 区域经理入库机会(v0.101.0):点卡片看该经理实际入库了哪些机会 ——
+  function openRegionOpps(id, zh) {
+    var body = openOvl("区域经理 · 入库机会", zh);
+    body.appendChild(mutedEl("加载中…"));
+    get("/api/admin/regions/opps?id=" + encodeURIComponent(id)).then(function (r) {
+      body.innerHTML = "";
+      var list = (r && r.list) || [];
+      if (!list.length) { body.appendChild(mutedEl("该经理还没有入库记录(可能刚上任或尚未上班)。")); return; }
+      var d = document.createElement("div"); d.style.cssText = "font-size:12.5px;color:#aab;margin-bottom:8px"; d.textContent = "共 " + list.length + " 条";
+      body.appendChild(d);
+      list.forEach(function (o) {
+        var row = document.createElement("div");
+        row.style.cssText = "padding:8px 10px;border:1px solid #2a2e36;border-radius:8px;margin-bottom:8px;background:#1d2026";
+        var st = { open: ["进行中", "#7ee08a"], expired: ["已截止", "#8b8f98"] }[o.status] || [o.status || "", "#aab"];
+        var l1 = document.createElement("div"); l1.style.cssText = "display:flex;justify-content:space-between;gap:10px;align-items:center";
+        var lt = document.createElement("span"); lt.style.cssText = "font-weight:600;font-size:13px;word-break:break-all";
+        lt.appendChild(anchorEl(o.title || o.id, o.url || "#")); l1.appendChild(lt);
+        var pill = document.createElement("span"); pill.className = "pill"; pill.style.cssText = "color:" + st[1]; pill.textContent = st[0];
+        l1.appendChild(pill);
+        row.appendChild(l1);
+        var l2 = document.createElement("div"); l2.style.cssText = "font-size:12px;color:#8b8f98;margin-top:3px";
+        l2.textContent = [o.org, o.city, o.deadline ? ("截止 " + o.deadline) : "", o.q ? ("来源词「" + o.q + "」") : ""].filter(Boolean).join(" · ");
+        row.appendChild(l2);
+        body.appendChild(row);
+      });
+    }).catch(function (e) { body.innerHTML = ""; body.appendChild(mutedEl("加载失败:" + (e && e.message || "网络错误"))); });
   }
 
   // 访客明细(v0.99.2):点某天,拉 /api/admin/stats/day 看当天具体是谁

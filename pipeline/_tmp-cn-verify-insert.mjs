@@ -11,9 +11,29 @@ import { verifyRecord } from "./lib/verify.mjs";
 import { dedupe } from "./lib/dedupe.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
+// 加载 pipeline/.env(LLM key 等)进 process.env,否则抽取会缺 DEEPSEEK/GLM 密钥
+import { readFileSync as _rf } from "node:fs";
+try {
+  const _env = _rf(join(__dir, ".env"), "utf8");
+  for (const _l of _env.split(/\r?\n/)) {
+    const _m = /^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/.exec(_l);
+    if (_m && !_l.trim().startsWith("#") && process.env[_m[1]] == null) process.env[_m[1]] = _m[2];
+  }
+} catch (e) { process.stderr.write("[verify-insert] 未找到 .env,跳过(" + e.message + ")\n"); }
 const DATA = join(__dir, "..", "site", "data", "opportunities.json");
 
 function todayISO() { return new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10); }
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+// 抓正文,偶发 http-300/http-403/fetch-error 抖动时等 1.5s 重试至多 2 次
+async function fetchRetry(u, host) {
+  for (let i = 0; i < 3; i++) {
+    const f = await fetchSource({ url: u, domain: host, type: "html" }, null, { timeoutMs: 10000 });
+    if (!(f.skipped && /http-300|http-403|fetch-error/.test(f.reason || ""))) return f;
+    await sleep(1500);
+  }
+  return null; // 重试耗尽,调用方按失败处理
+}
 function slug(s) {
   return String(s || "").toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "item";
 }
@@ -46,7 +66,7 @@ function finalizeRecord(rec, { domain, url }) {
 
 // —— 人工/检索核实的国内官方征稿页(org.cn 官方域名,evidence 在原文) ——
 import { readFileSync } from "node:fs";
-const URL_FILE = new URL("./_tmp-cn-urls.txt", import.meta.url);
+const URL_FILE = new URL("./_tmp-cn-batch6.txt", import.meta.url);
 const URLS = readFileSync(URL_FILE, "utf8").split(/\r?\n/).map(s => s.trim()).filter(s => s && !s.startsWith("#"));
 
 async function main() {
@@ -61,8 +81,8 @@ async function main() {
     const host = new URL(u).host;
     const domain = host.replace(/^www\./, "");
     try {
-      const f = await fetchSource({ url: u, domain: host, type: "html" }, null);
-      if (f.skipped || !f.text || f.text.length < 200) { dropped++; console.log("skip(页面薄) " + domain); continue; }
+      const f = await fetchRetry(u, host);
+      if (!f || f.skipped || !f.text || f.text.length < 200) { dropped++; console.log(`skip(页面薄|sk=${f && f.skipped}|rs=${f && f.reason}|st=${f && f.status}|len=${(f && (f.text||"")).length}) ${u}`); continue; }
       const ex = await extract(f.text, { org_zh: "", domain, url: u, source_url: u, sourceText: f.text });
       if (!ex.data || ex.data.applicable === false) { dropped++; console.log("drop(不适用) " + domain); continue; }
       const v = verifyRecord(ex.data, { sourceText: f.text, url: u, source_url: u, domain });

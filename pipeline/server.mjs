@@ -1365,6 +1365,53 @@ async function handleAuthApi(req, res, u) {
       if (r.code === 200) await db.logModeration("user", String(key), b.on ? "banned" : "unbanned", null).catch(() => {});
       return json(r);
     }
+    // —— 用户档案 v0.53(v0.101.0 后台增强):点名字/头像看完整档案 + 收藏 + 作品/评论 + 行为时间线 ——
+    if (p === "/api/admin/user" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const uid = String(u.searchParams.get("id") || "").slice(0, 40);
+      if (!uid) return json({ code: 400, body: { error: "缺少用户 id" } });
+      try {
+        const user = auth.adminUserDetail(uid);
+        if (!user) return json({ code: 404, body: { error: "用户不存在" } });
+        const works = await db.worksByUser(uid, true);
+        const comments = await db.commentsByUser(uid);
+        const follow = await db.followInfo(uid);
+        const favs = await resolveFavorites(user.favorites);
+        // 行为时间线:按 uid 过滤埋点日志(最新在最前)
+        const timeline = [];
+        try {
+          let lines = [];
+          for (const f of [join(__dir, "state", "events.jsonl.1"), join(__dir, "state", "events.jsonl")]) {
+            try { lines.push(...(await readFile(f, "utf8")).trim().split("\n")); } catch (e) {}
+          }
+          for (let i = lines.length - 1; i >= 0 && timeline.length < 500; i--) {
+            let e; try { e = JSON.parse(lines[i]); } catch (x) { continue; }
+            if (e.uid !== uid) continue;
+            timeline.push({ t: e.t, type: e.type, detail: e.id || e.q || e.title || e.nickname || null });
+          }
+        } catch (e) {}
+        return json({ code: 200, body: { user, works, comments, follow, favorites: favs, timeline } });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
+    // —— 区域经理入库机会(后台增强):某经理在档期内实际入库了哪些机会 ——
+    if (p === "/api/admin/regions/opps" && m === "GET") {
+      if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
+      const id = String(u.searchParams.get("id") || "").slice(0, 40);
+      try {
+        const rows = id ? await db.ingestByEmail("region:" + id) : [];
+        const seen = new Set(), ids = [];
+        for (const r of rows) if (!seen.has(r.record_id)) { seen.add(r.record_id); ids.push({ id: r.record_id, q: r.q, at: r.at }); }
+        const doc = JSON.parse(await readFile(DATA, "utf8"));
+        const byId = new Map((doc.opportunities || []).map(o => [o.id, o]));
+        const list = [];
+        for (const it of ids) {
+          const o = byId.get(it.id);
+          if (!o) continue;
+          list.push({ id: o.id, title: o.title_zh || o.title_en || o.title, org: o.org_zh || o.org || "", city: o.city_zh, deadline: o.deadline, status: o.status, apply_fee: o.apply_fee, funding: o.funding, url: o.url, q: it.q, at: it.at });
+        }
+        return json({ code: 200, body: { id, list } });
+      } catch (e) { return json({ code: 503, body: { error: String(e.message || e) } }); }
+    }
     // —— 投稿:提交 / 后台队列 / 人工裁决 ——
     if (p === "/api/submit" && m === "POST") {
       const user = auth.userOf(req);

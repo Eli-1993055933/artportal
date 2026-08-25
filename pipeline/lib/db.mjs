@@ -438,6 +438,16 @@ export async function commentsAdminList(limit = 300) {
   const d = await getDb();
   return d.prepare("SELECT * FROM comments ORDER BY (status='pending') DESC, id DESC LIMIT ?").all(limit).map(parseCmt);
 }
+// 某用户发表的所有评论(admin 用户档案用,含未过审)
+export async function commentsByUser(uid, limit = 200) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM comments WHERE uid=? ORDER BY id DESC LIMIT ?").all(uid, limit).map(parseCmt);
+}
+// 某 email 标记的入库溯源(admin 用:区域经理="region:<id>";编辑部="desk")
+export async function ingestByEmail(email, limit = 1000) {
+  const d = await getDb();
+  return d.prepare("SELECT * FROM search_ingest WHERE email=? ORDER BY id DESC LIMIT ?").all(String(email), limit);
+}
 export async function decideComment(id, status, note) {
   const d = await getDb();
   const row = d.prepare("SELECT * FROM comments WHERE id=?").get(id);
