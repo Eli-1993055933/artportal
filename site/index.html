@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.25.0" />
+<meta name="app-version" content="1.26.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -242,6 +242,9 @@
     #foot{font-size:10px;padding:5px 8px}
   }
   @media (max-width:720px){
+    /* 页脚备案号等信息:手机端压到最小但可辨(工信部备案需保留,字越小越好) */
+    #foot{font-size:8px;padding:2px 5px;line-height:1.5}
+    #foot a{margin:0 1px}
     /* 底部抽屉:拖把手上滑展开列表,地球同步缩小(JS 联动) */
     /* 高度定死(top:15vh),位置全靠 transform 平移:合成器动画不触发重排,拖拽跟手;
        touch-action:none 防浏览器抢手势发 pointercancel(真机拖不动/卡顿的根源),列表区保留纵向滚动 */
@@ -503,12 +506,6 @@
     .wra-p{font-size:16px}
     .wr-bar .d{display:none}
   }
-  /* 反馈浮标(桌面右下角小胶囊;z4 低于详情卡 z7,详情打开时被盖住属预期;手机走页脚入口) */
-  #fbBtn{position:fixed;right:26px;bottom:44px;z-index:4;background:var(--panel);border:1px solid var(--line);
-    border-radius:999px;padding:8px 14px;font-size:12.5px;color:var(--sub);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.08)}
-  #fbBtn:hover{color:var(--ink);background:#efeee8}
-  html.dark #fbBtn:hover{background:#262421}
-  @media (max-width:720px){ #fbBtn{display:none} }
   #foot a{cursor:pointer}
   /* 评论区(四类内容通用:详情卡内嵌 + 灯箱弹层) */
   .cmts{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
@@ -546,7 +543,7 @@
   button,.tgc,.ch,.abtn,.pp-btn,.lg-item,.oc,.ocard,.wcard,.pp-row,.wr-bar,.wr-item,.uq-i,.dcmt-toggle,.wv-like,.cmt__op{
     transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease,box-shadow .18s ease,opacity .18s ease}
   .abtn:active,.pp-btn:active,.mgo:active,.search .ai:active,#btnPanel:active,#back:active,.tgc:active,
-  .pubgrid button:active,.cmts__send:active,#fbBtn:active,.gd-skip:active,.wv-like:active{transform:scale(.96)}
+  .pubgrid button:active,.cmts__send:active,.gd-skip:active,.wv-like:active{transform:scale(.96)}
   #chn .ch:active,.lg-item:active{transform:scale(.97)}
   @keyframes apPop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
   .modal .scrim{background:rgba(20,18,15,.32);backdrop-filter:var(--ap-blur);-webkit-backdrop-filter:var(--ap-blur)}
@@ -618,7 +615,7 @@
   #gc:active{cursor:var(--cur-fist)}
   a,button,select,label.chk,.tgc,.ch,.abtn,.pp-btn,.lg-item,.oc,.ocard,.wcard,.pp-row,.pp-wk,.uq-i,
   .wr-bar,.wr-item,.wr-arch__row,.dcmt-toggle,.cmt__op,.cmt__nick,.cmt__ava,.fbar-btn,.mgo,
-  .modal .mx,.wv-x,#detail .x,.pro-head .x2,.gd-skip,.lc-sort,.lang,.search .ai,#fbBtn,#back,
+  .modal .mx,.wv-x,#detail .x,.pro-head .x2,.gd-skip,.lc-sort,.lang,.search .ai,#back,
   #btnPanel,.pubgrid button,.cmts__send,.cmts__cancel,.wra-ref,#lightbox .nav,#lightbox .mx,
   .wv-media .nav,.wv-media img,.wv-head img,.wv-head .nm,.wv-like,#foot a,.pp-up,.uq-i,#sheetbar{cursor:var(--cur-hand)}
   .pdiv{cursor:ns-resize}
@@ -690,6 +687,7 @@
     <span class="ch" data-ch="jobs">招聘</span>
     <span class="ch" data-ch="news">资讯</span>
     <span class="ch" data-ch="works">作品</span>
+    <span class="ch" data-ch="feedback">反馈</span>
   </nav>
   <div class="grow"></div>
   <div class="act">
@@ -746,7 +744,6 @@
 <div id="tip"></div>
 <div id="status">加载中…</div>
 <div id="toast"></div>
-<button id="fbBtn" type="button">✉ 反馈/求助</button>
 <!-- 收藏行程条(v0.101.0):进入行程模式后浮在地球上方,显示跨度并提供退出 -->
 <div id="rtBar"><div class="rt-l"><b id="rtTitle">我的申请行程</b><span id="rtInfo"></span>
   <span class="rt-hint" id="rtHint">按截止日期先后连成一条线;点圆点看详情</span></div>
@@ -757,11 +754,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.25.0</span></div>
+  ARTPORTAL <span id="appVer">v1.26.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.25.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.25.0"></script>
-<script src="js/globe-data.js?v=1.25.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.26.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.26.0"></script>
+<script src="js/globe-data.js?v=1.26.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1858,7 +1855,7 @@
   function ss(o){ return lang==='en'?(o.summary_en||o.summary_zh||''):(o.summary_zh||o.summary_en||''); }
   function applyLang(){
     document.documentElement.classList.toggle('en',lang==='en');   // 英文字段名更长,CSS 按此微调列宽
-    d3.selectAll('#chn .ch').text(function(){ var c=this.getAttribute('data-ch'); return c==='globe'?L('idx'):L(c); });
+    d3.selectAll('#chn .ch').text(function(){ var c=this.getAttribute('data-ch'); return c==='globe'?L('idx'):(c==='feedback'?L('fbBtnT'):L(c)); });
     document.getElementById('pubTxt').textContent=L('pub');
     var lt=document.getElementById('loginTxt'); if(lt) lt.textContent=L('login');
     document.getElementById('proTitle').textContent=L('pro');
@@ -1869,7 +1866,6 @@
     document.getElementById('q').placeholder=L('searchPh');
     if(!searching) document.getElementById('btnAI').textContent=L('ai');
     document.getElementById('btnLang').textContent=(lang==='zh')?'EN':'中';
-    document.getElementById('fbBtn').textContent=L('fbBtnT');
     document.getElementById('rtTitle').textContent=L('rtTitle');
     document.getElementById('rtHint').textContent=L('rtHint');
     document.getElementById('rtExit').textContent=L('rtExit');
@@ -1906,8 +1902,9 @@
   // 顶栏=索引(地球)+四频道;点频道不换页——地球虚化留在背后,该频道列表浮层展开(真数据)
   var chCache={}, chStore={}, chNorm={}, curCh=null, chView=[];
   d3.selectAll('#chn .ch').on('click',function(){ var el=this, ch=el.getAttribute('data-ch');
-    d3.selectAll('#chn .ch').classed('on',function(){ return this===el; });
     hideProfile();
+    if(ch==='feedback'){ openFeedback(); return; }   // 反馈按钮:非频道,直接弹反馈窗(不改变频道路由/高亮)
+    d3.selectAll('#chn .ch').classed('on',function(){ return this===el; });
     if(ch==='globe'){ hideChPanel(); return; }
     showChPanel(ch); });
   function hideChPanel(){ curCh=null; document.getElementById('chpanel').style.display='none'; releaseGuard(); }
@@ -3029,7 +3026,6 @@
         if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
         closeModal(); toast(L('fbThanks')); })
       .catch(function(){ b.disabled=false; err.textContent=L('authNet'); }); }); }
-  document.getElementById('fbBtn').addEventListener('click',openFeedback);
   document.getElementById('rtExit').addEventListener('click',exitRoute);
   document.getElementById('fbLink').addEventListener('click',openFeedback);
   document.getElementById('gdLink').addEventListener('click',function(){ openGuide(0); });
