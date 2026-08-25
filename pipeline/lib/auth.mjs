@@ -55,6 +55,7 @@ export async function initAuth() {
     const now = Date.now();
     sessions = new Map(Object.entries(d.sessions || {}).filter(([, s]) => now - s.created_at < SESS_TTL));
   } catch (e) { sessions = new Map(); }
+  await loadUserActs();
   process.stderr.write(`[auth] 已加载 ${users.length} 个用户,${sessions.size} 个会话\n`);
 }
 
@@ -77,6 +78,12 @@ let evtBytes = 0;
 const EVT_ROTATE_AT = 20 * 1024 * 1024;   // 20MB
 export function logEvent(type, extra) {
   const line = JSON.stringify({ t: new Date().toISOString(), type, ...extra }) + "\n";
+  if (extra && extra.uid) {
+    const c = userActs.get(extra.uid) || { usage: 0, interaction: 0 };
+    if (USAGE_EVTS.has(type)) c.usage++;
+    if (INTR_EVTS.has(type)) c.interaction++;
+    userActs.set(extra.uid, c);
+  }
   evtBytes += line.length;
   if (evtBytes > EVT_ROTATE_AT) {
     evtBytes = 0;
@@ -87,6 +94,27 @@ export function logEvent(type, extra) {
 }
 const MAX_USERS = 100000;                  // 批量注册安全阀(早期远够;到量再迁库)
 const MAX_ONLINE = 5000;                   // 在线表条目上限,防伪造 anon 灌爆内存
+
+// ---------- 行为计数(后台用户排序:高频使用 / 最多互动) ----------
+// 使用类=浏览/检索/作品等消费行为;互动类=评论/反馈/关注/收藏/登录等参与行为。
+// 启动时从 events.jsonl 建一次索引,之后 logEvent 增量更新,避免每次后台请求都重读大文件。
+const USAGE_EVTS = new Set(["visit", "view", "outbound", "search", "work", "wkread"]);
+const INTR_EVTS = new Set(["comment", "feedback", "follow", "fav", "submit", "login", "profile"]);
+const userActs = new Map();                // uid -> { usage, interaction }
+async function loadUserActs() {
+  try {
+    const txt = await readFile(EVENTS_FILE, "utf8");
+    for (const line of txt.split("\n")) {
+      if (!line) continue;
+      let e; try { e = JSON.parse(line); } catch { continue; }
+      if (!e.uid) continue;
+      const c = userActs.get(e.uid) || { usage: 0, interaction: 0 };
+      if (USAGE_EVTS.has(e.type)) c.usage++;
+      if (INTR_EVTS.has(e.type)) c.interaction++;
+      userActs.set(e.uid, c);
+    }
+  } catch (e) { /* 事件文件还没生成:保持空即可 */ }
+}
 
 // ---------- 周报订阅(路线图第 5 项):退订 token + 订阅名单 ----------
 // 退订链接要做到"点开即退订、无需登录"(邮件里点的可能不是登录设备),
@@ -865,12 +893,16 @@ export async function adminOverview() {
   };
 }
 export function adminUsers() {
-  const list = users.slice().reverse().map(u => ({
-    id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null), nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
-    last_seen: u.last_seen, favorites: (u.favorites || []).length,
-    verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio,
-    ip_region: (u.ip_region && u.ip_region.disp) || null
-  }));
+  const list = users.slice().reverse().map(u => {
+    const a = userActs.get(u.id) || { usage: 0, interaction: 0 };
+    return {
+      id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null), nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
+      last_seen: u.last_seen, favorites: (u.favorites || []).length,
+      usage_count: a.usage, interaction_count: a.interaction,
+      verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio,
+      ip_region: (u.ip_region && u.ip_region.disp) || null
+    };
+  });
   return { code: 200, body: { total: list.length, users: list } };
 }
 // 用户完整档案(admin 专用):比列表多出属地/资料/收藏明细/订阅标志,供「点名字看档案」用

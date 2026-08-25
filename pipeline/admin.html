@@ -347,10 +347,17 @@
           <!-- type=search + 中性 name + 各家密码管理器的忽略标记:合力挡住"自动填上次填过的邮箱" -->
           <input class="searchbox" id="userSearch" type="search" name="ap-filter-kw" placeholder="按邮箱/昵称搜索…"
                  autocomplete="off" data-lpignore="true" data-form-type="other" data-1p-ignore />
+          <select id="userSort" style="margin-left:8px;padding:4px 6px;border-radius:6px;background:#151a23;border:1px solid #2c3443;color:#cfd6e2;font-size:13px" title="列表排序方式">
+            <option value="newest">最新注册</option>
+            <option value="active">最近活跃</option>
+            <option value="usage">最高频使用</option>
+            <option value="interact">最多互动</option>
+            <option value="favs">最多收藏</option>
+          </select>
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>手机</th><th>验证</th><th>属地</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>手机</th><th>验证</th><th>属地</th><th>注册时间</th><th>最近活跃</th><th>使用</th><th>互动</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -374,7 +381,7 @@
     content: { page: 1, per: 50, q: "", via: "", channel: "opportunities" },
     recycle: { page: 1, per: 50 },
     ingest:  { page: 1, per: 50 },
-    users:   { page: 1, per: 50, q: "" }
+    users:   { page: 1, per: 50, q: "", sort: "newest" }
   };
 
   function $(id) { return document.getElementById(id); }
@@ -1012,6 +1019,13 @@
   function renderUsers() {
     var q = st.users.q.trim().toLowerCase();
     var list = allUsers.filter(function (u) { return !q || (u.email || "").indexOf(q) !== -1 || (u.nickname || "").toLowerCase().indexOf(q) !== -1; });
+    var sort = st.users.sort;
+    list = list.slice();
+    if (sort === "active") list.sort(function (a, b) { return (Date.parse(b.last_seen) || 0) - (Date.parse(a.last_seen) || 0); });
+    else if (sort === "usage") list.sort(function (a, b) { return (b.usage_count || 0) - (a.usage_count || 0); });
+    else if (sort === "interact") list.sort(function (a, b) { return (b.interaction_count || 0) - (a.interaction_count || 0); });
+    else if (sort === "favs") list.sort(function (a, b) { return (b.favorites || 0) - (a.favorites || 0); });
+    else list.sort(function (a, b) { return (Date.parse(b.created_at) || 0) - (Date.parse(a.created_at) || 0); });
     $("userCount").textContent = q ? "命中 " + list.length + " / " + allUsers.length : "";
     paginate(list, st.users, $("userPager"), function (u) {
       var tr = document.createElement("tr");
@@ -1037,6 +1051,8 @@
       tr.appendChild(td(u.ip_region || "—", u.ip_region ? "" : "muted"));
       tr.appendChild(td(bj(u.created_at, true), "mono"));
       tr.appendChild(td(rel(u.last_seen), "mono"));
+      tr.appendChild(td(u.usage_count != null ? u.usage_count : 0, "mono"));
+      tr.appendChild(td(u.interaction_count != null ? u.interaction_count : 0, "mono"));
       tr.appendChild(td(u.favorites, "mono"));
       // 画室工具授权(v0.92.0):默认关,勾选即授予,持久到用户记录;取消回滚勾选态
       var stc = document.createElement("td");
@@ -1071,9 +1087,10 @@
       }
       tr.appendChild(ops);
       $("usersTbl").tBodies[0].appendChild(tr);
-    }, $("usersTbl").tBodies[0], 8, "(还没有注册用户)");
+    }, $("usersTbl").tBodies[0], 13, "(还没有注册用户)");
   }
   $("userSearch").addEventListener("input", function () { st.users.q = this.value; st.users.page = 1; renderUsers(); });
+  $("userSort").addEventListener("change", function () { st.users.sort = this.value; st.users.page = 1; renderUsers(); });
 
   // —— 内容管理 ——
   var VIA = { search: "AI检索", submit: "用户投稿", daily: "每日抓取" };
