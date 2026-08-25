@@ -1732,7 +1732,7 @@ const NL_BATCH = Math.max(1, Number(process.env.NEWSLETTER_BATCH || 15));
 const NL_EMAIL_GAP = Math.max(2000, Number(process.env.NEWSLETTER_SEND_DELAY_MS || 6000));
 const NL_BATCH_GAP = Math.max(0, Number(process.env.NEWSLETTER_BATCH_GAP_MS || 30 * 60 * 1000));
 const NL_COOL_MS = Math.max(30 * 1000, Number(process.env.NEWSLETTER_COOLDOWN_MS || 30 * 60 * 1000));
-function rateLimited(err) {
+function nlRateLimited(err) {
   const s = String(err && (err.message || err) || "");
   return /535|login|frequency|限流|风控|abnormal/i.test(s);
 }
@@ -1759,7 +1759,7 @@ async function sendWeeklyBulk(report) {
       await db.nlLogSend(report.id, t.email, true, null);
       batchOk++; nlState.ok++;
     } catch (e) {
-      if (rateLimited(e)) {
+      if (nlRateLimited(e)) {
         // 风控命中:这封不记成功也不记失败,放进冷却,解除后再补发(批计数清空、放慢节奏)
         nlState.phase = "cooling";
         process.stderr.write(`[周报] 命中风控(${t.email}):${String(e.message || e).slice(0, 80)}… 冷却 ${Math.round(NL_COOL_MS / 60000)} 分后自动补发(累计已发 ${nlState.ok}/${targets.length})\n`);
