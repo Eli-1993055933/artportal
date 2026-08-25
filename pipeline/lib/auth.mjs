@@ -540,7 +540,7 @@ export async function register(body, ip) {
   if (authLimited(ip)) return { code: 429, body: { error: "尝试太频繁,请稍后再试" } };
   body = body || {};
   const password = String(body.password || "");
-  const newsletter = body.newsletter === true;   // 《个保法》明示同意,绝不默认勾
+  const newsletter = body.newsletter !== false;   // 按需求:新注册默认订阅周报(注册表单勾选框已默认打勾)
 
   if (smsOn()) {
     // —— 手机号短信验证码实名注册(阿里云短信配好后的主通道)——

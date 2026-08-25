@@ -23,6 +23,8 @@ import * as auth from "./lib/auth.mjs";
 import * as db from "./lib/db.mjs";
 import { agentLog } from "./lib/db.mjs";
 
+await auth.initAuth().catch(e => process.stderr.write("[send] initAuth 失败:" + e.message + "\n"));
+
 const SITE_URL = (process.env.SITE_URL || "http://60.205.212.195").replace(/\/+$/, "");
 function unsubUrlOf(email) {
   return SITE_URL + "/api/newsletter/unsub?e=" + Buffer.from(String(email).toLowerCase()).toString("base64url") + "&t=" + auth.unsubToken(email);
