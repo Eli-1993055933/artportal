@@ -75,10 +75,16 @@
     body { overflow-x: hidden; }
     .searchbox { width: 100%; }
     .count { margin-left: 0; width: 100%; }
-    /* 手机端:不横向滚动,让表格自适应容器宽+单元格换行,所有列一屏可见;字体/间距再收紧 */
+    /* 手机端:全后台字体收缩一档、排版更紧凑;并强制单元格/内联文本可换行断词,消除长内容撑爆造成的错位扭曲 */
     .scroll { overflow: visible; border: 1px solid #2a2e36; border-radius: 10px; background: #16181c; }
+    body { font-size: 10px; }
+    .card .k, .card .v, .muted, .mono, .sec__title, .chart-legend, .sumprev, .sumprev__brand,
+    button, input, select, textarea, label, a, .chips .chip { font-size: 10px; }
+    h1.sec__title, h2, h3 { font-size: 13px; line-height: 1.3; margin: 9px 0 4px; }
+    .card .v { font-size: 15px; }
     table { min-width: 0; width: 100%; }
-    th, td { font-size: 11px; padding: 4px 6px; white-space: normal; word-break: break-word; }
+    th, td { font-size: 10px; padding: 3px 5px; white-space: normal !important; word-break: break-word; line-height: 1.45; }
+    strong, span.mono, .muted, .ev, .status, .badge { white-space: normal !important; }
   }
   .sumprev:empty { display: none; }
   .sumprev { margin-top: 18px; padding: 18px 20px; border: 1px solid #2a2e36; border-radius: 12px; background: #14161b; max-width: 760px; line-height: 1.7; }
