@@ -15,6 +15,7 @@ import { wordHits, moderateText } from "./moderation.mjs";
 import { logModeration } from "./db.mjs";
 import { mailerOn, sendVerifyCode } from "./mailer.mjs";
 import { smsOn, sendSmsCode, checkSmsCode } from "./sms.mjs";
+import { ipRegion } from "./ipregion.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const STATE = join(__dir, "..", "state");
@@ -626,7 +627,7 @@ export async function register(body, ip) {
       newsletter, nickname: null, profile: newUserProfile(body), favorites: [],
       created_at: new Date().toISOString(), last_seen: new Date().toISOString()
     };
-    users.push(u); byPhone.set(u.phone_hmac, u); if (email) byEmail.set(email, u); saveUsers();
+    users.push(u); byPhone.set(u.phone_hmac, u); if (email) byEmail.set(email, u); const _regR = ipRegion(ip); if (_regR) u.ip_region = _regR; saveUsers();
     logEvent("register", { uid: u.id, phone: maskPhone(phone), ip });
     const token = newSession(u.id);
     return { code: 200, body: { user: publicUser(u) }, headers: { "Set-Cookie": sessionCookie(token) } };
@@ -659,7 +660,7 @@ export async function register(body, ip) {
     newsletter, nickname: null, profile: newUserProfile(body), favorites: [],
     created_at: new Date().toISOString(), last_seen: new Date().toISOString()
   };
-  users.push(u); byEmail.set(email, u); saveUsers();
+  users.push(u); byEmail.set(email, u); const _regR = ipRegion(ip); if (_regR) u.ip_region = _regR; saveUsers();
   logEvent("register", { uid: u.id, email, ip });
   const token = newSession(u.id);
   return { code: 200, body: { user: publicUser(u) }, headers: { "Set-Cookie": sessionCookie(token) } };
@@ -674,7 +675,9 @@ export function login(identifier, password, ip) {
   if (!u) { burnPassword(password); return { code: 401, body: { error: "账号或密码不正确" } }; }
   if (!checkPassword(password, u)) return { code: 401, body: { error: "账号或密码不正确" } };
   if (u.banned) return { code: 403, body: { error: "该账号已被停用。如有疑问请通过页脚反馈联系平台。" } };
-  u.last_seen = new Date().toISOString(); saveUsers();
+  u.last_seen = new Date().toISOString();
+  const _loginR = ipRegion(ip); if (_loginR && (!u.ip_region || u.ip_region.disp !== _loginR.disp)) u.ip_region = _loginR;
+  saveUsers();
   logEvent("login", { uid: u.id, email: u.email || maskPhone(u.phone ? decPhone(u.phone) : null), ip });
   const token = newSession(u.id);
   return { code: 200, body: { user: publicUser(u) }, headers: { "Set-Cookie": sessionCookie(token) } };
@@ -747,7 +750,7 @@ export function track(req, payload, ip) {
   const type = String((payload || {}).type || "");
   const u = userOf(req);
   const anon = String((payload || {}).anon || "").slice(0, 40);
-  if (u) { markOnline("user:" + u.id, "user", u.email || u.nickname || u.id); if (anon) online.delete("anon:" + anon); }  // 登录后清掉同人的访客条目,免重复计数
+  if (u) { markOnline("user:" + u.id, "user", u.email || u.nickname || u.id); if (anon) online.delete("anon:" + anon); touchIpRegion(u.id, ipRegion(ip)); }  // 登录后清掉同人的访客条目,免重复计数;并随访问刷新属地
   else if (anon) markOnline("anon:" + anon, "anon", anon.slice(0, 8));
   // 落盘事件白名单(v0.85.0 扩展):visit 进站 / outbound 前往官网 / view 看详情 /
   // fav 收藏切换 / wkread 读周刊;其余(hb 心跳)只更新在线表不落盘。
@@ -835,7 +838,8 @@ export async function adminOverview() {
       if (e.uid && um.has(e.uid)) {
         const u = um.get(e.uid);
         e.user = { id: u.id, nickname: u.nickname || null, avatar: u.avatar || null };
-        e.region = (u.ip_region && u.ip_region.disp) || null;
+        // 属地优先取用户已持久化记录;没有则用事件里的 IP 实时解析(老用户也立即可见)
+        e.region = (u.ip_region && u.ip_region.disp) || (e.ip ? ((ipRegion(e.ip) || {}).disp || null) : null);
       }
     }
   } catch (e) {}
