@@ -74,16 +74,10 @@
     .main { padding: 14px 12px 50px; }
     .searchbox { width: 100%; }
     .count { margin-left: 0; width: 100%; }
-    /* 手机端多列表格改「竖排卡片」:彻底告别横向裁切/横滚(字段名用 data-label 自动带出) */
-    .scroll, table { border: none; background: transparent; border-radius: 0; }
-    .scroll { overflow: visible; }
-    table { table-layout: auto; }
-    table thead { display: none; }
-    table tbody, table tr { display: block; }
-    table tbody { padding: 0; }
-    table tr { border: 1px solid #2a2e36; border-radius: 10px; padding: 3px 0; margin: 0 0 10px; background: #1d2026; }
-    table td { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; white-space: normal; word-break: break-word; border: none; padding: 4px 10px; font-size: 12px; line-height: 1.5; }
-    table td[data-label]::before { content: attr(data-label); flex: none; color: #8b8f98; font-size: 10px; margin-right: 8px; }
+    /* 手机端:保留常规横排列表(信息密度优先),窄屏靠横向滚动;仅缩小贴点与字号 */
+    .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #2a2e36; border-radius: 10px; background: #16181c; }
+    table { min-width: 640px; }
+    th, td { font-size: 12px; padding: 5px 8px; }
   }
   .sumprev:empty { display: none; }
   .sumprev { margin-top: 18px; padding: 18px 20px; border: 1px solid #2a2e36; border-radius: 12px; background: #14161b; max-width: 760px; line-height: 1.7; }
@@ -380,32 +374,6 @@
 <script>
 (function () {
   "use strict";
-  // 手机端后台表格转「竖排卡片」:自动给每个 td 刷上表头字段名(data-label),
-  // CSS 在窄屏用 ::before 带出字段名,宽屏不受影响(宽屏不显示这些标签)。
-  (function () {
-    var timer = null;
-    function labelRows() {
-      var tbs = document.querySelectorAll("table");
-      for (var i = 0; i < tbs.length; i++) {
-        var tb = tbs[i], hd = tb.querySelector("thead tr"); if (!hd) continue;
-        var heads = hd.children, bodies = tb.tBodies || [];
-        for (var b = 0; b < bodies.length; b++) {
-          var rows = bodies[b].rows || [];
-          for (var r = 0; r < rows.length; r++) {
-            var tds = rows[r].children;
-            for (var c = 0; c < tds.length; c++) {
-              var th = heads[c], td = tds[c];
-              if (th && th.textContent.trim() && !td.getAttribute("data-label")) td.setAttribute("data-label", th.textContent.trim());
-            }
-          }
-        }
-      }
-    }
-    function sched() { if (timer) clearTimeout(timer); timer = setTimeout(labelRows, 80); }
-    labelRows();
-    var mo = new MutationObserver(sched);
-    mo.observe(document.body, { childList: true, subtree: true });
-  })();
   var allUsers = [], allContent = [], allSubs = [], allRecycle = [], allIngests = [];
   var view = "overview";
   // 各模块分页/过滤状态(刷新数据时保留页码,不打断管理员操作)
