@@ -453,11 +453,12 @@ export function publicProfile(uid, ip) {
   } } };
 }
 
-// IP 属地:按最近活跃 IP 更新(仅属地变化才落盘);返回当前属地供 me 响应
+// IP 属地:首见即锚定(只记录第一次见到的位置,不随后续 IP 变动覆盖);返回当前属地供 me 响应
 export function touchIpRegion(uid, region) {
   const u = users.find(x => x.id === uid);
   if (!u) return region || null;
-  if (region && (!u.ip_region || u.ip_region.disp !== region.disp)) { u.ip_region = region; saveUsers(); }
+  // 属地"首见即锚定":只写第一次见到的值;已记录的永不因后续 IP(尤其 VPN/换节点漂移)变动而覆盖。
+  if (region && !u.ip_region) { u.ip_region = region; saveUsers(); }
   return u.ip_region || null;
 }
 
@@ -676,7 +677,7 @@ export function login(identifier, password, ip) {
   if (!checkPassword(password, u)) return { code: 401, body: { error: "账号或密码不正确" } };
   if (u.banned) return { code: 403, body: { error: "该账号已被停用。如有疑问请通过页脚反馈联系平台。" } };
   u.last_seen = new Date().toISOString();
-  const _loginR = ipRegion(ip); if (_loginR && (!u.ip_region || u.ip_region.disp !== _loginR.disp)) u.ip_region = _loginR;
+  const _loginR = ipRegion(ip); if (_loginR && !u.ip_region) u.ip_region = _loginR;  // 属地首见锚定,不随 VPN 漂移覆盖
   saveUsers();
   logEvent("login", { uid: u.id, email: u.email || maskPhone(u.phone ? decPhone(u.phone) : null), ip });
   const token = newSession(u.id);
