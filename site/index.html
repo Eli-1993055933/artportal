@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.26.0" />
+<meta name="app-version" content="1.26.1" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -754,11 +754,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.26.0</span></div>
+  ARTPORTAL <span id="appVer">v1.26.1</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.26.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.26.0"></script>
-<script src="js/globe-data.js?v=1.26.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.26.1"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.26.1"></script>
+<script src="js/globe-data.js?v=1.26.1"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -767,7 +767,7 @@
   var dpr=Math.min(window.devicePixelRatio||1,2);
   var W,H,scale0, proj=d3.geoOrthographic().clipAngle(90), pathC=d3.geoPath(proj,ctx), grat=d3.geoGraticule10();
   var SPHERE={type:'Sphere'};
-  var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null;
+  var countryFeats=[], labelData=[], markers=[], groups={}, adminFeats=[], drilledCountry=null, macroClus=[];
   var drillLevel=0, drilledProvAdcode=null, cnProv=null, cnBase=null, cnJD=null, CN_CART=null;
   var provLabels=[], adminLabels=[], drilledFeat=null, cnNE=null, maxK=100, adminSeq=0, drilledAdmName=null;
   // 中国三级下钻(L3=区县):点开某市→载该市区县多边形+区县名;直辖市/港澳/县级市(childrenNum=0)无此级
@@ -989,6 +989,41 @@
       ctx.beginPath(); ctx.arc(tp[0],tp[1],3+phz*10,0,2*PI); ctx.lineWidth=1.6;
       ctx.strokeStyle='rgba('+T.meRing+','+(0.6*(1-phz)).toFixed(3)+')'; ctx.stroke();
       ctx.beginPath(); ctx.arc(tp[0],tp[1],2.6,0,2*PI); ctx.fillStyle='#fff'; ctx.fill(); } }
+  // 远景光标可见门槛(小于此缩放时只画"聚合簇"代替散点,保证地球缩到最小也看得到数据量)
+  function markerMin(){ return scale0*((W<=720)?1.6:0.95); }
+  // 远景聚合簇:按屏幕距离把城市簇贪心聚拢成"大圆+数字"。
+  // 越缩小→同屏可容纳的城市越多、彼此屏距越近→自动并成少数大圆(数字越滚越大);
+  // 聚簇半径固定→不会真全挤成一团看不清,远处只是合并成几枚大数字。
+  function drawMacroCluster(){
+    macroClus=[];
+    if(!groups||!Object.keys(groups).length) return;
+    var R=(W<=720)?30:40;   // 聚合判定半径(像素):固定值,靠缩放天然收敛
+    var pts=[];
+    for(var ck in groups){ var g=groups[ck];
+      if(!g.cart||!frontC(g.cart)) continue;
+      var pt=proj(g.ll); if(pt[0]<-26||pt[0]>W+26||pt[1]<-18||pt[1]>H+18) continue;
+      var nm=0, il=g.items||[];
+      for(var q=0;q<il.length;q++) if(matchFilter(il[q].o)) nm++;
+      if(!nm) continue;
+      pts.push({x:pt[0],y:pt[1],cnt:nm,items:g.items}); }
+    for(var i=0;i<pts.length;i++){ var pp=pts[i], put=false;
+      for(var j=0;j<macroClus.length;j++){ var cc=macroClus[j];
+        var dx=pp.x-cc.rcx, dy=pp.y-cc.rcy, d2=dx*dx+dy*dy;
+        if(d2<R*R){ cc.cnt+=pp.cnt; cc.items=cc.items.concat(pp.items);
+          cc.rcx=(cc.rcx*(cc.cnt-pp.cnt)+pp.x*pp.cnt)/cc.cnt; cc.rcy=(cc.rcy*(cc.cnt-pp.cnt)+pp.y*pp.cnt)/cc.cnt;
+          cc.ll=proj.invert([cc.rcx,cc.rcy]); put=true; break; } }
+      if(!put) macroClus.push({cnt:pp.cnt,items:pp.items,rcx:pp.x,rcy:pp.y,ll:proj.invert([pp.x,pp.y])}); }
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    for(var c2=0;c2<macroClus.length;c2++){ var mc=macroClus[c2];
+      var r=Math.min((W<=720)?20:24, 5+Math.sqrt(mc.cnt));
+      mc.r=r;
+      ctx.beginPath(); ctx.arc(mc.rcx,mc.rcy,r,0,2*PI);
+      ctx.fillStyle='rgba(192,57,43,.9)'; ctx.fill();
+      ctx.lineWidth=1.5; ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.stroke();
+      ctx.font='600 '+(mc.cnt>=1000?8:mc.cnt>=100?9:mc.cnt>=10?10:12)+'px "Inter",-apple-system,sans-serif';
+      ctx.strokeStyle='rgba(8,11,18,.75)'; ctx.lineWidth=3; ctx.strokeText(String(mc.cnt),mc.rcx,mc.rcy);
+      ctx.fillStyle='#fff'; ctx.fillText(String(mc.cnt),mc.rcx,mc.rcy); }
+  }
   function draw(){
     var t0=performance.now(), nowMs=Date.now();
     var sc=proj.scale(); updateRC();
@@ -1047,8 +1082,8 @@
     function fitsLabel(rRad,txt,fs2){
       var cjk=/[一-鿿]/.test(txt);
       return 2*rRad*sc > txt.length*fs2*(cjk?1:0.56)*1.12; }
-    // —— 远景分层:最小=大洲名 → 稍放大=次区域名(两层均不画光标) → 再放大=国名+数字聚合点位 ——
-    var MARKER_MIN=scale0*((W<=720)?1.6:0.95);
+    // —— 远景分层:缩到底=大洲名+聚合数字大圆;放大一点=次区域名;再放大=国名+数字聚合点位 ——
+    var MARKER_MIN=markerMin();
     var showMarkers=!!drilledCountry||sc>=MARKER_MIN;
     if(!drilledCountry && sc<MARKER_MIN && !sheetDrag){   // 地名不随运动隐藏(文字很廉价);仅手机拖底卡时让位
       var tierA=sc<scale0*((W<=720)?0.8:0.7);
@@ -1094,6 +1129,7 @@
     if(!showMarkers){
       for(m=0;m<markers.length;m++) markers[m].sx=null;
       for(k in groups) groups[k].sx=null;
+      drawMacroCluster();   // 远景:散点换聚合大圆,数字越聚越大,地球缩到最小也看得到数据量
     } else if(sc<splitScale()){
       for(m=0;m<markers.length;m++) markers[m].sx=null;
       ctx.textAlign='center'; ctx.textBaseline='middle';
@@ -1221,7 +1257,12 @@
   // —— 命中检测(簇优先于散点,按当前模式) ——
   function hoverTest(e){
     var sc=proj.scale(), best=null, kind=null, k, g, m, mk;
-    if(sc<splitScale()){ var bd=1e9, slop=(W<=720)?9:5;
+    if(sc<markerMin() && macroClus.length){   // 远景:命中聚合大圆(没点中则是空白,不悬停)
+      var bdM=1e9;
+      for(var mc2=0;mc2<macroClus.length;mc2++){ var cl=macroClus[mc2];
+        var dxM=cl.rcx-e.clientX, dyM=cl.rcy-e.clientY, rrM=(cl.r+6)*(cl.r+6), ddM=dxM*dxM+dyM*dyM;
+        if(ddM<rrM&&ddM<bdM){ bdM=ddM; best=cl; kind='mc'; } } }
+    else if(sc<splitScale()){ var bd=1e9, slop=(W<=720)?9:5;
       for(k in groups){ g=groups[k]; if(g.sx==null) continue;
         var dx=g.sx-e.clientX, dy=g.sy-e.clientY, rr=(g.r+slop)*(g.r+slop), dd=dx*dx+dy*dy;
         if(dd<rr&&dd<bd){ bd=dd; best=g; kind='c'; } } }
@@ -1230,7 +1271,8 @@
         var dx2=mk.sx-e.clientX, dy2=mk.sy-e.clientY, dd2=dx2*dx2+dy2*dy2;
         if(dd2<bd2){ bd2=dd2; best=mk; kind='m'; } } }
     if(best){ canvas.style.cursor='var(--cur-hand)';   // 命中项目=macOS 指点手(非系统 pointer)
-      if(best!==hoverObj){ if(kind==='c'){ if(best.count===1) fillTip(best.single); else fillTipCluster(best); } else fillTip(best); }
+      if(best!==hoverObj){ if(kind==='mc'){ tipEl.innerHTML='<div class="tpad"><div class="tt">'+String(best.cnt).replace(/(\d)(?=(\d{3})+$)/g,'$1,')+esc(L('clusterN'))+'</div><div class="tg">'+esc(L('clusterGo'))+'</div></div>'; }
+        else if(kind==='c'){ if(best.count===1) fillTip(best.single); else fillTipCluster(best); } else fillTip(best); }
       moveTip(e); tipEl.style.display='block'; }
     else { canvas.style.cursor='var(--cur-arrow)'; tipEl.style.display='none'; }
     hoverObj=best; hoverKind=kind;
@@ -1291,6 +1333,12 @@
     if(moved) return;
     hoverTest(e);
     if(W<=720) tipEl.style.display='none';   // 手机:不弹悬浮卡,只居中弹详情卡(避免一次弹两个)
+    // —— 远景聚合大圆:点到=放大拆开再点散点 ——
+    if(hoverKind==='mc' && hoverObj){
+      tipEl.style.display='none';
+      flyTo(hoverObj.ll, Math.max(splitScale()*1.45, markerMin()*1.35));
+      return;
+    }
     // —— 机会点命中逻辑(用户需求定稿)——
     // 1) 含多条机会的聚合圆 → 一律放大导航(拆成散点后再点单条),不弹卡、不退出。
     // 2) 未到最细层级、且点位落在当前可下钻区划内 → 让位给下钻:机会密集处点得进板块(不弹卡)。
