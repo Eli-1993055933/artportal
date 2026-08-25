@@ -1789,14 +1789,21 @@ if (process.env.WEEKLY_REPORT === "1") {
     try {
       const bj = new Date(Date.now() + 8 * 3600e3);
       if (bj.getUTCDay() !== 1 || bj.getUTCHours() < 9) return;    // 北京时间周一 9 点后
-      if (await readWeekly(weekIdOf())) return;                    // 本周已出刊
-      const r = await generateWeekly({});
-      if (!r.report) return;
-      process.stderr.write(`[周报] 已生成 ${r.report.id}「${r.report.title}」(AI=${r.report.ai_composed})\n`);
-      db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${r.report.id}「${r.report.title}」`, metrics: { id: r.report.id, format: r.report.format || 1, refs: (r.report.references || []).length, en: !!r.report.en } }).catch(() => {});
-      if (!r.existed) notifyWeeklyPublished(r.report);   // 站内通知全体用户:新周刊出刊
+      const weekId = weekIdOf();
+      let report = await readWeekly(weekId);               // readWeekly 直接返回该期对象;未出刊返回 null
+      if (!report) {
+        // 本周未出刊 → 先生成
+        const r = await generateWeekly({});
+        if (!r.report) return;                             // 空刊保护:数据长期没更新就不出刊
+        report = r.report;
+        process.stderr.write(`[周报] 已生成 ${report.id}「${report.title}」(AI=${report.ai_composed})\n`);
+        db.agentLog({ agent: "eli", ok: true, summary: `出刊 ${report.id}「${report.title}」`, metrics: { id: report.id, format: report.format || 1, refs: (report.references || []).length, en: !!report.en } }).catch(() => {});
+        if (!r.existed) notifyWeeklyPublished(report);     // 站内通知全体用户:新周刊出刊
+      }
+      // 全自动群发 + 断点续发:只要闸开了、没在跑,就让引擎把「已出刊但还没发完」的补发完。
+      // 引擎内部按 nlSentSet 过滤已成功的那批,只补发剩下的;批间照常歇档、命中风控自动冷却重发。
       if (process.env.NEWSLETTER_AUTO === "1" && process.env.NEWSLETTER_BULK === "1" && mailerOn() && !nlState.running) {
-        sendWeeklyBulk(r.report);
+        sendWeeklyBulk(report);
       }
     } catch (e) { process.stderr.write("[周报] 定时生成失败: " + String(e.message || e).slice(0, 160) + "\n"); }
   }
