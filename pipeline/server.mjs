@@ -1119,7 +1119,7 @@ async function handleAuthApi(req, res, u) {
         return json({ code: 200, body: { days: out, topItems, topSearches, topZero, fav_total: favTotal } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
-    // 访客明细(v0.99.2):某天具体是谁——登录用户给邮箱/昵称,匿名按 IP 属地归堆(不出具体 IP)。
+    // 访客明细(v0.99.2):某天具体是谁——登录用户给邮箱/昵称/头像 + 访问的机会明细,匿名按 IP 属地归堆(不出具体 IP)。
     if (p === "/api/admin/stats/day" && m === "GET") {
       if (!auth.isAdmin(req, ip)) return json({ code: 401, body: { error: "unauthorized" } });
       const day = String(u.searchParams.get("day") || "").slice(0, 10);
@@ -1131,16 +1131,44 @@ async function handleAuthApi(req, res, u) {
           try { lines.push(...(await readFile(f, "utf8")).trim().split("\n")); } catch (e) {}
         }
         const uidHits = new Map(), ipHits = new Map();
+        const uidItems = new Map();          // uid -> Map(itemId -> {id, views, outs})
+        const itemIds = new Set();           // 需要解析标题的 item id
         for (const line of lines) {
           let e; try { e = JSON.parse(line); } catch (x) { continue; }
           if (!e.t || bjDayOf(e.t) !== day) continue;
-          if (e.uid) uidHits.set(e.uid, (uidHits.get(e.uid) || 0) + 1);
-          else if (e.ip) ipHits.set(e.ip, (ipHits.get(e.ip) || 0) + 1);
+          if (e.uid) {
+            uidHits.set(e.uid, (uidHits.get(e.uid) || 0) + 1);
+            if ((e.type === "view" || e.type === "outbound") && e.id) {
+              let m = uidItems.get(e.uid); if (!m) uidItems.set(e.uid, m = new Map());
+              const k = String(e.id);
+              let it = m.get(k); if (!it) { it = { id: k, views: 0, outs: 0 }; m.set(k, it); itemIds.add(k); }
+              if (e.type === "view") it.views++; else it.outs++;
+            }
+          } else if (e.ip) ipHits.set(e.ip, (ipHits.get(e.ip) || 0) + 1);
         }
+        // 解析访问过的机会/新闻/岗位/作品标题(三频道逐个试,与"热门条目"同一套解析;解析不到的显示 id,不凑数)
+        const titleBy = new Map();
+        const workIds = [...itemIds].filter(x => /^work-/.test(x)).map(x => x.slice(5));
+        if (workIds.length) { try { const rows = await db.worksByIds(workIds); for (const w of rows) if (w.title) titleBy.set("work-" + w.id, w.title); } catch (e) {} }
+        for (const id of itemIds) {
+          if (titleBy.has(id)) continue;
+          for (const c of ["opportunities", "news", "jobs"]) {
+            const mp = await favChannelMap(c);
+            const it = mp.get(id);
+            if (it) { titleBy.set(id, it.title_zh || it.title || id); break; }
+          }
+        }
+        for (const [, m] of uidItems) for (const [, it] of m) it.title = titleBy.get(it.id) || it.id;
         const mini = auth.usersForAdminLookup([...uidHits.keys()]);
         const byId = new Map(mini.map(x => [x.id, x]));
         const users = [...uidHits.entries()]
-          .map(([id, events]) => ({ id, email: (byId.get(id) || {}).email || null, nickname: (byId.get(id) || {}).nickname || null, events }))
+          .map(([id, events]) => {
+            const gu = byId.get(id) || {};
+            const items = uidItems.get(id) ? [...uidItems.get(id).values()]
+              .sort((a, b) => (b.views + b.outs) - (a.views + a.outs)).slice(0, 30)
+              .map(x => ({ id: x.id, title: x.title, views: x.views, outs: x.outs })) : [];
+            return { id, email: gu.email || null, nickname: gu.nickname || null, avatar: gu.avatar || null, events, items };
+          })
           .sort((a, b) => b.events - a.events);
         const regionAgg = new Map();
         for (const [ipAddr, events] of ipHits) {

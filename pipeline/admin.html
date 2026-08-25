@@ -1641,12 +1641,40 @@
       }
       if (users.length) {
         var t1 = document.createElement("table");
-        t1.innerHTML = "<thead><tr><th>登录用户</th><th>事件数</th></tr></thead>";
+        t1.innerHTML = "<thead><tr><th>用户(头像+昵称)</th><th>邮箱</th><th>事件数</th><th>访问的机会(看详情×N / 去官网×M)</th></tr></thead>";
         var b1 = document.createElement("tbody");
         users.forEach(function (x) {
           var tr = document.createElement("tr");
-          tr.appendChild(td(x.email || x.nickname || ("用户 " + x.id)));
+          // 头像 + 昵称(点击看完整用户档案)
+          var cu = document.createElement("span");
+          cu.style.cssText = "display:inline-flex;align-items:center;gap:8px;cursor:pointer";
+          cu.title = "查看该用户档案";
+          if (x.avatar) { var im = document.createElement("img"); im.src = "/" + x.avatar; im.style.cssText = "width:24px;height:24px;border-radius:50%;object-fit:cover;flex:none"; cu.appendChild(im); }
+          else { var ph = document.createElement("span"); ph.style.cssText = "width:24px;height:24px;border-radius:50%;background:#2a2e36;color:#8b8f98;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none"; ph.textContent = "·"; cu.appendChild(ph); }
+          var nm = document.createElement("span"); nm.style.cssText = "color:#9fdcff;font-weight:600;word-break:break-all";
+          nm.textContent = x.nickname || x.email || ("用户 " + x.id);
+          cu.appendChild(nm);
+          cu.onclick = function () { openUserDetail(x.id); };
+          var td0 = document.createElement("td"); td0.appendChild(cu);
+          tr.appendChild(td0);
+          tr.appendChild(td(x.email || "—"));
           tr.appendChild(td(x.events, "mono"));
+          var td3 = document.createElement("td");
+          var items = x.items || [];
+          if (items.length) {
+            var lst = document.createElement("div");
+            lst.style.cssText = "max-height:150px;overflow-y:auto;display:flex;flex-direction:column;gap:3px";
+            items.forEach(function (it) {
+              var row = document.createElement("div");
+              row.style.cssText = "font-size:12px;display:flex;justify-content:space-between;gap:10px;color:#c8ccd4;align-items:center";
+              var txtS = document.createElement("span"); txtS.textContent = it.title || it.id; txtS.style.cssText = "word-break:break-all;flex:1";
+              var cntS = document.createElement("span"); cntS.textContent = "看" + (it.views || 0) + "/去" + (it.outs || 0); cntS.className = "mono"; cntS.style.cssText = "color:#8b8f98;flex:none";
+              row.appendChild(txtS); row.appendChild(cntS);
+              lst.appendChild(row);
+            });
+            td3.appendChild(lst);
+          } else { td3.textContent = "—"; }
+          tr.appendChild(td3);
           b1.appendChild(tr);
         });
         t1.appendChild(b1);

@@ -431,7 +431,7 @@ export function userExists(uid) { return users.some(u => u.id === uid && u.nickn
 // 数据面板"访客明细"用(admin 专用,含邮箱,别的地方别复用——公开面不出邮箱)
 export function usersForAdminLookup(uids) {
   const set = new Set(uids);
-  return users.filter(u => set.has(u.id)).map(u => ({ id: u.id, email: u.email || null, nickname: u.nickname || null }));
+  return users.filter(u => set.has(u.id)).map(u => ({ id: u.id, email: u.email || null, nickname: u.nickname || null, avatar: (u.id && u.avatar) ? u.avatar : null }));
 }
 
 // 用户公开主页(8.1):任何人可看。只出公开字段——绝不含邮箱/收藏之外的任何隐私(红线)。
