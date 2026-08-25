@@ -431,7 +431,7 @@ export function userExists(uid) { return users.some(u => u.id === uid && u.nickn
 // 数据面板"访客明细"用(admin 专用,含邮箱,别的地方别复用——公开面不出邮箱)
 export function usersForAdminLookup(uids) {
   const set = new Set(uids);
-  return users.filter(u => set.has(u.id)).map(u => ({ id: u.id, email: u.email || null, nickname: u.nickname || null, avatar: (u.id && u.avatar) ? u.avatar : null }));
+  return users.filter(u => set.has(u.id)).map(u => ({ id: u.id, email: u.email || null, nickname: u.nickname || null, avatar: (u.id && u.avatar) ? u.avatar : null, region: (u.ip_region && u.ip_region.disp) || null }));
 }
 
 // 用户公开主页(8.1):任何人可看。只出公开字段——绝不含邮箱/收藏之外的任何隐私(红线)。
@@ -536,6 +536,52 @@ export async function setProfile(req, body, ip) {
   return { code: 200, body: { user: publicUser(u) } };
 }
 
+// 新用户资料(注册时采集):性别(必填) + 出生年份(必填)。缺失也放行(前端注册表单是必填,
+// 老注册通道或异常跳过时靠 needs_profile 强制在资料页补全)。存 profile 而非顶层,与现有资料字段一致。
+function newUserProfile(body) {
+  const pr = {};
+  const g = String((body || {}).gender || "").trim();
+  if (g === "male" || g === "female" || g === "private") pr.gender = g;
+  const by = parseInt((body || {}).birth_year, 10);
+  const maxYear = new Date().getFullYear() - 8;
+  if (by && by >= 1900 && by <= maxYear) pr.birth_year = by;
+  return pr;
+}
+// 按出生年算当前年龄段(数据面板用户构成用);缺资料返回 null
+function ageBucket(u) {
+  const by = (u.profile || {}).birth_year;
+  if (!by) return null;
+  const age = new Date().getFullYear() - by;
+  if (age < 20) return "<20";
+  if (age < 30) return "20-29";
+  if (age < 40) return "30-39";
+  if (age < 50) return "40-49";
+  if (age < 60) return "50-59";
+  return "60+";
+}
+// IP 属地聚合键:越具体越好的可读文本(省·市或境外国家),没有则"未知"
+function regionKey(u) {
+  const d = (u.ip_region && u.ip_region.disp) || "";
+  return d || "未知";
+}
+// 数据面板"用户构成"(admin 专用):性别 / 年龄 / IP 地区三组分布,供后台画环形饼图
+export function adminUserComposition() {
+  const byBucket = arr => {
+    const m = new Map();
+    for (const a of arr) { const k = a || "未知"; m.set(k, (m.get(k) || 0) + 1); }
+    return [...m.entries()].map(([label, n]) => ({ label, n })).sort((a, b) => b.n - a.n);
+  };
+  const genderZh = users.filter(u => u.nickname && (u.profile || {}).gender).map(u => GENDER_ZH[(u.profile || {}).gender] || "未知");
+  const age = users.filter(u => u.nickname && ageBucket(u)).map(ageBucket);
+  const region = users.filter(u => u.nickname && u.ip_region).map(regionKey);
+  return {
+    total: users.filter(u => u.nickname).length,
+    gender: byBucket(genderZh),
+    age: byBucket(age),
+    region: byBucket(region).slice(0, 12)
+  };
+}
+const GENDER_ZH = { male: "男", female: "女", private: "保密" };
 export async function register(body, ip) {
   if (authLimited(ip)) return { code: 429, body: { error: "尝试太频繁,请稍后再试" } };
   body = body || {};
@@ -577,7 +623,7 @@ export async function register(body, ip) {
       id: "u" + randomBytes(6).toString("hex"),
       email: email || null, salt, hash: hashPassword(password, salt), email_verified: emailVerified,
       phone: encPhone(phone), phone_hmac: phoneHmac(phone), phone_verified: true,
-      newsletter, nickname: null, profile: {}, favorites: [],
+      newsletter, nickname: null, profile: newUserProfile(body), favorites: [],
       created_at: new Date().toISOString(), last_seen: new Date().toISOString()
     };
     users.push(u); byPhone.set(u.phone_hmac, u); if (email) byEmail.set(email, u); saveUsers();
@@ -610,7 +656,7 @@ export async function register(body, ip) {
   const u = {
     id: "u" + randomBytes(6).toString("hex"),
     email, salt, hash: hashPassword(password, salt), email_verified: verified,
-    newsletter, nickname: null, profile: {}, favorites: [],
+    newsletter, nickname: null, profile: newUserProfile(body), favorites: [],
     created_at: new Date().toISOString(), last_seen: new Date().toISOString()
   };
   users.push(u); byEmail.set(email, u); saveUsers();
@@ -783,13 +829,30 @@ export async function adminOverview() {
     for (const line of lines.slice(-30).reverse()) {
       try { recent.push(JSON.parse(line)); } catch (x) {}
     }
+    // 近期事件补上用户(头像+ID/昵称)与 IP 属地(尽可能具体:省·市/国家),后台处处都能看到用户与属地
+    const um = new Map(users.map(u => [u.id, u]));
+    for (const e of recent) {
+      if (e.uid && um.has(e.uid)) {
+        const u = um.get(e.uid);
+        e.user = { id: u.id, nickname: u.nickname || null, avatar: u.avatar || null };
+        e.region = (u.ip_region && u.ip_region.disp) || null;
+      }
+    }
   } catch (e) {}
   const on = onlineNow();
+  const usersOn = on.users.map(function (it) {
+    const u = users.find(x => x.email === it.email || x.nickname === it.email || x.id === it.email);
+    return {
+      email: it.email, last: it.last,
+      nickname: (u && u.nickname) || null, avatar: (u && u.avatar) || null,
+      region: (u && u.ip_region && u.ip_region.disp) || null
+    };
+  });
   return {
     code: 200, body: {
       registered_total: users.length,
       registered_today: users.filter(u => beijingDay(u.created_at) === today).length,
-      online_users: on.users,
+      online_users: usersOn,
       online_anon: on.anonCount,
       today: stats,
       recent
@@ -800,7 +863,8 @@ export function adminUsers() {
   const list = users.slice().reverse().map(u => ({
     id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null), nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
     last_seen: u.last_seen, favorites: (u.favorites || []).length,
-    verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio
+    verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio,
+    ip_region: (u.ip_region && u.ip_region.disp) || null
   }));
   return { code: 200, body: { total: list.length, users: list } };
 }

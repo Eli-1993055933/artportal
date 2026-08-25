@@ -1116,7 +1116,9 @@ async function handleAuthApi(req, res, u) {
         const topSearches = [...qHits.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([q, n]) => ({ q, n }));
         const favTotal = auth.favTotal ? auth.favTotal() : null;
         const topZero = await db.topZeroQueries(30, 15); // P5 补源看板:近30天反复零结果的检索词
-        return json({ code: 200, body: { days: out, topItems, topSearches, topZero, fav_total: favTotal } });
+        let composition = null;
+        try { composition = auth.adminUserComposition ? auth.adminUserComposition() : null; } catch (e) {}
+        return json({ code: 200, body: { days: out, topItems, topSearches, topZero, fav_total: favTotal, composition } });
       } catch (e) { return json({ code: 503, body: { error: "暂不可用" } }); }
     }
     // 访客明细(v0.99.2):某天具体是谁——登录用户给邮箱/昵称/头像 + 访问的机会明细,匿名按 IP 属地归堆(不出具体 IP)。
@@ -1167,7 +1169,7 @@ async function handleAuthApi(req, res, u) {
             const items = uidItems.get(id) ? [...uidItems.get(id).values()]
               .sort((a, b) => (b.views + b.outs) - (a.views + a.outs)).slice(0, 30)
               .map(x => ({ id: x.id, title: x.title, views: x.views, outs: x.outs })) : [];
-            return { id, email: gu.email || null, nickname: gu.nickname || null, avatar: gu.avatar || null, events, items };
+            return { id, email: gu.email || null, nickname: gu.nickname || null, avatar: gu.avatar || null, region: gu.region || null, events, items };
           })
           .sort((a, b) => b.events - a.events);
         const regionAgg = new Map();

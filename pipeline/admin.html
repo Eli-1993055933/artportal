@@ -144,7 +144,7 @@
         <h1 class="sec__title">概览</h1>
         <div class="cards" id="cards"></div>
         <h2>当前在线(近 5 分钟有心跳)</h2>
-        <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th><th>属地</th></tr></thead><tbody></tbody></table></div>
         <h2>近期事件(最新 30 条)</h2>
         <div class="scroll"><table id="evtTbl"><thead><tr><th>时间</th><th>类型</th><th>谁</th><th>详情</th></tr></thead><tbody></tbody></table></div>
       </section>
@@ -155,7 +155,7 @@
         <div class="cards" id="stCards"></div>
         <h2>日活 / 每日新增注册 <span class="muted" style="font-size:12px">近 14 天折线</span></h2>
         <div class="chart-wrap"><div id="stLine" style="width:100%"></div></div>
-        <h2>行为构成 <span class="muted" style="font-size:12px">近 14 天各行为占比</span></h2>
+        <h2>用户构成 <span class="muted" style="font-size:12px">注册用户性别 / 年龄 / 地区分布</span></h2>
         <div class="chart-wrap" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><div id="stPie" style="flex:none"></div><div class="chart-legend" id="stPieLegend" style="flex:1;min-width:200px"></div></div>
         <h2>近 14 天独立访客</h2>
         <div id="stBars" style="display:flex;align-items:flex-end;gap:6px;height:130px;padding:6px 2px 0"></div>
@@ -350,7 +350,7 @@
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>手机</th><th>验证</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th>头像</th><th>昵称</th><th>邮箱</th><th>手机</th><th>验证</th><th>属地</th><th>注册时间</th><th>最近活跃</th><th>收藏</th><th>画室</th><th>操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -971,11 +971,18 @@
   }
   function renderOnline(list) {
     var tb = $("onlineTbl").tBodies[0]; tb.textContent = "";
-    if (!list.length) { emptyRow(tb, "(当前没有已登录用户在线;访客数见上方卡片)", 2); return; }
+    if (!list.length) { emptyRow(tb, "(当前没有已登录用户在线;访客数见上方卡片)", 3); return; }
     list.sort(function (a, b) { return b.last - a.last; }).forEach(function (u) {
       var tr = document.createElement("tr");
-      tr.appendChild(td(u.email));
+      var utd = document.createElement("td");
+      utd.style.cssText = "display:flex;align-items:center;gap:8px";
+      if (u.avatar) { var im = document.createElement("img"); im.src = "/" + u.avatar; im.style.cssText = "width:22px;height:22px;border-radius:50%;object-fit:cover;flex:none"; utd.appendChild(im); }
+      var nm = document.createElement("div");
+      nm.textContent = (u.nickname || u.email || "在线用户") + (u.nickname && u.email ? " · " + u.email : "");
+      utd.appendChild(nm);
+      tr.appendChild(utd);
       tr.appendChild(td(rel(u.last), "mono"));
+      tr.appendChild(td(u.region || "—", "muted"));
       tb.appendChild(tr);
     });
   }
@@ -988,7 +995,14 @@
       var typeCell = document.createElement("td");
       var pill = document.createElement("span"); pill.className = "pill" + (e.type === "register" ? " on" : "");
       pill.textContent = EVT_NAME[e.type] || e.type; typeCell.appendChild(pill); tr.appendChild(typeCell);
-      tr.appendChild(td(e.email || (e.anon ? "访客 " + e.anon : "—")));
+      var whoTd = document.createElement("td");
+      whoTd.style.cssText = "display:flex;align-items:center;gap:8px;flex-wrap:wrap";
+      if (e.user && e.user.avatar) { var im = document.createElement("img"); im.src = "/" + e.user.avatar; im.style.cssText = "width:22px;height:22px;border-radius:50%;object-fit:cover;flex:none"; whoTd.appendChild(im); }
+      var nm = document.createElement("span"); nm.style.fontWeight = "600";
+      nm.textContent = e.user ? (e.user.nickname || ("ID:" + e.user.id)) : (e.email || (e.anon ? "访客 " + e.anon : "—"));
+      whoTd.appendChild(nm);
+      if (e.region) { var rg = document.createElement("span"); rg.className = "muted"; rg.textContent = "(" + e.region + ")"; whoTd.appendChild(rg); }
+      tr.appendChild(whoTd);
       tr.appendChild(td(e.q || e.id || "", "muted"));
       tb.appendChild(tr);
     });
@@ -1020,6 +1034,7 @@
       vp.textContent = u.verified ? "✓ 已验证" : "未验证";
       vp.title = u.verified ? "验证码注册,邮箱真实" : "注册于发信启用前(仅域名弱校验)";
       vc.appendChild(vp); tr.appendChild(vc);
+      tr.appendChild(td(u.ip_region || "—", u.ip_region ? "" : "muted"));
       tr.appendChild(td(bj(u.created_at, true), "mono"));
       tr.appendChild(td(rel(u.last_seen), "mono"));
       tr.appendChild(td(u.favorites, "mono"));
@@ -1386,7 +1401,7 @@
     var days = stData.days || [];
     var w7 = days.slice(-7);
     var lineEl = $("stLine"), pieEl = $("stPie"), pieLeg = $("stPieLegend");
-    if (lineEl.parentElement) { renderLineChart(days); renderPie(days); }
+    if (lineEl.parentElement) { renderLineChart(days); renderPie(stData.composition || null); }
     function sum(k) { var n = 0; w7.forEach(function (d) { n += d[k] || 0; }); return n; }
     var box = $("stCards"); box.textContent = "";
     [["近7天独立访客", w7.reduce(function (m, d) { return m + d.visitors; }, 0)],
@@ -1468,7 +1483,7 @@
   function closeOvl() { $("ovl").hidden = true; $("ovlPanel").innerHTML = ""; }
   $("ovl").addEventListener("click", function (e) { if (e.target === $("ovl")) closeOvl(); });
 
-  // —— 数据面板:折线图(日活/新增注册) + 环形饼图(行为构成),纯 SVG,零依赖 ——
+  // —— 数据面板:折线图(日活/新增注册) + 环形饼图(用户构成:性别/年龄/地区),纯 SVG,零依赖 ——
   function renderLineChart(days) {
     var el = $("stLine"); el.innerHTML = "";
     if (!days || !days.length) { el.textContent = "暂无数据"; return; }
@@ -1495,30 +1510,45 @@
     out.push('<text x="' + (P.l + 96) + '" y="' + (P.t - 2) + '" fill="#7eb8e0" font-size="10">—— 每日新增注册</text>');
     el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;display:block">' + out.join("") + '</svg>';
   }
-  function mkLegend(color, label) {
-    var d = document.createElement("div"); d.style.cssText = "display:flex;align-items:center;gap:6px;font-size:12px;color:#cdd2da";
-    var i = document.createElement("i"); i.style.cssText = "width:10px;height:10px;border-radius:2px;background:" + color;
-    d.appendChild(i); d.appendChild(document.createTextNode(label)); return d;
-  }
-  function renderPie(days) {
+  function renderPie(comp) {
     var el = $("stPie"), leg = $("stPieLegend"); el.innerHTML = ""; leg.innerHTML = "";
-    if (!days || !days.length) { el.textContent = "暂无数据"; return; }
-    var SERIES = [["visit", "进站"], ["view", "看详情"], ["outbound", "去官网"], ["fav", "收藏"], ["search", "AI检索"], ["comment", "评论"], ["register", "注册"], ["login", "登录"]];
-    var data = [], total = 0;
-    SERIES.forEach(function (s) { var n = 0; days.forEach(function (d) { n += d[s[0]] || 0; }); data.push({ label: s[1], n: n }); total += n; });
-    if (!total) { el.textContent = "暂无行为数据"; return; }
-    var i = 0; data.forEach(function (d) { if (d.n) { leg.appendChild(mkLegend("#5b8a72,#7eb8e0,#d4a05b,#b48ad4,#e06f6f,#6fb8c0,#9ac264,#c97ba6".split(",")[i % 8], d.label + " · " + d.n)); } i++; });
-    var totEl = document.createElement("div"); totEl.textContent = "合计 " + total; totEl.style.cssText = "margin-bottom:6px;font-size:12.5px;color:#aab;font-weight:600";
-    leg.insertBefore(totEl, leg.firstChild);
-    var R = 54, C = 60, th = 26, seg = [], acc = 0, colors = "#5b8a72,#7eb8e0,#d4a05b,#b48ad4,#e06f6f,#6fb8c0,#9ac264,#c97ba6".split(",");
-    data.filter(function (d) { return d.n > 0; }).forEach(function (d, ci) {
-      var frac = d.n / total, a0 = acc * Math.PI * 2, a1 = (acc + frac) * Math.PI * 2;
-      var large = (a1 - a0) > Math.PI ? 1 : 0;
-      var x0 = C + R * Math.cos(a0), y0 = C + R * Math.sin(a0), x1 = C + R * Math.cos(a1), y1 = C + R * Math.sin(a1);
-      seg.push('<path d="M' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A' + R + ' ' + R + ' 0 ' + large + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + '" fill="none" stroke="' + colors[ci % colors.length] + '" stroke-width="' + th + '" opacity="0.92"/>');
-      acc += frac;
-    });
-    el.innerHTML = '<div style="display:inline-block"><svg viewBox="0 0 120 120" style="width:' + (C * 2 + th + 4) + 'px;height:' + (C * 2 + th + 4) + 'px;display:block;margin:auto;transform:rotate(-90deg)">' + seg.join("") + '</svg></div>';
+    el.style.display = "flex"; el.style.gap = "26px"; el.style.alignItems = "flex-start"; el.style.flexWrap = "wrap";
+    var colors = "#5b8a72,#7eb8e0,#d4a05b,#b48ad4,#e06f6f,#6fb8c0,#9ac264,#c97ba6,#e8997e,#7ea8c2".split(",");
+    if (!comp) { el.textContent = "暂无数据"; return; }
+    // 单张环形图:viewBox 按实际占用放大到 110×110,圆心/半径/环宽按比例取,保证不会被裁切
+    function donut(data) {
+      var size = 110, C = size / 2, R = size * 0.34, th = size * 0.16;
+      var arr = (data || []).filter(function (d) { return d.n > 0; });
+      var total = arr.reduce(function (s, d) { return s + d.n; }, 0);
+      if (!total) return '<div class="muted" style="font-size:12px">暂无数据</div>';
+      var seg = [], acc = 0;
+      arr.forEach(function (d, ci) {
+        var frac = d.n / total, a0 = acc * Math.PI * 2, a1 = (acc + frac) * Math.PI * 2;
+        acc += frac;
+        var large = (a1 - a0) > Math.PI ? 1 : 0;
+        var x0 = C + R * Math.cos(a0), y0 = C + R * Math.sin(a0), x1 = C + R * Math.cos(a1), y1 = C + R * Math.sin(a1);
+        seg.push('<path d="M' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A' + R + ' ' + R + ' 0 ' + large + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + '" fill="none" stroke="' + colors[ci % colors.length] + '" stroke-width="' + th + '" opacity="0.92"/>');
+      });
+      return '<div style="text-align:center"><svg viewBox="0 0 ' + size + ' ' + size + '" style="width:' + size + 'px;height:' + size + 'px;transform:rotate(-90deg)">' + seg.join("") + '</svg></div>';
+    }
+    function block(label, data) {
+      var wrap = document.createElement("div");
+      wrap.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:8px;min-width:140px";
+      var t = document.createElement("div"); t.style.cssText = "font-size:12.5px;color:#cdd2da;font-weight:600";
+      t.textContent = label + " (" + (data || []).reduce(function (s, d) { return s + d.n; }, 0) + ")";
+      wrap.appendChild(t);
+      var holder = document.createElement("div"); holder.innerHTML = donut(data); wrap.appendChild(holder.firstChild);
+      var items = document.createElement("div"); items.className = "muted"; items.style.cssText = "text-align:center;font-size:11.5px;line-height:1.7";
+      (data || []).forEach(function (d) { var r = document.createElement("div"); r.textContent = d.label + ": " + d.n; items.appendChild(r); });
+      wrap.appendChild(items);
+      el.appendChild(wrap);
+    }
+    block("性别", comp.gender || []);
+    block("年龄", comp.age || []);
+    block("地区(前8)", (comp.region || []).slice(0, 8));
+    var totalEl = document.createElement("div"); totalEl.className = "muted"; totalEl.style.cssText = "font-size:12px;margin-top:6px";
+    totalEl.textContent = "注册用户合计 " + (comp.total || 0) + " · 下列数据仅含已填资料/有属地的用户";
+    leg.appendChild(totalEl);
   }
 
   // —— 用户档案(v0.101.0):点名字/头像看完整档案 + 收藏 + 作品/评论 + 行为时间线 ——
@@ -1655,6 +1685,7 @@
           else { var ph = document.createElement("span"); ph.style.cssText = "width:24px;height:24px;border-radius:50%;background:#2a2e36;color:#8b8f98;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none"; ph.textContent = "·"; cu.appendChild(ph); }
           var nm = document.createElement("span"); nm.textContent = x.nickname || x.email || ("用户 " + x.id); nm.style.cssText = "color:#9fdcff;font-weight:600;word-break:break-all";
           cu.appendChild(nm);
+          if (x.region) { var rg = document.createElement("span"); rg.className = "muted"; rg.textContent = "(" + x.region + ")"; cu.appendChild(rg); }
           cu.onclick = function (ev) { ev.stopPropagation(); openUserDetail(x.id); };
           var td0 = document.createElement("td"); td0.appendChild(cu);
           var td3 = document.createElement("td"); td3.style.cssText = "text-align:right;font-size:12px;color:#8b8f98;white-space:nowrap";

@@ -54,6 +54,9 @@ export function ipRegion(ip) {
   const p = raw.split("|").map(x => (x === "0" ? "" : x));
   const country = p[0] || "", province = strip(p[1] || ""), city = strip(p[2] || "");
   if (!country) return null;
-  const disp = (country === "中国") ? (province || city || "中国") : country;
+  // disp 尽可能具体:境内 = 省·市(有市才带,市与省同值如直辖市去掉冗余);境外 = 国家。
+  const disp = (country === "中国")
+    ? ((province || city || "中国") + (province && city && city !== province ? "·" + city : ""))
+    : country;
   return { country, province, city, disp };
 }

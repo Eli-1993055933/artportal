@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.22.1" />
+<meta name="app-version" content="1.23.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -757,11 +757,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.22.1</span></div>
+  ARTPORTAL <span id="appVer">v1.23.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.22.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.22.1"></script>
-<script src="js/globe-data.js?v=1.22.1"></script>
+<script src="assets/vendor/d3.min.js?v=1.23.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.23.0"></script>
+<script src="js/globe-data.js?v=1.23.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1702,6 +1702,7 @@
       gateNote:'再多看几个机会前,先花一分钟注册吧 —— 永久免费,还能云端收藏、换设备不丢记录。',
       errAgree:'请先阅读并勾选同意用户协议与隐私政策',
       authBadEmail:'邮箱格式不对',authBadPw:'密码至少 6 位',authNet:'网络错误,稍后再试',
+      authGender:'性别(必填)',authMale:'男',authFemale:'女',authPriv:'保密',authBirth:'出生年份(必填)',authBadBirth:'请选择性别并填写出生年份',
       pubTitle:'发布',pubNote:'选择要发布的内容类型;内容经 AI 审核,干净即发、可疑转人工,发布后标注「用户投稿」。',
       pubOpp:'机会',pubOppD:'展览征集 · 驻留 · 奖项',pubJob:'招聘',pubJobD:'发布艺术类岗位',
       pubNews:'资讯',pubNewsD:'分享艺术资讯',pubWork:'作品',pubWorkD:'上传我的创作',
@@ -1784,6 +1785,7 @@
       gateNote:'Enjoying ARTPORTAL? Sign up (free, 1 min) to keep exploring — plus cloud-synced saves across devices.',
       errAgree:'Please read and accept the Terms and Privacy Policy first',
       authBadEmail:'Invalid email',authBadPw:'Password needs 6+ chars',authNet:'Network error, try again',
+      authGender:'Gender (required)',authMale:'Male',authFemale:'Female',authPriv:'Prefer not to say',authBirth:'Year of birth (required)',authBadBirth:'Please choose your gender and enter your year of birth',
       pubTitle:'Post',pubNote:'Pick a content type. Posts go through AI review; clean ones publish instantly, flagged ones go to manual review.',
       pubOpp:'Opportunity',pubOppD:'Open call · residency · award',pubJob:'Job',pubJobD:'Post an art-sector job',
       pubNews:'News',pubNewsD:'Share art news',pubWork:'Work',pubWorkD:'Upload my work',
@@ -2272,18 +2274,23 @@
       '<label class="chk"><input type="checkbox" id="aTos">'+L('authAgree')+
         '<a href="/terms.html" target="_blank" rel="noopener">'+L('authTerms')+'</a>'+
         '<a href="/privacy.html" target="_blank" rel="noopener">'+L('authPrivacy')+'</a></label>';
+    var ny=new Date().getFullYear()-8;
+    var profileRows=reg?('<div class="mrow"><select id="aGender"><option value="">'+L('authGender')+'</option>'+
+      '<option value="male">'+L('authMale')+'</option><option value="female">'+L('authFemale')+'</option>'+
+      '<option value="private">'+L('authPriv')+'</option></select>'+
+      '<input id="aBirth" type="number" inputmode="numeric" min="1900" max="'+ny+'" placeholder="'+L('authBirth')+'"></div>') : '';
     var fields;
     if(sms){   // 手机号实名:注册=手机号+密码+短信码+邮箱(mailer已配则必填并验证,否则选填);登录=手机号或邮箱+密码
       fields=reg
         ? ('<input id="aPhone" type="tel" maxlength="11" placeholder="'+L('authPhone')+'">'+
            '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+codeRow+
            '<input id="aEmail" type="email" placeholder="'+L(apMailOn?'authEmail':'authEmailOpt')+'" value="'+esc(em)+'">'+
-           (apMailOn?emailCodeRow:'')+agreeRow)
+           (apMailOn?emailCodeRow:'')+agreeRow+profileRows)
         : ('<input id="aId" type="text" placeholder="'+L('authIdent')+'" value="'+esc(idv)+'">'+
            '<input id="aPw" type="password" placeholder="'+L('authPw')+'">');
     } else {   // 邮箱模式(原有,未配短信时)
       fields='<input id="aEmail" type="email" placeholder="'+L('authEmail')+'" value="'+esc(em)+'">'+
-        '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+(reg?(codeRow+agreeRow):'');
+        '<input id="aPw" type="password" placeholder="'+L('authPw')+'">'+(reg?(codeRow+agreeRow+profileRows):'');
     }
     var m=modal('<h3>'+L(reg?'authTitleR':'authTitleL')+'</h3>'+
       (gate?('<p class="note">'+L('gateNote')+'</p>'):'')+
@@ -2313,6 +2320,14 @@
     m.querySelector('#aGo').addEventListener('click',function(){
       var err=m.querySelector('#aErr'), b=this, pw=m.querySelector('#aPw').value;
       if(pw.length<6){ err.textContent=L('authBadPw'); return; }
+      // 注册必填性别+出生年份(用户构成数据采集);登录不校验
+      function readProfile(){
+        if(!reg) return null;
+        var g=String(m.querySelector('#aGender').value||'').trim();
+        var by=parseInt(m.querySelector('#aBirth').value,10);
+        if((g!=='male'&&g!=='female'&&g!=='private') || !by || by<1900 || by>ny){ err.textContent=L('authBadBirth'); return null; }
+        return {gender:g, birth_year:by};
+      }
       var url, payload, sk, sv;
       if(sms&&reg){
         var phone=m.querySelector('#aPhone').value.trim();
@@ -2320,7 +2335,8 @@
         if(!m.querySelector('#aTos').checked){ err.textContent=L('errAgree'); return; }
         var em2=m.querySelector('#aEmail').value.trim();
         url='/api/auth/register'; sk='ap_ident'; sv=phone;
-        payload={phone:phone,password:pw,code:m.querySelector('#aCode').value.trim(),newsletter:!!m.querySelector('#aNl').checked};
+        var pf=readProfile(); if(!pf) return;
+        payload={phone:phone,password:pw,code:m.querySelector('#aCode').value.trim(),newsletter:!!m.querySelector('#aNl').checked,gender:pf.gender,birth_year:pf.birth_year};
         if(apMailOn){   // 邮箱必填并验证(2026-08-06)
           if(!EMAIL_RE.test(em2)){ err.textContent=L('authBadEmail'); return; }
           payload.email=em2; payload.email_code=m.querySelector('#aEmailCode').value.trim();
@@ -2334,7 +2350,8 @@
         if(!EMAIL_RE.test(email)){ err.textContent=L('authBadEmail'); return; }
         if(reg&&!m.querySelector('#aTos').checked){ err.textContent=L('errAgree'); return; }
         url=reg?'/api/auth/register':'/api/auth/login'; sk='ap_email'; sv=email;
-        payload={email:email,password:pw,code:reg?m.querySelector('#aCode').value.trim():'',newsletter:reg&&!!m.querySelector('#aNl').checked};
+        var pf=readProfile(); if(!pf) return;
+        payload={email:email,password:pw,code:reg?m.querySelector('#aCode').value.trim():'',newsletter:reg&&!!m.querySelector('#aNl').checked,gender:reg?pf.gender:undefined,birth_year:reg?pf.birth_year:undefined};
       }
       b.disabled=true;
       postJ(url,payload).then(function(r){
