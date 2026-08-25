@@ -1641,40 +1641,29 @@
       }
       if (users.length) {
         var t1 = document.createElement("table");
-        t1.innerHTML = "<thead><tr><th>用户(头像+昵称)</th><th>邮箱</th><th>事件数</th><th>访问的机会(看详情×N / 去官网×M)</th></tr></thead>";
+        t1.innerHTML = "<thead><tr><th>用户(头像+昵称,点人展开今天做了什么)</th><th>邮箱</th><th>事件数</th><th style=\"width:70px\">今天做了什么</th></tr></thead>";
         var b1 = document.createElement("tbody");
         users.forEach(function (x) {
           var tr = document.createElement("tr");
-          // 头像 + 昵称(点击看完整用户档案)
+          tr.style.cursor = "pointer";
+          tr.title = "点击展开/收起其今天访问的机会明细";
+          // 头像 + 昵称(点击看完整用户档案;stopPropagation 避免误触展开)
           var cu = document.createElement("span");
           cu.style.cssText = "display:inline-flex;align-items:center;gap:8px;cursor:pointer";
-          cu.title = "查看该用户档案";
+          cu.title = "查看完整用户档案";
           if (x.avatar) { var im = document.createElement("img"); im.src = "/" + x.avatar; im.style.cssText = "width:24px;height:24px;border-radius:50%;object-fit:cover;flex:none"; cu.appendChild(im); }
           else { var ph = document.createElement("span"); ph.style.cssText = "width:24px;height:24px;border-radius:50%;background:#2a2e36;color:#8b8f98;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none"; ph.textContent = "·"; cu.appendChild(ph); }
-          var nm = document.createElement("span"); nm.style.cssText = "color:#9fdcff;font-weight:600;word-break:break-all";
-          nm.textContent = x.nickname || x.email || ("用户 " + x.id);
+          var nm = document.createElement("span"); nm.textContent = x.nickname || x.email || ("用户 " + x.id); nm.style.cssText = "color:#9fdcff;font-weight:600;word-break:break-all";
           cu.appendChild(nm);
-          cu.onclick = function () { openUserDetail(x.id); };
+          cu.onclick = function (ev) { ev.stopPropagation(); openUserDetail(x.id); };
           var td0 = document.createElement("td"); td0.appendChild(cu);
+          var td3 = document.createElement("td"); td3.style.cssText = "text-align:right;font-size:12px;color:#8b8f98;white-space:nowrap";
+          td3.textContent = "展开 ▾";
           tr.appendChild(td0);
           tr.appendChild(td(x.email || "—"));
           tr.appendChild(td(x.events, "mono"));
-          var td3 = document.createElement("td");
-          var items = x.items || [];
-          if (items.length) {
-            var lst = document.createElement("div");
-            lst.style.cssText = "max-height:150px;overflow-y:auto;display:flex;flex-direction:column;gap:3px";
-            items.forEach(function (it) {
-              var row = document.createElement("div");
-              row.style.cssText = "font-size:12px;display:flex;justify-content:space-between;gap:10px;color:#c8ccd4;align-items:center";
-              var txtS = document.createElement("span"); txtS.textContent = it.title || it.id; txtS.style.cssText = "word-break:break-all;flex:1";
-              var cntS = document.createElement("span"); cntS.textContent = "看" + (it.views || 0) + "/去" + (it.outs || 0); cntS.className = "mono"; cntS.style.cssText = "color:#8b8f98;flex:none";
-              row.appendChild(txtS); row.appendChild(cntS);
-              lst.appendChild(row);
-            });
-            td3.appendChild(lst);
-          } else { td3.textContent = "—"; }
           tr.appendChild(td3);
+          tr.addEventListener("click", function () { toggleDayItems(this, x.items || []); });
           b1.appendChild(tr);
         });
         t1.appendChild(b1);
@@ -1701,6 +1690,35 @@
       var e = document.createElement("div"); e.className = "muted"; e.style.fontSize = "12px"; e.textContent = "加载失败,重新点一下试试。";
       box.appendChild(e);
     });
+  }
+  // 访客明细·点击某个用户时,在其行下方展开该用户"今天访问的机会明细"(默认收起,避免表格拥挤)
+  function toggleDayItems(tr, items) {
+    var nx = tr.nextSibling;
+    if (nx && nx.nodeType === 1 && nx.getAttribute("data-dayitems") === "1") { nx.remove(); return; }
+    var dtr = document.createElement("tr"); dtr.setAttribute("data-dayitems", "1");
+    var dtd = document.createElement("td"); dtd.colSpan = 4;
+    dtd.style.cssText = "background:#14161a;padding:10px 12px";
+    var cap = document.createElement("div"); cap.style.cssText = "font-size:12px;color:#8b8f98;margin-bottom:6px";
+    if (items && items.length) {
+      cap.textContent = "今天访问的机会(" + items.length + ") · 看详情/去官网次数:";
+      dtd.appendChild(cap);
+      var lst = document.createElement("div");
+      lst.style.cssText = "display:flex;flex-direction:column;gap:4px;max-height:220px;overflow-y:auto";
+      items.forEach(function (it) {
+        var row = document.createElement("div");
+        row.style.cssText = "font-size:12.5px;display:flex;justify-content:space-between;gap:12px;color:#c8ccd4;align-items:center";
+        var ts = document.createElement("span"); ts.textContent = it.title || it.id; ts.style.cssText = "word-break:break-all;flex:1";
+        var cs = document.createElement("span"); cs.textContent = "看" + (it.views || 0) + " · 去" + (it.outs || 0); cs.className = "mono"; cs.style.cssText = "color:#7eb8e0;flex:none;white-space:nowrap";
+        row.appendChild(ts); row.appendChild(cs);
+        lst.appendChild(row);
+      });
+      dtd.appendChild(lst);
+    } else {
+      cap.textContent = "今天只浏览了首页/检索等,未点开具体机会详情。";
+      dtd.appendChild(cap);
+    }
+    dtr.appendChild(dtd);
+    tr.parentNode.insertBefore(dtr, tr.nextSibling);
   }
 
   // —— 反馈信箱(v0.83.0):反馈列表 + 被举报内容 + 「信箱」agent 简报 ——
