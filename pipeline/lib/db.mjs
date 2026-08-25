@@ -608,7 +608,8 @@ export async function nlRecent(limit = 100) {
 export async function nlStats(wid) {
   try {
     const d = await getDb();
-    const r = d.prepare("SELECT SUM(ok) ok, COUNT(*) total FROM newsletter_sends WHERE wid=?").get(wid);
+    // 只统计真实群发;试发记录 email 以"(试发)"结尾,不混入"本期成功"口径
+    const r = d.prepare("SELECT SUM(ok) ok, COUNT(*) total FROM newsletter_sends WHERE wid=? AND email NOT LIKE '%(试发)%'").get(wid);
     return { ok: r.ok || 0, total: r.total || 0 };
   } catch (e) { return { ok: 0, total: 0 }; }
 }

@@ -731,7 +731,7 @@
       box.appendChild(wrCard("订阅人数", s.subscribers, s.subscribers > 0));
       box.appendChild(wrCard("发信配置", s.mailer_on ? "已配置 ✓" : "未配置(.env SMTP_*)", s.mailer_on));
       box.appendChild(wrCard("群发闸", s.bulk_enabled ? "已开启" : "关闭(备案后开)", s.bulk_enabled));
-      box.appendChild(wrCard("群发进度", s.sending ? ("发送中 " + s.sending.done + "/" + s.sending.total) : (s.sent_stats && s.sent_stats.total ? ("本期成功 " + s.sent_stats.ok + "/" + s.sent_stats.total) : "—"), !!s.sending));
+      box.appendChild(wrCard("邮件群发", s.sending ? ("发送中 " + s.sending.done + "/" + s.sending.total) : (s.sent_stats && s.sent_stats.total ? ("本期成功 " + s.sent_stats.ok + "/" + s.sent_stats.total) : "未群发"), !!s.sending));
       var tb = $("wrHistTbl").tBodies[0]; tb.textContent = "";
       if (!(s.history || []).length) emptyRow(tb, "(还没有周报;点「生成本周」试试)", 4);
       (s.history || []).forEach(function (h) {
@@ -752,7 +752,16 @@
         var tr = document.createElement("tr");
         tr.appendChild(td(bj(r.at, true), "mono"));
         tr.appendChild(td(r.wid, "mono"));
-        tr.appendChild(td(r.email));
+        var mailTd = document.createElement("td");
+        mailTd.style.whiteSpace = "normal"; mailTd.style.wordBreak = "break-all";
+        var ml = document.createElement("span"); ml.textContent = r.email;
+        mailTd.appendChild(ml);
+        if (/\(试发\)/.test(r.email)) {
+          var mk = document.createElement("span"); mk.className = "pill"; mk.textContent = "试发";
+          mk.style.marginLeft = "6px"; mailTd.appendChild(mk);
+          ml.textContent = r.email.replace(/\s*\(试发\)\s*$/, "");
+        }
+        tr.appendChild(mailTd);
         var rc = document.createElement("td");
         var pill = document.createElement("span");
         pill.className = "pill" + (r.ok ? " on" : "");

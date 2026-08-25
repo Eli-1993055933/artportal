@@ -30,8 +30,9 @@ export function sendMail({ to, subject, text, html, headers }) {
     return Promise.resolve();
   }
   const from = process.env.MAIL_FROM || process.env.SMTP_USER;
+  const fromName = process.env.MAIL_FROM_NAME || "ARTPORTAL";
   let head =
-    "From: ArtPortal <" + from + ">\r\n" +
+    "From: " + mimeUtf8(fromName) + " <" + from + ">\r\n" +
     "To: <" + to + ">\r\n" +
     "Subject: " + mimeUtf8(subject) + "\r\n" +
     "MIME-Version: 1.0\r\n";
