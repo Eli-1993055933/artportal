@@ -734,8 +734,10 @@ async function handleAuthApi(req, res, u) {
   try {
     if (p === "/api/auth/me" && m === "GET") {
       const r = auth.me(req);
-      if (r.body && r.body.user) {   // 画室工具入口可见性:管理员本人,或被管理员在名册里勾选授权的用户(默认关)
-        r.body.user.studio = auth.isAdmin(req, ip) || auth.studioEnabled(r.body.user.id);
+      if (r.body && r.body.user) {   // 画室工具入口可见性:严格按该账号在名册里的勾选状态(默认关)
+        // 注:isAdmin 是浏览器级管理会话,若用 OR 叠加会把"任意在带管理 cookie 的浏览器里查看的账号"全部误开放,
+        //     表现为"后台名册没画勾也照样打开"。故这里只认账号自己的 studio 标志。
+        r.body.user.studio = auth.studioEnabled(r.body.user.id);
         // IP 属地合规:每次心跳按当前 IP 刷新用户属地(境内省级/境外国家),主页与列表展示用
         r.body.user.ip_region = auth.touchIpRegion(r.body.user.id, ipRegion(ip));
       }
@@ -2384,8 +2386,9 @@ createServer(async (req, res) => {
   if (u.pathname === "/studio") { res.writeHead(302, { Location: "/studio/" }); return res.end(); }
   if (u.pathname.startsWith("/studio/")) {
     const me = auth.userOf(req);
-    // 访问控制(v0.92.0):默认关,只放行管理员本人 + 名册里被授权的用户(前端隐藏链接不算安全,这里才是闸)
-    const ok = me && (auth.isAdmin(req, ipOf(req)) || auth.studioEnabled(me.id));
+    // 访问控制(v0.92.0):默认关,只放行名册里被勾选授权的用户(前端隐藏链接不算安全,这里才是闸)。
+    // 不用 isAdmin OR —— 管理会话 cookie 是浏览器级的,会误放行"名册未勾选"的账号(后台显示没开却仍能打开)。
+    const ok = me && auth.studioEnabled(me.id);
     if (!ok) {
       res.writeHead(me ? 403 : 401, { "Content-Type": "text/html; charset=utf-8" });
       return res.end('<meta charset="utf-8"><body style="font-family:sans-serif;padding:44px;text-align:center;color:#333"><h3>画室点评工具</h3><p>' + (me ? "你没有使用权限。" : "请先登录后再使用。") + '</p><a href="/">返回首页</a></body>');
