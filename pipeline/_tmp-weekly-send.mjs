@@ -63,18 +63,45 @@ if (mode === "test") {
   // 站内通知全体用户
   process.stderr.write("[send] 站内通知全体用户…\n");
   await notifyWeeklyPublished(report);
-  // 邮件群发(去重:已发过的跳过,断点续发)
+  // 邮件分批群发(新引擎,与 server.mjs sendWeeklyBulk 同逻辑):去重已发 → 断点续发
   const audience = auth.newsletterAudience();
   const sent = await db.nlSentSet(report.id);
   const targets = audience.filter(a => !sent.has(a.email));
-  process.stderr.write("[send] 订阅 " + audience.length + " 人,本轮待发 " + targets.length + " 封\n");
-  let ok = 0, fail = 0;
-  for (const t of targets) {
-    try { await sendTo(report, t.email); await db.nlLogSend(report.id, t.email, true, null); ok++; }
-    catch (e) { await db.nlLogSend(report.id, t.email, false, e.message); fail++; process.stderr.write("[send] 失败 " + t.email + ":" + String(e.message || e).slice(0, 90) + "\n"); }
-    await new Promise(r => setTimeout(r, Math.max(1000, Number(process.env.NEWSLETTER_SEND_DELAY_MS || 3000))));
+  const NL_BATCH = Math.max(1, Number(process.env.NEWSLETTER_BATCH || 15));
+  const NL_EMAIL_GAP = Math.max(2000, Number(process.env.NEWSLETTER_SEND_DELAY_MS || 6000));
+  const NL_BATCH_GAP = Math.max(0, Number(process.env.NEWSLETTER_BATCH_GAP_MS || 30 * 60 * 1000));
+  const NL_COOL_MS = Math.max(30 * 1000, Number(process.env.NEWSLETTER_COOLDOWN_MS || 30 * 60 * 1000));
+  const nlRateLimited = e => /535|login|frequency|限流|风控|abnormal/i.test(String((e && (e.message || e)) || ""));
+  process.stderr.write("[send] 订阅 " + audience.length + " 人,本轮待发 " + targets.length + " 封(分批≤" + NL_BATCH + ", 批隔 " + Math.round(NL_BATCH_GAP / 60000) + " 分, 风控冷却 " + Math.round(NL_COOL_MS / 60000) + " 分, 逐封 " + NL_EMAIL_GAP + "ms)\n");
+  let ok = 0, fail = 0, batchOk = 0;
+  for (let i = 0; i < targets.length; i++) {
+    // 批间暂停:本批发满且还有剩下,摊到下一时段,降低被 QQ 风控概率
+    if (batchOk >= NL_BATCH) {
+      batchOk = 0;
+      process.stderr.write("[send] 本批已满,歇 " + Math.round(NL_BATCH_GAP / 60000) + " 分后再发…\n");
+      await new Promise(r => setTimeout(r, NL_BATCH_GAP));
+    }
+    const t = targets[i];
+    try {
+      await sendTo(report, t.email);
+      await db.nlLogSend(report.id, t.email, true, null);
+      ok++; batchOk++;
+    } catch (e) {
+      if (nlRateLimited(e)) {
+        // 风控命中:这封不记成功不记失败,冷却后自动重发,直到解限
+        process.stderr.write("[send] 命中风控(" + t.email + "):" + String(e.message || e).slice(0, 70) + "… 冷却 " + Math.round(NL_COOL_MS / 60000) + " 分后自动重发\n");
+        await new Promise(r => setTimeout(r, NL_COOL_MS));
+        batchOk = 0;
+        i--;
+        continue;
+      }
+      await db.nlLogSend(report.id, t.email, false, e.message);
+      fail++;
+      process.stderr.write("[send] 失败 " + t.email + ":" + String(e.message || e).slice(0, 90) + "\n");
+    }
+    await new Promise(r => setTimeout(r, NL_EMAIL_GAP));
   }
-  await agentLog({ agent: "postman", ok: ok === targets.length, summary: `群发 ${report.id}:成功 ${ok}/${targets.length}`, metrics: { wid: report.id, ok, total: targets.length } }).catch(() => {});
+  await agentLog({ agent: "postman", ok: ok === targets.length, summary: `群发 ${report.id}:成功 ${ok}/${targets.length}${fail ? ',失败 ' + fail : ''}`, metrics: { wid: report.id, ok, total: targets.length } }).catch(() => {});
   process.stderr.write("[send] ✅ 群发结束 " + report.id + ":成功 " + ok + "/" + targets.length + ",失败 " + fail + "\n");
 } else {
   process.stderr.write("[send] 用法:test <email> [wid] | bulk [wid]\n"); process.exit(1);
