@@ -82,15 +82,19 @@
     button, input, select, textarea, label, a, .chips .chip { font-size: 10px; }
     h1.sec__title, h2, h3 { font-size: 13px; line-height: 1.3; margin: 9px 0 4px; }
     .card .v { font-size: 15px; }
+    /* 手机端概览/数据栏：卡片收窄,一排至少四个,方便快速扫读 */
+    .cards { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; margin-bottom: 10px; }
+    .card { padding: 6px 8px; }
     table { min-width: 0; width: 100%; }
     th, td { font-size: 10px; padding: 3px 5px; white-space: normal !important; word-break: break-word; line-height: 1.45; }
     strong, span.mono, .muted, .ev, .status, .badge { white-space: normal !important; }
     /* 手机端精简列:一次只保留最关键信息,避免 13 列硬挤造成乱排
        用户栏隐藏 注册时间/最近活跃/收藏/画室(头像保留);事件栏隐藏"类型"列 */
-    th.u-ctime, td.u-ctime, th.u-act, td.u-act, th.u-fav, td.u-fav, th.u-studio, td.u-studio,
+    th.u-ctime, td.u-ctime, th.u-act, td.u-act, th.u-ol, td.u-ol, th.u-fav, td.u-fav, th.u-studio, td.u-studio,
     th.e-type, td.e-type { display: none; }
-    /* 用户栏字号在全局 10px 基础上再缩小一档 */
-    th[class^="u-"], td[class^="u-"] { font-size: 6px; padding: 3px 4px; }
+    /* 用户栏字号:表头保持小字号,数据行(昵称/邮箱/已验证等全部用户信息)再缩小一倍 */
+    th[class^="u-"] { font-size: 6px; padding: 3px 4px; }
+    td[class^="u-"] { font-size: 3px; padding: 2px 4px; }
     /* 近期事件:改「两行堆叠卡」(时间+谁 / 详情),彻底消除挤压错位 */
     #evtTbl thead { display: none; }
     #evtTbl, #evtTbl tbody { display: block; }
@@ -385,16 +389,18 @@
           <input class="searchbox" id="userSearch" type="search" name="ap-filter-kw" placeholder="按邮箱/昵称搜索…"
                  autocomplete="off" data-lpignore="true" data-form-type="other" data-1p-ignore />
           <select id="userSort" style="margin-left:8px;padding:4px 6px;border-radius:6px;background:#151a23;border:1px solid #2c3443;color:#cfd6e2;font-size:13px" title="列表排序方式">
+            <option value="online">在线时长</option>
             <option value="newest">最新注册</option>
             <option value="active">最近活跃</option>
             <option value="usage">最高频使用</option>
             <option value="interact">最多互动</option>
             <option value="favs">最多收藏</option>
           </select>
+          <button id="userSortRev" type="button" style="padding:4px 10px;border-radius:6px;background:#151a23;border:1px solid #2c3443;color:#cfd6e2;font-size:12px;cursor:pointer" title="切换 升序/倒序 查看">↓ 倒序</button>
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th class="u-av">头像</th><th class="u-nick">昵称</th><th class="u-mail">邮箱</th><th class="u-phone">手机</th><th class="u-ver">验证</th><th class="u-reg">属地</th><th class="u-ctime">注册时间</th><th class="u-act">最近活跃</th><th class="u-use">使用</th><th class="u-intr">互动</th><th class="u-fav">收藏</th><th class="u-studio">画室</th><th class="u-op">操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th class="u-av">头像</th><th class="u-nick">昵称</th><th class="u-mail">邮箱</th><th class="u-phone">手机</th><th class="u-ver">验证</th><th class="u-reg">属地</th><th class="u-ctime">注册时间</th><th class="u-act">最近活跃</th><th class="u-ol">在线时长</th><th class="u-use">使用</th><th class="u-intr">互动</th><th class="u-fav">收藏</th><th class="u-studio">画室</th><th class="u-op">操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -418,7 +424,7 @@
     content: { page: 1, per: 50, q: "", via: "", channel: "opportunities" },
     recycle: { page: 1, per: 50 },
     ingest:  { page: 1, per: 50 },
-    users:   { page: 1, per: 50, q: "", sort: "newest" }
+    users:   { page: 1, per: 50, q: "", sort: "online", desc: true }
   };
 
   function $(id) { return document.getElementById(id); }
@@ -442,6 +448,7 @@
     return Math.round(s / 86400) + " 天前";
   }
   function td(text, cls) { var el = document.createElement("td"); el.textContent = text == null ? "—" : String(text); if (cls) el.className = cls; return el; }
+  function fmtDur(sec) { if (!sec) return "—"; if (sec < 60) return sec + " 秒"; if (sec < 3600) return Math.round(sec / 60) + " 分"; return Math.round(sec / 3600) + " 时"; }
   // agent 打卡摘要:正常的原样显示;极少数老记录因编码问题损坏(2026-07-18 之前的本机脚本,
   // GBK 输出被当 UTF-8 读,原字节已不可逆丢失),那就用大白话讲清楚这次干成没干成,
   // 顺带把还能读出来的数字带上,别让用户对着乱码或"已隐藏"发懵(v0.100.0)。
@@ -1049,6 +1056,7 @@
       var nm = document.createElement("span"); nm.style.fontWeight = "600";
       nm.textContent = e.user ? (e.user.nickname || ("ID:" + e.user.id)) : (e.email || (e.anon ? "访客 " + e.anon : "—"));
       whoTd.appendChild(nm);
+      if (e.ip) { var iptd = document.createElement("span"); iptd.className = "muted mono"; iptd.textContent = " [" + e.ip + "]"; whoTd.appendChild(iptd); }
       if (e.region) { var rg = document.createElement("span"); rg.className = "muted"; rg.textContent = "(" + e.region + ")"; whoTd.appendChild(rg); }
       tr.appendChild(whoTd);
       tr.appendChild(td(e.q || e.id || "", "e-detail muted"));
@@ -1066,7 +1074,9 @@
     else if (sort === "usage") list.sort(function (a, b) { return (b.usage_count || 0) - (a.usage_count || 0); });
     else if (sort === "interact") list.sort(function (a, b) { return (b.interaction_count || 0) - (a.interaction_count || 0); });
     else if (sort === "favs") list.sort(function (a, b) { return (b.favorites || 0) - (a.favorites || 0); });
+    else if (sort === "online") list.sort(function (a, b) { return (b.online_sec || 0) - (a.online_sec || 0); });
     else list.sort(function (a, b) { return (Date.parse(b.created_at) || 0) - (Date.parse(a.created_at) || 0); });
+    if (!st.users.desc) list.reverse();   // 倒序开关:默认(desc=true)为最大优先,翻转为最小优先
     $("userCount").textContent = q ? "命中 " + list.length + " / " + allUsers.length : "";
     paginate(list, st.users, $("userPager"), function (u) {
       var tr = document.createElement("tr");
@@ -1092,6 +1102,7 @@
       tr.appendChild(td(u.ip_region || "—", (u.ip_region ? "" : "muted") + " u-reg"));
       tr.appendChild(td(bj(u.created_at, true), "u-ctime mono"));
       tr.appendChild(td(rel(u.last_seen), "u-act mono"));
+      tr.appendChild(td(fmtDur(u.online_sec || 0), "u-ol mono"));
       tr.appendChild(td(u.usage_count != null ? u.usage_count : 0, "u-use mono"));
       tr.appendChild(td(u.interaction_count != null ? u.interaction_count : 0, "u-intr mono"));
       tr.appendChild(td(u.favorites, "u-fav mono"));
@@ -1132,6 +1143,7 @@
   }
   $("userSearch").addEventListener("input", function () { st.users.q = this.value; st.users.page = 1; renderUsers(); });
   $("userSort").addEventListener("change", function () { st.users.sort = this.value; st.users.page = 1; renderUsers(); });
+  $("userSortRev").addEventListener("click", function () { st.users.desc = !st.users.desc; $("userSortRev").textContent = st.users.desc ? "↑ 正序" : "↓ 倒序"; st.users.page = 1; renderUsers(); });
 
   // —— 内容管理 ——
   var VIA = { search: "AI检索", submit: "用户投稿", daily: "每日抓取" };

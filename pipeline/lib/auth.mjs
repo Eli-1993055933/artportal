@@ -714,7 +714,20 @@ export function login(identifier, password, ip) {
 
 export function logout(req) {
   const token = cookieOf(req, "ap_sess");
-  if (token) { sessions.delete(token); saveSessions(); }
+  let uid = null;
+  if (token) { const s = sessions.get(token); if (s) uid = s.uid; sessions.delete(token); saveSessions(); }
+  // 退出时把最后一次心跳到此刻的时长补进在线时间,并移除其在线条目
+  if (uid) {
+    const key = "user:" + uid, v = online.get(key);
+    if (v && v.last) {
+      const d = Date.now() - v.last;
+      if (d >= 1000 && d <= ONLINE_WINDOW) {
+        const u = users.find(x => x.id === uid);
+        if (u) u.online_sec = (u.online_sec || 0) + Math.round(d / 1000);
+      }
+    }
+    online.delete(key);
+  }
   return { code: 200, body: { ok: true }, headers: { "Set-Cookie": CLEAR_COOKIE } };
 }
 
@@ -766,13 +779,26 @@ export function favTotal() {
 
 // ---------- 在线追踪 ----------
 function markOnline(key, kind, label) {
-  // 已存在的直接刷新;新增前若超容量则先清过期,仍超则丢弃(防伪造 anon 灌爆内存)
-  if (!online.has(key) && online.size >= MAX_ONLINE) {
-    const now = Date.now();
+  const now = Date.now();
+  // 同一用户连续心跳(≤ ONLINE_WINDOW)的时间差即累计在线时长 → 写入用户记录(供后台"在线时间"排序)
+  if (online.has(key)) {
+    const v = online.get(key);
+    if (kind === "user" && v.last) {
+      const d = now - v.last;
+      if (d >= 1000 && d <= ONLINE_WINDOW) {
+        const u = users.find(x => x.id === key.slice(5));
+        if (u) u.online_sec = (u.online_sec || 0) + Math.round(d / 1000);
+      }
+    }
+    v.last = now;
+    return;
+  }
+  // 新增前若超容量则先清过期,仍超则丢弃(防伪造 anon 灌爆内存)
+  if (online.size >= MAX_ONLINE) {
     for (const [k, v] of online) if (now - v.last > ONLINE_WINDOW) online.delete(k);
     if (online.size >= MAX_ONLINE) return;
   }
-  online.set(key, { kind, label, last: Date.now() });
+  online.set(key, { kind, label, last: now });
 }
 export function track(req, payload, ip) {
   if (trackLimited(ip)) return { code: 429, body: { error: "rate" } };
@@ -898,6 +924,7 @@ export function adminUsers() {
     return {
       id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null), nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at,
       last_seen: u.last_seen, favorites: (u.favorites || []).length,
+      online_sec: u.online_sec || 0,
       usage_count: a.usage, interaction_count: a.interaction,
       verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio,
       ip_region: (u.ip_region && u.ip_region.disp) || null
