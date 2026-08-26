@@ -86,10 +86,31 @@
     th, td { font-size: 10px; padding: 3px 5px; white-space: normal !important; word-break: break-word; line-height: 1.45; }
     strong, span.mono, .muted, .ev, .status, .badge { white-space: normal !important; }
     /* 手机端精简列:一次只保留最关键信息,避免 13 列硬挤造成乱排
-       用户栏只留:昵称/邮箱/手机/验证/属地/使用/互动/操作;事件栏合并为 时间/谁/详情 */
-    th.u-av, td.u-av, th.u-ctime, td.u-ctime, th.u-act, td.u-act, th.u-fav, td.u-fav, th.u-studio, td.u-studio,
+       用户栏隐藏 注册时间/最近活跃/收藏/画室(头像保留);事件栏隐藏"类型"列 */
+    th.u-ctime, td.u-ctime, th.u-act, td.u-act, th.u-fav, td.u-fav, th.u-studio, td.u-studio,
     th.e-type, td.e-type { display: none; }
+    /* 用户栏字号在全局 10px 基础上再缩小一档 */
+    th[class^="u-"], td[class^="u-"] { font-size: 6px; padding: 3px 4px; }
+    /* 近期事件:改「两行堆叠卡」(时间+谁 / 详情),彻底消除挤压错位 */
+    #evtTbl thead { display: none; }
+    #evtTbl, #evtTbl tbody { display: block; }
+    #evtTbl tr { display: grid !important; grid-template-columns: auto 1fr; grid-template-rows: auto auto; gap: 1px 10px; padding: 7px 8px; border-bottom: 1px solid #2a2e36; align-items: center; }
+    #evtTbl .e-time { grid-column: 1; grid-row: 1; color: #8b8f98; white-space: nowrap; }
+    #evtTbl .e-who { grid-column: 2; grid-row: 1; }
+    #evtTbl .e-detail { grid-column: 1 / -1; grid-row: 2; color: #8b8f98; }
+    /* 作品审核:手机切换专门的卡片视图,表格隐藏 */
+    #workTbl { display: none; }
+    #workList { display: block; }
+    .workcard { display: grid; grid-template-columns: 88px 1fr; grid-template-rows: auto auto auto auto auto; gap: 5px 10px; padding: 10px; border-bottom: 1px solid #2a2e36; align-items: start; }
+    .workcard .wc-pv { grid-column: 1; grid-row: 1 / span 3; }
+    .workcard .wc-pv img { width: 88px; height: 68px; object-fit: cover; border-radius: 6px; display: block; }
+    .workcard .wc-t { grid-column: 2; grid-row: 1; font-weight: 600; color: #e8eaee; line-height: 1.4; }
+    .workcard .wc-meta { grid-column: 2; grid-row: 2; color: #8b8f98; font-size: 10px; }
+    .workcard .wc-st { grid-column: 2; grid-row: 3; }
+    .workcard .wc-ai { grid-column: 1 / -1; grid-row: 4; color: #aab; font-size: 10px; }
+    .workcard .wc-ops { grid-column: 1 / -1; grid-row: 5; padding-top: 4px; }
   }
+  @media (min-width:900px) { #workList { display: none; } }
   .sumprev:empty { display: none; }
   .sumprev { margin-top: 18px; padding: 18px 20px; border: 1px solid #2a2e36; border-radius: 12px; background: #14161b; max-width: 760px; line-height: 1.7; }
   .sumprev__brand { font-size: 11px; letter-spacing: .12em; color: #7f8796; margin-bottom: 8px; }
@@ -210,6 +231,7 @@
           <span class="count" id="workCount"></span>
         </div>
         <div class="scroll"><table id="workTbl"><thead><tr><th>时间</th><th>预览</th><th>标题/说明</th><th>张数</th><th>作者</th><th>机审</th><th>举报</th><th>状态</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+        <div id="workList"></div>
         <div class="pager" id="workPager"></div>
       </section>
 
@@ -456,7 +478,10 @@
     tb.textContent = "";
     var total = list.length, pages = Math.max(1, Math.ceil(total / s.per));
     if (s.page > pages) s.page = pages;
-    if (!total) { emptyRow(tb, emptyText, colSpan); pagerEl.textContent = ""; return; }
+    if (!total) {
+      if (typeof tb.insertRow === "function") emptyRow(tb, emptyText, colSpan);
+      else { tb.textContent = ""; var em = document.createElement("div"); em.className = "muted"; em.style.cssText = "padding:12px;text-align:center"; em.textContent = emptyText; tb.appendChild(em); }
+      pagerEl.textContent = ""; return; }
     list.slice((s.page - 1) * s.per, s.page * s.per).forEach(renderRow);
     pagerEl.textContent = "";
     var info = document.createElement("span");
@@ -467,6 +492,7 @@
     next.addEventListener("click", function () { s.page++; renderActive(); });
     pagerEl.appendChild(info); pagerEl.appendChild(prev); pagerEl.appendChild(next);
   }
+  function isMobile() { return window.matchMedia && window.matchMedia("(max-width:899px)").matches; }
 
   // —— 登录 ——
   function tryLogin() {
@@ -1269,76 +1295,102 @@
 
   // —— 作品审核(8.3) ——
   var allWorks = [];
+  function workOpButtons(w) {
+    var ops = document.createElement("div");
+    function opBtn(label, act, confirmText, bg, fg) {
+      var b = document.createElement("button");
+      b.textContent = label;
+      b.style.cssText = "margin-right:6px;margin-bottom:4px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + bg + ";color:" + fg;
+      b.addEventListener("click", function () {
+        if (!confirm(confirmText + ":" + w.title + "?")) return;
+        post("/api/admin/works/decide", { id: w.id, action: act }).then(function (r) {
+          if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
+          refreshWorks();
+        });
+      });
+      ops.appendChild(b);
+      return b;
+    }
+    var days = w.restore_days_total || 30;
+    if (w.status === "pending") {
+      opBtn("通过", "approve", "通过并公开", "#1d3a24", "#7ee08a");
+      opBtn("拒绝", "reject", "拒绝(不公开;图片保留 " + days + " 天,期间可恢复)", "#3a1d1d", "#ff9a8a");
+    } else if (w.status === "approved") {
+      opBtn("下架", "reject", "下架(从作品频道撤下;图片保留 " + days + " 天,期间可恢复)", "#3a2a1d", "#ffc38a");
+    } else if (w.status === "rejected") {
+      var left = w.restore_days_left;
+      if (left > 0) {
+        opBtn("恢复", "approve", "恢复上架(重新公开到作品频道)", "#1d3a24", "#7ee08a");
+        var tip = document.createElement("span"); tip.className = "muted"; tip.style.fontSize = "12px";
+        tip.textContent = "还剩 " + left + " 天可恢复"; ops.appendChild(tip);
+      } else { ops.className = "muted"; ops.textContent = "已过 " + days + " 天恢复期,图片已清理"; }
+    } else ops.textContent = "—";
+    return ops;
+  }
+  function workRow(w) {   // 桌面:横排表格行
+    var tr = document.createElement("tr");
+    tr.appendChild(td(bj(w.created_at, true), "mono"));
+    var pv = document.createElement("td");
+    w.images.slice(0, 3).forEach(function (_, i) {
+      var a = document.createElement("a");
+      a.href = "/api/admin/works/img?id=" + w.id + "&i=" + i; a.target = "_blank"; a.rel = "noopener";
+      var im = document.createElement("img"); im.src = a.href;
+      im.style.cssText = "height:44px;border-radius:4px;margin-right:4px;vertical-align:middle";
+      a.appendChild(im); pv.appendChild(a);
+    });
+    if (!w.images.length) pv.textContent = "—";
+    tr.appendChild(pv);
+    var t = td(w.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "220px"; t.title = w.description || ""; tr.appendChild(t);
+    tr.appendChild(td(w.images.length, "mono"));
+    tr.appendChild(td(w.email || w.uid));
+    var mod = w.mod || {};
+    var mc = td((mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : ""), mod.verdict === "pass" ? "" : "muted");
+    mc.title = (mod.ai && mod.ai.reason) || ""; tr.appendChild(mc);
+    tr.appendChild(td(w.reports || 0, w.reports > 0 ? "" : "muted"));
+    var stc = document.createElement("td");
+    var pill = document.createElement("span");
+    pill.className = "pill" + (w.status === "approved" ? " on" : "");
+    pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[w.status] || w.status;
+    stc.appendChild(pill); tr.appendChild(stc);
+    var opsTd = document.createElement("td");
+    opsTd.appendChild(workOpButtons(w));
+    tr.appendChild(opsTd);
+    $("workTbl").tBodies[0].appendChild(tr);
+  }
+  function workCard(w) {   // 手机:竖排卡片视图
+    var c = document.createElement("div"); c.className = "workcard";
+    var pv = document.createElement("div"); pv.className = "wc-pv";
+    if (w.images.length) {
+      var a = document.createElement("a"); a.href = "/api/admin/works/img?id=" + w.id + "&i=0"; a.target = "_blank"; a.rel = "noopener";
+      var im = document.createElement("img"); im.src = a.href; a.appendChild(im); pv.appendChild(a);
+    } else pv.textContent = "—";
+    c.appendChild(pv);
+    var t = document.createElement("div"); t.className = "wc-t"; t.textContent = w.title; t.title = w.description || ""; c.appendChild(t);
+    var meta = document.createElement("div"); meta.className = "wc-meta";
+    meta.textContent = (w.email || w.uid) + " · 共 " + w.images.length + " 张 · " + bj(w.created_at, true); c.appendChild(meta);
+    var stc = document.createElement("div"); stc.className = "wc-st";
+    var pill = document.createElement("span");
+    pill.className = "pill" + (w.status === "approved" ? " on" : "");
+    pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[w.status] || w.status;
+    stc.appendChild(pill);
+    if (w.reports > 0) { var _r = document.createElement("span"); _r.className = "muted"; _r.textContent = "举报 " + w.reports; stc.appendChild(_r); }
+    c.appendChild(stc);
+    var mod = w.mod || {};
+    var ai = document.createElement("div"); ai.className = "wc-ai";
+    ai.textContent = "机审: " + ((mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : ""));
+    ai.title = (mod.ai && mod.ai.reason) || ""; c.appendChild(ai);
+    var ops = document.createElement("div"); ops.className = "wc-ops";
+    ops.appendChild(workOpButtons(w)); c.appendChild(ops);
+    $("workList").appendChild(c);
+  }
   function renderWorks() {
     var pending = allWorks.filter(function (w) { return w.status === "pending"; }).length;
     $("workPending").textContent = pending + " 待审";
     $("workPending").className = "pill" + (pending > 0 ? " on" : "");
     var list = st.works.status ? allWorks.filter(function (w) { return w.status === st.works.status; }) : allWorks;
     $("workCount").textContent = "共 " + list.length + " 条";
-    paginate(list, st.works, $("workPager"), function (w) {
-      var tr = document.createElement("tr");
-      tr.appendChild(td(bj(w.created_at, true), "mono"));
-      // 预览:前 3 张缩略图,点开新窗看大图(走管理员图片通道,待审图也能看)
-      var pv = document.createElement("td");
-      w.images.slice(0, 3).forEach(function (_, i) {
-        var a = document.createElement("a");
-        a.href = "/api/admin/works/img?id=" + w.id + "&i=" + i; a.target = "_blank"; a.rel = "noopener";
-        var im = document.createElement("img"); im.src = a.href;
-        im.style.cssText = "height:44px;border-radius:4px;margin-right:4px;vertical-align:middle";
-        a.appendChild(im); pv.appendChild(a);
-      });
-      if (!w.images.length) pv.textContent = "—";
-      tr.appendChild(pv);
-      var t = td(w.title); t.style.whiteSpace = "normal"; t.style.maxWidth = "220px"; t.title = w.description || ""; tr.appendChild(t);
-      tr.appendChild(td(w.images.length, "mono"));
-      tr.appendChild(td(w.email || w.uid));
-      var mod = w.mod || {};
-      var mc = td((mod.verdict || "—") + (mod.ai && mod.ai.category ? " · " + mod.ai.category : ""), mod.verdict === "pass" ? "" : "muted");
-      mc.title = (mod.ai && mod.ai.reason) || ""; tr.appendChild(mc);
-      tr.appendChild(td(w.reports || 0, w.reports > 0 ? "" : "muted"));
-      var stc = document.createElement("td");
-      var pill = document.createElement("span");
-      pill.className = "pill" + (w.status === "approved" ? " on" : "");
-      pill.textContent = { pending: "待审", approved: "已通过", rejected: "已拒绝" }[w.status] || w.status;
-      stc.appendChild(pill); tr.appendChild(stc);
-      var ops = document.createElement("td");
-      function opBtn(label, act, confirmText, bg, fg) {
-        var b = document.createElement("button");
-        b.textContent = label;
-        b.style.cssText = "margin-right:6px;padding:3px 10px;border-radius:6px;border:none;cursor:pointer;background:" + bg + ";color:" + fg;
-        b.addEventListener("click", function () {
-          if (!confirm(confirmText + ":" + w.title + "?")) return;
-          post("/api/admin/works/decide", { id: w.id, action: act }).then(function (r) {
-            if (!r.ok) { alert(r.data && r.data.error || "操作失败"); return; }
-            refreshWorks();
-          });
-        });
-        ops.appendChild(b);
-      }
-      var days = w.restore_days_total || 30;
-      if (w.status === "pending") {
-        opBtn("通过", "approve", "通过并公开", "#1d3a24", "#7ee08a");
-        opBtn("拒绝", "reject", "拒绝(不公开;图片保留 " + days + " 天,期间可恢复)", "#3a1d1d", "#ff9a8a");
-      } else if (w.status === "approved") {
-        // AI 自动通过的也在这里:人工复核发现问题可随时下架(图片撤回非公开目录留证)
-        opBtn("下架", "reject", "下架(从作品频道撤下;图片保留 " + days + " 天,期间可恢复)", "#3a2a1d", "#ffc38a");
-      } else if (w.status === "rejected") {
-        // v0.100.0:下架/拒绝后 N 天内可反悔,图片一直留着没删
-        var left = w.restore_days_left;
-        if (left > 0) {
-          opBtn("恢复", "approve", "恢复上架(重新公开到作品频道)", "#1d3a24", "#7ee08a");
-          var tip = document.createElement("span");
-          tip.className = "muted"; tip.style.fontSize = "12px";
-          tip.textContent = "还剩 " + left + " 天可恢复";
-          ops.appendChild(tip);
-        } else {
-          ops.textContent = "已过 " + days + " 天恢复期,图片已清理";
-          ops.className = "muted";
-        }
-      } else ops.textContent = "—";
-      tr.appendChild(ops);
-      $("workTbl").tBodies[0].appendChild(tr);
-    }, $("workTbl").tBodies[0], 9, "(暂无作品)");
+    var isM = isMobile();
+    paginate(list, st.works, $("workPager"), isM ? workCard : workRow, isM ? $("workList") : $("workTbl").tBodies[0], 9, "(暂无作品)");
   }
   $("workFilter").addEventListener("click", function (e) {
     var c = e.target.closest(".fchip"); if (!c) return;
