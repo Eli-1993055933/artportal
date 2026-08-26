@@ -895,6 +895,9 @@ export async function adminOverview() {
         e.user = { id: u.id, nickname: u.nickname || null, avatar: u.avatar || null };
         // 属地优先取用户已持久化记录;没有则用事件里的 IP 实时解析(老用户也立即可见)
         e.region = (u.ip_region && u.ip_region.disp) || (e.ip ? ((ipRegion(e.ip) || {}).disp || null) : null);
+      } else if (e.ip && !e.region) {
+        // 访客(无 uid)事件:用事件里的 IP 实时解析出具体地理位置,后台必须能看见
+        e.region = (ipRegion(e.ip) || {}).disp || null;
       }
     }
   } catch (e) {}
