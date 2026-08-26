@@ -420,9 +420,9 @@
       "region_hint": "cn-central-west",
       "sitemap": false,
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 3,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-08-26"
     },
     {
       "id": "threeshadows-tspa",
@@ -2207,9 +2207,9 @@
       "notes": "curl HTTP 200，20300字节，非空壳；正文含『Hyundai Blue Prize+ is an open call program, inviting emerging curators』(open call x2)、Prize x31、Hyundai/Blue Prize，含 2025 届信息(2025 x10)。robots.txt HTTP 404→none。北京现代汽车文化中心(798)运营的面向青年策展人/艺术家的 Art+Tech 年度艺术大奖公开征集官方站。",
       "region_hint": "cn-tier1",
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 3,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-08-26"
     },
     {
       "id": "yingge-ceramics-opencall",
@@ -2864,9 +2864,9 @@
       "discipline_hint": "字体/字库设计",
       "notes": "HTTP 200; 63349字节; 命中 参赛×5/征集×2; 页面含 方正/Founder(第十三届『方正奖』); 设中文/拉丁文/海报等组别,面向国内外设计师; ztds子域 robots.txt HTTP 404 无robots(none).",
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 3,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-08-26"
     },
     {
       "id": "tokyo-tdc",
@@ -6884,9 +6884,9 @@
       "region_hint": "intl-na-east",
       "sitemap": true,
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 3,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-08-26"
     },
     {
       "id": "newmuseum-open-call",
