@@ -90,11 +90,14 @@
     strong, span.mono, .muted, .ev, .status, .badge { white-space: normal !important; }
     /* 手机端精简列:一次只保留最关键信息,避免 13 列硬挤造成乱排
        用户栏隐藏 注册时间/最近活跃/收藏/画室(头像保留);事件栏隐藏"类型"列 */
-    th.u-ctime, td.u-ctime, th.u-act, td.u-act, th.u-ol, td.u-ol, th.u-fav, td.u-fav, th.u-studio, td.u-studio,
+    th.u-ctime, td.u-ctime, th.u-act, td.u-act, th.u-fav, td.u-fav, th.u-studio, td.u-studio,
     th.e-type, td.e-type { display: none; }
-    /* 用户栏字号:表头保持小字号,数据行(昵称/邮箱/已验证等全部用户信息)再缩小一倍 */
+    /* 用户栏字号:表头保持小字号,数据行默认小字号 */
     th[class^="u-"] { font-size: 6px; padding: 3px 4px; }
     td[class^="u-"] { font-size: 3px; padding: 2px 4px; }
+    /* 列级字号:绿色勾/使用/互动 提高一档(大一倍);邮箱/手机/属地/封禁 再缩小一档(小一倍) */
+    td.u-ver, td.u-use, td.u-intr { font-size: 6px; font-weight: 600; }
+    td.u-mail, td.u-phone, td.u-reg, td.u-op { font-size: 1.5px; }
     /* 近期事件:改「两行堆叠卡」(时间+谁 / 详情),彻底消除挤压错位 */
     #evtTbl thead { display: none; }
     #evtTbl, #evtTbl tbody { display: block; }
@@ -448,7 +451,7 @@
     return Math.round(s / 86400) + " 天前";
   }
   function td(text, cls) { var el = document.createElement("td"); el.textContent = text == null ? "—" : String(text); if (cls) el.className = cls; return el; }
-  function fmtDur(sec) { if (!sec) return "—"; if (sec < 60) return sec + " 秒"; if (sec < 3600) return Math.round(sec / 60) + " 分"; return Math.round(sec / 3600) + " 时"; }
+  function fmtDur(sec) { if (!sec) return "—"; sec = Math.round(sec); var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60; if (h) return h + "时" + m + "分"; if (m) return m + "分" + s + "秒"; return s + "秒"; }
   // agent 打卡摘要:正常的原样显示;极少数老记录因编码问题损坏(2026-07-18 之前的本机脚本,
   // GBK 输出被当 UTF-8 读,原字节已不可逆丢失),那就用大白话讲清楚这次干成没干成,
   // 顺带把还能读出来的数字带上,别让用户对着乱码或"已隐藏"发懵(v0.100.0)。
@@ -1056,8 +1059,9 @@
       var nm = document.createElement("span"); nm.style.fontWeight = "600";
       nm.textContent = e.user ? (e.user.nickname || ("ID:" + e.user.id)) : (e.email || (e.anon ? "访客 " + e.anon : "—"));
       whoTd.appendChild(nm);
-      if (e.ip) { var iptd = document.createElement("span"); iptd.className = "muted mono"; iptd.textContent = " [" + e.ip + "]"; whoTd.appendChild(iptd); }
+      // 地理位置在前,网络 IP 在后(便于一眼定位到人在哪)
       if (e.region) { var rg = document.createElement("span"); rg.className = "muted"; rg.textContent = "(" + e.region + ")"; whoTd.appendChild(rg); }
+      if (e.ip) { var iptd = document.createElement("span"); iptd.className = "muted mono"; iptd.textContent = " [IP:" + e.ip + "]"; whoTd.appendChild(iptd); }
       tr.appendChild(whoTd);
       tr.appendChild(td(e.q || e.id || "", "e-detail muted"));
       tb.appendChild(tr);
