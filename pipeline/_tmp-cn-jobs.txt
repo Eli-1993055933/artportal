@@ -474,3 +474,52 @@ https://m.liepin.com/job/1948608149.shtml
 https://m.liepin.com/job/1947342091.shtml
 # === 上海艺仓集 会务/会展专员(猎聘) ===
 https://m.liepin.com/job/1946986471.shtml
+
+# ============================================================
+# 第四轮:智联/猎聘/Boss 详情页冲量(2026-08-27,WebSearch 倒查)
+#   浏览器自动化被 Boss/智联登录墙+反爬阻挡;改用搜索引擎倒查官方详情页
+#   智联 m./jobdetail 详情页后端可抓,入库存量已验证;Boss 视反爬,脚本自判
+# ============================================================
+
+# === 智联 ===
+# 南京书画院(金陵美术馆)展览策划
+https://m.zhaopin.com/jobs/CC580462620J40057415514.htm
+# 中国工艺美术馆 展厅客服实习生
+https://m.zhaopin.com/jobs/CC683218930J40498165802.htm
+# UCCA沙丘美术馆 前台专员
+https://m.zhaopin.com/jobs/CC165317310J40868771605.htm
+# 苏州 艺术馆项目策划与执行实习生
+https://www.zhaopin.com/jobdetail/CC712437230J40845096605.htm
+# 画廊周北京 项目专员
+https://jobs.zhaopin.com/CC171222019J00143781814.htm
+# 新华社美术馆 策展专员
+https://www.zhaopin.com/jobdetail/CCL1455957880J40843239505.htm
+# 北京宋庄 执行美术馆长
+https://www.zhaopin.com/jobdetail/CCL1477334800J40790382806.htm
+# 石家庄 文化艺术馆藏品顾问
+https://www.zhaopin.com/jobdetail/CCL1474672160J40830488616.htm
+# 长春 艺术馆平面设计师
+https://www.zhaopin.com/jobdetail/CCL1361418220J40883560110.htm
+# 鄂尔多斯 艺术馆运营/拍摄剪辑
+https://www.zhaopin.com/jobdetail/CC390726780J40637638606.htm
+# 重庆潜能 美术馆/艺术馆运营
+https://www.zhaopin.com/jobdetail/CC275225310J40488372409.htm
+
+# === 猎聘(补充已核实详情页) ===
+# (本轮猎聘沿用第三轮通道,如需补量再扩展)
+
+# === Boss 直聘(反爬大概率被skip,一并尝试) ===
+# 郑州 中和美术馆 高端艺术品销售
+https://www.zhipin.com/job_detail/6c2365bbae8cc9640nV-39W8FVVX.html
+# 珠海普济艺术博物馆 互动程序设计师
+https://m.zhipin.com/job_detail/614d37b339b1c7f90nRz3ti1F1pU.html
+# 成都 广汇美术馆 运营总监
+https://m.zhipin.com/job_detail/0cc857b02ee0efb10nB43dW8FFBX.html
+# 北京 金开宇 艺术品/博物馆物流合伙人
+https://m.zhipin.com/job_detail/a2873725be6c874c1Hx83dS_FVJV.html
+# 上海博氪球 博物馆讲解员
+https://www.zhipin.com/job_detail/bb68bd129b555b3403F639S5EFBV.html
+# 南京 德基艺术博物馆 市场经理
+https://m.zhipin.com/job_detail/25debd28cbf902e80nF73dy0GVJS.html
+# 郑州 希尔鹿美术馆 兼职美术老师
+https://m.zhipin.com/job_detail/2003dbd3896703511XJ52d-9E1FX.html
