@@ -1,0 +1,200 @@
+# 人工核实的国内艺术招聘官方详情页 URL 清单
+# 每行一条,# 开头为注释;不收微信公众号/小红书/抖音,只收机构官网/公开招贤页
+
+# === 中央美术学院 ===
+https://www.cafa.edu.cn/st/2026/90233539.htm
+https://www.cafa.edu.cn/st/2026/90233673.htm
+
+# === 中国美术学院 ===
+https://rsps.caa.edu.cn/
+https://www.caa.edu.cn/info/26371/445242.htm
+
+# === 四川美术学院 ===
+https://www.scfai.edu.cn/rsc/zpxx.htm
+https://www.scfai.edu.cn/rsc/info/1013/2986.htm
+
+# === 鲁迅美术学院 ===
+https://www.lumei.edu.cn/info/1193/64355.htm
+
+# === 西安美术学院 ===
+https://xamyzhaopin.xafa.edu.cn
+https://www.xafa.edu.cn/info/1156/129901.htm
+
+# === 湖北美术学院 ===
+http://rsc.hifa.edu.cn/
+https://rst.hubei.gov.cn/bmdt/ztzl/ywzl/hbsszsydwgkzp/zpgg/202603/t20260311_5889564.shtml
+
+# === 天津美术学院 ===
+http://rsc.tjarts.edu.cn/gkzp.htm
+https://rsc.tjarts.edu.cn/info/1007/3386.htm
+
+# === 南京艺术学院 ===
+https://rsc.nua.edu.cn/tzggwxw/list.htm
+https://m.nj.bendibao.com/job/181733.shtm
+
+# === 山东艺术学院 ===
+http://hrss.shandong.gov.cn/articles/ch00232/202606/90264efe-1b5b-4d1d-a210-da51a15eab89.shtml
+
+# === 广西艺术学院 ===
+https://rsc.gxau.edu.cn/rcyj
+https://www.gaoxiaojob.com/announcement/detail/400756.html
+
+# === 云南艺术学院 ===
+https://www.ynart.edu.cn/info/1041/95121.htm
+https://rsc.ynart.edu.cn/info/1057/4460.htm
+
+# === 吉林艺术学院 ===
+http://www.jlart.edu.cn/info/1073/5878.htm
+https://m.gaoxiaojob.com/announcement/detail/422960.html
+
+# === 北京电影学院 ===
+https://www.bfa.edu.cn/renshichu/info/1067/1841.htm
+
+# === 上海戏剧学院 ===
+https://www.jfdaily.com/sgh/detail?id=4045002
+https://rs.sta.edu.cn/e9/f5/c84a125429/page.htm
+
+# === 广州美术学院 ===
+https://zp.gzarts.edu.cn/
+https://hrss.gd.gov.cn/zwgk/sydwzp/zpgg/content/mpost_4883797.html
+
+# === 上海大学上海美术学院 ===
+https://jobs.shu.edu.cn/Ads/Ads?a=a8dab89d-e5ab-4a1b-9e1d-5769b85a2d69
+https://jobs.shu.edu.cn/Ads/Ads?a=a7ea37e0-ef9d-46b6-b803-335f03e4b674
+https://jobs.shu.edu.cn/Ads/Ads?a=35187578-cf43-466d-a0d0-eaec6d851623
+https://jobs.shu.edu.cn/Ads/Ads?a=33e753a4-88eb-4f03-98a9-67b1b5956b59
+
+# === 北京服装学院 ===
+https://www.bift.edu.cn/xwgg/bfxw/3360263942b242249129a928dc0d9751.htm
+https://rsc.bift.edu.cn/rczp/b4fa74d05821415789772311303c5ace.htm
+https://rsc.bift.edu.cn/rczp/797215b7ef2842118432b38c3571083c.htm
+https://aiid.bift.edu.cn/tpxw/d2a35ed47bdc47ab9ea0601301ecb635.htm
+https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202607/t20260722_4777509.html
+
+# === 中央戏剧学院 ===
+https://chntheatre.edu.cn/cn/entrance/renshi3/detail/25342.html
+https://chntheatre.edu.cn/cn/entrance/renshi3/detail/25100.html
+
+# === 景德镇陶瓷大学 ===
+http://www.jcu.edu.cn/info/1055/51774.htm
+https://www.jci.edu.cn/info/1055/51602.htm
+
+# === 中央民族大学 ===
+https://rsc.muc.edu.cn/info/1016/3433.htm
+https://www.gaoxiaojob.com/announcement/detail/408001.html
+https://m.gaoxiaojob.com/job/detail/2214733.html
+https://m.gaoxiaojob.com/job/detail/2214734.html
+https://m.gaoxiaojob.com/job/detail/2214735.html
+https://m.gaoxiaojob.com/job/detail/2214737.html
+https://m.gaoxiaojob.com/job/detail/2214738.html
+https://m.gaoxiaojob.com/job/detail/2214742.html
+https://m.gaoxiaojob.com/job/detail/2214743.html
+
+# === 故宫博物院 ===
+https://www.dpm.org.cn/classify_detail/378881.html
+https://www.dpm.org.cn/classify_detail/379103.html
+
+# === 中国国家博物馆 ===
+https://www.chnmuseum.cn/gbgg/202606/t20260617_279715.shtml
+https://www.chnmuseum.cn/gbgg/202601/t20260122_278229.shtml
+
+# === 中国美术馆 ===
+https://m.gaoxiaojob.com/job/detail/2221274.html
+https://m.yingjiesheng.com/job-008-003-337.html
+
+# === 今日美术馆 ===
+http://www.todayartmuseum.com/cnnewsdetails.aspx?id=405&type=news&year=2026
+
+# === UCCA尤伦斯当代艺术中心 ===
+https://ucca.org.cn/careers/
+https://ucca.org.cn/job/%E9%A6%86%E9%95%BF%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%AE%9E%E4%B9%A0%E7%94%9F/
+
+# === 上海博物馆 ===
+http://www.dh.jrzp.com/shiyezhaopin/B55BEB64ABC01155.shtml
+https://rsj.sh.gov.cn/tzpgg_17408/20260825/t0035_1443267.html
+
+# === 浙江美术馆 ===
+http://m.offcn.com/sydw/2026/0712/1162715.html
+https://www.gaoxiaojob.com/announcement/detail/370337.html
+https://www.zjam.org.cn/Site/news/2026/0015/002150.shtml
+
+# === 何香凝美术馆 ===
+https://m.gaoxiaojob.com/job/detail/1415299.html
+https://m.gaoxiaojob.com/job/detail/1415300.html
+
+# === 广东美术馆 ===
+https://m.gaoxiaojob.com/job/detail/1178089.html
+https://m.gaoxiaojob.com/job/detail/1178090.html
+
+# === 北京画院 ===
+https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/rsxx/202608/t20260821_4832274.html
+https://rsj.beijing.gov.cn/xxgk/gkzp/202606/t20260625_4717074.html
+https://www.bjaa.com.cn/news.html?clg=9&hcs=1&news=5004
+https://www.bjaa.com.cn/news.html?clg=9&hcs=1&news=5003
+
+# === 中国国家画院 ===
+http://www.cnap.org.cn/cnap/gongg/202605/440df840b7504dd3840012238f63abc0.shtml
+http://www.cnap.org.cn/cnap/gongg/202603/68921576eff74bc49935d2952b61001f.shtml
+
+# === 文化和旅游部直属事业单位 ===
+https://www.mohrss.gov.cn/SYrlzyhshbzb/fwyd/SYkaoshizhaopin/zyhgjjgsydwgkzp/zpgg/202603/t20260316_568539.html
+
+# === 中国艺术研究院 ===
+https://www.mohrss.gov.cn/SYrlzyhshbzb/fwyd/SYkaoshizhaopin/zyhgjjgsydwgkzp/nprygs/202608/t20260821_582555.html
+
+# === 刘海粟美术馆 ===
+https://rsj.sh.gov.cn/tzpgg_17408/20260313/t0035_1439286.html
+
+# === 广州美术学院(协议年薪制44人,报名至2026-12-31) ===
+https://www.sys.jrzp.com/shiyezhaopin/D3ED1E282423185D.shtml
+
+# === 陕西师范大学美术学院(常年有效) ===
+https://meishuxy.snnu.edu.cn/info/1013/3462.htm
+
+# === 吉林艺术学院(报名至2026-8-27) ===
+http://www.jlart.edu.cn/info/1073/5878.htm
+
+# === 福建艺术职业学院(报名至2026-8-27) ===
+https://rst.fujian.gov.cn/zw/ztzl/zxzt/sydwrczp/zpfa/202608/t20260819_7201393.htm
+
+# === 鲁迅美术学院绘画艺术学院(截止2026-12-31) ===
+https://www.gaoxiaojob.com/announcement/detail/424864.html
+
+# === 宁夏回族自治区文旅厅事业单位(博士岗至2026-12-31) ===
+https://whhlyt.nx.gov.cn/zwgk/fdzdgknr/tzgg/202604/t20260421_5221990.html
+
+# === 浙江音乐学院常年引进高层次人才 ===
+https://www.zjcm.edu.cn/zyxw/tzgg/202002/55740.html
+
+# === 云南省文化和旅游厅直属事业单位 ===
+https://dct.yn.gov.cn/html/2601/23_42717.shtml
+
+# === 上海博物馆(2026-05-28 公告) ===
+https://rsj.sh.gov.cn/tzpgg_17408/20260528/t0035_1441070.html
+
+# === 安徽艺术学院(2026高层次人才,截止2026-12-31) ===
+https://www.ahua.edu.cn/_upload/article/files/34/f3/377648b14786b2c224738604c678/384aeba3-0d4d-4ebe-b2c8-2e9f8f3352c5.pdf
+
+# === 闽南师范大学(含艺术学院教师岗,截止2026-12-31) ===
+https://www.mnnu.edu.cn/info/1041/167261.htm
+
+# === 湖南省画院(报名至2026-12-30随到随招) ===
+https://rst.hunan.gov.cn/rst/xxgk/zpzl/sydwzp/202606/t20260611_33999412.html
+
+# === 贵州画院(贵州美术馆)2026公开招聘 ===
+https://whhly.guizhou.gov.cn/xwzx/tzgg/202601/t20260128_89349994.html
+
+# === 广东青年画院第五届招聘 ===
+https://www.gdhuayuan.com/gc_details/267.html
+
+# === 内蒙古艺术学院(2026高层次人才,报名至2026-8-31) ===
+https://www.imac.edu.cn/html-rsc/rczp/20260622/40918.shtml
+
+# === 新疆艺术学院(2026高层次人才引进第一批次) ===
+https://rst.xinjiang.gov.cn/xjrst/c112487/202603/fc32878d1f6e4257b4028c7d70daab4a.shtml
+
+# === 苏州工艺美术职业技术学院(长期公开招聘高层次人才,至2026-12-28) ===
+https://www.sgmart.edu.cn/info/1039/26145.htm
+
+# === 泉州工艺美术职业学院(报名至2026-8-28) ===
+https://rsj.quanzhou.gov.cn/zwgk/zxdt/syzk/202608/t20260814_3319506.htm

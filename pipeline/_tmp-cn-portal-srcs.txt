@@ -1,0 +1,32 @@
+# 国内官方门户/栏目页宽松发现源(与地区清单同规格,均已人工核实)
+# 类型:门户首页/征稿栏目/通知公告栏目;discover 展开同域详情页,一源多条
+http://www.artsc.gov.cn/	四川文艺网(省文联) | 征稿栏目 | opencall
+http://www.scsmsjxh.cn/	四川省美术家协会 | 征稿/展讯 | opencall
+https://www.scmeishu.org/	四川美术馆 | 展览公告 | exhibition
+https://www.scfai.edu.cn/museum/	四川美术学院美术馆 | 展览/驻留 | workshop
+https://www.cqartmuseum.cn/html/col1822963.html	重庆美术馆 | 通知公告栏目 | jobs
+http://www.hnswl.cn	湖南省文联 | 通知公告 | opencall
+http://www.henanshengmeixie.com	河南省美术家协会 | 征稿通知 | opencall
+http://www.zzmsg.cn	郑州美术馆 | 展览/公教 | exhibition
+https://www.hifa.edu.cn	湖北美术学院 | 通知公告 | jobs
+https://www.hnmsg.net	湖南美术馆 | 展览/公教 | exhibition
+http://www.mxarts.com	陕西省美术家协会 | 征稿/通知 | opencall
+https://www.sxpam.com.cn	陕西省美术博物馆 | 展览公告 | exhibition
+https://www.xafa.edu.cn	西安美术学院 | 通知公告 | jobs
+http://www.lnmsg.com/	辽宁美术馆(辽宁画院) | 展览/通知 | exhibition
+http://www.lnwyw.org.cn/gsgd/	辽宁文艺网·公示公告栏目 | 征稿 | opencall
+https://www.namoc.cn/namoc/gonggao/list.shtml	中国美术馆·公告栏目 | 大展征集 | opencall
+https://www.zjam.org.cn/Site/news/template/noticelist.shtml	浙江美术馆 | 通知公告 | opencall
+http://www.jssmsg.cn/Home/news1	江苏省美术馆 | 展览/通知 | exhibition
+https://www.artmuseumonline.org/art/art/visitGuide/xwgg/index.html	中华艺术宫(上海美术馆) | 新闻公告 | exhibition
+https://www.gdmoa.org/Media_Center/Notice/	广东美术馆·公告栏目 | 征集/公告 | opencall
+https://www.ynmsg.cn/	云南美术馆 | 展览/公教 | exhibition
+https://www.dha.ac.cn/	敦煌研究院 | 通知公告 | exhibition
+https://msy.ksu.edu.cn/	喀什大学美术学院 | 通知公告 | opencall
+https://www.imflac.org.cn/	内蒙古文联 | 通知公告 | opencall
+https://hljswl.org.cn/	黑龙江省文联 | 征稿/展讯 | opencall
+https://www.tjswl.cn/	天津市文联 | 征稿/展览 | opencall
+http://www.hbswl.org.cn	河北省文联 | 征稿/展览 | opencall
+https://www.tymsg.org.cn/	太原美术馆 | 展览/通知 | exhibition
+https://www.bjaa.com.cn/news.html?clg=9&hcs=1	北京画院美术馆 | 展览资讯 | exhibition
+https://www.gxau.edu.cn/	广西艺术学院 | 公告/招聘 | jobs

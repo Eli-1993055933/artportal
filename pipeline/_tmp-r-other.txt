@@ -1,0 +1,78 @@
+# ==== 中国其余省份艺术机会官方 URL(已逐条核实可访问)====
+# 覆盖区域:东北(黑龙江/吉林/辽宁)、华北(北京/天津/河北/山西/内蒙古)、
+#          东南(江苏/浙江/上海/安徽/福建/江西)、华南(广东/广西/海南)、齐鲁(山东)、西南余(云南/贵州)
+# 优先 gov.cn / 机构官网,坚决不含微信公众号/小红书/抖音。
+# 类型标注:jobs=招聘 / opencall=征稿 / exhibition=展览 / workshop=工作坊·驻留
+
+# ==== 东北·辽宁 ====
+http://www.lnwyw.org.cn/gsgd/ # 辽宁省文联(辽宁文艺网)·公示公告栏目 | opencall | 省美协/书协/摄协征稿与公示总入口
+http://www.lnwyw.org.cn/gsgd/202605/t20260528_1359890.html # 辽宁省文联·第十六届中国东北三省摄影艺术展览(辽宁)征稿启事 | opencall | 三省摄影联展征稿
+http://www.lnwyw.org.cn/gsgd/202605/t20260522_1359745.html # 辽宁省美术家协会·2026年度青年绘画人才"60·90"培养项目申报通知 | workshop | 青年绘画人才公费培养
+http://www.lnwyw.org.cn/gsgd/202604/t20260430_1359326.html # 辽宁省文联·辽宁省第五届双拥书法美术作品展面向全国征稿启事 | opencall | 全国性书画展征稿
+http://www.lnwyw.org.cn/gsgd/202504/t20250428_1343198.html # 辽宁省美术家协会·辽宁美术艺术创作营(2025)活动通知 | workshop | 美术创作营
+http://www.lnmsg.com/ # 辽宁美术馆(辽宁画院) | exhibition | 展览·通知公告·志愿者(官网)
+http://www.lnwyw.org.cn/gsgd/202512/t20251231_1356181.html # 辽宁省美术家协会·2025年度会员申报通知 | opencall | 省级美协会员申报
+
+# ==== 东北·吉林/黑龙江 ====
+http://wglj.changchun.gov.cn/jdhy_44809/zjdc/202605/t20260528_3489998.html # 长春市文旅局(长春市文联/长春美术馆)·第31届中韩(长春·蔚山)书法美术作品交流展征稿启事 | opencall | 国际书美交流展征稿
+https://hljswl.org.cn/hljswlht.php/index/art/info.html?id=10582 # 黑龙江省文联·短片征稿/展讯栏目(臻艺天地) | opencall | 全省征稿发布中心
+https://hljswl.org.cn/hljswlht.php/index/art/info.html?id=10438 # 黑龙江省文联·第十六届中国东北三省摄影艺术展览(黑龙江)征稿启事 | opencall | 三省摄影联展征稿
+https://hljswl.org.cn/hljswlht.php/index/art/info.html?id=10333 # 黑龙江省美协·第十二届黑龙江省水彩画作品双年展征稿通知 | opencall | 省级水彩双年展
+https://hljswl.org.cn/hljswlht.php/index/art/info.html?id=10264 # 黑龙江省美协·第六届黑龙江省油画作品双年展征稿通知 | opencall | 省级油画双年展
+
+# ==== 华北·内蒙古/天津/河北 ====
+https://www.imflac.org.cn/zx_meishu/15148.html # 内蒙古自治区文联/内蒙古美术家协会·第四届内蒙古青年美术作品展览征稿 | opencall | 青年美展(45岁以下)官方征稿
+https://www.imflac.org.cn/zy_meishu/14842.html # 内蒙古美术家协会·内蒙古第三届小版画暨藏书票作品展征稿 | opencall | 版画·藏书票征稿
+https://www.imflac.org.cn/zy_meishu/14781.html # 内蒙古美术家协会·2026全国坦培拉绘画学术研究巡回展征稿 | opencall | 全国性绘画巡展征稿
+http://www.tjswl.cn/system/2026/08/04/030325942.shtml # 天津市文联·天津市纪念红军长征胜利90周年美术作品展览征稿通知 | opencall | 市美协征稿
+http://www.tjswl.cn/system/2026/04/08/030273001.shtml # 天津市文联·"宋词里的中国画"天津市中国画作品展览征稿启事 | opencall | 市美协征稿
+https://www.tjmsg.cn/ # 天津美术馆 | exhibition | 展览·学术·志愿者·公教(官网)
+http://www.hbswl.org.cn/system/2026/05/12/030382986.shtml # 河北省文联·内蒙古、河北马年中国画作品联展征稿启事 | opencall | 跨省联展征稿
+https://www.hbafa.com/tzgg/27.htm # 河北省美术家协会·通知公告栏目 | opencall | 省美协征稿/展览总入口
+
+# ==== 华北·山西/北京 ====
+http://www.yqszlg.cn/tpxw/tzgg/202605/t20260509_2199169.html # 山西省美术家协会·纪念长征胜利90周年"长征精神 时代华章"山西省美术作品展征稿启事 | opencall | 省市联展征稿
+http://www.yqszlg.cn/tpxw/tzgg/202608/t20260814_2228991.html # 阳泉市美术馆·阳泉市第三届水彩·粉画作品展览征稿启事 | opencall | 市级水彩粉画展征稿
+http://www.yqszlg.cn/tpxw/tzgg/202602/t20260226_2174889.html # 阳泉市美术馆·"骐骥拓境·匠心版韵"海峡两岸版画交流展征稿通知 | opencall | 两岸版画展征稿
+https://www.tymsg.org.cn/ # 太原美术馆(太原画院) | exhibition | 展览·通知公告(官网)
+https://www.namoc.cn/namoc/gonggao/list.shtml # 中国美术馆·公告栏目 | opencall | 全国性大展作品征集/重大展览公告
+https://whlyj.beijing.gov.cn/zwgk/tzgg/ # 北京市文化和旅游局·通知公告 | opencall | 北京文化艺术基金年度资助申报征集
+https://www.bjaa.com.cn/news.html?clg=9&hcs=1 # 北京画院美术馆 | exhibition | 展览·新闻资讯
+https://www.cafamuseum.org/ # 中央美术学院美术馆 | exhibition | 展览·学术·公教(官网)
+
+# ==== 东南·江苏/浙江/上海 ====
+https://www.jssmsg.cn/Home/news1 # 江苏省美术馆 | exhibition | 展览·通知公告(官网)
+https://www.zjam.org.cn/Site/news/template/noticelist.shtml # 浙江美术馆 | opencall | 通知公告·全国性大展征集
+https://www.artmuseumonline.org/art/art/visitGuide/xwgg/index.html # 中华艺术宫(上海美术馆) | opencall | 新闻公告·展览与征稿
+https://art.ecnu.edu.cn/tzggwzpw/list.htm # 华东师范大学美术学院 | jobs | 工作聘聘·招聘通知公告
+
+# ==== 东南·安徽/福建/江西 ====
+http://www.ahwl.org.cn/wlgz/tzgg/202605/t20260506_1359405.html # 安徽省文联·第二届安徽省新文艺群体美术作品展征稿启事 | opencall | 省美协征稿
+http://www.jdzmsg.cn/ # 景德镇美术馆 | exhibition | 展览·通知公告(官网)
+http://nc.wenming.cn/2022wmcj/wmcs/202607/t20260720_9303608.html # 江西省·2026江西省小幅漆画作品大赛面向全省征稿 | opencall | 省漆画大赛征稿
+https://www.fjwyw.com/subpage/zxdt/gonggao/2026-07-22/29351.html # 福建文艺网(省文联)·"联通丝路 印象侨乡"东盟文化艺术创作季第七季中国境内书画征稿启事 | opencall | 省文联美术征稿
+https://www.xmwenlian.com/home/article/detail/id/7521.html # 厦门市文联·第三届"嘉庚杯"福建省大学生美术作品展览征稿启事 | opencall | 省大学生美展征稿
+
+# ==== 齐鲁·山东 ====
+http://shufa.sdwenlian.com/article/305_29097.html # 山东省书法家协会(山东书协网)·第六届"王羲之奖"全国书法作品展征稿启事 | opencall | 全国书法征稿
+http://shufa.sdwenlian.com/article/305_32213.html # 山东省书法家协会·第三届"欧阳中石杯"书法篆刻展征稿启事 | opencall | 书法篆刻征稿
+http://shufa.sdwenlian.com/article/305_30044.html # 山东社联·山东省文联·省社科界第十二届人文艺术作品征集活动通知 | opencall | 人文艺术征集
+https://www.sdwenlian.com/article/9_33223.html # 山东文艺网(省文联)·"一城春色半城花——厦门经济特区建设45周年美术作品展"开幕 | exhibition | 省文联美术展动态
+https://msxy.sdca.edu.cn/tzgg.htm # 山东艺术学院美术学院 | jobs | 通知公告·招聘
+
+# ==== 华南·广东/广西/海南 ====
+https://www.gdmoa.org/Media_Center/Notice/ # 广东美术馆·公告栏目 | opencall | 展览征集·藏品公告
+https://www.gdmoa.org/Exhibition/triennial_exhibition/ # 广东美术馆·广州三年展 | opencall | 三年展全国作品征集
+https://www.gzarts.edu.cn/index/xydt/gsgg/61.htm # 广州美术学院 | jobs | 通知公告·招聘与展览
+https://msg.gzarts.edu.cn/ # 广州美术学院美术馆 | exhibition | 展览·学术
+https://xxgk.gxau.edu.cn/tzgg # 广西艺术学院(信息公开子站) | jobs | 通知公告·公开招聘与展览
+https://www.gxwenlian.com/show/334/34174 # 广西文联·2026广西艺术作品展览·第十四届广西美术作品展览征稿补充通知 | opencall | 全区美展征稿
+https://www.gxwenlian.com/show/334/34169 # 广西文联·第十四届广西书法篆刻作品展览征稿补充通知 | opencall | 全区书展征稿
+https://zt.hnwenyi.net/show_vision.aspx?id=1057 # 海南省文联·"琼韵·青春"海南青年优秀美术作品展征稿通知 | opencall | 全省青年美展征稿
+
+# ==== 西南余·云南/贵州 ====
+https://www.ynmsg.cn/ # 云南美术馆(云南画院) | exhibition | 展览·昆明国际美术双年展·公教(官网)
+https://www.ynart.edu.cn/index/tzgg/25.htm # 云南艺术学院 | jobs | 通知公告·公开招聘
+http://wl.km.gov.cn/c/2026-08-07/5103015.shtml # 昆明市文联·"生态春城·滇咖万象"2026滇池湖滨生态暨咖啡文化主题摄影展征稿 | opencall | 市文联征稿
+http://wl.km.gov.cn/c/2026-07-10/5100515.shtml # 昆明市文联·第八届"云岭杯"中华经典诵写讲大赛"墨香彩云南"汉字书写大赛报名 | opencall | 书法大赛报名
+https://mzt.guizhou.gov.cn/xwzx/mzyw/202605/t20260509_90156372.html # 贵州省民政厅/省文联·2026贵州省老年诗词书画摄影大赛征稿启事 | opencall | 全省书画摄影大赛征稿

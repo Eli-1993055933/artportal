@@ -11,7 +11,18 @@ let browserPromise = null;
 function getBrowser() {
   if (!browserPromise) {
     browserPromise = import("puppeteer").then(({ default: puppeteer }) =>
-      puppeteer.launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] })
+      puppeteer.launch({
+        headless: true,
+        args: [
+          "--no-sandbox", "--disable-setuid-sandbox",
+          "--disable-gpu", "--disable-gpu-compositing",
+          "--disable-dev-shm-usage",
+          // 规避 Windows 沙箱对 GPU 缓存目录(NVIDIA DXCache)的写限制
+          "--disable-direct-composition", "--disable-software-rasterizer",
+          "--use-gl=swiftshader", "--disable-features=Vulkan,AngleSystemLayer,DirectComposition"
+        ],
+        env: Object.assign({}, process.env, { DISABLE_NVIDIA_GPU: "1" })
+      })
     );
   }
   return browserPromise;

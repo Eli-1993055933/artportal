@@ -66,7 +66,7 @@ function finalizeRecord(rec, { domain, url }) {
 
 // —— 人工/检索核实的国内官方征稿页(org.cn 官方域名,evidence 在原文) ——
 import { readFileSync } from "node:fs";
-const URL_FILE = new URL("./_tmp-cn-batch6.txt", import.meta.url);
+const URL_FILE = new URL(process.env.URL_FILE || "./_tmp-cn-batch7.txt", import.meta.url);
 const URLS = readFileSync(URL_FILE, "utf8").split(/\r?\n/).map(s => s.trim()).filter(s => s && !s.startsWith("#"));
 
 async function main() {

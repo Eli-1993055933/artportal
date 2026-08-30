@@ -15,8 +15,8 @@
       "afterCountryNull": 85
     }
   },
-  "generated_at": "2026-08-27",
-  "count": 1502,
+  "generated_at": "2026-08-30",
+  "count": 1521,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -22116,13 +22116,13 @@
       "domain": "ex.chinadaily.com.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-07-30",
       "last_seen": "2026-08-04",
-      "updated_at": "2026-07-30",
+      "updated_at": "2026-08-30",
       "_via": "search",
-      "_fail_streak": 0,
+      "_fail_streak": 3,
       "cover": "assets/covers/69779e63533040f4.jpg",
       "cover_source": "screenshot"
     },
@@ -26345,7 +26345,7 @@
       "source_url": "https://www.artistcommunities.org/directory/open-calls",
       "domain": "artistcommunities.org",
       "_fail_streak": 0,
-      "last_seen": "2026-08-27",
+      "last_seen": "2026-08-30",
       "source_platform": "James Castle House",
       "official_url": "https://www.jamescastlehouse.org/residencies/apply/",
       "official_located": "specific"
@@ -30301,13 +30301,14 @@
       "domain": "artistcommunities.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "cover": "assets/covers/c3ee3751c8bcc3d9.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artistcommunities-open-calls-trevelin-chubut-patagonia-argentina艺术家驻留",
@@ -33717,13 +33718,14 @@
       "domain": "fundsforngos.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "cover": "assets/covers/76ea09728a54fe55.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p2-signature-public-sculpture-for-fort-pier",
@@ -35641,15 +35643,16 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "source_platform": "CuratorSpace",
       "official_url": null,
       "cover": "assets/covers/e69501bfa602b51e.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p3-return-02",
@@ -35702,17 +35705,18 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://callforcurators.com/call/",
       "official_located": "org",
       "source_platform": "CuratorSpace",
       "cover": "assets/covers/5f901b05e2f351b3.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p3-in-between-2026-国际摄影展",
@@ -35753,16 +35757,17 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "official_url": "https://www.objectifs.com.sg/curator-open-call-2026/",
       "official_located": "org",
       "source_platform": "CuratorSpace",
       "cover": "assets/covers/1a38756c73cd5e9e.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p3-autumn-issue-seasonal-edition",
@@ -35818,16 +35823,17 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
       "geo_fallback": "geo_nationalize",
       "source_platform": "CuratorSpace",
       "official_url": null,
       "cover": "assets/covers/d44701b27192dd22.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p3-视觉艺术工作室空间-堪培拉-澳大利亚",
@@ -38887,16 +38893,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "geo_fallback": "geo_nationalize",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/089324f1b893f3d2.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p6-delfina-foundation-x-mondriaan-fund-居住开放",
@@ -38938,17 +38945,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Delfina Foundation",
       "official_url": "https://www.iktsite.org/news/residency-at-delfina-foundation-london",
       "official_located": "org",
       "cover": "assets/covers/f982b124bd87e217.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p6-cica-solo-show-series-春季2027艺术家征稿",
@@ -38996,17 +39004,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "CICA Museum",
       "official_url": null,
       "cover": "assets/covers/eaafd8fee77dc963.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p6-摄影师开放征稿-视觉诗歌杂志-artconnect",
@@ -39047,17 +39056,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/4c234eb819894e58.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p6-视觉艺术杂志征稿",
@@ -39121,18 +39131,19 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "ArtConnect",
       "official_url": "https://visualartjournal.com/",
       "official_located": "org",
       "cover": "assets/covers/c6a19a9fa6dc04e3.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p6-101当代艺术家及更多-书籍版",
@@ -39842,15 +39853,16 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/00cab8e8cf06be0f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-维也纳-奥地利视觉艺术群展",
@@ -39914,16 +39926,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "source_platform": "ArtConnect",
       "official_url": "https://www.artconnect.at/",
       "official_located": "org",
       "cover": "assets/covers/7f00177b77b89c8a.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-rotunda-gallery-call-for-proposals",
@@ -39964,17 +39977,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": "https://www.kitchener.ca/arts-culture-and-events/public-art/rotunda-gallery/",
       "official_located": "org",
       "cover": "assets/covers/16603b819543605e.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-bronx-cultural-visions-fund",
@@ -40016,17 +40030,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": "https://www.bronxarts.org/grants/bronx-cultural-visions",
       "official_located": "specific",
       "cover": "assets/covers/2bff1e19f142f392.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-discerning-eye-exhibition-artconnect",
@@ -40076,18 +40091,19 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": "英国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "ArtConnect",
       "official_url": "https://www.artconnected.org/about-us",
       "official_located": "org",
       "cover": "assets/covers/0b1fdb1ee1086fc1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-open-call-return-02-artconnect",
@@ -40148,17 +40164,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": "英国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "MolendArt",
       "official_url": null,
       "cover": "assets/covers/889d01f9fbdd2082.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-electric-tenderness-where-chaos-meets-ca",
@@ -40223,17 +40240,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": "https://www.artsconnectinternational.org/",
       "official_located": "org",
       "cover": "assets/covers/0800d9e0a389489d.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-与pro-helvetia合作的transmediale数字艺术驻留项目",
@@ -40280,16 +40298,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "official_url": "https://glogauair.net/collaborators/artconnect/",
       "official_located": "org",
       "source_platform": "ArtConnect",
       "cover": "assets/covers/2f5a8f18958fbeaa.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-transmediale-x-arts-council-korea-arko-r",
@@ -40338,17 +40357,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://ars.electronica.art/festival/en/arko/",
       "official_located": "org",
       "source_platform": "ArtConnect",
       "cover": "assets/covers/4e15b722be7eac9f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-vil-m-flusser艺术研究居留项目",
@@ -40396,15 +40416,16 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/fcef0e5f1afba7ef.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-south-downs-open-2026",
@@ -40465,16 +40486,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/2448a2a82135b34b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-two-month-residency-2027",
@@ -40539,16 +40561,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "geo_fallback": "geo_nationalize",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/1dfd969157fcfc18.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-gold-scholars-program",
@@ -40613,17 +40636,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": null,
       "official_url": "https://goldscholars.em.gatech.edu/",
       "official_located": "specific",
       "source_platform": "ArtConnect",
       "cover": "assets/covers/04fed3d8c257f204.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-佛罗里达植物园临时雕塑项目",
@@ -40665,11 +40689,11 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": null,
       "__c": "美国",
       "geo_fallback": "geo_backfill_locscan",
@@ -40677,7 +40701,8 @@
       "official_located": "org",
       "source_platform": "ArtConnect",
       "cover": "assets/covers/33f2763accb5fac7.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-cali-futures艺术家和文化工作者支持计划",
@@ -40742,17 +40767,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": "https://arts.ca.gov/grantee/the-center-for-cultural-innovation/",
       "official_located": "org",
       "cover": "assets/covers/0dde16d0950d2954.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p8-hale-精细艺术大师奖学金",
@@ -44762,18 +44788,19 @@
       "domain": "theartlist.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "official_url": "https://www.theartlist.com/art-fluent-call-for-art-minimal",
       "official_located": "specific",
       "source_platform": "TheArtList",
       "cover": "assets/covers/327df46c56191cc7.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-art-photo-p3-cica当代艺术个展系列春季2027征稿",
@@ -44829,18 +44856,19 @@
       "domain": "theartlist.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "official_url": "https://www.theartlist.com/call-for-artists-cica-contemporary-art-solo-show-series-spring-2027",
       "official_located": "specific",
       "source_platform": "TheArtList",
       "cover": "assets/covers/a73ca078518e60e7.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artenda-residency-德国2026年顶级艺术驻地项目",
@@ -45063,16 +45091,17 @@
       "domain": "artenda.net",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Artenda(国际)",
       "official_url": null,
       "cover": "assets/covers/8aadf89d4e58f196.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artenda-residency-2026年英国顶级艺术驻地项目",
@@ -55167,13 +55196,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "updated_at": "2026-08-30",
       "cover": "https://www.artquest.org.uk/wp-content/uploads/88x31.png",
-      "cover_source": "artquest.org.uk"
+      "cover_source": "artquest.org.uk",
+      "_fail_streak": 3
     },
     {
       "id": "artquest-opportunities-p1-outside-in和david-zwirner展览公开征稿",
@@ -55312,13 +55342,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "updated_at": "2026-08-30",
       "cover": "https://www.artquest.org.uk/wp-content/uploads/88x31.png",
-      "cover_source": "artquest.org.uk"
+      "cover_source": "artquest.org.uk",
+      "_fail_streak": 3
     },
     {
       "id": "artquest-opportunities-p1-pollock-krasner-foundation-artist-grants",
@@ -55407,13 +55438,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/43bcefb28f930998.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "artconnect-opportunities-p31-research-fellowships-artconnect",
@@ -59652,14 +59684,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "expired",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-22",
-      "updated_at": "2026-08-22",
+      "updated_at": "2026-08-30",
       "__country": "英国",
       "geo_fallback": "geo_backfill_evidence",
-      "_fail_streak": 0,
+      "_fail_streak": 3,
       "cover": "assets/covers/fe1d5b9f8638d1e0.jpg",
       "cover_source": "screenshot"
     },
@@ -60116,18 +60148,19 @@
       "domain": "artistcommunities.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-08-30",
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "official_url": "https://www.banffcentre.ca/",
       "official_located": "org",
       "source_platform": "Banff Centre for Arts & Creativity",
       "cover": "assets/covers/801534e5c8218ef8.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "artistcommunities-residencies-p3-重新构想文化政策-在治理体系间引领变革",
@@ -60610,17 +60643,18 @@
       "domain": "artistcommunities.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-08-30",
       "__country": null,
       "source_platform": "Banff Centre for Arts & Creativity",
       "official_url": "https://www.banffcentre.ca/",
       "official_located": "org",
       "cover": "assets/covers/6645013c3cfff280.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "artistcommunities-residencies-p3-deep-winter-writers-2027",
@@ -62861,16 +62895,17 @@
       "domain": "artistcommunities.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-08-30",
       "__country": null,
       "source_platform": "艺术家社区联盟",
       "official_url": null,
       "cover": "assets/covers/484ec9bbf565ce81.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "artistcommunities-residencies-p7-grand-marais-art-colony-residencies",
@@ -74285,17 +74320,18 @@
       "domain": "artrabbit.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "__country": "线上",
       "geo_fallback": "geo_backfill_online",
       "source_platform": "The Discerning Eye",
       "official_url": null,
       "cover": "assets/covers/28979b5ead13f1a0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-all-open-call-london-design-festival-2026-ev",
@@ -74347,13 +74383,14 @@
       "domain": "artrabbit.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
-      "cover_source": "artrabbit.com"
+      "cover_source": "artrabbit.com",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-all-jan-michalski-foundation-writers-residen",
@@ -76159,16 +76196,17 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "geo_fallback": "geo_nationalize",
       "source_platform": "CuratorSpace",
       "official_url": null,
       "cover": "assets/covers/22be61e42763351c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-exhibition-shelter",
@@ -76605,13 +76643,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/11a2b0ff2ab04173.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-鹿栖驻地计划",
@@ -76666,13 +76705,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/d1bfea7af08a84b8.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-tao-hua-han-artist-retreat",
@@ -76713,13 +76753,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/b088853f760f35d1.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-a4国际驻留项目",
@@ -76769,13 +76810,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/b4a5385c0ab8b375.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-acentricspace艺术家驻地",
@@ -76814,13 +76856,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/36c02dc353466f0b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-关山月原创版画基地驻留项目",
@@ -76861,13 +76904,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/3cbac5e4445a4312.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-the-pottery-workshop-jingdezhen",
@@ -76908,13 +76952,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/ab27c7bb396852ef.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-inside-out-art-museum-residency-中间美术馆",
@@ -76960,13 +77005,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/a6c055214d6fd43a.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "search-everyart-institut-fran-ais-cit-internationale-des-arts-驻留",
@@ -80503,11 +80549,11 @@
       "domain": "everyart.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-16",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-29",
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/e16758852b79e668.jpg",
@@ -81625,13 +81671,14 @@
       "domain": "gxau.edu.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-23",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/aa4fd97ccd92a222.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "artconnect-opportunities-当代艺术竞赛",
@@ -82015,13 +82062,14 @@
       "domain": "fdc.gov.mo",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "cover": "http://www.fdc.gov.mo/uploads/cache/funding355_546/uploads/attachment/2026-07/76b35958a1b97d0ca0347a29b6c41267.jpg",
-      "cover_source": "fdc.gov.mo"
+      "cover_source": "fdc.gov.mo",
+      "_fail_streak": 0
     },
     {
       "id": "fdc-activity-2027年文化活動-項目資助計劃",
@@ -82119,13 +82167,14 @@
       "domain": "fdc.gov.mo",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "cover": "http://www.fdc.gov.mo/uploads/cache/funding355_546/uploads/attachment/2026-07/442e53f548319bc1e7dcef8e01866e2b.jpg",
-      "cover_source": "fdc.gov.mo"
+      "cover_source": "fdc.gov.mo",
+      "_fail_streak": 0
     },
     {
       "id": "acc-grant-opportunities-2027年度亚洲文化协会-acc-奖学金和补助金",
@@ -85568,13 +85617,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-23",
       "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "updated_at": "2026-08-30",
       "cover": "https://www.artquest.org.uk/wp-content/uploads/88x31.png",
-      "cover_source": "artquest.org.uk"
+      "cover_source": "artquest.org.uk",
+      "_fail_streak": 3
     },
     {
       "id": "artistcommunities-residencies-p6-2027年1月至3月艺术家社区驻留项目",
@@ -87764,13 +87814,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/7451784011200bae.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "chinaresidencies-directory-斯沃琪艺术和平酒店艺术家驻留计划",
@@ -87817,13 +87868,14 @@
       "domain": "chinaresidencies.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-08-30",
       "cover": "assets/covers/14213639fdc1e588.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 3
     },
     {
       "id": "ktk-award-ktk设计奖-全球华人设计比赛",
@@ -90474,13 +90526,14 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-25",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-28",
       "cover": "https://r2.ac-img.com/2023/669f3de2-ebc8-476e-8bc7-75e799b58ece.jpeg",
-      "cover_source": "artconnect.com"
+      "cover_source": "artconnect.com",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-dir-p3-curatorspace艺术家奖学金-34",
@@ -91367,16 +91420,16 @@
         "版画"
       ],
       "summary_zh": "银川市文学艺术界联合会举办书法美术网络展览，主题为弘扬伟大长征精神，面向全市书画工作者、文艺爱好者、师生及社会各界艺术创作者征稿。",
-      "url": "https://ycwyj.com/news-view.asp?aid=77&id=83&newsid=6923",
-      "source_url": "https://ycwyj.com/news-view.asp?aid=77&id=83&newsid=6923",
+      "url": "https://www.ycwyj.com/news-view.asp?aid=77&id=83&newsid=6923",
+      "source_url": "https://www.ycwyj.com/news-view.asp?aid=77&id=83&newsid=6923",
       "domain": "ycwyj.com",
       "org_type": "official",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "first_seen": "2026-08-24",
-      "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
       "_via": "search",
       "cover": "assets/covers/bdc6f28c908fb781.jpg",
       "cover_source": "screenshot"
@@ -91415,16 +91468,16 @@
         "漆画"
       ],
       "summary_zh": "为传承弘扬豫章文脉精髓，集中展示近年来江西小幅漆画创作成果，推动江西漆画事业高质量发展，江西省美术家协会、南昌市文学艺术界联合会联合举办“豫章文脉”——2026江西省小幅漆画作品大赛。",
-      "url": "https://nc.wenming.cn/2022wmcj/wmcs/202607/t20260720_9303608.html",
-      "source_url": "https://nc.wenming.cn/2022wmcj/wmcs/202607/t20260720_9303608.html",
+      "url": "http://nc.wenming.cn/2022wmcj/wmcs/202607/t20260720_9303608.html",
+      "source_url": "http://nc.wenming.cn/2022wmcj/wmcs/202607/t20260720_9303608.html",
       "domain": "nc.wenming.cn",
       "org_type": "official",
       "trust": "auto",
       "status": "open",
       "verified_at": null,
-      "first_seen": "2026-08-24",
-      "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
       "_via": "search",
       "cover": "assets/covers/c5078a28ef42ba26.jpg",
       "cover_source": "screenshot"
@@ -92469,6 +92522,949 @@
       "_via": "search",
       "cover": "assets/covers/51f9fbd53d299ecb.jpg",
       "cover_source": "screenshot"
+    },
+    {
+      "id": "search-caanet-2026-天府风情-中国画作品展",
+      "category": "opencall",
+      "title_zh": "2026·天府风情——中国画作品展",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "成都",
+      "country_zh": "中国",
+      "deadline": "2026-09-21",
+      "deadline_note": "申报起止时间为即日起至2026年9月21日24时",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画"
+      ],
+      "summary_zh": "中国美术家协会主办，面向全国公开征集中国画作品，展出作品约200件。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10234",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10234",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-cdsszwhg-墨韵天府-锦绣郫都-天府美术名家作品展",
+      "category": "opencall",
+      "title_zh": "“墨韵天府·锦绣郫都”天府美术名家作品展",
+      "title_en": null,
+      "org_zh": "成都市美术家协会、郫都区政协、郫都区委宣传部、郫都区文体旅局",
+      "city_zh": "郫都区",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "征稿时间：即日起-2025年8月20日止",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "水彩",
+        "版画"
+      ],
+      "summary_zh": "为弘扬天府文化，庆祝郫都区人民政协成立45周年，成都市美术家协会、郫都区政协等单位联合举办本次展览，征稿时间即日起至2025年8月20日止。",
+      "url": "http://www.cdsszwhg.com/html/pc/510124/show-news.html?aid=b138926cb34c4b288e82f0bc2c53acf6",
+      "source_url": "http://www.cdsszwhg.com/html/pc/510124/show-news.html?aid=b138926cb34c4b288e82f0bc2c53acf6",
+      "domain": "cdsszwhg.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-scshufajia-第二届四川省普通高校美术书法创作展征稿启事",
+      "category": "opencall",
+      "title_zh": "第二届四川省普通高校美术书法创作展征稿启事",
+      "title_en": null,
+      "org_zh": "四川省教育厅、四川省文学艺术界联合会",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": "2026-09-20",
+      "deadline_note": "报名截止时间为 9 月 20 日 18:00",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "雕塑",
+        "综合画种",
+        "篆书",
+        "隶书",
+        "楷书",
+        "行书",
+        "草书",
+        "篆刻"
+      ],
+      "summary_zh": "第二届四川省普通高校美术书法创作展征稿启事，面向全省普通高校在职教师和在校大学生，作品类别包括中国画、油画、版画、雕塑等，书法类包括篆书、隶书、楷书、行书、草书、篆刻。",
+      "url": "http://www.scshufajia.com/scsfw/scsf010102/128958.html",
+      "source_url": "http://www.scshufajia.com/scsfw/scsf010102/128958.html",
+      "domain": "scshufajia.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-cqsart-大美漫路-第六届重庆市动漫艺术作品展览征稿启事",
+      "category": "opencall",
+      "title_zh": "“大美漫路”第六届重庆市动漫艺术作品展览征稿启事",
+      "title_en": null,
+      "org_zh": "重庆市美术家协会",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "动漫"
+      ],
+      "summary_zh": "重庆市美术家协会发布征稿启事，举办“大美漫路”第六届重庆市动漫艺术作品展览。",
+      "url": "https://cqsart.cn/web/column/col5003662.html",
+      "source_url": "https://cqsart.cn/web/column/col5003662.html",
+      "domain": "cqsart.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-cqsart-首届重庆市青年美术作品展览征稿启事",
+      "category": "opencall",
+      "title_zh": "首届重庆市青年美术作品展览征稿启事",
+      "title_en": null,
+      "org_zh": "重庆市美术家协会",
+      "city_zh": "重庆",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "初评收件时间：自征稿启事发布之日起至2025年8月15日。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "雕塑",
+        "水彩·粉画",
+        "综合材料绘画",
+        "综合类画种",
+        "艺术设计",
+        "数字艺术"
+      ],
+      "summary_zh": "重庆市美术家协会、重庆市青年美术家协会与大足区委宣传部共同主办的首届重庆市青年美术作品展览征稿启事，面向全市征稿，鼓励青年美术工作者创作优秀美术作品。",
+      "url": "https://cqsart.cn/web/article/1387781061844373504/web/content_1387781061844373504.html",
+      "source_url": "https://cqsart.cn/web/article/1387781061844373504/web/content_1387781061844373504.html",
+      "domain": "cqsart.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-红岩清风-第二届廉洁文化美术作品展览征稿通知",
+      "category": "opencall",
+      "title_zh": "红岩清风——第二届廉洁文化美术作品展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "重庆",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "作品照片截稿时间：自本通知发布之日起至 2025 年 10 月 15 日止。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "水彩/粉画",
+        "雕塑",
+        "综合画种"
+      ],
+      "summary_zh": "中国美术家协会等机构将于2025年12月底在重庆四川美术学院美术馆举办“红岩清风——第二届廉洁文化美术作品展览”，面向全国公开征集作品。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=9868",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=9868",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-cqsart-2026暑期驻留项目-重庆市综合材料绘画创作高研班",
+      "category": "residency",
+      "title_zh": "2026暑期驻留项目——重庆市综合材料绘画创作高研班",
+      "title_en": null,
+      "org_zh": "重庆半岛美术艺术中心",
+      "city_zh": "云南省红河州石屏县",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "报名截止 + 2026年7月6日截止",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "60周岁",
+        "nationality": null
+      },
+      "disciplines": [
+        "综合材料绘画"
+      ],
+      "summary_zh": "重庆市美术家协会与重庆半岛美术艺术中心联合举办，面向全国招募综合材料绘画创作者，为期30天的驻留研修项目。",
+      "url": "https://cqsart.cn/web/article/1513594867203153920/web/content_1513594867203153920.html",
+      "source_url": "https://cqsart.cn/web/article/1513594867203153920/web/content_1513594867203153920.html",
+      "domain": "cqsart.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-wlt-第八届西藏珠穆朗玛文学艺术奖作品征集公告",
+      "category": "award",
+      "title_zh": "第八届西藏珠穆朗玛文学艺术奖作品征集公告",
+      "title_en": null,
+      "org_zh": "西藏自治区文化和旅游厅",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": "2026-09-30",
+      "deadline_note": "所有参评作品报送、邮寄截止时间为2026年9月30日（以邮戳时间为准）。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "文学",
+        "美术",
+        "书法",
+        "摄影",
+        "音乐",
+        "舞蹈",
+        "戏剧",
+        "曲艺",
+        "民间文艺",
+        "电影电视",
+        "文艺理论（评论）"
+      ],
+      "summary_zh": "西藏自治区文化和旅游厅发布第八届西藏珠穆朗玛文学艺术奖作品征集公告，面向全区征集11个艺术门类的原创作品。",
+      "url": "https://wlt.xizang.gov.cn/xwzx_69/tzgg/202607/t20260717_550493.html",
+      "source_url": "https://wlt.xizang.gov.cn/xwzx_69/tzgg/202607/t20260717_550493.html",
+      "domain": "wlt.xizang.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-lnwyw-第十六届中国东北三省摄影艺术展览-辽宁省",
+      "category": "opencall",
+      "title_zh": "第十六届中国东北三省摄影艺术展览（辽宁省）",
+      "title_en": null,
+      "org_zh": "辽宁省文学艺术界联合会",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "第十六届中国东北三省摄影艺术展览征稿启事，由辽宁省文学艺术界联合会主办。",
+      "url": "http://www.lnwyw.org.cn/gsgd/202605/t20260528_1359890.html",
+      "source_url": "http://www.lnwyw.org.cn/gsgd/202605/t20260528_1359890.html",
+      "domain": "lnwyw.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-lnwyw-2025年度辽宁省美术家协会会员申报通知",
+      "category": "opencall",
+      "title_zh": "2025年度辽宁省美术家协会会员申报通知",
+      "title_en": null,
+      "org_zh": "辽宁省美术家协会",
+      "city_zh": "沈阳市",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "申报材料请于2026年1月26日至27日集中报送我会，未按时报送将视为自动放弃本年度申请。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "美术"
+      ],
+      "summary_zh": "2025年度辽宁省美术家协会会员申报工作现已启动，会员申报工作严格按照《辽宁省美术家协会个人会员入会细则》（2025年12月修订）执行。",
+      "url": "http://www.lnwyw.org.cn/gsgd/202512/t20251231_1356181.html",
+      "source_url": "http://www.lnwyw.org.cn/gsgd/202512/t20251231_1356181.html",
+      "domain": "lnwyw.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-yqszlg-阳泉市第三届水彩-粉画作品展览征稿启事",
+      "category": "opencall",
+      "title_zh": "阳泉市第三届水彩•粉画作品展览征稿启事",
+      "title_en": null,
+      "org_zh": "阳泉市展览馆（美术馆）",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": "2026-10-10",
+      "deadline_note": "征稿时间自本启事发布之日起至2026年10月10日截止（以邮箱收到日期为准）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "水彩画",
+        "水粉画",
+        "粉笔画",
+        "丙烯画"
+      ],
+      "summary_zh": "阳泉市第三届水彩•粉画作品展览征稿启事，面向水彩画爱好者及创作者，征稿时间至2026年10月10日。",
+      "url": "http://www.yqszlg.cn/tpxw/tzgg/202608/t20260814_2228991.html",
+      "source_url": "http://www.yqszlg.cn/tpxw/tzgg/202608/t20260814_2228991.html",
+      "domain": "yqszlg.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-fjwyw-联通丝路-印象侨乡-东盟文化艺术创作季-第七季-国际展中国境内书画作品征稿启事",
+      "category": "opencall",
+      "title_zh": "“联通丝路 印象侨乡”东盟文化艺术创作季（第七季）国际展中国境内书画作品征稿启事",
+      "title_en": null,
+      "org_zh": "福建省文学艺术界联合会",
+      "city_zh": "厦门",
+      "country_zh": "中国",
+      "deadline": "2026-08-31",
+      "deadline_note": "征稿截止时间：2026年8月31日",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "漆画",
+        "版画",
+        "数字绘画",
+        "水彩画",
+        "综合材料",
+        "书法"
+      ],
+      "summary_zh": "福建省文学艺术界联合会主办的“联通丝路 印象侨乡”东盟文化艺术创作季（第七季）国际展，面向中国境内征稿，展出书画作品，征稿截止至2026年8月31日。",
+      "url": "https://www.fjwyw.com/subpage/zxdt/gonggao/2026-07-22/29351.html",
+      "source_url": "https://www.fjwyw.com/subpage/zxdt/gonggao/2026-07-22/29351.html",
+      "domain": "fjwyw.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-xmwenlian-第三届-嘉庚杯-福建省大学生美术作品展览征稿启事",
+      "category": "opencall",
+      "title_zh": "第三届“嘉庚杯”福建省大学生美术作品展览征稿启事",
+      "title_en": null,
+      "org_zh": "厦门市文学艺术联合会",
+      "city_zh": "厦门市",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "初评作品照片寄送截止日期为2026年9月15日",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "漆画",
+        "版画",
+        "水彩画",
+        "水粉画",
+        "插画"
+      ],
+      "summary_zh": "为庆祝中国共产党成立105周年、纪念红军长征胜利90周年，举办第三届“嘉庚杯”福建省大学生美术作品展览，征稿对象为福建省内全日制高等院校在读学生及福建户籍的其他省份全日制高等院校学生。",
+      "url": "https://www.xmwenlian.com/home/article/detail/id/7521.html",
+      "source_url": "https://www.xmwenlian.com/home/article/detail/id/7521.html",
+      "domain": "xmwenlian.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-gxwenlian-2026广西艺术作品展览-第十四届广西美术作品展览征稿补充通知",
+      "category": "opencall",
+      "title_zh": "2026广西艺术作品展览——第十四届广西美术作品展览征稿补充通知",
+      "title_en": null,
+      "org_zh": "广西美术家协会",
+      "city_zh": "南宁",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "作品申报与评选\n2. 参展作品征稿日期截止2026年8月15日。",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "壁画",
+        "漆画",
+        "版画",
+        "水彩画",
+        "粉画",
+        "雕塑",
+        "艺术设计",
+        "漫画",
+        "连环画",
+        "插图"
+      ],
+      "summary_zh": "2026广西艺术作品展览——第十四届广西美术作品展览征稿补充通知，由广西美术家协会主办，面向广西籍公民或在广西工作、生活的非广西籍公民征稿，作品类别包括中国画、油画、壁画、漆画、版画、水彩画、粉画、雕塑、艺术设计、漫画、连环画、插图等。",
+      "url": "https://www.gxwenlian.com/show/334/34174",
+      "source_url": "https://www.gxwenlian.com/show/334/34174",
+      "domain": "gxwenlian.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-gxwenlian-2026广西艺术作品展览-第十四届广西书法篆刻作品展览征稿补充通知",
+      "category": "opencall",
+      "title_zh": "2026广西艺术作品展览——第十四届广西书法篆刻作品展览征稿补充通知",
+      "title_en": null,
+      "org_zh": "广西书法家协会",
+      "city_zh": "南宁市",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "投稿作品时间为自征稿通知发布之日起至2026年8月15日23:59",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "书法",
+        "篆刻"
+      ],
+      "summary_zh": "广西书法家协会发布征稿补充通知，举办2026广西艺术作品展览——第十四届广西书法篆刻作品展览，征稿对象为广西籍公民或在广西工作、生活的非广西籍公民，作品内容需符合相关要求。",
+      "url": "https://www.gxwenlian.com/show/334/34169",
+      "source_url": "https://www.gxwenlian.com/show/334/34169",
+      "domain": "gxwenlian.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-wl-生态春城-滇咖万象-2026滇池湖滨生态暨咖啡文化主题摄影展",
+      "category": "opencall",
+      "title_zh": "“生态春城·滇咖万象”2026滇池湖滨生态暨咖啡文化主题摄影展",
+      "title_en": null,
+      "org_zh": "云南省摄影家协会、中共昆明市委宣传部、昆明滇池国家旅游度假区管理委员会",
+      "city_zh": "昆明",
+      "country_zh": "中国",
+      "deadline": "2026-09-01",
+      "deadline_note": "截止时间为2026年9月1日（逾期提交的作品将不予受理，请各位创作者合理安排时间，提前完成投稿）",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "为全面展现滇池湖滨全域风光与云南精品咖啡产业发展成果，依托国庆环湖文旅节点，进一步提升滇池文旅生态形象、推广云南咖啡文化、丰富全省文艺公共服务供给，打造高规格湖滨文艺展示品牌，以文艺赋能地方经济社会发展，特举办“生态春城·滇咖万象”2026滇池湖滨生态暨咖啡文化主题摄影展。",
+      "url": "http://wl.km.gov.cn/c/2026-08-07/5103015.shtml",
+      "source_url": "http://wl.km.gov.cn/c/2026-08-07/5103015.shtml",
+      "domain": "wl.km.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-wl-第八届-云岭杯-中华经典诵写讲大赛-墨香彩云南-汉字书写大赛",
+      "category": "opencall",
+      "title_zh": "第八届“云岭杯”中华经典诵写讲大赛“墨香彩云南”汉字书写大赛",
+      "title_en": null,
+      "org_zh": "云南省语言文字工作委员会、云南省教育厅",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "社会人员组报名方式：材料报送：个人或所在单位填写参赛汇总表，连同《社会人员组个人承诺书》，于2026年7月15日前发送至指定邮箱2508294799@qq.com，文件规范命名。",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "书法"
+      ],
+      "summary_zh": "为深入传承中华经典文化，擦亮云岭文化名片，第八届“云岭杯”中华经典诵写讲大赛“墨香彩云南”汉字书写大赛正在火热报名中。",
+      "url": "http://wl.km.gov.cn/c/2026-07-10/5100515.shtml",
+      "source_url": "http://wl.km.gov.cn/c/2026-07-10/5100515.shtml",
+      "domain": "wl.km.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-lnwyw-征集-第二十二届辽宁省摄影艺术展开始征稿",
+      "category": "opencall",
+      "title_zh": "征集 | 第二十二届辽宁省摄影艺术展开始征稿",
+      "title_en": null,
+      "org_zh": "辽宁省文学艺术界联合会、辽宁省摄影家协会",
+      "city_zh": "沈阳市",
+      "country_zh": "中国",
+      "deadline": "2026-09-30",
+      "deadline_note": "征稿截止时间：2026年9月30日24时",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "摄影"
+      ],
+      "summary_zh": "由辽宁省文学艺术界联合会、辽宁省摄影家协会主办的第二十二届辽宁省摄影艺术展开始征稿，诚邀摄影家、摄影爱好者积极参与。",
+      "url": "http://www.lnwyw.org.cn/gsgd/202608/t20260828_1362017.html",
+      "source_url": "http://www.lnwyw.org.cn/gsgd/",
+      "domain": "lnwyw.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
+    },
+    {
+      "id": "search-dha-从美索不达米亚到敦煌-丝绸之路文化艺术研究班-招募启事",
+      "category": "workshop",
+      "title_zh": "从美索不达米亚到敦煌——丝绸之路文化艺术研究班 招募启事",
+      "title_en": null,
+      "org_zh": "甘肃鸿文敦煌艺术研修中心",
+      "city_zh": "敦煌市",
+      "country_zh": "中国",
+      "deadline": "2026-09-20",
+      "deadline_note": "报名期限：截止9月20日",
+      "apply_fee": {
+        "free": false,
+        "amount": "6500元/人",
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "含：授课费、翻译费、石窟考察费、资料印制费、研究班期间（11月9日至14日）交通费、餐费。",
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "甘肃鸿文敦煌艺术研修中心与敦煌研究院联合举办，为期六天的丝绸之路文化艺术研究班，面向国内外相关领域研究人员、硕博研究生及文化爱好者。",
+      "url": "https://www.dha.ac.cn/info/1020/7844.htm",
+      "source_url": "https://www.dha.ac.cn/",
+      "domain": "dha.ac.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-30",
+      "last_seen": "2026-08-30",
+      "updated_at": "2026-08-30",
+      "_via": "search"
     }
   ]
 }

@@ -1,0 +1,41 @@
+# ==== 四川·重庆 艺术机会官方 URL(已逐条核实可访问)====
+# 数据库采集脚本将把下方 -v 之后的 URL 与说明写入机会表,请勿删除各行 # 注释以外的内容。
+# 类型标注:jobs=招聘 / opencall=征稿 / exhibition=展览 / recruitment=志愿者招募 / workshop=驻留·工作坊
+
+# ==== 四川·省/市文联、美协、书协 ====
+-v http://www.artsc.gov.cn/ # 四川省文学艺术界联合会(四川文艺网) | opencall | 全省文艺评奖·作品征集官方首发站
+-v http://www.scsmsjxh.cn/ # 四川省美术家协会 | opencall | 省级征稿/会员/展讯官方站
+-v https://www.caanet.org.cn/newsdetail.mx?id=10234 # 中国美协官网「2026·天府风情——中国画作品展」征稿通知(成都主办) | opencall | 全国征稿
+-v https://www.cdwenyi.org.cn/page.php?cid=4&id=8000 # 成都市文联(成都文艺)成都大运会艺术展陈作品征稿公告 | opencall | 官方征稿
+-v http://www.cdsszwhg.com/html/pc/510124/show-news.html?aid=b138926cb34c4b288e82f0bc2c53acf6 # 成都市郫都区文化艺术中心「天府美术名家作品展」征稿启事 | opencall | 区级美协联合征稿
+-v http://www.scshufajia.com/scsfw/scsf010102/128958.html # 四川书法家网·第二届四川省高校美术书法创作展征稿启事 | opencall | 书法·美术创作展征稿
+
+# ==== 四川·美术馆/博物馆 ====
+-v https://www.scmeishu.org/ # 四川美术馆 | exhibition | 展览·馆藏·志愿者,官方门户
+-v https://www.scmuseum.cn/wap?page=219 # 四川博物院 | jobs | 通知公告·人事招聘(含文物修复编外招聘)
+-v https://www.cdmuseum.com/baoming.html # 成都博物馆 | recruitment | 志愿者扫码报名通道(常年招募)
+-v https://www.cdamuseum.cn/index.html # 成都市美术馆(天府美术馆/当代艺术馆·成都画院) | exhibition | 双年展·展览官方门户
+
+# ==== 四川·艺术院校招聘(人事处)====
+-v https://www.scfai.edu.cn/rsc/zpxx.htm # 四川美术学院人事处·招聘信息栏目 | jobs | 校编/考核招聘汇总
+-v https://rlsbj.cq.gov.cn/zwxx_182/sydw/sydwgkzp2026/202605/t20260508_15659699.html # 重庆市人社局·四川美术学院2026考核招聘公告(官网) | jobs | 事业编考核招聘
+-v https://rsc.swun.edu.cn/index.htm # 西南民族大学人事处·人才引进/招聘 | jobs | 教师/博士/辅导员招聘
+-v https://rsc.cdu.edu.cn/info/1032/4322.htm # 成都大学人事处「蓉漂人才荟」招聘公告 | jobs | 高层次人才考核招聘
+-v https://rsc.scmc.edu.cn/ # 四川传媒学院人事处 | jobs | 专任教师·博士引进公告
+
+# ==== 重庆·美协/文联 ====
+-v https://cqsart.cn/web/column/col5003662.html # 重庆市美术家协会·征稿启事栏目 | opencall | 市级征稿总入口
+-v https://cqsart.cn/web/article/1387781061844373504/web/content_1387781061844373504.html # 重庆市美协·首届重庆市青年美术作品展览征稿启事 | opencall | 青年美展征稿
+-v https://cqsart.cn/web/article/1387781039634980864/web/content_1387781039634980864.html # 重庆市美协·第八届全国青年美术作品展览征稿通知 | opencall | 全国青年美展(川美展出)
+-v https://www.cqwl.org/web/article/2025/07/14/1433893788315508736/web/content_1433893788315508736.html # 重庆市文联·第十届重庆市美术作品展览征稿启事 | opencall | 市级美展征稿
+-v https://www.caanet.org.cn/newsdetail.mx?id=9868 # 中国美协官网「红岩清风·第二届廉洁文化美术作品展览」征稿通知(重庆主办) | opencall | 全国征稿
+
+# ==== 重庆·美术馆/博物馆 ====
+-v https://www.cqartmuseum.cn/html/col1822963.html # 重庆美术馆(重庆画院)·通知公告栏目 | jobs | 2026Q3公开招聘/志愿者通告
+-v https://www.cqartmuseum.cn/html/1505958309473112064/web/content_1505958309473112064.html # 重庆美术馆·2026年志愿者招募 | recruitment | 志愿者网络报名
+
+# ==== 重庆·驻留/工作坊(川美美术馆、独立剧场)====
+-v https://www.scfai.edu.cn/museum/ # 四川美术学院美术馆(驻留计划官方主页) | workshop | 青年艺术家驻留·展览门户
+-v https://www.scfai.edu.cn/museum/info/1111/3114.htm # 川美2025-2026年度青年艺术家驻留计划招募 | workshop | 纯公益驻留(30名)
+-v https://cqsart.cn/web/article/1513594867203153920/web/content_1513594867203153920.html # 重庆市美协·2026暑期综合材料绘画高研班(驻留项目)招生简章 | workshop | 高研班·暑期驻留
+-v https://www.cqyinzi.com/m # 重庆寅子剧场 | workshop | 青年导演驻地计划YYDR·表演艺术工作坊
