@@ -1105,7 +1105,7 @@
       vp.title = u.verified ? "已验证(邮箱真实)" : "未验证(注册于发信启用前,仅域名弱校验)";
       vc.appendChild(vp); tr.appendChild(vc);
       tr.appendChild(td(u.ip_region || "—", (u.ip_region ? "" : "muted") + " u-reg"));
-      tr.appendChild(td(u.last_device || "—", (u.last_device ? "" : "muted") + " u-dev"));
+      tr.appendChild(td(u.last_device || "—", "u-dev" + (u.last_device ? "" : " muted")));
       tr.appendChild(td(bj(u.created_at, true), "u-ctime mono"));
       tr.appendChild(td(rel(u.last_seen), "u-act mono"));
       tr.appendChild(td(fmtDur(u.online_sec || 0), "u-ol mono"));
