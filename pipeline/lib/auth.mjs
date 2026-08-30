@@ -13,6 +13,7 @@ import { dirname, join } from "node:path";
 import { Resolver } from "node:dns/promises";
 import { wordHits, moderateText } from "./moderation.mjs";
 import { logModeration } from "./db.mjs";
+import { parseDevice } from "./device.mjs";
 import { mailerOn, sendVerifyCode } from "./mailer.mjs";
 import { smsOn, sendSmsCode, checkSmsCode } from "./sms.mjs";
 import { ipRegion } from "./ipregion.mjs";
@@ -778,7 +779,7 @@ export function favTotal() {
 }
 
 // ---------- 在线追踪 ----------
-function markOnline(key, kind, label) {
+function markOnline(key, kind, label, device) {
   const now = Date.now();
   // 同一用户连续心跳(≤ ONLINE_WINDOW)的时间差即累计在线时长 → 写入用户记录(供后台"在线时间"排序)
   if (online.has(key)) {
@@ -791,6 +792,7 @@ function markOnline(key, kind, label) {
       }
     }
     v.last = now;
+    if (device) v.device = device;
     return;
   }
   // 新增前若超容量则先清过期,仍超则丢弃(防伪造 anon 灌爆内存)
@@ -798,20 +800,27 @@ function markOnline(key, kind, label) {
     for (const [k, v] of online) if (now - v.last > ONLINE_WINDOW) online.delete(k);
     if (online.size >= MAX_ONLINE) return;
   }
-  online.set(key, { kind, label, last: now });
+  online.set(key, { kind, label, last: now, device: device || null });
 }
 export function track(req, payload, ip) {
   if (trackLimited(ip)) return { code: 429, body: { error: "rate" } };
   const type = String((payload || {}).type || "");
   const u = userOf(req);
   const anon = String((payload || {}).anon || "").slice(0, 40);
-  if (u) { markOnline("user:" + u.id, "user", u.email || u.nickname || u.id); if (anon) online.delete("anon:" + anon); touchIpRegion(u.id, ipRegion(ip)); }  // 登录后清掉同人的访客条目,免重复计数;并随访问刷新属地
-  else if (anon) markOnline("anon:" + anon, "anon", anon.slice(0, 8));
+  const dev = parseDevice((req.headers && req.headers["user-agent"]) || "", (payload || {}).device);
+  const devLabel = dev.label;
+  if (u) {
+    markOnline("user:" + u.id, "user", u.email || u.nickname || u.id, devLabel);
+    if (anon) online.delete("anon:" + anon);
+    touchIpRegion(u.id, ipRegion(ip));
+    if (u.last_device !== devLabel) { u.last_device = devLabel; saveUsers(); }
+  }  // 登录后清掉同人的访客条目,免重复计数;并随访问刷新属地/设备
+  else if (anon) markOnline("anon:" + anon, "anon", anon.slice(0, 8), devLabel);
   // 落盘事件白名单(v0.85.0 扩展):visit 进站 / outbound 前往官网 / view 看详情 /
   // fav 收藏切换 / wkread 读周刊;其余(hb 心跳)只更新在线表不落盘。
   if (type === "visit" || type === "outbound" || type === "view" || type === "fav" || type === "wkread") {
     logEvent(type, {
-      ...(u ? { uid: u.id, email: u.email } : { anon: anon.slice(0, 8) }), ip,
+      ...(u ? { uid: u.id, email: u.email } : { anon: anon.slice(0, 8) }), ip, device: devLabel,
       ...(payload.id ? { id: String(payload.id).slice(0, 120) } : {}),
       ...(payload.cat ? { cat: String(payload.cat).slice(0, 20) } : {}),
       ...(type === "fav" && payload.on != null ? { on: payload.on ? 1 : 0 } : {})
@@ -834,7 +843,7 @@ function onlineNow() {
   const now = Date.now(), usersOn = [], anonKeys = [];
   for (const [key, v] of online) {
     if (now - v.last > ONLINE_WINDOW) { online.delete(key); continue; }
-    if (v.kind === "user") usersOn.push({ email: v.label, last: v.last });
+    if (v.kind === "user") usersOn.push({ email: v.label, last: v.last, device: v.device || null });
     else anonKeys.push(key);
   }
   return { users: usersOn, anonCount: anonKeys.length };
@@ -905,7 +914,7 @@ export async function adminOverview() {
   const usersOn = on.users.map(function (it) {
     const u = users.find(x => x.email === it.email || x.nickname === it.email || x.id === it.email);
     return {
-      email: it.email, last: it.last,
+      email: it.email, last: it.last, device: it.device || null,
       nickname: (u && u.nickname) || null, avatar: (u && u.avatar) || null,
       region: (u && u.ip_region && u.ip_region.disp) || null
     };
@@ -930,6 +939,7 @@ export function adminUsers() {
       online_sec: u.online_sec || 0,
       usage_count: a.usage, interaction_count: a.interaction,
       verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio,
+      last_device: u.last_device || null,
       ip_region: (u.ip_region && u.ip_region.disp) || null
     };
   });
@@ -944,7 +954,7 @@ export function adminUserDetail(uid) {
     id: u.id, email: u.email, phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null),
     nickname: u.nickname, avatar: u.avatar || null, created_at: u.created_at, last_seen: u.last_seen,
     verified: !!u.email_verified, phone_verified: !!u.phone_verified, banned: !!u.banned, studio: !!u.studio, newsletter: !!u.newsletter,
-    ip_region: u.ip_region || null, fav_count: (u.favorites || []).length,
+    ip_region: u.ip_region || null, last_device: u.last_device || null, fav_count: (u.favorites || []).length,
     bio: p.bio || "", identity: p.identity || "", location: p.location || "", website: p.website || "", fields: p.fields || "",
     favorites: u.favorites || []
   };

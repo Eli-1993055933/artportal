@@ -187,7 +187,7 @@
         <h1 class="sec__title">概览</h1>
         <div class="cards" id="cards"></div>
         <h2>当前在线(近 5 分钟有心跳)</h2>
-        <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th><th>属地</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="onlineTbl"><thead><tr><th>用户</th><th>最近活动</th><th>设备</th><th>属地</th></tr></thead><tbody></tbody></table></div>
         <h2>近期事件(最新 30 条)</h2>
         <div class="scroll"><table id="evtTbl"><thead><tr><th class="e-time">时间</th><th class="e-type">类型</th><th class="e-who">谁</th><th class="e-detail">详情</th></tr></thead><tbody></tbody></table></div>
       </section>
@@ -403,7 +403,7 @@
           <span class="count" id="userCount"></span>
         </div>
         <p class="muted" style="font-size:12px;margin:2px 0 8px">「画室」勾选=授予该用户画室点评工具使用权限(默认关,仅你可改;勾上后 TA 以后打开都能用)。</p>
-        <div class="scroll"><table id="usersTbl"><thead><tr><th class="u-av">头像</th><th class="u-nick">昵称</th><th class="u-mail">邮箱</th><th class="u-phone">手机</th><th class="u-ver">验证</th><th class="u-reg">属地</th><th class="u-ctime">注册时间</th><th class="u-act">最近活跃</th><th class="u-ol">在线时长</th><th class="u-use">使用</th><th class="u-intr">互动</th><th class="u-fav">收藏</th><th class="u-studio">画室</th><th class="u-op">操作</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="usersTbl"><thead><tr><th class="u-av">头像</th><th class="u-nick">昵称</th><th class="u-mail">邮箱</th><th class="u-phone">手机</th><th class="u-ver">验证</th><th class="u-reg">属地</th><th class="u-dev">设备</th><th class="u-ctime">注册时间</th><th class="u-act">最近活跃</th><th class="u-ol">在线时长</th><th class="u-use">使用</th><th class="u-intr">互动</th><th class="u-fav">收藏</th><th class="u-studio">画室</th><th class="u-op">操作</th></tr></thead><tbody></tbody></table></div>
         <div class="pager" id="userPager"></div>
       </section>
     </main>
@@ -1029,7 +1029,7 @@
   }
   function renderOnline(list) {
     var tb = $("onlineTbl").tBodies[0]; tb.textContent = "";
-    if (!list.length) { emptyRow(tb, "(当前没有已登录用户在线;访客数见上方卡片)", 3); return; }
+    if (!list.length) { emptyRow(tb, "(当前没有已登录用户在线;访客数见上方卡片)", 4); return; }
     list.sort(function (a, b) { return b.last - a.last; }).forEach(function (u) {
       var tr = document.createElement("tr");
       var utd = document.createElement("td");
@@ -1040,6 +1040,7 @@
       utd.appendChild(nm);
       tr.appendChild(utd);
       tr.appendChild(td(rel(u.last), "mono"));
+      tr.appendChild(td(u.device || "—", "muted"));
       tr.appendChild(td(u.region || "—", "muted"));
       tb.appendChild(tr);
     });
@@ -1062,6 +1063,7 @@
       // 地理位置在前,网络 IP 在后(便于一眼定位到人在哪)
       if (e.region) { var rg = document.createElement("span"); rg.className = "muted"; rg.textContent = "(" + e.region + ")"; whoTd.appendChild(rg); }
       if (e.ip) { var iptd = document.createElement("span"); iptd.className = "muted mono"; iptd.textContent = " [IP:" + e.ip + "]"; whoTd.appendChild(iptd); }
+      if (e.device) { var dvt = document.createElement("div"); dvt.className = "muted"; dvt.style.cssText = "font-size:11px;opacity:.85"; dvt.textContent = "设备 " + e.device; whoTd.appendChild(dvt); }
       tr.appendChild(whoTd);
       tr.appendChild(td(e.q || e.id || "", "e-detail muted"));
       tb.appendChild(tr);
@@ -1103,6 +1105,7 @@
       vp.title = u.verified ? "已验证(邮箱真实)" : "未验证(注册于发信启用前,仅域名弱校验)";
       vc.appendChild(vp); tr.appendChild(vc);
       tr.appendChild(td(u.ip_region || "—", (u.ip_region ? "" : "muted") + " u-reg"));
+      tr.appendChild(td(u.last_device || "—", (u.last_device ? "" : "muted") + " u-dev"));
       tr.appendChild(td(bj(u.created_at, true), "u-ctime mono"));
       tr.appendChild(td(rel(u.last_seen), "u-act mono"));
       tr.appendChild(td(fmtDur(u.online_sec || 0), "u-ol mono"));
