@@ -15,8 +15,8 @@
       "afterCountryNull": 85
     }
   },
-  "generated_at": "2026-09-01",
-  "count": 1598,
+  "generated_at": "2026-09-03",
+  "count": 1622,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -4260,10 +4260,10 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-21",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://boomergallery.net/_assets/c345b1a8-c6eb-4eba-83af-639656236c79?w=1200&amp;h=630&amp;crop=top&amp;fit=crop",
       "cover_source": "curatorspace.com",
       "official_url": "https://boomergallery.net/upcoming-events",
@@ -19665,10 +19665,10 @@
       "domain": "everyart.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-25",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/4dc0f98ea42ce415.jpg",
@@ -20353,60 +20353,6 @@
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/927bc44d27d91fd6.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "search-zwgk-第九届全国画院美术作品展览",
-      "category": "opencall",
-      "title_zh": "第九届全国画院美术作品展览",
-      "title_en": null,
-      "org_zh": "文化和旅游部办公厅",
-      "city_zh": "北京",
-      "country_zh": "中国",
-      "deadline": "2025-09-01",
-      "deadline_note": "",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "中国画",
-        "油画",
-        "版画",
-        "雕塑",
-        "水彩（粉）",
-        "综合材料",
-        "书法篆刻"
-      ],
-      "summary_zh": "文化和旅游部办公厅举办第九届全国画院美术作品展览，面向全国各级国有画院艺术家征集作品，作品类型包括中国画、油画、版画、雕塑、水彩（粉）、综合材料及书法篆刻等。",
-      "url": "https://zwgk.mct.gov.cn/zfxxgkml/wysy/202503/t20250326_959019.html",
-      "source_url": "https://zwgk.mct.gov.cn/zfxxgkml/wysy/202503/t20250326_959019.html",
-      "domain": "zwgk.mct.gov.cn",
-      "org_type": "official",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-26",
-      "_via": "search",
-      "_fail_streak": 0,
-      "cover": "assets/covers/da8dfdaf81c8f69d.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -23327,11 +23273,11 @@
       "domain": "copenhagenphotofestival.com",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-07-30",
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-07-30",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/1adb0fd127b6e5bf.jpg",
@@ -23935,11 +23881,11 @@
       "domain": "creative.gov.au",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-07-31",
-      "last_seen": "2026-08-04",
-      "updated_at": "2026-08-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://creative.gov.au/sites/creative-australia/files/images/2025-04/CA%20logo-01_0.png",
       "cover_source": "creative.gov.au",
       "_fail_streak": 0
@@ -23983,7 +23929,7 @@
         "戏剧",
         "视觉艺术"
       ],
-      "summary_zh": "MacDowell为杰出才能的艺术家提供时间、空间和灵感居住环境。艺术家驻留项目包括独用工作室、住宿和每天三餐，为期最多八周。无驻留费用，MacDowell提供财务援助，报销往返驻留地点的交通费用，以及艺术家在驻留期间可能产生的费用，包括租金、收入损失和育儿费用。",
+      "summary_zh": "MacDowell为杰出才能的艺术家提供时间、空间和灵感居住环境。艺术家驻留项目包括独用工作室、住宿和每天三餐，为期最多八周。无驻留费用，MacDowell提供财务援助，报销往返驻留地的直接旅行费用，以及艺术家在驻留期间预期发生的费用，包括租金、收入损失和育儿费用。",
       "url": "https://www.macdowell.org/apply/application-guidelines",
       "source_url": "https://www.macdowell.org",
       "domain": "macdowell.org",
@@ -23992,10 +23938,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-07-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.macdowell.org/assets/meta/_1200x675_crop_center-center_none/Juan_Luis_Matos_photo-2022-sized-16x9-seo.jpg",
-      "cover_source": "macdowell.org"
+      "cover_source": "macdowell.org",
+      "_fail_streak": 0
     },
     {
       "id": "macdowell-known-macdowell-fellowships",
@@ -26178,7 +26125,7 @@
       "source_url": "https://www.artistcommunities.org/directory/open-calls",
       "domain": "artistcommunities.org",
       "_fail_streak": 0,
-      "last_seen": "2026-09-01",
+      "last_seen": "2026-09-03",
       "source_platform": "James Castle House",
       "official_url": "https://www.jamescastlehouse.org/residencies/apply/",
       "official_located": "specific"
@@ -26431,14 +26378,15 @@
       "domain": "www2.fundsforngos.org",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "_via": "search",
       "cover": "assets/covers/ea9e95cc931688e5.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "search-culture360-新加坡-sgiff-pro-pitching-forum-2026-open-call",
@@ -27964,16 +27912,17 @@
       "domain": "artistcommunities.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "source_platform": "Eutopia Art Residency",
       "official_url": "https://eutopiaart.com/",
       "official_located": "org",
       "cover": "assets/covers/29443fe4d0a5c577.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artistcommunities-residencies-sea-and-urbanism-kavala-greece-open-call",
@@ -36071,13 +36020,14 @@
       "domain": "fundsforngos.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
-      "cover_source": "fundsforngos.org"
+      "cover_source": "fundsforngos.org",
+      "_fail_streak": 0
     },
     {
       "id": "fundsforngos-arts-p3-电影和视频艺术奖学金-加拿大",
@@ -36169,11 +36119,11 @@
       "domain": "fundsforngos.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
       "cover_source": "fundsforngos.org",
       "_fail_streak": 0
@@ -36858,17 +36808,18 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://artcall.org/calls/c4688-open-call-for-artist-curatory-magazine",
       "official_located": "org",
       "source_platform": "CuratorSpace",
       "cover": "assets/covers/6eec94dce5ae1d04.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p5-陶瓷艺术家征稿-sunken-studio陶艺市场2026",
@@ -36966,17 +36917,18 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://artcall.org/calls/c4238-call-for-entries-landscape",
       "official_located": "org",
       "source_platform": "CuratorSpace",
       "cover": "assets/covers/b0c6bf09be61cc35.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p5-bankley-gallery-open-call-2026",
@@ -38227,13 +38179,14 @@
       "domain": "gasworks.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "assets/covers/8663640b8eeb967b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "gasworks-opportunities-面向东非艺术家的驻留开放征召",
@@ -41781,58 +41734,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "curatorspace-opportunities-p8-scott-creative-arts-foundation-emerging-",
-      "category": "award",
-      "title_zh": "Scott Creative Arts Foundation Emerging Artist Award 2027",
-      "title_en": "Scott Creative Arts Foundation Emerging Artist Award 2027",
-      "org_zh": "Scott Creative Arts Foundation",
-      "city_zh": "Halifax",
-      "country_zh": "United Kingdom",
-      "deadline": "2026-10-31",
-      "deadline_note": "Deadline: 31/10/2026",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "painting",
-        "sculpture",
-        "image",
-        "sound",
-        "video",
-        "graphics"
-      ],
-      "summary_zh": "Scott Creative Arts Foundation (SCAF) 邀请居住或工作在约克郡的新兴艺术家提交作品提案，以回应今年的主题：张力。入选作品将作为2027年新兴艺术家奖的一部分展出。",
-      "url": "https://www.curatorspace.com/opportunities/detail/scott-creative-arts-foundation-emerging-artist-award/10627",
-      "source_url": "https://www.curatorspace.com/opportunities?page=8",
-      "domain": "curatorspace.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/36861/opportunity/10627/image/002452080174db68e9.jpg",
-      "cover_source": "curatorspace.com"
-    },
-    {
       "id": "curatorspace-opportunities-p8-静默建筑-数字展览",
       "category": "opencall",
       "title_zh": "静默建筑 - 数字展览",
@@ -42548,8 +42449,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/13434/opportunity/9769/image/72eadab68aeca5a71e8e98.jpg",
       "cover_source": "curatorspace.com"
     },
@@ -44754,8 +44655,8 @@
       "org_zh": "Artenda(国际)",
       "city_zh": "Berlin",
       "country_zh": "德国",
-      "deadline": "2026-08-31",
-      "deadline_note": "原文未提及截止时间",
+      "deadline": "2026-09-05",
+      "deadline_note": "原文截止 + Sep 5, 2026",
       "apply_fee": {
         "free": null,
         "amount": null,
@@ -44780,6 +44681,7 @@
         "Digital",
         "Sound",
         "Painting",
+        "Architecture",
         "Drawing",
         "Literature",
         "Photography",
@@ -44790,22 +44692,24 @@
         "Sculpture",
         "Textile Art",
         "Ceramics",
-        "Music"
+        "Curatorial",
+        "Music",
+        "Chef",
+        "Food designer"
       ],
-      "summary_zh": "Artenda网站提供全球艺术驻地项目的开放申请，包括德国2026年的顶级艺术驻地项目。",
+      "summary_zh": "Artenda(国际)提供了2026年在德国的顶级艺术驻地项目列表，包括各种艺术领域的驻地机会。",
       "url": "https://artenda.net/selected-country/residency/Germany",
       "source_url": "https://artenda.net/art-open-call-opportunity/residency",
       "domain": "artenda.net",
       "org_type": "independent",
       "trust": "auto",
-      "status": "expired",
+      "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "assets/covers/f5099cc5b924fb4d.jpg",
-      "cover_source": "screenshot",
-      "_fail_streak": 0
+      "cover_source": "screenshot"
     },
     {
       "id": "artenda-residency-2026年美国顶级艺术驻地项目",
@@ -44874,11 +44778,11 @@
       "id": "artenda-residency-art-open-calls-international-exhibition-",
       "category": "opencall",
       "title_zh": "Art Open Calls: International Exhibition Calls 2026",
-      "title_en": "International Exhibition Calls 2026",
+      "title_en": "Art Open Calls: International Exhibition Calls 2026",
       "org_zh": "Artenda(国际)",
-      "city_zh": "Toronto",
-      "country_zh": "加拿大",
-      "deadline": "2026-08-31",
+      "city_zh": "New York",
+      "country_zh": "美国",
+      "deadline": "2026-09-04",
       "deadline_note": "Deadline reminders and agenda",
       "apply_fee": {
         "free": null,
@@ -44901,9 +44805,6 @@
         "nationality": null
       },
       "disciplines": [
-        "Sculpture",
-        "Ceramics",
-        "Glass",
         "Digital",
         "Painting",
         "Drawing",
@@ -44912,8 +44813,9 @@
         "Printmaking",
         "Installation",
         "Performance",
+        "Sculpture",
         "Textile Art",
-        "Curatorial"
+        "Ceramics"
       ],
       "summary_zh": "Art Open Calls: International Exhibition Calls 2026",
       "url": "https://artenda.net/art-open-call-opportunity/exhibition",
@@ -44921,14 +44823,13 @@
       "domain": "artenda.net",
       "org_type": "independent",
       "trust": "auto",
-      "status": "expired",
+      "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "assets/covers/3ef0491bb75ff68e.jpg",
-      "cover_source": "screenshot",
-      "_fail_streak": 0
+      "cover_source": "screenshot"
     },
     {
       "id": "artenda-residency-2026荷兰顶级艺术驻地项目",
@@ -45107,8 +45008,8 @@
       "org_zh": "Artenda(国际)",
       "city_zh": "New York",
       "country_zh": "美国",
-      "deadline": "2026-08-31",
-      "deadline_note": "原文未提及截止时间",
+      "deadline": "2026-09-10",
+      "deadline_note": "原文截止 + Sep 10, 2026",
       "apply_fee": {
         "free": null,
         "amount": null,
@@ -45130,33 +45031,21 @@
         "nationality": null
       },
       "disciplines": [
-        "Digital",
-        "Painting",
-        "Drawing",
-        "Photography",
-        "Video",
-        "Printmaking",
-        "Installation",
-        "Performance",
-        "Sculpture",
-        "Textile Art",
-        "Ceramics",
         "Curatorial"
       ],
-      "summary_zh": "Artenda(国际)发布2026年美国顶级展览开放征稿信息，涵盖多个艺术领域。",
+      "summary_zh": "Discover current open calls for national and international art exhibitions.",
       "url": "https://artenda.net/selected-country/exhibition/United-States-of-America",
       "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
       "domain": "artenda.net",
       "org_type": "independent",
       "trust": "auto",
-      "status": "expired",
+      "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "assets/covers/fc661c8e0dd717a0.jpg",
-      "cover_source": "screenshot",
-      "_fail_streak": 0
+      "cover_source": "screenshot"
     },
     {
       "id": "artenda-exhibition-2026年英国顶级展览开放征稿",
@@ -45166,7 +45055,7 @@
       "org_zh": "Artenda(国际)",
       "city_zh": "London",
       "country_zh": "英国",
-      "deadline": "2026-09-23",
+      "deadline": "2026-09-10",
       "deadline_note": "原文未提及截止时间",
       "apply_fee": {
         "free": null,
@@ -45189,10 +45078,11 @@
         "nationality": null
       },
       "disciplines": [
+        "Photography",
         "Digital",
+        "Sound",
         "Painting",
         "Drawing",
-        "Photography",
         "Video",
         "Printmaking",
         "Installation",
@@ -45201,7 +45091,7 @@
         "Textile Art",
         "Ceramics"
       ],
-      "summary_zh": "Artenda(国际)发布2026年英国顶级展览开放征稿信息，涵盖多个艺术领域。",
+      "summary_zh": "Artenda(国际)发布2026年英国顶级展览开放征稿信息，涵盖摄影、数字、声音、绘画、绘图、视频、印刷、装置、表演、雕塑、纺织艺术和陶瓷等多个艺术领域。",
       "url": "https://artenda.net/selected-country/exhibition/United-Kingdom",
       "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
       "domain": "artenda.net",
@@ -45210,11 +45100,10 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "assets/covers/00d9be946fa1bbca.jpg",
-      "cover_source": "screenshot",
-      "_fail_streak": 0
+      "cover_source": "screenshot"
     },
     {
       "id": "theartlist-calls-submissions-p3-国际开放征稿-斯坦尼斯拉夫-利本斯基奖2026",
@@ -45394,16 +45283,17 @@
       "domain": "theartlist.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "official_url": "https://www.theartlist.com/open-call-for-artists-arrival-gallery-paris-exhibition-2026",
       "official_located": "specific",
       "source_platform": "TheArtList",
       "cover": "assets/covers/c11c4a204e595a7b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-calls-submissions-p3-wayne-art-center-2026-craftforms-call-fo",
@@ -45515,7 +45405,7 @@
         "Ceramics",
         "Acrylic"
       ],
-      "summary_zh": "Ten Moir Gallery 邀请全球艺术家和摄影师提交作品参加我们的在线艺术挑战。每个挑战都围绕一个独特的主题，为艺术家提供一个在精选在线展示中分享有意义、创意作品的机会。",
+      "summary_zh": "Ten Moir Gallery 邀请全球艺术家和摄影师提交作品参加我们的旋转在线艺术挑战。每个挑战都围绕一个独特的主题，为艺术家提供一个在精选在线展示中分享有意义、创意作品的机会。",
       "url": "https://www.theartlist.com/ten-moir-gallery-monthly-themed-art-challenges-free-entry-open-call-for-artists",
       "source_url": "https://www.theartlist.com/category/contests-and-juried-shows?page=3",
       "domain": "theartlist.com",
@@ -45524,10 +45414,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1780794085.jpg",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-exhibitions-p1-arrival-gallery-米兰开放征稿-2026年9月",
@@ -45583,13 +45474,14 @@
       "domain": "theartlist.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1783680993.jpg",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-exhibitions-p1-arrival-gallery-call-for-artists-show-yo",
@@ -45639,7 +45531,7 @@
         "Ceramics",
         "Acrylic"
       ],
-      "summary_zh": "ARRIVAL Gallery 正在为艺术家提供一个在雅典举办的国际展览机会，欢迎来自世界各地的艺术家提交作品。",
+      "summary_zh": "ARRIVAL Gallery 正在雅典为艺术家提供一个专注于国际展览的机会，欢迎艺术家提交作品。",
       "url": "https://www.theartlist.com/arrival-gallery-call-for-artists-show-your-art-in-athens-this-september-2026",
       "source_url": "https://www.theartlist.com/category/exhibitions",
       "domain": "theartlist.com",
@@ -45648,10 +45540,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1783348099.jpg",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-exhibitions-p1-艺术家征稿-在马尼拉展示您的艺术-arrival-gallery-数字展览",
@@ -46030,10 +45923,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1776962210.png",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-exhibitions-p2-艺术家征稿-在10月布里斯顿展示您的艺术作品-arrival-gallery",
@@ -46430,7 +46324,7 @@
       "city_zh": "Blanca",
       "country_zh": "Spain",
       "deadline": null,
-      "deadline_note": "ONGOING",
+      "deadline_note": "Deadline: ONGOING",
       "apply_fee": {
         "free": true,
         "amount": null,
@@ -46469,7 +46363,7 @@
         "Ceramics",
         "Acrylic"
       ],
-      "summary_zh": "Cruce是AADK Spain的一个持续进行的计划，在西班牙Blanca（穆尔西亚）的乡村小镇提供一个转变和创意休憩的空间。自2020年以来，它已经接待了来自不同学科的70多名艺术家、研究人员和专业人士。位于Centro Negra，一个俯瞰Ricote山谷的山坡综合体的修复场所，Cruce邀请参与者在一个艺术、研究和日常生活融合的协作环境中工作、生活和联系。该计划鼓励独立、文化多样性和新的领土居住方式。参与者可以停留2周到6个月，使用工作室、协同办公区域和活动空间。",
+      "summary_zh": "Cruce是AADK Spain的一个持续进行的计划，在西班牙Blanca（穆尔西亚）的乡村小镇提供一个转变和创意休憩的空间。自2020年以来，它已经接待了来自不同学科的70多位艺术家、研究人员和专业人士。位于Centro Negra，一个俯瞰Ricote山谷的山坡综合体的修复场所，Cruce邀请参与者在一个艺术、研究和日常生活融合的协作环境中工作、生活和联系。该计划鼓励独立、文化多样性和新的居住方式。参与者可以停留2周到6个月，使用工作室、协同办公区域和活动空间。",
       "url": "https://www.theartlist.com/17022026120350-aadk-spain-residency-cruce-space-for-transformation",
       "source_url": "https://www.theartlist.com/category/residencies",
       "domain": "theartlist.com",
@@ -46478,10 +46372,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1762955903.png",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-residencies-2027艺术家驻留开放征召",
@@ -46600,16 +46495,17 @@
       "domain": "theartlist.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "source_platform": "Kimmel Harding Nelson Center for the Arts",
       "official_url": "https://www.khncenterforthearts.org/",
       "official_located": "specific",
       "cover": "assets/covers/f80f21a0931e6d73.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-fairs-evanston-art-center-冬季艺术与工艺展艺术家征召",
@@ -46681,7 +46577,7 @@
       "category": "opencall",
       "title_zh": "Call for Art: Two-Dimensional Temporary Public Art Installation for Fall 2026",
       "title_en": "Call for Art: Two-Dimensional Temporary Public Art Installation for Fall 2026",
-      "org_zh": "Rochester Contemporary Art Center (RoCo)",
+      "org_zh": "TheArtList",
       "city_zh": "未知",
       "country_zh": "未知",
       "deadline": "2026-09-15",
@@ -46719,7 +46615,7 @@
         "Crafts",
         "Acrylic"
       ],
-      "summary_zh": "Rochester Contemporary Art Center (RoCo) 邀请艺术家提交三个图像，用于在秋季2026年的临时公共艺术装置。作品需与地点、社区和历史相关联，挑战观众，并解决重要的社会和政治问题。",
+      "summary_zh": "Rochester Contemporary Art Center (RoCo) 正在邀请艺术家提交三个图像，用于在秋季2026年的临时公共艺术装置。特别感兴趣的是那些将游客与地点、社区和历史联系起来，挑战游客和路人，并解决重要社会和政治问题的项目。",
       "url": "https://www.theartlist.com/call-for-art-two-dimensional-temporary-public-art-installation-for-fall-2026",
       "source_url": "https://www.theartlist.com/category/rfps",
       "domain": "theartlist.com",
@@ -46728,10 +46624,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1784229766.jpg",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p11-available-temporary-studio-space-doncast",
@@ -46826,17 +46723,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "official_url": "https://jtnparts.org/",
       "official_located": "specific",
       "source_platform": "ArtConnect",
       "cover": "assets/covers/1159063882731ec0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-creative-residency-2027",
@@ -46901,16 +46799,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "geo_fallback": "geo_nationalize",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/3430abb21dae938b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-密歇根艺术家-retreat",
@@ -46974,15 +46873,16 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/483a99911c27c538.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-艺术家驻留项目",
@@ -47046,16 +46946,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "geo_fallback": "geo_nationalize",
       "source_platform": "Kimmel Harding Nelson Center of Arts",
       "official_url": null,
       "cover": "assets/covers/563504f38f6372e0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-month-long-residencies-artconnect",
@@ -47119,16 +47020,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "geo_fallback": "geo_nationalize",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/bb1a5f0726a7ab68.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-the-kingston-prize-2026",
@@ -47170,17 +47072,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": "加拿大",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/30b259991a413cf5.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-个人卓越奖",
@@ -47243,17 +47146,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "official_url": "https://www.austintexas.gov/economic-development/programs/artconnect",
       "official_located": "org",
       "source_platform": "ArtConnect",
       "cover": "assets/covers/4f73bb896f6ce679.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-culture-forward",
@@ -47318,17 +47222,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "geo_fallback": "geo_nationalize",
       "official_url": "https://www.svaneff.org/",
       "official_located": "specific",
       "source_platform": "The Svane Family Foundation",
       "cover": "assets/covers/4bbbf0b9d70456c8.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-艺术家支持补助金",
@@ -47393,16 +47298,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/6d0bad59d2eda7d9.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-first-book-award-2027",
@@ -47443,18 +47349,19 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "official_url": "https://poets.org/academy-american-poets/first-book-award-guidelines",
       "official_located": "specific",
       "source_platform": "Academy of American Poets",
       "cover": "assets/covers/8c5635ef390126ab.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p22-the-decatur-artway-ix",
@@ -48832,17 +48739,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": "捷克",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "FOUND OBJECT art space",
       "official_url": null,
       "cover": "assets/covers/18af60d3684645ce.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-tech-fellowship-programme-2027",
@@ -48888,17 +48796,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "official_url": "https://rijksakademie.nl/en/news/2026-06-30-tech-fellowship-programme-2027",
       "official_located": "org",
       "source_platform": "Rijksakademie",
       "cover": "assets/covers/a370da9c74e617bd.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-working-grant-for-fine-arts-2027",
@@ -48940,18 +48849,19 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "__country": null,
       "__c": "德国",
       "geo_fallback": "geo_backfill_locscan",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/118ec92a04cb195e.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-2-month-funded-artist-writer-residency",
@@ -49001,16 +48911,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "geo_fallback": "geo_nationalize",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/dc65404cb81afed0.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-2027年特定地点艺术画廊",
@@ -49054,16 +48965,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "source_platform": "ArtConnect",
       "official_url": "https://open-source-gallery.org/open-call-for-2027-exhibitions/",
       "official_located": "org",
       "cover": "assets/covers/dc82b15dee2c6217.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-2027-open-call-for-curators",
@@ -49104,17 +49016,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "__country": "全球(国际)",
       "geo_fallback": "geo_backfill_global",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/7e7fc95fd82528b2.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-在巴塞罗那展览您的艺术作品-2026年9月-巨大画廊-artconnect",
@@ -49179,17 +49092,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "__country": "西班牙",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/8f7a7dda4cf9518c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p16-transverse-exchange-grant",
@@ -55066,14 +54980,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "dead",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-08-31",
-      "updated_at": "2026-08-31",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artquest.org.uk/wp-content/uploads/88x31.png",
       "cover_source": "artquest.org.uk",
-      "_fail_streak": 1
+      "_fail_streak": 3
     },
     {
       "id": "artquest-opportunities-p1-outside-in和david-zwirner展览公开征稿",
@@ -55307,14 +55221,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "dead",
+      "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-30",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "assets/covers/43bcefb28f930998.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p31-research-fellowships-artconnect",
@@ -70087,14 +70001,15 @@
       "domain": "rivet.es",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "geo_fallback": "geo_nationalize",
       "cover": "assets/covers/9559c108e756590f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artistcommunities-residencies-p17-violet-institute评论家驻留计划",
@@ -74354,13 +74269,14 @@
       "domain": "artrabbit.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
-      "cover_source": "artrabbit.com"
+      "cover_source": "artrabbit.com",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-all-aa2a-artist-residencies-across-england",
@@ -74399,13 +74315,14 @@
       "domain": "artrabbit.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
-      "cover_source": "artrabbit.com"
+      "cover_source": "artrabbit.com",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-all-巴塞罗那艺术展览-2026年9月",
@@ -74438,19 +74355,20 @@
         "nationality": null
       },
       "disciplines": [],
-      "summary_zh": "HUGE Gallery是一个面向新兴艺术家的开放展览平台，旨在让艺术家的作品被看到、分享和记住。2026年9月18日至20日在巴塞罗那举行，提供展示机会、营销、代表、出版机会、销售支持、工作室空间和艺术家卡。",
+      "summary_zh": "HUGE Gallery是一个面向新兴艺术家的开放展览平台，提供展示、交流、营销、代表、展览、出版、销售支持、工作室空间和艺术家卡等服务。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/september/barcelona-art-exhibition--september-2026",
       "source_url": "https://www.artrabbit.com/artist-opportunities",
       "domain": "artrabbit.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://img.artrabbit.com/artist-opportunities/2026/september/barcelona-art-exhibition--september-2026/images/C0dhOiKnh5ze/950x534/Huge-Gallery-Barcelona.jpg",
-      "cover_source": "artrabbit.com"
+      "cover_source": "artrabbit.com",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-all-neo-future-thematic-2-weeks-residency-pr",
@@ -74492,8 +74410,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://img.artrabbit.com/artist-opportunities/2026/september/neo-future--thematic-2-week-residency-program-in-finland-dec-2026/images/Drsi3Gc4ABjl/950x534/arteles-neofuture-banner.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -74554,7 +74472,7 @@
       "title_zh": "THE TAGLI 2026 Mentorship Award in Partnership with Rosewood London",
       "title_en": "THE TAGLI 2026 Mentorship Award in Partnership with Rosewood London",
       "org_zh": "THE TAGLI",
-      "city_zh": "未知",
+      "city_zh": "London",
       "country_zh": "英国",
       "deadline": "2026-09-06",
       "deadline_note": "Deadline 06 September 2026",
@@ -74579,7 +74497,7 @@
         "nationality": null
       },
       "disciplines": [],
-      "summary_zh": "THE TAGLI的2026年导师奖与Rosewood London合作。该奖项将为获奖者提供一年期的导师指导、在Rosewood London的群展机会以及2000英镑的奖学金。",
+      "summary_zh": "THE TAGLI的2026年导师奖与Rosewood London合作。该奖项为获奖者提供一年期的导师指导、在Rosewood London的群展机会以及2000英镑的奖学金。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/september/the-tagli-2026-mentorship-award-in-partnership-wit",
       "source_url": "https://www.artrabbit.com/artist-opportunities",
       "domain": "artrabbit.com",
@@ -74588,15 +74506,10 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
-      "__country": null,
-      "__c": "英国",
-      "geo_fallback": "geo_backfill_locscan",
-      "source_platform": "THE TAGLI",
-      "official_url": null,
-      "cover": "assets/covers/f3606a8f38d46009.jpg",
-      "cover_source": "screenshot"
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://img.artrabbit.com/artist-opportunities/2026/september/untitled/images/Wqd8IEgIRvSF/950x534/Tagli-ArtOpps.jpg",
+      "cover_source": "artrabbit.com"
     },
     {
       "id": "artrabbit-opps-residency-rose-choreographic-school-s-artistic-coh",
@@ -74690,8 +74603,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -74735,8 +74648,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -74746,10 +74659,10 @@
       "title_zh": "NARS国际驻留计划",
       "title_en": "NARS International Residency Program",
       "org_zh": "NARS基金会",
-      "city_zh": "布鲁克林，纽约",
+      "city_zh": "布鲁克林",
       "country_zh": "美国",
       "deadline": "2026-12-31",
-      "deadline_note": "原文截止 + Deadline 31 December 2026",
+      "deadline_note": "Deadline 31 December 2026",
       "apply_fee": {
         "free": false,
         "amount": "US$35",
@@ -74787,8 +74700,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://img.artrabbit.com/artist-opportunities/2026/december/nars-international-residency-program/images/wAG10LAi0RlZ/950x534/International-Residency.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -74889,8 +74802,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -74986,8 +74899,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -75090,8 +75003,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -76109,10 +76022,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://img.artrabbit.com/artist-opportunities/2026/september/untitled/images/feDl9B39Sl98/950x534/WN-ARTMAIL-email-banner-700x393px-2-v1-1.jpg",
-      "cover_source": "artrabbit.com"
+      "cover_source": "artrabbit.com",
+      "_fail_streak": 0
     },
     {
       "id": "artrabbit-opps-exhibition-deck-the-mill-手工圣诞树装饰展",
@@ -76163,8 +76077,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -76338,18 +76252,15 @@
       "eligibility": {
         "students_ok": null,
         "age_limit": null,
-        "nationality": "EU residents"
+        "nationality": null
       },
       "disciplines": [
-        "绘画",
-        "雕塑",
-        "装置",
-        "影像",
-        "版画",
+        "插画",
+        "壁画",
         "设计",
         "视觉叙事"
       ],
-      "summary_zh": "The ENDURION Project invites EU resident illustrators, muralists, designers, and visual storytellers from across Europe to participate in the European Green Hydrogen Mural & Calendar Art Competition 2027. The competition seeks original artistic interpretations of how green hydrogen can contribute to a sustainable, climate-neutral, and energy-secure future for Europe.",
+      "summary_zh": "ENDURION项目邀请欧盟居民插画师、壁画艺术家、设计师和视觉叙事者参与欧洲绿色氢能壁画与日历艺术竞赛2027。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/october/european-green-hydrogen-mural-calendar-art-compe",
       "source_url": "https://www.artrabbit.com/artist-opportunities?type=Competition",
       "domain": "artrabbit.com",
@@ -76358,8 +76269,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -77034,14 +76945,15 @@
       "domain": "recology.com",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "_via": "search",
       "cover": "assets/covers/371334c98f3bc4b6.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "search-kunst-丹麦当代艺术生产-传播和展览资助计划",
@@ -78050,16 +77962,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "Syno Foundation",
       "official_url": null,
       "cover": "assets/covers/0aa5dda05a2da410.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-august-salon-art-prize-online-art-compet",
@@ -78102,16 +78015,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/aca1fccd3b26a386.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-call-for-solo-artists-2027",
@@ -78156,16 +78070,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "Copenhagen Photo Festival",
       "official_url": null,
       "cover": "assets/covers/ec787c073bbb828f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-希腊文化精神国际艺术家作品征稿",
@@ -78228,17 +78143,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": "希腊",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "One Culture Foundation",
       "official_url": null,
       "cover": "assets/covers/96f916ad8d35c502.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-国际巡回与环境责任计划",
@@ -78283,16 +78199,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/13c2bc6bc65c9795.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-可能的伤口-艺术-未来与非人类代理",
@@ -78357,16 +78274,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/8f8b3f5400eb576f.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-伦敦-based香港-diaspora艺术家工作室奖学金",
@@ -78431,17 +78349,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": "英国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "Gasworks",
       "official_url": null,
       "cover": "assets/covers/2a804248c248f75b.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-heatwave-adapting-public-spaces-to-extre",
@@ -78487,16 +78406,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/42b141c917a63b56.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-pro-helvetia-production-grants",
@@ -78559,16 +78479,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/a026adb2c7b09344.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-fondament-der-greif-ich-seh-etwas-was-du",
@@ -78609,16 +78530,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/bb6d4a387c959722.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p14-纳帕灯光艺术节2026",
@@ -78661,16 +78583,17 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-08-15",
-      "updated_at": "2026-08-15",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/ac636e27794ca4fb.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p20-马丁-罗特倡议",
@@ -80865,8 +80788,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-16",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://res-app.s3.amazonaws.com/uploads/image/display_1ec70578ff9a3516b12dbedd1525ea0e.jpg",
       "cover_source": "rivet.es"
     },
@@ -80968,15 +80891,16 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-16",
-      "last_seen": "2026-08-16",
-      "updated_at": "2026-08-16",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/d1d519fcba3bd65c.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "arabculturefund-auto-women-in-film-iii-training-through-pract",
@@ -82633,13 +82557,14 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://r2.ac-img.com/2022/3aa95c77-5e16-4934-b5d6-9e731b2e5bc8.jpg",
-      "cover_source": "artconnect.com"
+      "cover_source": "artconnect.com",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p12-dreams-nightmares-call-for-artists",
@@ -82704,13 +82629,14 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-08-23",
-      "updated_at": "2026-08-23",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://r2.ac-img.com/2023/174d4173-1379-4cd5-98ca-ad814e79799e.jpeg",
-      "cover_source": "artconnect.com"
+      "cover_source": "artconnect.com",
+      "_fail_streak": 0
     },
     {
       "id": "theartlist-art-photo-p1-arrival-shows-2026年9月在线展览项目艺术家征稿",
@@ -83163,7 +83089,7 @@
       "category": "opencall",
       "title_zh": "VISUALS 2026 — 国际开放征稿：平面设计及视觉传达",
       "title_en": "VISUALS 2026 — International Open Call for Graphic Design & Visual Communication",
-      "org_zh": "Naumy Design",
+      "org_zh": "TheArtList",
       "city_zh": "未知",
       "country_zh": "未知",
       "deadline": "2026-12-19",
@@ -83174,7 +83100,7 @@
         "currency": null
       },
       "participation_fee": {
-        "required": null,
+        "required": true,
         "amount": null,
         "currency": null
       },
@@ -83193,16 +83119,18 @@
         "Graphic Design",
         "Digital Media",
         "Typography",
-        "Poster design",
-        "Branding and visual identity",
-        "Editorial and packaging design",
-        "Digital and web design",
-        "Motion graphics",
+        "Imagery",
+        "Composition",
+        "Motion Graphics",
         "Illustration",
-        "Advertising design",
-        "Experimental visual communication"
+        "Advertising Design",
+        "Experimental Visual Communication",
+        "Posters",
+        "Branding and Visual Identity",
+        "Editorial and Packaging Design",
+        "Web Design"
       ],
-      "summary_zh": "Naumy Design国际展览，由美国设计公司Naumy Design和国际创意平台组织，邀请全球设计师和视觉艺术家参与VISUALS — 传达的艺术国际在线展览。",
+      "summary_zh": "Naumy Design国际展览邀请全球设计师和视觉艺术家参与VISUALS — 传达的艺术国际在线展览，专注于平面设计和视觉传达。",
       "url": "https://www.theartlist.com/visuals-2026-international-open-call-for-graphic-design-visual-communication",
       "source_url": "https://www.theartlist.com/category/exhibitions?page=2",
       "domain": "theartlist.com",
@@ -83211,10 +83139,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1787151865.jpg",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "artenda-project-grant-art-open-calls-international-art-competi",
@@ -83279,58 +83208,6 @@
       "_fail_streak": 0,
       "cover": "assets/covers/56b4d81dd3ef2603.jpg",
       "cover_source": "screenshot"
-    },
-    {
-      "id": "artenda-exhibition-2026年法国顶级展览开放征稿",
-      "category": "opencall",
-      "title_zh": "2026年法国顶级展览开放征稿",
-      "title_en": "Top Exhibitions in France 2026",
-      "org_zh": "Artenda(国际)",
-      "city_zh": "Paris",
-      "country_zh": "法国",
-      "deadline": "2026-08-31",
-      "deadline_note": "原文截止 + \"Deadline Aug 31, 2026\"",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "绘画",
-        "摄影",
-        "版画",
-        "装置",
-        "雕塑"
-      ],
-      "summary_zh": "Artenda(国际)举办的2026年法国顶级展览开放征稿，包括绘画、摄影、版画、装置和雕塑等多个艺术领域。",
-      "url": "https://artenda.net/selected-country/exhibition/France",
-      "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
-      "domain": "artenda.net",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
-      "cover": "assets/covers/d999aa451db9e97c.jpg",
-      "cover_source": "screenshot",
-      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p15-house-in-the-neighborhood-artconnect",
@@ -85346,14 +85223,14 @@
       "domain": "artquest.org.uk",
       "org_type": "independent",
       "trust": "auto",
-      "status": "dead",
+      "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-08-23",
-      "updated_at": "2026-08-30",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artquest.org.uk/wp-content/uploads/88x31.png",
       "cover_source": "artquest.org.uk",
-      "_fail_streak": 3
+      "_fail_streak": 0
     },
     {
       "id": "artistcommunities-residencies-p6-2027年1月至3月艺术家社区驻留项目",
@@ -85745,8 +85622,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://res-app.s3.amazonaws.com/uploads/image/display_af4dbd21bd3df1351de1b7ebb9ec7762.jpg",
       "cover_source": "rivet.es"
     },
@@ -85878,7 +85755,7 @@
         "food designers",
         "interdisciplinary practices"
       ],
-      "summary_zh": "Culinary Residency 是一个邀请厨师、艺术家、食品设计师和跨学科实践者探索前露台餐厅的历史或新的、当代的公共餐饮形式的驻留项目。",
+      "summary_zh": "Culinary Residency 是一个面向厨师、艺术家、食品设计师和跨学科实践者的居住项目，旨在探索前露台餐厅的历史或新的、当代的公共餐饮形式。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/september/open-call-culinary-residency",
       "source_url": "https://www.artrabbit.com/artist-opportunities?type=Artist+in+Residence",
       "domain": "artrabbit.com",
@@ -85887,8 +85764,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -85938,8 +85815,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -86037,8 +85914,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -86080,7 +85957,7 @@
         "装置",
         "跨媒介"
       ],
-      "summary_zh": "YICCA国际当代艺术竞赛是一个汇聚才华和机会的平台，为梦想在当代艺术领域留下足迹的艺术家提供了一次不可多得的机会。竞赛对所有类型的艺术作品和所有技术都开放，包括视频、表演和装置。参与YICCA，艺术家可以进入一个有影响力的全球网络，这对他们的职业生涯可能产生重大影响。",
+      "summary_zh": "YICCA国际当代艺术竞赛是一个汇聚才华和机会的平台，为梦想在当代艺术领域留下足迹的艺术家提供了不可多得的机会。竞赛对所有类型的艺术作品和所有技术都开放，包括视频、表演和装置。参与YICCA，艺术家可以进入一个有影响力的全球网络，这对他们的职业生涯可能产生重大影响。",
       "url": "http://yicca.org/fr",
       "source_url": "https://yicca.org/en/contest",
       "domain": "yicca.org",
@@ -86089,11 +85966,10 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "http://yicca.org/slider_img/fr/1.jpeg",
-      "cover_source": "yicca.org",
-      "_fail_streak": 0
+      "cover_source": "yicca.org"
     },
     {
       "id": "callforcurators-auto-industra-art-open-call-for-exhibition-pr",
@@ -86882,62 +86758,6 @@
       "cover_source": "artscouncil-tokyo.jp"
     },
     {
-      "id": "curatorspace-opportunities-p4-what-if-展览",
-      "category": "opencall",
-      "title_zh": "What If … 展览",
-      "title_en": "What If … Exhibition",
-      "org_zh": "CuratorSpace",
-      "city_zh": "London",
-      "country_zh": "United Kingdom",
-      "deadline": "2026-09-10",
-      "deadline_note": "Submission Deadline: 10 Sept 2026",
-      "apply_fee": {
-        "free": false,
-        "amount": {
-          "A4": "£45",
-          "A3": "£56",
-          "40x40cm": "£60"
-        },
-        "currency": "GBP"
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": {
-          "A3": "£120",
-          "40x40cm": "£150"
-        },
-        "currency": "GBP"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "image-based artist",
-        "lens-based artist",
-        "photographer"
-      ],
-      "summary_zh": "CuratorSpace举办的What If … 展览，面向图像艺术家、镜头艺术家和摄影师开放。展览将于2026年11月6日至9日在伦敦Photobook Cafe举行，主题为‘如果……’。",
-      "url": "https://www.curatorspace.com/opportunities/detail/open-call--what-if--exhibition/10793",
-      "source_url": "https://www.curatorspace.com/opportunities?page=4",
-      "domain": "curatorspace.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-08-23",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
-      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/61951/opportunity/10793/image/5a16ad21f3a97a709a965d758e98.jpg",
-      "cover_source": "curatorspace.com"
-    },
-    {
       "id": "artenda-exhibition-国际艺术津贴2026",
       "category": "opencall",
       "title_zh": "国际艺术津贴2026",
@@ -87352,7 +87172,7 @@
       "title_en": "Stomping Ground Call Out",
       "org_zh": "The Place",
       "city_zh": "United Kingdom",
-      "country_zh": "United Kingdom",
+      "country_zh": "未知",
       "deadline": "2026-09-03",
       "deadline_note": "Deadline 03 September 2026",
       "apply_fee": {
@@ -87379,7 +87199,7 @@
         "dance",
         "other disciplines who use movement in their practice"
       ],
-      "summary_zh": "The Place正在寻找为儿童创作的短期独奏或二重奏作品，适用于小学、节日和其他公共场所。入选艺术家将获得20000英镑的委托费、发展支持、最多两周的免费工作室空间，并有机会参与The Playground Tour。申请截止日期为2026年9月3日。",
+      "summary_zh": "The Place正在寻找为儿童创作的短期独奏或二重奏作品，适用于小学、节日和其他公共场所。入选艺术家将获得20000英镑的委托费、发展支持，以及最多两周的免费工作室空间。作品将在The Playground Tour中展出五周，并可能获得合作伙伴节日的进一步巡演机会。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/september/stomping-ground-call-out",
       "source_url": "https://www.artrabbit.com/artist-opportunities?page=3",
       "domain": "artrabbit.com",
@@ -87388,8 +87208,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-23",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -89964,10 +89784,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-25",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1787153493.jpg",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p17-grounding-the-cloud",
@@ -90368,13 +90189,14 @@
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-25",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.curatorspace.com/images/logos/logo_fb.png",
-      "cover_source": "curatorspace.com"
+      "cover_source": "curatorspace.com",
+      "_fail_streak": 0
     },
     {
       "id": "theocp-archive-the-open-call-platform-open-calls-for-ar",
@@ -90569,13 +90391,14 @@
       "domain": "fundsforcompanies.fundsforngos.org",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-25",
-      "last_seen": "2026-08-25",
-      "updated_at": "2026-08-25",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
-      "cover_source": "fundsforcompanies.fundsforngos.org"
+      "cover_source": "fundsforcompanies.fundsforngos.org",
+      "_fail_streak": 0
     },
     {
       "id": "artconnect-opportunities-p7-2027-28-展览征稿-artconnect",
@@ -93094,14 +92917,15 @@
       "domain": "wl.km.gov.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-30",
-      "last_seen": "2026-08-30",
-      "updated_at": "2026-08-30",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "_via": "search",
       "cover": "assets/covers/000d9ab168edec57.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_fail_streak": 0
     },
     {
       "id": "search-wl-第八届-云岭杯-中华经典诵写讲大赛-墨香彩云南-汉字书写大赛",
@@ -93291,11 +93115,11 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://r2.ac-img.com/2023/cdb051c6-be98-4af5-8293-1e80be97cb36.jpeg",
       "cover_source": "artconnect.com",
       "source_platform": "Design Trust for Public Space",
@@ -93703,11 +93527,10 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.akademie-solitude.de/wp-content/uploads/cropped-akademie-schloss-solitude-logo.png",
-      "cover_source": "akademie-solitude.de",
-      "_fail_streak": 0
+      "cover_source": "akademie-solitude.de"
     },
     {
       "id": "macdowell-known-macdowell工作室申请要求",
@@ -93855,7 +93678,9 @@
       "first_seen": "2026-08-31",
       "last_seen": "2026-09-01",
       "updated_at": "2026-08-31",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "assets/covers/c636fc51045314fd.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "us-auto-ben-harrington-youth-sports-fund-伊利诺伊州-申",
@@ -93962,16 +93787,16 @@
       "city_zh": "Toronto",
       "country_zh": "Canada",
       "deadline": "2027-05-25",
-      "deadline_note": "Alchemy Island 2027\nDates: May 17-25",
+      "deadline_note": "Alchemy Spring Island May 17-25, 2027",
       "apply_fee": {
-        "free": false,
-        "amount": 25,
-        "currency": "CAD"
+        "free": null,
+        "amount": null,
+        "currency": null
       },
       "participation_fee": {
-        "required": true,
-        "amount": 1100,
-        "currency": "CAD"
+        "required": null,
+        "amount": null,
+        "currency": null
       },
       "funding": {
         "stipend": null,
@@ -93983,43 +93808,9 @@
         "age_limit": null,
         "nationality": null
       },
-      "disciplines": [
-        "Art Conservation",
-        "Art Education",
-        "Book Arts",
-        "Ceramics/Clay Arts/Pottery",
-        "Choreography",
-        "Dance",
-        "Drawing",
-        "Ecology",
-        "Environmental Arts",
-        "Fiction",
-        "Film",
-        "History",
-        "Installation Arts",
-        "Interdisciplinary Arts",
-        "Literary Nonfiction",
-        "Mixed Media",
-        "Multimedia Arts",
-        "Painting",
-        "Paper Arts",
-        "Performance Art",
-        "Photography",
-        "Poetry",
-        "Printmaking",
-        "Public Art",
-        "Screenwriting",
-        "Sculpture",
-        "Social Practice",
-        "Sound Art",
-        "Storytelling",
-        "Textile & Fiber Arts/Weaving",
-        "Visual Arts",
-        "Woodworking",
-        "Writing"
-      ],
-      "summary_zh": "Alchemy Artists Residency 是一个由艺术家领导的国际艺术家驻留项目，自2015年以来，Alchemy 邀请艺术家在两个独特的加拿大环境中连接、协作和反思：多伦多群岛和爱德华王子县。该项目以食物、艺术、花园和餐桌为四大支柱，记录和分享艺术创作、餐点和对话。在Alchemy，艺术家深化他们的实践，交流思想，并与接待我们的社区、社区和景观互动。",
-      "url": "https://artistcommunities.org/directory/residencies/alchemy-artists-residency",
+      "disciplines": [],
+      "summary_zh": "Alchemy Artists Residency 是一个由艺术家领导的驻留项目，致力于场地启发型的艺术创作和社区参与。",
+      "url": "https://artistcommunities.org/directory/organizations/alchemy-artists-residency",
       "source_url": "https://www.artistcommunities.org/directory/ongoing-open-calls",
       "domain": "artistcommunities.org",
       "org_type": "independent",
@@ -94027,11 +93818,13 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "source_platform": "Alchemy Artists Residency",
+      "resolve_classify": "trusted-platform",
+      "resolve_gates": 4,
       "cover": "https://artistcommunities.org/sites/default/files/styles/slide_paragraph/public/2026-08/FE7CD405-C078-4C8D-8C3F-0F1BDBD13AF7.jpg?itok=-idWX1g2",
-      "cover_source": "artistcommunities.org",
-      "_fail_streak": 0
+      "cover_source": "artistcommunities.org"
     },
     {
       "id": "curatorspace-opportunities-p4-protest-for-change",
@@ -94067,7 +93860,7 @@
         "visual art",
         "creative writing"
       ],
-      "summary_zh": "CuratorSpace 正在寻找艺术家和创意作家提交视觉艺术或创意写作作品，以有机会在合作杂志《Protest for Change》中展出。提交截止日期为2026年9月18日午夜。",
+      "summary_zh": "CuratorSpace 正在寻找艺术家和创意作家提交视觉艺术或创意写作作品，以有机会在合作杂志中被展示。提交截止日期为 2026 年 9 月 18 日午夜。",
       "url": "https://www.curatorspace.com/opportunities/detail/protest-for-change/11049",
       "source_url": "https://www.curatorspace.com/opportunities?page=4",
       "domain": "curatorspace.com",
@@ -94076,10 +93869,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/71176/opportunity/11049/image/3eba2d7acb5fa2b0a16a781e09a965a2eb699e.png",
-      "cover_source": "curatorspace.com"
+      "cover_source": "curatorspace.com",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p5-narcissist-protocol",
@@ -94177,7 +93971,7 @@
         "影像",
         "跨媒介"
       ],
-      "summary_zh": "Beverley Art Gallery邀请艺术家提交提案，以在2027年夏季将画廊转变为一个活跃、互动的环境，鼓励参观者通过他们的存在和参与来探索和塑造空间。",
+      "summary_zh": "Beverley Art Gallery邀请艺术家提交2027年夏季委托提案，将画廊转变为一个活跃、互动的环境，鼓励参观者通过他们的参与和互动来探索和塑造空间。",
       "url": "https://www.curatorspace.com/opportunities/detail/art-commission--summer/11057",
       "source_url": "https://www.curatorspace.com/opportunities?page=5",
       "domain": "curatorspace.com",
@@ -94186,10 +93980,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/82794/opportunity/11057/image/11160205ebdeae57b23a97a71318626e2b62a27dbbb6149ea6d7a66deaf6d36e76da3a60.jpg",
-      "cover_source": "curatorspace.com"
+      "cover_source": "curatorspace.com",
+      "_fail_streak": 0
     },
     {
       "id": "curatorspace-opportunities-p5-shadows-monsters",
@@ -94583,65 +94378,6 @@
       "_fail_streak": 0
     },
     {
-      "id": "artenda-competition-国际艺术项目资助2026-artenda",
-      "category": "opencall",
-      "title_zh": "国际艺术项目资助2026 | Artenda",
-      "title_en": "International Art Project Grants 2026 | Artenda",
-      "org_zh": "Artenda(国际)",
-      "city_zh": "未知",
-      "country_zh": "未知",
-      "deadline": "2026-08-31",
-      "deadline_note": "Deadline Aug 31, 2026",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "Digital",
-        "Painting",
-        "Drawing",
-        "Photography",
-        "Video",
-        "Printmaking",
-        "Installation",
-        "Performance",
-        "Sculpture",
-        "Textile Art",
-        "Ceramics",
-        "Architecture",
-        "Literature",
-        "Music"
-      ],
-      "summary_zh": "Artenda网站提供全球范围内当前开放的艺术项目资助机会列表。",
-      "url": "https://artenda.net/art-open-call-opportunity/project-grant",
-      "source_url": "https://artenda.net/art-open-call-opportunity/competition",
-      "domain": "artenda.net",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "expired",
-      "verified_at": null,
-      "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
-      "_fail_streak": 0
-    },
-    {
       "id": "artenda-project-grant-国际公共艺术项目2026-artenda",
       "category": "opencall",
       "title_zh": "国际公共艺术项目2026 | Artenda",
@@ -94695,7 +94431,9 @@
       "first_seen": "2026-08-31",
       "last_seen": "2026-09-01",
       "updated_at": "2026-09-01",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "cover": "assets/covers/c37dd131651f20b2.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "artconnect-opportunities-p15-zmina-resilience-支持国际展示项目",
@@ -95983,8 +95721,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01"
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "_fail_streak": 0,
+      "cover": "assets/covers/436dfab9c4e017cf.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "artconnect-opportunities-p36-ars-gratia-artis-world-film-festival",
@@ -96078,11 +95819,11 @@
       "domain": "theocp.live",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theocp.live/og-image.png",
       "cover_source": "theocp.live",
       "_fail_streak": 0
@@ -96233,8 +95974,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -96244,7 +95985,7 @@
       "title_zh": "NOW 2026 展览机会",
       "title_en": "NOW 2026 Exhibition Opportunity",
       "org_zh": "Gerald Moore Gallery",
-      "city_zh": "United Kingdom",
+      "city_zh": "英国",
       "country_zh": "未知",
       "deadline": "2026-09-04",
       "deadline_note": "原文截止 + Deadline 04 September 2026",
@@ -96264,12 +96005,12 @@
         "travel": null
       },
       "eligibility": {
-        "students_ok": null,
+        "students_ok": true,
         "age_limit": null,
         "nationality": null
       },
       "disciplines": [],
-      "summary_zh": "欢迎参加NOW: New Original Work展览的开放征稿，这是一个专注于展示新兴艺术人才并支持艺术家从教育过渡到专业实践的年度展览。展览将于2026年10月8日至11月21日举行。",
+      "summary_zh": "欢迎参加NOW: New Original Work展览的开放征稿，这是一个致力于展示新兴艺术人才并支持艺术家从教育过渡到专业实践的年度展览。展览将于2026年10月8日至11月21日举行。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/september/now-2026-exhibition-opportunity",
       "source_url": "https://www.artrabbit.com/artist-opportunities?type=Exhibition+Opportunity",
       "domain": "artrabbit.com",
@@ -96278,8 +96019,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -96314,9 +96055,14 @@
         "nationality": null
       },
       "disciplines": [
-        "艺术与技术交汇"
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
       ],
-      "summary_zh": "ZKM | 中心艺术与媒体卡尔斯鲁厄正在邀请公众提交关于艺术与技术在交汇处的历史和正在进行的项目信息。",
+      "summary_zh": "ArtRabbit 是一个开放提交平台。任何人都可以添加活动。组织者可以管理他们的组织存在。",
       "url": "https://www.artrabbit.com/artist-opportunities/2026/september/open-call-case-studies-at-the-intersection-of-art",
       "source_url": "https://www.artrabbit.com/artist-opportunities?type=Exhibition+Opportunity",
       "domain": "artrabbit.com",
@@ -96325,8 +96071,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
       "cover_source": "artrabbit.com",
       "_fail_streak": 0
@@ -96381,8 +96127,8 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-31",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://img.artrabbit.com/artist-opportunities/2026/december/material-works-art-award-2o26/images/nEe5boxtqdBo/950x534/MW-Logo-2-2026.jpg",
       "cover_source": "artrabbit.com"
     },
@@ -96886,11 +96632,11 @@
       "category": "opencall",
       "title_zh": "SHAPES 2026 — 国际产品与物体设计公开征稿",
       "title_en": "SHAPES 2026 — International Open Call for Product & Object Design",
-      "org_zh": "TheArtList",
+      "org_zh": "Naumy Design",
       "city_zh": "未知",
       "country_zh": "未知",
       "deadline": "2026-12-17",
-      "deadline_note": "Deadline: December 17, 2026",
+      "deadline_note": "原文截止 + December 17, 2026",
       "apply_fee": {
         "free": false,
         "amount": null,
@@ -96912,12 +96658,12 @@
         "nationality": null
       },
       "disciplines": [
-        "Sculpture",
-        "Metalsmithing",
-        "Mixed media",
-        "Glass, Mosaic",
-        "Crafts",
-        "Ceramics"
+        "雕塑",
+        "金属工艺",
+        "混合媒体",
+        "玻璃、马赛克",
+        "工艺",
+        "陶瓷"
       ],
       "summary_zh": "Naumy Design国际展览，由美国设计公司Naumy Design和国际创意平台组织，邀请全球设计师和艺术家参与SHAPES — 物体的艺术，一个致力于物体和产品设计的国际在线展览。",
       "url": "https://www.theartlist.com/shapes-2026-international-open-call-for-product-object-design",
@@ -96928,10 +96674,11 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-09-01",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
       "cover": "https://www.theartlist.com/submission/small/1786997808.png",
-      "cover_source": "theartlist.com"
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
     },
     {
       "id": "artenda-residency-2026瑞士顶级艺术驻地项目",
@@ -96989,7 +96736,9 @@
       "verified_at": null,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01"
+      "updated_at": "2026-09-01",
+      "cover": "assets/covers/04f6dabd8f37948c.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "artconnect-opportunities-p18-nd-awards-2026",
@@ -97439,54 +97188,6 @@
       "cover_source": "artconnect.com"
     },
     {
-      "id": "artconnect-opportunities-p33-linda-peshkin-独展奖-2027",
-      "category": "award",
-      "title_zh": "Linda Peshkin 独展奖 2027",
-      "title_en": "Linda Peshkin Solo Exhibition Award 2027",
-      "org_zh": "Art Jewelry Forum",
-      "city_zh": "Lynchburg, VA, USA",
-      "country_zh": "美国",
-      "deadline": "2026-11-15",
-      "deadline_note": "Nov. 15, 2026 at 22:45 UTC",
-      "apply_fee": {
-        "free": false,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "设计",
-        "雕塑"
-      ],
-      "summary_zh": "Art Jewelry Forum (AJF) 举办的 Linda Peshkin 独展奖 2027，旨在支持艺术珠宝领域的艺术家创作个人展览。",
-      "url": "https://www.artconnect.com/opportunity/46DaYEw-TPKjjcljEe2lY",
-      "source_url": "https://www.artconnect.com/opportunities?page=33",
-      "domain": "artconnect.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-09-01",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
-      "cover": "https://r2.ac-img.com/2022/9c6d5487-294b-40e4-a142-e5096062b15e.jpg",
-      "cover_source": "artconnect.com"
-    },
-    {
       "id": "theartlist-art-photo-p4-manifest-translucent-关于透明度和半透明度的作品征稿",
       "category": "opencall",
       "title_zh": "Manifest - TRANSLUCENT: 关于透明度和半透明度的作品征稿",
@@ -97771,7 +97472,9 @@
       "verified_at": null,
       "first_seen": "2026-09-01",
       "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01"
+      "updated_at": "2026-09-01",
+      "cover": "assets/covers/38e9a3b4aa99154f.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "rivet-calls-glogauair-open-call-for-artists-on-line-",
@@ -97815,28 +97518,28 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-09-01",
-      "last_seen": "2026-09-01",
-      "updated_at": "2026-09-01",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
       "cover": "https://res-app.s3.amazonaws.com/uploads/image/display_679a90619b67fc60892aaf8a627815ae.jpg",
       "cover_source": "rivet.es"
     },
     {
-      "id": "curatorspace-opportunities-dir-p3-curatorspace-新的-0-佣金艺术销售平台",
+      "id": "artconnect-opportunities-在2027年3月在纽约展示您的艺术作品",
       "category": "opencall",
-      "title_zh": "CuratorSpace 新的 0% 佣金艺术销售平台",
-      "title_en": "New 0% commission art selling platform from CuratorSpace",
-      "org_zh": "CuratorSpace",
-      "city_zh": "英国",
-      "country_zh": "英国",
-      "deadline": "2026-08-27",
-      "deadline_note": "The next deadline for submissions is 27th August, 11.59pm",
+      "title_zh": "在2027年3月在纽约展示您的艺术作品",
+      "title_en": "Show Your Art in New York in March 2027",
+      "org_zh": "ArtConnect",
+      "city_zh": "纽约",
+      "country_zh": "美国",
+      "deadline": "2027-02-25",
+      "deadline_note": "申请截止：2027年2月25日",
       "apply_fee": {
-        "free": true,
+        "free": false,
         "amount": null,
         "currency": null
       },
       "participation_fee": {
-        "required": false,
+        "required": true,
         "amount": null,
         "currency": null
       },
@@ -97852,33 +97555,1606 @@
       },
       "disciplines": [
         "绘画",
-        "雕塑",
         "摄影",
-        "数字艺术",
-        "艺术家书籍",
+        "雕塑",
+        "插画",
+        "纺织艺术",
+        "混合媒体",
         "陶瓷",
-        "纺织品",
-        "珠宝",
-        "当代玻璃工艺",
-        "限量版复制品"
+        "绘画",
+        "数字艺术",
+        "当代视觉实践"
       ],
-      "summary_zh": "CuratorSpace 推出的一个在线艺术市场，艺术家可以直接向买家销售作品，无任何列表或佣金费用。目前仅对居住在英国、泽西岛、根西岛和马恩岛的艺术家开放。",
-      "url": "https://curatorspace.com/opportunities/detail/new--commission-art-selling-platform-from-curatorspace/9929",
-      "source_url": "https://curatorspace.com/opportunities?page=3",
+      "summary_zh": "ARRIVAL Gallery将在布鲁克林举办一个为期三天的展览，旨在提高艺术家的可见性、建立联系和关怀。展览地点位于纽约最具创造力和文化活力的社区之一。",
+      "url": "https://www.artconnect.com/opportunity/VdNNS4Rcbb-m6TzGiU9bD",
+      "source_url": "https://www.artconnect.com/opportunities",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://r2.ac-img.com/2025/b33dd94b-fa9b-41af-9e28-32dc7012025a.png",
+      "cover_source": "artconnect.com",
+      "source_platform": "ArtConnect",
+      "resolve_classify": "trusted-platform",
+      "resolve_gates": 4,
+      "_fail_streak": 0
+    },
+    {
+      "id": "www2-auto-创新绿色教育行动项目征集",
+      "category": "opencall",
+      "title_zh": "创新绿色教育行动项目征集",
+      "title_en": "Call for Innovative Green Education Actions Program",
+      "org_zh": "fundsforNGOs",
+      "city_zh": "New York",
+      "country_zh": "美国",
+      "deadline": "2026-09-06",
+      "deadline_note": "原文截止 + \"Deadline: 06-Sep-2026\"",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "教育"
+      ],
+      "summary_zh": "fundsforNGOs 发起了创新绿色教育行动项目征集，旨在展示在欧洲教育区域内实施的创新可持续性和环境教育倡议。",
+      "url": "https://www2.fundsforngos.org/innovation/call-for-innovative-green-education-actions-program/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org",
+      "_fail_streak": 0
+    },
+    {
+      "id": "www2-auto-2026年glenna-luschei非洲诗歌奖征稿",
+      "category": "award",
+      "title_zh": "2026年Glenna Luschei非洲诗歌奖征稿",
+      "title_en": "2026 Glenna Luschei Prize for African Poetry",
+      "org_zh": "fundsforNGOs",
+      "city_zh": "New York",
+      "country_zh": "美国",
+      "deadline": "2026-10-01",
+      "deadline_note": "原文截止 + 01-Oct-2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "诗歌"
+      ],
+      "summary_zh": "2026年Glenna Luschei非洲诗歌奖征稿，旨在表彰非洲诗人杰出的诗歌作品集，奖金为1000美元。",
+      "url": "https://www2.fundsforngos.org/individuals/call-for-submissions-2026-glenna-luschei-prize-for-african-poetry/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org",
+      "_fail_streak": 0
+    },
+    {
+      "id": "www2-auto-本地社区补助金申请-澳大利亚",
+      "category": "opencall",
+      "title_zh": "本地社区补助金申请（澳大利亚）",
+      "title_en": "Call for Applications: Get Local Community Grants (Australia)",
+      "org_zh": "fundsforNGOs",
+      "city_zh": "New York",
+      "country_zh": "美国",
+      "deadline": "2027-06-30",
+      "deadline_note": "Deadline: 30-Jun-2027",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Arts & Culture"
+      ],
+      "summary_zh": "本地社区补助金项目为加强当地联系、福祉和韧性提供最高1500澳元的补助金，用于小型社区活动和事件。",
+      "url": "https://www2.fundsforngos.org/community-development-2/call-for-applications-get-local-community-grants-australia/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org",
+      "_fail_streak": 0
+    },
+    {
+      "id": "www2-auto-fritt-ord挪威新闻支持申请",
+      "category": "opencall",
+      "title_zh": "Fritt Ord挪威新闻支持申请",
+      "title_en": "Fritt Ord Call for Applications to Support Norwegian Journalism",
+      "org_zh": "Fritt Ord基金会",
+      "city_zh": "New York",
+      "country_zh": "挪威",
+      "deadline": "2026-10-23",
+      "deadline_note": "原文截止 + 23-Oct-2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "新闻"
+      ],
+      "summary_zh": "Fritt Ord基金会为挪威媒体受众设计的新闻项目提供资金支持，每年最多提供2500万挪威克朗。该计划面向独立、编辑控制的出版物、编辑部、记者、编辑和编辑团队。",
+      "url": "https://www2.fundsforngos.org/individuals/fritt-ord-call-for-applications-to-support-norwegian-journalism-norway/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org",
+      "_fail_streak": 0
+    },
+    {
+      "id": "creative-auto-debra-porch-award-视觉艺术驻留",
+      "category": "residency",
+      "title_zh": "Debra Porch Award: 视觉艺术驻留",
+      "title_en": "Debra Porch Award: Visual Arts Residency",
+      "org_zh": "Creative Australia",
+      "city_zh": "悉尼",
+      "country_zh": "澳大利亚",
+      "deadline": "2026-09-15",
+      "deadline_note": "截止日期：2026年9月15日，下午3点AEST或中午12点东南亚标准时间。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": true
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "视觉艺术"
+      ],
+      "summary_zh": "Creative Australia通过其与UNSW Galleries和SAC Residency的合作，继续开展Debra Porch Award项目，为一位澳大利亚艺术家和一位泰国艺术家提供互惠驻留机会。",
+      "url": "https://creative.gov.au/investments-opportunities/debra-porch-award-visual-arts-residency",
+      "source_url": "https://creative.gov.au/investments-opportunities/arts-projects-individuals-and-groups",
+      "domain": "creative.gov.au",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://creative.gov.au/sites/creative-australia/files/images/2026-07/Nathan%20Beard%2C%201952%2C1215%201%2C%202025%20Image%20courtesy%20of%20TarraWarra%20Museum%20of%20Art%20and%20Andrew%20Curtis%20copy.jpg",
+      "cover_source": "creative.gov.au",
+      "_fail_streak": 0
+    },
+    {
+      "id": "creative-auto-青年-原住民艺术与文化项目基金",
+      "category": "opencall",
+      "title_zh": "青年：原住民艺术与文化项目基金",
+      "title_en": null,
+      "org_zh": "Creative Australia",
+      "city_zh": "New York City",
+      "country_zh": "美国",
+      "deadline": "2026-09-15",
+      "deadline_note": "Applications close: Tuesday 15 September 2026 (3PM AEST)",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18-35",
+        "nationality": "Australian First Nations"
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "Creative Australia的青年：原住民艺术与文化项目基金，面向18至35岁的澳大利亚原住民艺术家或艺术工作者，支持他们在所有艺术形式中的创意实践和职业发展。",
+      "url": "https://creative.gov.au/investments-opportunities/young-people-first-nations-arts-culture-project-fund",
+      "source_url": "https://creative.gov.au/investments-opportunities/arts-projects-individuals-and-groups",
+      "domain": "creative.gov.au",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://creative.gov.au/sites/creative-australia/files/images/2025-04/Image%202%20Milan%20Dhiiyaan%20at%20Baiame%E2%80%99s%20Ngunnhu%20Festival%202023%20Credit%20Stephen%20Wilson%20Barker%20%281%29.png",
+      "cover_source": "creative.gov.au",
+      "_fail_streak": 0
+    },
+    {
+      "id": "creative-auto-原住民艺术聋人或残疾项目基金",
+      "category": "opencall",
+      "title_zh": "原住民艺术聋人或残疾项目基金",
+      "title_en": "First Nations Arts d/Deaf and/or Disabilities Project Fund",
+      "org_zh": "Creative Australia",
+      "city_zh": "New York",
+      "country_zh": "美国",
+      "deadline": "2026-10-13",
+      "deadline_note": "Applications close : Tuesday 13 October 2026 (3pm AEDT)",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": "AUD"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "Creative Australia的First Nations First行业发展战略项目之一，旨在支持原住民聋人或残疾艺术家和艺术工作者在国内外所有艺术形式中的项目和专业发展机会，资助金额为5000至10000澳元。",
+      "url": "https://creative.gov.au/investments-opportunities/first-nations-arts-ddeaf-andor-disabilities-project-fund",
+      "source_url": "https://creative.gov.au/investments-opportunities/arts-projects-individuals-and-groups",
+      "domain": "creative.gov.au",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://creative.gov.au/sites/creative-australia/files/images/2026-01/Banumbirr%20Dancers%20from%20Elcho%20Island%2C%20Darwin%20Aboriginal%20Art%20Fair%2C%202024%2C%20Photo%20by%20Leicolhn%20McKellar%20copy.jpg",
+      "cover_source": "creative.gov.au",
+      "_fail_streak": 0
+    },
+    {
+      "id": "boston-auto-boston-cultural-council年度运营补助金",
+      "category": "award",
+      "title_zh": "Boston Cultural Council年度运营补助金",
+      "title_en": null,
+      "org_zh": "Boston Cultural Council",
+      "city_zh": "纽约",
+      "country_zh": "未知",
+      "deadline": "2026-10-15",
+      "deadline_note": "Application Deadline: Thursday, October 15, 2026 at 11:59 p.m.",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Boston Cultural Council每年向小型和中型艺术和文化组织提供运营补助金，以支持其整体使命、运营和能力建设。",
+      "url": "https://www.boston.gov/departments/arts-and-culture/boston-cultural-council",
+      "source_url": "https://www.boston.gov/departments/arts-and-culture/boston-cultural-council",
+      "domain": "boston.gov",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://patterns.boston.gov/images/global/icons/seal_dark_1000x1000.png",
+      "cover_source": "boston.gov",
+      "_fail_streak": 0
+    },
+    {
+      "id": "londonmuseum-auto-reimagining-research-conference-2027",
+      "category": "workshop",
+      "title_zh": "Reimagining Research Conference 2027",
+      "title_en": "Reimagining Research Conference 2027",
+      "org_zh": "London Museum",
+      "city_zh": "London",
+      "country_zh": "英国",
+      "deadline": "2026-09-15",
+      "deadline_note": "Submit your abstract by 15 September 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "museum practice",
+        "urban studies"
+      ],
+      "summary_zh": "伦敦博物馆与威斯敏斯特大学和ICOM CITIES合作举办2027年1月的'Reimagining Research'研讨会，探讨城市博物馆如何引领城市研究。",
+      "url": "https://www.londonmuseum.org.uk/blog/call-papers-reimagining-research-conference-2027/",
+      "source_url": "https://www.londonmuseum.org.uk/",
+      "domain": "londonmuseum.org.uk",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://media.londonmuseum.org.uk/images/Compassion-Research-Wo.width-1200.height-630.format-jpeg.jpg",
+      "cover_source": "londonmuseum.org.uk",
+      "_fail_streak": 0
+    },
+    {
+      "id": "artistcommunities-open-calls-neo-future-thematic-2-week-residency-pro",
+      "category": "residency",
+      "title_zh": "Neo Future - Thematic 2-week residency program in Finland, Dec 2026",
+      "title_en": "Neo Future - Thematic 2-week residency program in Finland, Dec 2026",
+      "org_zh": "Arteles Creative Center",
+      "city_zh": "Hämeenkyrö",
+      "country_zh": "Finland",
+      "deadline": "2026-09-03",
+      "deadline_note": "Application deadline: 3 September 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "1450",
+        "currency": "EUR"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "Minimum age is 23",
+        "nationality": null
+      },
+      "disciplines": [
+        "Acting",
+        "Animation",
+        "Architecture",
+        "Art Education",
+        "Art History",
+        "Augmented Reality",
+        "Biology",
+        "Blacksmithing",
+        "Book Arts",
+        "Choreography",
+        "Computing",
+        "Costume/Fashion Design",
+        "Criticism",
+        "Dance",
+        "Digital Fabrication",
+        "Digital Media",
+        "Documentary",
+        "Drawing",
+        "Ecology",
+        "Electronic Arts",
+        "Environmental Arts",
+        "Fiction",
+        "Film",
+        "Graphic Design",
+        "Illustration",
+        "Industrial Design",
+        "Installation Arts",
+        "Interdisciplinary Arts",
+        "Journalism",
+        "Landscape Architecture",
+        "Literary Nonfiction",
+        "Literature",
+        "Mathematics",
+        "Mixed Media",
+        "Moving Image",
+        "Multimedia Arts",
+        "Music",
+        "New Genres",
+        "Nonfiction",
+        "Painting",
+        "Paper Arts",
+        "Performance Art",
+        "Philosophy",
+        "Photography",
+        "Playwriting",
+        "Poetry",
+        "Printmaking",
+        "Public Art",
+        "Science",
+        "Screenwriting",
+        "Sculpture",
+        "Sound Art",
+        "Textile & Fiber Arts/Weaving",
+        "Theater",
+        "Translation",
+        "TV + Radio",
+        "Urban Planning/Design",
+        "Virtual Reality",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "Neo Future - Thematic 2-week residency program in Finland, Dec 2026",
+      "url": "https://www.artistcommunities.org/directory/open-calls/neo-future-thematic-2-week-residency-program-finland-dec-2026",
+      "source_url": "https://www.artistcommunities.org/directory/open-calls",
+      "domain": "artistcommunities.org",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "source_platform": "Arteles Creative Center",
+      "resolve_classify": "trusted-platform",
+      "resolve_gates": 4,
+      "_fail_streak": 0
+    },
+    {
+      "id": "curatorspace-opportunities-p6-analogue-digital-photography-exhibition",
+      "category": "opencall",
+      "title_zh": "Analogue/Digital; Photography Exhibition",
+      "title_en": "Analogue/Digital; Photography Exhibition",
+      "org_zh": "CuratorSpace",
+      "city_zh": "United Kingdom",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-09-29",
+      "deadline_note": "Submission Deadline: 29th September 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": {
+          "1 image": "£16",
+          "2 or more images": "£22"
+        },
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "18 years of age or older",
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography"
+      ],
+      "summary_zh": "CuratorSpace举办的Analogue/Digital摄影展览，探索模拟与数字两种图像制作方法之间的关系，提交截止日期为2026年9月29日。",
+      "url": "https://www.curatorspace.com/opportunities/detail/analoguedigital-photography-exhibition/11008",
+      "source_url": "https://www.curatorspace.com/opportunities?page=6",
       "domain": "curatorspace.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "expired",
+      "status": "open",
       "verified_at": null,
-      "first_seen": "2026-08-15",
-      "last_seen": "2026-08-30",
-      "updated_at": "2026-08-28",
-      "geo_fallback": "geo_nationalize",
-      "source_platform": "CuratorSpace",
-      "official_url": null,
-      "cover": "assets/covers/22be61e42763351c.jpg",
-      "cover_source": "screenshot",
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/82052/opportunity/11008/image/0276a5a20b9e0e2822b5a94fa2cb5eae3a60.jpg",
+      "cover_source": "curatorspace.com",
       "_fail_streak": 0
+    },
+    {
+      "id": "theartlist-calls-submissions-p3-cica-museum-call-for-artists-we-culture-",
+      "category": "opencall",
+      "title_zh": "CICA Museum - Call for Artists: “We: Culture” International Exhibition",
+      "title_en": null,
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-09-25",
+      "deadline_note": "Deadline: September 25, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Watercolor",
+        "Photography",
+        "Pastel",
+        "Oil",
+        "Sculpture",
+        "Mixed media",
+        "Drawing/Illustration",
+        "Digital Media",
+        "Ceramics",
+        "Acrylic"
+      ],
+      "summary_zh": "CICA Museum 邀请全球艺术家参与国际展览“我们：文化”。展览探讨文化多样性的不同视角，包括多元文化、身份、亚文化、社交媒体文化、流行文化以及民族、宗教和种族的概念。欢迎提交摄影、2D数字艺术、视频艺术、表演艺术、网络艺术、互动艺术、雕塑、绘画和装置作品。",
+      "url": "https://www.theartlist.com/cica-museum-call-for-artists-we-culture-international-exhibition",
+      "source_url": "https://www.theartlist.com/category/calls-for-submissions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://www.theartlist.com/submission/small/1787892780.jpg",
+      "cover_source": "theartlist.com",
+      "_fail_streak": 0
+    },
+    {
+      "id": "artenda-exhibition-2026年法国艺术展览开放征稿",
+      "category": "opencall",
+      "title_zh": "2026年法国艺术展览开放征稿",
+      "title_en": "Top Exhibitions in France 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "Paris",
+      "country_zh": "法国",
+      "deadline": "2026-09-12",
+      "deadline_note": "原文未提及截止时间",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Drawing",
+        "Painting",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Curatorial",
+        "Music"
+      ],
+      "summary_zh": "Artenda(国际)发布2026年法国艺术展览开放征稿信息，涵盖多个艺术领域。",
+      "url": "https://artenda.net/selected-country/exhibition/France",
+      "source_url": "https://artenda.net/art-open-call-opportunity/exhibition",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "_fail_streak": 0
+    },
+    {
+      "id": "artconnect-opportunities-p31-wedirectory-best-projects-websites-award",
+      "category": "award",
+      "title_zh": "WeDirectory Best Projects & Websites Award 2026",
+      "title_en": "WeDirectory Best Projects & Websites Award 2026",
+      "org_zh": "ArtConnect",
+      "city_zh": "Los Angeles",
+      "country_zh": "美国",
+      "deadline": "2026-12-31",
+      "deadline_note": "Dec. 31, 2026 at 22:45 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "WeDirectory是一个全球性的精选目录和发现平台，展示艺术、设计、时尚、建筑和视觉文化领域的领先项目、独立品牌和创意实践者。WeDirectory Best Websites & Projects Award 2026旨在表彰全球艺术、设计和文化领域中最具启发性的创意项目。",
+      "url": "https://www.artconnect.com/opportunity/LcOUseKb_6gNUz2XvQccL",
+      "source_url": "https://www.artconnect.com/opportunities?page=31",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://r2.ac-img.com/2026/d6f3fd1a-abdd-4771-affc-84b14e1d5745.png",
+      "cover_source": "artconnect.com",
+      "_fail_streak": 0
+    },
+    {
+      "id": "curatorspace-opportunities-dir-p2-what-if-展览",
+      "category": "opencall",
+      "title_zh": "What If … 展览",
+      "title_en": "What If … Exhibition",
+      "org_zh": "CuratorSpace",
+      "city_zh": "London",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-09-10",
+      "deadline_note": "Submission Deadline: 10 Sept 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": {
+          "A4": "£45",
+          "A3": "£56",
+          "40x40cm": "£60"
+        },
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": {
+          "A3": "£120",
+          "40x40cm": "£150"
+        },
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "image-based artist",
+        "lens-based artist",
+        "photographer"
+      ],
+      "summary_zh": "CuratorSpace英国举办的开放征稿展览，主题为‘如果…’，征集中基于图像的艺术家、摄影家和镜头艺术家作品。",
+      "url": "https://curatorspace.com/opportunities/detail/open-call--what-if--exhibition/10793",
+      "source_url": "https://curatorspace.com/opportunities?page=2",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/61951/opportunity/10793/image/5a16ad21f3a97a709a965d758e98.jpg",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "theocp-archive-beyond-the-image-art-prize-第一届",
+      "category": "opencall",
+      "title_zh": "Beyond the Image Art Prize – 第一届",
+      "title_en": "Beyond the Image Art Prize – First edition",
+      "org_zh": "The Open Call Platform",
+      "city_zh": "Milan",
+      "country_zh": "Italy",
+      "deadline": "2026-09-10",
+      "deadline_note": "原文截止 + September 10, 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography",
+        "Film and Video Art",
+        "New Media"
+      ],
+      "summary_zh": "The Beyond the Image Art Prize 邀请新兴和成熟的艺术家提交项目，探讨身份、形象、身体感知和数字技术的交汇。",
+      "url": "https://www.theocp.live/open-calls/beyond-the-image-art-prize-first-edition-cx7hr",
+      "source_url": "https://theocp.live/open-calls/archive",
+      "domain": "theocp.live",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://www.theocp.live/og-image.png",
+      "cover_source": "theocp.live",
+      "_fail_streak": 0
+    },
+    {
+      "id": "artrabbit-opps-all-hypha-studios-sevenoaks-open-call",
+      "category": "residency",
+      "title_zh": "Hypha Studios | Sevenoaks Open Call",
+      "title_en": null,
+      "org_zh": "Hypha Studios",
+      "city_zh": "Sevenoaks",
+      "country_zh": "未知",
+      "deadline": "2026-09-06",
+      "deadline_note": "Deadline 06 September 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Hypha Studios正在寻找多个大型团体，寻找免费的工作室或项目空间。Hypha Studios欢迎愿意与其他团体合作工作的组织。",
+      "url": "https://www.artrabbit.com/artist-opportunities/2026/september/hypha-studios-sevenoaks-open-call",
+      "source_url": "https://www.artrabbit.com/artist-opportunities",
+      "domain": "artrabbit.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
+      "cover_source": "artrabbit.com"
+    },
+    {
+      "id": "callforcurators-auto-pedantic-arts-open-call-summer-fall-2027",
+      "category": "residency",
+      "title_zh": "Pedantic Arts Open Call Summer / Fall 2027",
+      "title_en": "Pedantic Arts Open Call Summer / Fall 2027",
+      "org_zh": "Pedantic Arts",
+      "city_zh": "Pittsburgh",
+      "country_zh": "USA",
+      "deadline": "2026-09-28",
+      "deadline_note": "Application period: September 1 – 28.",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "visual arts",
+        "curation",
+        "writing"
+      ],
+      "summary_zh": "Pedantic Arts 正在举办夏季/秋季 2027 年的开放征召，寻找创意和研究人员参与夏季 2027 年和秋季 2027 年的居住项目。申请截止日期为 2026 年 9 月 28 日。",
+      "url": "https://callforcurators.com/call/pedantic-arts-open-call-summer-fall-2027/",
+      "source_url": "https://callforcurators.com/call/residency-programme-5/",
+      "domain": "callforcurators.com",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-02",
+      "cover": "https://callforcurators.com/wp-content/uploads/2026/08/Pedantic_20221014_262.webp",
+      "cover_source": "callforcurators.com",
+      "_fail_streak": 0
+    },
+    {
+      "id": "hxnart-huodong-人生if线-漫画工作坊",
+      "category": "workshop",
+      "title_zh": "人生IF线：漫画工作坊",
+      "title_en": null,
+      "org_zh": "何香凝美术馆",
+      "city_zh": "深圳市",
+      "country_zh": "中国",
+      "deadline": "2026-09-05",
+      "deadline_note": "2026年9月5日（周六）15:00 – 16:30",
+      "apply_fee": {
+        "free": false,
+        "amount": "100元",
+        "currency": "CNY"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "100元",
+        "currency": "CNY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": false,
+        "age_limit": "18岁以上成人",
+        "nationality": null
+      },
+      "disciplines": [
+        "漫画"
+      ],
+      "summary_zh": "何香凝美术馆举办的漫画工作坊，聚焦于基于人间画会的漫画板块，邀请参与者探索生活和表达的可能。",
+      "url": "http://hxnart.org.cn/cn/category/activity-list/detail!20260905",
+      "source_url": "http://hxnart.org.cn/cn/category/activity-list",
+      "domain": "hxnart.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://hxnart-org-storage.www.comocloud.net/upload/photo_db/2019/02/18/20190218123135a4a623e6.jpg",
+      "cover_source": "hxnart.org.cn"
+    },
+    {
+      "id": "www2-auto-sedel-collings-support-the-supporters-uk",
+      "category": "grant",
+      "title_zh": "Sedel-Collings Support the Supporters (UK)开放申请",
+      "title_en": "Open Call for Sedel-Collings Support the Supporters (UK)",
+      "org_zh": "Sedel-Collings Foundation",
+      "city_zh": "Cornwall and the Isles of Scilly",
+      "country_zh": "UK",
+      "deadline": "2026-10-07",
+      "deadline_note": "原文截止 + Deadline: 07-Oct-2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Sedel-Collings Support the Supporters Grant为Cornwall和Isles of Scilly的慈善和志愿者组织提供资金支持，以改善支持面临严重挑战的人的员工、志愿者和理事的福祉、韧性和能力。",
+      "url": "https://www2.fundsforngos.org/community-development-2/open-call-for-sedel-collings-support-the-supporters-uk/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org"
+    },
+    {
+      "id": "www2-auto-马来西亚chevening奖学金开放申请",
+      "category": "award",
+      "title_zh": "马来西亚Chevening奖学金开放申请",
+      "title_en": "Open Call for Chevening Scholarship in Malaysia",
+      "org_zh": "Chevening奖学金",
+      "city_zh": "New York",
+      "country_zh": "美国",
+      "deadline": "2026-10-06",
+      "deadline_note": "原文截止 + 06-Oct-2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "Chevening奖学金为马来西亚未来的领导者提供机会，在符合条件的英国大学攻读一年制的全资助授课型硕士学位。",
+      "url": "https://www2.fundsforngos.org/leadership/open-call-for-chevening-scholarship-in-malaysia/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org"
+    },
+    {
+      "id": "www2-auto-henry-s-varley-fund-for-rural-life-加拿大农村",
+      "category": "grant",
+      "title_zh": "Henry S. Varley Fund for Rural Life (加拿大农村生活亨利·S·瓦雷基金)",
+      "title_en": "Henry S. Varley Fund for Rural Life (Canada)",
+      "org_zh": "Henry S. Varley Fund for Rural Life",
+      "city_zh": "New York",
+      "country_zh": "加拿大",
+      "deadline": "2026-10-15",
+      "deadline_note": "原文截止 + 15-Oct-2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "The Henry S. Varley Fund for Rural Life provides grants to organizations and projects that improve the quality of life in rural Southwestern Alberta.",
+      "url": "https://www2.fundsforngos.org/community-development-2/open-call-henry-s-varley-fund-for-rural-life-canada/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org"
+    },
+    {
+      "id": "www2-auto-active-thames-fund-英国",
+      "category": "grant",
+      "title_zh": "Active Thames Fund (英国)",
+      "title_en": "Active Thames Fund (United Kingdom)",
+      "org_zh": "Active Thames Fund",
+      "city_zh": "伦敦",
+      "country_zh": "英国",
+      "deadline": "2026-09-27",
+      "deadline_note": "原文截止 + \"Deadline: 27-Sep-2026\"",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "体育活动"
+      ],
+      "summary_zh": "Active Thames Fund支持在伦敦、肯特和埃塞克斯的水道或其旁边进行可及性和包容性体育活动项目的组织。该基金旨在增加参与体育活动的人数，同时改善健康和福祉，加强社区联系。",
+      "url": "https://www2.fundsforngos.org/community-development-2/call-for-applications-active-thames-fund-united-kingdom/",
+      "source_url": "https://www2.fundsforngos.org/innovation/open-call-for-collaborative-art-projects-at-singapore-art-week-2027/",
+      "domain": "www2.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://fundsforngosmedia.s3.amazonaws.com/wp-content/uploads/2023/12/19141120/icon.png",
+      "cover_source": "www2.fundsforngos.org"
+    },
+    {
+      "id": "us-auto-ensemble-forward-grants-2026-申请",
+      "category": "award",
+      "title_zh": " Ensemble Forward Grants 2026 申请",
+      "title_en": "Call for Applications for Ensemble Forward Grants 2026 – New York",
+      "org_zh": "Chamber Music America",
+      "city_zh": "New York",
+      "country_zh": "United States",
+      "deadline": "2026-09-24",
+      "deadline_note": "原文截止 + (mm/dd/yyyy) 09/24/2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Western European classical and/or contemporary chamber music"
+      ],
+      "summary_zh": "Chamber Music America 为支持音乐组合在职业生涯关键时期的发展，提供为期一年的资助，用于与商业顾问合作，改善业务结构和/或业务发展。",
+      "url": "https://us.fundsforngos.org/type-of-grantgrant/call-for-applications-for-ensemble-forward-grants-2026-new-york/",
+      "source_url": "https://us.fundsforngos.org/donor/san-francisco-arts-commission-sfac/",
+      "domain": "us.fundsforngos.org",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://us.fundsforngos.org/wp-content/themes/dynamik-gen/images/content-filler.png",
+      "cover_source": "us.fundsforngos.org"
+    },
+    {
+      "id": "curatorspace-opportunities-p6-sheffield-ceramics-festival",
+      "category": "opencall",
+      "title_zh": "Sheffield Ceramics Festival",
+      "title_en": null,
+      "org_zh": "CuratorSpace",
+      "city_zh": "Sheffield",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-10-01",
+      "deadline_note": "October 1st 2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "Option A: £140, Option B: £80",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "陶瓷"
+      ],
+      "summary_zh": "Sheffield Ceramics Festival正在接受申请，是一个面向陶瓷艺术家的展览机会，将在2027年4月17日至18日在Sheffield的Kelham Island Museum举行。",
+      "url": "https://www.curatorspace.com/opportunities/detail/sheffield-ceramics-festival/11034",
+      "source_url": "https://www.curatorspace.com/opportunities?page=6",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/88396/opportunity/11034/image/29e9616a622c95a9dd32eb1eba6d63a6.jpg",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "curatorspace-opportunities-p7-scott-creative-arts-foundation-emerging-",
+      "category": "award",
+      "title_zh": "Scott Creative Arts Foundation Emerging Artist Award 2027",
+      "title_en": "Scott Creative Arts Foundation Emerging Artist Award 2027",
+      "org_zh": "Scott Creative Arts Foundation",
+      "city_zh": "Halifax",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-10-31",
+      "deadline_note": "Deadline: 31/10/2026",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "painting",
+        "sculpture",
+        "image",
+        "sound",
+        "video",
+        "graphics"
+      ],
+      "summary_zh": "Scott Creative Arts Foundation (SCAF) 邀请居住或工作在约克郡的新兴艺术家提交作品提案，以回应今年的主题：张力。入选作品将作为2027年新兴艺术家奖的一部分展出。",
+      "url": "https://www.curatorspace.com/opportunities/detail/scott-creative-arts-foundation-emerging-artist-award/10627",
+      "source_url": "https://www.curatorspace.com/opportunities?page=7",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/36861/opportunity/10627/image/002452080174db68e9.jpg",
+      "cover_source": "curatorspace.com"
+    },
+    {
+      "id": "artenda-competition-art-open-calls-international-art-project",
+      "category": "opencall",
+      "title_zh": "Art Open Calls: International Art Project Grants 2026",
+      "title_en": "International Art Project Grants 2026",
+      "org_zh": "Artenda(国际)",
+      "city_zh": "Paris",
+      "country_zh": "法国",
+      "deadline": "2026-09-03",
+      "deadline_note": "Deadline Sep 3, 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Digital",
+        "Sound",
+        "Painting",
+        "Drawing",
+        "Literature",
+        "Photography",
+        "Video",
+        "Printmaking",
+        "Installation",
+        "Performance",
+        "Sculpture",
+        "Textile Art",
+        "Ceramics",
+        "Curatorial",
+        "Music"
+      ],
+      "summary_zh": "Art Open Calls: International Art Project Grants 2026",
+      "url": "https://artenda.net/art-open-call-opportunity/project-grant",
+      "source_url": "https://artenda.net/art-open-call-opportunity/competition",
+      "domain": "artenda.net",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03"
+    },
+    {
+      "id": "artconnect-opportunities-p28-linda-peshkin-独展奖-2027",
+      "category": "award",
+      "title_zh": "Linda Peshkin 独展奖 2027",
+      "title_en": "Linda Peshkin Solo Exhibition Award 2027",
+      "org_zh": "Art Jewelry Forum",
+      "city_zh": "Lynchburg, VA, USA",
+      "country_zh": "美国",
+      "deadline": "2026-11-15",
+      "deadline_note": "Nov. 15, 2026 at 22:45 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "设计",
+        "雕塑"
+      ],
+      "summary_zh": "Art Jewelry Forum (AJF) 举办的 Linda Peshkin 独展奖 2027，旨在支持艺术珠宝领域的艺术家创作个人展览。",
+      "url": "https://www.artconnect.com/opportunity/46DaYEw-TPKjjcljEe2lY",
+      "source_url": "https://www.artconnect.com/opportunities?page=28",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://r2.ac-img.com/2022/9c6d5487-294b-40e4-a142-e5096062b15e.jpg",
+      "cover_source": "artconnect.com"
+    },
+    {
+      "id": "artrabbit-opps-all-巴斯克儿童营公共艺术项目首席艺术家",
+      "category": "opencall",
+      "title_zh": "巴斯克儿童营公共艺术项目首席艺术家",
+      "title_en": "Lead Artist for Basque Children&rsquo;s Camp Public Art",
+      "org_zh": "Eastleigh Borough Council",
+      "city_zh": "Chandler&rsquo;s Ford",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-09-08",
+      "deadline_note": "Deadline 08 September 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "9000",
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Public Art"
+      ],
+      "summary_zh": "邀请艺术家开发并交付公共艺术项目，以纪念巴斯克儿童营的90周年。",
+      "url": "https://www.artrabbit.com/artist-opportunities/2026/september/lead-artist-for-basque-childrens-camp-public-art",
+      "source_url": "https://www.artrabbit.com/artist-opportunities",
+      "domain": "artrabbit.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "updated_at": "2026-09-03",
+      "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
+      "cover_source": "artrabbit.com"
+    },
+    {
+      "id": "curatorspace-opportunities-p4-what-if-展览",
+      "category": "opencall",
+      "title_zh": "What If … 展览",
+      "title_en": "What If … Exhibition",
+      "org_zh": "CuratorSpace",
+      "city_zh": "London",
+      "country_zh": "United Kingdom",
+      "deadline": "2026-09-10",
+      "deadline_note": "Submission Deadline: 10 Sept 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": {
+          "A4": "£45",
+          "A3": "£56",
+          "40x40cm": "£60"
+        },
+        "currency": "GBP"
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": {
+          "A3": "£120",
+          "40x40cm": "£150"
+        },
+        "currency": "GBP"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "image-based artist",
+        "lens-based artist",
+        "photographer"
+      ],
+      "summary_zh": "CuratorSpace举办的What If … 展览，面向图像艺术家、镜头艺术家和摄影师开放。展览将于2026年11月6日至9日在伦敦Photobook Cafe举行，主题为‘如果……’。",
+      "url": "https://www.curatorspace.com/opportunities/detail/open-call--what-if--exhibition/10793",
+      "source_url": "https://www.curatorspace.com/opportunities?page=4",
+      "domain": "curatorspace.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-08-23",
+      "last_seen": "2026-08-25",
+      "updated_at": "2026-08-25",
+      "cover": "https://s3.eu-west-1.amazonaws.com/curatorspace.com/61951/opportunity/10793/image/5a16ad21f3a97a709a965d758e98.jpg",
+      "cover_source": "curatorspace.com"
     }
   ]
 }

@@ -420,9 +420,9 @@
       "region_hint": "cn-central-west",
       "sitemap": false,
       "yield_count": 0,
-      "fail_count": 3,
+      "fail_count": 5,
       "tier": "normal",
-      "last_polled": "2026-08-26"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "threeshadows-tspa",
@@ -1031,9 +1031,9 @@
       "notes": "curl HTTP 200, 252089 bytes。命中 Workshop/工作坊(工作坊x3等);双语活动列表。身份确认 泰康x17/TAIKANG ART MUSEUM。服务端HTML列表(WordPress风格),非JS空壳。robots.txt 返回403(openresty,无法读取)→unknown,但目标路径本身200可达。泰康保险集团创办的非营利美术馆。 | RSS自动发现(页面声明,2026-08-05),原url保留可切回",
       "region_hint": "cn-tier1",
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 4,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "uabb-news",
@@ -1100,9 +1100,9 @@
       "notes": "2026-08-04 用无头浏览器(lib/render.mjs,新增能力)渲染确认:纯 fetch 只拿到 SPA 空壳(<title>之外几乎无正文),渲染后 200,真实公告列表。命中'第15届上海双年展宣布参展艺术家名单''青策计划2024招募启动'等真实条目,青策计划(Emerging Curators Project)是常设的策展人公开招募,属于本站'opencall'范畴。原候选 url(/whats-on/programs/shanghai-bienniale)已404,站点已改版,改用此公告列表页。robots.txt 存在且允许。",
       "region_hint": "cn-tier1",
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 4,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "gdmoa-bid",
@@ -1297,9 +1297,9 @@
       "region_hint": "cn-hkmotw",
       "sitemap": false,
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 4,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "chat-whatson",
@@ -1986,9 +1986,9 @@
       "region_hint": "cn-hkmotw",
       "sitemap": false,
       "yield_count": 0,
-      "fail_count": 2,
+      "fail_count": 4,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "dfa-awards-hkdc",
@@ -2207,9 +2207,9 @@
       "notes": "curl HTTP 200，20300字节，非空壳；正文含『Hyundai Blue Prize+ is an open call program, inviting emerging curators』(open call x2)、Prize x31、Hyundai/Blue Prize，含 2025 届信息(2025 x10)。robots.txt HTTP 404→none。北京现代汽车文化中心(798)运营的面向青年策展人/艺术家的 Art+Tech 年度艺术大奖公开征集官方站。",
       "region_hint": "cn-tier1",
       "yield_count": 0,
-      "fail_count": 3,
+      "fail_count": 5,
       "tier": "normal",
-      "last_polled": "2026-08-26"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "yingge-ceramics-opencall",
@@ -2864,9 +2864,9 @@
       "discipline_hint": "字体/字库设计",
       "notes": "HTTP 200; 63349字节; 命中 参赛×5/征集×2; 页面含 方正/Founder(第十三届『方正奖』); 设中文/拉丁文/海报等组别,面向国内外设计师; ztds子域 robots.txt HTTP 404 无robots(none).",
       "yield_count": 0,
-      "fail_count": 3,
+      "fail_count": 5,
       "tier": "normal",
-      "last_polled": "2026-08-26"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "tokyo-tdc",
@@ -6884,9 +6884,9 @@
       "region_hint": "intl-na-east",
       "sitemap": true,
       "yield_count": 0,
-      "fail_count": 3,
+      "fail_count": 5,
       "tier": "normal",
-      "last_polled": "2026-08-26"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "newmuseum-open-call",
@@ -9011,8 +9011,10 @@
       "notes": "2026-08-15 实探:艺术文化资助分类页,22+ 详情链接且含申请动词,高产(批量收割补充用)",
       "trust_auto": true,
       "yield_count": 0,
-      "fail_count": 2,
-      "tier": "normal"
+      "fail_count": 4,
+      "tier": "normal",
+      "sitemap": false,
+      "last_polled": "2026-09-03"
     },
     {
       "id": "artconnect-opportunities-p2",
@@ -9183,9 +9185,11 @@
       "confirmed": false,
       "notes": "2026-08-15 实探:第2页分页,24+ 详情链接",
       "trust_auto": true,
-      "yield_count": 0,
-      "fail_count": 2,
-      "tier": "normal"
+      "yield_count": 1,
+      "fail_count": 0,
+      "tier": "normal",
+      "sitemap": false,
+      "last_polled": "2026-09-03"
     },
     {
       "id": "fundsforngos-arts-p3",
@@ -9960,10 +9964,10 @@
       "notes": "2026-08-15 实探:3 详情链接",
       "trust_auto": true,
       "sitemap": true,
-      "yield_count": 3,
+      "yield_count": 4,
       "fail_count": 0,
       "tier": "normal",
-      "last_polled": "2026-08-23"
+      "last_polled": "2026-09-03"
     },
     {
       "id": "theartlist-residencies",
