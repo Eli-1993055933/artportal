@@ -809,6 +809,13 @@ export function track(req, payload, ip) {
   const anon = String((payload || {}).anon || "").slice(0, 40);
   const dev = parseDevice((req.headers && req.headers["user-agent"]) || "", (payload || {}).device);
   const devLabel = dev.label;
+  // 活跃计时(v1.29.0):标签页切后台时前端发 hb+vis=0 → 立即把该用户移出"当前在线"并停止累加在线时长,
+  // 避免挂了后台的访客虚增几十小时在线 / 一直在概览显示在线;回到前台再发 vis=1 重新续计。
+  if (type === "hb" && String((payload || {}).vis) === "0") {
+    if (u) online.delete("user:" + u.id);
+    else if (anon) online.delete("anon:" + anon);
+    return { code: 200, body: { ok: true } };
+  }
   if (u) {
     markOnline("user:" + u.id, "user", u.email || u.nickname || u.id, devLabel);
     if (anon) online.delete("anon:" + anon);

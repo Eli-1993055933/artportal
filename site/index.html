@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.28.1" />
+<meta name="app-version" content="1.29.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -754,11 +754,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.28.1</span></div>
+  ARTPORTAL <span id="appVer">v1.29.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.28.1"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.28.1"></script>
-<script src="js/globe-data.js?v=1.28.1"></script>
+<script src="assets/vendor/d3.min.js?v=1.29.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.29.0"></script>
+<script src="js/globe-data.js?v=1.29.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -2154,9 +2154,12 @@
   }catch(e){}
   function trackDevJ(type){ try{ fetch('/api/track',{method:'POST',credentials:'same-origin',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({type:type,anon:apAnon,device:apDevHint})}).catch(function(){}); }catch(e){} }
+      body:JSON.stringify({type:type,anon:apAnon,device:apDevHint,
+        vis:document.visibilityState==='visible'?1:0})}).catch(function(){}); }catch(e){} }
   trackDevJ('visit');
-  setInterval(function(){ trackDevJ('hb'); },60000);   // 在线表心跳(admin 概览"当前在线")
+  // 在线心跳(v1.29.0 改"活跃计时"):后台标签不刷心跳,切后台立即上报下线,避免挂机者虚增在线时长/一直显示在线
+  setInterval(function(){ if(document.visibilityState!=='hidden') trackDevJ('hb'); },60000);
+  if('addEventListener' in document){ document.addEventListener('visibilitychange',function(){ trackDevJ('hb'); }); }
   // —— 收藏(v0.85.0 找回,v0.73 功能在地球站改版中遗失):四频道命名空间键,云端全量同步 ——
   var favKeys=new Set();
   function favKeyOf(o){
