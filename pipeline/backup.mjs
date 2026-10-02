@@ -29,8 +29,10 @@ const stamp = ts.getFullYear() + "-" +
 const DEST = join(BACKUPS, MODE === "local" ? "predeploy_" + stamp : "snapshot_" + stamp);
 
 // 检测是否有 ssh/scp（仅远程模式需要）
+// Windows 用 where，macOS/Linux 用 command -v（原来的 "where" 在 macOS 上恒为 false，导致远程备份跑不起来）
 function have(cmd) {
-  try { execSync("where " + cmd, { stdio: "ignore" }); return true; } catch (e) { return false; }
+  const probe = process.platform === "win32" ? "where " + cmd : "command -v " + cmd;
+  try { execSync(probe, { stdio: "ignore" }); return true; } catch (e) { return false; }
 }
 const hasSSH = have("ssh");
 const hasSCP = have("scp");
