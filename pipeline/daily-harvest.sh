@@ -1,13 +1,25 @@
 #!/bin/bash
-# daily-harvest.sh —— ArtPortal 每日采集(macOS launchd 定时任务用,Windows 旧机用 run-daily.bat)
+# daily-harvest.sh —— ArtPortal 每日例行(macOS launchd 定时任务用,Windows 旧机对应 run-daily.bat)
+#
+# 【重要:职责怎么分】(2026-10-03 更正)
+#   机会采集(run.mjs)**早已搬上服务器**,由服务器常驻的 server.mjs 内部定时器负责
+#   (.env 的 DAILY_CRAWL=1,每天北京时间 3 点 spawn `run.mjs --cap 12`),不依赖本机开机、不依赖本机余额。
+#   所以本机**不再重复跑全量机会采集**(那会与服务器撞车、白烧一份 AI 钱、还要 7 小时);
+#   本机只做服务器做不了的事:
+#     · 截图封面(SCREENSHOT_BACKFILL 未在服务器开启;历史上 mShots 封过服务器 IP)
+#     · 封面审计、类型均衡巡检
+#     · 本机 ↔ 服务器双向数据同步(sync-server.mjs)
+#   需要本机兜底跑一次全量采集时用 --full(服务器采集长时间不正常时用)。
 #
 # 每晚流程:
 #   1. ca-bootstrap.mjs  —— 自愈 TLS 中间证书缺失(国内官网只发叶子证书,Node 不做 AIA 补链)
-#   2. run.mjs           —— 全量信源采集(哈希未变自动跳过,日常轮很快;AI 提取需 .env 里的 key)
-#   3. sync-server.mjs   —— 双向按条合并上线(服务器先备份,谁的数据都不丢)
+#   2. sync-server.mjs   —— 先拉一次:把服务器昨晚抓到的条目同步下来,本机才知道哪些还缺封面
+#   3. 本机专属任务      —— backfill-screenshots / backfill-channel-covers / cover-audit / balance
+#   4. sync-server.mjs   —— 再推一次:把本机新截好的封面推回服务器
 #
 # 用法:
-#   bash pipeline/daily-harvest.sh               # 立刻完整跑一遍(在仓库里跑也行)
+#   bash pipeline/daily-harvest.sh               # 立刻跑一遍夜间例行(在仓库里跑也行)
+#   bash pipeline/daily-harvest.sh --full        # 例外:本机也跑一次全量机会采集(兜底用,约 7 小时)
 #   bash pipeline/daily-harvest.sh --selfcheck   # 快速自检(不调 AI、不写服务器):证书+单源抓取+SSH 干跑
 #   bash pipeline/daily-harvest.sh --install     # 安装每日 04:17 定时任务(装到 ~/.artportal-harvest)
 #
@@ -121,14 +133,16 @@ log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG"; }
 
 SELFCHECK=0
 [ "${1:-}" = "--selfcheck" ] && SELFCHECK=1
+FULL=0
+[ "${1:-}" = "--full" ] && FULL=1
 
 cd "$SELFDIR"
 export NODE_EXTRA_CA_CERTS="$SELFDIR/state/ca-intermediates.pem"
 export PATH="$HOME/.local/lib/node-current/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
-log "===== 每日采集开始($([ "$SELFCHECK" = 1 ] && echo 自检模式 || echo 完整模式)) ====="
+log "===== 每日例行开始($([ "$SELFCHECK" = 1 ] && echo 自检模式 || echo 常规模式)) ====="
 
-log "[1/3] TLS 中间证书补全(ca-bootstrap) ..."
+log "[1/4] TLS 中间证书补全(ca-bootstrap) ..."
 "$NODE" ca-bootstrap.mjs >> "$LOG" 2>&1
 log "  ca-bootstrap 退出码 $?"
 
@@ -144,16 +158,30 @@ if [ "$SELFCHECK" = 1 ]; then
   exit $RC
 fi
 
-log "[2/3] 全量信源采集(run.mjs) ..."
-"$NODE" --env-file=.env run.mjs >> "$LOG" 2>&1
-RUN_RC=$?
-# run.mjs 即使部分失败(单源异常/AI 余额不足)也可能已写盘,继续同步把成果推上去
-log "  run.mjs 退出码 $RUN_RC(非 0 不阻断同步)"
+# 机会采集默认不跑:那是服务器 server.mjs 每日 3 点(DAILY_CRAWL)的活。--full 时才在本机兜底跑一次。
+if [ "$FULL" = 1 ]; then
+  log "[!] --full:本机兜底跑一次全量机会采集(run.mjs,约 7 小时) ..."
+  "$NODE" --env-file=.env run.mjs >> "$LOG" 2>&1
+  RUN_RC=$?
+  log "  run.mjs 退出码 $RUN_RC(非 0 不阻断后续)"
+fi
 
-log "[3/3] 双向同步上线(sync-server) ..."
+log "[2/4] 拉取同步(sync-server:合并一次,把服务器昨晚抓到的条目同步下来,本机才知道哪些还缺封面) ..."
+"$NODE" sync-server.mjs >> "$LOG" 2>&1
+PULL_RC=$?
+log "  sync-server 退出码 $PULL_RC(非 0 不阻断后续,但封面任务会基于旧清单)"
+
+log "[3/4] 本机专属任务(服务器未开启或做不了的部分) ..."
+for step in backfill-screenshots backfill-channel-covers cover-audit balance; do
+  log "  -> $step.mjs"
+  "$NODE" --env-file=.env "$step.mjs" >> "$LOG" 2>&1
+  log "     退出码 $?"
+done
+
+log "[4/4] 推送同步(sync-server:把本机新截好的封面推回服务器) ..."
 "$NODE" sync-server.mjs >> "$LOG" 2>&1
 SYNC_RC=$?
 log "  sync-server 退出码 $SYNC_RC"
 
-log "===== 每日采集结束 ====="
+log "===== 每日例行结束 ====="
 exit "$SYNC_RC"
