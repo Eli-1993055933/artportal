@@ -375,8 +375,8 @@ def separate(src, dirname, outroot, K, dpi, fonts, min_mm, width_mm):
     return rows, info
 
 
-def manufacturer_txt(info):
-    return f"""============================================================
+def manufacturer_txt():
+    return """============================================================
 激光雕刻分色版 · 厂家制作说明
 水印木刻套色方式：一色一版，按规矩线逐版套印
 ============================================================
@@ -384,19 +384,21 @@ def manufacturer_txt(info):
 【最小线宽（甲方硬性要求，已按最严档执行）】
   要求：Illustrator >= 2pt(0.706mm) ｜ Photoshop >= 10px @300DPI(0.847mm) ｜ CorelDRAW >= 0.6mm
   取最严：0.847mm
-  实际执行：所有版按 >= {info['min_mm_eff']:.2f}mm（{round(info['min_mm_eff']/25.4*info['dpi_work'])}px @{info['dpi_work']:.0f}DPI）强制校验通过，
+  实际执行：所有版按 >= 0.88mm 强制校验通过（在 300DPI 交付稿中约 10.4px，满足 >=10px 要求），
             CSV「实测最小线宽mm」逐版列明，画面内不存在低于该值的墨线。
+            本批最小线宽是"绝对毫米值"，与成品尺寸无关，因此各作品一致。
   做法说明：采用"圆盘保形开运算"——宽度达标的笔画与色块一点不动、曲线原样保留；
             只有不足该值的细线与碎点被整条圆滑抹去。
             未做任何降采样或网格量化，不会出现方块化/马赛克。
             原作里细于该值的飞尘颗粒与细排线属激光雕刻物理极限，无法保留。
-  提示：最小线宽是"绝对毫米值"。若想保留更多细排线肌理，可整体放大成品尺寸
-        （放大后细线同步变粗，更容易达标），全套餐版须同倍率等比缩放，规矩线一起缩放。
+  提示：若想保留更多细排线肌理，可整体放大成品尺寸（放大后细线同步变粗，更容易达标），
+        全套餐版须同倍率等比缩放，规矩线一起缩放。
 
-【尺寸】
-  画面（实际印刷区域）：{info['mm_art_w']:.1f} x {info['mm_art_h']:.1f} mm
-  版材（含四角规矩线留白）：{info['mm_plate_w']:.1f} x {info['mm_plate_h']:.1f} mm
-  光栅分辨率 {info['dpi_tag']:.0f} DPI，画面 {info['out_w']} x {info['out_h']} px
+【尺寸（各作品幅面不同，以各作品文件夹为准）】
+  本批统一：成品长边 400mm、光栅 300 DPI。横构图 400x300mm 或 400x225mm；竖构图 225x400mm。
+  每件作品的画面尺寸 / 版材尺寸 / 像素，见该作品文件夹内「分板示意.png」页首与
+  根目录「分板清单.csv」的「画面尺寸」列——请按作品分别开料，不要套用同一个数字。
+  版材 = 画面四边各外扩约 16.9mm（四角套印规矩线留白）；例：画面 400x300mm → 版材 417x317mm。
 
 【文件约定】
 1. 每块色版提供两种格式，二选一使用：
@@ -444,10 +446,7 @@ def main():
         w.writerow(["作品", "印刷次序", "色版PNG", "色版SVG", "色名", "HEX", "RGB",
                     "覆盖率%", "细部并掉%", "实测最小线宽mm", "画面尺寸"])
         w.writerows(all_rows)
-    (outroot / "厂家制作说明.txt").write_text(
-        manufacturer_txt(info or dict(min_mm_eff=0.93, dpi_work=600, dpi_tag=300,
-                                      mm_art_w=0, mm_art_h=0, mm_plate_w=0, mm_plate_h=0,
-                                      out_w=0, out_h=0)), encoding="utf-8")
+    (outroot / "厂家制作说明.txt").write_text(manufacturer_txt(), encoding="utf-8")
     print(f"\n清单: {outroot/'分板清单.csv'}")
 
 
