@@ -106,7 +106,9 @@ export async function llmExtract(system, user, maxTokens) {
 //   超时/欠费)立刻换下一家,不用改代码就能加源——在 .env 里补一个 key 即自动加入。
 // 四家都是 OpenAI 兼容的 /chat/completions,所以共用 callOpenAICompat,不再一家一个函数。
 // 各家的 *_API_URL / *_MODEL 均可覆盖默认值(私有部署、换模型都行)。
-// ⚠ 各家的"免费"口径以其官网当期政策为准。本项目只实测过智谱 GLM-4-Flash,其余三家为待启用项。
+// ⚠ 各家的"免费"口径以其官网当期政策为准(百炼是"每模型 100 万 tokens 新人额度、90 天")。
+//   2026-10-03 实测可用:智谱 GLM-4-Flash、阿里百炼 qwen3.6-flash;讯飞/硅基流动尚未配 key。
+//   注意:百炼已没有 `qwen-flash` 这个模型名了,现用 qwen3.6-flash。
 const FREE_PROVIDERS = [
   {
     id: "glm-free", name: "智谱 GLM-4-Flash", keyEnv: "MOD_API_KEY",
@@ -119,9 +121,12 @@ const FREE_PROVIDERS = [
     model: () => process.env.XFYUN_MODEL || "lite"
   },
   {
-    id: "qwen-free", name: "阿里百炼 qwen-flash", keyEnv: "DASHSCOPE_API_KEY",
+    id: "qwen-free", name: "阿里百炼", keyEnv: "DASHSCOPE_API_KEY",
     url: () => process.env.DASHSCOPE_API_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
-    model: () => process.env.DASHSCOPE_MODEL || "qwen-flash"
+    model: () => process.env.DASHSCOPE_MODEL || "qwen3.6-flash",
+    // qwen3.6-flash 默认是"思考型",reasoning 会吃掉 max_tokens、有截断 JSON 的风险;关掉更省更快。
+    // 2026-10-03 实测:带上它 completion_tokens 5 / 不带 45,且都返回合法 JSON。
+    extra: () => ({ enable_thinking: false })
   },
   {
     id: "siliconflow", name: "硅基流动", keyEnv: "SILICONFLOW_API_KEY",
@@ -183,7 +188,8 @@ export async function callOpenAICompat(p, system, user, maxTokens) {
       model: p.model(),
       messages: [{ role: "system", content: system }, { role: "user", content: user }],
       temperature: 0,
-      max_tokens: maxTokens || 1500
+      max_tokens: maxTokens || 1500,
+      ...(p.extra ? p.extra() : {})   // 各家可选参数(如百炼的 enable_thinking:false)
     }),
     signal: AbortSignal.timeout(90000)
   });
