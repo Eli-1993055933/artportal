@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.30.0" />
+<meta name="app-version" content="1.31.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -288,6 +288,19 @@
     .modal .mx{left:12px;right:auto;font-size:13.5px;color:var(--ink)}
     #lightbox .mx{left:16px;right:auto;font-size:15px}
     .pro-head .x2{order:-1;font-size:13.5px;color:var(--ink);padding:0 2px}
+    /* 手机端筛选器:chips 放大到可点(touch target ≥32px),横滑单行不换行、不挤占抽屉高度 */
+    .tagrow{padding:8px 0 3px;gap:7px}
+    .tgc{font-size:12px;padding:7px 13px}
+    .tgc i{width:7px;height:7px}
+    #fltPanel .fgrp-t{margin:11px 0 2px;font-size:11.5px}
+    .fbar{padding:2px 0 0}
+    .fbar-btn{font-size:12.5px;padding:7px 14px}
+    /* 手机端结果卡片:加大缩略图与行高,提升可读性与点按命中 */
+    .oc{padding:11px 10px;gap:11px}
+    .oc .th{width:66px;height:50px;border-radius:9px}
+    .oc .t{font-size:13.5px}
+    .oc .m{font-size:12px;margin-top:4px}
+    html.dark .oc .th{background:#2a2721}
   }
   /* 个人主页:右侧竖向卡片面板(与左侧抽屉同款形态),从头像下方展开;头部含用户检索 */
   #propanel{position:fixed;right:26px;top:64px;bottom:44px;width:362px;z-index:8;display:none;
@@ -399,6 +412,17 @@
   .modal .mx{position:absolute;right:12px;top:10px;font-size:17px;color:var(--muted);cursor:pointer;background:none;border:0;line-height:1}
   .modal label.chk{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--sub);margin-top:6px;flex-wrap:wrap}
   .modal label.chk input{width:auto;margin:0}
+  /* 国家/区域机会概览弹层(点击地球仪国家) */
+  .cov-cats{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px}
+  .cov-cat{font-size:11.5px;color:#fff;border-radius:999px;padding:3px 11px;white-space:nowrap}
+  .cov-sub{font-size:11px;color:var(--muted);margin:0 0 4px;letter-spacing:.05em}
+  .cov-list{max-height:44vh;overflow-y:auto;overscroll-behavior:contain;margin:0 -6px}
+  .cov-row{display:flex;gap:9px;align-items:stretch;padding:9px 8px;border-radius:10px;cursor:pointer}
+  .cov-row:hover{background:#faf9f5}
+  html.dark .cov-row:hover{background:#242220}
+  .cov-dot{width:4px;border-radius:3px;flex:0 0 auto}
+  .cov-t{font-size:13px;font-weight:600;line-height:1.35}
+  .cov-m{font-size:11.5px;color:var(--sub);margin-top:3px}
   .pubgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
   .pubgrid button{padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);cursor:pointer;text-align:left;color:var(--ink)}
   .pubgrid button:hover{border-color:#c6c1b4}
@@ -754,11 +778,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.30.0</span></div>
+  ARTPORTAL <span id="appVer">v1.31.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.30.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.30.0"></script>
-<script src="js/globe-data.js?v=1.30.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.31.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.31.0"></script>
+<script src="js/globe-data.js?v=1.31.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1388,7 +1412,7 @@
       if(drilledFeat&&d3.geoContains(drilledFeat,inv)) return;
       exitDrill(); return; }
     if(drillLevel===0){
-      for(var i=0;i<countryFeats.length;i++){ if(d3.geoContains(countryFeats[i],inv)){ drillInto(countryFeats[i]); return; } } }
+      for(var i=0;i<countryFeats.length;i++){ if(d3.geoContains(countryFeats[i],inv)){ openCountryOv(countryFeats[i]); return; } } }
   });
 
   // flyTo 优化版:更平滑的缓动函数 + 自适应时长
@@ -1481,6 +1505,35 @@
     ensureGuard();   // 返回上一级按钮已移除(用户要求);逐级返回改走:点区划外 / 手机侧滑 / 桌面浏览器后退
     loadAdmin('data/geo/world/'+admSlug(nm)+'.json',null,2,
       'https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/50m/cultural/ne_50m_admin_1_states_provinces.json',nm); }
+  // —— 国家机会概览弹层:全球视图点击国家时先弹该区域收录概览,再可下钻看分布 ——
+  function covMarkers(nm){ var zh=D.NAME_ZH[nm], out=[];
+    for(var i=0;i<markers.length;i++){ var o=markers[i].o;
+      if((zh&&o.country_zh===zh)||o.country_en===nm) out.push(markers[i]); }
+    return out; }
+  function openCountryOv(feat){ var nm=feat.properties.name, zh=D.NAME_ZH[nm]||nm;
+    var ms=covMarkers(nm);
+    if(!ms.length){ drillInto(feat); return; }   // 未收录任何条目 → 维持原下钻行为
+    ms.sort(function(a,b){ return dlRank(a.o)-dlRank(b.o); });
+    var cnt={}; ms.forEach(function(m){ var c=CAT[m.o.category]?m.o.category:'opencall'; cnt[c]=(cnt[c]||0)+1; });
+    var cats=LEGEND_KEYS.filter(function(k){ return cnt[k]; }).map(function(k){
+      return '<span class="cov-cat" style="background:'+CAT[k].color+'">'+esc(catName(k))+' '+cnt[k]+'</span>'; }).join('');
+    var rows=ms.slice(0,8).map(function(m){ var o=m.o, c=CAT[o.category]||CAT.opencall, dl=daysLeft(o.deadline);
+      var meta=[o.city_zh||o.country_zh,o.deadline?(L('k_dl')+' '+o.deadline+(dl?' · '+dl:'')):''].filter(Boolean).join(' · ');
+      return '<div class="cov-row" data-coid="'+esc(o.id)+'"><span class="cov-dot" style="background:'+c.color+'"></span>'+
+        '<div style="flex:1;min-width:0"><div class="cov-t">'+esc(tt(o)||'(无标题)')+'</div>'+
+        '<div class="cov-m">'+esc(meta)+'</div></div></div>'; }).join('');
+    var m=modal('<h3>'+esc(zh)+'</h3><p class="note">'+L('covN')(ms.length)+'</p>'+
+      (cats?('<div class="cov-cats">'+cats+'</div>'):'')+
+      '<div class="cov-sub">'+L('covTop')+(ms.length>8?(' · '+L('covMore')(8)):'')+'</div>'+
+      '<div class="cov-list">'+rows+'</div>'+
+      '<button class="mgo" id="covDrill" type="button">'+L('covDrill')+'</button>');
+    m.querySelector('.cov-list').addEventListener('click',function(e){
+      var d=e.target.closest('[data-coid]'); if(!d) return;
+      var oid=d.getAttribute('data-coid'), rec=null;
+      for(var i=0;i<ms.length;i++){ if(ms[i].o.id===oid){ rec=ms[i]; break; } }
+      if(!rec) return;
+      closeModal(); flyTo(rec.ll, Math.max(splitScale()*1.5, proj.scale())); showDetail(rec.o); syncCard(rec); });
+    m.querySelector('#covDrill').addEventListener('click',function(){ closeModal(); drillInto(feat); }); }
   function drillAdm1(f){ drillLevel=2; drilledAdmName=f.properties.name;
     document.getElementById('back').textContent=L('backU');
     fitFly(f, boundsCenter(f), scale0*5); }
@@ -1728,7 +1781,7 @@
   var I18N={
     zh:{idx:'索引',opportunities:'机会',jobs:'招聘',news:'资讯',works:'作品',pub:'发布',login:'登录',
       libT:'实时索引库',unit:'项全球活跃索引',
-      libTip:'拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看行政区划。',
+      libTip:'拖拽旋转地球，滚轮或双指缩放。数字圆代表该城市的机会数，点击放大展开；点击国家版图查看该区域机会概览。',
       searchPh:'检索展览、城市、机构、项目内容…',ai:'✦ AI 检索',aiing:'✦ 检索中…',
       lgT:'分类索引图例',fold:'◂ 收起面板',unfold:'▸ 展开面板',backW:'← 返回全球',backU:'← 返回上一级',
       go:'前往官网 ↗',apply:'前往申请 ↗',read:'阅读原文 ↗',
@@ -1761,6 +1814,7 @@
       ntTitle:'通知',ntEmpty:'还没有通知',ntFollow:'关注了你',ntReply:'回复了你',ntLike:'赞了你的评论',
       ntComment:'评论了',ntDecide:'审核结果',ntOk:'已通过',ntNo:'未通过',ntWeekly:'新一期艺术周刊 ',
       ntRemind:'投递提醒:本周有 ',ntRemindB:' 个收藏的机会临近截止',ntRemindU:'(其中 {n} 个一周内截止)',
+      covN:function(n){return '该区域共收录 '+n+' 条';},covTop:'按截止时间排序',covMore:function(n){return '仅列前 '+n+' 条';},covDrill:'下钻查看分布',
       ppEdit:'编辑资料',ppLogout:'退出登录',ppFollow:'关注',ppFollowingB:'已关注',ppBlockB:'拉黑',ppUnblockB:'取消拉黑',
       ppJoined:'加入于',ppFieldsL:'创作领域',ppTabWorks:'作品',ppTabFavs:'收藏',ppTabSubs:'投稿',
       ppTabFing:'关注',ppTabFers:'粉丝',ppEmptyT:'这里还是空的',ppFavPriv:'TA 的收藏未公开',ppUpWork:'⊕ 上传作品',
@@ -1812,7 +1866,7 @@
       marked:function(n,c){return '已标注 '+n+' 项 · '+c+' 国';}},
     en:{idx:'Index',opportunities:'Calls',jobs:'Jobs',news:'News',works:'Works',pub:'Post',login:'Sign in',
       libT:'LIVE INDEX',unit:' live listings',
-      libTip:'Drag to rotate, scroll or pinch to zoom. Numbered circles are city clusters — click to expand; click a country for its regions.',
+      libTip:'Drag to rotate, scroll or pinch to zoom. Numbered circles are city clusters — click to expand; click a country for a quick overview.',
       searchPh:'Search shows, cities, institutions…',ai:'✦ AI Search',aiing:'✦ Searching…',
       lgT:'Category index',fold:'◂ Collapse panel',unfold:'▸ Show panel',backW:'← Back to globe',backU:'← Back',
       go:'Official site ↗',apply:'Apply ↗',read:'Read source ↗',
@@ -1845,6 +1899,7 @@
       ntTitle:'Notifications',ntEmpty:'No notifications yet',ntFollow:'followed you',ntReply:'replied to you',ntLike:'liked your comment',
       ntComment:'commented on ',ntDecide:'Review result',ntOk:'approved',ntNo:'not approved',ntWeekly:'New weekly digest ',
       ntRemind:'Deadline reminder: ',ntRemindB:' saved opportunities closing soon',ntRemindU:' ({n} within a week)',
+      covN:function(n){return n+(n>1?' listings in this region':' listing in this region');},covTop:'Sorted by deadline',covMore:function(n){return 'top '+n+' only';},covDrill:'Explore distribution',
       ppEdit:'Edit profile',ppLogout:'Sign out',ppFollow:'Follow',ppFollowingB:'Following',ppBlockB:'Block',ppUnblockB:'Unblock',
       ppJoined:'Joined',ppFieldsL:'Fields',ppTabWorks:'Works',ppTabFavs:'Saved',ppTabSubs:'Posts',
       ppTabFing:'Following',ppTabFers:'Followers',ppEmptyT:'Nothing here yet',ppFavPriv:'Their saves are private',ppUpWork:'⊕ Upload work',
