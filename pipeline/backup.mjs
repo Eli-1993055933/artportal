@@ -164,7 +164,8 @@ async function writeVersionInfo() {
   let gitInfo = {};
   try {
     const log = execSync("git log --oneline -1", { cwd: join(__dir, ".."), encoding: "utf8" }).trim();
-    const ver = execSync("type VERSION", { cwd: join(__dir, ".."), encoding: "utf8" }).trim();
+    // 直接读文件而非 `type VERSION`(那是 cmd.exe 语法,在 macOS/Linux 的 sh 下必失败)
+    const ver = (await readFile(join(__dir, "..", "VERSION"), "utf8")).trim();
     gitInfo = { commit: log, version: ver, time: stamp };
     await writeFile(join(DEST, "version.json"), JSON.stringify(gitInfo, null, 2), "utf8");
     console.log("  -> version.json 已保存:", ver);

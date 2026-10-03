@@ -39,7 +39,9 @@ async function main() {
   if (!DRY) {
     log("【保险】部署前备份本地 state/ ...");
     try {
-      execSync(`node "${join(__dir, "backup.mjs")}" --local`, { stdio: "pipe" });
+      // 用 process.execPath 而非 "node":本机(如 macOS)shell 常无 node 在 PATH,
+      // 之前这一步会以 `node: command not found` 静默失败,兜底备份形同虚设。
+      execFileSync(process.execPath, [join(__dir, "backup.mjs"), "--local"], { stdio: "pipe" });
       log("【保险】本地 state/ 备份完成");
     } catch (e) {
       log("【保险】本地备份失败: " + (e.message || e));
