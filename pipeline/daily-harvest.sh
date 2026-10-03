@@ -17,6 +17,12 @@
 #   3. 本机专属任务      —— backfill-screenshots / backfill-channel-covers / cover-audit / balance
 #   4. sync-server.mjs   —— 再推一次:把本机新截好的封面推回服务器
 #
+# 【联网就绪 + 重试】(2026-10-03 新增)
+#   launchd 在 04:17 把机器从睡眠唤醒后**立刻**执行本脚本,此时网络栈还没就绪,同步里的
+#   ssh/scp 会一律报 `Can't assign requested address`(见 state/daily-2026-10-03.log:三个
+#   数据文件同步全败、退出码 1)。故现在:跑联网步骤前先 wait_net 等网络,同步步骤失败再
+#   退避重试(立刻 / +20s / +60s),避免"唤醒即跑、整晚白跑"。
+#
 # 用法:
 #   bash pipeline/daily-harvest.sh               # 立刻跑一遍夜间例行(在仓库里跑也行)
 #   bash pipeline/daily-harvest.sh --full        # 例外:本机也跑一次全量机会采集(兜底用,约 7 小时)
@@ -142,6 +148,40 @@ export PATH="$HOME/.local/lib/node-current/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PA
 
 log "===== 每日例行开始($([ "$SELFCHECK" = 1 ] && echo 自检模式 || echo 常规模式)) ====="
 
+# ---------- 联网就绪等待 + 退避重试(2026-10-03,见文件头说明) ----------
+# 用 TCP 连服务器 22 端口判断(比 ping 准:阿里云可能屏蔽 ICMP)。最多等 120 秒。
+wait_net() {
+  local i
+  for i in $(seq 1 60); do
+    if nc -z -G 3 60.205.212.195 22 >/dev/null 2>&1; then
+      [ "$i" -gt 1 ] && log "  网络就绪(等了 $(( (i - 1) * 2 )) 秒)"
+      return 0
+    fi
+    sleep 2
+  done
+  log "  警告: 等网络 120 秒仍未就绪,仍继续尝试"
+  return 1
+}
+
+# 带退避重试跑一次双向同步:立刻 → 等 20s → 等 60s,每次前先 wait_net。成功返回 0。
+run_sync() {
+  local desc="$1" n=0 d
+  for d in 0 20 60; do
+    if [ "$d" -gt 0 ]; then log "  等 ${d}s 后重试 ..."; sleep "$d"; fi
+    wait_net
+    n=$((n + 1))
+    if "$NODE" sync-server.mjs >> "$LOG" 2>&1; then
+      log "  $desc 成功(第 $n 次)"
+      return 0
+    fi
+    log "  ! $desc 第 $n 次失败"
+  done
+  log "  ! $desc 三次均失败(数据不丢:两边各自完整,下次跑或手动 sync 会补上)"
+  return 1
+}
+
+wait_net
+
 log "[1/4] TLS 中间证书补全(ca-bootstrap) ..."
 "$NODE" ca-bootstrap.mjs >> "$LOG" 2>&1
 log "  ca-bootstrap 退出码 $?"
@@ -167,7 +207,7 @@ if [ "$FULL" = 1 ]; then
 fi
 
 log "[2/4] 拉取同步(sync-server:合并一次,把服务器昨晚抓到的条目同步下来,本机才知道哪些还缺封面) ..."
-"$NODE" sync-server.mjs >> "$LOG" 2>&1
+run_sync "拉取同步"
 PULL_RC=$?
 log "  sync-server 退出码 $PULL_RC(非 0 不阻断后续,但封面任务会基于旧清单)"
 
@@ -179,7 +219,7 @@ for step in backfill-screenshots backfill-channel-covers cover-audit balance; do
 done
 
 log "[4/4] 推送同步(sync-server:把本机新截好的封面推回服务器) ..."
-"$NODE" sync-server.mjs >> "$LOG" 2>&1
+run_sync "推送同步"
 SYNC_RC=$?
 log "  sync-server 退出码 $SYNC_RC"
 

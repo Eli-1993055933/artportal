@@ -155,12 +155,25 @@ async function main() {
   console.log(`收集到去重中间证书: ${pems.length} 张`);
   for (const [pem, m] of pemSet) console.log(`  · ${m.subject}  (来自 ${m.host})`);
 
-  await mkdir(P("state"), { recursive: true });
-  await writeFile(OUT, pems.join("\n"), "utf8");
-  console.log(`\n已写出 ${OUT}`);
+  // 与**已有 bundle 取并集**写回,绝不因为"本次没扫到"就把已有的修复清空。
+  // 2026-10-03 教训:原实现是直接覆盖写,而探测会因网络抖动/站点超时漏掉域名 —— 那天 381 个
+  // 域名有 129 个连不上、"链长=1"判为 0,于是写出一个 **0 字节**的 pem,把前一天刚修好的
+  // cafa.edu.cn 又打回原样(表现为 fetch-error TypeError)。中间证书"多一张无妨",故并集最稳。
+  const existing = await readFile(OUT, "utf8").catch(() => "");
+  const havePems = new Set(existing.match(/-----BEGIN CERTIFICATE-----[\s\S]*?-----END CERTIFICATE-----/g) || []);
+  const carried = havePems.size;
+  for (const pem of pems) havePems.add(pem);
+  const bundle = [...havePems];
+  if (!bundle.length) {
+    console.log("⚠ 本次未收集到中间证书,且已有 bundle 也是空的 —— 不写文件(维持无附加 CA 的状态)");
+  } else {
+    await mkdir(P("state"), { recursive: true });
+    await writeFile(OUT, bundle.join("\n") + "\n", "utf8");
+    console.log(`\n已写出 ${OUT}(沿用原有 ${carried} 张 + 本次新增 ${bundle.length - carried} 张 = 共 ${bundle.length} 张)`);
+  }
 
   // 复验:用 bundle 补链,rejectUnauthorized=true 再连一遍
-  const ca = [...tls.rootCertificates, ...pems];
+  const ca = [...tls.rootCertificates, ...bundle];
   const verify = (host) => new Promise((resolve) => {
     const sock = tls.connect({ host, port: 443, servername: host, ca, rejectUnauthorized: true, timeout: TIMEOUT_MS });
     sock.once("secureConnect", () => { try { sock.destroy(); } catch (e) {} resolve(true); });

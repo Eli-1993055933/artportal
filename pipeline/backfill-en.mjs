@@ -12,15 +12,15 @@
 
 import { readFile, writeFile, copyFile, rename } from "node:fs/promises";
 import { reportAgent } from "./lib/agent-report.mjs";
-import { llmExtract } from "./lib/extract.mjs";
+import { llmExtract, hasAnyLlmKey } from "./lib/extract.mjs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dir, "..", "site", "data", "opportunities.json");
-// GLM 免费档为主(2026-08-02 定调长期主力),DeepSeek/Anthropic 由 llmExtract 按需兜底,见 lib/extract.mjs。
-if (!process.env.MOD_API_KEY && !process.env.DEEPSEEK_API_KEY && !process.env.ANTHROPIC_API_KEY) {
-  console.error("缺 MOD_API_KEY / DEEPSEEK_API_KEY / ANTHROPIC_API_KEY(先 source .env)"); process.exit(1);
+// 免费云通道(智谱/讯飞/百炼/硅基流动任一家)为主,DeepSeek/Anthropic 由 llmExtract 按需兜底,见 lib/extract.mjs。
+if (!hasAnyLlmKey()) {
+  console.error("缺任何大模型 key:免费通道任一家(MOD_API_KEY / XFYUN_API_KEY / DASHSCOPE_API_KEY / SILICONFLOW_API_KEY)或 DEEPSEEK_API_KEY / ANTHROPIC_API_KEY(先 source .env)"); process.exit(1);
 }
 
 const BATCH = 6;        // 每次 API 调用翻译的条数(太大易被 max_tokens 截断)

@@ -10,7 +10,7 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { llmExtract } from "./extract.mjs";
+import { llmExtract, freeProviders, callOpenAICompat } from "./extract.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 
@@ -70,35 +70,25 @@ const AI_SYS = {
     '{"category":"正常|广告导流|涉政敏感|色情低俗|人身攻击","reason":"一句话理由"}\n' +
     "判定要点:正常的自我介绍都算【正常】;含联系方式导流或推销=广告导流。"
 };
-// —— 免费审核模型优先(v0.82.3,用户要求降成本):.env 配 MOD_API_KEY 即启用 ——
-// 默认接智谱 GLM-4-Flash(API 长期免费、国内直连、OpenAI 兼容格式);
-// MOD_API_URL / MOD_MODEL 可换任何 OpenAI 兼容服务(百炼 qwen-flash、硅基流动免费模型等)。
-// 免费模型失败自动回落 DeepSeek;两边都挂才算机审失败(转人工,fail-closed 兜底不变)。
+// —— 免费审核模型优先(v0.82.3,用户要求降成本)——
+// 2026-10-03 收编:原先这里自己 fetch 单家 GLM(又一处"GLM 单点"),现改走 extract.mjs 的
+// 免费云通道,配了哪几家就用哪几家、逐家故障转移。
+// 免费通道全挂自动回落 DeepSeek;两边都挂才算机审失败(转人工,fail-closed 兜底不变)。
 export async function freeModerate(sys, user) {
-  const res = await fetch(process.env.MOD_API_URL || "https://open.bigmodel.cn/api/paas/v4/chat/completions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: "Bearer " + process.env.MOD_API_KEY },
-    body: JSON.stringify({
-      model: process.env.MOD_MODEL || "glm-4-flash",
-      messages: [{ role: "system", content: sys }, { role: "user", content: user }],
-      temperature: 0.1,
-      max_tokens: 300
-    }),
-    signal: AbortSignal.timeout(30000)
-  });
-  if (!res.ok) throw new Error("mod-api " + res.status);
-  const j = await res.json();
-  const content = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
-  const m = content.match(/\{[\s\S]*\}/);   // 免费模型可能包 markdown 代码块,剥出 JSON 再解析
-  if (!m) throw new Error("mod-api no-json");
-  return JSON.parse(m[0]);
+  const avail = freeProviders();
+  let lastErr = null;
+  for (const p of avail) {
+    try { return (await callOpenAICompat(p, sys, user, 300)).data; }
+    catch (e) { lastErr = e; }
+  }
+  throw lastErr || new Error("mod-api 免费通道未配置");
 }
 async function aiModerate(text, kind) {
   const sys = AI_SYS[kind] || AI_SYS.submission;
   const user = "【待审内容】\n" + String(text).slice(0, 3000);
   let data = null;
-  if (process.env.MOD_API_KEY) {
-    try { data = await freeModerate(sys, user); } catch (e) { data = null; }   // 免费模型挂了回落 DeepSeek
+  if (freeProviders().length) {
+    try { data = await freeModerate(sys, user); } catch (e) { data = null; }   // 免费通道挂了回落 DeepSeek
   }
   if (!data) { const r = await llmExtract(sys, user, 300); data = r.data; }
   return {

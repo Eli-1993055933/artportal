@@ -2,14 +2,14 @@
 // 每日一巡:①给新进反馈做 AI 初判(分类/是否紧急/一句话摘要,便于站长扫一眼定先后);
 // ②聚合被举报且仍公开的评论/作品,给出处置建议(删除/保留/人工细看);
 // ③写 state/feedback-report.json 供 /admin「反馈信箱」展示,agentLog 打卡巡视台。
-// AI 走免费审核通道优先(moderation.freeModerate,MOD_API_KEY),回落 DeepSeek;
+// AI 走免费审核通道优先(moderation.freeModerate,免费云通道任一家的 key),回落 DeepSeek;
 // 两边都不可用就只做纯程序聚合(计数照报,初判留空,绝不编造)。
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { freeModerate } from "./moderation.mjs";
-import { llmExtract } from "./extract.mjs";
+import { llmExtract, freeProviders } from "./extract.mjs";
 import * as db from "./db.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
@@ -17,7 +17,7 @@ const REPORT_PATH = join(__dir, "..", "state", "feedback-report.json");
 
 // 统一的小 JSON 问答:免费模型优先 → DeepSeek 回落 → 都挂返回 null(调用方按"AI 不可用"处理)
 async function askJSON(sys, user) {
-  if (process.env.MOD_API_KEY) {
+  if (freeProviders().length) {
     try { return await freeModerate(sys, user); } catch (e) {}
   }
   try { const r = await llmExtract(sys, user, 300); return r.data; } catch (e) {}
