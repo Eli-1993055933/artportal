@@ -2275,6 +2275,38 @@ if (process.env.QUALITY_CHECK === "1") {
 // 只跑 run.mjs(机会频道);截图(mShots 服务器被 403)留本机;翻译/官网定位后续再评估上服务器。
 if (process.env.DAILY_CRAWL === "1") {
   let dcDay = null, dcRunning = false;
+
+  // 每日采集前先补 CA 中间证书(2026-10-03)。国内不少机构官网只发叶子证书、不发中间证书,
+  // Node 原生 fetch 会因缺链报 fetch-error TypeError;修法是用 ca-bootstrap.mjs 把它们并进
+  // pipeline/state/ca-intermediates.pem,再由 .env 的 NODE_EXTRA_CA_CERTS 交给 Node。
+  // 该 pem 落在 state/(gitignored)、不随 deploy.mjs 上线,服务器上原本没人更新它 —— 新出现的
+  // "只发叶子"站点就会一直抓不到,故放进每日采集开头自愈。它只影响少数源,失败/超时都不拦采集。
+  const CA_BOOTSTRAP_TIMEOUT_MS = 10 * 60 * 1000;
+  function refreshCaBeforeCrawl() {
+    return new Promise((resolve) => {
+      const t0 = Date.now();
+      let buf = Buffer.alloc(0);
+      const push = (d) => { buf = Buffer.concat([buf, d]); if (buf.length > 4000) buf = buf.subarray(buf.length - 4000); };
+      let done = false;
+      const finish = (tag) => {
+        if (done) return; done = true;
+        const tail = buf.toString("utf8").replace(/\s+/g, " ").slice(-150);
+        process.stderr.write("[每日抓取] CA 自愈 ca-bootstrap.mjs " + tag + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
+        db.agentLog({ agent: "harvester", ok: true, summary: "服务器 CA 自愈 ca-bootstrap(" + tag + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
+        resolve();
+      };
+      let p;
+      try { p = spawn(process.execPath, [join(__dir, "ca-bootstrap.mjs")], { cwd: __dir, env: process.env }); }
+      catch (e) { process.stderr.write("[每日抓取] CA 自愈 spawn 失败:" + e.message + "\n"); return resolve(); }
+      // 超时看门狗:ca-bootstrap 只做 TLS 探测 + 下载证书,正常几分钟内结束;卡住就杀掉、照跑采集。
+      const timer = setTimeout(() => { try { p.kill("SIGKILL"); } catch (e) {} finish("超时(" + (CA_BOOTSTRAP_TIMEOUT_MS / 60000) + "min)被杀"); }, CA_BOOTSTRAP_TIMEOUT_MS);
+      p.stdout.on("data", push);
+      p.stderr.on("data", push);
+      p.on("close", (code) => { clearTimeout(timer); finish("code=" + code); });
+      p.on("error", (e) => { clearTimeout(timer); process.stderr.write("[每日抓取] CA 自愈 spawn error:" + e.message + "\n"); finish("error"); });
+    });
+  }
+
   function dailyCrawlTick() {
     const bj = new Date(Date.now() + 8 * 3600e3);
     if (bj.getUTCHours() !== Number(process.env.DAILY_CRAWL_HOUR || 3)) return;
@@ -2283,21 +2315,25 @@ if (process.env.DAILY_CRAWL === "1") {
     dcDay = day; dcRunning = true;
     const t0 = Date.now();
     const cap = String(Math.max(4, Number(process.env.DAILY_CRAWL_CAP || 12)));
-    process.stderr.write("[每日抓取] 启动 run.mjs --cap " + cap + "\n");
     // 攒 Buffer 收尾一次性解码,别逐块 toString()——中文字符可能被切在两个 data 块中间,
     // 逐块解码会拼出乱码(v0.99.2 修:「铁犁」打卡摘要经常出现替换符就是这个坑)。
     let tailBuf = Buffer.alloc(0);
     function pushChunk(d) { tailBuf = Buffer.concat([tailBuf, d]); if (tailBuf.length > 4000) tailBuf = tailBuf.subarray(tailBuf.length - 4000); }
-    const p = spawn(process.execPath, [join(__dir, "run.mjs"), "--cap", cap], { cwd: __dir, env: process.env });
-    p.stdout.on("data", pushChunk);
-    p.stderr.on("data", pushChunk);
-    p.on("close", (code) => {
-      dcRunning = false;
-      const tail = tailBuf.toString("utf8").replace(/\s+/g, " ").slice(-150);
-      process.stderr.write("[每日抓取] run.mjs 结束 code=" + code + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
-      db.agentLog({ agent: "harvester", ok: code === 0, summary: "服务器每日抓取 run.mjs(code=" + code + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
+    // 先补 CA(自愈)、再跑采集:run.mjs 是子进程、启动时才读 NODE_EXTRA_CA_CERTS,
+    // 故必须在它启动前把 ca-intermediates.pem 写完(见上面的 refreshCaBeforeCrawl)。
+    refreshCaBeforeCrawl().then(() => {
+      process.stderr.write("[每日抓取] 启动 run.mjs --cap " + cap + "\n");
+      const p = spawn(process.execPath, [join(__dir, "run.mjs"), "--cap", cap], { cwd: __dir, env: process.env });
+      p.stdout.on("data", pushChunk);
+      p.stderr.on("data", pushChunk);
+      p.on("close", (code) => {
+        dcRunning = false;
+        const tail = tailBuf.toString("utf8").replace(/\s+/g, " ").slice(-150);
+        process.stderr.write("[每日抓取] run.mjs 结束 code=" + code + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
+        db.agentLog({ agent: "harvester", ok: code === 0, summary: "服务器每日抓取 run.mjs(code=" + code + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
+      });
+      p.on("error", (e) => { dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
     });
-    p.on("error", (e) => { dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
   }
   setTimeout(dailyCrawlTick, 200 * 1000);
   setInterval(dailyCrawlTick, 3600 * 1000);
