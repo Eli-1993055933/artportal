@@ -155,6 +155,32 @@ export function newsletterCount() { return users.filter(u => u.newsletter && !u.
 // 站内周刊通知的收件人:所有未封禁用户(站内通知是低打扰的铃铛提示,邮件才受订阅开关约束)
 export function allUserIds() { return users.filter(u => !u.banned).map(u => u.id); }
 
+// ---------- 投递材料提醒(路线图 35 项,v1.30.0):退订 token + 订阅名单 ----------
+// 与周报订阅完全独立的一套开关与 token:提醒邮件里的退订只关提醒,不动周报订阅,反之亦然。
+// token 命名空间加 "remind:" 前缀,避免两个退订链接互相顶用(拿周报 token 退提醒)。
+export function remindToken(email) {
+  return createHmac("sha256", mailSecret).update("remind:" + String(email).toLowerCase()).digest("hex").slice(0, 32);
+}
+// 提醒邮件里的退订链接点开:校验 token → 关闭提醒。返回 true=已退订 / false=链接无效
+export function reminderUnsub(email, token) {
+  email = String(email || "").trim().toLowerCase();
+  const u = byEmail.get(email);
+  if (!u || !token) return false;
+  try {
+    if (!timingSafeEqual(Buffer.from(remindToken(email)), Buffer.from(String(token).slice(0, 32).padEnd(32, "0")))) return false;
+  } catch (e) { return false; }
+  u.remind = false;
+  saveUsers();
+  logEvent("unsub", { uid: u.id, email, kind: "remind" });
+  return true;
+}
+// 提醒名单:未关闭提醒、未被封禁的用户(默认开启 = 字段缺省时也算开)。
+// 带上 favorites/昵称/邮箱,供提醒 tick 一次性算条与发信,免去逐用户回调(手机用户 email 可为 null,只发站内🔔)。
+export function reminderAudience() {
+  return users.filter(u => u.remind !== false && !u.banned)
+    .map(u => ({ id: u.id, email: u.email || null, nickname: u.nickname || "", favorites: u.favorites || [] }));
+}
+
 // ---------- 密码 ----------
 function hashPassword(pw, salt) { return scryptSync(String(pw), salt, 64).toString("hex"); }
 function checkPassword(pw, u) {
@@ -427,6 +453,7 @@ function publicUser(u) {
     website: p.website || "", fields: p.fields || "",
     fav_public: p.fav_public !== false,        // 收藏默认公开,可在编辑资料里关闭
     newsletter: !!u.newsletter,                // 周报订阅(注册勾选/资料页可改/邮件可退订)
+    remind: u.remind !== false,                // 投递材料提醒(默认开启;与周报订阅独立,邮件可单独退订)
     nickname_changed_at: u.nickname_changed_at || null,
     email_verified: !!u.email_verified,
     phone_masked: maskPhone(u.phone ? decPhone(u.phone) : null),   // 掩码手机号(138****5678);绝不返回明文
@@ -562,6 +589,7 @@ export async function setProfile(req, body, ip) {
   p.bio = bio; p.identity = identity; p.fields = fields; p.location = location; p.website = website;
   if (typeof b.fav_public === "boolean") p.fav_public = b.fav_public;
   if (typeof b.newsletter === "boolean") u.newsletter = b.newsletter;   // 周报订阅开关(资料页)
+  if (typeof b.remind === "boolean") u.remind = b.remind;               // 投递材料提醒开关(资料页;独立于周报)
   saveUsers();
   logEvent("profile", { uid: u.id, email: u.email, ip, nickname });
   return { code: 200, body: { user: publicUser(u) } };

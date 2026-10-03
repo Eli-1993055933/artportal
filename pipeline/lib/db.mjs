@@ -317,6 +317,11 @@ export async function notifMarkAllRead(uid) {
   const d = await getDb();
   d.prepare("UPDATE notifications SET read=1 WHERE uid=? AND read=0").run(uid);
 }
+// 是否已存在某条系统通知(投递提醒按周去重:已在则本小时不再重建,避免把已读又刷成未读)
+export async function notifHas(uid, type, refkey) {
+  const d = await getDb();
+  return !!d.prepare("SELECT 1 FROM notifications WHERE uid=? AND type=? AND actor IS NULL AND refkey=? LIMIT 1").get(uid, type, refkey);
+}
 
 // ---------- 评论(路线图第 2 项):四类内容通用(opportunity/news/job/work),扁平+一层回复 ----------
 const parseJsonCol = s => { if (!s) return null; try { return JSON.parse(s); } catch (e) { return null; } };

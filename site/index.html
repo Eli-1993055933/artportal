@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.29.0" />
+<meta name="app-version" content="1.30.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -754,11 +754,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.29.0</span></div>
+  ARTPORTAL <span id="appVer">v1.30.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.29.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.29.0"></script>
-<script src="js/globe-data.js?v=1.29.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.30.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.30.0"></script>
+<script src="js/globe-data.js?v=1.30.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -1760,12 +1760,13 @@
       errUrl:'链接需以 http(s):// 开头',errImgs:'请至少选择 1 张图片',errImgBad:'图片处理失败,换一张试试',
       ntTitle:'通知',ntEmpty:'还没有通知',ntFollow:'关注了你',ntReply:'回复了你',ntLike:'赞了你的评论',
       ntComment:'评论了',ntDecide:'审核结果',ntOk:'已通过',ntNo:'未通过',ntWeekly:'新一期艺术周刊 ',
+      ntRemind:'投递提醒:本周有 ',ntRemindB:' 个收藏的机会临近截止',ntRemindU:'(其中 {n} 个一周内截止)',
       ppEdit:'编辑资料',ppLogout:'退出登录',ppFollow:'关注',ppFollowingB:'已关注',ppBlockB:'拉黑',ppUnblockB:'取消拉黑',
       ppJoined:'加入于',ppFieldsL:'创作领域',ppTabWorks:'作品',ppTabFavs:'收藏',ppTabSubs:'投稿',
       ppTabFing:'关注',ppTabFers:'粉丝',ppEmptyT:'这里还是空的',ppFavPriv:'TA 的收藏未公开',ppUpWork:'⊕ 上传作品',
       ppNoUser:'用户不存在或资料未完成',wkPend:'审核中',wkRej:'未通过',wkDel:'删除',wkDelC:'删除这组作品?',
       peNick:'昵称',peIdentity:'身份',peFields:'创作领域(如 油画/摄影)',peLocation:'所在地',
-      peWebsite:'个人网站(https:// 开头)',peBio:'个人简介',peFavPub:'公开我的收藏',peNlK:'订阅周报',
+      peWebsite:'个人网站(https:// 开头)',peBio:'个人简介',peFavPub:'公开我的收藏',peNlK:'订阅周报',peRmK:'投递材料提醒',
       peAva:'更换头像',peSave:'保 存',idn_artist:'艺术家',idn_curator:'策展人',idn_student:'学生',idn_org:'机构',idn_fan:'爱好者',
       cropTitle:'调整头像裁切',cropHint:'拖动方框移动,拖右下角手柄或滚轮缩放',cropCancel:'取消',cropConfirm:'确认裁切',
       cpT:'完善资料',cpNote:'设置昵称并上传一张真实头像即可开始使用,未补齐前无法继续。不想现在完善?可退出登录。',
@@ -1843,12 +1844,13 @@
       errUrl:'Link must start with http(s)://',errImgs:'Pick at least 1 image',errImgBad:'Image failed, try another',
       ntTitle:'Notifications',ntEmpty:'No notifications yet',ntFollow:'followed you',ntReply:'replied to you',ntLike:'liked your comment',
       ntComment:'commented on ',ntDecide:'Review result',ntOk:'approved',ntNo:'not approved',ntWeekly:'New weekly digest ',
+      ntRemind:'Deadline reminder: ',ntRemindB:' saved opportunities closing soon',ntRemindU:' ({n} within a week)',
       ppEdit:'Edit profile',ppLogout:'Sign out',ppFollow:'Follow',ppFollowingB:'Following',ppBlockB:'Block',ppUnblockB:'Unblock',
       ppJoined:'Joined',ppFieldsL:'Fields',ppTabWorks:'Works',ppTabFavs:'Saved',ppTabSubs:'Posts',
       ppTabFing:'Following',ppTabFers:'Followers',ppEmptyT:'Nothing here yet',ppFavPriv:'Their saves are private',ppUpWork:'⊕ Upload work',
       ppNoUser:'User not found',wkPend:'In review',wkRej:'Rejected',wkDel:'Delete',wkDelC:'Delete this work?',
       peNick:'Nickname',peIdentity:'Identity',peFields:'Fields (e.g. painting/photo)',peLocation:'Location',
-      peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',
+      peWebsite:'Website (starts with https://)',peBio:'Bio',peFavPub:'Make my saves public',peNlK:'Weekly digest',peRmK:'Deadline reminders',
       peAva:'Change avatar',peSave:'Save',idn_artist:'Artist',idn_curator:'Curator',idn_student:'Student',idn_org:'Institution',idn_fan:'Art lover',
       cropTitle:'Crop avatar',cropHint:'Drag box to move, drag bottom-right handle or scroll to zoom',cropCancel:'Cancel',cropConfirm:'Confirm crop',
       cpT:'Finish your profile',cpNote:'Pick a nickname and upload a real avatar to get started. You cannot continue until both are done. Not now? You can sign out.',
@@ -2536,6 +2538,7 @@
     var pv=(n.ref&&n.ref.preview)?(':'+esc(n.ref.preview)):'';
     var tl=(n.ref&&n.ref.title)?('《'+esc(n.ref.title)+'》'):'';
     if(n.type==='weekly') return L('ntWeekly')+tl;
+    if(n.type==='remind'){ var rf=n.ref||{}; return L('ntRemind')+(rf.count||0)+L('ntRemindB')+(rf.urgent?L('ntRemindU').replace('{n}',rf.urgent):''); }
     if(n.type==='follow') return who+L('ntFollow');
     if(n.type==='reply') return who+L('ntReply')+pv;
     if(n.type==='like'&&n.ref&&n.ref.kind==='work'&&!n.ref.cid) return who+L('ntLikeWork')+tl;
@@ -2562,6 +2565,7 @@
           var d=e.target.closest('[data-ni]'); if(!d) return;
           var n=list[+d.getAttribute('data-ni')]; if(!n) return;
           if(n.type==='weekly'&&n.ref&&n.ref.id){ closeModal(); openWeekly(n.ref.id); return; }
+          if(n.type==='remind'){ closeModal(); openProfile(meUser.id,'favs'); return; }
           if(n.type==='follow'&&n.actor){ closeModal(); openProfile(n.actor.id); return; }
           if(n.type==='decide'){ closeModal(); openProfile(meUser.id); return; }
           var ref=n.ref||{};
@@ -2670,12 +2674,12 @@
     }
   }
 
-  function openProfile(uid){ hideChPanel();
+  function openProfile(uid,tab){ hideChPanel();
     document.getElementById('propanel').style.display='flex'; ensureGuard();
-    loadProfile(uid); }
+    loadProfile(uid,tab); }
   function hideProfile(){ document.getElementById('propanel').style.display='none';
     document.getElementById('uqRes').style.display='none'; releaseGuard(); }
-  function loadProfile(uid){ proUid=uid; proTab='works'; proCur=null;
+  function loadProfile(uid,tab){ proUid=uid; proTab=tab||'works'; proCur=null;
     document.getElementById('proBody').innerHTML='<div class="pp-empty">…</div>';
     fetch('/api/users/'+encodeURIComponent(uid),{credentials:'same-origin'})
       .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,data:j}; }); })
@@ -2897,6 +2901,7 @@
       '<textarea id="peB" maxlength="300" placeholder="'+L('peBio')+'">'+esc(u.bio||'')+'</textarea>'+
       '<label class="chk"><input type="checkbox" id="peFp"'+(u.fav_public?' checked':'')+'>'+L('peFavPub')+'</label>'+
       '<label class="chk"><input type="checkbox" id="peNl2"'+((meUser&&meUser.newsletter)?' checked':'')+'>'+L('peNlK')+'</label>'+
+      '<label class="chk"><input type="checkbox" id="peRm2"'+((!meUser||meUser.remind)?' checked':'')+'>'+L('peRmK')+'</label>'+
       '<div class="merr" id="peE"></div><button class="mgo" id="peGo" type="button">'+L('peSave')+'</button>');
     m.querySelector('#peF').addEventListener('change',function(){
       var f=this.files&&this.files[0]; if(!f) return;
@@ -2908,7 +2913,8 @@
       postJ('/api/auth/profile',{nickname:m.querySelector('#peN').value.trim(),avatar:newAva||'',
         bio:m.querySelector('#peB').value.trim(),identity:m.querySelector('#peI').value,
         fields:m.querySelector('#peFd').value.trim(),location:m.querySelector('#peLo').value.trim(),
-        website:web,fav_public:m.querySelector('#peFp').checked,newsletter:m.querySelector('#peNl2').checked})
+        website:web,fav_public:m.querySelector('#peFp').checked,newsletter:m.querySelector('#peNl2').checked,
+        remind:m.querySelector('#peRm2').checked})
       .then(function(r){ b.disabled=false;
         if(!r.ok){ err.textContent=(r.data&&r.data.error)||L('authNet'); return; }
         closeModal();

@@ -31,6 +31,7 @@ import { moderateText } from "./lib/moderation.mjs";
 import { fillGeoFallback } from "./lib/geolocation-fallback.mjs";
 import * as db from "./lib/db.mjs";
 import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
+import { dueReminders, renderReminderHtml, renderReminderText } from "./lib/reminder.mjs";
 import { mailerOn, sendMail } from "./lib/mailer.mjs";
 import { loadRegions, dueNow, pickQueries, dayIndex, rosterView, recordShift, reportView, setShortagePool, getShortagePool } from "./lib/regions.mjs";
 import { computeShortageTerms } from "./balance.mjs";
@@ -1748,6 +1749,20 @@ function sendWeeklyTo(report, email) {
     headers: { "List-Unsubscribe": "<" + ctx.unsubUrl + ">" }   // 合规:一键退订头(Gmail/QQ 都认)
   });
 }
+// —— 投递材料提醒邮件(v1.30.0):独立退订链接,只关提醒、不动周报订阅 ——
+function remindUrlOf(email) {
+  return SITE_URL + "/api/remind/unsub?e=" + Buffer.from(String(email).toLowerCase()).toString("base64url") + "&t=" + auth.remindToken(email);
+}
+function sendRemindTo(email, list, nickname) {
+  const ctx = { siteUrl: SITE_URL, unsubUrl: remindUrlOf(email), nickname };
+  return sendMail({
+    to: email,
+    subject: "ArtPortal 投递提醒:本周 " + list.length + " 个收藏的机会临近截止",
+    html: renderReminderHtml(list, ctx),
+    text: renderReminderText(list, ctx),
+    headers: { "List-Unsubscribe": "<" + ctx.unsubUrl + ">" }
+  });
+}
 // 群发状态(单例:同一时间只跑一场;断点续发靠 newsletter_sends 里的成功记录)
 //
 // —— 分批发送(2026-08 起):个人 QQ SMTP 连续发会被「535 login frequency」临时风控。
@@ -1840,6 +1855,53 @@ if (process.env.WEEKLY_REPORT === "1") {
   setTimeout(weeklyTick, 90 * 1000);
   setInterval(weeklyTick, 3600 * 1000);
   process.stderr.write("[周报] 每周自动出刊已开启(北京时间周一 9 点后生成" + (process.env.NEWSLETTER_AUTO === "1" ? ",并自动群发" : "") + ")\n");
+}
+
+// —— 每周投递材料提醒(v1.30.0):北京时间周一 9 点后,给"已收藏 + 近 30 天截止机会"的用户推站内🔔+邮件。
+//    纯程序选条+模板邮件,零 AI;提醒开关独立于周报订阅(默认开启,资料页可关,邮件可单独退订)。
+//    与周报出刊解耦:自己的闸 REMIND_WEEKLY,默认开(设 =0 关闭),不依赖 WEEKLY_REPORT。
+//    幂等:站内通知按 refkey=remind:<周号> 去重(notifHas 预判,避免把已读刷成未读);
+//    邮件靠 newsletter_sends 的成功记录(极简续发),每小时补发失败的那批,重启也不重发。
+if (process.env.REMIND_WEEKLY !== "0") {
+  async function remindTick() {
+    try {
+      const bj = new Date(Date.now() + 8 * 3600e3);
+      if (bj.getUTCDay() !== 1 || bj.getUTCHours() < 9) return;    // 北京时间周一 9 点后
+      const wid = "remind:" + weekIdOf();
+      const today = bj.toISOString().slice(0, 10);
+      const sent = await db.nlSentSet(wid);
+      let notified = 0, mailed = 0;
+      for (const a of auth.reminderAudience()) {
+        let list = [];
+        try { list = dueReminders(await resolveFavorites(a.favorites), today); } catch (e) { continue; }
+        if (!list.length) continue;                                // 无可提醒项:既不通知也不发信
+        try {
+          if (!(await db.notifHas(a.id, "remind", wid))) {
+            await db.notifyBroadcast([a.id], { type: "remind", refkey: wid, ref: { count: list.length, urgent: list.filter(x => x.urgent).length } });
+            notified++;
+          }
+        } catch (e) {}
+        if (a.email && mailerOn() && !sent.has(a.email)) {
+          try {
+            await sendRemindTo(a.email, list, a.nickname);
+            await db.nlLogSend(wid, a.email, true, null);
+            mailed++;
+          } catch (e) {
+            await db.nlLogSend(wid, a.email, false, e.message);
+            process.stderr.write("[提醒] 发送失败 " + a.email + ": " + String(e.message || e).slice(0, 100) + "\n");
+          }
+          await new Promise(r => setTimeout(r, 1500));             // 逐封限速,降低 SMTP 风控概率
+        }
+      }
+      if (notified || mailed) {
+        process.stderr.write(`[提醒] ${wid}:站内🔔 ${notified} 人,邮件 ${mailed} 封\n`);
+        db.agentLog({ agent: "postman", ok: true, summary: `投递提醒 ${wid}:站内 ${notified} 人,邮件 ${mailed} 封`, metrics: { wid, notified, mailed } }).catch(() => {});
+      }
+    } catch (e) { process.stderr.write("[提醒] 定时任务失败: " + String(e.message || e).slice(0, 160) + "\n"); }
+  }
+  setTimeout(remindTick, 120 * 1000);
+  setInterval(remindTick, 3600 * 1000);
+  process.stderr.write("[提醒] 每周投递材料提醒已开启(北京时间周一 9 点后;REMIND_WEEKLY=0 可关)\n");
 }
 
 // —— 每小时自动检索(用户 2026-07-17 要求:近期让站内 AI 定时全网检索,充实资讯/招聘)——
@@ -2553,6 +2615,21 @@ createServer(async (req, res) => {
       '<div style="text-align:center;padding:24px"><div style="letter-spacing:.14em;font-size:12px;color:#8a847c">ARTPORTAL</div>' +
       (ok ? "<h1 style='font-size:20px'>已退订艺术周报</h1><p style='color:#6b6660;font-size:14px'>不会再给这个邮箱发周报了。想恢复,登录后在「编辑资料」里重新勾选即可。</p>"
           : "<h1 style='font-size:20px'>链接无效</h1><p style='color:#6b6660;font-size:14px'>退订链接不完整或已失效。可登录 ArtPortal,在「编辑资料」里关闭订阅。</p>") +
+      '<p><a href="' + SITE_URL + '" style="color:#1b1a18">返回 ArtPortal</a></p></div>'
+    );
+  }
+  // 投递提醒退订(v1.30.0):提醒邮件里的链接,点开即关提醒(独立于周报订阅;token=HMAC 防伪造)
+  if (u.pathname === "/api/remind/unsub" && req.method === "GET") {
+    let email = "";
+    try { email = Buffer.from(String(u.searchParams.get("e") || ""), "base64url").toString("utf8"); } catch (e) {}
+    const ok = auth.reminderUnsub(email, u.searchParams.get("t") || "");
+    res.writeHead(ok ? 200 : 400, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
+    return res.end(
+      '<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>ArtPortal</title>' +
+      '<body style="font-family:-apple-system,\'PingFang SC\',sans-serif;background:#f7f6f2;color:#1b1a18;display:flex;min-height:90vh;align-items:center;justify-content:center">' +
+      '<div style="text-align:center;padding:24px"><div style="letter-spacing:.14em;font-size:12px;color:#8a847c">ARTPORTAL</div>' +
+      (ok ? "<h1 style='font-size:20px'>已关闭投递材料提醒</h1><p style='color:#6b6660;font-size:14px'>不会再给这个邮箱发投递提醒了。想恢复,登录后在「编辑资料」里重新勾选即可。</p>"
+          : "<h1 style='font-size:20px'>链接无效</h1><p style='color:#6b6660;font-size:14px'>退订链接不完整或已失效。可登录 ArtPortal,在「编辑资料」里关闭提醒。</p>") +
       '<p><a href="' + SITE_URL + '" style="color:#1b1a18">返回 ArtPortal</a></p></div>'
     );
   }
