@@ -2275,6 +2275,8 @@ if (process.env.QUALITY_CHECK === "1") {
 // 只跑 run.mjs(机会频道);截图(mShots 服务器被 403)留本机;翻译/官网定位后续再评估上服务器。
 if (process.env.DAILY_CRAWL === "1") {
   let dcDay = null, dcRunning = false;
+  // run.mjs 单轮采集的超时上限(默认 6 小时)。正常几十分钟内结束;超此即判定卡死,强杀并放行下一轮。
+  const RUN_CRAWL_TIMEOUT_MS = Number(process.env.DAILY_CRAWL_TIMEOUT_MS || 6 * 3600 * 1000);
 
   // 每日采集前先补 CA 中间证书(2026-10-03)。国内不少机构官网只发叶子证书、不发中间证书,
   // Node 原生 fetch 会因缺链报 fetch-error TypeError;修法是用 ca-bootstrap.mjs 把它们并进
@@ -2324,15 +2326,22 @@ if (process.env.DAILY_CRAWL === "1") {
     refreshCaBeforeCrawl().then(() => {
       process.stderr.write("[每日抓取] 启动 run.mjs --cap " + cap + "\n");
       const p = spawn(process.execPath, [join(__dir, "run.mjs"), "--cap", cap], { cwd: __dir, env: process.env });
+      // 超时看门狗(2026-10-03):run.mjs 卡死时不会自己退出,而 dcRunning 只有它的 close 回调会置回 false ——
+      // 一旦它挂住,dcRunning 永远是 true,每日采集就永久静默停摆(2026 年曾因此连续 9 天不抓且无人告警)。
+      // 到点强杀只为把 dcRunning 复位(当日 dcDay 已占,不重跑;次日恢复),代价是丢掉这一轮残余进度。
+      let killed = false;
+      const timer = setTimeout(() => { killed = true; try { p.kill("SIGKILL"); } catch (e) {} }, RUN_CRAWL_TIMEOUT_MS);
       p.stdout.on("data", pushChunk);
       p.stderr.on("data", pushChunk);
       p.on("close", (code) => {
+        clearTimeout(timer);
         dcRunning = false;
         const tail = tailBuf.toString("utf8").replace(/\s+/g, " ").slice(-150);
-        process.stderr.write("[每日抓取] run.mjs 结束 code=" + code + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
-        db.agentLog({ agent: "harvester", ok: code === 0, summary: "服务器每日抓取 run.mjs(code=" + code + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
+        const tag = killed ? "超时(" + (RUN_CRAWL_TIMEOUT_MS / 60000) + "min)被杀 code=" + code : "code=" + code;
+        process.stderr.write("[每日抓取] run.mjs 结束 " + tag + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
+        db.agentLog({ agent: "harvester", ok: !killed && code === 0, summary: "服务器每日抓取 run.mjs(" + tag + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
       });
-      p.on("error", (e) => { dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
+      p.on("error", (e) => { clearTimeout(timer); dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
     });
   }
   setTimeout(dailyCrawlTick, 200 * 1000);
