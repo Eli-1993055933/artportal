@@ -33,7 +33,7 @@ import * as db from "./lib/db.mjs";
 import { generateWeekly, readWeekly, readWeeklyIndex, weekIdOf, renderEmailHtml, renderEmailText, generatePersonalSummary } from "./lib/weekly.mjs";
 import { dueReminders, renderReminderHtml, renderReminderText } from "./lib/reminder.mjs";
 import { mailerOn, sendMail } from "./lib/mailer.mjs";
-import { loadRegions, dueNow, pickQueries, dayIndex, rosterView, recordShift, reportView, setShortagePool, getShortagePool } from "./lib/regions.mjs";
+import { loadRegions, dueNow, pickQueries, dayIndex, rosterView, recordShift, reportView, setShortagePool, getShortagePool, quotaFor } from "./lib/regions.mjs";
 import { computeShortageTerms } from "./balance.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
@@ -2130,18 +2130,24 @@ if (process.env.AUTO_HARVEST === "1" && process.env.REGION_HARVEST !== "1") {
     regionRunning = true;
     const done = [];
     try {
-      const perShift = Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3));
+      const baseQuota = Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3));
+      const adapt = process.env.REGION_QUOTA_ADAPT !== "0";   // 成绩单驱动配额(只加码不降频);=0 关闭,全部用 base
       for (const m of due) {
         doneShifts.add(day + ":" + m.id);
         let added = 0;
+        // 分片配额(路线图第30项):高产经理本班多取词,低产保持 base(不降频,预算够用)。
+        const q = adapt ? quotaFor(m.id, score, baseQuota) : { n: baseQuota, reason: "关闭" };
+        const perShift = q.n;
         const qs = pickQueries(m, perShift, now);
-        for (const q of qs) {
+        if (q.reason !== "持平" && q.reason !== "关闭")
+          process.stderr.write(`[区域经理] 配额调整:${m.zh} ${baseQuota}→${perShift} 词(${q.reason}${q.per_q != null ? ",近期新增/词 " + q.per_q : ""})\n`);
+        for (const qq of qs) {
           if (process.env.SERPER_API_KEY && serperBudgetLeft() < 4) break;   // 班中余量见底就收工
-          added += await runShift(m, q);
+          added += await runShift(m, qq);
         }
         db.agentLog({ agent: "region:" + m.id, ok: true,
           summary: `${m.zh} 当班 ${qs.length} 词 → 入库 ${added}`,
-          metrics: { region: m.id, queries: qs.length, added } }).catch(() => {});
+          metrics: { region: m.id, queries: qs.length, added, quota: perShift, base_quota: baseQuota, quota_reason: q.reason } }).catch(() => {});
         done.push({ id: m.id, zh: m.zh, queries: qs.length, added });
       }
       for (const s of deskDue) {

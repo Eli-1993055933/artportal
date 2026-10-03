@@ -164,3 +164,21 @@ export async function reportView() {
   const r = await loadReport();
   return r.managers || {};
 }
+
+// ---------- 分片配额(路线图第 30 项:成绩单驱动配额) ----------
+// 口径(用户 2026-10-03 拍板):【只加码、不降频】——当前 serper 日预算 70、实际只用约 26,
+// 并不紧张,故不因低产削减覆盖(避免"没预算压力却让各地区新内容发现变慢")。
+// 出货指标 = 最近若干次取词的【每次取词新增条数】(成绩单 recent 窗口,X.added 之和 / 窗口长度);
+// 样本不足(新经理/刚上线)一律保持 base,绝不猜。上限 base+2(防止词池被单一经理吃光)。
+export function quotaFor(id, report, base) {
+  const b = Math.max(1, Number(base) || 1);
+  const m = (report && report[id]) || null;
+  const rec = (m && Array.isArray(m.recent)) ? m.recent : [];
+  if (rec.length < 6) return { n: b, reason: "样本不足", per_q: null, window: rec.length };
+  const added = rec.reduce((s, x) => s + (Number(x && x.added) || 0), 0);
+  const perQ = added / rec.length;
+  let n = b, reason = "持平";
+  if (perQ >= 1) { n = b + 2; reason = "高产+2"; }
+  else if (perQ >= 1 / 3) { n = b + 1; reason = "偏高+1"; }
+  return { n: Math.min(n, b + 2), reason, per_q: Number(perQ.toFixed(3)), window: rec.length };
+}
