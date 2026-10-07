@@ -137,4 +137,51 @@ function nullifyField(field) {
   return null;
 }
 
+// v1.15.0 国内常年征集放宽(2026-10-07 用户确认):
+// 国内大量官方征集为"常年/滚动",原文根本不写截止日期,旧规则一律不收 → 国内产量极低。
+// 经确认:【仅国内来源】的无截止条目按"常年征集"收录,由调用方判定 cn 后调用本函数补标注。
+// 反幻觉:不虚构任何日期;note 明确写"原文未提及截止时间",只声明收录口径,并提示以官网为准。
+export const ROLLING_NOTE = "原文未提及截止时间，按常年征集收录（以官网为准）";
+export function markRolling(record) {
+  if (!record || record.deadline != null) return record;
+  const note = String(record.deadline_note || "").trim();
+  if (/常年|长期|滚动|rolling|ongoing|长期有效|全年|随时/i.test(note)) {
+    // 已是滚动口径:若除通用套话外无实质信息,归一为标准文案(防反复追加造成重复)
+    const stripped = note.replace(/原文未提及截止时间[，,]?/g, "")
+      .replace(/按常年征集收录(（以官网为准）|\(以官网为准\))/g, "")
+      .replace(/[；;、,\s]/g, "");
+    if (!stripped) record.deadline_note = ROLLING_NOTE;
+    return record;
+  }
+  if (!note || /原文未提及截止时间/.test(note)) { record.deadline_note = ROLLING_NOTE; return record; }
+  record.deadline_note = note + "；" + ROLLING_NOTE;
+  return record;
+}
+
+// v1.15.0 无截止条目的陈旧判定(配合「常年放宽」):
+// 原文没给可解析截止、又没滚动用语时,标题/备注里的年份与日期是唯一线索。
+// 返回 "future"(含今年或更晚的年份/日期,可留) | "stale"(只出现过今年以前的年份/日期,判陈旧) | "rolling"(无任何线索,按常年)。
+export function classifyNoDeadline(record, today) {
+  const note = String((record && record.deadline_note) || "");
+  if (/常年|长期|滚动|rolling|ongoing|长期有效|全年|随时/i.test(note)) return "rolling";   // 明确滚动口径,不判旧
+  const t = String((record && (record.title_zh || record.title_en)) || "") + " " + note;
+  const td = String(today || new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10));
+  const cur = Number(td.slice(0, 4));
+  const dates = [];
+  const re = /(20\d{2})\s*[-年./]\s*(\d{1,2})\s*[-月./]\s*(\d{1,2})/g;
+  let m;
+  while ((m = re.exec(t))) dates.push(m[1] + "-" + String(m[2]).padStart(2, "0") + "-" + String(m[3]).padStart(2, "0"));
+  if (dates.length) return dates.some(d => d >= td) ? "future" : "stale";
+  // 无年份的「M月D日」:与今年的同一日比较,已过 → 判旧(如「6月26日截止」在 10 月被抓到)
+  const mds = [...t.matchAll(/(\d{1,2})\s*月\s*(\d{1,2})\s*日/g)].map(x => [Number(x[1]), Number(x[2])]);
+  if (mds.length) {
+    const tmd = [Number(td.slice(5, 7)), Number(td.slice(8, 10))];
+    const cmp = (a, b) => (a[0] !== b[0] ? a[0] - b[0] : a[1] - b[1]);
+    return mds.some(x => cmp(x, tmd) >= 0) ? "future" : "stale";
+  }
+  const years = (t.match(/20\d{2}/g) || []).map(Number);
+  if (years.length) return Math.max(...years) >= cur ? "future" : "stale";
+  return "rolling";
+}
+
 export { sameDomain, norm };

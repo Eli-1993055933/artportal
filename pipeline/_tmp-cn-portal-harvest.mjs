@@ -9,7 +9,7 @@ import { fetchSource } from "./lib/fetch.mjs";
 import { discoverDetailLinks } from "./lib/discover.mjs";
 import { extract } from "./lib/extract.mjs";
 import { verifyRecord } from "./lib/verify.mjs";
-import { dedupe } from "./lib/dedupe.mjs";
+import { normUrl } from "./lib/dedupe.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 // 加载 .env
@@ -26,20 +26,10 @@ const SRC_FILE = join(__dir, "_tmp-cn-portal-srcs.txt");
 const LIST_URLS = readFileSync(SRC_FILE, "utf8")
   .split(/\r?\n/).map(s => s.trim()).filter(s => s && !s.startsWith("#"))
   .map(l => l.split("\t")[0].split("#")[0].trim());
-const allowed = new Set([
-  "www.henanshengmeixie.com",      // 河南美协
-  "www.lnwyw.org.cn",              // 辽宁文艺网(走 /gsgd 公示公告栏目)
-  "www.namoc.cn",                  // 中国美术馆公告
-  "www.gxau.edu.cn",               // 广西艺术学院
-  "design.gxau.edu.cn",
-  "msy.ksu.edu.cn",                // 喀什大学美院
-  "www.hnmsg.net",                 // 湖南美术馆
-  "www.lnmsg.com",                 // 辽宁美术馆展览预告
-  "www.ynmsg.cn",                  // 云南美术馆
-  "www.dha.ac.cn",                 // 敦煌研究院
-]);
-const DISCOVER_CAP = 20;           // 每源最多详情链接
-const DETAIL_CAP = 8;              // 每源最多入库详情数
+// 白名单 = 清单文件里出现的全部主机(该清单已人工核实,放开到全量做一次彻底收割)
+const allowed = new Set(LIST_URLS.map(u => { try { return new URL(u).host; } catch (e) { return null; } }).filter(Boolean));
+const DISCOVER_CAP = 30;           // 每源最多详情链接
+const DETAIL_CAP = 12;             // 每源最多入库详情数
 
 function todayISO() { return new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10); }
 function slug(s) { return String(s || "").toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "item"; }
@@ -109,13 +99,23 @@ async function main() {
   }
 
   if (!out.length) { console.log("\n无新增"); return; }
-  // 与现有合并去重写库
-  const byId = new Map((existing.opportunities || []).map(o => [o.id, o]));
-  for (const r of out) byId.set(r.id, r);
-  const dd = dedupe(Array.from(byId.values()));
+  // 【只追加、绝不删既有条目】——早先这里对整库跑 dedupe(),会把同域近似条目(curatorspace/artconnect 等)
+  // 当重复合并掉,造成既有数据静默丢失(2026-10-03 实测丢 6 条)。改为:按 id + URL 归一化,只并入新条目。
+  const cur = existing;
+  const ids = new Set((cur.opportunities || []).map(o => o.id));
+  const urls = new Set((cur.opportunities || []).map(o => normUrl(o.url)));
+  let saved = 0;
+  for (const r of out) {
+    if (ids.has(r.id)) continue;
+    const nu = normUrl(r.url);
+    if (nu && urls.has(nu)) continue;
+    cur.opportunities.push(r); ids.add(r.id); urls.add(nu); saved++;
+  }
+  cur.count = cur.opportunities.length;
+  cur.generated_at = new Date().toISOString().slice(0, 10);
   const tmp = DATA + ".tmp-" + process.pid;
-  await writeFile(tmp, JSON.stringify({ _meta: existing._meta || {}, generated_at: new Date().toISOString().slice(0, 10), count: dd.list.length, opportunities: dd.list }, null, 2), "utf8");
+  await writeFile(tmp, JSON.stringify(cur, null, 2), "utf8");
   await rename(tmp, DATA);
-  console.log(`\n完成: 新增 ${out.length}, 丢弃 ${totalDropped}, 错误 ${totalErr}, 总数 ${dd.list.length}`);
+  console.log(`\n完成: 新增 ${saved}, 丢弃 ${totalDropped}, 错误 ${totalErr}, 总数 ${cur.count}`);
 }
 main().catch(e => { console.error("FATAL:", e.message); process.exit(1); });

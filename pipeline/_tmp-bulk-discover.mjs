@@ -11,7 +11,7 @@ import { searchWeb, BLOCK, unsafeHost } from "./lib/websearch.mjs";
 import { isThirdParty, isTrustedPlatform, hostOf } from "./lib/aggregators.mjs";
 import { fetchSource } from "./lib/fetch.mjs";
 import { extract } from "./lib/extract.mjs";
-import { verifyRecord } from "./lib/verify.mjs";
+import { verifyRecord, markRolling, classifyNoDeadline } from "./lib/verify.mjs";
 import { fillGeoFallback } from "./lib/geolocation-fallback.mjs";
 import { normUrl } from "./lib/dedupe.mjs";
 
@@ -25,6 +25,11 @@ const QUERY_N = Math.max(1, parseInt(getOpt("--queries") || "55", 10) || 55);
 const POOL_CAP = Math.max(50, parseInt(getOpt("--cap") || "350", 10) || 350);   // 候选抓取上限
 const WHO = getOpt("--who") || "bulk-discover";
 const CONCURRENT = 8;
+// --cn:只跑【中国】各区域经理的词池(常驻 + 轮值组 kind=cn),不掺国际通用词——做一次国内全域冲刺。
+const CN_ONLY = args.includes("--cn");
+const CN_KINDS = new Set(["resident", "cn"]);
+// --rolling:国内来源的无截止条目按「常年征集」收录(2026-10-07 用户确认)。--cn 默认开启。
+const ALLOW_ROLLING = args.includes("--rolling") || CN_ONLY;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function slug(s) {
@@ -70,12 +75,13 @@ async function main() {
   const cfg = JSON.parse(await readFile(P("regions.json"), "utf8"));
   const pool = [];
   for (const m of (cfg.managers || [])) {
+    if (CN_ONLY && !CN_KINDS.has(m.kind)) continue;   // --cn:只取国内各区域经理的词
     for (const q of (m.queries || [])) {
       if (!q || !String(q).trim()) continue;
-      pool.push({ q: String(q).trim(), gl: String(m.gl || "cn").toLowerCase(), hl: String(m.hl || "zh-cn") });
+      pool.push({ q: String(q).trim(), gl: String(m.gl || "cn").toLowerCase(), hl: String(m.hl || "zh-cn"), region: m.id });
     }
   }
-  pool.push(...GENERIC);
+  if (!CN_ONLY) pool.push(...GENERIC);
   // 打散顺序:让中国/国际交错,避免同语言同域候选扎堆
   const shuffled = [...new Map(pool.map(x => [x.q + "|" + x.gl, x])).values()];
   for (let i = shuffled.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; }
@@ -114,7 +120,7 @@ async function main() {
   const targets = cands.slice(0, POOL_CAP);
 
   // 4) 并发抓取 + 提取 + 验证
-  const results = { added: [], log: [], dropped: 0, errors: 0 };
+  const results = { added: [], log: [], dropped: 0, errors: 0, drops: { thin: 0, notApplicable: 0, verify: 0, noDeadline: 0 } };
   const sleep2 = sleep;
   // 带退避的提取(免费 GLM 偶发 429,别急着花 DeepSeek 钱)
   async function extractRetry(text, ctx) {
@@ -133,15 +139,23 @@ async function main() {
       const domain = host.replace(/^www\./, "");
       try {
         const f = await fetchSource({ url, domain: host, type: "html" });
-        if (f.skipped || !f.text || f.text.length < 200) { results.dropped++; continue; }
+        if (f.skipped || !f.text || f.text.length < 200) { results.dropped++; results.drops.thin++; continue; }
         const ctx = { org_zh: "", domain: host, url, source_url: url, sourceText: f.text };
         const ex = await extractRetry(f.text, ctx);
-        if (!ex || !ex.data || ex.data.applicable === false) { results.dropped++; continue; }
+        if (!ex || !ex.data || ex.data.applicable === false) { results.dropped++; results.drops.notApplicable++; continue; }
         const v = verifyRecord(ex.data, { sourceText: f.text, url, source_url: url, domain: host });
-        if (v.dropped) { results.dropped++; continue; }
-        if (!v.flags.hasDeadline) { results.dropped++; continue; }  // 检索路径无日期闸:没 deadline 不进库
+        if (v.dropped) { results.dropped++; results.drops.verify++; continue; }
         const rec = v.record;
         const geo = fillGeoFallback(rec, { domain, source_url: url }, f.text);
+        // 无日期闸:国内来源按「常年征集」放宽(2026-10-07 用户确认);其余来源仍不收。
+        // 放宽后再过一道陈旧闸:标题/备注只出现今年以前的年份或日期 → 判旧页,仍丢弃。
+        if (!v.flags.hasDeadline) {
+          const isCn = geo.country_zh === "中国" || /\.cn$/i.test(domain);
+          if (!(ALLOW_ROLLING && isCn)) { results.dropped++; results.drops.noDeadline++; continue; }
+          const kind = classifyNoDeadline(rec);
+          if (kind === "stale") { results.dropped++; results.drops.stale = (results.drops.stale || 0) + 1; continue; }
+          if (kind === "rolling") { markRolling(rec); results.drops.rolled = (results.drops.rolled || 0) + 1; }
+        }
         const id = "search-" + domain.split(".")[0] + "-" + slug(rec.title_zh || rec.title_en || "item");
         const today = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);
         const out = {
@@ -189,6 +203,7 @@ async function main() {
   console.log("\n====== 批量发现完成 ======");
   console.log("词数:", queries.length, "| 候选:", targets.length);
   console.log("本次入库:", saved, "| 丢弃:", results.dropped, "| 错误:", results.errors);
+  console.log("丢弃明细:", JSON.stringify(results.drops));
   console.log("库总量:", cur.opportunities.length);
   console.log("新条目示例:");
   for (const r of results.added.slice(0, 8)) console.log("  -", r.title_zh || r.title_en, "|", r.deadline, "|", r.domain);

@@ -2,8 +2,8 @@
   "_meta": {
     "note": "艺术资讯。真实抓取核实,非编造。也是AI周报的归档地。"
   },
-  "generated_at": "2026-10-02",
-  "count": 236,
+  "generated_at": "2026-10-07",
+  "count": 238,
   "items": [
     {
       "id": "news-176uo0-in-the-studio-with-rama-duwaji",
@@ -22,7 +22,7 @@
       "summary_en": "Texas-born Syrian-American artist Rama Duwaji discusses her work in illustration, animation, oil painting, and ceramics in a studio interview. As New York's 'First Lady' following her husband's election as mayor, she recounts how growing up across Texas, Dubai, and Qatar shaped her artistic perspective, and expresses her commitment to creating with a sense of responsibility.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-y4ly8d-beer-with-a-painter-tom-burckhardt",
@@ -41,7 +41,7 @@
       "summary_en": "Abstract painter Tom Burckhardt is interviewed for 'Beer With a Painter' in his shared studio in New York's East Village with his wife, ceramicist Kathy Butterly. Born in 1964 into an artistic family and raised in the New York School tradition, he discusses using skepticism and humor to resist categorization, with a practice spanning abstract painting, installation, and collage on old book pages.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-117hd9-李明谈最新个展-swayy-wayy",
@@ -60,7 +60,7 @@
       "summary_en": "Artist Li Ming is interviewed about his solo exhibition 'Swayy Wayy' at Antenna Space in Hong Kong (through August 8). He discusses how editing transforms dense material into sculptural video, viewing editing as 'shattering linear time,' introduces the 'Inspiration' series begun in 2017 and his exploration of AI, and reflects on two decades of video creation.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-117hd5-程新皓谈-如此-我们将毫无阻碍地穿越他们的群山",
@@ -79,7 +79,7 @@
       "summary_en": "Artist Cheng Xinhao is interviewed about his Beijing solo exhibition, discussing how slow bodily actions like kicking stones serve as a method to examine how Yunnan has been shaped by successive transportation systems. The main work 'Stratification and Erratic Boulders' (2023-2024) documents a walk from Kunming to Ruili along the Burma Road, revealing historical layers of overlapping road networks and bodily perception.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-1i3mbg-chloe-wise-i-m-trying-to-put-all-of-these-things-i",
@@ -104,7 +104,7 @@
       "source": "Artforum",
       "summary": "英国普利茅斯的 The Box 博物馆荣获2026年度英国艺术基金\"年度博物馆\"大奖，奖金12万英镑，为全球最高额博物馆奖项。评委称赞其与本地社区深度互动、重新构想历史藏品叙事，五年间已覆盖全市89%的学校。其余四家入围机构各获2万英镑。",
       "url": "https://www.artforum.com/news/the-box-in-plymouth-wins-uks-2026-museum-of-the-year-award-1234753479/",
-      "cover": null,
+      "cover": "assets/covers/01182b012dd0273e.jpg",
       "published_at": "2026-06-26",
       "category": "动态",
       "domain": "artforum.com",
@@ -114,7 +114,8 @@
       "summary_zh": "英国普利茅斯的 The Box 博物馆荣获2026年度英国艺术基金“年度博物馆”大奖，奖金12万英镑，为全球最高额博物馆奖项。评委称赞其与本地社区深度互动、重新构想历史藏品叙事，五年间已覆盖全市89%的学校。其余四家入围机构各获2万英镑。",
       "summary_en": "The Box museum in Plymouth, UK, has won the 2026 Art Fund Museum of the Year award, with a £120,000 prize, the largest museum award globally. Judges praised its deep engagement with the local community and reimagined narratives of historical collections, reaching 89% of schools in the city over five years. The other four finalists each received £20,000.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1k3vge-泰特英国美术馆公布2026年特纳奖入围名单",
@@ -133,7 +134,7 @@
       "summary_en": "Tate Britain has announced the four artists shortlisted for the 2026 Turner Prize: Simeon Barclay, Kira Freije, Marguerite Humeau, and Tanoa Sasraku. The exhibition of their work will be held at the Middlesbrough Institute of Modern Art (MIMA) from September 26 to March 29 the following year. The winner will be announced on December 10, receiving £25,000, while the other shortlisted artists will each receive £10,000.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-h5kpmn-中国美术馆2026暑期夜场开放-每日新增预约名额2000个",
@@ -171,7 +172,7 @@
       "summary_en": "The New Museum in New York has announced the appointment of Massimiliano Gioni, its artistic director of 12 years, as the new director, succeeding Lisa Phillips, who led the museum for 26 years and announced her retirement last September. Gioni co-founded the New Museum Triennial in 2009 and became the youngest curator of the Venice Biennale in 2013. He will officially assume the role on August 1.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-1vym77-2026威尼斯双年展取消金狮奖-改设访客投票-访客狮",
@@ -179,7 +180,7 @@
       "source": "Artforum",
       "summary": "威尼斯双年展组织方宣布，2026年将取消传统的最佳艺术家金狮奖和最佳国家馆银狮奖，改由现场访客投票选出\"访客狮\"奖得主。颁奖时间也从5月9日开幕日推迟至11月22日闭幕日。俄罗斯和以色列此次获准参与竞争。",
       "url": "https://www.artforum.com/news/venice-biennale-ditches-golden-lions-for-2026-edition-1234749643/",
-      "cover": null,
+      "cover": "assets/covers/eecff4ff96b53cd5.jpg",
       "published_at": "2026-05-04",
       "category": "动态",
       "domain": "artforum.com",
@@ -189,7 +190,8 @@
       "summary_zh": "威尼斯双年展组织方宣布，2026年将取消传统的最佳艺术家金狮奖和最佳国家馆银狮奖，改由现场访客投票选出\"访客狮\"奖得主。颁奖时间也从5月9日开幕日推迟至11月22日闭幕日。俄罗斯和以色列此次获准参与竞争。",
       "summary_en": "The organizers of the Venice Biennale have announced that in 2026, the traditional Golden Lion for best artist and Silver Lion for best national pavilion will be abolished, replaced by a \"Visitor Lion\" award voted on by on-site visitors. The award ceremony will also be postponed from the opening day on May 9 to the closing day on November 22. Russia and Israel are permitted to compete this time.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-7s1h1q-vital-acts-on-the-public-work-of-criticism",
@@ -208,7 +210,7 @@
       "summary_en": "Editor's note for the May 2026 issue of Artforum, co-written by Daniel Wenger and Rachel Wetzler. The article reframes \"Does criticism matter?\" as \"What can criticism tell us about the world?\", proposing three propositions: \"art as form,\" \"art beyond art,\" and \"art reveals lies.\" Using the \"MONUMENTS\" exhibition of retired Confederate statues as an example, it emphasizes that criticism is an act that sustains the public sphere as public.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-jfenmf-the-polycrisis-sublime-of-the-whitney-biennial",
@@ -216,7 +218,7 @@
       "source": "Hyperallergic",
       "summary": "Aruna D'Souza评论2026年惠特尼双年展(策展人Marcela Guerrero与Drew Sawyer)。本届未设强主题,以\"关系与基础设施、纠缠与亲缘\"为线索,纳入阿富汗、智利、伊拉克、冲绳、菲律宾、波多黎各、越南等受美国影响地区的56组艺术家,涉及监控、殖民、哀悼与环境议题,政治意涵流经艺术表达而非直接给出答案。",
       "url": "https://hyperallergic.com/the-polycrisis-sublime-of-the-whitney-biennial/",
-      "cover": null,
+      "cover": "assets/covers/b3d3fe4a4d0962df.jpg",
       "published_at": "2026-03-05",
       "category": "展评",
       "domain": "hyperallergic.com",
@@ -226,7 +228,8 @@
       "summary_zh": "Aruna D'Souza评论2026年惠特尼双年展(策展人Marcela Guerrero与Drew Sawyer)。本届未设强主题,以\"关系与基础设施、纠缠与亲缘\"为线索,纳入阿富汗、智利、伊拉克、冲绳、菲律宾、波多黎各、越南等受美国影响地区的56组艺术家,涉及监控、殖民、哀悼与环境议题,政治意涵流经艺术表达而非直接给出答案。",
       "summary_en": "Aruna D'Souza reviews the 2026 Whitney Biennial (curated by Marcela Guerrero and Drew Sawyer). This edition has no strong theme, using \"relations and infrastructure, entanglement and kinship\" as threads, including 56 artists from regions affected by the US such as Afghanistan, Chile, Iraq, Okinawa, the Philippines, Puerto Rico, and Vietnam, addressing issues of surveillance, colonialism, mourning, and the environment. Political implications flow through artistic expression rather than providing direct answers.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1an3gg-后真相时代-艺术之-韧-何为-30个年度当代艺术与建筑展在中国-taj-review-2025",
@@ -245,7 +248,7 @@
       "summary_en": "The Art Newspaper's annual review takes \"resilience\" as the word of the year, analyzing the exhibition ecosystem in Greater China in 2025. The article argues that in the post-truth era of AI-generated slop and indistinguishable truth from falsehood, curation and creation demonstrate the ability to withstand pressure and tell stories. It selects 30 exhibitions, covering institutions such as Tai Kwun Contemporary, West Bund Museum, and M+, featuring artists like Yang Fudong, Liu Xiaodong, and Lin Tianmiao.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-yhl4ih-an-exhibition-of-silenced-artists-sends-a-warning-",
@@ -253,7 +256,7 @@
       "source": "Hyperallergic",
       "summary": "Isa Farfan报道纽约下曼哈顿Nathalie Karg画廊的展览《Don't Look Now: A Defense of Free Expression》,由Art at a Time Like This与策展人Barbara Pollack组织。展览陈列因DEI打压、反巴勒斯坦言论限制与经费削减而被撤展、审查的艺术家作品,包括Danielle SeeWalker、Andil Gosine等,主张艺术自由是民主健康的\"矿井金丝雀\"。",
       "url": "https://hyperallergic.com/an-exhibition-of-silenced-art-sends-a-warning-in-new-york-city/",
-      "cover": null,
+      "cover": "assets/covers/70b223ce0e4d1221.jpg",
       "published_at": "2025-10-22",
       "category": "展评",
       "domain": "hyperallergic.com",
@@ -263,7 +266,8 @@
       "summary_zh": "Isa Farfan报道纽约下曼哈顿Nathalie Karg画廊的展览《Don't Look Now: A Defense of Free Expression》，由Art at a Time Like This与策展人Barbara Pollack组织。展览陈列因DEI打压、反巴勒斯坦言论限制与经费削减而被撤展、审查的艺术家作品，包括Danielle SeeWalker、Andil Gosine等，主张艺术自由是民主健康的\"矿井金丝雀\"。",
       "summary_en": "Isa Farfan reports on the exhibition \"Don't Look Now: A Defense of Free Expression\" at Nathalie Karg Gallery in Lower Manhattan, organized by Art at a Time Like This and curator Barbara Pollack. The exhibition features works by artists who have been de-installed or censored due to DEI crackdowns, restrictions on pro-Palestinian speech, and funding cuts, including Danielle SeeWalker and Andil Gosine, arguing that artistic freedom is a \"canary in the coal mine\" for democratic health.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1fjf57-一周展讯-暑假推荐看这些大展",
@@ -318,7 +322,7 @@
       "summary_en": "The article selects several highlights from the 61st Venice Biennale (theme \"In Minor Keys\"): South African artist Gabrielle Goliath's multi-channel video \"Elegy\" at the Church of Sant'Antonin; Lithuanian Pavilion's Eglė Budvytytė's three-channel film; Estonian Pavilion's Merike Estna's live painting performance; Irish Pavilion's Isabel Nolan's tufted tapestry installation; and Bulgari Pavilion's Lotus L. Kang's immersive installation.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-1arnoy-梦溪-主题展现古今对话-第61届威尼斯国际艺术双年展中国馆展览开幕",
@@ -326,7 +330,7 @@
       "source": "新华网",
       "summary": "第61届威尼斯国际艺术双年展中国馆5月8日在意大利开幕,主题\"梦溪\"取自北宋沈括《梦溪笔谈》,以\"种子-光-共生\"为脉络,呈现书法、影像、数字叙事等多种形式作品,含\"致敬《梦溪笔谈》\"\"良渚之光\"\"逍遥游\"等。展览由文化和旅游部主办,持续至11月22日。",
       "url": "https://cn.chinadiplomacy.org.cn/2026-05/09/content_118485951.shtml",
-      "cover": null,
+      "cover": "assets/covers/e05b7fdb169d5fe4.jpg",
       "published_at": "2026-05-09",
       "category": "现场",
       "domain": "cn.chinadiplomacy.org.cn",
@@ -336,7 +340,8 @@
       "summary_zh": "第61届威尼斯国际艺术双年展中国馆5月8日在意大利开幕，主题\"梦溪\"取自北宋沈括《梦溪笔谈》，以\"种子-光-共生\"为脉络，呈现书法、影像、数字叙事等多种形式作品，含\"致敬《梦溪笔谈》\"\"良渚之光\"\"逍遥游\"等。展览由文化和旅游部主办，持续至11月22日。",
       "summary_en": "The China Pavilion of the 61st Venice International Art Biennale opened on May 8 in Italy, with the theme \"Dream Creek\" taken from Shen Kuo's \"Dream Pool Essays\" of the Northern Song Dynasty. Following the thread of \"Seed-Light-Symbiosis,\" it presents works in various forms including calligraphy, video, and digital narrative, featuring sections such as \"Homage to Dream Pool Essays,\" \"Light of Liangzhu,\" and \"Wandering Beyond.\" The exhibition is hosted by the Ministry of Culture and Tourism and runs until November 22.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1s1bpv-the-2026-whitney-biennial-in-five-key-themes",
@@ -361,7 +366,7 @@
       "source": "澎湃新闻·艺术评论",
       "summary": "澎湃梳理2026年全球纪念艺术巨匠的重要展览:康斯特布尔250周年,泰特不列颠推出\"透纳与康斯特布尔\",《干草车》首度回到故乡萨福克;布朗库西诞辰150周年,柏林新国家美术馆携手蓬皮杜办回顾展;另有莫德尔松-贝克150周年及伦敦国家肖像馆的玛丽莲·梦露百年肖像展等。",
       "url": "https://m.thepaper.cn/newsDetail_forward_32390115",
-      "cover": null,
+      "cover": "assets/covers/741c35d7d99b0813.jpg",
       "published_at": "2026-01-16",
       "category": "动态",
       "domain": "m.thepaper.cn",
@@ -371,7 +376,8 @@
       "summary_zh": "澎湃梳理2026年全球纪念艺术巨匠的重要展览：康斯特布尔250周年，泰特不列颠推出\"透纳与康斯特布尔\"，《干草车》首度回到故乡萨福克；布朗库西诞辰150周年，柏林新国家美术馆携手蓬皮杜办回顾展；另有莫德尔松-贝克150周年及伦敦国家肖像馆的玛丽莲·梦露百年肖像展等。",
       "summary_en": "The Paper reviews major global exhibitions in 2026 commemorating art masters: Constable's 250th anniversary, Tate Britain presents \"Turner and Constable,\" with \"The Hay Wain\" returning to its native Suffolk for the first time; Brancusi's 150th birthday, a retrospective co-organized by the Neue Nationalgalerie Berlin and Centre Pompidou; also Modersohn-Becker's 150th anniversary and the National Portrait Gallery London's centenary portrait exhibition of Marilyn Monroe, among others.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1vzyh8-inside-refik-anadol-s-dataland-the-world-s-first-a",
@@ -407,7 +413,7 @@
       "summary_en": "Art magazine Meer introduces Avery Singer's solo exhibition \"War_overlays\" at Hauser & Wirth Zurich (June 12 - September 5, 2026). She introduces AI tools into painting for the first time, training custom LoRAs with ComfyUI to generate 'AI low-quality' images; the works are inspired by Baudrillard's discourse on the Gulf War, reflecting on how Western conflicts are presented as media spectacles.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-rc4ebj-full-disclosure-the-edge-of-information-design-信息设",
@@ -426,7 +432,7 @@
       "summary_en": "MoMA will present its first exhibition dedicated to information design, \"Full Disclosure: The Edge of Information Design,\" from September 27, 2026 to June 2027, featuring 30 digital and analog works (including six new acquisitions), covering 'Dear Data,' 'Climate Warming Stripes,' and Forensic Architecture, exploring how people visualize and shape understanding of information in an increasingly complex digital world.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-3s5pex-before-friend-com-there-was-winkie-on-tech-hype-in",
@@ -445,7 +451,7 @@
       "summary_en": "Artforum's Summer 2026 issue features a review by Jonathan Odden, using the 1984-85 'Winkie' computer chip marketing fiasco in Los Angeles as an example, contrasting it with current AI hype like Friend.com, and analyzing media artists Chip Lord et al.'s 1985 video work \"Media Hostages\" as a critique of the tech landscape.",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-07"
     },
     {
       "id": "news-6w0tl3-cape-town-gallery-accused-of-withholding",
@@ -497,7 +503,9 @@
       "title_en": "Art Broadcast | CAFA Design Interprets \"Unity is Strength\", Chen Jianzhong Appointed Director of Hubei Museum of Art, Van Gogh Museum May Close Due to Funding Issues, Gagosian Re-represents Jeff Koons, Frieze Seoul Opens, Farewell to Daozi",
       "summary_zh": "本期艺术播报涵盖央美设计诠释“众志成城”、陈建中任湖北美术馆馆长、梵高博物馆或因经费问题闭馆、高古轩重新代理杰夫·昆斯、弗里兹首尔开幕及送别岛子等艺术界动态。",
       "summary_en": "This art broadcast covers CAFA's design interpreting \"Unity is Strength\", Chen Jianzhong's appointment as director of Hubei Museum of Art, Van Gogh Museum's potential closure due to funding issues, Gagosian's re-representation of Jeff Koons, the opening of Frieze Seoul, and farewell to Daozi.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/72a8782263f02fa0.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-68s22c-celebrating-50th-anniversary-museum-ludw",
@@ -639,7 +647,9 @@
       "title_en": "Notice: \"2026 Open, and next Art Imagination Lab: City Exploration Action | Qingpu Perception Database and Series Participatory Workshops\"",
       "summary_zh": "新竹縣政府文化局轉知由財團法人原住民族文化事業基金會主辦的活動，包含「城市探索行動｜青埔感知資料庫」展覽（2026年7月1日至8月31日）及系列參與式工作坊，邀請三位原住民族青年藝術家駐村創作，探索青埔地方樣貌。",
       "summary_en": "The Hsinchu County Government Cultural Bureau forwards an event organized by the Indigenous Peoples Cultural Foundation, including the \"City Exploration Action | Qingpu Perception Database\" exhibition (July 1 to August 31, 2026) and a series of participatory workshops, inviting three indigenous young artists for residency creation to explore the local landscape of Qingpu.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/66c8c44ba9227bb2.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-949s7i-tainan-art-museum-tam-art-forest-magic-b",
@@ -709,7 +719,9 @@
       "title_en": "Printmaking Exhibition and Art Education Exchange Program for the 50th Anniversary of China-Thailand Diplomatic Relations Held in Bangkok",
       "summary_zh": "为庆祝中泰建交50周年，中央美术学院等联合发起版画艺术展暨艺术教育交流计划，在曼谷展出中泰各25位版画家的50余幅作品，并走访泰国多所艺术院校，探讨建立常态化交流机制。",
       "summary_en": "To celebrate the 50th anniversary of China-Thailand diplomatic relations, the Central Academy of Fine Arts and others jointly launched a printmaking exhibition and art education exchange program in Bangkok, featuring over 50 works by 25 printmakers from each country, and visited multiple Thai art schools to discuss establishing regular exchange mechanisms.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/354ee12d487fd485.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-19s3v3-engraving-the-beauty-of-regional-cultura",
@@ -725,7 +737,9 @@
       "title_en": "Engraving the Beauty of Regional Cultural Symbiosis: \"Imprint of Civilization - China-ASEAN Print Art Exhibition\" Opens",
       "summary_zh": "2026年6月18日，“文明的印鉴——中国-东盟版画艺术展”在北京今日美术馆开幕，展出中国与东盟五国140余位艺术家的150余件版画精品。展览由清华大学美术学院主办，旨在搭建区域艺术交流桥梁，同期举办学术研讨与公共美育活动。",
       "summary_en": "On June 18, 2026, the \"Imprint of Civilization - China-ASEAN Print Art Exhibition\" opened at Today Art Museum in Beijing, featuring over 150 print works by more than 140 artists from China and five ASEAN countries. Hosted by the Academy of Arts & Design, Tsinghua University, the exhibition aims to build a bridge for regional art exchange, with concurrent academic seminars and public art education activities.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/9c0fa6a73461e1e9.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-149xx9-improvisational-drift-new-tendencies-in-",
@@ -759,7 +773,9 @@
       "title_en": "\"China Porcelain·World Tour\" Contemporary Chinese Ceramic Art Exhibition Opens in Istanbul",
       "summary_zh": "“中国瓷·世界行”中国当代陶瓷艺术巡展首站在土耳其伊斯坦布尔开幕，展出32件中国当代陶瓷精品，并举办陶瓷技艺交流活动，旨在深化中土文明交流互鉴。",
       "summary_en": "The first stop of the \"China Porcelain·World Tour\" contemporary Chinese ceramic art exhibition opened in Istanbul, Turkey, showcasing 32 contemporary Chinese ceramic masterpieces and hosting ceramic technique exchange activities, aiming to deepen Sino-Turkish cultural exchanges and mutual learning.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/30d97b7953cb9ff8.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2tmvn4-global-artists-to-gather-in-jingdezhen-t",
@@ -775,7 +791,9 @@
       "title_en": "Global Artists to Gather in Jingdezhen to Discuss the Future of Ceramics",
       "summary_zh": "2026景德镇国际陶瓷艺术双年展将于2026年6月底举行，作为第52届IAC国际陶艺大会的重要组成部分。展览广邀全球艺术家，设五大类别，新增跨界艺术工作者和“国中新锐奖”，并举办主宾国展等平行活动。",
       "summary_en": "The 2026 Jingdezhen International Ceramic Art Biennale will be held at the end of June 2026 as a key part of the 52nd IAC International Ceramic Congress. It invites global artists, features five categories, adds cross-disciplinary artists and the 'Guozhong Emerging Talent Award', and includes parallel events such as the guest country exhibition.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/f48e93d5882ed38e.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-a3grlc-4th-contemporary-ceramic-art-exhibition-",
@@ -791,7 +809,9 @@
       "title_en": "4th Contemporary Ceramic Art Exhibition Opens in Shandong, Traditional and Modern Porcelain Art Shine",
       "summary_zh": "第四届当代陶瓷艺术展览21日在山东美术馆启幕，展出228件入选作品，呈现中国当代陶瓷艺术发展全貌。展览由中国美协陶瓷艺委会时隔四年再次举办，受到广泛关注，共征集1463件投稿作品。",
       "summary_en": "The 4th Contemporary Ceramic Art Exhibition opened on April 21 at Shandong Art Museum, featuring 228 selected works that showcase the full spectrum of contemporary Chinese ceramic art. Organized by the Ceramic Art Committee of the China Artists Association after a four-year hiatus, the exhibition attracted widespread attention with 1,463 submissions.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/678bdf7d823a60b5.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-aascxw-press-conference-for-the-future-of-porce",
@@ -807,7 +827,9 @@
       "title_en": "Press Conference for 'The Future of Porcelain' 2026 Jingdezhen International Ceramic Art Biennale Held",
       "summary_zh": "8月11日，“瓷的未来”2026景德镇国际陶瓷艺术双年展新闻发布会在景德镇陶瓷大学举行。展览由江西省文旅厅、景德镇市政府、景德镇陶瓷大学、国际陶艺学会等共同主办，将于2026年6月底在景德镇举行。发布会介绍了展览主题、艺术委员会组成、奖项设置及平行活动等。",
       "summary_en": "On August 11, the press conference for 'The Future of Porcelain' 2026 Jingdezhen International Ceramic Art Biennale was held at Jingdezhen Ceramic University. Co-hosted by Jiangxi Provincial Department of Culture and Tourism, Jingdezhen Municipal Government, Jingdezhen Ceramic University, and the International Academy of Ceramics, the biennale will take place in Jingdezhen at the end of June 2026. The conference introduced the exhibition theme, composition of the art committee, award settings, and parallel events.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/7a0dcb32b2874423.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-6ehxvf-wandering-sculpture-park-public-art-exhi",
@@ -841,7 +863,9 @@
       "title_en": "Turn the City into an Exhibition Hall! 2026 Beijing Art Season 'Wandering · Sculpture Park' Opens at Olympic Forest Park and Liangma River",
       "summary_zh": "2026北京艺术季全新版块“漫游·雕塑公园”公共艺术展于奥森公园及亮马河畔启幕，展出15位艺术家的跨媒介雕塑与装置作品，打破美术馆围墙，将艺术融入城市公共空间。",
       "summary_en": "The new section 'Wandering · Sculpture Park' of the 2026 Beijing Art Season, a public art exhibition, opens at Olympic Forest Park and Liangma River, featuring cross-media sculptures and installations by 15 artists, breaking the walls of museums and integrating art into urban public spaces.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/2d730179b0f82302.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-dzddfp-2026-beijing-art-season-wandering-sculpt",
@@ -857,7 +881,9 @@
       "title_en": "2026 Beijing Art Season 'Wandering · Sculpture Park' Public Art Exhibition Opens",
       "summary_zh": "2026北京艺术季全新板块“漫游·雕塑公园”公共艺术展在北京奥林匹克森林公园及亮马河沿岸开幕，展出15位艺术家的跨媒介雕塑与装置作品，将城市转化为无边界开放展厅。",
       "summary_en": "The new segment of the 2026 Beijing Art Season, the 'Wandering · Sculpture Park' public art exhibition, opened at Beijing Olympic Forest Park and along the Liangma River, featuring cross-media sculptures and installations by 15 artists, transforming the city into a boundaryless open gallery.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/7c3d75e9ed060bab.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-ce2wef-beijing-art-season-wandering-sculpture-p",
@@ -891,7 +917,9 @@
       "title_en": "More Than Just Beautiful! Jing'an Sino-French Art Exhibition: Analyzing the Romance of Cultural Fusion Through Over 70 Works",
       "summary_zh": "上海静安雕塑公园艺术中心举办“静安香颂——2025中法艺术交流展”，展出70余幅中法艺术家作品，涵盖国画、水彩、油画等。展览期间还组织了苏河湾写生活动，旨在促进中法艺术交流与文化理解。",
       "summary_en": "The Shanghai Jing'an Sculpture Park Art Center hosts the 'Jing'an Chanson - 2025 Sino-French Art Exchange Exhibition', featuring over 70 works by Chinese and French artists, including ink painting, watercolor, and oil painting. A sketching event along Suzhou Creek was also organized to promote Sino-French artistic exchange and cultural understanding.",
-      "added_at": "2026-07-16"
+      "added_at": "2026-07-16",
+      "cover": "assets/covers/e24627ce7b91333a.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-pm6t36-sculpture-by-the-sea",
@@ -925,7 +953,9 @@
       "title_en": "January 2026: New Museum Exhibitions in Beijing Invite You to Enjoy",
       "summary_zh": "北京市文物局发布2026年1月北京地区文博新展汇总，涵盖中国国家博物馆、北京大运河博物馆、徐悲鸿纪念馆等多家机构的展览信息，包括展览时间、地点、简介及票价等。",
       "summary_en": "The Beijing Municipal Cultural Heritage Bureau releases a summary of new museum exhibitions in Beijing for January 2026, covering exhibitions at the National Museum of China, Beijing Grand Canal Museum, Xu Beihong Memorial Hall, and other institutions, including exhibition dates, locations, descriptions, and ticket prices.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/e27796b718026c27.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-al1cvo-special-10th-beijing-international-art-b",
@@ -941,7 +971,9 @@
       "title_en": "[Special] 10th Beijing International Art Biennale 2025 Xinhua Culture - Xinhua Net",
       "summary_zh": "第十届中国北京国际美术双年展于2025年12月29日在北京展览馆开幕，展至2026年1月28日。展览以“共生”为主题，包含主题展、国别展和特别展，展示全球艺术家的作品，并设有国际数字艺术特别展，融合AI、VR等技术。",
       "summary_en": "The 10th Beijing International Art Biennale opened on December 29, 2025 at the Beijing Exhibition Center, running until January 28, 2026. With the theme 'Coexistence', it features thematic, national, and special exhibitions, showcasing works from global artists, including an International Digital Art Special Exhibition integrating AI, VR and other technologies.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/ac04969da95d6391.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-3mtefz-unesco-launches-children-s-art-initiativ",
@@ -975,7 +1007,9 @@
       "title_en": "1985-2025 Chinese Modern Ink Painting Exhibition",
       "summary_zh": "当代唐人艺术中心将于2026年3月14日在北京798双空间举办大型群展“1985-2025 中国现代水墨展”，由邹建平策划，汇集68位艺术家的120余件作品，全面展现40年来水墨艺术的经典与创新。",
       "summary_en": "Tang Contemporary Art will hold a large group exhibition '1985-2025 Chinese Modern Ink Painting Exhibition' at Beijing 798 dual spaces on March 14, 2026, curated by Zou Jianping, featuring over 120 works by 68 artists, comprehensively showcasing the classics and innovations of ink art over 40 years.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/c54760f941b1f283.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-dn9czh-2026-beijing-tsinghua-academy-of-fine-ar",
@@ -991,7 +1025,9 @@
       "title_en": "2026 Beijing Tsinghua Academy of Fine Arts Graduation Exhibition Guide (Time + Location + Tickets + Transportation)",
       "summary_zh": "2026年清华美院毕业展于5月23日开幕，硕士展至6月5日，本科展6月13日至25日，地点在清华大学艺术博物馆，校外观众需购票入馆，门票50元/人。",
       "summary_en": "The 2026 Tsinghua Academy of Fine Arts graduation exhibition opens on May 23, with the master's exhibition until June 5 and the undergraduate exhibition from June 13 to 25, held at the Tsinghua University Art Museum; off-campus visitors need to purchase tickets, priced at 50 yuan per person.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/8128a75387259d64.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-b8vqty-national-taiwan-museum-of-fine-arts-anno",
@@ -1007,7 +1043,9 @@
       "title_en": "National Taiwan Museum of Fine Arts Announces Theme and First Wave of Participating Artists for the 2026 Asian Art Biennial",
       "summary_zh": "國立臺灣美術館宣布2026亞洲藝術雙年展主題「Mrahul Tminun・共織・Co-Weaving」，並公布首波參展藝術家名單，包括林介文、梅塔·梅莉達、鱷魚背等。展覽將於2026年11月7日開展，聚焦女性、原住民與酷兒視角，強調共織與共學。",
       "summary_en": "The National Taiwan Museum of Fine Arts announced the theme 'Mrahul Tminun・Co-Weaving' for the 2026 Asian Art Biennial and revealed the first wave of participating artists, including Lin Chieh-wen, Meita Meilita, and Gegerboyo. The exhibition will open on November 7, 2026, focusing on perspectives of women, indigenous peoples, and queer communities, emphasizing co-weaving and co-learning.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/3287ceece01c16cd.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1q7zf4-2026-venice-biennale-launches-which-pavi",
@@ -1016,7 +1054,6 @@
       "summary": "本文预览了第61届威尼斯艺术双年展，介绍了沙特阿拉伯、埃塞俄比亚、希腊、印度、印度尼西亚、意大利、拉脱维亚、黑山、圣马力诺、西班牙、东帝汶、乌克兰和津巴布韦等国家展馆的亮点作品和策展理念。",
       "url": "https://www.finestresullarte.info/cn/xin-wen-ju-jiao/2026-nian-wei-ni-si-shuang-nian-zhan-qi-dong-na-xie-zhan-guan-bu-rong-cuo-guo",
       "cover": "https://www.finestresullarte.info/Grafica/finestre-sull-arte-en-social.png",
-      "cover_source": "finestresullarte.info",
       "published_at": "2026-05-09",
       "category": "展览",
       "domain": "finestresullarte.info",
@@ -1025,7 +1062,10 @@
       "title_en": "2026 Venice Biennale Launches: Which Pavilions Not to Miss",
       "summary_zh": "本文预览了第61届威尼斯艺术双年展，介绍了沙特阿拉伯、埃塞俄比亚、希腊、印度、印度尼西亚、意大利、拉脱维亚、黑山、圣马力诺、西班牙、东帝汶、乌克兰和津巴布韦等国家展馆的亮点作品和策展理念。",
       "summary_en": "This article previews the 61st Venice Art Biennale, highlighting the standout works and curatorial concepts of national pavilions including Saudi Arabia, Ethiopia, Greece, India, Indonesia, Italy, Latvia, Montenegro, San Marino, Spain, Timor-Leste, Ukraine, and Zimbabwe.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×2)",
+      "cover_source": "finestresullarte.info"
     },
     {
       "id": "news-23vhuj-guide-to-the-61st-venice-art-biennale-20",
@@ -1041,7 +1081,9 @@
       "title_en": "Guide to the 61st Venice Art Biennale 2026: In Minor Keys",
       "summary_zh": "本文介绍了2026年第61届威尼斯艺术双年展的概况，包括主题《小调之中》、新增国家馆、策展人库尤·考奥的去世及其策展理念、国家馆列表、主展艺术家、展览设计、特别项目、学术项目、教育项目、编辑项目及气候行动等。",
       "summary_en": "This article provides an overview of the 61st Venice Art Biennale 2026, including the theme 'In Minor Keys', new national pavilions, the death of curator Koyo Kouoh and her curatorial vision, a list of national pavilions, main exhibition artists, exhibition design, special projects, academic programs, educational activities, editorial projects, and climate action.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/8dff8bed416509f8.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2g4e7g-2026-61st-venice-art-biennale-in-minor-k",
@@ -1068,7 +1110,6 @@
       "summary": "《艺术论坛》和《ARTnews》宣布推出首届纽约艺术周，将于2026年11月11日至14日举行，活动包括画廊开幕、展览导览、艺术家对谈等，旨在邀请藏家与艺术爱好者感受纽约艺术生态。",
       "url": "https://www.artforum.com.cn/news/16337",
       "cover": "https://www.artforum.com.cn/uploads/upload.000/id16337/featured00_landscape.jpg",
-      "cover_source": "artforum.com.cn",
       "published_at": "2026-06-11",
       "category": "机构",
       "domain": "artforum.com.cn",
@@ -1077,7 +1118,10 @@
       "title_en": "First New York Art Week to Debut in November 2026",
       "summary_zh": "《艺术论坛》和《ARTnews》宣布推出首届纽约艺术周，将于2026年11月11日至14日举行，活动包括画廊开幕、展览导览、艺术家对谈等，旨在邀请藏家与艺术爱好者感受纽约艺术生态。",
       "summary_en": "Artforum and ARTnews announce the inaugural New York Art Week, to be held November 11-14, 2026, featuring gallery openings, exhibition tours, artist talks, and more, inviting collectors and art enthusiasts to experience New York's vibrant art scene.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artforum.com.cn"
     },
     {
       "id": "news-6uvar4-the-61st-venice-international-art-bienna",
@@ -1093,7 +1137,9 @@
       "title_en": "The 61st Venice International Art Biennale China Pavilion Opens",
       "summary_zh": "第61届威尼斯国际艺术双年展中国馆于5月8日在威尼斯开幕，主题为“梦溪”，展出书法、装置、影像、数字艺术等作品，体现传统文化创造性转化与创新性发展。展览将持续至11月22日。",
       "summary_en": "The China Pavilion of the 61st Venice International Art Biennale opened on May 8 in Venice with the theme 'Dream Creek', featuring calligraphy, installations, video, and digital art, showcasing creative transformation and innovative development of traditional culture. The exhibition runs until November 22.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/34035249ad2cdd7f.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-a7pdys-biennale-arte-2026-the-invited-artists",
@@ -1181,7 +1227,9 @@
       "title_en": "news | your guide to the venice biennale 2026",
       "summary_zh": "Kurimanzutto 发布2026年威尼斯双年展指南，介绍其代理艺术家在双年展官方项目及城市各场馆的项目，包括Gala Porras-Kim、Rirkrit Tiravanija、Adrián Villar Rojas等。",
       "summary_en": "Kurimanzutto presents a guide to the 2026 Venice Biennale, featuring projects by its roster artists in the official program and across venues, including Gala Porras-Kim, Rirkrit Tiravanija, Adrián Villar Rojas, and others.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/c231b45286f575f9.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-9xxuao-scores-of-venice-biennale-participants-w",
@@ -1190,7 +1238,6 @@
       "summary": "为声援2026年威尼斯双年展投票评审团全体辞职，54位艺术家和22个国家馆团队退出“观众狮奖”评选。该奖项在评审团辞职后仓促设立，由开幕式期间参观两个展场的持票者决定。退出者多为库奥赫策展的“小调”展参展艺术家，他们于5月9日在e-flux发表声明。",
       "url": "https://www.artforum.com/news/venice-biennale-participants-withdraw-from-awards-1234750110/",
       "cover": "https://www.artforum.com/wp-content/uploads/2026/05/GettyImages-2274166279.jpg?w=650",
-      "cover_source": "artforum.com",
       "published_at": "2026-05-11",
       "category": "展览",
       "domain": "artforum.com",
@@ -1199,7 +1246,10 @@
       "title_en": "Scores of Venice Biennale Participants Withdraw from Awards Consideration",
       "summary_zh": "为声援2026年威尼斯双年展投票评审团全体辞职，54位艺术家和22个国家馆团队退出“观众狮奖”评选。该奖项在评审团辞职后仓促设立，由开幕式期间参观两个展场的持票者决定。退出者多为库奥赫策展的“小调”展参展艺术家，他们于5月9日在e-flux发表声明。",
       "summary_en": "In solidarity with the resignation of the entire 2026 Venice Biennale voting jury, 54 individual artists and 22 national pavilion teams have withdrawn from consideration for the Visitors' Lion awards. The awards were hastily established after the jury's resignation and are decided by ticket holders who visited both venues during the opening period. Most of the withdrawing artists are part of the Koyo Kouoh-curated \"In Minor Keys\" exhibition; they announced their decision in a statement published on e-flux on May 9.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artforum.com"
     },
     {
       "id": "news-70ozhw-southeastern-student-juried-art-exhibiti",
@@ -1287,7 +1337,9 @@
       "title_en": "2025 Above the Undercurrent | Tang Contemporary Art",
       "summary_zh": "当代唐人艺术中心于2025年11月15日在北京总部空间推出青年艺术家群展“潜流之上”，由韩雅俐策划，呈现曹金岩、关伟伟等八位艺术家的新作，探讨图像背后的生成之流与视觉机制。",
       "summary_en": "Tang Contemporary Art presents the group exhibition 'Above the Undercurrent' at its Beijing headquarters space on November 15, 2025, curated by Han Yali, featuring new works by eight young artists including Cao Jinyan and Guan Weiwei, exploring the generative flow and visual mechanisms behind images.",
-      "added_at": "2026-07-18"
+      "added_at": "2026-07-18",
+      "cover": "assets/covers/1a9c3640bd4c7098.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-4g3ybu-orientalism-between-fact-and-fantasy-at-",
@@ -1303,7 +1355,9 @@
       "title_en": "Orientalism: Between Fact and Fantasy at the Met Museum until February 28, 2027",
       "summary_zh": "纽约大都会艺术博物馆举办“东方主义：事实与幻想”展览，展期至2027年2月28日，重新审视西方艺术家对东方的描绘，在审美迷恋、想象建构与当代批判性重读之间摇摆。",
       "summary_en": "The Metropolitan Museum of Art in New York is presenting 'Orientalism: Between Fact and Fantasy', an exhibition that revisits the way Western artists have looked at the Orient, oscillating between aesthetic fascination, imaginative construction, and contemporary critical rereading, until February 28, 2027.",
-      "added_at": "2026-07-18"
+      "added_at": "2026-07-18",
+      "cover": "assets/covers/192964cfd4939122.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-5xqkzj-hong-kong-palace-museum-launches-nine-ne",
@@ -1355,7 +1409,10 @@
       "title_en": "Quest for Eternity: The Exploration and Excavation of Pompeii",
       "summary_zh": "中国国家博物馆主办的“叩问永恒——庞贝的探索与发掘”展览于2026年2月4日开幕，展至10月11日。展览聚焦庞贝古城自1748年以来的考古历程，展出105件（套）意大利文物，其中81件首次来华，并设3个沉浸式展项，还原古罗马城市风貌。",
       "summary_en": "The exhibition 'Quest for Eternity: The Exploration and Excavation of Pompeii', hosted by the National Museum of China, opened on February 4, 2026, and runs until October 11. It focuses on the archaeological history of Pompeii since 1748, displaying 105 artifacts from Italy, 81 of which are first-time in China, along with 3 immersive installations recreating the ancient Roman city.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-8vvrw7-hong-kong-story-exhibition-reopens-downp",
@@ -1425,7 +1482,9 @@
       "title_en": "National Taiwan Museum of Fine Arts Announces Theme and First Wave of Artists for 2026 Asian Art Biennial",
       "summary_zh": "國立臺灣美術館宣布2026亞洲藝術雙年展主題「Mrahul Tminun・共織・Co-Weaving」，並公布首波參展藝術家名單，包括林介文、梅塔·梅莉達、鱷魚背等。展覽將於2026年11月7日至2027年2月28日舉行，聚焦女性、原民與酷兒視角，強調共織與共學。",
       "summary_en": "The National Taiwan Museum of Fine Arts announced the theme 'Mrahul Tminun・Co-Weaving' for the 2026 Asian Art Biennial and revealed the first wave of participating artists, including Lin Jie-wen, Meita Meilita, and Gegerboyo. The exhibition will run from November 7, 2026 to February 28, 2027, focusing on female, indigenous, and queer perspectives, emphasizing co-weaving and co-learning.",
-      "added_at": "2026-07-17"
+      "added_at": "2026-07-17",
+      "cover": "assets/covers/21db9dd6babb4e30.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-cqn836-2026-asian-art-biennial-announces-theme-",
@@ -1559,7 +1618,7 @@
       "source": "artforum.com.cn",
       "summary": "匹兹堡卡内基艺术博物馆公布第59届卡内基国际艺术展的61位艺术家及团体名单，展览将于2026年5月2日至2027年1月3日举行，主题为“如果所谓我们”，并延伸至市内多家机构。",
       "url": "https://www.artforum.com.cn/news/16098",
-      "cover": null,
+      "cover": "assets/covers/b3e0edf0e3143ba1.jpg",
       "published_at": "2026-02-12",
       "category": "展览",
       "domain": "artforum.com.cn",
@@ -1570,7 +1629,8 @@
       "summary_en": "The Carnegie Museum of Art in Pittsburgh announced the list of 61 artists and groups for the 59th Carnegie International, to be held from May 2, 2026 to January 3, 2027, under the theme 'If the word we', extending to multiple venues in the city.",
       "added_at": "2026-07-17",
       "updated_at": "2026-07-18",
-      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)"
+      "cover_audit": "2026-07-18 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-382tmi-news-coverage-and-press-releases-newark-",
@@ -1708,7 +1768,9 @@
       "summary_en": "The San Francisco Art Fair 2026 will take place April 16-19 at Fort Mason Center, featuring nearly 90 local, national, and international galleries, with a special focus on Asian American and Pacific Islander (AAPI) voices, partnering with institutions like the Asian Art Museum.",
       "added_at": "2026-07-21",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/e89db02bed0d22e5.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-ojy8ee-announcing-talks-at-independent-2026",
@@ -1726,7 +1788,9 @@
       "summary_en": "Independent Art Fair will take place May 14-17, 2026 at its new home Pier 36 in New York, featuring a series of live conversations in partnership with Puck, including a live talk show by Jarrett Earnest, a dialogue between David Joselit and Janine Iversen, and a discussion between Eleanor Conover and Michelle Grabner. All talks are free with admission.",
       "added_at": "2026-07-21",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/bf1b56133c9d521a.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2ii4mh-the-other-art-fair-los-angeles-september",
@@ -1824,7 +1888,9 @@
       "summary_en": "The seventh edition of Frieze Los Angeles opened on February 26, 2026, at the Santa Monica Airport, featuring 95 galleries from 22 countries. Under the keywords 'continuity' and 'renewal,' the fair highlights gallery ecosystem, Focus section, photography trends, Frieze Projects, and socially engaged art, along with film and impact prizes.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/5b91fb9044c04785.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-67dfn4-art-fairs",
@@ -1842,7 +1908,9 @@
       "summary_en": "This page is a list of art fairs participated by Capsule Shanghai gallery, from 2017 to 2026, including NADA New York, Mega Art Fair, Art Basel Hong Kong, etc., with brief introductions of exhibiting artists and works.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/859adcdc26fd4c37.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-cb9obq-art-fair-on-the-square-madison-museum-of",
@@ -1880,7 +1948,10 @@
       "summary_en": "The National Art Museum of China issued a call for works for the 2026 National Young and Middle-aged Innovative Art Exhibition, to be held from July 31 to August 13, 2026, soliciting original works from young and middle-aged artists nationwide, with a submission deadline of June 21, 2026.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-defln3-youth-vision-2026-shenzhen-youth-art-exh",
@@ -1898,7 +1969,9 @@
       "summary_en": "The fifth \"Youth Vision - 2026 Shenzhen Youth Art Exhibition\" opened at Shenzhen Art Museum on July 14, 2026, running until August 20. The exhibition received over 1,800 submissions nationwide, with 80 works selected, covering various media. An academic seminar was held after the opening.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/120922529feba9c6.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-bg60o2-exhibition-i-shape-myself-2026-chinese-c",
@@ -1915,7 +1988,10 @@
       "summary_zh": "由中国女画家协会主办、中央美术学院美术馆承办的“我型我塑——2026年中国当代女艺术家学术提名展”在中央美术学院美术馆开展，展览涵盖油画与雕塑，呈现两代女艺术家的代表性作品，展期为2026年3月6日至3月15日。",
       "summary_en": "Hosted by the Chinese Female Painters Association and organized by the CAFA Art Museum, the \"I Shape Myself — 2026 Chinese Contemporary Female Artists Academic Nomination Exhibition\" is on view at the CAFA Art Museum, featuring oil paintings and sculptures by two generations of female artists, running from March 6 to March 15, 2026.",
       "added_at": "2026-07-22",
-      "_fail_streak": 12
+      "_fail_streak": 12,
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-j4u4ud-2026-national-art-museum-youth-curatoria",
@@ -1933,7 +2009,11 @@
       "summary_en": "The Ministry of Culture and Tourism announced the 2026 National Art Museum Youth Curatorial Project Support Plan selection list. The exhibition \"Roots and Long Song: The Artworks of the Situ Clan under the Influence of Overseas Chinese Culture\" curated by Feng Jinxin, a young curator at Jiangmen Art Museum, was listed as one of 20 nominated projects. The museum has previously had four projects selected for this plan.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/1010fad3818b223c.jpg",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(截图内容相同×7)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2lm7oh-five-colors-symbiosis-art-initiates-comm",
@@ -1951,7 +2031,10 @@
       "summary_en": "On May 29, 2026, the youth pioneer art group exhibition 'The Most Red, Orange, Yellow, Green, and Orange' opened at Fangcunshan Contemporary Art Center in Shanghai, featuring nearly 100 works by 14 young artists including illustrations, installations, and trendy toys, and debuting a 5-meter giant panda installation 'OuttaLaLa02' in Shanghai, running until August 30.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-bbodoo-national-young-and-middle-aged-innovativ",
@@ -1969,7 +2052,10 @@
       "summary_en": "The National Art Museum of China hosts the National Young and Middle-aged Innovative Art Exhibition, featuring over 150 works including paintings, sculptures, and installations. Guided by the principle of 'upholding tradition while innovating', it showcases young and middle-aged artists' exploration of tradition and innovation in four chapters.",
       "added_at": "2026-07-22",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-cr6ptj-2026-these-new-foreign-literature-books-",
@@ -1987,7 +2073,9 @@
       "summary_en": "The article introduces multiple new foreign literature books to be published in 2026, including John le Carré's letters, Rulfo's love letters, Karl Kraus's aphorisms, Anne Carson's accordion book, etc., covering novels, poetry, essays and other genres.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/07a81082214c31b5.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-7pbvcc-2026-new-books-worth-looking-forward-to-",
@@ -2005,7 +2093,9 @@
       "summary_en": "Jiemian Culture releases its annual list of anticipated new books for 2026, covering Chinese literature, translated literature, and non-fiction, including works by Zhu Tianwen, Hu Qian, Abdulrazak Gurnah, Ian McEwan, and travelogues and memoirs.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/38d9eafc54e2ca14.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-85ce6s-stars-poetry-magazine-agency",
@@ -2023,7 +2113,9 @@
       "summary_en": "This article introduces the Stars Poetry Magazine Agency, including that the Stars Poetry Journal was first published in 1957, sponsored by the Sichuan Writers Association, as the first poetry journal in New China, has published works by many famous writers, won multiple honors, currently publishes various periodicals, and conducts new media and poetry award activities.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/90eabcc8feaed2d8.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-dfn79h-historic-breakthrough-the-9th-lu-xun-lit",
@@ -2041,7 +2133,9 @@
       "summary_en": "The 9th Lu Xun Literary Award was announced, with Fujian Province writers Lin Nabei and Ye Yulin winning the Novella and Poetry Awards respectively, and Fujian-born critic Xie Youshun winning the Literary Theory and Criticism Award, achieving a historic breakthrough. The article introduces the works and achievements of the three winners, emphasizing this as a major achievement in Fujian's literary and artistic creation.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/58116bd3d2a1bdd9.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2nu7lz-literary-translation-and-cultural-exchan",
@@ -2059,7 +2153,9 @@
       "summary_en": "This article is an interview with Chinese translator Gu Yu by Alyaksey Klyukevich, Chairman of the Belarusian Writers' Union. Gu Yu shares the starting point of his translation career, selection of works, translation experience, and advice for young translators, while recalling interactions with predecessors like Ge Baoquan and Gao Mang, highlighting Nankai scholars' contributions to Russian-Chinese literary translation and cultural exchange.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/1dc98e1ba7ba2a8e.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-6n1ktg-2026-beijing-international-literature-we",
@@ -2117,7 +2213,9 @@
       "summary_en": "The First China Creative Design Biennale (CBCD 2026) issues a call for submissions, targeting designers, teachers, students, etc. aged 18 and above, for graphic, product, environmental, apparel, comprehensive design and academic papers. Deadline: May 31, 2026. Awards include gold, silver, bronze, etc. Winning works will be included in the China Creative Design Yearbook and indexed by CNKI.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/e1a125f22df6466a.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-ayt2jx-notice-on-call-for-entries-for-the-2026-",
@@ -2135,7 +2233,9 @@
       "summary_en": "The China International Building Decoration and Design Art Expo (CIDF) issued a call for entries for the 2026 Huading Award International Environmental Art Innovative Design Works Competition, targeting domestic and foreign designers and institutions. The competition features two categories: conceptual schemes and project engineering, with awards including gold, silver, and excellence prizes. Registration is divided into three phases, with the final deadline on November 15, 2026.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/870ddd961edb58c6.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-bpajrr-polyu-design-show-2026-ai-and-emerging-t",
@@ -2313,7 +2413,9 @@
       "summary_en": "The awards list for the 2026 Global Artists Spring Painting Competition - First Season has been announced, a global cultural and artistic exchange event gathering the painting talents of children and teenagers from around the world.",
       "added_at": "2026-07-24",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/8aeac4ee876c9a15.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-16glya-applied-arts-2026-illustration-awards",
@@ -2351,7 +2453,10 @@
       "summary_en": "In recent years, a group of Chinese artists active at the forefront of world art have achieved remarkable results in the Tokyo International Art Exhibition. This year in May, four Chinese artists recommended by the association participated in the '47th New Oil Painting Exhibition' held by the Tokyo Metropolitan Museum of Art, and some of the participating artists won different awards.",
       "added_at": "2026-07-24",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-c7c6rd-2026-u-s-california-international-automa",
@@ -2409,7 +2514,9 @@
       "summary_en": "The Tsinghua University School of Fine Arts held the opening ceremony of the 2026 Undergraduate Graduation Exhibition and the 'Graduation Gathering' Creative Culture Festival on June 15, 2026. The exhibition showcased nearly 1000 works by 240 undergraduate students and ran until June 25.",
       "added_at": "2026-07-24",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/0d436bfe3ccd0f07.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-61zkvd-designing-the-future-of-energy-an-exhibi",
@@ -2447,7 +2554,9 @@
       "summary_en": "This article discusses Hong Shiqing's rock carving art, analyzing its background, process, artistic characteristics, cultural value, and economic value, and explores the relationship between artistic behavior and the natural environment, as well as the relationship between public art and regional development.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/b3be905453cfbe90.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-cn8yah-a-project-that-brings-together-urban-mob",
@@ -2485,7 +2594,11 @@
       "summary_en": "In the Gobi Desert of Guazhou, Gansu Province, several giant public art pieces stand, forming the core narrative of Dong Shubing's 'Wild Art Plan', an initiative by the Vice Dean of the Academy of Fine Arts at Tsinghua University. This article introduces Dong Shubing's 'Wild Art Plan' and the latest creative camp held in Toli, Xinjiang.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/8bc261a15b420b35.jpg",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(截图内容相同×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1p4mh1-give-the-han-wu-di-statue-in-the-interne",
@@ -2503,7 +2616,9 @@
       "summary_en": "Recently, the Han Wu Di statue in the Gobi International Sculpture Art Corridor in Guazhou, Gansu has sparked controversy. The article discusses the challenges faced by public art in the digital age and the public's interpretation and response to art works.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/200b0bb1bbeead13.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-x0wkz2-call-for-entries-for-the-20th-china-inte",
@@ -2521,7 +2636,10 @@
       "summary_en": "The 20th China International Photography Art Exhibition is co-organized by the China Photographers Association and the People's Government of Lishui City, China, and will be held in Lishui, Zhejiang Province in 2026. The call for entries provides detailed information about the schedule, awards, category interpretations, rules, and selection process of the exhibition.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-9cnq3g-hong-kong-16th-national-photography-art-",
@@ -2539,7 +2657,9 @@
       "summary_en": "On May 8th, the awards ceremony of the '16th Hong Kong National Photography Art Exhibition', organized by Visual (China) Co., Ltd., was grandly held on Star Cruises. Nearly 500 photographers, guests, and award winners gathered in the South China Sea to witness the birth of outstanding photographic works.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/79e820ee2902db31.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-abhndf-information",
@@ -2557,7 +2677,9 @@
       "summary_en": "Providing various information related to art photography, including exhibitions, dialogues, events, and virtual galleries.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/9e58ad00ab41e178.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-9zealv-2025-11th-jimei-arles-international-phot",
@@ -2575,7 +2697,11 @@
       "summary_en": "The 11th Jimei & Arles International Photography Festival will be held in Xiamen from November 29, 2025, to January 4, 2026. It is an important annual photography art event in Asia and the only Chinese platform for cultural exchange with the world-famous Arles Photography Festival in France. The festival will feature over 25 exhibitions and present about 2,000 works from various countries and regions.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/efb1b583507f27b6.jpg",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(截图内容相同×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-bdjq2v-2026-shanghai-baby-photography-exhibitio",
@@ -2593,7 +2719,9 @@
       "summary_en": "The 2026 Shanghai Baby Photography Exhibition (BABY PHOTO) will be held from July 23 to July 25, 2026, at the Shanghai World Expo Exhibition Hall. The event, organized by the Shanghai Commission of International Trade and Investment Promotion and the China Photographic Society, aims to provide a platform for the photography equipment industry. It is expected to attract 60,000 visitors and 180 exhibiting companies.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/1ee4c0779167c7af.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-8vi1x8-ofoto-gallery",
@@ -2611,7 +2739,9 @@
       "summary_en": "OFOTO-GALLERY exhibition information summary, including exhibition names, dates, etc.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/72307f06d056fd77.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-d628mv-tai-xiangzhou",
@@ -2669,7 +2799,9 @@
       "summary_en": "In August, Shanghai's art galleries and museums are hosting a variety of new exhibitions, including the 'Variety of Nature: Chinese White Porcelain Shanghai Art Exhibition' at the China Art Palace and 'Boundless Realm: Los Angeles Original Art Collection and Other Perspectives' at the Shanghai Museum of Contemporary Art.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/60f738bfa321356e.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-622fvo-new-york-clearing-gallery-announces-clos",
@@ -2678,7 +2810,6 @@
       "summary": "纽约Clearing画廊宣布关闭其纽约和洛杉矶的空间。该画廊自2011年成立以来，一直致力于支持早期艺术家。",
       "url": "https://www.artforum.com.cn/news/15772",
       "cover": "https://www.artforum.com.cn/uploads/upload.000/id15772/featured00_landscape.jpg",
-      "cover_source": "artforum.com.cn",
       "published_at": "2025-08-08",
       "category": "展览",
       "domain": "artforum.com.cn",
@@ -2689,7 +2820,10 @@
       "summary_en": "New York's Clearing Gallery has announced the closure of its spaces in New York and Los Angeles. The gallery, established in 2011, has been dedicated to supporting emerging artists.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artforum.com.cn"
     },
     {
       "id": "news-95ugls-胡伟-异腔-reflexion-回声",
@@ -2727,7 +2861,9 @@
       "summary_en": "On June 1, 2026, the China Academy of Art held the 'Zhuangyou · 2026 China Academy of Art Graduation Season', showcasing nearly 3000 graduation works. At the same time, the International Youth Art Dialogue series of activities were launched, including dialogues among international art school presidents, international youth artists, and an international youth art exhibition.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/513543c299cdeb6d.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-advqqj-crossing-new-generation-blossoms-politic",
@@ -2745,7 +2881,10 @@
       "summary_en": "The Art Design College of Shanxi Media College successfully held the 2026 graduation design exhibition, which was held in two exhibition areas: the broadcast center and the art museum, showcasing the educational achievements of the college and the creative works of the students.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-5nitcp-what-to-see-at-the-art-academy-graduatio",
@@ -2763,7 +2902,11 @@
       "summary_en": "In early summer 2026, graduation exhibitions of various art academies took place as scheduled. This article introduces the characteristics and highlights of these exhibitions, including the themes of the works, creative techniques, and the integration of art and technology.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/b375ee4e4ed8539a.jpg",
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-5rtbux-hebei-academy-of-fine-arts-2026-graduati",
@@ -2781,7 +2924,10 @@
       "summary_en": "Hebei Academy of Fine Arts has recently launched the 2026 graduation season carnival, which includes activities such as excellent graduation exhibitions, art performances, and cultural and creative markets, aiming to showcase the school's practical teaching achievements and campus art atmosphere.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-69pohq-educational-affairs-graduate-school-orga",
@@ -2799,7 +2945,9 @@
       "summary_en": "The Graduate School of Hubei Academy of Fine Arts organized the second review of design graduate students' graduation works on April 15, 2026, reviewing the overall selection of topics, ideological orientation, and exhibition plans of the works.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/3b1edb6bc0b653f8.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-3wthdz-let-creativity-go-to-industry-let-works-",
@@ -2817,7 +2965,9 @@
       "summary_en": "On June 30, 2026, the graduation design joint exhibition of the Animation and Digital Art Academy of Communication University of China opened at the university. The exhibition showcased over 130 graduation design works, including 100 pieces of game and e-sports works and 30 pieces of comic and digital media art works. The event also featured industry forums, corporate special sessions, and recruitment.",
       "added_at": "2026-07-26",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/0efa79d4c4d48b1f.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2lou9i-design-ah-experience-the-wonders-of-ever",
@@ -2855,7 +3005,9 @@
       "summary_en": "Shanghai Jiao Tong University Design School will hold the opening ceremony of the 2026 undergraduate graduation ceremony and graduation design exhibition on June 10, 2026, showcasing the works of students from the school.",
       "added_at": "2026-07-27",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/fa4e6b68fc64a9bd.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-dn9er8-mad-2026-architecture-future-style-archi",
@@ -2873,7 +3025,10 @@
       "summary_en": "MAD Architecture Office held an exhibition in 2026 showcasing Architecture Future Style, including Ma Yansong's installation 'Super Star', the opening of the Fenix Museum in Rotterdam, and MAD Architecture Office winning the 2025 Dezeen Design Award.",
       "added_at": "2026-07-27",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×4)"
     },
     {
       "id": "news-2lp06q-the-8th-wuhan-design-biennale-opens-inte",
@@ -2891,7 +3046,9 @@
       "summary_en": "The 8th Wuhan Design Biennale opened at the Wuhan International Exhibition Center, gathering global design forces and showcasing the integration of design and technology. International architects praised Wuhan's urban development and design capabilities.",
       "added_at": "2026-07-27",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/d14207dbedd51e1d.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-fpfaf5-2025-taiwan-design-expo-makes-its-debut-",
@@ -2920,7 +3077,6 @@
       "summary": "香奈儿文化基金会公布2026年第三届NEXT Prize的获奖名单，包括十位当代艺术家，每位获奖者将获得10万欧元的资助，并参与为期两年的导师与人脉拓展计划。",
       "url": "https://artforum.com.cn/news/16060",
       "cover": "https://artforum.com.cn/uploads/upload.000/id16060/featured00_landscape.jpg",
-      "cover_source": "artforum.com.cn",
       "published_at": "2026-01-22",
       "category": "展览",
       "domain": "artforum.com.cn",
@@ -2931,7 +3087,10 @@
       "summary_en": "The CHANEL Culture Fund announces the winners of the 2026 NEXT PRIZE, a biennial award given to ten contemporary artists, each receiving 100,000 euros in funding and participating in a two-year mentorship and networking program.",
       "added_at": "2026-07-28",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artforum.com.cn"
     },
     {
       "id": "news-2fousv-the-winners-list-of-artists-works-exhibi",
@@ -2949,7 +3108,9 @@
       "summary_en": "The winners list of 'Artists' Works Exhibition Going Global (1st Period)' is announced. This exhibition focuses on the internationalization of art, selecting excellent works with high artistic value and communicative power, showcasing the diverse artistic pursuits and styles of artists from all over the world.",
       "added_at": "2026-07-28",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/a2684cc46b796790.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-4g3uz4-10-winners-build-the-art-innovation-dime",
@@ -2987,7 +3148,9 @@
       "summary_en": "The International Awards for Art Criticism (IAAC) is an award focusing on art criticism, featuring an overview of winners and their articles across multiple years.",
       "added_at": "2026-07-28",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/99afd4541243ea69.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-7rrvt3-touching-the-life-of-poetry-the-sharing-",
@@ -3005,7 +3168,9 @@
       "summary_en": "On the afternoon of February 8, 2026, a sharing session of 'Portrait of Poetry' was successfully held at the Capital Library. The event was co-organized by the Capital Library, Beijing Publishing Group, and Beijing October Literature and Art Publishing House. Poet and critic Ou Yang Heji, among other guests, participated in the session, which discussed topics such as poetry reading and the relationship between poets' lives and texts.",
       "added_at": "2026-07-28",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/6848c156153e14ac.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-8k2x3j-2026-basel-art-fair-announces-winners-li",
@@ -3014,7 +3179,6 @@
       "summary": "巴塞尔艺术展近日公布了2026年度“巴塞尔艺术奖”的33位获奖者，奖项分为九个类别，包括典范艺术家、成就艺术家、新锐艺术家等，获奖者将于6月在瑞士举行的巴塞尔艺术展期间获得表彰。",
       "url": "https://artforum.com.cn/news/16233",
       "cover": "https://artforum.com.cn/uploads/upload.000/id16233/featured00_landscape.jpg",
-      "cover_source": "artforum.com.cn",
       "published_at": "2026-04-20",
       "category": "展览",
       "domain": "artforum.com.cn",
@@ -3025,7 +3189,10 @@
       "summary_en": "The Basel Art Fair has announced the winners of the 2026 Basel Art Awards, with 33 recipients across nine categories, including Distinguished Artist, Achievement Artist, Emerging Artist, etc. The winners will be honored at the Basel Art Fair in Switzerland in June.",
       "added_at": "2026-07-28",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artforum.com.cn"
     },
     {
       "id": "news-d5gqlc-four-artists-win-2025-macarthur-fellowsh",
@@ -3034,7 +3201,6 @@
       "summary": "艺术家兼电影导演加勒特·布拉德利、跨学科艺术家加拉·波拉斯-金、跨领域艺术家阮俊以及编织艺术家杰里米·弗雷获2025年麦克阿瑟奖。",
       "url": "https://www.artforum.com.cn/news/15871",
       "cover": "https://www.artforum.com.cn/uploads/upload.000/id15871/featured00_landscape.jpg",
-      "cover_source": "artforum.com.cn",
       "published_at": "2025-10-08",
       "category": "人物",
       "domain": "artforum.com.cn",
@@ -3045,7 +3211,10 @@
       "summary_en": "Garrett Bradley, Gala Porras-Kim, Tuan Andrew Nguyen, and Jeremy Frey are recipients of the 2025 MacArthur Fellowships.",
       "added_at": "2026-07-28",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "updated_at": "2026-10-07",
+      "cover_audit": "2026-10-07 审核撤换(封面图来自第三方聚合)",
+      "cover_source": "artforum.com.cn"
     },
     {
       "id": "news-6blncj-美国摄影器材展会",
@@ -3063,7 +3232,9 @@
       "summary_en": "Jufair.com has compiled a detailed schedule of the 2026 U.S. photography equipment themed exhibitions, including specific dates, venue locations, and session durations, providing participants with a schedule and venue guide for participation.",
       "added_at": "2026-07-29",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/315cc01afd470fb8.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-5e0qby-beyond-writing-ren-tianjin-s-calligraphy",
@@ -3101,7 +3272,9 @@
       "summary_en": "Wang Tiande, born in Shanghai, China in 1960, is a pioneering ink painter and scholar. He is most famous for his innovative use of incense sticks instead of traditional brushes. His works are collected by numerous renowned museums and institutions, including the British Museum, the Metropolitan Museum of Art in New York, and more.",
       "added_at": "2026-07-29",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/c2f76d8da6104ef9.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-bfdvop-weaving-a-co-creation-landscape-impressi",
@@ -3119,7 +3292,9 @@
       "summary_en": "The 13th International Fiber Art Biennale is on display in Beijing, featuring 205 works by 220 artists from 53 countries and regions, presented in 5 zones, discussing the practice path of fiber art.",
       "added_at": "2026-07-30",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/4ddf61b9b5441666.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-aowfsf-dialogue-with-shi-hui-a-dreamweaver-and-",
@@ -3137,7 +3312,9 @@
       "summary_en": "Shi Hui, an innovator in the field of fiber art, discusses the development of Chinese fiber art in a dialogue with Fenghuang Art. Shi Hui has been exploring fiber art since its early days in China and was involved in establishing the Hangzhou Triennial of Fiber Art, which has been running for 12 years. This year's exhibition, themed 'Re-Constellations,' aims to challenge singular universal narratives and showcase the autonomous luminosity of cultural stars from the Global South.",
       "added_at": "2026-07-30",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/f85f89b3702bbeee.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-1l5jxd-re-constellations-the-5th-hangzhou-trien",
@@ -3155,7 +3332,9 @@
       "summary_en": "The 5th Hangzhou Triennial of Fiber Art, titled 'Re-Constellations', opened at the Zhejiang Art Museum on September 23, 2025, featuring 45 artists from 17 countries and regions, discussing the rise of culture and the future of contemporary art in the context of globalization retreat and value reconstruction.",
       "added_at": "2026-07-30",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/7e112e77cc1de1b0.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-4d8soz-2025-hangzhou-triennial-of-fiber-art",
@@ -3173,7 +3352,9 @@
       "summary_en": "The Hangzhou Triennial of Fiber Art 2025 will be held at the Zhejiang Art Museum from September 23, 2025, with the theme 'Re-Constellations', featuring works by 45 artists from 17 countries and regions.",
       "added_at": "2026-07-30",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/a980ea1357740273.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-9x2ce3-hu-yinping-start-whenever-you-can",
@@ -3211,7 +3392,9 @@
       "summary_en": "This article introduces the ongoing 5th Hangzhou Fiber Art Triennial Exhibition, discussing the reconstruction and renewal of fiber art in the international art landscape, as well as the unique expression and value of fiber art in contemporary art.",
       "added_at": "2026-07-30",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/27d449ca447eb210.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-b7xmg2-xinjiang-holds-press-conference-for-the-",
@@ -3229,7 +3412,9 @@
       "summary_en": "On May 15, 2026, the Xinjiang Uygur Autonomous Regional People's Government News Office held a press conference for the second China Xinjiang Folk Art Season to introduce the event's arrangements and activities.",
       "added_at": "2026-07-31",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/0865e34d95a89d8f.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-63a3eg-dongjiu-cultural-center-launches-dongjiu",
@@ -3306,7 +3491,9 @@
       "summary_en": "The China Writers Net's New Works section showcases various poetry works, including A Xin's 'Within the Radius of Rain', Mu Bai's 'Poems by Mu Bai', and more.",
       "added_at": "2026-08-02",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/44fd17a830817d95.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-14xuop-2026-these-new-books-are-worth-looking-f",
@@ -3384,7 +3571,9 @@
       "summary_en": "On April 2, 2026, the 2026 'Bai Nian Ding Xiang Shi Hui' series of cultural activities began at Bao Guo Temple in Xicheng District. The event is themed around 'Ding Xiang as a Message, Youth as Poetry', including poetry salons, writing sessions, recitals, and more than 10 other special events.",
       "added_at": "2026-08-02",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/c93209b1033b5d15.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-borbab-record-the-great-era-with-poetry-china-a",
@@ -3402,7 +3591,9 @@
       "summary_en": "Since its planning in 2010, 'China Annual Excellent Poetry' has been continuously published for fourteen years by Xinhua Publishing House. The selection aims to record the great era, adhering to the richness, diversity, and inclusiveness of the selected works, while emphasizing the artistic aesthetic standards of poetry.",
       "added_at": "2026-08-02",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03"
+      "last_seen": "2026-08-03",
+      "cover": "assets/covers/1f979ce2116fe46c.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-upasat-cade-international-architecture-festival",
@@ -3418,7 +3609,9 @@
       "title_en": "CADE International Architecture Festival 2026 to be Held from October 28th to 30th",
       "summary_zh": "中国建筑学会宣布，2026年10月28日至30日，将在中国举办CADE国际建筑节。该活动将展示一系列建筑设计和研究成果，包括建筑主题展览区、绿色建筑解决方案、建筑教育等。",
       "summary_en": "The Chinese Institute of Architects announced that the CADE International Architecture Festival will be held in China from October 28th to 30th, 2026. The event will showcase a range of architectural designs and research achievements, including an architectural design themed exhibition area, green building solutions, and architectural education.",
-      "added_at": "2026-08-03"
+      "added_at": "2026-08-03",
+      "cover": "assets/covers/50bd1a5caa22ceff.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-cj4jgq-economic-daily-report-2026-international",
@@ -3452,7 +3645,9 @@
       "title_en": "PolyU Design Show 2026",
       "summary_zh": "PolyU设计展2026将于2026年6月5日至8月7日举行，展出近400名本科生和研究生的作品，涵盖广告设计、信息设计、数字媒体、环境设计、室内设计、交互设计、产品设计、服务设计、社会设计、综合设计创业等多个领域。",
       "summary_en": "The PolyU Design Show 2026 will be held from June 5 to August 7, 2026, showcasing works from nearly 400 undergraduate and postgraduate students, covering a wide range of fields such as advertising design, information design, digital media, environmental design, interior design, interaction design, product design, service design, social design, and integrated design entrepreneurship.",
-      "added_at": "2026-08-03"
+      "added_at": "2026-08-03",
+      "cover": "assets/covers/6a268b9c41f8f068.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-3msqul-2026-chapter-1",
@@ -3486,7 +3681,9 @@
       "title_en": "Design Shanghai to Return to Shanghai Exhibition Center from March 19 to 22, 2026, with an Upgraded Content and Experience, Lighting Up the New High of Asian Design Again",
       "summary_zh": "亚洲权威国际设计盛会“设计上海”将于2026年3月19日至22日回归上海展览中心，以全面升级的内容与体验，再次点亮亚洲设计新高度。展会将聚焦家具与灯具设计、厨卫与整装、生活方式与配饰、新材料与应用等板块，展示来自全球的设计精品。",
       "summary_en": "The prestigious international design event 'Design Shanghai' will return to the Shanghai Exhibition Center from March 19 to 22, 2026, with an upgraded content and experience, lighting up the new high of Asian design again. The exhibition will focus on furniture and lighting design, kitchen and bathroom fittings, lifestyle and accessories, and new materials and applications, showcasing design masterpieces from around the world.",
-      "added_at": "2026-08-03"
+      "added_at": "2026-08-03",
+      "cover": "assets/covers/a7ae0bb6812ebc7c.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-d59wf3-art-china-cn",
@@ -3502,7 +3699,9 @@
       "title_en": "art.china.cn",
       "summary_zh": "艺术中国是中国艺术官方门户网站，提供艺术新闻、专题、声音中国、美丽中国、中外艺术家对话、何以中国、周末去哪儿、艺趣、展事、动态、热点等内容。",
       "summary_en": "Art China is the official portal of Chinese art, providing art news, special topics, Voice of China, Beautiful China, Dialogue between Chinese and foreign artists, How China, Where to Go on the Weekend, Art趣, Exhibitions, Dynamics, Hotspots, and more.",
-      "added_at": "2026-08-30"
+      "added_at": "2026-08-30",
+      "cover": "assets/covers/617a01eff0140b5d.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-bv28hu-multiple-real-estate-financial-policies-",
@@ -3511,7 +3710,6 @@
       "summary": "住房城乡建设部、中国人民银行、金融监管总局于8月28日出台一系列房地产金融政策，涉及个人住房贷款、商品房开发贷款等多个领域，旨在更好地保护买房人的合法权益。",
       "url": "https://news.cctv.com/china/",
       "cover": "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1502157896010276/newslog200.jpg",
-      "cover_source": "news.cctv.com",
       "published_at": null,
       "category": "政策",
       "domain": "news.cctv.com",
@@ -3520,7 +3718,10 @@
       "title_en": "Multiple Real Estate Financial Policies Optimized to Better Protect Homebuyers' Rights",
       "summary_zh": "住房城乡建设部、中国人民银行、金融监管总局于8月28日出台一系列房地产金融政策，涉及个人住房贷款、商品房开发贷款等多个领域，旨在更好地保护买房人的合法权益。",
       "summary_en": "On August 28th, the Ministry of Housing and Urban-Rural Development, the People's Bank of China, and the Financial Regulatory Bureau issued a series of real estate financial policies involving personal housing loans, commercial housing development loans, and other fields, aiming to better protect the legitimate rights and interests of homebuyers.",
-      "added_at": "2026-08-30"
+      "added_at": "2026-08-30",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×2)",
+      "cover_source": "news.cctv.com"
     },
     {
       "id": "news-2axjep-ceramics-the-palace-museum",
@@ -3529,7 +3730,6 @@
       "summary": "故宫博物院是中国最大的古代艺术品宝库，其中陶瓷器占约三十五万件。文章介绍了故宫博物院陶瓷收藏的历史、种类以及相关展览和学术资讯。",
       "url": "https://www.dpm.org.cn/collection/ceramics.html?fully_types=990861",
       "cover": "https://img.dpm.org.cn/static/themes_wap/image/wechat_share1.png",
-      "cover_source": "dpm.org.cn",
       "published_at": null,
       "category": "展览",
       "domain": "dpm.org.cn",
@@ -3540,7 +3740,10 @@
       "summary_en": "The Palace Museum in China is the largest repository of ancient art treasures, with approximately 350,000 pieces of ceramics among its nearly one million collections. The article discusses the history, types, and related exhibitions and academic information of the ceramics collection in the Palace Museum.",
       "added_at": "2026-08-31",
       "_fail_streak": 0,
-      "last_seen": "2026-09-01"
+      "last_seen": "2026-09-01",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×4)",
+      "cover_source": "dpm.org.cn"
     },
     {
       "id": "news-53kozq-china-ceramics",
@@ -3558,7 +3761,9 @@
       "summary_en": "Established in 1959, 'China Ceramics' is a technology journal focusing on applied science that has led the development of the ceramics industry. The journal has won multiple honors, including being a core journal of Chinese studies and a source journal of the Chinese Science Citation Database. The journal has several columns, including advanced ceramics, building and sanitary ceramics, daily-use ceramics, art ceramics, and ancient ceramics, aiming to focus on innovative research achievements, industry development, and academic exchanges in ceramics.",
       "added_at": "2026-08-31",
       "_fail_streak": 0,
-      "last_seen": "2026-09-01"
+      "last_seen": "2026-09-01",
+      "cover": "assets/covers/5e2658297c447354.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-b4bvo2-glass",
@@ -3574,7 +3779,9 @@
       "title_en": "Glass",
       "summary_zh": "玻璃是一种非结晶无机材料，由石英砂、纯碱、石灰石和长石等原料制得。它具有透明、脆性、不透气、硬度等特点，广泛应用于日常生活、医疗、科研和建筑领域。",
       "summary_en": "Glass is an amorphous inorganic material made from quartz sand, soda ash, limestone, and feldspar. It is characterized by transparency, brittleness, impermeability, and hardness, and is widely used in daily life, medical, scientific research, and construction fields.",
-      "added_at": "2026-09-01"
+      "added_at": "2026-09-01",
+      "cover": "assets/covers/8cab92e73df7fae5.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-393brj-free-sound-effects-library",
@@ -3590,7 +3797,9 @@
       "title_en": "Free Sound Effects Library",
       "summary_zh": "SoundDino 提供一个免费音效库，包含多种分类的音效，适用于视频、游戏、播客、广告等制作。用户可以搜索音效、按分类浏览，并下载可用的声音。",
       "summary_en": "SoundDino offers a free sound effects library with various categories of sounds suitable for video, games, podcasts, advertisements, and more. Users can search for sounds, browse by category, and download available sounds.",
-      "added_at": "2026-09-03"
+      "added_at": "2026-09-03",
+      "cover": "assets/covers/8981e5ff692b22a2.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-8dug33-free-ai-sound-library-listen-to-408-natu",
@@ -3624,7 +3833,9 @@
       "title_en": "Online Voice Test and Tone Test | CVoice Voice Character Report",
       "summary_zh": "CVoice 提供在线声音测试和音色测试服务，帮助用户识别和了解自己的声线角色。测试结果包括声线图鉴、声音指数和专属角色卡。测试无需下载App，可在浏览器中直接进行。",
       "summary_en": "CVoice offers online voice test and tone test services to help users identify and understand their voice characters. The test results include voice character guides, voice indexes, and exclusive character cards. The test does not require downloading an app and can be done directly in a browser.",
-      "added_at": "2026-09-03"
+      "added_at": "2026-09-03",
+      "cover": "assets/covers/5d0df75e2d926ae2.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-je80oo-archdaily-chinese-edition-spreading-worl",
@@ -3633,7 +3844,6 @@
       "summary": "ArchDaily 中文版提供世界建筑领域的最新资讯，包括各种建筑项目、设计理念、建筑师访谈等，致力于传播世界建筑文化。",
       "url": "https://www.archdaily.com/zh",
       "cover": "http://assets.adsttc.com/og/flat/og.png",
-      "cover_source": "archdaily.com",
       "published_at": null,
       "category": "其他",
       "domain": "archdaily.com",
@@ -3644,7 +3854,10 @@
       "summary_en": "ArchDaily Chinese Edition offers the latest news in the field of world architecture, including various architectural projects, design concepts, interviews with architects, etc., committed to spreading world architectural culture.",
       "added_at": "2026-09-06",
       "_fail_streak": 0,
-      "last_seen": "2026-09-09"
+      "last_seen": "2026-09-09",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×2)",
+      "cover_source": "archdaily.com"
     },
     {
       "id": "news-cg8vmn-suzhou-contemporary-art-museum-opens-big",
@@ -3652,8 +3865,7 @@
       "source": "ArchDaily 中文版",
       "summary": "苏州当代美术馆由BIG设计，已于2026年9月3日正式对公众开放。该美术馆是BIG首个建成的美术馆项目，占地60,000平方米，设计灵感源自苏州古典园林传统。",
       "url": "https://www.archdaily.com/zh/china",
-      "cover": "http://assets.adsttc.com/og/flat/og.png",
-      "cover_source": "archdaily.com",
+      "cover": "assets/covers/1ff6e031c2e2ebc8.jpg",
       "published_at": null,
       "category": "展览",
       "domain": "archdaily.com",
@@ -3664,7 +3876,10 @@
       "summary_en": "The Suzhou Contemporary Art Museum, designed by BIG, opened to the public on September 3, 2026. It is BIG's first completed art museum project, covering an area of 60,000 square meters and inspired by the traditional Suzhou gardens.",
       "added_at": "2026-09-06",
       "_fail_streak": 0,
-      "last_seen": "2026-09-09"
+      "last_seen": "2026-09-09",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-3muh7d-illustration_illustration_design_illustr",
@@ -3682,7 +3897,9 @@
       "summary_en": "ZCOOL provides illustration, illustration design, illustrator, and illustration material download services, showcasing various forms of illustration works.",
       "added_at": "2026-09-07",
       "_fail_streak": 0,
-      "last_seen": "2026-09-09"
+      "last_seen": "2026-09-09",
+      "cover": "assets/covers/4e969278cf9c3add.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-3170q8-illustration_illustration_design_illustr",
@@ -3700,7 +3917,9 @@
       "summary_en": "ZCOOL provides illustration, illustration design, illustrator, and illustration material download services, showcasing various forms of illustration works.",
       "added_at": "2026-09-07",
       "_fail_streak": 0,
-      "last_seen": "2026-09-09"
+      "last_seen": "2026-09-09",
+      "cover": "assets/covers/6f3be4f5ac1d71a2.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-6cntfw-illustration-series-overview",
@@ -3738,7 +3957,9 @@
       "summary_en": "MIKAGOGO Illustration is an anime illustration resource under the Subtle Town Animation, offering P站画师, P站美图, mobile wallpaper, computer wallpaper, and other 2D resources.",
       "added_at": "2026-09-07",
       "_fail_streak": 0,
-      "last_seen": "2026-09-09"
+      "last_seen": "2026-09-09",
+      "cover": "assets/covers/3551bc866b0d6b01.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-162w1h-锚定-十五五-规划-推动高质量内涵式发展丨学校召开2026年",
@@ -3756,7 +3977,10 @@
       "summary_en": "The China Academy of Art held a mid-level cadre reading conference at the Nanshan Campus from September 3rd to 4th, 2026, focusing on anchoring the '15th Five-Year Plan' and promoting high-quality connotative development.",
       "added_at": "2026-09-10",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×4)"
     },
     {
       "id": "news-biqh8e-contemporary-new-works-china-writers-net",
@@ -3774,7 +3998,9 @@
       "summary_en": "The 'New Works' section of the 'Contemporary' magazine, showcasing the latest literary works on the China Writers Net.",
       "added_at": "2026-09-12",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/b534f35256e001c5.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-94s5j3-contemporary-magazine-all-works-online-r",
@@ -3792,7 +4018,9 @@
       "summary_en": "Contemporary Magazine Society offers online reading of all its works on WeRead. Since its inception in 1979, the magazine has been committed to realism, focusing on reality and the lives of ordinary people, and is one of the largest and most influential literary magazines in mainland China with the highest circulation and social impact.",
       "added_at": "2026-09-12",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/920d5a0abae182b7.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-51bf1c-the-difference-between-modernity-and-con",
@@ -3810,7 +4038,9 @@
       "summary_en": "This article discusses the differences between the concepts of 'modernity' and 'contemporaneity' in terms of time span, usage context, and social characteristics, and analyzes their importance in the study of history, culture, and social phenomena.",
       "added_at": "2026-09-12",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/560077336ff82316.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-4h6hjh-notice-of-the-ministry-of-education-on-t",
@@ -3828,7 +4058,9 @@
       "summary_en": "The Ministry of Education has announced the winners list of the China International College Students Innovation Competition (2025), with a total of 4729 projects winning awards across various categories including the main track, the Youth Red Dream Building Journey track, vocational education track, industry track, and seedling track.",
       "added_at": "2026-09-13",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/69eb2495c008c9c9.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-6k570r-2025-national-science-and-technology-awa",
@@ -3846,7 +4078,9 @@
       "summary_en": "The Ministry of Science and Technology of the People's Republic of China has released the winning cases of the 2025 National Science and Technology Awards, including the winners of the highest science and technology award, the directory of natural science award winning projects, the directory of national technology invention award winning projects, the directory of national science and technology progress award winning projects, and the winners of the international science and technology cooperation award.",
       "added_at": "2026-09-13",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/b3a2e41159218007.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-2fll5m-notice-of-the-ministry-of-education-on-t",
@@ -3882,7 +4116,11 @@
       "summary_en": "The 14th Future Designer National College Digital Art Design Competition (NCDA) has concluded its national final review successfully, announcing the national award winners and releasing subsequent important arrangements.",
       "added_at": "2026-09-13",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/3e3fd2cc038cf84d.jpg",
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-7h54he-the-17th-national-college-student-mathem",
@@ -3900,7 +4138,9 @@
       "summary_en": "The award list of the 17th National College Student Mathematical Contest Final has been announced, including the names of winners from both the mathematics major group and the non-mathematics major group.",
       "added_at": "2026-09-13",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/b96aca5e49d49ef3.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-4suqqn-huawei-cup-22nd-china-graduate-mathemati",
@@ -3918,7 +4158,9 @@
       "summary_en": "The review results of the 22nd China Graduate Mathematical Modeling Contest, sponsored by Huawei, were announced on November 17, 2025. The award list is now officially released. The electronic version of the award certificates is expected to be available for download from December 16, 2025.",
       "added_at": "2026-09-13",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/bfe6f29359998693.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-76wahs-wang-yabin-s-solo-exhibition-long-yuan-t",
@@ -3936,7 +4178,9 @@
       "summary_en": "Triumph Gallery is set to host Wang Yabin's solo exhibition 'Long Yuan' on August 29, 2026.",
       "added_at": "2026-09-14",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/bb3083181088154c.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-8ehnn3-notice-on-the-launch-of-the-new-version-",
@@ -3954,7 +4198,10 @@
       "summary_en": "Xinjiang Public Resource Trading Network issued a notice announcing the launch of the new version of the unseen bidding hall of the Autonomous Region Public Resource Trading Center.",
       "added_at": "2026-09-16",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": null,
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)"
     },
     {
       "id": "news-b1j9mn-sculpture-the-palace-museum",
@@ -3962,8 +4209,7 @@
       "source": "故宫博物院",
       "summary": "故宫博物院介绍了雕塑作为造型艺术的主要门类之一，包括雕刻与塑造的总称，以及中国古代雕塑的历史和特色。故宫博物院收藏了从战国到清代的各色俑类，河北曲阳白石佛像，广东韶关南华寺木雕罗汉像等，以及瓷、铜、石雕刻作品等。",
       "url": "https://www.dpm.org.cn/collection/sculptures.html",
-      "cover": "https://img.dpm.org.cn/static/themes_wap/image/wechat_share1.png",
-      "cover_source": "dpm.org.cn",
+      "cover": "assets/covers/6ef76ec895dafcb3.jpg",
       "published_at": null,
       "category": "展览",
       "domain": "dpm.org.cn",
@@ -3974,7 +4220,10 @@
       "summary_en": "The Palace Museum introduces sculpture as one of the main categories of plastic arts, including carving and modeling. It also discusses the history and characteristics of ancient Chinese sculpture. The Palace Museum's collection includes various types of figurines from the Warring States period to the Qing Dynasty, white marble Buddha statues from Quyang, Hebei, wooden carved Arhat statues from Nanhua Temple in Shaoguan, Guangdong, as well as porcelain, copper, and stone carving works, among others.",
       "added_at": "2026-09-20",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-ci9utf-device-prts-chinese-wiki-of-arknights",
@@ -4012,7 +4261,9 @@
       "summary_en": "Chinese Brush Painting is a traditional Chinese art form using water and ink as the main materials, with rich connotations and expressive power. The article introduces the history, classification, production techniques, and artistic appreciation of Chinese Brush Painting.",
       "added_at": "2026-09-21",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/4fcda43d56bceb56.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-8wr2l3-calligraphy-works-appreciation-china-cal",
@@ -4030,7 +4281,9 @@
       "summary_en": "The China Calligraphy Association official website offers appreciation of calligraphy works, including both traditional and modern calligraphy pieces by famous calligraphers.",
       "added_at": "2026-09-21",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/6b1928ae6fe7f940.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-5chpah-11-famous-black-inventors-who-changed-yo",
@@ -4078,8 +4331,7 @@
       "source": "故宫博物院",
       "summary": "故宫博物院官方网站提供导览、展览、教育、学术、文创等信息。",
       "url": "https://www.dpm.org.cn/Home.html",
-      "cover": "https://img.dpm.org.cn/static/themes_wap/image/wechat_share1.png",
-      "cover_source": "dpm.org.cn",
+      "cover": "assets/covers/8bad3765368cdf2f.jpg",
       "published_at": null,
       "category": "机构",
       "domain": "dpm.org.cn",
@@ -4090,7 +4342,10 @@
       "summary_en": "The official website of the Palace Museum provides information on navigation, exhibitions, education, academia, and cultural and creative products.",
       "added_at": "2026-09-23",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-6zzptv-guided-tour-the-palace-museum",
@@ -4098,8 +4353,7 @@
       "source": "故宫博物院",
       "summary": "故宫博物院官方网站提供导览信息，包括开放时间、在线订票、交通路线、参观须知、全景故宫、近期展览、专馆、原状陈列、赴外展览、教育、探索、学术、文创、关于等内容。",
       "url": "https://www.dpm.org.cn/Visit.html",
-      "cover": "https://img.dpm.org.cn/static/themes_wap/image/wechat_share1.png",
-      "cover_source": "dpm.org.cn",
+      "cover": "assets/covers/3c1d45ff00092455.jpg",
       "published_at": null,
       "category": "机构",
       "domain": "dpm.org.cn",
@@ -4110,7 +4364,10 @@
       "summary_en": "The official website of the Palace Museum provides guided tour information, including opening hours, online ticketing, transportation routes, visitor guidelines, panoramic view of the Forbidden City, recent exhibitions, special exhibitions, original display, exhibitions abroad, education, exploration, academia, cultural and creative products, and about sections.",
       "added_at": "2026-09-23",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×4)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-a564v5-news",
@@ -4128,7 +4385,9 @@
       "summary_en": "Latest news from the Audit Museum of China, including visit activities, closure notices, opening announcements, etc.",
       "added_at": "2026-09-23",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/e07d10d921e9654d.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-5njapd-帽仕汇-汇天下头等大饰",
@@ -4166,7 +4425,9 @@
       "summary_en": "The weekly 'Pengpai News | Art Review' covers art reviews such as the 'Bodhi Leaves狂潮' at the British Museum.",
       "added_at": "2026-09-25",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/b2603b62e0e8bad6.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-9edbqx-general-secretary-addresses-young-people",
@@ -4184,7 +4445,9 @@
       "summary_en": "General Secretary of the Communist Party of China has addressed young people, encouraging them to contribute their youth to the new journey of success, emphasizing the role of youth as the vanguard of national rejuvenation and providing guidance for them.",
       "added_at": "2026-09-28",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/f0091df4d7d7372c.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-3tf07k-youth-mission-and-youth-brilliance",
@@ -4202,7 +4465,9 @@
       "summary_en": "The article emphasizes the close connection between the destiny of youth and the destiny of the nation, calling on young people to firmly establish their ideals and beliefs, courageously undertake historical missions, and showcase their youthful spirit on the stage of the new era.",
       "added_at": "2026-09-28",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/2994358ee76f79f5.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-ck81eh-youth-of-china-strivers-of-the-new-era-a",
@@ -4220,7 +4485,9 @@
       "summary_en": "This article discusses the role and contributions of China's youth in the new era, emphasizing their important role in national development and global affairs, including their contributions in technological innovation, cultural exchange, social development, and global governance.",
       "added_at": "2026-09-28",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/cc1bee30b88864e3.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-flei14-xi-jinping-says-youth-is-the-vanguard-of",
@@ -4228,8 +4495,7 @@
       "source": "新华网",
       "summary": "习近平强调青年是实现中华民族伟大复兴的生力军，全党应重视、关心和支持青年成长，鼓励青年树立远大志向，勇担时代重任，将个人追求融入党和国家事业。",
       "url": "https://news.cctv.com/2026/07/01/ARTI6neSoMaf775s8NCZvaip260701.shtml",
-      "cover": "https://p1.img.cctvpic.com/photoAlbum/templet/common/DEPA1502157896010276/newslog200.jpg",
-      "cover_source": "news.cctv.com",
+      "cover": "assets/covers/95d8a59299c96e12.jpg",
       "published_at": "2026-07-01",
       "category": "观点",
       "domain": "news.cctv.com",
@@ -4240,7 +4506,10 @@
       "summary_en": "Xi Jinping emphasizes that youth is the vanguard of the great rejuvenation of the Chinese nation, urging the whole party to pay attention to, care for, and support the growth of youth, and encourage them to establish great aspirations, bear the responsibilities of the times, and integrate their personal pursuits into the cause of the Party and the country.",
       "added_at": "2026-09-28",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "updated_at": "2026-10-04",
+      "cover_audit": "2026-10-04 审核撤换(URL 共用×2)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-abrxub-youth-china-striving-forward-young-chine",
@@ -4258,7 +4527,9 @@
       "summary_en": "The 'Young Chinese: New Era Strivers and Global Contributors' think tank report was released at the 2026 World Youth Development Forum, comprehensively showcasing the spirit, growth environment, mission and international role of young Chinese in the new era.",
       "added_at": "2026-09-28",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/689a8f8db0718d44.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-4984fs-why-locals-in-xinxing-a-county-in-yunfu-",
@@ -4296,7 +4567,11 @@
       "summary_en": "YituYu website offers an ultra-high-definition collection of art photos, covering various art forms such as painting, sculpture, installation, performance art, and conceptual photography, emphasizing artistic expression and aesthetic experience.",
       "added_at": "2026-09-29",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/f3acc781d4603d18.jpg",
+      "updated_at": "2026-10-05",
+      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)",
+      "cover_source": "screenshot"
     },
     {
       "id": "news-bbc3x0-behavior-what-is-it-behavior-is-included",
@@ -4317,6 +4592,42 @@
       "added_at": "2026-10-01",
       "_fail_streak": 0,
       "last_seen": "2026-10-02"
+    },
+    {
+      "id": "news-874pt1-fiber-medical-encyclopedia",
+      "title": "纤维",
+      "source": "医学百科",
+      "summary": "本文介绍了纤维的定义、分类、在各行各业中的应用以及纤维实验和鉴别方法。",
+      "url": "https://www.yixue.com/%E7%BA%A4%E7%BB%B4",
+      "published_at": null,
+      "category": "研究",
+      "domain": "yixue.com",
+      "_via": "search",
+      "title_zh": "纤维",
+      "title_en": "Fiber - Medical Encyclopedia",
+      "summary_zh": "本文介绍了纤维的定义、分类、在各行各业中的应用以及纤维实验和鉴别方法。",
+      "summary_en": "This article introduces the definition, classification, applications in various industries, as well as experimental methods and identification techniques of fibers.",
+      "added_at": "2026-10-06",
+      "_fail_streak": 0,
+      "last_seen": "2026-10-07"
+    },
+    {
+      "id": "news-bs79dk-fiber-quick-understanding-encyclopedia",
+      "title": "纤维-快懂百科",
+      "source": "m.baike.com",
+      "summary": "纤维是指由连续或不连续的细丝组成的物质，在动植物体内起到重要作用，用途广泛，可织成细线、线头和麻绳，也可用于造纸、织毡和其他复合材料的制造。",
+      "url": "https://m.baike.com/wikiid/1409714743266825309",
+      "published_at": null,
+      "category": "研究",
+      "domain": "m.baike.com",
+      "_via": "search",
+      "title_zh": "纤维-快懂百科",
+      "title_en": "Fiber-Quick Understanding Encyclopedia",
+      "summary_zh": "纤维是指由连续或不连续的细丝组成的物质，在动植物体内起到重要作用，用途广泛，可织成细线、线头和麻绳，也可用于造纸、织毡和其他复合材料的制造。",
+      "summary_en": "Fiber refers to a substance composed of continuous or discontinuous filaments, playing a significant role in the tissues of animals and plants. It is widely used, capable of being woven into threads, knots, and ropes, and can also be used in papermaking, felting, and the manufacture of other composite materials.",
+      "added_at": "2026-10-06",
+      "_fail_streak": 0,
+      "last_seen": "2026-10-07"
     }
   ]
 }

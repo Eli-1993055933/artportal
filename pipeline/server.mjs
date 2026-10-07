@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join, extname, normalize, sep } from "node:path";
 import { fetchSource } from "./lib/fetch.mjs";
 import { extract } from "./lib/extract.mjs";
-import { verifyRecord, isParseableDate } from "./lib/verify.mjs";
+import { verifyRecord, isParseableDate, markRolling, classifyNoDeadline } from "./lib/verify.mjs";
 import * as auth from "./lib/auth.mjs";
 import { isThirdParty, isTrustedPlatform } from "./lib/aggregators.mjs";
 import { ipRegion } from "./lib/ipregion.mjs";
@@ -276,7 +276,15 @@ async function searchAndHarvest(query, target = 6, hint = null, who = null) {
     // v1.14.0 检索路径无日期闸:无 deadline 且非常年标注 → 不进库。
     // 检索路径与每日管道同源(gradeTrust 判 pending),但检索无 review-queue 机制,直接 drop 更安全——
     // 否则 AI 漏提截止的机会经此路径 trust:"auto" 硬上线,前端"隐藏已截止"对它无效,污染全库。
-    if (!v.flags.hasDeadline) { log.push("dropped no-deadline " + host); continue; }
+    // v1.15.0 除外:【国内检索】(gl=cn)的无截止条目按「常年征集」收录(2026-10-07 用户确认)——
+    // 国内大量官方征集常年开放、原文不写截止;仍按反幻觉口径标注 deadline_note,绝不虚构日期。
+    if (!v.flags.hasDeadline) {
+      if (String(gl || "").toLowerCase() !== "cn") { log.push("dropped no-deadline " + host); continue; }
+      const kind = classifyNoDeadline(v.record);        // 放宽后仍拦陈旧页(标题/备注只出现往年)
+      if (kind === "stale") { log.push("dropped stale no-deadline " + host); continue; }
+      if (kind === "rolling") markRolling(v.record);
+      log.push("rolling no-deadline " + host);
+    }
     const rec = finalize(v.record, url, host);
     if (locTerms.length && !matchLocation(rec, locTerms)) { log.push("跑题(不含 " + loc + ") " + host); continue; }   // 地点相关性过滤(中英别名任一命中即可)
     if (existIds.has(rec.id) || added.find(a => a.id === rec.id)) continue;
