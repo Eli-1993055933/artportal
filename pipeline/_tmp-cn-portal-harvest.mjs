@@ -36,6 +36,13 @@ const DETAIL_CAP = 12;             // 每源最多入库详情数
 
 function todayISO() { return new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10); }
 function slug(s) { return String(s || "").toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "item"; }
+// 标题归一:去掉标点/空白/常见机构前缀,只留 CJK+字母数字,用于跨站同公告判重
+function normTitle(s) {
+  return String(s || "")
+    .replace(/^[\s\S]{0,20}?[：:]/g, "")                 // 去掉「中国美术家协会：」这类前缀
+    .replace(/[\s\u3000\p{P}\p{S}]/gu, "")
+    .toLowerCase().slice(0, 34);
+}
 function computeStatus(deadline) {
   if (!deadline) return "open";
   return String(deadline).slice(0, 10) < todayISO() ? "expired" : "open";
@@ -65,6 +72,9 @@ function finalizeRecord(rec, { domain, url, srcUrl }) {
 async function main() {
   const existing = JSON.parse(await readFile(DATA, "utf8"));
   const existUrls = new Set((existing.opportunities || []).map(o => (o.url || "").split("#")[0]));
+  // 标题判重:同一条公告常被多站(中国美协→省美协)镜像,按归一标题拦截,避免重复入库
+  const existTitles = new Set((existing.opportunities || []).map(o => normTitle(o.title_zh || o.title_en || "")).filter(Boolean));
+  const seenNewTitles = new Set();
   const out = [];
   let totalDropped = 0, totalErr = 0;
 
@@ -108,6 +118,9 @@ async function main() {
           }
         }
         const rec = finalizeRecord(v.record, { domain, url: u0, srcUrl: listUrl });
+        const nt = normTitle(rec.title_zh || rec.title_en || "");
+        if (nt && (existTitles.has(nt) || seenNewTitles.has(nt))) { totalDropped++; console.log(`  drop(标题已存在) ${rec.title_zh}`); continue; }
+        if (nt) { existTitles.add(nt); seenNewTitles.add(nt); }
         console.log(`  ✓ ${rec.title_zh} | dl=${rec.deadline||"?"}`);
         out.push(rec); added++;
       } catch (e) { totalErr++; console.log(`  ERR ${domain}: ${String(e.message||e).slice(0,50)}`); }

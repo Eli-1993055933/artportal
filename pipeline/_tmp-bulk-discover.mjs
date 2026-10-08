@@ -82,6 +82,19 @@ async function main() {
     }
   }
   if (!CN_ONLY) pool.push(...GENERIC);
+  // --qfile:额外加载自定义查询词(每行 `查询词[|gl[|hl]]`,# 开头忽略)——用于精准征稿类冲刺
+  const QFILE = getOpt("--qfile");
+  if (QFILE) {
+    try {
+      const lines = (await readFile(P(QFILE), "utf8")).split(/\r?\n/);
+      for (const ln of lines) {
+        const s = ln.trim();
+        if (!s || s.startsWith("#")) continue;
+        const parts = s.split("|").map(x => (x || "").trim());
+        if (parts[0]) pool.push({ q: parts[0], gl: (parts[1] || "cn").toLowerCase(), hl: parts[2] || "zh-cn", region: "qfile" });
+      }
+    } catch (e) { console.error("qfile 读取失败:", e.message); }
+  }
   // 打散顺序:让中国/国际交错,避免同语言同域候选扎堆
   const shuffled = [...new Map(pool.map(x => [x.q + "|" + x.gl, x])).values()];
   for (let i = shuffled.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; }

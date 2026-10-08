@@ -1,0 +1,10 @@
+# 国内门户候选源 第3批(2026-10-08)——可枚举列表页,靠 discoverDetailLinks 展开
+# 每行:列表页URL(Tab/空格后可跟备注,脚本只取第一段)
+http://www.henanshengmeixie.com/zgtz/index.html
+http://www.henanshengmeixie.com/zgtz/index_2.html
+http://www.henanshengmeixie.com/zgtz/index_3.html
+http://www.henanshengmeixie.com/zgtz/index_4.html
+http://www.henanshengmeixie.com/zgtz/index_5.html
+http://www.henanshengmeixie.com/zgtz/index_6.html
+http://www.daheart.cn/zixun/
+http://www.cnap.org.cn/

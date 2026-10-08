@@ -7,8 +7,8 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchSource } from "./lib/fetch.mjs";
 import { extract } from "./lib/extract.mjs";
-import { verifyRecord } from "./lib/verify.mjs";
-import { dedupe } from "./lib/dedupe.mjs";
+import { verifyRecord, markRolling, classifyNoDeadline } from "./lib/verify.mjs";
+import { normUrl } from "./lib/dedupe.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 // 加载 pipeline/.env(LLM key 等)进 process.env,否则抽取会缺 DEEPSEEK/GLM 密钥
@@ -87,19 +87,42 @@ async function main() {
       if (!ex.data || ex.data.applicable === false) { dropped++; console.log("drop(不适用) " + domain); continue; }
       const v = verifyRecord(ex.data, { sourceText: f.text, url: u, source_url: u, domain });
       if (v.dropped) { dropped++; console.log("drop(校验) " + domain + " " + (v.dropReason || "").slice(0, 40)); continue; }
+      // A 类口径保险:纯展览类(非征稿/征集/招募)不入库
+      if (/^exhibition/i.test(v.record.category || "") && !/(征集|征稿|招募|投稿|报名|申报|驻留)/.test(v.record.title_zh || "")) {
+        dropped++; console.log("drop(纯展览) " + (v.record.title_zh || "").slice(0, 24)); continue;
+      }
+      // 国内来源无截止 → 过陈旧闸后按「常年征集」标注(与门户收割口径一致)
+      if (v.record.deadline == null) {
+        const isCn = /中国/.test(v.record.country_zh || "") || /\.cn$/i.test(host);
+        if (isCn) {
+          const kind = classifyNoDeadline(v.record);
+          if (kind === "stale") { dropped++; console.log("drop(陈旧无截止) " + (v.record.title_zh || "").slice(0, 24)); continue; }
+          if (kind === "rolling") markRolling(v.record);
+        }
+      }
       const rec = finalizeRecord(v.record, { domain, url: u });
       console.log(`✓ ${rec.title_zh} | dl=${rec.deadline || "?"} | ${domain}`);
       out.push(rec);
     } catch (e) { err++; console.log("ERR " + domain + " " + e.message); }
   }
   if (!out.length) { console.log("\n无新增"); return; }
-  const byId = new Map((existing.opportunities || []).map(o => [o.id, o]));
-  for (const r of out) byId.set(r.id, r);
-  const dd = dedupe(Array.from(byId.values()));
-  const finalList = dd.list;
+  // 【只追加、绝不删既有条目】——历史上这里对整库跑 dedupe(),把同域近似条目当重复合并,
+  // 造成既有数据静默丢失(实测丢 6 条)。改为:按 id + URL 归一化,只并入新条目。
+  const cur = existing;
+  const ids = new Set((cur.opportunities || []).map(o => o.id));
+  const urls = new Set((cur.opportunities || []).map(o => normUrl(o.url)));
+  let saved = 0;
+  for (const r of out) {
+    if (ids.has(r.id)) continue;
+    const nu = normUrl(r.url);
+    if (nu && urls.has(nu)) continue;
+    cur.opportunities.push(r); ids.add(r.id); urls.add(nu); saved++;
+  }
+  cur.count = cur.opportunities.length;
+  cur.generated_at = new Date().toISOString().slice(0, 10);
   const tmp = DATA + ".tmp-" + process.pid;
-  await writeFile(tmp, JSON.stringify({ _meta: existing._meta || {}, generated_at: new Date().toISOString().slice(0, 10), count: finalList.length, opportunities: finalList }, null, 2), "utf8");
+  await writeFile(tmp, JSON.stringify(cur, null, 2), "utf8");
   await rename(tmp, DATA);
-  console.log(`\n完成: 新增 ${out.length}, 丢弃 ${dropped}, 错误 ${err}, 总数 ${finalList.length}`);
+  console.log(`\n完成: 新增 ${saved}(提取 ${out.length}), 丢弃 ${dropped}, 错误 ${err}, 总数 ${cur.count}`);
 }
 main().catch(e => { console.error("FATAL:", e.message); process.exit(1); });

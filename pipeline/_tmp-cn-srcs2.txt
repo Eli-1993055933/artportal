@@ -1,0 +1,7 @@
+# 高价值「征稿列表页」源(2026-10-08 增量冲刺第二批)——含近期(2026年8-10月)公告,截止多在 2026 年末/2027
+# 用 _tmp-cn-portal-harvest.mjs --srcs 跑(discoverDetailLinks 展开同域详情)
+https://www.caanet.org.cn/	中国美术家协会 | 公告通知 | opencall
+https://www.caanet.org.cn/Search.mx?q=%E5%BE%81%E7%A8%BF	中国美协·征稿搜索(642条) | 征稿 | opencall
+https://zg.cpanet.cn/index_2	中国摄影家协会征稿平台 | 活动征集 | opencall
+https://www.cpanet.org.cn/	中国摄影家协会网 | 大展征稿 | opencall
+https://www.cflac.org.cn/new_ys/sy/dt/	中国文艺网·摄影动态(征集) | 征集 | opencall

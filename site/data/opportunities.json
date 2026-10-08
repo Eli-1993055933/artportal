@@ -16,7 +16,7 @@
     }
   },
   "generated_at": "2026-10-08",
-  "count": 2068,
+  "count": 2078,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -125538,6 +125538,485 @@
       "last_seen": "2026-10-07",
       "updated_at": "2026-10-07",
       "_via": "search"
+    },
+    {
+      "id": "search-zwgk-第九届全国画院美术作品展览工作方案",
+      "category": "opencall",
+      "title_zh": "第九届全国画院美术作品展览工作方案",
+      "title_en": null,
+      "org_zh": "文化和旅游部办公厅",
+      "city_zh": "北京",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间，按常年征集收录（以官网为准）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画",
+        "油画",
+        "版画",
+        "雕塑",
+        "水彩（粉）",
+        "综合材料",
+        "书法篆刻"
+      ],
+      "summary_zh": "文化和旅游部办公厅发布《第九届全国画院美术作品展览工作方案》，面向全国各级国有画院艺术家征集作品，作品类型包括中国画、油画、版画、雕塑等。",
+      "url": "https://zwgk.mct.gov.cn/zfxxgkml/wysy/202503/t20250326_959019.html",
+      "source_url": "https://zwgk.mct.gov.cn/zfxxgkml/wysy/202503/t20250326_959019.html",
+      "domain": "zwgk.mct.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-gov-澳门艺术节本地节目提案征集",
+      "category": "opencall",
+      "title_zh": "澳门艺术节本地节目提案征集",
+      "title_en": "Macao Arts Festival Call for Proposals for Local Programmes",
+      "org_zh": "文化事务局",
+      "city_zh": "澳门",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间，按常年征集收录（以官网为准）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "戏剧",
+        "粤剧",
+        "舞蹈",
+        "儿童表演",
+        "多媒体表演艺术"
+      ],
+      "summary_zh": "澳门艺术节由文化事务局组织，旨在推广本地艺术发展，现正征集本地制作节目提案，主题为“海上丝绸之路的文化相遇”，鼓励艺术家从澳门独特文化遗产中汲取灵感。",
+      "url": "https://www.gov.mo/en/news/391985/",
+      "source_url": "https://www.gov.mo/en/news/391985/",
+      "domain": "gov.mo",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-scfai-四川美术学院青年艺术家驻留计划",
+      "category": "residency",
+      "title_zh": "四川美术学院青年艺术家驻留计划",
+      "title_en": null,
+      "org_zh": "四川美术学院",
+      "city_zh": "重庆",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间，按常年征集收录（以官网为准）",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": true,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "四川美术学院青年艺术家驻留计划是一项全公益的对青年艺术家的扶持计划，旨在尊重艺术教育的规律，打破体制机制障碍，探索适宜于我国的艺术英才成长的人才培养模式，实现青年艺术家“扶一把，送一程”的目的，为国家和社会培养出艺术精英人才。",
+      "url": "https://www.scfai.edu.cn/museum/qnysjzljh/zljj.htm",
+      "source_url": "https://www.scfai.edu.cn/museum/qnysjzljh/zljj.htm",
+      "domain": "scfai.edu.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-service-松江区-艺术家驻留目的地-评审和管理办法",
+      "category": "residency",
+      "title_zh": "松江区“艺术家驻留目的地”评审和管理办法",
+      "title_en": null,
+      "org_zh": "松江区文化和旅游局",
+      "city_zh": "松江区",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间，按常年征集收录（以官网为准）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "版画",
+        "绘画",
+        "雕塑",
+        "影像",
+        "装置",
+        "跨媒介"
+      ],
+      "summary_zh": "松江区文化和旅游局制定《松江区“艺术家驻留目的地”评审和管理办法》，旨在促进社会力量参与人文松江建设，激活松江当代艺术生态，加快艺术作品孵化。",
+      "url": "https://service.shanghai.gov.cn/XingZhengWenDangKuJyh/XZGFDetails.aspx?docid=240514140748iILGF5gCmvKKHhFZGRa",
+      "source_url": "https://service.shanghai.gov.cn/XingZhengWenDangKuJyh/XZGFDetails.aspx?docid=240514140748iILGF5gCmvKKHhFZGRa",
+      "domain": "service.shanghai.gov.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-szcod-深圳创意设计新锐奖",
+      "category": "award",
+      "title_zh": "深圳创意设计新锐奖",
+      "title_en": null,
+      "org_zh": "深圳市文化创意与设计联合会",
+      "city_zh": "深圳",
+      "country_zh": "中国",
+      "deadline": null,
+      "deadline_note": "原文未提及截止时间，按常年征集收录（以官网为准）",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "新锐奖是深圳市与联合国教科文组织于2013年联合发起的、面向全球295个创意城市的35岁以下年轻设计师的国际性专业奖项，每两年1届，至今已经成功举办了4届。",
+      "url": "https://szcod.org.cn/index",
+      "source_url": "https://szcod.org.cn/index",
+      "domain": "szcod.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-中国美协艺委会届展系列-红色沂蒙-时代画卷-第十届架上连环画展览征稿通知",
+      "category": "opencall",
+      "title_zh": "中国美协艺委会届展系列：红色沂蒙 时代画卷——第十届架上连环画展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会、临沂大学",
+      "city_zh": "临沂",
+      "country_zh": "中国",
+      "deadline": "2027-04-15",
+      "deadline_note": "申报时间为即日起至 2027年4月15日 24时。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "连环画",
+        "中国画",
+        "油画",
+        "版画",
+        "水彩画",
+        "素描"
+      ],
+      "summary_zh": "中国美术家协会、临沂大学共同主办，面向全国公开征集连环画作品，以赞颂沂蒙精神、描绘时代画卷为主题。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10405",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10405",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-中国美协艺委会青年展系列-首届青年壁画作品展览征稿通知",
+      "category": "opencall",
+      "title_zh": "中国美协艺委会青年展系列：首届青年壁画作品展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": "2026-10-25",
+      "deadline_note": "申报时间为即日起至2026年10月25日24时。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "45周岁以下",
+        "nationality": null
+      },
+      "disciplines": [
+        "壁画"
+      ],
+      "summary_zh": "中国美术家协会举办首届青年壁画作品展览，面向全国公开征集45周岁以下作者的作品，以‘界域·共生’为主题，作品形式为壁画。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10389",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10389",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search",
+      "_deadline_src": "note+原文验证"
+    },
+    {
+      "id": "search-caanet-中国美协艺委会学术研究展系列-2026厦门漆画展览征稿通知",
+      "category": "opencall",
+      "title_zh": "中国美协艺委会学术研究展系列：2026厦门漆画展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "厦门市",
+      "country_zh": "中国",
+      "deadline": "2026-10-25",
+      "deadline_note": "申报时间为即日起至2026年10月25日24时",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "漆画"
+      ],
+      "summary_zh": "中国美术家协会、厦门市文化和旅游局共同举办“2026厦门漆画展览”，面向全国范围公开征集漆画作品。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10386",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10386",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search",
+      "_deadline_src": "note+原文验证"
+    },
+    {
+      "id": "search-caanet-云日相辉映-首届当代中国山水画作品展征稿通知",
+      "category": "opencall",
+      "title_zh": "云日相辉映——首届当代中国山水画作品展征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "温州市",
+      "country_zh": "中国",
+      "deadline": "2026-10-30",
+      "deadline_note": "申报起止时间为即日起至2026年10月30日24时",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "中国山水画"
+      ],
+      "summary_zh": "由中国美术家协会等机构主办的“云日相辉映——首届当代中国山水画作品展”征稿通知，面向全国公开征集中国山水画作品。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10376",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10376",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search"
+    },
+    {
+      "id": "search-caanet-中国美协艺委会青年展系列-雨花满天-2026青年写意画作品展览征稿通知",
+      "category": "opencall",
+      "title_zh": "中国美协艺委会青年展系列：雨花满天——2026青年写意画作品展览征稿通知",
+      "title_en": null,
+      "org_zh": "中国美术家协会",
+      "city_zh": "未知",
+      "country_zh": "中国",
+      "deadline": "2026-10-15",
+      "deadline_note": "申报时间为即日起至2026年10月15日24时。",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": "45周岁以下",
+        "nationality": null
+      },
+      "disciplines": [
+        "中国画"
+      ],
+      "summary_zh": "中国美术家协会、江苏省文学艺术界联合会联合举办‘雨花满天——2026青年写意画作品展览’，面向全国45周岁以下作者征稿，作品形式为中国画，要求章款齐全，题材不限。",
+      "url": "https://www.caanet.org.cn/newsdetail.mx?id=10354",
+      "source_url": "https://www.caanet.org.cn/newsdetail.mx?id=10354",
+      "domain": "caanet.org.cn",
+      "org_type": "official",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-08",
+      "last_seen": "2026-10-08",
+      "updated_at": "2026-10-08",
+      "_via": "search",
+      "_deadline_src": "note+原文验证"
     }
   ]
 }

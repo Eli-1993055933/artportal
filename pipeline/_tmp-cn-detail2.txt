@@ -1,0 +1,16 @@
+# 近期(2026年8-10月发布)中国美协征稿详情页 PDF 直接入库候选(URL_FILE 传给 _tmp-cn-verify-insert.mjs)
+# 说明:发布晚 → 截止多半落在 2026年末/2027,是否仍开放由管线重抓原文+verifyRecord 判定
+https://www.caanet.org.cn/newsdetail.mx?id=10389
+https://www.caanet.org.cn/newsdetail.mx?id=10386
+https://www.caanet.org.cn/newsdetail.mx?id=10376
+https://www.caanet.org.cn/newsdetail.mx?id=10368
+https://www.caanet.org.cn/newsdetail.mx?id=10354
+https://www.caanet.org.cn/newsdetail.mx?id=10342
+https://www.caanet.org.cn/newsdetail.mx?id=10331
+https://www.caanet.org.cn/newsdetail.mx?id=10327
+https://www.caanet.org.cn/newsdetail.mx?id=10316
+https://www.caanet.org.cn/newsdetail.mx?id=10315
+https://www.caanet.org.cn/newsdetail.mx?id=10312
+https://www.caanet.org.cn/newsdetail.mx?id=10304
+https://www.caanet.org.cn/newsdetail.mx?id=10291
+https://www.caanet.org.cn/newsdetail.mx?id=10279
