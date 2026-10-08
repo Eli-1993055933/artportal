@@ -5556,7 +5556,7 @@
       "org_zh": "《中国摄影》杂志社",
       "city_zh": "未知",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2025-10-31",
       "deadline_note": "征稿时间：即日起至 2025 年10月31日",
       "apply_fee": {
         "free": true,
@@ -5587,14 +5587,15 @@
       "domain": "cphoto.com.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-07",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/2ff9f2dff80834d4.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 1
+      "_fail_streak": 1,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "guangdong-photographers-assoc-征稿-古韵围楼-大美始兴-全省摄影大赛",
@@ -6592,7 +6593,7 @@
       "org_zh": "上海国际童书展（CCBF）",
       "city_zh": "未知",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2026-06-08",
       "deadline_note": "征稿截止时间2026年06月08日（北京时间23:59）",
       "apply_fee": {
         "free": true,
@@ -6623,14 +6624,15 @@
       "domain": "ccbfgoldenpinwheel.com.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/f7a9bc5c5dbfa6f3.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "jp-tokas-opencall-tokas-emerging-2027",
@@ -6922,7 +6924,7 @@
       "org_zh": "北大方正字库",
       "city_zh": "未知",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2026-02-28",
       "deadline_note": "作品上传截止到2026年2月28日",
       "apply_fee": {
         "free": null,
@@ -6954,14 +6956,15 @@
       "domain": "foundertype.com",
       "org_type": "commercial",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/4e7a67ec016db3ba.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "jp-acac-opencall-工作室艺术家公开招募",
@@ -20977,7 +20980,7 @@
       "org_zh": "中国美术学院",
       "city_zh": "杭州",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-06-01",
       "deadline_note": "报名期限：即日起至2026年6月1日。",
       "apply_fee": {
         "free": true,
@@ -21010,15 +21013,16 @@
       "domain": "caa.at0086.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-07-30",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-07-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "_fail_streak": 0,
       "cover": "assets/covers/6baab3c7828207cd.jpg",
-      "cover_source": "screenshot"
+      "cover_source": "screenshot",
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "artconnect-opportunities-silence-awareness-existence-residency-in",
@@ -49221,7 +49225,7 @@
       "org_zh": "ArtConnect",
       "city_zh": "林茨",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2026-09-07",
       "deadline_note": "截止日期：2026年9月7日16:00 UTC",
       "apply_fee": {
         "free": true,
@@ -49276,17 +49280,18 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-10-08",
       "__country": null,
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/2e8ee92614b700e8.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "artconnect-opportunities-p18-hodder-fellowship",
@@ -50297,7 +50302,7 @@
       "org_zh": "ArtConnect",
       "city_zh": "未知",
       "country_zh": "英国",
-      "deadline": null,
+      "deadline": "2026-09-18",
       "deadline_note": "截止日期：2026年9月18日 08:00 UTC",
       "apply_fee": {
         "free": true,
@@ -50352,18 +50357,19 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-10-08",
       "__country": "英国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/f6308cad7e280ccb.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "artconnect-opportunities-p23-accordi-disaccordi-国际短片电影节",
@@ -52761,7 +52767,7 @@
       "org_zh": "ArtConnect",
       "city_zh": "阿姆斯特丹",
       "country_zh": "荷兰",
-      "deadline": null,
+      "deadline": "2026-10-10",
       "deadline_note": "申请截止日期：2026年10月10日",
       "apply_fee": {
         "free": false,
@@ -52818,12 +52824,13 @@
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-10-08",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/3e592d1fd5c913c9.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "artconnect-opportunities-p29-w-eugene-smith-grant-2026",
@@ -76265,7 +76272,7 @@
       "org_zh": "ArtConnect",
       "city_zh": "未知",
       "country_zh": "德国",
-      "deadline": null,
+      "deadline": "2026-09-11",
       "deadline_note": "截止日期：2026年9月11日16:00 UTC",
       "apply_fee": {
         "free": true,
@@ -76320,18 +76327,19 @@
       "domain": "artconnect.com",
       "org_type": "independent",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-15",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-15",
+      "updated_at": "2026-10-08",
       "__country": "德国",
       "geo_fallback": "geo_backfill_evidence",
       "source_platform": "ArtConnect",
       "official_url": null,
       "cover": "assets/covers/c9ceab8856dedc35.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "artconnect-opportunities-p20-designto-festival-2027-artconnect",
@@ -77930,7 +77938,7 @@
       "org_zh": "Ras Al Khaimah Art Festival",
       "city_zh": "未知",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2026-06-05",
       "deadline_note": "提交截止日期：2026年6月5日",
       "apply_fee": {
         "free": null,
@@ -77966,14 +77974,15 @@
       "domain": "rakart.ae",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-16",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-16",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/d1cd0aeced25a7d3.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "israel-israel-museum-以色列耶路撒冷以色列博物馆艺术机会",
@@ -84614,7 +84623,7 @@
       "org_zh": "《中国摄影》杂志社(中国摄影家协会主办)",
       "city_zh": "未知",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2023-12-20",
       "deadline_note": "征集时间：即日起至2023年12月20日",
       "apply_fee": {
         "free": null,
@@ -84645,14 +84654,15 @@
       "domain": "cphoto.com.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/38335236106730b9.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "zhongguo-sheying-mag-huodong-汽车轮子上的中国丨-中国摄影-杂志专题公开征稿",
@@ -84662,7 +84672,7 @@
       "org_zh": "《中国摄影》杂志社",
       "city_zh": "未知",
       "country_zh": "未知",
-      "deadline": null,
+      "deadline": "2023-09-10",
       "deadline_note": "征集时间：即日起至2023年9月10日",
       "apply_fee": {
         "free": null,
@@ -84693,14 +84703,15 @@
       "domain": "cphoto.com.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/a137e6a44db3da22.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "cafa-diaosuxi-news-曾竹韶雕塑艺术奖学金",
@@ -84758,7 +84769,7 @@
       "org_zh": "云南艺术学院",
       "city_zh": "昆明市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2024-05-30",
       "deadline_note": "报名截止日期2024年5月30日",
       "apply_fee": {
         "free": true,
@@ -84793,10 +84804,11 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "cover": "assets/covers/571bebe170f220d3.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "cn-1cminqx-known-2026年厦门大学-戏曲与非遗工作坊暑期学校-招生简章",
@@ -84901,7 +84913,7 @@
       "org_zh": "中国美术家协会",
       "city_zh": "长春",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-10-08",
       "deadline_note": "申报截止 + 2026年10月8日 24时",
       "apply_fee": {
         "free": null,
@@ -84936,11 +84948,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/cfe8c3ba97d395fa.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-艺术赋美乡村-中国美术家协会首届和美乡村建设艺术实践大展征稿通知",
@@ -84950,7 +84963,7 @@
       "org_zh": "中国美术家协会",
       "city_zh": "西安",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-09-15",
       "deadline_note": "申报起止时间为即日起至2026年9月15日24时",
       "apply_fee": {
         "free": null,
@@ -84986,15 +84999,16 @@
       "domain": "caanet.org.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/1e7c58372a4bdf30.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-第二届-浩瀚草原-美术作品展览征稿通知",
@@ -85055,7 +85069,7 @@
       "org_zh": "中国美术家协会、湖北美术学院",
       "city_zh": "武汉",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-09-15",
       "deadline_note": "申报起止时间为即日起至2026年9月15日24时",
       "apply_fee": {
         "free": null,
@@ -85090,15 +85104,16 @@
       "domain": "caanet.org.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/46514c3592744f2c.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-中国美协艺委会青年展系列-2026中轴线文化青年数字艺术展览征稿通知",
@@ -85108,7 +85123,7 @@
       "org_zh": "中国美术家协会",
       "city_zh": "北京市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-10-08",
       "deadline_note": "申报时间为即日起至2026年10月8日24时。",
       "apply_fee": {
         "free": null,
@@ -85143,11 +85158,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/6f581c745c52c944.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-中国美协艺委会学术研究展系列-第二届插画艺术展览征稿通知",
@@ -85157,7 +85173,7 @@
       "org_zh": "中国美术家协会",
       "city_zh": "珠海市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-11-18",
       "deadline_note": "申报起止时间即日起至2026年11月18日24时",
       "apply_fee": {
         "free": null,
@@ -85192,11 +85208,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/7d7b889543bc3c7d.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-设计的温度-中国美术家协会首届设计大展征稿通知",
@@ -85260,7 +85277,7 @@
       "org_zh": "中国美术家协会",
       "city_zh": "未知",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-09-20",
       "deadline_note": "申报时间为即日起至2026年9月20日24时",
       "apply_fee": {
         "free": null,
@@ -85291,15 +85308,16 @@
       "domain": "caanet.org.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/c812b8407fcf5ad6.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-遇见-虞山-2026中国画-山水画-双年展",
@@ -87280,7 +87298,7 @@
       "org_zh": "河南省美术家协会",
       "city_zh": "郑州",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-08-30",
       "deadline_note": "作品照片收件时间：8月20日至2026年8月30日",
       "apply_fee": {
         "free": null,
@@ -87321,11 +87339,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/38c622ab63dc2981.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-henanshengmeixie-第三届河南省青年美术人才推介工程-青苗计划综合美术作品展征稿通知",
@@ -87444,7 +87463,7 @@
       "org_zh": "河南省美术家协会",
       "city_zh": "南阳",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-04-01",
       "deadline_note": "照片收件时间：2026年4月1日——5日",
       "apply_fee": {
         "free": true,
@@ -87484,11 +87503,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/4042017821ae6fc4.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-henanshengmeixie-第三届全国大学生美术作品展览征稿通知",
@@ -87498,7 +87518,7 @@
       "org_zh": "中国美术家协会",
       "city_zh": "未知",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-05-01",
       "deadline_note": "网上报送通道开通时间：2026年5月1日—20日",
       "apply_fee": {
         "free": null,
@@ -87548,11 +87568,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/dad0eaf7ced9263f.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-henanshengmeixie-新生活-新风尚-新年画-我们的小康生活美术作品展览征稿通知",
@@ -87562,7 +87583,7 @@
       "org_zh": "河南省美术家协会",
       "city_zh": "未知",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2023-12-30",
       "deadline_note": "请于2023年12月30日前将作品电子图片、《作品申报表》、《作品授权书》word格式电子版文件及手签的申报表、授权书PDF文件一并上传至公共邮箱 artcommittes@126.com。",
       "apply_fee": {
         "free": null,
@@ -87603,11 +87624,12 @@
       "verified_at": null,
       "first_seen": "2026-08-24",
       "last_seen": "2026-08-24",
-      "updated_at": "2026-08-24",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/5329b75570eb1066.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-hljswl-首届黑龙江省壁画作品双年展",
@@ -87919,7 +87941,7 @@
       "org_zh": "湖南日报社、湖南省文学艺术界联合会、中国摄影出版传媒有限责任公司",
       "city_zh": "未知",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-11-30",
       "deadline_note": "截稿时间2026年11月30日24:00",
       "apply_fee": {
         "free": true,
@@ -87954,11 +87976,12 @@
       "verified_at": null,
       "first_seen": "2026-08-25",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-09-18",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/bac9dc2a0526b283.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-zg-天山镜语-看见新疆摄影展",
@@ -88069,7 +88092,7 @@
       "org_zh": "贵州省总工会、贵州省文联",
       "city_zh": "铜仁市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-09-15",
       "deadline_note": "征稿时间：自征稿启事发布之日起征稿，至2026年9月15日截稿（邮寄以邮寄时间为准）。",
       "apply_fee": {
         "free": null,
@@ -88100,15 +88123,16 @@
       "domain": "tongren.gov.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-25",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-25",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/458578c7d7407780.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-xaswl-西安市第二届书法临帖作品展等你来投稿",
@@ -89090,7 +89114,7 @@
       "org_zh": "重庆市美术家协会",
       "city_zh": "重庆",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2025-08-15",
       "deadline_note": "初评收件时间：自征稿启事发布之日起至2025年8月15日。",
       "apply_fee": {
         "free": null,
@@ -89129,15 +89153,16 @@
       "domain": "cqsart.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-10-05",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/790e60166081fed8.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 2
+      "_fail_streak": 2,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-caanet-红岩清风-第二届廉洁文化美术作品展览征稿通知",
@@ -89201,7 +89226,7 @@
       "org_zh": "重庆半岛美术艺术中心",
       "city_zh": "云南省红河州石屏县",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-07-06",
       "deadline_note": "报名截止 + 2026年7月6日截止",
       "apply_fee": {
         "free": null,
@@ -89232,15 +89257,16 @@
       "domain": "cqsart.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/d1dd884c8e53a59b.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-wlt-第八届西藏珠穆朗玛文学艺术奖作品征集公告",
@@ -89358,7 +89384,7 @@
       "org_zh": "辽宁省美术家协会",
       "city_zh": "沈阳市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-01-26",
       "deadline_note": "申报材料请于2026年1月26日至27日集中报送我会，未按时报送将视为自动放弃本年度申请。",
       "apply_fee": {
         "free": null,
@@ -89389,15 +89415,16 @@
       "domain": "lnwyw.org.cn",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/306d05c1ff6d2b7d.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-yqszlg-阳泉市第三届水彩-粉画作品展览征稿启事",
@@ -89515,7 +89542,7 @@
       "org_zh": "厦门市文学艺术联合会",
       "city_zh": "厦门市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-09-15",
       "deadline_note": "初评作品照片寄送截止日期为2026年9月15日",
       "apply_fee": {
         "free": null,
@@ -89552,15 +89579,16 @@
       "domain": "xmwenlian.com",
       "org_type": "official",
       "trust": "auto",
-      "status": "open",
+      "status": "expired",
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-10-08",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/0e982792359a2c90.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 0
+      "_fail_streak": 0,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-gxwenlian-2026广西艺术作品展览-第十四届广西美术作品展览征稿补充通知",
@@ -89570,7 +89598,7 @@
       "org_zh": "广西美术家协会",
       "city_zh": "南宁",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-08-15",
       "deadline_note": "作品申报与评选\n2. 参展作品征稿日期截止2026年8月15日。",
       "apply_fee": {
         "free": true,
@@ -89616,11 +89644,12 @@
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-08-30",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/8b4b01245c3ac44a.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-gxwenlian-2026广西艺术作品展览-第十四届广西书法篆刻作品展览征稿补充通知",
@@ -89630,7 +89659,7 @@
       "org_zh": "广西书法家协会",
       "city_zh": "南宁市",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-08-15",
       "deadline_note": "投稿作品时间为自征稿通知发布之日起至2026年8月15日23:59",
       "apply_fee": {
         "free": true,
@@ -89666,11 +89695,12 @@
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-08-30",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/1f6f22be8ec6eb02.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-wl-生态春城-滇咖万象-2026滇池湖滨生态暨咖啡文化主题摄影展",
@@ -89729,7 +89759,7 @@
       "org_zh": "云南省语言文字工作委员会、云南省教育厅",
       "city_zh": "未知",
       "country_zh": "中国",
-      "deadline": null,
+      "deadline": "2026-07-15",
       "deadline_note": "社会人员组报名方式：材料报送：个人或所在单位填写参赛汇总表，连同《社会人员组个人承诺书》，于2026年7月15日前发送至指定邮箱2508294799@qq.com，文件规范命名。",
       "apply_fee": {
         "free": true,
@@ -89764,11 +89794,12 @@
       "verified_at": null,
       "first_seen": "2026-08-30",
       "last_seen": "2026-08-30",
-      "updated_at": "2026-08-30",
+      "updated_at": "2026-10-08",
       "_via": "search",
       "cover": "assets/covers/8991cc9895e36510.jpg",
       "cover_source": "screenshot",
-      "_fail_streak": 3
+      "_fail_streak": 3,
+      "_deadline_src": "note+原文验证"
     },
     {
       "id": "search-lnwyw-征集-第二十二届辽宁省摄影艺术展开始征稿",

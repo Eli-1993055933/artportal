@@ -184,4 +184,55 @@ export function classifyNoDeadline(record, today) {
   return "rolling";
 }
 
+// v1.16.0 从 deadline_note 回填 deadline(2026-10-08 用户批准,路线图增量杠杆①):
+// 存量不少条目 deadline=null,但备注(AI 摘录原文所得)里其实写明了截止日期,
+// 如「征稿截止时间：2026年8月31日」。本函数只把【备注里已有的日期】结构化成 ISO,
+// 【绝不推断、绝不编造】;是否采纳由调用方再用 verifyDeadlineInSource() 拿原文复核。
+export function parseDeadlineFromNote(note) {
+  const t = String(note || "");
+  if (!t) return null;
+  // ① 长期/滚动/分期类:绝不能设成"某一天截止",否则会把长期有效条目错误判为已截止并隐藏。
+  if (/长期有效|常态化|常年|随时|滚动|每年\s*[一二三四五六七八九十\d]+\s*次|每季度|每半年|分批征集|分批次/i.test(t)) return null;
+  // ② 必须处在「征集/截止」语境;否则多半是展览/活动时间(如「展览时间：8月17日—9月6日」),不解析。
+  if (!/(截止|截至|截稿|投稿|征稿|征集|申报|报名|申请|提交|上传|寄送|报送|收件|deadline|due|apply|submit|closes?|ends?)/i.test(t)) return null;
+  // 兼容:2026年8月31日 / 2026-08-31 / 2026/8/31 / 8月31日(无年 → 继承前文最近年份)
+  const re = /(?:(20\d{2})\s*[-年.\/]\s*)?(\d{1,2})\s*[-月.\/]\s*(\d{1,2})\s*日?/g;
+  const hits = [];
+  let m;
+  while ((m = re.exec(t))) {
+    let y = m[1] ? Number(m[1]) : null;
+    if (!y) {
+      const before = t.slice(0, m.index).match(/20\d{2}/g);
+      y = before ? Number(before[before.length - 1]) : new Date(Date.now() + 8 * 3600e3).getUTCFullYear();
+    }
+    const mo = Number(m[2]), da = Number(m[3]);
+    if (mo < 1 || mo > 12 || da < 1 || da > 31) continue;
+    hits.push({ iso: y + "-" + String(mo).padStart(2, "0") + "-" + String(da).padStart(2, "0"), idx: m.index });
+  }
+  if (!hits.length) return null;
+  // 截止语境优先:取「截止/截至/延至/即日起至/起止时间/deadline/due/by…」之后最近的日期
+  const cutRe = /(截止|截至|延至|延长至|顺延至|报名至|征稿至|申请至|提交至|上传至|即日起至|起止时间|deadline|due|closes|before|by)/gi;
+  let cut = -1;
+  while ((m = cutRe.exec(t))) if (m.index > cut) cut = m.index;
+  if (cut >= 0) {
+    const after = hits.filter(h => h.idx >= cut);
+    if (after.length) return after[after.length - 1].iso;
+  }
+  return hits[hits.length - 1].iso;   // 兜底:中文「起止…至X」把截止放最后,取最后一个日期
+}
+
+// 反幻觉复核:解析出的日期必须在原文里出现(容忍空白/常见分隔符;中英文月份名皆可)。
+export function verifyDeadlineInSource(iso, sourceText) {
+  const s = String(sourceText || "");
+  if (!s || !/^20\d{2}-\d{2}-\d{2}$/.test(iso)) return false;
+  const [y, mo, da] = iso.split("-").map(Number);
+  const sep = "[\\s]*(?:年|[-/.])[\\s]*";
+  const cn = new RegExp(y + sep + "0?" + mo + "[\\s]*(?:月|[-/.])[\\s]*0?" + da + "[\\s]*日?");
+  if (cn.test(s)) return true;
+  const MN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const mon = MN[mo - 1];
+  const en = new RegExp("(?:" + mon + "[a-z]*\\.?\\s*0?" + da + "\\s*,?\\s*" + y + "|0?" + da + "\\s*" + mon + "[a-z]*\\.?\\s*,?\\s*" + y + ")", "i");
+  return en.test(s);
+}
+
 export { sameDomain, norm };
