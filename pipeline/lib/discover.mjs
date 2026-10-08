@@ -69,7 +69,13 @@ export function discoverDetailLinks(rawHtml, listUrl, domain, opts) {
     const byText = a.text && a.text.length >= 8 && OPP_TITLE.test(a.text) && /\/[^/]/.test(u.pathname);
     if (!looksLikeDetail(u) && !byText) continue;
     const key = u.href.split("#")[0];
-    if (seen.has(key)) continue;
+    if (seen.has(key)) {
+      // 同一 href 常出现两次(缩略图空锚 + 标题锚,如 cn5v 书画展赛网):保留更长的锚文本,
+      // 否则先出现的空文本会把真正的标题挤掉,后续"锚文本像征稿标题"的过滤/判重全失效。
+      const hit = results.find(r => r.url === key);
+      if (hit && (a.text || "").length > (hit.text || "").length) hit.text = a.text;
+      continue;
+    }
     seen.add(key);
     results.push({ url: key, text: a.text });
     if (results.length >= cap) break;

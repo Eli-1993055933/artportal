@@ -1,0 +1,17 @@
+# 中文艺术/设计征稿聚合门户列表页(2026-10-08 用户拍板"放宽红线:收录中文聚合门户")
+# 用途:_tmp-cn-portal-harvest.mjs --srcs _tmp-cn-agg-srcs.txt
+# 收录原则:这些是【真正承载可投稿/可报名征稿与竞赛】的门户(非新闻门户/非社媒)。
+# 入库后一律如实标注 org_type=aggregator + source_note="平台转载·非官网直采",前端按钮点名平台,绝不谎称官网。
+# 格式:URL [tab] 说明
+https://www.shejijingsai.com/category/dasai	设计竞赛网·设计大赛频道
+https://www.shejijingsai.com/category/dasai/gongye	设计竞赛网·工业产品大赛
+https://www.shejijingsai.com/category/dasai/shichuan	设计竞赛网·视觉传达大赛
+https://www.shejijingsai.com/category/dasai/huanjing	设计竞赛网·建筑环境大赛
+https://www.shejijingsai.com/category/dasai/yingxiang	设计竞赛网·影像艺术大赛
+https://www.cnyisai.com/calls.html	艺赛中国·征稿中赛事汇总
+https://www.xingxiancn.com/article?catID=59	行先生网·大赛公告
+https://www.zjideas.com/zjds	设计赛网·征集大赛
+https://www.ogdcn.com/notice/1.html	东方好创意大赛网·作品征集公告
+http://www.cn5v.com/	中国书画展赛网·首页
+http://www.cn5v.com/category/zg	中国书画展赛网·中国展赛
+http://www.cn5v.com/special/cj	中国书画展赛网·征集专题

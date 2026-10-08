@@ -1,0 +1,9 @@
+# 聚合门户收割 · 第二轮(2026-10-08):第一轮 --detail 30 截断,这里放开深挖
+# 用途:_tmp-cn-portal-harvest.mjs --srcs _tmp-cn-agg-srcs2.txt --disc 120 --detail 90
+https://www.cnyisai.com/calls.html	艺赛中国·全部征稿赛事(第一轮只取了前30)
+https://www.shejijingsai.com/liebiao	设计竞赛网·竞赛备忘录
+http://www.cn5v.com/	中国书画展赛网·首页(修好空锚文本后重跑)
+http://www.cn5v.com/category/zg	中国书画展赛网·中国展赛
+http://www.cn5v.com/special/cj	中国书画展赛网·征集专题
+http://www.cn5v.com/category/sfjy	中国书画展赛网·书法教育/征稿
+https://www.zjideas.com/hotinfo	设计赛网·火热征集中

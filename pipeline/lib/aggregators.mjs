@@ -39,7 +39,20 @@ export const TRUSTED_PLATFORMS = [
   "e-flux.com", "artenda.net",
   // 公开征集 / 报名托管平台(国际机构常把"官方报名页"直接放这上面)
   "callforentry.org", "submittable.com", "artcall.org", "entrythingy.com", "slideroom.com",
-  "zapplication.org", "theartlist.com"
+  "zapplication.org", "theartlist.com",
+  // 中文艺术/设计征稿门户(2026-10-08 用户拍板放宽:国内官方源已近枯竭,同意收录中文聚合门户,
+  // 如实标注"平台转载·非官网直采"。仅收【真正承载可投稿/可报名征稿与竞赛】的门户;
+  // 新闻门户/杂志/文档托管/社媒仍在黑名单、绝不放行)。
+  "shejijingsai.com",        // 设计竞赛网
+  "zcool.com.cn",            // 站酷(站酷奖/设计大赛)
+  "arting365.com",           // 中国设计在线
+  "sj33.cn", "gtn9.com", "10100.com", "xingxiancn.com", "cnyisai.com",
+  "yczhansai.com", "huaxiajiang.com", "chinaawards.net", "zjideas.com",
+  "whaleideas.com", "gaoyy.com", "cn5v.com", "eduzs.org.cn", "jsmsg.com",
+  "ogdcn.com", "logohhh.com", "68design.net", "shijue.me", "missku.com",
+  "zhiliaobiaoxun.com",
+  "artron.net",              // 雅昌艺术网(展览/征集频道)
+  "daheart.cn"               // 大河艺术网(河南,征稿频道)
 ];
 
 export function hostOf(u) {
