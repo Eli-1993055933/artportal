@@ -386,12 +386,16 @@
   }
   window.GLOBE_DATA = { CITY:CITY, COUNTRY:COUNTRY, NAME_ZH:NAME_ZH, CATEGORY:CATEGORY, REGIONS:REGIONS,
     TAGS:TAGS, tagsOf:tagsOf, regionOf:regionOf,
-    // 条目 -> [lng,lat]:优先城市,其次国家中心;资讯再兜底信源驻地;都无则 null(不落点,绝不编造)
+    // 条目 -> [lng,lat]:优先【逐条核对写入的显式坐标 geo_ll】(v1.34.0,精度 geo_prec),
+    // 其次城市,再次国家中心;资讯再兜底信源驻地;都无则 null(不落点,绝不编造)
     locate:function(o){
+      // v1.34.0:后端 geo-reconcile 已逐条判定真实地点(城市/省会/区县/州中心/机构驻地/国家/线上)。
+      if(o.geo_prec==="线上") return null;              // 线上/全球:无实体地点,不落点(避免 (0,0) 假堆叠)
+      if(o.geo_ll && o.geo_ll.length===2) return {ll:o.geo_ll, prec:o.geo_prec||"城市"};
       var c = o.city_zh && CITY[o.city_zh];
       if(c) return {ll:c, prec:"城市"};
       var k = o.country_zh && COUNTRY[o.country_zh];
-      if(k) return {ll:k, prec:"国家"};
+      if(k && o.country_zh!=="全球" && o.country_zh!=="线上") return {ll:k, prec:"国家"};
       if(o.category==='news' && o.source){ var s=String(o.source);
         for(var key in SOURCE_LOC){ if(s.indexOf(key)>=0){
           var v=SOURCE_LOC[key], ll=(typeof v==='string')?CITY[v]:v;
