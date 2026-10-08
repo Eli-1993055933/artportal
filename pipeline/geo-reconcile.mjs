@@ -27,7 +27,7 @@ import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dir, "..");
+export const ROOT = join(__dir, "..");
 const argv = process.argv.slice(2);
 const APPLY = argv.includes("--apply");
 const opt = (f, d) => { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : d; };
@@ -39,11 +39,11 @@ const sb = { window: {} };
 vm.createContext(sb);
 vm.runInContext(readFileSync(join(ROOT, "site/js/globe-data.js"), "utf8"), sb);
 const G = sb.window.GLOBE_DATA;
-const CITY0 = G.CITY, COUNTRY = G.COUNTRY, NAME_ZH = G.NAME_ZH;
+export const CITY0 = G.CITY, COUNTRY = G.COUNTRY, NAME_ZH = G.NAME_ZH;
 
 // 1b) 中国行政区划(site/data/geo/cn/*.json):省/市/区县 + 官方 center 坐标
-const cnProv = new Map();     // 全名(含后缀) -> {ll, ad}
-const cnCity = new Map();
+export const cnProv = new Map();     // 全名(含后缀) -> {ll, ad}
+export const cnCity = new Map();
 const cnDistRaw = new Map();  // 先收集,后剔除同名歧义(如"普陀区"上海/舟山各一)
 const CN_DIR = join(ROOT, "site/data/geo/cn");
 for (const f of readdirSync(CN_DIR)) {
@@ -61,7 +61,9 @@ for (const f of readdirSync(CN_DIR)) {
 // 同名区县(≥2 处)一律丢弃,避免"普陀区→舟山"这类误判
 const cnDist = new Map();
 for (const [name, arr] of cnDistRaw) if (arr.length === 1) cnDist.set(name, arr[0]);
+export { cnDist };
 const shortCN = n => n.replace(/(特别行政区|自治区|自治州|地区|盟|市|省|区|县|旗)$/, "");
+export { shortCN };
 function buildShortMap(full) {
   const m = new Map();
   for (const k of full.keys()) {
@@ -73,8 +75,9 @@ function buildShortMap(full) {
 }
 const cnProvShort = buildShortMap(cnProv);
 const cnCityShort = buildShortMap(cnCity);
+export { cnProvShort, cnCityShort };
 
-const PROV_CAPITAL = {
+export const PROV_CAPITAL = {
   "北京市": "北京市", "天津市": "天津市", "上海市": "上海市", "重庆市": "重庆市",
   "河北省": "石家庄市", "山西省": "太原市", "内蒙古自治区": "呼和浩特市", "辽宁省": "沈阳市",
   "吉林省": "长春市", "黑龙江省": "哈尔滨市", "江苏省": "南京市", "浙江省": "杭州市",
@@ -89,9 +92,9 @@ const PROV_CAPITAL = {
 // 1c) 世界一级行政区(site/data/geo/world/*.json)
 // 强约束:仅用【中文名(name_zh)】做匹配,英文名一律不用(极易误伤,如 Texas/"Centre"/"Southern")。
 const GENERIC = /^(中部|南部|北部|东部|西部|中央|大区|地区|区域|省|州|县|区|市|岛|半岛|沿海|内陆|首都|都会)$/;
-const worldByZh = new Map();   // 中文名 -> {ll, admin}
-const worldByName = new Map(); // 英文名(仅用于结构化的 city_zh 字段) -> {ll, admin}
-const worldByAdmin = new Map();// 国名(英文) -> [{name, zh, ll}](限英文名,供"已知国家"内匹配)
+export const worldByZh = new Map();   // 中文名 -> {ll, admin}
+export const worldByName = new Map(); // 英文名(仅用于结构化的 city_zh 字段) -> {ll, admin}
+export const worldByAdmin = new Map();// 国名(英文) -> [{name, zh, ll}](限英文名,供"已知国家"内匹配)
 for (const f of readdirSync(join(ROOT, "site/data/geo/world"))) {
   if (!f.endsWith(".json")) continue;
   const j = JSON.parse(readFileSync(join(ROOT, "site/data/geo/world", f), "utf8"));
@@ -113,6 +116,7 @@ for (const f of readdirSync(join(ROOT, "site/data/geo/world"))) {
   }
 }
 const EN2ZH = { ...NAME_ZH };
+export { EN2ZH };
 Object.assign(EN2ZH, {
   "China": "中国", "United States": "美国", "USA": "美国", "United Kingdom": "英国",
   "South Korea": "韩国", "Korea": "韩国", "Czech Republic": "捷克", "Czechia": "捷克",
@@ -143,13 +147,16 @@ Object.assign(EN2ZH, {
 });
 const ZH2EN = {};
 for (const [en, zh] of Object.entries(EN2ZH)) if (!ZH2EN[zh]) ZH2EN[zh] = en;
+export { ZH2EN };
 
 // 国家名归一:收录数据里 country_zh 常存英文/"城市, 国家"/州缩写等自由文本,
 // 归一到标准中文国名后,才能参与后续"国家中心"回落与"该国一级行政区"匹配。
 const EXTRA_EN2ZH = { "Spain": "西班牙", "Zambia": "赞比亚", "Guatemala": "危地马拉",
   "Kanada": "加拿大", "España": "西班牙", "Espana": "西班牙", "Deutschland": "德国", "International": "全球" };
+export { EXTRA_EN2ZH };
 const US_STATE_ABBR = new Set(["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"]);
-function normCountry(s) {
+export { US_STATE_ABBR };
+export function normCountry(s) {
   if (!s) return null;
   const t = String(s).replace(/^#/, "").trim();
   if (COUNTRY[t]) return t;
@@ -213,7 +220,7 @@ const CN_BLACKLIST = new Set(["东方", "中山", "大同", "朝阳", "和平", 
   "光明", "前进", "新兴", "向阳", "三明", "双阳", "白云", "青山", "长安", "长宁", "通州"]);
 
 // 中国:只认【全名(带后缀)】或【唯一的短名且不在黑名单】;限定在 org / title 文本内。
-function matchCN(text) {
+export function matchCN(text) {
   if (!text) return null;
   let best = null;
   const consider = h => { if (h && (!best || h.k.length > best.k.length)) best = h; };
@@ -233,7 +240,7 @@ function matchCN(text) {
 }
 
 // 世界:只认【中文名】,且必须 ≥2 字(避免英文泛词误伤)
-function matchWorld(text) {
+export function matchWorld(text) {
   if (!text) return null;
   let best = null;
   for (const [zh, w] of worldByZh) if (zh.length >= 2 && text.includes(zh)) {
@@ -243,7 +250,7 @@ function matchWorld(text) {
 }
 
 // 已知国家内,按该国一级行政区英文名匹配(限制在该国 → 误伤可控,如"California""Bavaria")
-function matchWorldInCountry(text, countryZh) {
+export function matchWorldInCountry(text, countryZh) {
   if (!text || !countryZh) return null;
   const en = ZH2EN[countryZh];
   if (!en) return null;
@@ -257,7 +264,7 @@ function matchWorldInCountry(text, countryZh) {
   return best;
 }
 
-function countryFromDomain(url) {
+export function countryFromDomain(url) {
   try {
     const h = new URL(url).hostname.toLowerCase();
     if (/\.cn$/.test(h)) return "中国";
@@ -279,6 +286,7 @@ function countryFromDomain(url) {
 
 const ONLINE_RE = /(线上展|线上征集|线上展览|线上驻留|网络展|网络征集|虚拟展|虚拟驻留|数字驻留|云端展)/;
 const ONLINE_EN = /\b(virtual|online)\s+(exhibition|residency|open\s?call|show|program|studio\s?visit)\b/i;
+export { ONLINE_RE, ONLINE_EN };
 
 // ---------------------------------------------------------------- 3. 判定单条
 function reconcile(o) {
@@ -377,4 +385,4 @@ function main() {
   }
 }
 
-main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) main();
