@@ -8,7 +8,7 @@ import { readFile, writeFile, rename } from "node:fs/promises";
 import { fetchSource } from "./lib/fetch.mjs";
 import { discoverDetailLinks } from "./lib/discover.mjs";
 import { extract } from "./lib/extract.mjs";
-import { verifyRecord } from "./lib/verify.mjs";
+import { verifyRecord, markRolling, classifyNoDeadline } from "./lib/verify.mjs";
 import { normUrl } from "./lib/dedupe.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
@@ -22,7 +22,10 @@ try {
 } catch (e) {}
 const DATA = join(__dir, "..", "site", "data", "opportunities.json");
 
-const SRC_FILE = join(__dir, "_tmp-cn-portal-srcs.txt");
+// 支持 --srcs <file> 指定源清单(默认主清单);--srcs 便于只跑新一批补充源
+const _args = process.argv.slice(2);
+const _opt = f => { const i = _args.indexOf(f); return i !== -1 ? _args[i + 1] : null; };
+const SRC_FILE = join(__dir, _opt("--srcs") || "_tmp-cn-portal-srcs.txt");
 const LIST_URLS = readFileSync(SRC_FILE, "utf8")
   .split(/\r?\n/).map(s => s.trim()).filter(s => s && !s.startsWith("#"))
   .map(l => l.split("\t")[0].split("#")[0].trim());
@@ -91,6 +94,19 @@ async function main() {
         if (!ex.data || ex.data.applicable === false) { totalDropped++; console.log(`  drop(不适用) ${domain} ${(l.text||"").slice(0,20)}`); continue; }
         const v = verifyRecord(ex.data, { sourceText: df.text, url: u0, source_url: listUrl, domain });
         if (v.dropped) { totalDropped++; console.log(`  drop(${String(v.dropReason||"").slice(0,30)}) ${(l.text||"").slice(0,20)}`); continue; }
+        // A 类口径保险(2026-10-07 用户确认:要的是「可投稿/报名的征集征稿」):纯展览类不入库
+        if (/^exhibition/i.test(v.record.category || "") && !/(征集|征稿|招募|投稿|报名|申报|驻留)/.test(v.record.title_zh || "")) {
+          totalDropped++; console.log(`  drop(纯展览) ${(l.text || "").slice(0, 20)}`); continue;
+        }
+        // 国内来源无截止 → 过陈旧闸后按「常年征集」标注(与 server.mjs / bulk-discover 口径一致,2026-10-07 用户确认)
+        if (v.record.deadline == null) {
+          const isCn = /中国/.test(v.record.country_zh || "") || /\.cn$/i.test(host);
+          if (isCn) {
+            const kind = classifyNoDeadline(v.record);
+            if (kind === "stale") { totalDropped++; console.log(`  drop(陈旧无截止) ${(l.text || "").slice(0, 20)}`); continue; }
+            if (kind === "rolling") markRolling(v.record);
+          }
+        }
         const rec = finalizeRecord(v.record, { domain, url: u0, srcUrl: listUrl });
         console.log(`  ✓ ${rec.title_zh} | dl=${rec.deadline||"?"}`);
         out.push(rec); added++;
