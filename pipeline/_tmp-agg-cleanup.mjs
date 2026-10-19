@@ -15,10 +15,12 @@ const APPLY = process.argv.includes("--apply");
 function key(s) {
   return String(s || "")
     .replace(/^\s*(作品征集公告|征集公告|征稿|倒计时|公告)\s*[丨|:：]\s*/g, "")
+    .replace(/^\s*(设计师招募|招募|征集)\s*[丨|:：]\s*/g, "")
     .replace(/\s*[-—_]\s*艺赛中国\s*$/g, "")
     .replace(/^\d{1,3}\s*天倒计时[！!]*/g, "")
     .replace(/^\d{1,2}月\d{1,2}日截稿[！!]*/g, "")
-    .replace(/^\s*20\d{2}\s*[-—·]?\s*/g, "")     // 去掉开头年份(跨站同赛事:「2026紫艺奖…」vs「紫艺奖…」)
+    .replace(/^\s*20\d{2}\s*年?\s*[-—·]?\s*/g, "")   // 去开头年份(含「2026年…」)(跨站同赛事:「2026紫艺奖…」vs「紫艺奖…」)
+    .replace(/(征稿开始啦|征稿启事|征稿通知|开始征稿|正式启动|开始啦)\s*$/g, "")  // 去尾部同义水印
     .replace(/[\s\u3000\p{P}\p{S}]/gu, "")
     .toLowerCase().slice(0, 40);
 }

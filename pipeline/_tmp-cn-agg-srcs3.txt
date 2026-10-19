@@ -1,0 +1,15 @@
+# 中文聚合门户收割 · 第三轮(2026-10-17 用户要求「给 artportal 加入 50 条国内艺术机会」)
+# 对象:v1.33.0 已把下列门户升格为 TRUSTED_PLATFORMS 【但当时并未实际收割】的那一批可信中文门户
+# 用途:_tmp-cn-portal-harvest.mjs --srcs _tmp-cn-agg-srcs3.txt --disc 150 --detail 120 --conc 4
+# 收录原则不变:入库一律 org_type=aggregator + source_note="平台转载·非官网直采",绝不谎称官网。
+https://www.sj33.cn/sjjs/	设计时代·征集频道
+https://www.sj33.cn/sjjs/pingmian	设计时代·平面征集
+https://www.sj33.cn/sjjs/gongye	设计时代·工业征集
+https://whaleideas.com/zjds	鲸创意·征集大赛
+https://whaleideas.com/zjds/gycp	鲸创意·工业产品
+https://whaleideas.com/zjds/sjcd	鲸创意·视觉传达
+https://whaleideas.com/zjds/hjys	鲸创意·环境艺术
+https://whaleideas.com/zjds/yssz	鲸创意·影视数字
+https://whaleideas.com/zjds/waxz	鲸创意·文案写作
+https://www.zcool.com.cn/competition	站酷·设计大赛
+https://www.huaxiajiang.com/category/zixun	华夏奖·大赛资讯

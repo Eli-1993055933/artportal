@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta name="theme-color" content="#F7F6F2" />
 <!-- 站点版本(SemVer,单一来源=根 VERSION;由 pipeline/bump-version.mjs 统一改写,勿手改) -->
-<meta name="app-version" content="1.34.0" />
+<meta name="app-version" content="1.35.0" />
 <style>
   :root{
     --bg:#F7F6F2; --ink:#1a1a1a; --sub:#6b6660; --muted:#a39e95; --line:#e5e2db; --panel:#ffffff;
@@ -767,11 +767,11 @@
   <a href="javascript:;" id="gdLink">新手引导</a> · <a href="javascript:;" id="fbLink">反馈/求助</a> ·
   <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2026044436号</a> ·
   <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11011202102116" target="_blank" rel="noopener">京公网安备11011202102116号</a> ·
-  ARTPORTAL <span id="appVer">v1.34.0</span></div>
+  ARTPORTAL <span id="appVer">v1.35.0</span></div>
 
-<script src="assets/vendor/d3.min.js?v=1.34.0"></script>
-<script src="assets/vendor/topojson-client.min.js?v=1.34.0"></script>
-<script src="js/globe-data.js?v=1.34.0"></script>
+<script src="assets/vendor/d3.min.js?v=1.35.0"></script>
+<script src="assets/vendor/topojson-client.min.js?v=1.35.0"></script>
+<script src="js/globe-data.js?v=1.35.0"></script>
 <script>
 (function(){
   var D=window.GLOBE_DATA, CAT=D.CATEGORY;
@@ -870,7 +870,10 @@
     // 国内官方信源近枯竭,经用户确认收录这些【真正承载可投稿/报名征稿与竞赛】的门户;
     // 条目 org_type=aggregator、source_note="平台转载·非官网直采",按钮点名平台,绝不谎称官网。
     "shejijingsai.com":"设计竞赛网","cnyisai.com":"艺赛中国","xingxiancn.com":"行先生网",
-    "zjideas.com":"设计赛网","ogdcn.com":"东方好创意","cn5v.com":"中国书画展赛网"};
+    "zjideas.com":"设计赛网","ogdcn.com":"东方好创意","cn5v.com":"中国书画展赛网",
+    // v1.35.0(2026-10-19):继续收割可信中文门户,补 设计之家 / 文创赛网 两个新落点标签,
+    // 否则其条目会因「官网必达」硬闸不可见(它们同属 THIRD_PARTY 名单)。
+    "sj33.cn":"设计之家","whaleideas.com":"文创赛网"};
   // 机会四类判定(独立于下方的 OPP_CATS,避免依赖变量声明顺序)
   function isOppCat(c){ return c==='opencall'||c==='residency'||c==='award'||c==='workshop'; }
   function hostOf(u){ try{ return new URL(u).host.replace(/^www\./,'').toLowerCase(); }catch(e){ return ''; } }
