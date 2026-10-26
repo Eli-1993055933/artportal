@@ -17,9 +17,11 @@
 // 用法: node ca-bootstrap.mjs
 //       NODE_EXTRA_CA_CERTS=<仓库>/pipeline/state/ca-intermediates.pem node --env-file=.env run.mjs
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { X509Certificate } from "node:crypto";
 import tls from "node:tls";
+import { spawn } from "node:child_process";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -158,12 +160,74 @@ async function main() {
   // 与**已有 bundle 取并集**写回,绝不因为"本次没扫到"就把已有的修复清空。
   // 2026-10-03 教训:原实现是直接覆盖写,而探测会因网络抖动/站点超时漏掉域名 —— 那天 381 个
   // 域名有 129 个连不上、"链长=1"判为 0,于是写出一个 **0 字节**的 pem,把前一天刚修好的
-  // cafa.edu.cn 又打回原样(表现为 fetch-error TypeError)。中间证书"多一张无妨",故并集最稳。
+  // cafa.edu.cn 又打回原样(表现为 fetch-error TypeError)。中间证书"多一张通常无妨"(故并集最稳),
+  // 但**个别自签中间证书会反而破坏其它站点的链**——见下方面向 AI 端点的金丝雀自检。
   const existing = await readFile(OUT, "utf8").catch(() => "");
   const havePems = new Set(existing.match(/-----BEGIN CERTIFICATE-----[\s\S]*?-----END CERTIFICATE-----/g) || []);
   const carried = havePems.size;
   for (const pem of pems) havePems.add(pem);
-  const bundle = [...havePems];
+  let bundle = [...havePems];
+
+  // —— 金丝雀自检(2026-10-26)——
+  // 中间证书并非"多一张无妨":实测 TrustAsia DV TLS RSA CA 2024 这张自签中间证书一进 bundle,
+  // NODE_EXTRA_CA_CERTS 会让 open.bigmodel.cn 的链解析失败(UNABLE_TO_GET_ISSUER_CERT)——
+  // 免费大模型兜底全线死掉,而 DeepSeek 又恰好欠费,于是每日采集"跑成功但零新增"整整 8 天。
+  // 对策:写盘前先用关键 AI 端点验一遍;哪张证书会让这些端点验不过,就从 bundle 剔除(宁可少补一个站,不可断采集)。
+  const CANARY_HOSTS = [
+    process.env.MOD_API_HOST || "open.bigmodel.cn",
+    "api.deepseek.com",
+    "dashscope.aliyuncs.com",
+    "api.siliconflow.cn"
+  ];
+  // ⚠ 关键:必须用 NODE_EXTRA_CA_CERTS 的真实语义去验,而不是 ca 数组。
+  //   实测同一张 TrustAsia DV TLS RSA CA 2024:放进 ca 数组能过,放进 NODE_EXTRA_CA_CERTS 就
+  //   报 UNABLE_TO_GET_ISSUER_CERT(追加信任不启用 partial-chain,链必须走到根)。
+  //   所以这里写临时 pem + 起子进程(child 里带 NODE_EXTRA_CA_CERTS)复现生产环境。
+  const testBundle = (pems) => new Promise((resolve) => {
+    const tmp = join(tmpdir(), "ca-canary-" + process.pid + "-" + Math.random().toString(36).slice(2) + ".pem");
+    const code = 'const tls=require("node:tls");const hosts=JSON.parse(process.argv[1]);' +
+      '(async()=>{const out=[];for(const h of hosts){out.push({host:h,ok:await new Promise(r=>{' +
+      'const s=tls.connect({host:h,port:443,servername:h,rejectUnauthorized:true,timeout:8000});' +
+      'const d=v=>{try{s.destroy()}catch(e){};r(v)};s.once("secureConnect",()=>d(true));' +
+      's.once("timeout",()=>d(false));s.once("error",()=>d(false))})})}' +
+      'process.stdout.write(JSON.stringify(out))})()';
+    writeFile(tmp, pems.join("\n") + "\n", "utf8").then(() => {
+      const p = spawn(process.execPath, ["-e", code, JSON.stringify(CANARY_HOSTS)], {
+        env: { ...process.env, NODE_EXTRA_CA_CERTS: tmp }, stdio: ["ignore", "pipe", "ignore"]
+      });
+      let buf = "";
+      p.stdout.on("data", d => { buf += d; });
+      p.on("close", async () => {
+        await rm(tmp, { force: true });
+        try { resolve(JSON.parse(buf)); } catch (e) { resolve(CANARY_HOSTS.map(host => ({ host, ok: false }))); }
+      });
+      p.on("error", async () => { await rm(tmp, { force: true }); resolve(CANARY_HOSTS.map(host => ({ host, ok: false }))); });
+    });
+  });
+  const failures = async (pems) => (await testBundle(pems)).filter(r => !r.ok).map(r => r.host);
+
+  // 逐张判定:单独放进 NODE_EXTRA_CA_CERTS 就让某个金丝雀验不过 → 它有罪,剔除。
+  // (组合式贪心会被一次网络抖动带偏,曾把 8 张全删光;单独判定稳定。)
+  const removed = [];
+  for (const pem of [...new Set(bundle)]) {          // 先去重(实测同一张证书会被并集写入两次)
+    const bad = await failures([pem]);
+    if (bad.length) { removed.push({ pem, bad }); bundle = bundle.filter(x => x !== pem); }
+  }
+  bundle = [...new Set(bundle)];
+  if (removed.length) {
+    console.log(`\n⚠ 金丝雀自检:剔除 ${removed.length} 张会破坏 AI 端点链的证书(宁可少补一个站,不可断采集)`);
+    for (const { pem, bad } of removed) {
+      const sub = (() => { try { return new X509Certificate(pem).subject.replace(/\n/g, " "); } catch (e) { return "(无法解析)"; } })();
+      console.log(`  · 已剔除(${bad.join(",")}): ` + sub);
+    }
+  }
+  // 剔除后再全量验一次;仍有不通的 → 清空 bundle(不带附加 CA 最安全,采集优先)
+  const canaryStillBad = await failures(bundle);
+  if (canaryStillBad.length) {
+    console.log(`⚠ 剔除后 ${canaryStillBad.join(",")} 仍验不过 → 本轮清空 bundle(不带附加 CA)`);
+    bundle = [];
+  }
+
   if (!bundle.length) {
     console.log("⚠ 本次未收集到中间证书,且已有 bundle 也是空的 —— 不写文件(维持无附加 CA 的状态)");
   } else {
