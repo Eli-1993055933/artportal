@@ -2,8 +2,8 @@
   "_meta": {
     "note": "艺术招聘。真实抓取核实,非编造。"
   },
-  "generated_at": "2026-10-09",
-  "count": 207,
+  "generated_at": "2026-11-06",
+  "count": 195,
   "jobs": [
     {
       "id": "job-1irbwe-sales-assistant-to-director-总监销售助理",
@@ -26,7 +26,7 @@
       "cover": "assets/covers/3617b43a1b523d97.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1s6j58-sales-assistant-to-senior-director-资深总监销售助理",
@@ -49,7 +49,7 @@
       "cover": "assets/covers/06bd42b9b7beae6e.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-lafk30-dz19-facilities-manager-设施经理-运营",
@@ -72,7 +72,7 @@
       "cover": "assets/covers/4567b644842fc84a.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1lsl6z-executive-director-执行馆长",
@@ -93,32 +93,9 @@
       "summary_zh": "为博物馆提供战略与实务领导,统筹艺术方向、展览、藏品、社区参与、机构发展、筹款、运营、设施与公众参与。要求至少5年艺术/文化机构领导经验,艺术、艺术史、博物馆学、商科或财务本科(硕士优先),具备管理、财务、筹款与拨款申请能力。",
       "summary_en": "Provide strategic and operational leadership for the museum, overseeing artistic direction, exhibitions, collections, community engagement, institutional development, fundraising, operations, facilities, and public participation. Requirements: at least 5 years of leadership experience in an arts/cultural institution; Bachelor's degree in Art, Art History, Museum Studies, Business, or Finance (Master's preferred); skills in management, finance, fundraising, and grant writing.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08",
+      "last_seen": "2026-11-06",
       "cover": "assets/covers/5359245bfbcef4c5.jpg",
       "cover_source": "screenshot"
-    },
-    {
-      "id": "job-1lsl71-director-curator-list-gallery-画廊总监兼策展人",
-      "title": "Director & Curator, List Gallery(画廊总监兼策展人)",
-      "org": "Swarthmore College, List Gallery(斯沃斯莫尔学院)",
-      "city": "斯沃斯莫尔(Swarthmore, PA)",
-      "country": "美国",
-      "employment_type": "全职",
-      "salary": "$120,000–$134,000/年",
-      "deadline": "2026-08-17",
-      "summary": "负责List画廊策展与运营:研究新兴及知名艺术家、每年策划四场大展、管理预算与合同、撰写拨款申请、监督15-20名学生员工及实习项目、负责设施与安全。要求硕士(MFA或同等博士)+5年以上博物馆级策展经验,熟悉艺术品处理、仓储、运输与保险。",
-      "apply_url": "https://aamd.org/museum-careers/current-opportunities/11824",
-      "domain": "aamd.org",
-      "posted_at": null,
-      "_via": "seed",
-      "title_zh": "Director & Curator, List Gallery(画廊总监兼策展人)",
-      "title_en": "Director & Curator, List Gallery",
-      "summary_zh": "负责List画廊策展与运营:研究新兴及知名艺术家、每年策划四场大展、管理预算与合同、撰写拨款申请、监督15-20名学生员工及实习项目、负责设施与安全。要求硕士(MFA或同等博士)+5年以上博物馆级策展经验,熟悉艺术品处理、仓储、运输与保险。",
-      "summary_en": "Responsible for curatorial and operational leadership of List Gallery: research emerging and established artists, curate four major exhibitions per year, manage budgets and contracts, write grant proposals, supervise 15-20 student staff and internship program, oversee facilities and security. Requirements: Master's degree (MFA or equivalent doctorate) plus 5+ years of museum-level curatorial experience; familiarity with art handling, storage, shipping, and insurance.",
-      "cover": "assets/covers/5d5a7875e8e042f1.jpg",
-      "cover_source": "screenshot",
-      "_fail_streak": 0,
-      "last_seen": "2026-10-08"
     },
     {
       "id": "job-uny0zk-museum-educator-博物馆教育员",
@@ -164,7 +141,7 @@
       "cover": "assets/covers/12bb8ae7a360e5c3.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1j3axk-kids-art-teacher-少儿美术教师",
@@ -208,7 +185,7 @@
       "cover": "assets/covers/58bbd7063ae0d004.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1ea523-faculty-associate-in-art-工作室艺术-兼职教师",
@@ -231,7 +208,7 @@
       "cover": "assets/covers/69ef0c29d52b1c4b.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1cta19-faculty-associate-in-art-history-艺术史-兼职教师",
@@ -252,7 +229,7 @@
       "summary_zh": "亚利桑那州立大学艺术学院招聘艺术史兼职教师，线上或坦佩校区讲授本科/研究生艺术史课程，主题涵盖全球遗产、当代艺术、动画史与亚洲艺术等；负责备课、评估学生作业与答疑。需相关硕士加四年或博士加两年经验及有效教学证明。起始2026秋或2027春。",
       "summary_en": "Arizona State University's School of Art seeks a part-time Faculty Associate in Art History. Teach undergraduate/graduate art history courses online or at Tempe campus, covering global heritage, contemporary art, animation history, and Asian art; responsible for preparation, assessment, and office hours. Requires relevant Master's plus 4 years or PhD plus 2 years experience, and evidence of effective teaching. Start Fall 2026 or Spring 2027.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08",
+      "last_seen": "2026-11-06",
       "cover": "assets/covers/b9c227613836263b.jpg",
       "cover_source": "screenshot"
     },
@@ -277,7 +254,7 @@
       "cover": "assets/covers/a71cca98be54979e.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1c5ps5-development-and-communications-director-发展与传播总监",
@@ -298,7 +275,7 @@
       "summary_zh": "主导基金会对外事务与机构发展,统筹募款(基金申请、个人捐赠、会员、特别活动)及传播策略(网站、邮件、社媒、媒体关系),撰写以艺术家为核心的募款叙事。要求5年以上非营利募款经验、扎实的基金写作能力及CRM与数字平台使用经验。每周现场办公4-5天。简历与求职信合并PDF发至 apply@cueartfoundation.org。",
       "summary_en": "Lead the foundation's external affairs and institutional development, overseeing fundraising (grants, individual donations, memberships, special events) and communications strategy (website, email, social media, media relations), and write artist-centered fundraising narratives. Requires 5+ years of nonprofit fundraising experience, strong grant writing skills, and experience with CRM and digital platforms. On-site 4-5 days per week. Send combined PDF of resume and cover letter to apply@cueartfoundation.org.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08",
+      "last_seen": "2026-11-06",
       "cover": "assets/covers/285225f2f8952666.jpg",
       "cover_source": "screenshot"
     },
@@ -323,7 +300,7 @@
       "cover": "assets/covers/9a30e1cb1d60718f.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-kfjxdk-development-associate-发展专员",
@@ -346,7 +323,7 @@
       "cover": "assets/covers/942b7ac45d6ae6bf.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-4z0xsu-general-manager-总经理",
@@ -367,33 +344,8 @@
       "summary_zh": "直接向执行总监汇报的核心岗位,支持机构整体运作,涵盖运营与传播、人事管理、项目、财务及发展。负责利益相关方关系维护、场馆与设施管理、财务监督及活动统筹。地点为华盛顿特区(2438 18th St. NW),全职受薪岗位。通过官网就业页在线提交申请,机构为平等就业雇主。",
       "summary_en": "A core position reporting directly to the Executive Director, supporting overall institutional operations including operations and communications, human resources management, programs, finance, and development. Responsible for stakeholder relations, venue and facilities management, financial oversight, and event coordination. Location: Washington, DC (2438 18th St. NW). Full-time salaried position. Apply online through the careers page on the official website. The organization is an equal opportunity employer.",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08",
+      "last_seen": "2026-11-06",
       "cover": "assets/covers/4b73a453e7193e37.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "job-1r48cp-助理策展人-非洲艺术-assistant-curator-of-african-art",
-      "title": "助理策展人(非洲艺术)Assistant Curator of African Art",
-      "org": "大都会艺术博物馆 The Metropolitan Museum of Art",
-      "city": "New York, NY",
-      "country": "美国",
-      "employment_type": "全职",
-      "salary": "$87,000–$92,000/年",
-      "deadline": "2026-09-01",
-      "summary": "负责大都会艺术博物馆非洲艺术永久藏品的研究、展示与编目,推进新装修洛克菲勒翼的藏品轮换,策划并支持特展、提出征集建议,与修复师及科学家协作并发表学术成果。要求硕士(博士优先),具非洲艺术专长、语言能力及博物馆藏品研究与策展经验。",
-      "apply_url": "https://aam-us-jobs.careerwebsite.com/job/assistant-curator-of-african-art/85056640/",
-      "domain": "aam-us-jobs.careerwebsite.com",
-      "posted_at": null,
-      "_via": "seed",
-      "title_zh": "助理策展人(非洲艺术)Assistant Curator of African Art",
-      "title_en": "Assistant Curator of African Art 助理策展人(非洲艺术)",
-      "summary_zh": "负责大都会艺术博物馆非洲艺术永久藏品的研究、展示与编目,推进新装修洛克菲勒翼的藏品轮换,策划并支持特展、提出征集建议,与修复师及科学家协作并发表学术成果。要求硕士(博士优先),具非洲艺术专长、语言能力及博物馆藏品研究与策展经验。",
-      "summary_en": "Responsible for research, display, and cataloging of the permanent collection of African art at the Metropolitan Museum of Art, advancing collection rotations in the newly renovated Rockefeller Wing, organizing and supporting special exhibitions, proposing acquisitions, collaborating with conservators and scientists, and publishing scholarly work. Requires a master's degree (PhD preferred), expertise in African art, language skills, and experience in museum collection research and curatorial work.",
-      "_fail_streak": 0,
-      "last_seen": "2026-10-02",
-      "cover": "assets/covers/c0a32e90d7b02019.jpg",
-      "updated_at": "2026-10-04",
-      "cover_audit": "2026-10-04 审核撤换(截图内容相同×2)",
       "cover_source": "screenshot"
     },
     {
@@ -417,7 +369,7 @@
       "cover": "assets/covers/faba4c7a7678d309.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-1t3qsi-艺术策展人-curator-of-art",
@@ -465,7 +417,7 @@
       "cover": "assets/covers/50bb4f2ff71274a7.jpg",
       "cover_source": "screenshot",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-11-06"
     },
     {
       "id": "job-8ci8v5-gallery-assistant",
@@ -696,11 +648,12 @@
       "summary_zh": "苏富比招聘行政助理，负责为高管提供全面的业务和行政支持，包括日程管理、会议协调、差旅安排、费用处理、发票管理，以及与全球员工、高端客户和外部利益相关者沟通。要求本科学位，有行政助理经验，对艺术市场有兴趣，熟练使用Outlook、Word、Excel、PowerPoint。",
       "summary_en": "Sotheby's is hiring an Executive Assistant to provide full business and administrative support to executives, including diary management, meeting coordination, travel booking, expense processing, invoice management, and liaison with global staff, high-profile clients, and external stakeholders. Requires Bachelor's degree, some EA experience, interest in art market, and proficiency in Outlook, Word, Excel, PowerPoint.",
       "added_at": "2026-07-16",
-      "cover": null,
+      "cover": "assets/covers/e45586588b0123e2.jpg",
       "updated_at": "2026-10-08",
       "cover_audit": "2026-10-08 审核撤换(截图内容相同×2)",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-10-08",
+      "cover_source": "screenshot"
     },
     {
       "id": "job-99z5ee-internships",
@@ -1219,30 +1172,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "job-7x8gk7-tenure-track-positions-with-permanent-es",
-      "title": "准聘长聘岗位（事业编制）",
-      "org": "南京大学艺术学院",
-      "city": "南京",
-      "country": "中国",
-      "employment_type": "全职",
-      "salary": null,
-      "deadline": "2026-08-20",
-      "summary": "南京大学艺术学院面向全球招聘艺术学领域准聘助理教授、准聘副教授岗位，研究方向包括艺术理论与美学、艺术史与艺术批评、戏剧影视学、艺术传播、美术学、艺术教育、数字艺术学、人工智能艺术、生态艺术疗愈与美育。要求具有博士学位，年龄未满40周岁，提供事业编制、年薪制等配套。",
-      "apply_url": "https://art.nju.edu.cn/b6/a3/c55216a833187/page.htm",
-      "domain": "art.nju.edu.cn",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "准聘长聘岗位（事业编制）",
-      "title_en": "Tenure-Track Positions (with Permanent Establishment)",
-      "summary_zh": "南京大学艺术学院面向全球招聘艺术学领域准聘助理教授、准聘副教授岗位，研究方向包括艺术理论与美学、艺术史与艺术批评、戏剧影视学、艺术传播、美术学、艺术教育、数字艺术学、人工智能艺术、生态艺术疗愈与美育。要求具有博士学位，年龄未满40周岁，提供事业编制、年薪制等配套。",
-      "summary_en": "The School of Arts at Nanjing University is recruiting globally for tenure-track assistant and associate professors in art studies, including art theory and aesthetics, art history and criticism, theater and film studies, art communication, fine arts, art education, digital art, AI art, and ecological art therapy and aesthetic education. Applicants must hold a PhD, be under 40, and will receive permanent establishment, annual salary, and other benefits.",
-      "added_at": "2026-07-21",
-      "_fail_streak": 0,
-      "last_seen": "2026-08-03",
-      "cover": "assets/covers/19e6973decfa24df.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-37rjzr-researcher-and-associate-researcher-recr",
       "title": "深圳大学艺术学部姜殿坤特聘教授团队研究员、副研究员招聘",
       "org": "深圳大学艺术学部",
@@ -1360,10 +1289,10 @@
       "summary_en": "Sichuan Fine Arts Institute is recruiting 31 public institution staff through assessment, covering teaching and research positions. Applicants must have Chinese nationality, with age calculated as of April 30, 2026. Registration is from 9:00 on May 9 to 18:00 on May 27, 2026, via the Chongqing Human Resources and Social Security Bureau website. Assessment includes professional quality evaluation, psychological test, and interview.",
       "added_at": "2026-07-23",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08",
+      "last_seen": "2026-08-03",
       "cover": null,
-      "updated_at": "2026-10-08",
-      "cover_audit": "2026-10-08 审核撤换(截图内容相同×18)"
+      "updated_at": "2026-11-06",
+      "cover_audit": "2026-11-06 审核撤换(截图内容相同×12)"
     },
     {
       "id": "job-a5gjkv-ticketing-coordinator",
@@ -1481,10 +1410,10 @@
       "summary_en": "BIG Shanghai office is hiring a Senior Project Manager and Senior Architect, requiring extensive project management or architectural design experience, familiar with Chinese building laws and regulations, and fluent in Chinese and English communication.",
       "added_at": "2026-07-25",
       "_fail_streak": 0,
-      "last_seen": "2026-08-03",
+      "last_seen": "2026-10-19",
       "cover": "assets/covers/50a30eeddeb9f20e.jpg",
-      "updated_at": "2026-10-06",
-      "cover_audit": "2026-10-06 审核撤换(截图内容相同×8)",
+      "updated_at": "2026-10-09",
+      "cover_audit": "2026-10-09 审核撤换(截图内容相同×3)",
       "cover_source": "screenshot"
     },
     {
@@ -1994,32 +1923,6 @@
       "last_seen": "2026-08-03"
     },
     {
-      "id": "job-uphkq5-署任副經理",
-      "title": "署任副經理",
-      "org": "香港教育劇場論壇",
-      "city": null,
-      "country": null,
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-31",
-      "summary": "香港教育劇場論壇現招聘署任副經理，截止日期為2026年8月31日。",
-      "apply_url": "https://www.hkadc.org.hk/resources",
-      "cover": "assets/covers/5f2fdf1d8df266af.jpg",
-      "domain": "hkadc.org.hk",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "署任副經理",
-      "title_en": "署任副經理",
-      "summary_zh": "香港教育劇場論壇現招聘署任副經理，截止日期為2026年8月31日。",
-      "summary_en": "Hong Kong Education Theatre Forum is recruiting for the position of Acting Deputy Manager, with the deadline on August 31, 2026.",
-      "added_at": "2026-08-01",
-      "_fail_streak": 1,
-      "last_seen": "2026-08-02",
-      "updated_at": "2026-10-04",
-      "cover_audit": "2026-10-04 审核撤换(URL 共用×4)",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-bwpsrs-展览设计师",
       "title": "展览设计师",
       "org": "UCCA尤伦斯当代艺术中心",
@@ -2201,10 +2104,8 @@
       "summary_en": "Liuhe Academy of Fine Arts has released a public recruitment announcement for high-level talents in 2026, targeting graduates and employed or unemployed individuals who meet the basic conditions and qualifications of the positions.",
       "added_at": "2026-08-26",
       "cover": null,
-      "updated_at": "2026-10-08",
-      "cover_audit": "2026-10-08 审核撤换(截图内容相同×18)",
-      "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "updated_at": "2026-11-06",
+      "cover_audit": "2026-11-06 审核撤换(截图内容相同×12)"
     },
     {
       "id": "job-d05yso-hubei-academy-of-fine-arts-2026-high-lev",
@@ -2314,28 +2215,6 @@
       "summary_en": "Yunnan Art Institute is publicly recruiting 29 doctoral staff members. Detailed job positions and requirements are available in the '2026 Yunnan Art Institute Public Recruitment Plan for Doctoral Candidates'.",
       "added_at": "2026-08-26",
       "cover": "assets/covers/9a0a593185d51f04.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "job-ao1ilg-jilin-art-academy-2026-public-recruitmen",
-      "title": "吉林艺术学院2026年公开招聘8名高级人才公告（1号）",
-      "org": "吉林艺术学院",
-      "city": "长春",
-      "country": null,
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-27",
-      "summary": "吉林艺术学院面向社会公开招聘高级人才，共招聘56名，具体岗位及条件详见附件。",
-      "apply_url": "https://m.gaoxiaojob.com/announcement/detail/422960.html",
-      "domain": "m.gaoxiaojob.com",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "吉林艺术学院2026年公开招聘8名高级人才公告（1号）",
-      "title_en": "Jilin Art Academy 2026 Public Recruitment Announcement (No. 1)",
-      "summary_zh": "吉林艺术学院面向社会公开招聘高级人才，共招聘56名，具体岗位及条件详见附件。",
-      "summary_en": "Jilin Art Academy is publicly recruiting senior talents, a total of 56 positions, specific positions and conditions can be seen in the attachment.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/029983de6d71191e.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -2515,28 +2394,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "job-1yzrco-北京市文化和旅游局所属北京画院2026年公开招聘资格复审及面试公告",
-      "title": "北京市文化和旅游局所属北京画院2026年公开招聘资格复审及面试公告",
-      "org": "北京画院",
-      "city": null,
-      "country": null,
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-27",
-      "summary": "北京画院发布2026年公开招聘资格复审及面试公告，包括资格复审时间和地点，以及面试时间和地点等重要信息。",
-      "apply_url": "https://whlyj.beijing.gov.cn/zfxxgkpt/zdgk/rsxx/202608/t20260821_4832274.html",
-      "domain": "whlyj.beijing.gov.cn",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "北京市文化和旅游局所属北京画院2026年公开招聘资格复审及面试公告",
-      "title_en": "北京市文化和旅游局所属北京画院2026年公开招聘资格复审及面试公告",
-      "summary_zh": "北京画院发布2026年公开招聘资格复审及面试公告，包括资格复审时间和地点，以及面试时间和地点等重要信息。",
-      "summary_en": "Beijing Academy of Fine Arts has released the announcement for the qualification review and interview of the 2026 public recruitment, including the time and location of the qualification review, as well as the time and location of the interview.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/d247ed79769bce5b.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-194nmw-教学科研人员",
       "title": "教学科研人员",
       "org": "陕西师范大学美术学院",
@@ -2603,28 +2460,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "job-bam2gi-fujian-art-vocational-college-public-rec",
-      "title": "福建艺术职业学院公开招聘工作人员",
-      "org": "福建艺术职业学院",
-      "city": null,
-      "country": null,
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-27",
-      "summary": "福建艺术职业学院因工作需要，拟在人员控制总量内向社会公开招聘工作人员6名。具体岗位和要求详见附件《2026年下半年福建艺术职业学院公开招聘岗位汇总表》。",
-      "apply_url": "https://rst.fujian.gov.cn/zw/ztzl/zxzt/sydwrczp/zpfa/202608/t20260819_7201393.htm",
-      "domain": "rst.fujian.gov.cn",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "福建艺术职业学院公开招聘工作人员",
-      "title_en": "Fujian Art Vocational College Public Recruitment of Staff",
-      "summary_zh": "福建艺术职业学院因工作需要，拟在人员控制总量内向社会公开招聘工作人员6名。具体岗位和要求详见附件《2026年下半年福建艺术职业学院公开招聘岗位汇总表》。",
-      "summary_en": "Fujian Art Vocational College is planning to publicly recruit 6 staff members due to work needs. Detailed positions and requirements are in the attached 'Summary of Public Recruitment Positions of Fujian Art Vocational College in the Second Half of 2026'.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/1beb99fa0a199287.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-554e8g-ningxia-hui-autonomous-region-department",
       "title": "宁夏回族自治区文化和旅游厅2026年事业单位自主公开招聘工作人员",
       "org": "宁夏回族自治区文化和旅游厅",
@@ -2644,10 +2479,8 @@
       "summary_en": "The Ningxia Hui Autonomous Region Department of Culture and Tourism has issued an announcement for the 2026 self-employed public recruitment of staff in public institutions, planning to recruit 19 staff members from the society, specific positions and requirements can be seen in the attachment.",
       "added_at": "2026-08-26",
       "cover": null,
-      "updated_at": "2026-10-08",
-      "cover_audit": "2026-10-08 审核撤换(截图内容相同×18)",
-      "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "updated_at": "2026-11-06",
+      "cover_audit": "2026-11-06 审核撤换(截图内容相同×12)"
     },
     {
       "id": "job-1w2m4f-2026-spring-recruitment-announcement-for",
@@ -2668,11 +2501,12 @@
       "summary_zh": "云南省文化和旅游厅直属事业单位面向社会公开招聘人员，涉及多个岗位，具体岗位及招聘条件详见招聘计划表。",
       "summary_en": "The Yunnan Provincial Department of Culture and Tourism is recruiting personnel for various positions under its direct administration, with specific job descriptions and requirements detailed in the recruitment plan.",
       "added_at": "2026-08-26",
-      "cover": null,
+      "cover": "assets/covers/abb710504948515d.jpg",
       "updated_at": "2026-10-08",
       "cover_audit": "2026-10-08 审核撤换(截图内容相同×18)",
       "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-10-08",
+      "cover_source": "screenshot"
     },
     {
       "id": "job-1xj7sf-mnnu-high-level-talent-recruitment-plan",
@@ -2716,32 +2550,8 @@
       "summary_en": "The Guizhou Provincial Department of Culture and Tourism is publicly recruiting 29 staff members for various positions, detailed requirements for which can be found in the 'List of Positions and Requirements for Public Recruitment of Staff in Guizhou Provincial Cultural and Tourism Department Institutions in 2026' (Attachment 1).",
       "added_at": "2026-08-26",
       "cover": null,
-      "updated_at": "2026-10-08",
-      "cover_audit": "2026-10-08 审核撤换(截图内容相同×18)",
-      "_fail_streak": 0,
-      "last_seen": "2026-10-08"
-    },
-    {
-      "id": "job-8xe5k1-内蒙古艺术学院2026年高层次人才引进公告",
-      "title": "内蒙古艺术学院2026年高层次人才引进公告",
-      "org": "内蒙古艺术学院",
-      "city": "呼和浩特市",
-      "country": "中国",
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-31",
-      "summary": "内蒙古艺术学院面向海内外公开招聘高层次人才，提供住房补贴、事业编制、科研启动金等待遇。",
-      "apply_url": "https://www.imac.edu.cn/html-rsc/rczp/20260622/40918.shtml",
-      "domain": "imac.edu.cn",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "内蒙古艺术学院2026年高层次人才引进公告",
-      "title_en": "内蒙古艺术学院2026年高层次人才引进公告",
-      "summary_zh": "内蒙古艺术学院面向海内外公开招聘高层次人才，提供住房补贴、事业编制、科研启动金等待遇。",
-      "summary_en": "Inner Mongolia Art Academy is recruiting high-level talents from home and abroad, offering housing subsidies, formal employment, research start-up funds, and other benefits.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/1eb29366c11be1b5.jpg",
-      "cover_source": "screenshot"
+      "updated_at": "2026-11-06",
+      "cover_audit": "2026-11-06 审核撤换(截图内容相同×12)"
     },
     {
       "id": "job-58cfxj-苏州工艺美术职业技术学院2026年长期公开招聘高层次人才公告",
@@ -2763,50 +2573,6 @@
       "summary_en": "Suzhou Institute of Arts and Crafts is currently recruiting outstanding talents from the public, specific positions and requirements are detailed in the position list.",
       "added_at": "2026-08-26",
       "cover": "assets/covers/f8b86873f41c5f2a.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "job-b2lg55-2026-quanzhou-vocational-college-of-arts",
-      "title": "2026年泉州工艺美术职业学院公开招聘人员控制总量内专任教师",
-      "org": "泉州工艺美术职业学院",
-      "city": "泉州市",
-      "country": "中国",
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-28",
-      "summary": "泉州工艺美术职业学院公开招聘专任教师，要求具有中华人民共和国国籍，热爱教育事业，遵纪守法，身体健康，符合招聘岗位要求的各项资格条件。",
-      "apply_url": "https://rsj.quanzhou.gov.cn/zwgk/zxdt/syzk/202608/t20260814_3319506.htm",
-      "domain": "rsj.quanzhou.gov.cn",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "2026年泉州工艺美术职业学院公开招聘人员控制总量内专任教师",
-      "title_en": "2026 Quanzhou Vocational College of Arts and Crafts Public Recruitment of Full-time Teachers within the Total Control Quantity",
-      "summary_zh": "泉州工艺美术职业学院公开招聘专任教师，要求具有中华人民共和国国籍，热爱教育事业，遵纪守法，身体健康，符合招聘岗位要求的各项资格条件。",
-      "summary_en": "Quanzhou Vocational College of Arts and Crafts is publicly recruiting full-time teachers, requiring candidates to be Chinese citizens, have a passion for education, be law-abiding, healthy, and meet the qualifications required for the positions.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/9172c0e2031ca4f1.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "job-dyai91-雕塑创作岗",
-      "title": "雕塑创作岗",
-      "org": "绍兴市文化广电旅游局",
-      "city": "绍兴",
-      "country": null,
-      "employment_type": null,
-      "salary": "面议",
-      "deadline": "2026-08-28",
-      "summary": "绍兴市文化广电旅游局下属事业单位公开招聘雕塑创作岗，要求硕士研究生学历，专业为美术与书法，年龄38周岁及以下，截止日期为2026年8月28日。",
-      "apply_url": "https://m.gaoxiaojob.com/job/detail/2303648.html",
-      "domain": "m.gaoxiaojob.com",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "雕塑创作岗",
-      "title_en": "雕塑创作岗",
-      "summary_zh": "绍兴市文化广电旅游局下属事业单位公开招聘雕塑创作岗，要求硕士研究生学历，专业为美术与书法，年龄38周岁及以下，截止日期为2026年8月28日。",
-      "summary_en": "Shaoxing Municipal Bureau of Culture, Radio, Television and Tourism is recruiting for a Sculpture Creation position under its affiliated public institutions. The requirement is a master's degree in Fine Arts and calligraphy, with an age limit of 38 years old and under, and the deadline for application is August 28, 2026.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/6653798f0509b4b0.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -3162,30 +2928,6 @@
       "added_at": "2026-08-26"
     },
     {
-      "id": "job-cdh4y1-艺术与科技专业教师-智能交互设计新专业建设筹备-软硬件技术与物理实现方向",
-      "title": "艺术与科技专业教师（智能交互设计新专业建设筹备）软硬件技术与物理实现方向",
-      "org": "未来设计学院",
-      "city": null,
-      "country": null,
-      "employment_type": null,
-      "salary": null,
-      "deadline": "2026-08-31",
-      "summary": "未来设计学院招聘艺术与科技专业教师，负责智能交互设计新专业建设筹备，要求硕士及以上学历，专业方向为艺术与科技，年龄35周岁及以下，具备工程技术+艺术设计跨学科知识结构，精通物理计算、传感器应用、智能感知技术。",
-      "apply_url": "https://edf.siva.edu.cn/2026/0703/c842a32534/page.htm",
-      "domain": "edf.siva.edu.cn",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "艺术与科技专业教师（智能交互设计新专业建设筹备）软硬件技术与物理实现方向",
-      "title_en": "艺术与科技专业教师（智能交互设计新专业建设筹备）软硬件技术与物理实现方向",
-      "summary_zh": "未来设计学院招聘艺术与科技专业教师，负责智能交互设计新专业建设筹备，要求硕士及以上学历，专业方向为艺术与科技，年龄35周岁及以下，具备工程技术+艺术设计跨学科知识结构，精通物理计算、传感器应用、智能感知技术。",
-      "summary_en": "Future Design College is recruiting teachers for the Art and Technology major, responsible for the preparation of a new major in intelligent interaction design. The position requires a master's degree or above, with a major in Art and Technology, under the age of 35, with a multidisciplinary knowledge structure of engineering technology and art design, proficient in physical computation, sensor application, and intelligent perception technology.",
-      "added_at": "2026-08-26",
-      "cover": "assets/covers/d16685aed3011250.jpg",
-      "updated_at": "2026-10-05",
-      "cover_audit": "2026-10-05 审核撤换(截图内容相同×25)",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-1swhiy-exhibition-execution",
       "title": "展览执行",
       "org": "Red Brick Art Museum",
@@ -3249,10 +2991,8 @@
       "summary_en": "Harbin Normal University is recruiting talents to optimize its faculty structure. The recruitment targets doctoral graduates across various disciplines and offers state employment and corresponding benefits.",
       "added_at": "2026-08-26",
       "cover": null,
-      "updated_at": "2026-10-08",
-      "cover_audit": "2026-10-08 审核撤换(截图内容相同×18)",
-      "_fail_streak": 0,
-      "last_seen": "2026-10-08"
+      "updated_at": "2026-11-06",
+      "cover_audit": "2026-11-06 审核撤换(截图内容相同×12)"
     },
     {
       "id": "job-85lvol-beijing-institute-of-fashion-technology-",
@@ -3613,28 +3353,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "job-7n4c9l-museum-director-operations",
-      "title": "美术馆馆长（运营方向）",
-      "org": "大理缘慧经营管理有限公司",
-      "city": "大理",
-      "country": "中国",
-      "employment_type": null,
-      "salary": "15-20k",
-      "deadline": "2026-08-27",
-      "summary": "负责美术馆全盘经营管理与成本把控，高端配套业态运营，高端商务运营思维，高端资源与品牌建设，艺术专业能力。",
-      "apply_url": "https://m.liepin.com/job/1985065919.shtml",
-      "domain": "m.liepin.com",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "美术馆馆长（运营方向）",
-      "title_en": "Museum Director (Operations)",
-      "summary_zh": "负责美术馆全盘经营管理与成本把控，高端配套业态运营，高端商务运营思维，高端资源与品牌建设，艺术专业能力。",
-      "summary_en": "Responsible for the comprehensive management and cost control of the museum, operation of high-end supporting businesses, high-end business operation thinking, high-end resource and brand building, and artistic professional skills.",
-      "added_at": "2026-08-27",
-      "cover": "assets/covers/a916509485458b88.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-brgz54-museum-media-publicity-responsible-perso",
       "title": "美术馆媒体宣传负责人(J80578)",
       "org": "泰康保险集团股份有限公司",
@@ -3747,28 +3465,6 @@
       "cover_source": "screenshot"
     },
     {
-      "id": "job-b7rtwc-collectors-and-private-clients-business-",
-      "title": "藏家与私人客户-业务&关系拓展",
-      "org": "麦埃尔(北京)艺术顾问有限公司",
-      "city": "北京",
-      "country": null,
-      "employment_type": null,
-      "salary": "18-20k",
-      "deadline": "2026-08-27",
-      "summary": "负责开拓并深耕国内外私人藏家，私人客户，资深藏家，企业家&企业藏家以及机构客户。通过专业的咨询，建议及服务，构建稳定的优质客户资源池，达成业绩成交目标。",
-      "apply_url": "https://m.liepin.com/job/1984433643.shtml",
-      "domain": "m.liepin.com",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "藏家与私人客户-业务&关系拓展",
-      "title_en": "Collectors and Private Clients - Business & Relationship Development",
-      "summary_zh": "负责开拓并深耕国内外私人藏家，私人客户，资深藏家，企业家&企业藏家以及机构客户。通过专业的咨询，建议及服务，构建稳定的优质客户资源池，达成业绩成交目标。",
-      "summary_en": "Responsible for developing and cultivating domestic and international private collectors, private clients, senior collectors, entrepreneurs & corporate collectors, and institutional clients. Through professional consulting, advice, and services, build a stable pool of high-quality client resources and achieve sales targets.",
-      "added_at": "2026-08-27",
-      "cover": "assets/covers/1772d45cdb04fe02.jpg",
-      "cover_source": "screenshot"
-    },
-    {
       "id": "job-1z22l3-策展人",
       "title": "策展人",
       "org": "上海博盟文化发展有限公司",
@@ -3788,28 +3484,6 @@
       "summary_en": "Responsible for the curation of original art exhibitions and special art IP exhibitions authorized by the French National Museum, such as the 'Master Exhibition of Willy Roni', 'The Louvre Engraving Exhibition', 'Encounter Rodin', and 'The King's Plant Immersive Exhibition', etc. Also responsible for the supervision of the company's landed art exhibitions.",
       "added_at": "2026-08-27",
       "cover": "assets/covers/9d5b32e80f9ced7b.jpg",
-      "cover_source": "screenshot"
-    },
-    {
-      "id": "job-9nxtmt-activity-curator-event-planning-position",
-      "title": "永庆坊 - 活动策展人（活动策划岗）",
-      "org": "印力商用置业有限公司",
-      "city": "广州",
-      "country": null,
-      "employment_type": null,
-      "salary": "10-15k",
-      "deadline": "2026-08-27",
-      "summary": "负责永庆坊全年内容日历的策展型内容策划，资源链接与共创，全案落地把控，文案与传播等工作。",
-      "apply_url": "https://m.liepin.com/job/1981759647.shtml",
-      "domain": "m.liepin.com",
-      "posted_at": null,
-      "_via": "search",
-      "title_zh": "永庆坊 - 活动策展人（活动策划岗）",
-      "title_en": "Activity Curator (Event Planning Position) at Yongqingfang",
-      "summary_zh": "负责永庆坊全年内容日历的策展型内容策划，资源链接与共创，全案落地把控，文案与传播等工作。",
-      "summary_en": "Responsible for the curatorial content planning of the annual calendar of Yongqingfang, resource linkage and co-creation, full-case implementation control, copywriting and communication, and other work.",
-      "added_at": "2026-08-27",
-      "cover": "assets/covers/c558537ed0209654.jpg",
       "cover_source": "screenshot"
     },
     {
@@ -4560,7 +4234,9 @@
       "summary_en": "Hiring for exhibition and display design, requiring 1-3 years of experience with a degree, with a 4-day weekend.",
       "added_at": "2026-09-10",
       "_fail_streak": 0,
-      "last_seen": "2026-10-02"
+      "last_seen": "2026-10-02",
+      "cover": "assets/covers/909681fb11c1c85d.jpg",
+      "cover_source": "screenshot"
     },
     {
       "id": "job-2fwlkw-展厅空间设计师",
@@ -4729,6 +4405,54 @@
       "last_seen": "2026-10-02",
       "cover": "assets/covers/5623acfe525f425b.jpg",
       "cover_source": "screenshot"
+    },
+    {
+      "id": "job-198qs7-designer-find-projects",
+      "title": "设计师/找项目",
+      "org": "谷德设计网",
+      "city": null,
+      "country": null,
+      "employment_type": null,
+      "salary": null,
+      "deadline": null,
+      "summary": "谷德设计网提供设计师寻找项目的机会，包括业主找设计师和设计师接项目。",
+      "apply_url": "https://www.gooood.cn/category/type/design",
+      "domain": "gooood.cn",
+      "posted_at": null,
+      "_via": "search",
+      "title_zh": "设计师/找项目",
+      "title_en": "Designer/Find Projects",
+      "summary_zh": "谷德设计网提供设计师寻找项目的机会，包括业主找设计师和设计师接项目。",
+      "summary_en": "gooood.com offers opportunities for designers to find projects, including clients seeking designers and designers finding projects.",
+      "added_at": "2026-10-11",
+      "cover": "assets/covers/fdecb69a27493814.jpg",
+      "cover_source": "screenshot",
+      "_fail_streak": 0,
+      "last_seen": "2026-10-19"
+    },
+    {
+      "id": "job-2m6zbc-女装设计师",
+      "title": "女装设计师",
+      "org": "嘉兴市秀洲区高照街道宝昌服装经营部(个体工商户)",
+      "city": "嘉兴",
+      "country": null,
+      "employment_type": null,
+      "salary": "7000-9000元·13薪",
+      "deadline": null,
+      "summary": "负责女装设计工作，要求有1-3年相关经验，学历不限，工作地点在嘉兴。",
+      "apply_url": "https://www.zhaopin.com/sou/jl489/kwCS6OHHCBNQ5Q2",
+      "domain": "zhaopin.com",
+      "posted_at": null,
+      "_via": "search",
+      "title_zh": "女装设计师",
+      "title_en": "女装设计师",
+      "summary_zh": "负责女装设计工作，要求有1-3年相关经验，学历不限，工作地点在嘉兴。",
+      "summary_en": "Responsible for women's clothing design, requiring 1-3 years of relevant experience, no degree requirement, located in Jiaxing.",
+      "added_at": "2026-10-14",
+      "cover": "assets/covers/6180df3e3c73c9ec.jpg",
+      "cover_source": "screenshot",
+      "_fail_streak": 0,
+      "last_seen": "2026-10-19"
     }
   ]
 }
