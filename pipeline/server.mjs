@@ -2139,13 +2139,19 @@ if (process.env.AUTO_HARVEST === "1" && process.env.REGION_HARVEST !== "1") {
     const done = [];
     try {
       const baseQuota = Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3));
+      // 国内:国外原为 6:4(用户 2026-10-09 要求「每天优先发现 6 个国内机会,再 4 个国外机会」)。
+      // 2026-11-06 用户新偏好(德/英/法/中国一线最受欢迎):新增常驻 intl-eu-core(4 词)、cn-tier1 提到 4 词,
+      // 每日 ≈ 国内 7 词 : 国际 8 词(EU 常驻 4 + 轮值 4)。改 base 时记得同步 intlBase 维持大致比例。
+      const intlBase = Math.max(1, Number(process.env.REGION_INTL_QUERIES_PER_SHIFT || 4));
       const adapt = process.env.REGION_QUOTA_ADAPT !== "0";   // 成绩单驱动配额(只加码不降频);=0 关闭,全部用 base
       for (const m of due) {
         doneShifts.add(day + ":" + m.id);
         let added = 0;
         // 分片配额(路线图第30项):高产经理本班多取词,低产保持 base(不降频,预算够用)。
         const q = adapt ? quotaFor(m.id, score, baseQuota) : { n: baseQuota, reason: "关闭" };
-        const perShift = q.n;
+        // 国际组按 6:4 的「国外份额」取词(4 词);中国组沿用分片配额(只加码,进一步强化国内优先)。
+        // 经理档案可用 words 覆盖本班词数(2026-11-06:德/英/法与中国一线为最受欢迎地区,常驻且各 4 词)。
+        const perShift = m.kind === "intl" ? intlBase : (m.words || q.n);
         const qs = pickQueries(m, perShift, now);
         if (q.reason !== "持平" && q.reason !== "关闭")
           process.stderr.write(`[区域经理] 配额调整:${m.zh} ${baseQuota}→${perShift} 词(${q.reason}${q.per_q != null ? ",近期新增/词 " + q.per_q : ""})\n`);
@@ -2186,8 +2192,8 @@ if (process.env.AUTO_HARVEST === "1" && process.env.REGION_HARVEST !== "1") {
     setTimeout(() => regionTick(), 70 * 1000);
     setInterval(() => regionTick(), 10 * 60 * 1000);      // 每 10 分钟对一次表,不会错过整点班次
     loadRegions().then(c => {
-      const cn = c.managers.filter(m => m.kind !== "intl").length, intl = c.managers.filter(m => m.kind === "intl").length;
-      process.stderr.write(`[区域经理] 编队已就位:${c.managers.length} 位(中国 ${cn} · 国际 ${intl}),按当地上班时间错峰轮值,每班 ${Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3))} 词\n`);
+      const cn = c.managers.filter(m => m.id.startsWith("cn-")).length, intl = c.managers.filter(m => m.id.startsWith("intl-")).length;
+      process.stderr.write(`[区域经理] 编队已就位:${c.managers.length} 位(中国 ${cn} · 国际 ${intl}),按当地上班时间错峰轮值;每班中国经理 ${Math.max(1, Number(process.env.REGION_QUERIES_PER_SHIFT || 3))} 词 · 国际经理 ${Math.max(1, Number(process.env.REGION_INTL_QUERIES_PER_SHIFT || 4))} 词(德英法与中国一线常驻,班次配额见 regions.json)\n`);
     }).catch(e => process.stderr.write("[区域经理] 档案加载失败:" + String(e.message || e).slice(0, 120) + "\n"));
   }
 }
@@ -2349,6 +2355,7 @@ if (process.env.QUALITY_CHECK === "1") {
 // 让存量信源每天真被抓、数据稳定增长。开关 DAILY_CRAWL=1;每日北京 DAILY_CRAWL_HOUR(默认 3)点跑一次(在质检 4 点前),
 // 幂等;spawn 子进程不阻塞 web 服务。run.mjs 已改并发安全(原子写+写前补回 server 期间新增),与 server.mjs 同写不丢数据。
 // 只跑 run.mjs(机会频道);截图(mShots 服务器被 403)留本机;翻译/官网定位后续再评估上服务器。
+let geoLocateNow = null;   // 由下方「新条目地点判定」块赋值;每日采集结束后回调它给新条目判地点
 if (process.env.DAILY_CRAWL === "1") {
   let dcDay = null, dcRunning = false;
   // run.mjs 单轮采集的超时上限(默认 6 小时)。正常几十分钟内结束;超此即判定卡死,强杀并放行下一轮。
@@ -2416,6 +2423,7 @@ if (process.env.DAILY_CRAWL === "1") {
         const tag = killed ? "超时(" + (RUN_CRAWL_TIMEOUT_MS / 60000) + "min)被杀 code=" + code : "code=" + code;
         process.stderr.write("[每日抓取] run.mjs 结束 " + tag + " 用时 " + Math.round((Date.now() - t0) / 1000) + "s\n");
         db.agentLog({ agent: "harvester", ok: !killed && code === 0, summary: "服务器每日抓取 run.mjs(" + tag + "):" + tail, took_ms: Date.now() - t0 }).catch(() => {});
+        if (geoLocateNow) setTimeout(() => geoLocateNow(), 5000);   // 采集一结束就给新条目判地点
       });
       p.on("error", (e) => { clearTimeout(timer); dcRunning = false; process.stderr.write("[每日抓取] spawn 失败:" + e.message + "\n"); });
     });
@@ -2423,6 +2431,71 @@ if (process.env.DAILY_CRAWL === "1") {
   setTimeout(dailyCrawlTick, 200 * 1000);
   setInterval(dailyCrawlTick, 3600 * 1000);
   process.stderr.write("[每日抓取] 已开启:每日北京时间 " + Number(process.env.DAILY_CRAWL_HOUR || 3) + " 点抓 sources.json 全部信源(run.mjs,并发安全)\n");
+}
+
+// —— 新入库条目的地点判定(2026-10-09,用户要求)——
+// 「以后每天自动抓取的新项目也得按照这个流程优化……一定要根据能找到的信息来确定这个项目究竟是在哪个地区」。
+// 每日抓取(run.mjs)与区域经理检索(searchAndHarvest)入库的新条目此前不带 geo_ll,前端地球落不到点。
+// 这里复用 2026-10-08 已有的两个脚本,反幻觉口径一字不改,只为把地点补上:
+//   ① geo-reconcile.mjs --apply --missing —— 只用条目【自己抓到的原文】+ 本地权威行政区划数据判定;
+//      只补【没有坐标】的新条目,已落点的一律保留(尤其 deepcrawl 打开网页判出的高精度结果),绝不回退精度。
+//   ② geo-deepcrawl.mjs --apply --limit N —— 仍判不出的,逐个打开其官网/来源页判定(采用的地名必须真的在
+//      页面原文里出现过,AI 凭自己知识补的地点一律作废)。
+// 两个脚本的写盘都已改为「并回最新 live + 原子写」,与 server/run 并发写同一文件时不丢条目、不撕裂。
+// 开关:GEO_LOCATE=0 关闭(默认开)。GEO_DEEP_LIMIT 控制每轮深挖上限(默认 40);GEO_TIMEOUT_MS 子进程超时(默认 25min)。
+{
+  const GEO_ENABLED = process.env.GEO_LOCATE !== "0";
+  const DEEP_LIMIT = String(Math.max(0, Number(process.env.GEO_DEEP_LIMIT || 40)));
+  const GEO_TIMEOUT_MS = Number(process.env.GEO_TIMEOUT_MS || 25 * 60 * 1000);
+  let geoRunning = false;
+  function runGeoScript(script, scriptArgs) {
+    return new Promise((resolve) => {
+      const t0 = Date.now();
+      let buf = Buffer.alloc(0);
+      const push = (d) => { buf = Buffer.concat([buf, d]); if (buf.length > 4000) buf = buf.subarray(buf.length - 4000); };
+      let done = false;
+      const finish = (tag, code) => {
+        if (done) return; done = true; clearTimeout(timer);
+        resolve({ code, tag, tail: buf.toString("utf8").replace(/\s+/g, " ").slice(-150), ms: Date.now() - t0 });
+      };
+      let p;
+      try { p = spawn(process.execPath, [join(__dir, script), ...scriptArgs], { cwd: __dir, env: process.env }); }
+      catch (e) { return resolve({ code: -1, tag: "spawn-fail:" + e.message, tail: "", ms: 0 }); }
+      const timer = setTimeout(() => { try { p.kill("SIGKILL"); } catch (e) {} finish("timeout", null); }, GEO_TIMEOUT_MS);
+      p.stdout.on("data", push);
+      p.stderr.on("data", push);
+      p.on("close", (code) => finish("code=" + code, code));
+      p.on("error", (e) => finish("error:" + e.message, -1));
+    });
+  }
+  geoLocateNow = async function geoLocate() {
+    if (!GEO_ENABLED || geoRunning) return;
+    // 先数一下有多少条目还没判过地点(缺 geo_prec 的新条目,或仍判不出为「未知」的);为 0 就直接跳过、不 spawn。
+    let todo = 0;
+    try {
+      const raw = JSON.parse(await readFile(DATA, "utf8"));
+      const arr = Array.isArray(raw) ? raw : (raw.opportunities || raw.items || []);
+      todo = arr.filter(o => !o.geo_prec || o.geo_prec === "未知").length;
+    } catch (e) { return; }
+    if (!todo) return;
+    geoRunning = true;
+    const t0 = Date.now();
+    process.stderr.write(`[地点判定] 待判 ${todo} 条,先跑 geo-reconcile(--missing) ...\n`);
+    try {
+      const r1 = await runGeoScript("geo-reconcile.mjs", ["--apply", "--missing"]);
+      process.stderr.write(`[地点判定] geo-reconcile ${r1.tag} ${Math.round(r1.ms / 1000)}s ${r1.tail}\n`);
+      const r2 = await runGeoScript("geo-deepcrawl.mjs", ["--apply", "--limit", DEEP_LIMIT]);
+      process.stderr.write(`[地点判定] geo-deepcrawl ${r2.tag} ${Math.round(r2.ms / 1000)}s ${r2.tail}\n`);
+      db.agentLog({ agent: "geo", ok: r1.code === 0 && r2.code === 0,
+        summary: `新条目地点判定:待判 ${todo} · reconcile(${r1.tag}) · deepcrawl(${r2.tag})`,
+        metrics: { todo, reconcile_code: r1.code, deep_code: r2.code }, took_ms: Date.now() - t0 }).catch(() => {});
+    } finally { geoRunning = false; }
+  };
+  if (GEO_ENABLED) {
+    setTimeout(() => geoLocateNow(), 5 * 60 * 1000);              // 启动 5 分钟后先补一次存量
+    setInterval(() => geoLocateNow(), 3 * 3600 * 1000);          // 每 3 小时兜一次(覆盖检索入库的新条目)
+    process.stderr.write(`[地点判定] 已开启:采集后 + 每 3 小时为新条目判地点(geo-reconcile --missing → geo-deepcrawl --limit ${DEEP_LIMIT})\n`);
+  }
 }
 
 // —— 双线/译者/寻址 也搬上服务器(2026-08-04)——

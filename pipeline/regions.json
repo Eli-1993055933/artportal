@@ -20,6 +20,7 @@
       "kind": "resident",
       "tz": 8,
       "hour": 10,
+      "words": 4,
       "gl": "cn",
       "hl": "zh-cn",
       "terms": ["北京", "上海", "广州", "深圳", "杭州", "Beijing", "Shanghai", "Guangzhou", "Shenzhen", "Hangzhou"],
@@ -180,6 +181,39 @@
         "香港 藝術發展局 資助 計劃 申請",
         "高雄 台中 藝術 徵件 駐村",
         "Hong Kong artist residency open call apply"
+      ]
+    },
+
+    {
+      "id": "intl-eu-core",
+      "zh": "欧洲核心·德英法",
+      "en": "Germany · UK · France",
+      "kind": "resident",
+      "tz": 1,
+      "hour": 10,
+      "words": 4,
+      "gl": "gb",
+      "hl": "en",
+      "terms": ["柏林", "慕尼黑", "汉堡", "科隆", "法兰克福", "伦敦", "曼彻斯特", "格拉斯哥", "爱丁堡", "巴黎", "里昂", "马赛", "Berlin", "Munich", "Hamburg", "Cologne", "Frankfurt", "London", "Manchester", "Glasgow", "Edinburgh", "Paris", "Lyon", "Marseille", "Germany", "Deutschland", "United Kingdom", "UK", "France", "Frankreich"],
+      "queries": [
+        "Berlin artist residency open call application",
+        "Germany artist residency open call Deutschland",
+        "London artist residency open call application",
+        "UK arts council grant open call for artists apply",
+        "Paris artist residency open call application France",
+        "Frankfurt Munich Hamburg artist residency open call",
+        "London gallery open call for artists submissions",
+        "Berlin art prize open call for artists",
+        "UK artist fellowship grant open call apply",
+        "France artist residency grant open call artists",
+        "Künstlerresidenz Ausschreibung offener Aufruf Künstler",
+        "Stipendium Ausschreibung Künstler Berlin Deutschland",
+        "appel à candidatures résidence artistique Paris",
+        "appel à projets artistiques France résidence artistes",
+        "德国 柏林 艺术 驻留 征集",
+        "英国 伦敦 艺术 驻留 申请",
+        "法国 巴黎 艺术 驻留 征集",
+        "德国 英国 法国 艺术 基金 资助 申请"
       ]
     },
 

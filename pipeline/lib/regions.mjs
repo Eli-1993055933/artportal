@@ -45,6 +45,7 @@ export async function loadRegions(force = false) {
       id: m.id, zh: m.zh || m.id, en: m.en || m.id, kind: m.kind,
       slot: Number.isFinite(m.slot) ? m.slot : 0,
       tz: m.tz, hour: m.hour,
+      words: Number.isFinite(m.words) ? Math.max(1, Math.round(m.words)) : null,   // 该经理每班词数(不填则用全局 base)
       gl: String(m.gl || "cn").toLowerCase(), hl: String(m.hl || "zh-cn"),
       terms: Array.isArray(m.terms) ? m.terms.filter(Boolean).map(String) : [],
       queries: m.queries.filter(Boolean).map(String)
