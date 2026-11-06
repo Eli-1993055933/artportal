@@ -65,6 +65,11 @@ async function main() {
     const n = name.replace(/\\/g, "/");
     // 排除任何层级的 .deploy_tmp（防止递归复制自身）
     if (n === ".deploy_tmp" || n.endsWith("/.deploy_tmp")) return true;
+    // 排除 macOS 垃圾文件:._xxx(AppleDouble 资源叉,二进制)与 .DS_Store。
+    // 2026-11-06 教训:服务器 site/data/geo/cn/ 混入 ._*.json 后,geo-reconcile 读取时 JSON.parse 直接崩,
+    // 新条目全部缺坐标,且只在服务器复现(本地没有这些文件)。
+    const base = n.split("/").pop();
+    if (base.startsWith("._") || base === ".DS_Store") return true;
     return EXCLUDES.some(e => n === e || n.startsWith(e + "/"));
   }
 

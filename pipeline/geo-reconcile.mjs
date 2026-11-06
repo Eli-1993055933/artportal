@@ -16,12 +16,13 @@
 // 用法:
 //   node geo-reconcile.mjs                     # 试跑(dry),只打印统计与样本
 //   node geo-reconcile.mjs --apply             # 写回 site/data/opportunities.json
+//   node geo-reconcile.mjs --apply --missing   # 只补【无坐标】的新条目,已落点原样保留(每日自动流程用)
 //   node geo-reconcile.mjs --apply --file <绝对或相对路径>
 //
 // 写入字段: geo_ll:[lng,lat]  geo_prec  geo_src(命中规则)  geo_ev(命中的原文片段)
 //           并把 city_zh/country_zh 归一成规范中文名(供显示/筛选)。
 
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, renameSync } from "node:fs";
 import { join, dirname, isAbsolute } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
@@ -30,6 +31,10 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(__dir, "..");
 const argv = process.argv.slice(2);
 const APPLY = argv.includes("--apply");
+// --missing(2026-10-09):只补【还没有坐标】的条目,已落点的一律原样保留。
+// 每日自动流程用它给新入库条目判地点;绝不能重算整库——那会把 geo-deepcrawl 打开网页
+// 判出的高精度结果(城市/机构驻地)覆盖成低精度的国家中心,是精度回退。
+const MISSING = argv.includes("--missing");
 const opt = (f, d) => { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : d; };
 const DATA_FILE = isAbsolute(opt("--file", "")) ? opt("--file") : join(ROOT, opt("--file", "site/data/opportunities.json"));
 
@@ -47,7 +52,8 @@ export const cnCity = new Map();
 const cnDistRaw = new Map();  // 先收集,后剔除同名歧义(如"普陀区"上海/舟山各一)
 const CN_DIR = join(ROOT, "site/data/geo/cn");
 for (const f of readdirSync(CN_DIR)) {
-  if (!f.endsWith(".json")) continue;
+  // 跳过 macOS 的 AppleDouble 资源文件(._xxx.json,二进制)——部署时若被带上服务器,JSON.parse 会直接崩
+  if (!f.endsWith(".json") || f.startsWith("._")) continue;
   const j = JSON.parse(readFileSync(join(CN_DIR, f), "utf8"));
   for (const ft of j.features || []) {
     const p = ft.properties;
@@ -96,7 +102,7 @@ export const worldByZh = new Map();   // 中文名 -> {ll, admin}
 export const worldByName = new Map(); // 英文名(仅用于结构化的 city_zh 字段) -> {ll, admin}
 export const worldByAdmin = new Map();// 国名(英文) -> [{name, zh, ll}](限英文名,供"已知国家"内匹配)
 for (const f of readdirSync(join(ROOT, "site/data/geo/world"))) {
-  if (!f.endsWith(".json")) continue;
+  if (!f.endsWith(".json") || f.startsWith("._")) continue;
   const j = JSON.parse(readFileSync(join(ROOT, "site/data/geo/world", f), "utf8"));
   for (const ft of j.features || []) {
     const p = ft.properties;
@@ -350,38 +356,49 @@ function reconcile(o) {
 // ---------------------------------------------------------------- 4. 主流程
 function main() {
   const raw = JSON.parse(readFileSync(DATA_FILE, "utf8"));
-  const wrap = !Array.isArray(raw);
   const list = Array.isArray(raw) ? raw : (raw.opportunities || raw.items || []);
   const stat = {}, statPrec = {};
-  let changed = 0, withLL = 0;
+  let changed = 0, withLL = 0, skipped = 0;
   const samples = [];
+  const patch = new Map();   // id -> 新地理字段。写盘时并回最新 live,避免与 server/run 并发时丢条目。
   for (const o of list) {
+    if (MISSING && o.geo_ll) { skipped++; continue; }   // 已落点:保留(尤其 deepcrawl 网页判出的高精度结果)
     const r = reconcile(o);
     stat[r.src] = (stat[r.src] || 0) + 1;
     statPrec[r.prec] = (statPrec[r.prec] || 0) + 1;
     if (r.ll) withLL++;
     const prev = o.geo_ll ? o.geo_ll.join(",") : "", next = r.ll ? r.ll.join(",") : "";
-    if (prev !== next || o.geo_prec !== r.prec) changed++;
+    const isChanged = prev !== next || o.geo_prec !== r.prec;
+    if (isChanged) changed++;
     if (samples.length < 12 && !r.ll) samples.push(`[${r.prec}] ${(o.org_zh || "").slice(0, 16)} | ${(o.title_zh || o.title_en || "").slice(0, 34)}`);
-    if (APPLY) {
-      o.geo_ll = r.ll || null;
-      o.geo_prec = r.prec;
-      o.geo_src = r.src;
-      o.geo_ev = r.ev || null;
-      if (r.city) o.city_zh = r.city;
-      if (r.country) o.country_zh = r.country;
+    if (APPLY && isChanged) {   // 只把真正有变化的放进 patch,避免无谓地整文件重写
+      const nxt = { geo_ll: r.ll || null, geo_prec: r.prec, geo_src: r.src, geo_ev: r.ev || null };
+      if (r.city) nxt.city_zh = r.city;
+      if (r.country) nxt.country_zh = r.country;
+      patch.set(o.id, nxt);
     }
   }
-  console.log("文件:", DATA_FILE, " 条目:", list.length, APPLY ? "(已写回)" : "(dry)");
+  const considered = list.length - skipped;
+  console.log("文件:", DATA_FILE, " 条目:", list.length, MISSING ? `(仅补无坐标,已落点跳过 ${skipped})` : "", APPLY ? "(已写回)" : "(dry)");
   console.log("落点精度:", JSON.stringify(statPrec));
   console.log("判定规则:", JSON.stringify(stat));
-  console.log("可落点:", withLL, "  无坐标:", list.length - withLL, "  变化:", changed);
+  console.log("本次判定:", considered, "  可落点:", withLL, "  无坐标:", considered - withLL, "  变化:", changed);
   console.log("--- 仍无坐标样本 ---");
   samples.forEach(s => console.log("  " + s));
-  if (APPLY) {
-    if (wrap) { raw.opportunities = list; writeFileSync(DATA_FILE, JSON.stringify(raw, null, 2)); }
-    else writeFileSync(DATA_FILE, JSON.stringify(list, null, 2));
-    console.log("已写回。");
+  if (APPLY && patch.size) {
+    // 并回 live + 原子写:处理期间 server/run 写盘的新条目必须原样保留,绝不整文件覆盖。
+    const live = JSON.parse(readFileSync(DATA_FILE, "utf8"));
+    const liveWrap = !Array.isArray(live);
+    const liveList = Array.isArray(live) ? live : (live.opportunities || live.items || []);
+    let applied = 0;
+    for (const o of liveList) { const p = patch.get(o.id); if (p) { Object.assign(o, p); applied++; } }
+    const out = liveWrap ? Object.assign({}, live, { opportunities: liveList }) : liveList;
+    const tmp = DATA_FILE + ".tmp-" + process.pid;
+    writeFileSync(tmp, JSON.stringify(out, null, 2));
+    renameSync(tmp, DATA_FILE);
+    console.log("已写回:", applied, "条(并回 live,原子写)。");
+  } else if (APPLY) {
+    console.log("无需写回(无新判定的条目)。");
   }
 }
 
