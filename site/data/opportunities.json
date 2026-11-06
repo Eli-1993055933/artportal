@@ -15,8 +15,8 @@
       "afterCountryNull": 85
     }
   },
-  "generated_at": "2026-11-06",
-  "count": 2526,
+  "generated_at": "2026-11-07",
+  "count": 2530,
   "opportunities": [
     {
       "id": "namoc-innovation-2026",
@@ -30394,9 +30394,9 @@
       "title_en": "Special AIR program for BOOK project (in Trevelin – Chubut – Argentina)",
       "org_zh": "We-Che Art Residency",
       "city_zh": "Trevelin",
-      "country_zh": "阿根廷",
-      "deadline": "2026-08-30",
-      "deadline_note": "Deadline August 30, 2026",
+      "country_zh": "Argentina",
+      "deadline": "2026-12-30",
+      "deadline_note": "Deadline December 30, 2026",
       "apply_fee": {
         "free": false,
         "amount": 1600,
@@ -30442,26 +30442,21 @@
         "Writing"
       ],
       "summary_zh": "We-Che艺术驻留项目位于阿根廷特雷韦林，是一个由艺术家双人组Raom&Loba创立的项目。该项目提供灵感、安静的工作空间，以及与世界各地艺术家交流的机会。驻留期限为1至2个月，适合所有艺术阶段和领域的艺术家。",
-      "url": "https://www.artistcommunities.org/directory/open-calls/special-air-program-book-project-trevelin-chubut-argentina",
+      "url": "https://artistcommunities.org/directory/open-calls/special-air-program-book-project-trevelin-chubut-argentina",
       "source_url": "https://www.artistcommunities.org/directory/open-calls",
       "domain": "artistcommunities.org",
       "org_type": "independent",
       "trust": "auto",
-      "status": "expired",
+      "status": "open",
       "verified_at": null,
       "first_seen": "2026-08-15",
-      "last_seen": "2026-10-22",
-      "updated_at": "2026-08-31",
+      "last_seen": "2026-11-06",
+      "updated_at": "2026-11-06",
       "cover": "https://wecheartresidency.ovh/wp-content/uploads/2026/02/ARTBOOK.jpg",
       "cover_source": "artistcommunities.org",
-      "_fail_streak": 0,
-      "geo_ll": [
-        -67.8642,
-        -43.9995
-      ],
-      "geo_prec": "州中心",
-      "geo_src": "text-world-country",
-      "geo_ev": "Chubut"
+      "source_platform": "We-Che Art Residency",
+      "resolve_classify": "trusted-platform",
+      "resolve_gates": 4
     },
     {
       "id": "artistcommunities-open-calls-协作版画驻留-2026-2027-秋冬",
@@ -150208,54 +150203,6 @@
       "cover_source": "artrabbit.com"
     },
     {
-      "id": "artrabbit-opps-residency-est-nord-est-artist-residency-2027-2028",
-      "category": "residency",
-      "title_zh": "Est-Nord-Est Artist Residency 2027–2028",
-      "title_en": "Est-Nord-Est Artist Residency 2027–2028",
-      "org_zh": "Est-Nord-Est",
-      "city_zh": "未知",
-      "country_zh": "未知",
-      "deadline": "2026-11-08",
-      "deadline_note": "Deadline 08 November 2026",
-      "apply_fee": {
-        "free": null,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": null,
-        "amount": null,
-        "currency": null
-      },
-      "funding": {
-        "stipend": true,
-        "housing": true,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [
-        "visual artists"
-      ],
-      "summary_zh": "Est-Nord-Est邀请来自魁北克、加拿大和国际上的专业视觉艺术家进行为期八周的驻留，专注于艺术研究和实验。",
-      "url": "https://www.artrabbit.com/artist-opportunities/2026/november/est-nord-est-artist-residency-20272028",
-      "source_url": "https://www.artrabbit.com/artist-opportunities?type=Artist+in+Residence",
-      "domain": "artrabbit.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-10-27",
-      "last_seen": "2026-10-27",
-      "updated_at": "2026-11-06",
-      "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
-      "cover_audit": "2026-11-06 审核撤换(URL 共用×39)",
-      "cover_source": "artrabbit.com"
-    },
-    {
       "id": "artrabbit-opps-residency-亚洲文化理事会2027年驻留艺术家奖学金和补助金",
       "category": "residency",
       "title_zh": "亚洲文化理事会2027年驻留艺术家奖学金和补助金",
@@ -156527,10 +156474,9 @@
       "status": "open",
       "verified_at": null,
       "first_seen": "2026-10-31",
-      "last_seen": "2026-10-31",
-      "updated_at": "2026-11-06",
+      "last_seen": "2026-11-07",
+      "updated_at": "2026-11-07",
       "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
-      "cover_audit": "2026-11-06 审核撤换(URL 共用×39)",
       "cover_source": "artrabbit.com"
     },
     {
@@ -159201,52 +159147,6 @@
       "cover_source": "curatorspace.com"
     },
     {
-      "id": "artrabbit-opps-residency-富士山脚下6okken艺术家驻留2027",
-      "category": "residency",
-      "title_zh": "富士山脚下6okken艺术家驻留2027",
-      "title_en": "6okken Residency 2027 at the foot of Mt. Fuji, Japan",
-      "org_zh": "6okken",
-      "city_zh": "Oishi",
-      "country_zh": "日本",
-      "deadline": "2027-05-31",
-      "deadline_note": "Deadline 31 May 2027",
-      "apply_fee": {
-        "free": true,
-        "amount": null,
-        "currency": null
-      },
-      "participation_fee": {
-        "required": true,
-        "amount": "280,000 JPY per 26-night term for the first person (320,000 JPY for summer terms 6 to 8), plus 100,000 JPY for each additional person.",
-        "currency": "JPY"
-      },
-      "funding": {
-        "stipend": null,
-        "housing": null,
-        "travel": null
-      },
-      "eligibility": {
-        "students_ok": null,
-        "age_limit": null,
-        "nationality": null
-      },
-      "disciplines": [],
-      "summary_zh": "6okken是一个位于富士山脚下的艺术家驻留项目，位于东京北部约两小时的巴士路程。每个驻留者或团体都有一栋带厨房和浴室的整栋房子，以及一个共享的工作室。申请全年开放，至少提前60天开始。欢迎来自任何国籍和学科的艺术家、作家、策展人和研究人员申请。",
-      "url": "https://www.artrabbit.com/artist-opportunities/2027/may/6okken-residency-2027-at-the-foot-of-mt-fuji-japan",
-      "source_url": "https://www.artrabbit.com/artist-opportunities?type=Artist+in+Residence",
-      "domain": "artrabbit.com",
-      "org_type": "independent",
-      "trust": "auto",
-      "status": "open",
-      "verified_at": null,
-      "first_seen": "2026-11-03",
-      "last_seen": "2026-11-04",
-      "updated_at": "2026-11-06",
-      "cover": "https://img.artrabbit.com/artist-opportunities/2027/may/untitled/images/1Qw13z9Roa0I/950x534/60kken-artrabbit-banner-950x534.jpg",
-      "cover_audit": "2026-11-06 审核撤换(封面图来自第三方聚合)",
-      "cover_source": "artrabbit.com"
-    },
-    {
       "id": "na-res-bemis-声音艺术-实验音乐驻留项目",
       "category": "residency",
       "title_zh": "声音艺术+实验音乐驻留项目",
@@ -161511,6 +161411,356 @@
       "last_seen": "2026-11-06",
       "updated_at": "2026-11-06",
       "cover": "https://img.artrabbit.com/artist-opportunities/2027/january/untitled/images/qQCRqK3HMii2/950x534/RI-ArtRabbit-Listing.jpg",
+      "cover_source": "artrabbit.com"
+    },
+    {
+      "id": "artconnect-opportunities-p12-艺术家驻留",
+      "category": "residency",
+      "title_zh": "艺术家驻留",
+      "title_en": "Artist Residency",
+      "org_zh": "ArtConnect",
+      "city_zh": "Queenstown",
+      "country_zh": "Australia",
+      "deadline": "2026-11-30",
+      "deadline_note": "Nov. 30, 2026 at 05:00 UTC",
+      "apply_fee": {
+        "free": false,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Applied Arts",
+        "Architecture",
+        "Curating",
+        "Dance",
+        "Design",
+        "Digital",
+        "Drawing",
+        "Education",
+        "Fashion",
+        "Film",
+        "Installation",
+        "Interdisciplinary",
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Public Art",
+        "Research",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Textiles",
+        "Video",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "这是一个独特的艺术家驻留机会，让艺术家在偏远的环境中沉浸，同时继续他们的创作工作。",
+      "url": "https://www.artconnect.com/opportunity/8CnxF_OwSdY0GmSxw6L63",
+      "source_url": "https://www.artconnect.com/opportunities?page=12",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "updated_at": "2026-11-06",
+      "cover": "https://r2.ac-img.com/2023/6164cab6-2e65-447d-9532-03e000f1c7ae.jpeg",
+      "cover_source": "artconnect.com"
+    },
+    {
+      "id": "theartlist-calls-submissions-p3-the-fine-odd-非常规艺术开放征稿-hfp-q1-2027-版本",
+      "category": "opencall",
+      "title_zh": "The Fine Odd — 非常规艺术开放征稿 (HFP, Q1 2027 版本)",
+      "title_en": "The Fine Odd — Unconventional Art Open Call (HFP, Q1 2027 Edition)",
+      "org_zh": "TheArtList",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-12-15",
+      "deadline_note": "原文截止 + December 15, 2026",
+      "apply_fee": {
+        "free": false,
+        "amount": "USD 15 for 3 pieces, USD 25 for 5 pieces",
+        "currency": "USD"
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Photography",
+        "Oil",
+        "Mixed media",
+        "Drawing/Illustration",
+        "Graphic Design",
+        "Digital Media",
+        "Illustration",
+        "Painting",
+        "Drawing",
+        "Collage",
+        "Printmaking",
+        "Digital art"
+      ],
+      "summary_zh": "The Fine Odd 是 Hand-Fetish-Projects' (HFP) 的开放征稿和艺术出版物 — Q1 2027 版本。包括摄影（概念、纪实、舞台、实验、模拟、数字、时尚、后期处理）和视觉艺术与印刷作品（插画、绘画、绘图、拼贴、印刷、数字艺术、混合媒体）。入选艺术家将获得实体加数字艺术书籍中的两个专用版面，通过 HFP 的商店和合作伙伴网络进行全球发行，以及可能的展览机会。全球开放，无需学术背景。18+ 主题，恋物癖，欲望 — 欢迎加入，无需要求。",
+      "url": "https://www.theartlist.com/the-fine-odd-unconventional-art-open-call-hfp-q1-2027-edition",
+      "source_url": "https://www.theartlist.com/category/calls-for-submissions?page=3",
+      "domain": "theartlist.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "updated_at": "2026-11-06",
+      "cover": "https://www.theartlist.com/submission/small/1789475997.jpg",
+      "cover_source": "theartlist.com"
+    },
+    {
+      "id": "artconnect-opportunities-p15-clio-art-fair-may-2027",
+      "category": "opencall",
+      "title_zh": "Clio Art Fair May 2027",
+      "title_en": "Clio Art Fair May 2027",
+      "org_zh": "ArtConnect(全球)",
+      "city_zh": "New York",
+      "country_zh": "未知",
+      "deadline": "2026-12-01",
+      "deadline_note": "Early Bird Application Deadline: December 1, 2026 — $50 Application Fee Waived!",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Painting",
+        "Performance",
+        "Photography",
+        "Printmaking",
+        "Sculpture",
+        "Visual Arts",
+        "Textiles",
+        "Dance",
+        "Digital"
+      ],
+      "summary_zh": "Clio Art Fair May 2027 是一个面向独立和自我代表艺术家的当代艺术博览会，现在接受申请，将于2027年5月在纽约切尔西举行。",
+      "url": "https://www.artconnect.com/opportunity/yRqJvGD2fpQToT_P55Cgu",
+      "source_url": "https://www.artconnect.com/opportunities?page=15",
+      "domain": "artconnect.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-11-06",
+      "last_seen": "2026-11-06",
+      "updated_at": "2026-11-06",
+      "cover": "https://r2.ac-img.com/2026/25597284-c786-44ca-8c9e-44d74fdf9cf9.png",
+      "cover_source": "artconnect.com"
+    },
+    {
+      "id": "artistcommunities-residencies-p5-富士山脚下6okken艺术家驻留2027",
+      "category": "residency",
+      "title_zh": "富士山脚下6okken艺术家驻留2027",
+      "title_en": "6okken Residency 2027 at the foot of Mt. Fuji, Japan (rolling applications)",
+      "org_zh": "6okken",
+      "city_zh": "Oishi",
+      "country_zh": "日本",
+      "deadline": "2027-05-31",
+      "deadline_note": "The deadline is 31 May 2027. Applications are also reviewed on a rolling basis and should reach us at least 60 days before the start date.",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "280,000 JPY per 26-night term for the first person (320,000 JPY for summer terms 6 to 8), plus 100,000 JPY for each additional person.",
+        "currency": "JPY"
+      },
+      "funding": {
+        "stipend": false,
+        "housing": false,
+        "travel": false
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "Architecture",
+        "Book Arts",
+        "Choreography",
+        "Dance",
+        "Documentary",
+        "Drawing",
+        "Fiction",
+        "Film",
+        "Graphic Design",
+        "Illustration",
+        "Installation Arts",
+        "Interdisciplinary Arts",
+        "Literature",
+        "Mixed Media",
+        "Moving Image",
+        "Music",
+        "Nonfiction",
+        "Painting",
+        "Performance Art",
+        "Photography",
+        "Poetry",
+        "Sculpture",
+        "Social Practice",
+        "Sound Art",
+        "Storytelling",
+        "Theater",
+        "Visual Arts",
+        "Writing"
+      ],
+      "summary_zh": "6okken艺术家驻留位于富士山脚下的Oishi村，提供全年11次为期26晚的驻留机会。驻留费用为280,000日元，夏季学期费用更高。无申请费，艺术家需自付旅行、食物和材料费。",
+      "url": "https://artistcommunities.org/directory/open-calls/6okken-residency-2027-foot-mt-fuji-japan-rolling-applications",
+      "source_url": "https://artistcommunities.org/residencies?page=5",
+      "domain": "artistcommunities.org",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-07",
+      "updated_at": "2026-11-07"
+    },
+    {
+      "id": "artrabbit-opps-residency-est-nord-est-artist-residency-2027-2028",
+      "category": "residency",
+      "title_zh": "Est-Nord-Est Artist Residency 2027–2028",
+      "title_en": "Est-Nord-Est Artist Residency 2027–2028",
+      "org_zh": "Est-Nord-Est",
+      "city_zh": "未知",
+      "country_zh": "未知",
+      "deadline": "2026-11-08",
+      "deadline_note": "Deadline 08 November 2026",
+      "apply_fee": {
+        "free": null,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": null,
+        "amount": null,
+        "currency": null
+      },
+      "funding": {
+        "stipend": true,
+        "housing": true,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [
+        "visual artists"
+      ],
+      "summary_zh": "Est-Nord-Est邀请来自魁北克、加拿大和国际上的专业视觉艺术家进行为期八周的驻留，专注于艺术研究和实验。",
+      "url": "https://www.artrabbit.com/artist-opportunities/2026/november/est-nord-est-artist-residency-20272028",
+      "source_url": "https://www.artrabbit.com/artist-opportunities?type=Artist+in+Residence",
+      "domain": "artrabbit.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-10-27",
+      "last_seen": "2026-10-27",
+      "updated_at": "2026-11-06",
+      "cover": "https://www.artrabbit.com/layout/img/artrabbit-open-calls.jpg",
+      "cover_audit": "2026-11-06 审核撤换(URL 共用×39)",
+      "cover_source": "artrabbit.com"
+    },
+    {
+      "id": "artrabbit-opps-residency-富士山脚下6okken艺术家驻留2027",
+      "category": "residency",
+      "title_zh": "富士山脚下6okken艺术家驻留2027",
+      "title_en": "6okken Residency 2027 at the foot of Mt. Fuji, Japan",
+      "org_zh": "6okken",
+      "city_zh": "Oishi",
+      "country_zh": "日本",
+      "deadline": "2027-05-31",
+      "deadline_note": "Deadline 31 May 2027",
+      "apply_fee": {
+        "free": true,
+        "amount": null,
+        "currency": null
+      },
+      "participation_fee": {
+        "required": true,
+        "amount": "280,000 JPY per 26-night term for the first person (320,000 JPY for summer terms 6 to 8), plus 100,000 JPY for each additional person.",
+        "currency": "JPY"
+      },
+      "funding": {
+        "stipend": null,
+        "housing": null,
+        "travel": null
+      },
+      "eligibility": {
+        "students_ok": null,
+        "age_limit": null,
+        "nationality": null
+      },
+      "disciplines": [],
+      "summary_zh": "6okken是一个位于富士山脚下的艺术家驻留项目，位于东京北部约两小时的巴士路程。每个驻留者或团体都有一栋带厨房和浴室的整栋房子，以及一个共享的工作室。申请全年开放，至少提前60天开始。欢迎来自任何国籍和学科的艺术家、作家、策展人和研究人员申请。",
+      "url": "https://www.artrabbit.com/artist-opportunities/2027/may/6okken-residency-2027-at-the-foot-of-mt-fuji-japan",
+      "source_url": "https://www.artrabbit.com/artist-opportunities?type=Artist+in+Residence",
+      "domain": "artrabbit.com",
+      "org_type": "independent",
+      "trust": "auto",
+      "status": "open",
+      "verified_at": null,
+      "first_seen": "2026-11-03",
+      "last_seen": "2026-11-04",
+      "updated_at": "2026-11-06",
+      "cover": "https://img.artrabbit.com/artist-opportunities/2027/may/untitled/images/1Qw13z9Roa0I/950x534/60kken-artrabbit-banner-950x534.jpg",
+      "cover_audit": "2026-11-06 审核撤换(封面图来自第三方聚合)",
       "cover_source": "artrabbit.com"
     },
     {
